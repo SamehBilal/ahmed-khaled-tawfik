@@ -1,5 +1,5 @@
 /* Cassette player — a vanilla rebuild of Codrops' "Old School Cassette Player".
-   The tracks are Audiohat episodes.
+   The tracks are Audiohat episodes and YouTube radio-drama episodes (Safari: Tasgeel channel).
    ▶ / ❚❚  plays the episode's sample inside the cassette when we have one (track.sample: a file in
            assets/audio/ or a permanent URL, added in data-audio.js). Audiohat's own sample links
            expire daily and can't be fetched from another site, so without a sample ▶ falls back
@@ -184,13 +184,24 @@
 			var p = audio.play();
 			if (p && p.catch) p.catch(function () {
 				state('');
-				el.querySelector('.cs-note').textContent = L('تعذّر تشغيل العيّنة — جرّب زر Audiohat', 'The sample could not be played — try the Audiohat button');
+				el.querySelector('.cs-note').textContent = L('تعذّر التشغيل هنا — جرّب الزر الأخير لفتح المصدر', 'Could not play here — try the last key to open the source');
 			});
 		}
 
 		/* ---------- YouTube ---------- */
+		function note(ar, en) { el.querySelector('.cs-note').textContent = L(ar, en); }
+
 		function playYT(tr) {
+			/* YouTube refuses embeds on pages opened from disk (file://, "Error 153"): open it there instead */
+			if (location.protocol === 'file:') {
+				state('is-playing');
+				window.open(tr.url, '_blank', 'noopener');
+				note('مشغّل YouTube لا يعمل والصفحة مفتوحة كملف من الجهاز، ففتحناه على YouTube. على الموقع المنشور يعمل هنا تحت الشريط.',
+					'The YouTube player does not work when the page is opened as a file from disk, so it opened on YouTube. On the published site it plays here, under the tape.');
+				return;
+			}
 			vbox.hidden = false;
+			note('جارٍ تشغيل YouTube… قد يبدأ بإعلان قصير قبل الحلقة.', 'Starting YouTube… it may play a short ad before the episode.');
 			if (yt && yt.getVideoData) {
 				var cur = (yt.getVideoData() || {}).video_id;
 				if (cur === tr.yt) {
@@ -205,9 +216,13 @@
 					playerVars: { autoplay: 1, playsinline: 1, rel: 0 },
 					events: {
 						onReady: function (ev) { ev.target.playVideo(); },
+						onError: function () {
+							state(''); setPlayIcon(false); clearInterval(ytPoll);
+							note('تعذّر تشغيل الحلقة هنا — اضغط زر YouTube لمشاهدتها هناك.', 'The episode could not play here — press the YouTube key to watch it there.');
+						},
 						onStateChange: function (ev) {
 							var st = ev.data;
-							if (st === 1) { state('is-playing'); setPlayIcon(true); clearInterval(ytPoll); ytPoll = setInterval(tick, 500); }
+							if (st === 1) { state('is-playing'); setPlayIcon(true); clearInterval(ytPoll); ytPoll = setInterval(tick, 500); var ch = (tracks[i] || {}).channel || 'YouTube'; note('من قناة «' + ch + '» على YouTube', 'From the “' + ch + '” channel on YouTube'); }
 							else if (st === 2 || st === 0) { state(''); setPlayIcon(false); clearInterval(ytPoll); tick(); }
 						}
 					}

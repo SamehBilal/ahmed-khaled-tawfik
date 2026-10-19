@@ -147,7 +147,7 @@ window.PAGE = {
 			] }
 		];
 		if (audioTracks.length) shops.push({ kind: L('مسموع', 'Audio'), items: [
-			audioTracks[0].yt ? ['YouTube', audioTracks[0].url] : ['Audiohat', audioTracks[0].url]
+			audioTracks[0].yt ? ['YouTube — ' + (audioTracks[0].channel || ''), audioTracks[0].url] : ['Audiohat', audioTracks[0].url]
 		] });
 		if (qEn) shops.push({ kind: L('بالإنجليزية', 'In English'), items: [
 			['Amazon', 'https://www.amazon.com/s?k=' + encodeURIComponent(qEn) + '&i=stripbooks']
@@ -178,7 +178,7 @@ window.PAGE = {
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
 						(item.note && t(item.note) ? '<p class="note">' + tx(item.note) + '</p>' : '') +
 						buyHtml +
-						(audioTracks.length ? '<section class="d-block d-audio"><h3>' + L('استمع إليه', 'Listen') + ' <small>Audiohat</small></h3><div id="d-cassette"></div></section>' : '') +
+						(audioTracks.length ? '<section class="d-block d-audio"><h3>' + L('استمع إليه', 'Listen') + ' <small>' + e(audioTracks.map(function (x) { return x.yt ? (x.channel || 'YouTube') : 'Audiohat'; }).filter(function (v, k, arr) { return arr.indexOf(v) === k; }).join(' · ')) + '</small></h3><div id="d-cassette"></div></section>' : '') +
 						'<dl class="d-facts">' + rows.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + e(x[1]) + '</dd>'; }).join('') + '</dl>' +
 						(info.altTitles && info.altTitles.length ? '<section class="d-block"><h3>' + L('عناوين أخرى', 'Other titles') + '</h3><ul class="alt-titles">' +
 							info.altTitles.map(function (a) { return '<li><b lang="' + e(a.lang || '') + '">' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + (a.lang ? ' <span class="lng">' + e(a.lang) + '</span>' : '') + '</li>'; }).join('') +
