@@ -3,8 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- GitHub Pages serves this page for any missing URL, at any depth, so resolve every link from the site root -->
-	<script>document.write('<base href="' + (/\.github\.io$/.test(location.hostname) ? '/ahmed-khaled-tawfik/' : '/') + '">');</script>
+	<!-- GitHub Pages serves this page for any missing URL, at any depth, so resolve every link from the site root.
+	     The base is written statically (so the browser's preloader fetches from the right place) and only
+	     switched to "/" when previewing on a local server. -->
+	<base href="/ahmed-khaled-tawfik/">
+	<script>if (!/\.github\.io$/.test(location.hostname)) document.querySelector('base').setAttribute('href', '/');</script>
 	<title>الصفحة غير موجودة — أحمد خالد توفيق</title>
 	<meta name="robots" content="noindex">
 	<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
