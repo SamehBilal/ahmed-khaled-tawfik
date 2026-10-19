@@ -29,16 +29,15 @@
 	<link rel="stylesheet" href="assets/css/extras.css">
 	<link rel="stylesheet" href="assets/css/books.css">
 	<link rel="stylesheet" href="assets/css/detail.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.css">
-	<link rel="stylesheet" href="assets/css/slider.css">
+	<link rel="stylesheet" href="assets/css/shelf-hero.css">
 	<script>try{var h=document.documentElement,l=localStorage.getItem('akt-lang'),t=localStorage.getItem('akt-theme');if(l==='en'){h.lang='en';h.dir='ltr';}if(t==='light'||(!t&&matchMedia('(prefers-color-scheme: light)').matches))h.setAttribute('data-theme','light');}catch(e){}</script>
 </head>
 <body>
 	<header id="site-header"></header>
 
 	<main id="main">
-		<!-- featured books slider (Flickity) -->
-		<section class="book-slide" id="book-slide" aria-roledescription="carousel"></section>
+		<!-- bookshelf hero: hover a book to bring it forward and read about it -->
+		<section class="shelf-hero" id="shelf-hero"></section>
 
 		<section class="page-hero">
 			<div class="wrap">
@@ -102,9 +101,11 @@
 	<script src="assets/js/data-books-b.js"></script>
 	<script src="assets/js/data-series-more.js"></script>
 	<script src="assets/js/data-audio.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/1.0.0/flickity.pkgd.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+	<script src="https://unpkg.com/split-type@0.3.4/umd/index.min.js"></script>
 	<script src="assets/js/books.js"></script>
 	<script src="assets/js/shared.js"></script>
+	<script src="assets/js/shelf-hero.js"></script>
 	<script src="assets/js/works.js"></script>
 	<script src="assets/js/app.js"></script>
 </body>

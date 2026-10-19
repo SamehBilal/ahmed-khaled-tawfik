@@ -26,7 +26,7 @@ window.PAGE = {
 		var App = window.App, d = App.data(), e = App.esc, t = App.t, tx = App.tx;
 		var S = window.WorksShared, self = this;
 
-		this.renderSlider();
+		this.renderShelfHero();
 
 		/* series — showcase books */
 		var seriesEl = document.getElementById('series');
@@ -198,42 +198,8 @@ window.PAGE = {
 		});
 	},
 
-	/* ---------- featured slider at the top (Flickity) ---------- */
-	renderSlider: function () {
-		var App = window.App, d = App.data(), S = window.WorksShared, e = App.esc, t = App.t, tx = App.tx, L = App.L;
-		var el = document.getElementById('book-slide');
-		if (!el) return;
-		if (this._flkty) { this._flkty.destroy(); this._flkty = null; }
-		var info = d.bookInfo || {};
-		var pick = [];
-		/* his series first, then the novels, then a few well-known collections */
-		S.ownSeries().forEach(function (s) {
-			pick.push({ href: S.seriesHref(s.id), title: s.title, color: s.color, kind: L('سلسلة', 'Series') + (s.years ? ' · ' + App.num(s.years) : ''), sum: (d.seriesInfo && d.seriesInfo[s.id] && d.seriesInfo[s.id].description) || s.tagline || s.synopsis });
-		});
-		(d.works || []).filter(function (w) { return w.type === 'novel'; }).concat(
-			(d.works || []).filter(function (w) { return ['room207', 'hazzak', 'zaghazigh', 'qahwa', 'fightclub'].indexOf(w.id) >= 0; })
-		).forEach(function (w) {
-			pick.push({ href: S.bookHref(w.id), title: w.title, color: w.color, img: S.coverOf(info[w.id]),
-				kind: t(S.TYPES[w.type] || { ar: w.type, en: w.type }) + (w.year ? ' · ' + App.num(w.year) : ''), sum: (info[w.id] && info[w.id].description) || w.synopsis });
-		});
-		el.innerHTML = pick.map(function (b) {
-			var sum = App.t(b.sum).split(/\n\s*\n/)[0];
-			return '<div class="bs-cell" style="--c:' + e(b.color || '#6e1a14') + '">' +
-				'<div class="bs-img"><a href="' + e(b.href) + '" tabindex="-1" aria-hidden="true">' + S.miniCover({ img: b.img, color: b.color, title: t(b.title) }) + '</a></div>' +
-				'<div class="bs-content">' +
-					'<div class="bs-kind">' + e(b.kind) + '</div>' +
-					'<div class="bs-title">' + tx(b.title) + '</div>' +
-					'<div class="bs-alt">' + e(App.alt(b.title)) + '</div>' +
-					'<p class="bs-sum">' + e(sum) + '</p>' +
-					'<div class="bs-see"><a href="' + e(b.href) + '">' + L('تفاصيل الكتاب', 'See the book') + '</a></div>' +
-				'</div></div>';
-		}).join('');
-		if (window.Flickity) {
-			this._flkty = new window.Flickity(el, {
-				wrapAround: true, cellAlign: 'center', pageDots: false,
-				rightToLeft: document.documentElement.dir === 'rtl',
-				imagesLoaded: true, accessibility: true
-			});
-		}
+	/* bookshelf hero at the top (assets/js/shelf-hero.js) */
+	renderShelfHero: function () {
+		if (window.ShelfHero) window.ShelfHero.render(document.getElementById('shelf-hero'));
 	}
 };

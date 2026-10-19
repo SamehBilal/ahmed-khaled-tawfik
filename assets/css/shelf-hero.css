@@ -1,0 +1,132 @@
+/* =========================================================
+   Works page — bookshelf hero.
+   Adapted from a CodePen "book cover effect" shelf (original idea by realvjy),
+   restyled for the site's theme and laid out in normal flow so it scales.
+   ========================================================= */
+
+.shelf-hero {
+	--sh-back: var(--paper);
+	--sh-page: #f6f0e2;
+	--sh-shadow: rgba(0, 0, 0, .45);
+	--sh-shadow-strong: rgba(0, 0, 0, .7);
+	--sh-shelf: linear-gradient(to bottom, #5b3a22, #3a2414);
+	position: relative; overflow: hidden; isolation: isolate;
+	padding: 56px 16px 40px;
+	min-height: 560px;
+	display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+}
+html[data-theme="light"] .shelf-hero { --sh-back: #231d16; --sh-shadow: rgba(60, 40, 20, .25); --sh-shadow-strong: rgba(60, 40, 20, .45); }
+
+/* dotted grid behind everything */
+.sh-grid { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; }
+
+/* huge faded title of the book in focus */
+.sh-overlay {
+	position: absolute; inset: 0; z-index: -1; pointer-events: none;
+	display: flex; align-items: center; justify-content: center; padding: 0 2vw;
+}
+.sh-overlay-text {
+	font-family: var(--f-chunky); font-size: clamp(90px, 17vw, 260px); line-height: 1;
+	text-align: center; max-width: 96vw; color: rgba(239, 230, 210, .06);
+	white-space: nowrap; overflow: hidden; text-overflow: clip;
+}
+html[lang="en"] .sh-overlay-text { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; }
+html[data-theme="light"] .sh-overlay-text { color: rgba(35, 29, 22, .06); }
+
+/* the books standing on the shelf */
+.sh-books {
+	position: relative; z-index: 10;
+	display: flex; align-items: flex-end; justify-content: center; gap: 2rem;
+	direction: ltr;
+}
+.sh-item { position: relative; height: 220px; }
+.sh-container { position: relative; width: 160px; height: 100%; }
+.sh-cover { position: relative; height: 100%; will-change: transform; }
+.sh-hitbox { position: absolute; inset: 0; z-index: 10; cursor: pointer; display: block; }
+.sh-hitbox:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+
+.sh-back-cover {
+	position: absolute; width: 96%; height: 96%; top: 2%; left: 2%; z-index: -10;
+	background: var(--sh-back); border-radius: 0 6px 6px 0; box-shadow: 2px 2px 5px rgba(0, 0, 0, .25);
+}
+.sh-inside { position: absolute; width: 90%; height: 94%; top: 3%; left: 5%; z-index: 0; }
+.sh-page {
+	position: absolute; top: 0; right: 0; width: 98%; height: 100%; z-index: -5;
+	background: var(--sh-page); border: 1px solid rgba(0, 0, 0, .2); border-radius: 0 6px 6px 0;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .15); transform-origin: right center;
+}
+.sh-image {
+	position: relative; z-index: 10; height: 100%; line-height: 0;
+	border-radius: 2px 6px 6px 2px; transform-origin: left center; will-change: transform, box-shadow;
+	box-shadow: var(--sh-shadow) 10px 5px 20px, var(--sh-shadow) 20px 0 30px;
+}
+.sh-image img, .sh-image .mini-cover { width: 100%; height: 100%; object-fit: cover; border-radius: 2px 6px 6px 2px; }
+.sh-image .mini-cover { aspect-ratio: auto; box-shadow: none; line-height: 1.25; }
+.sh-image .mini-cover .mc-t { font-size: 22px; }
+.sh-effect {
+	position: absolute; top: 0; width: 24px; height: 100%; margin-left: 12px; z-index: 5; pointer-events: none;
+	border-left: 2px solid rgba(0, 0, 0, .08);
+	background-image: linear-gradient(90deg, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0));
+}
+.sh-light {
+	position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: .1;
+	border-radius: 2px 6px 6px 2px; mix-blend-mode: overlay;
+	background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .5));
+}
+
+/* series spines between the covers */
+.sh-spine {
+	position: relative; height: 220px; width: 34px; cursor: pointer; display: block;
+	background: linear-gradient(to right, color-mix(in srgb, var(--c) 80%, #000) 0%, var(--c) 50%, color-mix(in srgb, var(--c) 80%, #000) 100%);
+	border-radius: 2px; transform-origin: bottom center; will-change: transform, box-shadow;
+	box-shadow: var(--sh-shadow) 5px -3px 10px, var(--sh-shadow) 10px 0 15px;
+}
+.sh-spine:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.sh-spine-title {
+	position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+	writing-mode: vertical-rl; color: #f6eedc; font-family: var(--f-display); font-size: 13px; white-space: nowrap;
+}
+html[lang="en"] .sh-spine-title { transform: rotate(180deg); font-family: var(--f-latin); letter-spacing: .08em; text-transform: uppercase; font-size: 11px; }
+.sh-spine::before, .sh-spine::after {
+	content: ''; position: absolute; left: 10%; width: 80%; height: 1px; background: rgba(217, 164, 65, .55);
+}
+.sh-spine::before { top: 20px; }
+.sh-spine::after { bottom: 20px; }
+
+/* contact shadow under each book */
+.sh-foot {
+	position: absolute; left: 50%; bottom: -3px; transform: translateX(-50%);
+	width: 120px; height: 3px; border-radius: 50%; z-index: 15; pointer-events: none;
+	background: radial-gradient(ellipse at center, var(--sh-shadow) 0%, transparent 70%);
+}
+.sh-spine .sh-foot { width: 26px; }
+
+/* the shelf board */
+.sh-shelf {
+	position: relative; z-index: 20; width: 100%; max-width: 860px; height: 15px; border-radius: 1px;
+	background: var(--sh-shelf);
+	box-shadow: 0 -1px 1px rgba(255, 255, 255, .15), 0 2px 3px rgba(0, 0, 0, .25), 0 15px 20px rgba(0, 0, 0, .2), 0 40px 60px rgba(0, 0, 0, .35);
+}
+
+/* description of the book in focus */
+.sh-descriptions { position: relative; width: 100%; max-width: 680px; min-height: 210px; margin-top: 34px; }
+.sh-desc { position: absolute; inset: 0 0 auto; opacity: 0; visibility: hidden; text-align: center; transition: opacity .3s, visibility .3s; }
+.sh-desc.active { opacity: 1; visibility: visible; }
+.sh-desc h3 { margin: 0 0 4px; font-family: var(--f-display); font-weight: 700; font-size: 1.8rem; color: var(--paper); }
+.sh-desc .sh-meta { color: var(--ember); font-family: var(--f-display); font-size: 15px; margin-bottom: 10px; }
+.sh-desc p { margin: 0 0 12px; color: var(--paper-dim); line-height: 1.75; }
+.sh-desc .sh-more { font-family: var(--f-display); font-size: 15px; }
+.sh-desc .line { overflow: hidden !important; display: block; }
+.sh-desc .line-inner { display: block; }
+
+/* phones: three books, a little smaller */
+@media (max-width: 720px) {
+	.shelf-hero { min-height: 500px; padding-top: 40px; }
+	.sh-books { gap: 1rem; }
+	.sh-item, .sh-spine { height: 170px; }
+	.sh-container { width: 116px; }
+	.sh-image .mini-cover .mc-t { font-size: 16px; }
+	.sh-foot { width: 90px; }
+	.sh-books > :nth-child(n+4) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .sh-desc { transition: none; } }
