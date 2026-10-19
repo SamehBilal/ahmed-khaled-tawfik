@@ -109,7 +109,7 @@ window.PAGE = {
 
 	/* ---------- every issue, as spines on a shelf ---------- */
 	renderIssues: function () {
-		var App = window.App, d = App.data(), e = App.esc, tx = App.tx, self = this;
+		var App = window.App, d = App.data(), e = App.esc, tx = App.tx, S = window.WorksShared, self = this;
 		var issues = d.issues || {};
 		var ids = S.ownSeries().map(function (s) { return s.id; }).filter(function (id) { return (issues[id] || []).length; });
 		var section = document.getElementById('issues-section');
