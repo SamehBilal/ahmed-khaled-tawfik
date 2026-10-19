@@ -251,18 +251,16 @@ button.media:hover { transform: translateY(-4px); border-color: var(--ember); }
 .video-dialog .bar a { color: #f2b56b; font-family: var(--f-latin); }
 .video-dialog .bar button { font: inherit; background: #222; color: #fff; border: 1px solid #333; border-radius: 999px; padding: 3px 12px; cursor: pointer; }
 
-/* ---------- His name (theme gradient; the cover font itself is still to be supplied) ---------- */
+/* ---------- His name, as lettered on the Ma Wara' al-Tabi'a covers ---------- */
 
 .home-hero .name-cover {
-	font-family: 'Rakkas', var(--f-chunky); font-weight: 400;
-	font-size: clamp(54px, 8.4vw, 112px); line-height: 1.25;
+	/* the cover lettering, traced to SVG, used as a mask over the theme gradient */
+	display: block; width: min(100%, 640px); aspect-ratio: 1820 / 470;
 	background: linear-gradient(180deg, #f6d79a, var(--ember) 55%, var(--blood));
-	-webkit-background-clip: text; background-clip: text; color: transparent;
-	padding-block: .05em;
-	white-space: nowrap;
+	-webkit-mask: url('../img/name-lettering.svg') center / contain no-repeat;
+	        mask: url('../img/name-lettering.svg') center / contain no-repeat;
+	color: transparent; font-size: 0; line-height: 0; overflow: hidden;
 }
-html[lang="en"] .home-hero .name-cover { text-align: start; }
-@media (max-width: 480px) { .home-hero .name-cover { white-space: normal; } }
 
 /* ---------- His grave, revealed from the quote ---------- */
 

@@ -24,7 +24,7 @@ window.PAGE = {
 		document.getElementById('hero-text').innerHTML =
 			'<p class="eyebrow">' + (App.lang === 'ar' ? 'ديسكوغرافيا أدبية' : 'A literary discography') + '</p>' +
 			/* his name as lettered on the Ma Wara' al-Tabi'a covers — always in Arabic, the English name sits under it */
-			'<h1><span class="name-ar name-cover" lang="ar" dir="rtl">د. أحمد خالد توفيق</span>' +
+			'<h1><span class="name-ar name-cover" role="img" aria-label="د. أحمد خالد توفيق" lang="ar" dir="rtl">د. أحمد خالد توفيق</span>' +
 			'<span class="name-en" lang="en">Dr. Ahmed Khaled Tawfik</span></h1>' +
 			'<div class="godfather"><small>العرّاب</small>The Godfather</div>' +
 			'<p class="dates">' + year(bio.born && bio.born.date) + ' — ' + year(bio.died && bio.died.date) +
