@@ -55,13 +55,13 @@
 
 /* the book standing on the tile */
 .mosaic a {
-	position: absolute; z-index: 1; width: 43%; left: 50%; top: 50%;
+	position: absolute; z-index: 0; width: 43%; left: 50%; top: 50%;
 	transform: translateX(-50%) translateY(-60%);
 	transition: transform .3s;
 	box-shadow: 5px -5px 10px rgba(0, 0, 0, .35);
 	direction: rtl;
 }
-.mosaic a:hover, .mosaic a:focus-visible { transform: translateX(-40%) translateY(-70%) rotate(25deg); outline: none; z-index: 2; }
+.mosaic a:hover, .mosaic a:focus-visible { transform: translateX(-40%) translateY(-70%) rotate(25deg); outline: none; z-index: 0; }
 .mosaic .mini-cover { border-radius: 2px; box-shadow: none; padding: 6px 4px; }
 .mosaic .mini-cover .mc-t { font-size: clamp(8px, 1.1vw, 13px); }
 .mosaic .mini-cover .mc-by, .mosaic .mini-cover .mc-s { display: none; }
