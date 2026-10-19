@@ -43,24 +43,26 @@
 					<feComposite in2="offsetblur" operator="in"></feComposite>
 					<feMerge><feMergeNode/><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
 				</filter>
+				<clipPath id="shaddaClip"><rect x="374" y="218" width="48" height="41" /></clipPath>
 				<mask id="ringMask"><use href="#introText" fill="#fff" /></mask>
 				<g id="ringGroup">
-					<circle class="ring" cx="400" cy="118" r="0" opacity="0"/>
-					<circle class="ring" cx="400" cy="118" r="0" opacity="0"/>
-					<circle class="ring" cx="400" cy="118" r="0" opacity="0"/>
-					<circle class="ring" cx="400" cy="118" r="0" opacity="0"/>
-					<circle class="ring" cx="400" cy="118" r="0" opacity="0"/>
-					<circle class="ring" cx="400" cy="118" r="0" opacity="0"/>
-					<circle class="ring" cx="400" cy="118" r="0" opacity="0"/>
-					<circle class="ring" cx="400" cy="118" r="0" opacity="0"/>
-					<circle class="ring" cx="400" cy="118" r="0" opacity="0"/>
-					<circle class="ring" cx="400" cy="118" r="0" opacity="0"/>
+					<circle class="ring" cx="397" cy="239" r="0" opacity="0"/>
+					<circle class="ring" cx="397" cy="239" r="0" opacity="0"/>
+					<circle class="ring" cx="397" cy="239" r="0" opacity="0"/>
+					<circle class="ring" cx="397" cy="239" r="0" opacity="0"/>
+					<circle class="ring" cx="397" cy="239" r="0" opacity="0"/>
+					<circle class="ring" cx="397" cy="239" r="0" opacity="0"/>
+					<circle class="ring" cx="397" cy="239" r="0" opacity="0"/>
+					<circle class="ring" cx="397" cy="239" r="0" opacity="0"/>
+					<circle class="ring" cx="397" cy="239" r="0" opacity="0"/>
+					<circle class="ring" cx="397" cy="239" r="0" opacity="0"/>
 				</g>
 			</defs>
 			<g fill="#efe6d2">
 			<g id="introText">
-				<g id="iDot" data-o="400 140"><circle id="iDotShape" cx="400" cy="118" r="22" /></g>
-				<g id="iWord" data-o="400 300"><text x="400" y="300" text-anchor="middle" font-family="Lalezar, 'Reem Kufi', sans-serif" font-size="170">العرّاب</text></g>
+				<!-- the shadda: the full word clipped to the mark above the ر, so it can drop in on its own like the dot of the "i" -->
+				<g id="iDot" data-o="397 252" data-c="397 239"><text x="400" y="300" text-anchor="middle" font-family="Lalezar, 'Reem Kufi', sans-serif" font-size="170" clip-path="url(#shaddaClip)">العرّاب</text></g>
+				<g id="iWord" data-o="400 300"><text x="400" y="300" text-anchor="middle" font-family="Lalezar, 'Reem Kufi', sans-serif" font-size="170">العراب</text></g>
 				<g id="iName">
 					<g data-o="590 395"><g class="w" data-o="590 420"><text x="590" y="420" text-anchor="middle" font-family="Lalezar, 'Reem Kufi', sans-serif" font-size="80">أحمد</text></g></g>
 					<g data-o="405 395"><g class="w" data-o="405 420"><text x="405" y="420" text-anchor="middle" font-family="Lalezar, 'Reem Kufi', sans-serif" font-size="80">خالد</text></g></g>

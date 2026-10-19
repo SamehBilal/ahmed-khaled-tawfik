@@ -1,5 +1,5 @@
 /* Opening reveal — adapted from the "Believe" GSAP animation.
-   "العرّاب" drops in and squashes like the "i", an ember dot falls onto it,
+   "العراب" drops in and squashes like the "i", its shadda (ّ) falls onto the ر like the i's dot,
    the three words of his name spring in from the centre, coloured rings bloom
    inside the letters, then a growing hole opens the page underneath.
    Plays once per browser session; click / Esc / the Skip button ends it. */
@@ -108,14 +108,14 @@
 		tl.timeScale(0.8);
 	}
 
-	/* centre the reveal hole on the ember dot's on-screen position */
+	/* centre the reveal hole on the shadda's on-screen position */
 	function centreHole() {
 		var svg = document.getElementById('introSVG');
-		var dot = document.getElementById('iDotShape');
+		var c = document.getElementById('iDot').getAttribute('data-c').split(' ');
 		var ctm = svg.getScreenCTM();
 		if (!ctm) return;
 		var pt = svg.createSVGPoint();
-		pt.x = +dot.getAttribute('cx'); pt.y = +dot.getAttribute('cy');
+		pt.x = +c[0]; pt.y = +c[1];
 		pt = pt.matrixTransform(ctm);
 		var o = overlay.getBoundingClientRect();
 		var s = svg.getBoundingClientRect();
