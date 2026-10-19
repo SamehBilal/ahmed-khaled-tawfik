@@ -10,12 +10,15 @@ window.PAGE = {
 		},
 		seriesTitle: { ar: 'السلاسل', en: 'The series' },
 		seriesHint: { ar: 'اضغط «تصفّح من الداخل» لفتح الكتاب، أو «اقلب الكتاب» لقراءة الغلاف الخلفي.', en: 'Press "View inside" to open a book, or "Flip" to read the back cover.' },
+		issuesTitle: { ar: 'كل الأعداد', en: 'Every issue' },
+		issuesHint: { ar: 'رفّ لكل سلسلة — اسحب أي عدد لترى تفاصيله.', en: 'A shelf for each series — pull out any issue to see its details.' },
 		booksTitle: { ar: 'الكتب المستقلة', en: 'Standalone books' },
 		booksHint: { ar: 'مرّر المؤشر على الكتاب (أو المسه) لينفتح.', en: 'Hover over a book (or tap it) to open it.' },
 		adaptTitle: { ar: 'على الشاشة', en: 'On screen' },
 		adaptHint: { ar: 'أعمال تحوّلت إلى مسلسلات وأفلام.', en: 'Works adapted for television and film.' }
 	},
 	filter: 'all',
+	issueSeries: null,
 
 	render: function () {
 		var App = window.App, d = App.data(), e = App.esc, t = App.t, tx = App.tx;
@@ -26,6 +29,8 @@ window.PAGE = {
 		seriesEl.innerHTML = (d.series || []).map(function (s) { return window.Books.showcase(S.seriesBook(s)); }).join('');
 		window.Books.initShowcase(seriesEl);
 
+		this.renderIssues();
+
 		/* standalone books — hardcovers, sorted by year */
 		var works = (d.works || []).slice().sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 		var types = [];
@@ -35,7 +40,7 @@ window.PAGE = {
 			return { id: ty, label: S.TYPES[ty] || { ar: ty, en: ty }, n: works.filter(function (w) { return w.type === ty; }).length };
 		}));
 		var filters = document.getElementById('filters');
-		filters.setAttribute('aria-label', App.lang === 'ar' ? 'تصفية حسب النوع' : 'Filter by type');
+		filters.setAttribute('aria-label', App.L('تصفية حسب النوع', 'Filter by type'));
 		filters.innerHTML = chips.map(function (c) {
 			return '<button type="button" class="chip" data-f="' + e(c.id) + '" aria-pressed="' + (self.filter === c.id) + '">' + tx(c.label) + '<span class="count">' + App.num(c.n) + '</span></button>';
 		}).join('');
@@ -43,14 +48,16 @@ window.PAGE = {
 		var booksEl = document.getElementById('books');
 		booksEl.innerHTML = works.map(function (w) {
 			var typeLabel = t(S.TYPES[w.type] || { ar: w.type, en: w.type });
-			return '<li class="hc-item rise" data-type="' + e(w.type) + '">' +
+			return '<li class="hc-item rise" id="w-' + e(w.id) + '" data-type="' + e(w.type) + '">' +
 				window.Books.hardcover({ color: w.color, title: w.title, year: w.year, typeLabel: typeLabel, ribbon: w.ribbon }) +
 				'<div class="hc-caption">' +
 					'<div class="type">' + e(typeLabel) + (w.year ? ' · ' + App.num(w.year) : '') + '</div>' +
 					'<h3>' + tx(w.title) + '</h3>' +
-					'<p class="sub">' + e(App.alt(w.title)) + (w.publisher ? ' — ' + tx(w.publisher) : '') + '</p>' +
+					'<p class="sub">' + e(App.alt(w.title)) + (w.publisher && t(w.publisher) ? ' — ' + tx(w.publisher) : '') + '</p>' +
 					'<p>' + tx(w.synopsis) + '</p>' +
 					(w.note && t(w.note) ? '<div class="note">' + tx(w.note) + '</div>' : '') +
+					S.charXref(w.id) +
+					App.fixLink(t(w.title)) +
 				'</div>' +
 			'</li>';
 		}).join('');
@@ -62,6 +69,7 @@ window.PAGE = {
 			});
 			filters.querySelectorAll('.chip').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-f') === self.filter)); });
 		}
+		this.applyFilter = applyFilter;
 		filters.onclick = function (ev) {
 			var b = ev.target.closest('.chip');
 			if (!b) return;
@@ -78,9 +86,99 @@ window.PAGE = {
 			return '<article class="adapt rise">' +
 				'<div class="kind">' + tx(a.kind) + '</div>' +
 				'<h3>' + tx(a.title) + '</h3>' +
-				'<div class="yr">' + App.num(a.year || '') + (src ? ' · ' + (App.lang === 'ar' ? 'عن ' : 'from ') + tx(src.title) : '') + '</div>' +
+				'<div class="yr">' + App.num(a.year || '') + (src ? ' · ' + App.L('عن ', 'from ') + App.workLink(a.basedOn) : '') + '</div>' +
 				'<p>' + tx(a.text) + '</p>' +
 			'</article>';
 		}).join('');
+
+		this.onHash();
+	},
+
+	/* ---------- every issue, as spines on a shelf ---------- */
+	renderIssues: function () {
+		var App = window.App, d = App.data(), e = App.esc, tx = App.tx, self = this;
+		var issues = d.issues || {};
+		var ids = (d.series || []).map(function (s) { return s.id; }).filter(function (id) { return (issues[id] || []).length; });
+		var section = document.getElementById('issues-section');
+		section.hidden = !ids.length;
+		if (!ids.length) return;
+		if (ids.indexOf(this.issueSeries) < 0) this.issueSeries = ids[0];
+
+		var tabs = document.getElementById('issue-tabs');
+		tabs.setAttribute('aria-label', App.L('اختر السلسلة', 'Choose a series'));
+		tabs.innerHTML = ids.map(function (id) {
+			var s = App.byId(d.series, id);
+			return '<button type="button" class="chip" data-s="' + e(id) + '" aria-pressed="' + (id === self.issueSeries) + '">' + tx(s.title) + '<span class="count">' + App.num(issues[id].length) + '</span></button>';
+		}).join('');
+		tabs.onclick = function (ev) {
+			var b = ev.target.closest('.chip');
+			if (!b) return;
+			self.issueSeries = b.getAttribute('data-s');
+			self.renderIssues();
+		};
+
+		var s = App.byId(d.series, this.issueSeries);
+		var list = issues[this.issueSeries].slice().sort(function (a, b) { return a.n - b.n || (a.part || 0) - (b.part || 0); });
+		var shelf = document.getElementById('issues');
+		shelf.style.setProperty('--c', s.color || '#3a1414');
+		shelf.innerHTML = list.map(function (is, i) {
+			var h = 150 + ((is.n * 29) % 46);
+			return '<button type="button" class="issue" id="i-' + e(s.id) + '-' + e(is.n) + (is.part ? '-' + is.part : '') + '" data-i="' + i + '" aria-expanded="false" aria-controls="issue-card" style="--h:' + h + 'px">' +
+				'<span class="no">' + e(App.num(is.n)) + (is.part ? '<small>' + e(App.num(is.part)) + '</small>' : '') + '</span><span class="nm">' + tx(is.title) + '</span></button>';
+		}).join('');
+
+		var card = document.getElementById('issue-card');
+		card.hidden = true;
+		shelf.onclick = function (ev) {
+			var b = ev.target.closest('.issue');
+			if (b) self.openIssue(b);
+		};
+
+		var total = s.count ? +s.count : 0, books = list.length;
+		var note = document.getElementById('issues-note');
+		var src = d.issuesSources || [];
+		note.innerHTML = (total && books < total
+			? App.L('القائمة تضم ' + App.num(books) + ' من ' + App.num(total) + ' عددًا موثّقًا حتى الآن. ', 'This shelf lists ' + books + ' of ' + total + ' issues confirmed so far. ')
+			: '') +
+			(src.length ? App.L('المصادر: ', 'Sources: ') + src.map(function (x) { return '<a href="' + e(x.url) + '" target="_blank" rel="noopener">' + e(x.label || x.url) + '</a>'; }).join(' · ') : '');
+	},
+
+	openIssue: function (b) {
+		var App = window.App, d = App.data(), e = App.esc, tx = App.tx;
+		var shelf = document.getElementById('issues'), card = document.getElementById('issue-card');
+		var open = b.getAttribute('aria-expanded') === 'true';
+		shelf.querySelectorAll('.issue').forEach(function (x) { x.setAttribute('aria-expanded', 'false'); });
+		if (open) { card.hidden = true; return; }
+		b.setAttribute('aria-expanded', 'true');
+		var s = App.byId(d.series, this.issueSeries);
+		var is = d.issues[this.issueSeries].slice().sort(function (a, c) { return a.n - c.n || (a.part || 0) - (c.part || 0); })[+b.getAttribute('data-i')];
+		var chars = (is.chars || []).map(App.charLink).filter(Boolean);
+		card.innerHTML =
+			'<h4>' + tx(is.title) + '</h4>' +
+			'<p class="sub">' + e(App.alt(is.title)) + '</p>' +
+			'<p class="meta">' + tx(s.title) + ' — ' + App.L('العدد ', 'Issue ') + e(App.num(is.n)) + (is.year ? ' · ' + e(App.num(is.year)) : '') + '</p>' +
+			(chars.length ? '<p class="meta">' + App.L('يظهر فيه: ', 'Featuring: ') + chars.join(App.L('، ', ', ')) + '</p>' : '') +
+			App.fixLink(App.t(s.title) + ' #' + is.n);
+		card.hidden = false;
+	},
+
+	/* #s-id opens a series book, #w-id opens a hardcover, #i-series-n pulls an issue */
+	onHash: function () {
+		var self = this, App = window.App;
+		var m = /^#i-([a-z]+)-(\d+)(?:-\d)?$/.exec(location.hash);
+		if (m && m[1] !== this.issueSeries && (App.data().issues || {})[m[1]]) { this.issueSeries = m[1]; this.renderIssues(); }
+		App.focusHash(function (el, id) {
+			if (id.indexOf('w-') === 0) {
+				if (el.hidden) { self.filter = 'all'; self.applyFilter(); }
+				var hc = el.querySelector('.hc');
+				document.querySelectorAll('.hc.is-open').forEach(function (x) { x.classList.remove('is-open'); });
+				if (hc) setTimeout(function () { hc.classList.add('is-open'); }, 500);
+			} else if (id.indexOf('s-') === 0) {
+				var btn = el.querySelector('.bk-bookview');
+				if (btn && !btn.classList.contains('bk-active')) setTimeout(function () { btn.click(); }, 500);
+			} else if (id.indexOf('i-') === 0) {
+				if (el.getAttribute('aria-expanded') !== 'true') self.openIssue(el);
+			}
+		});
 	}
 };

@@ -19,7 +19,7 @@
 		}).join('');
 
 		return '' +
-		'<li class="rise">' +
+		'<li class="rise"' + (o.id ? ' id="' + e(o.id) + '"' : '') + '>' +
 			'<div class="bk-book bk-bookdefault" style="--bk-c:' + e(o.color || '#333') + '">' +
 				'<div class="bk-front">' +
 					'<div class="bk-cover-back"></div>' +
@@ -43,6 +43,7 @@
 				'</div>' +
 				'<h3>' + e(o.info.title) + (o.info.sub ? '<small>' + e(o.info.sub) + '</small>' : '') + '</h3>' +
 				'<p>' + e(o.info.text || '') + '</p>' +
+				(o.info.extra || '') +
 				(facts ? '<div class="facts">' + facts + '</div>' : '') +
 			'</div>' +
 		'</li>';

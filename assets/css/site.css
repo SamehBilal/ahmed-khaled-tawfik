@@ -25,6 +25,8 @@
 	--gold: #d9a441;
 	--radius: 14px;
 	--shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+	--header-bg: rgba(14, 15, 19, 0.78);
+	--card-paper: #f3ead6;
 
 	--f-display: 'Reem Kufi', 'Cormorant Garamond', serif;
 	--f-body: 'Noto Naskh Arabic', 'Cormorant Garamond', Georgia, serif;
@@ -71,7 +73,7 @@ img { max-width: 100%; display: block; }
 
 .site-header {
 	position: sticky; top: 0; z-index: 50;
-	background: rgba(14, 15, 19, 0.78);
+	background: var(--header-bg);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 	border-bottom: 1px solid var(--line);
@@ -118,7 +120,7 @@ img { max-width: 100%; display: block; }
 	.nav { order: 3; width: 100%; margin: 0; overflow-x: auto; scrollbar-width: none; }
 	.nav::-webkit-scrollbar { display: none; }
 	.nav a { padding: 6px 12px; font-size: 15px; white-space: nowrap; }
-	.lang-toggle { margin-inline-start: auto; }
+	.tools { margin-inline-start: auto; }
 }
 
 /* ---------- Page hero ---------- */

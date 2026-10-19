@@ -5,12 +5,30 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>الأعمال — أحمد خالد توفيق</title>
 	<meta name="description" content="Every series, novel, collection and translation by Ahmed Khaled Tawfik, as 3D books.">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lalezar&family=Noto+Naskh+Arabic:wght@400;600&family=Reem+Kufi:wght@400;600;700&display=swap" rel="stylesheet">
+	<!-- share -->
+	<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+	<meta name="theme-color" content="#0e0f13">
+	<link rel="canonical" href="https://samehbilal.github.io/ahmed-khaled-tawfik/works.html">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="العرّاب — The Godfather">
+	<meta property="og:title" content="الأعمال — أحمد خالد توفيق">
+	<meta property="og:description" content="Every series, novel, collection and translation by Ahmed Khaled Tawfik, as 3D books.">
+	<meta property="og:url" content="https://samehbilal.github.io/ahmed-khaled-tawfik/works.html">
+	<meta property="og:image" content="https://samehbilal.github.io/ahmed-khaled-tawfik/assets/img/og.png">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:locale" content="ar_EG">
+	<meta property="og:locale:alternate" content="en_US">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="الأعمال — أحمد خالد توفيق">
+	<meta name="twitter:description" content="Every series, novel, collection and translation by Ahmed Khaled Tawfik, as 3D books.">
+	<meta name="twitter:image" content="https://samehbilal.github.io/ahmed-khaled-tawfik/assets/img/og.png">
+	<!-- /share -->
+	<link rel="stylesheet" href="assets/css/fonts.css">
 	<link rel="stylesheet" href="assets/css/site.css">
+	<link rel="stylesheet" href="assets/css/extras.css">
 	<link rel="stylesheet" href="assets/css/books.css">
-	<script>try{if(localStorage.getItem('akt-lang')==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';}}catch(e){}</script>
+	<script>try{var h=document.documentElement,l=localStorage.getItem('akt-lang'),t=localStorage.getItem('akt-theme');if(l==='en'){h.lang='en';h.dir='ltr';}if(t==='light'||(!t&&matchMedia('(prefers-color-scheme: light)').matches))h.setAttribute('data-theme','light');}catch(e){}</script>
 </head>
 <body>
 	<header id="site-header"></header>
@@ -28,6 +46,18 @@
 			<div class="wrap">
 				<div class="section-head"><div><h2 data-i18n="seriesTitle"></h2><p data-i18n="seriesHint"></p></div></div>
 				<ul class="bk-list" id="series"></ul>
+			</div>
+		</section>
+
+		<section class="section" id="issues-section" hidden>
+			<div class="wrap">
+				<div class="section-head">
+					<div><h2 data-i18n="issuesTitle"></h2><p data-i18n="issuesHint"></p></div>
+					<div class="chips issues-tabs" id="issue-tabs" role="group"></div>
+				</div>
+				<div class="issues" id="issues"></div>
+				<div class="issue-card"><div class="shelf-card" id="issue-card" aria-live="polite" hidden></div></div>
+				<p class="issues-note" id="issues-note"></p>
 			</div>
 		</section>
 
@@ -52,6 +82,9 @@
 	<footer id="site-footer"></footer>
 
 	<script src="assets/js/data.js"></script>
+	<script src="assets/js/data-issues.js"></script>
+	<script src="assets/js/data-quotes.js"></script>
+	<script src="assets/js/data-legacy.js"></script>
 	<script src="assets/js/books.js"></script>
 	<script src="assets/js/shared.js"></script>
 	<script src="assets/js/works.js"></script>

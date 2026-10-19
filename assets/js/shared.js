@@ -18,6 +18,15 @@
 		return s.charAt(0) || '؟';
 	}
 
+	/* "Characters: A, B, C" links for a series or work */
+	function charXref(workId) {
+		var App = window.App;
+		var cs = (App.data().characters || []).filter(function (c) { return c.work === workId; });
+		if (!cs.length) return '';
+		return '<div class="xref">' + App.L('الشخصيات: ', 'Characters: ') +
+			cs.map(function (c) { return App.charLink(c.id); }).join(App.L('، ', ', ')) + '</div>';
+	}
+
 	function seriesBook(s) {
 		var App = window.App, t = App.t, tx = App.tx;
 		var L = function (ar, en) { return App.lang === 'ar' ? ar : en; };
@@ -40,6 +49,7 @@
 		}
 
 		return {
+			id: 's-' + s.id,
 			color: s.color, title: s.title,
 			num: s.count ? '№ ' + s.count : '',
 			motif: monogram(s.title),
@@ -48,6 +58,7 @@
 			pages: pages,
 			info: {
 				title: t(s.title), sub: App.alt(s.title), text: t(s.tagline),
+				extra: charXref(s.id) + App.fixLink(t(s.title)),
 				facts: [
 					[L('السنوات', 'Years'), App.num(s.years || '')],
 					[L('الأعداد', 'Issues'), s.count ? App.num(s.count) : ''],
@@ -57,5 +68,5 @@
 		};
 	}
 
-	window.WorksShared = { TYPES: TYPES, seriesBook: seriesBook, monogram: monogram };
+	window.WorksShared = { TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref };
 })();

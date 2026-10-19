@@ -32,7 +32,7 @@ window.PAGE = {
 				'<div class="shelf">' + list.map(function (w, i) {
 					var h = 160 + ((i * 37 + si * 13) % 60);
 					var c = sh.palette[i % sh.palette.length];
-					return '<button type="button" class="spine" aria-expanded="false" aria-controls="card-' + si + '" data-i="' + i + '" style="--h:' + h + 'px;--c:' + c + '"><span>' + tx(w.name) + '</span></button>';
+					return '<button type="button" class="spine" id="wr-' + sh.key + '-' + i + '" aria-expanded="false" aria-controls="card-' + si + '" data-i="' + i + '" style="--h:' + h + 'px;--c:' + c + '"><span>' + tx(w.name) + '</span></button>';
 				}).join('') + '</div>' +
 				'<div class="shelf-card" id="card-' + si + '" aria-live="polite"></div>' +
 			'</div>';
@@ -63,7 +63,7 @@ window.PAGE = {
 					'<p class="sub">' + e(App.alt(w.name)) + '</p>' +
 					(meta ? '<p class="meta">' + e(meta) + '</p>' : '') +
 					App.paras(w.text) +
-					(w.source ? '<a href="' + e(w.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '');
+					(w.source ? '<a href="' + e(w.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') + ' ' + App.fixLink(t(w.name));
 				card.classList.remove('is-open');
 				void card.offsetWidth;
 				card.classList.add('is-open');
@@ -78,5 +78,11 @@ window.PAGE = {
 				'<ul style="margin:0;padding-inline-start:20px;font-family:var(--f-latin);font-size:15px">' +
 				src.map(function (s) { return '<li><a href="' + e(s.url) + '" target="_blank" rel="noopener">' + e(s.label || s.url) + '</a></li>'; }).join('') + '</ul>';
 		} else sb.remove();
+
+		/* #wr-shelf-i pulls that writer's book off the shelf */
+		this.onHash = function () {
+			App.focusHash(function (el) { if (el.getAttribute('aria-expanded') !== 'true') el.click(); });
+		};
+		this.onHash();
 	}
 };

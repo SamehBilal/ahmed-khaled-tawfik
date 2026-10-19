@@ -34,7 +34,7 @@ window.PAGE = {
 					var color = (w && w.color) || '#5a2a22';
 					var name = t(c.name);
 					var mono = App.lang === 'ar' ? ((c.name && c.name.ar) || '').charAt(0) : ((c.name && c.name.en) || '').charAt(0);
-					return '<button type="button" class="char rise" data-work="' + e(c.work) + '" aria-pressed="false" style="--c:' + e(color) + '">' +
+					return '<div class="char-cell rise" id="c-' + e(c.id) + '" data-work="' + e(c.work) + '"><button type="button" class="char" aria-pressed="false" style="--c:' + e(color) + '">' +
 						'<div class="char-inner">' +
 							'<div class="char-face char-front">' +
 								'<span class="char-mono" aria-hidden="true">' + e(mono) + '</span>' +
@@ -48,9 +48,14 @@ window.PAGE = {
 								App.paras(c.desc) +
 								(c.traits && c.traits.length ? '<div class="traits">' + c.traits.map(function (x) { return '<span>' + tx(x) + '</span>'; }).join('') + '</div>' : '') +
 								(c.quote && t(c.quote) ? '<blockquote>' + tx(c.quote) + '</blockquote>' : '') +
+								(d.quotes || []).map(function (q, qi) {
+									return q.character === c.id ? '<blockquote>' + tx(q.text) + '</blockquote>' : '';
+								}).join('') +
 							'</div>' +
 						'</div>' +
-					'</button>';
+					'</button>' +
+						'<div class="char-meta">' + (w ? App.L('من ', 'From ') + App.workLink(c.work) + ' · ' : '') + App.fixLink(name) + '</div>' +
+					'</div>';
 				}).join('') +
 			'</div></div></section>';
 
@@ -59,7 +64,7 @@ window.PAGE = {
 		var grid = document.getElementById('char-grid');
 		var filters = document.getElementById('char-filters');
 		function apply() {
-			grid.querySelectorAll('.char').forEach(function (c) { c.hidden = !(self.filter === 'all' || c.getAttribute('data-work') === self.filter); });
+			grid.querySelectorAll('.char-cell').forEach(function (c) { c.hidden = !(self.filter === 'all' || c.getAttribute('data-work') === self.filter); });
 			filters.querySelectorAll('.chip').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-f') === self.filter)); });
 		}
 		filters.addEventListener('click', function (ev) {
@@ -76,5 +81,19 @@ window.PAGE = {
 			c.setAttribute('aria-pressed', String(on));
 		});
 		apply();
+		this.apply = apply;
+		this.onHash();
+	},
+
+	/* #c-id: show that character's card and flip it to the description */
+	onHash: function () {
+		var self = this;
+		window.App.focusHash(function (el) {
+			if (el.hidden) { self.filter = 'all'; self.apply(); }
+			var card = el.querySelector('.char');
+			if (card && !card.classList.contains('is-flipped')) {
+				setTimeout(function () { card.classList.add('is-flipped'); card.setAttribute('aria-pressed', 'true'); }, 600);
+			}
+		});
 	}
 };

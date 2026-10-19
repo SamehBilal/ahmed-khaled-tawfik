@@ -56,12 +56,18 @@ window.PAGE = {
 
 		/* explore */
 		var cards = [
+			{ href: 'guide.html', big: '?', title: { ar: 'من أين أبدأ؟', en: 'Where to start' },
+			  text: { ar: 'جديد على عالمه؟ مسارات قراءة مقترحة حسب ذوقك.', en: 'New to his world? Suggested reading paths for every taste.' } },
 			{ href: 'works.html', big: series.length + works.length, title: { ar: 'الأعمال', en: 'The Works' },
 			  text: { ar: 'السلاسل والروايات والمقالات والترجمات — كتب ثلاثية الأبعاد تتصفحها من الداخل.', en: 'Series, novels, essays and translations — 3D books you can open and leaf through.' } },
 			{ href: 'characters.html', big: chars.length, title: { ar: 'الشخصيات', en: 'The Characters' },
 			  text: { ar: 'رفعت إسماعيل وعبير وعلاء عبد العظيم ومن عاش معهم بين الصفحات.', en: 'Refaat Ismail, Abeer, Alaa Abdel Azim and everyone who lived beside them on the page.' } },
 			{ href: 'writers.html', big: writersCount, title: { ar: 'الكُتّاب', en: 'The Writers' },
-			  text: { ar: 'من كتب معه، ومن قدّم لهم وقدّموا له، ومن خرج من عباءته.', en: 'Who wrote with him, who he introduced and who introduced him, and who grew up reading him.' } }
+			  text: { ar: 'من كتب معه، ومن قدّم لهم وقدّموا له، ومن خرج من عباءته.', en: 'Who wrote with him, who he introduced and who introduced him, and who grew up reading him.' } },
+			{ href: 'quotes.html', big: (d.quotes || []).length || '«»', title: { ar: 'اقتباسات', en: 'Quotes' },
+			  text: { ar: 'كلماته الموثّقة فقط — كل اقتباس بمصدره.', en: 'Only his verified words — every quote with its source.' } },
+			{ href: 'legacy.html', big: (d.media || []).length || '∞', title: { ar: 'الإرث', en: 'The legacy' },
+			  text: { ar: 'الوداع والتكريم، ولقاءاته ومحاضراته بصوته.', en: 'The farewell, the tributes, and his interviews and talks.' } }
 		];
 		document.getElementById('explore').innerHTML = cards.map(function (c) {
 			return '<a class="rise" href="' + c.href + '"><span class="big">' + e(c.big) + '</span><h3>' + tx(c.title) + '</h3><p>' + tx(c.text) + '</p><span class="go">' + (App.lang === 'ar' ? 'ادخل ←' : 'Enter →') + '</span></a>';
