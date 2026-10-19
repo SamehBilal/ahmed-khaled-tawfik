@@ -38,13 +38,18 @@ window.PAGE = {
 
 		function stat(n, label) { return '<div class="stat"><b>' + App.num(n) + '</b><span>' + tx(label) + '</span></div>'; }
 
-		/* hero book: the first series, as a 3D showcase book */
-		var hero = document.getElementById('hero-book');
-		var s0 = series[0];
-		if (s0) {
-			hero.innerHTML = window.Books.showcase(window.WorksShared.seriesBook(s0));
-			window.Books.initShowcase(hero);
-		}
+		/* hero portrait (linked from Youm7, credited under the photo) */
+		var photo = bio.photo || {
+			src: 'https://img.youm7.com/ArticleImgs/2018/4/6/112144-%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D8%A8-%D8%A3%D8%AD%D9%85%D8%AF-%D8%AE%D8%A7%D9%84%D8%AF-%D8%AA%D9%88%D9%81%D9%8A%D9%82.jpg',
+			credit: { ar: 'الصورة: اليوم السابع', en: 'Photo: Youm7' }
+		};
+		document.getElementById('hero-photo').innerHTML =
+			'<figure class="portrait">' +
+				'<div class="portrait-frame"><img src="' + e(photo.src) + '" alt="' + e(App.L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik')) + '" referrerpolicy="no-referrer" ' +
+					'onerror="this.closest(\'.portrait\').classList.add(\'no-img\')"></div>' +
+				'<span class="portrait-seal" aria-hidden="true">العرّاب</span>' +
+				'<figcaption>' + tx(photo.credit) + '</figcaption>' +
+			'</figure>';
 
 		/* bio */
 		document.getElementById('bio').innerHTML = App.paras(bio.summary);

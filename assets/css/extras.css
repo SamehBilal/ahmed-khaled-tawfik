@@ -194,3 +194,59 @@ a.media:hover { transform: translateY(-4px); border-color: var(--ember); color: 
 .char-meta a { font-family: var(--f-display); }
 .char-meta .fix-link { margin: 0; }
 .issue .no small { display: block; font-size: 9px; opacity: .8; }
+
+/* ---------- Home portrait ---------- */
+
+.hero-stage { align-items: center; }
+.portrait { position: relative; margin: 0; width: min(420px, 100%); }
+.portrait-frame {
+	position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 6px;
+	background: var(--ink-3);
+	box-shadow: 0 30px 70px rgba(0,0,0,.55), 0 0 0 1px var(--line);
+	transform: rotate(-2deg);
+	transition: transform .6s cubic-bezier(.2,.8,.2,1);
+}
+html[dir="rtl"] .portrait-frame { transform: rotate(2deg); }
+.portrait:hover .portrait-frame { transform: rotate(0); }
+.portrait-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; filter: grayscale(.25) contrast(1.05); }
+.portrait-frame::after {
+	content: ''; position: absolute; inset: 0; pointer-events: none;
+	background: linear-gradient(transparent 55%, rgba(14,15,19,.55)), radial-gradient(circle at 30% 20%, rgba(224,99,58,.18), transparent 60%);
+}
+.portrait-seal {
+	position: absolute; bottom: -18px; inset-inline-start: -18px;
+	display: grid; place-items: center; width: 96px; height: 96px; border-radius: 50%;
+	background: radial-gradient(circle at 40% 35%, #c23a22, #6e1a14);
+	color: #f6d79a; font-family: var(--f-chunky); font-size: 24px;
+	box-shadow: 0 10px 24px rgba(0,0,0,.5); transform: rotate(-12deg);
+}
+.portrait figcaption { margin-top: 14px; text-align: end; font-size: 12.5px; color: var(--muted); font-family: var(--f-display); }
+.portrait.no-img .portrait-frame { display: none; }
+
+/* ---------- Video thumbnails + pop-up player ---------- */
+
+.media.has-thumb { padding: 0; overflow: hidden; cursor: pointer; text-align: start; font: inherit; }
+.media.has-thumb .media-body { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 4px; }
+.thumb { position: relative; display: block; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .3s; opacity: .9; }
+.media.has-thumb:hover .thumb img { transform: scale(1.05); opacity: 1; }
+.thumb .play {
+	position: absolute; top: 50%; left: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%;
+	display: grid; place-items: center; background: rgba(179,38,30,.92); color: #fff;
+	box-shadow: 0 8px 24px rgba(0,0,0,.5); transition: transform .3s;
+}
+.media.has-thumb:hover .play { transform: scale(1.1); }
+button.media { border: 1px solid var(--line); width: 100%; color: var(--paper); }
+button.media:hover { transform: translateY(-4px); border-color: var(--ember); }
+
+.video-dialog {
+	width: min(1000px, 100% - 24px); padding: 0; border: 0; border-radius: 14px; overflow: hidden;
+	background: #000; color: #fff; box-shadow: 0 40px 100px rgba(0,0,0,.7);
+}
+.video-dialog::backdrop { background: rgba(5,5,8,.82); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.video-dialog .frame { position: relative; aspect-ratio: 16 / 9; }
+.video-dialog iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-dialog .bar { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #111; font-family: var(--f-display); font-size: 14px; }
+.video-dialog .bar .ttl { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.video-dialog .bar a { color: #f2b56b; font-family: var(--f-latin); }
+.video-dialog .bar button { font: inherit; background: #222; color: #fff; border: 1px solid #333; border-radius: 999px; padding: 3px 12px; cursor: pointer; }
