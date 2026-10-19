@@ -1,7 +1,10 @@
 /* Audiobooks on Audiohat (audiohatdar.com) — rights: شركة سلاح التلميذ للطباعة والنشر.
-   Audiohat's sample links are temporary, so the site never plays their audio itself:
-   the cassette player opens the episode page on Audiohat, where their own sample plays.
+   Audiohat's own sample links expire daily and can't be fetched from another site, so the
+   site can't play them; the cassette's Audiohat key opens the episode page there instead.
    Each entry: [Audiohat book slug (https://www.audiohatdar.com/books/<slug>), minutes or null].
+   Optional 3rd item: a sample the cassette can play itself — a file in assets/audio/ (e.g. "assets/audio/mwt-12.mp3")
+   or a permanent URL. Only add audio you have permission to use. Without it, ▶ opens Audiohat instead.
+   The midnight list takes the sample as its 4th item: [title, slug, minutes, sample].
    Long issues are split into several episodes. Catalogue collected 2026-10-20. */
 window.AKT = window.AKT || {};
 window.AKT.audio = {
@@ -113,3 +116,123 @@ window.AKT.audio = {
 		["الشقة رقم 9","30_الشقة_رقم_9",18]
 	]
 };
+
+/* Safari as radio drama on YouTube — the "Tasgeel - تسجيل" channel's playlist, one video per issue.
+   Each entry: [YouTube video id] or [id, 0] when the uploader has switched off embedding
+   (those open on YouTube instead of playing in the cassette). Checked 2026-10-20. */
+window.AKT.audio.youtube = {
+	channel: { name: "Tasgeel - تسجيل", url: "https://www.youtube.com/playlist?list=PLd2bItOIVSNnJ42x9WsGGOcDFYRRy2X5q" },
+	issues: {
+		"safari-1": [["rVfqKYAdS0E"],["EXslhnXCSw8"]],
+		"safari-2": [["TBwDjsus-Wg"]],
+		"safari-3": [["Z4LLY-RT4Rs"]],
+		"safari-4": [["ZbzMmRQKIZk"]],
+		"safari-5": [["dxKdnKMmU90"]],
+		"safari-6": [["HjFQFYqiB9U"]],
+		"safari-7": [["62_6ci6dw04"]],
+		"safari-8": [["OFHdrjvNbvE"]],
+		"safari-9": [["dVNAj7dt2dw"]],
+		"safari-10": [["QHo7JM9i13g"]],
+		"safari-11": [["zPXmUuNsA0c"]],
+		"safari-12": [["v4T-pTaoRyA"]],
+		"safari-13": [["-yH8r43SHy0"]],
+		"safari-14": [["7_TCGXJpW5Y"]],
+		"safari-15": [["aKhn-m4jq08"]],
+		"safari-16": [["ClqI1f9epDA",0]],
+		"safari-17": [["tv3kSOgj32c",0]],
+		"safari-18": [["9VrpKqMiQr0",0]],
+		"safari-19": [["somFMrN0bs4",0]],
+		"safari-20": [["WIr2roWWgY4"]],
+		"safari-21": [["6rm0wf_2BM0"]],
+		"safari-22": [["51-FRUXSuEA",0]],
+		"safari-23": [["nWptiWfaXGA"]],
+		"safari-24": [["hzPfm2JsdnY"]],
+		"safari-25": [["0SBg9FEgmdI"]],
+		"safari-26": [["wng6F3U4Miw"]],
+		"safari-27": [["02t0iuM2qug"]],
+		"safari-28": [["ggfWPz-CF58",0]],
+		"safari-29": [["D1kGFW3y_pg"]],
+		"safari-30": [["PyZbow_SHZ8"]],
+		"safari-31": [["ZUaUAS7El5Q"]],
+		"safari-32": [["8LTX7EtT31o",0]],
+		"safari-33": [["OYVtOgHY4k8"]],
+		"safari-34": [["xc_oxQbjeXo"]],
+		"safari-35": [["l8N12L3owPU"]],
+		"safari-36": [["YZfHQWDeFgM"]],
+		"safari-37": [["n1G_AWNPZg0"]],
+		"safari-38": [["9dQWtT5clfk"]],
+		"safari-39": [["hB9M-XDjwuA"]],
+		"safari-40": [["rY4KfrLgvZU"]],
+		"safari-41": [["qMWhlKj_NDY"]],
+		"safari-42": [["CGZLKVdFV88"]],
+		"safari-43": [["f4tfHeuvGVo"]],
+		"safari-44": [["nHMiCmhfBrI"]],
+		"safari-45": [["ewBybqeCcn4"]]
+	}
+};
+
+/* Ma Wara' al-Tabi'a special issue 1, «في كهوف دراجوسان» — an interactive gamebook, dramatised by
+   Audiohat on its YouTube channel, one video per cave. Entries: [videoId, embeddable (1/0), label]. Checked 2026-10-20. */
+window.AKT.audio.youtube.channels = window.AKT.audio.youtube.channels || {};
+window.AKT.audio.youtube.channels["mwt-s1"] = { name: "أوديوهات – كتب صوتية درامية", url: "https://www.youtube.com/playlist?list=PLUyXOmCVyikFTVOW5xfa7gQKQYs8UVweQ" };
+window.AKT.audio.youtube.issues["mwt-s1"] = [
+	["KZkQXbcA9J0",1,"البداية · خريطة الطريق"],
+	["T0iaR729H-w",1,"كهف 12"],
+	["zwvUFYIKu3c",1,"كهف 17 · أن أتبعه"],
+	["tgszwQJ5AH4",1,"كهف 20"],
+	["8A2O6LL1xhY",1,"كهف 27 · تاريخ اليوم يقبل القسمة على اثنين"],
+	["wRmo4aMCviU",1,"كهف 29 · فشلت فى حل اللغز"],
+	["3MvD4TrKGW8",1,"كهف 30 · أن أعود"],
+	["-Tt__TK5aRU",1,"كهف 31"],
+	["PmqEjsE8wyY",1,"كهف 35"],
+	["gjwFKhTtdhQ",1,"كهف 36 · اللدغة سامة"],
+	["ymuT8RNAZuE",1,"كهف 41 · الممر الأيمن"],
+	["I6LJxj7-_dA",1,"كهف 43 · توصلت الى الجواب"],
+	["yt9ML-bot1U",1,"كهف 48"],
+	["4oSPAnlHbT8",1,"كهف 49"],
+	["Ncf1t_cEQo0",1,"كهف 50"],
+	["-mZVRkEeGtk",1,"كهف 51"],
+	["NQ_tzI8LTn0",1,"كهف 63"],
+	["pgykCzpTUBc",1,"كهف 64 · اللدغة غير سامة"],
+	["jXFiu0F-3v8",1,"كهف 73 · القلادة معك"],
+	["UC4z1DhaUCs",1,"كهف 78 · الممر الأيسر"],
+	["3HAAr7oHYTM",1,"كهف 84 · لم تصل الى شيء"],
+	["OkXVoFK3iW8",1,"كهف 90 · دوروثي"],
+	["bulg0l00BZA",1,"كهف 93"],
+	["1YjPtoxCAZE",1,"كهف 95 · اجتياز الباب"],
+	["vkgvxy7ioM4",1,"كهف 103 · جرب أى رقم"],
+	["rZDmpNZBNpw",1,"كهف 106 · اليوم هو الثلاثاء أو الجمعة"],
+	["zLu2rKrRndM",1,"كهف 109"],
+	["fOowQtmPv8M",1,"كهف 110 · لو غلبك النوم"],
+	["PvXNr7X_PN4",1,"كهف 123"],
+	["YOj8Q11kB68",1,"كهف 128 · الحل الثاني"],
+	["ViY0ctOYlCo",1,"كهف 130 · تاريخ اليوم لا يقبل القسمة على اثنين"],
+	["zftiJ0C-sVY",1,"كهف 135"],
+	["mcMxpmaJvVc",1,"كهف 142 · لو كنت قوي الارادة"],
+	["khciSiLbZns",1,"كهف 150 · تقرأ بعد العاشرة مساءا"],
+	["q4vtPkkJRno",1,"كهف 158"],
+	["kVwRsWhczhA",1,"كهف 162 · اليوم هو الأحد أو الأربعاء"],
+	["SB4OmDAYLoU",1,"كهف 163 · تمثال السيد الأزرق"],
+	["SfcpcaAtz04",1,"كهف 164 · أن أرحل من هنا"],
+	["1XXL2Yvw6Uw",1,"كهف 167 · الكتابة الى أعلى"],
+	["KiO3wil6KHc",1,"كهف 170"],
+	["APbU2IRd8MA",1,"كهف 176 · الصندوق الثاني"],
+	["uIXNTB80OVw",1,"كهف 188 · أبقى مع الفتاة"],
+	["SZxkyrV3l-M",1,"كهف 196 · تقرأ قبل العاشرة مساءا"],
+	["CmJ0jVTWQqM",1,"كهف 199"],
+	["vjg007otiL8",1,"كهف 200 · أرتميس"],
+	["Mm5MKArIM2c",1,"كهف 206 · تمثال التوازن الذهبي"],
+	["NYubgjA6-Z4",1,"كهف 210 · اذا كنت فتاة"],
+	["ewVNAwoV3gc",1,"كهف 213 · أن أنزل"],
+	["UDf2mCritO4",1,"كهف 215 · ساقي سليمة"],
+	["4E20N9w44-M",1,"كهف 221 · ساقي قد كسرت"],
+	["wkP019Pe9qw",1,"كهف 227 · اذا كنت فتى"],
+	["UZrEAFQUXUs",1,"كهف 242 · القلادة ليست معك"],
+	["FLVOfMF7TSw",1,"كهف 243 · اليوم هو السبت أو الأثنين أو الخميس"],
+	["wsBTNbaToUQ",1,"كهف 249 · أن أبقى هنا"],
+	["nrrc30PaNbU",1,"كهف 252 · حللت اللغز"],
+	["zTLUJ1JlrMk",1,"كهف 254 · الحل الأول"],
+	["F9IQ_54U1jY",1,"كهف 261 · معك خاتم عشتار"],
+	["G8xNlNQjXsI",1,"كهف 263 · الصندوق الأول"],
+	["D7U_SdqvFjk",1,"كهف 266 · الكتابة الى أسفل"]
+];

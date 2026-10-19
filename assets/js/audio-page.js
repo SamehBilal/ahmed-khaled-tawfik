@@ -6,8 +6,8 @@ window.PAGE = {
 		eyebrow: { ar: 'كتب مسموعة', en: 'Audiobooks' },
 		title: { ar: 'العرّاب مسموعًا', en: 'The Godfather, out loud' },
 		lead: {
-			ar: 'أعداد «ما وراء الطبيعة» و«فانتازيا» وحكايات «بعد منتصف الليل» كما سجّلتها Audiohat. اختر شريطًا، ثم اضغط تشغيل لتسمع العيّنة على موقعهم.',
-			en: 'Beyond Nature and Fantasia issues, and the “After Midnight” stories, as recorded by Audiohat. Pick a tape, then press play to hear the sample on their site.'
+			ar: 'أعداد «ما وراء الطبيعة» و«فانتازيا» وحكايات «بعد منتصف الليل» كما سجّلتها Audiohat، و«سافاري» دراما إذاعية على YouTube. اختر شريطًا ثم اضغط تشغيل.',
+			en: 'Beyond Nature and Fantasia issues and the “After Midnight” stories as recorded by Audiohat, plus Safari as a radio drama on YouTube. Pick a tape, then press play.'
 		}
 	},
 
@@ -19,21 +19,31 @@ window.PAGE = {
 
 		/* one long playlist: issues in series order, then the midnight programme */
 		var tracks = [], groups = [];
-		['mwt', 'fantasia'].forEach(function (sid) {
+		var Y = (A.youtube && A.youtube.issues) || {};
+		['mwt', 'fantasia', 'safari'].forEach(function (sid) {
 			var s = App.byId(d.series, sid);
 			var rows = [];
 			S.seriesIssues(sid).forEach(function (is) {
 				var key = sid + '-' + is.n;
-				if (!A.issues[key] || is.part > 1) return;
+				if ((!A.issues[key] && !Y[key]) || is.part > 1) return;
 				var start = tracks.length;
 				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = t(s.title) + ' #' + App.num(is.n) + (tr.sub !== 'Audiohat' ? ' · ' + tr.sub : ''); tracks.push(tr); });
-				rows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), start: start, count: tracks.length - start, mins: A.issues[key].reduce(function (m, ep) { return m + (ep[1] || 0); }, 0) });
+				rows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
 			});
 			if (rows.length) groups.push({ title: s.title, total: S.seriesIssues(sid).length, rows: rows });
+			/* special issues of the series (e.g. «في كهوف دراجوسان»), one row each, all their videos on the tape */
+			var srows = [];
+			S.specialIssues(sid).forEach(function (is) {
+				var key = sid + '-s' + is.n;
+				var start = tracks.length;
+				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = L('عدد خاص ', 'Special ') + App.num(is.n) + ' · ' + tr.sub; tracks.push(tr); });
+				if (tracks.length > start) srows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), start: start, count: tracks.length - start, mins: 0, yt: true });
+			});
+			if (srows.length) groups.push({ title: { ar: t(s.title) + ' — الأعداد الخاصة', en: (s.title.en || '') + ' — special issues' }, rows: srows });
 		});
 		var midStart = tracks.length;
 		A.midnight.forEach(function (m) {
-			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: A.base + encodeURIComponent(m[1]).replace(/%28/g, '(').replace(/%29/g, ')'), mins: m[2] });
+			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], sample: m[3] || '' });
 		});
 		groups.push({
 			title: { ar: 'بعد منتصف الليل', en: 'After Midnight' },
@@ -44,7 +54,7 @@ window.PAGE = {
 		root.innerHTML =
 			'<section class="section"><div class="wrap audio-hero">' +
 				'<div><h2 class="d-head" style="font-family:var(--f-display);font-size:32px;margin:0 0 10px">' + L('على الشريط الآن', 'On the tape now') + '</h2>' +
-					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات، و ▶ يفتح الحلقة على Audiohat.', '◀◀ and ▶▶ wind between episodes; ▶ opens the episode on Audiohat.') + '</p>' +
+					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات، و ▶ يشغّل العيّنة على الشريط إن وُجدت، وزر Audiohat يفتح الحلقة على موقعهم.', '◀◀ and ▶▶ wind between episodes; ▶ plays the sample on the tape when there is one; the Audiohat key opens the episode on their site.') + '</p>' +
 					'<p style="color:var(--muted);margin:0">' + App.num(tracks.length) + ' ' + L('حلقة', 'episodes') + ' · ' +
 						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a></p></div>' +
 				'<div id="a-cassette"></div>' +
@@ -61,8 +71,8 @@ window.PAGE = {
 						'</li>';
 					}).join('') + '</ul></div>';
 			}).join('') + '</div>' +
-			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat و«شركة سلاح التلميذ للطباعة والنشر». هذا الموقع يربط إليها فقط ولا يستضيف أي صوت منها.',
-				'Recordings and rights belong to Audiohat and Salah El Telmeez for Printing & Publishing. This site only links to them and hosts none of their audio.') + '</p>' +
+			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat و«شركة سلاح التلميذ للطباعة والنشر»، ودراما «سافاري» الإذاعية من قناة «تسجيل» على YouTube. هذا الموقع يربط إليها أو يعرضها عبر مشغّل YouTube فقط، ولا يستضيف أي صوت منها.',
+				'Recordings and rights belong to Audiohat and Salah El Telmeez for Printing & Publishing; the Safari radio drama is from the Tasgeel channel on YouTube. This site only links to them or plays them through the YouTube player, and hosts none of their audio.') + '</p>' +
 			'</div></section>';
 
 		var deck = window.Cassette.mount(document.getElementById('a-cassette'), { tracks: tracks });

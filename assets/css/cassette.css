@@ -106,3 +106,33 @@ html[lang="en"] .cs-meta { direction: ltr; }
 .ep-list button:hover { border-color: var(--ember); color: var(--ember); }
 .ep-list li.cur { border-color: var(--ember); box-shadow: 0 0 0 1px var(--ember) inset; }
 .audio-credit { color: var(--muted); font-size: 14px; margin-top: 28px; }
+
+/* "Audiohat ↗" key and the tape progress bar */
+.cs-out a {
+	height: 52px; padding: 0 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;
+	font: 600 13px var(--f-latin); color: #333; text-decoration: none;
+	background: #ddd url('../img/cassette/metal.jpg') no-repeat center top; background-size: cover;
+	box-shadow: inset 0 0 0 1px rgba(0,0,0,.2), inset 0 0 1px 2px rgba(255,255,255,.9), inset 0 -6px 5px rgba(0,0,0,.1), 0 6px 7px rgba(0,0,0,.3), 0 4px 1px rgba(0,0,0,.5);
+	border-radius: 0 8px 8px 0;
+}
+.cs-out a:hover { color: #b3261e; }
+.cs-out a:active { transform: translateY(4px); background-image: url('../img/cassette/metal_dark.jpg'); }
+.cs-out a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; position: relative; z-index: 1; }
+.cs-controls li:nth-last-child(2) button { border-radius: 0; }
+.cs-progress { height: 3px; margin: 12px auto 0; max-width: 360px; background: var(--line); border-radius: 3px; overflow: hidden; visibility: hidden; }
+.cassette.has-sample .cs-progress { visibility: visible; }
+.cs-progress span { display: block; height: 100%; width: 0; background: var(--ember); transition: width .25s linear; }
+@media (max-width: 480px) { .cs-out .lb { display: none; } .cs-controls button, .cs-out a { padding: 0 12px; min-width: 52px; } }
+
+/* YouTube player panel (must stay visible, at least 200px tall) */
+.cs-video { margin: 16px auto 0; max-width: 586px; border-radius: 12px; overflow: hidden; background: #000; box-shadow: var(--shadow); }
+.cs-video[hidden] { display: none; }
+.cs-video .cs-yt, .cs-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; min-height: 200px; border: 0; }
+
+/* keep the key row inside narrow columns: drop the text labels, keep the icons */
+.cassette { container-type: inline-size; width: 100%; }
+@container (max-width: 540px) {
+	.cs-play .lb, .cs-out .lb { display: none; }
+	.cs-play button { min-width: 72px; }
+	.cs-controls button, .cs-out a { padding: 0 12px; min-width: 52px; }
+}
