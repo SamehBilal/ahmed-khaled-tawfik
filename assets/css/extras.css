@@ -251,14 +251,14 @@ button.media:hover { transform: translateY(-4px); border-color: var(--ember); }
 .video-dialog .bar a { color: #f2b56b; font-family: var(--f-latin); }
 .video-dialog .bar button { font: inherit; background: #222; color: #fff; border: 1px solid #333; border-radius: 999px; padding: 3px 12px; cursor: pointer; }
 
-/* ---------- His name, lettered like the Ma Wara' al-Tabi'a covers ---------- */
+/* ---------- His name (theme gradient; the cover font itself is still to be supplied) ---------- */
 
 .home-hero .name-cover {
 	font-family: 'Rakkas', var(--f-chunky); font-weight: 400;
 	font-size: clamp(54px, 8.4vw, 112px); line-height: 1.25;
-	color: #f7d417;
-	-webkit-text-stroke: .1em #2b1406; paint-order: stroke fill;
-	text-shadow: 0 .06em .12em rgba(0,0,0,.45);
+	background: linear-gradient(180deg, #f6d79a, var(--ember) 55%, var(--blood));
+	-webkit-background-clip: text; background-clip: text; color: transparent;
+	padding-block: .05em;
 	white-space: nowrap;
 }
 html[lang="en"] .home-hero .name-cover { text-align: start; }
@@ -290,8 +290,8 @@ html[lang="en"] .home-hero .name-cover { text-align: start; }
 	transform-origin: 50% 58%; transform: scale(1);
 	box-shadow: 0 0 120px rgba(0,0,0,.8);
 }
-.grave-overlay.on .grave-img { animation: graveZoom 9s ease-out forwards; }
-@keyframes graveZoom { from { transform: scale(1); } to { transform: scale(1.55); } }
+.grave-overlay.on .grave-img { animation: graveZoom 12s ease-out forwards; }
+@keyframes graveZoom { from { transform: scale(1); } to { transform: scale(1.06); } }
 .grave-cap {
 	position: absolute; left: 0; right: 0; bottom: 0; padding: 60px 24px 34px; text-align: center; color: #efe6d2;
 	background: linear-gradient(transparent, rgba(0,0,0,.85));
