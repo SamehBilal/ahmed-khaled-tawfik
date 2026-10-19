@@ -1,0 +1,107 @@
+/* =========================================================
+   Legacy page — scroll-focus timeline.
+   Adapted from a CodePen "timeline with changing background" (jQuery),
+   rebuilt without jQuery: the event in the middle of the screen comes
+   into focus and the section's backdrop becomes that event's picture.
+   ========================================================= */
+
+.tlx { position: relative; isolation: isolate; padding: 56px 0 80px; }
+.section.tlx-section { padding: 0; }
+
+/* the backdrop stays on screen while the section scrolls past */
+.tlx-bg {
+	position: sticky; top: 0; height: 100vh; height: 100svh; margin-bottom: -100vh; margin-bottom: -100svh;
+	z-index: -1; overflow: hidden; pointer-events: none;
+}
+.tlx-bg img {
+	position: absolute; inset: -20px; width: calc(100% + 40px); height: calc(100% + 40px);
+	object-fit: cover; opacity: 0; filter: blur(3px) saturate(.75);
+	transform: scale(1.04); transition: opacity .8s ease, transform 6s ease;
+}
+.tlx-bg img.on { opacity: 1; transform: scale(1); }
+.tlx-bg::after {
+	content: ''; position: absolute; inset: 0;
+	background:
+		linear-gradient(var(--ink) 0, transparent 18%, transparent 82%, var(--ink) 100%),
+		color-mix(in srgb, var(--ink) 80%, transparent);
+}
+
+.tlx .section-head { margin-bottom: 40px; }
+
+/* the line down the middle */
+.tlx-list { position: relative; list-style: none; margin: 0; padding: 0; }
+.tlx-list::before {
+	content: ''; position: absolute; top: 0; bottom: 0; inset-inline-start: 50%; width: 1px;
+	background: linear-gradient(transparent, var(--paper-dim) 6%, var(--paper-dim) 94%, transparent); opacity: .5;
+}
+
+.tlx-item {
+	position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+	padding: 40px 0; opacity: .3; filter: blur(2px);
+	transition: opacity .5s, filter .5s;
+}
+.tlx-item.active { opacity: 1; filter: none; }
+
+.tlx-content { padding-inline: 0 56px; grid-column: 1; grid-row: 1; transform: translateY(-40px); transition: transform .6s; }
+.tlx-item:nth-child(even) .tlx-content { grid-column: 2; padding-inline: 56px 0; }
+.tlx-item.active .tlx-content { transform: none; }
+
+/* the label beside the line, on the side opposite the content */
+.tlx-item::before {
+	content: attr(data-text); grid-column: 2; grid-row: 1; align-self: center;
+	margin-inline-start: 56px; padding-inline-start: 15px; border-inline-start: 2px solid var(--ember);
+	font-family: var(--f-display); font-size: 15px; letter-spacing: .03em; color: var(--paper);
+	opacity: 0; transform: translateY(40px); transition: opacity .3s, transform .3s;
+}
+.tlx-item:nth-child(even)::before {
+	grid-column: 1; justify-self: end; margin-inline: 0 56px;
+	padding-inline: 0 15px; border-inline-start: 0; border-inline-end: 2px solid var(--ember);
+}
+.tlx-item.active::before { opacity: 1; transform: none; transition-delay: .2s; }
+html[lang="en"] .tlx-item::before { font-family: var(--f-latin); font-size: 17px; text-transform: uppercase; letter-spacing: .12em; }
+
+/* the dot on the line */
+.tlx-item::after {
+	content: ''; position: absolute; top: 50%; inset-inline-start: 50%; width: 13px; height: 13px; box-sizing: border-box;
+	transform: translate(-50%, -50%);
+	border-radius: 50%; background: var(--ink); border: 2px solid var(--paper-dim); transition: background .4s, border-color .4s, box-shadow .4s;
+}
+html[dir="rtl"] .tlx-item::after { transform: translate(50%, -50%); }
+.tlx-item.active::after { background: var(--ember); border-color: var(--ember); box-shadow: 0 0 0 6px color-mix(in srgb, var(--ember) 25%, transparent); }
+
+.tlx-yr {
+	font-family: var(--f-latin); font-weight: 700; font-size: clamp(40px, 5vw, 60px); line-height: 1;
+	color: var(--paper); margin: 0 0 18px;
+}
+.tlx-media {
+	display: block; margin: 0 0 18px; border-radius: 4px; overflow: hidden; line-height: 0;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, .45); background: var(--ink-2);
+}
+button.tlx-media { width: 100%; padding: 0; border: 0; cursor: pointer; font: inherit; color: inherit; }
+button.tlx-media:hover img { transform: scale(1.03); }
+button.tlx-media:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.tlx-media img { transition: transform .4s; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.tlx-media.tall { width: min(180px, 60%); }
+.tlx-media.tall img { aspect-ratio: auto; }
+.tlx-content h3 { font-family: var(--f-display); font-size: 22px; margin: 0 0 8px; color: var(--paper); }
+.tlx-content p { margin: 0 0 10px; color: var(--paper-dim); line-height: 1.8; }
+.tlx-content .src { font-family: var(--f-display); font-size: 14px; }
+
+/* phones and small tablets: one column, line at the start */
+@media (max-width: 767px) {
+	.tlx-list::before { inset-inline-start: 6px; }
+	.tlx-item { grid-template-columns: 1fr; padding: 28px 0; padding-inline-start: 34px; }
+	.tlx-item::after { top: 38px; inset-inline-start: 6.5px; }
+	.tlx-content, .tlx-item:nth-child(even) .tlx-content { grid-column: 1; grid-row: 2; padding: 0; }
+	.tlx-item::before, .tlx-item:nth-child(even)::before {
+		grid-column: 1; grid-row: 1; justify-self: start; margin: 0 0 12px;
+		padding-inline: 12px 0; border-inline-end: 0; border-inline-start: 2px solid var(--ember);
+		transform: none;
+	}
+	.tlx-yr { font-size: 40px; margin-bottom: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tlx-item, .tlx-item::before, .tlx-content, .tlx-bg img { transition: none; }
+	.tlx-content, .tlx-item::before { transform: none; }
+}

@@ -28,15 +28,31 @@ window.PAGE = {
 			return App.num(p[0]);
 		};
 
+		var self = this;
 		var html = '';
 		if (legacy.length) {
-			html += '<section class="section"><div class="wrap">' +
-				'<div class="section-head"><div><h2>' + L('الوداع والتكريم', 'Farewell & tributes') + '</h2></div></div>' +
-				'<ol class="timeline">' + legacy.map(function (l, i) {
-					return '<li class="rise" id="l-' + i + '"><div class="yr">' + e(fmtDate(l.date)) + '</div><h3>' + tx(l.title) + '</h3><p>' + tx(l.text) + '</p>' +
-						(l.source ? '<a class="src" href="' + e(l.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') + '</li>';
+			html += '<section class="section tlx-section"><div class="tlx" id="tlx">' +
+				'<div class="tlx-bg" aria-hidden="true">' + legacy.map(function (l) {
+					var im = self.image(l.image, true);
+					return '<img src="' + e(im.src) + '" alt="" loading="lazy" referrerpolicy="no-referrer">';
+				}).join('') + '</div>' +
+				'<div class="wrap">' +
+				'<div class="section-head"><div><h2>' + L('الوداع والتكريم', 'Farewell & tributes') + '</h2>' +
+					'<p>' + L('مرّر لأسفل لتتبّع ما جرى بعد الرحيل.', 'Scroll down to follow what came after.') + '</p></div></div>' +
+				'<ol class="tlx-list">' + legacy.map(function (l, i) {
+					var im = self.image(l.image, false), title = App.t(l.title);
+					var pic = '<img src="' + e(im.src) + '" alt="' + e(title) + '" loading="lazy" referrerpolicy="no-referrer">';
+					var mi = im.yt ? media.findIndex(function (m) { return self.youtubeId(m.url) === im.yt; }) : -1;
+					return '<li class="tlx-item" id="l-' + i + '" data-text="' + e(fmtDate(l.date)) + '"><div class="tlx-content">' +
+						'<div class="tlx-yr">' + e(App.num(String(l.date).slice(0, 4))) + '</div>' +
+						(!im.src ? '' : mi >= 0
+							? '<button type="button" class="tlx-media" data-yt="' + e(im.yt) + '" data-i="' + mi + '" aria-label="' + e(L('شاهد: ', 'Watch: ') + App.t(media[mi].title)) + '">' + pic + '</button>'
+							: '<span class="tlx-media' + (im.tall ? ' tall' : '') + '">' + pic + '</span>') +
+						'<h3>' + tx(l.title) + '</h3><p>' + tx(l.text) + '</p>' +
+						(l.source ? '<a class="src" href="' + e(l.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
+					'</div></li>';
 				}).join('') + '</ol>' +
-			'</div></section>';
+			'</div></div></section>';
 		}
 
 		var ad = d.adaptations || [];
@@ -52,8 +68,6 @@ window.PAGE = {
 		}
 
 		if (media.length) {
-			var kinds = [];
-			var self = this;
 			var card = function (m, i) {
 				var head = '<span class="kind">' + tx(KIND[m.kind] || { ar: m.kind, en: m.kind }) + (m.lang ? '<span class="lng">' + e(m.lang === 'ar' ? 'عربي' : 'EN') + '</span>' : '') + '</span>' +
 					'<h3>' + tx(m.title) + '</h3>' +
@@ -88,12 +102,59 @@ window.PAGE = {
 
 		if (!html) html = '<section class="section"><div class="wrap"><p class="empty-note">' + L('لم تُضف بيانات بعد.', 'Nothing added yet.') + '</p></div></section>';
 		document.getElementById('content').innerHTML = html;
-		var grid = document.getElementById('videos');
-		if (grid) grid.onclick = function (ev) {
+		var onPlay = function (ev) {
 			var b = ev.target.closest('[data-yt]');
 			if (b) self.play(media[+b.getAttribute('data-i')], b.getAttribute('data-yt'));
 		};
+		var grid = document.getElementById('videos');
+		if (grid) grid.onclick = onPlay;
+		var tl = document.getElementById('tlx');
+		if (tl) { tl.onclick = onPlay; this.focusTimeline(tl); }
 		App.focusHash();
+	},
+
+	/* an event's picture: "portrait", "yt:<id>" (a video thumbnail), "cover:<book id>" or a path.
+	   Backdrops use the larger YouTube frame; cards use the 16:9 one, which has no letterbox bars. */
+	image: function (spec, big) {
+		spec = spec || '';
+		if (spec === 'portrait') return { src: 'https://img.youm7.com/ArticleImgs/2018/4/6/112144-%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D8%A8-%D8%A3%D8%AD%D9%85%D8%AF-%D8%AE%D8%A7%D9%84%D8%AF-%D8%AA%D9%88%D9%81%D9%8A%D9%82.jpg' };
+		if (spec.indexOf('yt:') === 0) {
+			var id = spec.slice(3);
+			return { src: 'https://i.ytimg.com/vi/' + id + (big ? '/hqdefault.jpg' : '/mqdefault.jpg'), yt: id };
+		}
+		if (spec.indexOf('cover:') === 0) {
+			var info = (window.App.data().bookInfo || {})[spec.slice(6)] || {}, eds = info.editions || [], src = info.cover || '';
+			for (var i = 0; i < eds.length; i++) if (eds[i].cover) { src = eds[i].cover; break; }
+			return { src: src, tall: true };
+		}
+		return { src: spec };
+	},
+
+	/* the event nearest the middle of the screen is in focus and lends the section its backdrop */
+	focusTimeline: function (root) {
+		if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); window.removeEventListener('resize', this._onScroll); }
+		var items = [].slice.call(root.querySelectorAll('.tlx-item'));
+		var bgs = [].slice.call(root.querySelectorAll('.tlx-bg img'));
+		var current = -1, queued = false;
+		var update = function () {
+			queued = false;
+			if (!root.isConnected) return;
+			var mid = window.innerHeight * 0.55, pick = 0;
+			items.forEach(function (it, i) { if (it.getBoundingClientRect().top < mid) pick = i; });
+			if (pick === current) return;
+			if (current >= 0) { items[current].classList.remove('active'); bgs[current].classList.remove('on'); }
+			current = pick;
+			items[pick].classList.add('active');
+			var bg = bgs[pick];
+			bg.loading = 'eager';
+			bg.classList.add('on');
+			/* warm the next backdrop so it is ready when its event arrives */
+			if (bgs[pick + 1]) bgs[pick + 1].loading = 'eager';
+		};
+		this._onScroll = function () { if (!queued) { queued = true; requestAnimationFrame(update); } };
+		window.addEventListener('scroll', this._onScroll, { passive: true });
+		window.addEventListener('resize', this._onScroll);
+		update();
 	},
 
 	/* YouTube id from watch / youtu.be / embed / shorts links */
