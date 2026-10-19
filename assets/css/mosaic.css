@@ -1,0 +1,103 @@
+/* =========================================================
+   Isometric book mosaic (guide page) — adapted from a CodePen
+   "books on diamond tiles" grid, in the site's palette.
+   Every tile is a book that links to its page.
+   ========================================================= */
+
+.mosaic {
+	--columns: 3;
+	--t1: var(--ember);
+	--t2: #6e1a14;
+	--t3: var(--gold);
+	--t4: #2a1d18;
+	--t5: var(--paper);
+	overflow: hidden; direction: ltr;
+	padding: 10px 0 0;
+	/* a wall of books about one screen tall, fading into the page */
+	max-height: min(82vh, 760px);
+	-webkit-mask-image: linear-gradient(#000 70%, transparent);
+	        mask-image: linear-gradient(#000 70%, transparent);
+	margin-bottom: -60px;
+}
+.mosaic ul {
+	list-style: none; padding: 0;
+	display: grid; grid-template-columns: repeat(var(--columns), 1fr);
+	margin: 200px -40px 120px;
+}
+.mosaic li {
+	grid-column-end: span 2;
+	position: relative; width: 100%; padding-bottom: 100%; margin-top: -50%;
+}
+.mosaic li:nth-child(2n) { grid-column-start: 2; }
+
+.mosaic li::before, .mosaic li::after {
+	content: ''; position: absolute; display: block; width: 100%; height: 100%;
+	background-size: 50% 100%, 100% 100%; background-position: left, right; background-repeat: no-repeat;
+	pointer-events: none;
+}
+.mosaic li::before {
+	z-index: -10;
+	clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+	background-image:
+		linear-gradient(-45deg, var(--a) 53.5%, var(--b) 53.5%, var(--b) 60%, var(--a) 60%),
+		linear-gradient(45deg, var(--a) 65.3%, var(--b) 65.3%, var(--b) 69.9%, var(--a) 69.9%);
+}
+.mosaic li::after {
+	clip-path: polygon(100% 50%, 50% 100%, 0 50%, 20% 50%, 50% 80%, 80% 50%);
+	background-image: linear-gradient(45deg, var(--a) 40%, var(--b) 40%), linear-gradient(-45deg, var(--a) 30%, var(--b) 30%);
+}
+/* tile colour pairs, cycling like the original */
+.mosaic li { --a: var(--t1); --b: var(--t4); }
+.mosaic li:nth-child(2n) { --a: var(--t3); --b: var(--t2); }
+.mosaic li:nth-child(5n) { --a: var(--t4); --b: var(--t3); }
+.mosaic li:nth-child(7n), .mosaic li:nth-child(7n-4) { --a: var(--t2); --b: var(--t5); }
+.mosaic li:nth-child(9n), .mosaic li:nth-child(9n-5) { --a: var(--t5); --b: var(--t4); }
+
+/* the book standing on the tile */
+.mosaic a {
+	position: absolute; z-index: 1; width: 43%; left: 50%; top: 50%;
+	transform: translateX(-50%) translateY(-60%);
+	transition: transform .3s;
+	box-shadow: 5px -5px 10px rgba(0, 0, 0, .35);
+	direction: rtl;
+}
+.mosaic a:hover, .mosaic a:focus-visible { transform: translateX(-40%) translateY(-70%) rotate(25deg); outline: none; z-index: 2; }
+.mosaic .mini-cover { border-radius: 2px; box-shadow: none; padding: 6px 4px; }
+.mosaic .mini-cover .mc-t { font-size: clamp(8px, 1.1vw, 13px); }
+.mosaic .mini-cover .mc-by, .mosaic .mini-cover .mc-s { display: none; }
+.mosaic .mini-cover .mc-num { font-size: 9px; top: 4px; padding: 0 3px; }
+
+/* same column steps as the original, by viewport width */
+@media (min-width: 450px) { .mosaic ul { margin: 190px 40px 120px; } }
+@media (min-width: 600px) {
+	.mosaic { --columns: 5; }
+	.mosaic li:nth-child(2n) { grid-column-start: auto; }
+	.mosaic li:nth-child(4n-1) { grid-column-start: 2; }
+}
+@media (min-width: 900px) {
+	.mosaic { --columns: 7; }
+	.mosaic li:nth-child(4n-1) { grid-column-start: auto; }
+	.mosaic li:nth-child(6n-2) { grid-column-start: 2; }
+}
+@media (min-width: 1200px) {
+	.mosaic { --columns: 9; }
+	.mosaic li:nth-child(6n-2) { grid-column-start: auto; }
+	.mosaic li:nth-child(8n-3) { grid-column-start: 2; }
+}
+@media (min-width: 1500px) {
+	.mosaic { --columns: 11; }
+	.mosaic li:nth-child(8n-3) { grid-column-start: auto; }
+	.mosaic li:nth-child(10n-4) { grid-column-start: 2; }
+}
+@media (min-width: 1800px) {
+	.mosaic { --columns: 13; }
+	.mosaic li:nth-child(10n-4) { grid-column-start: auto; }
+	.mosaic li:nth-child(12n-5) { grid-column-start: 2; }
+}
+@media (min-width: 2100px) {
+	.mosaic { --columns: 15; }
+	.mosaic li:nth-child(12n-5) { grid-column-start: auto; }
+	.mosaic li:nth-child(14n-6) { grid-column-start: 2; }
+}
+@media (prefers-reduced-motion: reduce) { .mosaic a { transition: none; } }
+@media (max-width: 599px) { .mosaic { max-height: 58vh; } }

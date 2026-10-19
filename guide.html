@@ -29,12 +29,16 @@
 	<link rel="stylesheet" href="assets/css/extras.css">
 	<link rel="stylesheet" href="assets/css/books.css">
 	<link rel="stylesheet" href="assets/css/detail.css">
+	<link rel="stylesheet" href="assets/css/mosaic.css">
 	<script>try{var h=document.documentElement,l=localStorage.getItem('akt-lang'),t=localStorage.getItem('akt-theme');if(l==='en'){h.lang='en';h.dir='ltr';}if(t==='light'||(!t&&matchMedia('(prefers-color-scheme: light)').matches))h.setAttribute('data-theme','light');}catch(e){}</script>
 </head>
 <body>
 	<header id="site-header"></header>
 
 	<main id="main">
+		<!-- a wall of his books on diamond tiles; each one links to its page -->
+		<section class="mosaic" aria-label=""><ul id="mosaic"></ul></section>
+
 		<section class="page-hero">
 			<div class="wrap">
 				<p class="eyebrow" data-i18n="eyebrow"></p>
@@ -55,6 +59,7 @@
 	<script src="assets/js/data-books-b.js"></script>
 	<script src="assets/js/data-series-more.js"></script>
 	<script src="assets/js/data-audio.js"></script>
+	<script src="assets/js/shared.js"></script>
 	<script src="assets/js/guide.js"></script>
 	<script src="assets/js/app.js"></script>
 </body>
