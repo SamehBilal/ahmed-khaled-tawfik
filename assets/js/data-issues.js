@@ -219,3 +219,13 @@ window.AKT.issuesSources = [
   { "label": "Goodreads: فانتازيا series", "url": "https://www.goodreads.com/series/52748" },
   { "label": "Goodreads: سافاري series", "url": "https://www.goodreads.com/series/58363" }
 ];
+
+/* Special issues (الأعداد الخاصة), kept apart from the numbered issues. Book pages: book.html?id=<series>-s<n> */
+window.AKT.specials = {
+	mwt: [
+		{ n: 1, title: { ar: "في كهوف دراجوسان", en: "In the Caves of Dragosan" },
+		  note: { ar: "عدد خاص تفاعلي: القارئ يختار طريق رفعت إسماعيل في الكهوف، بالانتقال بين فقرات مرقّمة.", en: "An interactive special issue: the reader chooses Refaat Ismail's path through the caves by jumping between numbered sections." },
+		  publisher: { ar: "المؤسسة العربية الحديثة", en: "Modern Arab Association" }, pages: 271,
+		  source: "https://www.goodreads.com/work/editions/13926975" }
+	]
+};

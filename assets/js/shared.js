@@ -93,6 +93,12 @@
 		return list.sort(function (a, b) { return (a.n || 9999) - (b.n || 9999) || (a.part || 0) - (b.part || 0) || (a._idx || 0) - (b._idx || 0); });
 	}
 
+	/* الأعداد الخاصة of a series, flagged so links go to <series>-s<n> */
+	function specialIssues(id) {
+		var list = ((window.App.data().specials || {})[id] || []);
+		return list.map(function (is) { return Object.assign({ _special: true }, is); });
+	}
+
 	function issueKey(sid, is) {
 		return sid + '-' + (is.n != null ? is.n : 'x' + (is._idx || 0)) + (is.part ? '-' + is.part : '');
 	}
@@ -102,6 +108,14 @@
 		var App = window.App, d = App.data();
 		var w = App.byId(d.works, id);
 		if (w) return { kind: 'work', id: id, item: w, info: (d.bookInfo || {})[id] || {} };
+		/* special issues: <series>-s<n> */
+		var sp = /^([a-z]+)-s(\d+)$/.exec(id || '');
+		if (sp) {
+			var sser = anySeries(sp[1]);
+			var slist = specialIssues(sp[1]);
+			for (var k = 0; k < slist.length; k++) if (+slist[k].n === +sp[2]) return { kind: 'issue', special: true, id: id, item: slist[k], series: sser, index: k, list: slist, info: ((d.issueInfo || {})[id]) || {} };
+			return null;
+		}
 		var m = /^([a-z0-9]+)-(x?\d+)(?:-(\d))?$/.exec(id || '');
 		if (!m) return null;
 		var ser = anySeries(m[1]);
@@ -151,7 +165,7 @@
 	window.WorksShared = {
 		ownSeries: ownSeries, contributedSeries: contributedSeries,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
-		anySeries: anySeries, seriesIssues: seriesIssues, issueKey: issueKey, resolveBook: resolveBook,
+		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook,
 		bookHref: bookHref, seriesHref: seriesHref, miniCover: miniCover, coverOf: coverOf
 	};
 })();

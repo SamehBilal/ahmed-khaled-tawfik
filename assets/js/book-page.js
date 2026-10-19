@@ -25,7 +25,7 @@ window.PAGE = {
 			: (S.TYPES[item.type] || { ar: item.type, en: item.type });
 		var cover = S.coverOf(info);
 		var desc = info.description || item.synopsis || (isIssue && item.original ? item.original : null);
-		var numLabel = isIssue && item.n != null ? App.num('#' + item.n) + (item.part ? ' · ' + L('الجزء ', 'Part ') + App.num(item.part) : '') : '';
+		var numLabel = r.special ? L('عدد خاص ', 'Special issue ') + App.num(item.n) : isIssue && item.n != null ? App.num('#' + item.n) + (item.part ? ' · ' + L('الجزء ', 'Part ') + App.num(item.part) : '') : '';
 
 		this.title = title;
 		window.App.applyLang();
@@ -127,6 +127,37 @@ window.PAGE = {
 		}
 
 		var audioTracks = (isIssue && window.Cassette) ? window.Cassette.issueTracks(r.id, t(title)) : [];
+
+		/* ---------- where to buy: store search links for this title (no affiliate codes) ---------- */
+		var qAr = (isIssue && ser ? t(ser.s.title) + ' ' : '') + (title.ar || '') + ' أحمد خالد توفيق';
+		var enEd = (info.editions || []).filter(function (ed) { return ed.lang === 'en'; })[0];
+		var qEn = enEd ? ((ed2t(enEd) || title.en || '') + ' Ahmed Khaled Towfik') : '';
+		function ed2t(ed) { return ed.title && (ed.title.en || ed.title.ar); }
+		var Q = encodeURIComponent(qAr);
+		var shops = [
+			{ kind: L('ورقي', 'Print'), items: [
+				['Jamalon', 'https://jamalon.com/ar/catalogsearch/result/?q=' + Q],
+				['Amazon.eg', 'https://www.amazon.eg/s?k=' + Q + '&i=stripbooks'],
+				['Noon', 'https://www.noon.com/egypt-ar/search/?q=' + Q]
+			] },
+			{ kind: L('إلكتروني', 'Ebook'), items: [
+				['Abjjad', 'https://www.abjjad.com/search?q=' + Q],
+				['Google Play Books', 'https://play.google.com/store/search?q=' + Q + '&c=books'],
+				['Kindle', 'https://www.amazon.com/s?k=' + Q + '&i=digital-text']
+			] }
+		];
+		if (audioTracks.length) shops.push({ kind: L('مسموع', 'Audio'), items: [
+			audioTracks[0].yt ? ['YouTube', audioTracks[0].url] : ['Audiohat', audioTracks[0].url]
+		] });
+		if (qEn) shops.push({ kind: L('بالإنجليزية', 'In English'), items: [
+			['Amazon', 'https://www.amazon.com/s?k=' + encodeURIComponent(qEn) + '&i=stripbooks']
+		] });
+		var buyHtml = '<section class="d-block d-buy"><h3>' + L('اشترِ الكتاب', 'Where to buy') + '</h3>' +
+			shops.map(function (g) {
+				return '<div class="buy-row"><span class="buy-kind">' + e(g.kind) + '</span>' +
+					g.items.map(function (it) { return '<a class="buy-btn" href="' + e(it[1]) + '" target="_blank" rel="noopener nofollow">' + e(it[0]) + ' ↗</a>'; }).join('') + '</div>';
+			}).join('') +
+			'<p class="buy-note">' + L('روابط بحث في المتاجر عن هذا العنوان — التوفر والسعر والطبعة حسب كل متجر. لا عمولة لهذا الموقع.', 'Store searches for this title — availability, price and edition vary by store. This site earns nothing from them.') + '</p></section>';
 		var links = (info.links || []).map(function (l) { return '<a href="' + e(l.url) + '" target="_blank" rel="noopener">' + e(l.label) + ' ↗</a>'; }).join('');
 		var sources = (info.sources || []).concat(item.source ? [item.source] : []);
 
@@ -146,6 +177,7 @@ window.PAGE = {
 						(desc ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
 						(item.note && t(item.note) ? '<p class="note">' + tx(item.note) + '</p>' : '') +
+						buyHtml +
 						(audioTracks.length ? '<section class="d-block d-audio"><h3>' + L('استمع إليه', 'Listen') + ' <small>Audiohat</small></h3><div id="d-cassette"></div></section>' : '') +
 						'<dl class="d-facts">' + rows.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + e(x[1]) + '</dd>'; }).join('') + '</dl>' +
 						(info.altTitles && info.altTitles.length ? '<section class="d-block"><h3>' + L('عناوين أخرى', 'Other titles') + '</h3><ul class="alt-titles">' +

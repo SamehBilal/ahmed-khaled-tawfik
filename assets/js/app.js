@@ -19,7 +19,7 @@
 			{ id: 'legacy', href: 'legacy.html', ar: 'الإرث', en: 'Legacy' }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
-		motto: { ar: 'اجعلهم يقرؤون', en: 'Make them read' },
+		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
 		footerNote: {
 			ar: 'موقع محبّين غير رسمي، صُنع تقديرًا لأحمد خالد توفيق (١٩٦٢–٢٠١٨). البيانات مجمّعة من مصادر عامة — راجع صفحة الكُتّاب للمراجع.',
 			en: 'An unofficial fan tribute to Ahmed Khaled Tawfik (1962–2018). Data compiled from public sources — see the Writers page for references.'
@@ -97,7 +97,7 @@
 			var d = App.data();
 			return (App.isSeries(id) || App.byId(d.otherSeries, id) ? 'series.html?id=' : 'book.html?id=') + encodeURIComponent(id);
 		},
-		issueHref: function (sid, is) { return 'book.html?id=' + sid + '-' + (is.n != null ? is.n : 'x' + (is._idx || 0)) + (is.part ? '-' + is.part : ''); },
+		issueHref: function (sid, is) { if (is._special) return 'book.html?id=' + sid + '-s' + is.n; return 'book.html?id=' + sid + '-' + (is.n != null ? is.n : 'x' + (is._idx || 0)) + (is.part ? '-' + is.part : ''); },
 		charHref: function (id) { return 'characters.html#c-' + id; },
 		workLink: function (id) {
 			var w = App.findWork(id);

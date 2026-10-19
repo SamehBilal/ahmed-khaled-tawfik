@@ -50,7 +50,7 @@ window.PAGE = {
 			return '<a class="cover-link" href="' + App.issueHref(id, is) + '" title="' + e(t(is.title)) + '">' +
 				S.miniCover({ color: s.color, title: t(is.title), num: is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '', sub: is.original ? t(is.original) : '' }) +
 				'<span class="cl-t">' + (is.n != null ? App.num(is.n) + '. ' : '') + tx(is.title) + '</span>' +
-				((d.audio && d.audio.issues[id + '-' + is.n] && !(is.part > 1)) ? '<span class="cl-audio" title="' + L('متاح مسموعًا على Audiohat', 'Audiobook on Audiohat') + '">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
+				((d.audio && (d.audio.issues[id + '-' + is.n] || (d.audio.youtube && d.audio.youtube.issues[id + '-' + is.n])) && !(is.part > 1)) ? '<span class="cl-audio" title="' + L('متاح مسموعًا على Audiohat', 'Audiobook on Audiohat') + '">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
 			'</a>';
 		}).join('');
 
@@ -84,7 +84,7 @@ window.PAGE = {
 						(info.altTitles && info.altTitles.length ? '<section class="d-block"><h3>' + L('عناوين أخرى', 'Other titles') + '</h3><ul class="alt-titles">' +
 							info.altTitles.map(function (a) { return '<li><b>' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + '</li>'; }).join('') + '</ul></section>' : '') +
 						(info.readingOrder ? '<section class="d-block"><h3>' + L('ترتيب القراءة', 'Reading order') + '</h3>' + App.paras(info.readingOrder) + '</section>' : '') +
-						(d.audio && issues.some(function (is) { return d.audio.issues[id + '-' + is.n]; }) ? '<p class="note"><a href="audio.html">♪ ' + L('عدد من أعدادها متاح مسموعًا — استمع على المسجّل', 'Many issues are on audio — listen on the cassette deck') + ' ←</a></p>' : '') +
+						(d.audio && issues.some(function (is) { return d.audio.issues[id + '-' + is.n] || (d.audio.youtube && d.audio.youtube.issues[id + '-' + is.n]); }) ? '<p class="note"><a href="audio.html">♪ ' + L('عدد من أعدادها متاح مسموعًا — استمع على المسجّل', 'Many issues are on audio — listen on the cassette deck') + ' ←</a></p>' : '') +
 						(chars.length ? '<section class="d-block"><h3>' + L('الشخصيات', 'Characters') + '</h3><p class="chips-line">' + chars.map(function (c) { return App.charLink(c.id); }).join('') + '</p></section>' : '') +
 						(eds ? '<section class="d-block"><h3>' + L('الطبعات', 'Editions') + '</h3><ul class="ed-list">' + eds + '</ul></section>' : '') +
 						(adapts.length ? '<section class="d-block"><h3>' + L('على الشاشة', 'On screen') + '</h3>' + adapts.map(function (a) {
@@ -94,6 +94,15 @@ window.PAGE = {
 				(ser.own && hero && issues.length ? this.proximityHtml(s, hero, issues) : '') +
 				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
 					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid">' + issueGrid + '</div></section>' : '') +
+				(S.specialIssues(id).length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('الأعداد الخاصة', 'Special issues') + ' <small>(' + App.num(S.specialIssues(id).length) + ')</small></h3></div><div class="cover-grid">' +
+					S.specialIssues(id).map(function (is) {
+						var au = d.audio && d.audio.youtube && d.audio.youtube.issues[id + '-s' + is.n];
+						return '<a class="cover-link" href="' + App.issueHref(id, is) + '" title="' + e(t(is.title)) + '">' +
+							S.miniCover({ color: '#1f1b2e', title: t(is.title), num: L('خاص ', 'S') + App.num(is.n) }) +
+							'<span class="cl-t">' + L('عدد خاص ', 'Special ') + App.num(is.n) + '. ' + tx(is.title) + '</span>' +
+							(au ? '<span class="cl-audio">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
+						'</a>';
+					}).join('') + '</div></section>' : '') +
 				'<section class="d-block d-wide"><div class="d-head"><h3>' + L('سلاسل أخرى', 'Other series') + '</h3></div><div class="cover-row">' +
 					all.filter(function (x) { return x.id !== id; }).map(function (x) {
 						return '<a class="cover-link" href="' + S.seriesHref(x.id) + '">' + S.miniCover({ color: x.color, title: t(x.title), sub: x.own ? '' : L('مشاركة', 'Contributor') }) + '</a>';

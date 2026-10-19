@@ -44,7 +44,7 @@
 	});
 
 	var fontsReady = (document.fonts && document.fonts.load)
-		? Promise.all([document.fonts.load('150px Lalezar', 'العرّاب'), document.fonts.load('40px "Reem Kufi"', 'اجعلهم'), document.fonts.load('86px Rakkas', 'أحمد خالد توفيق')]).catch(function () {})
+		? Promise.all([document.fonts.load('150px Lalezar', 'العرّاب'), document.fonts.load('40px "Reem Kufi"', 'جعل الشباب يقرؤون'), document.fonts.load('86px Rakkas', 'أحمد خالد توفيق')]).catch(function () {})
 		: Promise.resolve();
 
 	/* never wait for fonts more than 1.5s */

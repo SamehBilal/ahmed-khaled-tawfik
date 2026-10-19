@@ -29,13 +29,16 @@ window.PAGE = {
 			'<div class="godfather"><small>العرّاب</small>The Godfather</div>' +
 			'<p class="dates">' + year(bio.born && bio.born.date) + ' — ' + year(bio.died && bio.died.date) +
 				(bio.profession ? ' · ' + tx(bio.profession) : '') + '</p>' +
-			(bio.motto ? '<blockquote>' + tx(bio.motto) + '<cite>— ' + tx(bio.name) + '</cite></blockquote>' : '') +
+			(bio.motto ? '<blockquote class="grave-quote" tabindex="0" aria-describedby="grave-hint">' + tx(bio.motto) + '<cite>— ' + tx(bio.name) + '</cite>' +
+				'<span class="grave-hint" id="grave-hint">' + App.L('مرّر المؤشر لترى قبره اليوم', 'Hover to see his grave today') + '</span></blockquote>' : '') +
 			'<div class="stats">' +
 				stat(issues, { ar: 'عددًا في السلاسل', en: 'series issues' }) +
 				stat(series.length, { ar: 'سلسلة', en: 'series' }) +
 				stat(works.length, { ar: 'كتابًا مستقلًا', en: 'standalone books' }) +
 				stat(chars.length, { ar: 'شخصية', en: 'characters' }) +
 			'</div>';
+
+		this.initGrave();
 
 		function stat(n, label) { return '<div class="stat"><b>' + App.num(n) + '</b><span>' + tx(label) + '</span></div>'; }
 
@@ -78,5 +81,40 @@ window.PAGE = {
 		document.getElementById('explore').innerHTML = cards.map(function (c) {
 			return '<a class="rise" href="' + c.href + '"><span class="big">' + e(c.big) + '</span><h3>' + tx(c.title) + '</h3><p>' + tx(c.text) + '</p><span class="go">' + (App.lang === 'ar' ? 'ادخل ←' : 'Enter →') + '</span></a>';
 		}).join('');
+	},
+
+	/* hovering (or tapping) his grave wish fills the screen with a photo of his grave today,
+	   where readers did write it, and slowly zooms in on the inscription */
+	initGrave: function () {
+		var App = window.App, L = App.L;
+		var q = document.querySelector('.grave-quote');
+		if (!q) return;
+		var ov = document.getElementById('grave-overlay');
+		if (!ov) {
+			ov = document.createElement('div');
+			ov.id = 'grave-overlay';
+			ov.className = 'grave-overlay';
+			ov.setAttribute('aria-hidden', 'true');
+			document.body.appendChild(ov);
+			ov.addEventListener('click', function () { close(true); });
+		}
+		ov.innerHTML =
+			'<div class="grave-bg"></div>' +
+			'<img class="grave-img" src="assets/img/grave.webp" alt="' + App.esc(L('قبر أحمد خالد توفيق، مغطّى برسائل قرّائه، وعليه «جعل الشباب يقرأون»', 'The grave of Ahmed Khaled Tawfik, covered in notes from his readers, inscribed “He made the young read”')) + '">' +
+			'<div class="grave-cap"><p class="g-line">' + L('وهكذا كُتب على قبره', 'And so it was written on his grave') + '</p>' +
+				'<p class="g-quote">«جعل الشباب يقرأون»</p>' +
+				'<p class="g-sub">' + L('قبره اليوم، مغطّى برسائل قرّائه', 'His grave today, covered in notes from his readers') + '</p></div>';
+		var pinned = false, t = 0;
+		function open() { clearTimeout(t); ov.classList.add('on'); ov.setAttribute('aria-hidden', 'false'); }
+		function close(force) { if (pinned && !force) return; pinned = false; ov.classList.remove('pinned'); clearTimeout(t); t = setTimeout(function () { ov.classList.remove('on'); ov.setAttribute('aria-hidden', 'true'); }, 120); }
+		var fine = window.matchMedia && window.matchMedia('(hover: hover)').matches;
+		if (fine) {
+			q.addEventListener('mouseenter', open);
+			q.addEventListener('mouseleave', function () { close(false); });
+		}
+		q.addEventListener('focus', open);
+		q.addEventListener('blur', function () { close(true); });
+		q.addEventListener('click', function () { pinned = !pinned; if (pinned) { open(); ov.classList.add('pinned'); } else close(true); });
+		document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(true); });
 	}
 };
