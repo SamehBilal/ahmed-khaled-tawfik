@@ -129,3 +129,57 @@ html[lang="en"] .mini-cover .mc-t { font-family: var(--f-display); font-weight: 
 	.d-cover { position: static; }
 }
 .bk-solo > li.rise { opacity: 1; transform: none; }
+
+/* ---------- Thumbnail proximity effect (series hero backdrop) ---------- */
+
+.prox-hint { font-family: var(--f-display); font-size: 14px; color: var(--muted); }
+.prox {
+	position: relative; overflow: hidden; border-radius: var(--radius);
+	background: radial-gradient(120% 90% at 50% 30%, color-mix(in srgb, var(--c) 70%, #000), #0b0b0e 75%);
+	box-shadow: 0 0 0 5px var(--ink-2), 0 0 0 6px var(--line), var(--shadow);
+	min-height: 420px;
+}
+.prox.has-img { background-color: #0b0b0e; background-size: cover; background-repeat: no-repeat; background-position: center 30%; }
+.prox::before {
+	content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+	background: radial-gradient(transparent 40%, rgba(0,0,0,.55)), rgba(120, 30, 20, .18);
+}
+.prox-art {
+	position: absolute; inset: 0; z-index: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+	text-align: center; pointer-events: none;
+}
+.prox-art .pa-name { font-family: var(--f-chunky); font-size: clamp(56px, 10vw, 140px); line-height: 1; color: rgba(239,230,210,.12); }
+html[lang="en"] .prox-art .pa-name { font-family: var(--f-display); font-weight: 700; }
+.prox-art .pa-role { font-family: var(--f-display); font-size: 20px; color: rgba(239,230,210,.25); margin-top: 10px; }
+.prox-grid {
+	position: relative; z-index: 1; list-style: none; margin: 0; padding: 18px;
+	display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px;
+}
+.prox-grid li { position: relative; }
+.prox-grid a {
+	--s: 0; --o: 0;
+	display: block; transform: scale(var(--s)); opacity: var(--o);
+	transition: transform .12s linear, opacity .12s linear; will-change: transform, opacity;
+}
+.prox-grid a:focus-visible { --s: 1.35 !important; --o: 1 !important; outline: 2px solid var(--gold); outline-offset: 2px; }
+.prox-grid .mini-cover .mc-t { font-size: 10px; }
+.prox-grid .mini-cover .mc-by { display: none; }
+.prox-grid .mini-cover .mc-num { font-size: 10px; top: 4px; padding: 0 4px; }
+.prox-label {
+	position: absolute; top: 0; left: 0; z-index: 200; pointer-events: none;
+	max-width: 240px; padding: 8px 12px; border-radius: 8px;
+	background: rgba(0,0,0,.85); color: #fff; font-family: var(--f-display); font-size: 14px; line-height: 1.4;
+	opacity: 0; transition: opacity .15s;
+}
+.prox-label b { font-family: var(--f-latin); color: #f2b56b; margin-inline-end: 6px; }
+.prox-label.on { opacity: 1; }
+.prox-credit { position: absolute; bottom: 8px; inset-inline-end: 12px; z-index: 2; font-size: 11px; color: rgba(255,255,255,.6); font-family: var(--f-display); }
+
+/* touch / reduced motion: no proximity, just show the covers over the backdrop */
+.prox-static .prox-grid a { --s: 1; --o: .92; }
+.prox-static + .prox-hint, .prox-static ~ .prox-hint { display: none; }
+/* with a real backdrop: smaller tiles so the panel keeps the picture's landscape shape */
+.prox.has-img { background-position: center 30%; }
+.prox.has-img::before { background: radial-gradient(transparent 55%, rgba(0,0,0,.5)); }
+.prox.has-img .prox-grid { grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 6px; }
+.prox.has-img .prox-grid .mini-cover .mc-t { font-size: 8.5px; }

@@ -89,6 +89,7 @@ window.PAGE = {
 							return '<p><b>' + tx(a.title) + '</b> (' + App.num(a.year || '') + ') — ' + tx(a.text) + '</p>'; }).join('') + '</section>' : '') +
 					'</div>' +
 				'</div>' +
+				(ser.own && hero && issues.length ? this.proximityHtml(s, hero, issues) : '') +
 				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
 					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid">' + issueGrid + '</div></section>' : '') +
 				'<section class="d-block d-wide"><div class="d-head"><h3>' + L('سلاسل أخرى', 'Other series') + '</h3></div><div class="cover-row">' +
@@ -101,5 +102,77 @@ window.PAGE = {
 			'</div></section>';
 
 		window.Books.initShowcase(document.getElementById('d-book'));
+		this.initProximity(document.getElementById('prox'));
+	},
+
+	/* ---------- Thumbnail proximity effect (Codrops demo 3) ----------
+	   The series' hero is the backdrop; every issue cover hides on top of it and
+	   scales / fades in as the cursor gets near. The closest cover shows its title. */
+	proximityHtml: function (s, hero, issues) {
+		var App = window.App, S = window.WorksShared, e = App.esc, tx = App.tx, L = App.L;
+		var img = hero.image || '';
+		return '<section class="d-block d-wide"><div class="d-head"><h3>' + L('مكتبة ', 'The library of ') + tx(hero.name) + '</h3>' +
+				'<span class="prox-hint">' + L('حرّك المؤشر فوق الصورة لتظهر الأعداد', 'Move your cursor over the picture to reveal the issues') + '</span></div>' +
+			'<div class="prox' + (img ? ' has-img' : '') + '" id="prox" style="--c:' + e(s.color || '#3a1414') + (img ? ';background-image:url(\'' + e(img) + '\')' : '') + '">' +
+				(img ? '' : '<div class="prox-art" aria-hidden="true"><span class="pa-name">' + tx(hero.name) + '</span><span class="pa-role">' + tx(hero.role) + '</span></div>') +
+				'<ul class="prox-grid">' + issues.map(function (is) {
+					return '<li><a href="' + App.issueHref(s.id, is) + '" data-n="' + e(App.num(is.n)) + (is.part ? '/' + e(App.num(is.part)) : '') + '" data-t="' + e(App.t(is.title)) + '">' +
+						S.miniCover({ color: s.color, title: App.t(is.title), num: is.n != null ? App.num(is.n) : '' }) + '</a></li>';
+				}).join('') + '</ul>' +
+				'<div class="prox-label" aria-hidden="true"></div>' +
+				(hero.imageCredit ? '<span class="prox-credit">' + tx(hero.imageCredit) + '</span>' : '') +
+			'</div></section>';
+	},
+
+	initProximity: function (box) {
+		if (!box) return;
+		var links = [].slice.call(box.querySelectorAll('.prox-grid a'));
+		var label = box.querySelector('.prox-label');
+		var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+		var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (!fine || still) { box.classList.add('prox-static'); return; }
+
+		var MAX = 170, MIN_S = 0, MAX_S = 1.35, MIN_O = 0, MAX_O = 1;
+		var centres = [], px = null, py = null, raf = 0, active = null;
+
+		function measure() {
+			centres = links.map(function (a) {
+				var r = a.parentNode.getBoundingClientRect();
+				return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+			});
+		}
+		function frame() {
+			raf = 0;
+			var best = null, bestP = 0;
+			for (var i = 0; i < links.length; i++) {
+				var d = px == null ? Infinity : Math.hypot(centres[i].x - px, centres[i].y - py);
+				var p = d < MAX ? 1 - d / MAX : 0;
+				var a = links[i];
+				a.style.setProperty('--s', (MIN_S + p * (MAX_S - MIN_S)).toFixed(3));
+				a.style.setProperty('--o', (MIN_O + p * (MAX_O - MIN_O)).toFixed(3));
+				a.parentNode.style.zIndex = p > 0 ? String(10 + Math.round(p * 100)) : '';
+				if (p > bestP) { bestP = p; best = a; }
+			}
+			if (best && bestP > 0.82) {
+				if (active !== best) {
+					active = best;
+					label.innerHTML = '<b>' + best.getAttribute('data-n') + '</b> ' + window.App.esc(best.getAttribute('data-t'));
+				}
+				var br = best.parentNode.getBoundingClientRect(), bx = box.getBoundingClientRect();
+				label.style.transform = 'translate(' + Math.round(br.left - bx.left + br.width / 2) + 'px,' + Math.round(br.top - bx.top - 14) + 'px) translate(-50%, -100%)';
+				label.classList.add('on');
+			} else {
+				active = null;
+				label.classList.remove('on');
+			}
+		}
+		function queue() { if (!raf) raf = requestAnimationFrame(frame); }
+
+		box.addEventListener('pointerenter', function () { measure(); });
+		box.addEventListener('pointermove', function (ev) { px = ev.clientX; py = ev.clientY; queue(); });
+		box.addEventListener('pointerleave', function () { px = py = null; queue(); });
+		window.addEventListener('scroll', function () { if (px != null) { measure(); queue(); } }, { passive: true });
+		window.addEventListener('resize', function () { measure(); queue(); });
+		measure(); frame();
 	}
 };
