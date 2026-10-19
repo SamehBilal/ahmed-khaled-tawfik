@@ -126,6 +126,7 @@ window.PAGE = {
 			}
 		}
 
+		var audioTracks = (isIssue && window.Cassette) ? window.Cassette.issueTracks(r.id, t(title)) : [];
 		var links = (info.links || []).map(function (l) { return '<a href="' + e(l.url) + '" target="_blank" rel="noopener">' + e(l.label) + ' ↗</a>'; }).join('');
 		var sources = (info.sources || []).concat(item.source ? [item.source] : []);
 
@@ -145,6 +146,7 @@ window.PAGE = {
 						(desc ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
 						(item.note && t(item.note) ? '<p class="note">' + tx(item.note) + '</p>' : '') +
+						(audioTracks.length ? '<section class="d-block d-audio"><h3>' + L('استمع إليه', 'Listen') + ' <small>Audiohat</small></h3><div id="d-cassette"></div></section>' : '') +
 						'<dl class="d-facts">' + rows.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + e(x[1]) + '</dd>'; }).join('') + '</dl>' +
 						(info.altTitles && info.altTitles.length ? '<section class="d-block"><h3>' + L('عناوين أخرى', 'Other titles') + '</h3><ul class="alt-titles">' +
 							info.altTitles.map(function (a) { return '<li><b lang="' + e(a.lang || '') + '">' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + (a.lang ? ' <span class="lng">' + e(a.lang) + '</span>' : '') + '</li>'; }).join('') +
@@ -166,6 +168,7 @@ window.PAGE = {
 			'</div></section>';
 
 		window.Books.initShowcase(document.getElementById('d-book'));
+		if (audioTracks.length) window.Cassette.mount(document.getElementById('d-cassette'), { tracks: audioTracks });
 
 		function langName(l) {
 			var N = { ar: ['العربية', 'Arabic'], en: ['الإنجليزية', 'English'], fr: ['الفرنسية', 'French'], it: ['الإيطالية', 'Italian'], de: ['الألمانية', 'German'], es: ['الإسبانية', 'Spanish'], tr: ['التركية', 'Turkish'], fa: ['الفارسية', 'Persian'] };

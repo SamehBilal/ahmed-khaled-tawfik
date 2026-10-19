@@ -15,6 +15,7 @@
 			{ id: 'characters', href: 'characters.html', ar: 'الشخصيات', en: 'Characters' },
 			{ id: 'writers', href: 'writers.html', ar: 'الكُتّاب', en: 'Writers' },
 			{ id: 'quotes', href: 'quotes.html', ar: 'اقتباسات', en: 'Quotes' },
+			{ id: 'audio', href: 'audio.html', ar: 'مسموع', en: 'Audio' },
 			{ id: 'legacy', href: 'legacy.html', ar: 'الإرث', en: 'Legacy' }
 		],
 		toggle: { ar: 'English', en: 'العربية' },

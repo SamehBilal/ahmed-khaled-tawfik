@@ -183,3 +183,4 @@ html[lang="en"] .prox-art .pa-name { font-family: var(--f-display); font-weight:
 .prox.has-img::before { background: radial-gradient(transparent 55%, rgba(0,0,0,.5)); }
 .prox.has-img .prox-grid { grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 6px; }
 .prox.has-img .prox-grid .mini-cover .mc-t { font-size: 8.5px; }
+.cl-audio { font-family: var(--f-display); font-size: 11.5px; color: var(--ember); }

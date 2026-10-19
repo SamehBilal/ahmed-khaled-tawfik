@@ -1,0 +1,108 @@
+/* =========================================================
+   Cassette player — adapted from Codrops "Old School Cassette Player with HTML5 Audio".
+   Cassette artwork by Mauricio Estrella (see assets/img/cassette/CREDITS.txt).
+   ========================================================= */
+
+.cassette { --tl: 70px; --tr: 14px; position: relative; max-width: 586px; margin-inline: auto; direction: ltr; }
+.cs-stage { position: relative; perspective: 800px; overflow: visible; }
+.cs-tape { position: absolute; top: 0; left: 50%; width: 586px; height: 379px; margin-left: -293px; transform-origin: top center; }
+
+/* the original tape is blue; tint it to the site's ember palette */
+.cs-back, .cs-front { filter: hue-rotate(158deg) saturate(.85) brightness(.92); }
+
+.cs-back { position: absolute; inset: 0; background: url('../img/cassette/cs_back.png') no-repeat center; }
+.cs-wheel { position: absolute; top: 110px; width: 125px; height: 125px; border-radius: 50%; }
+.cs-l { left: 109px; box-shadow: 0 0 0 var(--tl) #120a08; transition: box-shadow .7s ease; }
+.cs-r { right: 113px; box-shadow: 0 0 0 var(--tr) #120a08; transition: box-shadow .7s ease; }
+.cs-wheel div { width: 100%; height: 100%; background: url('../img/cassette/cs_wheel.png') no-repeat center; }
+.cs-front { position: absolute; inset: 0; background: url('../img/cassette/cs_front.png') no-repeat center; pointer-events: none; }
+
+@keyframes csSpinL { to { transform: rotate(-360deg); } }
+@keyframes csSpinR { to { transform: rotate(360deg); } }
+.is-playing .cs-wheel div { animation: csSpinL 2s linear infinite; }
+.is-ff .cs-wheel div { animation: csSpinL .35s linear infinite; }
+.is-rew .cs-wheel div { animation: csSpinR .35s linear infinite; }
+
+/* paper sticker over the printed "TITLE / SUBJECT" line */
+.cs-label {
+	position: absolute; top: 41px; left: 104px; width: 362px; height: 64px;
+	display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px;
+	padding: 4px 14px; text-align: center; color: #2a2620;
+	border-radius: 3px; transform: rotate(-.6deg);
+	box-shadow: 0 1px 2px rgba(0,0,0,.35), inset 0 0 0 1px rgba(120,90,50,.15);
+	background-image: repeating-linear-gradient(transparent 0 20px, rgba(150,40,30,.18) 20px 21px), url('../img/paper.jpg');
+}
+.cs-t { font-family: var(--f-chunky); font-size: 21px; line-height: 1.2; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cs-s { font-family: var(--f-display); font-size: 13px; color: #7a1c14; }
+.cs-side {
+	position: absolute; top: 66px; left: 52px; width: 40px; text-align: center;
+	font-family: var(--f-chunky); font-size: 22px; color: rgba(0,0,0,.55);
+}
+
+/* metal piano-key controls */
+.cs-controls {
+	list-style: none; margin: 14px auto 0; padding: 8px; display: flex; justify-content: center; gap: 0;
+	width: max-content; max-width: 100%;
+	background: linear-gradient(rgba(170,170,170,.35), rgba(255,255,255,.44) 50%, rgba(255,255,255,.53));
+	border: 1px solid rgba(0,0,0,.1); border-bottom-color: rgba(255,255,255,.6); border-radius: 12px;
+	box-shadow: inset 0 1px 0 rgba(0,0,0,.05), 0 1px 0 rgba(255,255,255,.2), inset 0 2px 19px rgba(0,0,0,.05);
+}
+.cs-controls li { display: block; }
+.cs-controls button {
+	height: 52px; min-width: 64px; padding: 0 16px; margin: 0; border: 0; cursor: pointer;
+	display: flex; align-items: center; justify-content: center; gap: 10px;
+	font: 600 14px var(--f-display); color: #333;
+	background: #ddd url('../img/cassette/metal.jpg') no-repeat center top; background-size: cover;
+	box-shadow: inset 0 0 0 1px rgba(0,0,0,.2), inset 0 0 1px 2px rgba(255,255,255,.9), inset 0 -6px 5px rgba(0,0,0,.1), 0 6px 7px rgba(0,0,0,.3), 0 4px 1px rgba(0,0,0,.5);
+	transition: transform .08s, box-shadow .08s;
+	user-select: none;
+}
+.cs-controls li:first-child button { border-radius: 8px 0 0 8px; }
+.cs-controls li:last-child button { border-radius: 0 8px 8px 0; }
+.cs-controls .ic { display: grid; place-items: center; color: #444; filter: drop-shadow(1px 1px 0 rgba(255,255,255,.9)); }
+.cs-controls button:hover { box-shadow: inset 0 0 0 1px rgba(0,0,0,.2), inset 0 0 1px 2px rgba(255,255,255,.9), inset 0 -10px 15px rgba(0,0,0,.1), 0 6px 7px rgba(0,0,0,.3), 0 4px 1px rgba(0,0,0,.5); }
+.cs-controls button:active, .cs-controls li.on button {
+	transform: translateY(4px);
+	background-image: url('../img/cassette/metal_dark.jpg');
+	box-shadow: inset 0 0 0 1px rgba(0,0,0,.2), inset 0 0 5px 1px rgba(255,255,255,.5), inset 0 -10px 15px rgba(0,0,0,.2), 0 3px 3px rgba(0,0,0,.3);
+}
+.cs-controls li.on .ic { color: #b3261e; }
+.cs-controls button:disabled { opacity: .55; cursor: not-allowed; }
+.cs-controls button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; z-index: 1; position: relative; }
+.cs-play button { min-width: 190px; }
+
+.cs-meta { text-align: center; margin: 12px 0 0; font-family: var(--f-display); font-size: 14px; color: var(--muted); direction: rtl; }
+html[lang="en"] .cs-meta { direction: ltr; }
+.cs-note { display: block; font-size: 12.5px; margin-top: 2px; opacity: .8; }
+
+@media (max-width: 480px) {
+	.cs-play .lb { display: none; }
+	.cs-play button { min-width: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.cassette .cs-wheel div { animation: none !important; }
+}
+
+/* ---------- Audio page lists ---------- */
+
+.audio-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+@media (max-width: 900px) { .audio-hero { grid-template-columns: 1fr; } }
+.ep-groups { display: grid; gap: 36px; }
+.ep-group h3 { font-family: var(--f-display); font-size: 24px; margin: 0 0 12px; }
+.ep-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 10px; }
+.ep-list li {
+	display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px;
+	background: var(--ink-2); border: 1px solid var(--line);
+}
+.ep-list .no { font-family: var(--f-latin); font-weight: 700; color: var(--gold); min-width: 30px; text-align: center; }
+.ep-list .tt { flex: 1; min-width: 0; font-family: var(--f-display); }
+.ep-list .tt a { color: var(--paper); }
+.ep-list .tt a:hover { color: var(--ember); }
+.ep-list .tt small { display: block; color: var(--muted); font-size: 12.5px; }
+.ep-list button {
+	font: 13px var(--f-display); cursor: pointer; border-radius: 999px; padding: 4px 12px;
+	background: var(--ink-3); color: var(--paper); border: 1px solid var(--line); white-space: nowrap;
+}
+.ep-list button:hover { border-color: var(--ember); color: var(--ember); }
+.ep-list li.cur { border-color: var(--ember); box-shadow: 0 0 0 1px var(--ember) inset; }
+.audio-credit { color: var(--muted); font-size: 14px; margin-top: 28px; }

@@ -15,6 +15,7 @@ Static site, no build step. Open `index.html` or serve the folder (e.g. GitHub P
 | `writers.html` | Book-spine shelves: co-authors, introductions, influenced writers, contemporaries, authors he translated |
 | `book.html?id=…` | One page per book or series issue (`?id=utopia`, `?id=mwt-12`): cover, titles in other languages, description, details, editions and covers, characters, quotes, neighbouring issues |
 | `series.html?id=…` | One page per series (`?id=mwt`), including series by others that he wrote or translated for |
+| `audio.html` | His Audiohat audiobooks on a cassette deck (adapted from Codrops' Old School Cassette Player). ▶ opens the episode on Audiohat; issue pages get their own cassette |
 | `quotes.html` | Sourced quotes, with copy / link / save-as-image |
 | `legacy.html` | Farewell and tributes timeline, adaptations, interviews and talks |
 
@@ -31,6 +32,7 @@ All content lives in plain data files under `assets/js/`:
 - **`data-quotes.js`** — sourced quotes
 - **`data-legacy.js`** — tributes timeline and interviews / media links
 - **`data-books-a.js`, `data-books-b.js`** — per-book details (`AKT.bookInfo`): longer descriptions, other titles, genres, editions with ISBNs and covers
+- **`data-audio.js`** — Audiohat episodes per issue (links only: their sample URLs expire daily, so no audio is hosted here)
 - **`data-series-more.js`** — richer series pages (`AKT.seriesInfo`) and series by others he contributed to (`AKT.otherSeries`)
 
 Covers are only linked from Open Library or Wikimedia Commons; when there is none, the site draws its own cover.
@@ -49,3 +51,4 @@ Enable GitHub Pages (Settings → Pages → deploy from `main`, root). The share
 - Opening reveal adapted from the GSAP "Believe" animation.
 - "The Godfather" font by Jeff Bell (see `assets/fonts/THEGODFATHER-LICENSE.txt`).
 - Paper and wood textures from the Codrops demos.
+- Cassette artwork by Mauricio Estrella; tape sounds by Pogotron on Freesound (see the CREDITS files).

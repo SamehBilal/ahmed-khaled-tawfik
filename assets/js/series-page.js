@@ -50,6 +50,7 @@ window.PAGE = {
 			return '<a class="cover-link" href="' + App.issueHref(id, is) + '" title="' + e(t(is.title)) + '">' +
 				S.miniCover({ color: s.color, title: t(is.title), num: is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '', sub: is.original ? t(is.original) : '' }) +
 				'<span class="cl-t">' + (is.n != null ? App.num(is.n) + '. ' : '') + tx(is.title) + '</span>' +
+				((d.audio && d.audio.issues[id + '-' + is.n] && !(is.part > 1)) ? '<span class="cl-audio" title="' + L('متاح مسموعًا على Audiohat', 'Audiobook on Audiohat') + '">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
 			'</a>';
 		}).join('');
 
@@ -83,6 +84,7 @@ window.PAGE = {
 						(info.altTitles && info.altTitles.length ? '<section class="d-block"><h3>' + L('عناوين أخرى', 'Other titles') + '</h3><ul class="alt-titles">' +
 							info.altTitles.map(function (a) { return '<li><b>' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + '</li>'; }).join('') + '</ul></section>' : '') +
 						(info.readingOrder ? '<section class="d-block"><h3>' + L('ترتيب القراءة', 'Reading order') + '</h3>' + App.paras(info.readingOrder) + '</section>' : '') +
+						(d.audio && issues.some(function (is) { return d.audio.issues[id + '-' + is.n]; }) ? '<p class="note"><a href="audio.html">♪ ' + L('عدد من أعدادها متاح مسموعًا — استمع على المسجّل', 'Many issues are on audio — listen on the cassette deck') + ' ←</a></p>' : '') +
 						(chars.length ? '<section class="d-block"><h3>' + L('الشخصيات', 'Characters') + '</h3><p class="chips-line">' + chars.map(function (c) { return App.charLink(c.id); }).join('') + '</p></section>' : '') +
 						(eds ? '<section class="d-block"><h3>' + L('الطبعات', 'Editions') + '</h3><ul class="ed-list">' + eds + '</ul></section>' : '') +
 						(adapts.length ? '<section class="d-block"><h3>' + L('على الشاشة', 'On screen') + '</h3>' + adapts.map(function (a) {
