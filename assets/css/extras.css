@@ -250,3 +250,16 @@ button.media:hover { transform: translateY(-4px); border-color: var(--ember); }
 .video-dialog .bar .ttl { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .video-dialog .bar a { color: #f2b56b; font-family: var(--f-latin); }
 .video-dialog .bar button { font: inherit; background: #222; color: #fff; border: 1px solid #333; border-radius: 999px; padding: 3px 12px; cursor: pointer; }
+
+/* ---------- His name, lettered like the Ma Wara' al-Tabi'a covers ---------- */
+
+.home-hero .name-cover {
+	font-family: 'Rakkas', var(--f-chunky); font-weight: 400;
+	font-size: clamp(54px, 8.4vw, 112px); line-height: 1.25;
+	color: #f7d417;
+	-webkit-text-stroke: .1em #2b1406; paint-order: stroke fill;
+	text-shadow: 0 .06em .12em rgba(0,0,0,.45);
+	white-space: nowrap;
+}
+html[lang="en"] .home-hero .name-cover { text-align: start; }
+@media (max-width: 480px) { .home-hero .name-cover { white-space: normal; } }
