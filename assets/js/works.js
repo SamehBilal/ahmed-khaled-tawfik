@@ -11,6 +11,8 @@ window.PAGE = {
 		seriesTitle: { ar: 'السلاسل', en: 'The series' },
 		seriesHint: { ar: 'اضغط «تصفّح من الداخل» لفتح الكتاب، أو «اقلب الكتاب» لقراءة الغلاف الخلفي.', en: 'Press "View inside" to open a book, or "Flip" to read the back cover.' },
 		issuesTitle: { ar: 'كل الأعداد', en: 'Every issue' },
+		contribTitle: { ar: 'سلاسل شارك فيها', en: 'Series he contributed to' },
+		contribHint: { ar: 'سلاسل لم يؤسسها، لكنه كتب أو ترجم لها.', en: 'Series he did not create, but wrote or translated for.' },
 		issuesHint: { ar: 'رفّ لكل سلسلة — اسحب أي عدد لترى تفاصيله.', en: 'A shelf for each series — pull out any issue to see its details.' },
 		booksTitle: { ar: 'الكتب المستقلة', en: 'Standalone books' },
 		booksHint: { ar: 'مرّر المؤشر على الكتاب (أو المسه) لينفتح.', en: 'Hover over a book (or tap it) to open it.' },
@@ -26,7 +28,17 @@ window.PAGE = {
 
 		/* series — showcase books */
 		var seriesEl = document.getElementById('series');
-		seriesEl.innerHTML = (d.series || []).map(function (s) { return window.Books.showcase(S.seriesBook(s)); }).join('');
+		seriesEl.innerHTML = S.ownSeries().map(function (s) { return window.Books.showcase(S.seriesBook(s)); }).join('');
+
+		/* series by others that he wrote or translated for */
+		var contrib = S.contributedSeries();
+		document.getElementById('contrib-section').hidden = !contrib.length;
+		document.getElementById('contrib').innerHTML = contrib.map(function (o) {
+			var n = S.seriesIssues(o.id).length;
+			return '<a class="cover-link" href="' + S.seriesHref(o.id) + '">' +
+				S.miniCover({ color: o.color, title: t(o.title), sub: o.owner ? t(o.owner) : '', by: o.role ? t(o.role) : ' ' }) +
+				'<span class="cl-t">' + tx(o.title) + (n ? ' · ' + App.num(n) + App.L(' عنوانًا', ' titles') : '') + '</span></a>';
+		}).join('');
 		window.Books.initShowcase(seriesEl);
 
 		this.renderIssues();
@@ -52,11 +64,12 @@ window.PAGE = {
 				window.Books.hardcover({ color: w.color, title: w.title, year: w.year, typeLabel: typeLabel, ribbon: w.ribbon }) +
 				'<div class="hc-caption">' +
 					'<div class="type">' + e(typeLabel) + (w.year ? ' · ' + App.num(w.year) : '') + '</div>' +
-					'<h3>' + tx(w.title) + '</h3>' +
+					'<h3><a href="book.html?id=' + e(w.id) + '" style="color:inherit">' + tx(w.title) + '</a></h3>' +
 					'<p class="sub">' + e(App.alt(w.title)) + (w.publisher && t(w.publisher) ? ' — ' + tx(w.publisher) : '') + '</p>' +
 					'<p>' + tx(w.synopsis) + '</p>' +
 					(w.note && t(w.note) ? '<div class="note">' + tx(w.note) + '</div>' : '') +
 					S.charXref(w.id) +
+					'<a class="more-link" href="book.html?id=' + e(w.id) + '">' + App.L('تفاصيل الكتاب والطبعات ←', 'Book details & editions →') + '</a> ' +
 					App.fixLink(t(w.title)) +
 				'</div>' +
 			'</li>';
@@ -98,7 +111,7 @@ window.PAGE = {
 	renderIssues: function () {
 		var App = window.App, d = App.data(), e = App.esc, tx = App.tx, self = this;
 		var issues = d.issues || {};
-		var ids = (d.series || []).map(function (s) { return s.id; }).filter(function (id) { return (issues[id] || []).length; });
+		var ids = S.ownSeries().map(function (s) { return s.id; }).filter(function (id) { return (issues[id] || []).length; });
 		var section = document.getElementById('issues-section');
 		section.hidden = !ids.length;
 		if (!ids.length) return;
@@ -158,6 +171,7 @@ window.PAGE = {
 			'<p class="sub">' + e(App.alt(is.title)) + '</p>' +
 			'<p class="meta">' + tx(s.title) + ' — ' + App.L('العدد ', 'Issue ') + e(App.num(is.n)) + (is.year ? ' · ' + e(App.num(is.year)) : '') + '</p>' +
 			(chars.length ? '<p class="meta">' + App.L('يظهر فيه: ', 'Featuring: ') + chars.join(App.L('، ', ', ')) + '</p>' : '') +
+			'<a class="more-link" href="' + App.issueHref(s.id, is) + '">' + App.L('صفحة العدد ←', 'Issue page →') + '</a> ' +
 			App.fixLink(App.t(s.title) + ' #' + is.n);
 		card.hidden = false;
 	},

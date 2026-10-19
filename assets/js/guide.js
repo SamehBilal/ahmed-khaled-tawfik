@@ -108,7 +108,7 @@ window.PAGE = {
 				var href = App.workHref(st.ref), title = App.t(w.title), meta = w.year ? App.num(w.year) : (w.years ? App.num(w.years) : '');
 				if (st.issue) {
 					var it = self.issueTitle(st.ref, st.issue);
-					href = 'works.html#i-' + st.ref + '-' + st.issue;
+					href = 'book.html?id=' + st.ref + '-' + st.issue;
 					title = App.t(w.title) + ' ' + App.num('#' + st.issue) + (it ? ': ' + App.t(it) : '');
 					meta = '';
 				}

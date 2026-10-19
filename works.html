@@ -28,6 +28,7 @@
 	<link rel="stylesheet" href="assets/css/site.css">
 	<link rel="stylesheet" href="assets/css/extras.css">
 	<link rel="stylesheet" href="assets/css/books.css">
+	<link rel="stylesheet" href="assets/css/detail.css">
 	<script>try{var h=document.documentElement,l=localStorage.getItem('akt-lang'),t=localStorage.getItem('akt-theme');if(l==='en'){h.lang='en';h.dir='ltr';}if(t==='light'||(!t&&matchMedia('(prefers-color-scheme: light)').matches))h.setAttribute('data-theme','light');}catch(e){}</script>
 </head>
 <body>
@@ -46,6 +47,13 @@
 			<div class="wrap">
 				<div class="section-head"><div><h2 data-i18n="seriesTitle"></h2><p data-i18n="seriesHint"></p></div></div>
 				<ul class="bk-list" id="series"></ul>
+			</div>
+		</section>
+
+		<section class="section" id="contrib-section" hidden>
+			<div class="wrap">
+				<div class="section-head"><div><h2 data-i18n="contribTitle"></h2><p data-i18n="contribHint"></p></div></div>
+				<div class="cover-row" id="contrib"></div>
 			</div>
 		</section>
 
@@ -85,6 +93,9 @@
 	<script src="assets/js/data-issues.js"></script>
 	<script src="assets/js/data-quotes.js"></script>
 	<script src="assets/js/data-legacy.js"></script>
+	<script src="assets/js/data-books-a.js"></script>
+	<script src="assets/js/data-books-b.js"></script>
+	<script src="assets/js/data-series-more.js"></script>
 	<script src="assets/js/books.js"></script>
 	<script src="assets/js/shared.js"></script>
 	<script src="assets/js/works.js"></script>

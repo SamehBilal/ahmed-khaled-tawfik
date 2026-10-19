@@ -58,7 +58,7 @@
 			pages: pages,
 			info: {
 				title: t(s.title), sub: App.alt(s.title), text: t(s.tagline),
-				extra: charXref(s.id) + App.fixLink(t(s.title)),
+				extra: charXref(s.id) + '<a class="more-link" href="series.html?id=' + s.id + '">' + L('صفحة السلسلة وكل أعدادها ←', 'Series page & every issue →') + '</a> ' + App.fixLink(t(s.title)),
 				facts: [
 					[L('السنوات', 'Years'), App.num(s.years || '')],
 					[L('الأعداد', 'Issues'), s.count ? App.num(s.count) : ''],
@@ -68,5 +68,90 @@
 		};
 	}
 
-	window.WorksShared = { TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref };
+	/* ---------- catalogue: ids, lookups and mini covers for the detail pages ---------- */
+
+	/* own series, or a series by others that he contributed to */
+	function anySeries(id) {
+		var d = window.App.data();
+		var s = window.App.byId(d.series, id);
+		var o0 = window.App.byId(d.otherSeries, id);
+		/* a line like روايات عالمية للجيب appears in both lists: it isn't his own series, so the contributor record wins */
+		if (s && (o0 || s.contributor)) return { own: false, s: Object.assign({}, s, o0 || {}), info: (d.seriesInfo || {})[id] || {}, other: o0 };
+		if (s) return { own: true, s: s, info: (d.seriesInfo || {})[id] || {}, other: null };
+		var o = window.App.byId(d.otherSeries, id);
+		return o ? { own: false, s: o, info: {}, other: o } : null;
+	}
+
+	/* issues of a series: own series from data-issues, others from otherSeries[].issues */
+	function seriesIssues(id) {
+		var d = window.App.data();
+		var list = ((d.issues || {})[id] || []).slice();
+		if (!list.length) {
+			var o = window.App.byId(d.otherSeries, id);
+			list = ((o && o.issues) || []).map(function (is, i) { return Object.assign({ _idx: i }, is); });
+		}
+		return list.sort(function (a, b) { return (a.n || 9999) - (b.n || 9999) || (a.part || 0) - (b.part || 0) || (a._idx || 0) - (b._idx || 0); });
+	}
+
+	function issueKey(sid, is) {
+		return sid + '-' + (is.n != null ? is.n : 'x' + (is._idx || 0)) + (is.part ? '-' + is.part : '');
+	}
+
+	/* book.html?id=… → a standalone work, or an issue of a series */
+	function resolveBook(id) {
+		var App = window.App, d = App.data();
+		var w = App.byId(d.works, id);
+		if (w) return { kind: 'work', id: id, item: w, info: (d.bookInfo || {})[id] || {} };
+		var m = /^([a-z0-9]+)-(x?\d+)(?:-(\d))?$/.exec(id || '');
+		if (!m) return null;
+		var ser = anySeries(m[1]);
+		if (!ser) return null;
+		var list = seriesIssues(m[1]);
+		for (var i = 0; i < list.length; i++) {
+			if (issueKey(m[1], list[i]) === id) {
+				return { kind: 'issue', id: id, item: list[i], series: ser, index: i, list: list, info: ((d.issueInfo || {})[id]) || {} };
+			}
+		}
+		return null;
+	}
+
+	function bookHref(id) { return 'book.html?id=' + encodeURIComponent(id); }
+	function seriesHref(id) { return 'series.html?id=' + encodeURIComponent(id); }
+
+	/* small flat cover: a real image when we have one, otherwise a drawn cover */
+	function miniCover(o) {
+		var App = window.App, e = App.esc;
+		return '<span class="mini-cover' + (o.img ? ' has-img' : '') + '" style="--c:' + e(o.color || '#3a1414') + '">' +
+			(o.img ? '<img src="' + e(o.img) + '" alt="" loading="lazy" onerror="this.parentNode.classList.remove(\'has-img\');this.remove()">' : '') +
+			(o.num ? '<span class="mc-num">' + e(o.num) + '</span>' : '') +
+			'<span class="mc-t">' + e(o.title || '') + '</span>' +
+			(o.sub ? '<span class="mc-s">' + e(o.sub) + '</span>' : '') +
+			'<span class="mc-by">' + e(o.by || 'أحمد خالد توفيق') + '</span>' +
+		'</span>';
+	}
+
+	/* first edition cover we know about */
+	function coverOf(info) {
+		var eds = (info && info.editions) || [];
+		for (var i = 0; i < eds.length; i++) if (eds[i].cover) return eds[i].cover;
+		return info && info.cover || '';
+	}
+
+	function ownSeries() {
+		var d = window.App.data();
+		return (d.series || []).filter(function (s) { return !s.contributor && !window.App.byId(d.otherSeries, s.id); });
+	}
+	function contributedSeries() {
+		var d = window.App.data();
+		var list = (d.otherSeries || []).slice();
+		(d.series || []).forEach(function (s) { if (s.contributor && !window.App.byId(list, s.id)) list.push(s); });
+		return list;
+	}
+
+	window.WorksShared = {
+		ownSeries: ownSeries, contributedSeries: contributedSeries,
+		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
+		anySeries: anySeries, seriesIssues: seriesIssues, issueKey: issueKey, resolveBook: resolveBook,
+		bookHref: bookHref, seriesHref: seriesHref, miniCover: miniCover, coverOf: coverOf
+	};
 })();

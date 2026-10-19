@@ -13,6 +13,8 @@ Static site, no build step. Open `index.html` or serve the folder (e.g. GitHub P
 | `works.html` | Series as 3D showcase books, a shelf of every series issue, standalone books as hardcovers, screen adaptations |
 | `characters.html` | Character cards that flip, filterable by series |
 | `writers.html` | Book-spine shelves: co-authors, introductions, influenced writers, contemporaries, authors he translated |
+| `book.html?id=…` | One page per book or series issue (`?id=utopia`, `?id=mwt-12`): cover, titles in other languages, description, details, editions and covers, characters, quotes, neighbouring issues |
+| `series.html?id=…` | One page per series (`?id=mwt`), including series by others that he wrote or translated for |
 | `quotes.html` | Sourced quotes, with copy / link / save-as-image |
 | `legacy.html` | Farewell and tributes timeline, adaptations, interviews and talks |
 
@@ -28,6 +30,10 @@ All content lives in plain data files under `assets/js/`:
 - **`data-issues.js`** — every numbered issue of Ma Wara' al-Tabi'a, Fantasia and Safari
 - **`data-quotes.js`** — sourced quotes
 - **`data-legacy.js`** — tributes timeline and interviews / media links
+- **`data-books-a.js`, `data-books-b.js`** — per-book details (`AKT.bookInfo`): longer descriptions, other titles, genres, editions with ISBNs and covers
+- **`data-series-more.js`** — richer series pages (`AKT.seriesInfo`) and series by others he contributed to (`AKT.otherSeries`)
+
+Covers are only linked from Open Library or Wikimedia Commons; when there is none, the site draws its own cover.
 
 Every text field has an `ar` and `en` version. Add an entry and the pages pick it up — no HTML changes needed. Entries that make factual claims carry a `source` URL; please keep that habit.
 

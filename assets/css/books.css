@@ -349,3 +349,8 @@ html[dir="ltr"] { --page-dir: ltr; }
 	.hc-item .hc-caption { text-align: center; }
 	.hc { margin-left: 100px; margin-right: -30px; }
 }
+.bk-list .bk-back { overflow: hidden; }
+.bk-back p { display: -webkit-box; -webkit-line-clamp: 10; -webkit-box-orient: vertical; overflow: hidden; }
+.bk-cover .bk-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0 3px 3px 0; }
+.bk-cover.has-img > :not(.bk-img) { display: none; }
+.bk-cover.has-img { background-image: none; transform-style: flat !important; -webkit-transform-style: flat !important; }

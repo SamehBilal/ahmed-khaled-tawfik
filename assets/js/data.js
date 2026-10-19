@@ -134,7 +134,7 @@ window.AKT = {
       ]
     },
     {
-      "id": "rwg",
+      "id": "rwg", "contributor": true,
       "title": { "ar": "روايات عالمية للجيب", "en": "Rewayat Alamiya lil-Geib (World Pocket Novels)" },
       "years": "",
       "publisher": { "ar": "المؤسسة العربية الحديثة", "en": "Modern Arab Association" },

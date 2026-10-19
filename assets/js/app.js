@@ -87,12 +87,16 @@
 		/* find the series or standalone work a character / adaptation belongs to */
 		findWork: function (id) {
 			var d = App.data();
-			return App.byId(d.series, id) || App.byId(d.works, id);
+			return App.byId(d.series, id) || App.byId(d.works, id) || App.byId(d.otherSeries, id);
 		},
 		isSeries: function (id) { return !!App.byId(App.data().series, id); },
 
 		/* ---------- deep links ---------- */
-		workHref: function (id) { return 'works.html#' + (App.isSeries(id) ? 's-' : 'w-') + id; },
+		workHref: function (id) {
+			var d = App.data();
+			return (App.isSeries(id) || App.byId(d.otherSeries, id) ? 'series.html?id=' : 'book.html?id=') + encodeURIComponent(id);
+		},
+		issueHref: function (sid, is) { return 'book.html?id=' + sid + '-' + (is.n != null ? is.n : 'x' + (is._idx || 0)) + (is.part ? '-' + is.part : ''); },
 		charHref: function (id) { return 'characters.html#c-' + id; },
 		workLink: function (id) {
 			var w = App.findWork(id);
@@ -261,13 +265,17 @@
 				legacy: { ar: 'الإرث', en: 'Legacy' }, media: { ar: 'لقاء / مقال', en: 'Media' }
 			};
 
-			(d.series || []).forEach(function (s) { add(K.series, s.title, s.years, 'works.html#s-' + s.id, both(s.tagline) + ' ' + both(s.synopsis)); });
-			(d.works || []).forEach(function (w) { add(K.work, w.title, w.year, 'works.html#w-' + w.id, both(w.synopsis)); });
+			(d.series || []).forEach(function (s) { add(K.series, s.title, s.years, 'series.html?id=' + s.id, both(s.tagline) + ' ' + both(s.synopsis)); });
+			(d.works || []).forEach(function (w) { add(K.work, w.title, w.year, 'book.html?id=' + w.id, both(w.synopsis)); });
 			Object.keys(d.issues || {}).forEach(function (sid) {
 				var s = App.byId(d.series, sid);
 				(d.issues[sid] || []).forEach(function (is) {
-					add(K.issue, is.title, (s ? s.title : null), 'works.html#i-' + sid + '-' + is.n + (is.part ? '-' + is.part : ''), String(is.n));
+					add(K.issue, is.title, (s ? s.title : null), App.issueHref(sid, is), String(is.n));
 				});
+			});
+			(d.otherSeries || []).forEach(function (s) {
+				add(K.series, s.title, s.owner || s.years, 'series.html?id=' + s.id, both(s.description));
+				(s.issues || []).forEach(function (is, i) { add(K.issue, is.title, s.title, App.issueHref(s.id, Object.assign({ _idx: i }, is)), both(is.original)); });
 			});
 			(d.characters || []).forEach(function (c) { add(K.character, c.name, App.findWork(c.work) ? App.findWork(c.work).title : '', 'characters.html#c-' + c.id, both(c.role) + ' ' + both(c.desc)); });
 			var W = d.writers || {};
