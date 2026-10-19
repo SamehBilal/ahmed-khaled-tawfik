@@ -63,7 +63,9 @@
 		gsap.set('#introSVG .ring', { fill: gsap.utils.wrap(colors) });
 		/* explicit SVG origins: these elements live in <defs>, where bounding boxes are unreliable */
 		gsap.utils.toArray('#introSVG [data-o]').forEach(function (el) { gsap.set(el, { smoothOrigin: false, svgOrigin: el.getAttribute('data-o') }); });
-		gsap.set('#iMotto', { opacity: 0, y: 14 });
+		gsap.set('#qBar', { scaleY: 0 });
+		gsap.set('#iQuote .qr', { x: -380 });
+		gsap.set('#iQuote .ql', { x: 380 });
 
 		tl = window.__introTL = gsap.timeline({ onComplete: finish });
 
@@ -96,10 +98,20 @@
 			opacity: 1,
 			ease: ringRadialEase
 		}, '-=1.7')
-		.to('#iMotto', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=1.2')
+		/* the grave wish, as Codrops demo 3: divider opens, lines slide out from behind it (right half first),
+		   side lines fade, the split folds away and the full sentence appears */
+		.add('quote', '-=1.4')
+		.to('#qBar', { scaleY: 1, duration: 0.4, ease: 'none' }, 'quote')
+		.to('#iQuote .qr', { x: 0, duration: 0.5, ease: 'power2.in', stagger: 0.35 }, 'quote+=0.3')
+		.to('#iQuote .ql', { x: 0, duration: 0.5, ease: 'power2.in', stagger: 0.35 }, 'quote+=1.4')
+		.add('qhold', '+=0.9')
+		.to('#qSplit text[font-size="23"]', { opacity: 0, duration: 0.6, stagger: 0.08 }, 'qhold')
+		.to('#qSplit text[font-size="54"]', { y: -8, duration: 0.5, ease: 'power1.inOut' }, 'qhold+=0.4')
+		.to('#qSplit', { scaleY: 0, opacity: 0, duration: 0.45, ease: 'power2.in' }, 'qhold+=0.9')
+		.to('#qFull', { opacity: 1, duration: 0.8, ease: 'power1.out' }, 'qhold+=1.25')
 
 		/* reveal: a hole grows from the dot and uncovers the page */
-		.add('reveal', '+=0.35')
+		.add('reveal', '+=1.1')
 		.call(centreHole, null, 'reveal')
 		.to('#introSVG', { scale: 1.25, duration: 1.1, ease: 'power2.in' }, 'reveal')
 		.fromTo(overlay, { '--hole': '0%' }, { '--hole': '150%', duration: 1.1, ease: 'power3.in' }, 'reveal')

@@ -75,9 +75,29 @@
 				<rect width="100%" height="100%" fill="#efe6d2" />
 				<use href="#ringGroup" />
 			</g>
-			<g id="iMotto">
-				<text x="400" y="505" text-anchor="middle" fill="#b9b1a0" font-family="'Reem Kufi', sans-serif" font-size="34">اجعلهم يقرؤون</text>
-				<text x="400" y="545" text-anchor="middle" fill="#8a8577" font-family="'Cormorant Garamond', serif" font-size="18" letter-spacing="6">MAKE THEM READ</text>
+			<!-- His grave wish, as the Codrops "Splash & Coming Soon" demo 3 effect: a divider opens,
+			     lines slide out from behind it (right half first, in reading order), the side lines fade,
+			     then everything folds into the full sentence. -->
+			<g id="iQuote" direction="rtl" font-family="'Reem Kufi', sans-serif">
+				<clipPath id="qClipR"><rect x="403" y="440" width="380" height="140" /></clipPath>
+				<clipPath id="qClipL"><rect x="17" y="440" width="380" height="140" /></clipPath>
+				<g id="qSplit" data-o="400 510">
+					<g clip-path="url(#qClipR)">
+						<text class="qr" text-anchor="end" x="416" y="477" font-size="23" fill="#b9b1a0">أما أنا فأريد أن</text>
+						<text class="qr" text-anchor="end" x="414" y="528" font-size="54" font-family="Lalezar, 'Reem Kufi', sans-serif" fill="#efe6d2">يُكتب</text>
+						<text class="qr" text-anchor="end" x="416" y="560" font-size="23" fill="#b9b1a0">على قبري:</text>
+					</g>
+					<g clip-path="url(#qClipL)">
+						<text class="ql" x="384" y="477" font-size="23" text-anchor="start" fill="#eb9250">«جعل</text>
+						<text class="ql" x="386" y="528" font-size="54" text-anchor="start" font-family="Lalezar, 'Reem Kufi', sans-serif" fill="#e0703a">الشباب</text>
+						<text class="ql" x="384" y="560" font-size="23" text-anchor="start" fill="#eb9250">يقرأون»</text>
+					</g>
+					<rect id="qBar" data-o="400 510" x="398.5" y="450" width="3" height="120" fill="#e0633a" />
+				</g>
+				<g id="qFull" opacity="0">
+					<text x="400" y="512" text-anchor="middle" font-size="27" fill="#efe6d2">أما أنا فأريد أن يُكتب على قبري: <tspan fill="#eb9250">«جعل الشباب يقرأون»</tspan></text>
+					<text x="400" y="548" text-anchor="middle" direction="ltr" font-family="'Cormorant Garamond', serif" font-size="17" letter-spacing="3" fill="#8a8577">“ON MY GRAVE, LET THEM WRITE: HE MADE THE YOUNG READ”</text>
+				</g>
 			</g>
 		</svg>
 		<button class="intro-skip" type="button">Skip</button>
