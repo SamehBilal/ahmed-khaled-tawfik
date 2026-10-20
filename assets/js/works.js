@@ -64,7 +64,24 @@ window.PAGE = {
 			var typeLabel = t(S.TYPES[w.type] || { ar: w.type, en: w.type });
 			/* the details panel, after Codrops' Book Preview: the book turns on its spine and the facts slide in */
 			var bi = (d.bookInfo || {})[w.id] || {}, eds = bi.editions || [], ed0 = eds[0] || {};
-			var about = t(bi.description || w.synopsis).split(/\n\s*\n/)[0];
+			/* the short synopsis and the long description together, without repeating a paragraph */
+			var about = [];
+			(t(w.synopsis) + '\n\n' + t(bi.description)).split(/\n\s*\n/).forEach(function (p) {
+				p = p.trim();
+				if (!p) return;
+				for (var i = 0; i < about.length; i++) {
+					if (about[i].indexOf(p) >= 0) return;
+					if (p.indexOf(about[i]) >= 0) { about[i] = p; return; }
+				}
+				about.push(p);
+			});
+			var cover = S.coverOf(bi);
+			/* a solid book for the details view: it turns to show its spine (on the right, as Arabic books bind) */
+			var box = '<div class="hc-boxwrap" aria-hidden="true"><div class="hc-box" style="--hc-c:' + e(w.color || '#444') + '">' +
+				'<div class="hcb-front">' + (cover ? '<img src="' + e(cover) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '<span>' + e(t(w.title)) + '</span></div>' +
+				'<div class="hcb-back"></div><div class="hcb-edge"></div><div class="hcb-top"></div>' +
+				'<div class="hcb-spine"><span>' + e(t(w.title)) + '</span><b>' + e(App.num(w.year || '')) + '</b></div>' +
+			'</div></div>';
 			var facts = [
 				w.publisher && t(w.publisher) ? [App.L('الناشر', 'Publisher'), t(w.publisher)] : null,
 				w.year ? [App.L('سنة النشر', 'Published'), App.num(w.year)] : null,
@@ -72,7 +89,7 @@ window.PAGE = {
 				eds.length ? [App.L('الطبعات', 'Editions'), App.num(eds.length)] : null
 			].filter(Boolean);
 			var details = '<div class="hc-details" id="hd-' + e(w.id) + '" role="region" aria-label="' + e(App.L('تفاصيل ', 'Details: ') + t(w.title)) + '"><ul>' +
-				'<li>' + e(about) + '</li>' +
+				'<li>' + about.map(function (p) { return '<p>' + e(p) + '</p>'; }).join('') + '</li>' +
 				facts.map(function (f) { return '<li><span>' + e(f[0]) + '</span> ' + e(f[1]) + '</li>'; }).join('') +
 				'<li><a href="book.html?id=' + e(w.id) + '">' + App.L('صفحة الكتاب ←', 'Book page →') + '</a></li>' +
 				'</ul><button type="button" class="hc-close-details" aria-label="' + e(App.L('إغلاق التفاصيل', 'Close details')) + '"></button></div>';
@@ -88,7 +105,7 @@ window.PAGE = {
 					'<div class="hc-buttons"><button type="button" class="hc-show-details" aria-expanded="false" aria-controls="hd-' + e(w.id) + '">' + App.L('التفاصيل', 'Details') + '</button>' +
 						'<a class="more-link" href="book.html?id=' + e(w.id) + '">' + App.L('الكتاب والطبعات ←', 'Book & editions →') + '</a></div> ' +
 					App.fixLink(t(w.title)) +
-				'</div>' + details +
+				'</div>' + box + details +
 			'</li>';
 		}).join('');
 		if (!booksEl._wired) {
