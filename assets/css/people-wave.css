@@ -1,0 +1,68 @@
+/* =========================================================
+   Writers page — a wave of people across the top.
+   Adapted from a CodePen "the people that make us special" wave:
+   two rows of circles offset by sin/cos of one angle. Here the angle
+   drifts on its own instead of a slider, and every circle is a writer.
+   ========================================================= */
+
+@property --pw-angle { syntax: '<angle>'; inherits: true; initial-value: 60deg; }
+
+.people-wave {
+	--pw-size: 3.75rem;
+	--pw-gap: 14px;
+	--pw-angle: 60deg;
+	position: relative; margin-top: 36px;
+	/* full width of the window, past the page gutter */
+	width: 100vw; margin-inline: calc(50% - 50vw);
+	overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
+	padding-block: calc(var(--pw-size) / 2 + 12px) calc(var(--pw-size) / 2 + 40px);
+	-webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+	        mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+	animation: pw-drift 40s linear infinite;
+}
+.people-wave::-webkit-scrollbar { display: none; }
+.people-wave:hover, .people-wave:focus-within { animation-play-state: paused; }
+@keyframes pw-drift { from { --pw-angle: 60deg; } to { --pw-angle: 420deg; } }
+
+.pw-rows { position: relative; width: max-content; margin-inline: auto; padding-inline: 16px; }
+.pw-row { display: flex; gap: var(--pw-gap); list-style: none; margin: 0; padding: 0; }
+.pw-row li { width: var(--pw-size); height: var(--pw-size); flex: none; }
+.pw-main { position: relative; z-index: 2; }
+.pw-main li { transform: translateY(calc(sin(var(--pw-angle) * var(--i)) * var(--pw-size) / 2)); }
+.pw-ghost { position: absolute; top: 0; inset-inline-start: 16px; }
+.pw-ghost li { border-radius: 50%; background: color-mix(in srgb, var(--paper) 7%, transparent); transform: translateY(calc(cos(var(--pw-angle) * var(--i) + var(--pw-angle)) * var(--pw-size) / 2)); }
+
+/* a writer */
+.pw-person {
+	position: relative; display: flex; align-items: center; justify-content: center;
+	width: 100%; height: 100%; border-radius: 50%;
+	color: var(--paper); text-decoration: none;
+	font-family: var(--f-display); font-weight: 700; font-size: 1.15rem; line-height: 1;
+	transition: transform .25s, box-shadow .25s;
+}
+html[lang="en"] .pw-person { font-family: var(--f-latin); font-size: 1.3rem; letter-spacing: .04em; }
+.pw-main li:nth-child(3n - 2) .pw-person { background: color-mix(in lab, #e9c46a 50%, var(--ink) 50%); }
+.pw-main li:nth-child(3n - 1) .pw-person { background: color-mix(in lab, var(--ember) 55%, var(--ink) 45%); }
+.pw-main li:nth-child(3n) .pw-person { background: color-mix(in lab, #659fb8 50%, var(--ink) 50%); }
+html[data-theme="light"] .pw-person { color: #fff; }
+.pw-person:hover, .pw-person:focus-visible { transform: scale(1.12); box-shadow: 0 0 0 3px var(--gold); outline: none; }
+
+/* their name under the circle on hover / focus */
+.pw-person::after {
+	content: attr(data-name); position: absolute; top: calc(100% + 8px); left: 50%;
+	transform: translate(-50%, -4px); white-space: nowrap; pointer-events: none;
+	font-family: var(--f-display); font-weight: 400; font-size: 13px; letter-spacing: 0;
+	color: var(--paper); background: var(--ink-3); border: 1px solid var(--line);
+	padding: 4px 10px; border-radius: 999px; opacity: 0; transition: opacity .2s, transform .2s;
+}
+.pw-person:hover::after, .pw-person:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 720px) {
+	.people-wave { --pw-size: 3.25rem; --pw-gap: 14px; margin-top: 24px; }
+	.pw-person { font-size: .95rem; }
+	html[lang="en"] .pw-person { font-size: 1.05rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.people-wave { animation: none; }
+	.pw-person, .pw-person::after { transition: none; }
+}

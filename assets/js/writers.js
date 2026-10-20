@@ -41,6 +41,7 @@ window.PAGE = {
 		'</div></section>';
 
 		document.getElementById('content').innerHTML = html;
+		this.wave();
 
 		var shelves = this.shelves;
 		document.querySelectorAll('.shelf-block[data-shelf]').forEach(function (block) {
@@ -84,5 +85,36 @@ window.PAGE = {
 			App.focusHash(function (el) { if (el.getAttribute('aria-expanded') !== 'true') el.click(); });
 		};
 		this.onHash();
+	},
+
+	/* the wave of people under the page title: every writer as a circle with their initials,
+	   linking to their book on the shelf below */
+	wave: function () {
+		var App = window.App, d = App.data(), e = App.esc, t = App.t, W = d.writers || {};
+		var hero = document.querySelector('.page-hero .wrap');
+		if (!hero) return;
+		var old = hero.querySelector('.people-wave');
+		if (old) old.remove();
+		var people = [];
+		this.shelves.forEach(function (sh) {
+			(W[sh.key] || []).forEach(function (w, i) { people.push({ w: w, id: 'wr-' + sh.key + '-' + i, shelf: t(sh.title) }); });
+		});
+		if (!people.length) return;
+		/* first letter of the first two words, skipping the Arabic article */
+		var initials = function (name) {
+			return name.split(/\s+/).filter(Boolean).slice(0, 2).map(function (p) {
+				return p.charAt(/^ال./.test(p) ? 2 : 0);
+			}).join(App.lang === 'ar' ? ' ' : '');
+		};
+		var div = document.createElement('div');
+		div.className = 'people-wave';
+		div.innerHTML = '<div class="pw-rows">' +
+			'<ul class="pw-row pw-main">' + people.map(function (p, i) {
+				var name = t(p.w.name);
+				return '<li style="--i:' + i + '"><a class="pw-person" href="#' + p.id + '" data-name="' + e(name) + '" aria-label="' + e(name + ' — ' + p.shelf) + '">' + e(initials(name)) + '</a></li>';
+			}).join('') + '</ul>' +
+			'<ul class="pw-row pw-ghost" aria-hidden="true">' + people.map(function (p, i) { return '<li style="--i:' + i + '"></li>'; }).join('') + '</ul>' +
+		'</div>';
+		hero.appendChild(div);
 	}
 };
