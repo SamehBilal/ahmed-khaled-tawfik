@@ -53,7 +53,13 @@ window.PAGE = {
 				'</li>';
 			}).join('') + '</ol>' +
 			(list.some(function (p) { return p.photo; }) ? '<p class="empty-note">' + L('الصور من ويكيميديا كومنز، بتراخيص حرّة.', 'Photos from Wikimedia Commons, under free licences.') + '</p>' : '') +
-		'</div></section>';
+		'</div></section>' +
+		/* books written about him, covers from assets/img/covers/about */
+		((d.aboutBooks || []).length && window.WorksShared ? '<section class="section"><div class="wrap"><h2 class="tb-books-h">' + L('كتب عنه', 'Books about him') + '</h2><div class="cover-grid tb-books">' +
+			d.aboutBooks.map(function (b) {
+				return '<figure class="cover-link">' + window.WorksShared.miniCover({ img: b.cover, color: '#3a1414', title: t(b.title), by: t(b.by) }) +
+					'<figcaption class="cl-t">' + tx(b.title) + ' — ' + tx(b.by) + '</figcaption></figure>';
+			}).join('') + '</div></div></section>' : '');
 
 		var root = document.getElementById('tb');
 		var open = function (li) {

@@ -15,7 +15,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "منشور على صفحته في فيسبوك بعد إعلان الوفاة، نقلته الشروق.", "en": "Facebook post after the death was announced, quoted by Shorouk News." },
     "source": "https://www.shorouknews.com/news/view.aspx?cdate=03042018&id=aacc34ba-3f02-41af-8359-31b30a45d387",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Yousef_Ziedan.jpg/500px-Yousef_Ziedan.jpg"
+    "photo": "assets/img/photos/wikimedia-1320b28a4d67.jpg"
   },
   {
     "name": { "ar": "أحمد مراد", "en": "Ahmed Mourad" },
@@ -27,7 +27,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "منشور على صفحته الرسمية في فيسبوك يوم الوفاة، نقلته الشروق.", "en": "Post on his official Facebook page the night of the death, quoted by Shorouk News." },
     "source": "https://www.shorouknews.com/news/view.aspx?cdate=03042018&id=aacc34ba-3f02-41af-8359-31b30a45d387",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Ahmed_Murad.jpg/500px-Ahmed_Murad.jpg"
+    "photo": "assets/img/photos/wikimedia-b413569b4824.jpg"
   },
   {
     "name": { "ar": "شريف عرفة", "en": "Sherif Arafa" },
@@ -39,7 +39,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "منشور على فيسبوك يستعير كلمات العرّاب نفسه، نقلته الشروق.", "en": "Facebook post borrowing Tawfik's own famous farewell lines, quoted by Shorouk News." },
     "source": "https://www.shorouknews.com/news/view.aspx?cdate=03042018&id=aacc34ba-3f02-41af-8359-31b30a45d387",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Dr._Sherif_Arafa.jpg/500px-Dr._Sherif_Arafa.jpg"
+    "photo": "assets/img/photos/wikimedia-c737c3ecc114.jpg"
   },
   {
     "name": { "ar": "عمرو سلامة", "en": "Amr Salama" },
@@ -51,7 +51,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "منشور تعزية بعد الرحيل، قبل أن يُخرج مسلسل «ما وراء الطبيعة» لنتفليكس.", "en": "Condolence post after the death, before he went on to direct Netflix's \"Paranormal\"." },
     "source": "https://www.youm7.com/story/2018/4/3/المشاهير-ينعون-الكاتب-الراحل-أحمد-خالد-توفيق-كان-مفكرا-محترما/3727634",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/AmrSalama.jpg/500px-AmrSalama.jpg"
+    "photo": "assets/img/photos/wikimedia-6736399bf6bf.jpg"
   },
   {
     "name": { "ar": "محمد هنيدي", "en": "Mohamed Henedy" },
@@ -63,7 +63,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "تغريدة على حسابه الرسمي في تويتر، نقلها اليوم السابع.", "en": "Tweet from his official Twitter account, quoted by Youm7." },
     "source": "https://www.youm7.com/story/2018/4/3/هنيدى-ناعيا-أحمد-خالد-توفيق-أفكارك-وروحك-هتفضل-موجودة-فى/3727715",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Mohamed_Henedy.png/500px-Mohamed_Henedy.png"
+    "photo": "assets/img/photos/wikimedia-8683d4a4726d.png"
   },
   {
     "name": { "ar": "تميم البرغوثي", "en": "Tamim Al-Barghouti" },
@@ -75,7 +75,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "رثاء الشاعر الفلسطيني ضمن تقرير اليوم السابع عن نعي المثقفين.", "en": "The Palestinian poet's tribute, in Youm7's round-up of intellectuals mourning Tawfik." },
     "source": "https://www.youm7.com/story/2018/4/3/مثقفون-ينعون-احمد-خالد-توفيق-إبراهيم-المعلم-أسعد-أجيالاً-بأدبه/3727967",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/f/fa/%D8%AA%D9%85%D9%8A%D9%85_%D8%A7%D9%84%D8%A8%D8%B1%D8%BA%D9%88%D8%AB%D9%8A.jpg"
+    "photo": "assets/img/photos/wikimedia-cb2a41b0578e.jpg"
   },
   {
     "name": { "ar": "إبراهيم المعلم", "en": "Ibrahim El-Moallem" },
@@ -87,7 +87,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "ضمن تقرير اليوم السابع عن نعي المثقفين.", "en": "In Youm7's round-up of intellectuals' tributes." },
     "source": "https://www.youm7.com/story/2018/4/3/مثقفون-ينعون-احمد-خالد-توفيق-إبراهيم-المعلم-أسعد-أجيالاً-بأدبه/3727967",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Ibrahim-elmoallem.jpg/500px-Ibrahim-elmoallem.jpg"
+    "photo": "assets/img/photos/wikimedia-d6083bc73714.jpg"
   },
   {
     "name": { "ar": "حسن الجندي", "en": "Hassan El-Gendy" },
@@ -111,7 +111,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "تغريدة على حسابه في تويتر، نقلها صدى البلد.", "en": "Tweet from his Twitter account, quoted by Sada El Balad." },
     "source": "https://www.elbalad.news/3244707",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ibrahim_Eissa_%282024%29.png/500px-Ibrahim_Eissa_%282024%29.png"
+    "photo": "assets/img/photos/wikimedia-707e4c24b6e5.png"
   },
   {
     "name": { "ar": "حمزة نمرة", "en": "Hamza Namira" },
@@ -123,7 +123,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "تغريدة على حسابه في تويتر، نقلها صدى البلد.", "en": "Tweet from his Twitter account, quoted by Sada El Balad." },
     "source": "https://www.elbalad.news/3244707",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Hamza_Namira_Concert.jpeg/500px-Hamza_Namira_Concert.jpeg"
+    "photo": "assets/img/photos/wikimedia-3af4aaca57df.jpg"
   },
   {
     "name": { "ar": "هند صبري", "en": "Hend Sabry" },
@@ -183,7 +183,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "حديث عن كواليس «ما وراء الطبيعة» بعد عرضه على نتفليكس.", "en": "Talking about the making of Netflix's \"Paranormal\" days after its release." },
     "source": "https://www.youm7.com/story/2020/11/9/%D8%A3%D8%AD%D9%85%D8%AF-%D8%A3%D9%85%D9%8A%D9%86-%D9%8A%D9%83%D8%B4%D9%81-%D9%83%D9%88%D8%A7%D9%84%D9%8A%D8%B3-%D9%85%D8%A7-%D9%88%D8%B1%D8%A7%D8%A1-%D8%A7%D9%84%D8%B7%D8%A8%D9%8A%D8%B9%D8%A9-%D8%B1%D9%81%D8%B6%D8%AA-%D9%81%D9%89-%D8%A7%D9%84%D8%A8%D8%AF%D8%A7%D9%8A%D8%A9/5059257",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/%D8%A3%D8%AD%D9%85%D8%AF_%D8%A3%D9%85%D9%8A%D9%86.png/500px-%D8%A3%D8%AD%D9%85%D8%AF_%D8%A3%D9%85%D9%8A%D9%86.png"
+    "photo": "assets/img/photos/wikimedia-bc48cae3b42e.png"
   },
   {
     "name": { "ar": "محمد فراج", "en": "Mohamed Farrag" },
@@ -195,6 +195,6 @@ window.AKT.tributes = [
     },
     "context": { "ar": "في لقاء لمنصة «شاهد» عن بطولته لمسلسل «الغرفة 207».", "en": "In an interview for Shahid about starring in \"Room 207\"." },
     "source": "https://www.filfan.com/news/153571",
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/d/d4/%D9%85%D8%AD%D9%85%D8%AF_%D9%81%D8%B1%D8%A7%D8%AC.png"
+    "photo": "assets/img/photos/wikimedia-b192e9ae738a.png"
   }
 ];

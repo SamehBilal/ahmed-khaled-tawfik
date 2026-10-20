@@ -375,7 +375,7 @@ Object.assign(window.AKT.bookInfo, {
     "language": "ar",
     "editions": [
       { "title": { "ar": "زغازيغ", "en": "Zaghazigh" }, "publisher": { "ar": "دار ليلى", "en": "Dar Lila" }, "year": 2009, "lang": "ar", "pages": 182, "format": { "ar": "غلاف ورقي – الطبعة الأولى", "en": "Paperback – 1st edition" }, "source": "https://openlibrary.org/books/OL45190278M" },
-      { "title": { "ar": "زغازيغ", "en": "Zaghazigh" }, "publisher": { "ar": "كيان للنشر والتوزيع", "en": "Kayan Publishing" }, "year": 2017, "lang": "ar", "isbn": "9789778200232", "format": { "ar": "غلاف ورقي", "en": "Paperback" }, "cover": "https://covers.openlibrary.org/b/id/10839075-L.jpg", "source": "https://openlibrary.org/books/OL32184404M" },
+      { "title": { "ar": "زغازيغ", "en": "Zaghazigh" }, "publisher": { "ar": "كيان للنشر والتوزيع", "en": "Kayan Publishing" }, "year": 2017, "lang": "ar", "isbn": "9789778200232", "format": { "ar": "غلاف ورقي", "en": "Paperback" }, "cover": "assets/img/covers/books/openlibrary-948da3fedf55.jpg", "source": "https://openlibrary.org/books/OL32184404M" },
       { "title": { "ar": "قلقلک", "en": "Ghelghelak (Persian)" }, "publisher": { "ar": "صاد", "en": "Saad" }, "year": 2022, "lang": "fa", "isbn": "9786225336438", "pages": 138, "format": { "ar": "ترجمة عماد جعفري", "en": "Translated by Emad Jafari" }, "source": "https://www.goodreads.com/book/show/174012169" }
     ],
     "links": [
@@ -572,7 +572,7 @@ Object.assign(window.AKT.bookInfo, {
     "pages": 233,
     "language": "ar",
     "editions": [
-      { "title": { "ar": "شربة الحاج داود: مقالات عن العلم وشبه العلم", "en": "Hagg Dawood's Tonic: Essays on Science and Pseudo-Science" }, "publisher": { "ar": "دار الكرمة", "en": "Dar El Karma" }, "year": 2014, "lang": "ar", "isbn": "9789776467200", "pages": 233, "format": { "ar": "غلاف ورقي – الطبعة الأولى", "en": "Paperback – 1st edition" }, "cover": "https://covers.openlibrary.org/b/id/13769882-L.jpg", "source": "https://www.goodreads.com/book/show/23915038" }
+      { "title": { "ar": "شربة الحاج داود: مقالات عن العلم وشبه العلم", "en": "Hagg Dawood's Tonic: Essays on Science and Pseudo-Science" }, "publisher": { "ar": "دار الكرمة", "en": "Dar El Karma" }, "year": 2014, "lang": "ar", "isbn": "9789776467200", "pages": 233, "format": { "ar": "غلاف ورقي – الطبعة الأولى", "en": "Paperback – 1st edition" }, "cover": "assets/img/covers/books/openlibrary-767e449cc160.jpg", "source": "https://www.goodreads.com/book/show/23915038" }
     ],
     "links": [
       { "label": "Goodreads", "url": "https://www.goodreads.com/book/show/23915038" },
@@ -621,7 +621,7 @@ Object.assign(window.AKT.bookInfo, {
     "firstPublished": "2019",
     "language": "ar",
     "editions": [
-      { "title": { "ar": "لا مكان للملل", "en": "No Room for Boredom" }, "publisher": { "ar": "كيان للنشر والتوزيع", "en": "Kayan Publishing" }, "year": 2019, "lang": "ar", "isbn": "9789778200638", "pages": 184, "format": { "ar": "غلاف ورقي – الطبعة الأولى", "en": "Paperback – 1st edition" }, "cover": "https://covers.openlibrary.org/b/id/14736716-L.jpg", "source": "https://openlibrary.org/books/OL44428817M" }
+      { "title": { "ar": "لا مكان للملل", "en": "No Room for Boredom" }, "publisher": { "ar": "كيان للنشر والتوزيع", "en": "Kayan Publishing" }, "year": 2019, "lang": "ar", "isbn": "9789778200638", "pages": 184, "format": { "ar": "غلاف ورقي – الطبعة الأولى", "en": "Paperback – 1st edition" }, "cover": "assets/img/covers/books/openlibrary-662bf84762f8.jpg", "source": "https://openlibrary.org/books/OL44428817M" }
     ],
     "links": [
       { "label": "Goodreads", "url": "https://www.goodreads.com/book/show/43455970" },
@@ -681,7 +681,7 @@ Object.assign(window.AKT.bookInfo, {
     "pages": 228,
     "language": "ar",
     "editions": [
-      { "title": { "ar": "اللغز وراء السطور: أحاديث من مطبخ الكتابة", "en": "The Mystery Behind the Lines: Talks from the Writing Kitchen" }, "publisher": { "ar": "دار الشروق", "en": "Dar El Shorouk" }, "year": 2017, "lang": "ar", "isbn": "9789770933954", "pages": 228, "format": { "ar": "غلاف ورقي – الطبعة الأولى", "en": "Paperback – 1st edition" }, "cover": "https://covers.openlibrary.org/b/id/10869547-L.jpg", "source": "https://openlibrary.org/books/OL32234696M" }
+      { "title": { "ar": "اللغز وراء السطور: أحاديث من مطبخ الكتابة", "en": "The Mystery Behind the Lines: Talks from the Writing Kitchen" }, "publisher": { "ar": "دار الشروق", "en": "Dar El Shorouk" }, "year": 2017, "lang": "ar", "isbn": "9789770933954", "pages": 228, "format": { "ar": "غلاف ورقي – الطبعة الأولى", "en": "Paperback – 1st edition" }, "cover": "assets/img/covers/books/openlibrary-2a2a18a9a6bf.jpg", "source": "https://openlibrary.org/books/OL32234696M" }
     ],
     "links": [
       { "label": "Goodreads", "url": "https://www.goodreads.com/book/show/33844994" },

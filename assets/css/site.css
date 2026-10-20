@@ -114,6 +114,16 @@ img { max-width: 100%; display: block; }
 
 .menu-btn { display: none; }
 
+/* eleven links don't fit beside the brand on laptop widths: tighten, then give the menu its own row */
+@media (max-width: 1280px) { .nav { gap: 2px; } .nav a { padding: 8px 10px; font-size: 15px; } }
+@media (max-width: 1100px) and (min-width: 761px) {
+	.site-header .wrap { flex-wrap: wrap; row-gap: 6px; padding-block: 10px; }
+	.nav { order: 3; width: 100%; margin: 0; overflow-x: auto; scrollbar-width: none; justify-content: center; }
+	.nav::-webkit-scrollbar { display: none; }
+	.nav a { white-space: nowrap; }
+	.tools { margin-inline-start: auto; }
+}
+
 @media (max-width: 760px) {
 	.site-header .wrap { flex-wrap: wrap; gap: 8px 12px; padding-block: 10px; }
 	.brand-en { display: none; }

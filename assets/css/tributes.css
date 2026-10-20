@@ -153,3 +153,7 @@ html[dir="rtl"] .tb-body .alt { text-align: right; }
 @media (prefers-reduced-motion: reduce) {
 	.tb-card, .tb-inner, .tb-body, .tb-thumb, .tb-date, .tb-thumb img { transition: none; }
 }
+/* books about him */
+.tb-books-h { font-family: var(--f-display); font-size: 28px; margin: 0 0 18px; }
+.tb-books { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+.tb-books figure { margin: 0; }

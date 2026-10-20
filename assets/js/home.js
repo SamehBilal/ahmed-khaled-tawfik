@@ -45,7 +45,7 @@ window.PAGE = {
 
 		/* hero portrait (linked from Youm7, credited under the photo) */
 		var photo = bio.photo || {
-			src: 'https://img.youm7.com/ArticleImgs/2018/4/6/112144-%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D8%A8-%D8%A3%D8%AD%D9%85%D8%AF-%D8%AE%D8%A7%D9%84%D8%AF-%D8%AA%D9%88%D9%81%D9%8A%D9%82.jpg',
+			src: 'assets/img/photos/youm7-e94d8bd9a946.jpg',
 			credit: { ar: 'الصورة: اليوم السابع', en: 'Photo: Youm7' }
 		};
 		document.getElementById('hero-photo').innerHTML =

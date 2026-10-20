@@ -117,7 +117,7 @@ window.PAGE = {
 	   Backdrops use the larger YouTube frame; cards use the 16:9 one, which has no letterbox bars. */
 	image: function (spec, big) {
 		spec = spec || '';
-		if (spec === 'portrait') return { src: 'https://img.youm7.com/ArticleImgs/2018/4/6/112144-%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D8%A8-%D8%A3%D8%AD%D9%85%D8%AF-%D8%AE%D8%A7%D9%84%D8%AF-%D8%AA%D9%88%D9%81%D9%8A%D9%82.jpg' };
+		if (spec === 'portrait') return { src: 'assets/img/photos/youm7-e94d8bd9a946.jpg' };
 		if (spec.indexOf('yt:') === 0) {
 			var id = spec.slice(3);
 			return { src: 'https://i.ytimg.com/vi/' + id + (big ? '/hqdefault.jpg' : '/mqdefault.jpg'), yt: id };

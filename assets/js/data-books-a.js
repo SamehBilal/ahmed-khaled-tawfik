@@ -174,7 +174,7 @@ Object.assign(window.AKT.bookInfo, {
           "ar": "تشيب روسيتي",
           "en": "Chip Rossetti"
         },
-        "cover": "https://covers.openlibrary.org/b/id/8782570-L.jpg",
+        "cover": "assets/img/covers/novels/openlibrary-746a23038b98.jpg",
         "source": "https://www.goodreads.com/book/show/9680830-utopia"
       },
       {
@@ -221,7 +221,7 @@ Object.assign(window.AKT.bookInfo, {
           "ar": "ريشار جاكمون",
           "en": "Richard Jacquemond"
         },
-        "cover": "https://covers.openlibrary.org/b/id/8536705-L.jpg",
+        "cover": "assets/img/covers/novels/openlibrary-6a326662c41a.jpg",
         "source": "https://catalogue.bnf.fr/rechercher.do?motRecherche=9782081288492&critereRecherche=0&depart=0&facetteModifiee=ok"
       },
       {
@@ -285,7 +285,7 @@ Object.assign(window.AKT.bookInfo, {
           "ar": "غلاف ورقي",
           "en": "Paperback"
         },
-        "cover": "https://covers.openlibrary.org/b/id/12498404-L.jpg",
+        "cover": "assets/img/covers/novels/openlibrary-8165c5c9c464.jpg",
         "source": "https://openlibrary.org/isbn/9789770933077"
       },
       {
@@ -309,7 +309,7 @@ Object.assign(window.AKT.bookInfo, {
           "ar": "كريستينه باترمان",
           "en": "Christine Battermann"
         },
-        "cover": "https://covers.openlibrary.org/b/id/8782571-L.jpg",
+        "cover": "assets/img/covers/novels/openlibrary-cb4c92d8550d.jpg",
         "source": "https://d-nb.info/1063962323"
       },
       {
@@ -459,7 +459,7 @@ Object.assign(window.AKT.bookInfo, {
           "ar": "غلاف ورقي",
           "en": "Paperback"
         },
-        "cover": "https://covers.openlibrary.org/b/id/12198357-L.jpg",
+        "cover": "assets/img/covers/novels/openlibrary-8b37322cd6fa.jpg",
         "source": "https://www.goodreads.com/book/show/16076787"
       },
       {
@@ -694,7 +694,7 @@ Object.assign(window.AKT.bookInfo, {
           "ar": "غلاف ورقي",
           "en": "Paperback"
         },
-        "cover": "https://covers.openlibrary.org/b/id/10846216-L.jpg",
+        "cover": "assets/img/covers/novels/openlibrary-dc3524ee0267.jpg",
         "source": "https://www.goodreads.com/book/show/30612235"
       },
       {
@@ -1674,7 +1674,7 @@ Object.assign(window.AKT.bookInfo, {
           "ar": "غلاف ورقي",
           "en": "Paperback"
         },
-        "cover": "https://covers.openlibrary.org/b/id/14846890-L.jpg",
+        "cover": "assets/img/covers/translations/openlibrary-1a6df8907327.jpg",
         "source": "https://openlibrary.org/books/OL27650548M"
       }
     ],

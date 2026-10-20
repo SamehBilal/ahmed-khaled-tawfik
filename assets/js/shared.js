@@ -50,7 +50,7 @@
 
 		/* the cover: the first issue's, else a collected volume's */
 		var first = seriesIssues(s.id)[0];
-		var vol = ((App.data().seriesCovers || {})[s.id] || []).filter(function (c) { return /cdn.(abjjad|aseeralkotb)/.test(c.cover); })[0];
+		var vol = ((App.data().seriesCovers || {})[s.id] || []).filter(function (c) { return /cdn.(abjjad|aseeralkotb)|covers\/books\/(abjjad|aseeralkotb)-/.test(c.cover); })[0];
 		return {
 			id: 's-' + s.id,
 			img: (first && issueCover(s.id, first)) || (vol && vol.cover) || '',
@@ -158,6 +158,7 @@
 
 	/* first edition cover we know about */
 	function coverOf(info) {
+		if (info && info.ownCover) return info.ownCover;
 		var eds = (info && info.editions) || [];
 		for (var i = 0; i < eds.length; i++) if (eds[i].cover) return eds[i].cover;
 		return info && info.cover || '';

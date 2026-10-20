@@ -73,3 +73,4 @@ html[data-theme="light"] .pw-person { color: #fff; }
 .wr-photo img { width: 120px; height: 150px; object-fit: cover; border-radius: 8px; display: block; }
 .wr-photo figcaption { font-size: 10px; color: var(--muted); margin-top: 4px; }
 .wr-photo figcaption a { color: inherit; }
+.wr-cover img { height: auto; aspect-ratio: 2 / 3; box-shadow: 0 8px 18px rgba(0, 0, 0, .35); border-radius: 2px 6px 6px 2px; }

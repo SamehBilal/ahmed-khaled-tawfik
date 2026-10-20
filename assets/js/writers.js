@@ -60,6 +60,7 @@ window.PAGE = {
 				if (w.work) meta = L('العمل: ', 'Work: ') + t(w.work) + (w.year ? ' (' + App.num(w.year) + ')' : '');
 				if (w.book) meta = (w.direction === 'by_akt' ? L('قدّم له العرّاب: ', 'Foreword by AKT: ') : w.direction === 'back_akt' ? L('كلمة العرّاب على غلافه: ', 'AKT on the back cover: ') : L('كتب مقدّمة: ', 'Wrote the foreword to: ')) + t(w.book) + (w.year ? ' (' + App.num(w.year) + ')' : '');
 				card.innerHTML =
+					(w.cover ? '<figure class="wr-photo wr-cover"><img src="' + e(w.cover) + '" alt="' + e(t(w.book)) + '"></figure>' : '') +
 					(w.photo ? '<figure class="wr-photo"><img src="' + e(w.photo.url) + '" alt="' + e(t(w.name)) + '" referrerpolicy="no-referrer"><figcaption><a href="' + e(w.photo.file) + '" target="_blank" rel="noopener">' + e(w.photo.license) + ' · Wikimedia Commons</a></figcaption></figure>' : '') +
 					'<h4>' + tx(w.name) + '</h4>' +
 					'<p class="sub">' + e(App.alt(w.name)) + '</p>' +
