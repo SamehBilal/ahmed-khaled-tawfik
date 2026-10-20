@@ -19,6 +19,7 @@ window.PAGE = {
 		var issues = series.reduce(function (n, s) { return n + (+s.count || 0); }, 0);
 		var writersCount = ['collaborators', 'introductions', 'influenced', 'contemporaries', 'translated']
 			.reduce(function (n, k) { return n + ((w[k] || []).length); }, 0);
+		var au = d.audio || {}, audioCount = Object.keys(au.issues || {}).length + (au.midnight || []).length;
 
 		/* hero text */
 		document.getElementById('hero-text').innerHTML =
@@ -76,7 +77,13 @@ window.PAGE = {
 			{ href: 'quotes.html', big: (d.quotes || []).length || '«»', title: { ar: 'اقتباسات', en: 'Quotes' },
 			  text: { ar: 'كلماته الموثّقة فقط — كل اقتباس بمصدره.', en: 'Only his verified words — every quote with its source.' } },
 			{ href: 'legacy.html', big: (d.media || []).length || '∞', title: { ar: 'الإرث', en: 'The legacy' },
-			  text: { ar: 'الوداع والتكريم، ولقاءاته ومحاضراته بصوته.', en: 'The farewell, the tributes, and his interviews and talks.' } }
+			  text: { ar: 'الوداع والتكريم، ولقاءاته ومحاضراته بصوته.', en: 'The farewell, the tributes, and his interviews and talks.' } },
+			{ href: 'audio.html', big: audioCount || '▶', title: { ar: 'مسموع', en: 'Audio' },
+			  text: { ar: 'أعداده كتبًا مسموعة على شريط كاسيت — اضغط تشغيل واسمع.', en: 'His books as audiobooks on a cassette — press play and listen.' } },
+			{ href: 'tributes.html', big: (d.tributes || []).length || '❝', title: { ar: 'قالوا عنه', en: 'Tributes' },
+			  text: { ar: 'ما قاله عنه كُتّاب ومشاهير، يوم رحيله وبعده.', en: 'What well-known people said about him when he left, and after.' } },
+			{ href: 'blog.html', big: (d.blog && d.blog.posts || []).length || '✒', title: { ar: 'المدونة', en: 'The Blog' },
+			  text: { ar: 'مقالاته وقصصه القصيرة وكوميكسه، مجموعة من أرشيف المدونة.', en: 'His columns, short stories and comics, gathered from the blog archive.' } }
 		];
 		document.getElementById('explore').innerHTML = cards.map(function (c) {
 			return '<a class="rise" href="' + c.href + '"><span class="big">' + e(c.big) + '</span><h3>' + tx(c.title) + '</h3><p>' + tx(c.text) + '</p><span class="go">' + (App.lang === 'ar' ? 'ادخل ←' : 'Enter →') + '</span></a>';

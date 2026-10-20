@@ -197,12 +197,35 @@
 			var footer = document.getElementById('site-footer');
 			if (footer) {
 				footer.className = 'site-footer';
+				/* a night out of Ma Wara' al-Tabi'a: a bare tree under the moon, fog, eyes that blink in the dark,
+				   his motto on a headstone, and the pocket books' last line that never quite ends it */
+				var branches = [
+					['M100 230C99 196 104 162 96 128', 11], ['M97 148C80 128 58 122 36 96', 5], ['M58 120C48 108 50 92 42 76', 3],
+					['M98 132C116 106 142 100 164 74', 5], ['M142 98C152 86 168 86 186 80', 3], ['M96 128C95 96 101 66 92 34', 4],
+					['M94 76C80 66 74 50 68 34', 2.5], ['M97 64C110 54 118 38 126 22', 2.5], ['M40 98C30 94 22 96 12 90', 2], ['M164 74C168 60 176 54 182 44', 2]
+				].map(function (b) { return '<path d="' + b[0] + '" stroke-width="' + b[1] + '"/>'; }).join('');
 				footer.innerHTML =
-					'<div class="wrap">' +
-						'<div><div class="motto">' + App.tx(UI.motto) + '</div><div>' + App.tx(UI.footerNote) + '</div>' +
-							'<div style="margin-top:8px"><a href="' + App.esc(App.fixHref()) + '" target="_blank" rel="noopener">' + App.tx(UI.fix) + '</a></div></div>' +
-						'<div style="max-width:420px">' + App.tx(UI.credits) + '</div>' +
-					'</div>';
+					'<div class="ft-night" aria-hidden="true">' +
+						'<span class="ft-moon"></span>' +
+						'<svg class="ft-tree" viewBox="0 0 200 230"><g fill="none" stroke="currentColor" stroke-linecap="round">' + branches + '</g></svg>' +
+						'<span class="ft-eyes e1"><i></i><i></i></span><span class="ft-eyes e2"><i></i><i></i></span><span class="ft-eyes e3"><i></i><i></i></span>' +
+						'<span class="ft-fog f1"></span><span class="ft-fog f2"></span>' +
+						'<span class="ft-ground"></span>' +
+					'</div>' +
+					'<div class="ft-body"><div class="wrap">' +
+						'<div class="ft-stone">' +
+							'<span class="ft-name">' + App.L('د. أحمد خالد توفيق', 'Dr. Ahmed Khaled Tawfik') + '</span>' +
+							'<div class="motto">' + App.tx(UI.motto) + '</div>' +
+							'<span class="ft-dates" dir="ltr">1962 — 2018</span>' +
+						'</div>' +
+						'<nav class="ft-links" aria-label="' + App.L('صفحات الموقع', 'Site pages') + '">' +
+							UI.nav.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+						'</nav>' +
+						'<div class="ft-notes"><p>' + App.tx(UI.footerNote) + '</p>' +
+							'<p><a href="' + App.esc(App.fixHref()) + '" target="_blank" rel="noopener">' + App.tx(UI.fix) + '</a></p>' +
+							'<p class="ft-credits">' + App.tx(UI.credits) + '</p></div>' +
+					'</div>' +
+					'<p class="ft-end">' + App.L('تمّت…', 'The end…') + ' <span>' + App.L('أو هكذا يبدو', 'or so it seems') + '</span></p></div>';
 			}
 		},
 
