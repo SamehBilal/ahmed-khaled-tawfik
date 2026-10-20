@@ -1,0 +1,155 @@
+/* =========================================================
+   Tributes page — 3D timeline.
+   Adapted from Codrops' "Responsive CSS Timeline with 3D Effect":
+   a dotted line of portraits; the open card swings towards the
+   reader in perspective and unfolds the quote. Rebuilt with buttons
+   instead of the radio hack and without the icon font, mirrored
+   for Arabic and recoloured for the site.
+   ========================================================= */
+
+.tb {
+	--tb-idle: color-mix(in srgb, #659fb8 70%, var(--ink));
+	--tb-on: var(--ember);
+	--tb-card: var(--ink-2);
+	--tb-thumb: 100px;
+	--tb-line: 165px;          /* where the dotted line runs */
+	--tb-card-at: 230px;       /* where the cards start */
+	--tb-flip: 1;              /* 1 left-to-right, -1 right-to-left */
+	position: relative; list-style: none; margin: 0; padding: 30px 0 50px;
+}
+html[dir="rtl"] .tb { --tb-flip: -1; }
+html[data-theme="light"] .tb { --tb-idle: #41838e; --tb-card: #fffaf0; }
+
+.tb::before {
+	content: ''; position: absolute; top: 0; bottom: 0; inset-inline-start: var(--tb-line); width: 5px;
+	background: radial-gradient(circle, color-mix(in srgb, var(--paper) 35%, transparent) 1.4px, transparent 1.8px) 0 0 / 5px 5px;
+}
+
+.tb-event { position: relative; margin-bottom: 70px; padding-inline-end: 40px; min-height: calc(var(--tb-thumb) + 30px); }
+
+/* the portrait */
+.tb-thumb {
+	position: absolute; top: 0; inset-inline-start: 0; z-index: 2;
+	width: var(--tb-thumb); height: var(--tb-thumb); padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+	background: var(--ink-3); color: var(--paper);
+	box-shadow: 0 0 0 8px var(--tb-idle), 0 1px 1px rgba(255, 255, 255, .3);
+	transform: scale(.8) translateX(calc(24px * var(--tb-flip)));
+	font-family: var(--f-display); font-size: 28px; font-weight: 700;
+	display: flex; align-items: center; justify-content: center;
+}
+.tb-thumb img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; filter: grayscale(.6); transition: filter .6s; }
+.tb-thumb:focus-visible { outline: 2px solid var(--gold); outline-offset: 12px; }
+/* the arm from portrait to line */
+.tb-thumb::before {
+	content: ''; position: absolute; z-index: -1; top: 46px; height: 6px; width: 51px;
+	inset-inline-start: 100%; margin-inline-start: 8px;
+	background: repeating-linear-gradient(90deg, var(--tb-idle) 0 3px, transparent 3px 6px);
+	transition: background .6s .2s;
+}
+.tb-date {
+	position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%);
+	white-space: nowrap; color: var(--tb-idle); font-family: var(--f-display); font-size: 14px; font-weight: 700;
+}
+
+/* the knob on the line */
+.tb-knob {
+	position: absolute; top: 36px; inset-inline-start: calc(var(--tb-line) - 9px); z-index: 3;
+	width: 24px; height: 24px; border-radius: 50%; background: var(--paper); pointer-events: none;
+	display: flex; align-items: center; justify-content: center; color: var(--tb-idle);
+}
+.tb-knob svg { width: 14px; height: 14px; transition: transform .4s; }
+
+/* the card, in perspective */
+.tb-persp { position: relative; margin-inline-start: var(--tb-card-at); perspective: 600px; }
+.tb-persp::before {
+	content: ''; position: absolute; z-index: -1; top: 47px; height: 1px; width: 37px;
+	inset-inline-start: -51px; background: var(--paper-dim);
+}
+.tb-card {
+	transform: rotateY(calc(10deg * var(--tb-flip)));
+	transform-origin: 0 0; transform-style: preserve-3d;
+	transition: transform .8s cubic-bezier(.59, 1.45, .69, .98) .2s;
+}
+html[dir="rtl"] .tb-card { transform-origin: 100% 0; }
+.tb-inner {
+	position: relative; padding: 18px 22px; background: var(--tb-card); color: var(--paper);
+	border-inline-start: 5px solid var(--tb-idle); box-shadow: 0 4px 6px rgba(0, 0, 0, .2);
+	transition: box-shadow .8s linear .2s, border-color .6s .2s;
+}
+/* the little pointer towards the line */
+.tb-inner::before {
+	content: ''; position: absolute; top: 34px; inset-inline-start: -19px; width: 14px; height: 24px;
+	background: var(--tb-idle); clip-path: polygon(100% 0, 0 50%, 100% 100%);
+	transition: background .6s .2s;
+}
+html[dir="rtl"] .tb-inner::before { clip-path: polygon(0 0, 100% 50%, 0 100%); }
+
+.tb-head { margin: 0; }
+.tb-head button {
+	all: unset; cursor: pointer; display: block; width: 100%;
+	font-family: var(--f-display); font-size: 24px; font-weight: 700; line-height: 1.3;
+	color: var(--tb-idle); padding: 4px 0; transition: color .6s .2s;
+}
+.tb-head button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.tb-role { display: block; color: var(--paper-dim); font-size: 14px; font-family: var(--f-display); }
+
+/* the quote, folded until the card opens */
+.tb-body {
+	max-height: 0; overflow: hidden; color: transparent;
+	transition: max-height .5s linear, color .3s linear;
+}
+.tb-body blockquote { margin: 14px 0 0; font-family: var(--f-display); font-size: 1.2rem; line-height: 1.8; }
+html[lang="en"] .tb-body blockquote { font-family: var(--f-latin); font-size: 1.3rem; line-height: 1.5; font-weight: 600; }
+.tb-body blockquote::before { content: '«'; color: var(--tb-on); margin-inline-end: 4px; }
+.tb-body blockquote::after { content: '»'; color: var(--tb-on); margin-inline-start: 4px; }
+html[lang="en"] .tb-body blockquote::before { content: '“'; }
+html[lang="en"] .tb-body blockquote::after { content: '”'; }
+.tb-body .alt { margin: 8px 0 0; font-size: .92em; font-style: italic; unicode-bidi: plaintext; }
+html[dir="rtl"] .tb-body .alt { text-align: right; }
+.tb-body .ctx { margin: 10px 0 0; font-size: 14px; }
+.tb-body .src { font-family: var(--f-display); font-size: 14px; }
+
+/* open */
+.tb-event.open .tb-thumb { transform: scale(1); box-shadow: 0 0 0 8px var(--tb-on), 0 1px 1px rgba(255, 255, 255, .3); }
+.tb-event.open .tb-thumb img { filter: none; }
+.tb-event.open .tb-thumb::before { background: repeating-linear-gradient(90deg, var(--tb-on) 0 3px, transparent 3px 6px); }
+.tb-event.open .tb-date { color: var(--tb-on); }
+.tb-event.open .tb-knob { color: var(--tb-on); box-shadow: 0 0 0 5px color-mix(in srgb, var(--paper) 70%, transparent); }
+.tb-event.open .tb-knob svg { transform: rotate(45deg); }
+.tb-event.open .tb-persp::before { background: var(--tb-on); }
+.tb-event.open .tb-card { transform: rotateY(calc(-5deg * var(--tb-flip))); }
+.tb-event.open .tb-inner { border-color: var(--tb-on); box-shadow: calc(10px * var(--tb-flip)) 0 10px -6px rgba(0, 0, 0, .25); }
+.tb-event.open .tb-inner::before { background: var(--tb-on); }
+.tb-event.open .tb-head button { color: var(--tb-on); }
+.tb-event.open .tb-body { max-height: 700px; color: var(--paper-dim); transition-delay: 0s, .6s; }
+.tb-event.open .tb-body blockquote { color: var(--paper); }
+
+.tb-thumb, .tb-date { transition: transform .6s ease-in-out .2s, box-shadow .6s ease-in-out .2s, color .6s .2s; }
+
+@media (max-width: 850px) {
+	.tb-head button { font-size: 20px; }
+	.tb-body blockquote { font-size: 1.08rem; }
+}
+
+/* phones: portrait on top, card below, tilting forward instead of sideways */
+@media (max-width: 540px) {
+	.tb { --tb-line: 50px; }
+	.tb-event { padding-inline-end: 0; margin-bottom: 40px; min-height: 0; }
+	.tb-thumb { position: relative; transform: scale(.8); }
+	.tb-event.open .tb-thumb { transform: scale(.9); }
+	.tb-thumb::before, .tb-knob, .tb-persp::before { display: none; }
+	.tb-date { left: auto; inset-inline-start: calc(100% + 18px); top: 50%; transform: translateY(-50%); }
+	.tb-persp { margin-inline-start: 0; margin-top: 26px; }
+	.tb-card, html[dir="rtl"] .tb-card { transform: rotateX(-10deg); transform-origin: 50% 0; }
+	.tb-event.open .tb-card { transform: rotateX(10deg); }
+	.tb-inner { border-inline-start: 0; border-top: 5px solid var(--tb-idle); }
+	.tb-event.open .tb-inner { box-shadow: 0 10px 10px -6px rgba(0, 0, 0, .25); }
+	.tb-inner::before, html[dir="rtl"] .tb-inner::before {
+		top: -24px; inset-inline-start: 38px; width: 24px; height: 14px;
+		clip-path: polygon(50% 0, 100% 100%, 0 100%);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tb-card, .tb-inner, .tb-body, .tb-thumb, .tb-date, .tb-thumb img { transition: none; }
+}

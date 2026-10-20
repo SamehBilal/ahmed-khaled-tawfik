@@ -16,7 +16,8 @@
 			{ id: 'writers', href: 'writers.html', ar: 'الكُتّاب', en: 'Writers' },
 			{ id: 'quotes', href: 'quotes.html', ar: 'اقتباسات', en: 'Quotes' },
 			{ id: 'audio', href: 'audio.html', ar: 'مسموع', en: 'Audio' },
-			{ id: 'legacy', href: 'legacy.html', ar: 'الإرث', en: 'Legacy' }
+			{ id: 'legacy', href: 'legacy.html', ar: 'الإرث', en: 'Legacy' },
+			{ id: 'tributes', href: 'tributes.html', ar: 'قالوا عنه', en: 'Tributes' }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
@@ -263,7 +264,7 @@
 			var K = {
 				series: { ar: 'سلسلة', en: 'Series' }, work: { ar: 'كتاب', en: 'Book' }, issue: { ar: 'عدد', en: 'Issue' },
 				character: { ar: 'شخصية', en: 'Character' }, writer: { ar: 'كاتب', en: 'Writer' }, quote: { ar: 'اقتباس', en: 'Quote' },
-				legacy: { ar: 'الإرث', en: 'Legacy' }, media: { ar: 'لقاء / مقال', en: 'Media' }
+				legacy: { ar: 'الإرث', en: 'Legacy' }, tribute: { ar: 'قالوا عنه', en: 'Tribute' }, media: { ar: 'لقاء / مقال', en: 'Media' }
 			};
 
 			(d.series || []).forEach(function (s) { add(K.series, s.title, s.years, 'series.html?id=' + s.id, both(s.tagline) + ' ' + both(s.synopsis)); });
@@ -285,6 +286,7 @@
 			});
 			(d.quotes || []).forEach(function (q, i) { add(K.quote, q.text, q.from, 'quotes.html#q-' + i, both(q.from)); });
 			(d.legacy || []).forEach(function (l, i) { add(K.legacy, l.title, l.date, 'legacy.html#l-' + i, both(l.text)); });
+			(d.tributes || []).forEach(function (p, i) { add(K.tribute, p.name, p.role, 'tributes.html#t-' + i, both(p.quote) + ' ' + both(p.context)); });
 			(d.media || []).forEach(function (m, i) { add(K.media, m.title, m.outlet, 'legacy.html#m-' + i, both(m.note)); });
 			Search.index = items;
 		},
