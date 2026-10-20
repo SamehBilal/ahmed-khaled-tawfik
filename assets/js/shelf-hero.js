@@ -17,7 +17,7 @@
 		var lineup = [
 			{ k: 'book', w: W('utopia') }, { k: 'spine', s: ser('mwt') }, { k: 'book', w: W('senga') },
 			{ k: 'spine', s: ser('fantasia') }, { k: 'book', w: W('rats') }, { k: 'spine', s: ser('safari') },
-			{ k: 'book', w: W('icarus') }, { k: 'book', w: W('shaabeeb') }
+			{ k: 'book', w: W('icarus') }
 		].filter(function (x) { return x.w || x.s; });
 
 		var items = lineup.map(function (x) {

@@ -39,7 +39,7 @@ window.PAGE = {
 			var n = S.seriesIssues(o.id).length;
 			return '<a class="cover-link" href="' + S.seriesHref(o.id) + '">' +
 				S.miniCover({ color: o.color, title: t(o.title), sub: o.owner ? t(o.owner) : '', by: o.role ? t(o.role) : ' ' }) +
-				'<span class="cl-t">' + tx(o.title) + (n ? ' · ' + App.num(n) + App.L(' عنوانًا', ' titles') : '') + '</span></a>';
+				'<span class="cl-t">' + tx(o.title) + (n ? ' · ' + (n === 1 ? App.L('عنوان واحد', '1 title') : n === 2 ? App.L('عنوانان', '2 titles') : App.num(n) + App.L(n <= 10 ? ' عناوين' : ' عنوانًا', ' titles')) : '') + '</span></a>';
 		}).join('');
 		window.Books.initShowcase(seriesEl);
 
@@ -172,8 +172,10 @@ window.PAGE = {
 	/* ---------- every issue, as spines on a shelf ---------- */
 	renderIssues: function () {
 		var App = window.App, d = App.data(), e = App.esc, tx = App.tx, S = window.WorksShared, self = this;
-		var issues = d.issues || {};
-		var ids = S.ownSeries().map(function (s) { return s.id; }).filter(function (id) { return (issues[id] || []).length; });
+		/* his own series first, then the ones he wrote or translated for */
+		var ids = S.ownSeries().concat(S.contributedSeries()).map(function (s) { return s.id; })
+			.filter(function (id, i, all) { return all.indexOf(id) === i && S.seriesIssues(id).length; });
+		var ser = function (id) { return S.anySeries(id).s; };
 		var section = document.getElementById('issues-section');
 		section.hidden = !ids.length;
 		if (!ids.length) return;
@@ -182,8 +184,7 @@ window.PAGE = {
 		var tabs = document.getElementById('issue-tabs');
 		tabs.setAttribute('aria-label', App.L('اختر السلسلة', 'Choose a series'));
 		tabs.innerHTML = ids.map(function (id) {
-			var s = App.byId(d.series, id);
-			return '<button type="button" class="chip" data-s="' + e(id) + '" aria-pressed="' + (id === self.issueSeries) + '">' + tx(s.title) + '<span class="count">' + App.num(issues[id].length) + '</span></button>';
+			return '<button type="button" class="chip" data-s="' + e(id) + '" aria-pressed="' + (id === self.issueSeries) + '">' + tx(ser(id).title) + '<span class="count">' + App.num(S.seriesIssues(id).length) + '</span></button>';
 		}).join('');
 		tabs.onclick = function (ev) {
 			var b = ev.target.closest('.chip');
@@ -192,13 +193,13 @@ window.PAGE = {
 			self.renderIssues();
 		};
 
-		var s = App.byId(d.series, this.issueSeries);
-		var list = issues[this.issueSeries].slice().sort(function (a, b) { return a.n - b.n || (a.part || 0) - (b.part || 0); });
+		var s = ser(this.issueSeries);
+		var list = S.seriesIssues(this.issueSeries);
 		var shelf = document.getElementById('issues');
 		shelf.style.setProperty('--c', s.color || '#3a1414');
 		shelf.innerHTML = list.map(function (is, i) {
-			var h = 150 + ((is.n * 29) % 46);
-			return '<button type="button" class="issue" id="i-' + e(s.id) + '-' + e(is.n) + (is.part ? '-' + is.part : '') + '" data-i="' + i + '" data-ls-key="b:' + e(S.issueKey(s.id, is)) + '" aria-expanded="false" aria-controls="issue-card" style="--h:' + h + 'px">' +
+			var h = 150 + (((is.n || i + 1) * 29) % 46);
+			return '<button type="button" class="issue" id="i-' + e(S.issueKey(s.id, is)) + '" data-i="' + i + '" data-ls-key="b:' + e(S.issueKey(s.id, is)) + '" aria-expanded="false" aria-controls="issue-card" style="--h:' + h + 'px">' +
 				'<span class="no">' + e(App.num(is.n)) + (is.part ? '<small>' + e(App.num(is.part)) + '</small>' : '') + '</span><span class="nm">' + tx(is.title) + '</span></button>';
 		}).join('');
 
@@ -225,16 +226,17 @@ window.PAGE = {
 		shelf.querySelectorAll('.issue').forEach(function (x) { x.setAttribute('aria-expanded', 'false'); });
 		if (open) { card.hidden = true; return; }
 		b.setAttribute('aria-expanded', 'true');
-		var s = App.byId(d.series, this.issueSeries);
-		var is = d.issues[this.issueSeries].slice().sort(function (a, c) { return a.n - c.n || (a.part || 0) - (c.part || 0); })[+b.getAttribute('data-i')];
+		var S = window.WorksShared, s = S.anySeries(this.issueSeries).s;
+		var is = S.seriesIssues(this.issueSeries)[+b.getAttribute('data-i')];
 		var chars = (is.chars || []).map(App.charLink).filter(Boolean);
 		card.innerHTML =
 			'<h4>' + tx(is.title) + '</h4>' +
 			'<p class="sub">' + e(App.alt(is.title)) + '</p>' +
-			'<p class="meta">' + tx(s.title) + ' — ' + App.L('العدد ', 'Issue ') + e(App.num(is.n)) + (is.year ? ' · ' + e(App.num(is.year)) : '') + '</p>' +
+			'<p class="meta">' + tx(s.title) + (is.n != null ? ' — ' + App.L('العدد ', 'Issue ') + e(App.num(is.n)) : '') + (is.year ? ' · ' + e(App.num(is.year)) : '') + '</p>' +
+			(is.note ? '<p class="meta">' + tx(is.note) + '</p>' : '') +
 			(chars.length ? '<p class="meta">' + App.L('يظهر فيه: ', 'Featuring: ') + chars.join(App.L('، ', ', ')) + '</p>' : '') +
 			'<a class="more-link" href="' + App.issueHref(s.id, is) + '">' + App.L('صفحة العدد ←', 'Issue page →') + '</a> ' +
-			App.fixLink(App.t(s.title) + ' #' + is.n);
+			App.fixLink(App.t(s.title) + (is.n != null ? ' #' + is.n : ' — ' + App.t(is.title)));
 		card.hidden = false;
 	},
 
@@ -242,7 +244,7 @@ window.PAGE = {
 	onHash: function () {
 		var self = this, App = window.App;
 		var m = /^#i-([a-z]+)-(\d+)(?:-\d)?$/.exec(location.hash);
-		if (m && m[1] !== this.issueSeries && (App.data().issues || {})[m[1]]) { this.issueSeries = m[1]; this.renderIssues(); }
+		if (m && m[1] !== this.issueSeries && window.WorksShared.seriesIssues(m[1]).length) { this.issueSeries = m[1]; this.renderIssues(); }
 		App.focusHash(function (el, id) {
 			if (id.indexOf('w-') === 0) {
 				if (el.hidden) { self.filter = 'all'; self.applyFilter(); }

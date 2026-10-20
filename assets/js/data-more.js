@@ -35,3 +35,95 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	Object.keys(A.writers).forEach(function (g) { A.writers[g].forEach(function (w) { var p = M.photos[w.name.en]; if (p && !w.photo) w.photo = p; }); });
 })(window.AKT, window.AKT.more);
+
+/* series changes:
+   - «الأعداد الخاصة» becomes one of his own series: ten special issues across Ma Wara' al-Tabi'a,
+     Fantasia and Safari, issue «30» bringing the three heroes together. Each hero's series still
+     lists its own special issues, and the old <series>-s<n> pages lead to specials-<n>.
+   - «رجفة الخوف» moves from the series he contributed to into his own series.
+   - six more lines he wrote for: كتاب الصيف، المغامر، المقالات، سوبر ميجا، بلية العجيب، روايات كوميكس. */
+(function (A, M) {
+	var sp = (M.newSeries || []).filter(function (s) { return s.id === 'akt-specials'; })[0];
+	A.series = A.series || []; A.issues = A.issues || {}; A.seriesInfo = A.seriesInfo || {}; A.issueInfo = A.issueInfo || {};
+	var at = function (id) { for (var i = 0; i < A.series.length; i++) if (A.series[i].id === id) return i; return -1; };
+
+	if (sp && at('specials') < 0) {
+		var oldNotes = {};
+		((A.specials || {}).mwt || []).forEach(function (x) { oldNotes[x.n] = x; });
+		A.issues.specials = sp.issues.map(function (is) {
+			var old = oldNotes[is.n] || {};
+			var info = A.issueInfo['mwt-s' + is.n] || {};
+			A.issueInfo['specials-' + is.n] = { editions: (info.editions || []).concat(is.editions || []) };
+			var h = is.hero || 'mwt';
+			return {
+				n: is.n, title: is.title, year: is.year || null, hero: h, pages: old.pages, source: is.source,
+				note: old.note || (h === 'crossover' ? { ar: 'رفعت إسماعيل وعبير وعلاء عبد العظيم في رواية واحدة.', en: 'Refaat Ismail, Abeer and Alaa Abdel Azim in one novel.' } : undefined)
+			};
+		});
+		var rec = {
+			id: 'specials', title: sp.title, years: sp.years, count: sp.issues.length, publisher: sp.publisher, color: sp.color,
+			tagline: { ar: 'أعداد خاصة أطول لأبطال ما وراء الطبيعة وفانتازيا وسافاري — وعدد يجمعهم معًا.', en: 'Longer special issues for the heroes of Beyond Nature, Fantasia and Safari — and one that brings them together.' },
+			synopsis: sp.description,
+			firstIssue: sp.issues[0].title, lastIssue: sp.issues[sp.issues.length - 1].title
+		};
+		A.seriesInfo.specials = { description: sp.description };
+		var after = at('safari');
+		A.series.splice(after < 0 ? A.series.length : after + 1, 0, rec);
+		/* each hero's series keeps its own special issues; «30» belongs to all three */
+		A.specials = {};
+		['mwt', 'fantasia', 'safari'].forEach(function (sid) {
+			A.specials[sid] = A.issues.specials.filter(function (is) { return is.hero === sid || is.hero === 'crossover'; })
+				.map(function (is) { return { n: is.n, title: is.title, note: is.note, year: is.year }; });
+		});
+	}
+
+	A.otherSeries = A.otherSeries || [];
+	var shiv = A.otherSeries.filter(function (s) { return s.id === 'shivers'; })[0];
+	if (shiv && at('shivers') < 0) {
+		A.otherSeries = A.otherSeries.filter(function (s) { return s !== shiv; });
+		A.issues.shivers = (shiv.issues || []).map(function (is) { return Object.assign({}, is); });
+		A.seriesInfo.shivers = { description: shiv.description };
+		A.series.push({
+			id: 'shivers', title: shiv.title, years: shiv.years, count: A.issues.shivers.length, publisher: shiv.publisher, color: shiv.color || '#2a3b2a',
+			tagline: { ar: 'رعب للصغار، ترجمه عن سلسلة «Shivers» الأمريكية.', en: 'Horror for young readers, translated from the US Shivers series.' },
+			synopsis: shiv.description, owner: shiv.owner, role: shiv.role, source: shiv.source
+		});
+	}
+
+	/* WWW: the three of its five titles we know, unnumbered */
+	var www = A.series[at('www')];
+	if (www && !(A.issues.www || []).length && (www.notable || []).length) {
+		A.issues.www = www.notable.map(function (t, i) { return { _idx: i, title: t }; });
+	}
+
+	var MWT = { ar: 'من عالم «ما وراء الطبيعة».', en: 'From the world of Ma Wara\' al-Tabi\'a.' };
+	[
+		{ id: 'sayf', color: '#6b4a1a', title: { ar: 'كتاب الصيف', en: 'Kitab al-Sayf (The Summer Book)' },
+		  owner: { ar: 'مختارات صيفية متعددة المؤلفين', en: 'A multi-author summer anthology' }, role: { ar: 'كاتب قصة', en: 'Short story' },
+		  description: { ar: 'كتاب صيفي يجمع قصصًا لعدة كُتّاب، كتب فيه قصة «ثلاثة» لرفعت إسماعيل قبل أن تبدأ الأعداد الخاصة.', en: 'A summer anthology of stories by several writers. He wrote «Three» for it, a Refaat Ismail story, before the special issues began.' },
+		  issues: [{ title: { ar: 'ثلاثة', en: 'Three' }, related: 'mwt', note: { ar: 'قصة لرفعت إسماعيل في «كتاب الصيف – أشباح ولكن».', en: 'A Refaat Ismail story in "Kitab al-Sayf – Ghosts, But…".' } }] },
+		{ id: 'mughamer', color: '#2a4a5a', title: { ar: 'المغامر', en: 'Al-Mughamer (The Adventurer)' },
+		  owner: { ar: 'سلسلة متعددة المؤلفين', en: 'A multi-author line' }, role: { ar: 'كاتب قصة', en: 'Short story' },
+		  description: { ar: 'شارك فيها بقصة «لا تأخذه معك».', en: 'He contributed the story «Don\'t Take It With You».' },
+		  issues: [{ title: { ar: 'لا تأخذه معك', en: 'Don\'t Take It With You' } }] },
+		{ id: 'maqalat', color: '#4a3a2a', title: { ar: 'المقالات', en: 'Al-Maqalat (Essays)' },
+		  owner: { ar: 'سلسلة كتب مقالات', en: 'A line of essay books' }, role: { ar: 'كاتب', en: 'Writer' },
+		  description: { ar: 'صدر له فيها كتاب «دماغي كده».', en: 'His book «Demaghi Keda» came out in this line.' },
+		  issues: [{ title: { ar: 'دماغي كده', en: 'Demaghi Keda (That\'s How My Mind Works)' }, work: 'demaghi' }] },
+		{ id: 'supermega', color: '#5a1f3a', title: { ar: 'سوبر ميجا', en: 'Super Mega' },
+		  owner: { ar: 'سلسلة متعددة المؤلفين', en: 'A multi-author line' }, role: { ar: 'مشارك', en: 'Contributor' },
+		  description: { ar: 'شارك فيها بـ«أقوال تدوم».', en: 'He contributed «Sayings That Last».' },
+		  issues: [{ title: { ar: 'أقوال تدوم', en: 'Sayings That Last' } }] },
+		{ id: 'bley', color: '#6a5a1a', title: { ar: 'بلية العجيب', en: 'Balya al-Agib (Wondrous Balya)' },
+		  owner: { ar: 'سلسلة قصص مصورة', en: 'A comics line' }, role: { ar: 'كاتب السيناريو', en: 'Scriptwriter' },
+		  description: { ar: 'كتب سيناريو «أسطورة بلية».', en: 'He wrote the script of «The Legend of Balya».' },
+		  issues: [{ title: { ar: 'أسطورة بلية', en: 'The Legend of Balya' }, related: 'mwt', note: { ar: 'السيناريو له. ' + MWT.ar, en: 'Script by him. ' + MWT.en } }] },
+		{ id: 'comics', color: '#3a1f4a', title: { ar: 'روايات كوميكس', en: 'Rewayat Comics' },
+		  owner: { ar: 'قصص مصورة عن روايات مصرية للجيب', en: 'Comics from the Egyptian Pocket Novels' }, role: { ar: 'الكاتب', en: 'Writer' },
+		  description: { ar: 'عددان من «ما وراء الطبيعة» في صورة قصص مصورة.', en: 'Two Ma Wara\' al-Tabi\'a stories in comic form.' },
+		  issues: [
+			{ title: { ar: 'أسطورة ميسيا', en: 'The Legend of Myssia' }, related: 'mwt', note: { ar: 'أول عدد من «ما وراء الطبيعة» بصيغة الكوميكس.', en: 'The first Ma Wara\' al-Tabi\'a issue in comic form.' } },
+			{ title: { ar: 'أسطورة المرأة الأفعى', en: 'The Legend of the Snake Woman' }, related: 'mwt', note: { ar: 'العدد المصوّر الثاني من «ما وراء الطبيعة».', en: 'The second Ma Wara\' al-Tabi\'a comic.' } }
+		  ] }
+	].forEach(function (s) { if (!A.otherSeries.some(function (x) { return x.id === s.id; })) A.otherSeries.push(s); });
+})(window.AKT, window.AKT.more);

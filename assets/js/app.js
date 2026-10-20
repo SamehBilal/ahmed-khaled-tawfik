@@ -103,7 +103,7 @@
 			var d = App.data();
 			return (App.isSeries(id) || App.byId(d.otherSeries, id) ? 'series.html?id=' : 'book.html?id=') + encodeURIComponent(id);
 		},
-		issueHref: function (sid, is) { if (is._special) return 'book.html?id=' + sid + '-s' + is.n; return 'book.html?id=' + sid + '-' + (is.n != null ? is.n : 'x' + (is._idx || 0)) + (is.part ? '-' + is.part : ''); },
+		issueHref: function (sid, is) { if (is._special) return 'book.html?id=specials-' + is.n; if (is.work) return 'book.html?id=' + encodeURIComponent(is.work); return 'book.html?id=' + sid + '-' + (is.n != null ? is.n : 'x' + (is._idx || 0)) + (is.part ? '-' + is.part : ''); },
 		charHref: function (id) { return 'character.html?id=' + encodeURIComponent(id); },
 		workLink: function (id) {
 			var w = App.findWork(id);

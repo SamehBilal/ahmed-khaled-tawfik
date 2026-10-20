@@ -114,6 +114,8 @@
 		if (w) return { kind: 'work', id: id, item: w, info: (d.bookInfo || {})[id] || {} };
 		/* special issues: <series>-s<n> */
 		var sp = /^([a-z]+)-s(\d+)$/.exec(id || '');
+		/* the special issues now live in their own series, «الأعداد الخاصة» */
+		if (sp && anySeries('specials')) { var r0 = resolveBook('specials-' + sp[2]); if (r0) r0.special = true; return r0; }
 		if (sp) {
 			var sser = anySeries(sp[1]);
 			var slist = specialIssues(sp[1]);
@@ -135,7 +137,7 @@
 
 	/* the first known cover of an issue (from data-more.js: store listings, Wikimedia) */
 	function issueCover(sid, is) {
-		var key = is._special ? sid + '-s' + is.n : issueKey(sid, is);
+		var key = is._special ? 'specials-' + is.n : issueKey(sid, is);
 		return coverOf(((window.App.data().issueInfo) || {})[key]);
 	}
 

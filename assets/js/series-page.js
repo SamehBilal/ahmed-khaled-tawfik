@@ -66,6 +66,10 @@ window.PAGE = {
 		/* other series list for navigation */
 		var all = S.ownSeries().map(function (x) { return { id: x.id, title: x.title, color: x.color, own: true }; })
 			.concat(S.contributedSeries().map(function (x) { return { id: x.id, title: x.title, color: x.color, own: false }; }));
+		var related = [];
+		S.contributedSeries().forEach(function (x) {
+			S.seriesIssues(x.id).forEach(function (is) { if (is.related === id) related.push({ s: x, is: is }); });
+		});
 
 		root.innerHTML =
 			'<section class="detail"><div class="wrap">' +
@@ -107,6 +111,13 @@ window.PAGE = {
 							'<span class="cl-t">' + L('عدد خاص ', 'Special ') + App.num(is.n) + '. ' + tx(is.title) + '</span>' +
 							(au ? '<span class="cl-audio">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
 						'</a>';
+					}).join('') + '</div></section>' : '') +
+				/* stories from this world that came out in other series (comics, anthologies) */
+				(related.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('من عالمها في سلاسل أخرى', 'From this world, in other series') + ' <small>(' + App.num(related.length) + ')</small></h3></div><div class="cover-grid">' +
+					related.map(function (r) {
+						return '<a class="cover-link" href="' + App.issueHref(r.s.id, r.is) + '" title="' + e(t(r.is.title)) + '">' +
+							S.miniCover({ img: S.issueCover(r.s.id, r.is), color: r.s.color, title: t(r.is.title), sub: t(r.s.title) }) +
+							'<span class="cl-t">' + tx(r.is.title) + ' · ' + tx(r.s.title) + '</span></a>';
 					}).join('') + '</div></section>' : '') +
 				'<section class="d-block d-wide"><div class="d-head"><h3>' + L('سلاسل أخرى', 'Other series') + '</h3></div><div class="cover-row">' +
 					all.filter(function (x) { return x.id !== id; }).map(function (x) {
