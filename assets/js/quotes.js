@@ -82,7 +82,33 @@ window.PAGE = {
 			} else if (act === 'image') self.image(q, cite);
 		};
 		apply();
+		this.featured();
 		App.focusHash(function (el) { if (el.hidden) { self.filter = 'all'; apply(); } });
+	},
+
+	/* one quote in a speech bubble under the page title; "another" picks a new one */
+	featured: function () {
+		var App = window.App, d = App.data(), e = App.esc, t = App.t, L = App.L, self = this;
+		var quotes = (d.quotes || []).filter(function (q) { return t(q.text) && t(q.text).length < 220; });
+		var hero = document.querySelector('.page-hero .wrap');
+		if (!hero || !quotes.length) return;
+		var box = hero.querySelector('.qb-hero');
+		if (!box) { box = document.createElement('figure'); box.className = 'qb-hero'; hero.insertBefore(box, hero.firstChild); }
+		if (this._qb == null || this._qb >= quotes.length) this._qb = Math.floor(Math.random() * quotes.length);
+		var q = quotes[this._qb], i = (d.quotes || []).indexOf(q);
+		var cite = t(q.from) || t((App.findWork(q.work) || {}).title);
+		box.innerHTML = '<blockquote>' + e(t(q.text)) + '</blockquote>' +
+			'<figcaption><span>— ' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + (cite ? '<br><em>' + e(cite) + '</em>' : '') + '</span>' +
+				'<a href="#q-' + i + '">' + L('في القائمة ↓', 'In the list ↓') + '</a>' +
+				'<button type="button" class="qb-next">' + L('اقتباس آخر', 'Another quote') + '</button></figcaption>';
+		box.querySelector('.qb-next').onclick = function () {
+			box.classList.add('swap');
+			setTimeout(function () {
+				var n = self._qb;
+				while (quotes.length > 1 && n === self._qb) n = Math.floor(Math.random() * quotes.length);
+				self._qb = n; self.featured(); box.classList.remove('swap');
+			}, 300);
+		};
 	},
 
 	onHash: function () {

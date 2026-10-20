@@ -97,7 +97,8 @@ body.ls-dragging .ls-zone h3 b { margin: 0; }
 }
 .ls-zone.drop-feedback .ls-check { opacity: 1; transform: none; }
 
-.ls-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; max-height: 340px; overflow: auto; }
+.ls-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ls-items:not(:empty) + .ls-empty { display: none; }
 .ls-item { display: flex; align-items: center; gap: 10px; }
 .ls-thumb {
 	position: relative; flex: none; width: 34px; height: 48px; border-radius: 3px; overflow: hidden;
@@ -114,6 +115,27 @@ body.ls-dragging .ls-zone h3 b { margin: 0; }
 	background: none; border: 1px solid transparent; color: var(--muted); font-size: 18px; line-height: 1;
 }
 .ls-x:hover, .ls-x:focus-visible { border-color: var(--line); color: var(--ember); }
+
+/* rearranging: the grip, the gap left behind, the copy under the pointer */
+.ls-grip {
+	flex: none; width: 22px; height: 34px; padding: 0; border: 0; border-radius: 4px; cursor: grab;
+	background: none; color: var(--muted); touch-action: none;
+	display: flex; align-items: center; justify-content: center;
+}
+.ls-grip svg { width: 10px; height: 18px; }
+.ls-grip:hover, .ls-grip:focus-visible { color: var(--paper); background: var(--ink-3); outline: none; }
+.ls-grip:focus-visible { box-shadow: 0 0 0 2px var(--gold); }
+.ls-item.ls-placeholder { opacity: .35; outline: 1px dashed var(--paper-dim); outline-offset: 2px; border-radius: 6px; }
+.ls-sort-ghost {
+	position: fixed; top: 0; left: 0; z-index: 1001; pointer-events: none; margin: 0;
+	display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 8px;
+	background: var(--ink-3); border: 1px solid var(--ember); box-shadow: 0 14px 28px rgba(0, 0, 0, .45);
+	list-style: none; color: var(--paper);
+}
+.ls-sort-ghost .ls-x { visibility: hidden; }
+body.ls-sorting, body.ls-sorting * { cursor: grabbing !important; user-select: none; -webkit-user-select: none; }
+.ls-zone.sort-target { border-color: color-mix(in srgb, var(--ember) 60%, var(--line)); }
+body.ls-sorting .ls-zone .ls-items { min-height: 48px; }
 
 /* how far along each series */
 .ls-progress { margin-top: 26px; }

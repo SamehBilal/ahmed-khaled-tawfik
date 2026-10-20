@@ -91,6 +91,16 @@
 		return true;
 	}
 	function remove(list, key) { state.lists[list] = state.lists[list].filter(function (x) { return x.key !== key; }); save(); changed(); }
+	/* put an item at a position in a list (the same list to reorder, the other one to move it) */
+	function move(from, key, to, index) {
+		var rec = null;
+		state.lists[from] = state.lists[from].filter(function (x) { if (x.key === key) { rec = x; return false; } return true; });
+		if (!rec) return;
+		state.lists[to] = state.lists[to].filter(function (x) { return x.key !== key; });
+		index = Math.max(0, Math.min(index, state.lists[to].length));
+		state.lists[to].splice(index, 0, rec);
+		save(); changed();
+	}
 	function total() { var n = 0; Object.keys(state.lists).forEach(function (k) { n += state.lists[k].length; }); return n; }
 
 	/* ---------- the panel ---------- */
@@ -109,6 +119,8 @@
 		panel.setAttribute('aria-modal', 'true');
 		panel.setAttribute('aria-hidden', 'true');
 		panel.addEventListener('click', onPanelClick);
+		panel.addEventListener('pointerdown', onGripDown);
+		panel.addEventListener('keydown', onGripKey);
 		panel.addEventListener('change', onImport);
 		panel.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') close(); });
 
@@ -140,7 +152,9 @@
 	function itemHtml(list, x) {
 		var App_ = App();
 		var num = x.n != null ? '#' + (App_ ? App_.num(x.n) : x.n) : '';
-		return '<li class="ls-item">' +
+		return '<li class="ls-item" data-key="' + esc(x.key) + '">' +
+			'<button type="button" class="ls-grip" data-grip="' + esc(list) + '" data-key="' + esc(x.key) + '" aria-label="' + esc(L('حرّك «', 'Move “') + tt(x.title) + L('» — الأسهم للترتيب والنقل', '” — arrow keys reorder and move')) + '">' +
+				'<svg viewBox="0 0 12 20" aria-hidden="true"><g fill="currentColor"><circle cx="3" cy="4" r="1.6"/><circle cx="9" cy="4" r="1.6"/><circle cx="3" cy="10" r="1.6"/><circle cx="9" cy="10" r="1.6"/><circle cx="3" cy="16" r="1.6"/><circle cx="9" cy="16" r="1.6"/></g></svg></button>' +
 			'<a href="' + esc(x.href) + '" class="ls-thumb" style="--c:' + esc(x.color || '#3a1414') + '">' +
 				(x.img ? '<img src="' + esc(x.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') +
 				(num ? '<span>' + esc(num) + '</span>' : '') + '</a>' +
@@ -186,8 +200,8 @@
 				var items = state.lists[k];
 				return '<section class="ls-zone" data-list="' + k + '">' +
 					'<h3>' + icon(k) + '<span>' + esc(tt(LISTS[k])) + '</span><b>' + esc(App() ? App().num(items.length) : items.length) + '</b></h3>' +
-					(items.length ? '<ul class="ls-items">' + items.map(function (x) { return itemHtml(k, x); }).join('') + '</ul>'
-						: '<p class="ls-empty">' + L('لا شيء هنا بعد.', 'Nothing here yet.') + '</p>') +
+					'<ul class="ls-items">' + items.map(function (x) { return itemHtml(k, x); }).join('') + '</ul>' +
+					(items.length ? '' : '<p class="ls-empty">' + L('لا شيء هنا بعد.', 'Nothing here yet.') + '</p>') +
 					'<span class="ls-check" aria-hidden="true">✓</span>' +
 				'</section>';
 			}).join('') + '</div>' +
@@ -334,6 +348,7 @@
 		if (pending.touch) pending.timer = setTimeout(function () { if (pending) start(pending.x, pending.y); }, 420);
 	}
 	function onMove(ev) {
+		if (sorting) { ev.preventDefault(); sortMove(ev.clientX, ev.clientY); return; }
 		if (dragging) { ev.preventDefault(); moveGhost(ev.clientX, ev.clientY); return; }
 		if (!pending || ev.pointerId !== pending.id) return;
 		var dx = ev.clientX - pending.x, dy = ev.clientY - pending.y, far = dx * dx + dy * dy > 64;
@@ -341,6 +356,7 @@
 		if (far) start(ev.clientX, ev.clientY);
 	}
 	function onUp(ev) {
+		if (sorting) { sortEnd(); return; }
 		if (dragging) { finish(ev.clientX, ev.clientY); return; }
 		cancelPending();
 	}
@@ -391,6 +407,83 @@
 		if (g) setTimeout(function () { g.remove(); }, zone ? 300 : 0);
 	}
 
+	/* ---------- rearranging inside the panel ---------- */
+
+	/* drag an item by its grip: up and down to reorder, across to the other list to move it */
+	var sorting = null;
+	function onGripDown(ev) {
+		var g = ev.target.closest('.ls-grip');
+		if (!g || ev.button !== 0) return;
+		ev.preventDefault();
+		var li = g.closest('.ls-item'), r = li.getBoundingClientRect();
+		var ghostLi = li.cloneNode(true);
+		ghostLi.className = 'ls-item ls-sort-ghost';
+		ghostLi.style.width = r.width + 'px';
+		document.body.appendChild(ghostLi);
+		li.classList.add('ls-placeholder');
+		document.body.classList.add('ls-sorting');
+		sorting = { from: g.getAttribute('data-grip'), key: g.getAttribute('data-key'), li: li, ghost: ghostLi, dx: ev.clientX - r.left, dy: ev.clientY - r.top };
+		try { g.setPointerCapture(ev.pointerId); } catch (e) {}
+		sortMove(ev.clientX, ev.clientY);
+	}
+	function sortMove(x, y) {
+		var s = sorting;
+		s.ghost.style.transform = 'translate(' + (x - s.dx) + 'px,' + (y - s.dy) + 'px)';
+		var el = document.elementFromPoint(x, y);
+		var zone = el && el.closest('.ls-zone');
+		if (zone) {
+			var ul = zone.querySelector('.ls-items'), before = null;
+			var items = [].slice.call(ul.children).filter(function (n) { return n !== s.li; });
+			for (var i = 0; i < items.length; i++) {
+				var b = items[i].getBoundingClientRect();
+				if (y < b.top + b.height / 2) { before = items[i]; break; }
+			}
+			if (before) { if (s.li.nextSibling !== before) ul.insertBefore(s.li, before); }
+			else if (ul.lastElementChild !== s.li) ul.appendChild(s.li);
+			panel.querySelectorAll('.ls-zone').forEach(function (z) { z.classList.toggle('sort-target', z === zone); });
+		}
+		/* near the top or bottom edge, scroll the panel */
+		if (y < 70) panel.scrollTop -= 14; else if (y > window.innerHeight - 70) panel.scrollTop += 14;
+	}
+	function sortEnd(cancel) {
+		var s = sorting;
+		sorting = null;
+		s.ghost.remove();
+		document.body.classList.remove('ls-sorting');
+		if (cancel) { render(); return; }
+		var ul = s.li.parentNode, to = ul.closest('.ls-zone').getAttribute('data-list');
+		var index = [].indexOf.call(ul.children, s.li);
+		move(s.from, s.key, to, index);
+		if (to !== s.from) say(L('نُقل إلى ', 'Moved to ') + tt(LISTS[to]));
+		focusGrip(to, s.key);
+	}
+	function focusGrip(list, key) {
+		var g = [].slice.call(panel.querySelectorAll('.ls-zone[data-list="' + list + '"] .ls-grip')).filter(function (b) { return b.getAttribute('data-key') === key; })[0];
+		if (g) g.focus();
+	}
+
+	/* the same from the keyboard: up / down reorder, left / right move to the other list */
+	function onGripKey(ev) {
+		var g = ev.target.closest && ev.target.closest('.ls-grip');
+		if (!g) return;
+		var from = g.getAttribute('data-grip'), key = g.getAttribute('data-key');
+		var i = state.lists[from].map(function (x) { return x.key; }).indexOf(key), n = state.lists[from].length;
+		var other = MODES[state.mode].lists.filter(function (k) { return k !== from; })[0];
+		var to = from, at = i;
+		if (ev.key === 'ArrowUp') at = i - 1;
+		else if (ev.key === 'ArrowDown') at = i + 1;
+		else if (ev.key === 'Home') at = 0;
+		else if (ev.key === 'End') at = n - 1;
+		else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') { to = other; at = 0; }
+		else return;
+		ev.preventDefault();
+		if (to === from && (at < 0 || at >= n || at === i)) return;
+		move(from, key, to, at);
+		say(to !== from ? L('نُقل إلى ', 'Moved to ') + tt(LISTS[to])
+			: L('الترتيب ', 'Position ') + App().num(at + 1) + L(' من ', ' of ') + App().num(n));
+		focusGrip(to, key);
+	}
+
 	/* ---------- the buttons on a book page ---------- */
 
 	function buttons(key) {
@@ -427,9 +520,9 @@
 		document.addEventListener('pointerdown', onDown);
 		document.addEventListener('pointermove', onMove, { passive: false });
 		document.addEventListener('pointerup', onUp);
-		document.addEventListener('pointercancel', function () { if (dragging) finish(-1, -1); else cancelPending(); });
+		document.addEventListener('pointercancel', function () { if (sorting) sortEnd(true); else if (dragging) finish(-1, -1); else cancelPending(); });
 		/* while dragging on touch, the finger moves the cover, not the page */
-		document.addEventListener('touchmove', function (ev) { if (dragging) ev.preventDefault(); }, { passive: false });
+		document.addEventListener('touchmove', function (ev) { if (dragging || sorting) ev.preventDefault(); }, { passive: false });
 		document.addEventListener('contextmenu', function (ev) { if (pending || dragging) ev.preventDefault(); });
 		/* the browser's own link dragging would fight ours */
 		document.addEventListener('dragstart', function (ev) { if (candidate(ev.target)) ev.preventDefault(); });

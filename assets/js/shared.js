@@ -129,6 +129,12 @@
 		return null;
 	}
 
+	/* the first known cover of an issue (from data-more.js: store listings, Wikimedia) */
+	function issueCover(sid, is) {
+		var key = is._special ? sid + '-s' + is.n : issueKey(sid, is);
+		return coverOf(((window.App.data().issueInfo) || {})[key]);
+	}
+
 	function bookHref(id) { return 'book.html?id=' + encodeURIComponent(id); }
 	function seriesHref(id) { return 'series.html?id=' + encodeURIComponent(id); }
 
@@ -165,7 +171,7 @@
 	window.WorksShared = {
 		ownSeries: ownSeries, contributedSeries: contributedSeries,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
-		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook,
+		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook, issueCover: issueCover,
 		bookHref: bookHref, seriesHref: seriesHref, miniCover: miniCover, coverOf: coverOf
 	};
 })();

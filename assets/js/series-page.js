@@ -48,7 +48,7 @@ window.PAGE = {
 
 		var issueGrid = issues.map(function (is) {
 			return '<a class="cover-link" href="' + App.issueHref(id, is) + '" title="' + e(t(is.title)) + '">' +
-				S.miniCover({ color: s.color, title: t(is.title), num: is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '', sub: is.original ? t(is.original) : '' }) +
+				S.miniCover({ img: S.issueCover(id, is), color: s.color, title: t(is.title), num: is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '', sub: is.original ? t(is.original) : '' }) +
 				'<span class="cl-t">' + (is.n != null ? App.num(is.n) + '. ' : '') + tx(is.title) + '</span>' +
 				((d.audio && (d.audio.issues[id + '-' + is.n] || (d.audio.youtube && d.audio.youtube.issues[id + '-' + is.n])) && !(is.part > 1)) ? '<span class="cl-audio" title="' + L('متاح مسموعًا على Audiohat', 'Audiobook on Audiohat') + '">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
 			'</a>';
@@ -87,6 +87,11 @@ window.PAGE = {
 						(d.audio && issues.some(function (is) { return d.audio.issues[id + '-' + is.n] || (d.audio.youtube && d.audio.youtube.issues[id + '-' + is.n]); }) ? '<p class="note"><a href="audio.html">♪ ' + L('عدد من أعدادها متاح مسموعًا — استمع على المسجّل', 'Many issues are on audio — listen on the cassette deck') + ' ←</a></p>' : '') +
 						(chars.length ? '<section class="d-block"><h3>' + L('الشخصيات', 'Characters') + '</h3><p class="chips-line">' + chars.map(function (c) { return App.charLink(c.id); }).join('') + '</p></section>' : '') +
 						(eds ? '<section class="d-block"><h3>' + L('الطبعات', 'Editions') + '</h3><ul class="ed-list">' + eds + '</ul></section>' : '') +
+						/* collected volumes, box sets and the series logo, from the stores and Wikimedia */
+						(((d.seriesCovers || {})[id] || []).length ? '<section class="d-block"><h3>' + L('المجلدات والأغلفة', 'Volumes and covers') + ' <small>(' + App.num(d.seriesCovers[id].length) + ')</small></h3><div class="sv-covers">' +
+							d.seriesCovers[id].map(function (c) {
+								return '<a class="sv-cover" href="' + e(c.source || c.cover) + '" target="_blank" rel="noopener" title="' + e(t(c.label)) + '"><img src="' + e(c.cover) + '" alt="' + e(t(c.label)) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><span>' + e(t(c.label)) + '</span></a>';
+							}).join('') + '</div></section>' : '') +
 						(adapts.length ? '<section class="d-block"><h3>' + L('على الشاشة', 'On screen') + '</h3>' + adapts.map(function (a) {
 							return '<p><b>' + tx(a.title) + '</b> (' + App.num(a.year || '') + ') — ' + tx(a.text) + '</p>'; }).join('') + '</section>' : '') +
 					'</div>' +
@@ -98,7 +103,7 @@ window.PAGE = {
 					S.specialIssues(id).map(function (is) {
 						var au = d.audio && d.audio.youtube && d.audio.youtube.issues[id + '-s' + is.n];
 						return '<a class="cover-link" href="' + App.issueHref(id, is) + '" title="' + e(t(is.title)) + '">' +
-							S.miniCover({ color: '#1f1b2e', title: t(is.title), num: L('خاص ', 'S') + App.num(is.n) }) +
+							S.miniCover({ img: S.issueCover(id, is), color: '#1f1b2e', title: t(is.title), num: L('خاص ', 'S') + App.num(is.n) }) +
 							'<span class="cl-t">' + L('عدد خاص ', 'Special ') + App.num(is.n) + '. ' + tx(is.title) + '</span>' +
 							(au ? '<span class="cl-audio">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
 						'</a>';
@@ -128,7 +133,7 @@ window.PAGE = {
 				(img ? '' : '<div class="prox-art" aria-hidden="true"><span class="pa-name">' + tx(hero.name) + '</span><span class="pa-role">' + tx(hero.role) + '</span></div>') +
 				'<ul class="prox-grid">' + issues.map(function (is) {
 					return '<li><a href="' + App.issueHref(s.id, is) + '" data-n="' + e(App.num(is.n)) + (is.part ? '/' + e(App.num(is.part)) : '') + '" data-t="' + e(App.t(is.title)) + '">' +
-						S.miniCover({ color: s.color, title: App.t(is.title), num: is.n != null ? App.num(is.n) : '' }) + '</a></li>';
+						S.miniCover({ img: S.issueCover(s.id, is), color: s.color, title: App.t(is.title), num: is.n != null ? App.num(is.n) : '' }) + '</a></li>';
 				}).join('') + '</ul>' +
 				'<div class="prox-label" aria-hidden="true"></div>' +
 				(hero.imageCredit ? '<span class="prox-credit">' + tx(hero.imageCredit) + '</span>' : '') +

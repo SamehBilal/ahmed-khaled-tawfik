@@ -60,6 +60,7 @@ window.PAGE = {
 				if (w.work) meta = L('العمل: ', 'Work: ') + t(w.work) + (w.year ? ' (' + App.num(w.year) + ')' : '');
 				if (w.book) meta = (w.direction === 'by_akt' ? L('قدّم له العرّاب: ', 'Foreword by AKT: ') : L('كتب مقدّمة: ', 'Wrote the foreword to: ')) + t(w.book);
 				card.innerHTML =
+					(w.photo ? '<figure class="wr-photo"><img src="' + e(w.photo.url) + '" alt="' + e(t(w.name)) + '" referrerpolicy="no-referrer"><figcaption><a href="' + e(w.photo.file) + '" target="_blank" rel="noopener">' + e(w.photo.license) + ' · Wikimedia Commons</a></figcaption></figure>' : '') +
 					'<h4>' + tx(w.name) + '</h4>' +
 					'<p class="sub">' + e(App.alt(w.name)) + '</p>' +
 					(meta ? '<p class="meta">' + e(meta) + '</p>' : '') +
@@ -111,7 +112,7 @@ window.PAGE = {
 		div.innerHTML = '<div class="pw-rows">' +
 			'<ul class="pw-row pw-main">' + people.map(function (p, i) {
 				var name = t(p.w.name);
-				return '<li style="--i:' + i + '"><a class="pw-person" href="#' + p.id + '" data-name="' + e(name) + '" aria-label="' + e(name + ' — ' + p.shelf) + '">' + e(initials(name)) + '</a></li>';
+				return '<li style="--i:' + i + '"><a class="pw-person" href="#' + p.id + '" data-name="' + e(name) + '" aria-label="' + e(name + ' — ' + p.shelf) + '"' + (p.w.photo ? ' style="background-image:url(&quot;' + e(p.w.photo.url) + '&quot;)"' : '') + '>' + (p.w.photo ? '' : e(initials(name))) + '</a></li>';
 			}).join('') + '</ul>' +
 			'<ul class="pw-row pw-ghost" aria-hidden="true">' + people.map(function (p, i) { return '<li style="--i:' + i + '"></li>'; }).join('') + '</ul>' +
 		'</div>';

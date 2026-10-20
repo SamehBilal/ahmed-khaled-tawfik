@@ -96,7 +96,7 @@ window.PAGE = {
 				'<p class="meta">' + e(meta) + '</p>' +
 				(ed.translator ? '<p class="meta">' + L('ترجمة: ', 'Translated by ') + tx(ed.translator) + '</p>' : '') +
 				(ed.isbn ? '<p class="meta">ISBN ' + e(ed.isbn) + '</p>' : '') +
-				(ed.source ? '<a href="' + e(ed.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
+				(ed.source ? '<a href="' + e(ed.source) + '" target="_blank" rel="noopener">' + (ed.store === 'Abjjad' ? L('على أبجد ↗', 'On Abjjad ↗') : ed.store === 'Aseer Al Kotb' ? L('على عصير الكتب ↗', 'On Aseer Al Kotb ↗') : L('المصدر ↗', 'Source ↗')) + '</a>' : '') +
 				'</div></article>';
 		}).join('');
 

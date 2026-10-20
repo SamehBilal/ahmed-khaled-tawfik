@@ -99,7 +99,7 @@
 			return (App.isSeries(id) || App.byId(d.otherSeries, id) ? 'series.html?id=' : 'book.html?id=') + encodeURIComponent(id);
 		},
 		issueHref: function (sid, is) { if (is._special) return 'book.html?id=' + sid + '-s' + is.n; return 'book.html?id=' + sid + '-' + (is.n != null ? is.n : 'x' + (is._idx || 0)) + (is.part ? '-' + is.part : ''); },
-		charHref: function (id) { return 'characters.html#c-' + id; },
+		charHref: function (id) { return 'character.html?id=' + encodeURIComponent(id); },
 		workLink: function (id) {
 			var w = App.findWork(id);
 			return w ? '<a href="' + App.workHref(id) + '">' + App.tx(w.title) + '</a>' : '';
@@ -279,7 +279,7 @@
 				add(K.series, s.title, s.owner || s.years, 'series.html?id=' + s.id, both(s.description));
 				(s.issues || []).forEach(function (is, i) { add(K.issue, is.title, s.title, App.issueHref(s.id, Object.assign({ _idx: i }, is)), both(is.original)); });
 			});
-			(d.characters || []).forEach(function (c) { add(K.character, c.name, App.findWork(c.work) ? App.findWork(c.work).title : '', 'characters.html#c-' + c.id, both(c.role) + ' ' + both(c.desc)); });
+			(d.characters || []).forEach(function (c) { add(K.character, c.name, App.findWork(c.work) ? App.findWork(c.work).title : '', 'character.html?id=' + c.id, both(c.role) + ' ' + both(c.desc)); });
 			var W = d.writers || {};
 			Object.keys(W).forEach(function (k) {
 				(W[k] || []).forEach(function (w, i) { add(K.writer, w.name, w.work || w.book || '', 'writers.html#wr-' + k + '-' + i, both(w.text)); });

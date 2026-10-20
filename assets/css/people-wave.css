@@ -66,3 +66,10 @@ html[data-theme="light"] .pw-person { color: #fff; }
 	.people-wave { animation: none; }
 	.pw-person, .pw-person::after { transition: none; }
 }
+
+/* a writer with a free photo shows it instead of initials */
+.pw-person[style*="background-image"] { background-size: cover !important; background-position: center 25% !important; }
+.wr-photo { float: inline-end; width: 120px; margin: 0 0 10px; margin-inline-start: 16px; }
+.wr-photo img { width: 120px; height: 150px; object-fit: cover; border-radius: 8px; display: block; }
+.wr-photo figcaption { font-size: 10px; color: var(--muted); margin-top: 4px; }
+.wr-photo figcaption a { color: inherit; }

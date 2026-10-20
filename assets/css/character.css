@@ -1,0 +1,147 @@
+/* =========================================================
+   Character pages. A shared layout, and three themes for the
+   series heroes: ghosts (Refaat), medicine (Alaa), fantasy (Abeer).
+   ========================================================= */
+
+.ch-hero { position: relative; overflow: hidden; isolation: isolate; padding: 64px 0 48px; border-bottom: 1px solid var(--line); }
+.ch-hero::before {
+	content: ''; position: absolute; inset: 0; z-index: -2;
+	background: radial-gradient(900px 420px at 80% 0%, color-mix(in srgb, var(--c) 45%, transparent), transparent 70%);
+}
+.ch-hero-grid { display: grid; grid-template-columns: 260px 1fr; gap: 44px; align-items: center; }
+.ch-portrait {
+	width: 260px; aspect-ratio: 3 / 4; border-radius: 16px; overflow: hidden; position: relative;
+	background: linear-gradient(150deg, var(--c), color-mix(in srgb, var(--c) 45%, #000));
+	box-shadow: 0 24px 50px rgba(0, 0, 0, .45), 0 0 0 1px var(--line);
+	display: flex; align-items: center; justify-content: center;
+}
+.ch-portrait img { width: 100%; height: 100%; object-fit: cover; }
+.ch-mono { font-family: var(--f-chunky); font-size: 120px; color: rgba(255, 255, 255, .85); line-height: 1; }
+html[lang="en"] .ch-mono { font-family: var(--f-display); font-weight: 700; }
+.ch-text h1 { margin: 6px 0 0; font-family: var(--f-chunky); font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.1; }
+html[lang="en"] .ch-text h1 { font-family: var(--f-display); font-weight: 700; }
+.ch-alt { margin: 4px 0 0; color: var(--paper-dim); font-family: var(--f-latin); font-size: 1.2rem; }
+.ch-role { margin: 10px 0 14px; color: var(--ember); font-family: var(--f-display); font-size: 1.1rem; }
+.ch-text p { max-width: 70ch; color: var(--paper-dim); line-height: 1.85; }
+.ch-text .traits { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+.ch-text .traits span { padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); font-family: var(--f-display); font-size: 14px; }
+
+/* issue covers */
+.ch-group { margin-bottom: 34px; }
+.ch-group h3 { font-family: var(--f-display); font-size: 1.35rem; margin: 0 0 4px; display: flex; align-items: baseline; gap: 10px; }
+.ch-group h3 small { font-family: var(--f-latin); color: var(--muted); font-size: 1rem; }
+.ch-group > p { margin: 0 0 12px; color: var(--paper-dim); }
+.ch-issues { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 18px 16px; margin-top: 12px; }
+.ch-issue { display: flex; flex-direction: column; gap: 6px; color: var(--paper); text-decoration: none; }
+.ch-issue .mini-cover { transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s; }
+.ch-issue:hover .mini-cover, .ch-issue:focus-visible .mini-cover { transform: translateY(-6px) rotate(-2deg); box-shadow: 0 16px 26px rgba(0, 0, 0, .45); }
+.ch-issue-t { font-family: var(--f-display); font-size: 14px; line-height: 1.4; }
+.ch-issue-y { font-family: var(--f-latin); color: var(--muted); font-size: 13px; }
+
+.ch-every { font-family: var(--f-display); font-size: 1.1rem; margin: 0; }
+.ch-quotes { display: grid; gap: 16px; max-width: 800px; }
+.ch-quotes blockquote {
+	margin: 0; padding: 16px 22px; border-inline-start: 4px solid var(--ember); background: var(--ink-2); border-radius: 0 10px 10px 0;
+	font-family: var(--f-display); font-size: 1.2rem; line-height: 1.8;
+}
+html[dir="rtl"] .ch-quotes blockquote { border-radius: 10px 0 0 10px; }
+
+.ch-people { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+.ch-person {
+	display: grid; grid-template-columns: 56px 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center;
+	padding: 12px; border-radius: 12px; background: var(--ink-2); border: 1px solid var(--line); color: var(--paper); text-decoration: none;
+	transition: border-color .2s, transform .2s;
+}
+.ch-person:hover, .ch-person:focus-visible { border-color: var(--ember); transform: translateY(-2px); }
+.ch-person img, .ch-person .ch-mono {
+	grid-row: 1 / 3; width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+	background: linear-gradient(150deg, var(--c), color-mix(in srgb, var(--c) 45%, #000));
+	font-size: 26px; display: flex; align-items: center; justify-content: center;
+}
+.ch-person b { font-family: var(--f-display); }
+.ch-person span:not(.ch-mono) { color: var(--paper-dim); font-size: 13px; }
+.ch-back { font-family: var(--f-display); margin: 0; }
+
+@media (max-width: 760px) {
+	.ch-hero { padding-top: 36px; }
+	.ch-hero-grid { grid-template-columns: 1fr; gap: 24px; }
+	.ch-portrait { width: min(220px, 60vw); }
+}
+
+/* ---------- Refaat: fog and candlelight ---------- */
+.ch-theme-ghosts { --c: #2a2e38; }
+.ch-theme-ghosts::before { background: radial-gradient(700px 380px at 75% 10%, rgba(224, 160, 80, .18), transparent 70%), linear-gradient(#07080b, transparent); }
+.ch-theme-ghosts .ch-portrait img { filter: grayscale(.4) contrast(1.05); animation: ch-flicker 6s infinite; }
+@keyframes ch-flicker { 0%, 100% { filter: grayscale(.4) brightness(1); } 47% { filter: grayscale(.4) brightness(1); } 48% { filter: grayscale(.4) brightness(.7); } 50% { filter: grayscale(.4) brightness(1.05); } 52% { filter: grayscale(.4) brightness(.8); } 54% { filter: grayscale(.4) brightness(1); } }
+.ch-fog { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.ch-fog span {
+	position: absolute; bottom: -30%; left: -50%; width: 200%; height: 90%; opacity: .5;
+	background: radial-gradient(closest-side, rgba(200, 205, 215, .16), transparent 70%) 0 0 / 40% 100% repeat-x;
+	animation: ch-drift 38s linear infinite; filter: blur(8px);
+}
+.ch-fog span:nth-child(2) { bottom: -10%; opacity: .35; animation-duration: 55s; animation-direction: reverse; background-size: 55% 100%; }
+.ch-fog span:nth-child(3) { bottom: 20%; opacity: .2; animation-duration: 70s; background-size: 70% 100%; }
+@keyframes ch-drift { from { transform: translateX(0); } to { transform: translateX(25%); } }
+.ch-theme-ghosts-body .ch-group h3::before { content: '✝'; color: var(--gold); font-size: .9em; }
+.ch-theme-ghosts-body .ch-issue .mini-cover { filter: saturate(.7); }
+.ch-theme-ghosts-body .ch-issue:hover .mini-cover { filter: none; box-shadow: 0 0 24px rgba(224, 160, 80, .35); }
+
+/* ---------- Alaa: the heartbeat and the case file ---------- */
+.ch-theme-medicine::before { background: radial-gradient(800px 380px at 80% 0%, rgba(60, 160, 120, .22), transparent 70%); }
+.ch-ecg { position: absolute; left: 0; right: 0; bottom: 18px; width: 100%; height: 90px; z-index: -1; opacity: .55; }
+.ch-ecg path { fill: none; stroke: #4fc39a; stroke-width: 2.5; stroke-linejoin: round; stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: ch-beat 4s linear infinite; filter: drop-shadow(0 0 6px rgba(79, 195, 154, .7)); }
+@keyframes ch-beat { to { stroke-dashoffset: 0; } }
+.ch-theme-medicine .ch-role { color: #4fc39a; }
+.ch-theme-medicine-body .ch-group {
+	padding: 18px 20px 20px; border-radius: 10px; background: var(--ink-2); border: 1px solid var(--line);
+	border-inline-start: 6px solid #4fc39a; position: relative;
+}
+.ch-theme-medicine-body .ch-group::after {
+	content: attr(data-kind); position: absolute; top: 14px; inset-inline-end: 16px;
+	font-family: var(--f-latin); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+	border: 1px dashed var(--line); padding: 2px 8px; border-radius: 4px;
+}
+.ch-theme-medicine-body .ch-group[data-kind="disease"] { border-inline-start-color: var(--blood, #b3261e); }
+.ch-theme-medicine-body .ch-group[data-kind="place"] { border-inline-start-color: var(--gold); }
+.ch-theme-medicine-body .ch-group[data-kind="lab"] { border-inline-start-color: #659fb8; }
+.ch-places { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 30px; }
+.ch-place {
+	display: grid; grid-template-columns: 26px 1fr; column-gap: 8px; align-items: center;
+	padding: 12px 14px; border-radius: 10px; background: color-mix(in srgb, var(--gold) 10%, var(--ink-2)); border: 1px solid var(--line);
+	color: var(--paper); text-decoration: none;
+}
+.ch-place svg { grid-row: 1 / 4; width: 24px; height: 24px; color: var(--gold); }
+.ch-place b { font-family: var(--f-display); }
+.ch-place span, .ch-place small { color: var(--paper-dim); font-size: 13px; }
+.ch-place:hover { border-color: var(--gold); }
+
+/* ---------- Abeer: stars and a portal ---------- */
+.ch-theme-fantasy::before { background: radial-gradient(800px 420px at 78% 10%, rgba(140, 110, 230, .25), transparent 70%); }
+.ch-stars {
+	position: absolute; inset: 0; z-index: -1; opacity: .7;
+	background-image:
+		radial-gradient(1.5px 1.5px at 10% 20%, #fff, transparent), radial-gradient(1px 1px at 30% 70%, #fff, transparent),
+		radial-gradient(1.5px 1.5px at 55% 35%, #fff, transparent), radial-gradient(1px 1px at 75% 80%, #fff, transparent),
+		radial-gradient(1px 1px at 88% 15%, #fff, transparent), radial-gradient(1.5px 1.5px at 42% 90%, #fff, transparent),
+		radial-gradient(1px 1px at 65% 55%, #fff, transparent), radial-gradient(1px 1px at 20% 50%, #fff, transparent);
+	background-size: 420px 300px; animation: ch-twinkle 6s ease-in-out infinite alternate;
+}
+html[data-theme="light"] .ch-stars { filter: invert(1); opacity: .35; }
+@keyframes ch-twinkle { from { opacity: .45; } to { opacity: .85; } }
+.ch-portal {
+	position: absolute; z-index: -1; width: 420px; height: 420px; top: 50%; inset-inline-start: -60px; transform: translateY(-50%);
+	border-radius: 50%; border: 2px solid rgba(170, 140, 255, .45);
+	box-shadow: 0 0 60px rgba(140, 110, 230, .35), inset 0 0 60px rgba(140, 110, 230, .25);
+	animation: ch-spin 30s linear infinite;
+	background: conic-gradient(from 0deg, transparent, rgba(170, 140, 255, .12), transparent 40%);
+}
+@keyframes ch-spin { to { transform: translateY(-50%) rotate(360deg); } }
+.ch-theme-fantasy .ch-role { color: #b39cff; }
+.ch-theme-fantasy-body .ch-issue .mini-cover { border-radius: 40px 40px 4px 4px; }
+.ch-theme-fantasy-body .ch-issue:hover .mini-cover { box-shadow: 0 0 0 2px #b39cff, 0 0 28px rgba(140, 110, 230, .55); transform: translateY(-6px); }
+.ch-theme-fantasy-body .ch-group h3::before { content: '✦'; color: #b39cff; }
+
+@media (prefers-reduced-motion: reduce) {
+	.ch-fog span, .ch-ecg path, .ch-stars, .ch-portal, .ch-theme-ghosts .ch-portrait img { animation: none; }
+	.ch-ecg path { stroke-dashoffset: 0; }
+}

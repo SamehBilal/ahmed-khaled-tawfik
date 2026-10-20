@@ -1,33 +1,32 @@
 /* =========================================================
-   Quotes page — speech-bubble quotes.
+   Quotes page — a featured quote in a speech bubble at the top.
    Adapted from a CodePen blockquote: the quote sits in a rounded
    outline, a curved tail drops from its lower edge and the
    attribution hangs beside the tail. Mirrored for Arabic.
+   The quote cards below keep their own paper style.
    ========================================================= */
 
-.quote-grid { columns: 2 380px; column-gap: 40px; }
-
-.quote {
+.qb-hero {
 	--qb-bg: var(--ink);
-	--qb-tail: 46px;
-	--qb-off: 40px;
-	background: none; box-shadow: none; border-radius: 0; color: var(--paper);
-	padding: 0; margin: 0 0 44px;
+	--qb-tail: 60px;
+	--qb-off: 50px;
+	max-width: 760px; margin: 0 0 30px;
 }
-.quote::before { content: none; }
 
 /* the bubble */
-.quote blockquote {
+.qb-hero blockquote {
 	position: relative; margin: 0;
-	padding: 22px 24px;
-	border: 2px solid var(--paper-dim); border-radius: 20px;
+	padding: 25px 28px;
+	border: 2px solid var(--paper); border-radius: 20px;
 	color: var(--ember);
-	font-family: var(--f-display); font-size: 1.35rem; line-height: 1.7;
+	font-family: var(--f-display); font-size: clamp(1.5rem, 3.4vw, 2.4rem); line-height: 1.55;
+	min-height: 3.4em;
 }
-html[lang="en"] .quote blockquote { font-family: var(--f-latin); font-weight: 600; font-size: 1.5rem; line-height: 1.35; }
+html[lang="en"] .qb-hero blockquote { font-family: var(--f-latin); font-weight: 700; font-size: clamp(1.7rem, 4vw, 2.8rem); line-height: 1.2; }
+.qb-hero blockquote .hl { color: var(--paper); }
 
 /* the curved tail */
-.quote blockquote::after {
+.qb-hero blockquote::after {
 	content: ''; position: absolute; z-index: 3;
 	width: var(--qb-tail); height: var(--qb-tail); bottom: calc(-1 * var(--qb-tail) - 2px);
 	inset-inline-start: var(--qb-off);
@@ -35,41 +34,32 @@ html[lang="en"] .quote blockquote { font-family: var(--f-latin); font-weight: 60
 	border-inline-start: 0; border-start-end-radius: 100%;
 }
 /* the gap it leaves in the outline */
-.quote blockquote::before {
+.qb-hero blockquote::before {
 	content: ''; position: absolute; z-index: 2;
-	width: calc(var(--qb-tail) + 16px); height: 6px; bottom: -4px;
+	width: calc(var(--qb-tail) + 20px); height: 6px; bottom: -4px;
 	inset-inline-start: calc(var(--qb-off) - 2px);
 	background: var(--qb-bg);
 }
 
-/* the other language, under the quote */
-.quote .alt {
-	margin: 12px 0 0; padding-inline-start: calc(var(--qb-off) + var(--qb-tail) + 18px);
-	color: var(--paper-dim); font-size: .92em; font-style: italic;
-	unicode-bidi: plaintext; /* English under Arabic keeps its own punctuation order */
-}
-html[dir="rtl"] .quote .alt { text-align: right; }
-html[dir="ltr"] .quote .alt { text-align: left; }
-
 /* attribution beside the tail */
-.quote figcaption {
-	margin-top: 0; padding-top: 14px;
-	padding-inline-start: calc(var(--qb-off) + var(--qb-tail) + 18px);
-	min-height: calc(var(--qb-tail) + 6px);
-	font-family: var(--f-display); font-size: 15px; color: var(--paper);
-	display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline;
+.qb-hero figcaption {
+	padding-top: 15px; padding-inline-start: calc(var(--qb-off) + var(--qb-tail) + 40px);
+	min-height: calc(var(--qb-tail) + 10px);
+	color: var(--paper); font-family: var(--f-display); font-size: 1.15rem; line-height: 1.4;
+	display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px;
 }
-.quote .alt + figcaption { padding-top: 8px; }
-.quote figcaption > span:first-child { flex-basis: 100%; }
-.quote figcaption a { color: var(--gold); }
-.quote .q-actions { margin-inline-start: 0; }
-.quote .q-actions button {
-	background: transparent; color: var(--paper-dim); border: 1px solid var(--line);
+.qb-hero figcaption em { color: var(--paper-dim); font-size: .9em; }
+.qb-hero .qb-next {
+	font-family: var(--f-display); font-size: 14px; cursor: pointer;
+	padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: none; color: var(--paper-dim);
 }
-.quote .q-actions button:hover { background: var(--ember); border-color: var(--ember); color: #fff; }
+.qb-hero .qb-next:hover { border-color: var(--ember); color: var(--ember); }
+.qb-hero blockquote, .qb-hero figcaption { transition: opacity .35s; }
+.qb-hero.swap blockquote, .qb-hero.swap figcaption { opacity: 0; }
 
 @media (max-width: 600px) {
-	.quote { --qb-tail: 38px; --qb-off: 28px; }
-	.quote blockquote { font-size: 1.2rem; padding: 18px; }
-	html[lang="en"] .quote blockquote { font-size: 1.3rem; }
+	.qb-hero { --qb-tail: 44px; --qb-off: 30px; }
+	.qb-hero blockquote { padding: 18px 20px; }
+	.qb-hero figcaption { padding-inline-start: calc(var(--qb-off) + var(--qb-tail) + 16px); font-size: 1rem; }
 }
+@media (prefers-reduced-motion: reduce) { .qb-hero blockquote, .qb-hero figcaption { transition: none; } }

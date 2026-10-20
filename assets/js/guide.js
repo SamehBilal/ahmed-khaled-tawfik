@@ -146,7 +146,7 @@ window.PAGE = {
 		var mwt = App.byId(d.series, 'mwt');
 		S.seriesIssues('mwt').forEach(function (is) {
 			if (items.length >= 68 || is.part > 1) return;
-			items.push({ href: App.issueHref('mwt', is), title: t(is.title), color: mwt && mwt.color, num: App.num(is.n) });
+			items.push({ href: App.issueHref('mwt', is), title: t(is.title), color: mwt && mwt.color, num: App.num(is.n), img: S.issueCover('mwt', is) });
 		});
 		ul.innerHTML = items.map(function (it) {
 			return '<li><a href="' + e(it.href) + '" title="' + e(it.title) + '">' +
