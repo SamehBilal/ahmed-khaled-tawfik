@@ -354,3 +354,8 @@ html[dir="ltr"] { --page-dir: ltr; }
 .bk-cover .bk-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 0 3px 3px 0; }
 .bk-cover.has-img > :not(.bk-img) { display: none; }
 .bk-cover.has-img { background-image: none; transform-style: flat !important; -webkit-transform-style: flat !important; }
+
+/* a hardcover with a real cover */
+.hc-cover.has-img { padding: 0; background-image: none; }
+.hc-cover .hc-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.hc-cover.has-img > span:not(.hc-ribbon) { display: none; }

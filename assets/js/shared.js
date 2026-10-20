@@ -48,8 +48,12 @@
 				s.notable.map(function (n) { return '<li>' + tx(n) + '</li>'; }).join('') + '</ol>');
 		}
 
+		/* the cover: the first issue's, else a collected volume's */
+		var first = seriesIssues(s.id)[0];
+		var vol = ((App.data().seriesCovers || {})[s.id] || []).filter(function (c) { return /cdn.(abjjad|aseeralkotb)/.test(c.cover); })[0];
 		return {
 			id: 's-' + s.id,
+			img: (first && issueCover(s.id, first)) || (vol && vol.cover) || '',
 			color: s.color, title: s.title,
 			num: s.count ? '№ ' + s.count : '',
 			motif: monogram(s.title),

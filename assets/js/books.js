@@ -120,13 +120,14 @@
 
 	/* ---------- Hardcover ---------- */
 
-	/* opts: { color, title{ar,en}, ribbon, year, typeLabel } -> returns the <figure class="hc"> markup */
+	/* opts: { color, title{ar,en}, ribbon, year, typeLabel, img } -> returns the <figure class="hc"> markup */
 	function hardcover(o) {
 		var e = A().esc;
 		return '' +
 		'<figure class="hc" tabindex="0"' + (o.key ? ' data-ls-key="' + e(o.key) + '"' : '') + ' style="--hc-c:' + e(o.color || '#444') + '" aria-label="' + e((o.title.ar || '') + ' — ' + (o.title.en || '')) + '">' +
 			'<ul class="hc-front">' +
-				'<li><div class="hc-cover">' +
+				'<li><div class="hc-cover' + (o.img ? ' has-img' : '') + '">' +
+					(o.img ? '<img class="hc-img" src="' + e(o.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.remove(\'has-img\');this.remove()">' : '') +
 					(o.ribbon ? '<span class="hc-ribbon">' + e(o.ribbon) + '</span>' : '') +
 					'<span class="c-ar">' + e(o.title.ar || '') + '</span>' +
 					'<span class="c-en">' + e(o.title.en || '') + '</span>' +

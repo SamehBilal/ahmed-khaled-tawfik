@@ -376,50 +376,57 @@ window.PAGE = {
 		this.title = { ar: p.t, en: p.t };
 		App.applyLang();
 		var MON = this.MONTHS[App.lang === 'ar' ? 'ar' : 'en'];
+		/* "رسوم: فواز" and the like, for the tilted caption */
+		var credit = (/(رسوم|رسم|ريشة)\s*[:：]?\s*([^.،\n]+)/.exec(p.ex || '') || [])[0] || '';
+		var intro = (p.ex || '').replace(credit, '').replace(/[.\s،]+$/, '').trim();
 		document.getElementById('content').innerHTML = '<section class="section"><div class="wrap">' +
 			'<p class="np-crumbs"><a href="blog.html">' + L('→ المدونة', '← The blog') + '</a> · <a href="blog.html" data-goto="' + e(p.d.slice(0, 4)) + '-' + (+p.d.slice(5, 7)) + '">' + e(MON[+p.d.slice(5, 7) - 1] + ' ' + App.num(p.d.slice(0, 4))) + '</a></p>' +
-			'<div class="cx">' +
-				'<h1 class="cx-title">' + e(p.t) + '</h1>' +
-				'<p class="cx-meta">' + e([p.src, p.ex].filter(Boolean).join(' — ')) + '</p>' +
-				'<p class="cx-hint">' + L('اضغط على كل لوحة لتتحرك.', 'Click each panel to bring it to life.') + '</p>' +
-				'<div class="cx-panels" id="cx-panels">' + p.comic.map(function (u, i) {
-					return '<button type="button" class="cx-tile" data-i="' + i + '" aria-label="' + e(L('اللوحة ', 'Panel ') + App.num(i + 1)) + '">' +
-						'<img src="' + e(self.img(u)) + '" alt="" referrerpolicy="no-referrer" loading="' + (i < 2 ? 'eager' : 'lazy') + '">' +
-						'<span class="cx-num">' + App.num(i + 1) + '</span></button>';
-				}).join('') + '</div>' +
-				'<div class="cx-actions"><button type="button" class="cx-btn" id="cx-play">' + L('شغّل الكل', 'Play all') + '</button>' +
-					'<button type="button" class="cx-btn" id="cx-reset">' + L('إعادة', 'Reset') + '</button></div>' +
-				'<p class="np-credit">' + L('من أرشيف المدونة: ', 'From the blog archive: ') + '<a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a></p>' +
-			'</div></div></section>';
+			'<section class="cg" id="cg">' +
+				'<div class="cg-panel cg-title"><h1>' + e(p.t) + '</h1>' + (p.src ? '<p>' + e(p.src) + '</p>' : '') + '</div>' +
+				(intro ? '<div class="cg-panel cg-caption"><p>' + e(intro) + '</p></div>' : '') +
+				'<div class="cg-loading cg-panel cg-caption"><p>' + L('تُحمَّل اللوحات…', 'Loading the panels…') + '</p></div>' +
+				'<div class="cg-panel cg-copy"><p>' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + (credit ? ' — ' + e(credit) : '') + '<br>' +
+					L('من أرشيف المدونة: ', 'From the blog archive: ') + '<a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a></p></div>' +
+			'</section></div></section>';
 
-		var box = document.getElementById('cx-panels');
-		/* a whole comic page is cut into strips, one panel each; wide images take a full row,
-		   squarer ones share it — like the comic's mixed tiles */
-		var renumber = function () { box.querySelectorAll('.cx-num').forEach(function (n, k) { n.textContent = App.num(k + 1); }); };
-		box.querySelectorAll('img').forEach(function (img) {
-			var fit = function () {
-				var tile = img.closest('.cx-tile'), w = img.naturalWidth, h = img.naturalHeight;
-				var strips = h > w * 1.3 ? Math.min(5, Math.round(h / (w * 0.62))) : 1;
-				if (strips < 2) { tile.classList.add(w > h * 1.25 || p.comic.length === 1 ? 'cx-wide' : 'cx-tall'); return; }
-				var frag = document.createDocumentFragment();
+		/* every image becomes panels: a whole comic page is cut into strips; strips and single
+		   images then take one, two or three of the grid's columns, as in the template */
+		var grid = document.getElementById('cg'), copy = grid.querySelector('.cg-copy');
+		var urls = p.comic.map(function (u) { return self.img(u); }), done = 0, results = [];
+		var finish = function () {
+			var loading = grid.querySelector('.cg-loading'); if (loading) loading.remove();
+			var n = 0, spanCycle = [2, 1, 1, 2, 3];
+			var total = results.reduce(function (t, r) { return t + (!r ? 0 : r.h > r.w * 1.25 ? Math.min(6, Math.max(2, Math.round(r.h / (r.w * 0.55)))) : 1); }, 0);
+			results.forEach(function (r) {
+				if (!r) return;
+				var strips = r.h > r.w * 1.25 ? Math.min(6, Math.max(2, Math.round(r.h / (r.w * 0.55)))) : 1;
 				for (var k = 0; k < strips; k++) {
-					var t = document.createElement('button');
-					t.type = 'button'; t.className = 'cx-tile cx-wide cx-strip';
-					t.style.aspectRatio = w + ' / ' + (h / strips);
-					t.innerHTML = '<span class="cx-in"><img src="' + e(img.src) + '" alt="" referrerpolicy="no-referrer" style="height:' + (strips * 100) + '%;top:-' + (k * 100) + '%"></span><span class="cx-num"></span>';
-					frag.appendChild(t);
+					var div = document.createElement('div');
+					var span = strips === 1 ? (r.w > r.h * 1.25 ? 3 : 2) : spanCycle[n % spanCycle.length];
+					div.className = 'cg-panel cg-art cg-span-' + span;
+					div.setAttribute('role', 'img');
+					div.setAttribute('aria-label', L('لوحة ', 'Panel ') + App.num(n + 1));
+					div.style.backgroundImage = 'url("' + r.src.replace(/"/g, '%22') + '")';
+					if (strips > 1) {
+						div.style.backgroundSize = '100% ' + (strips * 100) + '%';
+						div.style.backgroundPosition = '0 ' + (k / (strips - 1) * 100) + '%';
+						div.style.setProperty('--ar', (r.w / (r.h / strips)).toFixed(3));
+					} else div.style.setProperty('--ar', (r.w / r.h).toFixed(3));
+					grid.insertBefore(div, copy);
+					/* the template's tilted caption, laid over the third panel */
+					if (n === Math.min(2, total - 1) && credit) div.insertAdjacentHTML('beforeend', '<span class="cg-tilt">' + e(credit) + '</span>');
+					n++;
 				}
-				tile.replaceWith(frag);
-				renumber();
-			};
-			if (img.complete && img.naturalWidth) fit(); else img.addEventListener('load', fit);
-			img.addEventListener('error', function () { img.closest('.cx-tile').remove(); renumber(); });
-		});
-		box.addEventListener('click', function (ev) { var t = ev.target.closest('.cx-tile'); if (t) t.classList.add('animated'); });
-		document.getElementById('cx-reset').onclick = function () { box.querySelectorAll('.cx-tile').forEach(function (t) { t.classList.remove('animated'); void t.offsetWidth; }); };
-		document.getElementById('cx-play').onclick = function () {
-			box.querySelectorAll('.cx-tile').forEach(function (t, i) { t.classList.remove('animated'); setTimeout(function () { t.classList.add('animated'); }, 400 * i); });
+			});
+			if (!n) grid.insertBefore(Object.assign(document.createElement('div'), { className: 'cg-panel cg-caption', innerHTML: '<p><a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">' + L('افتح الكوميكس في المدونة ↗', 'Open the comic on the blog ↗') + '</a></p>' }), copy);
 		};
+		urls.forEach(function (u, i) {
+			var im = new Image();
+			im.referrerPolicy = 'no-referrer';
+			im.onload = function () { results[i] = { src: u, w: im.naturalWidth, h: im.naturalHeight }; if (++done === urls.length) finish(); };
+			im.onerror = function () { results[i] = null; if (++done === urls.length) finish(); };
+			im.src = u;
+		});
 		this.wireGoto();
 	}
 };

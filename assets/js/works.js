@@ -63,7 +63,7 @@ window.PAGE = {
 		booksEl.innerHTML = works.map(function (w) {
 			var typeLabel = t(S.TYPES[w.type] || { ar: w.type, en: w.type });
 			return '<li class="hc-item rise" id="w-' + e(w.id) + '" data-type="' + e(w.type) + '">' +
-				window.Books.hardcover({ key: 'b:' + w.id, color: w.color, title: w.title, year: w.year, typeLabel: typeLabel, ribbon: w.ribbon }) +
+				window.Books.hardcover({ key: 'b:' + w.id, img: S.coverOf((d.bookInfo || {})[w.id]), color: w.color, title: w.title, year: w.year, typeLabel: typeLabel, ribbon: w.ribbon }) +
 				'<div class="hc-caption">' +
 					'<div class="type">' + e(typeLabel) + (w.year ? ' · ' + App.num(w.year) : '') + '</div>' +
 					'<h3><a href="book.html?id=' + e(w.id) + '" style="color:inherit">' + tx(w.title) + '</a></h3>' +
