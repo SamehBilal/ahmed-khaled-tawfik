@@ -57,6 +57,7 @@ window.PAGE = {
 				L('أرشيف جمعه ' + (blog.curator === 'Amr Ebaid' ? 'عمرو عبيد' : blog.curator) + '. هنا العنوان ومقتطف قصير، والنص الكامل في المدونة.', 'an archive collected by ' + blog.curator + '. Here: the title and a short excerpt; the full text is on the blog.') + '</p>' +
 		'</div></section>';
 
+		this.hero();
 		document.getElementById('bl-kinds').onclick = function (ev) {
 			var b = ev.target.closest('.chip'); if (!b) return;
 			self.kind = b.getAttribute('data-k');
@@ -70,6 +71,42 @@ window.PAGE = {
 		this.stapel = new this.Stapel(document.getElementById('tp-grid'), { gutter: 70, pileAngles: 5, delay: 50, randomAngle: true });
 		this.level = this.restore();
 		this.show();
+	},
+
+	/* the banner above the page title (after a CodePen "grid and clip-path" hero): a notched
+	   picture from the newest post, three comic panels taking turns in the small box, and the
+	   heading on stacked highlight blocks */
+	hero: function () {
+		var App = window.App, e = App.esc, L = App.L, self = this;
+		var wrap = document.querySelector('.page-hero .wrap');
+		if (!wrap) return;
+		var old = wrap.querySelector('.bh'); if (old) old.remove();
+		var posts = (App.data().blog || { posts: [] }).posts;
+		var lead = posts.filter(function (p) { return p.img && !p.comic; })[0] || posts[0];
+		var comics = posts.filter(function (p) { return p.comic && p.img; }).slice(0, 3);
+		var years = posts.map(function (p) { return +p.d.slice(0, 4); });
+		var corner = '<svg class="bh-corner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M12 12C12 5.373 6.627 0 0 0h12v12Z"/></svg>';
+		var el = document.createElement('section');
+		el.className = 'bh';
+		el.innerHTML = '<div class="bh-box">' +
+			'<a class="bh-media" href="blog.html?post=' + e(lead.id) + '" aria-label="' + e(lead.t) + '"><img src="' + e(self.img(lead.img).replace(/\/s640\//, '/s1200/')) + '" alt="" referrerpolicy="no-referrer"></a>' +
+			'<div class="bh-mini" aria-hidden="true">' + comics.map(function (c) {
+				return '<figure class="bh-icon"><img src="' + e(self.img(c.img)) + '" alt="" referrerpolicy="no-referrer"></figure>';
+			}).join('') + '</div>' +
+			'<div class="bh-text">' +
+				'<div><h2 class="bh-heading"><span class="bh-aligned">' +
+					'<span class="bh-1">' + L('مقالاته', 'His columns,') + '</span>' +
+					'<span class="bh-2">' + L('وقصصه', 'his stories') + corner + corner + '</span>' +
+				'</span><span class="bh-3">' + L('وكوميكس', 'and comics') + corner + '</span></h2></div>' +
+				'<div class="bh-body"><div class="bh-body-in">' +
+					'<p>' + L(App.num(posts.length) + ' منشورًا بين ' + App.num(Math.min.apply(null, years)) + ' و' + App.num(Math.max.apply(null, years)) + '، من «الدستور» و«التحرير» و«بص وطل» و«إضاءات» وغيرها، كما جمعها عمرو عبيد.',
+						App.num(posts.length) + ' posts from ' + Math.min.apply(null, years) + ' to ' + Math.max.apply(null, years) + ', from Al-Dostour, Al-Tahrir, Bos w Tol, Ida2at and more, as collected by Amr Ebaid.') + '</p>' +
+					'<div class="bh-ctas"><a class="bh-cta bh-cta-1" href="blog.html?post=' + e(posts[0].id) + '">' + L('أحدث ما نُشر', 'Latest post') + '</a>' +
+						'<a class="bh-cta bh-cta-2" href="' + e((App.data().blog || {}).source) + '" target="_blank" rel="noopener">' + L('المدونة الأصلية ↗', 'The original blog ↗') + '</a></div>' +
+				'</div></div>' +
+			'</div>' +
+		'</div>';
+		wrap.insertBefore(el, wrap.firstChild);
 	},
 
 	/* the posts after the kind filter and the search, grouped by year and month */

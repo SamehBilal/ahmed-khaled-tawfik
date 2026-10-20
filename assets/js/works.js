@@ -62,6 +62,20 @@ window.PAGE = {
 		var booksEl = document.getElementById('books');
 		booksEl.innerHTML = works.map(function (w) {
 			var typeLabel = t(S.TYPES[w.type] || { ar: w.type, en: w.type });
+			/* the details panel, after Codrops' Book Preview: the book turns on its spine and the facts slide in */
+			var bi = (d.bookInfo || {})[w.id] || {}, eds = bi.editions || [], ed0 = eds[0] || {};
+			var about = t(bi.description || w.synopsis).split(/\n\s*\n/)[0];
+			var facts = [
+				w.publisher && t(w.publisher) ? [App.L('الناشر', 'Publisher'), t(w.publisher)] : null,
+				w.year ? [App.L('سنة النشر', 'Published'), App.num(w.year)] : null,
+				ed0.pages ? [App.L('الصفحات', 'Pages'), App.num(ed0.pages)] : null,
+				eds.length ? [App.L('الطبعات', 'Editions'), App.num(eds.length)] : null
+			].filter(Boolean);
+			var details = '<div class="hc-details" id="hd-' + e(w.id) + '" role="region" aria-label="' + e(App.L('تفاصيل ', 'Details: ') + t(w.title)) + '"><ul>' +
+				'<li>' + e(about) + '</li>' +
+				facts.map(function (f) { return '<li><span>' + e(f[0]) + '</span> ' + e(f[1]) + '</li>'; }).join('') +
+				'<li><a href="book.html?id=' + e(w.id) + '">' + App.L('صفحة الكتاب ←', 'Book page →') + '</a></li>' +
+				'</ul><button type="button" class="hc-close-details" aria-label="' + e(App.L('إغلاق التفاصيل', 'Close details')) + '"></button></div>';
 			return '<li class="hc-item rise" id="w-' + e(w.id) + '" data-type="' + e(w.type) + '">' +
 				window.Books.hardcover({ key: 'b:' + w.id, img: S.coverOf((d.bookInfo || {})[w.id]), color: w.color, title: w.title, year: w.year, typeLabel: typeLabel, ribbon: w.ribbon }) +
 				'<div class="hc-caption">' +
@@ -71,12 +85,41 @@ window.PAGE = {
 					'<p>' + tx(w.synopsis) + '</p>' +
 					(w.note && t(w.note) ? '<div class="note">' + tx(w.note) + '</div>' : '') +
 					S.charXref(w.id) +
-					'<a class="more-link" href="book.html?id=' + e(w.id) + '">' + App.L('تفاصيل الكتاب والطبعات ←', 'Book details & editions →') + '</a> ' +
+					'<div class="hc-buttons"><button type="button" class="hc-show-details" aria-expanded="false" aria-controls="hd-' + e(w.id) + '">' + App.L('التفاصيل', 'Details') + '</button>' +
+						'<a class="more-link" href="book.html?id=' + e(w.id) + '">' + App.L('الكتاب والطبعات ←', 'Book & editions →') + '</a></div> ' +
 					App.fixLink(t(w.title)) +
-				'</div>' +
+				'</div>' + details +
 			'</li>';
 		}).join('');
-		if (!booksEl._wired) { window.Books.initHardcovers(booksEl); booksEl._wired = true; }
+		if (!booksEl._wired) {
+			window.Books.initHardcovers(booksEl);
+			/* Details: one book at a time; the close button, a click outside or Esc puts it back */
+			var closeDetails = function (li) {
+				(li ? [li] : [].slice.call(booksEl.querySelectorAll('.hc-item.details-open'))).forEach(function (x) {
+					x.classList.remove('details-open');
+					var b = x.querySelector('.hc-show-details'); if (b) b.setAttribute('aria-expanded', 'false');
+				});
+				document.body.classList.toggle('hc-dim', !!booksEl.querySelector('.hc-item.details-open'));
+			};
+			booksEl.addEventListener('click', function (ev) {
+				var show = ev.target.closest('.hc-show-details'), close = ev.target.closest('.hc-close-details');
+				if (show) {
+					var li = show.closest('.hc-item');
+					closeDetails();
+					li.classList.add('details-open');
+					show.setAttribute('aria-expanded', 'true');
+					document.body.classList.add('hc-dim');
+					setTimeout(function () { var c = li.querySelector('.hc-close-details'); if (c) c.focus(); }, 300);
+				} else if (close) {
+					var li2 = close.closest('.hc-item');
+					closeDetails(li2);
+					var b2 = li2.querySelector('.hc-show-details'); if (b2) b2.focus();
+				}
+			});
+			document.addEventListener('click', function (ev) { if (document.body.classList.contains('hc-dim') && !ev.target.closest('.hc-item.details-open, .hc-show-details')) closeDetails(); });
+			document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && document.body.classList.contains('hc-dim')) closeDetails(); });
+			booksEl._wired = true;
+		}
 
 		function applyFilter() {
 			booksEl.querySelectorAll('.hc-item').forEach(function (li) {

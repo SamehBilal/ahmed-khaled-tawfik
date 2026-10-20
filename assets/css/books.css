@@ -359,3 +359,64 @@ html[dir="ltr"] { --page-dir: ltr; }
 .hc-cover.has-img { padding: 0; background-image: none; }
 .hc-cover .hc-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 .hc-cover.has-img > span:not(.hc-ribbon) { display: none; }
+
+/* ---------- Standalone books: details, after Codrops' Book Preview ----------
+   "Details" turns the book on its spine and a panel fades in beside it, its lines
+   sliding in one after another; the rest of the page dims. */
+.hc-item { position: relative; perspective: 1800px; }
+.hc { transition: transform .3s; }
+.hc-item.details-open { z-index: 61; }
+.hc-item.details-open .hc { transform: translateX(-36px) rotateY(90deg); }
+.hc-buttons { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin-top: 10px; }
+.hc-show-details {
+	font-family: var(--f-display); font-size: 14px; cursor: pointer; padding: 4px 14px; border-radius: 999px;
+	background: none; color: var(--paper); border: 1px solid var(--line); letter-spacing: .02em;
+}
+.hc-show-details:hover, .hc-show-details[aria-expanded="true"] { border-color: var(--ember); color: var(--ember); }
+.hc-details {
+	position: absolute; top: -14px; bottom: -14px; left: 180px; right: -14px; z-index: 10;
+	direction: var(--page-dir, rtl); text-align: start;
+	background: var(--ink-2); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 20px 40px rgba(0, 0, 0, .45);
+	visibility: hidden; opacity: 0; overflow: auto;
+	transition: opacity .5s, visibility 0s .5s;
+}
+.hc-item.details-open .hc-details { visibility: visible; opacity: 1; transition: opacity .5s, visibility 0s; }
+.hc-details ul { margin: 0; padding: 46px 26px 20px; list-style: none; }
+.hc-details li {
+	margin: 0 0 10px; color: var(--paper); font-family: var(--f-display);
+	opacity: 0; transform: translateX(30%); transition: transform .3s, opacity .3s;
+}
+html[dir="rtl"] .hc-details li { transform: translateX(-30%); }
+.hc-details li:first-child {
+	position: relative; margin-bottom: 15px; padding-bottom: 15px; font-family: var(--f-body); color: var(--paper-dim);
+	line-height: 1.75; text-align: justify;
+}
+.hc-details li:first-child::after { content: ''; position: absolute; bottom: 0; inset-inline-start: 0; width: 20%; height: 1px; background: var(--line); }
+.hc-details li span { color: var(--muted); font-weight: 400; margin-inline-end: 6px; }
+.hc-item.details-open .hc-details li { opacity: 1; transform: none; }
+.hc-item.details-open .hc-details li:nth-child(1) { transition-delay: .1s; }
+.hc-item.details-open .hc-details li:nth-child(2) { transition-delay: .15s; }
+.hc-item.details-open .hc-details li:nth-child(3) { transition-delay: .2s; }
+.hc-item.details-open .hc-details li:nth-child(4) { transition-delay: .25s; }
+.hc-item.details-open .hc-details li:nth-child(5) { transition-delay: .3s; }
+.hc-item.details-open .hc-details li:nth-child(6) { transition-delay: .35s; }
+.hc-close-details {
+	position: absolute; top: 12px; inset-inline-end: 12px; width: 22px; height: 22px; padding: 0; cursor: pointer;
+	background: none; border: 0; opacity: .6;
+}
+.hc-close-details::before, .hc-close-details::after {
+	content: ''; position: absolute; top: 0; left: 50%; width: 1.5px; height: 100%; background: var(--paper);
+}
+.hc-close-details::before { transform: rotate(-45deg); }
+.hc-close-details::after { transform: rotate(45deg); }
+.hc-close-details:hover, .hc-close-details:focus-visible { opacity: 1; outline: none; }
+/* the other books dim while one shows its details */
+.hc-item { transition: opacity .3s, filter .3s; }
+body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grayscale(.8); }
+@media (max-width: 560px) {
+	.hc-details { left: 0; right: 0; top: auto; bottom: auto; position: relative; margin-top: 14px; display: none; }
+	.hc-item { flex-wrap: wrap; }
+	.hc-item.details-open .hc-details { display: block; }
+	.hc-item.details-open .hc { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hc, .hc-details, .hc-details li { transition: none !important; } }
