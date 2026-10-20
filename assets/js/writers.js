@@ -115,6 +115,6 @@ window.PAGE = {
 			}).join('') + '</ul>' +
 			'<ul class="pw-row pw-ghost" aria-hidden="true">' + people.map(function (p, i) { return '<li style="--i:' + i + '"></li>'; }).join('') + '</ul>' +
 		'</div>';
-		hero.appendChild(div);
+		hero.insertBefore(div, hero.firstChild);
 	}
 };
