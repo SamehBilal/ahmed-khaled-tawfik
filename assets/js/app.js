@@ -17,7 +17,8 @@
 			{ id: 'quotes', href: 'quotes.html', ar: 'اقتباسات', en: 'Quotes' },
 			{ id: 'audio', href: 'audio.html', ar: 'مسموع', en: 'Audio' },
 			{ id: 'legacy', href: 'legacy.html', ar: 'الإرث', en: 'Legacy' },
-			{ id: 'tributes', href: 'tributes.html', ar: 'قالوا عنه', en: 'Tributes' }
+			{ id: 'tributes', href: 'tributes.html', ar: 'قالوا عنه', en: 'Tributes' },
+			{ id: 'blog', href: 'blog.html', ar: 'المدونة', en: 'Blog' }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
