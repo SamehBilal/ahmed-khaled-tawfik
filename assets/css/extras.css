@@ -104,7 +104,13 @@ html[data-theme="light"] .path .for { filter: none; }
 .path h3 { font-family: var(--f-display); font-size: 26px; margin: 4px 0 8px; line-height: 1.3; }
 .path > div > p { margin: 0; color: var(--paper-dim); }
 .steps { list-style: none; margin: 0; padding: 0; counter-reset: st; display: grid; gap: 16px; }
-.steps li { counter-increment: st; display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; }
+.steps li { counter-increment: st; display: grid; grid-template-columns: 34px 52px 1fr; gap: 14px; align-items: start; }
+/* a small cover beside each suggested book */
+.st-thumb { display: block; width: 52px; text-decoration: none; }
+.st-thumb .mini-cover { width: 52px; padding: 4px; border-radius: 2px 4px 4px 2px; box-shadow: 0 6px 14px rgba(0, 0, 0, .35); transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
+.st-thumb .mini-cover .mc-t { font-size: 9px; line-height: 1.2; }
+.st-thumb .mini-cover .mc-by, .st-thumb .mini-cover .mc-num { display: none; }
+.steps li:hover .st-thumb .mini-cover { transform: translateY(-3px) rotate(-3deg); }
 .steps li::before {
 	content: counter(st); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
 	font-family: var(--f-latin); font-weight: 700; color: #fff; background: var(--c, var(--ember));

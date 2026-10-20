@@ -22,7 +22,10 @@ window.PAGE = {
 				{ ref: 'fantasia', issue: 35, note: { ar: 'لقاء نادر بين عالمين: عبير تقابل رفعت إسماعيل.', en: 'A rare crossover: Abeer meets Refaat Ismail.' } },
 				{ ref: 'room207', note: { ar: 'غرفة فندق ملعونة واثنتا عشرة حكاية — وأساس مسلسل «الغرفة 207».', en: 'One cursed hotel room, twelve stories — and the basis of the series Room 207.' } },
 				{ ref: 'hazzak', note: { ar: 'لعنة الأبراج الاثني عشر — وعنها مسلسل «زودياك».', en: 'A curse in twelve star signs — adapted as Zodiac.' } },
-				{ ref: 'mawsoua', note: { ar: 'حين تريد أن تعرف أصل الأساطير التي كتب عنها.', en: 'For when you want the real lore behind the legends he wrote about.' } }
+				{ ref: 'mawsoua', note: { ar: 'حين تريد أن تعرف أصل الأساطير التي كتب عنها.', en: 'For when you want the real lore behind the legends he wrote about.' } },
+				{ ref: 'qessa-tokmeloha-anta', note: { ar: 'قصة رعب تفاعلية بدأها هو وأكملها كُتّاب شباب.', en: 'An interactive horror story he began and young writers carried on.' } },
+				{ ref: 'afrah', note: { ar: 'تسع قصص صدرت بعد رحيله.', en: 'Nine stories, published after his death.' } },
+				{ ref: 'rufaqa', note: { ar: 'اثنتا عشرة قصة نُشرت بعد رحيله.', en: 'Twelve stories, published after he died.' } }
 			]
 		},
 		{
@@ -45,10 +48,14 @@ window.PAGE = {
 			text: { ar: 'خفة الظل التي عرفها قرّاء مقالاته: عن مصر والناس والسينما والكتابة نفسها.', en: 'The wit his column readers knew: on Egypt, people, cinema — and writing itself.' },
 			steps: [
 				{ ref: 'zaghazigh', note: { ar: 'ابدأ بالسخرية الخالصة.', en: 'Start with pure satire.' } },
+				{ ref: 'dahakat', note: { ar: 'أربعون مقالًا ساخرًا.', en: 'Forty satirical essays.' } },
+				{ ref: 'demaghi' },
 				{ ref: 'qahwa' },
 				{ ref: 'shay' },
 				{ ref: 'aflam', note: { ar: 'لمحبّي السينما: كتاب كامل عن الأفلام.', en: 'For film lovers: a whole book on cinema.' } },
-				{ ref: 'laghz', note: { ar: 'لمن يحلم بالكتابة: خلاصة خبرته في الحرفة.', en: 'For aspiring writers: his thoughts on the craft.' } }
+				{ ref: 'laghz', note: { ar: 'لمن يحلم بالكتابة: خلاصة خبرته في الحرفة.', en: 'For aspiring writers: his thoughts on the craft.' } },
+				{ ref: 'tweets-medieval', note: { ar: 'شذرات قصيرة، ساخرة وسياسية وحانية بالتناوب.', en: 'Short fragments, by turns satirical, political and tender.' } },
+				{ ref: 'nashawat-qadima', note: { ar: 'مقالاته التي لم تُجمع في كتاب من قبل، صدرت بعد رحيله.', en: 'His articles never before gathered in a book, published after his death.' } }
 			]
 		},
 		{
@@ -59,7 +66,10 @@ window.PAGE = {
 			steps: [
 				{ ref: 'safari', note: { ar: 'علاء عبد العظيم ووحدة سافاري؛ الطب في قلب المغامرة.', en: 'Alaa Abdel Azim and the Safari unit — medicine at the heart of adventure.' } },
 				{ ref: 'www' },
-				{ ref: 'sandoq', note: { ar: 'قصص قصيرة متنوعة كتبها لمجلة الشباب.', en: 'Varied short stories written for Al-Shabab magazine.' } }
+				{ ref: 'sandoq', note: { ar: 'قصص قصيرة متنوعة كتبها لمجلة الشباب.', en: 'Varied short stories written for Al-Shabab magazine.' } },
+				{ ref: 'sharba', note: { ar: 'ثلاثون مقالًا عن العلم والعلم الزائف.', en: 'Thirty essays on science and pseudoscience.' } },
+				{ ref: 'al-hafa', note: { ar: 'حقائق وظواهر غريبة على حافة المألوف، مع سند راشد دخيل.', en: 'Strange facts and phenomena at the edge of the ordinary, with Sanad Rashed Dakheel.' } },
+				{ ref: 'hadem-al-asateer', note: { ar: 'يفكك الخرافات الشائعة والمفاهيم الخاطئة.', en: 'Takes apart popular myths and misconceptions.' } }
 			]
 		},
 		{
@@ -74,6 +84,21 @@ window.PAGE = {
 			]
 		},
 		{
+			id: 'stories', color: '#5a2a4a',
+			for: { ar: 'لمن يقرأ في جلسة واحدة', en: 'For reading in one sitting' },
+			title: { ar: 'مجموعاته القصصية', en: 'The story collections' },
+			text: { ar: 'قصص قصيرة بين الرعب والغرابة والحياة اليومية — كل مجموعة تُقرأ بأي ترتيب.', en: 'Short stories between horror, the uncanny and everyday life — read each collection in any order.' },
+			steps: [
+				{ ref: 'aql', note: { ar: 'اثنتان وعشرون قصة.', en: 'Twenty-two stories.' } },
+				{ ref: 'esp', note: { ar: 'اثنتان وعشرون قصة أخرى.', en: 'Another twenty-two stories.' } },
+				{ ref: 'anfham' },
+				{ ref: 'lastwahdak' },
+				{ ref: 'aquarelle' },
+				{ ref: 'alhool' },
+				{ ref: 'qaws', note: { ar: 'سبع قصص كتبها مع تامر إبراهيم.', en: 'Seven stories co-written with Tamer Ibrahim.' } }
+			]
+		},
+		{
 			id: 'translations', color: '#3b3b58',
 			for: { ar: 'لمن يريد العرّاب مترجمًا', en: 'For the Godfather as translator' },
 			title: { ar: 'العالم بالعربية', en: 'The world, in Arabic' },
@@ -82,7 +107,8 @@ window.PAGE = {
 				{ ref: 'fightclub' },
 				{ ref: 'dermaphoria' },
 				{ ref: 'kiterunner' },
-				{ ref: 'che' }
+				{ ref: 'che' },
+				{ ref: 'rwg', note: { ar: 'روائع الأدب العالمي مختصرة بحجم الجيب؛ ترجم أعدادها من 8 إلى 83.', en: 'World classics abridged to pocket size; he translated issues 8 to 83.' } }
 			]
 		}
 	],
@@ -99,7 +125,18 @@ window.PAGE = {
 	},
 
 	render: function () {
-		var App = window.App, e = App.esc, tx = App.tx, L = App.L, self = this;
+		var App = window.App, e = App.esc, tx = App.tx, L = App.L, self = this, d = App.data(), S = window.WorksShared;
+		/* a small cover beside each book: its first known cover, else a drawn one in the book's colour */
+		var thumb = function (st, w, title) {
+			if (!S) return '';
+			var img = '';
+			if (st.issue) {
+				var is = S.seriesIssues(st.ref).filter(function (x) { return +x.n === st.issue && !(x.part > 1); })[0];
+				img = is ? S.issueCover(st.ref, is) : '';
+			} else if (App.byId(d.works, st.ref)) img = S.coverOf((d.bookInfo || {})[st.ref]);
+			else img = S.seriesBook(w).img;
+			return S.miniCover({ img: img, color: w.color, title: title });
+		};
 
 		var html = '<section class="section"><div class="wrap"><div class="paths">' + this.paths.map(function (p) {
 			var steps = p.steps.map(function (st) {
@@ -112,7 +149,8 @@ window.PAGE = {
 					title = App.t(w.title) + ' ' + App.num('#' + st.issue) + (it ? ': ' + App.t(it) : '');
 					meta = '';
 				}
-				return '<li><div><a class="ttl" href="' + href + '">' + e(title) + '</a>' +
+				return '<li><a class="st-thumb" href="' + href + '" tabindex="-1" aria-hidden="true">' + thumb(st, w, App.t(w.title)) + '</a>' +
+					'<div><a class="ttl" href="' + href + '">' + e(title) + '</a>' +
 					(meta ? '<span class="meta">' + e(meta) + '</span>' : '') +
 					'<p>' + (st.note ? tx(st.note) : tx(w.synopsis || w.tagline)) + '</p></div></li>';
 			}).join('');
