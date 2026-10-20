@@ -265,7 +265,7 @@
 			var K = {
 				series: { ar: 'سلسلة', en: 'Series' }, work: { ar: 'كتاب', en: 'Book' }, issue: { ar: 'عدد', en: 'Issue' },
 				character: { ar: 'شخصية', en: 'Character' }, writer: { ar: 'كاتب', en: 'Writer' }, quote: { ar: 'اقتباس', en: 'Quote' },
-				legacy: { ar: 'الإرث', en: 'Legacy' }, tribute: { ar: 'قالوا عنه', en: 'Tribute' }, media: { ar: 'لقاء / مقال', en: 'Media' }
+				legacy: { ar: 'الإرث', en: 'Legacy' }, tribute: { ar: 'قالوا عنه', en: 'Tribute' }, blog: { ar: 'المدونة', en: 'Blog' }, media: { ar: 'لقاء / مقال', en: 'Media' }
 			};
 
 			(d.series || []).forEach(function (s) { add(K.series, s.title, s.years, 'series.html?id=' + s.id, both(s.tagline) + ' ' + both(s.synopsis)); });
@@ -289,6 +289,8 @@
 			(d.legacy || []).forEach(function (l, i) { add(K.legacy, l.title, l.date, 'legacy.html#l-' + i, both(l.text)); });
 			(d.tributes || []).forEach(function (p, i) { add(K.tribute, p.name, p.role, 'tributes.html#t-' + i, both(p.quote) + ' ' + both(p.context)); });
 			(d.media || []).forEach(function (m, i) { add(K.media, m.title, m.outlet, 'legacy.html#m-' + i, both(m.note)); });
+			/* his columns, stories and comics from the blog archive (loaded on first search) */
+			((d.blog && d.blog.posts) || []).forEach(function (p) { add(K.blog, { ar: p.t, en: p.t }, { ar: p.src || p.d, en: p.src || p.d }, 'blog.html?post=' + p.id, (p.l || []).join(' ') + ' ' + (p.ex || '')); });
 			Search.index = items;
 		},
 
@@ -311,6 +313,18 @@
 
 		open: function () {
 			if (!Search.index) Search.build();
+			/* the blog index is large, so pages other than the blog fetch it only when search opens */
+			if (!App.data().blog && !Search.loadingBlog) {
+				Search.loadingBlog = true;
+				var bs = document.createElement('script');
+				bs.src = 'assets/js/data-blog.js';
+				bs.onload = function () {
+					Search.build();
+					var inp = document.querySelector('#search-dialog input');
+					if (inp && inp.value.trim()) inp.dispatchEvent(new Event('input'));
+				};
+				document.head.appendChild(bs);
+			}
 			var dlg = document.getElementById('search-dialog');
 			if (!dlg) {
 				dlg = document.createElement('dialog');
@@ -321,7 +335,7 @@
 			}
 			dlg.innerHTML =
 				'<form method="dialog" class="search-box" role="search">' +
-					'<input type="search" autocomplete="off" placeholder="' + App.L('ابحث عن كتاب، عدد، شخصية، كاتب، اقتباس…', 'Search books, issues, characters, writers, quotes…') + '" aria-label="' + App.L('بحث', 'Search') + '">' +
+					'<input type="search" autocomplete="off" placeholder="' + App.L('ابحث عن كتاب، عدد، شخصية، كاتب، اقتباس، مقال…', 'Search books, issues, characters, writers, quotes, articles…') + '" aria-label="' + App.L('بحث', 'Search') + '">' +
 					'<button type="submit" class="search-close" aria-label="' + App.L('إغلاق', 'Close') + '">Esc</button>' +
 				'</form>' +
 				'<ul class="search-results" role="listbox"></ul>' +

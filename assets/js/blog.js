@@ -259,8 +259,8 @@ window.PAGE = {
 					'<div>' + e((p.l || []).slice(0, 2).join(' · ')) + '</div>' +
 				'</div></aside>' +
 				'<h2 class="np-title">' + e(p.t) + '</h2>' +
-				'<div class="np-text np-cols">' + body +
-					(p.body ? '' : '<p class="np-more"><a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">' + L('اقرأ النص كاملًا في المدونة ↗', 'Read the full text on the blog ↗') + '</a></p>') +
+				'<div class="np-text np-cols" id="np-text">' + body +
+					(p.body ? '' : '<p class="np-loading">' + L('يُحمَّل النص الكامل من المدونة…', 'Loading the full text from the blog…') + '</p>') +
 				'</div>' +
 				(p.img ? '<figure class="np-fig"><img src="' + e(self.img(p.img).replace(/\/s640\//, '/s1000/')) + '" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><figcaption>' + e(p.t) + '</figcaption></figure>' : '') +
 				'<div class="np-side">' +
@@ -274,6 +274,88 @@ window.PAGE = {
 				'<p class="np-credit">' + L('نُشر في المدونة: ', 'Posted on the blog: ') + e(posted) + ' · <a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a></p>' +
 			'</article></div></section>';
 		this.wireGoto();
+		if (!p.body) this.loadFull(p);
+	},
+
+	/* the full text, read from the blog's public feed when the article opens (JSONP: the feed
+	   sends no CORS headers). Its HTML is rebuilt from a short list of safe tags. */
+	loadFull: function (p) {
+		var App = window.App, L = App.L, e = App.esc, self = this;
+		var box = document.getElementById('np-text');
+		var fail = function () {
+			if (!box || !box.isConnected) return;
+			var w = box.querySelector('.np-loading');
+			if (w) w.outerHTML = '<p class="np-more"><a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">' + L('تعذّر تحميل النص — اقرأه في المدونة ↗', 'Could not load the text — read it on the blog ↗') + '</a></p>';
+		};
+		var cb = '__aktPost' + p.id;
+		var s = document.createElement('script');
+		var timer = setTimeout(function () { cleanup(); fail(); }, 12000);
+		var cleanup = function () { clearTimeout(timer); try { delete window[cb]; } catch (x) { window[cb] = undefined; } s.remove(); };
+		window[cb] = function (data) {
+			cleanup();
+			var html = data && data.entry && data.entry.content && data.entry.content.$t;
+			var clean = html && self.sanitize(html);
+			if (!clean || !box || !box.isConnected) return fail();
+			box.innerHTML = clean;
+			/* the first line names the paper and date, already shown in the bar above */
+			var first = box.firstElementChild;
+			if (first && p.src && first.textContent.trim().indexOf(p.src.split(' - ')[0]) === 0 && first.textContent.length < 80) first.remove();
+			/* the blog's feed stops at its "read more" break: say so and link to the rest */
+			var more = [].slice.call(box.querySelectorAll('a')).filter(function (a) { return /#more$/.test(a.getAttribute('href') || ''); });
+			more.forEach(function (a) { var par = a.closest('p'); (par && par.textContent.trim() === a.textContent.trim() ? par : a).remove(); });
+			box.insertAdjacentHTML('beforeend', more.length
+				? '<p class="np-more"><a href="' + e(self.url(p)) + '#more" target="_blank" rel="noopener">' + L('بقية المقال في المدونة ↗', 'The rest of the article is on the blog ↗') + '</a></p>'
+				: '<p class="np-via">' + L('النص من أرشيف المدونة: ', 'Text from the blog archive: ') + '<a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a></p>');
+		};
+		s.onerror = function () { cleanup(); fail(); };
+		s.src = (App.data().blog || {}).source + 'feeds/posts/default/' + encodeURIComponent(p.id) + '?alt=json-in-script&callback=' + cb;
+		document.head.appendChild(s);
+	},
+
+	/* keep text and basic formatting only: no scripts, styles, frames or attributes,
+	   images only from Blogger, links only to http(s) addresses */
+	sanitize: function (html) {
+		var doc = new DOMParser().parseFromString('<div>' + html + '</div>', 'text/html');
+		var KEEP = { P: 'p', B: 'b', STRONG: 'b', I: 'i', EM: 'i', U: 'u', BLOCKQUOTE: 'blockquote', H1: 'h3', H2: 'h3', H3: 'h3', H4: 'h4', UL: 'ul', OL: 'ol', LI: 'li', HR: 'hr', BR: 'br' };
+		var BLOCK = { DIV: 1, P: 1, H1: 1, H2: 1, H3: 1, H4: 1, BLOCKQUOTE: 1, UL: 1, OL: 1, TABLE: 1, TR: 1 };
+		var out = document.createElement('div');
+		var para = null;
+		var ensure = function () { if (!para) { para = document.createElement('p'); out.appendChild(para); } return para; };
+		var walk = function (node, into) {
+			node.childNodes.forEach(function (n) {
+				if (n.nodeType === 3) { if (n.nodeValue.replace(/\s+/g, '')) (into || ensure()).appendChild(document.createTextNode(n.nodeValue)); return; }
+				if (n.nodeType !== 1) return;
+				var tag = n.tagName;
+				if (/^(SCRIPT|STYLE|IFRAME|OBJECT|EMBED|FORM|INPUT|BUTTON|NOSCRIPT|SVG|VIDEO|AUDIO)$/.test(tag)) return;
+				if (tag === 'IMG') {
+					var src = n.getAttribute('src') || '';
+					if (/^https:\/\/(blogger\.googleusercontent\.com|\d\.bp\.blogspot\.com|lh\d\.googleusercontent\.com)\//.test(src)) {
+						var fig = document.createElement('figure'); fig.className = 'np-inline';
+						var im = document.createElement('img'); im.src = src; im.alt = ''; im.loading = 'lazy'; im.referrerPolicy = 'no-referrer';
+						fig.appendChild(im); out.appendChild(fig); para = null;
+					}
+					return;
+				}
+				if (tag === 'A') {
+					var href = n.getAttribute('href') || '';
+					if (n.querySelector('img')) { walk(n, into); return; }
+					if (/^https?:\/\//.test(href)) { var a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener nofollow'; (into || ensure()).appendChild(a); walk(n, a); return; }
+					walk(n, into); return;
+				}
+				if (tag === 'BR') { if (into) into.appendChild(document.createElement('br')); else para = null; return; }
+				if (BLOCK[tag] && !into) {
+					para = null;
+					if (KEEP[tag] && tag !== 'P') { var b = document.createElement(KEEP[tag]); out.appendChild(b); walk(n, b); return; }
+					walk(n, null); para = null; return;
+				}
+				if (KEEP[tag]) { var k = document.createElement(KEEP[tag]); (into || ensure()).appendChild(k); walk(n, k); return; }
+				walk(n, into); /* span, font and the like: keep the text, drop the tag */
+			});
+		};
+		walk(doc.body.firstChild, null);
+		/* drop empty paragraphs */
+		out.querySelectorAll('p').forEach(function (x) { if (!x.textContent.trim() && !x.querySelector('img')) x.remove(); });
+		return out.innerHTML.trim();
 	},
 
 	/* "back to this month" from an article or comic */

@@ -164,3 +164,20 @@ body.blog-reading .page-hero { display: none; }
 .cx-strip.animated .cx-in { animation: cx-in 1.4s cubic-bezier(.2, .8, .2, 1) forwards; }
 .cx-strip.animated img { animation: none; }
 @media (prefers-reduced-motion: reduce) { .cx-strip .cx-in { transform: none; opacity: 1; filter: none; } .cx-strip.animated .cx-in { animation: none; } }
+
+/* the full text, loaded from the blog */
+.np-loading { color: #5b5545; font-style: italic; }
+.np-text h3, .np-text h4 { font-family: var(--f-display); margin: 1rem 0 .4rem; break-after: avoid; }
+.np-text blockquote { margin: .6rem 0; padding-inline-start: 1rem; border-inline-start: 3px solid var(--np-ink); }
+.np-text .np-inline { margin: .4rem 0 1rem; break-inside: avoid; }
+.np-text .np-inline img { width: 100%; filter: grayscale(95%); border: 1px solid var(--np-ink); }
+.np-via { font-size: 13px; color: #5b5545; margin-top: 1rem; }
+@media (min-width: 700px) {
+	/* a long text gets the newspaper's two columns beside the picture column */
+	.np-text { grid-column: 1 / 5; }
+	.np-cols { column-count: 2; column-gap: 1.6rem; column-rule: 1px solid rgba(28, 31, 51, .25); }
+	.np-fig { grid-column: 1 / 5; grid-row: 4; max-width: 520px; justify-self: center; }
+	.np-text { grid-row: 5; }
+	.np-side { grid-row: 4 / 7; }
+}
+@media (min-width: 700px) and (max-width: 1023px) { .np-cols { column-count: 1; } .np-side { grid-row: auto; } .np-fig, .np-text { grid-row: auto; } }
