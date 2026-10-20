@@ -179,7 +179,7 @@ html[dir="rtl"] .cg-tilt { transform: rotate(2deg); }
 /* ---------- the banner above the title, after a CodePen "grid and clip-path" hero ---------- */
 .bh { --bh-hl: #e9dcc0; --bh-ink: #15110d; background: var(--ink-2); border-radius: 18px; padding: 1rem; margin: 0 0 40px; border: 1px solid var(--line); }
 html[data-theme="light"] .bh { --bh-hl: #2a1f17; --bh-ink: #f6efe0; }
-.bh-box { container: bh / inline-size; display: grid; margin-inline: auto; max-inline-size: 30rem; }
+.bh-box { container: bh / inline-size; display: grid; grid-template-columns: minmax(0, 1fr); margin-inline: auto; max-inline-size: 30rem; }
 @media (min-width: 768px) { .bh-box { max-inline-size: 75rem; } }
 .bh-media, .bh-mini { grid-area: 1 / 1 / 2 / 2; }
 .bh-media { aspect-ratio: 346 / 300; clip-path: url(#bh-clip-default); position: relative; display: block; }

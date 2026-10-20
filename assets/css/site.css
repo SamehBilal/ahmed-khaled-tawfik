@@ -461,7 +461,7 @@ html[lang="en"] .site-footer .motto { font-family: var(--f-display); font-style:
 	text-shadow: 0 0 18px rgba(179, 38, 30, .55); animation: ft-flicker 6s infinite;
 }
 html[lang="en"] .ft-end { font-family: var(--f-display); }
-.ft-end span { font-family: var(--f-display); font-size: 16px; color: var(--ft-dim); text-shadow: none; }
+.ft-end span { font-family: var(--f-display); font-size: 16px; word-spacing: .25em; color: var(--ft-dim); text-shadow: none; }
 @keyframes ft-flicker { 0%, 91%, 94%, 97%, 100% { opacity: 1; } 92%, 96% { opacity: .25; } }
 @media (max-width: 900px) {
 	.ft-body .wrap { grid-template-columns: 1fr; gap: 28px; }
@@ -512,3 +512,12 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 	.ft-moon, .ft-eyes, .ft-eyes i, .ft-fog, .ft-end { animation: none !important; }
 	.ft-eyes { opacity: 1; }
 }
+
+/* ---------- App (PWA) ---------- */
+.save-offline { font: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: start; color: var(--ft-eye, #ffb347); grid-column: 1 / -1; margin-top: 6px; }
+.save-offline::before { content: '⤓ '; }
+.save-offline:hover, .save-offline:focus-visible { color: var(--ft-bright); text-shadow: 0 0 12px rgba(224, 99, 58, .9); outline: none; }
+.ns-action { font: inherit; font-family: var(--f-display); margin-inline-start: 6px; padding: 2px 12px; border-radius: 999px; border: 0; background: var(--ember, #e0703a); color: #fff; cursor: pointer; }
+/* installed: leave room for the phone's status bar and home indicator */
+html.is-app .site-header { padding-top: env(safe-area-inset-top); }
+html.is-app body { padding-bottom: env(safe-area-inset-bottom); }

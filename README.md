@@ -45,6 +45,16 @@ Replay the intro with `index.html?intro=1` (it otherwise plays once per browser 
 
 Enable GitHub Pages (Settings → Pages → deploy from `main`, root). The share-preview tags assume the site lives at `https://samehbilal.github.io/ahmed-khaled-tawfik/` — update the `og:` / `canonical` URLs in the page heads if you use a custom domain. Fonts are self-hosted in `assets/fonts/gf` (SIL Open Font License).
 
+### App (PWA)
+
+The site installs as an app and works offline (`manifest.webmanifest`, `sw.js`, `assets/js/pwa.js`). After changing any page, script, stylesheet or font, run:
+
+```
+node tools/build-sw.js
+```
+
+It refreshes the service worker's file list and version, so installed copies show "A newer version is ready". Covers are cached as they're viewed, or all at once with "Save for offline" in the footer.
+
 ## Credits
 
 - 3D book components adapted from Codrops: *3D Book Showcase* and *Animated Books with CSS 3D Transforms* (Marco Barría).

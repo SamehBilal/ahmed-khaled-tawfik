@@ -1,0 +1,29 @@
+{
+	"id": "./",
+	"name": "العرّاب — أحمد خالد توفيق",
+	"short_name": "العرّاب",
+	"description": "أحمد خالد توفيق: حياته وسلاسله ورواياته وشخصياته والكتّاب من حوله — Ahmed Khaled Tawfik, a bio-bibliography.",
+	"lang": "ar",
+	"dir": "rtl",
+	"start_url": "./index.html?source=pwa",
+	"scope": "./",
+	"display": "standalone",
+	"display_override": ["standalone", "minimal-ui"],
+	"orientation": "any",
+	"background_color": "#0e0f13",
+	"theme_color": "#0e0f13",
+	"categories": ["books", "education", "entertainment"],
+	"icons": [
+		{ "src": "assets/img/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+		{ "src": "assets/img/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+		{ "src": "assets/img/icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+		{ "src": "assets/img/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+		{ "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+	],
+	"shortcuts": [
+		{ "name": "الأعمال", "short_name": "الأعمال", "description": "Works — every book and series", "url": "./works.html?source=pwa", "icons": [{ "src": "assets/img/icons/icon-192.png", "sizes": "192x192" }] },
+		{ "name": "من أين أبدأ؟", "short_name": "ابدأ هنا", "description": "Start here — reading paths", "url": "./guide.html?source=pwa", "icons": [{ "src": "assets/img/icons/icon-192.png", "sizes": "192x192" }] },
+		{ "name": "مسموع", "short_name": "مسموع", "description": "Audio — the cassette deck", "url": "./audio.html?source=pwa", "icons": [{ "src": "assets/img/icons/icon-192.png", "sizes": "192x192" }] },
+		{ "name": "المدونة", "short_name": "المدونة", "description": "Blog — his columns", "url": "./blog.html?source=pwa", "icons": [{ "src": "assets/img/icons/icon-192.png", "sizes": "192x192" }] }
+	]
+}

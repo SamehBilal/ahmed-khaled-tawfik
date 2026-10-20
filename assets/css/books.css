@@ -466,3 +466,19 @@ body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grays
 	.hc-boxwrap { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .hc, .hc-box, .hc-boxwrap, .hc-details, .hc-details li { transition: none !important; } }
+
+/* ---------- Works on phones: a compact list instead of one tall book per screen ---------- */
+@media (max-width: 560px) {
+	.hc-grid { gap: 26px; }
+	.hc-item { flex-direction: row; align-items: flex-start; padding: 0; padding-left: 58px; gap: 16px; }
+	.hc-item .hc-caption { text-align: start; flex: 1; min-width: 0; }
+	.hc { margin: 0; zoom: .6; }
+	.hc-caption h3 { font-size: 19px; }
+	.hc-caption .sub { font-size: 13px; margin-bottom: 4px; }
+	.hc-caption > p { -webkit-line-clamp: 2; font-size: .88em; }
+}
+@media (max-width: 560px) {
+	.hc-item .hc-caption .fix-link { display: none; }
+	.hc-item .hc-buttons { gap: 6px 10px; margin-top: 6px; font-size: .9em; }
+	.hc-item .hc-caption .type { font-size: 12px; }
+}
