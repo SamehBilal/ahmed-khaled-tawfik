@@ -118,7 +118,7 @@ window.PAGE = {
 
 	copy: function (text, btn) {
 		var L = window.App.L, old = btn.textContent;
-		var done = function () { btn.textContent = L('تم ✓', 'Done ✓'); setTimeout(function () { btn.textContent = old; }, 1400); };
+		var done = function () { if (window.Notify) window.Notify(L('نُسخ إلى الحافظة.', 'Copied to the clipboard.'), { type: 'success' }); btn.textContent = L('تم ✓', 'Done ✓'); setTimeout(function () { btn.textContent = old; }, 1400); };
 		if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () {});
 		else {
 			var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();

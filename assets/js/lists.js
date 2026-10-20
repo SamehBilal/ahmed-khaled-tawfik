@@ -320,11 +320,15 @@
 				});
 				save(); changed();
 				say(L('استُورد ' + added + ' عنصرًا.', 'Imported ' + added + ' items.'));
-			} catch (e) { say(L('هذا الملف ليس تصديرًا من قوائمي.', 'That file is not a My lists export.')); }
+			} catch (e) { say(L('هذا الملف ليس تصديرًا من قوائمي.', 'That file is not a My lists export.'), 'error'); }
 		};
 		reader.readAsText(input.files[0]);
 	}
-	function say(msg) { if (live) { live.textContent = msg; live.classList.add('show'); clearTimeout(say.t); say.t = setTimeout(function () { live.classList.remove('show'); }, 2600); } }
+	/* messages go to the shared jelly notification; the old line stays as a fallback */
+	function say(msg, type) {
+		if (window.Notify) { window.Notify(msg, { type: type || 'success', title: L('قوائمي', 'My lists') }); return; }
+		if (live) { live.textContent = msg; live.classList.add('show'); clearTimeout(say.t); say.t = setTimeout(function () { live.classList.remove('show'); }, 2600); }
+	}
 
 	/* ---------- drag (pointer events) ---------- */
 
@@ -399,7 +403,7 @@
 			var isNew = add(list, d.rec);
 			var z2 = panel.querySelector('.ls-zone[data-list="' + list + '"]') || zone;
 			z2.classList.add('drop-feedback');
-			say((isNew ? L('أُضيف «', 'Added “') : L('موجود بالفعل في «', 'Already in “')) + tt(d.rec.title) + (isNew ? L('» إلى ', '” to ') : L('» — ', '” — ')) + tt(LISTS[list]));
+			say((isNew ? L('أُضيف «', 'Added “') : L('موجود بالفعل في «', 'Already in “')) + tt(d.rec.title) + (isNew ? L('» إلى ', '” to ') : L('» — ', '” — ')) + tt(LISTS[list]), isNew ? 'success' : 'notice');
 			if (ghost) { ghost.classList.add('is-dropped'); }
 			setTimeout(close, 650);
 		} else close();
