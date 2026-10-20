@@ -340,9 +340,16 @@ window.PAGE = {
 			/* the blog's feed stops at its "read more" break: say so and link to the rest */
 			var more = [].slice.call(box.querySelectorAll('a')).filter(function (a) { return /#more$/.test(a.getAttribute('href') || ''); });
 			more.forEach(function (a) { var par = a.closest('p'); (par && par.textContent.trim() === a.textContent.trim() ? par : a).remove(); });
-			box.insertAdjacentHTML('beforeend', more.length
-				? '<p class="np-more"><a href="' + e(self.url(p)) + '#more" target="_blank" rel="noopener">' + L('بقية المقال في المدونة ↗', 'The rest of the article is on the blog ↗') + '</a></p>'
-				: '<p class="np-via">' + L('النص من أرشيف المدونة: ', 'Text from the blog archive: ') + '<a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a></p>');
+			if (more.length) {
+				/* the full article stays on the blog: its own page is shown here, in its light
+				   mobile layout, instead of copying the text into this site */
+				box.classList.add('np-framed');
+				box.innerHTML = '<div class="np-frame"><iframe src="' + e(self.url(p)) + '?m=1#post-body-' + e(p.id) + '" title="' + e(p.t) + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div>' +
+					'<p class="np-via">' + L('المقال كاملًا كما نشرته مدونة «أحمد خالد توفيق» (عمرو عبيد) — ', 'The full article as published on the "Ahmed Khaled Tawfik" blog (Amr Ebaid) — ') +
+					'<a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">' + L('افتحه في المدونة ↗', 'open it on the blog ↗') + '</a></p>';
+				return;
+			}
+			box.insertAdjacentHTML('beforeend', '<p class="np-via">' + L('النص من أرشيف المدونة: ', 'Text from the blog archive: ') + '<a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a></p>');
 		};
 		s.onerror = function () { cleanup(); fail(); };
 		s.src = (App.data().blog || {}).source + 'feeds/posts/default/' + encodeURIComponent(p.id) + '?alt=json-in-script&callback=' + cb;

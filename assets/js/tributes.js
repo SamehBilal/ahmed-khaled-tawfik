@@ -5,8 +5,8 @@ window.PAGE = {
 		eyebrow: { ar: 'بأقلامهم وأصواتهم', en: 'In their words' },
 		title: { ar: 'قالوا عنه', en: 'What they said about him' },
 		lead: {
-			ar: 'كُتّاب وفنانون ومخرجون وصحفيون تحدّثوا عن العرّاب — عند رحيله وفي ذكراه. كل كلمة هنا منقولة بنصّها مع رابط مصدرها. اضغط على صورة أو اسم لتقرأ ما قاله.',
-			en: 'Writers, artists, directors and journalists on the Godfather — when he died and in the years after. Every word here is quoted as published, with a link to where it appeared. Click a portrait or a name to read what they said.'
+			ar: 'كُتّاب وفنانون ومخرجون وصحفيون تحدّثوا عن العرّاب — عند رحيله وفي ذكراه. كل كلمة هنا منقولة بنصّها مع رابط مصدرها. مرّر لتنفتح البطاقات واحدة بعد أخرى، أو اضغط على صورة أو اسم.',
+			en: 'Writers, artists, directors and journalists on the Godfather — when he died and in the years after. Every word here is quoted as published, with a link to where it appeared. Scroll and the cards open one after another, or click a portrait or a name.'
 		}
 	},
 
@@ -66,13 +66,29 @@ window.PAGE = {
 			li.querySelector('.tb-head button').setAttribute('aria-expanded', 'true');
 		};
 		this.open = open;
+		var lockUntil = 0;
 		root.addEventListener('click', function (ev) {
 			if (ev.target.closest('a')) return;
 			var b = ev.target.closest('.tb-thumb, .tb-head button');
-			if (b) open(b.closest('.tb-event'));
+			/* a click wins over the scroll for a moment, while the cards resize */
+			if (b) { open(b.closest('.tb-event')); lockUntil = Date.now() + 1200; }
 		});
 		open(root.querySelector('.tb-event'));
 		this.onHash();
+
+		/* scrolling opens the card that reaches the middle of the screen and folds the last one */
+		var events = [].slice.call(root.querySelectorAll('.tb-event')), queued = false;
+		var pick = function () {
+			queued = false;
+			if (!root.isConnected || Date.now() < lockUntil) return;
+			var line = window.innerHeight * 0.45, best = null;
+			events.forEach(function (li) { if (li.getBoundingClientRect().top < line) best = li; });
+			if (best && !best.classList.contains('open')) open(best);
+		};
+		this.pick = pick;
+		if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+		this._onScroll = function () { if (!queued) { queued = true; requestAnimationFrame(pick); } };
+		window.addEventListener('scroll', this._onScroll, { passive: true });
 	},
 
 	/* #t-3 opens that card */
