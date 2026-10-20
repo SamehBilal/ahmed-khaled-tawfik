@@ -19,7 +19,7 @@
 		}).join('');
 
 		return '' +
-		'<li class="rise"' + (o.id ? ' id="' + e(o.id) + '"' : '') + '>' +
+		'<li class="rise"' + (o.id ? ' id="' + e(o.id) + '"' : '') + (o.key ? ' data-ls-key="' + e(o.key) + '"' : '') + '>' +
 			'<div class="bk-book bk-bookdefault" style="--bk-c:' + e(o.color || '#333') + '">' +
 				'<div class="bk-front">' +
 					'<div class="bk-cover-back"></div>' +
@@ -124,7 +124,7 @@
 	function hardcover(o) {
 		var e = A().esc;
 		return '' +
-		'<figure class="hc" tabindex="0" style="--hc-c:' + e(o.color || '#444') + '" aria-label="' + e((o.title.ar || '') + ' — ' + (o.title.en || '')) + '">' +
+		'<figure class="hc" tabindex="0"' + (o.key ? ' data-ls-key="' + e(o.key) + '"' : '') + ' style="--hc-c:' + e(o.color || '#444') + '" aria-label="' + e((o.title.ar || '') + ' — ' + (o.title.en || '')) + '">' +
 			'<ul class="hc-front">' +
 				'<li><div class="hc-cover">' +
 					(o.ribbon ? '<span class="hc-ribbon">' + e(o.ribbon) + '</span>' : '') +

@@ -30,7 +30,7 @@ window.PAGE = {
 
 		/* series — showcase books */
 		var seriesEl = document.getElementById('series');
-		seriesEl.innerHTML = S.ownSeries().map(function (s) { return window.Books.showcase(S.seriesBook(s)); }).join('');
+		seriesEl.innerHTML = S.ownSeries().map(function (s) { return window.Books.showcase(Object.assign(S.seriesBook(s), { key: 's:' + s.id })); }).join('');
 
 		/* series by others that he wrote or translated for */
 		var contrib = S.contributedSeries();
@@ -63,7 +63,7 @@ window.PAGE = {
 		booksEl.innerHTML = works.map(function (w) {
 			var typeLabel = t(S.TYPES[w.type] || { ar: w.type, en: w.type });
 			return '<li class="hc-item rise" id="w-' + e(w.id) + '" data-type="' + e(w.type) + '">' +
-				window.Books.hardcover({ color: w.color, title: w.title, year: w.year, typeLabel: typeLabel, ribbon: w.ribbon }) +
+				window.Books.hardcover({ key: 'b:' + w.id, color: w.color, title: w.title, year: w.year, typeLabel: typeLabel, ribbon: w.ribbon }) +
 				'<div class="hc-caption">' +
 					'<div class="type">' + e(typeLabel) + (w.year ? ' · ' + App.num(w.year) : '') + '</div>' +
 					'<h3><a href="book.html?id=' + e(w.id) + '" style="color:inherit">' + tx(w.title) + '</a></h3>' +
@@ -138,7 +138,7 @@ window.PAGE = {
 		shelf.style.setProperty('--c', s.color || '#3a1414');
 		shelf.innerHTML = list.map(function (is, i) {
 			var h = 150 + ((is.n * 29) % 46);
-			return '<button type="button" class="issue" id="i-' + e(s.id) + '-' + e(is.n) + (is.part ? '-' + is.part : '') + '" data-i="' + i + '" aria-expanded="false" aria-controls="issue-card" style="--h:' + h + 'px">' +
+			return '<button type="button" class="issue" id="i-' + e(s.id) + '-' + e(is.n) + (is.part ? '-' + is.part : '') + '" data-i="' + i + '" data-ls-key="b:' + e(S.issueKey(s.id, is)) + '" aria-expanded="false" aria-controls="issue-card" style="--h:' + h + 'px">' +
 				'<span class="no">' + e(App.num(is.n)) + (is.part ? '<small>' + e(App.num(is.part)) + '</small>' : '') + '</span><span class="nm">' + tx(is.title) + '</span></button>';
 		}).join('');
 

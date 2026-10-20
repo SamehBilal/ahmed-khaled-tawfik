@@ -39,6 +39,7 @@ window.PAGE = {
 		if (!pages.length) pages.push('<h4>' + tx(title) + '</h4><p>' + L('لا يوجد وصف بعد.', 'No description yet.') + '</p>');
 
 		var book = window.Books.showcase({
+			key: 'b:' + id,
 			color: color, title: title, img: cover,
 			num: isIssue && item.n != null ? '№ ' + item.n : '',
 			motif: isIssue && item.n != null ? App.num(item.n) : S.monogram(title),
@@ -174,6 +175,7 @@ window.PAGE = {
 						'<h1>' + tx(title) + '</h1>' +
 						'<p class="d-alt">' + e(App.alt(title)) + '</p>' +
 						'<p class="d-by">' + (isIssue && !ser.own ? L('دوره: ', 'His role: ') + tx(ser.s.role || { ar: 'مساهم', en: 'Contributor' }) + ' — ' : L('تأليف ', 'by ')) + people + '</p>' +
+						(window.Lists ? window.Lists.buttons('b:' + id) : '') +
 						(desc ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
 						(item.note && t(item.note) ? '<p class="note">' + tx(item.note) + '</p>' : '') +
