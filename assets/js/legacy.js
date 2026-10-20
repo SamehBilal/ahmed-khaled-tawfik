@@ -2,7 +2,7 @@ window.PAGE = {
 	id: 'legacy',
 	title: { ar: 'الإرث', en: 'Legacy' },
 	strings: {
-		eyebrow: { ar: 'ما بعد ٢ أبريل ٢٠١٨', en: 'After 2 April 2018' },
+		eyebrow: { ar: 'ما بعد 2 أبريل 2018', en: 'After 2 April 2018' },
 		title: { ar: 'الإرث', en: 'The Legacy' },
 		lead: {
 			ar: 'رحل العرّاب، وبقي جيلٌ تعلّم القراءة على يديه. هنا الوداع والتكريم وما تحوّل من أعماله إلى الشاشة، ثم لقاءاته ومحاضراته بصوته.',

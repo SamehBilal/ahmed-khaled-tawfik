@@ -109,7 +109,6 @@ html[data-theme="light"] .path .for { filter: none; }
 	content: counter(st); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
 	font-family: var(--f-latin); font-weight: 700; color: #fff; background: var(--c, var(--ember));
 }
-html[lang="ar"] .steps li::before { content: counter(st, arabic-indic); }
 .steps a.ttl { font-family: var(--f-display); font-size: 19px; color: var(--paper); }
 .steps a.ttl:hover { color: var(--ember); }
 .steps .meta { font-family: var(--f-latin); color: var(--muted); font-size: 14px; margin-inline-start: 6px; }

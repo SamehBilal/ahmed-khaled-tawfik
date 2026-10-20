@@ -331,7 +331,7 @@ window.PAGE = {
 		window[cb] = function (data) {
 			cleanup();
 			var html = data && data.entry && data.entry.content && data.entry.content.$t;
-			var clean = html && self.sanitize(html);
+			var clean = html && App.digits(self.sanitize(html));
 			if (!clean || !box || !box.isConnected) return fail();
 			box.innerHTML = clean;
 			/* the first line names the paper and date, already shown in the bar above */

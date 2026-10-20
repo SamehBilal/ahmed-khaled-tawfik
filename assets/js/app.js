@@ -23,7 +23,7 @@
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
 		footerNote: {
-			ar: 'موقع محبّين غير رسمي، صُنع تقديرًا لأحمد خالد توفيق (١٩٦٢–٢٠١٨). البيانات مجمّعة من مصادر عامة — راجع صفحة الكُتّاب للمراجع.',
+			ar: 'موقع محبّين غير رسمي، صُنع تقديرًا لأحمد خالد توفيق (1962–2018). البيانات مجمّعة من مصادر عامة — راجع صفحة الكُتّاب للمراجع.',
 			en: 'An unofficial fan tribute to Ahmed Khaled Tawfik (1962–2018). Data compiled from public sources — see the Writers page for references.'
 		},
 		fix: { ar: 'وجدت خطأً أو لديك إضافة؟ اقترح تصحيحًا ↗', en: 'Spotted a mistake or have an addition? Suggest a correction ↗' },
@@ -79,7 +79,11 @@
 		},
 		num: function (n) {
 			if (n == null || n === '') return '';
-			return App.lang === 'ar' ? String(n).replace(/\d/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'[d]; }) : String(n);
+			return App.digits(n);
+		},
+		/* Western digits (0-9) everywhere, in Arabic too */
+		digits: function (s) {
+			return String(s).replace(/[٠-٩]/g, function (d) { return d.charCodeAt(0) - 0x0660; }).replace(/[۰-۹]/g, function (d) { return d.charCodeAt(0) - 0x06F0; });
 		},
 		data: function () { return window.AKT || {}; },
 		byId: function (list, id) {
