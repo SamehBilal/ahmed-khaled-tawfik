@@ -361,6 +361,8 @@ html[dir="ltr"] { --page-dir: ltr; }
 .hc-cover.has-img { padding: 0; background-image: none; }
 .hc-cover .hc-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 .hc-cover.has-img > span:not(.hc-ribbon) { display: none; }
+/* no white sheen over a real cover, only a thin shadow at the hinge */
+.hc-cover.has-img::after { z-index: 1; background-image: linear-gradient(to right, rgba(0, 0, 0, .3), transparent 6%); }
 
 /* ---------- Standalone books: details, after Codrops' Book Preview ----------
    "Details" turns the book on its spine and a panel fades in beside it, its lines
@@ -390,7 +392,7 @@ html[dir="ltr"] { --page-dir: ltr; }
 .hcb-front { transform: translateZ(14px); display: flex; align-items: center; justify-content: center; padding: 12px; text-align: center; }
 .hcb-front span { font-family: var(--f-chunky); color: #fff; font-size: 22px; line-height: 1.2; }
 .hcb-front img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-.hcb-front::after { content: ''; position: absolute; inset: 0; z-index: 2; background: linear-gradient(to left, rgba(0, 0, 0, .28), transparent 8%, rgba(255, 255, 255, .08) 10%, transparent 40%); }
+.hcb-front::after { content: ''; position: absolute; inset: 0; z-index: 2; background: linear-gradient(to left, rgba(0, 0, 0, .28), transparent 8%); }
 .hcb-back { transform: rotateY(180deg) translateZ(14px); filter: brightness(.7); }
 .hcb-spine, .hcb-edge { top: 0; left: 66px; width: 28px; height: 100%; }
 .hcb-spine {
