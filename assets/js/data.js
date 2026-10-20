@@ -1,4 +1,4 @@
-/* Ahmed Khaled Tawfik — fan discography data (Arabic-first, English second).
+/* Ahmed Khaled Tawfik — fan Bio-bibliography data (Arabic-first, English second).
    Compiled from Arabic & English Wikipedia, Goodreads, Abjjad, publisher/retailer listings
    and Arabic/English press. See `sources` at the bottom. */
 window.AKT = {

@@ -22,7 +22,7 @@ window.PAGE = {
 
 		/* hero text */
 		document.getElementById('hero-text').innerHTML =
-			'<p class="eyebrow">' + (App.lang === 'ar' ? 'ديسكوغرافيا أدبية' : 'A literary discography') + '</p>' +
+			'<p class="eyebrow">' + (App.lang === 'ar' ? 'ديسكوغرافيا أدبية' : 'A literary Bio-bibliography') + '</p>' +
 			/* his name as lettered on the Ma Wara' al-Tabi'a covers — always in Arabic, the English name sits under it */
 			'<h1><span class="name-ar name-cover" role="img" aria-label="د. أحمد خالد توفيق" lang="ar" dir="rtl">د. أحمد خالد توفيق</span>' +
 			'<span class="name-en" lang="en">Dr. Ahmed Khaled Tawfik</span></h1>' +

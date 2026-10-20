@@ -1,6 +1,6 @@
 # أحمد خالد توفيق — العرّاب
 
-A bilingual (Arabic / English) fan "discography" of Dr. Ahmed Khaled Tawfik (1962–2018): his life, his series and standalone books, his characters, and the writers around him.
+A bilingual (Arabic / English) fan "Bio-bibliography" of Dr. Ahmed Khaled Tawfik (1962–2018): his life, his series and standalone books, his characters, and the writers around him.
 
 Static site, no build step. Open `index.html` or serve the folder (e.g. GitHub Pages).
 
