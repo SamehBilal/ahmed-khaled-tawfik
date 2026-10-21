@@ -707,3 +707,44 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	A.bookhome = A.bookhome || {};
 	A.bookhome['about-hatta-tahtareq'] = 41024;
 })(window.AKT);
+
+/* Covers for the series by others he wrote for (works page), and the publishers he worked with.
+   Covers: «أليس في بلاد العجائب» (روايات عالمية للجيب 65) and «أسطورة المرأة الأفعى» (كوميكس) from bookhome;
+   «أسطورة بلية» (بلية العجيب 17), «دماغي كده», «سوبر ميجا 1» and «أنت لا تساوي كلب» (مولوتوف 5) from Goodreads.
+   publishers: each one's name is matched against the publisher of every work and series, so a book published jointly
+   (or later taken over, as Dar Lila by Kayan) counts for each house named in it. */
+(function (A) {
+	var C = 'assets/img/covers/contrib/';
+	var MAA = { ar: 'المؤسسة العربية الحديثة — روايات مصرية للجيب', en: 'Modern Arab Association — Egyptian Pocket Novels' };
+	var set = {
+		rwg: { cover: C + 'rwg.webp' },
+		comics: { cover: C + 'comics.webp', publisher: MAA },
+		bley: { cover: C + 'bley.webp', publisher: MAA },
+		maqalat: { cover: C + 'maqalat.webp', publisher: { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' } },
+		supermega: { cover: C + 'supermega.webp', publisher: MAA },
+		molotov: { cover: C + 'molotov.webp' }
+	};
+	[].concat(A.otherSeries || [], A.series || []).forEach(function (s) {
+		var x = set[s.id];
+		if (!x) return;
+		if (x.cover) s.cover = x.cover;
+		if (x.publisher && !(s.publisher && s.publisher.ar)) s.publisher = x.publisher;
+	});
+
+	A.publishers = [
+		{ id: 'maa', name: { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' }, match: 'المؤسسة العربية الحديثة',
+		  note: { ar: 'بيت «روايات مصرية للجيب»، ومنها بدأ كل شيء.', en: 'Home of the Egyptian Pocket Novels, where it all began.' } },
+		{ id: 'diamond', name: { ar: 'دايموند بوك', en: 'Diamond Book' }, match: 'دايموند' },
+		{ id: 'lila', name: { ar: 'دار ليلى', en: 'Dar Lila' }, match: 'ليلى' },
+		{ id: 'merit', name: { ar: 'دار ميريت', en: 'Merit' }, match: 'ميريت' },
+		{ id: 'kayan', name: { ar: 'كيان', en: 'Kayan' }, match: 'كيان',
+		  note: { ar: 'ضمّت دار ليلى، وأعادت نشر كثير من كتبه.', en: 'Took in Dar Lila and reissued many of his books.' } },
+		{ id: 'bloomsbury', name: { ar: 'بلومزبري – مؤسسة قطر للنشر', en: 'Bloomsbury Qatar Foundation Publishing' }, match: 'بلومزبري' },
+		{ id: 'shorouk', name: { ar: 'دار الشروق', en: 'Dar El Shorouk' }, match: 'الشروق' },
+		{ id: 'karma', name: { ar: 'دار الكرمة', en: 'Dar Al Karma' }, match: 'الكرمة' },
+		{ id: 'sparks', name: { ar: 'سباركس', en: 'Sparks' }, match: 'سباركس' },
+		{ id: 'sama', name: { ar: 'دار سما', en: 'Dar Sama' }, match: 'دار سما' },
+		{ id: 'komix', name: { ar: 'كوميكس', en: 'Komix' }, match: '^كوميكس' },
+		{ id: 'delta', name: { ar: 'دار دلتا', en: 'Dar Delta' }, match: 'دلتا' }
+	];
+})(window.AKT);

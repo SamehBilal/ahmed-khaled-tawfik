@@ -38,7 +38,7 @@ window.PAGE = {
 		document.getElementById('contrib').innerHTML = contrib.map(function (o) {
 			var n = S.seriesIssues(o.id).length;
 			return '<a class="cover-link" href="' + S.seriesHref(o.id) + '">' +
-				S.miniCover({ color: o.color, title: t(o.title), sub: o.owner ? t(o.owner) : '', by: o.role ? t(o.role) : ' ' }) +
+				S.miniCover({ img: o.cover || '', color: o.color, title: t(o.title), sub: o.owner ? t(o.owner) : '', by: o.role ? t(o.role) : ' ' }) +
 				'<span class="cl-t">' + tx(o.title) + (n ? ' · ' + (n === 1 ? App.L('عنوان واحد', '1 title') : n === 2 ? App.L('عنوانان', '2 titles') : App.num(n) + App.L(n <= 10 ? ' عناوين' : ' عنوانًا', ' titles')) : '') + '</span></a>';
 		}).join('');
 		/* series by others that grew out of his work */
@@ -193,6 +193,8 @@ window.PAGE = {
 			'</div></article>';
 		}).join('');
 
+		this.renderPublishers();
+
 		/* his awards, and the books others wrote about him, after On screen */
 		var after = document.getElementById('adaptations-section');
 		var addSection = function (id, html) {
@@ -212,6 +214,53 @@ window.PAGE = {
 			}).join('') + '</div>');
 
 		this.onHash();
+	},
+
+	/* ---------- the publishers he worked with, in order of their first book with him ---------- */
+	renderPublishers: function () {
+		var App = window.App, d = App.data(), S = window.WorksShared, e = App.esc, tx = App.tx, L = App.L;
+		var pubs = d.publishers || [], before = document.getElementById('adaptations-section');
+		if (!pubs.length || !before) return;
+		/* the first edition's house stands in for a work whose own publisher is not recorded */
+		var house = function (w) {
+			var p = w.publisher && w.publisher.ar;
+			if (p) return p;
+			var eds = ((d.bookInfo || {})[w.id] || {}).editions || [];
+			return eds.length && eds[0].publisher ? eds[0].publisher.ar || '' : '';
+		};
+		var yearOf = function (y) { var m = String(y || '').match(/\d{4}/); return m ? +m[0] : 0; };
+		var items = (d.works || []).map(function (w) { return { title: w.title, href: App.workHref(w.id), year: yearOf(w.year), pub: house(w) }; })
+			.concat(S.ownSeries().concat(S.contributedSeries()).map(function (s) {
+				return { title: s.title, href: S.seriesHref(s.id), year: yearOf(s.years), pub: (s.publisher && s.publisher.ar) || '', series: true };
+			}));
+		var cards = pubs.map(function (p) {
+			var re = new RegExp(p.match);
+			/* a house that only took a book over later («ثم …») is not counted for it */
+			var mine = items.filter(function (it) { return it.pub && re.test(it.pub.replace(/\(ثم[^)]*\)/g, '')); })
+				.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+			var ys = mine.map(function (it) { return it.year; }).filter(Boolean);
+			return { p: p, list: mine, from: ys.length ? Math.min.apply(null, ys) : 0, to: ys.length ? Math.max.apply(null, ys) : 0 };
+		}).filter(function (c) { return c.list.length; })
+			.sort(function (a, b) { return (a.from || 9999) - (b.from || 9999); });
+		var sec = document.getElementById('publishers-section');
+		if (!sec) {
+			sec = document.createElement('section');
+			sec.id = 'publishers-section'; sec.className = 'section';
+			before.parentNode.insertBefore(sec, before);
+		}
+		sec.innerHTML = '<div class="wrap"><div class="section-head"><div><h2>' + L('دور النشر', 'Publishers') + '</h2>' +
+			'<p>' + L('الدور التي صدرت عنها كتبه وسلاسله، بترتيب أول كتاب له عند كل منها.', 'The houses that published his books and series, in order of his first book with each.') + '</p></div></div>' +
+			'<div class="pub-grid">' + cards.map(function (c) {
+				var n = c.list.length;
+				return '<article class="pub rise">' +
+					'<div class="pub-head"><h3>' + tx(c.p.name) + '</h3>' +
+						'<span class="pub-n">' + App.num(n) + ' ' + (n === 1 ? L('عمل', 'work') : n === 2 ? L('عملان', 'works') : L(n <= 10 ? 'أعمال' : 'عملًا', 'works')) + '</span></div>' +
+					(c.from ? '<div class="pub-yr">' + App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') + '</div>' : '') +
+					(c.p.note ? '<p class="pub-note">' + tx(c.p.note) + '</p>' : '') +
+					'<ul class="pub-list">' + c.list.map(function (it) {
+						return '<li' + (it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + '</a></li>';
+					}).join('') + '</ul></article>';
+			}).join('') + '</div></div>';
 	},
 
 	/* ---------- every issue, as spines on a shelf ---------- */
