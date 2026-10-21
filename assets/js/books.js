@@ -51,7 +51,22 @@
 		'</li>';
 	}
 
+	/* a book page shows its scrollbar only while it scrolls (once, for every showcase on the page) */
+	var scrollWired = false;
+	function wireScroll() {
+		if (scrollWired) return;
+		scrollWired = true;
+		document.addEventListener('scroll', function (ev) {
+			var p = ev.target;
+			if (!p.classList || !p.classList.contains('bk-content')) return;
+			p.classList.add('is-scrolling');
+			clearTimeout(p._scrollT);
+			p._scrollT = setTimeout(function () { p.classList.remove('is-scrolling'); }, 900);
+		}, true);
+	}
+
 	function initShowcase(list) {
+		wireScroll();
 		var items = Array.prototype.slice.call(list.children);
 		var books = items.map(function (li) { return li.querySelector('.bk-book'); });
 

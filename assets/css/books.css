@@ -539,3 +539,18 @@ body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grays
 @media (min-width: 1100px) and (max-width: 1279px) {
 	#series.bk-list > li { zoom: .78; }
 }
+/* the page arrows and counter sit inside the mirrored book, so they are flipped back too */
+.bk-list .bk-page > nav { transform: scaleX(-1); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+
+/* ---------- Pages inside the books: the scrollbar shows only while they scroll, as a thin ember pill ---------- */
+.bk-content::-webkit-scrollbar { width: 6px; }
+.bk-content::-webkit-scrollbar-track { background: transparent; margin: 6px 0; }
+.bk-content::-webkit-scrollbar-thumb { background: transparent; border-radius: 999px; }
+.bk-content.is-scrolling::-webkit-scrollbar-thumb {
+	background: linear-gradient(to bottom, var(--ember, #e0703a), var(--blood, #b3261e));
+	box-shadow: 0 0 6px rgba(224, 99, 58, .5);
+}
+@supports not selector(::-webkit-scrollbar) {
+	.bk-content { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+	.bk-content.is-scrolling { scrollbar-color: var(--ember, #e0703a) transparent; }
+}
