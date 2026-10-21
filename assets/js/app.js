@@ -282,10 +282,10 @@
 						'<nav class="ft-links" aria-label="' + App.L('صفحات الموقع', 'Site pages') + '">' +
 							UI.nav.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 						'</nav>' +
+						'<nav class="ft-legal" aria-labelledby="ft-legal-h"><h2 id="ft-legal-h">' + App.L('خلف الكواليس', 'Behind the site') + '</h2>' +
+							UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+						'</nav>' +
 						'<div class="ft-notes"><p>' + App.tx(UI.footerNote) + '</p>' +
-							'<nav class="ft-legal" aria-label="' + App.L('عن الموقع', 'About the site') + '">' +
-								UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
-							'</nav>' +
 							'<p><a href="' + App.esc(App.fixHref()) + '" target="_blank" rel="noopener">' + App.tx(UI.fix) + '</a></p>' +
 							'<p class="ft-credits">' + App.tx(UI.credits) + ' — ' + App.L('التلّ المسكون ومشهد السافاري والساحرة من ', 'The haunted hill, the savanna scene and the witch from ') + '<a href="https://www.vecteezy.com/" target="_blank" rel="noopener">Vecteezy.com</a>.</p></div>' +
 					'</div>' +

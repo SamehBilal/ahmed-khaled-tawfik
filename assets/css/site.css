@@ -782,3 +782,16 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 	.info-tabs a { border: 1px solid var(--line); border-radius: 999px; padding: 5px 14px; margin: 0; font-size: 15px; }
 	.info-tabs a[aria-current="page"] { border-color: var(--ember); }
 }
+
+/* ---------- "About the site": its own footer column beside the page links, with a heading ---------- */
+.ft-body .wrap { grid-template-columns: 260px auto auto 1.2fr; }
+.ft-legal { display: flex; flex-direction: column; gap: 4px; margin: 0; font-family: var(--f-display); font-size: inherit; }
+.ft-legal h2 { margin: 0 0 6px; font-family: var(--f-display); font-size: 13px; font-weight: 400; letter-spacing: .08em; color: var(--ember); }
+.ft-legal a { color: var(--ft-text); transition: color .2s, text-shadow .2s; }
+.ft-legal a:hover, .ft-legal a:focus-visible { color: var(--ft-bright); text-shadow: 0 0 12px rgba(224, 99, 58, .9); }
+.ft-legal a + a::before { content: none; }
+@media (max-width: 900px) {
+	.ft-body .wrap { grid-template-columns: 1fr; }
+	.ft-legal { flex-direction: row; flex-wrap: wrap; gap: 4px 24px; }
+	.ft-legal h2 { flex-basis: 100%; }
+}
