@@ -136,3 +136,33 @@ html[lang="en"] .cs-meta { direction: ltr; }
 	.cs-play button { min-width: 72px; }
 	.cs-controls button, .cs-out a { padding: 0 12px; min-width: 52px; }
 }
+
+/* ---------- Audio page: the deck sits above the headline ---------- */
+.audio-deck { padding: 34px 0 6px; background: radial-gradient(60% 80% at 50% 0%, rgba(179, 38, 30, .16), transparent 70%); }
+.audio-deck + .page-hero { padding-top: 18px; }
+.audio-help { padding-top: 0; }
+
+/* ---------- Tape skins: the shell takes the colour of the series on the tape ----------
+   The artwork is blue; hue-rotate turns it (210° + rotation = the target hue). */
+.cs-back, .cs-front { transition: filter .6s ease; }
+.cassette[data-skin="mwt"] .cs-back, .cassette[data-skin="mwt"] .cs-front { filter: hue-rotate(150deg) saturate(1.5) brightness(.6) contrast(1.15); }
+.cassette[data-skin="fantasia"] .cs-back, .cassette[data-skin="fantasia"] .cs-front { filter: hue-rotate(62deg) saturate(.95) brightness(.9); }
+.cassette[data-skin="safari"] .cs-back, .cassette[data-skin="safari"] .cs-front { filter: hue-rotate(262deg) saturate(.8) brightness(.85); }
+.cassette[data-skin="specials"] .cs-back, .cassette[data-skin="specials"] .cs-front { filter: hue-rotate(192deg) saturate(.9) brightness(1); }
+.cassette[data-skin="midnight"] .cs-back, .cassette[data-skin="midnight"] .cs-front { filter: saturate(.25) brightness(.55); }
+.cassette { --cs-ink: #7a1c14; }
+.cassette[data-skin="fantasia"] { --cs-ink: #4b2a7a; }
+.cassette[data-skin="safari"] { --cs-ink: #2f5a2a; }
+.cassette[data-skin="specials"] { --cs-ink: #8a6414; }
+.cassette[data-skin="midnight"] { --cs-ink: #1d2a44; }
+.cs-s { color: var(--cs-ink); transition: color .6s; }
+
+/* ---------- The episode's picture printed on the sticker ---------- */
+.cs-label { flex-direction: row; justify-content: flex-start; gap: 10px; padding: 4px 8px; }
+.cs-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px; }
+.cs-art { display: none; flex: 0 0 auto; height: 54px; width: 40px; border-radius: 2px; overflow: hidden;
+	box-shadow: 0 0 0 2px #f3ead6, 0 0 0 3px var(--cs-ink), 0 2px 4px rgba(0, 0, 0, .35); background: #222; }
+.art-wide .cs-art { width: 96px; }
+.has-art .cs-art { display: block; }
+.cs-art img { display: block; width: 100%; height: 100%; object-fit: cover; filter: sepia(.25) contrast(1.05); }
+.has-art .cs-t { font-size: 19px; }

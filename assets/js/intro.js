@@ -63,9 +63,6 @@
 		gsap.set('#introSVG .ring', { fill: gsap.utils.wrap(colors) });
 		/* explicit SVG origins: these elements live in <defs>, where bounding boxes are unreliable */
 		gsap.utils.toArray('#introSVG [data-o]').forEach(function (el) { gsap.set(el, { smoothOrigin: false, svgOrigin: el.getAttribute('data-o') }); });
-		gsap.set('#qBar', { scaleY: 0 });
-		gsap.set('#iQuote .qr', { x: -380 });
-		gsap.set('#iQuote .ql', { x: 380 });
 
 		tl = window.__introTL = gsap.timeline({ onComplete: finish });
 
@@ -98,20 +95,22 @@
 			opacity: 1,
 			ease: ringRadialEase
 		}, '-=1.7')
-		/* the grave wish, as Codrops demo 3: divider opens, lines slide out from behind it (right half first),
-		   side lines fade, the split folds away and the full sentence appears */
-		.add('quote', '-=1.4')
-		.to('#qBar', { scaleY: 1, duration: 0.4, ease: 'none' }, 'quote')
-		.to('#iQuote .qr', { x: 0, duration: 0.5, ease: 'power2.in', stagger: 0.35 }, 'quote+=0.3')
-		.to('#iQuote .ql', { x: 0, duration: 0.5, ease: 'power2.in', stagger: 0.35 }, 'quote+=1.4')
-		.add('qhold', '+=0.9')
-		.to('#qSplit text[font-size="23"]', { opacity: 0, duration: 0.6, stagger: 0.08 }, 'qhold')
-		.to('#qSplit text[font-size="54"]', { y: -8, duration: 0.5, ease: 'power1.inOut' }, 'qhold+=0.4')
-		.to('#qSplit', { scaleY: 0, opacity: 0, duration: 0.45, ease: 'power2.in' }, 'qhold+=0.9')
-		.to('#qFull', { opacity: 1, duration: 0.8, ease: 'power1.out' }, 'qhold+=1.25')
+		/* «حتى تحترق النجوم…»: each line rises in and drifts up as the next arrives,
+		   then the last two lines stay and «ربما» swells in ember */
+		.add('quote', '-=1.4');
+		var qLines = gsap.utils.toArray('#iQuote .ql'), STEP = 1.05;
+		qLines.forEach(function (ln, k) {
+			tl.fromTo(ln, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 'quote+=' + (k * STEP))
+				.to(ln, { opacity: 0, y: -14, duration: 0.35, ease: 'power1.in' }, 'quote+=' + (k * STEP + 0.75));
+		});
+		tl.add('qend', 'quote+=' + (qLines.length * STEP))
+		.to('#qEnd', { opacity: 1, duration: 0.5 }, 'qend')
+		.from('#qEnd text:first-child', { y: 12, duration: 0.5, ease: 'power2.out' }, 'qend')
+		.from('#qMaybe', { opacity: 0, scale: 0.6, transformOrigin: '50% 50%', duration: 0.7, ease: 'back.out(2)' }, 'qend+=0.9')
+		.to('#qEnd text:first-child', { opacity: 0.45, duration: 0.6 }, 'qend+=1.5');
 
 		/* reveal: a hole grows from the dot and uncovers the page */
-		.add('reveal', '+=1.1')
+		tl.add('reveal', '+=1.2')
 		.call(centreHole, null, 'reveal')
 		.to('#introSVG', { scale: 1.25, duration: 1.1, ease: 'power2.in' }, 'reveal')
 		.fromTo(overlay, { '--hole': '0%' }, { '--hole': '150%', duration: 1.1, ease: 'power3.in' }, 'reveal')

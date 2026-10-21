@@ -27,7 +27,8 @@ window.PAGE = {
 				var key = sid + '-' + is.n;
 				if ((!A.issues[key] && !Y[key]) || is.part > 1) return;
 				var start = tracks.length;
-				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = t(s.title) + ' #' + App.num(is.n) + (tr.sub !== 'Audiohat' ? ' · ' + tr.sub : ''); tracks.push(tr); });
+				var cover = S.issueCover(sid, is);
+				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = t(s.title) + ' #' + App.num(is.n) + (tr.sub !== 'Audiohat' ? ' · ' + tr.sub : ''); tr.skin = sid; if (!tr.yt && cover) tr.art = cover; tracks.push(tr); });
 				rows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
 			});
 			if (rows.length) groups.push({ title: s.title, total: S.seriesIssues(sid).length, rows: rows });
@@ -36,14 +37,14 @@ window.PAGE = {
 			S.specialIssues(sid).forEach(function (is) {
 				var key = sid + '-s' + is.n;
 				var start = tracks.length;
-				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = L('عدد خاص ', 'Special ') + App.num(is.n) + ' · ' + tr.sub; tracks.push(tr); });
+				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = L('عدد خاص ', 'Special ') + App.num(is.n) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
 				if (tracks.length > start) srows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), start: start, count: tracks.length - start, mins: 0, yt: true });
 			});
 			if (srows.length) groups.push({ title: { ar: t(s.title) + ' — الأعداد الخاصة', en: (s.title.en || '') + ' — special issues' }, rows: srows });
 		});
 		var midStart = tracks.length;
 		A.midnight.forEach(function (m) {
-			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], sample: m[3] || '' });
+			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], sample: m[3] || '', skin: 'midnight' });
 		});
 		groups.push({
 			title: { ar: 'بعد منتصف الليل', en: 'After Midnight' },
@@ -51,13 +52,22 @@ window.PAGE = {
 			rows: A.midnight.map(function (m, k) { return { title: { ar: m[0], en: m[0] }, start: midStart + k, count: 1, mins: m[2] }; })
 		});
 
+		var hero = document.querySelector('.page-hero');
+		var deckSec = document.getElementById('audio-deck');
+		if (!deckSec) {
+			deckSec = document.createElement('section');
+			deckSec.id = 'audio-deck';
+			deckSec.className = 'audio-deck';
+			hero.parentNode.insertBefore(deckSec, hero);
+		}
+		deckSec.innerHTML = '<div class="wrap"><div id="a-cassette"></div></div>';
+
 		root.innerHTML =
-			'<section class="section"><div class="wrap audio-hero">' +
-				'<div><h2 class="d-head" style="font-family:var(--f-display);font-size:32px;margin:0 0 10px">' + L('على الشريط الآن', 'On the tape now') + '</h2>' +
+			'<section class="section audio-help"><div class="wrap">' +
+				'<div><h2 class="d-head" style="font-family:var(--f-display);font-size:28px;margin:0 0 10px">' + L('على الشريط الآن', 'On the tape now') + '</h2>' +
 					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات، و ▶ يشغّل العيّنة على الشريط إن وُجدت، وزر Audiohat يفتح الحلقة على موقعهم.', '◀◀ and ▶▶ wind between episodes; ▶ plays the sample on the tape when there is one; the Audiohat key opens the episode on their site.') + '</p>' +
 					'<p style="color:var(--muted);margin:0">' + App.num(tracks.length) + ' ' + L('حلقة', 'episodes') + ' · ' +
 						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a></p></div>' +
-				'<div id="a-cassette"></div>' +
 			'</div></section>' +
 			'<section class="section"><div class="wrap"><div class="ep-groups">' + groups.map(function (g) {
 				return '<div class="ep-group"><h3>' + tx(g.title) + ' <small style="color:var(--muted);font-family:var(--f-latin);font-size:15px">(' + App.num(g.rows.length) + (g.total ? ' / ' + App.num(g.total) : '') + ')</small></h3>' +

@@ -73,7 +73,7 @@
 			'<div class="cs-stage"><div class="cs-tape">' +
 				'<div class="cs-back"><div class="cs-wheel cs-l"><div></div></div><div class="cs-wheel cs-r"><div></div></div></div>' +
 				'<div class="cs-front"></div>' +
-				'<div class="cs-label" dir="rtl"><span class="cs-t"></span><span class="cs-s"></span></div>' +
+				'<div class="cs-label" dir="rtl"><span class="cs-art" aria-hidden="true"><img alt="" referrerpolicy="no-referrer"></span><span class="cs-tx"><span class="cs-t"></span><span class="cs-s"></span></span></div>' +
 				'<span class="cs-side">' + L('أ', 'A') + '</span>' +
 			'</div></div>' +
 			'<ul class="cs-controls" role="toolbar" aria-label="' + L('أزرار المسجل', 'Tape deck') + '">' +
@@ -123,6 +123,14 @@
 		function render() {
 			var tr = tracks[i] || {};
 			el.querySelector('.cs-t').textContent = tr.title || '';
+			/* the tape takes its series' colour, and the sticker carries the episode's picture:
+			   the YouTube thumbnail, or the issue's cover for Audiohat episodes */
+			el.setAttribute('data-skin', tr.skin || '');
+			var art = tr.art || (tr.yt ? 'https://i.ytimg.com/vi/' + tr.yt + '/hqdefault.jpg' : '');
+			var artImg = el.querySelector('.cs-art img');
+			el.classList.toggle('has-art', !!art);
+			el.classList.toggle('art-wide', !!(art && (tr.yt || /ytimg/.test(art))));
+			if (art && artImg.getAttribute('src') !== art) artImg.setAttribute('src', art);
 			el.querySelector('.cs-s').textContent = tr.sub || '';
 			el.querySelector('.cs-count').textContent = L(App.num(i + 1) + ' من ' + App.num(tracks.length), (i + 1) + ' / ' + tracks.length);
 			el.querySelector('.cs-dur').textContent = tr.mins ? App.num(tr.mins) + ' ' + L('دقيقة', 'min') : L('مدة غير معروفة', 'length unknown');
@@ -285,7 +293,8 @@
 				sub: eps.length > 1 ? L('الحلقة ', 'Episode ') + window.App.num(k + 1) + L(' من ', ' of ') + window.App.num(eps.length) : 'Audiohat',
 				url: pageUrl(A, ep[0]),
 				mins: ep[1],
-				sample: ep[2] || ''
+				sample: ep[2] || '',
+				skin: key.split('-')[0]
 			};
 		});
 	}
@@ -303,7 +312,8 @@
 				sub: ep[2] ? ep[2] : L('دراما إذاعية', 'Radio drama') + (eps.length > 1 ? ' · ' + L('الجزء ', 'Part ') + window.App.num(k + 1) : ''),
 				channel: ch.name || 'YouTube',
 				url: 'https://www.youtube.com/watch?v=' + ep[0],
-				yt: ep[0], ytEmbed: ep[1] !== 0
+				yt: ep[0], ytEmbed: ep[1] !== 0,
+				skin: key.split('-')[0]
 			};
 		});
 	}
