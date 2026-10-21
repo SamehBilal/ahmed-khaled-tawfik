@@ -748,3 +748,15 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ id: 'delta', name: { ar: 'دار دلتا', en: 'Dar Delta' }, match: 'دلتا' }
 	];
 })(window.AKT);
+
+/* «كتاب المقبرة»: its cover from bookhome (product 47352), which also becomes its «بيت الكتب» link.
+   The Aseer Al Kotb edition's cover file is gone, so that edition keeps its link and loses the picture. */
+(function (A) {
+	var bi = (A.bookInfo || {}).graveyard;
+	if (bi) {
+		bi.ownCover = 'assets/img/covers/translations/graveyard.webp';
+		(bi.editions || []).forEach(function (ed) { if (/aseeralkotb-b38e950e4e86/.test(ed.cover || '')) delete ed.cover; });
+	}
+	A.bookhome = A.bookhome || {};
+	A.bookhome.graveyard = 47352;
+})(window.AKT);
