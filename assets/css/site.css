@@ -430,7 +430,7 @@ html[dir="ltr"] .ft-shoot { background: linear-gradient(to right, #fff6dc, trans
 @keyframes ft-spark { 0% { opacity: 0; transform: translate(0, 0) scale(.6); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx, 10px), -46px) scale(1.2); } }
 /* Safari: an acacia and a giraffe on the far horizon, a shade lighter than the near tree */
 .ft-safari { position: absolute; bottom: 26px; inset-inline-end: 46.5%; width: 280px; height: 170px; color: #030304; }
-.ft-africa { position: absolute; left: 45px; bottom: 0; width: 170px; height: 187px; opacity: .92; filter: drop-shadow(0 0 22px rgba(237, 183, 51, .38)); }
+.ft-africa { position: absolute; left: 45px; bottom: 0; width: 170px; height: 187px; opacity: .92; filter: drop-shadow(0 0 22px rgba(150, 180, 80, .38)); }
 .ft-elephant { position: absolute; left: 138px; bottom: 0; width: 66px; height: 53px; }
 
 .ft-acacia { position: absolute; left: 30px; bottom: 0; width: 200px; height: 110px; }
@@ -740,3 +740,8 @@ html[lang="en"] .site-footer .ft-stone .motto { font-size: 22px; }
 html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 78%, rgba(120, 80, 200, .16), transparent 70%); }
 @media (max-width: 1199px) { .ft-citadel { width: 140px; inset-inline-start: 25%; } }
 @media (max-width: 640px) { .ft-citadel { width: 92px; top: auto; bottom: 26px; inset-inline-start: 3%; } }
+/* 1200–1600 px: the headstone column would cover the citadel at 5%, so it stands just past the stone
+   (the stone is the wrap's first 260 px column) */
+@media (min-width: 1200px) and (max-width: 1600px) {
+	.ft-citadel { inset-inline-start: calc((100% - min(1180px, 100% - 32px)) / 2 + 276px); }
+}
