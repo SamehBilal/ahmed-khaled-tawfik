@@ -544,3 +544,39 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	A.bookhome = A.bookhome || {};
 	Object.assign(A.bookhome, {"lasheen-1":45148,"lasheen-2":47631,"lasheen-3":51089,"lasheen-4":52407,"lasheen-5":58606,"lasheen-6":57190,"lasheen-7":58003,"lasheen-8":59101,"lasheen-9":62318,"lasheen-10":62402,"lasheen-11":65218,"lasheen-12":64171,"lasheen-13":68705,"lasheen-14":68706,"lasheen-15":72877,"lasheen-16":72878,"lasheen-17":76089,"lasheen-18":82000}, { 'about-arrab': 66061, 'about-esmoh-khaled': 64168, 'about-ostoura': 64885, 'about-utopia-dystopia': 63629 });
 })(window.AKT);
+
+/* Lasheen's spin-off: «أشباح الموالد», the book Soheir Zaher wrote inside the series, published for real (Kotopia, 2025).
+   It has no number, so its page is book.html?id=lasheen-x18 (the 19th entry). */
+(function (A) {
+	var L = A.otherSeries.filter(function (s) { return s.id === 'lasheen'; })[0];
+	L.issues.push({
+		title: { ar: 'أشباح الموالد', en: 'Ghosts of the Moulids' }, year: 2025, spinoff: true,
+		original: { ar: 'كتاب جانبي — كتاب سهير زاهر', en: 'Spin-off — Soheir Zaher’s book' },
+		synopsis: {
+			ar: 'الكتاب الذي تذكره السلسلة لسهير زاهر، صادرًا باسم مؤلفتها: مصورة من طنطا تعشق الموالد منذ طفولتها، تسجّل زحامها وطقوسها وأصواتها وحِرَف شوارعها، وتحمل لعنة أن ترى الأشباح وتظهر لها في صورها. تنتقل من مولد إلى آخر، حتى ليلة مولد السيد البدوي، فيصير المولد مكانًا تنفتح فيه الحياة العادية على العجيب والمخيف.',
+			en: 'The book the series credits to Soheir Zaher, published under its real author’s name: a photographer from Tanta, in love with moulids since childhood, records their crowds, rites, sounds and street trades, and carries the curse of seeing ghosts, who show up in her photographs. From one moulid to the next, up to the night of al-Sayyid al-Badawi’s, the festival becomes a place where ordinary life opens onto the wondrous and the frightening.'
+		}
+	});
+	var cover = 'assets/img/covers/lasheen/spinoff-ashbah-al-mawaled.png';
+	A.issueInfo['lasheen-x18'] = {
+		cover: cover,
+		editions: [{ publisher: { ar: 'دار كتوبيا للنشر والتوزيع', en: 'Kotopia' }, year: 2025, pages: 121, lang: 'ar', cover: cover,
+			source: 'https://www.abjjad.com/book/1034085138468/', store: 'Abjjad' }],
+		sources: ['https://www.abjjad.com/book/1034085138468/', 'https://www.shorouknews.com/news/view.aspx?cdate=14022026&id=8d0ac160-cf6a-47e6-843e-639a0e329763']
+	};
+	A.bookhome['lasheen-x18'] = 78275;
+	/* on the series page, right after the audio seasons */
+	A.seriesInfo.lasheen.blocks.splice(2, 0, {
+		title: { ar: 'كتاب جانبي: أشباح الموالد', en: 'Spin-off: Ghosts of the Moulids' },
+		text: { ar: 'الكتاب الذي ألّفته سهير زاهر داخل السلسلة صار كتابًا حقيقيًا (كتوبيا، 2025، 121 صفحة)، ومنه بودكاست درامي بالعنوان نفسه.', en: 'The book Soheir Zaher writes inside the series became a real one (Kotopia, 2025, 121 pages), with a drama podcast of the same name.' },
+		items: [
+			{ title: { ar: 'أشباح الموالد', en: 'Ghosts of the Moulids' }, href: 'book.html?id=lasheen-x18', meta: { ar: 'شيرين هنائي · 2025', en: 'Sherine Hanaey · 2025' } },
+			{ title: { ar: 'البودكاست على Apple Podcasts', en: 'The podcast on Apple Podcasts' }, url: 'https://podcasts.apple.com/kw/podcast/04-%D8%A7%D9%84%D9%85%D8%B3%D8%AE%D8%A9/id1849760435?i=1000735111170', meta: { ar: 'إخراج كريم قنديل', en: 'directed by Karim Kandil' } }
+		]
+	});
+	A.seriesInfo.lasheen.description.ar += ' ومعها كتاب جانبي هو «أشباح الموالد».';
+	A.seriesInfo.lasheen.description.en += ' There is also a spin-off, Ghosts of the Moulids.';
+	var soheir = A.characters.filter(function (c) { return c.id === 'lasheen-soheir'; })[0];
+	soheir.desc.ar += ' صدر كتابها «أشباح الموالد» كتابًا جانبيًا للسلسلة عام 2025.';
+	soheir.desc.en += ' Her Ghosts of the Moulids came out as the series’ spin-off in 2025.';
+})(window.AKT);

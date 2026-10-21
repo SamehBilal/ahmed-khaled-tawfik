@@ -21,7 +21,7 @@ window.PAGE = {
 		var title = item.title || {};
 		var color = item.color || (ser && ser.s.color) || '#3a1414';
 		var typeLabel = isIssue
-			? { ar: 'عدد من سلسلة', en: 'Series issue' }
+			? (item.spinoff ? { ar: 'كتاب جانبي', en: 'Spin-off' } : { ar: 'عدد من سلسلة', en: 'Series issue' })
 			: (S.TYPES[item.type] || { ar: item.type, en: item.type });
 		var cover = S.coverOf(info);
 		var desc = info.description || item.synopsis || (isIssue && item.original ? item.original : null);
