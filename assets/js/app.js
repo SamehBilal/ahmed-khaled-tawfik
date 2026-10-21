@@ -208,7 +208,7 @@
 					'<g fill="none" stroke="#9c8a62" stroke-width=".8" opacity=".7"><path d="M10 13Q22 10 34 15M10 18Q22 15 34 20M10 23Q22 20 34 25"/><path d="M46 15Q58 10 70 13M46 20Q58 15 70 18M46 25Q58 20 70 23"/></g>' +
 					'<path d="M40 12V36" stroke="#7d6c48" stroke-width="1"/></svg>';
 				var africa = '<svg class="ft-africa" viewBox="0 0 100 110"><defs>' +
-					'<linearGradient id="ft-sun" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f6c24a"/><stop offset=".55" stop-color="#ee8a2e"/><stop offset="1" stop-color="#c4501f"/></linearGradient>' +
+					'<linearGradient id="ft-sun" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f7d26a"/><stop offset=".55" stop-color="#edb733"/><stop offset="1" stop-color="#d99a24"/></linearGradient>' +
 					'<mask id="ft-bands"><rect width="100" height="110" fill="#fff"/><g fill="#000"><rect x="0" y="15" width="64" height="1.6"/><rect x="10" y="23" width="70" height="1.6"/><rect x="0" y="31" width="58" height="1.6"/><rect x="20" y="39" width="70" height="1.4"/></g></mask></defs>' +
 					'<g mask="url(#ft-bands)" fill="url(#ft-sun)"><path d="M18 6 40 2 55 6 62 4 70 10 76 26 86 34 98 36 90 48 82 60 80 72 76 80 72 92 64 104 52 108 46 100 42 86 40 72 38 60 36 52 30 50 18 52 8 46 2 36 4 24 10 14Z"/>' +
 					'<ellipse cx="88" cy="84" rx="3" ry="7" transform="rotate(20 88 84)"/></g></svg>';
