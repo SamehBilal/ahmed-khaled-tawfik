@@ -240,7 +240,19 @@
 				footer.innerHTML =
 					'<div class="ft-night" aria-hidden="true">' +
 						'<span class="ft-stars">' + stars + '</span><span class="ft-shoot"></span>' +
-						'<span class="ft-moon"></span>' +
+						/* Fantasia's sky: a big moon with a witch on her broom crossing it (after the Vecteezy Halloween
+						   scene you sent), and a flying saucer with its beam */
+						'<span class="ft-luna"><span class="ft-moon"></span><img class="ft-witch" src="assets/img/footer/witch.webp" alt="" loading="lazy"></span>' +
+						'<svg class="ft-ufo" viewBox="0 0 160 210" aria-hidden="true"><defs>' +
+							'<linearGradient id="ufoBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2ee9a" stop-opacity=".7"/><stop offset="1" stop-color="#e2ee9a" stop-opacity="0"/></linearGradient>' +
+							'<radialGradient id="ufoDome" cx=".42" cy=".35" r=".7"><stop offset="0" stop-color="#f4f9c8"/><stop offset="1" stop-color="#b8c96a"/></radialGradient></defs>' +
+							'<path class="ufo-beam" d="M64 54h32l46 156H18z" fill="url(#ufoBeam)"/>' +
+							'<ellipse cx="80" cy="38" rx="25" ry="21" fill="url(#ufoDome)"/>' +
+							'<ellipse cx="80" cy="47" rx="74" ry="14" fill="#123038" stroke="#d6e486" stroke-opacity=".55" stroke-width="1.4"/>' +
+							'<ellipse cx="80" cy="44" rx="58" ry="7" fill="#1b4450"/>' +
+							'<ellipse cx="80" cy="56" rx="20" ry="5" fill="#e2ee9a"/>' +
+							'<g class="ufo-lights" fill="#e2ee9a"><ellipse cx="28" cy="49" rx="5" ry="2.4"/><ellipse cx="50" cy="53" rx="6" ry="2.6"/><ellipse cx="80" cy="54.5" rx="6" ry="2.6"/><ellipse cx="110" cy="53" rx="6" ry="2.6"/><ellipse cx="132" cy="49" rx="5" ry="2.4"/></g>' +
+						'</svg>' +
 						'<span class="ft-fog f1"></span><span class="ft-fog f2"></span>' +
 						'<span class="ft-fantasia">' + book + '<span class="ft-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>' +
 						/* Safari: the savanna from Vecteezy (free licence, credited below) in front of the Africa-shaped sunset */
