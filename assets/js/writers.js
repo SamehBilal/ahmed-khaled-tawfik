@@ -13,6 +13,7 @@ window.PAGE = {
 	shelves: [
 		{ key: 'collaborators', title: { ar: 'كتبوا معه', en: 'Wrote with him' }, text: { ar: 'كُتّاب شاركوه تأليف كتاب أو سلسلة.', en: 'Writers who co-authored a book or series with him.' }, palette: ['#6e1a14', '#8a3b12', '#4f2a1c'] },
 		{ key: 'introductions', title: { ar: 'المقدّمات', en: 'Introductions' }, text: { ar: 'كتب قدّم لها العرّاب أو كتب كلمة على غلافها، وكُتّاب قدّموا لكتبه.', en: 'Books he wrote forewords or back-cover words for, and writers who wrote forewords for his.' }, palette: ['#1f4e5a', '#2c3e64', '#3d5a4a'] },
+		{ key: 'dedications', title: { ar: 'أهدوا إليه', en: 'Dedicated to him' }, text: { ar: 'كُتّاب ومترجمون أهدوا كتبهم إلى العرّاب.', en: 'Writers and translators who dedicated a book to him.' }, palette: ['#5a1f3a', '#3a2a5a', '#6b3a1c'] },
 		{ key: 'influenced', title: { ar: 'تأثّروا به', en: 'Influenced by him' }, text: { ar: 'كُتّاب يقولون بأنفسهم إنهم خرجوا من عباءته.', en: 'Writers who, in their own words, grew up under his influence.' }, palette: ['#7a5a1c', '#5b3a6e', '#8c2f39'] },
 		{ key: 'contemporaries', title: { ar: 'رفاق الطريق', en: 'Contemporaries' }, text: { ar: 'زملاء جيله ورفاقه في عالم كتب الجيب.', en: 'Peers from his generation and from the world of pocket books.' }, palette: ['#334155', '#4b3b2a', '#2f4f3f'] },
 		{ key: 'translated', title: { ar: 'ترجم لهم', en: 'Authors he translated' }, text: { ar: 'كُتّاب عالميون نقل أعمالهم إلى العربية.', en: 'Foreign authors whose work he brought into Arabic.' }, palette: ['#3b3b58', '#5a3d2b', '#28485a'] }
@@ -58,9 +59,11 @@ window.PAGE = {
 				var w = list[+b.getAttribute('data-i')];
 				var meta = '';
 				if (w.work) meta = L('العمل: ', 'Work: ') + t(w.work) + (w.year ? ' (' + App.num(w.year) + ')' : '');
-				if (w.book) meta = (w.direction === 'by_akt' ? L('قدّم له العرّاب: ', 'Foreword by AKT: ') : w.direction === 'back_akt' ? L('كلمة العرّاب على غلافه: ', 'AKT on the back cover: ') : L('كتب مقدّمة: ', 'Wrote the foreword to: ')) + t(w.book) + (w.year ? ' (' + App.num(w.year) + ')' : '');
+				if (w.book) meta = (w.direction === 'by_akt' ? L('قدّم له العرّاب: ', 'Foreword by AKT: ') : w.direction === 'back_akt' ? L('كلمة العرّاب على غلافه: ', 'AKT on the back cover: ') : w.direction === 'dedication' ? L('أهدى إليه: ', 'Dedicated to him: ') : L('كتب مقدّمة: ', 'Wrote the foreword to: ')) + t(w.book) + (w.year ? ' (' + App.num(w.year) + ')' : '');
 				card.innerHTML =
 					(w.cover ? '<figure class="wr-photo wr-cover"><img src="' + e(w.cover) + '" alt="' + e(t(w.book)) + '"></figure>' : '') +
+					/* the back cover with his words, or the dedication page, opens at full size */
+					(w.back ? '<figure class="wr-photo wr-cover wr-back"><a href="' + e(w.back) + '" target="_blank" rel="noopener"><img src="' + e(w.back) + '" alt="' + e((w.direction === 'dedication' ? L('صفحة الإهداء — ', 'Dedication page — ') : L('الغلاف الخلفي — ', 'Back cover — ')) + t(w.book)) + '" loading="lazy"></a><figcaption>' + (w.direction === 'dedication' ? L('صفحة الإهداء ↗', 'Dedication page ↗') : L('الغلاف الخلفي ↗', 'Back cover ↗')) + '</figcaption></figure>' : '') +
 					(w.photo ? '<figure class="wr-photo"><img src="' + e(w.photo.url) + '" alt="' + e(t(w.name)) + '" referrerpolicy="no-referrer"><figcaption><a href="' + e(w.photo.file) + '" target="_blank" rel="noopener">' + e(w.photo.license) + ' · Wikimedia Commons</a></figcaption></figure>' : '') +
 					'<h4>' + tx(w.name) + '</h4>' +
 					'<p class="sub">' + e(App.alt(w.name)) + '</p>' +

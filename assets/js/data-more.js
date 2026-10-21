@@ -661,3 +661,49 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var wi = A.seriesInfo.www = A.seriesInfo.www || {};
 	wi.links = (wi.links || []).concat([{ label: 'Goodreads — WWW', url: 'https://www.goodreads.com/series/58359-www' }]);
 })(window.AKT);
+
+/* His words on other writers' back covers — each with a photo of the back cover (covers/outro) —
+   writers who dedicated a book to him (covers/about), and a pocket-book issue written as a tribute to him. */
+(function (A) {
+	var C = 'assets/img/covers/';
+	var W = A.writers = A.writers || {};
+	var intros = W.introductions = W.introductions || [];
+	var find = function (ar) { return intros.filter(function (w) { return w.book && w.book.ar === ar; })[0]; };
+	var TAMER = { ar: 'تامر إبراهيم', en: 'Tamer Ibrahim' };
+	var tamerWords = { ar: 'على غلافه الخلفي كلمة للعرّاب: «يعبر تامر إبراهيم بسلاسة ذلك الحاجز الفاصل بين التشويق والرعب…»، يقول فيها إنه قادر تمامًا على ارتياد عوالم رعب لا أجرؤ على ارتيادها.', en: 'Its back cover carries his words: “Tamer Ibrahim smoothly crosses that barrier between suspense and horror…”, adding that he is fully able to enter worlds of horror Tawfik himself would not dare to.' };
+
+	var necro = find('نيكروفيليا');
+	if (necro) {
+		necro.back = C + 'outro/necrophilia-back.jpg';
+		necro.text = { ar: 'على غلافها الخلفي كلمة للعرّاب يقول فيها إنه راقه فيها قدرة الكاتبة على خلق هذا السواد والجو الرجيم وشجاعتها، وإن «نيكروفيليا» جاءت من نفس العالم تقريبًا.', en: 'Its back cover carries his words: he admired the author’s ability to create that darkness and accursed mood, and her nerve, and said Necrophilia came from almost the same world as his.' };
+	}
+	var mawta = find('حكايات الموتى');
+	if (mawta) {
+		mawta.back = C + 'outro/hekayat-al-mawta-tamer-ibrahim.jpg';
+		mawta.text = { ar: (mawta.text ? mawta.text.ar + '\n\n' : '') + 'وعلى الغلاف الخلفي لطبعة دار الكرمة كلمته: «سوف تروق لك هذه المجموعة فعلًا، وتمضي معها ساعات ممتعة».', en: (mawta.text ? mawta.text.en + '\n\n' : '') + 'The back cover of the Dar Al Karma edition carries his line: “You will really like this collection, and spend enjoyable hours with it.”' };
+	}
+	[
+		{ name: { ar: 'أحمد مراد', en: 'Ahmed Mourad' }, book: { ar: '1919', en: '1919' }, year: 2014, back: C + 'outro/1919-ahmed-mourad.webp',
+			text: { ar: 'روايته «1919» (دار الشروق) تحمل على غلافها الخلفي كلمة للعرّاب: «سيختطفك أحمد مراد في آلة زمن» إلى قاهرة 1919، وتنتهي بقوله: «سوف تدرك أن البعض مازال مصرًّا على الجدية والإتقان».', en: 'His novel 1919 (Dar El Shorouk) carries Tawfik’s words on the back cover: “Ahmed Mourad will kidnap you in a time machine” to the Cairo of 1919, ending: “you will see that some still insist on seriousness and mastery.”' } },
+		{ name: TAMER, book: { ar: 'صانع الظلام', en: 'The Maker of Darkness' }, year: 2012, back: C + 'outro/sanea-al-zalam-tamer-ibrahim.jpg',
+			text: { ar: 'صدرت عن دار بلومزبري – مؤسسة قطر للنشر. ' + tamerWords.ar, en: 'Published by Bloomsbury – Qatar Foundation Publishing. ' + tamerWords.en } },
+		{ name: TAMER, book: { ar: 'حكايات القبو', en: 'Tales of the Cellar' }, back: C + 'outro/hekayat-al-qabw-tamer-ibrahim.jpg',
+			text: { ar: 'طبعة دار الكرمة. ' + tamerWords.ar, en: 'The Dar Al Karma edition. ' + tamerWords.en } },
+		{ name: TAMER, book: { ar: 'منزل السيدة البدينة', en: 'The Fat Lady’s House' }, back: C + 'outro/manzel-al-sayeda-al-badina-tamer-ibrahim.jpg',
+			text: { ar: 'صدرت عن دار الكرمة. ' + tamerWords.ar, en: 'Published by Dar Al Karma. ' + tamerWords.en } }
+	].forEach(function (w) { if (!find(w.book.ar)) { w.direction = 'back_akt'; intros.push(w); } });
+
+	W.dedications = (W.dedications || []).concat([
+		{ name: { ar: 'د. أحمد خالد مصطفى', en: 'Dr. Ahmed Khaled Mostafa' }, book: { ar: 'مطرقة الساحرات', en: 'The Hammer of Witches (Malleus Maleficarum)' }, year: 2020, direction: 'dedication',
+			back: C + 'about/matraqat-al-saherat-dedication.jpg',
+			text: { ar: 'في ترجمته العربية لـ«مطرقة الساحرات» (دار عصير الكتب) كتب إهداءً طويلًا يبدأ: «إلى الراحل.. العرّاب.. د. أحمد خالد توفيق»، ويختمه: «فقط شكرًا لأنك أنت».', en: 'His Arabic translation of the Malleus Maleficarum (Aseer Al Kotb) opens with a long dedication “to the late Godfather, Dr. Ahmed Khaled Tawfik”, closing: “just thank you for being you.”' },
+			source: 'https://www.amazon.com/dp/9779921095' }
+	]);
+
+	A.aboutBooks = A.aboutBooks || [];
+	A.aboutBooks.push({ id: 'about-hatta-tahtareq', title: { ar: 'حتى تحترق النجوم (خوف 4)', en: 'Until the Stars Burn (Khawf #4)' }, by: { ar: 'هاني حجاج', en: 'Hany Haggag' },
+		cover: C + 'about/hatta-tahtareq-al-nogoum-hany-haggag.jpg', color: '#2a1c3a', publisher: { ar: 'المؤسسة العربية الحديثة — روايات مصرية للجيب', en: 'Modern Arab Association — Egyptian Pocket Novels' },
+		synopsis: { ar: 'العدد الرابع من سلسلة «خوف»، فيه تحية خاصة من مؤلفه (مدير النشر بالمؤسسة العربية الحديثة) تخلّد وجه العرّاب وعبارته الشهيرة، ويذكر فيه مواقف عنه، إلى جانب رواية مسلسلة بالعنوان نفسه وترجمات من أدب الرعب.', en: 'Issue 4 of the Khawf series, with a special tribute from its author — publishing director at the Modern Arab Association — to Tawfik’s face and famous line, and recollections of him, alongside a serial novel of the same name and horror translations.' } });
+	A.bookhome = A.bookhome || {};
+	A.bookhome['about-hatta-tahtareq'] = 41024;
+})(window.AKT);
