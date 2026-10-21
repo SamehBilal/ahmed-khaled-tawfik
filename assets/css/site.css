@@ -867,3 +867,31 @@ html[dir="rtl"] .ft-copy { text-align: right; }
 .pub-list a { display: inline-block; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--paper-dim); font-size: 14px; text-decoration: none; transition: color .2s, border-color .2s; }
 .pub-list a:hover, .pub-list a:focus-visible { color: var(--paper); border-color: var(--ember); }
 .pub-list .is-series a { border-color: rgba(212, 160, 60, .45); color: var(--gold); }
+
+/* ---------- The footer on tablets and phones: everything centred under the headstone ---------- */
+@media (max-width: 900px) {
+	.ft-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; }
+	.save-offline { flex-basis: 100%; text-align: center; margin-top: 6px; }
+	.ft-legal { justify-content: center; text-align: center; gap: 8px 18px; }
+	.ft-legal h2 { text-align: center; }
+	.ft-maker { text-align: center; }
+	.ft-maker-line { margin-inline: auto; }
+	.ft-maker-links { justify-content: center; }
+	.ft-copy, html[dir="rtl"] .ft-copy { text-align: center; line-height: 1.6; }
+	.ft-copy span { white-space: nowrap; }
+	/* clear of the floating «قوائمي» button */
+	.ft-end { margin: 30px 0 76px; }
+}
+/* phones: a smaller headstone, the buttons two by two */
+@media (max-width: 640px) {
+	.ft-body .wrap { gap: 26px; }
+	.ft-stone { width: 240px; min-height: 262px; padding: 52px 30px 76px; margin-top: -40px; }
+	.ft-stone .ft-name { font-size: 13px; }
+	.site-footer .ft-stone .motto { font-size: 21px; }
+	html[lang="en"] .site-footer .ft-stone .motto { font-size: 18px; }
+	.ft-maker-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+	.ft-maker-links a { justify-content: center; }
+	.ft-copy, html[dir="rtl"] .ft-copy { font-size: 14px; }
+	/* in English the scene is mirrored: the savanna shrinks toward its own edge, not off the screen */
+	html[dir="ltr"] .ft-safari { inset-inline-end: 38%; transform-origin: 100% 100%; }
+}
