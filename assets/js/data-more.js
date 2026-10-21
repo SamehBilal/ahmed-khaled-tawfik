@@ -580,3 +580,33 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	soheir.desc.ar += ' صدر كتابها «أشباح الموالد» كتابًا جانبيًا للسلسلة عام 2025.';
 	soheir.desc.en += ' Her Ghosts of the Moulids came out as the series’ spin-off in 2025.';
 })(window.AKT);
+
+/* Posters for the screen adaptations (Wikipedia infobox images) and his awards and honours.
+   Each award names the work it was for, so the book page can show it too. */
+(function (A) {
+	var posters = {
+		hazzak: ['assets/img/posters/zodiac.jpg', 'https://ar.wikipedia.org/wiki/%D8%B2%D9%88%D8%AF%D9%8A%D8%A7%D9%83_(%D9%85%D8%B3%D9%84%D8%B3%D9%84)'],
+		mwt: ['assets/img/posters/paranormal.jpg', 'https://en.wikipedia.org/wiki/Paranormal_(TV_series)'],
+		room207: ['assets/img/posters/room207.jpg', 'https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D8%BA%D8%B1%D9%81%D8%A9_207_(%D9%85%D8%B3%D9%84%D8%B3%D9%84)']
+	};
+	(A.adaptations || []).forEach(function (a) { var p = posters[a.basedOn]; if (p && !a.poster) { a.poster = p[0]; a.posterSource = p[1]; } });
+
+	A.awards = [
+		{ year: 2012, kind: 'finalist', work: 'utopia',
+			title: { ar: 'القائمة القصيرة لجوائز ترجمة الخيال العلمي والفانتازيا', en: 'Finalist, Science Fiction & Fantasy Translation Awards' },
+			text: { ar: 'وصلت «يوتوبيا» بترجمتها الإنجليزية (ترجمة تشيب روسيتي، بلومزبري قطر) إلى القائمة القصيرة لدورة 2012.', en: 'Utopia in English (translated by Chip Rossetti, Bloomsbury Qatar) was a finalist in the 2012 awards.' },
+			source: 'https://arablit.org/2012/05/29/towfiks-utopia-finalist-for-2012-sff-translation-awards/' },
+		{ year: 2016, kind: 'win', work: 'icarus',
+			title: { ar: 'جائزة أفضل كتاب عربي في الرواية — معرض الشارقة الدولي للكتاب', en: 'Best Arabic Book (Novel), Sharjah International Book Fair' },
+			text: { ar: 'في الدورة الخامسة والثلاثين للمعرض، عن «مثل إيكاروس» (دار الشروق). قال إنها أول مسابقة يدخلها في حياته.', en: 'At the fair’s 35th edition, for Like Icarus (Dar El Shorouk). He said it was the first competition he had ever entered.' },
+			source: 'https://al-ain.com/article/best-novel-sharjah-book-fair' },
+		{ year: 2018, kind: 'win', work: 'mirante', posthumous: true,
+			title: { ar: 'جائزة مصطفى عزوز لأدب الطفل (تونس) — بعد الرحيل', en: 'Mustapha Azzouz Prize for Children’s Literature (Tunisia), posthumous' },
+			text: { ar: 'الجائزة الخاصة بالقصة ذات المضمون التاريخي، عن «الميرانتي أمير البحار».', en: 'The special prize for a story with a historical theme, for Al-Miranti, Prince of the Seas.' },
+			source: 'https://kapitalis.com/anbaa-tounes/?p=128657' },
+		{ year: 2018, kind: 'honour',
+			title: { ar: 'معرض طنطا للكتاب يحمل اسمه', en: 'The Tanta Book Fair named after him' },
+			text: { ar: 'أعلنت الهيئة المصرية العامة للكتاب بعد رحيله أن دورة معرض طنطا التالية ستحمل اسمه.', en: 'After his death the Egyptian General Book Authority announced that the next Tanta Book Fair would carry his name.' },
+			source: 'https://www.emaratalyoum.com/life/culture/2018-04-04-1.1086411' }
+	];
+})(window.AKT);

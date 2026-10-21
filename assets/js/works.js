@@ -180,15 +180,36 @@ window.PAGE = {
 		/* adaptations */
 		var ad = d.adaptations || [];
 		document.getElementById('adaptations-section').hidden = !ad.length;
+		var e = App.esc, t = App.t;
 		document.getElementById('adaptations').innerHTML = ad.map(function (a) {
 			var src = App.findWork(a.basedOn);
-			return '<article class="adapt rise">' +
+			return '<article class="adapt rise' + (a.poster ? ' has-poster' : '') + '">' +
+				(a.poster ? '<a class="adapt-poster" href="' + e(a.posterSource || a.poster) + '" target="_blank" rel="noopener"><img src="' + e(a.poster) + '" alt="' + e(App.L('ملصق ', 'Poster: ') + t(a.title)) + '" loading="lazy"></a>' : '') +
+				'<div>' +
 				'<div class="kind">' + tx(a.kind) + '</div>' +
 				'<h3>' + tx(a.title) + '</h3>' +
 				'<div class="yr">' + App.num(a.year || '') + (src ? ' · ' + App.L('عن ', 'from ') + App.workLink(a.basedOn) : '') + '</div>' +
 				'<p>' + tx(a.text) + '</p>' +
-			'</article>';
+			'</div></article>';
 		}).join('');
+
+		/* his awards, and the books others wrote about him, after On screen */
+		var after = document.getElementById('adaptations-section');
+		var addSection = function (id, html) {
+			var el = document.getElementById(id);
+			if (!el) { el = document.createElement('section'); el.id = id; el.className = 'section'; after.parentNode.insertBefore(el, after.nextSibling); }
+			el.innerHTML = '<div class="wrap">' + html + '</div>';
+			after = el;
+		};
+		if ((d.awards || []).length) addSection('awards-section',
+			'<div class="section-head"><div><h2>' + App.L('الجوائز والتكريم', 'Awards & honours') + '</h2></div></div>' + S.awardsList(d.awards));
+		if ((d.aboutBooks || []).length) addSection('about-section',
+			'<div class="section-head"><div><h2>' + App.L('كتب عنه', 'Books about him') + '</h2>' +
+				'<p>' + App.L('سِيَر ودراسات كتبها غيره عنه وعن أدبه. ', 'Biographies and studies others wrote about him and his work. ') + '<a href="tributes.html">' + App.L('وما قالوه عنه ←', 'And what they said →') + '</a></p></div></div>' +
+			'<div class="cover-grid tb-books">' + d.aboutBooks.map(function (b) {
+				return '<a class="cover-link" href="' + S.bookHref(b.id) + '">' + S.miniCover({ img: b.cover, color: b.color, title: t(b.title), by: t(b.by) }) +
+					'<span class="cl-t">' + tx(b.title) + ' — ' + tx(b.by) + '</span></a>';
+			}).join('') + '</div>');
 
 		this.onHash();
 	},

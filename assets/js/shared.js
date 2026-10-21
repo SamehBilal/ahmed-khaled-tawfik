@@ -179,6 +179,20 @@
 	function seriesAuthor(ser) {
 		return ser && !ser.own && ser.s.author ? ser.s.author : { ar: 'أحمد خالد توفيق', en: 'Ahmed Khaled Tawfik' };
 	}
+	/* awards as cards: medal, year, prize, what it was for, source */
+	function awardsList(list) {
+		var App = window.App, e = App.esc, tx = App.tx, L = App.L;
+		var KIND = { win: { ar: 'فوز', en: 'Won' }, finalist: { ar: 'قائمة قصيرة', en: 'Finalist' }, honour: { ar: 'تكريم', en: 'Honour' } };
+		return '<ul class="awards">' + list.map(function (a) {
+			return '<li class="award rise ' + e(a.kind || 'win') + '">' +
+				'<div class="yr">' + App.num(a.year || '') + ' · ' + tx(KIND[a.kind] || KIND.win) + (a.posthumous ? ' · ' + L('بعد الرحيل', 'posthumous') : '') + '</div>' +
+				'<h3>' + tx(a.title) + '</h3>' +
+				'<p>' + tx(a.text) + '</p>' +
+				(a.work && App.findWork(a.work) ? '<div class="for">' + L('عن ', 'For ') + App.workLink(a.work) + '</div>' : '') +
+				(a.source ? '<a class="src" href="' + e(a.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
+			'</li>';
+		}).join('') + '</ul>';
+	}
 	function contributedSeries() {
 		var d = window.App.data();
 		/* series he wrote or translated for; series by others that grew out of his work are listed apart */
@@ -188,7 +202,7 @@
 	}
 
 	window.WorksShared = {
-		ownSeries: ownSeries, contributedSeries: contributedSeries, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
+		ownSeries: ownSeries, contributedSeries: contributedSeries, awardsList: awardsList, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
 		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook, issueCover: issueCover,
 		bookHref: bookHref, seriesHref: seriesHref, miniCover: miniCover, coverOf: coverOf

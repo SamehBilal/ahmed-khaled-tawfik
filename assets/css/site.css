@@ -587,3 +587,22 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 /* installed: leave room for the phone's status bar and home indicator */
 html.is-app .site-header { padding-top: env(safe-area-inset-top); }
 html.is-app body { padding-bottom: env(safe-area-inset-bottom); }
+
+/* ---------- On screen: posters; awards; books about him ---------- */
+.adapt.has-poster { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; align-items: start; }
+.adapt-poster { display: block; margin: 0; }
+.adapt-poster img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 6px; box-shadow: 0 10px 22px rgba(0, 0, 0, .45); }
+.awards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.award { position: relative; padding: 18px 18px 16px 58px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
+html[dir="rtl"] .award { padding: 18px 58px 16px 18px; }
+.award::before { content: ''; position: absolute; top: 18px; inset-inline-start: 16px; width: 28px; height: 28px; border-radius: 50%;
+	background: radial-gradient(circle at 35% 35%, #ffe7a8, #c9962e 60%, #7a5a14); box-shadow: 0 0 14px rgba(224, 170, 60, .45); }
+.award.finalist::before { background: radial-gradient(circle at 35% 35%, #f2f2f2, #a7a7a7 60%, #5d5d5d); box-shadow: 0 0 12px rgba(200, 200, 200, .3); }
+.award.honour::before { background: radial-gradient(circle at 35% 35%, #f6c0a0, #b3261e 60%, #5a120d); box-shadow: 0 0 14px rgba(179, 38, 30, .45); }
+.award .yr { font-family: var(--f-latin); color: var(--gold); font-size: 15px; }
+.award h3 { font-family: var(--f-display); font-size: 19px; line-height: 1.35; margin: 2px 0 6px; }
+.award p { margin: 0 0 6px; color: var(--paper-dim); font-size: .93em; }
+.award .for, .award .src { font-size: .88em; }
+.award .src { color: var(--muted); }
+#about-section .cover-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 22px 16px; }
+.d-block .award h3 { font-size: 19px; margin: 2px 0 6px; }
