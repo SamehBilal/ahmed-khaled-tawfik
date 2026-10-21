@@ -197,15 +197,10 @@
 			var footer = document.getElementById('site-footer');
 			if (footer) {
 				footer.className = 'site-footer';
-				/* one night for his three series, on one hilly horizon: Ma Wara' al-Tabi'a's castle with lit
-				   windows, bare tree, old graves, a broken fence with a cat on it, bats, fog and eyes in the dark;
-				   Safari's acacia, elephant and giraffe against a sunset in the shape of Africa; Fantasia's open
+				/* one night for his three series, on one hilly horizon: Ma Wara' al-Tabi'a's haunted hill (a castle
+				   with lit windows, a path, bare trees, old graves and a fence — from Vecteezy), bats, fog and eyes
+				   in the dark; Safari's savanna (Vecteezy) against a sunset in the shape of Africa; Fantasia's open
 				   book adrift among the stars. Then his motto on a headstone, and the pocket books' last line */
-				var branches = [
-					['M100 230C99 196 104 162 96 128', 11], ['M97 148C80 128 58 122 36 96', 5], ['M58 120C48 108 50 92 42 76', 3],
-					['M98 132C116 106 142 100 164 74', 5], ['M142 98C152 86 168 86 186 80', 3], ['M96 128C95 96 101 66 92 34', 4],
-					['M94 76C80 66 74 50 68 34', 2.5], ['M97 64C110 54 118 38 126 22', 2.5], ['M40 98C30 94 22 96 12 90', 2], ['M164 74C168 60 176 54 182 44', 2]
-				].map(function (b) { return '<path d="' + b[0] + '" stroke-width="' + b[1] + '"/>'; }).join('');
 				var stars = [[6, 18], [11, 52], [19, 30], [24, 8], [29, 64], [38, 22], [44, 46], [51, 12], [57, 36], [63, 58], [69, 16], [74, 42], [81, 26], [86, 60], [92, 12], [96, 40]]
 					.map(function (s, i) { return '<i style="inset-inline-start:' + s[0] + '%;top:' + s[1] + 'px;animation-delay:-' + (i * 0.7 % 5).toFixed(1) + 's"></i>'; }).join('');
 				var book = '<svg class="ft-book" viewBox="0 0 80 40"><defs><linearGradient id="ft-pg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fbf1d2"/><stop offset="1" stop-color="#cdb98a"/></linearGradient></defs>' +
@@ -217,28 +212,6 @@
 					'<mask id="ft-bands"><rect width="100" height="110" fill="#fff"/><g fill="#000"><rect x="0" y="15" width="64" height="1.6"/><rect x="10" y="23" width="70" height="1.6"/><rect x="0" y="31" width="58" height="1.6"/><rect x="20" y="39" width="70" height="1.4"/></g></mask></defs>' +
 					'<g mask="url(#ft-bands)" fill="url(#ft-sun)"><path d="M18 6 40 2 55 6 62 4 70 10 76 26 86 34 98 36 90 48 82 60 80 72 76 80 72 92 64 104 52 108 46 100 42 86 40 72 38 60 36 52 30 50 18 52 8 46 2 36 4 24 10 14Z"/>' +
 					'<ellipse cx="88" cy="84" rx="3" ry="7" transform="rotate(20 88 84)"/></g></svg>';
-				/* arched window or door: x, y, width, height */
-				var arch = function (x, y, w, h, cls) { return '<path class="' + (cls || '') + '" d="M' + x + ' ' + (y + h) + 'V' + (y + w / 2) + 'a' + (w / 2) + ' ' + (w / 2) + ' 0 0 1 ' + w + ' 0V' + (y + h) + 'Z"/>'; };
-				var castle = '<svg class="ft-castle" viewBox="0 0 120 130"><g fill="currentColor">' +
-					'<rect x="20" y="70" width="80" height="60"/><path d="M20 70h8v-6h6v6h8v-6h6v6"/><path d="M72 70h8v-6h6v6h8v-6h6v6h0"/>' +
-					'<rect x="48" y="30" width="24" height="100"/><path d="M46 30 60 0l14 30Z"/><path d="M60 0V-0" />' +
-					'<rect x="14" y="50" width="18" height="80"/><path d="M12 50 23 20l11 30Z"/>' +
-					'<rect x="88" y="45" width="18" height="85"/><path d="M86 45 97 14l11 31Z"/>' +
-					'<rect x="34" y="60" width="10" height="70"/><path d="M33 60 39 44l6 16Z"/><rect x="76" y="60" width="10" height="70"/><path d="M75 60 81 44l6 16Z"/>' +
-					/* pennants instead of crosses */
-					'<path d="M97 14V6l7 2.5-7 2.5" /><path d="M23 20v-7l6 2.2-6 2.2"/></g>' +
-					'<g class="ft-lit">' + arch(55, 42, 10, 14) + arch(19, 64, 7, 10, 'fl') + arch(94, 58, 6, 10) + arch(36, 84, 7, 12, 'fl2') + arch(77, 84, 7, 12) +
-						'<circle cx="60" cy="80" r="3.2"/>' + arch(53, 106, 14, 24, 'fl') + '</g></svg>';
-				var graves = '<svg class="ft-graves" viewBox="0 0 70 32"><g fill="currentColor">' +
-					'<path d="M2 32V14a7 7 0 0 1 14 0v18Z" transform="rotate(-7 9 32)"/><path d="M24 32V10a8 8 0 0 1 16 0v22Z"/>' +
-					'<path d="M48 32V17a6 6 0 0 1 12 0v15Z" transform="rotate(9 54 32)"/><rect x="60" y="26" width="10" height="6" rx="1"/></g></svg>';
-				var fence = '<svg class="ft-fence" viewBox="0 0 70 34"><g fill="currentColor">' +
-					'<path d="M2 34V8l3-4 3 4v26Z"/><path d="M16 34V7l3-4 3 4v27Z"/><path d="M30 34V9l3-4 3 4v25Z"/><path d="M45 34V10l3-4 3 4v24Z" transform="rotate(8 48 34)"/><path d="M59 34V7l3-4 3 4v27Z"/>' +
-					'<rect x="0" y="12" width="38" height="2.6"/><rect x="0" y="24" width="66" height="2.6"/><rect x="44" y="11" width="22" height="2.6" transform="rotate(-6 55 12)"/></g></svg>';
-				var cat = '<svg class="ft-cat" viewBox="0 0 40 42"><g fill="currentColor"><path d="M12 42C6 42 4 36 6 30s6-8 6-12L10 6l5 5h5l5-5-2 12c0 4 4 6 5 12 2 6-2 12-8 12Z"/>' +
-					'<path d="M26 40c8 0 12-6 8-12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></g>' +
-					'<g class="ft-cat-eyes" fill="#f5c542"><ellipse cx="14.6" cy="15" rx="1.4" ry="1"/><ellipse cx="20.4" cy="15" rx="1.4" ry="1"/></g></svg>';
-				var pine = '<svg class="ft-pine" viewBox="0 0 50 110"><path fill="currentColor" d="M25 0 36 22h-6l12 20h-8l12 22H36l14 24H28v22h-6V88H0l14-24H4l12-22H8l12-20h-6Z"/></svg>';
 				var bat = '<svg viewBox="0 0 20 10"><path fill="currentColor" d="M10 4C8 1 5 0 0 2c3 1 3 3 2 5 2-1 4-1 5 1 1-2 2-2 3-1 1-1 2-1 3 1 1-2 3-2 5-1-1-2-1-4 2-5-5-2-8-1-10 2Z"/></svg>';
 				/* the bats: after Calleb's CodePen "Halloween" (codepen.io/Calleb/pen/vYZqgwz, MIT) —
 				   three of them, wings flapping, eyes glowing, each on its own flight path */
@@ -272,9 +245,7 @@
 						'<span class="ft-fantasia">' + book + '<span class="ft-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>' +
 						/* Safari: the savanna from Vecteezy (free licence, credited below) in front of the Africa-shaped sunset */
 						'<span class="ft-safari">' + africa + '<img class="ft-savanna" src="assets/img/footer/savanna.webp" alt="" loading="lazy">' + '</span>' +
-						bats + pine + castle +
-						'<svg class="ft-tree" viewBox="0 0 200 230"><g fill="none" stroke="currentColor" stroke-linecap="round">' + branches + '</g></svg>' +
-						graves + fence + cat +
+						'<img class="ft-haunt" src="assets/img/footer/haunted-hill.webp" alt="" loading="lazy">' + bats +
 						'<span class="ft-eyes e2"><i></i><i></i></span><span class="ft-eyes e3"><i></i><i></i></span>' +
 						'<svg class="ft-hills" viewBox="0 0 1000 60" preserveAspectRatio="none"><path d="' + hill + '"/></svg>' +
 					'</div>' +
@@ -289,7 +260,7 @@
 						'</nav>' +
 						'<div class="ft-notes"><p>' + App.tx(UI.footerNote) + '</p>' +
 							'<p><a href="' + App.esc(App.fixHref()) + '" target="_blank" rel="noopener">' + App.tx(UI.fix) + '</a></p>' +
-							'<p class="ft-credits">' + App.tx(UI.credits) + ' — ' + App.L('مشهد السافاري من ', 'The savanna scene from ') + '<a href="https://www.vecteezy.com/free-vector/safari" target="_blank" rel="noopener">Vecteezy.com</a>.</p></div>' +
+							'<p class="ft-credits">' + App.tx(UI.credits) + ' — ' + App.L('التلّ المسكون ومشهد السافاري من ', 'The haunted hill and the savanna scene from ') + '<a href="https://www.vecteezy.com/" target="_blank" rel="noopener">Vecteezy.com</a>.</p></div>' +
 					'</div>' +
 					'<p class="ft-end">' + App.L('تمّت…', 'The end…') + ' <span>' + App.L('أو هكذا يبدو', 'or so it seems') + '</span></p></div>';
 			}
