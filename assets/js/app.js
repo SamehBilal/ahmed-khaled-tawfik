@@ -23,9 +23,17 @@
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
 		footerNote: {
-			ar: 'موقع محبّين غير رسمي، صُنع تقديرًا لأحمد خالد توفيق (1962–2018). البيانات مجمّعة من مصادر عامة — راجع صفحة الكُتّاب للمراجع.',
-			en: 'An unofficial fan tribute to Ahmed Khaled Tawfik (1962–2018). Data compiled from public sources — see the Writers page for references.'
+			ar: 'موقع محبّين غير رسمي، صُنع تقديرًا لأحمد خالد توفيق (1962–2018). البيانات مجمّعة من مصادر عامة — راجع صفحة المصادر.',
+			en: 'An unofficial fan tribute to Ahmed Khaled Tawfik (1962–2018). Data compiled from public sources — see the Sources page.'
 		},
+		/* pages linked only from the footer, not the header */
+		legal: [
+			{ href: 'about.html', ar: 'عن الموقع', en: 'About' },
+			{ href: 'sources.html', ar: 'المصادر وطريقة الجمع', en: 'Sources & method' },
+			{ href: 'privacy.html', ar: 'الخصوصية', en: 'Privacy' },
+			{ href: 'terms.html', ar: 'حقوق الاستخدام', en: 'Rights & use' },
+			{ href: 'contact.html', ar: 'تواصل', en: 'Contact' }
+		],
 		fix: { ar: 'وجدت خطأً أو لديك إضافة؟ اقترح تصحيحًا ↗', en: 'Spotted a mistake or have an addition? Suggest a correction ↗' },
 		credits: {
 			ar: 'تصميم الكتب ثلاثية الأبعاد مبني على عروض Codrops — خط The Godfather من تصميم Jeff Bell — خفافيش التذييل عن عرض Calleb على CodePen.',
@@ -275,6 +283,9 @@
 							UI.nav.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 						'</nav>' +
 						'<div class="ft-notes"><p>' + App.tx(UI.footerNote) + '</p>' +
+							'<nav class="ft-legal" aria-label="' + App.L('عن الموقع', 'About the site') + '">' +
+								UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+							'</nav>' +
 							'<p><a href="' + App.esc(App.fixHref()) + '" target="_blank" rel="noopener">' + App.tx(UI.fix) + '</a></p>' +
 							'<p class="ft-credits">' + App.tx(UI.credits) + ' — ' + App.L('التلّ المسكون ومشهد السافاري والساحرة من ', 'The haunted hill, the savanna scene and the witch from ') + '<a href="https://www.vecteezy.com/" target="_blank" rel="noopener">Vecteezy.com</a>.</p></div>' +
 					'</div>' +

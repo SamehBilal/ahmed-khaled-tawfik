@@ -18,6 +18,7 @@ Static site, no build step. Open `index.html` or serve the folder (e.g. GitHub P
 | `audio.html` | His audiobooks on a cassette deck (adapted from Codrops' Old School Cassette Player): Audiohat episodes (Ma Wara' al-Tabi'a, Fantasia, After Midnight) and the Safari radio drama from the Tasgeel YouTube channel. ▶ plays in the cassette when it can (a sample file, or YouTube in a visible player), otherwise opens the source; issue pages get their own cassette |
 | `quotes.html` | Sourced quotes, with copy / link / save-as-image |
 | `legacy.html` | Farewell and tributes timeline, adaptations, interviews and talks |
+| `about.html`, `sources.html`, `privacy.html`, `terms.html`, `contact.html` | Linked from the footer only (not the header): who built the site, sources and how the data was collected, privacy, rights and use, contact. Their text is in `assets/js/info.js` |
 
 Every page has search (press `/` or Ctrl+K), an Arabic/English switch, a paper (light) theme, and a "suggest a fix" link that opens a pre-filled GitHub issue.
 
