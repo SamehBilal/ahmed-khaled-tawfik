@@ -610,3 +610,54 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			source: 'https://www.emaratalyoum.com/life/culture/2018-04-04-1.1086411' }
 	];
 })(window.AKT);
+
+/* Covers and links sent in for the pages that had none: four books, Shivers 5, his Super Mega piece,
+   and the WWW series, now with all five books numbered (Goodreads series 58359). */
+(function (A) {
+	var C = 'assets/img/covers/';
+	var add = function (store, key, o) {
+		var info = store[key] = store[key] || {};
+		if (o.edition) info.editions = (info.editions || []).concat([o.edition]);
+		if (o.cover && !info.cover) info.cover = o.cover;
+		if (o.link) info.links = (info.links || []).concat([o.link]);
+		if (o.source) info.sources = (info.sources || []).concat([o.source]);
+	};
+	var B = A.bookInfo = A.bookInfo || {}, I = A.issueInfo = A.issueInfo || {};
+
+	add(B, 'che', {
+		edition: { publisher: { ar: 'دار الشروق', en: 'Dar El Shorouk' }, year: 2021, pages: 350, isbn: '9789770928646', lang: 'ar',
+			cover: C + 'translations/amazon-che.jpg', source: 'https://www.amazon.eg/dp/977092864X' },
+		link: { label: 'Amazon.eg', url: 'https://www.amazon.eg/dp/977092864X' }
+	});
+	add(B, 'oshaq-al-adrenaline', { cover: C + 'books/goodreads-oshaq-al-adrenaline.jpg', link: { label: 'Goodreads', url: 'https://www.goodreads.com/book/show/5998593' }, source: 'https://www.goodreads.com/book/show/5998593' });
+	add(B, 'qessa-tokmeloha-anta', {
+		edition: { publisher: { ar: 'دار ليلى ودايموند بوك', en: 'Dar Lila & Diamond Book' }, year: 2007, pages: 126, lang: 'ar',
+			cover: C + 'books/abjjad-qessa-tokmeloha-anta.jpg', source: 'https://www.abjjad.com/book/15456105/', store: 'Abjjad' },
+		link: { label: 'أبجد', url: 'https://www.abjjad.com/book/15456105/' }
+	});
+	add(B, 'sabaa-wogooh-lel-hob', { cover: C + 'books/goodreads-sabaa-wogooh-lel-hob.jpg', link: { label: 'Goodreads', url: 'https://www.goodreads.com/book/show/3553717' }, source: 'https://www.goodreads.com/book/show/3553717' });
+	add(I, 'shivers-5', { cover: C + 'series/shivers/goodreads-shivers-5.jpg', link: { label: 'Goodreads', url: 'https://www.goodreads.com/book/show/15766875' }, source: 'https://www.goodreads.com/book/show/15766875' });
+	/* «أقوال تدوم» came out in the first Super Mega volume */
+	add(I, 'supermega-x0', {
+		edition: { title: { ar: 'سوبر ميجا 1', en: 'Super Mega 1' }, publisher: { ar: 'شركة سلاح التلميذ للطباعة والنشر', en: 'Salah El-Telmeez' }, year: 2023, pages: 256, isbn: '6222052105531', lang: 'ar',
+			cover: C + 'series/supermega/abjjad-supermega-1.png', source: 'https://www.abjjad.com/book/2805956616/', store: 'Abjjad' },
+		link: { label: 'أبجد — سوبر ميجا 1', url: 'https://www.abjjad.com/book/2805956616/' }
+	});
+
+	A.issues = A.issues || {};
+	A.issues.www = [
+		{ n: 1, title: { ar: 'المحادثة', en: 'The Conversation' }, year: 2006 },
+		{ n: 2, title: { ar: 'العد الأخير', en: 'The Final Countdown' }, year: 2007 },
+		{ n: 3, title: { ar: 'غرباء الأطوار', en: 'Eccentrics' }, year: 2008 },
+		{ n: 4, title: { ar: 'أحدهم هرب', en: 'One of Them Escaped' }, year: 2009 },
+		{ n: 5, title: { ar: 'المتلصص', en: 'The Peeping Tom' }, year: 2012 }
+	];
+	[5957110, 3561351, 5957045, 6164047, 13530040].forEach(function (gr, i) {
+		add(I, 'www-' + (i + 1), { cover: C + 'series/www/goodreads-www-' + (i + 1) + '.jpg', link: { label: 'Goodreads', url: 'https://www.goodreads.com/book/show/' + gr } });
+	});
+	A.seriesCovers = A.seriesCovers || {};
+	A.seriesCovers.www = (A.seriesCovers.www || []).concat([{ label: { ar: 'WWW — المجلد الجامع (1–5)', en: 'WWW — the omnibus (1–5)' }, cover: C + 'series/www/goodreads-www-omnibus.jpg', source: 'https://www.goodreads.com/book/show/17992755' }]);
+	A.seriesInfo = A.seriesInfo || {};
+	var wi = A.seriesInfo.www = A.seriesInfo.www || {};
+	wi.links = (wi.links || []).concat([{ label: 'Goodreads — WWW', url: 'https://www.goodreads.com/series/58359-www' }]);
+})(window.AKT);
