@@ -3,6 +3,8 @@
 (function () {
 	var id = (document.getElementById('main') || {}).getAttribute ? document.getElementById('main').getAttribute('data-info') : '';
 	var REPO = 'https://github.com/SamehBilal/ahmed-khaled-tawfik';
+	var EMAIL = 'sameh.bilal@outlook.com';
+	var mail = '<a href="mailto:' + EMAIL + '" dir="ltr">' + EMAIL + '</a>';
 	var ext = function (href, text) { return '<a href="' + href + '" target="_blank" rel="noopener">' + text + '</a>'; };
 
 	var PAGES = {
@@ -86,8 +88,8 @@
 					p: { ar: '<ul><li><strong>الاستضافة:</strong> الموقع على GitHub Pages، وقد تحتفظ GitHub بسجلّات تقنية (مثل عنوان IP) لأغراض الأمان، وفق ' + ext('https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement', 'سياسة خصوصيتها') + '.</li><li><strong>مكتبات الحركة:</strong> تُحمَّل في بعض الصفحات من شبكات CDN عامة (jsDelivr وcdnjs وunpkg).</li><li><strong>YouTube:</strong> في صفحة «مسموع» تُحمَّل أداة المشغّل وصور الحلقات من YouTube، وتُعرض المقاطع من نطاق youtube-nocookie.com؛ وقد يضع YouTube ملفاته الخاصة حين تشغّل مقطعًا.</li><li><strong>الروابط:</strong> روابط المتاجر وAudiohat والمواقع الأخرى تفتح مواقعها، ولكلٍّ منها سياسته.</li></ul>',
 						en: '<ul><li><strong>Hosting:</strong> the site runs on GitHub Pages; GitHub may keep technical logs (such as IP addresses) for security, under its ' + ext('https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement', 'privacy statement') + '.</li><li><strong>Animation libraries:</strong> some pages load them from public CDNs (jsDelivr, cdnjs, unpkg).</li><li><strong>YouTube:</strong> on the Audio page the player script and episode thumbnails load from YouTube, and videos play from youtube-nocookie.com; YouTube may set its own cookies when you play one.</li><li><strong>Links:</strong> store, Audiohat and other links open those sites, each under its own policy.</li></ul>' } },
 				{ h: { ar: 'إن راسلتنا', en: 'If you write to us' },
-					p: { ar: '<p>التصحيحات تُرسل عبر GitHub، فتكون علنية ويظهر فيها اسم حسابك هناك. لا تكتب فيها بيانات شخصية لا تريد نشرها.</p>',
-						en: '<p>Corrections go through GitHub, so they are public and show your account name there. Don’t include personal details you don’t want published.</p>' } }
+					p: { ar: '<p>التصحيحات تُرسل عبر GitHub، فتكون علنية ويظهر فيها اسم حسابك هناك. لا تكتب فيها بيانات شخصية لا تريد نشرها.</p><p>أما الرسائل إلى ' + mail + ' فخاصة: لا تُنشر، ولا يُستخدم عنوانك إلا للرد عليك.</p>',
+						en: '<p>Corrections go through GitHub, so they are public and show your account name there. Don’t include personal details you don’t want published.</p><p>Emails to ' + mail + ' are private: they are not published, and your address is used only to reply to you.</p>' } }
 			]
 		},
 
@@ -106,8 +108,8 @@
 					p: { ar: '<p>الأغلفة ملك ناشريها ورسّاميها، وتُعرض صغيرة للتعريف بالكتاب، كما في أي فهرس أو متجر. الملصقات وصور الشاشة لمنتجيها، والصور الشخصية لمصوّريها ومصادرها. أسماء المنصّات والعلامات التجارية لأصحابها.</p>',
 						en: '<p>Covers belong to their publishers and illustrators and are shown small to identify the book, as in any catalogue or store. Posters and stills belong to their producers, photos to their photographers and sources. Platform names and trademarks belong to their owners.</p>' } },
 				{ h: { ar: 'طلب الإزالة', en: 'Removal requests' },
-					p: { ar: '<p>إن كنت صاحب حق في صورة أو نص هنا وتريد إزالته أو تعديل إسناده، فراسلنا من <a href="contact.html">صفحة التواصل</a> وسنستجيب في أقرب وقت.</p>',
-						en: '<p>If you hold the rights to an image or text here and want it removed or its credit changed, write to us from the <a href="contact.html">contact page</a> and we will act on it as soon as we can.</p>' } },
+					p: { ar: '<p>إن كنت صاحب حق في صورة أو نص هنا وتريد إزالته أو تعديل إسناده، فراسلنا على ' + mail + ' أو من <a href="contact.html">صفحة التواصل</a> وسنستجيب في أقرب وقت.</p>',
+						en: '<p>If you hold the rights to an image or text here and want it removed or its credit changed, write to ' + mail + ' or use the <a href="contact.html">contact page</a> and we will act on it as soon as we can.</p>' } },
 				{ h: { ar: 'دقّة المعلومات', en: 'Accuracy' },
 					p: { ar: '<p>جُمع المحتوى بعناية، لكنه عمل محبّين يقدَّم كما هو، وقد يحتوي أخطاء. للبحث الأكاديمي ارجع دائمًا إلى المصادر المذكورة في <a href="sources.html">صفحة المصادر</a>.</p>',
 						en: '<p>The content was gathered with care, but it is a fan project offered as is and may contain mistakes. For academic work, always go back to the sources listed on the <a href="sources.html">sources page</a>.</p>' } },
@@ -147,22 +149,22 @@
 			if (id === 'contact') {
 				var card = function (icon, h, p, href, btn) {
 					return '<div class="info-card"><span class="info-ic" aria-hidden="true">' + icon + '</span><h2>' + h + '</h2><p>' + p + '</p>' +
-						'<a class="buy-btn" href="' + e(href) + '" target="_blank" rel="noopener">' + btn + '</a></div>';
+						'<a class="buy-btn" href="' + e(href) + '"' + (/^mailto:/.test(href) ? '' : ' target="_blank" rel="noopener"') + '>' + btn + '</a></div>';
 				};
-				var issue = function (title, body) { return REPO + '/issues/new?title=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(body); };
+				var mailto = function (subject, body) { return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + (body ? '&body=' + encodeURIComponent(body) : ''); };
 				body = '<div class="info-cards">' +
 					card('✎', L('تصحيح أو إضافة', 'A correction or addition'),
 						L('افتح بلاغًا على GitHub فيه الصفحة والخطأ والتصحيح ورابط المصدر. ستجد زرًّا مثله أسفل كل صفحة وفي صفحات الكتب.', 'Open an issue on GitHub with the page, the mistake, the fix and a link to your source. There is a button like this at the foot of every page and on book pages.'),
 						App.fixHref(L('', '')), L('اقترح تصحيحًا ↗', 'Suggest a fix ↗')) +
 					card('⚖', L('طلب من صاحب حق', 'From a rights holder'),
-						L('لإزالة صورة أو نص أو تعديل إسناده، اذكر العمل والصفحة وصفتك.', 'To remove an image or text or change its credit, name the work, the page, and your role.'),
-						issue(L('طلب حقوق: ', 'Rights request: '), L('الصفحة:\n\nالعمل:\n\nالمطلوب (إزالة / تعديل الإسناد):\n\nصفتك:\n', 'Page:\n\nWork:\n\nRequest (remove / change credit):\n\nYour role:\n')),
-						L('أرسل الطلب ↗', 'Send the request ↗')) +
+						L('لإزالة صورة أو نص أو تعديل إسناده، اذكر العمل والصفحة وصفتك. يصل الطلب بالبريد، فلا يُنشر.', 'To remove an image or text or change its credit, name the work, the page, and your role. It goes by email, so it stays private.'),
+						mailto(L('طلب حقوق', 'Rights request'), L('الصفحة:\n\nالعمل:\n\nالمطلوب (إزالة / تعديل الإسناد):\n\nصفتك:\n', 'Page:\n\nWork:\n\nRequest (remove / change credit):\n\nYour role:\n')),
+						L('أرسل الطلب', 'Send the request')) +
 					card('✉', L('فكرة أو رسالة', 'An idea or a note'),
-						L('اقتراح لصفحة جديدة، أو ذكرى مع كتبه تحب أن تشاركها، أو مجرد تحية.', 'An idea for a new page, a memory of his books you’d like to share, or just hello.'),
-						REPO + '/issues/new', L('اكتب لنا ↗', 'Write to us ↗')) +
+						L('اقتراح لصفحة جديدة، أو ذكرى مع كتبه تحب أن تشاركها، أو مجرد تحية، على ', 'An idea for a new page, a memory of his books you’d like to share, or just hello, at ') + mail + '.',
+						mailto(L('رسالة من الموقع', 'A note from the site')), L('أرسل بريدًا', 'Send an email')) +
 				'</div>' +
-				'<p class="info-note">' + L('الرسائل تُرسل عبر GitHub وتحتاج حسابًا مجانيًا هناك، وتكون علنية — انظر ', 'Messages go through GitHub, need a free account there, and are public — see ') + '<a href="privacy.html">' + L('الخصوصية', 'Privacy') + '</a>.</p>';
+				'<p class="info-note">' + L('التصحيحات تُرسل عبر GitHub وتحتاج حسابًا مجانيًا هناك، وتكون علنية؛ أما البريد إلى ', 'Corrections go through GitHub, need a free account there, and are public; email to ') + mail + L(' فيبقى خاصًا — انظر ', ' stays private — see ') + '<a href="privacy.html">' + L('الخصوصية', 'Privacy') + '</a>.</p>';
 			}
 
 			document.getElementById('content').innerHTML =
