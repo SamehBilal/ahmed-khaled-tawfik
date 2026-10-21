@@ -197,9 +197,10 @@
 			var footer = document.getElementById('site-footer');
 			if (footer) {
 				footer.className = 'site-footer';
-				/* one night for his three series: Ma Wara' al-Tabi'a's bare tree, fog and eyes in the dark;
-				   Fantasia's open book adrift among the stars, shedding sparks; Safari's acacia and a grazing
-				   giraffe on the far horizon. Then his motto on a headstone, and the pocket books' last line */
+				/* one night for his three series, on one hilly horizon: Ma Wara' al-Tabi'a's castle with lit
+				   windows, bare tree, old graves, a broken fence with a cat on it, bats, fog and eyes in the dark;
+				   Safari's acacia, elephant and giraffe against a sunset in the shape of Africa; Fantasia's open
+				   book adrift among the stars. Then his motto on a headstone, and the pocket books' last line */
 				var branches = [
 					['M100 230C99 196 104 162 96 128', 11], ['M97 148C80 128 58 122 36 96', 5], ['M58 120C48 108 50 92 42 76', 3],
 					['M98 132C116 106 142 100 164 74', 5], ['M142 98C152 86 168 86 186 80', 3], ['M96 128C95 96 101 66 92 34', 4],
@@ -211,24 +212,74 @@
 					'<path d="M40 36Q22 28 4 32V8Q22 4 40 12Z" fill="url(#ft-pg)"/><path d="M40 36Q58 28 76 32V8Q58 4 40 12Z" fill="url(#ft-pg)"/>' +
 					'<g fill="none" stroke="#9c8a62" stroke-width=".8" opacity=".7"><path d="M10 13Q22 10 34 15M10 18Q22 15 34 20M10 23Q22 20 34 25"/><path d="M46 15Q58 10 70 13M46 20Q58 15 70 18M46 25Q58 20 70 23"/></g>' +
 					'<path d="M40 12V36" stroke="#7d6c48" stroke-width="1"/></svg>';
-				var acacia = '<svg class="ft-acacia" viewBox="0 0 160 90"><g fill="currentColor">' +
-					'<path d="M76 90 79 52Q70 44 50 40l2-3q18 3 28 10 6-9 26-13l1 3q-17 5-23 15l1 28Z"/>' +
-					'<ellipse cx="80" cy="30" rx="72" ry="8"/><ellipse cx="48" cy="25" rx="34" ry="7"/><ellipse cx="110" cy="24" rx="38" ry="8"/><ellipse cx="80" cy="20" rx="40" ry="6"/></g></svg>';
+				var acacia = '<svg class="ft-acacia" viewBox="0 0 200 110"><g fill="currentColor">' +
+					'<path d="M96 110C97 92 98 80 94 66 88 56 74 50 60 44l2-4c14 4 26 10 34 18 2-8 4-14 0-22l4-2c4 8 4 16 2 24 8-8 22-14 38-18l1 4c-15 6-29 14-35 24-4 12-3 26-2 42Z"/>' +
+					'<ellipse cx="100" cy="30" rx="88" ry="8"/><ellipse cx="58" cy="24" rx="46" ry="9"/><ellipse cx="142" cy="22" rx="50" ry="10"/><ellipse cx="100" cy="17" rx="46" ry="8"/>' +
+					'<ellipse cx="34" cy="32" rx="28" ry="5"/><ellipse cx="168" cy="30" rx="28" ry="5"/></g></svg>';
+				var africa = '<svg class="ft-africa" viewBox="0 0 100 110"><defs>' +
+					'<linearGradient id="ft-sun" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f6c24a"/><stop offset=".55" stop-color="#ee8a2e"/><stop offset="1" stop-color="#c4501f"/></linearGradient>' +
+					'<mask id="ft-bands"><rect width="100" height="110" fill="#fff"/><g fill="#000"><rect x="0" y="15" width="64" height="1.6"/><rect x="10" y="23" width="70" height="1.6"/><rect x="0" y="31" width="58" height="1.6"/><rect x="20" y="39" width="70" height="1.4"/></g></mask></defs>' +
+					'<g mask="url(#ft-bands)" fill="url(#ft-sun)"><path d="M18 6 40 2 55 6 62 4 70 10 76 26 86 34 98 36 90 48 82 60 80 72 76 80 72 92 64 104 52 108 46 100 42 86 40 72 38 60 36 52 30 50 18 52 8 46 2 36 4 24 10 14Z"/>' +
+					'<ellipse cx="88" cy="84" rx="3" ry="7" transform="rotate(20 88 84)"/></g></svg>';
+				var elephant = '<svg class="ft-elephant" viewBox="0 0 70 56"><g fill="currentColor">' +
+					'<path d="M24 20c2-10 16-12 28-10 10 2 16 10 16 20 0 6-2 10-4 12v14h-7l-1-12c-6 2-12 2-16 1v11h-7l-1-14c-4-2-7-6-8-10Z"/><circle cx="22" cy="22" r="11"/>' +
+					'<path d="M14 26C8 28 6 22 6 16S8 4 4 0" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>' +
+					'<path d="M67 30c3 6 3 12 2 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></g>' +
+					'<path d="M24 14c10-2 14 8 10 18" fill="none" stroke="#2a1d14" stroke-width=".9"/>' +
+					'<path d="M15 30c-4 2-6 0-7-2" fill="none" stroke="#e9dcc0" stroke-width="1.6" stroke-linecap="round" opacity=".8"/></svg>';
 				var giraffe = '<svg class="ft-giraffe" viewBox="0 0 60 80"><g fill="currentColor">' +
 					'<g class="neck"><path d="M24 44 12 13l6-3 14 30Z"/><ellipse cx="11" cy="11" rx="7" ry="3.4" transform="rotate(-18 11 11)"/><rect x="11" y="2" width="1.6" height="6" rx=".8"/><rect x="15" y="2" width="1.6" height="6" rx=".8"/></g>' +
 					'<path d="M21 40Q36 33 51 42V52Q36 55 23 52Z"/>' +
 					'<rect x="23" y="49" width="2.6" height="31" rx="1"/><rect x="28" y="50" width="2.6" height="30" rx="1"/><rect x="43" y="50" width="2.6" height="30" rx="1"/><rect x="47.5" y="49" width="2.6" height="31" rx="1"/>' +
 					'<path d="M50.5 43q4 6 3 15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></g></svg>';
+				/* arched window or door: x, y, width, height */
+				var arch = function (x, y, w, h, cls) { return '<path class="' + (cls || '') + '" d="M' + x + ' ' + (y + h) + 'V' + (y + w / 2) + 'a' + (w / 2) + ' ' + (w / 2) + ' 0 0 1 ' + w + ' 0V' + (y + h) + 'Z"/>'; };
+				var castle = '<svg class="ft-castle" viewBox="0 0 120 130"><g fill="currentColor">' +
+					'<rect x="20" y="70" width="80" height="60"/><path d="M20 70h8v-6h6v6h8v-6h6v6"/><path d="M72 70h8v-6h6v6h8v-6h6v6h0"/>' +
+					'<rect x="48" y="30" width="24" height="100"/><path d="M46 30 60 0l14 30Z"/><path d="M60 0V-0" />' +
+					'<rect x="14" y="50" width="18" height="80"/><path d="M12 50 23 20l11 30Z"/>' +
+					'<rect x="88" y="45" width="18" height="85"/><path d="M86 45 97 14l11 31Z"/>' +
+					'<rect x="34" y="60" width="10" height="70"/><path d="M33 60 39 44l6 16Z"/><rect x="76" y="60" width="10" height="70"/><path d="M75 60 81 44l6 16Z"/>' +
+					/* pennants instead of crosses */
+					'<path d="M97 14V6l7 2.5-7 2.5" /><path d="M23 20v-7l6 2.2-6 2.2"/></g>' +
+					'<g class="ft-lit">' + arch(55, 42, 10, 14) + arch(19, 64, 7, 10, 'fl') + arch(94, 58, 6, 10) + arch(36, 84, 7, 12, 'fl2') + arch(77, 84, 7, 12) +
+						'<circle cx="60" cy="80" r="3.2"/>' + arch(53, 106, 14, 24, 'fl') + '</g></svg>';
+				var graves = '<svg class="ft-graves" viewBox="0 0 70 32"><g fill="currentColor">' +
+					'<path d="M2 32V14a7 7 0 0 1 14 0v18Z" transform="rotate(-7 9 32)"/><path d="M24 32V10a8 8 0 0 1 16 0v22Z"/>' +
+					'<path d="M48 32V17a6 6 0 0 1 12 0v15Z" transform="rotate(9 54 32)"/><rect x="60" y="26" width="10" height="6" rx="1"/></g></svg>';
+				var fence = '<svg class="ft-fence" viewBox="0 0 70 34"><g fill="currentColor">' +
+					'<path d="M2 34V8l3-4 3 4v26Z"/><path d="M16 34V7l3-4 3 4v27Z"/><path d="M30 34V9l3-4 3 4v25Z"/><path d="M45 34V10l3-4 3 4v24Z" transform="rotate(8 48 34)"/><path d="M59 34V7l3-4 3 4v27Z"/>' +
+					'<rect x="0" y="12" width="38" height="2.6"/><rect x="0" y="24" width="66" height="2.6"/><rect x="44" y="11" width="22" height="2.6" transform="rotate(-6 55 12)"/></g></svg>';
+				var cat = '<svg class="ft-cat" viewBox="0 0 40 42"><g fill="currentColor"><path d="M12 42C6 42 4 36 6 30s6-8 6-12L10 6l5 5h5l5-5-2 12c0 4 4 6 5 12 2 6-2 12-8 12Z"/>' +
+					'<path d="M26 40c8 0 12-6 8-12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></g>' +
+					'<g class="ft-cat-eyes" fill="#f5c542"><ellipse cx="14.6" cy="15" rx="1.4" ry="1"/><ellipse cx="20.4" cy="15" rx="1.4" ry="1"/></g></svg>';
+				var pine = '<svg class="ft-pine" viewBox="0 0 50 110"><path fill="currentColor" d="M25 0 36 22h-6l12 20h-8l12 22H36l14 24H28v22h-6V88H0l14-24H4l12-22H8l12-20h-6Z"/></svg>';
+				var bat = '<svg viewBox="0 0 20 10"><path fill="currentColor" d="M10 4C8 1 5 0 0 2c3 1 3 3 2 5 2-1 4-1 5 1 1-2 2-2 3-1 1-1 2-1 3 1 1-2 3-2 5-1-1-2-1-4 2-5-5-2-8-1-10 2Z"/></svg>';
+				var bats = [1, 2, 3, 4, 5].map(function (i) { return '<span class="ft-bat b' + i + '">' + bat + '</span>'; }).join('');
+				/* hills with grass along the top edge; the same curve sets how high each thing stands */
+				var hillPts = [[0, 30], [110, 18], [220, 30], [400, 26], [600, 32], [790, 24], [1000, 28]];
+				var hillY = function (x) {
+					for (var k = 1; k < hillPts.length; k++) if (x <= hillPts[k][0]) {
+						var a = hillPts[k - 1], b = hillPts[k], t = (x - a[0]) / (b[0] - a[0]);
+						return a[1] + (b[1] - a[1]) * (1 - Math.cos(t * Math.PI)) / 2;
+					}
+					return 28;
+				};
+				var hill = 'M0 60';
+				for (var hx = 0, hi = 0; hx <= 1000; hx += 4, hi++) hill += 'L' + hx + ' ' + (hillY(hx) - (hi % 3 === 0 ? 3 + (hi * 7) % 5 : 0)).toFixed(1);
+				hill += 'L1000 60Z';
 				footer.innerHTML =
 					'<div class="ft-night" aria-hidden="true">' +
 						'<span class="ft-stars">' + stars + '</span><span class="ft-shoot"></span>' +
 						'<span class="ft-moon"></span>' +
-						'<span class="ft-fantasia">' + book + '<span class="ft-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>' +
-						'<span class="ft-safari">' + acacia + giraffe + '</span>' +
-						'<svg class="ft-tree" viewBox="0 0 200 230"><g fill="none" stroke="currentColor" stroke-linecap="round">' + branches + '</g></svg>' +
-						'<span class="ft-eyes e1"><i></i><i></i></span><span class="ft-eyes e2"><i></i><i></i></span><span class="ft-eyes e3"><i></i><i></i></span>' +
 						'<span class="ft-fog f1"></span><span class="ft-fog f2"></span>' +
-						'<span class="ft-ground"></span>' +
+						'<span class="ft-fantasia">' + book + '<span class="ft-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>' +
+						'<span class="ft-safari">' + africa + acacia + elephant + giraffe + '</span>' +
+						bats + pine + castle +
+						'<svg class="ft-tree" viewBox="0 0 200 230"><g fill="none" stroke="currentColor" stroke-linecap="round">' + branches + '</g></svg>' +
+						graves + fence + cat +
+						'<span class="ft-eyes e2"><i></i><i></i></span><span class="ft-eyes e3"><i></i><i></i></span>' +
+						'<svg class="ft-hills" viewBox="0 0 1000 60" preserveAspectRatio="none"><path d="' + hill + '"/></svg>' +
 					'</div>' +
 					'<div class="ft-body"><div class="wrap">' +
 						'<div class="ft-stone">' +

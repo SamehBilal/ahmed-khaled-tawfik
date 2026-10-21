@@ -133,7 +133,7 @@ html[dir="rtl"] .tb-body .alt { text-align: right; }
 
 /* phones: portrait on top, card below, tilting forward instead of sideways */
 @media (max-width: 540px) {
-	.tb { --tb-line: 50px; }
+	.tb { --tb-line: 50px; overflow-x: clip; } /* the tilted cards are a few px wider at the top */
 	.tb-event { padding-inline-end: 0; margin-bottom: 40px; min-height: 0; }
 	.tb-thumb { position: relative; transform: scale(.8); }
 	.tb-event.open .tb-thumb { transform: scale(.9); }
