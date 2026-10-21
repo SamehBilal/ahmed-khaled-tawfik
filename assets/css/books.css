@@ -482,3 +482,36 @@ body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grays
 	.hc-item .hc-buttons { gap: 6px 10px; margin-top: 6px; font-size: .9em; }
 	.hc-item .hc-caption .type { font-size: 12px; }
 }
+
+/* ---------- Arabic books open from right to left ----------
+   The hardcover is mirrored, so its hinge is on the right and the cover swings out to the right;
+   the cover art and the page text are flipped back so they read the right way. The book sits at
+   the right of its card with room beside it, and the details panel opens on its left. */
+.hc-grid .hc-item { direction: rtl; padding-left: 0; padding-right: 140px; }
+.hc-grid .hc { transform: scaleX(-1); }
+/* flip the art, not the cover itself: a flipped cover would no longer hide its back when it opens */
+.hc-grid .hc-cover > :not(.hc-ribbon), .hc-grid .hc-pages > li > * { transform: scaleX(-1); }
+.hc-grid .hc-ribbon { transform: rotateZ(45deg) translateZ(1px) scaleX(-1); }
+/* each flipped piece gets its own layer, so it has to hide its own back when the cover swings open */
+.hc-grid .hc-cover > * { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.hc-grid .hc-boxwrap { left: auto; right: 140px; }
+.hc-grid .hc-boxwrap::after { left: 30%; right: 0; }
+.hc-grid .hc-item.details-open .hc-box { transform: translateX(70px) rotateY(-75deg); }
+.hc-grid .hc-details { left: -14px; right: 210px; }
+@media (max-width: 560px) {
+	.hc-grid .hc-item { padding-right: 58px; }
+	.hc-grid .hc-details { left: 0; right: 0; }
+}
+
+/* ---------- Details panel: the scrollbar shows only while it scrolls, as a thin ember pill ---------- */
+.hc-details::-webkit-scrollbar { width: 6px; }
+.hc-details::-webkit-scrollbar-track { background: transparent; margin: 14px 0; }
+.hc-details::-webkit-scrollbar-thumb { background: transparent; border-radius: 999px; }
+.hc-details.is-scrolling::-webkit-scrollbar-thumb {
+	background: linear-gradient(to bottom, var(--ember, #e0703a), var(--blood, #b3261e));
+	box-shadow: 0 0 6px rgba(224, 99, 58, .6);
+}
+@supports not selector(::-webkit-scrollbar) {
+	.hc-details { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+	.hc-details.is-scrolling { scrollbar-color: var(--ember, #e0703a) transparent; }
+}

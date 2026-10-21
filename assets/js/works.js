@@ -136,6 +136,14 @@ window.PAGE = {
 			document.addEventListener('click', function (ev) { if (document.body.classList.contains('hc-dim') && !ev.target.closest('.hc-item.details-open, .hc-show-details')) closeDetails(); });
 			document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && document.body.classList.contains('hc-dim')) closeDetails(); });
 			booksEl._wired = true;
+			/* the details panel shows its scrollbar only while it scrolls */
+			booksEl.addEventListener('scroll', function (ev) {
+				var p = ev.target;
+				if (!p.classList || !p.classList.contains('hc-details')) return;
+				p.classList.add('is-scrolling');
+				clearTimeout(p._scrollT);
+				p._scrollT = setTimeout(function () { p.classList.remove('is-scrolling'); }, 900);
+			}, true);
 		}
 
 		function applyFilter() {
