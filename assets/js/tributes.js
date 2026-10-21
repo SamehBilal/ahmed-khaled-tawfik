@@ -52,7 +52,9 @@ window.PAGE = {
 					'</div></div></div>' +
 				'</li>';
 			}).join('') + '</ol>' +
-			(list.some(function (p) { return p.photo; }) ? '<p class="empty-note">' + L('الصور من ويكيميديا كومنز، بتراخيص حرّة.', 'Photos from Wikimedia Commons, under free licences.') + '</p>' : '') +
+			(list.some(function (p) { return p.photo; }) ? '<p class="empty-note">' + (list.some(function (p) { return p.photoSource; })
+				? L('الصور من ويكيميديا كومنز بتراخيص حرّة، وبعضها من صفحات المؤلفين في «عصير الكتب».', 'Photos from Wikimedia Commons under free licences, and some from the authors’ pages on Aseer Al Kotb.')
+				: L('الصور من ويكيميديا كومنز، بتراخيص حرّة.', 'Photos from Wikimedia Commons, under free licences.')) + '</p>' : '') +
 		'</div></section>' +
 		/* books written about him, covers from assets/img/covers/about */
 		((d.aboutBooks || []).length && window.WorksShared ? '<section class="section"><div class="wrap"><h2 class="tb-books-h">' + L('كتب عنه', 'Books about him') + '</h2><div class="cover-grid tb-books">' +

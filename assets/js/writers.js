@@ -64,7 +64,7 @@ window.PAGE = {
 					(w.cover ? '<figure class="wr-photo wr-cover"><img src="' + e(w.cover) + '" alt="' + e(t(w.book)) + '"></figure>' : '') +
 					/* the back cover with his words, or the dedication page, opens at full size */
 					(w.back ? '<figure class="wr-photo wr-cover wr-back"><a href="' + e(w.back) + '" target="_blank" rel="noopener"><img src="' + e(w.back) + '" alt="' + e((w.direction === 'dedication' ? L('صفحة الإهداء — ', 'Dedication page — ') : L('الغلاف الخلفي — ', 'Back cover — ')) + t(w.book)) + '" loading="lazy"></a><figcaption>' + (w.direction === 'dedication' ? L('صفحة الإهداء ↗', 'Dedication page ↗') : L('الغلاف الخلفي ↗', 'Back cover ↗')) + '</figcaption></figure>' : '') +
-					(w.photo ? '<figure class="wr-photo"><img src="' + e(w.photo.url) + '" alt="' + e(t(w.name)) + '" referrerpolicy="no-referrer"><figcaption><a href="' + e(w.photo.file) + '" target="_blank" rel="noopener">' + e(w.photo.license) + ' · Wikimedia Commons</a></figcaption></figure>' : '') +
+					(w.photo ? '<figure class="wr-photo"><img src="' + e(w.photo.url) + '" alt="' + e(t(w.name)) + '" referrerpolicy="no-referrer"><figcaption><a href="' + e(w.photo.file) + '" target="_blank" rel="noopener">' + (w.photo.license ? e(w.photo.license) + ' · ' : '') + (w.photo.source ? tx(w.photo.source) : 'Wikimedia Commons') + '</a></figcaption></figure>' : '') +
 					'<h4>' + tx(w.name) + '</h4>' +
 					'<p class="sub">' + e(App.alt(w.name)) + '</p>' +
 					(meta ? '<p class="meta">' + e(meta) + '</p>' : '') +

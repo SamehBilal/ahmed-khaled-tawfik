@@ -771,3 +771,93 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	A.bookhome = A.bookhome || {};
 	Object.assign(A.bookhome, {"rwg-8":1228,"rwg-9":1229,"rwg-10":1230,"rwg-11":1231,"rwg-12":1232,"rwg-13":1233,"rwg-14":1234,"rwg-15":1235,"rwg-16":1236,"rwg-17":1237,"rwg-18":1238,"rwg-19":1239,"rwg-20":1240,"rwg-21":1241,"rwg-22":1242,"rwg-23":1243,"rwg-24":1244,"rwg-25":1245,"rwg-26":1246,"rwg-27":1247,"rwg-28":1248,"rwg-29":1249,"rwg-30":1250,"rwg-31":1251,"rwg-32":1252,"rwg-33":1253,"rwg-34":1254,"rwg-35":1255,"rwg-36":1256,"rwg-37":1257,"rwg-38":1258,"rwg-39":1259,"rwg-40":1260,"rwg-41":1261,"rwg-42":1262,"rwg-43":1263,"rwg-44":1264,"rwg-45":1265,"rwg-46":1266,"rwg-47":1267,"rwg-48":1268,"rwg-49":1269,"rwg-50":1270,"rwg-51":1271,"rwg-52":1272,"rwg-53":1273,"rwg-54":1274,"rwg-55":1275,"rwg-56":1276,"rwg-57":2462,"rwg-58":2463,"rwg-59":2464,"rwg-60":2465,"rwg-61":2466,"rwg-62":2467,"rwg-63":2468,"rwg-64":2469,"rwg-65":2470,"rwg-66":2471,"rwg-67":2472,"rwg-68":2473,"rwg-69":6728,"rwg-70":8010,"rwg-71":8306,"rwg-72":8677,"rwg-73":8723,"rwg-74":9349,"rwg-75":9824,"rwg-76":10447,"rwg-77":10448,"rwg-78":10780,"rwg-79":10938,"rwg-80":17806,"rwg-81":20192,"rwg-82":23799,"rwg-83":28271});
 })(window.AKT);
+
+/* Author photos from Aseer Al Kotb (each from the author's page there, 150 × 150), for the writers and
+   tributes that have no Wikimedia Commons photo. The caption links back to that page. */
+(function (A) {
+	var photos = {
+		"تامر إبراهيم": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-451733.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/تامر-إبراهيم"
+		},
+		"محمد فتحي": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-271848.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/محمد-فتحي"
+		},
+		"نبيل فاروق": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-176755.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/د-نبيل-فاروق"
+		},
+		"تامر أحمد": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-327144.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/تامر-أحمد"
+		},
+		"ميشيل حنا": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-418823.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/ميشيل-حنا"
+		},
+		"وليد فكري": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-175171.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/وليد-فكري"
+		},
+		"شيرين هنائي": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-175180.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/شيرين-هنائي"
+		},
+		"أحمد مراد": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-321574.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/أحمد-مراد"
+		},
+		"وسام سعيد": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-176770.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/وسام-سعيد"
+		},
+		"محمد عصمت": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-327141.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/محمد-عصمت"
+		},
+		"أحمد صلاح المهدي": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-452031.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/أحمد-صلاح-المهدي"
+		},
+		"عمرو عبد الحميد": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-325967.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/عمرو-عبد-الحميد"
+		},
+		"محمد سليمان عبد المالك": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-356053.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/محمد-سليمان-عبد-المالك"
+		},
+		"أحمد يونس": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-360203.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/أحمد-يونس"
+		},
+		"عبد الوهاب السيد الرفاعي": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-178798.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/عبد-الوهاب-السيد-الرفاعي"
+		},
+		"حسن الجندي": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-326084.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/حسن-الجندي"
+		},
+		"كريج كليفنجر": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-441652.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/كريج-كليفنجر"
+		},
+		"أحمد خالد مصطفى": {
+			"url": "assets/img/photos/writers/aseeralkotb-author-174907.webp",
+			"page": "https://www.aseeralkotb.com/ar/authors/أحمد-خالد-مصطفى"
+		}
+	};
+	var key = function (name) { return String((name && name.ar) || '').replace(/^د\.\s*/, '').trim(); };
+	Object.keys(A.writers || {}).forEach(function (g) {
+		(A.writers[g] || []).forEach(function (w) {
+			var p = photos[key(w.name)];
+			if (p && !w.photo) w.photo = { url: p.url, file: p.page, source: { ar: 'عصير الكتب', en: 'Aseer Al Kotb' } };
+		});
+	});
+	(A.tributes || []).forEach(function (t) {
+		var p = photos[key(t.name)];
+		if (p && !t.photo) { t.photo = p.url; t.photoSource = p.page; }
+	});
+})(window.AKT);
