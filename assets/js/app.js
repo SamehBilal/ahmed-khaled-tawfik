@@ -240,8 +240,8 @@
 				footer.innerHTML =
 					'<div class="ft-night" aria-hidden="true">' +
 						'<span class="ft-stars">' + stars + '</span><span class="ft-shoot"></span>' +
-						/* Fantasia's sky: a big moon with a witch on her broom crossing it (after the Vecteezy Halloween
-						   scene you sent), and a flying saucer with its beam */
+						/* Fantasia's sky: a big moon with a witch on her broom crossing it (from a Vecteezy Halloween
+						   scene, free licence), and a flying saucer with its beam */
 						'<span class="ft-luna"><span class="ft-moon"></span><img class="ft-witch" src="assets/img/footer/witch.webp" alt="" loading="lazy"></span>' +
 						'<svg class="ft-ufo" viewBox="0 0 160 210" aria-hidden="true"><defs>' +
 							'<linearGradient id="ufoBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2ee9a" stop-opacity=".7"/><stop offset="1" stop-color="#e2ee9a" stop-opacity="0"/></linearGradient>' +
@@ -272,7 +272,7 @@
 						'</nav>' +
 						'<div class="ft-notes"><p>' + App.tx(UI.footerNote) + '</p>' +
 							'<p><a href="' + App.esc(App.fixHref()) + '" target="_blank" rel="noopener">' + App.tx(UI.fix) + '</a></p>' +
-							'<p class="ft-credits">' + App.tx(UI.credits) + ' — ' + App.L('التلّ المسكون ومشهد السافاري من ', 'The haunted hill and the savanna scene from ') + '<a href="https://www.vecteezy.com/" target="_blank" rel="noopener">Vecteezy.com</a>.</p></div>' +
+							'<p class="ft-credits">' + App.tx(UI.credits) + ' — ' + App.L('التلّ المسكون ومشهد السافاري والساحرة من ', 'The haunted hill, the savanna scene and the witch from ') + '<a href="https://www.vecteezy.com/" target="_blank" rel="noopener">Vecteezy.com</a>.</p></div>' +
 					'</div>' +
 					'<p class="ft-end">' + App.L('تمّت…', 'The end…') + ' <span>' + App.L('أو هكذا يبدو', 'or so it seems') + '</span></p></div>';
 			}
