@@ -62,7 +62,7 @@ window.PAGE = {
 		/* timeline */
 		document.getElementById('timeline').innerHTML = (d.timeline || []).map(function (ev) {
 			var pics = (ev.images || []).map(function (im) {
-				return '<button type="button" class="tl-pic" data-src="' + e(im.src) + '" data-alt="' + e(t(im.alt)) + '">' +
+				return '<button type="button" class="tl-pic' + (im.w > im.h * 1.2 ? ' wide' : '') + '" data-src="' + e(im.src) + '" data-alt="' + e(t(im.alt)) + '">' +
 					'<img src="' + e(im.src) + '" width="' + im.w + '" height="' + im.h + '" alt="' + e(t(im.alt)) + '" loading="lazy" decoding="async"></button>';
 			}).join('');
 			return '<li class="rise"><div class="yr">' + App.num(ev.year) + '</div><h3>' + tx(ev.title) + '</h3><p>' + tx(ev.text) + '</p>' +
