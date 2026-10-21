@@ -28,8 +28,8 @@
 		},
 		fix: { ar: 'وجدت خطأً أو لديك إضافة؟ اقترح تصحيحًا ↗', en: 'Spotted a mistake or have an addition? Suggest a correction ↗' },
 		credits: {
-			ar: 'تصميم الكتب ثلاثية الأبعاد مبني على عروض Codrops — خط The Godfather من تصميم Jeff Bell.',
-			en: '3D book designs built on Codrops demos — "The Godfather" font by Jeff Bell.'
+			ar: 'تصميم الكتب ثلاثية الأبعاد مبني على عروض Codrops — خط The Godfather من تصميم Jeff Bell — خفافيش التذييل عن عرض Calleb على CodePen.',
+			en: '3D book designs built on Codrops demos — "The Godfather" font by Jeff Bell — the footer bats after Calleb on CodePen.'
 		}
 	};
 
@@ -255,7 +255,18 @@
 					'<g class="ft-cat-eyes" fill="#f5c542"><ellipse cx="14.6" cy="15" rx="1.4" ry="1"/><ellipse cx="20.4" cy="15" rx="1.4" ry="1"/></g></svg>';
 				var pine = '<svg class="ft-pine" viewBox="0 0 50 110"><path fill="currentColor" d="M25 0 36 22h-6l12 20h-8l12 22H36l14 24H28v22h-6V88H0l14-24H4l12-22H8l12-20h-6Z"/></svg>';
 				var bat = '<svg viewBox="0 0 20 10"><path fill="currentColor" d="M10 4C8 1 5 0 0 2c3 1 3 3 2 5 2-1 4-1 5 1 1-2 2-2 3-1 1-1 2-1 3 1 1-2 3-2 5-1-1-2-1-4 2-5-5-2-8-1-10 2Z"/></svg>';
-				var bats = [1, 2, 3, 4, 5].map(function (i) { return '<span class="ft-bat b' + i + '">' + bat + '</span>'; }).join('');
+				/* the bats: after Calleb's CodePen "Halloween" (codepen.io/Calleb/pen/vYZqgwz, MIT) —
+				   three of them, wings flapping, eyes glowing, each on its own flight path */
+				var penBat = function (k) {
+					return '<g class="pb pb' + k + '">' +
+						'<path d="M306.9,145.4l-7.3,7.3l-7.3-7.3c-0.6-0.6-1.6-0.2-1.6,0.6v7.9h7.6h2.5h7.6V146C308.5,145.2,307.5,144.8,306.9,145.4z"/>' +
+						'<path class="pb-w" d="M408.4,167.5c-3.3-2.7-7.6-4.4-12.2-4.4c-9.3,0-17.1,6.6-18.9,15.4c-2.8-1.6-6.1-2.5-9.6-2.5c-8.5,0-15.7,5.5-18.3,13.1c-3-6.6-9.7-11.3-17.5-11.3c-7.7,0-14.4,4.6-17.5,11.1c-6.9-4.7-11-10.7-11-17.1c0-2.4,0.6-4.7,1.6-6.9c0.2,0,0.4,0,0.7,0c24.7,0,45.4-9,51.2-21.1C383,144.1,404.5,154.3,408.4,167.5z"/>' +
+						'<path class="pb-w1" d="M191.6,167.5c3.3-2.7,7.6-4.4,12.2-4.4c9.3,0,17.1,6.6,18.9,15.4c2.8-1.6,6.1-2.5,9.6-2.5c8.5,0,15.7,5.5,18.3,13.1c3-6.6,9.7-11.3,17.5-11.3c7.7,0,14.4,4.6,17.5,11.1c6.9-4.7,11-10.7,11-17.1c0-2.4-0.6-4.7-1.6-6.9c-0.2,0-0.4,0-0.7,0c-24.7,0-45.4-9-51.2-21.1C217,144.1,195.5,154.3,191.6,167.5z"/>' +
+						'<path d="M312.3,158.2c0,5.2-6,27.3-12.9,27.3c-7,0-12.3-22.1-12.3-27.3s5.7-9.5,12.6-9.5C306.6,148.8,312.3,153,312.3,158.2z"/>' +
+						'<ellipse class="pb-eye" cx="295.2" cy="161.8" rx="1.5" ry="3"/><ellipse class="pb-eye" cx="304.2" cy="161.8" rx="1.5" ry="3"/>' +
+					'</g>';
+				};
+				var bats = '<svg class="ft-bats" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet">' + penBat(0) + penBat(1) + penBat(2) + '</svg>';
 				/* hills with grass along the top edge; the same curve sets how high each thing stands */
 				var hillPts = [[0, 30], [110, 18], [220, 30], [400, 26], [600, 32], [790, 24], [1000, 28]];
 				var hillY = function (x) {

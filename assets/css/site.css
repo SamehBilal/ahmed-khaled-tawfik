@@ -606,3 +606,29 @@ html[dir="rtl"] .award { padding: 18px 58px 16px 18px; }
 .award .src { color: var(--muted); }
 #about-section .cover-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 22px 16px; }
 .d-block .award h3 { font-size: 19px; margin: 2px 0 6px; }
+
+/* ---------- Footer bats, after Calleb's CodePen "Halloween" (MIT) ----------
+   One 600 × 400 sky over the castle and the tree; each bat flies its own 15 s loop and beats its
+   wings once a second. Transforms are about the centre of that sky, as in the pen. */
+.ft-bats { position: absolute; top: -24px; inset-inline-end: 3%; width: 440px; height: 293px; overflow: visible; pointer-events: none; fill: #050507; }
+.ft-bats .pb, .ft-bats .pb-w, .ft-bats .pb-w1 { transform-box: view-box; transform-origin: 50% 50%; }
+.ft-bats .pb-eye { fill: #e0703a; filter: drop-shadow(0 0 3px rgba(255, 140, 60, .9)); }
+.ft-bats .pb0 { animation: pb-move0 15s ease-in-out infinite; }
+.ft-bats .pb1 { animation: pb-move1 15s ease-in-out infinite; }
+.ft-bats .pb2 { animation: pb-move2 15s ease-in-out infinite; }
+.ft-bats .pb-w { animation: pb-wing 1s ease-in-out infinite; }
+.ft-bats .pb-w1 { animation: pb-wing1 1s ease-in-out infinite; }
+.ft-bats .pb1 .pb-w, .ft-bats .pb1 .pb-w1 { animation-duration: .9s; }
+.ft-bats .pb2 .pb-w, .ft-bats .pb2 .pb-w1 { animation-duration: 1.15s; }
+@keyframes pb-move0 { 0%, 100% { transform: translate(150px, 90px) scale(.55) rotate(10deg); } 25% { transform: translate(-150px, 90px) scale(.55) rotate(-10deg); } 50% { transform: translate(-160px, -80px) scale(.55) rotate(10deg); } 75% { transform: translate(-140px, -100px) scale(.55) rotate(-10deg); } }
+@keyframes pb-move1 { 0%, 100% { transform: translate(-140px, -70px) scale(.42) rotate(-10deg); } 25% { transform: translate(0, -50px) scale(.42) rotate(10deg); } 50% { transform: translate(150px, 50px) scale(.42) rotate(-10deg); } 75% { transform: translate(-100px, 30px) scale(.42) rotate(10deg); } 85% { transform: translate(-110px, 90px) scale(.42) rotate(10deg); } }
+@keyframes pb-move2 { 0%, 100% { transform: translate(150px, -70px) scale(.5) rotate(10deg); } 25% { transform: translate(160px, -90px) scale(.35) rotate(-10deg); } 50% { transform: translate(170px, -100px) scale(.35) rotate(10deg); } 75% { transform: translate(105px, -80px) scale(.5) rotate(-10deg); } }
+@keyframes pb-wing { 0%, 100% { transform: none; } 50% { transform: scaleX(.5) rotate(-25deg); } }
+@keyframes pb-wing1 { 0%, 100% { transform: none; } 50% { transform: scaleX(.5) rotate(25deg); } }
+@media (max-width: 640px) { .ft-bats { width: 270px; height: 180px; inset-inline-end: 0; top: -10px; } }
+@media (prefers-reduced-motion: reduce) {
+	.ft-bats .pb, .ft-bats .pb-w, .ft-bats .pb-w1 { animation: none !important; }
+	.ft-bats .pb0 { transform: translate(-150px, -60px) scale(.55); }
+	.ft-bats .pb1 { transform: translate(60px, -90px) scale(.42); }
+	.ft-bats .pb2 { transform: translate(160px, -40px) scale(.35); }
+}
