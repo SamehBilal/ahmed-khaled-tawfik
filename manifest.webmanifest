@@ -44,12 +44,6 @@
 			"sizes": "512x512",
 			"type": "image/png",
 			"purpose": "maskable"
-		},
-		{
-			"src": "assets/img/icon.svg",
-			"sizes": "any",
-			"type": "image/svg+xml",
-			"purpose": "any"
 		}
 	],
 	"shortcuts": [
@@ -115,6 +109,13 @@
 			"label": "الرئيسية — Home"
 		},
 		{
+			"src": "assets/img/screens/wide-timeline.jpg",
+			"sizes": "1280x720",
+			"type": "image/jpeg",
+			"form_factor": "wide",
+			"label": "حياة في محطات — The timeline"
+		},
+		{
 			"src": "assets/img/screens/wide-works.jpg",
 			"sizes": "1280x720",
 			"type": "image/jpeg",
@@ -127,6 +128,13 @@
 			"type": "image/jpeg",
 			"form_factor": "narrow",
 			"label": "الرئيسية — Home"
+		},
+		{
+			"src": "assets/img/screens/narrow-works.jpg",
+			"sizes": "412x915",
+			"type": "image/jpeg",
+			"form_factor": "narrow",
+			"label": "سلاسل شارك فيها — Series he wrote for"
 		},
 		{
 			"src": "assets/img/screens/narrow-characters.jpg",
