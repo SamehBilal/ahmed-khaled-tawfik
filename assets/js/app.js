@@ -197,16 +197,34 @@
 			var footer = document.getElementById('site-footer');
 			if (footer) {
 				footer.className = 'site-footer';
-				/* a night out of Ma Wara' al-Tabi'a: a bare tree under the moon, fog, eyes that blink in the dark,
-				   his motto on a headstone, and the pocket books' last line that never quite ends it */
+				/* one night for his three series: Ma Wara' al-Tabi'a's bare tree, fog and eyes in the dark;
+				   Fantasia's open book adrift among the stars, shedding sparks; Safari's acacia and a grazing
+				   giraffe on the far horizon. Then his motto on a headstone, and the pocket books' last line */
 				var branches = [
 					['M100 230C99 196 104 162 96 128', 11], ['M97 148C80 128 58 122 36 96', 5], ['M58 120C48 108 50 92 42 76', 3],
 					['M98 132C116 106 142 100 164 74', 5], ['M142 98C152 86 168 86 186 80', 3], ['M96 128C95 96 101 66 92 34', 4],
 					['M94 76C80 66 74 50 68 34', 2.5], ['M97 64C110 54 118 38 126 22', 2.5], ['M40 98C30 94 22 96 12 90', 2], ['M164 74C168 60 176 54 182 44', 2]
 				].map(function (b) { return '<path d="' + b[0] + '" stroke-width="' + b[1] + '"/>'; }).join('');
+				var stars = [[6, 18], [11, 52], [19, 30], [24, 8], [29, 64], [38, 22], [44, 46], [51, 12], [57, 36], [63, 58], [69, 16], [74, 42], [81, 26], [86, 60], [92, 12], [96, 40]]
+					.map(function (s, i) { return '<i style="inset-inline-start:' + s[0] + '%;top:' + s[1] + 'px;animation-delay:-' + (i * 0.7 % 5).toFixed(1) + 's"></i>'; }).join('');
+				var book = '<svg class="ft-book" viewBox="0 0 80 40"><defs><linearGradient id="ft-pg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fbf1d2"/><stop offset="1" stop-color="#cdb98a"/></linearGradient></defs>' +
+					'<path d="M40 36Q22 28 4 32V8Q22 4 40 12Z" fill="url(#ft-pg)"/><path d="M40 36Q58 28 76 32V8Q58 4 40 12Z" fill="url(#ft-pg)"/>' +
+					'<g fill="none" stroke="#9c8a62" stroke-width=".8" opacity=".7"><path d="M10 13Q22 10 34 15M10 18Q22 15 34 20M10 23Q22 20 34 25"/><path d="M46 15Q58 10 70 13M46 20Q58 15 70 18M46 25Q58 20 70 23"/></g>' +
+					'<path d="M40 12V36" stroke="#7d6c48" stroke-width="1"/></svg>';
+				var acacia = '<svg class="ft-acacia" viewBox="0 0 160 90"><g fill="currentColor">' +
+					'<path d="M76 90 79 52Q70 44 50 40l2-3q18 3 28 10 6-9 26-13l1 3q-17 5-23 15l1 28Z"/>' +
+					'<ellipse cx="80" cy="30" rx="72" ry="8"/><ellipse cx="48" cy="25" rx="34" ry="7"/><ellipse cx="110" cy="24" rx="38" ry="8"/><ellipse cx="80" cy="20" rx="40" ry="6"/></g></svg>';
+				var giraffe = '<svg class="ft-giraffe" viewBox="0 0 60 80"><g fill="currentColor">' +
+					'<g class="neck"><path d="M24 44 12 13l6-3 14 30Z"/><ellipse cx="11" cy="11" rx="7" ry="3.4" transform="rotate(-18 11 11)"/><rect x="11" y="2" width="1.6" height="6" rx=".8"/><rect x="15" y="2" width="1.6" height="6" rx=".8"/></g>' +
+					'<path d="M21 40Q36 33 51 42V52Q36 55 23 52Z"/>' +
+					'<rect x="23" y="49" width="2.6" height="31" rx="1"/><rect x="28" y="50" width="2.6" height="30" rx="1"/><rect x="43" y="50" width="2.6" height="30" rx="1"/><rect x="47.5" y="49" width="2.6" height="31" rx="1"/>' +
+					'<path d="M50.5 43q4 6 3 15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></g></svg>';
 				footer.innerHTML =
 					'<div class="ft-night" aria-hidden="true">' +
+						'<span class="ft-stars">' + stars + '</span><span class="ft-shoot"></span>' +
 						'<span class="ft-moon"></span>' +
+						'<span class="ft-fantasia">' + book + '<span class="ft-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>' +
+						'<span class="ft-safari">' + acacia + giraffe + '</span>' +
 						'<svg class="ft-tree" viewBox="0 0 200 230"><g fill="none" stroke="currentColor" stroke-linecap="round">' + branches + '</g></svg>' +
 						'<span class="ft-eyes e1"><i></i><i></i></span><span class="ft-eyes e2"><i></i><i></i></span><span class="ft-eyes e3"><i></i><i></i></span>' +
 						'<span class="ft-fog f1"></span><span class="ft-fog f2"></span>' +
