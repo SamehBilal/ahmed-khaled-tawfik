@@ -515,3 +515,17 @@ body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grays
 	.hc-details { scrollbar-width: thin; scrollbar-color: transparent transparent; }
 	.hc-details.is-scrolling { scrollbar-color: var(--ember, #e0703a) transparent; }
 }
+
+/* ---------- Showcase books open the Arabic way ----------
+   The whole book is mirrored (spine on the right, cover swinging open to the right, flipping over the
+   other way), and what is written or drawn on it is flipped back so it reads normally. Each flipped
+   piece hides its own back, or it would show through when the cover opens or the book turns. */
+.bk-list .bk-mirror {
+	position: absolute; top: 0; left: 0; width: 100%; height: 400px;
+	transform: scaleX(-1); transform-style: preserve-3d; -webkit-transform-style: preserve-3d;
+}
+.bk-list .bk-cover > *, .bk-list .bk-back > *, .bk-list .bk-page > .bk-content {
+	transform: scaleX(-1); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+/* the spine title is already turned on its side, so its lines flip along their height */
+.bk-list .bk-left h2 > span { display: block; transform: scaleY(-1); backface-visibility: hidden; -webkit-backface-visibility: hidden; }

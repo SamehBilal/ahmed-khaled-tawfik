@@ -20,7 +20,8 @@
 
 		return '' +
 		'<li class="rise"' + (o.id ? ' id="' + e(o.id) + '"' : '') + (o.key ? ' data-ls-key="' + e(o.key) + '"' : '') + '>' +
-			'<div class="bk-book bk-bookdefault" style="--bk-c:' + e(o.color || '#333') + '">' +
+			/* mirrored, so the spine is on the right and the cover opens to the right, as Arabic books do */
+			'<div class="bk-mirror"><div class="bk-book bk-bookdefault" style="--bk-c:' + e(o.color || '#333') + '">' +
 				'<div class="bk-front">' +
 					'<div class="bk-cover-back"></div>' +
 					'<div class="bk-cover' + (o.img ? ' has-img' : '') + '">' +
@@ -36,7 +37,7 @@
 				'<div class="bk-left"><h2><span class="t-ar">' + e(o.title.ar || '') + '</span><span class="t-en">' + e(o.title.en || '') + '</span></h2></div>' +
 				'<div class="bk-top"></div>' +
 				'<div class="bk-bottom"></div>' +
-			'</div>' +
+			'</div></div>' +
 			'<div class="bk-info">' +
 				'<div class="bk-actions">' +
 					'<button type="button" class="bk-bookback">' + (App.lang === 'ar' ? 'اقلب الكتاب' : 'Flip') + '</button>' +
