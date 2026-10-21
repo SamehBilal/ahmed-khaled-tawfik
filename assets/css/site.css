@@ -704,3 +704,20 @@ html[dir="ltr"] .ft-night { background: radial-gradient(260px 120px at 16% 68px,
 html[lang="en"] .site-footer .ft-stone .motto { font-size: 22px; }
 @media (max-width: 900px) { .ft-stone { margin-top: -110px; } }
 @media (max-width: 640px) { .ft-stone { margin-top: -40px; } }
+
+/* ---------- Fantasia's colours: the saucer turns violet and moves to the outer edge; the book flies on the witch's other side ---------- */
+.ft-ufo { inset-inline-start: 1.5%; top: 4px; filter: drop-shadow(0 0 10px rgba(170, 120, 255, .45)); }
+.ft-fantasia { inset-inline-start: calc(11% + 128px); top: 54px; }
+@media (max-width: 1199px) { .ft-ufo { inset-inline-start: 1%; } .ft-fantasia { inset-inline-start: calc(11% + 108px); } }
+@media (max-width: 640px) { .ft-ufo { inset-inline-start: 3%; top: 60px; } .ft-fantasia { inset-inline-start: calc(30% + 82px); top: 34px; } }
+
+/* ---------- Fantasia's citadel: violet towers on a floating island, bobbing between the savanna and the headstone ---------- */
+.ft-safari { inset-inline-end: 37%; }
+.ft-citadel { position: absolute; top: 34px; inset-inline-start: 26%; width: 120px; height: auto; overflow: visible;
+	filter: drop-shadow(0 0 14px rgba(150, 100, 240, .45)); animation: ft-float-isle 8s ease-in-out infinite; }
+.ft-citadel .cit-lit { filter: drop-shadow(0 0 3px rgba(220, 190, 255, .95)); animation: ft-cit-glow 5s ease-in-out infinite; }
+@keyframes ft-float-isle { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+@keyframes ft-cit-glow { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
+@media (max-width: 1199px) { .ft-safari { inset-inline-end: 34%; } .ft-citadel { width: 92px; inset-inline-start: 29%; } }
+@media (max-width: 640px) { .ft-safari { inset-inline-end: 52%; } .ft-citadel { width: 62px; inset-inline-start: 5%; top: 124px; } }
+@media (prefers-reduced-motion: reduce) { .ft-citadel, .ft-citadel .cit-lit { animation: none !important; } }

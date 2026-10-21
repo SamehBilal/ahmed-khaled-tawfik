@@ -243,15 +243,17 @@
 						/* Fantasia's sky: a big moon with a witch on her broom crossing it (from a Vecteezy Halloween
 						   scene, free licence), and a flying saucer with its beam */
 						'<span class="ft-luna"><span class="ft-moon"></span><img class="ft-witch" src="assets/img/footer/witch.webp" alt="" loading="lazy"></span>' +
+						/* Fantasia's citadel: violet towers on a floating island, drawn for the site */
+						'<svg class="ft-citadel" viewBox="0 0 160 200" aria-hidden="true"><defs><linearGradient id="citStone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a46c4"/><stop offset=".55" stop-color="#3d1b72"/><stop offset="1" stop-color="#1e0b3c"/></linearGradient><linearGradient id="citRock" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a1d63"/><stop offset="1" stop-color="#0f0620"/></linearGradient></defs><path d="M14 140q66-14 132 0l-12 18-16 8-10 20-14-14-10 26-14-28-12 10-14-20z" fill="url(#citRock)" stroke="#12061f" stroke-width="2" stroke-linejoin="round"/><path d="M58 168c-2 10 2 18-2 26M98 172c3 8-1 14 2 22M42 160c-3 7 0 12-3 18" fill="none" stroke="#2b1450" stroke-width="1.6" stroke-linecap="round"/><g fill="url(#citStone)" stroke="#12061f" stroke-width="1.8" stroke-linejoin="round"><path d="M42 142v-38h76v38z"/><path d="M42 104v-7h7v7h7v-7h7v7h7v-7h7v7h6v-7h7v7h7v-7h7v7h6v-7h6v7"/><path d="M26 142V80h22v62z"/><path d="M22 80l15-40 15 40z"/><path d="M112 142V86h22v56z"/><path d="M108 86l15-34 15 34z"/><path d="M60 142V54h40v88z"/><path d="M54 54l26-50 26 50z"/><path d="M50 104V74h12v30z"/><path d="M47 74l9-18 9 18z"/><path d="M98 104V76h12v28z"/><path d="M95 76l9-17 9 17z"/></g><g fill="#c9a6ff"><path d="M80 4v-8l9 3-9 3"/><path d="M37 40v-7l7 2.5-7 2.5"/><path d="M123 52v-7l7 2.5-7 2.5"/></g><path d="M80 4v-9M37 40v-8M123 52v-8" stroke="#12061f" stroke-width="1.2"/><g class="cit-lit" fill="#efe2ff"><path d="M74 142v-14a6 6 0 0 1 12 0v14z"/><path d="M76 76v-8a4 4 0 0 1 8 0v8z"/><path d="M76 100v-8a4 4 0 0 1 8 0v8z"/><path d="M34 100v-7a3 3 0 0 1 6 0v7z"/><path d="M34 122v-7a3 3 0 0 1 6 0v7z"/><path d="M120 106v-7a3 3 0 0 1 6 0v7z"/><path d="M120 126v-7a3 3 0 0 1 6 0v7z"/><path d="M54 92v-6a2 2 0 0 1 4 0v6z"/><path d="M102 94v-6a2 2 0 0 1 4 0v6z"/><path d="M50 126v-6a3 3 0 0 1 6 0v6z"/><path d="M104 126v-6a3 3 0 0 1 6 0v6z"/></g></svg>' +
 						'<svg class="ft-ufo" viewBox="0 0 160 210" aria-hidden="true"><defs>' +
-							'<linearGradient id="ufoBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2ee9a" stop-opacity=".7"/><stop offset="1" stop-color="#e2ee9a" stop-opacity="0"/></linearGradient>' +
-							'<radialGradient id="ufoDome" cx=".42" cy=".35" r=".7"><stop offset="0" stop-color="#f4f9c8"/><stop offset="1" stop-color="#b8c96a"/></radialGradient></defs>' +
+							'<linearGradient id="ufoBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cdb0ff" stop-opacity=".7"/><stop offset="1" stop-color="#cdb0ff" stop-opacity="0"/></linearGradient>' +
+							'<radialGradient id="ufoDome" cx=".42" cy=".35" r=".7"><stop offset="0" stop-color="#f1e6ff"/><stop offset="1" stop-color="#9a6ae0"/></radialGradient></defs>' +
 							'<path class="ufo-beam" d="M64 54h32l46 156H18z" fill="url(#ufoBeam)"/>' +
 							'<ellipse cx="80" cy="38" rx="25" ry="21" fill="url(#ufoDome)"/>' +
-							'<ellipse cx="80" cy="47" rx="74" ry="14" fill="#123038" stroke="#d6e486" stroke-opacity=".55" stroke-width="1.4"/>' +
-							'<ellipse cx="80" cy="44" rx="58" ry="7" fill="#1b4450"/>' +
-							'<ellipse cx="80" cy="56" rx="20" ry="5" fill="#e2ee9a"/>' +
-							'<g class="ufo-lights" fill="#e2ee9a"><ellipse cx="28" cy="49" rx="5" ry="2.4"/><ellipse cx="50" cy="53" rx="6" ry="2.6"/><ellipse cx="80" cy="54.5" rx="6" ry="2.6"/><ellipse cx="110" cy="53" rx="6" ry="2.6"/><ellipse cx="132" cy="49" rx="5" ry="2.4"/></g>' +
+							'<ellipse cx="80" cy="47" rx="74" ry="14" fill="#24123f" stroke="#c9a6ff" stroke-opacity=".55" stroke-width="1.4"/>' +
+							'<ellipse cx="80" cy="44" rx="58" ry="7" fill="#3a1f63"/>' +
+							'<ellipse cx="80" cy="56" rx="20" ry="5" fill="#d9c2ff"/>' +
+							'<g class="ufo-lights" fill="#ecdcff"><ellipse cx="28" cy="49" rx="5" ry="2.4"/><ellipse cx="50" cy="53" rx="6" ry="2.6"/><ellipse cx="80" cy="54.5" rx="6" ry="2.6"/><ellipse cx="110" cy="53" rx="6" ry="2.6"/><ellipse cx="132" cy="49" rx="5" ry="2.4"/></g>' +
 						'</svg>' +
 						'<span class="ft-fog f1"></span><span class="ft-fog f2"></span>' +
 						'<span class="ft-fantasia">' + book + '<span class="ft-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>' +
