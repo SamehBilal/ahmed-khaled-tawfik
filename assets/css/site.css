@@ -815,7 +815,7 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 html[dir="rtl"] .ft-copy { text-align: right; }
 
 /* timeline pictures (the 1977 Tintin poem) and their viewer */
-.tl-pics { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+.tl-pics { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px; margin-top: 14px; }
 .timeline li:nth-child(odd) .tl-pics { justify-content: flex-end; }
 .tl-pic { padding: 0; border: 1px solid rgba(239, 230, 210, .18); border-radius: 6px; background: none; cursor: zoom-in; overflow: hidden; transition: transform .2s, border-color .2s, box-shadow .2s; }
 .tl-pic img { display: block; width: 120px; height: auto; }
