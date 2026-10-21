@@ -9,7 +9,8 @@
 		articles: { ar: 'مقالات', en: 'Essays & articles' },
 		translation: { ar: 'ترجمة', en: 'Translation' },
 		nonfiction: { ar: 'غير روائي', en: 'Non-fiction' },
-		collab: { ar: 'عمل مشترك', en: 'Collaboration' }
+		collab: { ar: 'عمل مشترك', en: 'Collaboration' },
+		about: { ar: 'كتاب عنه', en: 'A book about him' }
 	};
 
 	/* first letter of the Arabic title, skipping a leading "ال" */
@@ -83,7 +84,7 @@
 		if (s && (o0 || s.contributor)) return { own: false, s: Object.assign({}, s, o0 || {}), info: (d.seriesInfo || {})[id] || {}, other: o0 };
 		if (s) return { own: true, s: s, info: (d.seriesInfo || {})[id] || {}, other: null };
 		var o = window.App.byId(d.otherSeries, id);
-		return o ? { own: false, s: o, info: {}, other: o } : null;
+		return o ? { own: false, inspired: !!o.inspired, s: o, info: (d.seriesInfo || {})[id] || {}, other: o } : null;
 	}
 
 	/* issues of a series: own series from data-issues, others from otherSeries[].issues */
@@ -112,6 +113,9 @@
 		var App = window.App, d = App.data();
 		var w = App.byId(d.works, id);
 		if (w) return { kind: 'work', id: id, item: w, info: (d.bookInfo || {})[id] || {} };
+		/* books other writers wrote about him (tributes page) */
+		var ab = App.byId(d.aboutBooks, id);
+		if (ab) return { kind: 'work', about: true, id: id, item: Object.assign({ type: 'about' }, ab), info: Object.assign({ cover: ab.cover }, (d.bookInfo || {})[id] || {}) };
 		/* special issues: <series>-s<n> */
 		var sp = /^([a-z]+)-s(\d+)$/.exec(id || '');
 		/* the special issues now live in their own series, «الأعداد الخاصة» */
@@ -168,15 +172,23 @@
 		var d = window.App.data();
 		return (d.series || []).filter(function (s) { return !s.contributor && !window.App.byId(d.otherSeries, s.id); });
 	}
+	function inspiredSeries() {
+		return (window.App.data().otherSeries || []).filter(function (s) { return s.inspired; });
+	}
+	/* who wrote a series: him, or the author of a series he contributed to or that his work inspired */
+	function seriesAuthor(ser) {
+		return ser && !ser.own && ser.s.author ? ser.s.author : { ar: 'أحمد خالد توفيق', en: 'Ahmed Khaled Tawfik' };
+	}
 	function contributedSeries() {
 		var d = window.App.data();
-		var list = (d.otherSeries || []).slice();
+		/* series he wrote or translated for; series by others that grew out of his work are listed apart */
+		var list = (d.otherSeries || []).filter(function (s) { return !s.inspired; });
 		(d.series || []).forEach(function (s) { if (s.contributor && !window.App.byId(list, s.id)) list.push(s); });
 		return list;
 	}
 
 	window.WorksShared = {
-		ownSeries: ownSeries, contributedSeries: contributedSeries,
+		ownSeries: ownSeries, contributedSeries: contributedSeries, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
 		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook, issueCover: issueCover,
 		bookHref: bookHref, seriesHref: seriesHref, miniCover: miniCover, coverOf: coverOf

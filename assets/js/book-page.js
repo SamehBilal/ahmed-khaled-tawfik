@@ -46,7 +46,8 @@ window.PAGE = {
 			back: tx(item.synopsis || desc || ''),
 			meta: isIssue ? t(ser.s.title) : (item.year ? String(item.year) : ''),
 			pages: pages,
-			info: { title: '', text: '' }
+			info: { title: '', text: '' },
+			by: r.about ? t(item.by) : isIssue && ser.inspired ? t(S.seriesAuthor(ser)) : ''
 		});
 
 		/* ---------- details table ---------- */
@@ -63,7 +64,10 @@ window.PAGE = {
 		].filter(function (x) { return x[1]; });
 
 		/* ---------- people ---------- */
-		var people = '<a href="index.html">' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + '</a>' +
+		/* a book about him, or a book of a series his work inspired, is by someone else */
+		var otherAuthor = r.about ? item.by : (isIssue && ser.inspired ? S.seriesAuthor(ser) : null);
+		var authorAr = otherAuthor ? otherAuthor.ar : 'أحمد خالد توفيق';
+		var people = (otherAuthor ? '<span>' + tx(otherAuthor) + '</span>' : '<a href="index.html">' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + '</a>') +
 			
 			(info.authors || []).map(function (p) {
 				return '<span class="sep">·</span>' + tx(p) + (p.role ? ' <span class="role">(' + tx(p.role) + ')</span>' : '');
@@ -74,6 +78,7 @@ window.PAGE = {
 		if (isIssue) {
 			if (ser.own && ser.s.hero) chars.push(ser.s.hero);
 			(item.chars || []).forEach(function (c) { if (chars.indexOf(c) < 0) chars.push(c); });
+			if (ser.inspired) (d.characters || []).forEach(function (c) { if (c.work === ser.s.id && chars.indexOf(c.id) < 0) chars.push(c.id); });
 		} else {
 			(d.characters || []).forEach(function (c) { if (c.work === item.id) chars.push(c.id); });
 		}
@@ -91,7 +96,7 @@ window.PAGE = {
 				langName(ed.lang)
 			].filter(Boolean).join(' · ');
 			return '<article class="edition">' +
-				S.miniCover({ img: ed.cover, color: color, title: t(ed.title || title), by: ed.lang && ed.lang !== 'ar' ? 'Ahmed Khaled Tawfik' : '' }) +
+				S.miniCover({ img: ed.cover, color: color, title: t(ed.title || title), by: otherAuthor ? authorAr : ed.lang && ed.lang !== 'ar' ? 'Ahmed Khaled Tawfik' : '' }) +
 				'<div><h4>' + tx(ed.title || title) + '</h4>' +
 				'<p class="meta">' + e(meta) + '</p>' +
 				(ed.translator ? '<p class="meta">' + L('ترجمة: ', 'Translated by ') + tx(ed.translator) + '</p>' : '') +
@@ -114,15 +119,17 @@ window.PAGE = {
 				'<div class="cover-row">' + near.map(function (is) {
 					var here = is === item;
 					return '<a class="cover-link' + (here ? ' here' : '') + '" href="' + App.issueHref(ser.s.id, is) + '"' + (here ? ' aria-current="page"' : '') + '>' +
-						S.miniCover({ color: ser.s.color, title: t(is.title), num: is.n != null ? App.num(is.n) : '' }) + '</a>';
+						S.miniCover({ color: ser.s.color, title: t(is.title), num: is.n != null ? App.num(is.n) : '', by: authorAr }) + '</a>';
 				}).join('') + '</div></section>';
 		} else {
-			var rel = (d.works || []).filter(function (w) { return w.type === item.type && w.id !== item.id; }).slice(0, 8);
+			var rel = r.about ? (d.aboutBooks || []).filter(function (w) { return w.id !== item.id; })
+				: (d.works || []).filter(function (w) { return w.type === item.type && w.id !== item.id; }).slice(0, 8);
 			if (rel.length) {
-				shelf = '<section class="d-block"><div class="d-head"><h3>' + L('من النوع نفسه', 'More like this') + '</h3><a href="works.html">' + L('كل الأعمال ←', 'All works →') + '</a></div>' +
+				shelf = '<section class="d-block"><div class="d-head"><h3>' + (r.about ? L('كتب أخرى عنه', 'More books about him') : L('من النوع نفسه', 'More like this')) + '</h3>' +
+					(r.about ? '<a href="tributes.html">' + L('قالوا عنه ←', 'Tributes →') + '</a>' : '<a href="works.html">' + L('كل الأعمال ←', 'All works →') + '</a>') + '</div>' +
 					'<div class="cover-row">' + rel.map(function (w) {
 						return '<a class="cover-link" href="' + S.bookHref(w.id) + '">' +
-							S.miniCover({ img: S.coverOf((d.bookInfo || {})[w.id]), color: w.color, title: t(w.title), sub: w.year ? App.num(w.year) : '' }) + '</a>';
+							S.miniCover({ img: r.about ? w.cover : S.coverOf((d.bookInfo || {})[w.id]), color: w.color, title: t(w.title), sub: w.year ? App.num(w.year) : '', by: r.about ? t(w.by) : '' }) + '</a>';
 					}).join('') + '</div></section>';
 			}
 		}
@@ -130,7 +137,7 @@ window.PAGE = {
 		var audioTracks = (isIssue && window.Cassette) ? window.Cassette.issueTracks(r.id, t(title)) : [];
 
 		/* ---------- where to buy: store search links for this title (no affiliate codes) ---------- */
-		var qAr = (isIssue && ser ? t(ser.s.title) + ' ' : '') + (title.ar || '') + ' أحمد خالد توفيق';
+		var qAr = (isIssue && ser ? t(ser.s.title) + ' ' : '') + (title.ar || '') + ' ' + authorAr;
 		var enEd = (info.editions || []).filter(function (ed) { return ed.lang === 'en'; })[0];
 		var qEn = enEd ? ((ed2t(enEd) || title.en || '') + ' Ahmed Khaled Towfik') : '';
 		function ed2t(ed) { return ed.title && (ed.title.en || ed.title.ar); }
@@ -167,7 +174,7 @@ window.PAGE = {
 
 		root.innerHTML =
 			'<section class="detail"><div class="wrap">' +
-				'<nav class="crumbs"><a href="works.html">' + L('الأعمال', 'Works') + '</a>' +
+				'<nav class="crumbs">' + (r.about ? '<a href="tributes.html">' + L('قالوا عنه', 'Tributes') + '</a>' : '<a href="works.html">' + L('الأعمال', 'Works') + '</a>') +
 					(isIssue ? ' / <a href="' + S.seriesHref(ser.s.id) + '">' + tx(ser.s.title) + '</a>' : '') + ' / <span>' + tx(title) + '</span></nav>' +
 				'<div class="detail-grid">' +
 					'<aside class="d-cover"><ul class="bk-list bk-solo" id="d-book">' + book + '</ul>' +
@@ -177,7 +184,9 @@ window.PAGE = {
 						'<p class="eyebrow">' + tx(typeLabel) + (isIssue ? ' · <a href="' + S.seriesHref(ser.s.id) + '">' + tx(ser.s.title) + '</a> ' + e(numLabel) : '') + '</p>' +
 						'<h1>' + tx(title) + '</h1>' +
 						'<p class="d-alt">' + e(App.alt(title)) + '</p>' +
-						'<p class="d-by">' + (isIssue && !ser.own ? L('دوره: ', 'His role: ') + tx(ser.s.role || { ar: 'مساهم', en: 'Contributor' }) + ' — ' : L('تأليف ', 'by ')) + people + '</p>' +
+						'<p class="d-by">' + (isIssue && !ser.own && !ser.inspired ? L('دوره: ', 'His role: ') + tx(ser.s.role || { ar: 'مساهم', en: 'Contributor' }) + ' — ' : L('تأليف ', 'by ')) + people + '</p>' +
+						(r.about ? '<p class="d-by">' + L('كتاب عن ', 'About ') + '<a href="index.html">' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + '</a></p>' : '') +
+						(isIssue && ser.inspired && ser.s.role ? '<p class="d-by">' + L('صلتها به: ', 'Link to him: ') + tx(ser.s.role) + '</p>' : '') +
 						(window.Lists ? window.Lists.buttons('b:' + id) : '') +
 						(desc ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +

@@ -57,8 +57,8 @@ window.PAGE = {
 		/* books written about him, covers from assets/img/covers/about */
 		((d.aboutBooks || []).length && window.WorksShared ? '<section class="section"><div class="wrap"><h2 class="tb-books-h">' + L('كتب عنه', 'Books about him') + '</h2><div class="cover-grid tb-books">' +
 			d.aboutBooks.map(function (b) {
-				return '<figure class="cover-link">' + window.WorksShared.miniCover({ img: b.cover, color: '#3a1414', title: t(b.title), by: t(b.by) }) +
-					'<figcaption class="cl-t">' + tx(b.title) + ' — ' + tx(b.by) + '</figcaption></figure>';
+				return '<a class="cover-link" href="book.html?id=' + e(b.id) + '">' + window.WorksShared.miniCover({ img: b.cover, color: b.color || '#3a1414', title: t(b.title), by: t(b.by) }) +
+					'<span class="cl-t">' + tx(b.title) + ' — ' + tx(b.by) + '</span></a>';
 			}).join('') + '</div></div></section>' : '');
 
 		var root = document.getElementById('tb');

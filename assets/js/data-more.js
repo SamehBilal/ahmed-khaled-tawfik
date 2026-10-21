@@ -152,11 +152,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	Object.keys(tr).forEach(function (id) { var b = (A.bookInfo = A.bookInfo || {})[id] = A.bookInfo[id] || {}; b.ownCover = C + 'translations/' + tr[id]; });
 
 	A.aboutBooks = [
-		{ title: { ar: 'العرّاب', en: 'Al-Arrab (The Godfather)' }, by: { ar: 'إيهاب مصطفى', en: 'Ehab Moustafa' }, cover: C + 'about/al-arrab-ehab-moustafa.jpg' },
-		{ title: { ar: 'أسطورة أحمد خالد توفيق', en: 'The Legend of Ahmed Khaled Tawfik' }, by: { ar: 'خلف جابر', en: 'Khalaf Gaber' }, cover: C + 'about/ostoura-khalaf-gaber.webp' },
-		{ title: { ar: 'اسمه خالد', en: 'Esmoh Khaled (His Name Is Khaled)' }, by: { ar: 'محمود حافظ', en: 'Mahmoud Hafez' }, cover: C + 'about/esmoh-khaled-mahmoud-hafez.webp' },
-		{ title: { ar: 'السخرية في أدب أحمد خالد توفيق', en: 'Satire in the Writing of Ahmed Khaled Tawfik' }, by: { ar: 'د. إسلام حمزة', en: 'Dr. Islam Hamza' }, cover: C + 'about/al-sokhreya-islam-hamza.webp' },
-		{ title: { ar: 'اليوتوبيا والديستوبيا في رواية أحمد خالد توفيق', en: 'Utopia and Dystopia in Ahmed Khaled Tawfik’s Novel' }, by: { ar: 'إنجي خالد أحمد', en: 'Engy Khaled Ahmed' }, cover: C + 'about/utopia-dystopia-engy-khaled.webp' }
+		{ title: { ar: 'العرّاب', en: 'Al-Arrab (The Godfather)' }, by: { ar: 'إيهاب مصطفى', en: 'Ehab Moustafa' }, cover: C + 'about/al-arrab-ehab-moustafa.jpg', id: 'about-arrab', color: '#3b1d14', publisher: { ar: 'دار تشكيل', en: 'Tashkeel' } },
+		{ title: { ar: 'أسطورة أحمد خالد توفيق', en: 'The Legend of Ahmed Khaled Tawfik' }, by: { ar: 'خلف جابر', en: 'Khalaf Gaber' }, cover: C + 'about/ostoura-khalaf-gaber.webp', id: 'about-ostoura', color: '#1f2a33', publisher: { ar: 'كيان للنشر والتوزيع', en: 'Kayan' } },
+		{ title: { ar: 'اسمه خالد', en: 'Esmoh Khaled (His Name Is Khaled)' }, by: { ar: 'محمود حافظ', en: 'Mahmoud Hafez' }, cover: C + 'about/esmoh-khaled-mahmoud-hafez.webp', id: 'about-esmoh-khaled', color: '#2c4a3a', publisher: { ar: 'دار كتوبيا', en: 'Kotopia' } },
+		{ title: { ar: 'السخرية في أدب أحمد خالد توفيق', en: 'Satire in the Writing of Ahmed Khaled Tawfik' }, by: { ar: 'د. إسلام حمزة', en: 'Dr. Islam Hamza' }, cover: C + 'about/al-sokhreya-islam-hamza.webp', id: 'about-sokhreya', color: '#4a4a48' },
+		{ title: { ar: 'اليوتوبيا والديستوبيا في رواية أحمد خالد توفيق', en: 'Utopia and Dystopia in Ahmed Khaled Tawfik’s Novel' }, by: { ar: 'إنجي خالد أحمد', en: 'Engy Khaled Ahmed' }, cover: C + 'about/utopia-dystopia-engy-khaled.webp', id: 'about-utopia-dystopia', color: '#5a2a18', publisher: { ar: 'العربي للنشر والتوزيع', en: 'Al-Arabi' } }
 	];
 })(window.AKT);
 
@@ -444,4 +444,103 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		var info = store[k] = store[k] || {};
 		if (!info.cover) { info.cover = covers[k]; info.coverSource = src; }
 	});
+})(window.AKT);
+
+/* لاشين (Lasheen): Sherine Hanaey's series that grew out of his Ma Wara' al-Tabi'a special issue «بعد منتصف الليل».
+   It is listed apart from the series he wrote for (inspired: true): its own series page, a page per book,
+   its characters, the radio show's audio seasons and the collectible staff. Covers in assets/img/covers/lasheen. */
+(function (A) {
+	var ah = function (t) { return 'https://www.audiohatdar.com/serieses/' + encodeURIComponent(t); };
+	A.otherSeries = A.otherSeries || [];
+	A.otherSeries.push({
+		id: 'lasheen', inspired: true,
+		title: { ar: 'لاشين', en: 'Lasheen' },
+		author: { ar: 'شيرين هنائي', en: 'Sherine Hanaey' },
+		owner: { ar: 'شيرين هنائي', en: 'Sherine Hanaey' },
+		years: '2021–2026', count: 18, color: '#6b1d10', hero: 'lasheen-adam',
+		publisher: { ar: 'دار كتوبيا للنشر والتوزيع', en: 'Kotopia' },
+		role: { ar: 'تكمل عالم عدده «أسطورة بعد منتصف الليل» (ما وراء الطبيعة 30) بشخصيات جديدة', en: 'It carries on the world of his issue “The Legend of After Midnight” (Ma Wara’ al-Tabi’a #30) with new characters' },
+		tagline: { ar: 'البرنامج الإذاعي «بعد منتصف الليل» يعود بعد خمسين عامًا — بقلم شيرين هنائي.', en: 'The radio show “After Midnight” returns fifty years on, written by Sherine Hanaey.' },
+		source: 'https://ar.wikipedia.org/wiki/%D9%84%D8%A7%D8%B4%D9%8A%D9%86_(%D8%B3%D9%84%D8%B3%D9%84%D8%A9)',
+		issues: [{"n":1,"title":{"ar":"عهد الدجالين","en":"The Age of Charlatans"},"year":2021,"synopsis":{"ar":"يحكي آدم لاشين قصته التي يقول إن العالم لا يحتملها، وما قرر روايتها إلا وفاءً بوعد لسهير زاهر. تبدأ بمشهد في أوروبا قبل آلاف السنين، ومع الموسم الثاني من البرنامج الإذاعي «بعد منتصف الليل» بعد خمسين عامًا من توقفه.","en":"Adam Lasheen tells a story he says the world cannot bear, only because he promised Soheir Zaher. It opens in Europe thousands of years ago, and with the second season of the radio show After Midnight, fifty years after it was taken off the air."}},{"n":2,"title":{"ar":"أبناء ديهيا","en":"Sons of Dihya"},"year":2021,"synopsis":{"ar":"يواصل قصة لاشين ويعمّق عالمه. منه خرجت «عصا أبناء ديهيا»، أول قطعة مقتنيات فنية مصرية مستلهمة من عالم روائي (2025).","en":"Carries Lasheen’s story on and deepens his world. It gave its name to the Staff of the Sons of Dihya, the first Egyptian collectible made from a novel’s world (2025)."}},{"n":3,"title":{"ar":"كاهنة الأوراس","en":"The Priestess of the Aurès"},"year":2021},{"n":4,"title":{"ar":"خلف قسم اللبان","en":"Behind al-Labban Station"},"year":2022},{"n":5,"title":{"ar":"حكايات الشمندورة","en":"Tales of the Buoy"},"year":2022},{"n":6,"title":{"ar":"جزيرة الضحاك","en":"The Island of al-Dahhak"},"year":2022},{"n":7,"title":{"ar":"دقة ليل","en":"A Knock in the Night"},"year":2022,"synopsis":{"ar":"مغامرة مستقلة يحقق فيها لاشين وسهير زاهر في طقوس «الزار» بالإسماعيلية.","en":"A standalone adventure: Lasheen and Soheir Zaher look into zar rituals in Ismailia."}},{"n":8,"title":{"ar":"لعبة ناجورو","en":"The Nagoro Game"},"year":2023,"synopsis":{"ar":"عن دمى قرية ناجورو اليابانية، وأطفال يختفون حين تظهر.","en":"About the dolls of the Japanese village of Nagoro, and children who vanish when they appear."}},{"n":9,"title":{"ar":"نادي الصلعاوات","en":"The Bald Women’s Club"},"year":2023},{"n":10,"title":{"ar":"نوم العصاري","en":"The Afternoon Nap"},"year":2023},{"n":11,"title":{"ar":"ابن الريح","en":"Son of the Wind"},"year":2023},{"n":12,"title":{"ar":"الزوجة أول من يعلم","en":"The Wife Is the First to Know"},"year":2024,"synopsis":{"ar":"مغامرة لسهير زاهر ورانيا بعيدًا عن لاشين.","en":"An adventure for Soheir Zaher and Rania, away from Lasheen."}},{"n":13,"title":{"ar":"الضفدع","en":"The Frog"}},{"n":14,"title":{"ar":"الزوهري","en":"Al-Zouhari"},"year":2024},{"n":15,"title":{"ar":"عن الرعب والسفر","en":"On Horror and Travel"},"year":2024,"synopsis":{"ar":"صدر أيضًا مسموعًا في أربع حلقات من إنتاج منصة «اقرأ لي» على أوديوهات.","en":"Also out as a four-part audiobook, produced by Iqra Li, on Audiohat."}},{"n":16,"title":{"ar":"أيام الشقلباظ","en":"The Shaqlabaz Days"},"year":2025},{"n":17,"title":{"ar":"الحضرة","en":"The Hadra"},"year":2025},{"n":18,"title":{"ar":"المبدول","en":"The Changeling"},"year":2026}]
+	});
+
+	A.seriesInfo = A.seriesInfo || {};
+	A.seriesInfo.lasheen = {
+		description: {
+			ar: 'في العدد الخاص «أسطورة بعد منتصف الليل» من «ما وراء الطبيعة» كتب أحمد خالد توفيق عن برنامج إذاعي للرعب بهذا الاسم، أُذيع عامي 1969 و1970 ثم أوقفته الرقابة لأثره على نفوس الأطفال.\n\nفي ليلة 31 أكتوبر 2020 أعادت الكاتبة والمترجمة شيرين هنائي البرنامج بموسم ثانٍ مسموع على «أوديوهات» بالتعاون مع دار كتوبيا، تدور أحداثه بعد خمسين عامًا من الموسم الأول. ومن هذا الموسم خرجت سلسلة «لاشين» الروائية بأبطال جدد: آدم لاشين، ابن رجل وُصم بالدجل في قريته، والمصورة سهير زاهر، ومذيع البرنامج مهاب عمارة.\n\nصدر منها 18 كتابًا بين 2021 و2026، وما زالت مواسم البرنامج المسموعة تصدر كل عام.',
+			en: 'In the Ma Wara’ al-Tabi’a special issue “The Legend of After Midnight”, Ahmed Khaled Tawfik wrote about a horror radio show of that name, aired in 1969 and 1970 and then pulled by the censors for its effect on children.\n\nOn 31 October 2020 the writer and translator Sherine Hanaey brought the show back with a second, audio season on Audiohat, with Kotopia, set fifty years after the first. That season grew into the Lasheen novels, with new leads: Adam Lasheen, son of a man branded a charlatan in his village; the photographer Soheir Zaher; and the show’s host, Mohab Amara.\n\nEighteen books have come out between 2021 and 2026, and a new audio season of the show still comes out every year.'
+		},
+		format: { ar: 'روايات قصيرة متسلسلة + مواسم مسموعة', en: 'Serial novellas + audio seasons' },
+		genres: [{ ar: 'رعب', en: 'Horror' }, { ar: 'فانتازيا', en: 'Fantasy' }, { ar: 'أساطير شعبية', en: 'Folklore' }],
+		links: [
+			{ label: 'لاشين — أبجد', url: 'https://www.abjjad.com/books/lists/102/%D9%84%D8%A7%D8%B4%D9%8A%D9%86' },
+			{ label: 'Goodreads', url: 'https://www.goodreads.com/series/335162' },
+			{ label: 'بيت الكتب', url: 'https://www.thebookhome.com/Home/SearchResult?searchKey=%D9%84%D8%A7%D8%B4%D9%8A%D9%86&sortKey=Date%20desc&pageNumber=1' }
+		],
+		blocks: [
+			{
+				title: { ar: 'البداية: عدده «بعد منتصف الليل»', en: 'Where it starts: his “After Midnight”' },
+				items: [
+					{ title: { ar: 'ما وراء الطبيعة 30 — أسطورة بعد منتصف الليل', en: 'Ma Wara’ al-Tabi’a #30 — The Legend of After Midnight' }, href: 'book.html?id=mwt-30', text: { ar: 'العدد الخاص الذي ابتكر فيه البرنامج الإذاعي.', en: 'The special issue where he made up the radio show.' } },
+					{ title: { ar: 'بعد منتصف الليل — مسموعًا على أوديوهات', en: 'After Midnight — as audio on Audiohat' }, url: ah('30_بعد_منتصف_الليل_'), meta: { ar: 'أحمد خالد توفيق', en: 'Ahmed Khaled Tawfik' } },
+					{ title: { ar: 'بعد منتصف الليل — الحلقات المنسية (70)', en: 'After Midnight — The Forgotten Episodes (#70)' }, url: ah('70_بعد_منتصف_الليل_-_الحلقات_المنسية_'), meta: { ar: 'أحمد خالد توفيق · 12 حلقة', en: 'Ahmed Khaled Tawfik · 12 episodes' } }
+				]
+			},
+			{
+				title: { ar: 'مواسم البرنامج المسموعة على أوديوهات', en: 'The show’s audio seasons on Audiohat' },
+				text: { ar: 'إصدارات أوديوهات الأصلية، بقلم شيرين هنائي وبالتعاون مع دار كتوبيا. في الموسم الثاني أدّى محمد خميس دور لاشين، وأخرجه عمرو يسري.', en: 'Audiohat originals, written by Sherine Hanaey with Kotopia. In season two Mohamed Khamis voiced Lasheen; Amr Yousry directed.' },
+				items: [{"title":{"ar":"الموسم الثاني","en":"Season Two"},"url":"https://www.audiohatdar.com/serieses/_02_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2020 · 9 حلقات","en":"2020 · 9 episodes"},"text":{"ar":"«عودة آلة الرعب»","en":"The return of the horror machine"}},{"title":{"ar":"الموسم الثالث","en":"Season Three"},"url":"https://www.audiohatdar.com/serieses/_03_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2021 · 10 حلقات","en":"2021 · 10 episodes"}},{"title":{"ar":"الموسم الرابع","en":"Season Four"},"url":"https://www.audiohatdar.com/serieses/_04_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2022 · 10 حلقات","en":"2022 · 10 episodes"}},{"title":{"ar":"الموسم الخامس","en":"Season Five"},"url":"https://www.audiohatdar.com/serieses/_05_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2023 · 10 حلقات","en":"2023 · 10 episodes"}},{"title":{"ar":"الموسم السادس","en":"Season Six"},"url":"https://www.audiohatdar.com/serieses/_06_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2024 · 10 حلقات","en":"2024 · 10 episodes"}},{"title":{"ar":"الموسم السابع","en":"Season Seven"},"url":"https://www.audiohatdar.com/serieses/_07_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B3%D8%A7%D8%A8%D8%B9_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2025 · 10 حلقات","en":"2025 · 10 episodes"}},{"title":{"ar":"الموسم الثامن","en":"Season Eight"},"url":"https://www.audiohatdar.com/serieses/_08_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B3%D8%A7%D8%A8%D8%B9_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2026 · يصدر قريبًا","en":"2026 · coming soon"}}].concat([{ title: { ar: 'لاشين 15: عن الرعب والسفر — مسموعًا', en: 'Lasheen 15: On Horror and Travel — audiobook' }, url: ah('لاشين:_عن_الرعب_والسفر_'), meta: { ar: '4 حلقات · إنتاج «اقرأ لي»', en: '4 parts · produced by Iqra Li' } }])
+			},
+			{
+				title: { ar: 'عصا أبناء ديهيا', en: 'The Staff of the Sons of Dihya' },
+				text: {
+					ar: 'قطعة مقتنيات فنية صمّمتها وأنتجتها شركة «أوتوجراف» بالتعاون مع دار كتوبيا، أُعلن عنها في نوفمبر 2025. تجسّد رمزًا محوريًا في السلسلة: إرثًا تنتقل قوته عبر الأجيال، وقُدّمت بوصفها أول قطعة تترجم عالمًا أدبيًا مصريًا إلى مقتنى ملموس في مصر والوطن العربي.',
+					en: 'A collectible designed and made by Autograph with Kotopia, announced in November 2025. It stands for one of the series’ central symbols, an heirloom whose power passes down the generations, and was billed as the first piece in Egypt and the Arab world to turn an Egyptian literary world into an object.'
+				},
+				items: [
+					{ title: { ar: 'خبر الإطلاق — صدى الأمة', en: 'Launch report — Sada El-Omma' }, url: 'https://www.sadaelomma.com/2025/11/blog-post_523.html' },
+					{ title: { ar: 'الكتاب الثاني: أبناء ديهيا', en: 'Book two: Sons of Dihya' }, href: 'book.html?id=lasheen-2' }
+				]
+			}
+		],
+		sources: [
+			'https://www.goodreads.com/series/335162',
+			'https://www.audiohatdar.com/serieses',
+			'https://abjjad.com/review/952598331416',
+			'https://www.sadaelomma.com/2025/11/blog-post_523.html'
+		]
+	};
+
+	A.issueInfo = A.issueInfo || {};
+	var files = ["01.jpg","02.jpg","03.jpg","04.jpg","05.jpeg","06.jpg","07.jpeg","08.jpg","09.jpg","10.jpg","11.png","12.png","13.jpeg","14.jpeg","15.png","16.png","17.jpeg","18.png"];
+	files.forEach(function (f, i) {
+		var n = i + 1, k = 'lasheen-' + n, info = A.issueInfo[k] = A.issueInfo[k] || {};
+		info.cover = 'assets/img/covers/lasheen/' + f;
+		info.editions = [{ publisher: { ar: 'دار كتوبيا للنشر والتوزيع', en: 'Kotopia' }, lang: 'ar', cover: info.cover }];
+	});
+	A.issueInfo['lasheen-1'].editions[0].isbn = '9789776692558';
+	A.issueInfo['lasheen-1'].sources = ['https://www.abjjad.com/book/2759000073/'];
+	/* his issue 30 points on to the series it started */
+	var m30 = A.issueInfo['mwt-30'] = A.issueInfo['mwt-30'] || {};
+	m30.links = (m30.links || []).concat([{ label: 'امتداده: سلسلة لاشين — شيرين هنائي', url: 'series.html?id=lasheen' }]);
+
+	A.characters = A.characters || [];
+	A.characters.push(
+		{ id: 'lasheen-adam', name: { ar: 'آدم لاشين', en: 'Adam Lasheen' }, work: 'lasheen',
+			role: { ar: 'البطل والراوي', en: 'Protagonist & narrator' },
+			desc: { ar: 'ابن رجل وُصم بالدجل في قريته، وُلد من صراع بين الحلال والحرام والدجل والشعوذة. يروي قصته لأنه وعد سهير زاهر بذلك، ويقول إنها أكبر من أن يحتملها العالم.', en: 'Son of a man branded a charlatan in his village, born of a struggle between the lawful and the forbidden, sorcery and fraud. He tells his story because he promised Soheir Zaher, and says it is more than the world can bear.' },
+			traits: [{ ar: 'غامض', en: 'Mysterious' }, { ar: 'موصوم', en: 'Marked' }, { ar: 'وريث', en: 'An heir' }] },
+		{ id: 'lasheen-soheir', name: { ar: 'سهير زاهر', en: 'Soheir Zaher' }, work: 'lasheen',
+			role: { ar: 'مصورة ومشاركة في تقديم البرنامج', en: 'Photographer & co-host' },
+			desc: { ar: 'مصورة فوتوغرافية متخصصة في تصوير الماورائيات، صاحبة كتاب «أشباح الموالد». تشارك في تقديم «بعد منتصف الليل»، ولها مغامرات بعيدًا عن لاشين.', en: 'A photographer of the supernatural and author of “Ghosts of the Moulids”. She co-hosts After Midnight and has adventures of her own away from Lasheen.' },
+			traits: [{ ar: 'فضولية', en: 'Curious' }, { ar: 'شجاعة', en: 'Brave' }] },
+		{ id: 'lasheen-mohab', name: { ar: 'مهاب عمارة', en: 'Mohab Amara' }, work: 'lasheen',
+			role: { ar: 'مذيع البرنامج', en: 'The show’s host' },
+			desc: { ar: 'مذيع «بعد منتصف الليل» في موسمه الجديد، يفتتح حلقاته بعبارة «مساء الفل»، وله أدوار مهمة على مدار السلسلة.', en: 'Host of After Midnight in its new run, who opens every episode with “Masa’ el-full” (good evening), and plays a large part across the series.' },
+			traits: [{ ar: 'صوت الليل', en: 'The voice of the night' }] }
+	);
+
+	A.bookhome = A.bookhome || {};
+	Object.assign(A.bookhome, {"lasheen-1":45148,"lasheen-2":47631,"lasheen-3":51089,"lasheen-4":52407,"lasheen-5":58606,"lasheen-6":57190,"lasheen-7":58003,"lasheen-8":59101,"lasheen-9":62318,"lasheen-10":62402,"lasheen-11":65218,"lasheen-12":64171,"lasheen-13":68705,"lasheen-14":68706,"lasheen-15":72877,"lasheen-16":72878,"lasheen-17":76089,"lasheen-18":82000}, { 'about-arrab': 66061, 'about-esmoh-khaled': 64168, 'about-ostoura': 64885, 'about-utopia-dystopia': 63629 });
 })(window.AKT);

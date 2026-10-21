@@ -27,7 +27,7 @@
 						(o.img ? '<img class="bk-img" src="' + e(o.img) + '" alt="" loading="lazy" onerror="this.parentNode.classList.remove(\'has-img\');this.remove()">' : '') +
 						(o.num ? '<span class="bk-num">' + e(o.num) + '</span>' : '') +
 						(o.motif ? '<span class="bk-motif">' + e(o.motif) + '</span>' : '') +
-						'<h2><span class="t-ar">' + e(o.title.ar || '') + '</span><span class="t-en">' + e(o.title.en || '') + '</span><span class="by">د. أحمد خالد توفيق</span></h2>' +
+						'<h2><span class="t-ar">' + e(o.title.ar || '') + '</span><span class="t-en">' + e(o.title.en || '') + '</span><span class="by">' + e(o.by || 'د. أحمد خالد توفيق') + '</span></h2>' +
 					'</div>' +
 				'</div>' +
 				'<div class="bk-page">' + pages + '</div>' +

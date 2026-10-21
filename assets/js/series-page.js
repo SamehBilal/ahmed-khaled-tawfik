@@ -31,7 +31,8 @@ window.PAGE = {
 			color: s.color || '#4b3b2a', title: s.title, motif: S.monogram(s.title),
 			back: tx(s.description || ''), meta: s.years || '',
 			pages: ['<h4>' + tx(s.title) + '</h4>' + App.paras(s.description)],
-			info: { title: '', text: '' }
+			info: { title: '', text: '' },
+			by: ser.inspired ? t(S.seriesAuthor(ser)) : ''
 		};
 		bookOpts.id = '';
 		bookOpts.info = { title: '', text: '' };
@@ -41,14 +42,14 @@ window.PAGE = {
 			[L('عدد الأعداد', 'Issues'), App.num(s.count || (issues.length || ''))],
 			[L('الناشر', 'Publisher'), s.publisher ? t(s.publisher) : ''],
 			[L('صاحب السلسلة', 'Created by'), ser.own ? L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') : (s.owner ? t(s.owner) : '')],
-			[L('دوره', 'His role'), !ser.own && s.role ? t(s.role) : (other && other.role ? t(other.role) : '')],
+			[ser.inspired ? L('صلتها به', 'Link to him') : L('دوره', 'His role'), !ser.own && s.role ? t(s.role) : (other && other.role ? t(other.role) : '')],
 			[L('البطل', 'Lead'), hero ? t(hero.name) : ''],
 			[L('الشكل', 'Format'), info.format ? t(info.format) : '']
 		].filter(function (x) { return x[1]; });
 
 		var issueGrid = issues.map(function (is) {
 			return '<a class="cover-link" href="' + App.issueHref(id, is) + '" title="' + e(t(is.title)) + '">' +
-				S.miniCover({ img: S.issueCover(id, is), color: s.color, title: t(is.title), num: is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '', sub: is.original ? t(is.original) : '' }) +
+				S.miniCover({ img: S.issueCover(id, is), color: s.color, title: t(is.title), num: is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '', sub: is.original ? t(is.original) : '', by: t(S.seriesAuthor(ser)) }) +
 				'<span class="cl-t">' + (is.n != null ? App.num(is.n) + '. ' : '') + tx(is.title) + '</span>' +
 				((d.audio && (d.audio.issues[id + '-' + is.n] || (d.audio.youtube && d.audio.youtube.issues[id + '-' + is.n])) && !(is.part > 1)) ? '<span class="cl-audio" title="' + L('متاح مسموعًا على Audiohat', 'Audiobook on Audiohat') + '">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
 			'</a>';
@@ -78,7 +79,7 @@ window.PAGE = {
 					'<aside class="d-cover"><ul class="bk-list bk-solo" id="d-book">' + window.Books.showcase(bookOpts) + '</ul>' +
 						(links ? '<div class="d-links">' + links + '</div>' : '') + '</aside>' +
 					'<div class="d-main">' +
-						'<p class="eyebrow">' + (ser.own ? L('سلسلة من تأليفه', 'His series') : L('سلسلة شارك فيها', 'A series he contributed to')) + '</p>' +
+						'<p class="eyebrow">' + (ser.own ? L('سلسلة من تأليفه', 'His series') : ser.inspired ? L('عالم خرج من أدبه', 'A world grown from his work') : L('سلسلة شارك فيها', 'A series he contributed to')) + '</p>' +
 						'<h1>' + tx(s.title) + '</h1>' +
 						'<p class="d-alt">' + e(App.alt(s.title)) + '</p>' +
 						(s.tagline ? '<p class="d-by">' + tx(s.tagline) + '</p>' : '') +
@@ -89,6 +90,14 @@ window.PAGE = {
 							info.altTitles.map(function (a) { return '<li><b>' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + '</li>'; }).join('') + '</ul></section>' : '') +
 						(info.readingOrder ? '<section class="d-block"><h3>' + L('ترتيب القراءة', 'Reading order') + '</h3>' + App.paras(info.readingOrder) + '</section>' : '') +
 						(d.audio && issues.some(function (is) { return d.audio.issues[id + '-' + is.n] || (d.audio.youtube && d.audio.youtube.issues[id + '-' + is.n]); }) ? '<p class="note"><a href="audio.html">♪ ' + L('عدد من أعدادها متاح مسموعًا — استمع على المسجّل', 'Many issues are on audio — listen on the cassette deck') + ' ←</a></p>' : '') +
+						(info.blocks || []).map(function (b) {
+							return '<section class="d-block d-extra"><h3>' + tx(b.title) + (b.items && b.items.length > 1 ? ' <small>(' + App.num(b.items.length) + ')</small>' : '') + '</h3>' +
+								(b.text ? App.paras(b.text) : '') +
+								(b.items ? '<ul class="ex-list">' + b.items.map(function (it) {
+									var head = it.href ? '<a href="' + e(it.href) + '">' + tx(it.title) + '</a>' : it.url ? '<a href="' + e(it.url) + '" target="_blank" rel="noopener">' + tx(it.title) + ' ↗</a>' : '<b>' + tx(it.title) + '</b>';
+									return '<li>' + head + (it.meta ? ' <span class="meta">' + tx(it.meta) + '</span>' : '') + (it.text ? '<br><span class="ex-t">' + tx(it.text) + '</span>' : '') + '</li>';
+								}).join('') + '</ul>' : '') + '</section>';
+						}).join('') +
 						(chars.length ? '<section class="d-block"><h3>' + L('الشخصيات', 'Characters') + '</h3><p class="chips-line">' + chars.map(function (c) { return App.charLink(c.id); }).join('') + '</p></section>' : '') +
 						(eds ? '<section class="d-block"><h3>' + L('الطبعات', 'Editions') + '</h3><ul class="ed-list">' + eds + '</ul></section>' : '') +
 						/* collected volumes, box sets and the series logo, from the stores and Wikimedia */
@@ -101,7 +110,7 @@ window.PAGE = {
 					'</div>' +
 				'</div>' +
 				(ser.own && hero && issues.length ? this.proximityHtml(s, hero, issues) : '') +
-				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
+				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
 					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid">' + issueGrid + '</div></section>' : '') +
 				(S.specialIssues(id).length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('الأعداد الخاصة', 'Special issues') + ' <small>(' + App.num(S.specialIssues(id).length) + ')</small></h3></div><div class="cover-grid">' +
 					S.specialIssues(id).map(function (is) {

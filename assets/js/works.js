@@ -41,6 +41,22 @@ window.PAGE = {
 				S.miniCover({ color: o.color, title: t(o.title), sub: o.owner ? t(o.owner) : '', by: o.role ? t(o.role) : ' ' }) +
 				'<span class="cl-t">' + tx(o.title) + (n ? ' · ' + (n === 1 ? App.L('عنوان واحد', '1 title') : n === 2 ? App.L('عنوانان', '2 titles') : App.num(n) + App.L(n <= 10 ? ' عناوين' : ' عنوانًا', ' titles')) : '') + '</span></a>';
 		}).join('');
+		/* series by others that grew out of his work */
+		var insp = S.inspiredSeries(), cs = document.getElementById('contrib-section');
+		var ins = document.getElementById('inspired-section');
+		if (insp.length && cs && !ins) {
+			ins = document.createElement('section');
+			ins.id = 'inspired-section'; ins.className = cs.className;
+			cs.parentNode.insertBefore(ins, cs.nextSibling);
+		}
+		if (ins) ins.innerHTML = '<div class="wrap"><div class="section-head"><div><h2>' + App.L('عوالم خرجت من أدبه', 'Worlds grown from his work') + '</h2>' +
+			'<p class="sub">' + App.L('سلاسل كتبها غيره، تبدأ من حيث توقف أحد أعداده.', 'Series by other writers that pick up where one of his books left off.') + '</p></div></div>' +
+			'<div class="cover-grid">' + insp.map(function (o) {
+				var n = S.seriesIssues(o.id).length, first = S.seriesIssues(o.id)[0];
+				return '<a class="cover-link" href="' + S.seriesHref(o.id) + '">' +
+					S.miniCover({ img: first ? S.issueCover(o.id, first) : '', color: o.color, title: t(o.title), sub: o.owner ? t(o.owner) : '', by: o.author ? t(o.author) : ' ' }) +
+					'<span class="cl-t">' + tx(o.title) + (n ? ' · ' + App.num(n) + App.L(n <= 10 ? ' كتب' : ' كتابًا', ' books') : '') + ' — ' + tx(o.author) + '</span></a>';
+			}).join('') + '</div></div>';
 		window.Books.initShowcase(seriesEl);
 
 		this.renderIssues();
