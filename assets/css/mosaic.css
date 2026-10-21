@@ -1,11 +1,11 @@
 /* =========================================================
-   Isometric book mosaic (guide page) — adapted from a CodePen
+   Isometric book mosaic (Works page) — adapted from a CodePen
    "books on diamond tiles" grid, in the site's palette.
    Every tile is a book that links to its page.
    ========================================================= */
 
 .mosaic {
-	--columns: 3;
+	--columns: 5;
 	--t1: var(--ember);
 	--t2: #6e1a14;
 	--t3: var(--gold);
@@ -22,13 +22,14 @@
 .mosaic ul {
 	list-style: none; padding: 0;
 	display: grid; grid-template-columns: repeat(var(--columns), 1fr);
-	margin: 200px -40px 120px;
+	/* room above the first row: half a tile, which is two columns wide */
+	margin: calc(100vw / var(--columns) + 30px) -40px 120px;
 }
 .mosaic li {
 	grid-column-end: span 2;
 	position: relative; width: 100%; padding-bottom: 100%; margin-top: -50%;
 }
-.mosaic li:nth-child(2n) { grid-column-start: 2; }
+.mosaic li:nth-child(4n-1) { grid-column-start: 2; }
 
 .mosaic li::before, .mosaic li::after {
 	content: ''; position: absolute; display: block; width: 100%; height: 100%;
@@ -67,37 +68,48 @@
 .mosaic .mini-cover .mc-by, .mosaic .mini-cover .mc-s { display: none; }
 .mosaic .mini-cover .mc-num { font-size: 9px; top: 4px; padding: 0 3px; }
 
-/* same column steps as the original, by viewport width */
-@media (min-width: 450px) { .mosaic ul { margin: 190px 40px 120px; } }
-@media (min-width: 600px) {
-	.mosaic { --columns: 5; }
-	.mosaic li:nth-child(2n) { grid-column-start: auto; }
-	.mosaic li:nth-child(4n-1) { grid-column-start: 2; }
-}
-@media (min-width: 900px) {
+/* columns by viewport width, so a tile stays about 190px wide: with 2k+1 columns a row holds k books,
+   and every other row starts one column in (book number (2k)n-(k-1)) */
+@media (min-width: 450px) { .mosaic ul { margin-inline: 40px; } }
+@media (min-width: 520px) {
 	.mosaic { --columns: 7; }
 	.mosaic li:nth-child(4n-1) { grid-column-start: auto; }
 	.mosaic li:nth-child(6n-2) { grid-column-start: 2; }
 }
-@media (min-width: 1200px) {
+@media (min-width: 760px) {
 	.mosaic { --columns: 9; }
 	.mosaic li:nth-child(6n-2) { grid-column-start: auto; }
 	.mosaic li:nth-child(8n-3) { grid-column-start: 2; }
 }
-@media (min-width: 1500px) {
+@media (min-width: 950px) {
 	.mosaic { --columns: 11; }
 	.mosaic li:nth-child(8n-3) { grid-column-start: auto; }
 	.mosaic li:nth-child(10n-4) { grid-column-start: 2; }
 }
-@media (min-width: 1800px) {
+@media (min-width: 1140px) {
 	.mosaic { --columns: 13; }
 	.mosaic li:nth-child(10n-4) { grid-column-start: auto; }
 	.mosaic li:nth-child(12n-5) { grid-column-start: 2; }
 }
-@media (min-width: 2100px) {
+@media (min-width: 1330px) {
 	.mosaic { --columns: 15; }
 	.mosaic li:nth-child(12n-5) { grid-column-start: auto; }
 	.mosaic li:nth-child(14n-6) { grid-column-start: 2; }
+}
+@media (min-width: 1520px) {
+	.mosaic { --columns: 17; }
+	.mosaic li:nth-child(14n-6) { grid-column-start: auto; }
+	.mosaic li:nth-child(16n-7) { grid-column-start: 2; }
+}
+@media (min-width: 1710px) {
+	.mosaic { --columns: 19; }
+	.mosaic li:nth-child(16n-7) { grid-column-start: auto; }
+	.mosaic li:nth-child(18n-8) { grid-column-start: 2; }
+}
+@media (min-width: 1900px) {
+	.mosaic { --columns: 21; }
+	.mosaic li:nth-child(18n-8) { grid-column-start: auto; }
+	.mosaic li:nth-child(20n-9) { grid-column-start: 2; }
 }
 @media (prefers-reduced-motion: reduce) { .mosaic a { transition: none; } }
 @media (max-width: 599px) { .mosaic { max-height: 58vh; } }

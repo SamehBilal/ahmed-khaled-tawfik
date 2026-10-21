@@ -92,34 +92,51 @@ html[data-theme="light"] .stat b { color: var(--blood); }
 
 /* ---------- Guide ---------- */
 
-.paths { display: grid; gap: 28px; }
-.path {
-	display: grid; grid-template-columns: 280px 1fr; gap: 32px;
-	padding: 28px; border-radius: var(--radius);
-	background: var(--ink-2); border: 1px solid var(--line);
-	border-inline-start: 4px solid var(--c, var(--ember));
-}
-.path .for { font-family: var(--f-display); color: var(--c, var(--ember)); font-size: 14px; filter: brightness(1.6); }
+/* reading paths: chips to jump to a path, then each path's header and its books as cover cards in reading order */
+.path-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 34px; }
+.path-chips a { display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; border: 1px solid var(--line); border-radius: 999px;
+	background: var(--ink-2); color: var(--paper); font-family: var(--f-display); font-size: 15px; text-decoration: none; transition: border-color .2s, background .2s; }
+.path-chips a i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 10px var(--c); }
+.path-chips a:hover, .path-chips a:focus-visible { border-color: var(--c); background: color-mix(in srgb, var(--c) 22%, var(--ink-2)); }
+.paths { display: grid; gap: 40px; }
+.path { scroll-margin-top: 90px; border-radius: var(--radius); background: var(--ink-2); border: 1px solid var(--line); overflow: hidden; }
+.path-head { position: relative; padding: 28px 30px 24px; border-bottom: 1px solid var(--line);
+	background: linear-gradient(120deg, color-mix(in srgb, var(--c) 42%, transparent), transparent 70%); }
+html[dir="rtl"] .path-head { background: linear-gradient(-120deg, color-mix(in srgb, var(--c) 42%, transparent), transparent 70%); }
+.path .for { font-family: var(--f-display); color: var(--c, var(--ember)); font-size: 14px; filter: brightness(1.7); }
 html[data-theme="light"] .path .for { filter: none; }
-.path h3 { font-family: var(--f-display); font-size: 26px; margin: 4px 0 8px; line-height: 1.3; }
-.path > div > p { margin: 0; color: var(--paper-dim); }
-.steps { list-style: none; margin: 0; padding: 0; counter-reset: st; display: grid; gap: 16px; }
-.steps li { counter-increment: st; display: grid; grid-template-columns: 34px 52px 1fr; gap: 14px; align-items: start; }
-/* a small cover beside each suggested book */
-.st-thumb { display: block; width: 52px; text-decoration: none; }
-.st-thumb .mini-cover { width: 52px; padding: 4px; border-radius: 2px 4px 4px 2px; box-shadow: 0 6px 14px rgba(0, 0, 0, .35); transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
-.st-thumb .mini-cover .mc-t { font-size: 9px; line-height: 1.2; }
-.st-thumb .mini-cover .mc-by, .st-thumb .mini-cover .mc-num { display: none; }
-.steps li:hover .st-thumb .mini-cover { transform: translateY(-3px) rotate(-3deg); }
-.steps li::before {
-	content: counter(st); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
-	font-family: var(--f-latin); font-weight: 700; color: #fff; background: var(--c, var(--ember));
+.path h3 { font-family: var(--f-chunky); font-weight: 400; font-size: clamp(26px, 3.2vw, 36px); margin: 4px 0 8px; line-height: 1.25; }
+html[lang="en"] .path h3 { font-family: var(--f-display); font-weight: 700; }
+.path-head p { margin: 0; max-width: 680px; color: var(--paper-dim); }
+.path-count { position: absolute; top: 28px; inset-inline-end: 30px; padding: 3px 12px; border-radius: 999px; background: var(--c); color: #fff; font-size: 14px; }
+/* one row per path, every book the same size (up to 150px) on every path */
+.steps { list-style: none; margin: 0; padding: 26px 30px 30px; display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, 150px)); gap: 20px 18px; }
+.step a { display: flex; flex-direction: column; height: 100%; color: inherit; text-decoration: none; }
+.step-cover { position: relative; display: block; }
+.step-cover .mini-cover { width: 100%; transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s; box-shadow: 0 12px 24px rgba(0, 0, 0, .45); }
+.step-cover .mini-cover .mc-by { display: none; }
+.step a:hover .mini-cover, .step a:focus-visible .mini-cover { transform: translateY(-6px) rotate(-2deg); box-shadow: 0 20px 34px rgba(0, 0, 0, .55); }
+.step a:focus-visible { outline: none; }
+.step-n { position: absolute; z-index: 2; top: -10px; inset-inline-start: -10px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+	background: var(--c); color: #fff; font-family: var(--f-latin); font-size: 17px; box-shadow: 0 4px 10px rgba(0, 0, 0, .45), 0 0 0 3px var(--ink-2); }
+.step-t { margin-top: 14px; font-family: var(--f-display); font-size: 17px; line-height: 1.35; color: var(--paper); transition: color .2s; }
+.step a:hover .step-t, .step a:focus-visible .step-t { color: var(--ember); }
+.step-y { font-family: var(--f-latin); font-size: 14px; color: var(--muted); }
+.step-note { margin-top: 6px; color: var(--paper-dim); font-size: .9em; line-height: 1.6;
+	display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+/* tablets and phones: each path's books slide sideways on a shelf */
+@media (max-width: 900px) {
+	.steps { display: flex; gap: 18px; max-width: none; overflow-x: auto; scroll-snap-type: x mandatory; padding: 24px 22px 22px; scrollbar-width: thin; }
+	.step { flex: 0 0 150px; scroll-snap-align: start; }
 }
-.steps a.ttl { font-family: var(--f-display); font-size: 19px; color: var(--paper); }
-.steps a.ttl:hover { color: var(--ember); }
-.steps .meta { font-family: var(--f-latin); color: var(--muted); font-size: 14px; margin-inline-start: 6px; }
-.steps p { margin: 2px 0 0; color: var(--paper-dim); font-size: .95em; }
-@media (max-width: 760px) { .path { grid-template-columns: 1fr; padding: 20px; gap: 16px; } }
+@media (max-width: 640px) {
+	.path-head { padding: 22px 18px 18px; }
+	.path-count { position: static; display: inline-block; margin-top: 12px; }
+	.steps { padding: 24px 18px 22px; }
+	.step { flex-basis: 140px; }
+	.step-t { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) { .step-cover .mini-cover { transition: none; } }
 
 /* ---------- Issue shelves ---------- */
 

@@ -30,7 +30,7 @@ window.PAGE = {
 
 		/* series — showcase books */
 		var seriesEl = document.getElementById('series');
-		seriesEl.innerHTML = S.ownSeries().map(function (s) { return window.Books.showcase(Object.assign(S.seriesBook(s), { key: 's:' + s.id })); }).join('');
+		seriesEl.innerHTML = S.ownSeries().map(function (s) { return window.Books.showcase(Object.assign(S.seriesBook(s), { key: 's:' + s.id, href: S.seriesHref(s.id) })); }).join('');
 
 		/* series by others that he wrote or translated for */
 		var contrib = S.contributedSeries();

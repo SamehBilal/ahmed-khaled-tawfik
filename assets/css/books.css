@@ -555,3 +555,10 @@ body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grays
 	.bk-content.is-scrolling { scrollbar-color: var(--ember, #e0703a) transparent; }
 }
 .bk-page nav button { display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+
+/* a showcase book that links to its page (the series on the Works page) */
+.bk-list > li.bk-linked .bk-mirror { cursor: pointer; }
+.bk-list > li.bk-linked .bk-mirror:focus-visible { outline: 2px solid var(--ember); outline-offset: 8px; border-radius: 4px; }
+.bk-list > li.bk-linked .bk-viewinside, .bk-list > li.bk-linked .bk-viewback { cursor: default; }
+.bk-info h3 a { color: inherit; text-decoration: none; }
+.bk-info h3 a:hover, .bk-info h3 a:focus-visible { color: var(--ember); }

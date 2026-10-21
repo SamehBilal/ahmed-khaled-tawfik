@@ -8,7 +8,8 @@
 
 	/* ---------- Showcase ---------- */
 
-	/* opts: { color, num, motif, title{ar,en}, back (html), meta, pages: [html,...], info: { title, sub, text, facts:[[label,value]] } } */
+	/* opts: { color, num, motif, title{ar,en}, back (html), meta, pages: [html,...], info: { title, sub, text, facts:[[label,value]] }, href }
+	   With href, the closed book is a link to that page (its title in the card too). */
 	function showcase(o) {
 		var App = A(), e = App.esc;
 		var pages = (o.pages || []).map(function (p, i) {
@@ -19,9 +20,9 @@
 		}).join('');
 
 		return '' +
-		'<li class="rise"' + (o.id ? ' id="' + e(o.id) + '"' : '') + (o.key ? ' data-ls-key="' + e(o.key) + '"' : '') + '>' +
+		'<li class="rise' + (o.href ? ' bk-linked' : '') + '"' + (o.id ? ' id="' + e(o.id) + '"' : '') + (o.key ? ' data-ls-key="' + e(o.key) + '"' : '') + (o.href ? ' data-href="' + e(o.href) + '"' : '') + '>' +
 			/* mirrored, so the spine is on the right and the cover opens to the right, as Arabic books do */
-			'<div class="bk-mirror"><div class="bk-book bk-bookdefault" style="--bk-c:' + e(o.color || '#333') + '">' +
+			'<div class="bk-mirror"' + (o.href ? ' role="link" tabindex="0" aria-label="' + e(o.info.title) + '"' : '') + '><div class="bk-book bk-bookdefault" style="--bk-c:' + e(o.color || '#333') + '">' +
 				'<div class="bk-front">' +
 					'<div class="bk-cover-back"></div>' +
 					'<div class="bk-cover' + (o.img ? ' has-img' : '') + '">' +
@@ -43,7 +44,7 @@
 					'<button type="button" class="bk-bookback">' + (App.lang === 'ar' ? 'اقلب الكتاب' : 'Flip') + '</button>' +
 					'<button type="button" class="bk-bookview">' + (App.lang === 'ar' ? 'تصفّح من الداخل' : 'View inside') + '</button>' +
 				'</div>' +
-				'<h3>' + e(o.info.title) + (o.info.sub ? '<small>' + e(o.info.sub) + '</small>' : '') + '</h3>' +
+				'<h3>' + (o.href ? '<a href="' + e(o.href) + '">' + e(o.info.title) + '</a>' : e(o.info.title)) + (o.info.sub ? '<small>' + e(o.info.sub) + '</small>' : '') + '</h3>' +
 				'<p>' + e(o.info.text || '') + '</p>' +
 				(o.info.extra || '') +
 				(facts ? '<div class="facts">' + facts + '</div>' : '') +
@@ -117,6 +118,14 @@
 					show(0);
 				}
 			});
+
+			/* a linked book: clicking it while it stands closed (or Enter on it) opens its page; open or flipped, clicks stay with the book */
+			var href = li.getAttribute('data-href');
+			if (href) {
+				var mirror = li.querySelector('.bk-mirror');
+				mirror.addEventListener('click', function () { if (!state.opened && !state.flip) location.href = href; });
+				mirror.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' && ev.target === mirror) location.href = href; });
+			}
 
 			var counter = null;
 			if (contents.length > 1) {

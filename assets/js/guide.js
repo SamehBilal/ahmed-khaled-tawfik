@@ -138,7 +138,12 @@ window.PAGE = {
 			return S.miniCover({ img: img, color: w.color, title: title });
 		};
 
-		var html = '<section class="section"><div class="wrap"><div class="paths">' + this.paths.map(function (p) {
+		/* the paths as chips to jump to, then each path: its header, and its books as cover cards in reading order */
+		var chips = '<nav class="path-chips" aria-label="' + e(L('طرق القراءة', 'Reading paths')) + '">' + this.paths.map(function (p) {
+			return '<a href="#p-' + p.id + '" style="--c:' + p.color + '"><i></i>' + tx(p.title) + '</a>';
+		}).join('') + '</nav>';
+		var html = '<section class="section"><div class="wrap">' + chips + '<div class="paths">' + this.paths.map(function (p) {
+			var n = 0;
 			var steps = p.steps.map(function (st) {
 				var w = App.findWork(st.ref);
 				if (!w) return '';
@@ -149,14 +154,18 @@ window.PAGE = {
 					title = App.t(w.title) + ' ' + App.num('#' + st.issue) + (it ? ': ' + App.t(it) : '');
 					meta = '';
 				}
-				return '<li><a class="st-thumb" href="' + href + '" tabindex="-1" aria-hidden="true">' + thumb(st, w, App.t(w.title)) + '</a>' +
-					'<div><a class="ttl" href="' + href + '">' + e(title) + '</a>' +
-					(meta ? '<span class="meta">' + e(meta) + '</span>' : '') +
-					'<p>' + (st.note ? tx(st.note) : tx(w.synopsis || w.tagline)) + '</p></div></li>';
+				n++;
+				return '<li class="step"><a href="' + href + '">' +
+					'<span class="step-cover">' + thumb(st, w, App.t(w.title)) + '<b class="step-n">' + App.num(n) + '</b></span>' +
+					'<span class="step-t">' + e(title) + '</span>' +
+					(meta ? '<span class="step-y">' + e(meta) + '</span>' : '') +
+					'<span class="step-note">' + (st.note ? tx(st.note) : tx(w.synopsis || w.tagline)) + '</span>' +
+				'</a></li>';
 			}).join('');
 			return '<article class="path rise" id="p-' + p.id + '" style="--c:' + p.color + '">' +
-				'<div><div class="for">' + tx(p.for) + '</div><h3>' + tx(p.title) + '</h3><p>' + tx(p.text) + '</p></div>' +
-				'<ol class="steps">' + steps + '</ol>' +
+				'<header class="path-head"><div class="for">' + tx(p.for) + '</div><h3>' + tx(p.title) + '</h3><p>' + tx(p.text) + '</p>' +
+					'<span class="path-count">' + App.num(n) + ' ' + (n === 1 ? L('كتاب', 'book') : n === 2 ? L('كتابان', 'books') : L(n <= 10 ? 'كتب' : 'كتابًا', 'books')) + '</span></header>' +
+				'<ol class="steps" style="--n:' + n + '">' + steps + '</ol>' +
 			'</article>';
 		}).join('') + '</div>' +
 		'<p class="issues-note">' + L('لا تعرف ماذا تختار؟ استخدم البحث (اضغط /) أو تصفّح ', 'Still unsure? Use search (press /) or browse ') +
