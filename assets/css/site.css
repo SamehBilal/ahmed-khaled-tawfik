@@ -632,3 +632,10 @@ html[dir="rtl"] .award { padding: 18px 58px 16px 18px; }
 	.ft-bats .pb1 { transform: translate(60px, -90px) scale(.42); }
 	.ft-bats .pb2 { transform: translate(160px, -40px) scale(.35); }
 }
+
+/* ---------- Safari: the Vecteezy savanna (free licence, credited in the footer) before the Africa sunset ---------- */
+.ft-safari { width: 430px; height: 172px; inset-inline-end: 41%; }
+.ft-safari .ft-africa { left: 64px; width: 150px; height: 165px; bottom: 8px; }
+.ft-savanna { position: absolute; left: 0; bottom: -4px; width: 100%; height: auto; display: block; }
+@media (max-width: 1199px) { .ft-safari { inset-inline-end: 40%; scale: .82; transform-origin: 0 100%; } }
+@media (max-width: 640px) { .ft-safari { inset-inline-end: 22%; bottom: 28px; scale: .55; transform-origin: 0 100%; } }

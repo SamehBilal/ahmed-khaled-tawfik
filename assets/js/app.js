@@ -212,26 +212,11 @@
 					'<path d="M40 36Q22 28 4 32V8Q22 4 40 12Z" fill="url(#ft-pg)"/><path d="M40 36Q58 28 76 32V8Q58 4 40 12Z" fill="url(#ft-pg)"/>' +
 					'<g fill="none" stroke="#9c8a62" stroke-width=".8" opacity=".7"><path d="M10 13Q22 10 34 15M10 18Q22 15 34 20M10 23Q22 20 34 25"/><path d="M46 15Q58 10 70 13M46 20Q58 15 70 18M46 25Q58 20 70 23"/></g>' +
 					'<path d="M40 12V36" stroke="#7d6c48" stroke-width="1"/></svg>';
-				var acacia = '<svg class="ft-acacia" viewBox="0 0 200 110"><g fill="currentColor">' +
-					'<path d="M96 110C97 92 98 80 94 66 88 56 74 50 60 44l2-4c14 4 26 10 34 18 2-8 4-14 0-22l4-2c4 8 4 16 2 24 8-8 22-14 38-18l1 4c-15 6-29 14-35 24-4 12-3 26-2 42Z"/>' +
-					'<ellipse cx="100" cy="30" rx="88" ry="8"/><ellipse cx="58" cy="24" rx="46" ry="9"/><ellipse cx="142" cy="22" rx="50" ry="10"/><ellipse cx="100" cy="17" rx="46" ry="8"/>' +
-					'<ellipse cx="34" cy="32" rx="28" ry="5"/><ellipse cx="168" cy="30" rx="28" ry="5"/></g></svg>';
 				var africa = '<svg class="ft-africa" viewBox="0 0 100 110"><defs>' +
 					'<linearGradient id="ft-sun" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f6c24a"/><stop offset=".55" stop-color="#ee8a2e"/><stop offset="1" stop-color="#c4501f"/></linearGradient>' +
 					'<mask id="ft-bands"><rect width="100" height="110" fill="#fff"/><g fill="#000"><rect x="0" y="15" width="64" height="1.6"/><rect x="10" y="23" width="70" height="1.6"/><rect x="0" y="31" width="58" height="1.6"/><rect x="20" y="39" width="70" height="1.4"/></g></mask></defs>' +
 					'<g mask="url(#ft-bands)" fill="url(#ft-sun)"><path d="M18 6 40 2 55 6 62 4 70 10 76 26 86 34 98 36 90 48 82 60 80 72 76 80 72 92 64 104 52 108 46 100 42 86 40 72 38 60 36 52 30 50 18 52 8 46 2 36 4 24 10 14Z"/>' +
 					'<ellipse cx="88" cy="84" rx="3" ry="7" transform="rotate(20 88 84)"/></g></svg>';
-				var elephant = '<svg class="ft-elephant" viewBox="0 0 70 56"><g fill="currentColor">' +
-					'<path d="M24 20c2-10 16-12 28-10 10 2 16 10 16 20 0 6-2 10-4 12v14h-7l-1-12c-6 2-12 2-16 1v11h-7l-1-14c-4-2-7-6-8-10Z"/><circle cx="22" cy="22" r="11"/>' +
-					'<path d="M14 26C8 28 6 22 6 16S8 4 4 0" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>' +
-					'<path d="M67 30c3 6 3 12 2 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></g>' +
-					'<path d="M24 14c10-2 14 8 10 18" fill="none" stroke="#2a1d14" stroke-width=".9"/>' +
-					'<path d="M15 30c-4 2-6 0-7-2" fill="none" stroke="#e9dcc0" stroke-width="1.6" stroke-linecap="round" opacity=".8"/></svg>';
-				var giraffe = '<svg class="ft-giraffe" viewBox="0 0 60 80"><g fill="currentColor">' +
-					'<g class="neck"><path d="M24 44 12 13l6-3 14 30Z"/><ellipse cx="11" cy="11" rx="7" ry="3.4" transform="rotate(-18 11 11)"/><rect x="11" y="2" width="1.6" height="6" rx=".8"/><rect x="15" y="2" width="1.6" height="6" rx=".8"/></g>' +
-					'<path d="M21 40Q36 33 51 42V52Q36 55 23 52Z"/>' +
-					'<rect x="23" y="49" width="2.6" height="31" rx="1"/><rect x="28" y="50" width="2.6" height="30" rx="1"/><rect x="43" y="50" width="2.6" height="30" rx="1"/><rect x="47.5" y="49" width="2.6" height="31" rx="1"/>' +
-					'<path d="M50.5 43q4 6 3 15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></g></svg>';
 				/* arched window or door: x, y, width, height */
 				var arch = function (x, y, w, h, cls) { return '<path class="' + (cls || '') + '" d="M' + x + ' ' + (y + h) + 'V' + (y + w / 2) + 'a' + (w / 2) + ' ' + (w / 2) + ' 0 0 1 ' + w + ' 0V' + (y + h) + 'Z"/>'; };
 				var castle = '<svg class="ft-castle" viewBox="0 0 120 130"><g fill="currentColor">' +
@@ -285,7 +270,8 @@
 						'<span class="ft-moon"></span>' +
 						'<span class="ft-fog f1"></span><span class="ft-fog f2"></span>' +
 						'<span class="ft-fantasia">' + book + '<span class="ft-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>' +
-						'<span class="ft-safari">' + africa + acacia + elephant + giraffe + '</span>' +
+						/* Safari: the savanna from Vecteezy (free licence, credited below) in front of the Africa-shaped sunset */
+						'<span class="ft-safari">' + africa + '<img class="ft-savanna" src="assets/img/footer/savanna.webp" alt="" loading="lazy">' + '</span>' +
 						bats + pine + castle +
 						'<svg class="ft-tree" viewBox="0 0 200 230"><g fill="none" stroke="currentColor" stroke-linecap="round">' + branches + '</g></svg>' +
 						graves + fence + cat +
@@ -303,7 +289,7 @@
 						'</nav>' +
 						'<div class="ft-notes"><p>' + App.tx(UI.footerNote) + '</p>' +
 							'<p><a href="' + App.esc(App.fixHref()) + '" target="_blank" rel="noopener">' + App.tx(UI.fix) + '</a></p>' +
-							'<p class="ft-credits">' + App.tx(UI.credits) + '</p></div>' +
+							'<p class="ft-credits">' + App.tx(UI.credits) + ' — ' + App.L('مشهد السافاري من ', 'The savanna scene from ') + '<a href="https://www.vecteezy.com/free-vector/safari" target="_blank" rel="noopener">Vecteezy.com</a>.</p></div>' +
 					'</div>' +
 					'<p class="ft-end">' + App.L('تمّت…', 'The end…') + ' <span>' + App.L('أو هكذا يبدو', 'or so it seems') + '</span></p></div>';
 			}
