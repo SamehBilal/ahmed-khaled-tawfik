@@ -22,10 +22,6 @@
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
-		footerNote: {
-			ar: 'موقع محبّين غير رسمي، صُنع تقديرًا لأحمد خالد توفيق (1962–2018). البيانات مجمّعة من مصادر عامة — راجع صفحة المصادر.',
-			en: 'An unofficial fan tribute to Ahmed Khaled Tawfik (1962–2018). Data compiled from public sources — see the Sources page.'
-		},
 		/* pages linked only from the footer, not the header */
 		legal: [
 			{ href: 'about.html', ar: 'عن الموقع', en: 'About' },
@@ -35,9 +31,12 @@
 			{ href: 'contact.html', ar: 'تواصل', en: 'Contact' }
 		],
 		fix: { ar: 'وجدت خطأً أو لديك إضافة؟ اقترح تصحيحًا ↗', en: 'Spotted a mistake or have an addition? Suggest a correction ↗' },
-		credits: {
-			ar: 'تصميم الكتب ثلاثية الأبعاد مبني على عروض Codrops — خط The Godfather من تصميم Jeff Bell — خفافيش التذييل عن عرض Calleb على CodePen.',
-			en: '3D book designs built on Codrops demos — "The Godfather" font by Jeff Bell — the footer bats after Calleb on CodePen.'
+		/* the footer's last column: who made the site (the notes and credits live on about.html) */
+		maker: {
+			name: { ar: 'سامح بلال', en: 'Sameh Bilal' },
+			line: { ar: 'موقع محبّين غير رسمي، صمّمه وبناه قارئ نشأ على «ما وراء الطبيعة» و«فانتازيا» و«سافاري».', en: 'An unofficial fan site, designed and built by a reader who grew up on Paranormal, Fantasia and Safari.' },
+			github: 'https://github.com/SamehBilal',
+			portfolio: 'https://samehbilal.github.io/portfolio/'
 		}
 	};
 
@@ -285,9 +284,14 @@
 						'<nav class="ft-legal" aria-labelledby="ft-legal-h"><h2 id="ft-legal-h">' + App.L('خلف الكواليس', 'Behind the site') + '</h2>' +
 							UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 						'</nav>' +
-						'<div class="ft-notes"><p>' + App.tx(UI.footerNote) + '</p>' +
-							'<p><a href="' + App.esc(App.fixHref()) + '" target="_blank" rel="noopener">' + App.tx(UI.fix) + '</a></p>' +
-							'<p class="ft-credits">' + App.tx(UI.credits) + ' — ' + App.L('التلّ المسكون ومشهد السافاري والساحرة من ', 'The haunted hill, the savanna scene and the witch from ') + '<a href="https://www.vecteezy.com/" target="_blank" rel="noopener">Vecteezy.com</a>.</p></div>' +
+						'<div class="ft-maker"><h2>' + App.L('صنعه', 'Made by') + '</h2>' +
+							'<p class="ft-maker-name">' + App.tx(UI.maker.name) + '</p>' +
+							'<p class="ft-maker-line">' + App.tx(UI.maker.line) + '</p>' +
+							'<div class="ft-maker-links">' +
+								'<a href="' + UI.maker.github + '" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>GitHub</a>' +
+								'<a href="' + UI.maker.portfolio + '" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M1.5 5.5h13v8h-13zM5.5 5.5v-2h5v2M1.5 9h13"/></svg>' + App.L('أعمالي', 'Portfolio') + '</a>' +
+							'</div>' +
+						'</div>' +
 					'</div>' +
 					'<p class="ft-end">' + App.L('تمّت…', 'The end…') + ' <span>' + App.L('أو هكذا يبدو', 'or so it seems') + '</span></p></div>';
 			}

@@ -795,3 +795,15 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 	.ft-legal { flex-direction: row; flex-wrap: wrap; gap: 4px 24px; }
 	.ft-legal h2 { flex-basis: 100%; }
 }
+
+/* ---------- The footer's last column: who made the site (notes and credits moved to about.html) ---------- */
+.ft-maker h2 { margin: 0 0 6px; font-family: var(--f-display); font-size: 13px; font-weight: 400; letter-spacing: .08em; color: var(--ember); }
+.ft-maker-name { margin: 0; font-family: var(--f-display); font-size: 26px; line-height: 1.2; color: var(--ft-bright); }
+.ft-maker-line { margin: 6px 0 14px; max-width: 360px; color: var(--ft-dim); font-size: 14px; }
+.ft-maker-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.ft-maker-links a {
+	display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(239, 230, 210, .16); border-radius: 999px;
+	color: var(--ft-text); font-family: var(--f-display); font-size: 14px; transition: color .2s, border-color .2s, box-shadow .2s;
+}
+.ft-maker-links a:hover, .ft-maker-links a:focus-visible { color: var(--ft-bright); border-color: var(--ember); box-shadow: 0 0 14px rgba(224, 99, 58, .35); }
+.ft-maker-links svg { width: 15px; height: 15px; flex: none; }
