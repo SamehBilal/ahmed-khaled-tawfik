@@ -799,7 +799,7 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 /* ---------- The footer's last column: who made the site (notes and credits moved to about.html) ---------- */
 .ft-maker h2 { margin: 0 0 6px; font-family: var(--f-display); font-size: 13px; font-weight: 400; letter-spacing: .08em; color: var(--ember); }
 .ft-maker-name { margin: 0; font-family: var(--f-display); font-size: 26px; line-height: 1.2; color: var(--ft-bright); }
-.ft-maker-line { margin: 6px 0 14px; max-width: 360px; color: var(--ft-dim); font-size: 14px; }
+.ft-maker-line { margin: 6px 0 14px; max-width: 360px; color: var(--ft-dim); }
 .ft-maker-links { display: flex; flex-wrap: wrap; gap: 10px; }
 .ft-maker-links a {
 	display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid rgba(239, 230, 210, .16); border-radius: 999px;
@@ -811,7 +811,7 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 .ft-maker-line { margin: 0 0 14px; max-width: 440px; color: var(--ft-text); }
 .ft-maker-line a { color: var(--ember); }
 .ft-maker-links a.wa:hover, .ft-maker-links a.wa:focus-visible { border-color: #25d366; box-shadow: 0 0 14px rgba(37, 211, 102, .3); }
-.ft-copy { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid rgba(239, 230, 210, .12); color: var(--ft-dim); font-family: var(--f-latin); font-size: 14px; text-align: start; }
+.ft-copy { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid rgba(239, 230, 210, .12); color: var(--ft-dim); font-family: var(--f-latin); text-align: start; }
 html[dir="rtl"] .ft-copy { text-align: right; }
 
 /* timeline pictures (the 1977 Tintin poem) and their viewer */
@@ -827,3 +827,24 @@ html[dir="rtl"] .ft-copy { text-align: right; }
 .pic-dialog img { display: block; max-width: 100%; max-height: 86vh; margin: 0 auto; border-radius: 6px; }
 .pic-dialog figcaption { margin-top: 10px; color: #efe6d2; font-size: 15px; text-align: center; }
 .pic-dialog .close { position: absolute; top: -14px; inset-inline-end: -14px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--ember); color: #fff; font-size: 22px; line-height: 1; cursor: pointer; }
+
+/* the safari car's headlight: the driver flicks it on and off at the elephant.
+   .ft-lamp is laid exactly over the savanna picture (1280 × 470), so the beam is placed in its percentages */
+.ft-lamp { position: absolute; left: 0; bottom: -4px; width: 100%; aspect-ratio: 1280 / 470; pointer-events: none; }
+.ft-lamp::before {
+	content: ''; position: absolute; left: 38.4%; top: 85%; width: 5px; height: 4px; border-radius: 50%;
+	background: #fff4c8; box-shadow: 0 0 6px 3px rgba(255, 220, 130, .8); opacity: 0; animation: ft-headlight 7s infinite;
+}
+.ft-lamp .beam {
+	position: absolute; left: 38.8%; top: calc(86% - 9%); width: 24%; height: 18%;
+	transform-origin: 0 50%; rotate: 4deg; mix-blend-mode: screen; filter: blur(1.5px);
+	clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 60%);
+	background: linear-gradient(to right, rgba(255, 240, 185, .85), rgba(255, 222, 140, .32) 55%, transparent);
+	opacity: 0; animation: ft-headlight 7s infinite;
+}
+@keyframes ft-headlight {
+	0%, 6% { opacity: 0; } 7%, 38% { opacity: 1; } 39%, 55% { opacity: 0; }
+	56%, 58% { opacity: 1; } 59%, 61% { opacity: 0; } 62%, 64% { opacity: 1; } 65%, 67% { opacity: 0; }
+	68%, 90% { opacity: 1; } 91%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .ft-lamp::before, .ft-lamp .beam { animation: none; opacity: .8; } }
