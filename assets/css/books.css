@@ -487,7 +487,7 @@ body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grays
    The hardcover is mirrored, so its hinge is on the right and the cover swings out to the right;
    the cover art and the page text are flipped back so they read the right way. The book sits at
    the right of its card with room beside it, and the details panel opens on its left. */
-.hc-grid .hc-item { direction: rtl; padding-left: 0; padding-right: 140px; }
+.hc-grid .hc-item { direction: rtl; padding-left: 0; /*padding-right: 140px;*/ }
 .hc-grid .hc { transform: scaleX(-1); }
 /* flip the art, not the cover itself: a flipped cover would no longer hide its back when it opens */
 .hc-grid .hc-cover > :not(.hc-ribbon), .hc-grid .hc-pages > li > * { transform: scaleX(-1); }
