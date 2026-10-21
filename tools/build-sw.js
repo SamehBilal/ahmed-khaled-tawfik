@@ -8,6 +8,7 @@ const list = ['./'];
 const add = (rel) => list.push(rel.split(path.sep).join('/'));
 fs.readdirSync(root).filter(f => /\.html$/.test(f) && f !== '404.html').sort().forEach(add);
 add('manifest.webmanifest');
+add('favicon.ico');
 const walk = (dir, test) => fs.readdirSync(path.join(root, dir), { withFileTypes: true }).forEach(d => {
 	const rel = path.join(dir, d.name);
 	if (d.isDirectory()) walk(rel, test); else if (test(rel)) add(rel);

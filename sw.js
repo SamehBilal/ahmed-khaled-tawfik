@@ -7,7 +7,7 @@
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'akt-e072a5e9dd';
+var VERSION = 'akt-f7891d101b';
 var PRECACHE = [
 	'./',
 	'audio.html',
@@ -25,6 +25,7 @@ var PRECACHE = [
 	'works.html',
 	'writers.html',
 	'manifest.webmanifest',
+	'favicon.ico',
 	'assets/js/app.js',
 	'assets/js/audio-page.js',
 	'assets/js/blog.js',
@@ -93,6 +94,8 @@ var PRECACHE = [
 	'assets/fonts/thegodfather-v2-webfont.ttf',
 	'assets/fonts/thegodfather-v2-webfont.woff',
 	'assets/img/icons/apple-touch-icon.png',
+	'assets/img/icons/favicon-32.png',
+	'assets/img/icons/favicon-48.png',
 	'assets/img/icons/icon-192.png',
 	'assets/img/icons/icon-512.png',
 	'assets/img/icons/maskable-192.png',
@@ -104,6 +107,8 @@ var PRECACHE = [
 	'assets/img/cassette/metal_dark.jpg',
 	'assets/img/favicon.svg',
 	'assets/img/grave.webp',
+	'assets/img/icon-maskable.svg',
+	'assets/img/icon.svg',
 	'assets/img/name-lettering.jpg',
 	'assets/img/name-lettering.svg',
 	'assets/img/paper.jpg',

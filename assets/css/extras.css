@@ -260,7 +260,7 @@ button.media:hover { transform: translateY(-4px); border-color: var(--ember); }
 
 .home-hero .name-cover {
 	/* the cover lettering, traced to SVG, used as a mask over the theme gradient */
-	display: block; width: min(100%, 540px); aspect-ratio: 1820 / 470;
+	display: block; width: min(100%, 480px); aspect-ratio: 1820 / 470;
 	background: linear-gradient(180deg, #f6d79a, var(--ember) 55%, var(--blood));
 	-webkit-mask: url('../img/name-lettering.svg') center / contain no-repeat;
 	        mask: url('../img/name-lettering.svg') center / contain no-repeat;
