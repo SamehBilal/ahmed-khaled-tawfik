@@ -811,3 +811,5 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 .ft-maker-line { margin: 0 0 14px; max-width: 440px; color: var(--ft-text); }
 .ft-maker-line a { color: var(--ember); }
 .ft-maker-links a.wa:hover, .ft-maker-links a.wa:focus-visible { border-color: #25d366; box-shadow: 0 0 14px rgba(37, 211, 102, .3); }
+.ft-copy { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid rgba(239, 230, 210, .12); color: var(--ft-dim); font-family: var(--f-latin); font-size: 14px; text-align: start; }
+html[dir="rtl"] .ft-copy { text-align: right; }
