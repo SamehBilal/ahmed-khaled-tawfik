@@ -135,8 +135,11 @@ window.PAGE = {
 		var qEn = enEd ? ((ed2t(enEd) || title.en || '') + ' Ahmed Khaled Towfik') : '';
 		function ed2t(ed) { return ed.title && (ed.title.en || ed.title.ar); }
 		var Q = encodeURIComponent(qAr);
+		/* The Book Home: straight to the book when we know its product page, else its search */
+		var bh = (d.bookhome || {})[r.id] || (d.bookhome || {})[id];
 		var shops = [
 			{ kind: L('ورقي', 'Print'), items: [
+				[L('بيت الكتب', 'The Book Home'), bh ? 'https://www.thebookhome.com/product/index/' + bh : 'https://www.thebookhome.com/Home/SearchResult?searchKey=' + encodeURIComponent(title.ar || '') + '&sortKey=Date%20desc&pageNumber=1'],
 				['Jamalon', 'https://jamalon.com/ar/catalogsearch/result/?q=' + Q],
 				['Amazon.eg', 'https://www.amazon.eg/s?k=' + Q + '&i=stripbooks'],
 				['Noon', 'https://www.noon.com/egypt-ar/search/?q=' + Q]
