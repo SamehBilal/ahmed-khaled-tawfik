@@ -726,7 +726,7 @@ html[lang="en"] .site-footer .ft-stone .motto { font-size: 22px; }
    The citadel stands on its own hill on the horizon as a black silhouette, like the haunted hill and
    the savanna; only its windows are lit, in lilac, and flicker like the castle's. The saucer is a dark
    hull with lilac lights. A faint violet haze hangs over this side, as the sunset does over Africa. */
-.ft-citadel { top: auto; bottom: 22px; inset-inline-start: 23%; width: 168px; animation: none; filter: none; }
+.ft-citadel { top: auto; bottom: 22px; inset-inline-start: 5%; width: 168px; animation: none; filter: none; }
 .ft-citadel .cit-lit { filter: drop-shadow(0 0 4px rgba(200, 170, 255, .9)); animation: none; }
 .ft-citadel .cit-lit .fl { animation: ft-candle 3.8s infinite; }
 .ft-citadel .cit-lit .fl2 { animation: ft-candle 5.4s infinite 1.4s; }
