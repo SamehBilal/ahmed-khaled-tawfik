@@ -807,11 +807,7 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 }
 .ft-maker-links a:hover, .ft-maker-links a:focus-visible { color: var(--ft-bright); border-color: var(--ember); box-shadow: 0 0 14px rgba(224, 99, 58, .35); }
 .ft-maker-links svg { width: 15px; height: 15px; flex: none; }
-/* the note itself, larger, with room around it */
-.ft-maker { padding-top: 4px; }
-.ft-maker-line { margin: 0 0 22px; max-width: 440px; font-size: 18px; line-height: 1.9; color: var(--ft-text); }
-html[lang="en"] .ft-maker-line { font-size: 19px; line-height: 1.6; }
+/* the note at the footer's own size, the buttons in one row under it */
+.ft-maker-line { margin: 0 0 14px; max-width: 440px; color: var(--ft-text); }
 .ft-maker-line a { color: var(--ember); }
-.ft-maker-links { flex-direction: column; align-items: flex-start; gap: 10px; }
-.ft-maker-links a { padding: 8px 16px; font-size: 15px; }
-@media (max-width: 900px) { .ft-maker-links { flex-direction: row; } }
+.ft-maker-links a.wa:hover, .ft-maker-links a.wa:focus-visible { border-color: #25d366; box-shadow: 0 0 14px rgba(37, 211, 102, .3); }
