@@ -813,3 +813,17 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 .ft-maker-links a.wa:hover, .ft-maker-links a.wa:focus-visible { border-color: #25d366; box-shadow: 0 0 14px rgba(37, 211, 102, .3); }
 .ft-copy { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid rgba(239, 230, 210, .12); color: var(--ft-dim); font-family: var(--f-latin); font-size: 14px; text-align: start; }
 html[dir="rtl"] .ft-copy { text-align: right; }
+
+/* timeline pictures (the 1977 Tintin poem) and their viewer */
+.tl-pics { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+.timeline li:nth-child(odd) .tl-pics { justify-content: flex-end; }
+.tl-pic { padding: 0; border: 1px solid rgba(239, 230, 210, .18); border-radius: 6px; background: none; cursor: zoom-in; overflow: hidden; transition: transform .2s, border-color .2s, box-shadow .2s; }
+.tl-pic img { display: block; width: 120px; height: auto; }
+.tl-pic:hover, .tl-pic:focus-visible { transform: translateY(-3px) rotate(-1deg); border-color: var(--ember); box-shadow: 0 10px 24px rgba(0, 0, 0, .45); }
+@media (max-width: 760px) { .timeline li:nth-child(odd) .tl-pics { justify-content: flex-start; } .tl-pic img { width: 104px; } }
+.pic-dialog { max-width: min(94vw, 760px); max-height: 94vh; padding: 0; border: 0; background: transparent; overflow: visible; }
+.pic-dialog::backdrop { background: rgba(5, 5, 8, .88); }
+.pic-dialog figure { margin: 0; }
+.pic-dialog img { display: block; max-width: 100%; max-height: 86vh; margin: 0 auto; border-radius: 6px; }
+.pic-dialog figcaption { margin-top: 10px; color: #efe6d2; font-size: 15px; text-align: center; }
+.pic-dialog .close { position: absolute; top: -14px; inset-inline-end: -14px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--ember); color: #fff; font-size: 22px; line-height: 1; cursor: pointer; }
