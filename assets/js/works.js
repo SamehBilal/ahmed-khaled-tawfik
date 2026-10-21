@@ -26,7 +26,7 @@ window.PAGE = {
 		var App = window.App, d = App.data(), e = App.esc, t = App.t, tx = App.tx;
 		var S = window.WorksShared, self = this;
 
-		this.renderShelfHero();
+		this.renderMosaic();
 
 		/* series — showcase books */
 		var seriesEl = document.getElementById('series');
@@ -354,8 +354,8 @@ window.PAGE = {
 		});
 	},
 
-	/* bookshelf hero at the top (assets/js/shelf-hero.js) */
-	renderShelfHero: function () {
-		if (window.ShelfHero) window.ShelfHero.render(document.getElementById('shelf-hero'));
+	/* the wall of books at the top (assets/js/mosaic.js) */
+	renderMosaic: function () {
+		if (window.Mosaic) window.Mosaic.render();
 	}
 };
