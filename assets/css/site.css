@@ -706,8 +706,8 @@ html[lang="en"] .site-footer .ft-stone .motto { font-size: 22px; }
 @media (max-width: 640px) { .ft-stone { margin-top: -40px; } }
 
 /* ---------- Fantasia's colours: the saucer turns violet and moves to the outer edge; the book flies on the witch's other side ---------- */
-.ft-ufo { inset-inline-start: 1.5%; top: 4px; filter: drop-shadow(0 0 10px rgba(170, 120, 255, .45)); }
-.ft-fantasia { inset-inline-start: calc(11% + 128px); top: 54px; }
+.ft-ufo { inset-inline-start: 2.5%; top: 15px; filter: drop-shadow(0 0 10px rgba(170, 120, 255, .45)); }
+.ft-fantasia { inset-inline-start: calc(6% + 128px); top: 160px; }
 @media (max-width: 1199px) { .ft-ufo { inset-inline-start: 1%; } .ft-fantasia { inset-inline-start: calc(11% + 108px); } }
 @media (max-width: 640px) { .ft-ufo { inset-inline-start: 3%; top: 60px; } .ft-fantasia { inset-inline-start: calc(30% + 82px); top: 34px; } }
 
