@@ -554,3 +554,4 @@ body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grays
 	.bk-content { scrollbar-width: thin; scrollbar-color: transparent transparent; }
 	.bk-content.is-scrolling { scrollbar-color: var(--ember, #e0703a) transparent; }
 }
+.bk-page nav button { display: inline-flex; align-items: center; justify-content: center; padding: 0; }

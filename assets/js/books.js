@@ -121,9 +121,11 @@
 			var counter = null;
 			if (contents.length > 1) {
 				var nav = document.createElement('nav');
-				var rtl = document.documentElement.dir === 'rtl';
-				nav.dir = rtl ? 'rtl' : 'ltr';
-				nav.innerHTML = '<button type="button" aria-label="Previous">' + (rtl ? '&rsaquo;' : '&lsaquo;') + '</button><span class="bk-count"></span><button type="button" aria-label="Next">' + (rtl ? '&lsaquo;' : '&rsaquo;') + '</button>';
+				nav.dir = 'rtl'; /* the books open the Arabic way in both languages, so the next page is always to the left */
+				/* drawn chevrons, not ‹ › characters: those get mirrored by right-to-left text and by the mirrored book */
+				var chev = function (right) { return '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="' + (right ? 'M9 5l7 7-7 7' : 'M15 5l-7 7 7 7') + '" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'; };
+				/* next on the left, previous on the right, both arrows pointing in toward the page count */
+				nav.innerHTML = '<button type="button" aria-label="' + A().L('السابق', 'Previous') + '">' + chev(false) + '</button><span class="bk-count"></span><button type="button" aria-label="' + A().L('التالي', 'Next') + '">' + chev(true) + '</button>';
 				var btns = nav.querySelectorAll('button');
 				counter = nav.querySelector('.bk-count');
 				btns[0].addEventListener('click', function (ev) { ev.stopPropagation(); if (state.current > 0) show(state.current - 1); });
