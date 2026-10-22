@@ -239,6 +239,7 @@ html[dir="rtl"] .bh-heading { clip-path: none; }
 @media (prefers-reduced-motion: reduce) { .bh-icon img { animation: none; } .bh-icon:first-child img { opacity: 1; } }
 
 /* a full article shown from the blog itself */
-.np-text.np-framed { column-count: 1 !important; }
-.np-frame { border: 2px solid var(--np-ink); background: #fff; box-shadow: inset 0 0 0 1px var(--np-ink); padding: 3px; }
-.np-frame iframe { display: block; width: 100%; height: min(78vh, 900px); border: 0; background: #fff; }
+/* the article continues on the blog: a button in the paper's ink, across the columns */
+.np-cont { column-span: all; margin: 18px 0 6px; text-align: center; }
+.np-cont-btn { display: inline-block; padding: 9px 22px; border: 2px solid var(--np-ink); background: var(--np-ink); color: var(--np-paper, #f3ead6); font-family: var(--f-display); font-size: 17px; text-decoration: none; transition: background .2s, color .2s; }
+.np-cont-btn:hover, .np-cont-btn:focus-visible { background: transparent; color: var(--np-ink); }
