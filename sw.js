@@ -7,7 +7,7 @@
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'akt-7dba1a8114';
+var VERSION = 'akt-a3591a5c86';
 var PRECACHE = [
 	'./',
 	'about.html',
@@ -97,6 +97,8 @@ var PRECACHE = [
 	'assets/fonts/gf/NotoNaskhArabic-arabic-7.woff2',
 	'assets/fonts/gf/NotoNaskhArabic-latin-9.woff2',
 	'assets/fonts/gf/NotoNaskhArabic-latin-ext-8.woff2',
+	'assets/fonts/gf/Poppins-500-latin-ext.woff2',
+	'assets/fonts/gf/Poppins-500-latin.woff2',
 	'assets/fonts/gf/ReemKufi-arabic-10.woff2',
 	'assets/fonts/gf/ReemKufi-latin-12.woff2',
 	'assets/fonts/gf/ReemKufi-latin-ext-11.woff2',

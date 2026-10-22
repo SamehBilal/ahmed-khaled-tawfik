@@ -963,3 +963,6 @@ html[dir="rtl"] .ft-copy { text-align: right; }
 .ft-copy .ascii.owl:hover { opacity: 1; transform: translateY(-1px); }
 /* phones: the savanna without the Africa-shaped sunset behind it */
 @media (max-width: 640px) { .ft-safari .ft-africa { display: none; } }
+/* the copyright line in the portfolio's own type: Poppins 500, 14px (assets/css/fonts.css) */
+.ft-copy, html[dir="rtl"] .ft-copy { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; line-height: 20px; }
+@media (max-width: 900px) { .ft-copy, html[dir="rtl"] .ft-copy { line-height: 1.7; } }
