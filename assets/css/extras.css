@@ -110,15 +110,19 @@ html[lang="en"] .path h3 { font-family: var(--f-display); font-weight: 700; }
 .path-head p { margin: 0; max-width: 680px; color: var(--paper-dim); }
 .path-count { position: absolute; top: 28px; inset-inline-end: 30px; padding: 3px 12px; border-radius: 999px; background: var(--c); color: #fff; font-size: 14px; }
 /* one row per path, every book the same size (up to 150px) on every path */
-.steps { list-style: none; margin: 0; padding: 26px 30px 30px; display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, 150px)); gap: 20px 18px; }
+.steps { list-style: none; margin: 0; padding: 26px 30px 30px; display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, 190px)); gap: 20px 14px; }
 .step a { display: flex; flex-direction: column; height: 100%; color: inherit; text-decoration: none; }
-.step-cover { position: relative; display: block; }
-.step-cover .mini-cover { width: 100%; transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s; box-shadow: 0 12px 24px rgba(0, 0, 0, .45); }
+.step-cover { position: relative; display: flex; align-items: flex-end; }
+.step-cover .mini-cover { position: relative; z-index: 1; flex: 1; min-width: 0; width: auto; transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s; box-shadow: 0 12px 24px rgba(0, 0, 0, .45); }
 .step-cover .mini-cover .mc-by { display: none; }
 .step a:hover .mini-cover, .step a:focus-visible .mini-cover { transform: translateY(-6px) rotate(-2deg); box-shadow: 0 20px 34px rgba(0, 0, 0, .55); }
 .step a:focus-visible { outline: none; }
-.step-n { position: absolute; z-index: 2; top: -10px; inset-inline-start: -10px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
-	background: var(--c); color: #fff; font-family: var(--f-latin); font-size: 17px; box-shadow: 0 4px 10px rgba(0, 0, 0, .45), 0 0 0 3px var(--ink-2); }
+/* the step number, after Jorge Aguilar's "Netflix top 10" pen (CodePen RwGPdME): a huge figure filled with the card's colour,
+   outlined, standing beside the cover, which overlaps its edge */
+.step-n { order: -1; flex: none; position: relative; z-index: 0; margin-inline-end: -18px; padding-bottom: 2px;
+	font-family: Arial, "Helvetica Neue", sans-serif; font-weight: 900; font-size: clamp(72px, calc(760px / var(--n, 6)), 128px); line-height: .78; letter-spacing: -.04em;
+	color: var(--ink-2); -webkit-text-stroke: 4px #595959; paint-order: stroke fill; transition: -webkit-text-stroke-color .3s; }
+.step a:hover .step-n, .step a:focus-visible .step-n { -webkit-text-stroke-color: var(--c); }
 .step-t { margin-top: 14px; font-family: var(--f-display); font-size: 17px; line-height: 1.35; color: var(--paper); transition: color .2s; }
 .step a:hover .step-t, .step a:focus-visible .step-t { color: var(--ember); }
 .step-y { font-family: var(--f-latin); font-size: 14px; color: var(--muted); }
@@ -127,13 +131,14 @@ html[lang="en"] .path h3 { font-family: var(--f-display); font-weight: 700; }
 /* tablets and phones: each path's books slide sideways on a shelf */
 @media (max-width: 900px) {
 	.steps { display: flex; gap: 18px; max-width: none; overflow-x: auto; scroll-snap-type: x mandatory; padding: 24px 22px 22px; scrollbar-width: thin; }
-	.step { flex: 0 0 150px; scroll-snap-align: start; }
+	.step { flex: 0 0 180px; scroll-snap-align: start; }
 }
 @media (max-width: 640px) {
 	.path-head { padding: 22px 18px 18px; }
 	.path-count { position: static; display: inline-block; margin-top: 12px; }
 	.steps { padding: 24px 18px 22px; }
-	.step { flex-basis: 140px; }
+	.step { flex-basis: 168px; }
+	.step-n { font-size: 96px; }
 	.step-t { font-size: 15px; }
 }
 @media (prefers-reduced-motion: reduce) { .step-cover .mini-cover { transition: none; } }
