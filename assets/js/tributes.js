@@ -64,8 +64,9 @@ window.PAGE = {
 			}).join('') + '</div></div></section>' : '');
 
 		var root = document.getElementById('tb');
-		var open = function (li) {
-			root.querySelectorAll('.tb-event.open').forEach(function (x) {
+		/* keep: leave the other cards open (scrolling on a phone: folding a card above would pull the page up under the reader) */
+		var open = function (li, keep) {
+			if (!keep) root.querySelectorAll('.tb-event.open').forEach(function (x) {
 				if (x === li) return;
 				x.classList.remove('open');
 				x.querySelector('.tb-head button').setAttribute('aria-expanded', 'false');
@@ -86,12 +87,13 @@ window.PAGE = {
 
 		/* scrolling opens the card that reaches the middle of the screen and folds the last one */
 		var events = [].slice.call(root.querySelectorAll('.tb-event')), queued = false;
+		var narrow = window.matchMedia('(max-width: 760px)');
 		var pick = function () {
 			queued = false;
 			if (!root.isConnected || Date.now() < lockUntil) return;
 			var line = window.innerHeight * 0.45, best = null;
 			events.forEach(function (li) { if (li.getBoundingClientRect().top < line) best = li; });
-			if (best && !best.classList.contains('open')) open(best);
+			if (best && !best.classList.contains('open')) open(best, narrow.matches);
 		};
 		this.pick = pick;
 		if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
