@@ -76,3 +76,16 @@ html[data-theme="light"] .pw-person { color: #fff; }
 .wr-cover img { height: auto; aspect-ratio: 2 / 3; box-shadow: 0 8px 18px rgba(0, 0, 0, .35); border-radius: 2px 6px 6px 2px; }
 .wr-back img { height: auto; aspect-ratio: auto; max-height: 190px; object-fit: contain; background: #111; }
 .wr-back figcaption { text-align: center; }
+
+/* one book per writer on a shelf: a small count when they did more than one thing there, every entry in the card */
+.spine { position: relative; }
+.spine-n { position: absolute; top: -9px; inset-inline-end: -7px; display: grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; border-radius: 11px;
+	background: var(--gold); color: #1b130c; font-family: var(--f-latin); font-size: 13px; font-weight: 700; box-shadow: 0 2px 6px rgba(0, 0, 0, .4); }
+.wr-entry { clear: inline-end; padding: 12px 0 4px; border-top: 1px dashed rgba(74, 63, 51, .3); }
+.wr-entry:first-of-type { border-top: 0; padding-top: 4px; }
+.wr-entry::after { content: ''; display: block; clear: both; }
+.wr-entry-covers { float: inline-end; display: flex; gap: 10px; margin-inline-start: 16px; }
+.wr-entry-covers .wr-photo { float: none; margin: 0; }
+.wr-more { clear: both; margin: 14px 0 0; padding-top: 12px; border-top: 1px solid rgba(74, 63, 51, .25); }
+.wr-more .btn-link { font-family: var(--f-display); font-size: 17px; color: #7a1c14; text-decoration: none; border-bottom: 2px solid rgba(122, 28, 20, .35); }
+.wr-more .btn-link:hover, .wr-more .btn-link:focus-visible { border-bottom-color: #7a1c14; }

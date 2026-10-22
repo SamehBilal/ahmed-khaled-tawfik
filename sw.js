@@ -7,7 +7,7 @@
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'akt-a3591a5c86';
+var VERSION = 'akt-49e723cc0a';
 var PRECACHE = [
 	'./',
 	'about.html',
@@ -28,6 +28,7 @@ var PRECACHE = [
 	'terms.html',
 	'tributes.html',
 	'works.html',
+	'writer.html',
 	'writers.html',
 	'manifest.webmanifest',
 	'favicon.ico',
@@ -61,6 +62,7 @@ var PRECACHE = [
 	'assets/js/notfound.js',
 	'assets/js/notify.js',
 	'assets/js/page-hero.js',
+	'assets/js/people.js',
 	'assets/js/pwa.js',
 	'assets/js/quotes.js',
 	'assets/js/series-page.js',
@@ -68,6 +70,7 @@ var PRECACHE = [
 	'assets/js/shelf-hero.js',
 	'assets/js/tributes.js',
 	'assets/js/works.js',
+	'assets/js/writer-page.js',
 	'assets/js/writers.js',
 	'assets/css/blog.css',
 	'assets/css/books.css',
@@ -87,6 +90,7 @@ var PRECACHE = [
 	'assets/css/shelf-hero.css',
 	'assets/css/site.css',
 	'assets/css/tributes.css',
+	'assets/css/writer.css',
 	'assets/fonts/gf/CormorantGaramond-latin-1.woff2',
 	'assets/fonts/gf/CormorantGaramond-latin-3.woff2',
 	'assets/fonts/gf/CormorantGaramond-latin-ext-0.woff2',

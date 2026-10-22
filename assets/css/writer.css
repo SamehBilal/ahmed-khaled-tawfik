@@ -1,0 +1,60 @@
+/* =========================================================
+   Writer pages (writer.html?id=…, assets/js/writer-page.js):
+   a portrait and who they are, then everything they did with him, shelf by shelf.
+   --c is the colour of their first shelf on the writers page.
+   ========================================================= */
+
+.wp-hero { position: relative; padding: 40px 0 44px; border-bottom: 1px solid var(--line);
+	background: radial-gradient(60% 100% at 85% 0%, color-mix(in srgb, var(--c) 45%, transparent), transparent 70%); }
+html[dir="ltr"] .wp-hero { background: radial-gradient(60% 100% at 15% 0%, color-mix(in srgb, var(--c) 45%, transparent), transparent 70%); }
+.wp-head { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: start; }
+.wp-photo { margin: 0; }
+.wp-photo img { display: block; width: 220px; height: 270px; object-fit: cover; border-radius: 14px; box-shadow: 0 22px 44px rgba(0, 0, 0, .5), 0 0 0 4px color-mix(in srgb, var(--c) 70%, #000); }
+.wp-photo figcaption { margin-top: 8px; font-size: 12px; color: var(--muted); }
+.wp-photo figcaption a { color: inherit; }
+.wp-mono { display: grid; place-items: center; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--c) 80%, #fff 10%), var(--c) 55%, color-mix(in srgb, var(--c) 60%, #000));
+	color: #f6d79a; font-family: var(--f-chunky); font-size: 76px; box-shadow: 0 22px 44px rgba(0, 0, 0, .5); }
+.wp-id h1 { margin: 0; font-family: var(--f-chunky); font-weight: 400; font-size: clamp(40px, 6vw, 72px); line-height: 1.1; }
+html[lang="en"] .wp-id h1 { font-family: var(--f-display); font-weight: 700; }
+.wp-alt { margin: 6px 0 14px; font-family: var(--f-latin); color: var(--paper-dim); font-size: 1.1em; }
+.wp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.wp-chip { padding: 4px 14px; border-radius: 999px; background: var(--c); color: #fff; font-family: var(--f-display); font-size: 14px; text-decoration: none; filter: saturate(1.2); transition: filter .2s, transform .2s; }
+.wp-chip:hover, .wp-chip:focus-visible { filter: saturate(1.5) brightness(1.15); transform: translateY(-1px); }
+.wp-bio { max-width: 720px; margin: 0 0 12px; font-size: 1.1em; line-height: 1.85; }
+.wp-link { max-width: 720px; margin: 0; padding-inline-start: 14px; border-inline-start: 3px solid var(--c); color: var(--paper-dim); font-family: var(--f-display); }
+.wp-src { font-size: 13px; color: var(--ember); white-space: nowrap; }
+
+.wp-h { margin: 0 0 22px; font-family: var(--f-chunky); font-weight: 400; font-size: clamp(26px, 3vw, 34px); }
+html[lang="en"] .wp-h { font-family: var(--f-display); font-weight: 700; }
+.wp-group + .wp-group { margin-top: 30px; }
+.wp-group h3 { display: inline-block; margin: 0 0 14px; padding: 3px 14px; border-radius: 6px; background: var(--c); color: #fff; font-family: var(--f-display); font-size: 16px; font-weight: 400; }
+.wp-entry { display: flex; gap: 22px; align-items: flex-start; padding: 20px 22px; border-radius: var(--radius); background: var(--ink-2); border: 1px solid var(--line); border-inline-start: 4px solid var(--c); }
+.wp-entry + .wp-entry { margin-top: 14px; }
+.wp-covers { flex: none; display: flex; gap: 10px; }
+.wp-covers img { display: block; width: 110px; height: auto; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 3px 6px 6px 3px; box-shadow: 0 10px 22px rgba(0, 0, 0, .45); }
+.wp-entry-body { flex: 1; min-width: 0; }
+.wp-entry-body p { margin: 0 0 10px; }
+.wp-meta { font-family: var(--f-display); color: var(--gold); }
+
+.wp-quote { margin: 0; max-width: 820px; padding: 22px 26px; border-radius: var(--radius); background: var(--ink-2); border-inline-start: 4px solid var(--gold);
+	font-family: var(--f-display); font-size: 1.25em; line-height: 1.7; }
+.wp-quote cite { display: block; margin-top: 10px; font-style: normal; font-size: 14px; color: var(--muted); }
+
+.wp-people { display: flex; flex-wrap: wrap; gap: 14px 18px; }
+.wp-person { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 92px; text-align: center; color: var(--paper-dim); font-family: var(--f-display); font-size: 13px; line-height: 1.35; text-decoration: none; }
+.wp-dot { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--ink-3) center / cover no-repeat; color: var(--gold); font-family: var(--f-chunky); font-size: 20px;
+	box-shadow: 0 0 0 2px var(--line); transition: box-shadow .2s, transform .2s; }
+.wp-person:hover .wp-dot, .wp-person:focus-visible .wp-dot { box-shadow: 0 0 0 3px var(--ember); transform: translateY(-2px); }
+.wp-person:hover, .wp-person:focus-visible { color: var(--paper); }
+.wp-pn { margin-top: 30px; }
+
+@media (max-width: 760px) {
+	.wp-head { grid-template-columns: 1fr; gap: 22px; justify-items: center; text-align: center; }
+	.wp-chips { justify-content: center; }
+	.wp-photo img { width: 180px; height: 220px; }
+	.wp-mono { width: 160px; height: 160px; font-size: 56px; }
+	.wp-link { text-align: start; }
+	.wp-bio { text-align: start; }
+	.wp-entry { flex-direction: column; padding: 16px; }
+	.wp-covers img { width: 96px; }
+}
