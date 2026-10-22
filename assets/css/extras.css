@@ -332,3 +332,26 @@ button.media:hover { transform: translateY(-4px); border-color: var(--ember); }
 	.issues { flex-wrap: nowrap; overflow-x: auto; padding-top: 28px; scroll-snap-type: x proximity; }
 	.issue { flex: 0 0 30px; scroll-snap-align: start; }
 }
+
+/* the books stand on a shelf, after Brian Haferkamp's "Digital Bookshelf" pen (CodePen ZEGoRoB):
+   a thin plank under the covers with soft shadows, each card's piece reaching half the gap on either side so the plank runs on */
+.steps { --shelf-gap: 18px; column-gap: var(--shelf-gap); }
+.step-cover { padding-bottom: 14px; }
+.step-cover .mini-cover { position: relative; z-index: 2; transform: translateY(6px); box-shadow: 0 -5px 20px 2px rgba(0, 0, 0, .35); }
+.step a:hover .mini-cover, .step a:focus-visible .mini-cover { transform: translateY(-4px) rotate(-2deg); }
+.step-cover::before, .step-cover::after {
+	content: ''; position: absolute; bottom: 0; height: 14px;
+	inset-inline: calc(var(--shelf-gap) / -2 - 1px);
+}
+/* rounded only at the two ends of the plank */
+.step:first-child .step-cover::before, .step:first-child .step-cover::after { border-start-start-radius: 3px; border-end-start-radius: 3px; }
+.step:last-child .step-cover::before, .step:last-child .step-cover::after { border-start-end-radius: 3px; border-end-end-radius: 3px; }
+/* the shelf's own shadows, under the plank */
+.step-cover::before { z-index: 1; box-shadow: 0 -5px 3px 0 rgba(0, 0, 0, .25), 0 15px 20px 0 rgba(0, 0, 0, .55), 0 5px 5px 0 rgba(0, 0, 0, .4); }
+/* the plank, in front of the covers' feet */
+.step-cover::after { z-index: 3; background: linear-gradient(#efe6d2, #cdbf9f 70%, #b3a382); }
+html[data-theme="light"] .step-cover::before { box-shadow: 0 -5px 3px 0 rgba(170, 170, 170, .2), 0 15px 20px 0 rgba(120, 100, 80, .45), 0 5px 5px 0 rgba(119, 119, 119, .3); }
+html[data-theme="light"] .step-cover::after { background: linear-gradient(#ffffff, #f1ece2 70%, #e2d8c6); }
+.step-n { z-index: 4; }
+.step-t { margin-top: 18px; }
+@media (max-width: 900px) { .steps { gap: var(--shelf-gap); } }
