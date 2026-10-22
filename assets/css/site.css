@@ -953,3 +953,13 @@ html[dir="rtl"] .ft-copy { text-align: right; }
 	.z-horror .ft-eyes.e3 { display: none; }
 	.ft-stone { margin-top: -8px; }
 }
+
+/* the ASCII owl in the copyright line, from Sameh Bilal's portfolio */
+.ft-copy .ascii.owl {
+	display: inline-block; font-family: monospace; font-size: .85em; line-height: 1.1; white-space: pre; text-align: left;
+	vertical-align: middle; margin: 0 6px; opacity: .85; color: #F9812E; cursor: help;
+	transition: opacity .25s ease, transform .25s ease;
+}
+.ft-copy .ascii.owl:hover { opacity: 1; transform: translateY(-1px); }
+/* phones: the savanna without the Africa-shaped sunset behind it */
+@media (max-width: 640px) { .ft-safari .ft-africa { display: none; } }
