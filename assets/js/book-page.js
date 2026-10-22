@@ -25,6 +25,9 @@ window.PAGE = {
 			: (S.TYPES[item.type] || { ar: item.type, en: item.type });
 		var cover = S.coverOf(info);
 		var desc = info.description || item.synopsis || (isIssue && item.original ? item.original : null);
+		/* what is printed on its back: a photo of the real back cover, and the blurb (series issues) */
+		var blurb = (d.blurbs || {})[id] || null, backImg = (d.backCovers || {})[id] || '';
+		if (!desc && blurb) desc = { ar: blurb.ar };
 		var numLabel = r.special ? L('عدد خاص ', 'Special issue ') + App.num(item.n) : isIssue && item.n != null ? App.num('#' + item.n) + (item.part ? ' · ' + L('الجزء ', 'Part ') + App.num(item.part) : '') : '';
 
 		this.title = title;
@@ -43,7 +46,8 @@ window.PAGE = {
 			color: color, title: title, img: cover,
 			num: isIssue && item.n != null ? '№ ' + item.n : '',
 			motif: isIssue && item.n != null ? App.num(item.n) : S.monogram(title),
-			back: tx(item.synopsis || desc || ''),
+			back: blurb ? e(blurb.ar).replace(/\n/g, '<br>') : tx(item.synopsis || desc || ''),
+			backImg: backImg,
 			meta: isIssue ? t(ser.s.title) : (item.year ? String(item.year) : ''),
 			pages: pages,
 			info: { title: '', text: '' },
@@ -188,7 +192,11 @@ window.PAGE = {
 						(r.about ? '<p class="d-by">' + L('كتاب عن ', 'About ') + '<a href="index.html">' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + '</a></p>' : '') +
 						(isIssue && ser.inspired && ser.s.role ? '<p class="d-by">' + L('صلتها به: ', 'Link to him: ') + tx(ser.s.role) + '</p>' : '') +
 						(window.Lists ? window.Lists.buttons('b:' + id) : '') +
-						(desc ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
+						((desc && !(blurb && desc.ar === blurb.ar)) ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
+						((blurb || backImg) ? '<section class="d-block d-backcover"><h3>' + L('على الغلاف الخلفي', 'On the back cover') + '</h3>' +
+							(backImg ? '<a class="d-back-img" href="' + e(backImg) + '" target="_blank" rel="noopener"><img src="' + e(backImg) + '" alt="' + e(L('الغلاف الخلفي — ', 'Back cover — ') + t(title)) + '" loading="lazy"></a>' : '') +
+							(blurb ? '<blockquote class="d-blurb" dir="rtl" lang="ar">' + e(blurb.ar).replace(/\n/g, '<br>') + '</blockquote><a class="d-blurb-src" href="' + e(blurb.src) + '" target="_blank" rel="noopener">' + L('عن أبجد ↗', 'From Abjjad ↗') + '</a>' : '') +
+						'</section>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
 						(item.note && t(item.note) ? '<p class="note">' + tx(item.note) + '</p>' : '') +
 						(function () {

@@ -33,7 +33,8 @@
 					'</div>' +
 				'</div>' +
 				'<div class="bk-page">' + pages + '</div>' +
-				'<div class="bk-back"><p>' + (o.back || '') + '</p>' + (o.meta ? '<div class="bk-meta">' + e(o.meta) + '</div>' : '') + '</div>' +
+				/* the back: a photo of the real back cover when there is one, else the blurb */
+				'<div class="bk-back' + (o.backImg ? ' has-img' : '') + '">' + (o.backImg ? '<img class="bk-back-img" src="' + e(o.backImg) + '" alt="" loading="lazy">' : '<p>' + (o.back || '') + '</p>' + (o.meta ? '<div class="bk-meta">' + e(o.meta) + '</div>' : '')) + '</div>' +
 				'<div class="bk-right"></div>' +
 				'<div class="bk-left"><h2><span class="t-ar">' + e(o.title.ar || '') + '</span><span class="t-en">' + e(o.title.en || '') + '</span></h2></div>' +
 				'<div class="bk-top"></div>' +

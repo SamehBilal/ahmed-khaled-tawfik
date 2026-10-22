@@ -202,3 +202,8 @@ html[lang="en"] .prox-art .pa-name { font-family: var(--f-display); font-weight:
 .sv-cover { display: flex; flex-direction: column; gap: 6px; color: var(--paper-dim); text-decoration: none; font-size: 12px; line-height: 1.35; }
 .sv-cover img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 4px; background: var(--ink-2); box-shadow: 0 6px 14px rgba(0, 0, 0, .35); transition: transform .25s; }
 .sv-cover:hover img { transform: translateY(-4px); }
+
+/* book page: what is printed on the back */
+.d-backcover .d-back-img img { display: block; width: 180px; height: auto; margin-bottom: 12px; border-radius: 3px 6px 6px 3px; box-shadow: 0 10px 22px rgba(0, 0, 0, .4); }
+.d-blurb { margin: 0; padding: 16px 20px; border-inline-start: 4px solid var(--ember); background: var(--ink-2); font-family: var(--f-display); font-size: 1.1em; line-height: 1.9; }
+.d-blurb-src { display: inline-block; margin-top: 8px; font-size: 13px; color: var(--ember); }
