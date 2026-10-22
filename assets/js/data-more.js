@@ -448,7 +448,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 
 /* لاشين (Lasheen): Sherine Hanaey's series that grew out of his Ma Wara' al-Tabi'a special issue «بعد منتصف الليل».
    It is listed apart from the series he wrote for (inspired: true): its own series page, a page per book,
-   its characters, the radio show's audio seasons and the collectible staff. Covers in assets/img/covers/lasheen. */
+   the radio show's audio seasons and the collectible staff. Covers in assets/img/covers/lasheen. */
 (function (A) {
 	var ah = function (t) { return 'https://www.audiohatdar.com/serieses/' + encodeURIComponent(t); };
 	A.otherSeries = A.otherSeries || [];
@@ -457,7 +457,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		title: { ar: 'لاشين', en: 'Lasheen' },
 		author: { ar: 'شيرين هنائي', en: 'Sherine Hanaey' },
 		owner: { ar: 'شيرين هنائي', en: 'Sherine Hanaey' },
-		years: '2021–2026', count: 18, color: '#6b1d10', hero: 'lasheen-adam',
+		years: '2021–2026', count: 18, color: '#6b1d10',
 		publisher: { ar: 'دار كتوبيا للنشر والتوزيع', en: 'Kotopia' },
 		role: { ar: 'تكمل عالم عدده «أسطورة بعد منتصف الليل» (ما وراء الطبيعة 30) بشخصيات جديدة', en: 'It carries on the world of his issue “The Legend of After Midnight” (Ma Wara’ al-Tabi’a #30) with new characters' },
 		tagline: { ar: 'البرنامج الإذاعي «بعد منتصف الليل» يعود بعد خمسين عامًا — بقلم شيرين هنائي.', en: 'The radio show “After Midnight” returns fifty years on, written by Sherine Hanaey.' },
@@ -525,22 +525,6 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var m30 = A.issueInfo['mwt-30'] = A.issueInfo['mwt-30'] || {};
 	m30.links = (m30.links || []).concat([{ label: 'امتداده: سلسلة لاشين — شيرين هنائي', url: 'series.html?id=lasheen' }]);
 
-	A.characters = A.characters || [];
-	A.characters.push(
-		{ id: 'lasheen-adam', name: { ar: 'آدم لاشين', en: 'Adam Lasheen' }, work: 'lasheen',
-			role: { ar: 'البطل والراوي', en: 'Protagonist & narrator' },
-			desc: { ar: 'ابن رجل وُصم بالدجل في قريته، وُلد من صراع بين الحلال والحرام والدجل والشعوذة. يروي قصته لأنه وعد سهير زاهر بذلك، ويقول إنها أكبر من أن يحتملها العالم.', en: 'Son of a man branded a charlatan in his village, born of a struggle between the lawful and the forbidden, sorcery and fraud. He tells his story because he promised Soheir Zaher, and says it is more than the world can bear.' },
-			traits: [{ ar: 'غامض', en: 'Mysterious' }, { ar: 'موصوم', en: 'Marked' }, { ar: 'وريث', en: 'An heir' }] },
-		{ id: 'lasheen-soheir', name: { ar: 'سهير زاهر', en: 'Soheir Zaher' }, work: 'lasheen',
-			role: { ar: 'مصورة ومشاركة في تقديم البرنامج', en: 'Photographer & co-host' },
-			desc: { ar: 'مصورة فوتوغرافية متخصصة في تصوير الماورائيات، صاحبة كتاب «أشباح الموالد». تشارك في تقديم «بعد منتصف الليل»، ولها مغامرات بعيدًا عن لاشين.', en: 'A photographer of the supernatural and author of “Ghosts of the Moulids”. She co-hosts After Midnight and has adventures of her own away from Lasheen.' },
-			traits: [{ ar: 'فضولية', en: 'Curious' }, { ar: 'شجاعة', en: 'Brave' }] },
-		{ id: 'lasheen-mohab', name: { ar: 'مهاب عمارة', en: 'Mohab Amara' }, work: 'lasheen',
-			role: { ar: 'مذيع البرنامج', en: 'The show’s host' },
-			desc: { ar: 'مذيع «بعد منتصف الليل» في موسمه الجديد، يفتتح حلقاته بعبارة «مساء الفل»، وله أدوار مهمة على مدار السلسلة.', en: 'Host of After Midnight in its new run, who opens every episode with “Masa’ el-full” (good evening), and plays a large part across the series.' },
-			traits: [{ ar: 'صوت الليل', en: 'The voice of the night' }] }
-	);
-
 	A.bookhome = A.bookhome || {};
 	Object.assign(A.bookhome, {"lasheen-1":45148,"lasheen-2":47631,"lasheen-3":51089,"lasheen-4":52407,"lasheen-5":58606,"lasheen-6":57190,"lasheen-7":58003,"lasheen-8":59101,"lasheen-9":62318,"lasheen-10":62402,"lasheen-11":65218,"lasheen-12":64171,"lasheen-13":68705,"lasheen-14":68706,"lasheen-15":72877,"lasheen-16":72878,"lasheen-17":76089,"lasheen-18":82000}, { 'about-arrab': 66061, 'about-esmoh-khaled': 64168, 'about-ostoura': 64885, 'about-utopia-dystopia': 63629 });
 })(window.AKT);
@@ -576,9 +560,6 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	A.seriesInfo.lasheen.description.ar += ' ومعها كتاب جانبي هو «أشباح الموالد».';
 	A.seriesInfo.lasheen.description.en += ' There is also a spin-off, Ghosts of the Moulids.';
-	var soheir = A.characters.filter(function (c) { return c.id === 'lasheen-soheir'; })[0];
-	soheir.desc.ar += ' صدر كتابها «أشباح الموالد» كتابًا جانبيًا للسلسلة عام 2025.';
-	soheir.desc.en += ' Her Ghosts of the Moulids came out as the series’ spin-off in 2025.';
 })(window.AKT);
 
 /* Posters for the screen adaptations (Wikipedia infobox images) and his awards and honours.
