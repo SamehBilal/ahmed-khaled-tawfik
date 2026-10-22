@@ -28,31 +28,43 @@ window.PAGE = {
 					return '<button type="button" class="chip" data-f="' + e(g) + '">' + (w ? tx(w.title) : e(g)) + '<span class="count">' + App.num(n) + '</span></button>';
 				}).join('') +
 			'</div></div>' +
-			'<div class="char-grid" id="char-grid">' +
+			'<div class="char-grid cc-grid" id="char-grid">' +
 				chars.map(function (c) {
 					var w = App.findWork(c.work);
-					var color = (w && w.color) || '#5a2a22';
+					var info = self.info(c);
+					var color = info.color;
 					var name = t(c.name);
-					var mono = App.lang === 'ar' ? ((c.name && c.name.ar) || '').charAt(0) : ((c.name && c.name.en) || '').charAt(0);
-					return '<div class="char-cell rise" id="c-' + e(c.id) + '" data-work="' + e(c.work) + '"><button type="button" class="char" aria-pressed="false" style="--c:' + e(color) + '">' +
-						'<div class="char-inner">' +
-							'<div class="char-face char-front">' +
-								'<span class="char-mono" aria-hidden="true">' + e(mono) + '</span>' +
-								'<span class="char-series">' + (w ? tx(w.title) : '') + '</span>' +
-								'<span class="char-name">' + e(name) + '</span>' +
-								'<span class="char-role">' + tx(c.role) + '</span>' +
-								'<span class="flip-hint">' + (App.lang === 'ar' ? 'اقلب البطاقة ↻' : 'Flip the card ↻') + '</span>' +
-							'</div>' +
-							'<div class="char-face char-back">' +
-								'<h4>' + e(name) + '</h4>' +
-								App.paras(c.desc) +
-								(c.traits && c.traits.length ? '<div class="traits">' + c.traits.map(function (x) { return '<span>' + tx(x) + '</span>'; }).join('') + '</div>' : '') +
-								(c.quote && t(c.quote) ? '<blockquote>' + tx(c.quote) + '</blockquote>' : '') +
-								(d.quotes || []).map(function (q, qi) {
-									return q.character === c.id ? '<blockquote>' + tx(q.text) + '</blockquote>' : '';
-								}).join('') +
-							'</div>' +
-						'</div>' +
+					var plain = name.replace(/^(د\.|Dr\.)\s*/, '');
+					var row = function (k, v) { return v ? '<li><span>' + e(k) + '</span>' + v + '</li>' : ''; };
+					var L = App.L;
+					return '<div class="char-cell cc-cell rise" id="c-' + e(c.id) + '" data-work="' + e(c.work) + '">' +
+						'<button type="button" class="char cc" aria-pressed="false" style="--c:' + e(color) + '">' +
+						/* the character, standing over the card's corner */
+						(info.figure ? '<span class="cc-figure' + (info.cutout ? ' is-cutout' : '') + '" aria-hidden="true"><img src="' + e(info.figure) + '" alt="" loading="lazy"></span>' : '') +
+						'<span class="cc-inner">' +
+							'<span class="cc-face cc-front"><span class="cc-main">' +
+								/* the pen's two-tone name: the first letter big in English; Arabic letters join, so there the first word */
+								'<span class="cc-name">' + (App.lang === 'ar'
+									? '<b class="w">' + e(plain.split(' ')[0]) + '</b>' + (plain.indexOf(' ') > 0 ? '<span>' + e(plain.slice(plain.indexOf(' ') + 1)) + '</span>' : '')
+									: '<b>' + e(plain.charAt(0)) + '</b>' + e(plain.slice(1))) + '</span>' +
+								'<span class="cc-alt">' + e(App.alt(c.name)) + '</span>' +
+								'<ul class="cc-info">' +
+									row(L('العمل', 'From'), w ? tx(w.title) : '') +
+									row(L('الدور', 'Role'), tx(c.role)) +
+									row(L('أول ظهور', 'First seen'), info.first ? e(info.first) : '') +
+									row(L('الظهور', 'Appears in'), info.count ? e(App.num(info.count) + ' ' + (info.count === 1 ? L('عدد', 'issue') : info.count === 2 ? L('عددين', 'issues') : L(info.count <= 10 ? 'أعداد' : 'عددًا', 'issues'))) : '') +
+								'</ul>' +
+								(c.traits && c.traits.length ? '<span class="cc-traits">' + c.traits.slice(0, 3).map(function (x) { return '<i>' + tx(x) + '</i>'; }).join('') + '</span>' : '') +
+								'<span class="flip-hint">' + L('اقلب البطاقة ↻', 'Flip the card ↻') + '</span>' +
+							'</span></span>' +
+							'<span class="cc-face cc-back"><span class="cc-main">' +
+								'<span class="cc-back-name">' + e(name) + '</span>' +
+								'<span class="cc-text">' + App.paras(c.desc) +
+									(c.quote && t(c.quote) ? '<blockquote>' + tx(c.quote) + '</blockquote>' : '') +
+									(d.quotes || []).map(function (q) { return q.character === c.id ? '<blockquote>' + tx(q.text) + '</blockquote>' : ''; }).join('') +
+								'</span>' +
+							'</span></span>' +
+						'</span>' +
 					'</button>' +
 						'<div class="char-meta"><a class="char-page" href="character.html?id=' + e(c.id) + '">' + App.L('صفحة الشخصية', 'Character page') + '</a>' + (w ? ' · ' + App.L('من ', 'From ') + App.workLink(c.work) : '') + ' · ' + App.fixLink(name) + '</div>' +
 					'</div>';
@@ -83,6 +95,29 @@ window.PAGE = {
 		apply();
 		this.apply = apply;
 		this.onHash();
+	},
+
+	/* what a card shows of a character: its picture, first appearance and how often they appear.
+	   The picture is a cut-out from AKT.charFigures when there is one, else their own image, else the cover of
+	   their first appearance, else the first issue of the series they lead, else the cover of their book. */
+	info: function (c) {
+		var App = window.App, d = App.data(), S = window.WorksShared, t = App.t;
+		var ser = S && S.anySeries(c.work), w = App.findWork(c.work);
+		var out = { color: (ser && ser.s.color) || (w && w.color) || '#5a2a22', figure: '', cutout: false, first: '', count: 0 };
+		var issues = ser ? S.seriesIssues(c.work) : [];
+		var seen = issues.filter(function (is) { return (is.chars || []).indexOf(c.id) >= 0; });
+		var lead = ser && ser.s.hero === c.id;
+		if (lead) out.count = ser.s.count || issues.length;
+		else out.count = seen.length;
+		var firstIs = seen[0] || (lead ? issues[0] : null);
+		if (firstIs) out.first = (firstIs.n != null ? App.num(firstIs.n) + ' · ' : '') + t(firstIs.title);
+		var cut = (d.charFigures || {})[c.id];
+		if (cut) { out.figure = cut; out.cutout = true; }
+		else if (c.image) out.figure = c.image;
+		else if (firstIs) out.figure = S.issueCover(c.work, firstIs);
+		if (!out.figure && ser) out.figure = S.seriesCover(c.work);
+		if (!out.figure && w) out.figure = S.coverOf((d.bookInfo || {})[c.work]);
+		return out;
 	},
 
 	/* #c-id: show that character's card and flip it to the description */
