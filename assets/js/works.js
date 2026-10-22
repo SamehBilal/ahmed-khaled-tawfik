@@ -253,7 +253,7 @@ window.PAGE = {
 			'<div class="pub-grid">' + cards.map(function (c) {
 				var n = c.list.length;
 				return '<article class="pub rise">' +
-					'<div class="pub-head"><h3>' + tx(c.p.name) + '</h3>' +
+					'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)s+/, '').charAt(0)) + '</span>') + '<h3>' + tx(c.p.name) + '</h3>' +
 						'<span class="pub-n">' + App.num(n) + ' ' + (n === 1 ? L('عمل', 'work') : n === 2 ? L('عملان', 'works') : L(n <= 10 ? 'أعمال' : 'عملًا', 'works')) + '</span></div>' +
 					(c.from ? '<div class="pub-yr">' + App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') + '</div>' : '') +
 					(c.p.note ? '<p class="pub-note">' + tx(c.p.note) + '</p>' : '') +

@@ -861,3 +861,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if (p && !t.photo) { t.photo = p.url; t.photoSource = p.page; }
 	});
 })(window.AKT);
+
+/* Publisher logos, from each house's page on The Book Home (Diamond Book, Sparks and Dar Delta have none there). */
+(function (A) {
+	var have = ['maa', 'lila', 'merit', 'kayan', 'bloomsbury', 'shorouk', 'karma', 'sama', 'komix'];
+	(A.publishers || []).forEach(function (p) { if (have.indexOf(p.id) >= 0) p.logo = 'assets/img/publishers/' + p.id + '.webp'; });
+})(window.AKT);
