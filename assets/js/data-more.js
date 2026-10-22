@@ -867,3 +867,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var have = ['maa', 'lila', 'merit', 'kayan', 'bloomsbury', 'shorouk', 'karma', 'sama', 'komix'];
 	(A.publishers || []).forEach(function (p) { if (have.indexOf(p.id) >= 0) p.logo = 'assets/img/publishers/' + p.id + '.webp'; });
 })(window.AKT);
+
+/* Covers for the books of the series he wrote for, so each series can show its first book:
+   Molotov 2 (Goodreads) and 5, كتاب الصيف «أشباح ولكن» (the reader's scan), دماغي كده, أسطورة بلية, أسطورة المرأة الأفعى.
+   Still none found anywhere: روايات عالمية للجيب 70 «ماتيلدا», «أسطورة ميسيا», «لا تأخذه معك». */
+(function (A) {
+	var C = 'assets/img/covers/contrib/';
+	var set = { 'molotov-2': 'molotov-2.webp', 'molotov-5': 'molotov.webp', 'sayf-x0': 'sayf.webp', 'maqalat-x0': 'maqalat.webp', 'bley-x0': 'bley.webp', 'comics-x1': 'comics.webp' };
+	A.issueInfo = A.issueInfo || {};
+	Object.keys(set).forEach(function (k) {
+		A.issueInfo[k] = A.issueInfo[k] || {};
+		if (!A.issueInfo[k].ownCover) A.issueInfo[k].ownCover = C + set[k];
+	});
+})(window.AKT);

@@ -36,9 +36,11 @@ window.PAGE = {
 		var contrib = S.contributedSeries();
 		document.getElementById('contrib-section').hidden = !contrib.length;
 		document.getElementById('contrib').innerHTML = contrib.map(function (o) {
-			var n = S.seriesIssues(o.id).length;
+			var list = S.seriesIssues(o.id), n = list.length;
+			/* the series shows its first book: the first issue with a cover, else its own cover */
+			var firstCover = list.map(function (is) { return S.issueCover(o.id, is); }).filter(Boolean)[0];
 			return '<a class="cover-link" href="' + S.seriesHref(o.id) + '">' +
-				S.miniCover({ img: o.cover || '', color: o.color, title: t(o.title), sub: o.owner ? t(o.owner) : '', by: o.role ? t(o.role) : ' ' }) +
+				S.miniCover({ img: firstCover || o.cover || '', color: o.color, title: t(o.title), sub: o.owner ? t(o.owner) : '', by: o.role ? t(o.role) : ' ' }) +
 				'<span class="cl-t">' + tx(o.title) + (n ? ' · ' + (n === 1 ? App.L('عنوان واحد', '1 title') : n === 2 ? App.L('عنوانان', '2 titles') : App.num(n) + App.L(n <= 10 ? ' عناوين' : ' عنوانًا', ' titles')) : '') + '</span></a>';
 		}).join('');
 		/* series by others that grew out of his work */

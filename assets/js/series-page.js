@@ -28,6 +28,8 @@ window.PAGE = {
 
 		/* 3D book: own series reuse the works-page book; others get a simple one */
 		var bookOpts = ser.own ? S.seriesBook(s) : {
+			/* the cover of its first book (the first issue that has one), else the series' own */
+			img: S.seriesIssues(s.id).map(function (is) { return S.issueCover(s.id, is); }).filter(Boolean)[0] || s.cover || '',
 			color: s.color || '#4b3b2a', title: s.title, motif: S.monogram(s.title),
 			back: tx(s.description || ''), meta: s.years || '',
 			pages: ['<h4>' + tx(s.title) + '</h4>' + App.paras(s.description)],
