@@ -90,12 +90,7 @@ window.PAGE = {
 		var adapts = (d.adaptations || []).filter(function (a) { return a.basedOn === (isIssue ? '' : item.id); });
 
 		/* ---------- editions ---------- */
-		/* Aseer Al Kotb is a store listing, not an edition: no card of its own, but its cover still stands in
-		   (it can be the book's main cover through coverOf, and goes on the first edition when none has one) */
-		var aseer = (info.editions || []).filter(function (ed) { return ed.store === 'Aseer Al Kotb'; });
-		var eds = (info.editions || []).filter(function (ed) { return ed.store !== 'Aseer Al Kotb'; });
-		var aseerCover = (aseer.filter(function (ed) { return ed.cover; })[0] || {}).cover;
-		if (aseerCover && eds.length && !eds.some(function (ed) { return ed.cover; })) eds = [Object.assign({}, eds[0], { cover: aseerCover })].concat(eds.slice(1));
+		var eds = info.editions || [];
 		var edHtml = eds.map(function (ed) {
 			var meta = [
 				ed.publisher ? t(ed.publisher) : '',
@@ -157,7 +152,7 @@ window.PAGE = {
 			{ kind: L('ورقي', 'Print'), items: [
 				[L('بيت الكتب', 'The Book Home'), bh ? 'https://www.thebookhome.com/product/index/' + bh : 'https://www.thebookhome.com/Home/SearchResult?searchKey=' + encodeURIComponent(title.ar || '') + '&sortKey=Date%20desc&pageNumber=1'],
 				/* Aseer Al Kotb: its page for the book when we have one, else a search for the title */
-				[L('عصير الكتب', 'Aseer Al Kotb'), (aseer.filter(function (ed) { return ed.source; })[0] || {}).source || 'https://www.aseeralkotb.com/ar/search?q=' + encodeURIComponent(title.ar || '')],
+				[L('عصير الكتب', 'Aseer Al Kotb'), (info.aseer && info.aseer.source) || 'https://www.aseeralkotb.com/ar/search?q=' + encodeURIComponent(title.ar || '')],
 				['Amazon.eg','https://www.amazon.eg/s?k=' + Q + '&i=stripbooks'],
 				['Noon', 'https://www.noon.com/egypt-ar/search/?q=' + Q]
 			] },

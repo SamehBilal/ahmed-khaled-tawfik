@@ -125,9 +125,7 @@ window.PAGE = {
 			return { src: 'https://i.ytimg.com/vi/' + id + (big ? '/hqdefault.jpg' : '/mqdefault.jpg'), yt: id };
 		}
 		if (spec.indexOf('cover:') === 0) {
-			var info = (window.App.data().bookInfo || {})[spec.slice(6)] || {}, eds = info.editions || [], src = info.cover || '';
-			for (var i = 0; i < eds.length; i++) if (eds[i].cover) { src = eds[i].cover; break; }
-			return { src: src, tall: true };
+			return { src: window.WorksShared.coverOf((window.App.data().bookInfo || {})[spec.slice(6)] || {}), tall: true };
 		}
 		return { src: spec };
 	},

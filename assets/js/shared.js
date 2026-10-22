@@ -209,6 +209,31 @@
 		return list;
 	}
 
+	/* Aseer Al Kotb is a store, not an edition: its listings leave the editions (so no card and no count anywhere)
+	   and become info.aseer {source, cover} for the where-to-buy link. The covers stay: the book keeps the cover
+	   it showed before, and when no edition left has one, the first edition takes Aseer's. */
+	(function () {
+		var A = window.AKT || {};
+		[A.bookInfo, A.issueInfo].forEach(function (map) {
+			Object.keys(map || {}).forEach(function (k) {
+				var info = map[k], all = info && info.editions;
+				if (!all || !all.length) return;
+				var isA = function (ed) { return ed.store === 'Aseer Al Kotb'; };
+				var aseer = all.filter(isA);
+				if (!aseer.length) return;
+				var shown = coverOf(info);
+				info.editions = all.filter(function (ed) { return !isA(ed); });
+				info.aseer = {
+					source: (aseer.filter(function (ed) { return ed.source; })[0] || {}).source || '',
+					cover: (aseer.filter(function (ed) { return ed.cover; })[0] || {}).cover || ''
+				};
+				if (shown && coverOf(info) !== shown) info.ownCover = shown;
+				if (info.aseer.cover && info.editions.length && !info.editions.some(function (ed) { return ed.cover; }))
+					info.editions[0] = Object.assign({}, info.editions[0], { cover: info.aseer.cover });
+			});
+		});
+	})();
+
 	window.WorksShared = {
 		ownSeries: ownSeries, contributedSeries: contributedSeries, awardsList: awardsList, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
