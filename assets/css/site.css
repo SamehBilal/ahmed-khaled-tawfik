@@ -902,3 +902,46 @@ html[dir="rtl"] .ft-copy { text-align: right; }
 .pub-logo img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
 .pub-logo.is-mono { background: var(--ink-3); color: var(--gold); font-family: var(--f-chunky); font-size: 26px; box-shadow: inset 0 0 0 1px var(--line); }
 .pub-head h3 { flex: 1; }
+
+/* ---------- The footer scene's three worlds as three sides on tablets and phones ----------
+   Fantasia on the reading side, Safari in the middle, the haunted hill on the far side (mirrored in English).
+   On wide screens each zone covers the whole scene, so the pieces keep their places above; below 1200px each
+   zone takes its side and its pieces are sized to it (cqw = 1% of the zone's width). */
+.ft-zone { position: absolute; inset: 0; pointer-events: none; }
+@media (max-width: 1199px) {
+	.ft-zone { inset-inline: auto; width: 33.34%; container-type: inline-size; }
+	.z-fantasy { inset-inline-start: 0; }
+	.z-safari { inset-inline-start: 33.33%; }
+	.z-horror { inset-inline-end: 0; }
+
+	/* Fantasia: the moon with its witch high up, the saucer beside it, the citadel on the ground, the book between */
+	.z-fantasy .ft-luna { top: 12px; inset-inline-start: 6cqw; width: min(112px, 46cqw); height: min(112px, 46cqw); }
+	.z-fantasy .ft-luna .ft-moon { inset-inline-start: 0; }
+	.z-fantasy .ft-witch { width: 88%; top: 24%; inset-inline-start: -14%; }
+	.z-fantasy .ft-ufo { top: 10px; inset-inline-start: auto; inset-inline-end: 4cqw; width: min(96px, 34cqw); }
+	.z-fantasy .ft-citadel { top: auto; bottom: 24px; inset-inline-start: 34cqw; width: min(168px, 58cqw); }
+	.z-fantasy .ft-fantasia { top: auto; bottom: 92px; inset-inline-start: 4cqw; width: min(70px, 26cqw); }
+	.z-fantasy .ft-book { width: 100%; height: auto; aspect-ratio: 2 / 1; }
+
+	/* Safari: the whole savanna fitted to the middle, Africa's sunset behind it */
+	.z-safari .ft-safari { inset: auto 0 26px 0; width: 100%; height: auto; aspect-ratio: 430 / 172; scale: none; transform: none; }
+	html[dir="ltr"] .z-safari .ft-safari { transform-origin: 50% 100%; }
+	.z-safari .ft-safari .ft-africa { left: 14.9%; bottom: 4.6%; width: 34.9%; height: auto; aspect-ratio: 100 / 110; }
+
+	/* horror: the hill cropped to its castle, the bats over it, eyes in the dark */
+	.z-horror .ft-haunt { inset-inline-end: 0; bottom: -6px; width: 100%; height: min(230px, 66%); object-fit: cover; object-position: 66% 100%; }
+	.z-horror .ft-bats { top: -10px; inset-inline-end: 0; width: 100%; height: auto; }
+	.z-horror .ft-eyes.e2 { inset-inline-end: 64cqw; bottom: 34%; }
+	.z-horror .ft-eyes.e3 { inset-inline-end: 12cqw; bottom: 26px; }
+}
+@media (max-width: 900px) {
+	/* one column below the scene: the headstone stands under the horizon instead of covering the middle */
+	.ft-stone { margin-top: -14px; }
+}
+@media (max-width: 640px) {
+	/* phones: the savanna gets the wider middle */
+	.ft-zone { width: 30%; }
+	.z-safari { inset-inline-start: 30%; width: 40%; }
+	.z-horror .ft-eyes.e3 { display: none; }
+	.ft-stone { margin-top: -8px; }
+}

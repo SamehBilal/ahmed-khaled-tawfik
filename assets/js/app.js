@@ -250,6 +250,8 @@
 						'<span class="ft-stars">' + stars + '</span><span class="ft-shoot"></span>' +
 						/* Fantasia's sky: a big moon with a witch on her broom crossing it (from a Vecteezy Halloween
 						   scene, free licence), and a flying saucer with its beam */
+						/* the three worlds, each in its own zone: on wide screens a zone covers the whole scene, below 1200px each takes its side */
+						'<div class="ft-zone z-fantasy">' +
 						'<span class="ft-luna"><span class="ft-moon"></span><img class="ft-witch" src="assets/img/footer/witch.webp" alt="" loading="lazy"></span>' +
 						/* Fantasia's citadel on its hill: a black silhouette like the rest, lilac windows, a violet rim from the moon */
 						'<svg class="ft-citadel" viewBox="0 0 200 180" aria-hidden="true"><defs><linearGradient id="citStone" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#1c1030"/><stop offset=".35" stop-color="#0b0614"/><stop offset="1" stop-color="#050309"/></linearGradient></defs><path d="M0 180c18-30 52-46 100-48s84 18 100 48z" fill="#050507"/><g fill="url(#citStone)" stroke="#2a1848" stroke-opacity=".55" stroke-width="1" stroke-linejoin="round"><path d="M58 140v-38h84v38z"/><path d="M58 102v-7h7v7h7v-7h7v7h7v-7h7v7h6v-7h7v7h7v-7h7v7h7v-7h7v7h7v-7h6v7"/><path d="M40 142V78h22v64z"/><path d="M36 78l15-40 15 40z"/><path d="M138 142V86h22v56z"/><path d="M134 86l15-34 15 34z"/><path d="M80 142V52h40v90z"/><path d="M74 52l26-50 26 50z"/><path d="M66 102V72h12v30z"/><path d="M63 72l9-18 9 18z"/><path d="M122 102V74h12v28z"/><path d="M119 74l9-17 9 17z"/></g><g fill="#050309"><path d="M100 2v-8l9 3-9 3"/><path d="M51 38v-7l7 2.5-7 2.5"/><path d="M149 52v-7l7 2.5-7 2.5"/></g><path d="M100 2v-9M51 38v-8M149 52v-8" stroke="#050309" stroke-width="1.2"/><g class="cit-lit" fill="#d9c4ff"><path class="fl" d="M94 142v-14a6 6 0 0 1 12 0v14z"/><path d="M96 76v-8a4 4 0 0 1 8 0v8z"/><path class="fl2" d="M96 100v-8a4 4 0 0 1 8 0v8z"/><path d="M48 100v-7a3 3 0 0 1 6 0v7z"/><path class="fl" d="M48 122v-7a3 3 0 0 1 6 0v7z"/><path class="fl2" d="M146 106v-7a3 3 0 0 1 6 0v7z"/><path d="M146 126v-7a3 3 0 0 1 6 0v7z"/><path d="M70 90v-6a2 2 0 0 1 4 0v6z"/><path d="M126 92v-6a2 2 0 0 1 4 0v6z"/></g></svg>' +
@@ -263,13 +265,14 @@
 							'<ellipse cx="80" cy="56" rx="20" ry="5" fill="#bfa0f0"/>' +
 							'<g class="ufo-lights" fill="#ecdcff"><ellipse cx="28" cy="49" rx="5" ry="2.4"/><ellipse cx="50" cy="53" rx="6" ry="2.6"/><ellipse cx="80" cy="54.5" rx="6" ry="2.6"/><ellipse cx="110" cy="53" rx="6" ry="2.6"/><ellipse cx="132" cy="49" rx="5" ry="2.4"/></g>' +
 						'</svg>' +
-						'<span class="ft-fog f1"></span><span class="ft-fog f2"></span>' +
 						'<span class="ft-fantasia">' + book + '<span class="ft-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>' +
+						'</div>' +
+						'<span class="ft-fog f1"></span><span class="ft-fog f2"></span>' +
 						/* Safari: the savanna from Vecteezy (free licence, credited below) in front of the Africa-shaped sunset */
-						'<span class="ft-safari">' + africa + '<img class="ft-savanna" src="assets/img/footer/savanna.webp" alt="" loading="lazy">' +
-							'<span class="ft-lamp" aria-hidden="true"><i class="beam"></i></span></span>' +
-						'<img class="ft-haunt" src="assets/img/footer/haunted-hill.webp" alt="" loading="lazy">' + bats +
-						'<span class="ft-eyes e2"><i></i><i></i></span><span class="ft-eyes e3"><i></i><i></i></span>' +
+						'<div class="ft-zone z-safari"><span class="ft-safari">' + africa + '<img class="ft-savanna" src="assets/img/footer/savanna.webp" alt="" loading="lazy">' +
+							'<span class="ft-lamp" aria-hidden="true"><i class="beam"></i></span></span></div>' +
+						'<div class="ft-zone z-horror"><img class="ft-haunt" src="assets/img/footer/haunted-hill.webp" alt="" loading="lazy">' + bats +
+						'<span class="ft-eyes e2"><i></i><i></i></span><span class="ft-eyes e3"><i></i><i></i></span></div>' +
 						'<svg class="ft-hills" viewBox="0 0 1000 60" preserveAspectRatio="none"><path d="' + hill + '"/></svg>' +
 					'</div>' +
 					'<div class="ft-body"><div class="wrap">' +
