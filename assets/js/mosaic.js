@@ -13,7 +13,7 @@
 			items.push({ href: S.bookHref(w.id), title: t(w.title), color: w.color, img: S.coverOf((d.bookInfo || {})[w.id]) });
 		});
 		S.ownSeries().concat(S.contributedSeries()).forEach(function (s) {
-			items.push({ href: S.seriesHref(s.id), title: t(s.title), color: s.color });
+			items.push({ href: S.seriesHref(s.id), title: t(s.title), color: s.color, img: S.seriesCover(s.id) });
 		});
 		var mwt = App.byId(d.series, 'mwt');
 		S.seriesIssues('mwt').forEach(function (is) {

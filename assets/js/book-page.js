@@ -119,7 +119,7 @@ window.PAGE = {
 				'<div class="cover-row">' + near.map(function (is) {
 					var here = is === item;
 					return '<a class="cover-link' + (here ? ' here' : '') + '" href="' + App.issueHref(ser.s.id, is) + '"' + (here ? ' aria-current="page"' : '') + '>' +
-						S.miniCover({ color: ser.s.color, title: t(is.title), num: is.n != null ? App.num(is.n) : '', by: authorAr }) + '</a>';
+						S.miniCover({ img: S.issueCover(ser.s.id, is), color: ser.s.color, title: t(is.title), num: is.n != null ? App.num(is.n) : '', by: authorAr }) + '</a>';
 				}).join('') + '</div></section>';
 		} else {
 			var rel = r.about ? (d.aboutBooks || []).filter(function (w) { return w.id !== item.id; })
