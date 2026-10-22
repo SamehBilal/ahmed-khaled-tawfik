@@ -298,9 +298,13 @@
 								'<a href="' + UI.maker.portfolio + '" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M1.5 5.5h13v8h-13zM5.5 5.5v-2h5v2M1.5 9h13"/></svg>' + 'Portfolio</a>' +
 							'</div>' +
 							/* the copyright line from Sameh Bilal's portfolio, with its ASCII owl (App.owl) */
-							'<p class="ft-copy" dir="ltr">Copyright @2026, <span class="ascii owl" aria-hidden="true">,___,\n[o,o]\n/)__)\n~"--"~</span>' +
-								'<span class="visually-hidden">Decorative owl animation indicating site activity</span>All Rights Reserved. ' +
-								'<span>Crafted with <span style="color: #F9812E;">🧡</span> Sameh Bilal</span></p>' +
+							(App.lang === 'ar'
+								? '<p class="ft-copy is-ar" dir="rtl">حقوق النشر @2026، <span class="ascii owl" aria-hidden="true">,___,\n[o,o]\n/)__)\n~"--"~</span>' +
+									'<span class="visually-hidden">بومة متحركة للزينة تدل على نشاط الموقع</span>جميع الحقوق محفوظة. ' +
+									'<span>صُنع بـ <span style="color: #F9812E;">🧡</span> سامح بلال</span></p>'
+								: '<p class="ft-copy" dir="ltr">Copyright @2026, <span class="ascii owl" aria-hidden="true">,___,\n[o,o]\n/)__)\n~"--"~</span>' +
+									'<span class="visually-hidden">Decorative owl animation indicating site activity</span>All Rights Reserved. ' +
+									'<span>Crafted with <span style="color: #F9812E;">🧡</span> Sameh Bilal</span></p>') +
 						'</div>' +
 					'</div>' +
 					'<p class="ft-end">' + App.L('تمّت…', 'The end…') + ' <span>' + App.L('أو هكذا يبدو', 'or so it seems') + '</span></p></div>';
