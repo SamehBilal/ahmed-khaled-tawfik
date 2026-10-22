@@ -151,7 +151,6 @@ window.PAGE = {
 		var shops = [
 			{ kind: L('ورقي', 'Print'), items: [
 				[L('بيت الكتب', 'The Book Home'), bh ? 'https://www.thebookhome.com/product/index/' + bh : 'https://www.thebookhome.com/Home/SearchResult?searchKey=' + encodeURIComponent(title.ar || '') + '&sortKey=Date%20desc&pageNumber=1'],
-				['Jamalon', 'https://jamalon.com/ar/catalogsearch/result/?q=' + Q],
 				['Amazon.eg', 'https://www.amazon.eg/s?k=' + Q + '&i=stripbooks'],
 				['Noon', 'https://www.noon.com/egypt-ar/search/?q=' + Q]
 			] },

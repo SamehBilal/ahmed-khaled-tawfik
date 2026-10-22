@@ -905,23 +905,6 @@ Object.assign(window.AKT.bookInfo, {
         "lang": "ar",
         "isbn": "9789778200867",
         "source": "https://www.goodreads.com/book/show/60173957"
-      },
-      {
-        "title": {
-          "ar": "الميرانتي أمير البحار",
-          "en": "Al-Mirante: Prince of the Seas"
-        },
-        "publisher": {
-          "ar": "كيان للنشر والتوزيع",
-          "en": "Kayan Publishing"
-        },
-        "year": 2024,
-        "lang": "ar",
-        "format": {
-          "ar": "نسخة كيندل",
-          "en": "Kindle edition"
-        },
-        "source": "https://www.goodreads.com/book/show/240027446"
       }
     ],
     "links": [
