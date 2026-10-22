@@ -19,7 +19,9 @@ window.PAGE = {
 
 		/* one long playlist: issues in series order, then the midnight programme */
 		var tracks = [], groups = [];
-		var Y = (A.youtube && A.youtube.issues) || {};
+		var Y = (A.youtube && A.youtube.issues) || {}, TH = A.thumbs || {};
+		/* a row's picture: Audiohat's own, else the YouTube still, else the book cover */
+		function ytThumb(v) { return 'https://i.ytimg.com/vi/' + v + '/mqdefault.jpg'; }
 		['mwt', 'fantasia', 'safari'].forEach(function (sid) {
 			var s = App.byId(d.series, sid);
 			var rows = [];
@@ -27,9 +29,10 @@ window.PAGE = {
 				var key = sid + '-' + is.n;
 				if ((!A.issues[key] && !Y[key]) || is.part > 1) return;
 				var start = tracks.length;
-				var cover = S.issueCover(sid, is);
-				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = t(s.title) + ' #' + App.num(is.n) + (tr.sub !== 'Audiohat' ? ' · ' + tr.sub : ''); tr.skin = sid; if (!tr.yt && cover) tr.art = cover; tracks.push(tr); });
-				rows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
+				var cover = S.issueCover(sid, is), eps = A.issues[key] || [];
+				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr, k) { tr.sub = t(s.title) + ' #' + App.num(is.n) + (tr.sub !== 'Audiohat' ? ' · ' + tr.sub : ''); tr.skin = sid; if (!tr.yt) tr.art = (eps[k] && TH[eps[k][0]]) || cover || ''; tracks.push(tr); });
+				var thumb = (eps[0] && TH[eps[0][0]]) || (Y[key] ? ytThumb(Y[key][0][0]) : '') || cover;
+				rows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), thumb: thumb, start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
 			});
 			if (rows.length) groups.push({ title: s.title, total: S.seriesIssues(sid).length, rows: rows });
 			/* special issues of the series (e.g. «في كهوف دراجوسان»), one row each, all their videos on the tape */
@@ -38,18 +41,18 @@ window.PAGE = {
 				var key = sid + '-s' + is.n;
 				var start = tracks.length;
 				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = L('عدد خاص ', 'Special ') + App.num(is.n) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
-				if (tracks.length > start) srows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), start: start, count: tracks.length - start, mins: 0, yt: true });
+				if (tracks.length > start) srows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), thumb: (tracks[start].yt ? ytThumb(tracks[start].yt) : '') || S.issueCover(sid, is), start: start, count: tracks.length - start, mins: 0, yt: true });
 			});
 			if (srows.length) groups.push({ title: { ar: t(s.title) + ' — الأعداد الخاصة', en: (s.title.en || '') + ' — special issues' }, rows: srows });
 		});
 		var midStart = tracks.length;
 		A.midnight.forEach(function (m) {
-			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], sample: m[3] || '', skin: 'midnight' });
+			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], sample: m[3] || '', skin: 'midnight', art: TH[m[1]] || '' });
 		});
 		groups.push({
 			title: { ar: 'بعد منتصف الليل', en: 'After Midnight' },
 			note: { ar: 'برنامج من Audiohat لقصص قصيرة له.', en: 'An Audiohat programme of his short stories.' },
-			rows: A.midnight.map(function (m, k) { return { title: { ar: m[0], en: m[0] }, start: midStart + k, count: 1, mins: m[2] }; })
+			rows: A.midnight.map(function (m, k) { return { title: { ar: m[0], en: m[0] }, thumb: TH[m[1]] || '', start: midStart + k, count: 1, mins: m[2] }; })
 		});
 
 		var hero = document.querySelector('.page-hero');
@@ -75,6 +78,7 @@ window.PAGE = {
 					'<ul class="ep-list">' + g.rows.map(function (r) {
 						return '<li data-start="' + r.start + '">' +
 							(r.n != null ? '<span class="no">' + e(App.num(r.n)) + '</span>' : '<span class="no">♪</span>') +
+							'<span class="th' + (r.thumb ? '' : ' none') + '" aria-hidden="true">' + (r.thumb ? '<img src="' + e(r.thumb) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">' : '') + '</span>' +
 							'<span class="tt">' + (r.href ? '<a href="' + r.href + '">' + tx(r.title) + '</a>' : tx(r.title)) +
 								'<small>' + (r.count > 1 ? App.num(r.count) + ' ' + L('حلقات', 'episodes') + ' · ' : '') + (r.mins ? App.num(r.mins) + ' ' + L('دقيقة', 'min') : '') + '</small></span>' +
 							'<button type="button" data-start="' + r.start + '">' + L('ضعه في المسجل', 'Load tape') + '</button>' +

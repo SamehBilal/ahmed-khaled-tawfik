@@ -130,6 +130,7 @@
 			var artImg = el.querySelector('.cs-art img');
 			el.classList.toggle('has-art', !!art);
 			el.classList.toggle('art-wide', !!(art && (tr.yt || /ytimg/.test(art))));
+			el.classList.toggle('art-sq', !!(art && /img\/audio\//.test(art)));
 			if (art && artImg.getAttribute('src') !== art) artImg.setAttribute('src', art);
 			el.querySelector('.cs-s').textContent = tr.sub || '';
 			el.querySelector('.cs-count').textContent = L(App.num(i + 1) + ' من ' + App.num(tracks.length), (i + 1) + ' / ' + tracks.length);
