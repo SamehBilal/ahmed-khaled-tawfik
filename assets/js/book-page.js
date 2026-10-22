@@ -60,7 +60,7 @@ window.PAGE = {
 		var rows = [
 			[L('النوع', 'Type'), t(typeLabel)],
 			[L('أول نشر', 'First published'), App.num(info.firstPublished || item.year || '')],
-			[L('الناشر', 'Publisher'), publisher ? t(publisher) : ''],
+			[L('الناشر', 'Publisher'), publisher ? t(publisher) : '', publisher ? S.publisherLink(publisher) : ''],
 			[L('عدد الصفحات', 'Pages'), App.num(info.pages || firstEd.pages || '')],
 			[L('اللغة', 'Language'), langName(info.language || 'ar')],
 			['ISBN', firstEd.isbn || ''],
@@ -206,7 +206,7 @@ window.PAGE = {
 						})() +
 						buyHtml +
 						(audioTracks.length ? '<section class="d-block d-audio"><h3>' + L('استمع إليه', 'Listen') + ' <small>' + e(audioTracks.map(function (x) { return x.yt ? (x.channel || 'YouTube') : 'Audiohat'; }).filter(function (v, k, arr) { return arr.indexOf(v) === k; }).join(' · ')) + '</small></h3><div id="d-cassette"></div></section>' : '') +
-						'<dl class="d-facts">' + rows.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + e(x[1]) + '</dd>'; }).join('') + '</dl>' +
+						'<dl class="d-facts">' + rows.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + (x[2] || e(x[1])) + '</dd>'; }).join('') + '</dl>' +
 						(info.altTitles && info.altTitles.length ? '<section class="d-block"><h3>' + L('عناوين أخرى', 'Other titles') + '</h3><ul class="alt-titles">' +
 							info.altTitles.map(function (a) { return '<li><b lang="' + e(a.lang || '') + '">' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + (a.lang ? ' <span class="lng">' + e(a.lang) + '</span>' : '') + '</li>'; }).join('') +
 						'</ul></section>' : '') +

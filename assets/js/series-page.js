@@ -42,7 +42,7 @@ window.PAGE = {
 		var facts = [
 			[L('السنوات', 'Years'), App.num(s.years || '')],
 			[L('عدد الأعداد', 'Issues'), App.num(s.count || (issues.length || ''))],
-			[L('الناشر', 'Publisher'), s.publisher ? t(s.publisher) : ''],
+			[L('الناشر', 'Publisher'), s.publisher ? t(s.publisher) : '', s.publisher ? S.publisherLink(s.publisher) : ''],
 			[L('صاحب السلسلة', 'Created by'), ser.own ? L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') : (s.owner ? t(s.owner) : '')],
 			[ser.inspired ? L('صلتها به', 'Link to him') : L('دوره', 'His role'), !ser.own && s.role ? t(s.role) : (other && other.role ? t(other.role) : '')],
 			[L('البطل', 'Lead'), hero ? t(hero.name) : ''],
@@ -87,7 +87,7 @@ window.PAGE = {
 						(s.tagline ? '<p class="d-by">' + tx(s.tagline) + '</p>' : '') +
 						(desc ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
-						'<dl class="d-facts">' + facts.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + e(x[1]) + '</dd>'; }).join('') + '</dl>' +
+						'<dl class="d-facts">' + facts.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + (x[2] || e(x[1])) + '</dd>'; }).join('') + '</dl>' +
 						(info.altTitles && info.altTitles.length ? '<section class="d-block"><h3>' + L('عناوين أخرى', 'Other titles') + '</h3><ul class="alt-titles">' +
 							info.altTitles.map(function (a) { return '<li><b>' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + '</li>'; }).join('') + '</ul></section>' : '') +
 						(info.readingOrder ? '<section class="d-block"><h3>' + L('ترتيب القراءة', 'Reading order') + '</h3>' + App.paras(info.readingOrder) + '</section>' : '') +

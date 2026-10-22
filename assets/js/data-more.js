@@ -849,6 +849,26 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	(A.publishers || []).forEach(function (p) { if (have.indexOf(p.id) >= 0) p.logo = 'assets/img/publishers/' + p.id + '.webp'; });
 })(window.AKT);
 
+/* A line about each house for its page (publisher.html), from its Wikipedia article; houses without one show only
+   what the site records of their books with him. */
+(function (A) {
+	var about = {
+		maa: { ar: 'دار نشر مصرية تأسست عام 1960، صاحبها ومديرها حمدي مصطفى. تصدر كتب «سلاح التلميذ» المدرسية، وتوجّه إصداراتها إلى الشباب خاصة، وأشهرها «روايات مصرية للجيب»: سلاسل نبيل فاروق وسلاسل أحمد خالد توفيق.',
+			en: 'An Egyptian publisher founded in 1960, owned and run by Hamdy Mostafa. It puts out the Selah El Telmeez school books and aims its list at young readers, best known for the Egyptian Pocket Novels: Nabil Farouk’s series and Ahmed Khaled Tawfik’s.',
+			src: 'https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D9%85%D8%A4%D8%B3%D8%B3%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB%D8%A9' },
+		merit: { ar: 'دار نشر مصرية تأسست عام 1998 بمبادرة من مؤسسها محمد هاشم، واحتضنها عدد كبير من رموز الثقافة المصرية، وسعت منذ بدايتها إلى ترسيخ العقلانية وحرية الرأي والإبداع بالكتب والندوات.',
+			en: 'An Egyptian publisher founded in 1998 by Mohamed Hashem, backed from the start by many figures of Egyptian culture, and set on furthering reason and free thought and expression through its books and seminars.',
+			src: 'https://ar.wikipedia.org/wiki/%D8%AF%D8%A7%D8%B1_%D9%85%D9%8A%D8%B1%D9%8A%D8%AA_%D9%84%D9%84%D9%86%D8%B4%D8%B1' },
+		shorouk: { ar: 'من دور النشر العربية الكبرى، ناشر عام لكتب السياسة والسير والمذكرات والتاريخ والفلسفة والعلوم الاجتماعية والفكر، والكتب الفنية المصورة وكتب الأطفال.',
+			en: 'One of the large Arab publishers, with a general list of politics, biography and memoir, history, philosophy, social science and ideas, art books and children’s books.',
+			src: 'https://ar.wikipedia.org/wiki/%D8%AF%D8%A7%D8%B1_%D8%A7%D9%84%D8%B4%D8%B1%D9%88%D9%82' },
+		bloomsbury: { ar: 'دار نشر في الدوحة، أسستها مؤسسة قطر مع دار بلومزبري البريطانية عام 2008 باسم «بلومزبري – مؤسسة قطر للنشر»، وصارت عام 2015 «دار جامعة حمد بن خليفة للنشر». تنشر لقراء عرب وأجانب معًا.',
+			en: 'A Doha publisher, set up by Qatar Foundation and managed by Bloomsbury in 2008 as Bloomsbury Qatar Foundation Publishing, and since 2015 Hamad Bin Khalifa University Press. It publishes for Arab and international readers alike.',
+			src: 'https://en.wikipedia.org/wiki/Hamad_Bin_Khalifa_University_Press' }
+	};
+	(A.publishers || []).forEach(function (p) { if (about[p.id]) p.about = about[p.id]; });
+})(window.AKT);
+
 /* Covers for the books of the series he wrote for, so each series can show its first book:
    Molotov 2 (Goodreads) and 5, كتاب الصيف «أشباح ولكن» (the reader's scan), دماغي كده, أسطورة بلية, أسطورة المرأة الأفعى.
    Still none found anywhere: روايات عالمية للجيب 70 «ماتيلدا», «أسطورة ميسيا», «لا تأخذه معك». */

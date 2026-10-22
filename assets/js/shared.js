@@ -234,7 +234,53 @@
 		});
 	})();
 
+	/* ---------- publishers (AKT.publishers): each house's name is matched against the publisher of every work and series ---------- */
+	function publisherHref(id) { return 'publisher.html?id=' + encodeURIComponent(id); }
+	/* a house that only took a book over later («ثم …») is not counted for it */
+	function pubMatches(p, name) { return !!name && new RegExp(p.match).test(name.replace(/\(ثم[^)]*\)/g, '')); }
+	function yearOf(y) { var m = String(y || '').match(/\d{4}/); return m ? +m[0] : 0; }
+	/* every house with what it published first, oldest partnership first:
+	   [{ p, list: [{ id, title, href, year, cover, color, series }], from, to, later: [...] }] */
+	function publishers() {
+		var App = window.App, d = App.data();
+		/* the first edition's house stands in for a work whose own publisher is not recorded */
+		var house = function (w) {
+			var p = w.publisher && w.publisher.ar;
+			if (p) return p;
+			var eds = ((d.bookInfo || {})[w.id] || {}).editions || [];
+			return eds.length && eds[0].publisher ? eds[0].publisher.ar || '' : '';
+		};
+		var items = (d.works || []).map(function (w) {
+			return { id: w.id, title: w.title, href: App.workHref(w.id), year: yearOf(w.year), pub: house(w), cover: coverOf((d.bookInfo || {})[w.id]), color: w.color };
+		}).concat(ownSeries().concat(contributedSeries()).map(function (s) {
+			return { id: s.id, title: s.title, href: seriesHref(s.id), year: yearOf(s.years), pub: (s.publisher && s.publisher.ar) || '', cover: seriesCover(s.id), color: s.color, series: true };
+		}));
+		return (d.publishers || []).map(function (p) {
+			var mine = items.filter(function (it) { return pubMatches(p, it.pub); })
+				.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+			/* later editions of other books of his that this house reissued */
+			var later = items.filter(function (it) {
+				if (it.series || mine.indexOf(it) >= 0) return false;
+				return (((d.bookInfo || {})[it.id] || {}).editions || []).some(function (ed) { return ed.publisher && pubMatches(p, ed.publisher.ar || ''); });
+			}).map(function (it) {
+				var ys = ((d.bookInfo || {})[it.id].editions || []).filter(function (ed) { return ed.publisher && pubMatches(p, ed.publisher.ar || ''); })
+					.map(function (ed) { return yearOf(ed.year); }).filter(Boolean);
+				return Object.assign({}, it, { year: ys.length ? Math.min.apply(null, ys) : 0 });
+			}).sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+			var ys = mine.map(function (it) { return it.year; }).filter(Boolean);
+			return { p: p, list: mine, later: later, from: ys.length ? Math.min.apply(null, ys) : 0, to: ys.length ? Math.max.apply(null, ys) : 0 };
+		}).filter(function (c) { return c.list.length; })
+			.sort(function (a, b) { return (a.from || 9999) - (b.from || 9999); });
+	}
+	/* a publisher's name as printed, linked to the page of the first house it names (or plain text) */
+	function publisherLink(name) {
+		var App = window.App, text = typeof name === 'string' ? name : App.t(name || {}), ar = typeof name === 'string' ? name : (name && name.ar) || '';
+		var p = (App.data().publishers || []).filter(function (x) { return pubMatches(x, ar); })[0];
+		return p ? '<a href="' + App.esc(publisherHref(p.id)) + '">' + App.esc(text) + '</a>' : App.esc(text);
+	}
+
 	window.WorksShared = {
+		publishers: publishers, publisherHref: publisherHref, publisherLink: publisherLink,
 		ownSeries: ownSeries, contributedSeries: contributedSeries, awardsList: awardsList, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
 		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook, issueCover: issueCover,

@@ -221,27 +221,7 @@ window.PAGE = {
 		var App = window.App, d = App.data(), S = window.WorksShared, e = App.esc, tx = App.tx, L = App.L;
 		var pubs = d.publishers || [], before = document.getElementById('adaptations-section');
 		if (!pubs.length || !before) return;
-		/* the first edition's house stands in for a work whose own publisher is not recorded */
-		var house = function (w) {
-			var p = w.publisher && w.publisher.ar;
-			if (p) return p;
-			var eds = ((d.bookInfo || {})[w.id] || {}).editions || [];
-			return eds.length && eds[0].publisher ? eds[0].publisher.ar || '' : '';
-		};
-		var yearOf = function (y) { var m = String(y || '').match(/\d{4}/); return m ? +m[0] : 0; };
-		var items = (d.works || []).map(function (w) { return { title: w.title, href: App.workHref(w.id), year: yearOf(w.year), pub: house(w) }; })
-			.concat(S.ownSeries().concat(S.contributedSeries()).map(function (s) {
-				return { title: s.title, href: S.seriesHref(s.id), year: yearOf(s.years), pub: (s.publisher && s.publisher.ar) || '', series: true };
-			}));
-		var cards = pubs.map(function (p) {
-			var re = new RegExp(p.match);
-			/* a house that only took a book over later («ثم …») is not counted for it */
-			var mine = items.filter(function (it) { return it.pub && re.test(it.pub.replace(/\(ثم[^)]*\)/g, '')); })
-				.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
-			var ys = mine.map(function (it) { return it.year; }).filter(Boolean);
-			return { p: p, list: mine, from: ys.length ? Math.min.apply(null, ys) : 0, to: ys.length ? Math.max.apply(null, ys) : 0 };
-		}).filter(function (c) { return c.list.length; })
-			.sort(function (a, b) { return (a.from || 9999) - (b.from || 9999); });
+		var cards = S.publishers();
 		var sec = document.getElementById('publishers-section');
 		if (!sec) {
 			sec = document.createElement('section');
@@ -253,10 +233,11 @@ window.PAGE = {
 			'<div class="pub-grid">' + cards.map(function (c) {
 				var n = c.list.length;
 				return '<article class="pub rise">' +
-					'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)s+/, '').charAt(0)) + '</span>') + '<h3>' + tx(c.p.name) + '</h3>' +
+					'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)\s+/, '').charAt(0)) + '</span>') + '<h3><a class="pub-a" href="' + e(S.publisherHref(c.p.id)) + '">' + tx(c.p.name) + '</a></h3>' +
 						'<span class="pub-n">' + App.num(n) + ' ' + (n === 1 ? L('عمل', 'work') : n === 2 ? L('عملان', 'works') : L(n <= 10 ? 'أعمال' : 'عملًا', 'works')) + '</span></div>' +
 					(c.from ? '<div class="pub-yr">' + App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') + '</div>' : '') +
 					(c.p.note ? '<p class="pub-note">' + tx(c.p.note) + '</p>' : '') +
+					'<a class="pub-more" href="' + e(S.publisherHref(c.p.id)) + '">' + L('صفحة الدار ←', 'The house’s page →') + '</a>' +
 					'<ul class="pub-list">' + c.list.map(function (it) {
 						return '<li' + (it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + '</a></li>';
 					}).join('') + '</ul></article>';
