@@ -66,11 +66,13 @@ window.PAGE = {
 				'<div class="shelf-card" id="card-' + si + '" aria-live="polite"></div>' +
 			'</div>';
 		}).join('') +
-		'<div class="shelf-block rise" id="sources-block"></div>' +
-		'</div></section>';
+		'</div></section>' +
+		this.directory() +
+		'<section class="section"><div class="wrap"><div class="shelf-block rise" id="sources-block"></div></div></section>';
 
 		document.getElementById('content').innerHTML = html;
 		this.wave();
+		this.bindDirectory();
 
 		var shelves = this.shelves;
 		document.querySelectorAll('.shelf-block[data-shelf]').forEach(function (block) {
@@ -109,9 +111,60 @@ window.PAGE = {
 
 		/* #wr-shelf-id pulls that writer's book off the shelf */
 		this.onHash = function () {
+			/* #all (and the old authors.html) opens at the top of the A to Z list */
+			/* (instantly, once the page has loaded: a smooth scroll this long gets cut off) */
+			if (location.hash === '#all') {
+				var go = function () { var a = document.getElementById('all'); if (a) a.scrollIntoView({ block: 'start', behavior: 'instant' }); };
+				if (document.readyState === 'complete') setTimeout(go, 60); else window.addEventListener('load', function () { setTimeout(go, 60); }, { once: true });
+				return;
+			}
 			App.focusHash(function (el) { if (el.getAttribute('aria-expanded') !== 'true') el.click(); });
 		};
 		this.onHash();
+	},
+
+	/* every writer once, A to Z, each card leading to their own page; the shelves filter it */
+	dirShelf: '',
+	directory: function () {
+		var App = window.App, P = window.People, self = this;
+		var e = App.esc, t = App.t, L = App.L;
+		var bare = function (p) { return t(p.name).replace(/^(د\.|Dr\.)\s*/, ''); };
+		var all = P.all().slice().sort(function (a, b) { return bare(a).localeCompare(bare(b), App.lang); });
+		var label = function (sh, p) { return L(p && p.female && sh.arF ? sh.arF : sh.ar, sh.en); };
+		var chips = '<button type="button" class="dir-chip" data-shelf=""' + (!this.dirShelf ? ' aria-pressed="true"' : '') + '>' + L('الكل', 'All') + ' <small>' + App.num(all.length) + '</small></button>' +
+			P.SHELVES.map(function (s) {
+				var n = all.filter(function (p) { return p.shelves.indexOf(s) >= 0; }).length;
+				return n ? '<button type="button" class="dir-chip" style="--c:' + P.LABELS[s].c + '" data-shelf="' + s + '"' + (self.dirShelf === s ? ' aria-pressed="true"' : '') + '>' + e(label(P.LABELS[s])) + ' <small>' + App.num(n) + '</small></button>' : '';
+			}).join('');
+		var card = function (p) {
+			var n = t(p.name), first = P.LABELS[p.shelves[0]];
+			return '<a class="dir-card" href="' + e(P.href(p)) + '" data-shelves="' + p.shelves.join(' ') + '" style="--c:' + first.c + '">' +
+				'<span class="dir-pic"' + (p.photo ? ' style="background-image:url(&quot;' + e(p.photo.url) + '&quot;)"' : '') + '>' + (p.photo ? '' : e(P.initials(n, App.lang))) + '</span>' +
+				'<span class="dir-body"><b>' + e(n) + '</b><small>' + e(App.alt(p.name)) + '</small>' +
+					'<span class="dir-tags">' + p.shelves.map(function (s) { return '<i style="--c:' + P.LABELS[s].c + '">' + e(label(P.LABELS[s], p)) + '</i>'; }).join('') + '</span></span>' +
+			'</a>';
+		};
+		return '<section class="section" id="all"><div class="wrap">' +
+			'<div class="section-head"><div><h2>' + L('كل الكُتّاب أبجديًا', 'All the writers, A to Z') + '</h2>' +
+				'<p>' + L('كل كاتب مرة واحدة، ولكل منهم صفحته وما جمعه بالعرّاب. اختر رفًّا لتصفية القائمة.', 'Every writer once, each with a page on what they shared with him. Pick a shelf to filter the list.') + '</p></div></div>' +
+			'<div class="dir-chips" role="group" aria-label="' + e(L('حسب العلاقة', 'By connection')) + '">' + chips + '</div>' +
+			'<div class="dir-grid">' + all.map(card).join('') + '</div>' +
+		'</div></section>';
+	},
+	bindDirectory: function () {
+		var self = this, sec = document.getElementById('all');
+		if (!sec) return;
+		var apply = function () {
+			sec.querySelectorAll('.dir-chip').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-shelf') === self.dirShelf)); });
+			sec.querySelectorAll('.dir-card').forEach(function (c) { c.hidden = !!self.dirShelf && (' ' + c.getAttribute('data-shelves') + ' ').indexOf(' ' + self.dirShelf + ' ') < 0; });
+		};
+		sec.querySelector('.dir-chips').addEventListener('click', function (ev) {
+			var b = ev.target.closest('.dir-chip');
+			if (!b) return;
+			self.dirShelf = b.getAttribute('data-shelf');
+			apply();
+		});
+		apply();
 	},
 
 	/* the wave of people under the page title: every writer once, as a circle with their photo or initials,

@@ -22,9 +22,8 @@
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
-		/* the directories, linked from the footer and the home page, not the header */
+		/* the publishers directory, linked from the footer and the home page, not the header */
 		more: [
-			{ href: 'authors.html', ar: 'كل الكُتّاب', en: 'All the writers' },
 			{ href: 'publishers.html', ar: 'دور النشر', en: 'Publishers' }
 		],
 		/* pages linked only from the footer, not the header */

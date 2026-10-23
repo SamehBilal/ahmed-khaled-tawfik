@@ -102,17 +102,6 @@
 			return '<div class="ph-wall"><div class="track">' + frames + frames + '</div></div>';
 		},
 
-		/* authors: the writers around him who have a portrait */
-		authors: function (d, A) {
-			var e = A.esc, t = A.t, list = window.People ? window.People.all().filter(function (p) { return p.photo; }) : [];
-			if (!list.length) return '';
-			var frames = list.map(function (p, i) {
-				return '<figure class="ph-frame" style="--r:' + ((rnd(i, 22) - 0.5) * 5).toFixed(1) + 'deg"><img src="' + e(p.photo.url) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">' +
-					'<figcaption>' + e(t(p.name)) + '</figcaption></figure>';
-			}).join('');
-			return '<div class="ph-wall"><div class="track">' + frames + frames + '</div></div>';
-		},
-
 		/* tributes: a gallery wall of the people who wrote about him */
 		tributes: function (d, A) {
 			var e = A.esc, t = A.t, list = (d.tributes || []).filter(function (x) { return x.photo; });

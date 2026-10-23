@@ -89,3 +89,20 @@ html[data-theme="light"] .pw-person { color: #fff; }
 .wr-more { clear: both; margin: 14px 0 0; padding-top: 12px; border-top: 1px solid rgba(74, 63, 51, .25); }
 .wr-more .btn-link { font-family: var(--f-display); font-size: 17px; color: #7a1c14; text-decoration: none; border-bottom: 2px solid rgba(122, 28, 20, .35); }
 .wr-more .btn-link:hover, .wr-more .btn-link:focus-visible { border-bottom-color: #7a1c14; }
+
+/* writers.html#all: every writer once, A to Z, filtered by shelf (writers.js directory) */
+.dir-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.dir-chip { --c: var(--ember); padding: 5px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--paper-dim); font: inherit; font-family: var(--f-display); font-size: 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.dir-chip small { font-family: var(--f-latin); opacity: .7; }
+.dir-chip:hover, .dir-chip:focus-visible { border-color: var(--c); color: var(--paper); }
+.dir-chip[aria-pressed="true"] { background: var(--c); border-color: var(--c); color: #fff; }
+.dir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 12px; }
+.dir-card { display: flex; gap: 14px; align-items: center; padding: 12px 14px; border-radius: var(--radius); background: var(--ink-2); border: 1px solid var(--line); border-inline-start: 4px solid var(--c); color: var(--paper); text-decoration: none; transition: border-color .2s, transform .2s; }
+.dir-card:hover, .dir-card:focus-visible { border-color: var(--c); transform: translateY(-2px); }
+.dir-card[hidden] { display: none; }
+.dir-pic { flex: none; display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; background: var(--c) center / cover no-repeat; color: #f6d79a; font-family: var(--f-chunky); font-size: 19px; box-shadow: 0 0 0 2px var(--line); }
+.dir-body { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.dir-body b { font-family: var(--f-display); font-size: 17px; font-weight: 700; line-height: 1.3; }
+.dir-body small { color: var(--muted); font-family: var(--f-latin); font-size: 13px; }
+.dir-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.dir-tags i { font-style: normal; padding: 1px 8px; border-radius: 999px; background: color-mix(in srgb, var(--c) 70%, transparent); color: #fff; font-size: 11.5px; font-family: var(--f-display); }
