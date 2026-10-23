@@ -152,6 +152,15 @@
 
 	window.People = {
 		SHELVES: SHELVES,
+		/* each shelf's name (feminine in Arabic where it differs) and colour */
+		LABELS: {
+			collaborators: { ar: 'كتب معه', arF: 'كتبت معه', en: 'Wrote with him', c: '#8a3b12' },
+			introductions: { ar: 'المقدّمات', en: 'Introductions', c: '#2c5a68' },
+			dedications: { ar: 'أهدى إليه', arF: 'أهدت إليه', en: 'Dedicated a book to him', c: '#5a1f3a' },
+			influenced: { ar: 'تأثّر به', arF: 'تأثّرت به', en: 'Influenced by him', c: '#7a5a1c' },
+			contemporaries: { ar: 'رفيق الطريق', arF: 'رفيقة الطريق', en: 'Contemporary', c: '#334155' },
+			translated: { ar: 'ترجم له', en: 'He translated them', c: '#3b3b58' }
+		},
 		key: key,
 		all: function () { if (!cache) cache = build(); return cache.list; },
 		byId: function (id) { return this.all().filter(function (p) { return p.id === id; })[0] || null; },

@@ -279,8 +279,23 @@
 		return p ? '<a href="' + App.esc(publisherHref(p.id)) + '">' + App.esc(text) + '</a>' : App.esc(text);
 	}
 
+	/* a house's card (works page, publishers.html): logo, name, count, years, note and its books */
+	function publisherCard(c) {
+		var App = window.App, e = App.esc, tx = App.tx, L = App.L;
+		var n = c.list.length;
+		return '<article class="pub rise">' +
+			'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)\s+/, '').charAt(0)) + '</span>') + '<h3><a class="pub-a" href="' + e(publisherHref(c.p.id)) + '">' + tx(c.p.name) + '</a></h3>' +
+				'<span class="pub-n">' + (n === 2 ? L('عملان', '2 works') : App.num(n) + ' ' + (n === 1 ? L('عمل', 'work') : L(n <= 10 ? 'أعمال' : 'عملًا', 'works'))) + '</span></div>' +
+			(c.from ? '<div class="pub-yr">' + App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') + '</div>' : '') +
+			(c.p.note ? '<p class="pub-note">' + tx(c.p.note) + '</p>' : '') +
+			'<a class="pub-more" href="' + e(publisherHref(c.p.id)) + '">' + L('صفحة الدار ←', 'The house’s page →') + '</a>' +
+			'<ul class="pub-list">' + c.list.map(function (it) {
+				return '<li' + (it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + '</a></li>';
+			}).join('') + '</ul></article>';
+	}
+
 	window.WorksShared = {
-		publishers: publishers, publisherHref: publisherHref, publisherLink: publisherLink,
+		publishers: publishers, publisherHref: publisherHref, publisherLink: publisherLink, publisherCard: publisherCard,
 		ownSeries: ownSeries, contributedSeries: contributedSeries, awardsList: awardsList, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
 		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook, issueCover: issueCover,

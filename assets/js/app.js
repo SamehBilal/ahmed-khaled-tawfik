@@ -22,6 +22,11 @@
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
+		/* the directories, linked from the footer and the home page, not the header */
+		more: [
+			{ href: 'authors.html', ar: 'كل الكُتّاب', en: 'All the writers' },
+			{ href: 'publishers.html', ar: 'دور النشر', en: 'Publishers' }
+		],
 		/* pages linked only from the footer, not the header */
 		legal: [
 			{ href: 'about.html', ar: 'عن الموقع', en: 'About' },
@@ -284,7 +289,7 @@
 							'<span class="ft-dates" dir="ltr">1962 — 2018</span>' +
 						'</div>' +
 						'<nav class="ft-links" aria-label="' + App.L('صفحات الموقع', 'Site pages') + '">' +
-							UI.nav.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+							UI.nav.concat(UI.more).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 						'</nav>' +
 						'<nav class="ft-legal" aria-labelledby="ft-legal-h"><h2 id="ft-legal-h">' + App.L('خلف الكواليس', 'Behind the site') + '</h2>' +
 							UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +

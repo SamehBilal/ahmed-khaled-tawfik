@@ -5,14 +5,7 @@ window.PAGE = {
 	id: 'writers',
 	title: { ar: 'كاتب', en: 'Writer' },
 
-	SHELF: {
-		collaborators: { ar: 'كتب معه', arF: 'كتبت معه', en: 'Wrote with him', c: '#8a3b12' },
-		introductions: { ar: 'المقدّمات', en: 'Introductions', c: '#2c5a68' },
-		dedications: { ar: 'أهدى إليه', arF: 'أهدت إليه', en: 'Dedicated a book to him', c: '#5a1f3a' },
-		influenced: { ar: 'تأثّر به', arF: 'تأثّرت به', en: 'Influenced by him', c: '#7a5a1c' },
-		contemporaries: { ar: 'رفيق الطريق', arF: 'رفيقة الطريق', en: 'Contemporary', c: '#334155' },
-		translated: { ar: 'ترجم له', en: 'He translated them', c: '#3b3b58' }
-	},
+	SHELF: window.People.LABELS,
 
 	/* a shelf's label for this person (feminine in Arabic for a woman) */
 	label: function (sh, p) { return window.App.L(p.female && sh.arF ? sh.arF : sh.ar, sh.en); },

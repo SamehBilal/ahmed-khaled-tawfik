@@ -152,3 +152,6 @@ html[dir="rtl"] .ph-wall .track { animation-name: ph-marquee-rtl; }
 	.ph *, .ph *::before { animation: none !important; transition: none !important; }
 	.ph-env { display: none; }
 }
+
+/* publishers: logos keep their colours and fit inside the card */
+.ph-logo img { object-fit: contain; background: #fff; padding: 14px; filter: none; }

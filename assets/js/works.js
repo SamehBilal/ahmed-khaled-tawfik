@@ -230,18 +230,7 @@ window.PAGE = {
 		}
 		sec.innerHTML = '<div class="wrap"><div class="section-head"><div><h2>' + L('دور النشر', 'Publishers') + '</h2>' +
 			'<p>' + L('الدور التي صدرت عنها كتبه وسلاسله، بترتيب أول كتاب له عند كل منها.', 'The houses that published his books and series, in order of his first book with each.') + '</p></div></div>' +
-			'<div class="pub-grid">' + cards.map(function (c) {
-				var n = c.list.length;
-				return '<article class="pub rise">' +
-					'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)\s+/, '').charAt(0)) + '</span>') + '<h3><a class="pub-a" href="' + e(S.publisherHref(c.p.id)) + '">' + tx(c.p.name) + '</a></h3>' +
-						'<span class="pub-n">' + App.num(n) + ' ' + (n === 1 ? L('عمل', 'work') : n === 2 ? L('عملان', 'works') : L(n <= 10 ? 'أعمال' : 'عملًا', 'works')) + '</span></div>' +
-					(c.from ? '<div class="pub-yr">' + App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') + '</div>' : '') +
-					(c.p.note ? '<p class="pub-note">' + tx(c.p.note) + '</p>' : '') +
-					'<a class="pub-more" href="' + e(S.publisherHref(c.p.id)) + '">' + L('صفحة الدار ←', 'The house’s page →') + '</a>' +
-					'<ul class="pub-list">' + c.list.map(function (it) {
-						return '<li' + (it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + '</a></li>';
-					}).join('') + '</ul></article>';
-			}).join('') + '</div></div>';
+			'<div class="pub-grid">' + cards.map(S.publisherCard).join('') + '</div></div>';
 	},
 
 	/* ---------- every issue, as spines on a shelf ---------- */
