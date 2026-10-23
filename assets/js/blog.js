@@ -319,6 +319,22 @@ window.PAGE = {
 	loadFull: function (p) {
 		var App = window.App, L = App.L, e = App.esc, self = this;
 		var box = document.getElementById('np-text');
+		/* the full article, copied from the blog with its owner's permission (assets/blog/<id>.html,
+		   cached once read); the blog's feed, which stops at "read more", only when there is no copy */
+		if (!this._triedLocal) this._triedLocal = {};
+		if (!this._triedLocal[p.id]) {
+			this._triedLocal[p.id] = true;
+			fetch('assets/blog/' + encodeURIComponent(p.id) + '.html').then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (html) {
+				var clean = App.digits(self.sanitize(html));
+				if (!clean || !box || !box.isConnected) throw 0;
+				box.innerHTML = clean;
+				var first = box.firstElementChild;
+				if (first && p.src && first.textContent.trim().indexOf(p.src.split(' - ')[0]) === 0 && first.textContent.length < 80) first.remove();
+				box.insertAdjacentHTML('beforeend', '<p class="np-via">' + L('النص كاملًا من أرشيف مدونة «أحمد خالد توفيق» (عمرو عبيد)، بإذنه: ', 'The full text from the "Ahmed Khaled Tawfik" blog archive (Amr Ebaid), by permission: ') +
+					'<a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a></p>');
+			}).catch(function () { if (box && box.isConnected) self.loadFull(p); });
+			return;
+		}
 		var fail = function () {
 			if (!box || !box.isConnected) return;
 			var w = box.querySelector('.np-loading');
