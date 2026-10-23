@@ -49,10 +49,15 @@ window.PAGE = {
 			[L('الشكل', 'Format'), info.format ? t(info.format) : '']
 		].filter(function (x) { return x[1]; });
 
+		/* each issue's number stands beside its cover, as on the guide (.step-n) */
+		/* the widest number sets the column all the numbers stand in, so every cover is the same width */
+		var digits = Math.max.apply(null, [1].concat(issues.map(function (is) { return is.n != null ? String(is.n).length : 1; })));
 		var issueGrid = issues.map(function (is) {
+			var n = is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '';
 			return '<a class="cover-link" href="' + App.issueHref(id, is) + '" title="' + e(t(is.title)) + '">' +
-				S.miniCover({ img: S.issueCover(id, is), color: s.color, title: t(is.title), num: is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '', sub: is.original ? t(is.original) : '', by: t(S.seriesAuthor(ser)) }) +
-				'<span class="cl-t">' + (is.n != null ? App.num(is.n) + '. ' : '') + tx(is.title) + '</span>' +
+				'<span class="cl-cover">' + S.miniCover({ img: S.issueCover(id, is), color: s.color, title: t(is.title), sub: is.original ? t(is.original) : '', by: t(S.seriesAuthor(ser)) }) +
+					(n ? '<b class="cl-n"' + (is.part ? ' data-part' : '') + '>' + e(n) + '</b>' : '') + '</span>' +
+				'<span class="cl-t">' + tx(is.title) + '</span>' +
 				((d.audio && (d.audio.issues[id + '-' + is.n] || (d.audio.youtube && d.audio.youtube.issues[id + '-' + is.n])) && !(is.part > 1)) ? '<span class="cl-audio" title="' + L('متاح مسموعًا على Audiohat', 'Audiobook on Audiohat') + '">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
 			'</a>';
 		}).join('');
@@ -113,7 +118,7 @@ window.PAGE = {
 				'</div>' +
 				(ser.own && hero && issues.length ? this.proximityHtml(s, hero, issues) : '') +
 				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
-					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid">' + issueGrid + '</div></section>' : '') +
+					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid is-ranked" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
 				(S.specialIssues(id).length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('الأعداد الخاصة', 'Special issues') + ' <small>(' + App.num(S.specialIssues(id).length) + ')</small></h3></div><div class="cover-grid">' +
 					S.specialIssues(id).map(function (is) {
 						var au = d.audio && d.audio.youtube && d.audio.youtube.issues[id + '-s' + is.n];
