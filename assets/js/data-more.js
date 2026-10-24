@@ -2065,3 +2065,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			source: 'https://www.goodreads.com/book/show/73148303' }
 	]).concat(old.filter(function (ed) { return ed.store; }));
 })(window.AKT);
+
+/* «سر الغرفة 207»: the covers of its editions; the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).room207 = A.bookInfo.room207 || {};
+	var C = 'assets/img/covers/stories/room207-', by = {
+		B0DLT6432R: 'diamond-2008', B0DLT67BBQ: 'diamond-kw-2008', B0DLTBH8FJ: 'lila-2009', B0DMZR488Q: 'lila', '9778200270': 'kayan-2017', '9394315535': 'ml-2022'
+	};
+	(b.editions || []).forEach(function (ed) {
+		if (by[ed.asin]) ed.cover = C + by[ed.asin] + '.webp';
+		if (ed.date === '2009-09-16') ed.cover = C + 'lila-2009-09.webp';
+	});
+	b.ownCover = C + 'diamond-2008.webp';
+})(window.AKT);
