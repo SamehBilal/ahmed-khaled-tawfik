@@ -694,7 +694,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
    Covers: «أليس في بلاد العجائب» (روايات عالمية للجيب 65) and «أسطورة المرأة الأفعى» (كوميكس) from bookhome;
    «أسطورة بلية» (بلية العجيب 17), «دماغي كده», «سوبر ميجا 1» and «أنت لا تساوي كلب» (مولوتوف 5) from Goodreads.
    publishers: each one's name is matched against the publisher of every work and series, so a book published jointly
-   (or later taken over, as Dar Lila by Kayan) counts for each house named in it. */
+   counts for each house named in it. Kayan Corp («كيان كورب»), behind Dar Lila, is not Kayan Publishing. */
 (function (A) {
 	var C = 'assets/img/covers/contrib/';
 	var MAA = { ar: 'المؤسسة العربية الحديثة — روايات مصرية للجيب', en: 'Modern Arab Association — Egyptian Pocket Novels' };
@@ -719,8 +719,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ id: 'diamond', name: { ar: 'دايموند بوك', en: 'Diamond Book' }, match: 'دايموند' },
 		{ id: 'lila', name: { ar: 'دار ليلى', en: 'Dar Lila' }, match: 'ليلى' },
 		{ id: 'merit', name: { ar: 'دار ميريت', en: 'Merit' }, match: 'ميريت' },
-		{ id: 'kayan', name: { ar: 'كيان', en: 'Kayan' }, match: 'كيان',
-		  note: { ar: 'ضمّت دار ليلى، وأعادت نشر كثير من كتبه.', en: 'Took in Dar Lila and reissued many of his books.' } },
+		{ id: 'kayan', name: { ar: 'كيان', en: 'Kayan' }, match: 'كيان(?! كورب)',
+		  note: { ar: 'أعادت نشر كثير من كتبه.', en: 'Reissued many of his books.' } },
 		{ id: 'bloomsbury', name: { ar: 'بلومزبري – مؤسسة قطر للنشر', en: 'Bloomsbury Qatar Foundation Publishing' }, match: 'بلومزبري' },
 		{ id: 'shorouk', name: { ar: 'دار الشروق', en: 'Dar El Shorouk' }, match: 'الشروق' },
 		{ id: 'karma', name: { ar: 'دار الكرمة', en: 'Dar Al Karma' }, match: 'الكرمة' },
