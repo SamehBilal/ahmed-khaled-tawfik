@@ -1577,8 +1577,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 })(window.AKT);
 
 /* «المغامر» (The Adventurous): Basem Salah El-Din's line from the Modern Arab Association, where he wrote the story
-   «لا تأخذه معك»; its first two issues (July and September 2009), each with its back cover. Which issue holds his
-   story isn't recorded here yet, so the story stays in the line's description. */
+   «لا تأخذه معك»; its first two issues (July and September 2009), each with its back cover. His story runs in two
+   parts, one in each issue. */
 (function (A) {
 	var MAA = { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' };
 	(A.otherSeries || []).forEach(function (s) {
@@ -1586,11 +1586,13 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		s.owner = { ar: 'باسم صلاح الدين', en: 'Basem Salah El-Din' };
 		s.publisher = MAA;
 		s.years = '2009';
-		s.description = { ar: 'سلسلة لباسم صلاح الدين من المؤسسة العربية الحديثة (The Adventurous)، صدر عددها الأول في يوليو 2009 والثاني في سبتمبر 2009. شارك فيها أحمد خالد توفيق بقصة «لا تأخذه معك».',
-			en: 'Basem Salah El-Din’s line from the Modern Arab Association (The Adventurous); its first issue came out in July 2009 and its second in September 2009. Ahmed Khaled Tawfik contributed the story «Don’t Take It With You».' };
+		s.description = { ar: 'سلسلة لباسم صلاح الدين من المؤسسة العربية الحديثة (The Adventurous)، صدر عددها الأول في يوليو 2009 والثاني في سبتمبر 2009. شارك فيها أحمد خالد توفيق بقصة «لا تأخذه معك»، نُشرت على جزأين في العددين الأول والثاني.',
+			en: 'Basem Salah El-Din’s line from the Modern Arab Association (The Adventurous); its first issue came out in July 2009 and its second in September 2009. Ahmed Khaled Tawfik contributed the story «Don’t Take It With You», in two parts across the first two issues.' };
 		s.issues = [
-			{ n: 1, title: { ar: 'المغامر 1', en: 'Al-Mughamer 1' } },
-			{ n: 2, title: { ar: 'المغامر 2', en: 'Al-Mughamer 2' } }
+			{ n: 1, title: { ar: 'المغامر 1', en: 'Al-Mughamer 1' },
+				synopsis: { ar: 'فيه الجزء الأول من قصة أحمد خالد توفيق «لا تأخذه معك».', en: 'It carries the first part of Ahmed Khaled Tawfik’s story «Don’t Take It With You».' } },
+			{ n: 2, title: { ar: 'المغامر 2', en: 'Al-Mughamer 2' },
+				synopsis: { ar: 'فيه الجزء الثاني من قصة أحمد خالد توفيق «لا تأخذه معك».', en: 'It carries the second part of Ahmed Khaled Tawfik’s story «Don’t Take It With You».' } }
 		];
 	});
 	var I = A.issueInfo = A.issueInfo || {};
