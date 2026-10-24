@@ -156,7 +156,7 @@ window.PAGE = {
 			var p = (d.publishers || []).filter(function (x) { return withPub.publisher && new RegExp(x.match).test(((withPub.publisher || {}).ar || '').replace(/\(ثم[^)]*\)/g, '')); })[0];
 			/* its own back cover, else one tied to no edition (it fits any), else none: the blurb */
 			return { cover: g.cover, back: (list.filter(function (ed) { return ed.back; })[0] || backs.filter(function (ed) { return !ed.cover; })[0] || {}).back || '',
-				house: p ? p.id : '', label: withPub.publisher ? t(withPub.publisher) : langName(list[0].lang), year: list[0].year ? String(list[0].year).slice(0, 4) : '', lang: list[0].lang };
+				house: p ? p.id : '', label: withPub.publisher ? t(withPub.publisher) : L('طبعة', 'Edition'), year: list[0].year ? String(list[0].year).slice(0, 4) : '', lang: list[0].lang };
 		});
 		var printsHtml = looks.length > 1 ? '<div class="d-prints" role="group" aria-label="' + e(L('بدّل الطبعة على الكتاب', 'Show another edition on the book')) + '">' + looks.map(function (lk, i) {
 			var on = lk.cover === S.coverOf(info);
