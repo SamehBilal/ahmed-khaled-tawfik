@@ -2424,3 +2424,31 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.editions = rest.slice(0, at).concat(p2, rest.slice(at));
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004093/');
 })(window.AKT);
+
+/* «الآن نفتح الصندوق 3»: the seven editions of its third part — Dar Lila (2010: 195 pages, 141 pages; and an undated 180-page printing),
+   Kayan (2017 paperback of 145 pages with its back cover from Samawy (samawy.com/i/1004094); a 2017 paperback of 133 pages; Kindle
+   October 2017 and 2024); three covers, each named on Goodreads by its book id */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).sandoq = A.bookInfo.sandoq || {};
+	var T = { ar: 'الآن نفتح الصندوق 3', en: 'Now We Open the Box 3' }, C = 'assets/img/covers/stories/sandoq-', GR = 'https://www.goodreads.com/book/show/';
+	var LILA = { ar: 'دار ليلى للنشر والتوزيع', en: 'Dar Lila' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var part3 = function (ed) { return /الثالث|الصندوق 3$/.test((ed.title || {}).ar || ''); };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200317'; })[0] || {};
+	/* part three's printings go after part two's */
+	var rest = old.filter(function (ed) { return !part3(ed); });
+	var at = rest.map(function (ed) { return /الثاني|الصندوق 2$/.test((ed.title || {}).ar || ''); }).lastIndexOf(true) + 1;
+	var p3 = [
+		{ title: T, publisher: LILA, year: 2010, date: '2010-01-01', lang: 'ar', isbn: '9789776386143', isbn10: '9776386148', asin: '9776386148', pages: 195, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + '9568185.webp', source: GR + '9568185' },
+		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, year: 2010, date: '2010-01-01', lang: 'ar', pages: 141, format: PB, cover: C + '34657833.webp', source: GR + '34657833' },
+		{ title: T, publisher: LILA, lang: 'ar', pages: 180, format: PB, cover: C + '18664186.webp', source: GR + '18664186' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200317', isbn10: '9778200319', asin: '9778200319', pages: 145, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/sandoq-3-kayan.webp', source: kayan.source },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', asin: 'B0DM22B2PG', pages: 133, format: PB },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-10-01', lang: 'ar', asin: 'B076X6Q9BJ', pages: 196, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYQ6L4D', pages: 114, format: KD }
+	];
+	b.editions = rest.slice(0, at).concat(p3, rest.slice(at));
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004094/');
+})(window.AKT);
