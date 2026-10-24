@@ -202,9 +202,10 @@
 				header.innerHTML =
 					'<div class="wrap">' +
 						'<a class="brand" href="index.html"><span class="brand-ar">العرّاب</span><span class="brand-en">The Godfather</span></a>' +
-						'<nav class="nav" aria-label="' + App.L('التنقل الرئيسي', 'Main') + '">' +
-							UI.nav.map(function (n) {
-								return '<a href="' + n.href + '"' + (n.id === pageId ? ' aria-current="page"' : '') + '>' + App.esc(n[App.lang]) + '</a>';
+						'<nav class="nav" id="site-nav" aria-label="' + App.L('التنقل الرئيسي', 'Main') + '" data-title="' + App.L('الفهرس', 'Contents') + '">' +
+							UI.nav.map(function (n, i) {
+								/* the empty span is the dotted leader to the page number in the phone menu */
+								return '<a href="' + n.href + '" style="--i:' + i + '"' + (n.id === pageId ? ' aria-current="page"' : '') + '>' + App.esc(n[App.lang]) + '<span aria-hidden="true"></span></a>';
 							}).join('') +
 						'</nav>' +
 						'<div class="tools">' +
@@ -216,8 +217,28 @@
 								'<svg class="i-page" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 3h9l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 11h7M9 15h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' +
 							'</button>' +
 							'<button class="lang-toggle" type="button" lang="' + (App.lang === 'ar' ? 'en' : 'ar') + '">' + App.tx(UI.toggle) + '</button>' +
+							'<button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="' + App.L('القائمة', 'Menu') + '">' +
+								'<span class="stack" aria-hidden="true"><i></i><i></i><i></i></span>' +
+							'</button>' +
 						'</div>' +
 					'</div>';
+				/* the phone menu: opens and closes on its button, and closes on a link, Escape, a tap outside the header,
+				   or when the screen grows past the phone layout */
+				var setMenu = function (open) {
+					header.classList.toggle('menu-open', open);
+					header.querySelector('.menu-btn').setAttribute('aria-expanded', String(open));
+				};
+				header.querySelector('.menu-btn').addEventListener('click', function () { setMenu(!header.classList.contains('menu-open')); });
+				header.querySelector('.nav').addEventListener('click', function (ev) { if (ev.target.closest('a')) setMenu(false); });
+				if (!header.dataset.menuWired) {
+					header.dataset.menuWired = '1';
+					document.addEventListener('keydown', function (ev) {
+						if (ev.key === 'Escape' && header.classList.contains('menu-open')) { setMenu(false); header.querySelector('.menu-btn').focus(); }
+					});
+					document.addEventListener('click', function (ev) { if (!header.contains(ev.target)) setMenu(false); });
+					var mq = window.matchMedia('(max-width: 760px)');
+					(mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(function () { setMenu(false); });
+				}
 				header.querySelector('.lang-toggle').addEventListener('click', function () { App.setLang(App.lang === 'ar' ? 'en' : 'ar'); });
 				header.querySelector('.theme-toggle').addEventListener('click', function () { App.setTheme(App.theme() === 'light' ? 'dark' : 'light'); });
 				header.querySelector('.search-open').addEventListener('click', function () { Search.open(); });

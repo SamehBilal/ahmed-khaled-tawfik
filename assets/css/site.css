@@ -112,7 +112,7 @@ img { max-width: 100%; display: block; }
 }
 .lang-toggle:hover { border-color: var(--gold); color: var(--gold); }
 
-.menu-btn { display: none; }
+.site-header .menu-btn { display: none; }
 
 /* eleven links don't fit beside the brand on laptop widths: tighten, then give the menu its own row */
 @media (max-width: 1280px) { .nav { gap: 2px; } .nav a { padding: 8px 10px; font-size: 15px; } }
@@ -124,13 +124,86 @@ img { max-width: 100%; display: block; }
 	.tools { margin-inline-start: auto; }
 }
 
+/* phones: the links fold away behind a menu button — three books lying in a stack that fold into an ✕ — and open as a
+   book's contents page, swinging down from the header: a spine down one edge, ruled lines, each link with its page
+   number on a dotted leader, a red ribbon on the page you are on */
 @media (max-width: 760px) {
-	.site-header .wrap { flex-wrap: wrap; gap: 8px 12px; padding-block: 10px; }
+	.site-header .wrap { gap: 12px; padding-block: 10px; }
 	.brand-en { display: none; }
-	.nav { order: 3; width: 100%; margin: 0; overflow-x: auto; scrollbar-width: none; }
-	.nav::-webkit-scrollbar { display: none; }
-	.nav a { padding: 6px 12px; font-size: 15px; white-space: nowrap; }
 	.tools { margin-inline-start: auto; }
+
+	.site-header .menu-btn { display: grid; }
+	.menu-btn .stack { position: relative; width: 18px; height: 14px; }
+	.menu-btn .stack i {
+		position: absolute; inset-inline-start: 0; height: 3px; border-radius: 1px;
+		background: currentColor; transition: transform .35s cubic-bezier(.6, -0.3, .3, 1.4), opacity .25s, width .35s;
+	}
+	.menu-btn .stack i::after {
+		content: ''; position: absolute; inset-block: 0; inset-inline-end: 3px; width: 2px; background: var(--ink); opacity: .7;
+	}
+	.menu-btn .stack i:nth-child(1) { top: 0; width: 15px; inset-inline-start: 2px; color: var(--gold); }
+	.menu-btn .stack i:nth-child(2) { top: 5.5px; width: 18px; color: var(--ember); }
+	.menu-btn .stack i:nth-child(3) { top: 11px; width: 16px; inset-inline-start: 1px; }
+	.menu-btn .stack i { background: currentColor; }
+	.menu-btn:hover .stack i:nth-child(1) { transform: translateX(-2px) rotate(-4deg); }
+	.menu-btn:hover .stack i:nth-child(3) { transform: translateX(2px) rotate(3deg); }
+	.menu-open .menu-btn { border-color: var(--ember); }
+	.menu-open .menu-btn .stack i:nth-child(1) { width: 18px; transform: translate(-2px, 5.5px) rotate(45deg); }
+	.menu-open .menu-btn .stack i:nth-child(2) { opacity: 0; transform: translateX(14px); }
+	html[dir="rtl"] .menu-open .menu-btn .stack i:nth-child(2) { transform: translateX(-14px); }
+	.menu-open .menu-btn .stack i:nth-child(3) { width: 18px; transform: translate(-1px, -5.5px) rotate(-45deg); }
+	html[dir="rtl"] .menu-open .menu-btn .stack i:nth-child(1) { transform: translate(2px, 5.5px) rotate(-45deg); }
+	html[dir="rtl"] .menu-open .menu-btn .stack i:nth-child(3) { transform: translate(1px, -5.5px) rotate(45deg); }
+	.menu-open .menu-btn .stack i::after { opacity: 0; }
+
+	.nav {
+		position: absolute; top: calc(100% + 6px); inset-inline: 12px; margin: 0;
+		display: flex; flex-direction: column; gap: 0;
+		max-height: calc(100dvh - 90px); overflow-y: auto; overscroll-behavior: contain;
+		padding: 46px 22px 22px; padding-inline-start: 34px;
+		border: 1px solid var(--line); border-radius: 6px 14px 14px 6px;
+		background:
+			linear-gradient(to var(--spine-side, right), transparent 18px, rgba(0, 0, 0, .18) 18px, transparent 26px),
+			repeating-linear-gradient(transparent 0 37px, var(--line) 37px 38px),
+			var(--ink-2);
+		box-shadow: var(--shadow), inset 12px 0 0 -6px var(--ember);
+		transform-origin: 50% 0; transform: perspective(900px) rotateX(-92deg);
+		opacity: 0; visibility: hidden;
+		transition: transform .55s cubic-bezier(.2, .9, .25, 1.15), opacity .3s, visibility 0s .55s;
+	}
+	html[dir="rtl"] .nav { --spine-side: left; border-radius: 14px 6px 6px 14px; box-shadow: var(--shadow), inset -12px 0 0 -6px var(--ember); }
+	.nav::before {
+		content: attr(data-title); position: absolute; top: 12px; inset-inline: 34px 22px;
+		font-family: var(--f-chunky); font-size: 18px; color: var(--ember); letter-spacing: .02em;
+		border-bottom: 2px double var(--line); padding-bottom: 4px;
+	}
+	.menu-open .nav { transform: none; opacity: 1; visibility: visible; transition: transform .55s cubic-bezier(.2, .9, .25, 1.15), opacity .2s, visibility 0s; }
+	.nav { counter-reset: page; }
+	.nav a {
+		counter-increment: page; position: relative;
+		display: flex; align-items: baseline; gap: 8px;
+		padding: 5px 4px; border-radius: 0; font-size: 17px; line-height: 28px; color: var(--paper);
+		opacity: 0; transform: translateY(-8px);
+		transition: opacity .3s, transform .35s cubic-bezier(.2, .8, .2, 1), color .2s;
+	}
+	.nav a::after {
+		content: counter(page, decimal); order: 2; margin-inline-start: auto;
+		font-family: var(--f-latin); font-size: 14px; color: var(--muted);
+	}
+	html[lang="ar"] .nav a::after { content: counter(page, arabic-indic); font-family: var(--f-body); }
+	.nav a > span { flex: 1; order: 1; border-bottom: 2px dotted var(--line); margin-bottom: 7px; min-width: 20px; }
+	.menu-open .nav a { opacity: 1; transform: none; transition-delay: calc(.12s + var(--i, 0) * 40ms); }
+	.nav a:hover { background: none; color: var(--gold); }
+	html .site-header .nav a[aria-current="page"][href] { background: none; color: var(--ember); }
+	.nav a[aria-current="page"]::before {
+		content: ''; position: absolute; inset-inline-start: -26px; top: -12px; width: 12px; height: 38px;
+		background: linear-gradient(var(--blood), #d23a2c); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+	}
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+	.nav, .menu-open .nav, .nav a, .menu-open .nav a, .menu-btn .stack i { transition: none; }
+	.nav { transform: none; }
 }
 
 /* ---------- Page hero ---------- */
