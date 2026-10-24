@@ -2020,3 +2020,19 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'أهدي هذا الكتيب لقرائي الأعزاء، سواء كانوا ممن سيبتاعون نسخته الأصلية أو المزورة، أو ممن سيحملونه في صيغة pdf مجانًا من شبكة الإنترنت، فيدعو كل منهم للقرصان صاحب الموقع ويقول له: «جعل الله هذا في ميزان حسناتك يا أخي»، ثم ينهال بالهجوم على مؤلف الكتاب باعتباره رجلًا سخيفًا تافهًا، وقد أخذ أكبر من حجمه بكثير، ويدعو عليه بالشلل والبله المغولي، ثم ينام سعيدًا راضيًا عن الكون والحياة.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004116/');
 })(window.AKT);
+
+/* «سر الغرفة 207»: Kayan's printing with the cover of the Shahid series «الغرفة 207» (2022), its front and back covers from Samawy
+   (samawy.com/i/1004766) and the back's text; that cover was shown on the 2017 edition, which now has none of its own */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).room207 = A.bookInfo.room207 || {};
+	var eds = b.editions = b.editions || [];
+	eds.forEach(function (ed) { if (ed.isbn === '9789778200270' && /abjjad-3a7fdb88a7a2/.test(ed.cover || '')) delete ed.cover; });
+	var at = eds.map(function (ed) { return ed.isbn; }).indexOf('9789778200270') + 1 || eds.length;
+	eds.splice(at, 0, { title: { ar: 'سر الغرفة 207', en: 'The Secret of Room 207' }, publisher: { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' },
+		year: 2022, lang: 'ar', isbn: '9789778200270', pages: 220, format: { ar: 'غلاف ورقي', en: 'Paperback' },
+		edition: { ar: 'طبعة مسلسل «الغرفة 207» (شاهد)', en: 'Room 207 series (Shahid) edition' },
+		cover: 'assets/img/covers/stories/room207-kayan-samawy.webp', back: 'assets/img/covers/back/room207-kayan.webp', source: 'https://www.samawy.com/i/1004766/' });
+	if (!b.blurb) b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'يقول ستيفن كنج: «بالإضافة إلى قصص دفن الأحياء، على كل كاتب رعب أن يقدم قصة واحدة على الأقل عن غرف الفنادق المسكونة، لأن غرف الفنادق أماكن مخيفة بطبعها. تخيل كم من الناس نام في الفراش قبلك؟ كم منهم كان مريضًا؟ كم منهم كان يفقد عقله؟ كم منهم كان يفكر في قراءة بضع آيات أخيرة من الكتاب المقدس الموضوع في درج الكومود بجوار الفراش قبل أن يشنق نفسه في خزانة الملابس بجوار التليفزيون؟». بالفعل غرف الفنادق أماكن مرعبة، وأكثرها إرعابًا هي الغرفة 207.. في هذه الغرفة تحتشد أشنع مخاوفك التي داريتها حتى عن نفسك منذ كنت طفلًا.. في هذه الغرفة يتلاشى الحاجز بين الحقيقة والوهم.. بين المخاوف المشروعة والكابوس.. في هذه الغرفة يتلاشى الحاجز بين الماضي والمستقبل، وبين ذاتك والآخرين.. لا تتلصص ولا تختلس النظرات عبر ثقب المفتاح.. فقط فلتدر مقبض الباب في هدوء وحذر.. ولتدخل الغرفة رقم 207..' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004766/');
+})(window.AKT);
