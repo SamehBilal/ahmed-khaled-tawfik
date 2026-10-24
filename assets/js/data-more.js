@@ -1279,3 +1279,29 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1008927/');
 })(window.AKT);
+
+/* «نادي القتال»: Merit's first edition (1 January 2005, 224 pages, with the cover from the timeline) and Dar Al Karma's
+   (26 January 2023, 272 pages, with its back cover from Samawy, samawy.com/i/1009082) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).fightclub = A.bookInfo.fightclub || {};
+	var merit = 'assets/img/timeline/fight-club-merit.webp';
+	b.firstPublished = '2005-01-01';
+	b.ownCover = merit;
+	var seen = {};
+	b.editions = (b.editions || []).filter(function (ed) {
+		/* Dar Lila's 2014 printing is listed twice from the same Goodreads page */
+		var k = ed.source && ed.year ? ed.source + '|' + ed.year : '';
+		if (k && seen[k]) { if (ed.translator) seen[k].translator = ed.translator; return false; }
+		if (k) seen[k] = ed;
+		return true;
+	});
+	b.editions.forEach(function (ed) {
+		if (ed.year === 2005 && /ميريت/.test((ed.publisher || {}).ar || '')) {
+			ed.date = '2005-01-01'; ed.pages = 224; ed.isbn = '9789773512163'; ed.isbn10 = '9773512169'; ed.cover = merit;
+		}
+		if (ed.isbn === '9789778648027') {
+			ed.date = '2023-01-26'; ed.pages = 272; ed.isbn10 = '9778648026'; ed.back = 'assets/img/covers/back/fightclub-karma.webp';
+		}
+	});
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009082/');
+})(window.AKT);
