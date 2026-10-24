@@ -1547,7 +1547,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 })(window.AKT);
 
 /* «ولد قليل الأدب»: two paperbacks of 155 pages with two covers and two back covers — Dar Lila (Kayan Corp)'s, and one
-   dated 1 January 2015 whose publisher we can't read on its small cover; the audiobooks are left out. Its house is
+   of 1 January 2015, also Dar Lila (Kayan Corp)'s; the audiobooks are left out. Its house is
    Dar Lila (Kayan Corp), not Kayan Publishing. */
 (function (A) {
 	var LILA_KC = { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' };
@@ -1560,7 +1560,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.editions = [
 		{ title: T, publisher: LILA_KC, lang: 'ar', asin: 'B0DN7FMJCR', pages: 155, format: PB, cover: lilaCover, back: 'assets/img/covers/back/walad-lila.webp',
 			source: 'https://www.goodreads.com/book/show/51058355' },
-		{ title: T, year: 2015, date: '2015-01-01', lang: 'ar', asin: 'B0DTVTWQBX', pages: 155, format: PB,
+		{ title: T, publisher: LILA_KC, year: 2015, date: '2015-01-01', lang: 'ar', asin: 'B0DTVTWQBX', pages: 155, format: PB,
 			cover: 'assets/img/covers/books/walad-2015.webp', back: 'assets/img/covers/back/walad-2015.webp' }
 	];
 })(window.AKT);
