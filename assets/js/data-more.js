@@ -1446,3 +1446,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			en: 'Translated The Graveyard Book; the translation came out in 2013 from Bloomsbury Qatar Foundation Publishing as Kitab al-Maqabir, and Dar Al Karma reissued it after his death.' };
 	});
 })(window.AKT);
+
+/* «في ممر الفئران»: Dar Al Karma's paperback (6 July 2016, 384 pages) with its back cover from Samawy
+   (samawy.com/i/1009755) and Kindle edition (dated 1 January 2016, 216 pages); the audiobook is left out */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).rats = A.bookInfo.rats || {};
+	b.firstPublished = '2016-07-06';
+	b.editions = (b.editions || []).filter(function (ed) { return !/صوتي/.test((ed.format || {}).ar || ''); });
+	b.editions.forEach(function (ed) {
+		if (ed.isbn === '9789776467552') { ed.date = '2016-07-06'; ed.pages = 384; ed.isbn10 = '9776467555'; ed.asin = '9776467555'; ed.back = 'assets/img/covers/back/rats.webp'; }
+		if (/كيندل/.test((ed.format || {}).ar || '')) { ed.date = '2016-01-01'; ed.pages = 216; ed.asin = 'B078JMJTGZ'; }
+	});
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009755/');
+})(window.AKT);
