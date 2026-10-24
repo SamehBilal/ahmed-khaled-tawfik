@@ -11,7 +11,10 @@
 		translation: { ar: 'ترجمة', en: 'Translation' },
 		nonfiction: { ar: 'غير روائي', en: 'Non-fiction' },
 		collab: { ar: 'عمل مشترك', en: 'Collaboration' },
-		about: { ar: 'كتاب عنه', en: 'A book about him' }
+		about: { ar: 'كتاب عنه', en: 'A book about him' },
+		foreword: { ar: 'كتاب بمقدمة منه', en: 'With his foreword' },
+		backword: { ar: 'كتاب عليه كلمته', en: 'With his words on the back' },
+		dedicated: { ar: 'كتاب أُهدي إليه', en: 'Dedicated to him' }
 	};
 
 	/* first letter of the Arabic title, skipping a leading "ال" */
@@ -109,11 +112,35 @@
 		return sid + '-' + (is.n != null ? is.n : 'x' + (is._idx || 0)) + (is.part ? '-' + is.part : '');
 	}
 
+	/* The books on the writers page that carry his words or are dedicated to him (other writers' books, not his):
+	   each has a page, book.html?id=by-<its English title>, saying why it is on the site. */
+	function entryBookId(w) { return 'by-' + String((w.book || {}).en || '').split(':')[0].toLowerCase().replace(/\(.*?\)/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+	function entryBooks() {
+		var W = window.App.data().writers || {}, out = [];
+		['introductions', 'dedications'].forEach(function (sh) {
+			(W[sh] || []).forEach(function (w) { if (w.book && w.book.en) out.push({ id: entryBookId(w), w: w, shelf: sh }); });
+		});
+		return out;
+	}
+	function entryBookHref(w) { return bookHref(entryBookId(w)); }
+
 	/* book.html?id=… → a standalone work, or an issue of a series */
 	function resolveBook(id) {
 		var App = window.App, d = App.data();
 		var w = App.byId(d.works, id);
 		if (w) return { kind: 'work', id: id, item: w, info: (d.bookInfo || {})[id] || {} };
+		/* a book of another writer's that carries his words or is dedicated to him */
+		if (/^by-/.test(id)) {
+			var eb = entryBooks().filter(function (x) { return x.id === id; })[0];
+			if (eb) {
+				var w = eb.w, kind = w.direction === 'dedication' ? 'dedicated' : w.direction === 'back_akt' ? 'backword' : 'foreword';
+				var eds = (w.cover || (w.back && kind !== 'dedicated')) ? [{ lang: 'ar', cover: w.cover || '', back: kind === 'dedicated' ? '' : (w.back || '') }] : [];
+				return { kind: 'work', about: true, entry: eb, id: id,
+					item: { id: id, type: kind, title: w.book, year: w.year, by: w.name, color: '#3a2a1f' },
+					info: { cover: w.cover || '', description: w.text, editions: eds, shop: w.shop, sources: w.source ? [w.source] : [], intro: w.intro || null,
+						dedicationPage: kind === 'dedicated' ? w.back : '' } };
+			}
+		}
 		/* books other writers wrote about him (tributes page) */
 		var ab = App.byId(d.aboutBooks, id);
 		if (ab) return { kind: 'work', about: true, id: id, item: Object.assign({ type: 'about' }, ab), info: Object.assign({ cover: ab.cover }, (d.bookInfo || {})[id] || {}) };
@@ -318,7 +345,7 @@
 	}
 
 	window.WorksShared = {
-		backOf: backOf, publishers: publishers, publisherHref: publisherHref, publisherLink: publisherLink, publisherCard: publisherCard,
+		backOf: backOf, entryBooks: entryBooks, entryBookHref: entryBookHref, publishers: publishers, publisherHref: publisherHref, publisherLink: publisherLink, publisherCard: publisherCard,
 		ownSeries: ownSeries, contributedSeries: contributedSeries, awardsList: awardsList, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
 		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook, issueCover: issueCover,

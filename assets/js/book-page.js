@@ -201,11 +201,13 @@ window.PAGE = {
 						S.miniCover({ img: S.issueCover(ser.s.id, is), color: ser.s.color, title: t(is.title), num: is.n != null ? App.num(is.n) : '', by: authorAr }) + '</a>';
 				}).join('') + '</div></section>';
 		} else {
-			var rel = r.about ? (d.aboutBooks || []).filter(function (w) { return w.id !== item.id; })
+			/* a book on the writers page sits with the others that carry his words; a book about him with the others about him */
+			var rel = r.entry ? S.entryBooks().filter(function (x) { return x.id !== item.id; }).map(function (x) { return { id: x.id, title: x.w.book, year: x.w.year, cover: x.w.cover, by: x.w.name, color: '#3a2a1f' }; })
+				: r.about ? (d.aboutBooks || []).filter(function (w) { return w.id !== item.id; })
 				: (d.works || []).filter(function (w) { return w.type === item.type && w.id !== item.id; }).slice(0, 8);
 			if (rel.length) {
-				shelf = '<section class="d-block"><div class="d-head"><h3>' + (r.about ? L('كتب أخرى عنه', 'More books about him') : L('من النوع نفسه', 'More like this')) + '</h3>' +
-					(r.about ? '<a href="tributes.html">' + L('قالوا عنه ←', 'Tributes →') + '</a>' : '<a href="works.html">' + L('كل الأعمال ←', 'All works →') + '</a>') + '</div>' +
+				shelf = '<section class="d-block"><div class="d-head"><h3>' + (r.entry ? L('كتب أخرى عليها كلمته', 'More books with his words') : r.about ? L('كتب أخرى عنه', 'More books about him') : L('من النوع نفسه', 'More like this')) + '</h3>' +
+					(r.entry ? '<a href="writers.html">' + L('الكُتّاب ←', 'Writers →') + '</a>' : r.about ? '<a href="tributes.html">' + L('قالوا عنه ←', 'Tributes →') + '</a>' : '<a href="works.html">' + L('كل الأعمال ←', 'All works →') + '</a>') + '</div>' +
 					'<div class="cover-row">' + rel.map(function (w) {
 						return '<a class="cover-link" href="' + S.bookHref(w.id) + '">' +
 							S.miniCover({ img: r.about ? w.cover : S.coverOf((d.bookInfo || {})[w.id]), color: w.color, title: t(w.title), sub: w.year ? App.num(w.year) : '', by: r.about ? t(w.by) : '' }) + '</a>';
@@ -255,7 +257,7 @@ window.PAGE = {
 
 		root.innerHTML =
 			'<section class="detail"><div class="wrap">' +
-				'<nav class="crumbs">' + (r.about ? '<a href="tributes.html">' + L('قالوا عنه', 'Tributes') + '</a>' : '<a href="works.html">' + L('الأعمال', 'Works') + '</a>') +
+				'<nav class="crumbs">' + (r.entry ? '<a href="writers.html">' + L('الكُتّاب', 'Writers') + '</a>' : r.about ? '<a href="tributes.html">' + L('قالوا عنه', 'Tributes') + '</a>' : '<a href="works.html">' + L('الأعمال', 'Works') + '</a>') +
 					(isIssue ? ' / <a href="' + S.seriesHref(ser.s.id) + '">' + tx(ser.s.title) + '</a>' : '') + ' / <span>' + tx(title) + '</span></nav>' +
 				'<div class="detail-grid">' +
 					'<aside class="d-cover"><ul class="bk-list bk-solo" id="d-book">' + book + '</ul>' + printsHtml +
@@ -268,10 +270,17 @@ window.PAGE = {
 							'<span>' + (bookAwards.length > 1 ? App.num(bookAwards.length) + ' ' + L('جوائز', 'awards') : e(t(bookAwards[0].badge || bookAwards[0].title).replace(/\s*[—(].*$/, '')) + ' ' + App.num(bookAwards[0].year || '')) + '</span></a>' : '') + '</h1>' +
 						'<p class="d-alt">' + e(App.alt(title)) + '</p>' +
 						'<p class="d-by">' + (isIssue && !ser.own && !ser.inspired ? L('دوره: ', 'His role: ') + tx(ser.s.role || { ar: 'مساهم', en: 'Contributor' }) + ' — ' : item.type === 'translation' ? L('ترجمة ', 'translated by ') : L('تأليف ', 'by ')) + people + '</p>' +
-						(r.about ? '<p class="d-by">' + L('كتاب عن ', 'About ') + '<a href="index.html">' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + '</a></p>' : '') +
+						(r.about && !r.entry ? '<p class="d-by">' + L('كتاب عن ', 'About ') + '<a href="index.html">' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + '</a></p>' : '') +
 						(isIssue && ser.inspired && ser.s.role ? '<p class="d-by">' + L('صلتها به: ', 'Link to him: ') + tx(ser.s.role) + '</p>' : '') +
 						(window.Lists ? window.Lists.buttons('b:' + id) : '') +
 						((desc && !(blurb && desc.ar === blurb.ar)) ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
+						(r.entry ? '<section class="d-block d-why-block"><h3>' + L('لماذا هذا الكتاب هنا؟', 'Why this book is here') + '</h3><p class="d-why">' +
+							(item.type === 'dedicated' ? L('أهداه مؤلفه إلى أحمد خالد توفيق.', 'Its author dedicated it to Ahmed Khaled Tawfik.') :
+								item.type === 'backword' ? L('على غلافه الخلفي كلمة لأحمد خالد توفيق.', 'It carries Ahmed Khaled Tawfik’s words on its back cover.') :
+								L('كتب له أحمد خالد توفيق مقدمته.', 'Ahmed Khaled Tawfik wrote its foreword.')) + '</p></section>' : '') +
+						(info.intro ? '<section class="d-block d-intro"><h3>' + L('مقدمة أحمد خالد توفيق', 'His foreword') + '</h3><blockquote class="d-blurb" dir="rtl" lang="ar">' + e(info.intro.ar || '').replace(/\n/g, '<br>') + '</blockquote>' +
+							(info.intro.src ? '<a class="d-blurb-src" href="' + e(info.intro.src) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') + '</section>' : '') +
+						(info.dedicationPage ? '<section class="d-block d-backcover"><h3>' + L('صفحة الإهداء', 'The dedication page') + '</h3><div class="d-backs"><figure><button type="button" class="d-back-img" data-src="' + e(info.dedicationPage) + '" data-alt="' + e(L('صفحة الإهداء — ', 'Dedication page — ') + t(title)) + '"><img src="' + e(info.dedicationPage) + '" alt="" loading="lazy"></button></figure></div></section>' : '') +
 						((blurb || backs.length) ? '<section class="d-block d-backcover"><h3>' + L('على الغلاف الخلفي', 'On the back cover') + '</h3>' +
 							(backs.length ? '<div class="d-backs">' + backs.map(function (ed) {
 								/* with more than one, each is captioned with its edition */
@@ -383,6 +392,15 @@ window.PAGE = {
 					break;
 				}
 			});
+		}
+
+		/* a book on the writers page: why it is here, with a link to its writer */
+		if (r.entry) {
+			var why = root.querySelector('.d-why');
+			if (why && window.People) {
+				var who = window.People.ofEntry(r.entry.w);
+				if (who) why.insertAdjacentHTML('beforeend', ' <a href="' + e(window.People.href(who)) + '">' + L('صفحة ', '') + e(t(who.name)) + L(' ←', '’s page →') + '</a>');
+			}
 		}
 
 		/* the back cover opens full size, like the pictures on the home timeline */
