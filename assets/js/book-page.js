@@ -31,7 +31,9 @@ window.PAGE = {
 		var backs = (info.editions || []).filter(function (ed) { return ed.back; }).filter(function (ed, i, all) { return all.map(function (x) { return x.back; }).indexOf(ed.back) === i; });
 		if ((d.backCovers || {})[id]) backs = [{ back: d.backCovers[id] }];
 		var mainCover = S.coverOf(info);
-		var backImg = ((backs.filter(function (ed) { return ed.cover && ed.cover === mainCover; })[0] || backs[0] || {}).back) || '';
+		/* the back of the edition whose cover it shows; a back tied to no edition's cover fits any; else the blurb */
+		var backImg = ((backs.filter(function (ed) { return ed.cover && ed.cover === mainCover; })[0] ||
+			backs.filter(function (ed) { return !ed.cover; })[0] || {}).back) || '';
 		if (!desc && blurb) desc = { ar: blurb.ar };
 		var numLabel = r.special ? L('عدد خاص ', 'Special issue ') + App.num(item.n) : isIssue && item.n != null ? App.num('#' + item.n) + (item.part ? ' · ' + L('الجزء ', 'Part ') + App.num(item.part) : '') : '';
 
