@@ -722,7 +722,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ id: 'merit', name: { ar: 'دار ميريت', en: 'Merit' }, match: 'ميريت' },
 		{ id: 'kayan', name: { ar: 'كيان', en: 'Kayan' }, match: 'كيان(?! كورب)',
 		  note: { ar: 'أعادت نشر كثير من كتبه.', en: 'Reissued many of his books.' } },
-		{ id: 'bloomsbury', name: { ar: 'بلومزبري – مؤسسة قطر للنشر', en: 'Bloomsbury Qatar Foundation Publishing' }, match: 'بلومزبري' },
+		{ id: 'bloomsbury', name: { ar: 'بلومزبري – مؤسسة قطر للنشر', en: 'Bloomsbury Qatar Foundation Publishing' }, match: 'بلومزبري|Bloomsbury' },
 		{ id: 'shorouk', name: { ar: 'دار الشروق', en: 'Dar El Shorouk' }, match: 'الشروق' },
 		{ id: 'karma', name: { ar: 'دار الكرمة', en: 'Dar Al Karma' }, match: 'الكرمة' },
 		{ id: 'sparks', name: { ar: 'سباركس', en: 'Sparks' }, match: 'سباركس' },
@@ -2550,4 +2550,24 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			pages: 188, format: HB, translator: { ar: 'كريستينه باترمان', en: 'Christine Battermann' } }, '29482014')
 	].concat(keep, old.filter(function (x) { return x.store; }));
 	b.ownCover = C + '3503947.webp';
+})(window.AKT);
+
+/* «يوتوبيا»: printings that wear the same cover share one picture (the sharpest), so they share a card — Merit's hands (2008, the 2020
+   and 2022 Kindle editions), Dar El Shorouk's skull (2014 and its 2017 Kindle edition), Bloomsbury's English hand, Ombres Noires' and
+   Lenos's two each; Dar El Shorouk's back cover (its barcode is ISBN 9789770933077, its note on him dates from after 2018) and its text */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).utopia = A.bookInfo.utopia || {};
+	var C = 'assets/img/covers/novels/utopia-', same = {
+		'3503947': '53524902', '61205998': '53524902', '23524550': '36595963',
+		'9680830': '25565333', '18867017': '25565333', '17301668': '25565333', '25604650': '130434024', '29482014': '59014759'
+	};
+	(b.editions || []).forEach(function (ed) {
+		var m = /utopia-(\d+)\.webp$/.exec(ed.cover || '');
+		if (m && same[m[1]]) ed.cover = C + same[m[1]] + '.webp';
+		if (ed.isbn === '9783857877896') ed.publisher = { ar: 'Lenos Verlag', en: 'Lenos Verlag' };
+		if (ed.asin === 'B0FSKMK9YL') ed.back = 'assets/img/covers/back/utopia-shorouk-2014.webp';
+	});
+	b.ownCover = C + '53524902.webp';
+	b.blurb = { by: { ar: 'دار الشروق', en: 'Dar El Shorouk' },
+		ar: '«الآن فقط أفهم لماذا عزلنا أنفسنا في «يوتوبيا».. لم يعد في هذا العالم إلا الفقر، وإلا الوجوه الشاحبة التي تطل منها عيون جاحظة جوعى متوحشة.. منذ ثلاثين عامًا كان هؤلاء ينالون بعض الحقوق، أما اليوم فهم منسيون تمامًا.\n\nهؤلاء القوم يتظاهرون بأنهم أحياء.. يتظاهرون بأنهم يأكلون لحمًا، ويتظاهرون بأنهم يشربون خمرًا، وبالطبع يتظاهرون بأنهم ثملوا وأنهم نسوا مشاكلهم. يتظاهرون بأن لهم الحق في الخطيئة والزلل.. يتظاهرون بأنهم بشر..»\n\n«قصة توفيق قاتمة ومقنعة تمامًا، وشخصياته بلا أدنى أمل. لا يدهشك أن تدرك أن المؤلف أستاذ في الطب (فالتفاصيل التشريحية مفزعة)، وهو كذلك كاتب الرعب الأعلى مبيعًا في العالم العربي. هذه القصة تحفة مصغرة وأتحدى أي واحد ألا يقرأها في جلسة واحدة.» — شولتو بيرنس، الإندبندنت' };
 })(window.AKT);

@@ -127,6 +127,11 @@ window.PAGE = {
 			return (p ? p.id : n.replace(/\(.*?\)|[–-].*$|\s(للنشر|للطباعة|للتوزيع).*$/g, '').replace(/^(شركة|دار|مؤسسة|مكتبة)\s+/, '').trim()) + '|' + (ed.lang || 'ar') + '|' + partOf(ed);
 		};
 		var groups = [], byKey = {};
+		/* a printing that names no publisher (a Kindle edition) goes with the house whose printing wears the same cover */
+		var houseByCover = {};
+		eds.forEach(function (ed) { if (ed.cover && ed.publisher && !houseByCover[ed.cover]) houseByCover[ed.cover] = houseOf(ed); });
+		var houseOf0 = houseOf;
+		houseOf = function (ed) { return (!ed.publisher && houseByCover[ed.cover]) || houseOf0(ed); };
 		eds.forEach(function (ed, i) {
 			if (!ed.cover) return;
 			var k = houseOf(ed) + '|' + ed.cover;
