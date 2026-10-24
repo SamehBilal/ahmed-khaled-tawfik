@@ -54,11 +54,16 @@
 			return '<div class="ph-stars"></div>' + h + '<div class="ph-stamp">' + A.esc(A.L('بريد القرّاء', 'Readers\' mail')) + '</div>';
 		},
 
-		/* legacy: a row of candles under his wish for his grave */
+		/* legacy: candles floating under his wish for his grave, as in the Great Hall: each bobs on its own clock, nearer ones
+		   larger and brighter, and each flame twirls and throws a warm pool of light around it */
 		legacy: function (d, A) {
 			var h = '';
-			for (var i = 0; i < 13; i++) h += '<div class="ph-candle" style="--h:' + (46 + rnd(i, 12) * 70).toFixed(0) + 'px;--d:' + (-rnd(i, 13) * 3).toFixed(2) + 's"><i class="flame"></i><i class="wax"></i></div>';
-			return '<p class="ph-motto">' + A.tx(((d.bio || {}).motto) || '') + '</p><div class="ph-candles">' + h + '</div><i class="ph-ledge"></i>';
+			for (var i = 0; i < 18; i++) {
+				var z = 0.5 + rnd(i, 21) * 0.6;
+				h += '<i class="fc" style="--x:' + ((i + 0.2 + rnd(i, 22) * 0.6) / 18 * 100).toFixed(1) + '%;--y:' + (30 + rnd(i, 23) * 40).toFixed(0) + '%;--z:' + z.toFixed(2) +
+					';--h:' + (50 + rnd(i, 24) * 60).toFixed(0) + 'px;--d:-' + (rnd(i, 25) * 15).toFixed(1) + 's;--f:-' + (rnd(i, 26) * 6).toFixed(1) + 's"><b class="halo"></b><b class="flame"></b><b class="wax"></b></i>';
+			}
+			return '<p class="ph-motto">' + A.tx(((d.bio || {}).motto) || '') + '</p><div class="ph-floating">' + h + '</div>';
 		},
 
 		/* privacy: a padlock with a glowing keyhole */
@@ -110,15 +115,7 @@
 				return '<figure class="ph-frame" style="--r:' + ((rnd(i, 16) - 0.5) * 5).toFixed(1) + 'deg"><img src="' + e(p.photo) + '" alt="" loading="lazy" decoding="async">' +
 					'<figcaption>' + e(t(p.name)) + '</figcaption></figure>';
 			}).join('');
-			/* candles floating over the wall, as in the Great Hall: each bobs on its own clock, nearer ones larger and brighter,
-			   and each flame twirls and throws a warm pool of light on the frames behind it */
-			var candles = '';
-			for (var i = 0; i < 13; i++) {
-				var z = 0.55 + rnd(i, 21) * 0.55;
-				candles += '<i class="fc" style="--x:' + ((i + 0.2 + rnd(i, 22) * 0.6) / 13 * 100).toFixed(1) + '%;--y:' + (2 + rnd(i, 23) * 9).toFixed(0) + '%;--z:' + z.toFixed(2) +
-					';--h:' + (34 + rnd(i, 24) * 34).toFixed(0) + 'px;--d:-' + (rnd(i, 25) * 15).toFixed(1) + 's;--f:-' + (rnd(i, 26) * 6).toFixed(1) + 's"><b class="halo"></b><b class="flame"></b><b class="wax"></b></i>';
-			}
-			return '<div class="ph-wall"><div class="track">' + frames + frames + '</div></div><div class="ph-floating">' + candles + '</div>';
+			return '<div class="ph-wall"><div class="track">' + frames + frames + '</div></div>';
 		}
 	};
 

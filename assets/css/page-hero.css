@@ -80,15 +80,9 @@ html[dir="ltr"] .ph-env { left: auto; right: 100%; animation-name: ph-fly-ltr; }
 /* ---------- legacy: candles ---------- */
 .ph[data-ph="legacy"] { background: radial-gradient(60% 90% at 50% 100%, #3b2210 0%, #120d0a 60%, #08080b 100%); }
 .ph-motto { position: absolute; top: 34px; left: 8%; right: 8%; margin: 0; text-align: center; font-family: var(--f-chunky); font-size: clamp(22px, 3.4vw, 40px); line-height: 1.4; color: rgba(246, 215, 154, .22); }
-.ph-candles { position: absolute; left: 10%; right: 10%; bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; }
-.ph-candle { position: relative; display: flex; flex-direction: column; align-items: center; }
-.ph-candle .wax { width: 22px; height: var(--h); border-radius: 4px 4px 2px 2px; background: linear-gradient(90deg, #d9cdb2, #f6efe0 45%, #c9bb9d); }
-.ph-candle .flame { width: 12px; height: 26px; margin-bottom: 3px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-	background: radial-gradient(circle at 50% 75%, #fff8dc, #ffcc55 40%, #e0633a 75%, transparent 80%);
-	box-shadow: 0 0 22px 8px rgba(255, 180, 80, .35); transform-origin: 50% 100%; animation: ph-flicker 2.6s ease-in-out infinite var(--d); }
-.ph-ledge { position: absolute; left: 6%; right: 6%; bottom: 28px; height: 14px; border-radius: 3px; background: linear-gradient(#2a1d14, #120c08); box-shadow: 0 -10px 40px rgba(255, 170, 70, .12); }
-@keyframes ph-flicker { 0%, 100% { transform: scale(1) rotate(-2deg); opacity: 1; } 30% { transform: scale(1.08, .94) rotate(3deg); } 55% { transform: scale(.94, 1.06) rotate(-3deg); opacity: .85; } 80% { transform: scale(1.04) rotate(1deg); } }
-@media (max-width: 640px) { .ph-candle:nth-child(n+8) { display: none; } .ph-candles { left: 6%; right: 6%; } }
+/* the room glows with them */
+.ph[data-ph="legacy"] .ph-stage::before { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+	background: radial-gradient(70% 80% at 50% 55%, rgba(255, 170, 60, .13), transparent 70%); animation: fc-light 3.4s ease-in-out infinite; }
 
 /* ---------- privacy: the padlock ---------- */
 .ph[data-ph="privacy"] .ph-stage::before { content: ''; }
@@ -148,13 +142,9 @@ html[dir="rtl"] .ph-wall .track { animation-name: ph-marquee-rtl; }
 .ph-frame figcaption { padding: 6px 4px 8px; text-align: center; color: #1c140a; font-family: var(--f-display); font-size: 13px; }
 @media (max-width: 640px) { .ph-frame img { width: 104px; height: 132px; } .ph-frame figcaption { font-size: 11px; } }
 
-/* floating candles over the wall (after codepen.io/zepha/pen/Napomd), their flames twirling and glowing
-   (after codepen.io/menashebouhadana/pen/QWKVqar); each throws a soft pool of warm light on the frames */
+/* legacy's floating candles (after codepen.io/zepha/pen/Napomd), their flames twirling and glowing
+   (after codepen.io/menashebouhadana/pen/QWKVqar); each throws a soft pool of warm light around it */
 .ph-floating { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
-/* the wall hangs lower, leaving the air above it to the candles, whose light warms the tops of the frames */
-.ph[data-ph="tributes"] .ph-wall { align-items: flex-end; padding-bottom: 22px; }
-.ph[data-ph="tributes"] .ph-stage::before { content: ''; position: absolute; inset: 0 0 45%; z-index: 2; pointer-events: none;
-	background: radial-gradient(60% 100% at 50% 0%, rgba(255, 170, 60, .14), transparent 70%); animation: fc-light 3.4s ease-in-out infinite; }
 .fc {
 	position: absolute; left: var(--x); top: var(--y); width: 14px;
 	transform: scale(var(--z)); transform-origin: 50% 0; opacity: calc(.45 + var(--z) * .55);
@@ -189,8 +179,8 @@ html[dir="rtl"] .ph-wall .track { animation-name: ph-marquee-rtl; }
 	25% { transform: rotate(0) scale(1.05, 1); } 37.5% { transform: rotate(-3deg) scale(.8, .9); } 50% { transform: rotate(-5deg) scale(.95, 1.06); }
 }
 @keyframes fc-light { 0%, 100% { opacity: .85; transform: scale(1); } 40% { opacity: 1; transform: scale(1.08); } 70% { opacity: .75; transform: scale(.96); } }
-@media (max-width: 640px) { .fc:nth-child(2n) { display: none; } .ph[data-ph="tributes"] .ph-wall { padding-bottom: 14px; } }
-@media (prefers-reduced-motion: reduce) { .fc, .fc .flame, .fc .halo { animation: none; } }
+@media (max-width: 640px) { .fc:nth-child(2n) { display: none; } }
+@media (prefers-reduced-motion: reduce) { .fc, .fc .flame, .fc .halo, .ph[data-ph="legacy"] .ph-stage::before { animation: none; } }
 
 @media (prefers-reduced-motion: reduce) {
 	.ph *, .ph *::before { animation: none !important; transition: none !important; }
