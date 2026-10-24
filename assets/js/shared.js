@@ -197,6 +197,7 @@
 				'<div class="yr">' + App.num(a.year || '') + ' · ' + tx(KIND[a.kind] || KIND.win) + (a.posthumous ? ' · ' + L('بعد الرحيل', 'posthumous') : '') + '</div>' +
 				'<h3>' + tx(a.title) + '</h3>' +
 				'<p>' + tx(a.text) + '</p>' +
+				(a.image ? '<button type="button" class="aw-pic" data-src="' + e(a.image.src) + '" data-alt="' + e(App.t(a.image.alt)) + '" onclick="App.showPic(this.dataset.src, this.dataset.alt)"><img src="' + e(a.image.src) + '" alt="' + e(App.t(a.image.alt)) + '" loading="lazy"></button>' : '') +
 				(a.work && App.findWork(a.work) ? '<div class="for">' + L('عن ', 'For ') + App.workLink(a.work) + '</div>' : '') +
 				(a.source ? '<a class="src" href="' + e(a.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
 			'</li>';

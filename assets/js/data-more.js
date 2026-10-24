@@ -584,6 +584,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ year: 2018, kind: 'win', work: 'mirante', posthumous: true,
 			title: { ar: 'جائزة مصطفى عزوز لأدب الطفل (تونس) — بعد الرحيل', en: 'Mustapha Azzouz Prize for Children’s Literature (Tunisia), posthumous' },
 			text: { ar: 'الجائزة الخاصة بالقصة ذات المضمون التاريخي، عن «الميرانتي أمير البحار».', en: 'The special prize for a story with a historical theme, for Al-Miranti, Prince of the Seas.' },
+			image: { src: 'assets/img/prizes/azzouz-2018.webp', alt: { ar: 'حفل تسليم الجائزة في تونس، 2018: شيك الجائزة باسمه (8000 دينار تونسي)، برعاية البنك العربي لتونس', en: 'The prize ceremony in Tunis, 2018: the cheque in his name (8,000 Tunisian dinars), sponsored by the Arab Tunisian Bank' } },
 			source: 'https://kapitalis.com/anbaa-tounes/?p=128657' },
 		{ year: 2018, kind: 'honour',
 			title: { ar: 'معرض طنطا للكتاب يحمل اسمه', en: 'The Tanta Book Fair named after him' },
@@ -1136,4 +1137,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ title: TITLE, publisher: SHOROUK, year: 2022, lang: 'ar', isbn: '9789770928646', cover: cover,
 			format: { ar: 'غلاف ورقي – الطبعة الثانية', en: 'Paperback – second printing' }, source: 'https://www.amazon.eg/dp/977092864X' }
 	];
+})(window.AKT);
+
+/* «الميرانتي: أمير البحار»: the text on its back cover (Kayan, 2022) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).mirante = A.bookInfo.mirante || {};
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'تقلع السفينة فاردة شراعها مغادرة ماليندي.\n\nفي الأيام التالية أُصبت بدوار بحر رهيب، لكن حينما استطعت أن أتمالك نفسي أخيرًا بدأت أراقب سير الأمور، كان «دي جاما» فظًّا خشنًا وهذا يتناسب مع مسؤولياته الكثيرة، لكنه بالفعل معجب بذلك العربي «ابن ماجد» الذي صار مرشد الرحلة إلى الهند، وكان من حقه أن يقابل القبطان متى شاء.\n\nلقد صار وجه «ابن ماجد» مألوفًا هنا بجسمه الضئيل وعمامته وضحكته، وقد سمّاه البرتغاليون «المعلم الفلكي». لم يستطيعوا نطق العبارة فخرجت من أفواههم «ماليمونكا»، كذلك حاولوا تسميته «أمير البحار» فخرجت الكلمة «الميرانتي».\n\nالآن عرفت من أين جاء هذا الاسم الغريب. «الميرانتي» هو نفسه «أحمد بن ماجد».' };
 })(window.AKT);
