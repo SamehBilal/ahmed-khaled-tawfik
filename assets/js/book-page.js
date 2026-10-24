@@ -110,12 +110,21 @@ window.PAGE = {
 		/* ---------- editions ----------
 		   One card per house and cover: printings that only differ in year, format or page count are the same edition
 		   to a reader, so they share a card and show as year chips; a chip opens that printing's details. A printing
-		   without a cover of its own (an ebook, a reprint) joins its house's card. */
+		   without a cover of its own (an ebook, a reprint) joins its house's card. A book in parts (الآن نفتح الصندوق 1, 2, 3)
+		   keeps each part's printings on cards of their own, in the parts' order. */
 		var eds = info.editions || [];
+		var ORD = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس'];
+		var partOf = function (ed) {
+			if (ed.part) return +ed.part;
+			var tt = (ed.title || {}).ar || '', m = tt.match(/الجزء\s+(الأول|الثاني|الثالث|الرابع|الخامس)/);
+			if (m) return ORD.indexOf(m[1]) + 1;
+			m = tt.match(/\s([1-9])\s*$/);
+			return m ? +m[1] : 0;
+		};
 		var houseOf = function (ed) {
 			var n = ((ed.publisher || {}).ar || '').replace(/\(ثم[^)]*\)/g, '');
 			var p = (d.publishers || []).filter(function (x) { return n && new RegExp(x.match).test(n); })[0];
-			return (p ? p.id : n.replace(/\(.*?\)|[–-].*$|\s(للنشر|للطباعة|للتوزيع).*$/g, '').replace(/^(شركة|دار|مؤسسة|مكتبة)\s+/, '').trim()) + '|' + (ed.lang || 'ar');
+			return (p ? p.id : n.replace(/\(.*?\)|[–-].*$|\s(للنشر|للطباعة|للتوزيع).*$/g, '').replace(/^(شركة|دار|مؤسسة|مكتبة)\s+/, '').trim()) + '|' + (ed.lang || 'ar') + '|' + partOf(ed);
 		};
 		var groups = [], byKey = {};
 		eds.forEach(function (ed, i) {
@@ -132,7 +141,9 @@ window.PAGE = {
 		});
 		var yr = function (ed) { return +String(ed.year || '').slice(0, 4) || 9999; };
 		groups.forEach(function (g) { g.list.sort(function (x, y) { return yr(eds[x]) - yr(eds[y]); }); });
-		groups.sort(function (x, y) { return yr(eds[x.list[0]]) - yr(eds[y.list[0]]); });
+		/* parts in order (a printing of all of them, part 0, comes last), then by year */
+		var po = function (g) { return partOf(eds[g.list[0]]) || 99; };
+		groups.sort(function (x, y) { return (po(x) - po(y)) || (yr(eds[x.list[0]]) - yr(eds[y.list[0]])); });
 		var edHtml = groups.map(function (g) {
 			var first = eds[g.list[0]];
 			var withPub = g.list.map(function (i) { return eds[i]; }).filter(function (ed) { return ed.publisher; })[0] || first;
