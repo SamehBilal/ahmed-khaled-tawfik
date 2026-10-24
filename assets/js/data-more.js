@@ -1267,3 +1267,15 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.blurb = { by: SAMA,
 		ar: 'هذه قصص متفرقة تتحدث عن الخوف.. كل الخوف.. ولا شيء سوى الخوف.\n\nسوف نعرف كل شيء عن القصيدة التي تكمل نفسها، والرواية التي تكتبها أرواح الموتى، والطبيب الذي تزوره جثث ضحاياه في عيادته الخاصة.\n\nسنعرف سر المدينة الفضية عبر العصور، وقصة الحب بين شاب مكتمل الرجولة وجثة متعفنة. سنعرف قصة اللوحة التي تتغير كل دقيقة، وزيارات (ناحيما) الليلية.\n\nسنعرف الكثير مما لا ينبغي أن نعرفه، وإذا عرفناه لا نتكلم عنه.' };
 })(window.AKT);
+
+/* «أفراح المقبرة»: published by Dar Al Karma on 14 June 2018; its back cover from Samawy (samawy.com/i/1008927) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).afrah = A.bookInfo.afrah || {};
+	b.firstPublished = '2018-06-14';
+	(b.editions || []).forEach(function (ed) {
+		if (ed.isbn !== '9789776488229') return;
+		ed.date = '2018-06-14';
+		ed.back = 'assets/img/covers/back/afrah.webp';
+	});
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1008927/');
+})(window.AKT);
