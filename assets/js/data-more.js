@@ -2571,3 +2571,21 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.blurb = { by: { ar: 'دار الشروق', en: 'Dar El Shorouk' },
 		ar: '«الآن فقط أفهم لماذا عزلنا أنفسنا في «يوتوبيا».. لم يعد في هذا العالم إلا الفقر، وإلا الوجوه الشاحبة التي تطل منها عيون جاحظة جوعى متوحشة.. منذ ثلاثين عامًا كان هؤلاء ينالون بعض الحقوق، أما اليوم فهم منسيون تمامًا.\n\nهؤلاء القوم يتظاهرون بأنهم أحياء.. يتظاهرون بأنهم يأكلون لحمًا، ويتظاهرون بأنهم يشربون خمرًا، وبالطبع يتظاهرون بأنهم ثملوا وأنهم نسوا مشاكلهم. يتظاهرون بأن لهم الحق في الخطيئة والزلل.. يتظاهرون بأنهم بشر..»\n\n«قصة توفيق قاتمة ومقنعة تمامًا، وشخصياته بلا أدنى أمل. لا يدهشك أن تدرك أن المؤلف أستاذ في الطب (فالتفاصيل التشريحية مفزعة)، وهو كذلك كاتب الرعب الأعلى مبيعًا في العالم العربي. هذه القصة تحفة مصغرة وأتحدى أي واحد ألا يقرأها في جلسة واحدة.» — شولتو بيرنس، الإندبندنت' };
 })(window.AKT);
+
+/* the Legacy timeline: real pictures for the events that have them (the funeral, the award, the books, Google's doodle, the posters);
+   an event whose picture was a video still has its video to play */
+(function (A) {
+	var photo = {
+		'2018-04-03|الجنازة في طنطا': 'assets/img/timeline/funeral-2018.webp',
+		'2018-05': 'assets/img/prizes/azzouz-2018.webp',
+		'2018-06': 'cover:afrah',
+		'2019-06-10': 'assets/img/timeline/google-doodle-2019.webp',
+		'2020-11-05': 'assets/img/posters/paranormal.jpg',
+		'2022-01': 'cover:mirante',
+		'2022': 'assets/img/posters/room207.jpg'
+	};
+	(A.legacy || []).forEach(function (l) {
+		var p = photo[l.date + '|' + ((l.title || {}).ar || '')] || photo[l.date];
+		if (p) l.photo = p;
+	});
+})(window.AKT);

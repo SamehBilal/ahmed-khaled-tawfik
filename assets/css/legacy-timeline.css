@@ -86,6 +86,13 @@ button.tlx-media:focus-visible { outline: 2px solid var(--gold); outline-offset:
 .tlx-content h3 { font-family: var(--f-display); font-size: 22px; margin: 0 0 8px; color: var(--paper); }
 .tlx-content p { margin: 0 0 10px; color: var(--paper-dim); line-height: 1.8; }
 .tlx-content .src { font-family: var(--f-display); font-size: 14px; }
+button.tlx-pic { cursor: zoom-in; }
+.tlx-watch {
+	font: inherit; font-family: var(--f-display); font-size: 14px; cursor: pointer;
+	margin-inline-end: 10px; padding: 3px 12px; border-radius: 999px;
+	background: transparent; color: var(--ember); border: 1px solid var(--ember);
+}
+.tlx-watch:hover { background: var(--ember); color: var(--ink); }
 
 /* phones and small tablets: one column, line at the start */
 @media (max-width: 767px) {

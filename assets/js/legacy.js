@@ -33,22 +33,25 @@ window.PAGE = {
 		if (legacy.length) {
 			html += '<section class="section tlx-section"><div class="tlx" id="tlx">' +
 				'<div class="tlx-bg" aria-hidden="true">' + legacy.map(function (l) {
-					var im = self.image(l.image, true);
+					var im = self.image(l.photo || l.image, true);
 					return '<img src="' + e(im.src) + '" alt="" loading="lazy" referrerpolicy="no-referrer">';
 				}).join('') + '</div>' +
 				'<div class="wrap">' +
 				'<div class="section-head"><div><h2>' + L('الوداع والتكريم', 'Farewell & tributes') + '</h2>' +
 					'<p>' + L('مرّر لأسفل لتتبّع ما جرى بعد الرحيل.', 'Scroll down to follow what came after.') + '</p></div></div>' +
 				'<ol class="tlx-list">' + legacy.map(function (l, i) {
-					var im = self.image(l.image, false), title = App.t(l.title);
+					/* its picture opens full size, as on the home timeline; its video (the picture itself, or beside a photo) plays here */
+					var vid = self.image(l.image, false), im = l.photo ? self.image(l.photo, false) : vid, title = App.t(l.title);
 					var pic = '<img src="' + e(im.src) + '" alt="' + e(title) + '" loading="lazy" referrerpolicy="no-referrer">';
-					var mi = im.yt ? media.findIndex(function (m) { return self.youtubeId(m.url) === im.yt; }) : -1;
+					var mi = vid.yt ? media.findIndex(function (m) { return self.youtubeId(m.url) === vid.yt; }) : -1;
+					var big = im.yt ? 'https://i.ytimg.com/vi/' + im.yt + '/hqdefault.jpg' : im.src;
 					return '<li class="tlx-item" id="l-' + i + '" data-text="' + e(fmtDate(l.date)) + '"><div class="tlx-content">' +
 						'<div class="tlx-yr">' + e(App.num(String(l.date).slice(0, 4))) + '</div>' +
-						(!im.src ? '' : mi >= 0
+						(!im.src ? '' : (im.yt && mi >= 0)
 							? '<button type="button" class="tlx-media" data-yt="' + e(im.yt) + '" data-i="' + mi + '" aria-label="' + e(L('شاهد: ', 'Watch: ') + App.t(media[mi].title)) + '">' + pic + '</button>'
-							: '<span class="tlx-media' + (im.tall ? ' tall' : '') + '">' + pic + '</span>') +
+							: '<button type="button" class="tlx-media tlx-pic' + (im.tall ? ' tall' : '') + '" data-src="' + e(big) + '" data-alt="' + e(title) + '" aria-label="' + e(L('تكبير الصورة: ', 'Enlarge the picture: ') + title) + '">' + pic + '</button>') +
 						'<h3>' + tx(l.title) + '</h3><p>' + tx(l.text) + '</p>' +
+						(l.photo && mi >= 0 ? '<button type="button" class="tlx-watch" data-yt="' + e(vid.yt) + '" data-i="' + mi + '">▶ ' + L('شاهد', 'Watch') + '</button> ' : '') +
 						(l.source ? '<a class="src" href="' + e(l.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
 					'</div></li>';
 				}).join('') + '</ol>' +
@@ -111,7 +114,14 @@ window.PAGE = {
 		var grid = document.getElementById('videos');
 		if (grid) grid.onclick = onPlay;
 		var tl = document.getElementById('tlx');
-		if (tl) { tl.onclick = onPlay; this.focusTimeline(tl); }
+		if (tl) {
+			tl.onclick = function (ev) {
+				var p = ev.target.closest('.tlx-pic');
+				if (p) App.showPic(p.getAttribute('data-src'), p.getAttribute('data-alt'));
+				else onPlay(ev);
+			};
+			this.focusTimeline(tl);
+		}
 		App.focusHash();
 	},
 
@@ -127,7 +137,7 @@ window.PAGE = {
 		if (spec.indexOf('cover:') === 0) {
 			return { src: window.WorksShared.coverOf((window.App.data().bookInfo || {})[spec.slice(6)] || {}), tall: true };
 		}
-		return { src: spec };
+		return { src: spec, tall: /\/posters\//.test(spec) };
 	},
 
 	/* the event nearest the middle of the screen is in focus and lends the section its backdrop */
