@@ -1669,8 +1669,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ title: T, publisher: { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, year: 2010, date: '2010-01-01', lang: 'ar', asin: 'B0DM1JJLMX', pages: 145, format: PB,
 			source: 'https://www.goodreads.com/book/show/27190777' },
 		{ title: T, publisher: KAYAN, year: 2018, date: '2018-01-01', lang: 'ar', isbn: '9789778200324', isbn10: '9778200327', asin: '9778200327', pages: 204, format: PB,
-			cover: 'assets/img/covers/books/aseeralkotb-ca08acba5a37.webp', source: 'https://www.goodreads.com/book/show/40672979' },
+			cover: 'assets/img/covers/books/aseeralkotb-ca08acba5a37.webp', back: 'assets/img/covers/back/al-hafa-kayan.webp', source: 'https://www.goodreads.com/book/show/40672979' },
 		{ title: T, publisher: KAYAN, year: 2018, date: '2018-01-27', lang: 'ar', asin: 'B087CC16K4', pages: 115, format: KD },
 		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYQPQPT', pages: 123, format: KD }
 	];
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004095/');
 })(window.AKT);
