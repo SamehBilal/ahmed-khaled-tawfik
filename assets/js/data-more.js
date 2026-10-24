@@ -1773,3 +1773,24 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if ((w.book || {}).ar === '7 باب') w.back = 'assets/img/covers/back/7-bab.webp';
 	});
 })(window.AKT);
+
+/* «حدث في الكويت» (Sanad Rashed Dakheel, Diamond Book, 1 January 2006): one edition, 170 pages, its cover from Goodreads */
+(function (A) {
+	var DIAMOND = { ar: 'دايموند بوك', en: 'Diamond Book' }, T = { ar: 'حدث في الكويت', en: 'It Happened in Kuwait' };
+	A.works = A.works || [];
+	if (!A.works.some(function (w) { return w.id === 'hadath-fi-alkuwait'; }))
+		A.works.push({ id: 'hadath-fi-alkuwait', title: T, year: 2006, type: 'collab', publisher: DIAMOND, color: '#2f3a2a',
+			synopsis: { ar: 'من كتب دايموند بوك مع سند راشد دخيل: تحضير الأرواح والبرمجة اللغوية العصبية والأشباح وقراءة الكف والفنجان، على محك الحقيقة.',
+				en: 'One of the Diamond Book titles with Sanad Rashed Dakheel: séances, NLP, ghosts, palm and coffee-cup reading, put to the test.' } });
+	A.bookInfo = A.bookInfo || {};
+	A.bookInfo['hadath-fi-alkuwait'] = {
+		description: { ar: 'يتناول الكتاب ما يتداوله الناس عن تحضير الأرواح والبرمجة اللغوية العصبية والأشباح وقراءة الكف والفنجان، ليثبت أنها أكاذيب تعشش في العقول.\n\nصدر عن دايموند بوك في الكويت عام 2006.',
+			en: 'The book takes on what people say about séances, neuro-linguistic programming, ghosts, and palm and coffee-cup reading, and sets out to show they are lies nesting in our minds.\n\nPublished by Diamond Book in Kuwait in 2006.' },
+		authors: [{ ar: 'سند راشد دخيل', en: 'Sanad Rashed Dakheel' }],
+		language: 'ar', firstPublished: '2006-01-01', pages: 170,
+		ownCover: 'assets/img/covers/books/hadath-kuwait.webp',
+		editions: [{ title: T, publisher: DIAMOND, year: 2006, date: '2006-01-01', lang: 'ar', asin: 'B0DLTB7NZ5', pages: 170,
+			format: { ar: 'غلاف ورقي', en: 'Paperback' }, cover: 'assets/img/covers/books/hadath-kuwait.webp', source: 'https://www.goodreads.com/book/show/8108559' }],
+		sources: ['https://www.goodreads.com/book/show/8108559']
+	};
+})(window.AKT);
