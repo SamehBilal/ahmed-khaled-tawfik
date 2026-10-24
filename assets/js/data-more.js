@@ -2162,3 +2162,30 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'طبعًا ينتظر القارئ مني أن أتكلم عن بعض الظواهر الغامضة مثل قلعة اللورد فلان في إسكتلندا حيث يمشي شبح الكونتيسة بعد منتصف الليل ليلتهم أذن من يكون هناك، أو الرسوم الغامضة التي وجدها العالم (فلان) على قمة جبل في التبت، وتؤكد أن الهامبرجر كان معروفًا منذ مليون سنة لدى حضارة أخرى.. إلخ. يسمون هذا الكلام الفارغ (الظواهر الفورتية Fortean). وهناك أطنان منه على كل حال، ومن الغريب أنني لا أرتاح له كثيرًا.. أقبل أن يكون هذا الكلام في سياق قصة حيث الخيال هو اسم اللعبة، لكني أرفض رفضًا تامًا أن يكون على شكل معلومات. بعبارة أخرى يسرني أن أكتب قصة مسلية عن مصاصي الدماء، لكني أرفض أن أكتب مقالًا عن مصاصي الدماء، وطريقة قتلهم وكيف تميزهم عن سواهم. دعنا من الكونتيسة التي تلتهم الآذان إذن ولنتكلم في شيء آخر اليوم على الأقل، فقط تعالَ وأعدّ لنا كوبًا من الشاي بالنعناع ليحلو الكلام..' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004106/');
 })(window.AKT);
+
+/* «زغازيغ»: its five editions — Dar Lila (1 August 2009), Kayan (2017 paperback, whose back cover from Samawy (samawy.com/i/1004097)
+   carries ISBN 9789778200232, with its text; Kindle 2018 and 2024) and the Persian translation (Saad, 2022); the book opens on the
+   first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).zaghazigh = A.bookInfo.zaghazigh || {};
+	var T = { ar: 'زغازيغ', en: 'Zaghazigh' }, C = 'assets/img/covers/books/';
+	var KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' }, PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200232'; })[0] || {};
+	b.firstPublished = '2009-08-01';
+	b.pages = 182;
+	b.editions = [
+		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, year: 2009, date: '2009-08-01', lang: 'ar', pages: 182, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'zaghazigh-2009.webp', source: 'https://openlibrary.org/books/OL45190278M' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200232', isbn10: '9778200238', asin: 'B0DM26ZXQC', pages: 165, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/zaghazigh-kayan.webp', source: kayan.source },
+		{ title: T, publisher: KAYAN, year: 2018, date: '2018-01-27', lang: 'ar', asin: 'B087B77NSH', pages: 90, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYQZW8D', pages: 98, format: KD },
+		{ title: { ar: 'قلقلک', en: 'Ghelghelak (Persian)' }, publisher: { ar: 'صاد', en: 'Saad' }, year: 2022, date: '2022-01-01', lang: 'fa',
+			isbn: '9786225336438', isbn10: '6225336435', asin: '6225336435', pages: 138, translator: { ar: 'عماد جعفري', en: 'Emad Jafari' },
+			cover: C + 'zaghazigh-2022-fa.webp', source: 'https://www.goodreads.com/book/show/174012169' }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'zaghazigh-2009.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'من متجر علاج الاكتئاب، أردنا أن نأتيك بدعابات ظريفة.. أو نكات مضحكة.. أو طرائف مسلية.. أو مُلح مقرظة، فلم نجد للأسف.. لهذا ابتعنا لك نصف كيلو زغازيغ.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004097/');
+})(window.AKT);
