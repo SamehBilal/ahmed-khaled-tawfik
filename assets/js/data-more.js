@@ -2115,3 +2115,22 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'لست ناقدًا سينمائيًا، وبالتأكيد لم أتعلم مفاتيح هذا العالم الجميل بشكل أكاديمي، لكني أعرف جيدًا تلك الأفلام التي هزتني أو أبكتني أو أضحكتني أو جعلتني أفكر طويلًا.. أعرفها وأحتفظ بها جميعًا في الحافظة الزرقاء العتيقة التي تمزقت أطرافها، وسوف أدعوك لتشاهدها معي لكنها بالطبع أثمن من أن أقرضها. معظم هذه الأفلام قديم مجهول أو لا يُعرض الآن، لكنها تجارب ساحرة يكره المرء ألا يعرفها من يحب.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004090/');
 })(window.AKT);
+
+/* «لا مكان للملل»: its two editions — Kayan's paperback (23 January 2019) with its back cover from Samawy (samawy.com/i/1004111)
+   and its text, and Kayan's Kindle edition (2024) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).lamakan = A.bookInfo.lamakan || {};
+	var T = { ar: 'لا مكان للملل', en: 'No Room for Boredom' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var old = b.editions || [], first = old.filter(function (ed) { return ed.isbn === '9789778200638'; })[0] || {};
+	b.firstPublished = '2019-01-23';
+	b.pages = 184;
+	b.editions = [
+		{ title: T, publisher: KAYAN, year: 2019, date: '2019-01-23', lang: 'ar', isbn: '9789778200638', isbn10: '9778200637', asin: '9778200637', pages: 184,
+			format: { ar: 'غلاف ورقي', en: 'Paperback' }, edition: { ar: 'الطبعة الأولى', en: '1st edition' },
+			cover: first.cover || '', back: 'assets/img/covers/back/lamakan-kayan.webp', source: first.source },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLZ637Q3', pages: 80, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'أحيانًا يتكلم بطل القصة بغرور أو وقاحة أو يكون ملحدًا.. يقوم الأدمن بنقل الجملة كما هي من على لسان البطل ويكتب اسمي جوارها! هكذا تجد لي عبارات خالدة مثل: «يجب قهر الضعفاء – أحمد خالد» أو «إنني أقدم للأجيال القادمة قطوف الحكمة التي لن يجدوها في أي موضع آخر – أحمد خالد» أو «من الواضح تمامًا أن الكون أوجد نفسه بلا حاجة لخالق – أحمد خالد».\n\nقلت للأصدقاء محرري الصفحات مرارًا أن عليهم كتابة مصدر الاقتباس وقائله بدقة، أو لا يكتبوا شيئًا على الإطلاق. ينطبق الأمر نفسه على التويتات.. أنا لا أتعامل مع تويتر ولا أعرف ما هو بدقة، لكني أجد تويتات مستفزة حقًا تحمل اسمي.. لقد كتبتها فعلًا لكن على لسان أبطال قصصي؛ ومنهم الوغد والمغرور والزاني والكذوب والملحد.. أما أن تجد تويتة تحمل اسمي تقول: «أنا أكره الربيع والأزهار والأطفال» فأنت تشك في عقل من كتب هذا الكلام.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004111/');
+})(window.AKT);
