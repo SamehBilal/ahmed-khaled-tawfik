@@ -2036,3 +2036,32 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'يقول ستيفن كنج: «بالإضافة إلى قصص دفن الأحياء، على كل كاتب رعب أن يقدم قصة واحدة على الأقل عن غرف الفنادق المسكونة، لأن غرف الفنادق أماكن مخيفة بطبعها. تخيل كم من الناس نام في الفراش قبلك؟ كم منهم كان مريضًا؟ كم منهم كان يفقد عقله؟ كم منهم كان يفكر في قراءة بضع آيات أخيرة من الكتاب المقدس الموضوع في درج الكومود بجوار الفراش قبل أن يشنق نفسه في خزانة الملابس بجوار التليفزيون؟». بالفعل غرف الفنادق أماكن مرعبة، وأكثرها إرعابًا هي الغرفة 207.. في هذه الغرفة تحتشد أشنع مخاوفك التي داريتها حتى عن نفسك منذ كنت طفلًا.. في هذه الغرفة يتلاشى الحاجز بين الحقيقة والوهم.. بين المخاوف المشروعة والكابوس.. في هذه الغرفة يتلاشى الحاجز بين الماضي والمستقبل، وبين ذاتك والآخرين.. لا تتلصص ولا تختلس النظرات عبر ثقب المفتاح.. فقط فلتدر مقبض الباب في هدوء وحذر.. ولتدخل الغرفة رقم 207..' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004766/');
 })(window.AKT);
+
+/* «سر الغرفة 207»: its nine editions — Diamond Book (2008, as «207», and the Kuwait printing), Dar Lila (Kayan Corp) (2009, 16 September
+   2009, and undated), Kayan (2017 paperback, Kindle October 2017 and 2024) and the Malayalam translation (Saikatham Books, 2022);
+   Kayan's Shahid series printing stays after the 2017 paperback */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).room207 = A.bookInfo.room207 || {};
+	var T = { ar: 'سر الغرفة 207', en: 'The Secret of Room 207' }, T207 = { ar: '207', en: '207' };
+	var LILA = { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [];
+	var shahid = old.filter(function (ed) { return /room207-kayan-samawy/.test(ed.cover || ''); });
+	b.firstPublished = '2008-01-01';
+	b.pages = 155;
+	b.editions = [
+		{ title: T207, publisher: { ar: 'دايموند بوك', en: 'Diamond Book' }, year: 2008, date: '2008-01-01', lang: 'ar', asin: 'B0DLT6432R', pages: 155, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, source: 'https://www.goodreads.com/work/editions/6025544' },
+		{ title: T207, publisher: { ar: 'إصدارات دايموند (الكويت)', en: 'Diamond Publications (Kuwait)' }, year: 2008, date: '2008-01-01', lang: 'ar', asin: 'B0DLT67BBQ', pages: 155, format: PB },
+		{ title: T, publisher: LILA, year: 2009, date: '2009-01-01', lang: 'ar', asin: 'B0DLTBH8FJ', pages: 264, format: PB, source: 'https://www.goodreads.com/book/show/18398527' },
+		{ title: T, publisher: LILA, year: 2009, date: '2009-09-16', lang: 'ar', pages: 258, format: PB },
+		{ title: T, publisher: LILA, lang: 'ar', asin: 'B0DMZR488Q', pages: 258, format: PB },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200270', isbn10: '9778200270', asin: '9778200270', pages: 220, format: PB }
+	].concat(shahid).concat([
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-10-01', lang: 'ar', asin: 'B076X74GSC', pages: 151, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYPRG7P', pages: 187, format: KD },
+		{ title: { ar: 'Rahasyamuri 207 (بالمالايالامية)', en: 'Rahasyamuri 207 (Malayalam)' }, publisher: { ar: 'Saikatham Books LLP', en: 'Saikatham Books LLP' },
+			year: 2022, date: '2022-10-30', lang: 'ml', isbn: '9789394315532', isbn10: '9394315535', asin: '9394315535', pages: 184, format: PB,
+			source: 'https://www.goodreads.com/book/show/73148303' }
+	]).concat(old.filter(function (ed) { return ed.store; }));
+})(window.AKT);
