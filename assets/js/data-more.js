@@ -1305,3 +1305,12 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009082/');
 })(window.AKT);
+
+/* «نادي القتال»: another cover, from a digital copy passed around on Telegram in 2020 (stamped «مكتبة Telegram Network
+   2020»); not a publisher's edition, and marked as such */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).fightclub = A.bookInfo.fightclub || {};
+	(b.editions = b.editions || []).push({ title: { ar: 'نادي القتال', en: 'Fight Club' },
+		publisher: { ar: 'نسخة متداولة على تليجرام', en: 'A copy passed around on Telegram' }, year: 2020, lang: 'ar',
+		format: { ar: 'نسخة رقمية غير رسمية', en: 'Unofficial digital copy' }, cover: 'assets/img/covers/translations/fight-club-telegram-2020.webp' });
+})(window.AKT);
