@@ -93,25 +93,64 @@ window.PAGE = {
 		var quotes = isIssue ? [] : (d.quotes || []).map(function (q, i) { return { q: q, i: i }; }).filter(function (x) { return x.q.work === item.id; });
 		var adapts = (d.adaptations || []).filter(function (a) { return a.basedOn === (isIssue ? '' : item.id); });
 
-		/* ---------- editions ---------- */
+		/* ---------- editions ----------
+		   One card per house and cover: printings that only differ in year, format or page count are the same edition
+		   to a reader, so they share a card and show as year chips; a chip opens that printing's details. A printing
+		   without a cover of its own (an ebook, a reprint) joins its house's card. */
 		var eds = info.editions || [];
-		var edHtml = eds.map(function (ed) {
-			var meta = [
-				ed.publisher ? t(ed.publisher) : '',
-				ed.year ? App.num(ed.year) : '',
-				ed.format ? t(ed.format) : '',
-				ed.pages ? App.num(ed.pages) + ' ' + L('صفحة', 'pages') : '',
-				langName(ed.lang)
-			].filter(Boolean).join(' · ');
+		var houseOf = function (ed) {
+			var n = ((ed.publisher || {}).ar || '').replace(/\(ثم[^)]*\)/g, '');
+			var p = (d.publishers || []).filter(function (x) { return n && new RegExp(x.match).test(n); })[0];
+			return (p ? p.id : n.replace(/\(.*?\)|[–-].*$|\s(للنشر|للطباعة|للتوزيع).*$/g, '').replace(/^(شركة|دار|مؤسسة|مكتبة)\s+/, '').trim()) + '|' + (ed.lang || 'ar');
+		};
+		var groups = [], byKey = {};
+		eds.forEach(function (ed, i) {
+			if (!ed.cover) return;
+			var k = houseOf(ed) + '|' + ed.cover;
+			if (!byKey[k]) { byKey[k] = { cover: ed.cover, house: houseOf(ed), list: [] }; groups.push(byKey[k]); }
+			byKey[k].list.push(i);
+		});
+		eds.forEach(function (ed, i) {
+			if (ed.cover) return;
+			var g = groups.filter(function (x) { return x.house === houseOf(ed); })[0];
+			if (!g) { g = { cover: '', house: houseOf(ed), list: [] }; groups.push(g); }
+			g.list.push(i);
+		});
+		var yr = function (ed) { return +String(ed.year || '').slice(0, 4) || 9999; };
+		groups.forEach(function (g) { g.list.sort(function (x, y) { return yr(eds[x]) - yr(eds[y]); }); });
+		groups.sort(function (x, y) { return yr(eds[x.list[0]]) - yr(eds[y.list[0]]); });
+		var edHtml = groups.map(function (g) {
+			var first = eds[g.list[0]];
+			var withPub = g.list.map(function (i) { return eds[i]; }).filter(function (ed) { return ed.publisher; })[0] || first;
+			var n = g.list.length;
+			var meta = [withPub.publisher ? t(withPub.publisher) : '', langName(first.lang),
+				n > 1 ? (n === 2 ? L('طبعتان', '2 printings') : App.num(n) + ' ' + L(n <= 10 ? 'طبعات' : 'طبعة', 'printings')) : ''].filter(Boolean).join(' · ');
 			return '<article class="edition">' +
-				S.miniCover({ img: ed.cover, color: color, title: t(ed.title || title), by: otherAuthor ? authorAr : ed.lang && ed.lang !== 'ar' ? 'Ahmed Khaled Tawfik' : '' }) +
-				'<div><h4>' + tx(ed.title || title) + '</h4>' +
+				S.miniCover({ img: g.cover, color: color, title: t(first.title || title), by: otherAuthor ? authorAr : first.lang && first.lang !== 'ar' ? 'Ahmed Khaled Tawfik' : '' }) +
+				'<div><h4>' + tx(first.title || title) + '</h4>' +
 				'<p class="meta">' + e(meta) + '</p>' +
-				(ed.translator ? '<p class="meta">' + L('ترجمة: ', 'Translated by ') + tx(ed.translator) + '</p>' : '') +
-				(ed.isbn ? '<p class="meta">ISBN ' + e(ed.isbn) + '</p>' : '') +
-				(ed.source ? '<a href="' + e(ed.source) + '" target="_blank" rel="noopener">' + (ed.store === 'Abjjad' ? L('على أبجد ↗', 'On Abjjad ↗') : ed.store === 'Aseer Al Kotb' ? L('على عصير الكتب ↗', 'On Aseer Al Kotb ↗') : L('المصدر ↗', 'Source ↗')) + '</a>' : '') +
+				'<div class="ed-years" role="group" aria-label="' + e(L('الطبعات', 'Printings')) + '">' + g.list.map(function (i) {
+					var ed = eds[i], f = ed.format ? t(ed.format) : '';
+					return '<button type="button" class="ed-yr" data-ed="' + i + '" data-first="' + g.list[0] + '" aria-expanded="false">' + (ed.year ? e(App.num(String(ed.year).slice(0, 4))) : '—') +
+						(/كيندل|Kindle/i.test(f) ? ' <small>' + L('إلكتروني', 'ebook') + '</small>' : /صوتي|Audio/i.test(f) ? ' <small>' + L('مسموع', 'audio') + '</small>' : '') + '</button>';
+				}).join('') + '</div>' +
 				'</div></article>';
 		}).join('');
+		/* a printing's details, for its chip's popup */
+		var edDetails = function (ed, cardTitle) {
+			var rows = [
+				ed.title && t(ed.title) !== t(cardTitle || title) ? [L('العنوان', 'Title'), tx(ed.title)] : null,
+				ed.publisher ? [L('الناشر', 'Publisher'), e(t(ed.publisher))] : null,
+				ed.year ? [L('السنة', 'Year'), e(App.num(ed.year))] : null,
+				ed.format ? [L('الشكل', 'Format'), e(t(ed.format))] : null,
+				ed.edition ? [L('الطبعة', 'Printing'), e(t(ed.edition))] : null,
+				ed.pages ? [L('الصفحات', 'Pages'), e(App.num(ed.pages))] : null,
+				ed.translator ? [L('الترجمة', 'Translator'), tx(ed.translator)] : null,
+				ed.isbn ? ['ISBN', e(ed.isbn)] : null
+			].filter(Boolean);
+			return '<dl>' + rows.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('') + '</dl>' +
+				(ed.source ? '<a href="' + e(ed.source) + '" target="_blank" rel="noopener">' + (ed.store === 'Abjjad' ? L('على أبجد ↗', 'On Abjjad ↗') : L('المصدر ↗', 'Source ↗')) + '</a>' : '');
+		};
 
 		/* ---------- series navigation (issues) / related books (works) ---------- */
 		var shelf = '';
@@ -217,7 +256,7 @@ window.PAGE = {
 							info.altTitles.map(function (a) { return '<li><b lang="' + e(a.lang || '') + '">' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + (a.lang ? ' <span class="lng">' + e(a.lang) + '</span>' : '') + '</li>'; }).join('') +
 						'</ul></section>' : '') +
 						(chars.length ? '<section class="d-block"><h3>' + L('الشخصيات', 'Characters') + '</h3><p class="chips-line">' + chars.map(App.charLink).filter(Boolean).join('') + '</p></section>' : '') +
-						(eds.length ? '<section class="d-block"><h3>' + L('الطبعات والأغلفة', 'Editions & covers') + ' <small>(' + App.num(eds.length) + ')</small></h3><div class="editions">' + edHtml + '</div></section>' : '') +
+						(eds.length ? '<section class="d-block d-editions"><h3>' + L('الطبعات والأغلفة', 'Editions & covers') + ' <small>(' + App.num(groups.length) + ')</small></h3><div class="editions">' + edHtml + '</div></section>' : '') +
 						(quotes.length ? '<section class="d-block"><h3>' + L('اقتباسات', 'Quotes') + '</h3>' + quotes.map(function (x) {
 							return '<blockquote class="d-quote">' + tx(x.q.text) + ' <a href="quotes.html#q-' + x.i + '">↗</a></blockquote>';
 						}).join('') + '</section>' : '') +
@@ -233,13 +272,39 @@ window.PAGE = {
 			'</div></section>';
 
 		window.Books.initShowcase(document.getElementById('d-book'));
+		/* a printing's year opens a small popup with its details; one at a time, closed by a click elsewhere or Escape */
+		var edSec = root.querySelector('.d-editions');
+		if (edSec) {
+			var pop = document.createElement('div');
+			pop.className = 'ed-pop';
+			pop.hidden = true;
+			edSec.appendChild(pop);
+			var openBtn = null;
+			var close = function () { pop.hidden = true; if (openBtn) openBtn.setAttribute('aria-expanded', 'false'); openBtn = null; };
+			edSec.addEventListener('click', function (ev) {
+				var btn = ev.target.closest('.ed-yr');
+				if (!btn) { if (!ev.target.closest('.ed-pop')) close(); return; }
+				if (openBtn === btn) { close(); return; }
+				close();
+				openBtn = btn;
+				btn.setAttribute('aria-expanded', 'true');
+				pop.innerHTML = edDetails(eds[+btn.getAttribute('data-ed')], eds[+btn.getAttribute('data-first')].title);
+				pop.hidden = false;
+				var sr = edSec.getBoundingClientRect(), br = btn.getBoundingClientRect();
+				var left = Math.min(Math.max(0, br.left - sr.left + br.width / 2 - pop.offsetWidth / 2), sr.width - pop.offsetWidth);
+				pop.style.left = left + 'px';
+				pop.style.top = (br.bottom - sr.top + 8) + 'px';
+			});
+			document.addEventListener('click', function (ev) { if (!edSec.contains(ev.target)) close(); });
+			document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') close(); });
+		}
 		/* the back cover opens full size, like the pictures on the home timeline */
 		var bc = root.querySelector('.d-back-img');
 		if (bc) bc.addEventListener('click', function () { App.showPic(bc.dataset.src, bc.dataset.alt); });
 		if (audioTracks.length) window.Cassette.mount(document.getElementById('d-cassette'), { tracks: audioTracks });
 
 		function langName(l) {
-			var N = { ar: ['العربية', 'Arabic'], en: ['الإنجليزية', 'English'], fr: ['الفرنسية', 'French'], it: ['الإيطالية', 'Italian'], de: ['الألمانية', 'German'], es: ['الإسبانية', 'Spanish'], tr: ['التركية', 'Turkish'], fa: ['الفارسية', 'Persian'] };
+			var N = { ar: ['العربية', 'Arabic'], en: ['الإنجليزية', 'English'], fr: ['الفرنسية', 'French'], it: ['الإيطالية', 'Italian'], de: ['الألمانية', 'German'], es: ['الإسبانية', 'Spanish'], tr: ['التركية', 'Turkish'], fa: ['الفارسية', 'Persian'], fi: ['الفنلندية', 'Finnish'], ru: ['الروسية', 'Russian'], ku: ['الكردية', 'Kurdish'], ur: ['الأردية', 'Urdu'], id: ['الإندونيسية', 'Indonesian'] };
 			return l ? (N[l] ? N[l][App.lang === 'ar' ? 0 : 1] : l) : '';
 		}
 	}
