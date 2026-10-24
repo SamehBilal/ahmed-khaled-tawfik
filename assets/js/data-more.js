@@ -1249,3 +1249,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.blurb = { by: { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' },
 		ar: 'لعلك قرأت بعض هذه المقالات، ولعلك قرأتها كلها.. لكن اجتماعها في كتاب واحد يعطيك نظرة أشمل، وأعمق.\n\nقد يروق لك هذا الكتاب، وقد يبرهن على أنني حسن الظن في نفسي أكثر من اللازم، ولكني في جميع الأحوال أعدك بشيء واحد: هذه مقالات صادقة تمامًا؛ لم أكتبها طلبًا للمادة، أو نفاقًا لمسؤول، أو دفاعًا عن جهة ما..\n\nعندما حاول بعض المحيطين بعبد الناصر أن يوغروا صدره على العظيم (أحمد بهاء الدين)، قال لهم: اتركوه؛ نحن راقبناه، وندرك أنه لا علاقة له بأحد.. هذا رجل (دماغه كده)..\n\n(دماغي كده).. عنوان مناسب جدًا لهذه المقالات.. فقط هناك شخص واحد كتبت وهو في ذهني، ويهمني بالطبع رضاه والفوز باحترامه – إن لم يكن بحبه –، ويغريني بممارسة تلك اللعبة المعقدة؛ بين قول ما أريد قوله، وكتابة ما يريد قراءته؛ فلا أتورط في أسلوب (ما يطلبه المستمعون)، أو أمارس الاستفزاز المجاني لمجرد التميز.. وهذا الشخص هو القادر على جعلي أتردد، أو أراجع دماغي هذه.. وهو الوحيد الذي أدين له بكل شيء: القارئ.' };
 })(window.AKT);
+
+/* «أكواريل»: two printings from Dar Sama, 2013 and 2014, each with its own cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).aquarelle = A.bookInfo.aquarelle || {};
+	var SAMA = { ar: 'دار سما للنشر والتوزيع', en: 'Dar Sama' }, TITLE = { ar: 'أكواريل وقصص أخرى', en: 'Aquarelle and Other Stories' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' };
+	b.editions = [
+		{ title: TITLE, publisher: SAMA, year: 2013, lang: 'ar', format: PB, cover: 'assets/img/covers/stories/aseeralkotb-ace14e29ee2e.webp' },
+		{ title: TITLE, publisher: SAMA, year: 2014, lang: 'ar', isbn: '9789996655302', pages: 352, format: PB, cover: 'assets/img/covers/stories/aquarelle-2014.webp',
+			source: 'https://www.goodreads.com/book/show/18746715' }
+	];
+	b.firstPublished = '2013';
+})(window.AKT);
