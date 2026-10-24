@@ -1575,3 +1575,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ed.date = '2014-01-01'; ed.pages = 90; ed.isbn10 = '9776378854'; ed.asin = '9776378854'; ed.back = 'assets/img/covers/back/jarada.webp';
 	});
 })(window.AKT);
+
+/* «المغامر» (The Adventurous): Basem Salah El-Din's line from the Modern Arab Association, where he wrote the story
+   «لا تأخذه معك»; its first two issues (July and September 2009), each with its back cover. Which issue holds his
+   story isn't recorded here yet, so the story stays in the line's description. */
+(function (A) {
+	var MAA = { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' };
+	(A.otherSeries || []).forEach(function (s) {
+		if (s.id !== 'mughamer') return;
+		s.owner = { ar: 'باسم صلاح الدين', en: 'Basem Salah El-Din' };
+		s.publisher = MAA;
+		s.years = '2009';
+		s.description = { ar: 'سلسلة لباسم صلاح الدين من المؤسسة العربية الحديثة (The Adventurous)، صدر عددها الأول في يوليو 2009 والثاني في سبتمبر 2009. شارك فيها أحمد خالد توفيق بقصة «لا تأخذه معك».',
+			en: 'Basem Salah El-Din’s line from the Modern Arab Association (The Adventurous); its first issue came out in July 2009 and its second in September 2009. Ahmed Khaled Tawfik contributed the story «Don’t Take It With You».' };
+		s.issues = [
+			{ n: 1, title: { ar: 'المغامر 1', en: 'Al-Mughamer 1' } },
+			{ n: 2, title: { ar: 'المغامر 2', en: 'Al-Mughamer 2' } }
+		];
+	});
+	var I = A.issueInfo = A.issueInfo || {};
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' };
+	I['mughamer-1'] = { firstPublished: '2009-07-01', editions: [{ title: { ar: 'المغامر 1', en: 'Al-Mughamer 1' }, publisher: MAA, year: 2009, date: '2009-07-01', lang: 'ar',
+		asin: 'B0DLTBWKQR', format: PB, back: 'assets/img/covers/back/mughamer-1.webp' }] };
+	I['mughamer-2'] = { firstPublished: '2009-09-01', editions: [{ title: { ar: 'المغامر 2', en: 'Al-Mughamer 2' }, publisher: MAA, year: 2009, date: '2009-09-01', lang: 'ar',
+		asin: 'B0DLTDZDV7', format: PB, back: 'assets/img/covers/back/mughamer-2.webp' }] };
+})(window.AKT);

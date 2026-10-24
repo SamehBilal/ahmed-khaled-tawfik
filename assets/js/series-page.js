@@ -37,7 +37,7 @@ window.PAGE = {
 			by: ser.inspired ? t(S.seriesAuthor(ser)) : ''
 		};
 		/* its back: the back cover of its first book that has one */
-		if (!ser.own && !bookOpts.backImg) issues.some(function (is) { var bk = is.work ? S.backOf(is.work) : ''; if (bk) bookOpts.backImg = bk; return !!bk; });
+		if (!ser.own && !bookOpts.backImg) issues.some(function (is) { var bk = S.backOf(is.work || S.issueKey(id, is)); if (bk) bookOpts.backImg = bk; return !!bk; });
 		bookOpts.id = '';
 		bookOpts.info = { title: '', text: '' };
 

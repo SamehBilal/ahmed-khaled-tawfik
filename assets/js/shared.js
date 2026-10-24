@@ -149,7 +149,7 @@
 
 	/* a book's back cover: its own (backCovers, on the book page), else one of its editions' */
 	function backOf(id) {
-		var d = window.App.data(), info = (d.bookInfo || {})[id] || {};
+		var d = window.App.data(), info = (d.bookInfo || {})[id] || (d.issueInfo || {})[id] || {};
 		return (d.backCovers || {})[id] || ((info.editions || []).filter(function (ed) { return ed.back; })[0] || {}).back || '';
 	}
 
