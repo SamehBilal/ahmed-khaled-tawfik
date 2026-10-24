@@ -198,7 +198,7 @@ window.PAGE = {
 						((desc && !(blurb && desc.ar === blurb.ar)) ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
 						((blurb || backImg) ? '<section class="d-block d-backcover"><h3>' + L('على الغلاف الخلفي', 'On the back cover') + '</h3>' +
 							(backImg ? '<button type="button" class="d-back-img" data-src="' + e(backImg) + '" data-alt="' + e(L('الغلاف الخلفي — ', 'Back cover — ') + t(title)) + '" aria-label="' + e(L('تكبير الغلاف الخلفي', 'Enlarge the back cover')) + '"><img src="' + e(backImg) + '" alt="' + e(L('الغلاف الخلفي — ', 'Back cover — ') + t(title)) + '" loading="lazy"></button>' : '') +
-							(blurb ? '<blockquote class="d-blurb" dir="rtl" lang="ar">' + e(blurb.ar).replace(/\n/g, '<br>') + '</blockquote><a class="d-blurb-src" href="' + e(blurb.src) + '" target="_blank" rel="noopener">' + (blurb.by ? L('عن ', 'From ') + t(blurb.by) + ' ↗' : L('عن أبجد ↗', 'From Abjjad ↗')) + '</a>' : '') +
+							(blurb ? '<blockquote class="d-blurb" dir="rtl" lang="ar">' + e(blurb.ar).replace(/\n/g, '<br>') + '</blockquote>' + (blurb.src ? '<a class="d-blurb-src" href="' + e(blurb.src) + '" target="_blank" rel="noopener">' + (blurb.by ? L('عن ', 'From ') + t(blurb.by) + ' ↗' : L('عن أبجد ↗', 'From Abjjad ↗')) + '</a>' : '') : '') +
 						'</section>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
 						(item.note && t(item.note) ? '<p class="note">' + tx(item.note) + '</p>' : '') +

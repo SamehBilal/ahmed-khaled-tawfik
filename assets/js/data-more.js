@@ -1104,6 +1104,13 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var info = (A.bookInfo = A.bookInfo || {})['about-sokhreya'] = A.bookInfo['about-sokhreya'] || {};
 	info.firstPublished = '2022-01';
 	info.pages = 240;
+	info.description = {
+		ar: 'دراسة نقدية صدرت عن الهيئة المصرية العامة للكتاب في يناير 2022، يقدّم فيها د. إسلام حمزة قراءة متأنية للسخرية في أدب أحمد خالد توفيق، الذي اتكأ بكثرة على توظيف السخرية في معظم إنتاجه، ومزج بين الأغراض الأدبية في فنون النشر المتنوعة.\n\nتولي القراءة أهمية كبيرة للمرجعية الثقافية للنص، مستفيدة من معطيات العلوم المتنوعة.',
+		en: 'A critical study published by the General Egyptian Book Organization in January 2022, in which Dr. Islam Hamza gives a close reading of satire in Ahmed Khaled Tawfik’s writing: he leaned on satire across most of his work and blended literary purposes in many forms.\n\nThe reading pays close attention to the cultural references behind the texts, drawing on several fields of knowledge.'
+	};
+	/* the text on its back cover */
+	info.blurb = { ar: 'سيظل البحث عن أسرار النصوص الأدبية الرفيعة عملًا عظيمًا وممتعًا، مع الإشارة إلى أن النصوص الأدبية لا تُؤتي أُكلها كلَّ حين بإذن مبدعها، وإنما تحتاج إلى جُهد عملاق يُقدَّم من القارئ؛ حتى يبوح له النص الأدبي بأدق أسراره وخفاياه. وفي هذا الكتاب يُقدِّم المؤلف قراءة متأنية للسخرية في أدب أحمد خالد توفيق، الذي نال – بما أنتجه من أعمال إبداعية – شهرة واسعة في الوطن العربي، والذي اتكأ بكثرة على توظيف السخرية في معظم إنتاجه الأدبي، واستطاع المزج بين الأغراض الأدبية، كما استطاع إنتاج زاد أدبي في فنون النشر المتنوعة. وهذه القراءة تُولي أهمية كبيرة للمرجعية الثقافية للنص الأدبي، مستفيدة من معطيات العلوم المتنوعة؛ بغية خدمة النص الأدبي من البدء إلى الختام، فهو محور الاهتمام.',
+		by: GEBO };
 	info.language = 'ar';
 	info.editions = [{ title: { ar: 'السخرية في أدب أحمد خالد توفيق', en: 'Satire in the Writing of Ahmed Khaled Tawfik' }, publisher: GEBO, year: 2022, lang: 'ar', isbn: '9789779135779', pages: 240,
 		format: { ar: 'غلاف ورقي', en: 'Paperback' }, cover: ab ? ab.cover : '' }];
