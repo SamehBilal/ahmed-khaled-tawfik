@@ -1134,7 +1134,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.editions = [
 		{ title: TITLE, publisher: SHOROUK, year: 2018, lang: 'ar', isbn: '9789770928646', pages: 110, cover: cover,
 			format: { ar: 'غلاف ورقي – الطبعة الأولى', en: 'Paperback – first printing' }, source: 'https://www.goodreads.com/book/show/43687854' },
-		{ title: TITLE, publisher: SHOROUK, year: 2022, lang: 'ar', isbn: '9789770928646', cover: cover,
+		{ title: TITLE, publisher: SHOROUK, year: 2022, lang: 'ar', isbn: '9789770928646', pages: 110, cover: cover,
 			format: { ar: 'غلاف ورقي – الطبعة الثانية', en: 'Paperback – second printing' }, source: 'https://www.amazon.eg/dp/977092864X' }
 	];
 })(window.AKT);
