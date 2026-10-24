@@ -1825,3 +1825,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'هما صديقان.. أحدهما امتلك العضلات والقوة الجسدية، بينما لم يمتلك الآخر إلا العقل.. العقل العبقري القادر على أن يحل أعقد المشاكل في دقائق.. «عصام فتحي» أستاذ الرياضيات حبيس الكرسي المتحرك.. ومجموعة من الألغاز الرقمية المحيرة التي يحلها دومًا، مبرهنًا على أنه جدير بلقب «رجل الأرقام». بعض هذه الألغاز يتعلق بجرائم مخيفة، وبعضها يتعلق بمحاولتنا لفهم الآخرين. لكنه في كل مرة يبصر الحقيقة المتوارية وراء الضباب، ويثبت أنه عبقري.. حتى لو كان عقلًا بلا جسد.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004108/');
 })(window.AKT);
+
+/* «ضحكات كئيبة»: its four editions — Spark (2012), Kayan (2019 paperback with its back cover from Samawy (samawy.com/i/1004107)
+   and its text; Kindle 2024) and the Persian translation (Saad, 2022); the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).dahakat = A.bookInfo.dahakat || {};
+	var T = { ar: 'ضحكات كئيبة', en: 'Gloomy Laughs' }, C = 'assets/img/covers/books/';
+	var KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' }, PB = { ar: 'غلاف ورقي', en: 'Paperback' };
+	var kayan = (b.editions || []).filter(function (ed) { return ed.isbn === '9789778200621'; })[0] || {};
+	b.firstPublished = '2012-01-01';
+	b.pages = 238;
+	b.editions = [
+		{ title: T, publisher: { ar: 'سبارك للنشر والتوزيع', en: 'Spark Publishing' }, year: 2012, date: '2012-01-01', lang: 'ar', asin: 'B0DLT4TQLL', pages: 238, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'dahakat-2012.webp', source: 'https://www.goodreads.com/book/show/13418296' },
+		{ title: T, publisher: KAYAN, year: 2019, date: '2019-01-01', lang: 'ar', isbn: '9789778200621', asin: 'B0DMFXDMLV', pages: 246, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/dahakat-kayan.webp' },
+		{ title: { ar: 'خنده های غم انگیز', en: 'Khandeh-ha-ye gham-angiz (Persian)' }, publisher: { ar: 'صاد', en: 'Saad' }, year: 2022, date: '2022-01-01', lang: 'fa',
+			isbn: '9786229443316', isbn10: '6229443317', asin: '6229443317', pages: 178, translator: { ar: 'عماد جعفري', en: 'Emad Jafari' },
+			cover: C + 'dahakat-2022-fa.webp', source: 'https://www.goodreads.com/book/show/174013186' },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLZ63JVT', pages: 108, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } }
+	].concat((b.editions || []).filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'dahakat-2012.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'إنها ضحكات كئيبة.. قد تروق لك وقد لا تروق.. قد تجدها ظريفة وقد تجدها كئيبة فعلًا.. قد تجدها عميقة تتجاوز السخرية إلى ما وراءها، وقد تجدها التفاهة ذاتها.. قد تجدها موفقة جدًا وقد تجدها فاشلة تمامًا. المهم أنني أنذرتك مسبقًا.. هذه ضحكات كئيبة، فماذا تتوقع من ضحكات كئيبة؟' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004107/');
+})(window.AKT);
