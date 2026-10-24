@@ -72,7 +72,9 @@ window.PAGE = {
 			[L('عدد الصفحات', 'Pages'), App.num(info.pages || firstEd.pages || '')],
 			[L('اللغة', 'Language'), langName(info.language || 'ar')],
 			['ISBN', firstEd.isbn || ''],
-			[L('الأصل', 'Original'), item.original ? t(item.original) : '']
+			[L('الأصل', 'Original'), item.original ? t(item.original) : ''],
+			/* a standalone book that came out in a publisher's line (أدبيات) */
+			[L('ضمن سلسلة', 'In the series'), info.inSeries ? t(info.inSeries) : '']
 		].filter(function (x) { return x[1]; });
 
 		/* ---------- people ---------- */

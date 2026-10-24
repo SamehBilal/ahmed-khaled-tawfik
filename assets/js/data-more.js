@@ -1218,3 +1218,22 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ ar: 'ريهام إبراهيم', en: 'Reham Ibrahim', role: ROLE }
 	];
 })(window.AKT);
+
+/* «دماغي كده» is one book, no. 1 of the Modern Arab Association's essay line «أدبيات – سلسلة مقالات», the only one he
+   wrote in it: the line leaves the series list (where it showed the book a second time) and becomes a fact of the book */
+(function (A) {
+	['otherSeries', 'series'].forEach(function (k) { if (A[k]) A[k] = A[k].filter(function (s) { return s.id !== 'maqalat'; }); });
+	var b = (A.bookInfo = A.bookInfo || {}).demaghi = A.bookInfo.demaghi || {};
+	b.inSeries = { ar: 'أدبيات – سلسلة مقالات (1)', en: 'Adabiyat – an essay series (no. 1)' };
+	/* the 2009 printing appears twice from Goodreads: keep one, with both forms of its ISBN */
+	var seen = {};
+	b.editions = (b.editions || []).filter(function (ed) {
+		var k = ed.source && ed.year ? ed.source + '|' + ed.year : '';
+		if (k && seen[k]) return false;
+		if (k) seen[k] = true;
+		return true;
+	});
+	b.editions.forEach(function (ed) { if (ed.isbn === '9773781526') { ed.isbn = '9789773781521'; ed.isbn10 = '9773781526'; } });
+	b.blurb = { by: { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' },
+		ar: 'لعلك قرأت بعض هذه المقالات، ولعلك قرأتها كلها.. لكن اجتماعها في كتاب واحد يعطيك نظرة أشمل، وأعمق.\n\nقد يروق لك هذا الكتاب، وقد يبرهن على أنني حسن الظن في نفسي أكثر من اللازم، ولكني في جميع الأحوال أعدك بشيء واحد: هذه مقالات صادقة تمامًا؛ لم أكتبها طلبًا للمادة، أو نفاقًا لمسؤول، أو دفاعًا عن جهة ما..\n\nعندما حاول بعض المحيطين بعبد الناصر أن يوغروا صدره على العظيم (أحمد بهاء الدين)، قال لهم: اتركوه؛ نحن راقبناه، وندرك أنه لا علاقة له بأحد.. هذا رجل (دماغه كده)..\n\n(دماغي كده).. عنوان مناسب جدًا لهذه المقالات.. فقط هناك شخص واحد كتبت وهو في ذهني، ويهمني بالطبع رضاه والفوز باحترامه – إن لم يكن بحبه –، ويغريني بممارسة تلك اللعبة المعقدة؛ بين قول ما أريد قوله، وكتابة ما يريد قراءته؛ فلا أتورط في أسلوب (ما يطلبه المستمعون)، أو أمارس الاستفزاز المجاني لمجرد التميز.. وهذا الشخص هو القادر على جعلي أتردد، أو أراجع دماغي هذه.. وهو الوحيد الذي أدين له بكل شيء: القارئ.' };
+})(window.AKT);
