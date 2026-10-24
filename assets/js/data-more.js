@@ -1564,3 +1564,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			cover: 'assets/img/covers/books/walad-2015.webp', back: 'assets/img/covers/back/walad-2015.webp' }
 	];
 })(window.AKT);
+
+/* «تأثير الجرادة»: Komix's paperback (1 January 2014, 90 pages) with its back cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).jarada = A.bookInfo.jarada || {};
+	b.firstPublished = '2014-01-01';
+	b.pages = 90;
+	(b.editions || []).forEach(function (ed) {
+		if (ed.isbn !== '9789776378858') return;
+		ed.date = '2014-01-01'; ed.pages = 90; ed.isbn10 = '9776378854'; ed.asin = '9776378854'; ed.back = 'assets/img/covers/back/jarada.webp';
+	});
+})(window.AKT);
