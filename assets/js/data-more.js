@@ -1520,3 +1520,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.blurb = { by: { ar: 'دار الشروق', en: 'Dar El Shorouk' },
 		ar: '«لقد مات محمود لأنه اقترب من الحقيقة أكثر من اللازم، فلم يتحمل واحترق وذاب جناحاه.. هوى من حالق ليغرق وسط محيط ثائر.. مثل إيكاروس».\n— أحمد خالد توفيق\n\nللحقيقة ثمن، وللمعرفة ثمن، وقد دفع «محمود السمنودي» مقابل معرفته نبذًا وألمًا ومعاناة، منذ طفولته كطفل غريب الأطوار بين أقرانه ثم كرجل لا يرغب أحد في الاقتراب منه.\n\nتدور أحداث الرواية عام ٢٠٢٠، وتمتد إلى المستقبل، ثم تعود إلى الماضي لتجمع كل الخيوط في حجرة داخل مصحة للعلاج النفسي يمكث فيها رجل قادر على قراءة أحداث الأزمنة، قبل أن يجبر نفسه على الصمت.\n\nرواية شائقة للأديب أحمد خالد توفيق، تأخذ القارئ لعالم غامض وتعود به محملًا بكثير من الأسئلة وربما ببعض الإجابات، ولكن هل نحن مستعدون ومتأهبون للمعرفة؟' };
 })(window.AKT);
+
+/* «السنجة»: four editions with two covers and two back covers — Bloomsbury Qatar's paperback (16 October 2012, 266 pages)
+   and its Kindle edition (now Hamad Bin Khalifa University Press; dated 23 February 2012, 150 pages), and Dar El Shorouk's
+   paperback (2023, 232 pages) and Kindle edition (24 January 2023, 156 pages); the audiobook is left out */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).senga = A.bookInfo.senga || {};
+	var T = { ar: 'السنجة', en: 'Al-Senga (The Knife)' };
+	var BQFP = { ar: 'دار بلومزبري – مؤسسة قطر للنشر', en: 'Bloomsbury Qatar Foundation Publishing' };
+	var HBKU = { ar: 'دار جامعة حمد بن خليفة للنشر (بلومزبري – مؤسسة قطر للنشر سابقًا)', en: 'Hamad Bin Khalifa University Press (formerly Bloomsbury Qatar)' };
+	var SHOROUK = { ar: 'دار الشروق', en: 'Dar El Shorouk' };
+	var bqCover = 'assets/img/covers/novels/openlibrary-8b37322cd6fa.jpg', shCover = 'assets/img/covers/novels/abjjad-22e50ee881a6.png';
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	b.firstPublished = '2012';
+	b.pages = 266;
+	b.ownCover = bqCover;
+	b.editions = [
+		{ title: T, publisher: BQFP, year: 2012, date: '2012-10-16', lang: 'ar', isbn: '9789992195741', isbn10: '9992195746', asin: '9992195746', pages: 266, format: PB,
+			cover: bqCover, back: 'assets/img/covers/back/senga-bqfp.webp', source: 'https://www.goodreads.com/book/show/16076787' },
+		{ title: T, publisher: HBKU, year: 2012, date: '2012-02-23', lang: 'ar', asin: 'B086DRVTKV', pages: 150, format: KD },
+		{ title: T, publisher: SHOROUK, year: 2023, date: '2023-01-01', lang: 'ar', isbn: '9789770938171', asin: 'B0DM43CF3C', pages: 232, format: PB,
+			cover: shCover, back: 'assets/img/covers/back/senga-shorouk.webp', source: 'https://www.goodreads.com/book/show/209604239' },
+		{ title: T, publisher: SHOROUK, year: 2023, date: '2023-01-24', lang: 'ar', isbn: '9789770938171', isbn10: '9770938173', asin: 'B0BSXNDHQ4', pages: 156, format: KD,
+			source: 'https://www.goodreads.com/book/show/97459594' }
+	];
+})(window.AKT);
