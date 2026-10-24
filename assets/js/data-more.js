@@ -1475,3 +1475,23 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			isbn10: '9776467067', asin: 'B078JLDDJB', pages: 205, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } });
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1008920/');
 })(window.AKT);
+
+/* «اللغز وراء السطور: أحاديث من مطبخ الكتابة»: its full title; Dar El Shorouk's paperback (26 January 2017, 228 pages)
+   with its back cover and its text, and Kindle edition (1 October 2017, 240 pages) */
+(function (A) {
+	var TITLE = { ar: 'اللغز وراء السطور: أحاديث من مطبخ الكتابة', en: 'The Mystery Behind the Lines: Talks from the Writing Kitchen' };
+	(A.works || []).forEach(function (w) { if (w.id === 'laghz') w.title = TITLE; });
+	var b = (A.bookInfo = A.bookInfo || {}).laghz = A.bookInfo.laghz || {};
+	var SHOROUK = { ar: 'دار الشروق', en: 'Dar El Shorouk' };
+	b.firstPublished = '2017-01-26';
+	b.pages = 228;
+	b.altTitles = [{ title: 'اللغز وراء السطور', lang: 'ar', note: { ar: 'العنوان المختصر', en: 'Short title' } }];
+	var eds = b.editions = b.editions || [];
+	eds.forEach(function (ed) {
+		if (ed.isbn === '9789770933954') { ed.date = '2017-01-26'; ed.pages = 228; ed.isbn10 = '9770933953'; ed.asin = '9770933953'; ed.back = 'assets/img/covers/back/loghz.webp'; }
+	});
+	if (!eds.some(function (ed) { return /كيندل/.test((ed.format || {}).ar || ''); }))
+		eds.push({ title: TITLE, publisher: SHOROUK, year: 2017, date: '2017-10-01', lang: 'ar', asin: 'B076HH8FRT', pages: 240, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } });
+	b.blurb = { by: SHOROUK,
+		ar: 'دائمًا يتلقى الكُتّاب والأدباء السؤال ذاته من قرائهم: «ماذا أفعل لأكون كاتبًا؟»، وهو سؤال بالغ التعقيد. وعن ذلك يقول د. أحمد خالد توفيق:\n\n«حاولت دائمًا فهم اللغز الكامن وراء السطور، ولماذا تبدو هذه الفقرة جميلة وتلك مفككة، ولماذا تمتعنا هذه القصة بينما تثير تلك مللنا».\n\nفي هذا الكتاب يحاول د. أحمد فك اللغز، بأسلوبه الساخر، والممتع، ليقدم لنا وصفة سحرية من عصارة تجاربه ومن تجارب كبار الأدباء. يتناول في الجزء الأول بعض التقنيات الأدبية المستعصية ويعطيك معها الحل ببساطة وإمتاع، يتنقل من سدة الكاتب إلى أسماء الأبطال، يتوقف عند العمل الناجح المدمر لمؤلفه، ويحل إشكالية الغرور وانعدام الثقة. أما الجزء الثاني فيستعرض فيه المعارك الأدبية المختلفة من تحذلق النقاد إلى متلازمة الطب والأدب، ويحل أزمة الاقتباس من الأدب إلى السينما.\n\nالمؤلف هنا يقوم بممارسة عملية التعلم أمام القراء جميعًا، في تجربة مفيدة وممتعة للقارئ والمؤلف معًا، وعندها يكون قد نجح في فك اللغز وراء السطور.' };
+})(window.AKT);
