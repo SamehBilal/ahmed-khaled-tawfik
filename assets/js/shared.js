@@ -269,6 +269,19 @@
 					.map(function (ed) { return yearOf(ed.year); }).filter(Boolean);
 				return Object.assign({}, it, { year: ys.length ? Math.min.apply(null, ys) : 0 });
 			}).sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+			/* each book shows this house's own cover when its edition here has one: of the editions naming this house,
+			   the one that names it first («كيان للنشر» over «دار ليلى (كيان كورب)») */
+			var own = function (it) {
+				if (it.series) return it;
+				var best = null, at = 1e9;
+				(((d.bookInfo || {})[it.id] || {}).editions || []).forEach(function (ed) {
+					var n = ((ed.publisher || {}).ar || '').replace(/\(ثم[^)]*\)/g, ''), m = ed.cover && n.match(new RegExp(p.match));
+					if (m && m.index < at) { at = m.index; best = ed; }
+				});
+				return best ? Object.assign({}, it, { cover: best.cover }) : it;
+			};
+			mine = mine.map(own);
+			later = later.map(own);
 			var ys = mine.map(function (it) { return it.year; }).filter(Boolean);
 			return { p: p, list: mine, later: later, from: ys.length ? Math.min.apply(null, ys) : 0, to: ys.length ? Math.max.apply(null, ys) : 0 };
 		}).filter(function (c) { return c.list.length; })
