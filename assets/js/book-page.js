@@ -71,9 +71,10 @@ window.PAGE = {
 		/* a book about him, or a book of a series his work inspired, is by someone else */
 		var otherAuthor = r.about ? item.by : (isIssue && ser.inspired ? S.seriesAuthor(ser) : null);
 		var authorAr = otherAuthor ? otherAuthor.ar : 'أحمد خالد توفيق';
+		/* the book's other people, without repeating the author already named first (some lists include him) */
+		var bare = function (n) { return String(n || '').replace(/^(د\.|Dr\.)\s*/, '').replace(/\s+/g, ' ').trim(); };
 		var people = (otherAuthor ? '<span>' + tx(otherAuthor) + '</span>' : '<a href="index.html">' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + '</a>') +
-			
-			(info.authors || []).map(function (p) {
+			(info.authors || []).filter(function (p) { return bare(p.ar) !== bare(authorAr) || p.role; }).map(function (p) {
 				return '<span class="sep">·</span>' + tx(p) + (p.role ? ' <span class="role">(' + tx(p.role) + ')</span>' : '');
 			}).join('');
 
@@ -190,7 +191,7 @@ window.PAGE = {
 						'<p class="eyebrow">' + tx(typeLabel) + (isIssue ? ' · <a href="' + S.seriesHref(ser.s.id) + '">' + tx(ser.s.title) + '</a> ' + e(numLabel) : '') + '</p>' +
 						'<h1>' + tx(title) + '</h1>' +
 						'<p class="d-alt">' + e(App.alt(title)) + '</p>' +
-						'<p class="d-by">' + (isIssue && !ser.own && !ser.inspired ? L('دوره: ', 'His role: ') + tx(ser.s.role || { ar: 'مساهم', en: 'Contributor' }) + ' — ' : L('تأليف ', 'by ')) + people + '</p>' +
+						'<p class="d-by">' + (isIssue && !ser.own && !ser.inspired ? L('دوره: ', 'His role: ') + tx(ser.s.role || { ar: 'مساهم', en: 'Contributor' }) + ' — ' : item.type === 'translation' ? L('ترجمة ', 'translated by ') : L('تأليف ', 'by ')) + people + '</p>' +
 						(r.about ? '<p class="d-by">' + L('كتاب عن ', 'About ') + '<a href="index.html">' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + '</a></p>' : '') +
 						(isIssue && ser.inspired && ser.s.role ? '<p class="d-by">' + L('صلتها به: ', 'Link to him: ') + tx(ser.s.role) + '</p>' : '') +
 						(window.Lists ? window.Lists.buttons('b:' + id) : '') +
