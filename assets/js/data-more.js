@@ -1752,3 +1752,17 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'اسمي (هند الشافعي).. لدي موهبة تجعلني قادرة على إيجاد الحقيقة في أغرب الحوادث وأكثرها غموضًا.. هكذا استطعت أن أزيح الستار عن قصص حيرت الكثيرين وحيرت رجال الشرطة. هناك أسماء كثيرة لموهبتي تلك، فهي حزمة كاملة من القدرات التي يطلق عليها العامة اسم (الحاسة السادسة)، بينما أفضل أنا أن أطلق عليها اسم الإدراك الفائق للحواس أو E.S.P..' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004082/');
 })(window.AKT);
+
+/* «E.S.P»: the covers of Dar Lila's 2009 and 2010 editions and of the Malayalam translation (2022); the undated third Dar
+   Lila printing is left out; the book shows the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).esp = A.bookInfo.esp || {};
+	var C = 'assets/img/covers/stories/';
+	b.editions = (b.editions || []).filter(function (ed) { return ed.isbn !== '9789776386006'; });
+	b.editions.forEach(function (ed) {
+		if (ed.year === 2009) ed.cover = C + 'esp-2009.webp';
+		if (ed.isbn === '9789776836006') ed.cover = C + 'esp-2010.webp';
+		if (ed.isbn === '9789394315525') ed.cover = C + 'esp-2022-ml.webp';
+	});
+	b.ownCover = C + 'esp-2009.webp';
+})(window.AKT);
