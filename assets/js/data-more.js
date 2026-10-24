@@ -1997,3 +1997,26 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var b = (A.bookInfo = A.bookInfo || {})['nashawat-qadima'] = A.bookInfo['nashawat-qadima'] || {};
 	(b.editions || []).forEach(function (ed) { if (ed.isbn === '9789778202243') ed.back = 'assets/img/covers/back/nashawat-kayan.webp'; });
 })(window.AKT);
+
+/* «وساوس وهلاوس»: its four editions — Dar Lila (Kayan Corp) (22 January 2014), Kayan (2017 paperback with its back cover from
+   Samawy (samawy.com/i/1004116) and its text; Kindle October 2017 and 2024); the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).wasawes = A.bookInfo.wasawes || {};
+	var T = { ar: 'وساوس وهلاوس', en: 'Obsessions and Hallucinations' }, C = 'assets/img/covers/books/';
+	var KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' }, PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200348'; })[0] || {};
+	b.firstPublished = '2014-01-22';
+	b.pages = 231;
+	b.editions = [
+		{ title: T, publisher: { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, year: 2014, date: '2014-01-22', lang: 'ar', isbn: '9789775238863', isbn10: '9775238862',
+			asin: '9775238862', pages: 231, format: PB, edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'wasawes-2014.webp', source: 'https://www.goodreads.com/work/editions/28185687' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200348', pages: 230, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/wasawes-kayan.webp' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-10-01', lang: 'ar', asin: 'B076X6TRX2', pages: 183, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYRBNZH', pages: 127, format: KD }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'wasawes-2014.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'أهدي هذا الكتيب لقرائي الأعزاء، سواء كانوا ممن سيبتاعون نسخته الأصلية أو المزورة، أو ممن سيحملونه في صيغة pdf مجانًا من شبكة الإنترنت، فيدعو كل منهم للقرصان صاحب الموقع ويقول له: «جعل الله هذا في ميزان حسناتك يا أخي»، ثم ينهال بالهجوم على مؤلف الكتاب باعتباره رجلًا سخيفًا تافهًا، وقد أخذ أكبر من حجمه بكثير، ويدعو عليه بالشلل والبله المغولي، ثم ينام سعيدًا راضيًا عن الكون والحياة.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004116/');
+})(window.AKT);
