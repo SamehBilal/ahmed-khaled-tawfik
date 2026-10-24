@@ -1675,3 +1675,17 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	];
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004095/');
 })(window.AKT);
+
+/* «الحافة»: the covers of Diamond Book's (2008), Dar Lila's (2008) and Dar Lila – Kayan Corp's (2010) editions; the book
+   shows the first edition's */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {})['al-hafa'] = A.bookInfo['al-hafa'] || {};
+	var C = 'assets/img/covers/books/';
+	(b.editions || []).forEach(function (ed) {
+		var p = (ed.publisher || {}).ar || '';
+		if (ed.year === 2008 && /دايموند/.test(p)) ed.cover = C + 'al-hafa-diamond-2008.webp';
+		if (ed.year === 2008 && /ليلى/.test(p)) ed.cover = C + 'al-hafa-lila-2008.webp';
+		if (ed.year === 2010 && /ليلى/.test(p)) ed.cover = C + 'al-hafa-lila-2010.webp';
+	});
+	b.ownCover = C + 'al-hafa-diamond-2008.webp';
+})(window.AKT);
