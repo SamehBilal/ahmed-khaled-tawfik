@@ -2506,3 +2506,48 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		};
 	});
 })(window.AKT);
+
+/* «يوتوبيا»: its sixteen editions (Merit 2008 and its sixth printing; Bloomsbury Qatar Foundation's Arabic 2010; Dar El Shorouk 2014, 2025
+   and Kindle 2017; Kindle 2020 and 2022; in English Bloomsbury USA 2011, Bloomsbury Qatar Foundation's Kindle editions of 2012 and
+   Bloomsbury's 2014 paperback; Like's Finnish 2013; Ombres Noires' French 2013 and an undated printing; Lenos's German 2015), with the
+   Lenos 2017 paperback and the Italian translation kept; each with its cover from Goodreads (named by its Goodreads id); the audiobook
+   is left out; the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).utopia = A.bookInfo.utopia || {};
+	var C = 'assets/img/covers/novels/utopia-', GR = 'https://www.goodreads.com/book/show/';
+	var AR = { ar: 'يوتوبيا', en: 'Utopia' }, EN = { ar: 'Utopia', en: 'Utopia' }, DE = { ar: 'Utopia: Roman aus Ägypten', en: 'Utopia: Roman aus Ägypten' };
+	var MERIT = { ar: 'دار ميريت', en: 'Merit Publishing' }, SHOROUK = { ar: 'دار الشروق', en: 'Dar El Shorouk' };
+	var BQFP = { ar: 'بلومزبري – مؤسسة قطر للنشر', en: 'Bloomsbury Qatar Foundation Publishing' }, ON = { ar: 'Ombres Noires', en: 'Ombres Noires' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, HB = { ar: 'غلاف مقوّى', en: 'Hardcover' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var CHIP = { ar: 'تشيب روسيتي', en: 'Chip Rossetti' };
+	var old = b.editions || [], keep = old.filter(function (ed) { return ed.isbn === '9783857877896' || ed.isbn === '9788865643082'; });
+	keep.forEach(function (ed) { ed.cover = C + (ed.isbn === '9783857877896' ? '59014759' : '50150712') + '.webp'; });
+	var ed = function (o, id) { o.cover = C + id + '.webp'; o.source = GR + id; return o; };
+	b.firstPublished = '2008-01-01';
+	b.pages = 192;
+	b.editions = [
+		ed({ title: AR, publisher: MERIT, year: 2008, date: '2008-01-01', lang: 'ar', isbn: '9789773513917', isbn10: '9773513912', asin: '9773513912', pages: 192, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' } }, '3503947'),
+		ed({ title: AR, publisher: MERIT, lang: 'ar', asin: 'B0DN2C4KGH', format: PB, edition: { ar: 'الطبعة السادسة', en: '6th printing' } }, '20617951'),
+		ed({ title: AR, publisher: BQFP, year: 2010, date: '2010-11-15', lang: 'ar', isbn: '9789992142394', isbn10: '9992142391', asin: '9992142391', pages: 192, format: PB }, '13722311'),
+		ed({ title: AR, publisher: SHOROUK, year: 2014, date: '2014-11-10', lang: 'ar', asin: 'B0FSKMK9YL', pages: 184, format: PB }, '23524550'),
+		ed({ title: AR, publisher: SHOROUK, year: 2017, date: '2017-10-01', lang: 'ar', asin: 'B076HHFSTK', pages: 155, format: KD }, '36595963'),
+		ed({ title: AR, year: 2020, date: '2020-04-18', lang: 'ar', asin: 'B087B3FBTH', pages: 193, format: KD }, '53524902'),
+		ed({ title: AR, year: 2022, date: '2022-04-02', lang: 'ar', asin: 'B09X4WMJQ9', pages: 192, format: KD }, '61205998'),
+		ed({ title: AR, publisher: SHOROUK, year: 2025, date: '2025-01-01', lang: 'ar', isbn: '9789770933077', isbn10: '9770933074', asin: '9770933074', pages: 184, format: PB }, '240263217'),
+		ed({ title: EN, publisher: { ar: 'Bloomsbury USA', en: 'Bloomsbury USA' }, year: 2011, date: '2011-09-19', lang: 'en', isbn: '9789992142677', isbn10: '9992142677', asin: '9992142677',
+			pages: 160, format: HB, translator: CHIP }, '9680830'),
+		ed({ title: EN, publisher: BQFP, year: 2012, date: '2012-03-15', lang: 'en', asin: 'B007C1N1BK', pages: 176, format: KD, translator: CHIP }, '18867017'),
+		ed({ title: EN, publisher: BQFP, year: 2012, date: '2012-03-15', lang: 'en', isbn: '9789992194300', isbn10: '9992194308', asin: '9992194308', pages: 160, format: KD, translator: CHIP }, '17301668'),
+		ed({ title: EN, publisher: { ar: 'Bloomsbury Paperbacks', en: 'Bloomsbury Paperbacks' }, year: 2014, date: '2014-06-15', lang: 'en', isbn: '9789927101762', isbn10: '9927101767',
+			asin: '9927101767', format: PB, translator: CHIP }, '25565333'),
+		ed({ title: EN, publisher: { ar: 'Like Kustannus', en: 'Like Kustannus' }, year: 2013, date: '2013-02-01', lang: 'fi', isbn: '9789520108922', isbn10: '9520108920', asin: '9520108920',
+			pages: 202, format: HB, translator: { ar: 'سامبسا بلتونن', en: 'Sampsa Peltonen' } }, '17368415'),
+		ed({ title: EN, publisher: ON, year: 2013, date: '2013-04-12', lang: 'fr', isbn: '9782081288492', isbn10: '2081288494', asin: '2081288494', pages: 182, format: PB,
+			translator: { ar: 'ريشار جاكمون', en: 'Richard Jacquemond' } }, '25604650'),
+		ed({ title: EN, publisher: ON, lang: 'fr', asin: 'B01A68KXBG', format: PB, translator: { ar: 'ريشار جاكمون', en: 'Richard Jacquemond' } }, '130434024'),
+		ed({ title: DE, publisher: { ar: 'Lenos Verlag', en: 'Lenos Verlag' }, year: 2015, date: '2015-06-12', lang: 'de', isbn: '9783857874574', isbn10: '3857874570', asin: '3857874570',
+			pages: 188, format: HB, translator: { ar: 'كريستينه باترمان', en: 'Christine Battermann' } }, '29482014')
+	].concat(keep, old.filter(function (x) { return x.store; }));
+	b.ownCover = C + '3503947.webp';
+})(window.AKT);
