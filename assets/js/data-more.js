@@ -1166,3 +1166,20 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.pages = 218;
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009972/');
 })(window.AKT);
+
+/* Each house's own website, shop and accounts, as its website links them (checked 2026-10-24). Kayan's site turns
+   away automated visits, so only its address is here; the other houses have no website we could confirm. */
+(function (A) {
+	var links = {
+		karma: [['shop', 'https://alkarmabooks.com'], ['facebook', 'https://www.facebook.com/alkarmabooks'], ['instagram', 'https://www.instagram.com/alkarmabooks'],
+			['x', 'https://twitter.com/alkarmabooks'], ['youtube', 'https://www.youtube.com/@AlKarmaBooks'], ['tiktok', 'https://www.tiktok.com/@alkarma_books']],
+		shorouk: [['shop', 'https://www.shorouk.com'], ['facebook', 'https://www.facebook.com/Darelshorouk'], ['instagram', 'https://www.instagram.com/dar.elshorouk'],
+			['x', 'https://twitter.com/dar_elshorouk']],
+		bloomsbury: [['site', 'https://hbkupress.com'], ['facebook', 'https://www.facebook.com/HBKUPress'], ['instagram', 'https://www.instagram.com/hbkupress'],
+			['x', 'https://twitter.com/hbkupress'], ['youtube', 'https://www.youtube.com/channel/UC1zy091BHljzGadIMmP1qOA']],
+		kayan: [['shop', 'https://kayanpublishing.com/?lang=ar'], ['site', 'https://kayanpublishing.com/product_author/%d8%af-%d8%a3%d8%ad%d9%85%d8%af-%d8%ae%d8%a7%d9%84%d8%af-%d8%aa%d9%88%d9%81%d9%8a%d9%82/?lang=ar', 'his']]
+	};
+	(A.publishers || []).forEach(function (p) {
+		if (links[p.id]) p.links = links[p.id].map(function (l) { return { kind: l[0], url: l[1], his: l[2] === 'his' }; });
+	});
+})(window.AKT);

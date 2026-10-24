@@ -71,3 +71,16 @@ html[lang="en"] .wp-h { font-family: var(--f-display); font-weight: 700; }
 
 /* publishers.html: the totals above the cards */
 .dir-sum { margin: 0 0 22px; color: var(--muted); font-family: var(--f-display); }
+
+/* a house's website, shop and accounts */
+.pb-links { display: flex; flex-wrap: wrap; gap: 8px; margin: -6px 0 18px; }
+.pb-link { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--paper-dim);
+	font-family: var(--f-display); font-size: 13.5px; text-decoration: none; transition: border-color .2s, color .2s, background .2s; }
+.pb-link svg { width: 16px; height: 16px; flex: none; }
+.pb-link:hover, .pb-link:focus-visible { color: #fff; border-color: transparent; background: var(--ember); }
+.pb-facebook:hover, .pb-facebook:focus-visible { background: #1877f2; }
+.pb-instagram:hover, .pb-instagram:focus-visible { background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af); }
+.pb-x:hover, .pb-x:focus-visible { background: #000; }
+.pb-youtube:hover, .pb-youtube:focus-visible { background: #e00; }
+.pb-tiktok:hover, .pb-tiktok:focus-visible { background: #111; }
+@media (max-width: 760px) { .pb-links { justify-content: center; } }

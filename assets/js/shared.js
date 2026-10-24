@@ -278,7 +278,8 @@
 					var n = ((ed.publisher || {}).ar || '').replace(/\(ثم[^)]*\)/g, ''), m = ed.cover && n.match(new RegExp(p.match));
 					if (m && m.index < at) { at = m.index; best = ed; }
 				});
-				return best ? Object.assign({}, it, { cover: best.cover }) : it;
+				/* and its link opens the book on this house's edition */
+				return Object.assign({}, it, best ? { cover: best.cover } : {}, { href: it.href + (it.href.indexOf('?') < 0 ? '?' : '&') + 'pub=' + encodeURIComponent(p.id) });
 			};
 			mine = mine.map(own);
 			later = later.map(own);

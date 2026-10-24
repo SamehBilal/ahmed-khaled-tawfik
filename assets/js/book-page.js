@@ -148,7 +148,7 @@ window.PAGE = {
 			var withPub = list.filter(function (ed) { return ed.publisher; })[0] || list[0];
 			var p = (d.publishers || []).filter(function (x) { return withPub.publisher && new RegExp(x.match).test(((withPub.publisher || {}).ar || '').replace(/\(ثم[^)]*\)/g, '')); })[0];
 			return { cover: g.cover, back: (list.filter(function (ed) { return ed.back; })[0] || {}).back || '',
-				label: p ? t(p.name) : (withPub.publisher ? t(withPub.publisher) : langName(list[0].lang)), year: list[0].year ? String(list[0].year).slice(0, 4) : '', lang: list[0].lang };
+				house: p ? p.id : '', label: p ? t(p.name) : (withPub.publisher ? t(withPub.publisher) : langName(list[0].lang)), year: list[0].year ? String(list[0].year).slice(0, 4) : '', lang: list[0].lang };
 		});
 		var printsHtml = looks.length > 1 ? '<div class="d-prints" role="group" aria-label="' + e(L('بدّل الطبعة على الكتاب', 'Show another edition on the book')) + '">' + looks.map(function (lk, i) {
 			var on = lk.cover === S.coverOf(info);
@@ -315,6 +315,10 @@ window.PAGE = {
 				if (lk.back) { backEl.classList.add('has-img'); backEl.innerHTML = '<img class="bk-back-img" src="' + e(lk.back) + '" alt="">'; }
 				else { backEl.classList.toggle('has-img', backHad); backEl.innerHTML = backHtml; }
 			});
+			/* ?pub=<house> (a publisher's page links here) opens on that house's edition */
+			var pub = new URLSearchParams(location.search).get('pub');
+			var want = pub ? looks.map(function (lk) { return lk.house; }).indexOf(pub) : -1;
+			if (want >= 0) printsEl.querySelector('[data-look="' + want + '"]').click();
 		}
 		/* a printing's year opens a small popup with its details; one at a time, closed by a click elsewhere or Escape */
 		var edSec = root.querySelector('.d-editions');
