@@ -2452,3 +2452,57 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.editions = rest.slice(0, at).concat(p3, rest.slice(at));
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004094/');
 })(window.AKT);
+
+/* «الآن نفتح الصندوق»: three books, not one — part one keeps the id sandoq (links to the old page land on it), parts two and three
+   are sandoq-2 and sandoq-3, each with its own editions, covers, back cover and back-cover text; the store copies go to their part
+   (Aseer Al Kotb names them ج1–ج3; Abjjad's «الآن نفتح الصندوق 2» is Kayan's second part, ISBN 9789778200300) */
+(function (A) {
+	var all = ((A.bookInfo = A.bookInfo || {}).sandoq || {});
+	var eds = all.editions || [];
+	var partOf = function (ed) {
+		var t = (ed.title || {}).ar || '', u = decodeURIComponent(ed.source || '');
+		if (/الثاني|الصندوق 2$/.test(t) || /-ج2$/.test(u) || ed.isbn === '9789778200300') return 2;
+		if (/الثالث|الصندوق 3$/.test(t) || /-ج3$/.test(u)) return 3;
+		return 1;
+	};
+	var abjjad2 = eds.filter(function (ed) { return ed.store === 'Abjjad' && ed.isbn === '9789778200300'; })[0];
+	eds = eds.filter(function (ed) { return ed !== abjjad2; });
+	eds.forEach(function (ed) { if (abjjad2 && !ed.store && ed.isbn === '9789778200300') ed.cover = ed.cover || abjjad2.cover; });
+	var only = function (n) { return eds.filter(function (ed) { return partOf(ed) === n; }); };
+	var GENRES = all.genres, PREMISE = {
+		ar: 'يترك طبيب عجوز يُدعى د. محفوظ، مات فقيرًا، صندوقًا في قبو بيته مليئًا بمذكرات وأوراق عن الحوادث الغريبة التي عاشها أو سمع بها. كل قصة ورقة جديدة تُسحب من الصندوق على ضوء شمعة.',
+		en: 'A poor old physician, Dr. Mahfouz, dies and leaves behind a box in his cellar, packed with notes and memoirs about the strange events he witnessed or heard of. Each story is another sheet pulled from the box by candlelight.' };
+	var KAYAN = { ar: 'كيان', en: 'Kayan' };
+	var parts = [
+		{ id: 'sandoq', n: 1, year: 2007, color: '#3a2e24', pub: { ar: 'دار ليلى', en: 'Dar Lila' }, gr: '5853529', pages: 294,
+			ord: { ar: 'الأول', en: 'first' }, out: { ar: 'صدر عن دار ليلى عام 2007، وأعادت «كيان» نشره عام 2017.', en: 'Published by Dar Lila in 2007 and reissued by Kayan in 2017.' },
+			blurb: all.blurb && all.blurb.ar, cover: all.ownCover },
+		{ id: 'sandoq-2', n: 2, year: 2009, color: '#2e2a33', pub: { ar: 'دار ليلى', en: 'Dar Lila' }, gr: '6601981', pages: 207,
+			ord: { ar: 'الثاني', en: 'second' }, out: { ar: 'صدر عام 2009 عن دار ليلى ودايموند بوك، وأعادت «كيان» نشره عام 2017.', en: 'Published in 2009 by Dar Lila and Diamond Book, and reissued by Kayan in 2017.' },
+			blurb: 'مازلنا مع الصندوق العجيب الذي تركه لنا د. محفوظ. تذكرون أن الرجل مات فقيرًا فلم يترك لنا إلا هذا الصندوق في قبو داره. الصندوق لم يفرغ بعد، فما زالت فيه حكايات وملاحظات عن تلك القصص الغريبة التي مرت به في حياته. من جديد اقتربوا، تعالوا نفتح الصندوق الآن. تعالوا نشعل شمعة تبدد ظلام القبو ونطالع قصة جديدة من تلك القصص.',
+			cover: 'assets/img/covers/stories/sandoq-9466641.webp' },
+		{ id: 'sandoq-3', n: 3, year: 2010, color: '#3b2224', pub: { ar: 'دار ليلى', en: 'Dar Lila' }, gr: '9568185', pages: 195,
+			ord: { ar: 'الثالث', en: 'third' }, out: { ar: 'صدر عن دار ليلى عام 2010، وأعادت «كيان» نشره عام 2017.', en: 'Published by Dar Lila in 2010 and reissued by Kayan in 2017.' },
+			blurb: 'إن الخوف من الصندوق المغلق أو الحيرة بصدد محتواه قديمان جدًا في وجدان البشرية. ولسوف تجده في ألف ليلة وليلة وشكسبير وقصص الأطفال وكل شيء. إنه الغيب مجردًا. نحن محظوظون لأننا نعرف يقينًا أن الصندوق يحوي قصاصات ورقية. لن نجد جثة كما في ألف ليلة وليلة. ولن نجد عقربًا أو ثعبانًا أو سبيكة مشعة أو غازًا سامًا أو لعنة قديمة.',
+			cover: 'assets/img/covers/stories/sandoq-9568185.webp' }
+	];
+	A.works = A.works || [];
+	var at = A.works.map(function (w) { return w.id; }).indexOf('sandoq');
+	parts.forEach(function (p, i) {
+		var title = { ar: 'الآن نفتح الصندوق ' + p.n, en: 'Now We Open the Box ' + p.n };
+		var work = { id: p.id, title: title, year: p.year, type: 'stories', publisher: p.pub, color: p.color,
+			synopsis: { ar: 'الجزء ' + p.ord.ar + ' من قصص الصندوق الذي تركه د. محفوظ في قبو داره.', en: 'The ' + p.ord.en + ' part of the stories from the box Dr. Mahfouz left in his cellar.' } };
+		var w0 = A.works.filter(function (w) { return w.id === p.id; })[0];
+		if (w0) { w0.title = title; w0.year = p.year; w0.publisher = p.pub; w0.synopsis = work.synopsis; }
+		else A.works.splice(at + i, 0, work);
+		A.bookInfo[p.id] = {
+			description: { ar: PREMISE.ar + '\n\nهذا هو الجزء ' + p.ord.ar + ' من ثلاثة أجزاء مستقلة، وكثير من قصصه نُشر أولًا في مجلة «الشباب». ' + p.out.ar,
+				en: PREMISE.en + '\n\nThis is the ' + p.ord.en + ' of three separate volumes; many of its stories first ran in Al-Shabab magazine. ' + p.out.en },
+			genres: GENRES, language: 'ar', firstPublished: p.year + '-01-01', pages: p.pages,
+			editions: only(p.n), ownCover: p.cover,
+			blurb: p.blurb ? { by: KAYAN, ar: p.blurb } : undefined,
+			links: [{ label: 'Goodreads', url: 'https://www.goodreads.com/book/show/' + p.gr }],
+			sources: ['https://www.goodreads.com/book/show/' + p.gr, 'https://www.samawy.com/i/' + (1004091 + p.n) + '/']
+		};
+	});
+})(window.AKT);
