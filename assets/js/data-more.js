@@ -1414,3 +1414,35 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.ownCover = 'assets/img/covers/karma/9789776743465.webp';
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009099/');
 })(window.AKT);
+
+/* «كتاب المقبرة»: his translation first came out from Bloomsbury Qatar Foundation Publishing on 9 July 2013, as
+   «كتاب المقابر» (298 pages); Dar Al Karma reissued it as «كتاب المقبرة» in 2021, after his death */
+(function (A) {
+	var BQFP = { ar: 'بلومزبري – مؤسسة قطر للنشر', en: 'Bloomsbury Qatar Foundation Publishing' };
+	(A.works || []).forEach(function (w) {
+		if (w.id !== 'graveyard') return;
+		w.year = 2013;
+		w.publisher = BQFP;
+		w.synopsis = { ar: 'ترجمته لرواية نيل جايمان عن صبي تربّيه الأشباح في مقبرة؛ صدرت عام 2013 بعنوان «كتاب المقابر»، وأعادت دار الكرمة نشرها بعد رحيله.',
+			en: 'His translation of Neil Gaiman’s novel about a boy raised by ghosts in a graveyard; it came out in 2013 as Kitab al-Maqabir, and Dar Al Karma reissued it after his death.' };
+	});
+	var b = (A.bookInfo = A.bookInfo || {}).graveyard = A.bookInfo.graveyard || {};
+	var cover = 'assets/img/covers/translations/graveyard-bqfp.webp';
+	b.firstPublished = '2013-07-09';
+	b.pages = 298;
+	b.ownCover = cover;
+	b.editions = [{ title: { ar: 'كتاب المقابر', en: 'The Graveyard Book' }, publisher: BQFP, year: 2013, date: '2013-07-09', lang: 'ar',
+		isbn: '9789992194003', isbn10: '9992194006', asin: '9992194006', pages: 298, format: { ar: 'غلاف ورقي', en: 'Paperback' }, cover: cover }].concat(b.editions || []);
+	b.altTitles = (b.altTitles || []).concat([{ title: 'كتاب المقابر', lang: 'ar', note: { ar: 'عنوان الطبعة الأولى (بلومزبري – مؤسسة قطر للنشر، 2013)', en: 'Title of the first edition (Bloomsbury Qatar, 2013)' } }]);
+	if (b.description) {
+		b.description.ar = b.description.ar.replace('نشرت دار الكرمة الترجمة عام 2021 بعد رحيل أحمد خالد توفيق.',
+			'صدرت الترجمة أول مرة عن بلومزبري – مؤسسة قطر للنشر في 9 يوليو 2013 بعنوان «كتاب المقابر»، ثم أعادت دار الكرمة نشرها عام 2021 بعنوان «كتاب المقبرة»، بعد رحيل أحمد خالد توفيق.');
+		b.description.en = b.description.en.replace('Dar Al Karma published the translation in 2021, after Tawfik\'s death.',
+			'The translation first came out from Bloomsbury Qatar Foundation Publishing on 9 July 2013 as Kitab al-Maqabir; Dar Al Karma reissued it in 2021 as Kitab al-Maqbara, after Tawfik’s death.');
+	}
+	((A.writers || {}).translated || []).forEach(function (w) {
+		if (!/نيل جايمان/.test((w.name || {}).ar || '')) return;
+		w.text = { ar: 'ترجم له «كتاب المقبرة»، وصدرت الترجمة عام 2013 عن بلومزبري – مؤسسة قطر للنشر بعنوان «كتاب المقابر»، ثم أعادت دار الكرمة نشرها بعد رحيله.',
+			en: 'Translated The Graveyard Book; the translation came out in 2013 from Bloomsbury Qatar Foundation Publishing as Kitab al-Maqabir, and Dar Al Karma reissued it after his death.' };
+	});
+})(window.AKT);
