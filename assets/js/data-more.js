@@ -1650,3 +1650,25 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			en: 'A book on love by seven writers: Ahmed Khaled Tawfik, Nabil Farouk, Tamer Ibrahim, Tamer Ahmed, Mohamed Fathy, Sanad Rashed and Mohamed Samy.' };
 	});
 })(window.AKT);
+
+/* «الحافة»: six editions — Diamond Book (2008, 192 pages), Dar Lila (2008, 185 pages), Dar Lila (Kayan Corp) (2010,
+   145 pages), Kayan's paperback (2018, 204 pages, with the only cover we have) and its two Kindle editions (27 January
+   2018, 115 pages; 3 April 2024, 123 pages) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {})['al-hafa'] = A.bookInfo['al-hafa'] || {};
+	var T = { ar: 'الحافة', en: 'The Edge' }, PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	b.firstPublished = '2008-01-01';
+	b.pages = 192;
+	b.editions = [
+		{ title: T, publisher: { ar: 'دايموند بوك', en: 'Diamond Book' }, year: 2008, date: '2008-01-01', lang: 'ar', asin: 'B0DT1CWJRS', pages: 192, format: PB,
+			source: 'https://www.goodreads.com/book/show/18731402' },
+		{ title: T, publisher: { ar: 'دار ليلى للنشر والتوزيع', en: 'Dar Lila' }, year: 2008, date: '2008-01-01', lang: 'ar', asin: 'B0DLT97V9F', pages: 185, format: PB },
+		{ title: T, publisher: { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, year: 2010, date: '2010-01-01', lang: 'ar', asin: 'B0DM1JJLMX', pages: 145, format: PB,
+			source: 'https://www.goodreads.com/book/show/27190777' },
+		{ title: T, publisher: KAYAN, year: 2018, date: '2018-01-01', lang: 'ar', isbn: '9789778200324', isbn10: '9778200327', asin: '9778200327', pages: 204, format: PB,
+			cover: 'assets/img/covers/books/aseeralkotb-ca08acba5a37.webp', source: 'https://www.goodreads.com/book/show/40672979' },
+		{ title: T, publisher: KAYAN, year: 2018, date: '2018-01-27', lang: 'ar', asin: 'B087CC16K4', pages: 115, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYQPQPT', pages: 123, format: KD }
+	];
+})(window.AKT);
