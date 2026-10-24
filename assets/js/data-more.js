@@ -2303,3 +2303,27 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'لقد وافقت يا صغيرتي.. ومشيت معي بين الأطلال.. بين الشواهد.. لا ترين شيئًا تقريبًا لكنك تثقين بي.. نهبط من هنا ونصعد من هنا.. تمسكين يدي بيد راجفة خائفة.. تلهثين انبهارًا ونشوة.. تقولين إنك تثقين بي.. ليتك لم تفعلي.. ليتك أنذرتني...' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004091/');
 })(window.AKT);
+
+/* «هادم الأساطير»: its four editions — Diamond Book (2007), Dar Lila (undated), Kayan (2017 paperback with its back cover from Samawy
+   (samawy.com/i/1004115) and its text; Kindle 2024); the Diamond and Dar Lila covers; the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {})['hadem-al-asateer'] = A.bookInfo['hadem-al-asateer'] || {};
+	var T = { ar: 'هادم الأساطير', en: 'The Myth Breaker' }, C = 'assets/img/covers/books/', KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200249'; })[0] || {};
+	b.firstPublished = '2007-01-01';
+	b.pages = 152;
+	b.editions = [
+		{ title: T, publisher: { ar: 'دايموند بوك', en: 'Diamond Book' }, year: 2007, date: '2007-01-01', lang: 'ar', asin: 'B0DLTBTN7N', pages: 152, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'hadem-diamond-2007.webp', source: 'https://www.goodreads.com/book/show/16099033' },
+		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, lang: 'ar', isbn: '9789776386099', isbn10: '9776386091', asin: '9776386091', pages: 128, format: PB,
+			cover: C + 'hadem-lila.webp', source: 'https://www.goodreads.com/book/show/5854237' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200249', isbn10: '9778200246', asin: '9778200246', pages: 160, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/hadem-kayan.webp', source: kayan.source },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYTG6LW', pages: 94, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'hadem-diamond-2007.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'عندما تصطدم الحقيقة مع الخيال الممتع، فإن الخيال يكسب بالتأكيد.. هكذا تولد الأساطير.. هكذا تولد الشائعات.. تتضافر عوامل عدة مثل الذاكرة المزيفة، والرغبة في التصديق، والبحث عن الإثارة، وشهوة جذب الاهتمام، والبحث المحموم عن تفسير منطقي لطلاسم الكون، دعك من الرغبة في الكسب المادي لأن سوق الخرافة رائجة في كل مكان وزمان.. من ثم تغدو الخرافة أكثر واقعية من الواقع ذاته.\n\nقليلون امتلكوا الشجاعة كيف يفحصوا ويفندوا ويعلنوا ما توصلوا له.. في العصور الوسطى كان أمثال هؤلاء يحرقون أحياء، أما اليوم فلا يعبأ بهم أحد ولا يصدقهم أحد.. وهو عقاب ليس أقل قسوة في رأيي..\n\nهذا الكتاب لا يعلن الحرب على الخيال.. بل يعلنها على الخيال الذي يصر أصحابه على أنه الحقيقة الوحيدة.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004115/');
+})(window.AKT);
