@@ -277,3 +277,15 @@ html[data-theme="light"] .d-award-badge { background: linear-gradient(180deg, #f
 .edition .meta a:hover, .ed-pop dd a:hover { color: var(--ember); text-decoration-color: currentColor; }
 .d-desc .d-pub-link { color: inherit; text-decoration: underline; text-decoration-color: var(--ember); text-underline-offset: 3px; }
 .d-desc .d-pub-link:hover { color: var(--ember); }
+
+/* the edition buttons under the 3D book: a thumbnail of each edition's cover, its house and year */
+.d-prints { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 14px 0 4px; }
+.d-print { display: flex; align-items: center; gap: 8px; max-width: 100%; padding: 4px 10px 4px 4px; border: 1px solid var(--line); border-radius: 8px;
+	background: var(--ink-2); color: var(--paper-dim); font: inherit; font-family: var(--f-display); font-size: 13px; line-height: 1.25; text-align: start; cursor: pointer;
+	transition: border-color .2s, color .2s, transform .2s; }
+html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
+.d-print img { flex: none; width: 30px; height: 44px; object-fit: cover; border-radius: 2px 4px 4px 2px; box-shadow: 0 2px 6px rgba(0, 0, 0, .4); }
+.d-print span { display: flex; flex-direction: column; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 130px; }
+.d-print small { font-family: var(--f-latin); font-size: 12px; color: var(--muted); }
+.d-print:hover, .d-print:focus-visible { border-color: var(--ember); color: var(--paper); transform: translateY(-1px); }
+.d-print[aria-pressed="true"] { border-color: var(--gold); color: var(--paper); box-shadow: 0 0 0 1px var(--gold) inset; }

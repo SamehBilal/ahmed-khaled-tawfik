@@ -142,6 +142,20 @@ window.PAGE = {
 				}).join('') + '</div>' +
 				'</div></article>';
 		}).join('');
+		/* the editions the 3D book can wear: one per card that has a cover, with that edition's back cover if we have one */
+		var looks = groups.filter(function (g) { return g.cover; }).map(function (g) {
+			var list = g.list.map(function (i) { return eds[i]; });
+			var withPub = list.filter(function (ed) { return ed.publisher; })[0] || list[0];
+			var p = (d.publishers || []).filter(function (x) { return withPub.publisher && new RegExp(x.match).test(((withPub.publisher || {}).ar || '').replace(/\(ثم[^)]*\)/g, '')); })[0];
+			return { cover: g.cover, back: (list.filter(function (ed) { return ed.back; })[0] || {}).back || '',
+				label: p ? t(p.name) : (withPub.publisher ? t(withPub.publisher) : langName(list[0].lang)), year: list[0].year ? String(list[0].year).slice(0, 4) : '', lang: list[0].lang };
+		});
+		var printsHtml = looks.length > 1 ? '<div class="d-prints" role="group" aria-label="' + e(L('بدّل الطبعة على الكتاب', 'Show another edition on the book')) + '">' + looks.map(function (lk, i) {
+			var on = lk.cover === S.coverOf(info);
+			return '<button type="button" class="d-print" data-look="' + i + '" aria-pressed="' + on + '" title="' + e(lk.label + (lk.year ? ' · ' + App.num(lk.year) : '')) + '">' +
+				'<img src="' + e(lk.cover) + '" alt="" loading="lazy"><span>' + e(lk.label) + ((lk.year || (lk.lang && lk.lang !== 'ar')) ? '<small>' + e([lk.year ? App.num(lk.year) : '', lk.lang && lk.lang !== 'ar' ? langName(lk.lang) : ''].filter(Boolean).join(' · ')) + '</small>' : '') + '</span></button>';
+		}).join('') + '</div>' : '';
+
 		/* a printing's details, for its chip's popup */
 		var edDetails = function (ed, cardTitle) {
 			var rows = [
@@ -233,7 +247,7 @@ window.PAGE = {
 				'<nav class="crumbs">' + (r.about ? '<a href="tributes.html">' + L('قالوا عنه', 'Tributes') + '</a>' : '<a href="works.html">' + L('الأعمال', 'Works') + '</a>') +
 					(isIssue ? ' / <a href="' + S.seriesHref(ser.s.id) + '">' + tx(ser.s.title) + '</a>' : '') + ' / <span>' + tx(title) + '</span></nav>' +
 				'<div class="detail-grid">' +
-					'<aside class="d-cover"><ul class="bk-list bk-solo" id="d-book">' + book + '</ul>' +
+					'<aside class="d-cover"><ul class="bk-list bk-solo" id="d-book">' + book + '</ul>' + printsHtml +
 						(links ? '<div class="d-links">' + links + '</div>' : '') +
 					'</aside>' +
 					'<div class="d-main">' +
@@ -284,6 +298,24 @@ window.PAGE = {
 			'</div></section>';
 
 		window.Books.initShowcase(document.getElementById('d-book'));
+		/* the edition buttons: put that edition's front cover, and its back cover (or the blurb), on the 3D book */
+		var printsEl = root.querySelector('.d-prints');
+		if (printsEl) {
+			var bookEl = document.getElementById('d-book'), backEl = bookEl.querySelector('.bk-back'), backHtml = backEl.innerHTML, backHad = backEl.classList.contains('has-img');
+			printsEl.addEventListener('click', function (ev) {
+				var btn = ev.target.closest('.d-print');
+				if (!btn) return;
+				var lk = looks[+btn.getAttribute('data-look')];
+				printsEl.querySelectorAll('.d-print').forEach(function (x) { x.setAttribute('aria-pressed', String(x === btn)); });
+				var cov = bookEl.querySelector('.bk-cover'), img = cov.querySelector('.bk-img');
+				if (!img) { img = document.createElement('img'); img.className = 'bk-img'; img.alt = ''; cov.insertBefore(img, cov.firstChild); }
+				cov.classList.add('has-img');
+				img.src = lk.cover;
+				/* its own back cover, else the book's (the one the page opened with) */
+				if (lk.back) { backEl.classList.add('has-img'); backEl.innerHTML = '<img class="bk-back-img" src="' + e(lk.back) + '" alt="">'; }
+				else { backEl.classList.toggle('has-img', backHad); backEl.innerHTML = backHtml; }
+			});
+		}
 		/* a printing's year opens a small popup with its details; one at a time, closed by a click elsewhere or Escape */
 		var edSec = root.querySelector('.d-editions');
 		if (edSec) {
