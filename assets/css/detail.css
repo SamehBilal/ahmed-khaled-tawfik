@@ -242,8 +242,8 @@ html[lang="en"] .prox-art .pa-name { font-family: var(--f-display); font-weight:
 html[dir="rtl"] .cl-n { text-align: left; margin-left: var(--tuck); }
 html[dir="ltr"] .cl-n { text-align: right; margin-right: var(--tuck); }
 
-/* the award badge beside a book's title (after Goodreads'): a medal and the prize, leading to the awards block */
-.d-award-badge { display: inline-flex; align-items: center; gap: 6px; vertical-align: middle; margin-inline-start: 10px; padding: 4px 12px 4px 6px;
+/* the award badge on its own line under a book's title (after Goodreads'): a medal and the prize, leading to the awards block */
+.d-award-badge { display: flex; width: max-content; max-width: 100%; align-items: center; gap: 6px; margin: 12px 0 0; padding: 4px 12px 4px 6px;
 	border-radius: 999px; background: linear-gradient(180deg, #3a2a10, #24190a); border: 1px solid #8a6a26; color: #f3d88c;
 	font-family: var(--f-display); font-size: 14px; font-weight: 400; line-height: 1.2; text-decoration: none; white-space: nowrap;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, .3), 0 6px 16px rgba(217, 164, 65, .18); transition: transform .2s, box-shadow .2s; }
@@ -252,7 +252,6 @@ html[dir="rtl"] .d-award-badge { padding: 4px 6px 4px 12px; }
 .d-award-badge:hover, .d-award-badge:focus-visible { transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(0, 0, 0, .3), 0 8px 22px rgba(217, 164, 65, .35); }
 .d-award-badge.finalist { border-color: #8d8d8d; color: #e6e6e6; background: linear-gradient(180deg, #2f2f2f, #1d1d1d); }
 html[data-theme="light"] .d-award-badge { background: linear-gradient(180deg, #fff6dc, #f3e2b0); color: #6b4a0e; }
-@media (max-width: 640px) { .d-award-badge { display: flex; width: max-content; margin: 10px 0 0; } }
 /* an award's photo (the prize ceremony), opening full size */
 .aw-pic { display: block; margin: 8px 0 8px; padding: 0; border: 1px solid var(--line); border-radius: 8px; background: none; overflow: hidden; cursor: zoom-in; }
 .aw-pic img { display: block; width: 100%; height: auto; transition: transform .3s; }
