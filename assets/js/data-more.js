@@ -1859,3 +1859,24 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'اثنا عشر برجًا.. اثنتا عشرة طريقة للموت، ولعنة تطاردك في كل صوب. تمر بالأطوار المعتادة: في البداية أنت لا تعرف.. بعد هذا أنت لا تلاحظ.. ثم تلاحظ فلا تصدق.. ثم تصدق فلا تعرف ما ينبغي عمله. يقول الغربيون إنك لا يمكن أن تكون حذرًا أكثر من اللازم، وهذه القصص تطبيق عملي صادق لصحة هذه المقولة.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004096/');
 })(window.AKT);
+
+/* «حظك اليوم»: its five editions — Diamond Book (2008 paperback, Kindle 2019 and 2022) and Kayan (2017 paperback, Kindle 2018) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).hazzak = A.bookInfo.hazzak || {};
+	var T = { ar: 'حظك اليوم', en: 'Your Horoscope Today' };
+	var DIAMOND = { ar: 'دار دايموند بوك', en: 'Diamond Book' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [], pick = function (f) { return old.filter(f)[0] || {}; };
+	var diamond = pick(function (ed) { return ed.year === 2008; }), kayan = pick(function (ed) { return ed.isbn === '9789778200164'; });
+	b.firstPublished = '2008-01-01';
+	b.pages = 95;
+	b.editions = [
+		{ title: T, publisher: DIAMOND, year: 2008, date: '2008-01-01', lang: 'ar', asin: 'B0DLT6VJM3', pages: 95, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: diamond.cover || '', source: 'https://www.goodreads.com/book/show/5822364' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200164', asin: 'B0DMDR7ZYV', pages: 128, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/hazzak-kayan.webp' },
+		{ title: T, publisher: KAYAN, year: 2018, date: '2018-01-27', lang: 'ar', asin: 'B087BHB8CY', pages: 70, format: KD },
+		{ title: T, publisher: DIAMOND, year: 2019, date: '2019-12-02', lang: 'ar', asin: 'B08296P1Y5', pages: 48, format: KD },
+		{ title: T, publisher: DIAMOND, year: 2022, date: '2022-02-23', lang: 'ar', asin: 'B09TBJ65M1', pages: 48, format: KD }
+	].concat(old.filter(function (ed) { return ed.store; }));
+})(window.AKT);
