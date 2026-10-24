@@ -1956,3 +1956,38 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'نُشرت هذه المقالات في أماكن متفرقة، وإن كان معظمها في جريدة الدستور قبل اغتيالها، وفي موقع (بص وطل) على شبكة الإنترنت. يمكنك أن تجد كل حرف كتبته على شبكة الإنترنت، لكنني في النهاية ابن الكتاب وربيبه، ولا أؤمن أنني كتبت شيئًا ما لم أمسك به مطبوعًا على ورق جميل.. تضع خطًا أو تثني صفحة أو تسكب كوب الشاي على الصفحة. هذا هو اختراع الخواجة (جوتنبرج) في كامل عنفوانه ومجده. لا يمكنك أن تشعر بالشيء ذاته في الفضاء السايبري حيث أفكارك مجرد ومضات إلكترونية وتبادل بين علامة الواحد والصفر.. دعك من الحاجة البشرية الطبيعية لأن تضع كل أولادك تحت سقف واحد.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004240/');
 })(window.AKT);
+
+/* «نشوات قديمة»: not essays but the lyrics of some of his favourite songs with his translations of them; its one edition
+   (Kayan, 25 January 2024, 432 pages) */
+(function (A) {
+	var T = { ar: 'نشوات قديمة', en: 'Old Delights' };
+	(A.works || []).forEach(function (w) {
+		if (w.id !== 'nashawat-qadima') return;
+		w.title = T;
+		w.type = 'translation';
+		w.synopsis = { ar: 'كلمات بعض أغانيه المفضلة وترجمته لها، صدرت بعد رحيله.', en: 'The lyrics of some of his favourite songs, with his translations of them, published after his death.' };
+	});
+	var b = (A.bookInfo = A.bookInfo || {})['nashawat-qadima'] = A.bookInfo['nashawat-qadima'] || {};
+	b.firstPublished = '2024-01-25';
+	b.pages = 432;
+	b.editions = [
+		{ title: T, publisher: { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' }, year: 2024, date: '2024-01-25', lang: 'ar',
+			isbn: '9789778202243', isbn10: '9778202249', asin: '9778202249', pages: 432, format: { ar: 'غلاف ورقي', en: 'Paperback' },
+			source: 'https://www.goodreads.com/book/show/210350347' }
+	].concat((b.editions || []).filter(function (ed) { return ed.store; }));
+})(window.AKT);
+
+/* «نشوات قديمة»: the words on its back cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {})['nashawat-qadima'] = A.bookInfo['nashawat-qadima'] || {};
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'في كل مرة سوف أقدم لك ترجمةً وكلمات أغنية أجنبية من أيام شبابي (أي عندما كانت الديناصورات تجوب المستنقعات المغطاة بالسراخس). أغنية دفنت وغطاها الصدأ، فالتراب لن يكفي أن تحملها بين أناملك لتدرك أي بريق وسحر فيها. سَمِّه ما شِئتَ... سَمِّه نوعًا من ثرثرة العجائز على غرار (الغنا ده كان أيامنا إحنا)... أو سمها رغبةً في أن تشاركني هذه النشوات القديمة.... المهم أني أضمن لك الاستمتاع.' };
+})(window.AKT);
+
+/* «نشوات قديمة»: what the book is — his column of that name on «بص وطل», where he brought back forgotten foreign songs */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {})['nashawat-qadima'] = A.bookInfo['nashawat-qadima'] || {};
+	b.description = {
+		ar: '«نشوات قديمة» باب كتبه أحمد خالد توفيق في موقع «بص وطل»، يستعيد فيه مذاق أغنيات أجنبية منسية من أيام شبابه: يقدّم كلمات الأغنية ثم ترجمته لها وحكايته معها.\n\nجمعت كيان للنشر هذه الحلقات في كتاب صدر في يناير 2024، بعد رحيله بست سنوات، في 432 صفحة.',
+		en: 'Old Delights was a column Ahmed Khaled Tawfik wrote for the website Boss w Tol, bringing back forgotten foreign songs from his youth: each one gives a song\'s lyrics, then his translation and his own story with it.\n\nKayan gathered the columns in a book published in January 2024, six years after his death, at 432 pages.' };
+})(window.AKT);

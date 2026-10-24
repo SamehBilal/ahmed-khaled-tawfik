@@ -55,7 +55,6 @@ window.PAGE = {
 				{ ref: 'aflam', note: { ar: 'لمحبّي السينما: كتاب كامل عن الأفلام.', en: 'For film lovers: a whole book on cinema.' } },
 				{ ref: 'laghz', note: { ar: 'لمن يحلم بالكتابة: خلاصة خبرته في الحرفة.', en: 'For aspiring writers: his thoughts on the craft.' } },
 				{ ref: 'tweets-medieval', note: { ar: 'شذرات قصيرة، ساخرة وسياسية وحانية بالتناوب.', en: 'Short fragments, by turns satirical, political and tender.' } },
-				{ ref: 'nashawat-qadima', note: { ar: 'مقالاته التي لم تُجمع في كتاب من قبل، صدرت بعد رحيله.', en: 'His articles never before gathered in a book, published after his death.' } }
 			]
 		},
 		{
@@ -108,6 +107,7 @@ window.PAGE = {
 				{ ref: 'dermaphoria' },
 				{ ref: 'kiterunner' },
 				{ ref: 'che' },
+				{ ref: 'nashawat-qadima', note: { ar: 'كلمات أغانيه المفضلة وترجمتها، صدرت بعد رحيله.', en: 'The lyrics of his favourite songs and his translations of them, published after his death.' } },
 				{ ref: 'rwg', note: { ar: 'روائع الأدب العالمي مختصرة بحجم الجيب؛ ترجم أعدادها من 8 إلى 83.', en: 'World classics abridged to pocket size; he translated issues 8 to 83.' } }
 			]
 		}
