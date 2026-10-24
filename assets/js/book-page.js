@@ -74,7 +74,7 @@ window.PAGE = {
 			['ISBN', firstEd.isbn || ''],
 			[L('الأصل', 'Original'), item.original ? t(item.original) : ''],
 			/* a standalone book that came out in a publisher's line (أدبيات) */
-			[L('ضمن سلسلة', 'In the series'), info.inSeries ? t(info.inSeries) : '']
+			[L('ضمن سلسلة', 'In the series'), info.inSeries ? t(info.inSeries) : '', info.inSeries && info.inSeriesId ? '<a href="' + e(S.seriesHref(info.inSeriesId)) + '">' + e(t(info.inSeries)) + '</a>' : '']
 		].filter(function (x) { return x[1]; });
 
 		/* ---------- people ---------- */

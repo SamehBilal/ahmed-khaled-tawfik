@@ -1220,11 +1220,18 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 })(window.AKT);
 
 /* «دماغي كده» is one book, no. 1 of the Modern Arab Association's essay line «أدبيات – سلسلة مقالات», the only one he
-   wrote in it: the line leaves the series list (where it showed the book a second time) and becomes a fact of the book */
+   wrote in it: the line keeps its page under its real name, its one issue is the book, and the book names the line */
 (function (A) {
-	['otherSeries', 'series'].forEach(function (k) { if (A[k]) A[k] = A[k].filter(function (s) { return s.id !== 'maqalat'; }); });
+	[].concat(A.otherSeries || [], A.series || []).forEach(function (s) {
+		if (s.id !== 'maqalat') return;
+		s.title = { ar: 'أدبيات', en: 'Adabiyat' };
+		s.owner = { ar: 'سلسلة مقالات من المؤسسة العربية الحديثة – «نبع الآداب والثقافة المعاصرة»', en: 'An essay line from the Modern Arab Association – “a spring of contemporary letters and culture”' };
+		s.description = { ar: 'سلسلة مقالات من المؤسسة العربية الحديثة، كان «دماغي كده» عددها الأول، وهو الكتاب الوحيد الذي كتبه فيها.', en: 'An essay line from the Modern Arab Association; Demaghi Keda was its first number, and the only book he wrote in it.' };
+		(s.issues || []).forEach(function (is) { if (is.work === 'demaghi') is.n = 1; });
+	});
 	var b = (A.bookInfo = A.bookInfo || {}).demaghi = A.bookInfo.demaghi || {};
 	b.inSeries = { ar: 'أدبيات – سلسلة مقالات (1)', en: 'Adabiyat – an essay series (no. 1)' };
+	b.inSeriesId = 'maqalat';
 	/* first published on 1 January 2008 */
 	b.firstPublished = '2008-01-01';
 	(b.editions || []).forEach(function (ed) { if (ed.year === 2008 && ed.publisher) ed.date = '2008-01-01'; });
