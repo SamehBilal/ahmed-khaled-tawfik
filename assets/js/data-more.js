@@ -1641,7 +1641,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			cover: 'assets/img/covers/books/goodreads-sabaa-wogooh-lel-hob.jpg', source: 'https://www.goodreads.com/book/show/3553717' },
 		{ title: T, publisher: LILA, lang: 'ar', format: PB, cover: 'assets/img/covers/books/sabaa-wogooh-lila-a.webp' },
 		{ title: T, publisher: LILA, lang: 'ar', format: PB, cover: 'assets/img/covers/books/sabaa-wogooh-lila-b.webp' },
-		{ title: T, year: 2019, date: '2019-10-12', lang: 'ar', asin: 'B07Z2WX4XK', pages: 107, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } }
+		/* the Kindle edition carries the first edition's cover */
+		{ title: T, publisher: { ar: 'دار ليلى ودايموند بوك', en: 'Dar Lila & Diamond Book' }, year: 2019, date: '2019-10-12', lang: 'ar', asin: 'B07Z2WX4XK', pages: 107,
+			format: { ar: 'نسخة كيندل', en: 'Kindle edition' }, cover: 'assets/img/covers/books/goodreads-sabaa-wogooh-lel-hob.jpg' }
 	];
 	(A.works || []).forEach(function (w) {
 		if (w.id !== 'sabaa-wogooh-lel-hob') return;
