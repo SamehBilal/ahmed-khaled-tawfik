@@ -1225,6 +1225,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	['otherSeries', 'series'].forEach(function (k) { if (A[k]) A[k] = A[k].filter(function (s) { return s.id !== 'maqalat'; }); });
 	var b = (A.bookInfo = A.bookInfo || {}).demaghi = A.bookInfo.demaghi || {};
 	b.inSeries = { ar: 'أدبيات – سلسلة مقالات (1)', en: 'Adabiyat – an essay series (no. 1)' };
+	/* first published on 1 January 2008 */
+	b.firstPublished = '2008-01-01';
+	(b.editions || []).forEach(function (ed) { if (ed.year === 2008 && ed.publisher) ed.date = '2008-01-01'; });
 	/* the 2009 printing appears twice from Goodreads: keep one, with both forms of its ISBN */
 	var seen = {};
 	b.editions = (b.editions || []).filter(function (ed) {
