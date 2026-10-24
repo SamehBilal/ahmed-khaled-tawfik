@@ -2589,3 +2589,17 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if (p) l.photo = p;
 	});
 })(window.AKT);
+
+/* the Legacy timeline: his publisher's obituary in Al-Ahram, 5 April 2018 */
+(function (A) {
+	var L = A.legacy = A.legacy || [];
+	var ev = { date: '2018-04-05', image: 'assets/img/timeline/obituary-arab-modern-2018.webp',
+		title: { ar: 'نعي المؤسسة العربية الحديثة', en: 'His publisher’s obituary' },
+		text: { ar: 'نعته المؤسسة العربية الحديثة، بيته الأول، في صفحة كاملة بجريدة «الأهرام»: «لا ترثيك ولكننا نرثي نبعًا من الإبداع كنا نتمنى أن يبقى ألف عام… إنه ليس وداعًا، إنما سلامًا طيبًا لروحك الجميلة الباقية في نفوسنا ونفوس محبيك». ووقّعتها: «من بيتك: المؤسسة العربية الحديثة».',
+			en: 'The Modern Arab Foundation, his first publishing home, mourned him in Al-Ahram: “Not a farewell, but a gentle peace to your beautiful soul, which lives on in us and in all who love you.” It was signed “From your home: the Modern Arab Foundation.”' } };
+	if (!L.some(function (l) { return l.date === ev.date && l.image === ev.image; })) {
+		var at = L.length;
+		for (var i = 0; i < L.length; i++) if (String(L[i].date) > ev.date) { at = i; break; }
+		L.splice(at, 0, ev);
+	}
+})(window.AKT);
