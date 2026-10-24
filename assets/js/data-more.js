@@ -1850,3 +1850,12 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'إنها ضحكات كئيبة.. قد تروق لك وقد لا تروق.. قد تجدها ظريفة وقد تجدها كئيبة فعلًا.. قد تجدها عميقة تتجاوز السخرية إلى ما وراءها، وقد تجدها التفاهة ذاتها.. قد تجدها موفقة جدًا وقد تجدها فاشلة تمامًا. المهم أنني أنذرتك مسبقًا.. هذه ضحكات كئيبة، فماذا تتوقع من ضحكات كئيبة؟' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004107/');
 })(window.AKT);
+
+/* «حظك اليوم»: Kayan's back cover (2017, ISBN 9789778200164) from Samawy (samawy.com/i/1004096) and its text */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).hazzak = A.bookInfo.hazzak || {};
+	(b.editions || []).forEach(function (ed) { if (ed.isbn === '9789778200164') ed.back = 'assets/img/covers/back/hazzak-kayan.webp'; });
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'اثنا عشر برجًا.. اثنتا عشرة طريقة للموت، ولعنة تطاردك في كل صوب. تمر بالأطوار المعتادة: في البداية أنت لا تعرف.. بعد هذا أنت لا تلاحظ.. ثم تلاحظ فلا تصدق.. ثم تصدق فلا تعرف ما ينبغي عمله. يقول الغربيون إنك لا يمكن أن تكون حذرًا أكثر من اللازم، وهذه القصص تطبيق عملي صادق لصحة هذه المقولة.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004096/');
+})(window.AKT);
