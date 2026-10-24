@@ -1991,3 +1991,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: '«نشوات قديمة» باب كتبه أحمد خالد توفيق في موقع «بص وطل»، يستعيد فيه مذاق أغنيات أجنبية منسية من أيام شبابه: يقدّم كلمات الأغنية ثم ترجمته لها وحكايته معها.\n\nجمعت كيان للنشر هذه الحلقات في كتاب صدر في يناير 2024، بعد رحيله بست سنوات، في 432 صفحة.',
 		en: 'Old Delights was a column Ahmed Khaled Tawfik wrote for the website Boss w Tol, bringing back forgotten foreign songs from his youth: each one gives a song\'s lyrics, then his translation and his own story with it.\n\nKayan gathered the columns in a book published in January 2024, six years after his death, at 432 pages.' };
 })(window.AKT);
+
+/* «نشوات قديمة»: its back cover (Kayan, 2024) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {})['nashawat-qadima'] = A.bookInfo['nashawat-qadima'] || {};
+	(b.editions || []).forEach(function (ed) { if (ed.isbn === '9789778202243') ed.back = 'assets/img/covers/back/nashawat-kayan.webp'; });
+})(window.AKT);
