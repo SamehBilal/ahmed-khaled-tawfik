@@ -2246,3 +2246,31 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'عندما تقلب في أوراقك القديمة تجد الكثير من الهراء.. كثيرًا من الكلام الفارغ الذي لا رأس له ولا ذيل، وبعضه ينم عن سخف أو سذاجة بالغة أو تفاؤل مضحك أو ثقة بالنفس غير مبررة أو شعور بالضعة لا داعي له، مصداقًا لقصيدة قديمة لنزار قباني يقول فيها: «أتلو رسائلنا فتضحكني... أمثل هذا السخف قد كنا؟». عندما تقلب في أوراقك القديمة تجد الكثير من الهراء.. لكنك كذلك تجد بقايا أفكار ولمحات من خواطر فيها بعض اللحم. عندها يخطر لك أن هذه القصاصات تصلح لشيء ما.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004110/');
 })(window.AKT);
+
+/* «WWW»: the editions of its one-volume collection — Dar Lila (2006, an undated printing, and the 2014 ebook) and Kayan (2017 paperback
+   with its back cover from Samawy (samawy.com/i/1004087) and its text; Kindle 2020 and 2024) — after the original five-part run; the
+   two Dar Lila covers among its volumes (the 2014 one replaces the same picture from Goodreads) */
+(function (A) {
+	var si = (A.seriesInfo = A.seriesInfo || {}).www = A.seriesInfo.www || {};
+	var LILA = { ar: 'دار ليلى', en: 'Dar Lila' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var VOL = { ar: 'المجلد الجامع', en: 'Collected volume' };
+	var ed = function (pub, years, kind, ar, en) { return { publisher: pub, years: years, kind: kind, note: { ar: ar, en: en } }; };
+	si.editions = (si.editions || []).filter(function (x) { return x.years === '2006–2012'; }).concat([
+		ed(LILA, '2006', VOL, 'غلاف ورقي، 463 صفحة، 1 يناير 2006 · ASIN B0DM1FY8TH', 'Paperback, 463 pages, 1 January 2006 · ASIN B0DM1FY8TH'),
+		ed(LILA, '', VOL, 'غلاف ورقي، 471 صفحة · ASIN B0DT182YSR', 'Paperback, 471 pages · ASIN B0DT182YSR'),
+		ed(LILA, '2014', { ar: 'المجلد الجامع — نسخة إلكترونية', en: 'Collected volume — ebook' }, '471 صفحة، 1 يناير 2014 · ASIN B0DLTFGP7Z', '471 pages, 1 January 2014 · ASIN B0DLTFGP7Z'),
+		ed(KAYAN, '2017', VOL, 'غلاف ورقي، 420 صفحة، 1 يناير 2017 · ISBN 9789778200188 (ISBN-10 9778200181)', 'Paperback, 420 pages, 1 January 2017 · ISBN 9789778200188 (ISBN-10 9778200181)'),
+		ed(KAYAN, '2020', { ar: 'المجلد الجامع — نسخة كيندل', en: 'Collected volume — Kindle edition' }, '280 صفحة، 23 يناير 2020 · ASIN B087CCMGR1', '280 pages, 23 January 2020 · ASIN B087CCMGR1'),
+		ed(KAYAN, '2024', { ar: 'المجلد الجامع — نسخة كيندل', en: 'Collected volume — Kindle edition' }, '288 صفحة، 3 أبريل 2024 · ASIN B0FLYTGKQY', '288 pages, 3 April 2024 · ASIN B0FLYTGKQY')
+	]);
+	si.back = 'assets/img/covers/back/www-kayan.webp';
+	(si.blocks = si.blocks || []).push({ title: { ar: 'على الغلاف الخلفي', en: 'On the back cover' },
+		text: { ar: 'هذه القصة يحكيها لكم فيروس كمبيوتر.. لو كنت تجد هذا سخيفًا أو لا يصدق، فبوسعك الانصراف من الآن، وثق أنه لن يفوتك شيء إلا المزيد من الغيظ والاحتقان والعصبية. لكن لا تبقَ هنا تصغي ثم تقول: هذا هراء.. لا تقل إنني لم أنذرك منذ اللحظة الأولى وبعد عدة أسطر من تعارفنا.. سوف يكون تصرفك وقتها كمن بدأ لعب الشطرنج ثم قرر بعد ساعة – وقد بدأ يخسر – أنها لعبة سخيفة، وقلب الرقعة بما عليها، وهذا تصرف يفتقر للعدل، وعلى من بدأ لعبة أن يستكملها بقواعدها وإلا فليتركها ولا يبدأ.\n\nأما من يجدون أن ما أقول يستأهل التوقف والإصغاء – بصرف النظر عن محتواه – فمن حقهم أن يعرفوا كيف بدأ كل شيء. هل اخترتم – بتفكيركم البشري النمطي – للكتاب اسم (مذكرات فيروس)؟.. لا؟.. أحسنتم صنعًا.. إنه عنوان تقليدي رتيب. لم لا تختارون عنوانًا أكثر غرابة وإثارة للفضول؟.. A.I؟.. جميل لكن هناك فيلمًا شهيرًا سبقنا إلى هذا العنوان للأسف.. لم لا تطلقون عليها اسم WWW؟' } });
+	(si.sources = si.sources || []).push('https://www.samawy.com/i/1004087/');
+	var C = 'assets/img/covers/series/www/';
+	var covers = ((A.seriesCovers = A.seriesCovers || {}).www || []).filter(function (c) { return !/goodreads-www-omnibus/.test(c.cover); });
+	A.seriesCovers.www = [
+		{ label: { ar: 'المجلد الجامع — دار ليلى (2006)', en: 'Collected volume — Dar Lila (2006)' }, cover: C + 'www-lila-2006.webp' },
+		{ label: { ar: 'المجلد الجامع — دار ليلى (2014)', en: 'Collected volume — Dar Lila (2014)' }, cover: C + 'www-lila-2014.webp', source: 'https://www.goodreads.com/book/show/17992755' }
+	].concat(covers);
+})(window.AKT);

@@ -36,7 +36,8 @@ window.PAGE = {
 			info: { title: '', text: '' },
 			by: ser.inspired ? t(S.seriesAuthor(ser)) : ''
 		};
-		/* its back: the back cover of its first book that has one */
+		/* its back: its own back cover (a collected volume's), else the back cover of its first book that has one */
+		if (info.back) bookOpts.backImg = info.back;
 		if (!ser.own && !bookOpts.backImg) issues.some(function (is) { var bk = S.backOf(is.work || S.issueKey(id, is)); if (bk) bookOpts.backImg = bk; return !!bk; });
 		bookOpts.id = '';
 		bookOpts.info = { title: '', text: '' };
