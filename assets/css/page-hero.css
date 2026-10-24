@@ -148,6 +148,50 @@ html[dir="rtl"] .ph-wall .track { animation-name: ph-marquee-rtl; }
 .ph-frame figcaption { padding: 6px 4px 8px; text-align: center; color: #1c140a; font-family: var(--f-display); font-size: 13px; }
 @media (max-width: 640px) { .ph-frame img { width: 104px; height: 132px; } .ph-frame figcaption { font-size: 11px; } }
 
+/* floating candles over the wall (after codepen.io/zepha/pen/Napomd), their flames twirling and glowing
+   (after codepen.io/menashebouhadana/pen/QWKVqar); each throws a soft pool of warm light on the frames */
+.ph-floating { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+/* the wall hangs lower, leaving the air above it to the candles, whose light warms the tops of the frames */
+.ph[data-ph="tributes"] .ph-wall { align-items: flex-end; padding-bottom: 22px; }
+.ph[data-ph="tributes"] .ph-stage::before { content: ''; position: absolute; inset: 0 0 45%; z-index: 2; pointer-events: none;
+	background: radial-gradient(60% 100% at 50% 0%, rgba(255, 170, 60, .14), transparent 70%); animation: fc-light 3.4s ease-in-out infinite; }
+.fc {
+	position: absolute; left: var(--x); top: var(--y); width: 14px;
+	transform: scale(var(--z)); transform-origin: 50% 0; opacity: calc(.45 + var(--z) * .55);
+	filter: blur(calc((1.1 - var(--z)) * 2px));
+	animation: fc-bob 15s ease-in-out infinite; animation-delay: var(--d);
+}
+.fc .wax {
+	position: absolute; top: 20px; left: 0; width: 14px; height: var(--h);
+	border-radius: 50% / 4px; background: linear-gradient(90deg, #8f8467, #e9dfc4 40%, #f6efdc 55%, #a29672);
+	box-shadow: 0 1px 0 0 rgba(255, 238, 221, .6) inset, 0 26px 16px 0 rgba(255, 238, 221, .25) inset, 0 12px 24px 3px rgba(0, 0, 0, .25);
+}
+.fc .wax::before { content: ''; position: absolute; top: -5px; left: 6px; width: 2px; height: 7px; border-radius: 1px; background: #2a2018; }
+.fc .flame {
+	position: absolute; top: 0; left: 2px; width: 10px; height: 20px;
+	background: radial-gradient(circle at 50% 80%, #fff 0 18%, #ffe08a 35%, #ffad00 70%);
+	border-radius: 8px 8px 8px 8px / 20px 20px 8px 8px; transform-origin: 50% 100%;
+	animation: fc-twirl 15s ease infinite, fc-glow 2s ease infinite, fc-flicker 6s linear infinite; animation-delay: var(--f);
+}
+.fc .halo {
+	position: absolute; top: -50px; left: -53px; width: 120px; height: 120px; border-radius: 50%;
+	background: radial-gradient(circle, rgba(255, 190, 90, .42), rgba(255, 150, 40, .12) 45%, transparent 70%);
+	mix-blend-mode: screen; animation: fc-light 2.6s ease-in-out infinite; animation-delay: var(--f);
+}
+@keyframes fc-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 18px; } }
+@keyframes fc-twirl {
+	0%, 22%, 49%, 62%, 81%, 100% { border-radius: 2px 14px 8px 8px / 20px 20px 8px 8px; }
+	14%, 32%, 56%, 70%, 89% { border-radius: 14px 2px 8px 8px / 20px 20px 8px 8px; }
+}
+@keyframes fc-glow { 0%, 30%, 60%, 80%, 100% { box-shadow: 0 0 14px 2px rgba(255, 173, 0, .85); } 20%, 50%, 70% { box-shadow: 0 0 20px 4px rgba(255, 173, 0, .95); } }
+@keyframes fc-flicker {
+	0%, 100% { transform: rotate(5deg) scale(1, 1); } 12.5% { transform: rotate(2deg) scale(.8, .9); }
+	25% { transform: rotate(0) scale(1.05, 1); } 37.5% { transform: rotate(-3deg) scale(.8, .9); } 50% { transform: rotate(-5deg) scale(.95, 1.06); }
+}
+@keyframes fc-light { 0%, 100% { opacity: .85; transform: scale(1); } 40% { opacity: 1; transform: scale(1.08); } 70% { opacity: .75; transform: scale(.96); } }
+@media (max-width: 640px) { .fc:nth-child(2n) { display: none; } .ph[data-ph="tributes"] .ph-wall { padding-bottom: 14px; } }
+@media (prefers-reduced-motion: reduce) { .fc, .fc .flame, .fc .halo { animation: none; } }
+
 @media (prefers-reduced-motion: reduce) {
 	.ph *, .ph *::before { animation: none !important; transition: none !important; }
 	.ph-env { display: none; }
