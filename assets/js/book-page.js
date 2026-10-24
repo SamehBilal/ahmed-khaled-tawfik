@@ -26,7 +26,12 @@ window.PAGE = {
 		var cover = S.coverOf(info);
 		var desc = info.description || item.synopsis || (isIssue && item.original ? item.original : null);
 		/* what is printed on its back: a photo of the real back cover, and the blurb (series issues) */
-		var blurb = (d.blurbs || {})[id] || info.blurb || null, backImg = (d.backCovers || {})[id] || '';
+		var blurb = (d.blurbs || {})[id] || info.blurb || null;
+		/* back covers: the book's own (backCovers), else one per edition (ed.back); the 3D book shows the one of the cover it shows */
+		var backs = (info.editions || []).filter(function (ed) { return ed.back; }).filter(function (ed, i, all) { return all.map(function (x) { return x.back; }).indexOf(ed.back) === i; });
+		if ((d.backCovers || {})[id]) backs = [{ back: d.backCovers[id] }];
+		var mainCover = S.coverOf(info);
+		var backImg = ((backs.filter(function (ed) { return ed.cover && ed.cover === mainCover; })[0] || backs[0] || {}).back) || '';
 		if (!desc && blurb) desc = { ar: blurb.ar };
 		var numLabel = r.special ? L('عدد خاص ', 'Special issue ') + App.num(item.n) : isIssue && item.n != null ? App.num('#' + item.n) + (item.part ? ' · ' + L('الجزء ', 'Part ') + App.num(item.part) : '') : '';
 
@@ -141,12 +146,13 @@ window.PAGE = {
 			var rows = [
 				ed.title && t(ed.title) !== t(cardTitle || title) ? [L('العنوان', 'Title'), tx(ed.title)] : null,
 				ed.publisher ? [L('الناشر', 'Publisher'), e(t(ed.publisher))] : null,
-				ed.year ? [L('السنة', 'Year'), e(App.num(ed.year))] : null,
+				ed.date ? [L('تاريخ النشر', 'Published'), e(App.num(ed.date.split('-').reverse().join('/')))] : ed.year ? [L('السنة', 'Year'), e(App.num(ed.year))] : null,
 				ed.format ? [L('الشكل', 'Format'), e(t(ed.format))] : null,
 				ed.edition ? [L('الطبعة', 'Printing'), e(t(ed.edition))] : null,
 				ed.pages ? [L('الصفحات', 'Pages'), e(App.num(ed.pages))] : null,
 				ed.translator ? [L('الترجمة', 'Translator'), tx(ed.translator)] : null,
-				ed.isbn ? ['ISBN', e(ed.isbn)] : null
+				ed.isbn ? ['ISBN', e(ed.isbn)] : null,
+				ed.isbn10 ? ['ISBN-10', e(ed.isbn10)] : null
 			].filter(Boolean);
 			return '<dl>' + rows.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('') + '</dl>' +
 				(ed.source ? '<a href="' + e(ed.source) + '" target="_blank" rel="noopener">' + (ed.store === 'Abjjad' ? L('على أبجد ↗', 'On Abjjad ↗') : L('المصدر ↗', 'Source ↗')) + '</a>' : '');
@@ -240,8 +246,13 @@ window.PAGE = {
 						(isIssue && ser.inspired && ser.s.role ? '<p class="d-by">' + L('صلتها به: ', 'Link to him: ') + tx(ser.s.role) + '</p>' : '') +
 						(window.Lists ? window.Lists.buttons('b:' + id) : '') +
 						((desc && !(blurb && desc.ar === blurb.ar)) ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
-						((blurb || backImg) ? '<section class="d-block d-backcover"><h3>' + L('على الغلاف الخلفي', 'On the back cover') + '</h3>' +
-							(backImg ? '<button type="button" class="d-back-img" data-src="' + e(backImg) + '" data-alt="' + e(L('الغلاف الخلفي — ', 'Back cover — ') + t(title)) + '" aria-label="' + e(L('تكبير الغلاف الخلفي', 'Enlarge the back cover')) + '"><img src="' + e(backImg) + '" alt="' + e(L('الغلاف الخلفي — ', 'Back cover — ') + t(title)) + '" loading="lazy"></button>' : '') +
+						((blurb || backs.length) ? '<section class="d-block d-backcover"><h3>' + L('على الغلاف الخلفي', 'On the back cover') + '</h3>' +
+							(backs.length ? '<div class="d-backs">' + backs.map(function (ed) {
+								/* with more than one, each is captioned with its edition */
+								var cap = backs.length > 1 ? [ed.publisher ? t(ed.publisher) : '', ed.year ? App.num(ed.year) : ''].filter(Boolean).join(' · ') : '';
+								var alt = L('الغلاف الخلفي — ', 'Back cover — ') + t(title) + (cap ? ' (' + cap + ')' : '');
+								return '<figure><button type="button" class="d-back-img" data-src="' + e(ed.back) + '" data-alt="' + e(alt) + '" aria-label="' + e(L('تكبير الغلاف الخلفي', 'Enlarge the back cover')) + '"><img src="' + e(ed.back) + '" alt="' + e(alt) + '" loading="lazy"></button>' + (cap ? '<figcaption>' + e(cap) + '</figcaption>' : '') + '</figure>';
+							}).join('') + '</div>' : '') +
 							(blurb ? '<blockquote class="d-blurb" dir="rtl" lang="ar">' + e(blurb.ar).replace(/\n/g, '<br>') + '</blockquote>' + (blurb.src ? '<a class="d-blurb-src" href="' + e(blurb.src) + '" target="_blank" rel="noopener">' + (blurb.by ? L('عن ', 'From ') + t(blurb.by) + ' ↗' : L('عن أبجد ↗', 'From Abjjad ↗')) + '</a>' : '') : '') +
 						'</section>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
@@ -299,8 +310,7 @@ window.PAGE = {
 			document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') close(); });
 		}
 		/* the back cover opens full size, like the pictures on the home timeline */
-		var bc = root.querySelector('.d-back-img');
-		if (bc) bc.addEventListener('click', function () { App.showPic(bc.dataset.src, bc.dataset.alt); });
+		root.querySelectorAll('.d-back-img').forEach(function (bc) { bc.addEventListener('click', function () { App.showPic(bc.dataset.src, bc.dataset.alt); }); });
 		if (audioTracks.length) window.Cassette.mount(document.getElementById('d-cassette'), { tracks: audioTracks });
 
 		function langName(l) {

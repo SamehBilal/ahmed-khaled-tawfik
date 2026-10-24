@@ -209,6 +209,9 @@ html[lang="en"] .prox-art .pa-name { font-family: var(--f-display); font-weight:
 .sv-cover:hover img { transform: translateY(-4px); }
 
 /* book page: what is printed on the back */
+.d-backs { display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start; }
+.d-backs figure { margin: 0; }
+.d-backs figcaption { margin: -4px 0 12px; font-size: 13px; color: var(--muted); text-align: center; }
 .d-backcover .d-back-img { display: inline-block; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .d-backcover .d-back-img:hover img, .d-backcover .d-back-img:focus-visible img { transform: translateY(-3px); box-shadow: 0 16px 30px rgba(0, 0, 0, .5); }
 .d-backcover .d-back-img img { transition: transform .2s, box-shadow .2s; display: block; width: 180px; height: auto; margin-bottom: 12px; border-radius: 3px 6px 6px 3px; box-shadow: 0 10px 22px rgba(0, 0, 0, .4); }

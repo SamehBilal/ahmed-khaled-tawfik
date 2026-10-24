@@ -1145,3 +1145,24 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
 		ar: 'تقلع السفينة فاردة شراعها مغادرة ماليندي.\n\nفي الأيام التالية أُصبت بدوار بحر رهيب، لكن حينما استطعت أن أتمالك نفسي أخيرًا بدأت أراقب سير الأمور، كان «دي جاما» فظًّا خشنًا وهذا يتناسب مع مسؤولياته الكثيرة، لكنه بالفعل معجب بذلك العربي «ابن ماجد» الذي صار مرشد الرحلة إلى الهند، وكان من حقه أن يقابل القبطان متى شاء.\n\nلقد صار وجه «ابن ماجد» مألوفًا هنا بجسمه الضئيل وعمامته وضحكته، وقد سمّاه البرتغاليون «المعلم الفلكي». لم يستطيعوا نطق العبارة فخرجت من أفواههم «ماليمونكا»، كذلك حاولوا تسميته «أمير البحار» فخرجت الكلمة «الميرانتي».\n\nالآن عرفت من أين جاء هذا الاسم الغريب. «الميرانتي» هو نفسه «أحمد بن ماجد».' };
 })(window.AKT);
+
+/* «خواطر سطحية سخيفة عن الحياة والبشر»: Dar Delta's first edition (1 January 2017, 218 pages) and Dar Al Karma's
+   (22 January 2020, 144 pages), each with its front and back cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {})['khawater-sathiya'] = A.bookInfo['khawater-sathiya'] || {};
+	var eds = b.editions = b.editions || [];
+	var delta = eds.filter(function (e) { return e.isbn === '9789776605206'; })[0];
+	var karma = eds.filter(function (e) { return e.isbn === '9789776743205'; })[0];
+	if (delta) {
+		delta.date = '2017-01-01'; delta.pages = 218; delta.isbn10 = '9776605206';
+		delta.cover = 'assets/img/covers/books/khawater-delta.webp';
+		delta.back = 'assets/img/covers/back/khawater-delta.webp';
+	}
+	if (karma) {
+		karma.date = '2020-01-22'; karma.pages = 144; karma.isbn10 = '977674320X';
+		karma.back = 'assets/img/covers/back/khawater-karma.webp';
+	}
+	b.firstPublished = '2017-01-01';
+	b.pages = 218;
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009972/');
+})(window.AKT);
