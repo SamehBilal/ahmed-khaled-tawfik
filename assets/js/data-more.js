@@ -2189,3 +2189,30 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'من متجر علاج الاكتئاب، أردنا أن نأتيك بدعابات ظريفة.. أو نكات مضحكة.. أو طرائف مسلية.. أو مُلح مقرظة، فلم نجد للأسف.. لهذا ابتعنا لك نصف كيلو زغازيغ.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004097/');
 })(window.AKT);
+
+/* «قوس قزح»: its editions — Dar Lila (1 January 2005, a 124-page printing, and another printing known only by its cover), Kayan
+   (23 January 2019 paperback with its back cover from Samawy (samawy.com/i/1004764) and its text; Kindle 2019 and 2024); the book
+   opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).qaws = A.bookInfo.qaws || {};
+	var T = { ar: 'قوس قزح', en: 'Qaws Quzah' }, C = 'assets/img/covers/stories/';
+	var LILA = { ar: 'دار ليلى', en: 'Dar Lila' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200614'; })[0] || {};
+	b.firstPublished = '2005-01-01';
+	b.pages = 142;
+	b.editions = [
+		{ title: T, publisher: LILA, year: 2005, date: '2005-01-01', lang: 'ar', asin: 'B0DN1DVR9V', pages: 142, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'qaws-2005.webp', source: 'https://www.goodreads.com/book/show/5854563' },
+		{ title: T, publisher: LILA, lang: 'ar', asin: 'B0DT1BMZLL', pages: 124, cover: C + 'qaws-lila-124.webp' },
+		{ title: T, publisher: LILA, lang: 'ar', cover: C + 'qaws-lila.webp' },
+		{ title: T, publisher: KAYAN, year: 2019, date: '2019-01-23', lang: 'ar', isbn: '9789778200614', asin: 'B0DT31WTFN', pages: 137, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/qaws-kayan.webp', source: kayan.source },
+		{ title: T, publisher: KAYAN, year: 2019, date: '2019-01-27', lang: 'ar', asin: 'B08792Y422', pages: 70, format: KD, source: 'https://www.goodreads.com/book/show/55938588' },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYT34FN', pages: 78, format: KD }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'qaws-2005.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'أحمر.. برتقالي.. أصفر.. أخضر.. أزرق.. نيلي.. بنفسجي... اليوم نحكي لك كيف أن قوس القزح قد يكون مخيفًا... كيف تصير الألوان مرعبة أو – على أقل تقدير – ليست كما وجدت في خيالات طفولتنا... هذه سبع قصص تحكي عن الألوان... سبع حكايات عن قوس قزح...' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004764/');
+})(window.AKT);
