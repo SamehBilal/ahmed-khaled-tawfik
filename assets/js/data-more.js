@@ -2216,3 +2216,33 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'أحمر.. برتقالي.. أصفر.. أخضر.. أزرق.. نيلي.. بنفسجي... اليوم نحكي لك كيف أن قوس القزح قد يكون مخيفًا... كيف تصير الألوان مرعبة أو – على أقل تقدير – ليست كما وجدت في خيالات طفولتنا... هذه سبع قصص تحكي عن الألوان... سبع حكايات عن قوس قزح...' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004764/');
 })(window.AKT);
+
+/* «قصاصات قابلة للحرق»: its six editions — Diamond Book (2007), Dar Lila (Kayan Corp) (2010, and its enlarged printing of 116 pages),
+   Kayan (2017 paperback with its back cover from Samawy (samawy.com/i/1004110) and its text; Kindle 2018 and 2024); the book opens
+   on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).qusasat = A.bookInfo.qusasat || {};
+	var T = { ar: 'قصاصات قابلة للحرق', en: 'Scraps Fit for Burning' }, C = 'assets/img/covers/books/';
+	var LILA = { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200157'; })[0] || {};
+	(A.works || []).forEach(function (w) { if (w.id === 'qusasat' && !(w.publisher || {}).ar) w.publisher = { ar: 'دايموند بوك', en: 'Diamond Book' }; });
+	b.firstPublished = '2007-01-01';
+	b.pages = 128;
+	b.editions = [
+		{ title: T, publisher: { ar: 'دايموند بوك', en: 'Diamond Book' }, year: 2007, date: '2007-01-01', lang: 'ar', asin: 'B0DLT85S4L', pages: 128,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'qusasat-2007.webp', source: 'https://www.goodreads.com/book/show/5978729' },
+		{ title: T, publisher: LILA, year: 2010, date: '2010-01-01', lang: 'ar', isbn: '9789776836228', isbn10: '9776836224', asin: '9776836224', pages: 79, format: PB,
+			cover: C + 'qusasat-a.webp', source: 'https://www.goodreads.com/work/editions/6152039' },
+		{ title: T, publisher: LILA, year: 2010, date: '2010-01-01', lang: 'ar', asin: 'B0DLT9XLRD', pages: 116, format: PB,
+			edition: { ar: 'طبعة مزيدة', en: 'Enlarged edition' }, cover: C + 'qusasat-b.webp' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200157', isbn10: '9778200157', asin: '9778200157', pages: 108, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/qusasat-kayan.webp', source: kayan.source },
+		{ title: T, publisher: KAYAN, year: 2018, date: '2018-01-27', lang: 'ar', asin: 'B087BFKXDY', pages: 55, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYPT8L2', pages: 70, format: KD }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'qusasat-2007.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'عندما تقلب في أوراقك القديمة تجد الكثير من الهراء.. كثيرًا من الكلام الفارغ الذي لا رأس له ولا ذيل، وبعضه ينم عن سخف أو سذاجة بالغة أو تفاؤل مضحك أو ثقة بالنفس غير مبررة أو شعور بالضعة لا داعي له، مصداقًا لقصيدة قديمة لنزار قباني يقول فيها: «أتلو رسائلنا فتضحكني... أمثل هذا السخف قد كنا؟». عندما تقلب في أوراقك القديمة تجد الكثير من الهراء.. لكنك كذلك تجد بقايا أفكار ولمحات من خواطر فيها بعض اللحم. عندها يخطر لك أن هذه القصاصات تصلح لشيء ما.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004110/');
+})(window.AKT);
