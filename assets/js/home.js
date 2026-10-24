@@ -73,18 +73,7 @@ window.PAGE = {
 		document.getElementById('timeline').addEventListener('click', function (ev) {
 			var b = ev.target.closest('.tl-pic');
 			if (!b) return;
-			var dlg = document.getElementById('pic-dialog');
-			if (!dlg) {
-				dlg = document.createElement('dialog');
-				dlg.id = 'pic-dialog';
-				dlg.className = 'pic-dialog';
-				document.body.appendChild(dlg);
-				dlg.addEventListener('click', function (x) { if (x.target === dlg || x.target.closest('.close')) dlg.close(); });
-				dlg.addEventListener('close', function () { dlg.innerHTML = ''; });
-			}
-			dlg.innerHTML = '<figure><img src="' + e(b.dataset.src) + '" alt="' + e(b.dataset.alt) + '"><figcaption>' + e(b.dataset.alt) + '</figcaption></figure>' +
-				'<button type="button" class="close" aria-label="' + e(App.L('إغلاق', 'Close')) + '">×</button>';
-			dlg.showModal();
+			App.showPic(b.dataset.src, b.dataset.alt);
 		});
 
 		/* explore */

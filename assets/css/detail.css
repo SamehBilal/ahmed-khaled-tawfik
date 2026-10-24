@@ -114,7 +114,12 @@ html[lang="en"] .mini-cover .mc-t { font-family: var(--f-display); font-weight: 
 .mini-cover .mc-s { font-family: var(--f-latin); font-size: 11px; opacity: .85; margin-top: 4px; }
 .mini-cover .mc-by { position: absolute; bottom: 7px; left: 0; right: 0; font-family: var(--f-display); font-size: 9.5px; opacity: .7; }
 
-.cover-row { display: grid; grid-auto-flow: column; grid-auto-columns: 120px; gap: 14px; overflow-x: auto; padding: 4px 2px 14px; scrollbar-width: thin; }
+.cover-row { display: grid; grid-auto-flow: column; grid-auto-columns: 120px; gap: 14px; overflow-x: auto; padding: 4px 2px 14px; scrollbar-width: thin; scrollbar-color: transparent transparent; }
+/* the scrollbar shows only while the row is scrolled (app.js adds .is-scrolling) */
+.cover-row.is-scrolling { scrollbar-color: var(--line) transparent; }
+.cover-row::-webkit-scrollbar { height: 6px; }
+.cover-row::-webkit-scrollbar-thumb { background: transparent; border-radius: 3px; }
+.cover-row.is-scrolling::-webkit-scrollbar-thumb { background: var(--line); }
 .cover-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 22px 16px; }
 .cover-link { display: flex; flex-direction: column; gap: 8px; color: var(--paper); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
 .cover-link:hover { transform: translateY(-6px); color: var(--ember); }
@@ -204,7 +209,9 @@ html[lang="en"] .prox-art .pa-name { font-family: var(--f-display); font-weight:
 .sv-cover:hover img { transform: translateY(-4px); }
 
 /* book page: what is printed on the back */
-.d-backcover .d-back-img img { display: block; width: 180px; height: auto; margin-bottom: 12px; border-radius: 3px 6px 6px 3px; box-shadow: 0 10px 22px rgba(0, 0, 0, .4); }
+.d-backcover .d-back-img { display: inline-block; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.d-backcover .d-back-img:hover img, .d-backcover .d-back-img:focus-visible img { transform: translateY(-3px); box-shadow: 0 16px 30px rgba(0, 0, 0, .5); }
+.d-backcover .d-back-img img { transition: transform .2s, box-shadow .2s; display: block; width: 180px; height: auto; margin-bottom: 12px; border-radius: 3px 6px 6px 3px; box-shadow: 0 10px 22px rgba(0, 0, 0, .4); }
 .d-blurb { margin: 0; padding: 16px 20px; border-inline-start: 4px solid var(--ember); background: var(--ink-2); font-family: var(--f-display); font-size: 1.1em; line-height: 1.9; }
 .d-blurb-src { display: inline-block; margin-top: 8px; font-size: 13px; color: var(--ember); }
 

@@ -196,7 +196,7 @@ window.PAGE = {
 						(window.Lists ? window.Lists.buttons('b:' + id) : '') +
 						((desc && !(blurb && desc.ar === blurb.ar)) ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
 						((blurb || backImg) ? '<section class="d-block d-backcover"><h3>' + L('على الغلاف الخلفي', 'On the back cover') + '</h3>' +
-							(backImg ? '<a class="d-back-img" href="' + e(backImg) + '" target="_blank" rel="noopener"><img src="' + e(backImg) + '" alt="' + e(L('الغلاف الخلفي — ', 'Back cover — ') + t(title)) + '" loading="lazy"></a>' : '') +
+							(backImg ? '<button type="button" class="d-back-img" data-src="' + e(backImg) + '" data-alt="' + e(L('الغلاف الخلفي — ', 'Back cover — ') + t(title)) + '" aria-label="' + e(L('تكبير الغلاف الخلفي', 'Enlarge the back cover')) + '"><img src="' + e(backImg) + '" alt="' + e(L('الغلاف الخلفي — ', 'Back cover — ') + t(title)) + '" loading="lazy"></button>' : '') +
 							(blurb ? '<blockquote class="d-blurb" dir="rtl" lang="ar">' + e(blurb.ar).replace(/\n/g, '<br>') + '</blockquote><a class="d-blurb-src" href="' + e(blurb.src) + '" target="_blank" rel="noopener">' + (blurb.by ? L('عن ', 'From ') + t(blurb.by) + ' ↗' : L('عن أبجد ↗', 'From Abjjad ↗')) + '</a>' : '') +
 						'</section>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
@@ -228,6 +228,9 @@ window.PAGE = {
 			'</div></section>';
 
 		window.Books.initShowcase(document.getElementById('d-book'));
+		/* the back cover opens full size, like the pictures on the home timeline */
+		var bc = root.querySelector('.d-back-img');
+		if (bc) bc.addEventListener('click', function () { App.showPic(bc.dataset.src, bc.dataset.alt); });
 		if (audioTracks.length) window.Cassette.mount(document.getElementById('d-cassette'), { tracks: audioTracks });
 
 		function langName(l) {

@@ -126,6 +126,22 @@
 			return c ? '<a href="' + App.charHref(id) + '">' + App.tx(c.name) + '</a>' : '';
 		},
 		/* scroll to #hash after a render, and let the page react (open / flip) */
+		/* a picture full size in a dialog, with its caption (the home timeline, a book's back cover) */
+		showPic: function (src, alt) {
+			var e = App.esc, dlg = document.getElementById('pic-dialog');
+			if (!dlg) {
+				dlg = document.createElement('dialog');
+				dlg.id = 'pic-dialog';
+				dlg.className = 'pic-dialog';
+				document.body.appendChild(dlg);
+				dlg.addEventListener('click', function (x) { if (x.target === dlg || x.target.closest('.close')) dlg.close(); });
+				dlg.addEventListener('close', function () { dlg.innerHTML = ''; });
+			}
+			dlg.innerHTML = '<figure><img src="' + e(src) + '" alt="' + e(alt || '') + '">' + (alt ? '<figcaption>' + e(alt) + '</figcaption>' : '') + '</figure>' +
+				'<button type="button" class="close" aria-label="' + e(App.L('إغلاق', 'Close')) + '">×</button>';
+			dlg.showModal();
+		},
+
 		focusHash: function (onTarget) {
 			var id = decodeURIComponent(location.hash.slice(1));
 			if (!id) return;
@@ -386,6 +402,14 @@
 			App.fillStrings();
 			if (window.PAGE && typeof window.PAGE.render === 'function') window.PAGE.render();
 			App.observeRise();
+			/* rows of covers show their scrollbar only while they are being scrolled */
+			document.addEventListener('scroll', function (ev) {
+				var el = ev.target;
+				if (!el.classList || !el.classList.contains('cover-row')) return;
+				el.classList.add('is-scrolling');
+				clearTimeout(el._sbt);
+				el._sbt = setTimeout(function () { el.classList.remove('is-scrolling'); }, 900);
+			}, true);
 			window.addEventListener('hashchange', function () {
 				if (window.PAGE && window.PAGE.onHash) window.PAGE.onHash(); else App.focusHash();
 			});
