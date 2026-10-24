@@ -1095,3 +1095,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		source: "https://alkarmabooks.com/book/%D9%83%D9%86%D8%AA-%D8%B5%D8%A8%D9%8A%D9%91%D9%8B%D8%A7-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%A8%D8%B9%D9%8A%D9%86%D9%8A%D8%A7%D8%AA-%D8%B3%D9%8A%D8%B1%D8%A9-%D8%AB%D9%82%D8%A7%D9%81%D9%8A%D8%A9-%D9%88%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A9", shop: { name: KARMA, url: "https://alkarmabooks.com/book/%D9%83%D9%86%D8%AA-%D8%B5%D8%A8%D9%8A%D9%91%D9%8B%D8%A7-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D8%A8%D8%B9%D9%8A%D9%86%D9%8A%D8%A7%D8%AA-%D8%B3%D9%8A%D8%B1%D8%A9-%D8%AB%D9%82%D8%A7%D9%81%D9%8A%D8%A9-%D9%88%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A9" }
 	});
 })(window.AKT);
+
+/* «السخرية في أدب أحمد خالد توفيق» (Dr. Islam Hamza): the General Egyptian Book Organization, January 2022, 240 pages */
+(function (A) {
+	var GEBO = { ar: 'الهيئة المصرية العامة للكتاب', en: 'General Egyptian Book Organization' };
+	var ab = (A.aboutBooks || []).filter(function (b) { return b.id === 'about-sokhreya'; })[0];
+	if (ab) { ab.publisher = GEBO; ab.year = 2022; }
+	var info = (A.bookInfo = A.bookInfo || {})['about-sokhreya'] = A.bookInfo['about-sokhreya'] || {};
+	info.firstPublished = '2022-01';
+	info.pages = 240;
+	info.language = 'ar';
+	info.editions = [{ title: { ar: 'السخرية في أدب أحمد خالد توفيق', en: 'Satire in the Writing of Ahmed Khaled Tawfik' }, publisher: GEBO, year: 2022, lang: 'ar', isbn: '9789779135779', pages: 240,
+		format: { ar: 'غلاف ورقي', en: 'Paperback' }, cover: ab ? ab.cover : '' }];
+})(window.AKT);
