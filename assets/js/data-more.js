@@ -1932,3 +1932,27 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'هذه مقالات ساخرة قصيرة لا تبغي سوى جعلك تبتسم، بعدها تنفجر كالفقاقيع وتبلل أرنبة أنفك لثوان. لهذا نقدم جائزة لأي شخص يتذكر مقالًا واحدًا من هذا الكتاب بعد ثلاث دقائق من قراءته.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004109/');
 })(window.AKT);
+
+/* «الغث من القول»: its five editions — Dar Lila (2010), Dar Lila (Kayan Corp) (undated), Kayan (2017 paperback with its back cover
+   from Samawy (samawy.com/i/1004240) and its text; Kindle October 2017 and 2024); the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).ghath = A.bookInfo.ghath || {};
+	var T = { ar: 'الغث من القول', en: 'Al-Ghath min Al-Qawl' }, C = 'assets/img/covers/books/';
+	var KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' }, PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200195'; })[0] || {};
+	b.firstPublished = '2010-01-01';
+	b.pages = 295;
+	b.editions = [
+		{ title: T, publisher: { ar: 'دار ليلى للنشر والتوزيع', en: 'Dar Lila' }, year: 2010, date: '2010-01-01', lang: 'ar', isbn: '9789776386167', isbn10: '9776386164', asin: '9776386164',
+			pages: 295, format: PB, edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'ghath-2010.webp', source: 'https://openlibrary.org/books/OL24849637M' },
+		{ title: T, publisher: { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, lang: 'ar', asin: 'B0DN26NNYW', format: PB, cover: C + 'ghath-lila-kayan-corp.webp' },
+		{ title: T, publisher: KAYAN, year: 2017, lang: 'ar', isbn: '9789778200195', isbn10: '977820019X', pages: 228, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/ghath-kayan.webp', source: kayan.source },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-10-01', lang: 'ar', isbn10: '977820019X', asin: 'B076X799QH', pages: 136, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYRXYSK', pages: 150, format: KD }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'ghath-2010.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'نُشرت هذه المقالات في أماكن متفرقة، وإن كان معظمها في جريدة الدستور قبل اغتيالها، وفي موقع (بص وطل) على شبكة الإنترنت. يمكنك أن تجد كل حرف كتبته على شبكة الإنترنت، لكنني في النهاية ابن الكتاب وربيبه، ولا أؤمن أنني كتبت شيئًا ما لم أمسك به مطبوعًا على ورق جميل.. تضع خطًا أو تثني صفحة أو تسكب كوب الشاي على الصفحة. هذا هو اختراع الخواجة (جوتنبرج) في كامل عنفوانه ومجده. لا يمكنك أن تشعر بالشيء ذاته في الفضاء السايبري حيث أفكارك مجرد ومضات إلكترونية وتبادل بين علامة الواحد والصفر.. دعك من الحاجة البشرية الطبيعية لأن تضع كل أولادك تحت سقف واحد.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004240/');
+})(window.AKT);
