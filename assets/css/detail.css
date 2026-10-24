@@ -272,3 +272,8 @@ html[data-theme="light"] .d-award-badge { background: linear-gradient(180deg, #f
 .ed-pop dt { color: var(--muted); }
 .ed-pop dd { margin: 0; color: var(--paper); }
 .ed-pop a { font-family: var(--f-latin); font-size: 13.5px; }
+/* the publisher in an edition card or a printing's popup links to its page, in the text's own font */
+.edition .meta a, .ed-pop dd a { font-family: inherit; font-size: inherit; color: var(--paper-dim); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.edition .meta a:hover, .ed-pop dd a:hover { color: var(--ember); text-decoration-color: currentColor; }
+.d-desc .d-pub-link { color: inherit; text-decoration: underline; text-decoration-color: var(--ember); text-underline-offset: 3px; }
+.d-desc .d-pub-link:hover { color: var(--ember); }

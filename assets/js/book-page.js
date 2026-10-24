@@ -128,12 +128,13 @@ window.PAGE = {
 			var first = eds[g.list[0]];
 			var withPub = g.list.map(function (i) { return eds[i]; }).filter(function (ed) { return ed.publisher; })[0] || first;
 			var n = g.list.length;
-			var meta = [withPub.publisher ? t(withPub.publisher) : '', langName(first.lang),
-				n > 1 ? (n === 2 ? L('طبعتان', '2 printings') : App.num(n) + ' ' + L(n <= 10 ? 'طبعات' : 'طبعة', 'printings')) : ''].filter(Boolean).join(' · ');
+			/* the house links to its page when it has one */
+			var meta = [withPub.publisher ? S.publisherLink(withPub.publisher) : '', e(langName(first.lang)),
+				n > 1 ? e(n === 2 ? L('طبعتان', '2 printings') : App.num(n) + ' ' + L(n <= 10 ? 'طبعات' : 'طبعة', 'printings')) : ''].filter(Boolean).join(' · ');
 			return '<article class="edition">' +
 				S.miniCover({ img: g.cover, color: color, title: t(first.title || title), by: otherAuthor ? authorAr : first.lang && first.lang !== 'ar' ? 'Ahmed Khaled Tawfik' : '' }) +
 				'<div><h4>' + tx(first.title || title) + '</h4>' +
-				'<p class="meta">' + e(meta) + '</p>' +
+				'<p class="meta">' + meta + '</p>' +
 				'<div class="ed-years" role="group" aria-label="' + e(L('الطبعات', 'Printings')) + '">' + g.list.map(function (i) {
 					var ed = eds[i], f = ed.format ? t(ed.format) : '';
 					return '<button type="button" class="ed-yr" data-ed="' + i + '" data-first="' + g.list[0] + '" aria-expanded="false">' + (ed.year ? e(App.num(String(ed.year).slice(0, 4))) : '—') +
@@ -145,7 +146,7 @@ window.PAGE = {
 		var edDetails = function (ed, cardTitle) {
 			var rows = [
 				ed.title && t(ed.title) !== t(cardTitle || title) ? [L('العنوان', 'Title'), tx(ed.title)] : null,
-				ed.publisher ? [L('الناشر', 'Publisher'), e(t(ed.publisher))] : null,
+				ed.publisher ? [L('الناشر', 'Publisher'), S.publisherLink(ed.publisher)] : null,
 				ed.date ? [L('تاريخ النشر', 'Published'), e(App.num(ed.date.split('-').reverse().join('/')))] : ed.year ? [L('السنة', 'Year'), e(App.num(ed.year))] : null,
 				ed.format ? [L('الشكل', 'Format'), e(t(ed.format))] : null,
 				ed.edition ? [L('الطبعة', 'Printing'), e(t(ed.edition))] : null,
@@ -309,6 +310,34 @@ window.PAGE = {
 			document.addEventListener('click', function (ev) { if (!edSec.contains(ev.target)) close(); });
 			document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') close(); });
 		}
+		/* a publisher named in the description links to its page (its first mention, as a whole name) */
+		var descEl = root.querySelector('.d-desc');
+		if (descEl) {
+			(d.publishers || []).forEach(function (p) {
+				var names = [p.name.ar, p.name.en].filter(function (n) { return n && n.length > 3; });
+				var walker = document.createTreeWalker(descEl, NodeFilter.SHOW_TEXT), node;
+				while ((node = walker.nextNode())) {
+					if (node.parentNode.closest('a')) continue;
+					var hit = null;
+					names.forEach(function (n) {
+						var i = node.data.indexOf(n);
+						var before = i > 0 ? node.data.charAt(i - 1) : ' ', after = node.data.charAt(i + n.length) || ' ';
+						/* a whole name: not inside a longer word (Arabic letters or Latin letters on either side) */
+						if (i >= 0 && !/[ء-يa-zA-Z]/.test(before) && !/[ء-يa-zA-Z]/.test(after) && (!hit || i < hit.i)) hit = { i: i, n: n };
+					});
+					if (!hit) continue;
+					var rest = node.splitText(hit.i);
+					rest.splitText(hit.n.length);
+					var a = document.createElement('a');
+					a.href = S.publisherHref(p.id);
+					a.className = 'd-pub-link';
+					rest.parentNode.replaceChild(a, rest);
+					a.appendChild(rest);
+					break;
+				}
+			});
+		}
+
 		/* the back cover opens full size, like the pictures on the home timeline */
 		root.querySelectorAll('.d-back-img').forEach(function (bc) { bc.addEventListener('click', function () { App.showPic(bc.dataset.src, bc.dataset.alt); }); });
 		if (audioTracks.length) window.Cassette.mount(document.getElementById('d-cassette'), { tracks: audioTracks });
