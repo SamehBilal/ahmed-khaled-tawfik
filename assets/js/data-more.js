@@ -1766,3 +1766,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	b.ownCover = C + 'esp-2009.webp';
 })(window.AKT);
+
+/* «7 باب» (Mohamed Adel, Dar Lila & Diamond Book): its back cover, which names his foreword */
+(function (A) {
+	((A.writers || {}).introductions || []).forEach(function (w) {
+		if ((w.book || {}).ar === '7 باب') w.back = 'assets/img/covers/back/7-bab.webp';
+	});
+})(window.AKT);
