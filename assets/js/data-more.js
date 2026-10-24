@@ -1336,7 +1336,12 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		/* Al Karma's Kindle edition: 20 February 2023, 172 pages */
 		if (/كيندل/.test((ed.format || {}).ar || '') && /الكرمة/.test(p)) { ed.date = '2023-02-20'; ed.pages = 172; ed.isbn10 = '977862559X'; ed.asin = 'B0BSZXYLH9'; ed.source = 'https://www.goodreads.com/book/show/123026949'; }
 	});
-	/* the only cover we have is Al Karma's, so the book shows that edition's (and so its back cover) */
-	b.ownCover = 'assets/img/covers/karma/9789778625592.webp';
+	/* each printing's own cover; the book shows the first edition's, Merit's */
+	b.editions.forEach(function (ed) {
+		var p = (ed.publisher || {}).ar || '';
+		if (ed.year === 2010 && /ميريت/.test(p)) ed.cover = 'assets/img/covers/translations/dermaphoria-merit.webp';
+		if (ed.year === 2014 && /ليلى/.test(p)) ed.cover = 'assets/img/covers/translations/dermaphoria-lila.webp';
+	});
+	b.ownCover = 'assets/img/covers/translations/dermaphoria-merit.webp';
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009253/', 'https://www.goodreads.com/book/show/86919279');
 })(window.AKT);
