@@ -2327,3 +2327,32 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'عندما تصطدم الحقيقة مع الخيال الممتع، فإن الخيال يكسب بالتأكيد.. هكذا تولد الأساطير.. هكذا تولد الشائعات.. تتضافر عوامل عدة مثل الذاكرة المزيفة، والرغبة في التصديق، والبحث عن الإثارة، وشهوة جذب الاهتمام، والبحث المحموم عن تفسير منطقي لطلاسم الكون، دعك من الرغبة في الكسب المادي لأن سوق الخرافة رائجة في كل مكان وزمان.. من ثم تغدو الخرافة أكثر واقعية من الواقع ذاته.\n\nقليلون امتلكوا الشجاعة كيف يفحصوا ويفندوا ويعلنوا ما توصلوا له.. في العصور الوسطى كان أمثال هؤلاء يحرقون أحياء، أما اليوم فلا يعبأ بهم أحد ولا يصدقهم أحد.. وهو عقاب ليس أقل قسوة في رأيي..\n\nهذا الكتاب لا يعلن الحرب على الخيال.. بل يعلنها على الخيال الذي يصر أصحابه على أنه الحقيقة الوحيدة.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004115/');
 })(window.AKT);
+
+/* «موسوعة الظلام»: its six editions — Diamond Book (2006), Dar Lila (Kayan Corp) (220 and 172 pages, undated), Dar Lila (undated,
+   188 pages), Kayan (2017 paperback with its back cover from Samawy (samawy.com/i/1004112) and its text; Kindle 2024); the covers of
+   the first four (each named on Goodreads by its book id); the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).mawsoua = A.bookInfo.mawsoua || {};
+	var T = { ar: 'موسوعة الظلام', en: 'Encyclopedia of Darkness' }, C = 'assets/img/covers/books/mawsoua-', GR = 'https://www.goodreads.com/book/show/';
+	var LILAKC = { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200225'; })[0] || {};
+	(A.works || []).forEach(function (w) { if (w.id === 'mawsoua' && !(w.publisher || {}).ar) w.publisher = { ar: 'دايموند بوك', en: 'Diamond Book' }; });
+	b.firstPublished = '2006-01-01';
+	b.pages = 220;
+	b.editions = [
+		{ title: T, publisher: { ar: 'دايموند بوك', en: 'Diamond Book' }, year: 2006, date: '2006-01-01', lang: 'ar', asin: 'B0DLT5XXZ6', pages: 220, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'diamond-2006.webp', source: GR + '10954529' },
+		{ title: T, publisher: LILAKC, lang: 'ar', asin: 'B0DMZ9GJQG', pages: 220, format: PB, cover: C + 'lila-220.webp', source: GR + '5854156' },
+		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, lang: 'ar', isbn: '9789776386105', isbn10: '9776386105', asin: '9776386105', pages: 188, format: PB,
+			cover: C + 'lila.webp', source: GR + '17643627' },
+		{ title: T, publisher: LILAKC, lang: 'ar', pages: 172, format: PB, cover: C + 'lila-172.webp', source: GR + '23590587' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200225', asin: 'B0DMDKTG3G', pages: 188, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/mawsoua-kayan.webp', source: kayan.source },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYRP5B6', pages: 131, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'diamond-2006.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'موسوعة الظلام.. نتحدث عن الرعب.. عن المجهول.. عن الجانب المظلم من القمر، والناحية الأخرى من الباب الموصد.. نتحدث عما ينتظرنا في زاوية المنعطف، وعن الذي يقرع جرس الباب بعد منتصف الليل.. نتحدث عن سبب عواء الكلب وانتصاب شعر القط.. نتحدث عن أسرار منسية وفنون بائدة يتداولون سرها همسًا.. نتحدث عن طقوس غامضة وقلاع مهجورة.. موسوعة الظلام.. نتحدث عن كتب كانوا يحرقون من يمتلكها، وعن أشياء لا اسم لها.. نتحدث عن هذه الأسرار الرهيبة وعن الذين كتبوا عنها أو صوروها. موسوعة الظلام هي محاولة جريئة هي أن تجمع كل هذا في موسوعة، كأنك يمكن أن تحتوي خيال الإنسان وكوابيسه في كلمات، لكننا حاولنا.. والنتيجة ما زالت بعيدة عن الكمال، لكنها تمنحك ساعات لا شك فيها من الإثارة والخيال.. نستطيع أن نعطيك هذا الوعد ونفي به!' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004112/');
+})(window.AKT);
