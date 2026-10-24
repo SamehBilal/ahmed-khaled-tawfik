@@ -1026,6 +1026,17 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		en: 'Mines in the Sea of Memories came out from Dar Al Karma on 5 July 2025, to mark his birthday, and is the latest of his books to date. It holds 46 poems never published before, which he wrote over the years and kept in a private notebook: the oldest from when he was fourteen, the latest from 1992, when he was thirty.\n\nHis family wanted readers to know this side of his writing, which came before the series, and took the poems to Dar Al Karma. He sometimes gave lines from them to his characters, and mentioned writing poetry in his essay “A Poet’s Resignation”. The poems range from love poems to reflective ones.'
 	};
 
+	/* «دعني أخبرك بشيء»: released on 21 January 2025, 152 pages */
+	var dk = (A.works || []).filter(function (w) { return w.id === 'daani-okhberak'; })[0];
+	if (dk) dk.synopsis = { ar: 'مختارات من تأملاته عن الحياة والبشر وملاحظاته الذكية، صدرت بعد رحيله في يناير 2025.', en: 'A selection of his reflections on life and people and his sharp observations, published after his death in January 2025.' };
+	var dki = A.bookInfo['daani-okhberak'] = A.bookInfo['daani-okhberak'] || {};
+	dki.firstPublished = '2025-01-21';
+	dki.pages = 152;
+	dki.description = {
+		ar: 'صدر «دعني أخبرك بشيء» عن دار الكرمة في 21 يناير 2025، في 152 صفحة: باقة مختارة من أجمل ما كتبه أحمد خالد توفيق من تأملات عميقة عن الحياة والبشر، وملاحظاته الذكية التي لا تخلو أبدًا من حكمة.\n\nيأخذ عنوانه من تقديمه للكتاب: «دعني أخبرك بشيء مهم، لا تقضِ حياتك بانتظار أن تنتهي الفترة كذا والفترة كذا… يجب أن تستمتع بكل فترة كأنها هي الصورة الوحيدة النهائية لحياتك».',
+		en: 'Let Me Tell You Something came out from Dar Al Karma on 21 January 2025, at 152 pages: a selection of the best of Ahmed Khaled Tawfik’s reflections on life and people, and his sharp observations, never short of wisdom.\n\nIts title comes from his own introduction: “Let me tell you something important: don’t spend your life waiting for this period or that one to end… Enjoy every period as if it were the one, final picture of your life.”'
+	};
+
 	Object.keys(books).forEach(function (id) {
 		var b = books[id], info = A.bookInfo[id] = A.bookInfo[id] || {};
 		var eds = info.editions = info.editions || [];
