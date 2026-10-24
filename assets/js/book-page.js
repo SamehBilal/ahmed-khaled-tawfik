@@ -175,7 +175,8 @@ window.PAGE = {
 				ed.pages ? [L('الصفحات', 'Pages'), e(App.num(ed.pages))] : null,
 				ed.translator ? [L('الترجمة', 'Translator'), tx(ed.translator)] : null,
 				ed.isbn ? ['ISBN', e(ed.isbn)] : null,
-				ed.isbn10 ? ['ISBN-10', e(ed.isbn10)] : null
+				ed.isbn10 ? ['ISBN-10', e(ed.isbn10)] : null,
+				ed.asin ? ['ASIN', e(ed.asin)] : null
 			].filter(Boolean);
 			return '<dl>' + rows.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('') + '</dl>' +
 				(ed.source ? '<a href="' + e(ed.source) + '" target="_blank" rel="noopener">' + (ed.store === 'Abjjad' ? L('على أبجد ↗', 'On Abjjad ↗') : L('المصدر ↗', 'Source ↗')) + '</a>' : '');

@@ -1314,3 +1314,29 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		publisher: { ar: 'نسخة متداولة على تليجرام', en: 'A copy passed around on Telegram' }, year: 2020, lang: 'ar',
 		format: { ar: 'نسخة رقمية غير رسمية', en: 'Unofficial digital copy' }, cover: 'assets/img/covers/translations/fight-club-telegram-2020.webp' });
 })(window.AKT);
+
+/* «ديرمافوريا»: three printings — Merit (1 January 2010, 239 pages), Dar Lila (1 January 2014, 292 pages) and Dar Al Karma
+   (26 January 2023, 272 pages, with its back cover from Samawy, samawy.com/i/1009253) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).dermaphoria = A.bookInfo.dermaphoria || {};
+	b.firstPublished = '2010-01-01';
+	var seen = {};
+	b.editions = (b.editions || []).filter(function (ed) {
+		/* Dar Lila's 2014 printing is listed twice from the same Goodreads page */
+		var k = ed.source && ed.year ? ed.source + '|' + ed.year : '';
+		if (k && seen[k]) return false;
+		if (k) seen[k] = ed;
+		return true;
+	});
+	b.editions.forEach(function (ed) {
+		var p = (ed.publisher || {}).ar || '';
+		if (ed.year === 2010 && /ميريت/.test(p)) { ed.date = '2010-01-01'; ed.pages = 239; ed.asin = 'B0DM8P37BK'; ed.source = 'https://www.goodreads.com/book/show/9304885'; }
+		if (ed.year === 2014 && /ليلى/.test(p)) { ed.date = '2014-01-01'; ed.pages = 292; ed.asin = 'B0DM1KV1WJ'; ed.publisher = { ar: 'دار ليلى للنشر والتوزيع', en: 'Dar Lila' }; ed.source = 'https://www.goodreads.com/book/show/34731379'; }
+		if (ed.isbn === '9789778625592') { ed.date = '2023-01-26'; ed.pages = 272; ed.isbn10 = '977862559X'; ed.back = 'assets/img/covers/back/dermaphoria-karma.webp'; }
+		/* Al Karma's Kindle edition: 20 February 2023, 172 pages */
+		if (/كيندل/.test((ed.format || {}).ar || '') && /الكرمة/.test(p)) { ed.date = '2023-02-20'; ed.pages = 172; ed.isbn10 = '977862559X'; ed.asin = 'B0BSZXYLH9'; ed.source = 'https://www.goodreads.com/book/show/123026949'; }
+	});
+	/* the only cover we have is Al Karma's, so the book shows that edition's (and so its back cover) */
+	b.ownCover = 'assets/img/covers/karma/9789778625592.webp';
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009253/', 'https://www.goodreads.com/book/show/86919279');
+})(window.AKT);
