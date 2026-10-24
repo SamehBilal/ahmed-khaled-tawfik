@@ -2134,3 +2134,31 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'أحيانًا يتكلم بطل القصة بغرور أو وقاحة أو يكون ملحدًا.. يقوم الأدمن بنقل الجملة كما هي من على لسان البطل ويكتب اسمي جوارها! هكذا تجد لي عبارات خالدة مثل: «يجب قهر الضعفاء – أحمد خالد» أو «إنني أقدم للأجيال القادمة قطوف الحكمة التي لن يجدوها في أي موضع آخر – أحمد خالد» أو «من الواضح تمامًا أن الكون أوجد نفسه بلا حاجة لخالق – أحمد خالد».\n\nقلت للأصدقاء محرري الصفحات مرارًا أن عليهم كتابة مصدر الاقتباس وقائله بدقة، أو لا يكتبوا شيئًا على الإطلاق. ينطبق الأمر نفسه على التويتات.. أنا لا أتعامل مع تويتر ولا أعرف ما هو بدقة، لكني أجد تويتات مستفزة حقًا تحمل اسمي.. لقد كتبتها فعلًا لكن على لسان أبطال قصصي؛ ومنهم الوغد والمغرور والزاني والكذوب والملحد.. أما أن تجد تويتة تحمل اسمي تقول: «أنا أكره الربيع والأزهار والأطفال» فأنت تشك في عقل من كتب هذا الكلام.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004111/');
 })(window.AKT);
+
+/* «شاي بالنعناع»: its five editions — Dar Lila (Kayan Corp) (22 January 2012; Kindle 2022), Kayan (2017 paperback with its back cover
+   from Samawy (samawy.com/i/1004106) and its text; Kindle October 2017) and the Persian translation (Anan, 1 April 2024);
+   the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).shay = A.bookInfo.shay || {};
+	var T = { ar: 'شاي بالنعناع', en: 'Mint Tea' }, C = 'assets/img/covers/books/';
+	var LILA = { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200201'; })[0] || {};
+	b.firstPublished = '2012-01-22';
+	b.pages = 185;
+	b.editions = [
+		{ title: T, publisher: LILA, year: 2012, date: '2012-01-22', lang: 'ar', isbn: '9789775238030', isbn10: '977523803X', asin: '977523803X', pages: 185, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'shay-2012.webp', source: 'https://openlibrary.org/books/OL25247756M' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200201', asin: '9778200203', pages: 164, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/shay-kayan.webp', source: kayan.source },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-10-01', lang: 'ar', asin: 'B076X5ZVLC', pages: 103, format: KD },
+		{ title: T, publisher: LILA, year: 2022, date: '2022-03-30', lang: 'ar', asin: 'B09WXQDQ13', pages: 96, format: KD },
+		{ title: { ar: 'چای با نعناع', en: "Chay ba Na'na' (Persian)" }, publisher: { ar: 'آنان', en: 'Anan' }, year: 2024, date: '2024-04-01', lang: 'fa',
+			asin: 'B0DXGSC3Z8', pages: 146, format: PB, translator: { ar: 'عماد جعفري', en: 'Emad Jafari' }, cover: C + 'shay-2024-fa.webp',
+			source: 'https://www.goodreads.com/book/show/228102133' }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'shay-2012.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'طبعًا ينتظر القارئ مني أن أتكلم عن بعض الظواهر الغامضة مثل قلعة اللورد فلان في إسكتلندا حيث يمشي شبح الكونتيسة بعد منتصف الليل ليلتهم أذن من يكون هناك، أو الرسوم الغامضة التي وجدها العالم (فلان) على قمة جبل في التبت، وتؤكد أن الهامبرجر كان معروفًا منذ مليون سنة لدى حضارة أخرى.. إلخ. يسمون هذا الكلام الفارغ (الظواهر الفورتية Fortean). وهناك أطنان منه على كل حال، ومن الغريب أنني لا أرتاح له كثيرًا.. أقبل أن يكون هذا الكلام في سياق قصة حيث الخيال هو اسم اللعبة، لكني أرفض رفضًا تامًا أن يكون على شكل معلومات. بعبارة أخرى يسرني أن أكتب قصة مسلية عن مصاصي الدماء، لكني أرفض أن أكتب مقالًا عن مصاصي الدماء، وطريقة قتلهم وكيف تميزهم عن سواهم. دعنا من الكونتيسة التي تلتهم الآذان إذن ولنتكلم في شيء آخر اليوم على الأقل، فقط تعالَ وأعدّ لنا كوبًا من الشاي بالنعناع ليحلو الكلام..' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004106/');
+})(window.AKT);
