@@ -143,7 +143,14 @@
 	/* the first known cover of an issue (from data-more.js: store listings, Wikimedia) */
 	function issueCover(sid, is) {
 		var key = is._special ? 'specials-' + is.n : issueKey(sid, is);
-		return coverOf(((window.App.data().issueInfo) || {})[key]);
+		/* an issue that is one of his books takes that book's cover */
+		return coverOf(((window.App.data().issueInfo) || {})[key]) || (is.work ? coverOf((window.App.data().bookInfo || {})[is.work]) : '');
+	}
+
+	/* a book's back cover: its own (backCovers, on the book page), else one of its editions' */
+	function backOf(id) {
+		var d = window.App.data(), info = (d.bookInfo || {})[id] || {};
+		return (d.backCovers || {})[id] || ((info.editions || []).filter(function (ed) { return ed.back; })[0] || {}).back || '';
 	}
 
 	/* a series' cover: the cover of its first book that has one, else the series' own cover */
@@ -311,7 +318,7 @@
 	}
 
 	window.WorksShared = {
-		publishers: publishers, publisherHref: publisherHref, publisherLink: publisherLink, publisherCard: publisherCard,
+		backOf: backOf, publishers: publishers, publisherHref: publisherHref, publisherLink: publisherLink, publisherCard: publisherCard,
 		ownSeries: ownSeries, contributedSeries: contributedSeries, awardsList: awardsList, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
 		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook, issueCover: issueCover,
