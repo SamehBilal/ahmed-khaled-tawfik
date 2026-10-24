@@ -1459,3 +1459,19 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009755/');
 })(window.AKT);
+
+/* «الهول»: Dar Al Karma's paperback (20 July 2014, 248 pages) with its back cover from Samawy (samawy.com/i/1008920)
+   and Kindle edition (1 November 2017, 205 pages) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).alhool = A.bookInfo.alhool || {};
+	b.firstPublished = '2014-07-20';
+	b.pages = 248;
+	var eds = b.editions = b.editions || [];
+	eds.forEach(function (ed) {
+		if (ed.isbn === '9789776467064') { ed.date = '2014-07-20'; ed.pages = 248; ed.asin = '9776467067'; ed.back = 'assets/img/covers/back/alhool.webp'; }
+	});
+	if (!eds.some(function (ed) { return /كيندل/.test((ed.format || {}).ar || ''); }))
+		eds.push({ title: { ar: 'الهول', en: 'Al-Hool (The Terror)' }, publisher: { ar: 'دار الكرمة', en: 'Dar Al Karma' }, year: 2017, date: '2017-11-01', lang: 'ar',
+			isbn10: '9776467067', asin: 'B078JLDDJB', pages: 205, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } });
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1008920/');
+})(window.AKT);
