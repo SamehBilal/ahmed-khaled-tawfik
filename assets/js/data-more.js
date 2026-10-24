@@ -1602,3 +1602,22 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	I['mughamer-2'] = { firstPublished: '2009-09-01', editions: [{ title: { ar: 'المغامر 2', en: 'Al-Mughamer 2' }, publisher: MAA, year: 2009, date: '2009-09-01', lang: 'ar',
 		asin: 'B0DLTDZDV7', format: PB, back: 'assets/img/covers/back/mughamer-2.webp' }] };
 })(window.AKT);
+
+/* «المغامر»: the front covers of issues 1 and 2; the line is an illustrated one («سلسلة المغامر المصورة», comic book
+   serials) in the Egyptian Pocket Novels */
+(function (A) {
+	var I = A.issueInfo = A.issueInfo || {};
+	[1, 2].forEach(function (n) {
+		var info = I['mughamer-' + n];
+		if (!info) return;
+		var cover = 'assets/img/covers/series/mughamer-' + n + '.webp';
+		info.ownCover = cover;
+		(info.editions || []).forEach(function (ed) { ed.cover = cover; });
+	});
+	(A.otherSeries || []).forEach(function (s) {
+		if (s.id !== 'mughamer') return;
+		s.cover = 'assets/img/covers/series/mughamer-1.webp';
+		s.description.ar = s.description.ar.replace('سلسلة لباسم صلاح الدين', 'سلسلة مصوّرة لباسم صلاح الدين («سلسلة المغامر المصورة») ضمن «روايات مصرية للجيب»');
+		s.description.en = s.description.en.replace('Basem Salah El-Din’s line', 'Basem Salah El-Din’s illustrated line (comic book serials) in the Egyptian Pocket Novels');
+	});
+})(window.AKT);
