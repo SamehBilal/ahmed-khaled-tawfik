@@ -2362,3 +2362,34 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var b = (A.bookInfo = A.bookInfo || {})['hadem-al-asateer'] = A.bookInfo['hadem-al-asateer'] || {};
 	(b.editions || []).forEach(function (ed) { if (ed.isbn === '9789778200249') ed.cover = 'assets/img/covers/books/aseeralkotb-205ade7cbeb9.webp'; });
 })(window.AKT);
+
+/* «الآن نفتح الصندوق»: the six editions of its first part — Dar Lila (2007, and a second 2007 printing; 2016 with Dar El Shorouk),
+   Kayan (1 July 2017 paperback with its back cover from Samawy (samawy.com/i/1004092) and its text; an undated Kindle edition and
+   2024's) — before the second and third parts' editions; the three Dar Lila covers; the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).sandoq = A.bookInfo.sandoq || {};
+	var T = { ar: 'الآن نفتح الصندوق 1', en: 'Now We Open the Box 1' }, C = 'assets/img/covers/stories/sandoq-', GR = 'https://www.goodreads.com/book/show/';
+	var LILA = { ar: 'دار ليلى للنشر والتوزيع', en: 'Dar Lila' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [];
+	var part1 = function (ed) { var t = (ed.title || {}).ar || ''; return /الأول|الصندوق 1$/.test(t); };
+	var kayan = old.filter(function (ed) { return ed.isbn === '9789778200294'; })[0] || {};
+	var second = old.filter(function (ed) { return ed.isbn === '9789776386020'; })[0] || {};
+	b.firstPublished = '2007-01-01';
+	b.editions = [
+		{ title: T, publisher: LILA, year: 2007, date: '2007-01-01', lang: 'ar', asin: 'B0DLT8GYD7', pages: 294, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + '5853529.webp', source: GR + '5853529' },
+		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, year: 2007, date: '2007-01-01', lang: 'ar', isbn: second.isbn, pages: 294, format: PB,
+			edition: second.isbn ? { ar: 'الطبعة الثانية', en: '2nd printing' } : undefined, cover: C + '23124714.webp', source: GR + '23124714' },
+		{ title: T, publisher: { ar: 'دار ليلى ودار الشروق', en: 'Dar Lila & Dar El Shorouk' }, year: 2016, date: '2016-01-01', lang: 'ar', asin: 'B0DMF91MYP', pages: 295, format: PB,
+			edition: { ar: 'طبعة خاصة', en: 'Special edition' }, cover: C + '39718362.webp', source: GR + '39718362' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-07-01', lang: 'ar', isbn: '9789778200294', isbn10: '9778200297', asin: '9778200297', pages: 229, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/sandoq-kayan.webp', source: kayan.source },
+		{ title: T, publisher: KAYAN, lang: 'ar', asin: 'B076X5MCCC', pages: 162, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYKYG84', pages: 203, format: KD }
+	].concat(old.filter(function (ed) { return !part1(ed); }));
+	b.ownCover = C + '5853529.webp';
+	b.blurb = { by: { ar: 'كيان — الجزء الأول', en: 'Kayan — Part One' },
+		ar: 'لم يترك لنا الدكتور «محفوظ» إلا هذا الصندوق في قبو داره. الصندوق يحوي مذكرات وملاحظات عن تلك القصص الغريبة التي مرت به في حياته. تعالوا نفتح الصندوق الآن.. تعالوا نشعل شمعة تبدد ظلام القبو ونطالع واحدة من تلك القصص.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004092/');
+})(window.AKT);
