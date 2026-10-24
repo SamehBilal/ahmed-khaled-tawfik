@@ -1622,3 +1622,31 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		s.description.en = s.description.en.replace('Basem Salah El-Din’s line', 'Basem Salah El-Din’s illustrated line (comic book serials) in the Egyptian Pocket Novels');
 	});
 })(window.AKT);
+
+/* «7 وجوه للحب»: its seven writers, and four editions with three covers — Dar Lila & Diamond Book's (1 January 2007,
+   199 pages), two more from Dar Lila (undated), and a Kindle edition (12 October 2019, 107 pages) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {})['sabaa-wogooh-lel-hob'] = A.bookInfo['sabaa-wogooh-lel-hob'] || {};
+	var T = { ar: '7 وجوه للحب', en: 'Seven Faces of Love' }, PB = { ar: 'غلاف ورقي', en: 'Paperback' };
+	var LILA = { ar: 'دار ليلى', en: 'Dar Lila' };
+	b.firstPublished = '2007-01-01';
+	b.pages = 199;
+	b.ownCover = 'assets/img/covers/books/goodreads-sabaa-wogooh-lel-hob.jpg';
+	b.authors = [
+		{ ar: 'نبيل فاروق', en: 'Nabil Farouk' }, { ar: 'تامر إبراهيم', en: 'Tamer Ibrahim' }, { ar: 'تامر أحمد', en: 'Tamer Ahmed' },
+		{ ar: 'محمد فتحي', en: 'Mohamed Fathy' }, { ar: 'سند راشد', en: 'Sanad Rashed' }, { ar: 'محمد سامي', en: 'Mohamed Samy' }
+	];
+	b.editions = [
+		{ title: T, publisher: { ar: 'دار ليلى ودايموند بوك', en: 'Dar Lila & Diamond Book' }, year: 2007, date: '2007-01-01', lang: 'ar', asin: 'B0DLT61RR7', pages: 199, format: PB,
+			cover: 'assets/img/covers/books/goodreads-sabaa-wogooh-lel-hob.jpg', source: 'https://www.goodreads.com/book/show/3553717' },
+		{ title: T, publisher: LILA, lang: 'ar', format: PB, cover: 'assets/img/covers/books/sabaa-wogooh-lila-a.webp' },
+		{ title: T, publisher: LILA, lang: 'ar', format: PB, cover: 'assets/img/covers/books/sabaa-wogooh-lila-b.webp' },
+		{ title: T, year: 2019, date: '2019-10-12', lang: 'ar', asin: 'B07Z2WX4XK', pages: 107, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } }
+	];
+	(A.works || []).forEach(function (w) {
+		if (w.id !== 'sabaa-wogooh-lel-hob') return;
+		w.publisher = { ar: 'دار ليلى ودايموند بوك', en: 'Dar Lila & Diamond Book' };
+		w.synopsis = { ar: 'كتاب جماعي عن الحب كتبه سبعة: أحمد خالد توفيق ونبيل فاروق وتامر إبراهيم وتامر أحمد ومحمد فتحي وسند راشد ومحمد سامي.',
+			en: 'A book on love by seven writers: Ahmed Khaled Tawfik, Nabil Farouk, Tamer Ibrahim, Tamer Ahmed, Mohamed Fathy, Sanad Rashed and Mohamed Samy.' };
+	});
+})(window.AKT);
