@@ -2078,3 +2078,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	b.ownCover = C + 'diamond-2008.webp';
 })(window.AKT);
+
+/* «سر الغرفة 207»: Diamond Book's two 2008 listings are one edition, the Kuwait printing with its cover; it is the first edition
+   and the book opens on its cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).room207 = A.bookInfo.room207 || {};
+	b.editions = (b.editions || []).filter(function (ed) { return ed.asin !== 'B0DLT6432R'; });
+	b.editions.forEach(function (ed) {
+		if (ed.asin === 'B0DLT67BBQ') { ed.edition = { ar: 'الطبعة الأولى', en: '1st edition' }; ed.source = 'https://www.goodreads.com/work/editions/6025544'; }
+	});
+	b.ownCover = 'assets/img/covers/stories/room207-diamond-kw-2008.webp';
+})(window.AKT);
