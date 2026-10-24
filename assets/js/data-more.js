@@ -1368,7 +1368,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1008821/');
 })(window.AKT);
 
-/* «رفقاء الليل»: Dar Al Karma's paperback (2 June 2019, 328 pages) and Kindle edition (4 June 2019, 252 pages) */
+/* «رفقاء الليل»: Dar Al Karma's paperback (2 June 2019, 328 pages, with its back cover from Samawy, samawy.com/i/1008844)
+   and Kindle edition (4 June 2019, 252 pages) */
 (function (A) {
 	var b = (A.bookInfo = A.bookInfo || {}).rufaqa = A.bookInfo.rufaqa || {};
 	var KARMA = { ar: 'دار الكرمة', en: 'Dar Al Karma' }, TITLE = { ar: 'رفقاء الليل', en: 'Companions of the Night' }, cover = 'assets/img/covers/karma/785614265396.webp';
@@ -1377,8 +1378,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.ownCover = cover;
 	b.editions = [
 		{ title: TITLE, publisher: KARMA, year: 2019, date: '2019-06-02', lang: 'ar', isbn: '9786009944316', isbn10: '6009944317', asin: '6009944317', pages: 328,
-			format: { ar: 'غلاف ورقي', en: 'Paperback' }, cover: cover, source: 'https://alkarmabooks.com/book/%D8%B1%D9%81%D9%82%D8%A7%D8%A1-%D8%A7%D9%84%D9%84%D9%8A%D9%84' },
+			format: { ar: 'غلاف ورقي', en: 'Paperback' }, cover: cover, back: 'assets/img/covers/back/rufaqa.webp',
+			source: 'https://alkarmabooks.com/book/%D8%B1%D9%81%D9%82%D8%A7%D8%A1-%D8%A7%D9%84%D9%84%D9%8A%D9%84' },
 		{ title: TITLE, publisher: KARMA, year: 2019, date: '2019-06-04', lang: 'ar', asin: 'B07SQNQRRY', pages: 252,
 			format: { ar: 'نسخة كيندل', en: 'Kindle edition' } }
 	];
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1008844/');
 })(window.AKT);
