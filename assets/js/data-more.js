@@ -1794,3 +1794,34 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		sources: ['https://www.goodreads.com/book/show/8108559']
 	};
 })(window.AKT);
+
+/* «عقل بلا جسد»: its eight editions — Diamond Book (2008 paperback, Kindle 2019 and 2022), Dar Lila (2008), Kayan (2017 paperback
+   with its back cover from Samawy (samawy.com/i/1004108) and its text, Kindle 2018 and 2024) and the Persian translation (Qatreh);
+   the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).aql = A.bookInfo.aql || {};
+	var T = { ar: 'عقل بلا جسد', en: 'A Mind Without a Body' }, C = 'assets/img/covers/stories/';
+	var DIAMOND = { ar: 'دار دايموند بوك', en: 'Diamond Book' }, LILA = { ar: 'دار ليلى', en: 'Dar Lila' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var kayan = (b.editions || []).filter(function (ed) { return ed.isbn === '9789778200287'; })[0] || {};
+	b.firstPublished = '2008-01-01';
+	b.pages = 183;
+	b.editions = [
+		{ title: T, publisher: DIAMOND, year: 2008, date: '2008-01-01', lang: 'ar', asin: 'B0DLT6F1HH', pages: 183, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'aql-diamond-2008.webp', source: 'https://www.goodreads.com/book/show/5767170' },
+		{ title: T, publisher: LILA, year: 2008, date: '2008-01-01', lang: 'ar', asin: 'B0DT115TSM', pages: 242, format: PB, cover: C + 'aql-lila-2008.webp' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200287', asin: 'B0DMDGRHQS', pages: 221, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/aql-kayan.webp' },
+		{ title: T, publisher: KAYAN, year: 2018, date: '2018-01-27', lang: 'ar', asin: 'B087B4GMBC', pages: 140, format: KD },
+		{ title: T, publisher: DIAMOND, year: 2019, date: '2019-12-02', lang: 'ar', asin: 'B08296XRFB', pages: 184, format: KD },
+		{ title: T, publisher: DIAMOND, year: 2022, date: '2022-03-28', lang: 'ar', asin: 'B09WRM3QKN', pages: 183, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYPT22Y', pages: 151, format: KD },
+		{ title: { ar: 'عقل بی‌بدن', en: 'Aql-e bi-badan (Persian)' }, publisher: { ar: 'قطره', en: 'Qatreh' }, lang: 'fa',
+			isbn: '9786223082399', isbn10: '6223082398', asin: '6223082398', pages: 220, format: PB,
+			translator: { ar: 'عماد جعفري', en: 'Emad Jafari' }, cover: C + 'aql-fa.webp', source: 'https://www.goodreads.com/book/show/255031718' }
+	].concat((b.editions || []).filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'aql-diamond-2008.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'هما صديقان.. أحدهما امتلك العضلات والقوة الجسدية، بينما لم يمتلك الآخر إلا العقل.. العقل العبقري القادر على أن يحل أعقد المشاكل في دقائق.. «عصام فتحي» أستاذ الرياضيات حبيس الكرسي المتحرك.. ومجموعة من الألغاز الرقمية المحيرة التي يحلها دومًا، مبرهنًا على أنه جدير بلقب «رجل الأرقام». بعض هذه الألغاز يتعلق بجرائم مخيفة، وبعضها يتعلق بمحاولتنا لفهم الآخرين. لكنه في كل مرة يبصر الحقيقة المتوارية وراء الضباب، ويثبت أنه عبقري.. حتى لو كان عقلًا بلا جسد.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004108/');
+})(window.AKT);
