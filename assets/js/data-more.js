@@ -1884,18 +1884,19 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 })(window.AKT);
 
 /* «لست وحدك»: its four editions — Spark (22 January 2012) and Kayan (2019 paperback with its back cover from Samawy
-   (samawy.com/i/1004767) and its text; Kindle 2019 and 2024) */
+   (samawy.com/i/1004767) and its text; Kindle 2019 and 2024); the book opens on the first edition's cover */
 (function (A) {
 	var b = (A.bookInfo = A.bookInfo || {}).lastwahdak = A.bookInfo.lastwahdak || {};
 	var T = { ar: 'لست وحدك', en: 'You Are Not Alone' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
 	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
 	var old = b.editions || [], pick = function (f) { return old.filter(f)[0] || {}; };
-	var spark = pick(function (ed) { return ed.year === 2012; }), kayan = pick(function (ed) { return ed.isbn === '9789778200607'; });
+	var kayan = pick(function (ed) { return ed.isbn === '9789778200607'; });
 	b.firstPublished = '2012-01-22';
 	b.pages = 177;
+	b.ownCover = 'assets/img/covers/stories/lastwahdak-spark-2012.webp';
 	b.editions = [
 		{ title: T, publisher: { ar: 'سبارك للنشر والتوزيع', en: 'Spark Publishing' }, year: 2012, date: '2012-01-22', lang: 'ar', asin: 'B0DLT97F2Q', pages: 177, format: PB,
-			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: spark.cover || '', source: 'https://www.goodreads.com/book/show/13412477' },
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: 'assets/img/covers/stories/lastwahdak-spark-2012.webp', source: 'https://www.goodreads.com/book/show/13412477' },
 		{ title: T, publisher: KAYAN, year: 2019, date: '2019-01-01', lang: 'ar', isbn: '9789778200607', asin: 'B0DMFXSHSV', pages: 231, format: PB,
 			cover: kayan.cover || '', back: 'assets/img/covers/back/lastwahdak-kayan.webp' },
 		{ title: T, publisher: KAYAN, year: 2019, date: '2019-01-27', lang: 'ar', asin: 'B087947SJ9', pages: 164, format: KD },
