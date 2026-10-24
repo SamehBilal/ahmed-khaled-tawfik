@@ -1345,3 +1345,25 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.ownCover = 'assets/img/covers/translations/dermaphoria-merit.webp';
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009253/', 'https://www.goodreads.com/book/show/86919279');
 })(window.AKT);
+
+/* «شربة الحاج داود: مقالات عن العلم وشبه العلم»: its full title; Dar Al Karma's paperback (25 December 2014, 233 pages)
+   and Kindle edition (1 November 2017, 139 pages); the back cover from Samawy (samawy.com/i/1008821) */
+(function (A) {
+	var TITLE = { ar: 'شربة الحاج داود: مقالات عن العلم وشبه العلم', en: 'Hajj Dawoud’s Tonic: Essays on Science and Pseudo-Science' };
+	(A.works || []).forEach(function (w) { if (w.id === 'sharba') w.title = TITLE; });
+	var b = (A.bookInfo = A.bookInfo || {}).sharba = A.bookInfo.sharba || {};
+	var KARMA = { ar: 'دار الكرمة', en: 'Dar Al Karma' }, cover = 'assets/img/covers/karma/9789776467200.webp';
+	b.firstPublished = '2014-12-25';
+	b.pages = 233;
+	b.ownCover = cover;
+	/* the full title is the title now, not another one; the short one becomes the other */
+	b.altTitles = [{ title: 'شربة الحاج داود', lang: 'ar', note: { ar: 'العنوان المختصر', en: 'Short title' } }];
+	b.editions = [
+		{ title: TITLE, publisher: KARMA, year: 2014, date: '2014-12-25', lang: 'ar', isbn: '9789776467200', isbn10: '9776467202', asin: '9776467202', pages: 233,
+			format: { ar: 'غلاف ورقي', en: 'Paperback' }, cover: cover, back: 'assets/img/covers/back/sharba.webp',
+			source: 'https://alkarmabooks.com/book/%D8%B4%D8%B1%D8%A8%D8%A9-%D8%A7%D9%84%D8%AD%D8%A7%D8%AC-%D8%AF%D8%A7%D9%88%D8%AF-%D9%85%D9%82%D8%A7%D9%84%D8%A7%D8%AA-%D8%B9%D9%86-%D8%A7%D9%84%D8%B9%D9%84%D9%85-%D9%88%D8%B4%D8%A8%D9%87-%D8%A7%D9%84%D8%B9%D9%84%D9%85' },
+		{ title: TITLE, publisher: KARMA, year: 2017, date: '2017-11-01', lang: 'ar', asin: 'B078JJT9ZF', pages: 139,
+			format: { ar: 'نسخة كيندل', en: 'Kindle edition' } }
+	];
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1008821/');
+})(window.AKT);
