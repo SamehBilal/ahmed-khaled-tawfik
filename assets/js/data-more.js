@@ -1719,3 +1719,13 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'لابد أن تتوقع ممن أصدر كتابًا اسمه (شاي بالنعناع) أن يصدر كتابًا آخر اسمه (قهوة باليورانيوم).. هذا شيء حتمي له قوة القانون. ولا تسأل لماذا اليورانيوم بالذات، فلا يمكن أن يكون الكتاب قهوة بالزركونيوم أو الجرمانيوم. بعض هذه المقالات ساخر وبعضها مفعم بالشجن وبعضها يتلصص على عالم الفن الساحر.. لكنك لن تجد مقالًا سياسيًا واحدًا في هذه المجموعة، لأن السياسة تسربت إلى كل شيء، ولونت كل شيء، والتصقت رائحتها بأناملنا وأوراقنا وأدوات طعامنا وشعر حسناوات شارعنا.. سوف نفر من السياسة ونحتمي في مكان هادئ دافئ لن تجدنا فيه لعدة ساعات.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004765/');
 })(window.AKT);
+
+/* «قهوة باليورانيوم»: the covers of Dar Lila's 2012 and 2013 editions; the book shows the first edition's */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).qahwa = A.bookInfo.qahwa || {};
+	(b.editions || []).forEach(function (ed) {
+		if (ed.year === 2012) ed.cover = 'assets/img/covers/books/qahwa-2012.webp';
+		if (ed.year === 2013) ed.cover = 'assets/img/covers/books/qahwa-2013.webp';
+	});
+	b.ownCover = 'assets/img/covers/books/qahwa-2012.webp';
+})(window.AKT);
