@@ -1729,3 +1729,26 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	b.ownCover = 'assets/img/covers/books/qahwa-2012.webp';
 })(window.AKT);
+
+/* «E.S.P»: Dar Lila (2009, 329 pages), Dar Lila (Kayan Corp) (2010, 267 pages; and an undated printing), Kayan's paperback
+   (2017, 213 pages) with its back cover from Samawy (samawy.com/i/1004082) and its text, Kayan's Kindle edition
+   (3 April 2024, 182 pages), and the Malayalam translation (Saikatham Books, 30 October 2022, 192 pages) */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).esp = A.bookInfo.esp || {};
+	(A.works || []).forEach(function (w) { if (w.id === 'esp') w.publisher = { ar: 'دار ليلى', en: 'Dar Lila' }; });
+	b.firstPublished = '2009-01-01';
+	b.pages = 329;
+	var eds = b.editions = b.editions || [];
+	eds.forEach(function (ed) {
+		if (ed.year === 2009) { ed.date = '2009-01-01'; ed.pages = 329; ed.asin = 'B0DLTB26C6'; }
+		if (ed.isbn === '9789776836006') { ed.date = '2010-01-01'; ed.pages = 267; ed.isbn10 = '9776836003'; ed.asin = '9776836003'; }
+		if (ed.isbn === '9789778200256') { ed.date = '2017-01-01'; ed.pages = 213; ed.isbn10 = '9778200254'; ed.asin = '9778200254'; ed.back = 'assets/img/covers/back/esp-kayan.webp'; }
+		if (ed.isbn === '9789394315525') { ed.date = '2022-10-30'; ed.pages = 192; ed.isbn10 = '9394315527'; ed.asin = '9394315527'; ed.publisher = { ar: 'Saikatham Books LLP', en: 'Saikatham Books LLP' }; }
+	});
+	if (!eds.some(function (ed) { return /كيندل/.test((ed.format || {}).ar || ''); }))
+		eds.push({ title: { ar: 'E.S.P', en: 'E.S.P' }, publisher: { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' }, year: 2024, date: '2024-04-03', lang: 'ar',
+			asin: 'B0FLYYW26G', pages: 182, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } });
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'اسمي (هند الشافعي).. لدي موهبة تجعلني قادرة على إيجاد الحقيقة في أغرب الحوادث وأكثرها غموضًا.. هكذا استطعت أن أزيح الستار عن قصص حيرت الكثيرين وحيرت رجال الشرطة. هناك أسماء كثيرة لموهبتي تلك، فهي حزمة كاملة من القدرات التي يطلق عليها العامة اسم (الحاسة السادسة)، بينما أفضل أنا أن أطلق عليها اسم الإدراك الفائق للحواس أو E.S.P..' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004082/');
+})(window.AKT);

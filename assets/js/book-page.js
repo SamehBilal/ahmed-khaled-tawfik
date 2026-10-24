@@ -69,7 +69,9 @@ window.PAGE = {
 
 		/* ---------- details table ---------- */
 		var firstEd = (info.editions || [])[0] || {};
-		var publisher = item.publisher || (isIssue ? ser.s.publisher : null) || firstEd.publisher;
+		/* an empty publisher ({ar: ''}) counts as none, so the first edition's stands in */
+		var named = function (p) { return p && (p.ar || p.en) ? p : null; };
+		var publisher = named(item.publisher) || (isIssue ? named(ser.s.publisher) : null) || named(firstEd.publisher);
 		var rows = [
 			[L('النوع', 'Type'), t(typeLabel)],
 			[L('أول نشر', 'First published'), App.num(info.firstPublished || item.year || '')],
@@ -388,7 +390,7 @@ window.PAGE = {
 		if (audioTracks.length) window.Cassette.mount(document.getElementById('d-cassette'), { tracks: audioTracks });
 
 		function langName(l) {
-			var N = { ar: ['العربية', 'Arabic'], en: ['الإنجليزية', 'English'], fr: ['الفرنسية', 'French'], it: ['الإيطالية', 'Italian'], de: ['الألمانية', 'German'], es: ['الإسبانية', 'Spanish'], tr: ['التركية', 'Turkish'], fa: ['الفارسية', 'Persian'], fi: ['الفنلندية', 'Finnish'], ru: ['الروسية', 'Russian'], ku: ['الكردية', 'Kurdish'], ur: ['الأردية', 'Urdu'], id: ['الإندونيسية', 'Indonesian'] };
+			var N = { ar: ['العربية', 'Arabic'], en: ['الإنجليزية', 'English'], fr: ['الفرنسية', 'French'], it: ['الإيطالية', 'Italian'], de: ['الألمانية', 'German'], es: ['الإسبانية', 'Spanish'], tr: ['التركية', 'Turkish'], fa: ['الفارسية', 'Persian'], fi: ['الفنلندية', 'Finnish'], ml: ['المالايالامية', 'Malayalam'], ru: ['الروسية', 'Russian'], ku: ['الكردية', 'Kurdish'], ur: ['الأردية', 'Urdu'], id: ['الإندونيسية', 'Indonesian'] };
 			return l ? (N[l] ? N[l][App.lang === 'ar' ? 0 : 1] : l) : '';
 		}
 	}
