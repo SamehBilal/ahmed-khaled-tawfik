@@ -580,6 +580,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ year: 2016, kind: 'win', work: 'icarus',
 			title: { ar: 'جائزة أفضل كتاب عربي في الرواية — معرض الشارقة الدولي للكتاب', en: 'Best Arabic Book (Novel), Sharjah International Book Fair' },
 			text: { ar: 'في الدورة الخامسة والثلاثين للمعرض، عن «مثل إيكاروس» (دار الشروق). قال إنها أول مسابقة يدخلها في حياته.', en: 'At the fair’s 35th edition, for Like Icarus (Dar El Shorouk). He said it was the first competition he had ever entered.' },
+			image: { src: 'assets/img/prizes/sharjah-2016.webp', alt: { ar: 'أحمد خالد توفيق يتسلّم شهادة الجائزة في معرض الشارقة الدولي للكتاب، 2016', en: 'Ahmed Khaled Tawfik receiving the prize certificate at the Sharjah International Book Fair, 2016' } },
 			source: 'https://al-ain.com/article/best-novel-sharjah-book-fair' },
 		{ year: 2018, kind: 'win', work: 'mirante', posthumous: true,
 			title: { ar: 'جائزة مصطفى عزوز لأدب الطفل (تونس) — بعد الرحيل', en: 'Mustapha Azzouz Prize for Children’s Literature (Tunisia), posthumous' },
