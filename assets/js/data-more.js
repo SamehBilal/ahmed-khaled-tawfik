@@ -1906,3 +1906,29 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'سوف نعرف أشياء أكثر عن أنفسنا، وعن الشيء الذي ينتظر هنالك عند المنعطف المظلم التالي. ستعرف لماذا ينظر لك الناس بمقت أحيانًا وينظرون لك بانبهار أحيانًا أخرى. ستعرف من القتيل في ذلك البيت الريفي الذي أغرقته الأمطار، ولماذا لم يحدث أي شيء لهيام.. لماذا رسمت هذه النقوش الغريبة على جدران الكهف؟ ولماذا لا تتغلق المقبرة إلا على ثلاثة موتى؟ سوف تعرف أكثر عن الرعب والخوف والهول.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004767/');
 })(window.AKT);
+
+/* «فقاقيع»: its five editions — Dar Lila (2009), Kayan Corp (Dar Lila) (undated, and 2015), Kayan (2017 paperback with its back
+   cover from Samawy (samawy.com/i/1004109) and its text; Kindle 2024); the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).faqaqee = A.bookInfo.faqaqee || {};
+	var T = { ar: 'فقاقيع', en: 'Bubbles' }, C = 'assets/img/covers/books/';
+	var KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' }, PB = { ar: 'غلاف ورقي', en: 'Paperback' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200331'; })[0] || {};
+	b.firstPublished = '2009-01-01';
+	b.pages = 244;
+	b.editions = [
+		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, year: 2009, date: '2009-01-01', lang: 'ar', asin: 'B0DLT8BD7K', pages: 244, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'faqaqee-2009.webp', source: 'https://www.goodreads.com/book/show/7481068' },
+		{ title: T, publisher: { ar: 'كيان كورب (دار ليلى)', en: 'Kayan Corp (Dar Lila)' }, lang: 'ar', isbn: '9789776836013', isbn10: '9776836011', asin: '9776836011',
+			pages: 225, format: PB, cover: C + 'faqaqee-kayan-corp.webp' },
+		{ title: T, publisher: { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, year: 2015, date: '2015-01-01', lang: 'ar', asin: 'B0DM1C576Z',
+			pages: 187, format: PB, cover: C + 'faqaqee-2015.webp' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200331', isbn10: '9778200335', asin: '9778200335', pages: 224, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/faqaqee-kayan.webp' },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYKZ7L5', pages: 143, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'faqaqee-2009.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'هذه مقالات ساخرة قصيرة لا تبغي سوى جعلك تبتسم، بعدها تنفجر كالفقاقيع وتبلل أرنبة أنفك لثوان. لهذا نقدم جائزة لأي شخص يتذكر مقالًا واحدًا من هذا الكتاب بعد ثلاث دقائق من قراءته.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004109/');
+})(window.AKT);
