@@ -1391,10 +1391,26 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 (function (A) {
 	var b = (A.bookInfo = A.bookInfo || {}).shaabeeb = A.bookInfo.shaabeeb || {};
 	b.firstPublished = '2018-01-27';
-	(b.editions || []).forEach(function (ed) {
+	/* the audiobook is left out */
+	b.editions = (b.editions || []).filter(function (ed) { return !/صوتي/.test((ed.format || {}).ar || ''); });
+	b.editions.forEach(function (ed) {
 		if (ed.isbn === '9789770934562') { ed.date = '2018-01-27'; ed.pages = 329; ed.isbn10 = '9770934569'; ed.asin = '9770934569'; ed.back = 'assets/img/covers/back/shaabeeb.webp'; }
 		if (ed.year === 2023 && /كيندل/.test((ed.format || {}).ar || '')) { ed.date = '2023-09-13'; ed.pages = 223; ed.asin = 'B0CHYLP7MW'; }
 	});
 	b.blurb = { by: { ar: 'دار الشروق', en: 'Dar El Shorouk' },
 		ar: '«هذه ليست حربًا، لكنها تدانيها في الخطورة والأهمية. الهدف الاستراتيجي واضح جلي، لكنه يحتاج إلى مبرر أخلاقي وتاريخي. الوسيلة لن تكون نظيفة تمامًا لكن الغاية مبررة ومحترمة. القليل من الماكيافيللية لن يضر أحدًا...\nهكذا استعان بأستاذ تاريخ هو أحمد صفوان وأستاذ أديان مقارنة وأديب، كلهم من العرب المقيمين في الولايات، قال لهم:\n– أريد تاريخًا مزيفًا!»\n\nحلم واحد كان يلاحق مكرم؛ الأستاذ في جامعة هارفارد، أن يلتقي كل عرب المهجر في موضع واحد. كان يحلم بدولة واحدة يجتمع فيها العرب بعدما تشتتوا في العالم، هناك لن يضطهدهم أحد ولن يخيفهم أحد. سوف تكون دولة قوية لأنها ستمزج بين ما تعلموه في كل الحضارات.\n\nبأسلوبه المتفرد، يصطحبنا د. أحمد خالد توفيق في روايته الجديدة «شآبيب» إلى رحلة ممتعة مليئة بالإثارة من النرويج إلى الولايات المتحدة، مرورًا بليبيريا ومصر وأستراليا، قبل أن يستقر عند خط الاستواء. يطرح العديد من الأفكار الجريئة ليظل السؤال: هل يمكن لرجل واحد أن يُصلح العالم، حتى لو كان يؤمن بأنه الشخص المناسب الذي جاء في الزمن المناسب ليقوم بالمهمة المناسبة؟' };
+})(window.AKT);
+
+/* «كتاب المقبرة»: Dar Al Karma's paperback (23 June 2021, 424 pages) with its back cover from Samawy (samawy.com/i/1009099)
+   and Kindle edition (30 June 2021, 364 pages); the audiobook is left out */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).graveyard = A.bookInfo.graveyard || {};
+	b.firstPublished = '2021-06-23';
+	b.editions = (b.editions || []).filter(function (ed) { return !/صوتي/.test((ed.format || {}).ar || ''); });
+	b.editions.forEach(function (ed) {
+		if (ed.isbn === '9789776743465') { ed.date = '2021-06-23'; ed.pages = 424; ed.isbn10 = '9776743463'; ed.asin = '9776743463'; ed.back = 'assets/img/covers/back/graveyard-karma.webp'; }
+		if (/كيندل/.test((ed.format || {}).ar || '')) { ed.date = '2021-06-30'; ed.pages = 364; ed.asin = 'B09KQFXBVM'; }
+	});
+	b.ownCover = 'assets/img/covers/karma/9789776743465.webp';
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1009099/');
 })(window.AKT);
