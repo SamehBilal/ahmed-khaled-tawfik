@@ -1193,3 +1193,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.blurb = { by: { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' },
 		ar: 'اخترت اسم «تويتات من العصور الوسطى» لأن هذا يناسبني جدًا.. كنت أكتبها من قبل أن أرى أي كمبيوتر في حياتي، وحتى اليوم لا يوجد حب مفقود بيني وموقع تويتر.\n\nهذه تويتات بلا شبكة إنترنت إذن.\n\nأعتقد أنك ستحب هذه المجموعة.. فيها تنوع كبير، وبعضها ساخر وبعضها كئيب أو سوداوي. بعضها قديم جدًا كتبته وأنا في المدرسة الثانوية، وبعضها كتبته هذا الشهر.\n\nبعضها سياسي وبعضها أدبي وبعضها عاطفي.. هذا التنوع الزمني والموضوعي يجعل فرصة اقتناصك لخواطر تروق لك عالية.. من الصعب أن تكره كل شيء، وإلا فأنت تكرهني جدًا أنا نفسي، أو أنا منحوس لدرجة لا تصدق.' };
 })(window.AKT);
+
+/* «قصة تكملها أنت»: four printings with four covers (Dar Lila, and Dar Lila with Kayan Corp), and the four writers who
+   finished the story he began */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {})['qessa-tokmeloha-anta'] = A.bookInfo['qessa-tokmeloha-anta'] || {};
+	var C = 'assets/img/covers/books/', TITLE = { ar: 'قصة تكملها أنت', en: 'A Story You Finish' };
+	var LILA = { ar: 'دار ليلى', en: 'Dar Lila' }, LILA_KC = { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' };
+	b.editions = [
+		{ title: TITLE, publisher: LILA, year: 2007, lang: 'ar', pages: 126, format: PB, cover: C + 'qessa-2007-lila.webp', source: 'https://www.abjjad.com/book/15456105/', store: 'Abjjad' },
+		{ title: TITLE, publisher: LILA_KC, year: 2007, lang: 'ar', pages: 94, format: PB, cover: C + 'qessa-2007-kayancorp.webp', source: 'https://www.goodreads.com/book/show/5853664' },
+		{ title: TITLE, publisher: LILA, year: 2012, lang: 'ar', pages: 94, format: PB, cover: C + 'qessa-2012-lila.webp' },
+		{ title: TITLE, publisher: LILA_KC, year: 2014, lang: 'ar', pages: 160, format: PB, cover: C + 'qessa-2014-kayancorp.webp', source: 'https://www.goodreads.com/book/show/44334715' }
+	];
+	b.pages = 126;
+	/* its first printing is Dar Lila's own */
+	(A.works || []).forEach(function (w) { if (w.id === 'qessa-tokmeloha-anta') w.publisher = LILA; });
+	var ROLE = { ar: 'أكمل القصة', en: 'Finished the story' };
+	b.authors = [
+		{ ar: 'فلاشندي', en: 'Flashandy', role: ROLE },
+		{ ar: 'تامر الباجوري', en: 'Tamer El-Bagoury', role: ROLE },
+		{ ar: 'مديحة محمد', en: 'Madiha Mohamed', role: ROLE },
+		{ ar: 'ريهام إبراهيم', en: 'Reham Ibrahim', role: ROLE }
+	];
+})(window.AKT);

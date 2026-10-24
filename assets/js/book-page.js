@@ -148,7 +148,7 @@ window.PAGE = {
 			var withPub = list.filter(function (ed) { return ed.publisher; })[0] || list[0];
 			var p = (d.publishers || []).filter(function (x) { return withPub.publisher && new RegExp(x.match).test(((withPub.publisher || {}).ar || '').replace(/\(ثم[^)]*\)/g, '')); })[0];
 			return { cover: g.cover, back: (list.filter(function (ed) { return ed.back; })[0] || {}).back || '',
-				house: p ? p.id : '', label: p ? t(p.name) : (withPub.publisher ? t(withPub.publisher) : langName(list[0].lang)), year: list[0].year ? String(list[0].year).slice(0, 4) : '', lang: list[0].lang };
+				house: p ? p.id : '', label: withPub.publisher ? t(withPub.publisher) : langName(list[0].lang), year: list[0].year ? String(list[0].year).slice(0, 4) : '', lang: list[0].lang };
 		});
 		var printsHtml = looks.length > 1 ? '<div class="d-prints" role="group" aria-label="' + e(L('بدّل الطبعة على الكتاب', 'Show another edition on the book')) + '">' + looks.map(function (lk, i) {
 			var on = lk.cover === S.coverOf(info);
