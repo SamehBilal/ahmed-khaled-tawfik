@@ -2274,3 +2274,32 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ label: { ar: 'المجلد الجامع — دار ليلى (2014)', en: 'Collected volume — Dar Lila (2014)' }, cover: C + 'www-lila-2014.webp', source: 'https://www.goodreads.com/book/show/17992755' }
 	].concat(covers);
 })(window.AKT);
+
+/* «الآن أفهم»: its six editions — Dar Lila (2009, with its back cover; 2010) and Dar Lila (Kayan Corp) (undated, 180 pages), Kayan
+   (2017 paperback with its back cover from Samawy (samawy.com/i/1004091) and its text; Kindle October 2017 and 2024); the book
+   opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).anfham = A.bookInfo.anfham || {};
+	var T = { ar: 'الآن أفهم', en: 'Now I Understand' }, C = 'assets/img/covers/stories/', BK = 'assets/img/covers/back/';
+	var LILA = { ar: 'دار ليلى للنشر والتوزيع', en: 'Dar Lila' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200263'; })[0] || {};
+	(A.works || []).forEach(function (w) { if (w.id === 'anfham' && !(w.publisher || {}).ar) w.publisher = { ar: 'دار ليلى', en: 'Dar Lila' }; });
+	b.firstPublished = '2009-01-01';
+	b.pages = 245;
+	b.editions = [
+		{ title: T, publisher: LILA, year: 2009, date: '2009-01-01', lang: 'ar', asin: 'B0DLT9JRR9', pages: 245, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'anfham-a.webp', back: BK + 'anfham-lila-2009.webp', source: 'https://www.goodreads.com/book/show/6659861' },
+		{ title: T, publisher: LILA, year: 2010, date: '2010-01-01', lang: 'ar', isbn: '9789776836044', isbn10: '9776836046', asin: '9776836046', pages: 179, format: PB,
+			source: 'https://www.goodreads.com/work/editions/6854619' },
+		{ title: T, publisher: { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, lang: 'ar', pages: 180, format: PB, cover: C + 'anfham-b.webp' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200263', isbn10: '9778200262', asin: '9778200262', pages: 147, format: PB,
+			cover: kayan.cover || '', back: BK + 'anfham-kayan.webp', source: kayan.source },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-10-01', lang: 'ar', asin: 'B076X4PWNG', pages: 169, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLZ89JGR', pages: 122, format: KD }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = C + 'anfham-a.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'لقد وافقت يا صغيرتي.. ومشيت معي بين الأطلال.. بين الشواهد.. لا ترين شيئًا تقريبًا لكنك تثقين بي.. نهبط من هنا ونصعد من هنا.. تمسكين يدي بيد راجفة خائفة.. تلهثين انبهارًا ونشوة.. تقولين إنك تثقين بي.. ليتك لم تفعلي.. ليتك أنذرتني...' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004091/');
+})(window.AKT);
