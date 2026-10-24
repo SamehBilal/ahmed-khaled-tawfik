@@ -2393,3 +2393,34 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'لم يترك لنا الدكتور «محفوظ» إلا هذا الصندوق في قبو داره. الصندوق يحوي مذكرات وملاحظات عن تلك القصص الغريبة التي مرت به في حياته. تعالوا نفتح الصندوق الآن.. تعالوا نشعل شمعة تبدد ظلام القبو ونطالع واحدة من تلك القصص.' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004092/');
 })(window.AKT);
+
+/* «الآن نفتح الصندوق 2»: the eight editions of its second part — Diamond Book (2009), Dar Lila (2009; 2010 third printing, 249 pages;
+   2010, 268 pages), Dar Lila (Kayan Corp) (2009, 300 pages), Kayan (2017 paperback, whose back cover from Samawy (samawy.com/i/1004093)
+   carries ISBN 9789778200300; Kindle October 2017 and 2024); four covers, each named on Goodreads by its book id */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).sandoq = A.bookInfo.sandoq || {};
+	var T = { ar: 'الآن نفتح الصندوق 2', en: 'Now We Open the Box 2' }, C = 'assets/img/covers/stories/sandoq-', GR = 'https://www.goodreads.com/book/show/';
+	var LILA = { ar: 'دار ليلى', en: 'Dar Lila' }, KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' };
+	var PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var part2 = function (ed) { var t = (ed.title || {}).ar || ''; return /الثاني|الصندوق 2$/.test(t); };
+	/* part two's printings go after part one's */
+	var rest = (b.editions || []).filter(function (ed) { return !part2(ed); });
+	var at = rest.map(function (ed) { return /الأول|الصندوق 1$/.test((ed.title || {}).ar || ''); }).lastIndexOf(true) + 1;
+	var p2 = [
+		{ title: T, publisher: { ar: 'دايموند بوك', en: 'Diamond Book' }, year: 2009, date: '2009-01-01', lang: 'ar', asin: 'B0DLTBXBDH', pages: 208, format: PB,
+			cover: C + '9466641.webp', source: GR + '9466641' },
+		{ title: T, publisher: { ar: 'دار ليلى للنشر والتوزيع', en: 'Dar Lila' }, year: 2009, date: '2009-01-01', lang: 'ar', pages: 207, format: PB,
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, source: GR + '6601981' },
+		{ title: T, publisher: { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, year: 2009, date: '2009-01-01', lang: 'ar', isbn: '9789776836037', isbn10: '9776836038',
+			asin: '9776836038', pages: 300, format: PB, cover: C + '18522646.webp', source: GR + '18522646' },
+		{ title: T, publisher: LILA, year: 2010, date: '2010-01-01', lang: 'ar', isbn: '9789776386037', isbn10: '9776386032', asin: '9776386032', pages: 249, format: PB,
+			edition: { ar: 'الطبعة الثالثة', en: '3rd printing' }, cover: C + '11139407.webp', source: GR + '11139407' },
+		{ title: T, publisher: LILA, year: 2010, date: '2010-01-01', lang: 'ar', asin: 'B0DM1MPG7M', pages: 268, format: PB, cover: C + '34517425.webp', source: GR + '34517425' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200300', isbn10: '9778200300', asin: '9778200300', pages: 194, format: PB,
+			back: 'assets/img/covers/back/sandoq-2-kayan.webp', source: GR + '37835288' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-10-01', lang: 'ar', asin: 'B076X5RX2D', pages: 132, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYQWNBR', pages: 173, format: KD }
+	];
+	b.editions = rest.slice(0, at).concat(p2, rest.slice(at));
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004093/');
+})(window.AKT);
