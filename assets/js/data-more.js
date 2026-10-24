@@ -1124,3 +1124,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	(B.kiterunner = B.kiterunner || {}).blurb = { by: { ar: 'بلومزبري – مؤسسة قطر للنشر', en: 'Bloomsbury Qatar Foundation Publishing' },
 		ar: 'الرواية المصوَّرة لقصة خالد حسيني الأكثر مبيعًا، والحاصلة على العديد من الجوائز.\n\nأفغانستان في السبعينيات: أمير ذو الاثني عشر عامًا مُصمِّم على أن يربح المسابقة المحلية للطائرات الورقية، وقد وعده صديقه الوفي حسن بمساعدته. ولكن لا يعرف الولدان ما سيحدث لحسن في ذلك اليوم؛ حدثٌ سيحطّم حياتهما. بعد الغزو السوفيتي واضطرار عائلة أمير للفرار إلى الولايات المتحدة، يدرك أمير ضرورة أن تعود أفغانستان في ظل حكم الطالبان، ليجد الشيء الوحيد الذي لم يستطع عالمه الجديد منحه: الخلاص.\n\n«كتاب آسر، وقصة مؤثرة عن الحب، والخسارة، والخيانة. من المؤكد أنها ستحرّك مشاعر أكثر القلوب قسوة». — الإندبندنت' };
 })(window.AKT);
+
+/* «تشي جيفارا: سيرة مصورة»: two printings from Dar El Shorouk, 2018 and 2022, with the same cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).che = A.bookInfo.che || {};
+	var SHOROUK = { ar: 'دار الشروق', en: 'Dar El Shorouk' }, TITLE = { ar: 'تشي جيفارا: سيرة مصورة', en: 'Che: A Graphic Biography' };
+	var cover = 'assets/img/covers/translations/amazon-che.jpg';
+	b.editions = [
+		{ title: TITLE, publisher: SHOROUK, year: 2018, lang: 'ar', isbn: '9789770928646', pages: 110, cover: cover,
+			format: { ar: 'غلاف ورقي – الطبعة الأولى', en: 'Paperback – first printing' }, source: 'https://www.goodreads.com/book/show/43687854' },
+		{ title: TITLE, publisher: SHOROUK, year: 2022, lang: 'ar', isbn: '9789770928646', cover: cover,
+			format: { ar: 'غلاف ورقي – الطبعة الثانية', en: 'Paperback – second printing' }, source: 'https://www.amazon.eg/dp/977092864X' }
+	];
+})(window.AKT);
