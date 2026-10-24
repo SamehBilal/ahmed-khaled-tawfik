@@ -1256,12 +1256,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var SAMA = { ar: 'دار سما للنشر والتوزيع', en: 'Dar Sama' }, TITLE = { ar: 'أكواريل وقصص أخرى', en: 'Aquarelle and Other Stories' };
 	var PB = { ar: 'غلاف ورقي', en: 'Paperback' };
 	b.editions = [
-		{ title: TITLE, publisher: SAMA, year: 2013, lang: 'ar', format: PB, cover: 'assets/img/covers/stories/aseeralkotb-ace14e29ee2e.webp' },
+		/* the back cover is the 2013 printing's; it carries the same ISBN as the 2014 one */
+		{ title: TITLE, publisher: SAMA, year: 2013, lang: 'ar', isbn: '9789996655302', format: PB, cover: 'assets/img/covers/stories/aseeralkotb-ace14e29ee2e.webp',
+			back: 'assets/img/covers/back/aquarelle.webp' },
 		{ title: TITLE, publisher: SAMA, year: 2014, lang: 'ar', isbn: '9789996655302', pages: 352, format: PB, cover: 'assets/img/covers/stories/aquarelle-2014.webp',
-			back: 'assets/img/covers/back/aquarelle.webp', source: 'https://www.goodreads.com/book/show/18746715' }
+			source: 'https://www.goodreads.com/book/show/18746715' }
 	];
 	b.firstPublished = '2013';
-	/* the text on the 2014 back cover */
+	/* the text on the 2013 back cover */
 	b.blurb = { by: SAMA,
 		ar: 'هذه قصص متفرقة تتحدث عن الخوف.. كل الخوف.. ولا شيء سوى الخوف.\n\nسوف نعرف كل شيء عن القصيدة التي تكمل نفسها، والرواية التي تكتبها أرواح الموتى، والطبيب الذي تزوره جثث ضحاياه في عيادته الخاصة.\n\nسنعرف سر المدينة الفضية عبر العصور، وقصة الحب بين شاب مكتمل الرجولة وجثة متعفنة. سنعرف قصة اللوحة التي تتغير كل دقيقة، وزيارات (ناحيما) الليلية.\n\nسنعرف الكثير مما لا ينبغي أن نعرفه، وإذا عرفناه لا نتكلم عنه.' };
 })(window.AKT);

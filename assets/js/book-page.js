@@ -48,14 +48,17 @@ window.PAGE = {
 		}
 		if (!pages.length) pages.push('<h4>' + tx(title) + '</h4><p>' + L('لا يوجد وصف بعد.', 'No description yet.') + '</p>');
 
+		/* the back as text (the blurb), also for the 3D book when the edition it shows has no back cover */
+		var backText = blurb ? e(blurb.ar).replace(/\n/g, '<br>') : tx(item.synopsis || desc || '');
+		var backMeta = isIssue ? t(ser.s.title) : (item.year ? String(item.year) : '');
 		var book = window.Books.showcase({
 			key: 'b:' + id,
 			color: color, title: title, img: cover,
 			num: isIssue && item.n != null ? '№ ' + item.n : '',
 			motif: isIssue && item.n != null ? App.num(item.n) : S.monogram(title),
-			back: blurb ? e(blurb.ar).replace(/\n/g, '<br>') : tx(item.synopsis || desc || ''),
+			back: backText,
 			backImg: backImg,
-			meta: isIssue ? t(ser.s.title) : (item.year ? String(item.year) : ''),
+			meta: backMeta,
 			pages: pages,
 			info: { title: '', text: '' },
 			by: r.about ? t(item.by) : isIssue && ser.inspired ? t(S.seriesAuthor(ser)) : ''
@@ -151,7 +154,8 @@ window.PAGE = {
 			var list = g.list.map(function (i) { return eds[i]; });
 			var withPub = list.filter(function (ed) { return ed.publisher; })[0] || list[0];
 			var p = (d.publishers || []).filter(function (x) { return withPub.publisher && new RegExp(x.match).test(((withPub.publisher || {}).ar || '').replace(/\(ثم[^)]*\)/g, '')); })[0];
-			return { cover: g.cover, back: (list.filter(function (ed) { return ed.back; })[0] || {}).back || '',
+			/* its own back cover, else one tied to no edition (it fits any), else none: the blurb */
+			return { cover: g.cover, back: (list.filter(function (ed) { return ed.back; })[0] || backs.filter(function (ed) { return !ed.cover; })[0] || {}).back || '',
 				house: p ? p.id : '', label: withPub.publisher ? t(withPub.publisher) : langName(list[0].lang), year: list[0].year ? String(list[0].year).slice(0, 4) : '', lang: list[0].lang };
 		});
 		var printsHtml = looks.length > 1 ? '<div class="d-prints" role="group" aria-label="' + e(L('بدّل الطبعة على الكتاب', 'Show another edition on the book')) + '">' + looks.map(function (lk, i) {
@@ -305,7 +309,7 @@ window.PAGE = {
 		/* the edition buttons: put that edition's front cover, and its back cover (or the blurb), on the 3D book */
 		var printsEl = root.querySelector('.d-prints');
 		if (printsEl) {
-			var bookEl = document.getElementById('d-book'), backEl = bookEl.querySelector('.bk-back'), backHtml = backEl.innerHTML, backHad = backEl.classList.contains('has-img');
+			var bookEl = document.getElementById('d-book'), backEl = bookEl.querySelector('.bk-back');
 			printsEl.addEventListener('click', function (ev) {
 				var btn = ev.target.closest('.d-print');
 				if (!btn) return;
@@ -317,7 +321,7 @@ window.PAGE = {
 				img.src = lk.cover;
 				/* its own back cover, else the book's (the one the page opened with) */
 				if (lk.back) { backEl.classList.add('has-img'); backEl.innerHTML = '<img class="bk-back-img" src="' + e(lk.back) + '" alt="">'; }
-				else { backEl.classList.toggle('has-img', backHad); backEl.innerHTML = backHtml; }
+				else { backEl.classList.remove('has-img'); backEl.innerHTML = '<p>' + backText + '</p>' + (backMeta ? '<div class="bk-meta">' + e(backMeta) + '</div>' : ''); }
 			});
 			/* ?pub=<house> (a publisher's page links here) opens on that house's edition */
 			var pub = new URLSearchParams(location.search).get('pub');
