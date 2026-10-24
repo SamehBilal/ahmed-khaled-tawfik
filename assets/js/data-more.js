@@ -2089,3 +2089,29 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	b.ownCover = 'assets/img/covers/stories/room207-diamond-kw-2008.webp';
 })(window.AKT);
+
+/* «أفلام الحافظة الزرقاء»: its five editions — Dar Lila (Kayan Corp) (15 September 2015), Kayan (2017 paperback with its back cover
+   from Samawy (samawy.com/i/1004090) and its text; 2018 paperback; Kindle 2020 and 2024); the book opens on the first edition's cover */
+(function (A) {
+	var b = (A.bookInfo = A.bookInfo || {}).aflam = A.bookInfo.aflam || {};
+	var T = { ar: 'أفلام الحافظة الزرقاء', en: 'Films from the Blue Folder' };
+	var KAYAN = { ar: 'كيان للنشر والتوزيع', en: 'Kayan Publishing' }, PB = { ar: 'غلاف ورقي', en: 'Paperback' }, KD = { ar: 'نسخة كيندل', en: 'Kindle edition' };
+	var old = b.editions || [], kayan = old.filter(function (ed) { return ed.isbn === '9789778200171'; })[0] || {};
+	b.firstPublished = '2015-09-15';
+	b.pages = 264;
+	b.editions = [
+		{ title: T, publisher: { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, year: 2015, date: '2015-09-15', lang: 'ar', isbn: '9789775238979', isbn10: '9775238978',
+			asin: '9775238978', pages: 264, format: PB, edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: 'assets/img/covers/books/aflam-2015.webp',
+			source: 'https://www.goodreads.com/book/show/26804474' },
+		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200171', asin: 'B0DMFLT9NX', pages: 268, format: PB,
+			cover: kayan.cover || '', back: 'assets/img/covers/back/aflam-kayan.webp', source: kayan.source },
+		{ title: T, publisher: { ar: 'دار كيان للنشر', en: 'Kayan Publishing' }, year: 2018, date: '2018-01-01', lang: 'ar', isbn: '9786000958855', isbn10: '6000958854',
+			asin: '6000958854', pages: 256, format: PB },
+		{ title: T, publisher: KAYAN, year: 2020, date: '2020-05-04', lang: 'ar', asin: 'B0881TGJPV', pages: 229, format: KD },
+		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYJN58Y', pages: 270, format: KD }
+	].concat(old.filter(function (ed) { return ed.store; }));
+	b.ownCover = 'assets/img/covers/books/aflam-2015.webp';
+	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
+		ar: 'لست ناقدًا سينمائيًا، وبالتأكيد لم أتعلم مفاتيح هذا العالم الجميل بشكل أكاديمي، لكني أعرف جيدًا تلك الأفلام التي هزتني أو أبكتني أو أضحكتني أو جعلتني أفكر طويلًا.. أعرفها وأحتفظ بها جميعًا في الحافظة الزرقاء العتيقة التي تمزقت أطرافها، وسوف أدعوك لتشاهدها معي لكنها بالطبع أثمن من أن أقرضها. معظم هذه الأفلام قديم مجهول أو لا يُعرض الآن، لكنها تجارب ساحرة يكره المرء ألا يعرفها من يحب.' };
+	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004090/');
+})(window.AKT);
