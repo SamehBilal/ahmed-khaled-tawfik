@@ -1612,7 +1612,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if (!info) return;
 		var cover = 'assets/img/covers/series/mughamer-' + n + '.webp';
 		info.ownCover = cover;
-		(info.editions || []).forEach(function (ed) { ed.cover = cover; });
+		info.pages = 48;
+		(info.editions || []).forEach(function (ed) { ed.cover = cover; ed.pages = 48; });
 	});
 	(A.otherSeries || []).forEach(function (s) {
 		if (s.id !== 'mughamer') return;
