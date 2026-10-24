@@ -26,7 +26,7 @@ window.PAGE = {
 		var cover = S.coverOf(info);
 		var desc = info.description || item.synopsis || (isIssue && item.original ? item.original : null);
 		/* what is printed on its back: a photo of the real back cover, and the blurb (series issues) */
-		var blurb = (d.blurbs || {})[id] || null, backImg = (d.backCovers || {})[id] || '';
+		var blurb = (d.blurbs || {})[id] || info.blurb || null, backImg = (d.backCovers || {})[id] || '';
 		if (!desc && blurb) desc = { ar: blurb.ar };
 		var numLabel = r.special ? L('عدد خاص ', 'Special issue ') + App.num(item.n) : isIssue && item.n != null ? App.num('#' + item.n) + (item.part ? ' · ' + L('الجزء ', 'Part ') + App.num(item.part) : '') : '';
 
@@ -148,14 +148,15 @@ window.PAGE = {
 		var Q = encodeURIComponent(qAr);
 		/* The Book Home: straight to the book when we know its product page, else its search */
 		var bh = (d.bookhome || {})[r.id] || (d.bookhome || {})[id];
+		/* the publisher's own shop, when we have the book's page there, comes first */
 		var shops = [
-			{ kind: L('ورقي', 'Print'), items: [
+			{ kind: L('ورقي', 'Print'), items: (info.shop ? [[t(info.shop.name), info.shop.url]] : []).concat([
 				[L('بيت الكتب', 'The Book Home'), bh ? 'https://www.thebookhome.com/product/index/' + bh : 'https://www.thebookhome.com/Home/SearchResult?searchKey=' + encodeURIComponent(title.ar || '') + '&sortKey=Date%20desc&pageNumber=1'],
 				/* Aseer Al Kotb: its page for the book when we have one, else a search for the title */
 				[L('عصير الكتب', 'Aseer Al Kotb'), (info.aseer && info.aseer.source) || 'https://www.aseeralkotb.com/ar/search?q=' + encodeURIComponent(title.ar || '')],
 				['Amazon.eg','https://www.amazon.eg/s?k=' + Q + '&i=stripbooks'],
 				['Noon', 'https://www.noon.com/egypt-ar/search/?q=' + Q]
-			] },
+			]) },
 			{ kind: L('إلكتروني', 'Ebook'), items: [
 				['Abjjad', 'https://www.abjjad.com/search?q=' + Q],
 				['Google Play Books', 'https://play.google.com/store/search?q=' + Q + '&c=books'],
@@ -196,7 +197,7 @@ window.PAGE = {
 						((desc && !(blurb && desc.ar === blurb.ar)) ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
 						((blurb || backImg) ? '<section class="d-block d-backcover"><h3>' + L('على الغلاف الخلفي', 'On the back cover') + '</h3>' +
 							(backImg ? '<a class="d-back-img" href="' + e(backImg) + '" target="_blank" rel="noopener"><img src="' + e(backImg) + '" alt="' + e(L('الغلاف الخلفي — ', 'Back cover — ') + t(title)) + '" loading="lazy"></a>' : '') +
-							(blurb ? '<blockquote class="d-blurb" dir="rtl" lang="ar">' + e(blurb.ar).replace(/\n/g, '<br>') + '</blockquote><a class="d-blurb-src" href="' + e(blurb.src) + '" target="_blank" rel="noopener">' + L('عن أبجد ↗', 'From Abjjad ↗') + '</a>' : '') +
+							(blurb ? '<blockquote class="d-blurb" dir="rtl" lang="ar">' + e(blurb.ar).replace(/\n/g, '<br>') + '</blockquote><a class="d-blurb-src" href="' + e(blurb.src) + '" target="_blank" rel="noopener">' + (blurb.by ? L('عن ', 'From ') + t(blurb.by) + ' ↗' : L('عن أبجد ↗', 'From Abjjad ↗')) + '</a>' : '') +
 						'</section>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
 						(item.note && t(item.note) ? '<p class="note">' + tx(item.note) + '</p>' : '') +

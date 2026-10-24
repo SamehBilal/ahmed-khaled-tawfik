@@ -67,7 +67,8 @@ window.PAGE = {
 							(w.back ? '<a href="' + e(w.back) + '" target="_blank" rel="noopener"><img src="' + e(w.back) + '" alt="' + e((w.direction === 'dedication' ? L('صفحة الإهداء — ', 'Dedication page — ') : L('الغلاف الخلفي — ', 'Back cover — ')) + t(w.book)) + '" loading="lazy"></a>' : '') +
 						'</div>' : '') +
 						'<div class="wp-entry-body">' + (meta ? '<p class="wp-meta">' + e(meta) + '</p>' : '') + App.paras(w.text) +
-						(w.source ? '<a class="wp-src" href="' + e(w.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') + '</div>' +
+						(w.source ? '<a class="wp-src" href="' + e(w.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
+							(w.shop ? ' <a class="wp-src" href="' + e(w.shop.url) + '" target="_blank" rel="noopener">' + L('اشترِه من ', 'Buy it from ') + t(w.shop.name) + ' ↗</a>' : '') + '</div>' +
 					'</article>';
 				}).join('') + '</div>';
 		}).join('');

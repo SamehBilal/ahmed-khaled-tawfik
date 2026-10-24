@@ -7,6 +7,7 @@
 		novel: { ar: 'رواية', en: 'Novel' },
 		stories: { ar: 'قصص', en: 'Short stories' },
 		articles: { ar: 'مقالات', en: 'Essays & articles' },
+		poetry: { ar: 'شعر', en: 'Poetry' },
 		translation: { ar: 'ترجمة', en: 'Translation' },
 		nonfiction: { ar: 'غير روائي', en: 'Non-fiction' },
 		collab: { ar: 'عمل مشترك', en: 'Collaboration' },
@@ -251,13 +252,13 @@
 			return eds.length && eds[0].publisher ? eds[0].publisher.ar || '' : '';
 		};
 		var items = (d.works || []).map(function (w) {
-			return { id: w.id, title: w.title, href: App.workHref(w.id), year: yearOf(w.year), pub: house(w), cover: coverOf((d.bookInfo || {})[w.id]), color: w.color };
+			return { id: w.id, title: w.title, href: App.workHref(w.id), year: yearOf(w.year), date: ((d.bookInfo || {})[w.id] || {}).firstPublished || '', pub: house(w), cover: coverOf((d.bookInfo || {})[w.id]), color: w.color };
 		}).concat(ownSeries().concat(contributedSeries()).map(function (s) {
 			return { id: s.id, title: s.title, href: seriesHref(s.id), year: yearOf(s.years), pub: (s.publisher && s.publisher.ar) || '', cover: seriesCover(s.id), color: s.color, series: true };
 		}));
 		return (d.publishers || []).map(function (p) {
 			var mine = items.filter(function (it) { return pubMatches(p, it.pub); })
-				.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+				.sort(function (a, b) { return ((a.year || 9999) - (b.year || 9999)) || String(a.date || '').localeCompare(String(b.date || '')); });
 			/* later editions of other books of his that this house reissued */
 			var later = items.filter(function (it) {
 				if (it.series || mine.indexOf(it) >= 0) return false;

@@ -42,6 +42,7 @@ window.PAGE = {
 			(meta ? '<p class="meta">' + e(meta) + '</p>' : '') +
 			App.paras(w.text) +
 			(w.source ? '<a href="' + e(w.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
+			(w.shop ? ' <a class="wr-shop" href="' + e(w.shop.url) + '" target="_blank" rel="noopener">' + L('اشترِه من ', 'Buy it from ') + t(w.shop.name) + ' ↗</a>' : '') +
 		'</div>';
 	},
 

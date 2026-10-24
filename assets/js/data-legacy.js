@@ -132,6 +132,16 @@ window.AKT.legacy = [
     "source": "https://egyptianstreets.com/2022/12/27/wrapping-up-2022-top-egyptian-shahid-productions/"
   },
   {
+    "date": "2025-07-05",
+    "image": "cover:alghaam",
+    "title": { "ar": "صدور \"ألغام في بحر الذكريات\"، آخر كتبه", "en": "\"Mines in the Sea of Memories\", his latest book" },
+    "text": {
+      "ar": "أصدرت دار الكرمة، احتفاءً بذكرى ميلاده، 46 قصيدة لم تُنشر من قبل كتبها بين الرابعة عشرة والثلاثين من عمره واحتفظ بها في كراسة خاصة، بعد أن حملتها أسرته إلى الدار.",
+      "en": "To mark his birthday, Dar Al Karma published 46 poems he wrote between fourteen and thirty and kept in a private notebook, brought to the publisher by his family."
+    },
+    "source": "https://alkarmabooks.com/book/%D8%A3%D9%84%D8%BA%D8%A7%D9%85-%D9%81%D9%8A-%D8%A8%D8%AD%D8%B1-%D8%A7%D9%84%D8%B0%D9%83%D8%B1%D9%8A%D8%A7%D8%AA"
+  },
+  {
     "date": "2025-12",
     "image": "yt:i8CICc-j-MI",
     "title": { "ar": "وثائقي \"العرّاب\" من الجزيرة الوثائقية", "en": "Al Jazeera documentary \"The Godfather\"" },
