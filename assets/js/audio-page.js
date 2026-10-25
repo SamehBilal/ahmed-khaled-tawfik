@@ -22,6 +22,7 @@ window.PAGE = {
 		var Y = (A.youtube && A.youtube.issues) || {}, TH = A.thumbs || {};
 		/* a row's picture: Audiohat's own, else the YouTube still, else the book cover */
 		function ytThumb(v) { return 'https://i.ytimg.com/vi/' + v + '/mqdefault.jpg'; }
+		var shown = {};
 		['mwt', 'fantasia', 'safari'].forEach(function (sid) {
 			var s = App.byId(d.series, sid);
 			var rows = [];
@@ -42,6 +43,18 @@ window.PAGE = {
 				var start = tracks.length;
 				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = L('عدد خاص ', 'Special ') + App.num(is.n) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
 				if (tracks.length > start) srows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), thumb: (tracks[start].yt ? ytThumb(tracks[start].yt) : '') || S.issueCover(sid, is), start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
+			});
+			/* issues of other series that count as its specials (e.g. «ثلاثة» in «كتاب الصيف»), listed once, under the first of their series */
+			S.contributedSeries().forEach(function (x) {
+				S.seriesIssues(x.id).forEach(function (is) {
+					var key = S.issueKey(x.id, is);
+					if (!is.asSpecial || [].concat(is.related || []).indexOf(sid) < 0 || shown[key]) return;
+					var start = tracks.length;
+					window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = t(x.title) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
+					if (tracks.length === start) return;
+					shown[key] = 1;
+					srows.push({ n: is.n, title: is.title, href: App.issueHref(x.id, is), thumb: (tracks[start].yt ? ytThumb(tracks[start].yt) : '') || S.issueCover(x.id, is), start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
+				});
 			});
 			if (srows.length) groups.push({ title: { ar: t(s.title) + ' — الأعداد الخاصة', en: (s.title.en || '') + ' — special issues' }, rows: srows });
 		});
