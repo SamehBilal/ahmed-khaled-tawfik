@@ -666,7 +666,10 @@ html.is-app body { padding-bottom: env(safe-area-inset-bottom); }
 .adapt.has-poster { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; align-items: start; }
 .adapt-poster { display: block; margin: 0; }
 .adapt-poster img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 6px; box-shadow: 0 10px 22px rgba(0, 0, 0, .45); }
-.awards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+/* three to a row, two on a tablet, one on a phone */
+.awards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+@media (max-width: 900px) { .awards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .awards { grid-template-columns: minmax(0, 1fr); } }
 .award { position: relative; padding: 18px 18px 16px 58px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
 html[dir="rtl"] .award { padding: 18px 58px 16px 18px; }
 .award::before { content: ''; position: absolute; top: 18px; inset-inline-start: 16px; width: 28px; height: 28px; border-radius: 50%;
