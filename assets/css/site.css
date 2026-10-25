@@ -933,7 +933,7 @@ html[dir="rtl"] .ft-copy { text-align: right; }
 .pub-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .pub h3 { margin: 0; font-family: var(--f-display); font-size: 21px; }
 .pub-n { color: var(--muted); font-family: var(--f-display); font-size: 13px; }
-.pub-yr { margin-top: 2px; font-family: var(--f-latin); color: var(--gold); }
+.pub-yr { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-top: 2px; font-family: var(--f-latin); color: var(--gold); }
 .pub-note { margin: 8px 0 0; color: var(--paper-dim); font-size: .92em; }
 .pub-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; }
 .pub-list a { display: inline-block; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--paper-dim); font-size: 14px; text-decoration: none; transition: color .2s, border-color .2s; }
