@@ -66,7 +66,8 @@ window.PAGE = {
 							'</span></span>' +
 						'</span>' +
 					'</button>' +
-						'<div class="char-meta"><a class="char-page" href="character.html?id=' + e(c.id) + '">' + App.L('صفحة الشخصية', 'Character page') + '</a>' + (w ? ' · ' + App.L('من ', 'From ') + App.workLink(c.work) : '') + ' · ' + App.fixLink(name) + '</div>' +
+						'<div class="char-meta">' + [c.main ? '<a class="char-page" href="character.html?id=' + e(c.id) + '">' + App.L('صفحة الشخصية', 'Character page') + '</a>' : '',
+							w ? App.L('من ', 'From ') + App.workLink(c.work) : '', App.fixLink(name)].filter(Boolean).join(' · ') + '</div>' +
 					'</div>';
 				}).join('') +
 			'</div></div></section>';

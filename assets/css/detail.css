@@ -64,11 +64,13 @@ html[lang="en"] .d-alt { font-family: var(--f-display); }
 	border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; color: var(--muted);
 }
 .chips-line { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
-.chips-line a {
+.chips-line a, .chips-line .char-name {
 	font-family: var(--f-display); padding: 4px 14px; border-radius: 999px;
 	background: var(--ink-2); border: 1px solid var(--line); color: var(--paper);
 }
 .chips-line a:hover { border-color: var(--ember); color: var(--ember); }
+/* a character without a page of their own: the same chip, quieter, not a link */
+.chips-line .char-name { color: var(--paper-dim); border-style: dashed; }
 
 .editions { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; }
 .edition {

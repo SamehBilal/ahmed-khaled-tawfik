@@ -2610,3 +2610,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var g = ids.indexOf('alghaam'), d = ids.indexOf('daani-okhberak');
 	if (g >= 0 && d > g) W.splice(d + 1, 0, W.splice(g, 1)[0]);
 })(window.AKT);
+
+/* the characters with a page of their own: the leads, one or two per book or series */
+(function (A) {
+	var main = ['refaat', 'abeer', 'alaa', 'virus', 'alaa-utopia', 'gaber', 'essam', 'samanoudi'];
+	(A.characters || []).forEach(function (c) { c.main = main.indexOf(c.id) >= 0; });
+})(window.AKT);

@@ -13,6 +13,8 @@ window.PAGE = {
 		var c = App.byId(d.characters, id);
 		var root = document.getElementById('content');
 
+		/* only the leads have a page; anyone else is shown on the characters page, at their card */
+		if (c && !c.main) { location.replace(App.charHref(id)); return; }
 		if (!c) {
 			root.innerHTML = '<section class="page-hero"><div class="wrap"><p class="eyebrow">404</p><h1>' + L('لم نجد هذه الشخصية', 'Character not found') + '</h1>' +
 				'<p class="lead"><a href="characters.html">' + L('كل الشخصيات', 'All characters') + '</a></p></div></section>';
@@ -119,7 +121,7 @@ window.PAGE = {
 				'<div class="section-head"><div><h2>' + L('من حوله', 'Around them') + '</h2></div></div>' +
 				'<div class="ch-people">' + others.map(function (o) {
 					var on = t(o.name), om = (App.lang === 'ar' ? (o.name.ar || '') : (o.name.en || '')).replace(/^(د\.|Dr\.)\s*/, '').charAt(0);
-					return '<a class="ch-person rise" href="character.html?id=' + e(o.id) + '" style="--c:' + e(color) + '">' +
+					return '<a class="ch-person rise" href="' + e(App.charHref(o.id)) + '" style="--c:' + e(color) + '">' +
 						(o.image ? '<img src="' + e(o.image) + '" alt="">' : '<span class="ch-mono" aria-hidden="true">' + e(om) + '</span>') +
 						'<b>' + e(on) + '</b><span>' + tx(o.role) + '</span></a>';
 				}).join('') + '</div></div></section>';
