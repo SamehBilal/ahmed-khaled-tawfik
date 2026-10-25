@@ -3174,3 +3174,13 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if (p.id === 'merit') p.links = (p.links || []).filter(function (l) { return l.kind !== 'site'; }).concat([{ kind: 'site', url: 'https://www.darmerit.com/' }]);
 	});
 })(window.AKT);
+
+/* Dar Lila: its logo and what it was (in standard Arabic and the past tense, as it has closed) */
+(function (A) {
+	(A.publishers || []).forEach(function (p) {
+		if (p.id !== 'lila') return;
+		p.logo = 'assets/img/publishers/lila-kayan-corp.webp';
+		p.about = { ar: 'دار نشر مصرية تأسست عام 2004 بمبادرة من مؤسسها محمد سامي، واحتضنها عدد كبير من الرموز الثقافية المصرية يتقدمهم أحمد خالد توفيق ونبيل فاروق وعلاء الأسواني، بمشاركة مجموعة كبيرة من الشباب المثقف. سعت منذ بدايتها إلى ترسيخ العقلانية وحرية الرأي والفكر والإبداع والاعتقاد، بإصدار الكتب وإقامة الندوات والمناقشات، وتبنّت الإبداع الجديد والطليعي، فقدّمت كثيرًا من المواهب الشابة التي صارت اليوم في متن الثقافة المصرية.',
+			en: 'An Egyptian publisher founded in 2004 by Mohamed Sami and backed by many leading Egyptian cultural figures, Ahmed Khaled Tawfik, Nabil Farouk and Alaa Al Aswany among them, along with many young intellectuals. From the start it worked for reason and freedom of opinion, thought, creativity and belief, through its books, talks and discussions, and championed new and avant-garde writing, bringing forward many young talents who are now at the heart of Egyptian culture.' };
+	});
+})(window.AKT);
