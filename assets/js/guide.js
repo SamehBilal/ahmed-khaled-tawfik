@@ -126,14 +126,20 @@ window.PAGE = {
 
 	render: function () {
 		var App = window.App, e = App.esc, tx = App.tx, L = App.L, self = this, d = App.data(), S = window.WorksShared;
-		/* a small cover beside each book: its first known cover, else a drawn one in the book's colour */
+		/* a small cover beside each book: for a standalone book, the cover of its latest edition that has a back cover too
+		   (the one a reader is likeliest to hold), else its first known cover; else a drawn one in the book's colour */
+		var latestWithBack = function (info) {
+			var key = function (ed) { return String(ed.date || ed.year || ''); };
+			return ((info && info.editions) || []).filter(function (ed) { return ed.cover && ed.back; })
+				.sort(function (a, b) { return key(b).localeCompare(key(a)); }).map(function (ed) { return ed.cover; })[0] || '';
+		};
 		var thumb = function (st, w, title) {
 			if (!S) return '';
 			var img = '';
 			if (st.issue) {
 				var is = S.seriesIssues(st.ref).filter(function (x) { return +x.n === st.issue && !(x.part > 1); })[0];
 				img = is ? S.issueCover(st.ref, is) : '';
-			} else if (App.byId(d.works, st.ref)) img = S.coverOf((d.bookInfo || {})[st.ref]);
+			} else if (App.byId(d.works, st.ref)) img = latestWithBack((d.bookInfo || {})[st.ref]) || S.coverOf((d.bookInfo || {})[st.ref]);
 			else img = S.seriesBook(w).img;
 			return S.miniCover({ img: img, color: w.color, title: title });
 		};
