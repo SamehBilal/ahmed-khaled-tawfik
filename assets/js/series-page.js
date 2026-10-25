@@ -117,10 +117,8 @@ window.PAGE = {
 						(chars.length ? '<section class="d-block"><h3>' + L('الشخصيات', 'Characters') + '</h3><p class="chips-line">' + chars.map(function (c) { return App.charLink(c.id); }).join('') + '</p></section>' : '') +
 						(eds ? '<section class="d-block"><h3>' + L('الطبعات', 'Editions') + '</h3><ul class="ed-list">' + eds + '</ul></section>' : '') +
 						/* collected volumes, box sets and the series logo, from the stores and Wikimedia */
-						(((d.seriesCovers || {})[id] || []).length ? '<section class="d-block"><h3>' + L('المجلدات والأغلفة', 'Volumes and covers') + ' <small>(' + App.num(d.seriesCovers[id].length) + ')</small></h3><div class="sv-covers">' +
-							d.seriesCovers[id].map(function (c) {
-								return '<a class="sv-cover" href="' + e(c.source || c.cover) + '" target="_blank" rel="noopener" title="' + e(t(c.label)) + '"><img src="' + e(c.cover) + '" alt="' + e(t(c.label)) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><span>' + e(t(c.label)) + '</span></a>';
-							}).join('') + '</div></section>' : '') +
+						this.volumesHtml(id, s) +
+						this.buyHtml(s) +
 						(adapts.length ? '<section class="d-block"><h3>' + L('على الشاشة', 'On screen') + '</h3>' + adapts.map(function (a) {
 							return '<p><b>' + tx(a.title) + '</b> (' + App.num(a.year || '') + ') — ' + tx(a.text) + '</p>'; }).join('') + '</section>' : '') +
 					'</div>' +
@@ -168,6 +166,119 @@ window.PAGE = {
 		window.Books.initShowcase(document.getElementById('d-book'));
 		this.initProximity(document.getElementById('prox'));
 		this.initIssuePanel(document.getElementById('issue-grid'), issues, id, s);
+		this.initVolumes(id);
+	},
+
+	/* ---------- collected volumes, box sets and the series logo (d.seriesCovers) ----------
+	   As on a book page, one card stands for many printings: a series' numbered volumes share one design, so they
+	   are one card with a chip per volume, each opening a popup with that volume and where to buy it; box sets and
+	   single printings get a card each, and the logo and photos stay pictures */
+	volOrd: { 'الأول': 1, 'الاول': 1, 'الحادي': 1, 'الحادى': 1, 'الثاني': 2, 'الثانى': 2, 'الثالث': 3, 'الرابع': 4, 'الخامس': 5, 'السادس': 6, 'السابع': 7, 'الثامن': 8, 'التاسع': 9, 'العاشر': 10 },
+	volNum: function (label) {
+		if (/بوكس|box/i.test(label)) return 0;
+		var m = /(?:^|\s)ج\s*(\d+)/.exec(label) || /(?:الجزء|المجلد)\s+(\d+)/.exec(label);
+		if (m) return +m[1];
+		m = /(?:الجزء|المجلد)\s+(ال\S+)(\s+عشر)?/.exec(label);
+		var n = m && this.volOrd[m[1]];
+		return n ? n + (m[2] ? 10 : 0) : 0;
+	},
+	storeOf: function (url) {
+		var L = window.App.L, h = String(url || '');
+		return /aseeralkotb/.test(h) ? L('عصير الكتب', 'Aseer Al Kotb') : /abjjad/.test(h) ? L('أبجد', 'Abjjad') : /goodreads/.test(h) ? 'Goodreads'
+			: /thebookhome/.test(h) ? L('بيت الكتب', 'The Book Home') : /asfar/.test(h) ? L('أسفار', 'Asfar') : /wiki/.test(h) ? L('ويكيبيديا', 'Wikipedia') : '';
+	},
+	volumeGroups: function (id) {
+		var self = this, t = window.App.t, list = ((window.App.data().seriesCovers || {})[id] || []);
+		var vols = [], cards = [], pics = [];
+		list.forEach(function (c) {
+			if (c.kind === 'logo' || /wiki/.test(c.source || '')) { pics.push(c); return; }
+			var n = self.volNum(t(c.label));
+			if (n) vols.push({ c: c, n: n }); else cards.push({ list: [{ c: c, n: 0 }] });
+		});
+		vols.sort(function (a, b) { return a.n - b.n; });
+		var groups = (vols.length ? [{ vols: true, list: vols }] : []).concat(cards);
+		return { groups: groups, pics: pics };
+	},
+	volumesHtml: function (id, s) {
+		var App = window.App, e = App.esc, t = App.t, tx = App.tx, L = App.L, S = window.WorksShared, self = this;
+		var g = this.volumeGroups(id), total = ((App.data().seriesCovers || {})[id] || []).length;
+		if (!total) return '';
+		var cards = g.groups.map(function (grp, gi) {
+			var first = grp.list[0].c, n = grp.list.length;
+			var store = self.storeOf(first.source);
+			var head = grp.vols ? L('مجلدات ', 'The volumes of ') + t(s.title) : t(first.label);
+			var meta = [store, grp.vols ? (n === 2 ? L('مجلدان', '2 volumes') : App.num(n) + ' ' + L(n <= 10 ? 'مجلدات' : 'مجلدًا', 'volumes')) : ''].filter(Boolean).map(e).join(' · ');
+			return '<article class="edition" data-g="' + gi + '">' +
+				'<span class="sv-ed-cover">' + S.miniCover({ img: first.cover, color: s.color, title: head }) + '</span>' +
+				'<div><h4>' + e(head) + '</h4>' + (meta ? '<p class="meta">' + meta + '</p>' : '') +
+				'<div class="ed-years" role="group" aria-label="' + e(grp.vols ? L('المجلدات', 'Volumes') : L('الطبعة', 'Printing')) + '">' + grp.list.map(function (v, vi) {
+					return '<button type="button" class="ed-yr" data-g="' + gi + '" data-v="' + vi + '" aria-expanded="false">' + (grp.vols ? e(App.num(v.n)) : L('التفاصيل', 'Details')) + '</button>';
+				}).join('') + '</div></div></article>';
+		}).join('');
+		var pics = g.pics.map(function (c) {
+			return '<a class="sv-cover" href="' + e(c.source || c.cover) + '" target="_blank" rel="noopener" title="' + e(t(c.label)) + '"><img src="' + e(c.cover) + '" alt="' + e(t(c.label)) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><span>' + e(t(c.label)) + '</span></a>';
+		}).join('');
+		return '<section class="d-block d-editions sv-volumes"><h3>' + L('المجلدات والأغلفة', 'Volumes and covers') + ' <small>(' + App.num(g.groups.length + g.pics.length) + ')</small></h3>' +
+			(cards ? '<div class="editions">' + cards + '</div>' : '') +
+			(pics ? '<div class="sv-covers">' + pics + '</div>' : '') + '</section>';
+	},
+	/* a volume's chip opens its popup and puts its cover on the card */
+	initVolumes: function (id) {
+		var sec = document.querySelector('.sv-volumes');
+		if (!sec) return;
+		var App = window.App, e = App.esc, t = App.t, L = App.L, S = window.WorksShared, self = this;
+		var groups = this.volumeGroups(id).groups;
+		var pop = document.createElement('div');
+		pop.className = 'ed-pop';
+		pop.hidden = true;
+		sec.appendChild(pop);
+		var openBtn = null;
+		var close = function () { pop.hidden = true; if (openBtn) openBtn.setAttribute('aria-expanded', 'false'); openBtn = null; };
+		sec.addEventListener('click', function (ev) {
+			var btn = ev.target.closest('.ed-yr');
+			if (!btn) { if (!ev.target.closest('.ed-pop')) close(); return; }
+			if (openBtn === btn) { close(); return; }
+			close();
+			openBtn = btn;
+			btn.setAttribute('aria-expanded', 'true');
+			var c = groups[+btn.getAttribute('data-g')].list[+btn.getAttribute('data-v')].c, store = self.storeOf(c.source);
+			var img = btn.closest('.edition').querySelector('.sv-ed-cover img');
+			if (img) img.src = c.cover;
+			pop.innerHTML = '<dl><dt>' + L('العنوان', 'Title') + '</dt><dd>' + e(t(c.label)) + '</dd>' +
+				(store ? '<dt>' + L('المتجر', 'Store') + '</dt><dd>' + e(store) + '</dd>' : '') + '</dl>' +
+				(c.source ? '<a href="' + e(c.source) + '" target="_blank" rel="noopener">' + (store && !/ويكيبيديا|Wikipedia|Goodreads/.test(store) ? L('اشترِه من ', 'Buy it at ') + e(store) : L('المصدر', 'Source')) + ' ↗</a>' : '');
+			pop.hidden = false;
+			var sr = sec.getBoundingClientRect(), br = btn.getBoundingClientRect();
+			pop.style.left = Math.min(Math.max(0, br.left - sr.left + br.width / 2 - pop.offsetWidth / 2), sr.width - pop.offsetWidth) + 'px';
+			pop.style.top = (br.bottom - sr.top + 8) + 'px';
+		});
+		document.addEventListener('click', function (ev) { if (!sec.contains(ev.target)) close(); });
+		document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') close(); });
+	},
+
+	/* ---------- where to buy the series: store searches, as on a book page (no affiliate codes) ---------- */
+	buyHtml: function (s) {
+		var App = window.App, e = App.esc, t = App.t, L = App.L;
+		var title = s.title.ar || t(s.title), Q = encodeURIComponent(title + ' أحمد خالد توفيق');
+		var shops = [
+			{ kind: L('ورقي', 'Print'), items: [
+				[L('بيت الكتب', 'The Book Home'), 'https://www.thebookhome.com/Home/SearchResult?searchKey=' + encodeURIComponent(title) + '&sortKey=Date%20desc&pageNumber=1'],
+				[L('عصير الكتب', 'Aseer Al Kotb'), 'https://www.aseeralkotb.com/ar/search?q=' + encodeURIComponent(title)],
+				['Amazon.eg', 'https://www.amazon.eg/s?k=' + Q + '&i=stripbooks'],
+				['Noon', 'https://www.noon.com/egypt-ar/search/?q=' + Q]
+			] },
+			{ kind: L('إلكتروني', 'Ebook'), items: [
+				['Abjjad', 'https://www.abjjad.com/search?q=' + Q],
+				['Google Play Books', 'https://play.google.com/store/search?q=' + Q + '&c=books'],
+				['Kindle', 'https://www.amazon.com/s?k=' + Q + '&i=digital-text']
+			] }
+		];
+		return '<section class="d-block d-buy"><h3>' + L('اشترِ السلسلة', 'Where to buy') + '</h3>' +
+			shops.map(function (g) {
+				return '<div class="buy-row"><span class="buy-kind">' + e(g.kind) + '</span>' +
+					g.items.map(function (it) { return '<a class="buy-btn" href="' + e(it[1]) + '" target="_blank" rel="noopener nofollow">' + e(it[0]) + ' ↗</a>'; }).join('') + '</div>';
+			}).join('') +
+			'<p class="buy-note">' + L('روابط بحث في المتاجر عن هذه السلسلة — التوفر والسعر والطبعة حسب كل متجر. لا عمولة لهذا الموقع.', 'Store searches for this series — availability, price and edition vary by store. This site earns nothing from them.') + '</p></section>';
 	},
 
 	/* a click on an issue opens it under its row: its cover, a few facts and the words on its back, with a link to its

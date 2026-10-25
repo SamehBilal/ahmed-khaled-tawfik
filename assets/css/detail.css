@@ -319,3 +319,7 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 /* on the Works shelf it opens below the spines, in the old card's place */
 .issue-card .issue-panel { margin-top: 24px; }
 .issue-panel[hidden] { display: none; }
+/* a series' volumes and covers (series-page.js volumesHtml): the logo and photos under the cards */
+.sv-volumes .editions + .sv-covers { margin-top: 18px; }
+.sv-ed-cover { display: block; }
+.sv-ed-cover .mini-cover { width: 84px; }
