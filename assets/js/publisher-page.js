@@ -13,7 +13,7 @@ window.PAGE = {
 		var root = document.getElementById('content');
 		if (!c) {
 			root.innerHTML = '<section class="page-hero"><div class="wrap"><p class="eyebrow">404</p><h1>' + L('لم نجد هذه الدار', 'Publisher not found') + '</h1>' +
-				'<p class="lead"><a href="works.html#publishers-section">' + L('كل دور النشر', 'All the publishers') + '</a></p></div></section>';
+				'<p class="lead"><a href="publishers.html">' + L('كل دور النشر', 'All the publishers') + '</a></p></div></section>';
 			return;
 		}
 		var p = c.p;
@@ -81,7 +81,7 @@ window.PAGE = {
 
 		root.innerHTML =
 			'<section class="wp-hero" style="--c:#7a5a1c"><div class="wrap">' +
-				'<nav class="crumbs"><a href="works.html">' + L('الأعمال', 'Works') + '</a> / <a href="works.html#publishers-section">' + L('دور النشر', 'Publishers') + '</a> / <span>' + e(t(p.name)) + '</span></nav>' +
+				'<nav class="crumbs"><a href="works.html">' + L('الأعمال', 'Works') + '</a> / <a href="publishers.html">' + L('دور النشر', 'Publishers') + '</a> / <span>' + e(t(p.name)) + '</span></nav>' +
 				'<div class="wp-head">' + logo +
 					'<div class="wp-id"><p class="eyebrow">' + L('دار نشر', 'Publisher') + '</p><h1>' + tx(p.name) + '</h1>' +
 						'<p class="wp-alt">' + e(App.alt(p.name)) + '</p><div class="wp-chips">' + chips + '</div>' + linksHtml +
