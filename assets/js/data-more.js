@@ -2901,3 +2901,21 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var C = A.seriesCovers || {};
 	if (C.www) C.www = C.www.filter(function (c) { return c.label.ar !== 'www'; });
 })(window.AKT);
+
+/* «موسوعة الظلام»: Diamond Book's second printing (Kuwait, 2009), by Ahmed Khaled Tawfik, Sanad Rashed and Tamer Ibrahim,
+   with its front and back covers (the back carries the book's text and the three writers' photos) */
+(function (A) {
+	var b = (A.bookInfo || {}).mawsoua;
+	if (!b) return;
+	var DIAMOND = { ar: 'دايموند بوك', en: 'Diamond Book' };
+	var ed = { title: { ar: 'موسوعة الظلام', en: 'Encyclopedia of Darkness' }, publisher: DIAMOND, year: 2009, lang: 'ar',
+		format: { ar: 'غلاف ورقي', en: 'Paperback' }, edition: { ar: 'الطبعة الثانية', en: '2nd edition' },
+		credit: { ar: 'د. أحمد خالد توفيق، م. سند راشد، د. تامر إبراهيم', en: 'Ahmed Khaled Tawfik, Sanad Rashed, Tamer Ibrahim' },
+		cover: 'assets/img/covers/books/mawsoua-diamond-2009.webp', back: 'assets/img/covers/back/mawsoua-diamond-2009.webp' };
+	var at = 0;
+	b.editions.forEach(function (e, i) { if (e.publisher && e.publisher.ar === DIAMOND.ar) at = i + 1; });
+	b.editions.splice(at, 0, ed);
+	b.authors = b.authors || [];
+	if (!b.authors.some(function (a) { return a.ar === 'تامر إبراهيم'; }))
+		b.authors.push({ ar: 'تامر إبراهيم', en: 'Tamer Ibrahim', role: { ar: 'مؤلف مشارك في طبعة دايموند الثانية، 2009', en: 'Co-author of Diamond Book’s 2nd printing, 2009' } });
+})(window.AKT);

@@ -192,6 +192,8 @@ window.PAGE = {
 				ed.edition ? [L('الطبعة', 'Printing'), e(t(ed.edition))] : null,
 				ed.pages ? [L('الصفحات', 'Pages'), e(App.num(ed.pages))] : null,
 				ed.translator ? [L('الترجمة', 'Translator'), tx(ed.translator)] : null,
+				/* the names a printing carries, when they differ from the book's */
+				ed.credit ? [L('بقلم', 'By'), tx(ed.credit)] : null,
 				ed.isbn ? ['ISBN', e(ed.isbn)] : null,
 				ed.isbn10 ? ['ISBN-10', e(ed.isbn10)] : null,
 				ed.asin ? ['ASIN', e(ed.asin)] : null
