@@ -283,7 +283,7 @@
 	function pageUrl(A, slug) { return A.base + encodeURIComponent(slug).replace(/%28/g, '(').replace(/%29/g, ')'); }
 
 	/* episodes of an issue (book.html id like "mwt-12") -> tracks.
-	   data entries: [slug, minutes, sample?] */
+	   data entries: [slug, minutes, sample?, label?] — a label names the episode in place of "Episode n of m" */
 	function issueTracks(key, issueTitle) {
 		var A = (window.App.data().audio) || null;
 		if (!A || !A.issues || !A.issues[key]) return [];
@@ -291,7 +291,7 @@
 		return eps.map(function (ep, k) {
 			return {
 				title: issueTitle,
-				sub: eps.length > 1 ? L('الحلقة ', 'Episode ') + window.App.num(k + 1) + L(' من ', ' of ') + window.App.num(eps.length) : 'Audiohat',
+				sub: ep[3] ? ep[3] : eps.length > 1 ? L('الحلقة ', 'Episode ') + window.App.num(k + 1) + L(' من ', ' of ') + window.App.num(eps.length) : 'Audiohat',
 				url: pageUrl(A, ep[0]),
 				mins: ep[1],
 				sample: ep[2] || '',

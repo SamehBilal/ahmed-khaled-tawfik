@@ -368,3 +368,26 @@ window.AKT.audio.thumbs = {
 	"70_على_الإيقاع": "assets/img/audio/mid-18.webp",
 	"30_الشقة_رقم_9": "assets/img/audio/mid-19.webp"
 };
+
+/* Ma Wara' al-Tabi'a special issue 2, «36» — a choose-your-path book (12 plots in 36 chapters), on Audiohat in
+   13 episodes: the introduction, then each ally (Ezzat, Maggie, Hen Cho Kan) against each of four dangers.
+   Keyed both as the audio page reads a series' special issue (mwt-s2) and as its own page does (specials-2). Checked 2026-10-25. */
+(function (A) {
+	var eps = [["(36)_-_مقدمة", 1, "", "مقدمة لا بد منها"]];
+	[["عزت", "عزت"], ["ماجي", "ماجي"], ["هن_تشو_كان", "هن تشو كان"]].forEach(function (ally, i) {
+		var mins = [[23, 2, 2, 2], [2, 21, 1, 2], [22, 2, 1, 2]][i];
+		[["مصاصو_دماء", "مصاصو دماء"], ["تعويذة_قديمة_منسية_كالعادة", "تعويذة قديمة منسية كالعادة"], ["الموتى_الذين_ليسوا_كذلك", "الموتى الذين ليسوا كذلك"], ["عراف_شرير", "عراف شرير"]].forEach(function (p, k) {
+			/* Audiohat's slugs for «عراف شرير» end in an underscore, except Hen Cho Kan's */
+			var slug = "(36)_-_" + ally[0] + "_-_" + p[0] + (k === 3 && i < 2 ? "_" : "");
+			eps.push([slug, mins[k], "", ally[1] + " · " + p[1]]);
+		});
+	});
+	A.audio.issues["mwt-s2"] = eps;
+	A.audio.issues["specials-2"] = eps;
+})(window.AKT);
+
+/* «في كهوف دراجوسان»'s videos on its own page too (specials-1), not only on the audio page (mwt-s1) */
+(function (Y) {
+	Y.issues["specials-1"] = Y.issues["mwt-s1"];
+	Y.channels["specials-1"] = Y.channels["mwt-s1"];
+})(window.AKT.audio.youtube);
