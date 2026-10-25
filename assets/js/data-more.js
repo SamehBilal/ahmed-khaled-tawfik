@@ -2764,3 +2764,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	(A.issueInfo['sayf-x0'] = A.issueInfo['sayf-x0'] || {}).ownCover = F + 'sayf-1.webp';
 	(A.issueInfo['molotov-2'] = A.issueInfo['molotov-2'] || {}).ownCover = F + 'molotov-2.webp';
 })(window.AKT);
+
+/* «ما وراء الطبيعة»'s volumes and covers: without the photo of a spread of the original issues, the single «ما وراء الطبيعة 81» and the box of volumes 1–8 */
+(function (A) {
+	var C = A.seriesCovers || {};
+	if (C.mwt) C.mwt = C.mwt.filter(function (c) { return ['مجموعة من أعداد السلسلة الأصلية', 'ما وراء الطبيعة 81', 'بوكس سلسلة ما وراء الطبيعة المجلدات من 1 إلى 8'].indexOf(c.label.ar) < 0; });
+})(window.AKT);
