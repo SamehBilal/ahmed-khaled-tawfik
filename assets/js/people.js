@@ -92,6 +92,9 @@
 		'spain-rodriguez': { src: EN('Spain Rodriguez'),
 			ar: 'رسام قصص مصوّرة أمريكي من رواد الكوميكس الأمريكي «الأندرغراوند».',
 			en: 'An American cartoonist, one of the leading figures of underground comix.' },
+		'mahmoud-abdel-shakour': { src: WP('محمود عبد الشكور'),
+			ar: 'كاتب وناقد سينمائي وأدبي مصري وُلد عام 1965، تخرّج في كلية الإعلام، وكتب في صحف ومجلات مصرية وعربية كثيرة، وكان نائبًا لرئيس تحرير مجلة «أكتوبر».',
+			en: 'An Egyptian writer and film and literary critic, born in 1965, a graduate of the Faculty of Mass Communication who has written for many Egyptian and Arab papers and magazines and was deputy editor-in-chief of October magazine.' },
 		'ahmed-khaled-mostafa': { src: AK('أحمد-خالد-مصطفى'),
 			ar: 'روائي مصري وُلد في المدينة المنورة عام 1984 ودرس الصيدلة بجامعة القاهرة، وصاحب «أنتيخريستوس» و«أرض السافلين».',
 			en: 'An Egyptian novelist, born in Medina in 1984, who studied pharmacy at Cairo University; author of Antichristus and Land of the Lowly.' }

@@ -21,6 +21,18 @@ window.PAGE = {
 		if (has('influenced')) parts.push(L('خرج من عباءته قارئًا ثم كاتبًا', 'grew up reading him before becoming a writer', 'خرجت من عباءته قارئةً ثم كاتبةً'));
 		if (has('contemporaries')) parts.push(L('كان من رفاق جيله في كتب الجيب', 'was one of his peers in the pocket books', 'كانت من رفاق جيله في كتب الجيب'));
 		if (has('translated')) parts.push(L('نقل العرّاب أعماله إلى العربية', 'was translated into Arabic by him'));
+		/* and what the site's other data says they did: a series from his world, a screen adaptation they directed or wrote */
+		var d = App.data(), S = window.WorksShared;
+		p.series.forEach(function (sid) {
+			var s = S && S.anySeries(sid);
+			if (s && s.s.inspired && ((d.seriesInfo || {})[sid] || {}).with) parts.push(L('كتب سلسلة «' + App.t(s.s.title) + '» من عالمه', 'wrote the ' + App.t(s.s.title) + ' series out of his world', 'كتبت سلسلة «' + App.t(s.s.title) + '» من عالمه'));
+		});
+		(d.adaptations || []).forEach(function (a) {
+			var ar = (a.text || {}).ar || '', who = (p.name.ar || '').replace(/^د\.\s*/, '');
+			if (!who || ar.indexOf(who) < 0) return;
+			if (new RegExp('إخراج\\s+' + who).test(ar)) parts.push(L('أخرج «' + a.title.ar + '» عن أحد أعماله', 'directed ' + a.title.en + ', adapted from his work', 'أخرجت «' + a.title.ar + '» عن أحد أعماله'));
+			else if (new RegExp('سيناريو[^،.]*' + who).test(ar)) parts.push(L('كتب سيناريو «' + a.title.ar + '» عن أحد أعماله', 'wrote the screenplay of ' + a.title.en + ', adapted from his work', 'كتبت سيناريو «' + a.title.ar + '» عن أحد أعماله'));
+		});
 		if (!parts.length) return '';
 		var last = parts.pop();
 		return n + ' ' + (parts.length ? parts.join(L('، و', ', ')) + L('، و', ' and ') : '') + last + L('.', '.');
