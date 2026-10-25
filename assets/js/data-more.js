@@ -2983,3 +2983,19 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		s.description = { ar: 'كتاب صيفي يجمع قصصًا لعدة كُتّاب، كتب فيه قصة «ثلاثة» التي تجمع أبطاله الثلاثة رفعت إسماعيل وعلاء عبد العظيم وعبير عبد الرحمن معًا.', en: 'A summer anthology of stories by several writers. He wrote «Three» for it, a story that brings his three heroes, Refaat Ismail, Alaa Abdel Azim and Abeer Abdel Rahman, together.' };
 	});
 })(window.AKT);
+
+/* Rewayat Alamiya 1–6, by Nabil Farouk before Ahmed Khaled Tawfik took the series over: in its library only, ahead of his issues,
+   with their Asfar covers and pages (asfar.io/series/international-novels-pocket-books) */
+(function (A) {
+	var I = A.seriesInfo = A.seriesInfo || {};
+	I.rwg = I.rwg || {};
+	var NF = { ar: 'نبيل فاروق', en: 'Nabil Farouk' }, P = 'https://asfar.io/product/', C = 'assets/img/covers/series/rwg/asfar-rwg-';
+	I.rwg.libraryBefore = [
+		[1, 'فلاش جوردن', 'Flash Gordon', 'flash-gordon-alex-raymond'],
+		[2, 'كنوز الملك سليمان', 'King Solomon’s Mines', 'king-solomon-s-mines-h-rider-haggard'],
+		[3, 'دكتور نو', 'Dr. No', 'doctor-no-james-bond'],
+		[4, 'حرب النجوم', 'Star Wars', 'star-war-george-lucas'],
+		[5, 'الفك المفترس', 'Jaws', 'jaws-peter-benchley'],
+		[6, 'فوق مستوى الشبهات', 'Above Suspicion', 'above-suspicion-helen-macinnes']
+	].map(function (x) { return { n: x[0], title: { ar: x[1], en: x[2] }, by: NF, cover: C + x[0] + '.webp', url: P + x[3] + '/' }; });
+})(window.AKT);

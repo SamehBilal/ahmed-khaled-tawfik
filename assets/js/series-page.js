@@ -133,7 +133,8 @@ window.PAGE = {
 				'</div>' +
 				/* the library holds everything of this world: its issues, its special issues and comics and its stories in other
 				   series, written by him or not (of a series that grew from it, like Lasheen, only its first book) */
-				(issues.length ? this.proximityHtml(s, hero, issues.map(function (is) { return { sid: id, is: is }; })
+				(issues.length ? this.proximityHtml(s, hero, (info.libraryBefore || []).map(function (b) { return { sid: id, is: b, href: b.url, cover: b.cover, by: b.by }; })
+					.concat(issues.map(function (is) { return { sid: id, is: is }; }))
 					.concat(specials.map(function (is) { return { sid: id, is: is, tag: L('خاص ', 'Special ') }; }))
 					.concat(extraSpecials.map(function (r) { return { sid: r.s.id, is: r.is, tag: r.s.specialsOf === id ? L('كوميكس', 'Comic') : t(r.s.title), color: r.s.color }; }))
 					.concat(related.map(function (r) { return { sid: r.s.id, is: r.is, tag: t(r.s.title), color: r.s.color }; }))
@@ -383,8 +384,9 @@ window.PAGE = {
 					/* a cover from beyond the series' own issues says what it is: «خاص 3», «كوميكس», «لاشين 5» */
 					var is = x.is, num = is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '';
 					var tagged = x.tag ? (x.tag + (/ $/.test(x.tag) || !num ? '' : ' ') + num).trim() : num;
-					return '<li' + (x.tag ? ' class="is-extra"' : '') + '><a href="' + App.issueHref(x.sid, is) + '" data-n="' + e(tagged) + '" data-t="' + e(App.t(is.title)) + '">' +
-						S.miniCover({ img: S.issueCover(x.sid, is), color: x.color || s.color, title: App.t(is.title), num: tagged }) + '</a></li>';
+					/* a book of the series that isn't on the site (seriesInfo[id].libraryBefore) brings its own cover and link, and says whose it is */
+					return '<li' + (x.tag || x.href ? ' class="is-extra"' : '') + '><a href="' + e(x.href || App.issueHref(x.sid, is)) + '"' + (x.href ? ' target="_blank" rel="noopener"' : '') + ' data-n="' + e(tagged) + '" data-t="' + e(App.t(is.title) + (x.by ? ' — ' + App.t(x.by) : '')) + '">' +
+						S.miniCover({ img: x.cover || S.issueCover(x.sid, is), color: x.color || s.color, title: App.t(is.title), num: tagged }) + '</a></li>';
 				}).join('') + '</ul>' +
 				'<div class="prox-label" aria-hidden="true"></div>' +
 				(credit ? '<span class="prox-credit">' + tx(credit) + '</span>' : '') +
