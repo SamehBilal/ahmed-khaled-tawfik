@@ -530,14 +530,18 @@ body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grays
 /* the spine title is already turned on its side, so its lines flip along their height */
 .bk-list .bk-left h2 > span { display: block; transform: scaleY(-1); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 
-/* ---------- Works: four series books to a row on wide screens ----------
-   The 3D book is built in fixed pixels (300 × 400), so the whole book is zoomed down to fit four. */
+/* ---------- Works: six series books to a row on wide screens ----------
+   The 3D book is built in fixed pixels (300 × 400), so the whole book is zoomed down to fit six (--z); its caption
+   and buttons are zoomed back up (1 / --z) so they read at full size, as wide as the book and just below it. */
 @media (min-width: 1100px) {
-	#series.bk-list { gap: 24px 26px; }
-	#series.bk-list > li { zoom: .9; }
+	#series.bk-list { --z: .6; gap: 28px 20px; }
+	#series.bk-list > li { zoom: var(--z); }
+	#series .bk-info { zoom: calc(1 / var(--z)); width: 100%; margin-top: calc(var(--z) * 400px + 22px); }
+	#series .bk-info h3 { font-size: 19px; margin-top: 10px; }
+	#series .bk-info .bk-actions { flex-wrap: wrap; }
 }
 @media (min-width: 1100px) and (max-width: 1279px) {
-	#series.bk-list > li { zoom: .78; }
+	#series.bk-list { --z: .52; gap: 28px 16px; }
 }
 /* the page arrows and counter sit inside the mirrored book, so they are flipped back too */
 .bk-list .bk-page > nav { transform: scaleX(-1); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
