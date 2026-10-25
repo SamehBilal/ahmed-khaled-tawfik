@@ -2769,4 +2769,46 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 (function (A) {
 	var C = A.seriesCovers || {};
 	if (C.mwt) C.mwt = C.mwt.filter(function (c) { return ['مجموعة من أعداد السلسلة الأصلية', 'ما وراء الطبيعة 81', 'بوكس سلسلة ما وراء الطبيعة المجلدات من 1 إلى 8'].indexOf(c.label.ar) < 0; });
+
+	/* its volumes wear their Goodreads covers (1–13; Goodreads has no 14–16) with the issues, pages and year it gives;
+	   the Aseer Al Kotb page stays as the place to buy each one */
+	var P = 'assets/img/covers/series/paranormal/', AM = { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' };
+	var GR = {
+		'مجلد ما وراء الطبيعة الجزء الأول': [1, 24871703, '1–6', 415, 2015],
+		'ما وراء الطبيعة ج2': [2, 35194819, '7–11', 399],
+		'مجلد ما وراء الطبيعة الجزء الثالث': [3, 34115745, '12–18', 461, 2017],
+		'مجلد ما وراء الطبيعة الجزء الرابع': [4, 38463336, '19–23', 398, 2018],
+		'مجلد ما وراء الطبيعة الجزء الخامس': [5, 43471271, '24–29', 414, 2018],
+		'مجلد ما وراء الطبيعة الجزء السادس': [6, 44553419, '30–34', 447, 2019],
+		'مجلد ما وراء الطبيعة الجزء السابع': [7, 53044475, '35–40', 476, 2019],
+		'مجلد ما وراء الطبيعة الجزء الثامن': [8, 50652863, '41–46', 415, 2020],
+		'مجلد ما وراء الطبيعة الجزء التاسع': [9, 142617852, '47–52', 0, 2021],
+		'مجلد ما وراء الطبيعة الجزء العاشر': [10, 62592200, '53–58', 458, 2021],
+		'مجلد ما وراء الطبيعة الجزء الحادى عشر': [11, 75738451, '59–64', 495, 2021],
+		'مجلد ما وراء الطبيعة الجزء الثانى عشر': [12, 142618152, '65–67'],
+		'مجلد ما وراء الطبيعة الجزء الثالث عشر': [13, 142618076, '68–70']
+	};
+	(C.mwt || []).forEach(function (c) {
+		var g = GR[c.label.ar];
+		if (g) {
+			c.cover = P + 'goodreads-vol-' + g[0] + '.webp';
+			c.goodreads = 'https://www.goodreads.com/book/show/' + g[1];
+			c.issues = g[2];
+			if (g[3]) c.pages = g[3];
+			if (g[4]) c.year = g[4];
+			c.publisher = AM;
+		} else if (/الجزء/.test(c.label.ar)) c.publisher = AM;
+		/* the old pocket-size issues, all of them, in one box; and the newer, taller printing in another */
+		if (c.label.ar === 'سلسلة ما وراء الطبيعة الأعداد الكاملة') {
+			c.cover = P + 'goodreads-complete.webp';
+			c.goodreads = 'https://www.goodreads.com/book/show/25351913';
+			c.storeTitle = c.label;
+			c.label = { ar: 'بوكس الأعداد كاملة — طبعة الجيب القديمة', en: 'Box of every issue — the old pocket printing' };
+			c.publisher = AM;
+		}
+		if (c.label.ar === 'بوكس سلسلة ما وراء الطبيعة المجلدات من 9 إلى 16') {
+			c.storeTitle = c.label;
+			c.label = { ar: 'بوكس الطبعة الجديدة الأطول', en: 'Box of the newer, taller printing' };
+		}
+	});
 })(window.AKT);

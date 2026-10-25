@@ -213,20 +213,28 @@ window.PAGE = {
 			var first = grp.list[0].c, n = grp.list.length;
 			var store = self.storeOf(first.source);
 			var head = grp.vols ? L('مجلدات ', 'The volumes of ') + t(s.title) : t(first.label);
-			var meta = [store, grp.vols ? (n === 2 ? L('مجلدان', '2 volumes') : App.num(n) + ' ' + L(n <= 10 ? 'مجلدات' : 'مجلدًا', 'volumes')) : ''].filter(Boolean).map(e).join(' · ');
+			var meta = [first.publisher ? S.publisherLink(first.publisher) : '', grp.vols ? e(n === 2 ? L('مجلدان', '2 volumes') : App.num(n) + ' ' + L(n <= 10 ? 'مجلدات' : 'مجلدًا', 'volumes')) : ''].filter(Boolean).join(' · ');
 			return '<article class="edition" data-g="' + gi + '">' +
 				'<span class="sv-ed-cover">' + S.miniCover({ img: first.cover, color: s.color, title: head }) + '</span>' +
 				'<div><h4>' + e(head) + '</h4>' + (meta ? '<p class="meta">' + meta + '</p>' : '') +
 				'<div class="ed-years" role="group" aria-label="' + e(grp.vols ? L('المجلدات', 'Volumes') : L('الطبعة', 'Printing')) + '">' + grp.list.map(function (v, vi) {
 					return '<button type="button" class="ed-yr" data-g="' + gi + '" data-v="' + vi + '" aria-expanded="false">' + (grp.vols ? e(App.num(v.n)) : L('التفاصيل', 'Details')) + '</button>';
-				}).join('') + '</div></div></article>';
+				}).join('') + '</div>' +
+				/* where to buy it, under the card; for the volumes, the one picked last */
+				(first.source && store ? '<a class="buy-btn sv-buy" href="' + e(first.source) + '" target="_blank" rel="noopener nofollow">' + L('اشترِ' + (grp.vols ? ' المجلد ' + App.num(grp.list[0].n) : '') + ' من ', 'Buy' + (grp.vols ? ' volume ' + grp.list[0].n : '') + ' at ') + e(store) + ' ↗</a>' : '') +
+				'</div></article>';
 		}).join('');
+		/* the logo and photos as cards too, the picture beside what it is */
 		var pics = g.pics.map(function (c) {
-			return '<a class="sv-cover" href="' + e(c.source || c.cover) + '" target="_blank" rel="noopener" title="' + e(t(c.label)) + '"><img src="' + e(c.cover) + '" alt="' + e(t(c.label)) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><span>' + e(t(c.label)) + '</span></a>';
+			var store = self.storeOf(c.source);
+			return '<article class="edition sv-pic">' +
+				'<a class="sv-pic-img" href="' + e(c.source || c.cover) + '" target="_blank" rel="noopener"><img src="' + e(c.cover) + '" alt="' + e(t(c.label)) + '" loading="lazy" referrerpolicy="no-referrer"></a>' +
+				'<div><h4>' + e(t(c.label)) + '</h4>' +
+				(c.license || store ? '<p class="meta">' + e([store, c.license].filter(Boolean).join(' · ')) + '</p>' : '') +
+				(c.source ? '<a href="' + e(c.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') + '</div></article>';
 		}).join('');
 		return '<section class="d-block d-editions sv-volumes"><h3>' + L('المجلدات والأغلفة', 'Volumes and covers') + ' <small>(' + App.num(g.groups.length + g.pics.length) + ')</small></h3>' +
-			(cards ? '<div class="editions">' + cards + '</div>' : '') +
-			(pics ? '<div class="sv-covers">' + pics + '</div>' : '') + '</section>';
+			'<div class="editions">' + cards + pics + '</div></section>';
 	},
 	/* a volume's chip opens its popup and puts its cover on the card */
 	initVolumes: function (id) {
@@ -248,11 +256,20 @@ window.PAGE = {
 			openBtn = btn;
 			btn.setAttribute('aria-expanded', 'true');
 			var c = groups[+btn.getAttribute('data-g')].list[+btn.getAttribute('data-v')].c, store = self.storeOf(c.source);
-			var img = btn.closest('.edition').querySelector('.sv-ed-cover img');
+			var card = btn.closest('.edition'), img = card.querySelector('.sv-ed-cover img'), buy = card.querySelector('.sv-buy');
 			if (img) img.src = c.cover;
-			pop.innerHTML = '<dl><dt>' + L('العنوان', 'Title') + '</dt><dd>' + e(t(c.label)) + '</dd>' +
-				(store ? '<dt>' + L('المتجر', 'Store') + '</dt><dd>' + e(store) + '</dd>' : '') + '</dl>' +
-				(c.source ? '<a href="' + e(c.source) + '" target="_blank" rel="noopener">' + (store && !/ويكيبيديا|Wikipedia|Goodreads/.test(store) ? L('اشترِه من ', 'Buy it at ') + e(store) : L('المصدر', 'Source')) + ' ↗</a>' : '');
+			var v = groups[+btn.getAttribute('data-g')];
+			if (buy && c.source && v.vols) { buy.href = c.source; buy.textContent = L('اشترِ المجلد ', 'Buy volume ') + App.num(v.list[+btn.getAttribute('data-v')].n) + L(' من ', ' at ') + store + ' ↗'; }
+			var row = function (k, v) { return v ? '<dt>' + k + '</dt><dd>' + v + '</dd>' : ''; };
+			pop.innerHTML = '<dl>' + row(L('العنوان', 'Title'), e(t(c.label))) +
+				row(L('في المتجر باسم', 'Sold as'), c.storeTitle ? e(t(c.storeTitle)) : '') +
+				row(L('الأعداد', 'Issues'), c.issues ? e(App.num(c.issues)) : '') +
+				row(L('الناشر', 'Publisher'), c.publisher ? S.publisherLink(c.publisher) : '') +
+				row(L('السنة', 'Year'), c.year ? e(App.num(c.year)) : '') +
+				row(L('الصفحات', 'Pages'), c.pages ? e(App.num(c.pages)) : '') + '</dl>' +
+				'<p class="ed-pop-links">' +
+				(c.source ? '<a href="' + e(c.source) + '" target="_blank" rel="noopener">' + (store && !/ويكيبيديا|Wikipedia|Goodreads/.test(store) ? L('اشترِه من ', 'Buy it at ') + e(store) : L('المصدر', 'Source')) + ' ↗</a>' : '') +
+				(c.goodreads ? ' <a href="' + e(c.goodreads) + '" target="_blank" rel="noopener">Goodreads ↗</a>' : '') + '</p>';
 			pop.hidden = false;
 			var sr = sec.getBoundingClientRect(), br = btn.getBoundingClientRect();
 			pop.style.left = Math.min(Math.max(0, br.left - sr.left + br.width / 2 - pop.offsetWidth / 2), sr.width - pop.offsetWidth) + 'px';
