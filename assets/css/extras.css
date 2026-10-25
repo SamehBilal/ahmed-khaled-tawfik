@@ -338,4 +338,4 @@ button.media:hover { transform: translateY(-4px); border-color: var(--ember); }
 	.issue { flex: 0 0 30px; scroll-snap-align: start; }
 }
 
-.pub-list .pub-is { font-family: var(--f-display); font-size: 12px; color: var(--muted); }
+.pub-list .pub-is { font-size: 13px; color: var(--muted); }

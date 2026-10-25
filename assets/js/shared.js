@@ -355,13 +355,14 @@
 			series.length ? (issues ? count(issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + L(' في ', ' in ') : '') + count(series.length, 'سلسلة', issues ? 'سلسلتين' : 'سلسلتان', 'سلاسل', 'سلسلة', 'series', 'series') : ''].filter(Boolean).join(' · ');
 		return '<article class="pub rise">' +
 			'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)\s+/, '').charAt(0)) + '</span>') + '<h3><a class="pub-a" href="' + e(publisherHref(c.p.id)) + '">' + tx(c.p.name) + '</a></h3>' +
-				'<span class="pub-n">' + what + '</span></div>' +
-			(c.from ? '<div class="pub-yr">' + App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') + '</div>' : '') +
+				'</div>' +
+			/* its years, and beside them what it published */
+			'<div class="pub-yr">' + (c.from ? App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') : '') + (what ? '<span class="pub-n">' + (c.from ? ' · ' : '') + what + '</span>' : '') + '</div>' +
 			(c.p.note ? '<p class="pub-note">' + tx(c.p.note) + '</p>' : '') +
 			'<a class="pub-more" href="' + e(publisherHref(c.p.id)) + '">' + L('صفحة الدار ←', 'The house’s page →') + '</a>' +
 			'<ul class="pub-list">' + c.list.map(function (it) {
 				/* a series says how many of its issues are his */
-				return '<li' + (it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + '</a>' + (it.series && it.issues ? ' <small class="pub-is">' + count(it.issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + '</small>' : '') + '</li>';
+				return '<li' + (it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + (it.series && it.issues ? ' <small class="pub-is">(' + App.num(it.issues) + ')</small>' : '') + '</a></li>';
 			}).join('') + '</ul></article>';
 	}
 
