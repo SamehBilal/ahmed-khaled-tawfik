@@ -114,7 +114,10 @@ window.PAGE = {
 							(r.count > 1
 								? '<button type="button" data-eps aria-expanded="false">' + L('الحلقات', 'Episodes') + ' (' + App.num(r.count) + ')</button>' +
 									'<ol class="ep-sub" hidden>' + tracks.slice(r.start, r.start + r.count).map(function (tr, k) {
+										/* each episode with its own picture: its Audiohat art, its YouTube still, or the row's */
+										var pic = tr.art || (tr.yt ? ytThumb(tr.yt) : '') || r.thumb || '';
 										return '<li data-start="' + (r.start + k) + '"><span class="no">' + e(App.num(k + 1)) + '</span>' +
+											'<span class="th' + (pic ? '' : ' none') + '" aria-hidden="true">' + (pic ? '<img src="' + e(pic) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">' : '') + '</span>' +
 											'<span class="tt">' + e(tr.ep || tr.title) + '<small>' + (tr.yt ? e(tr.channel || 'YouTube') : 'Audiohat') + (tr.mins ? ' · ' + App.num(tr.mins) + ' ' + L('دقيقة', 'min') : '') + '</small></span>' +
 											'<button type="button" data-start="' + (r.start + k) + '">' + L('ضعها في المسجل', 'Load tape') + '</button></li>';
 									}).join('') + '</ol>'
