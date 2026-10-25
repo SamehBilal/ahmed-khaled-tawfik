@@ -2886,3 +2886,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	if (I) I.library = { image: 'assets/img/photos/fantasia-32-library.webp',
 		credit: { ar: 'غلاف «في مملكة الأخوين» — فانتازيا 32', en: 'The cover of In the Brothers\u2019 Kingdom — Fantasia 32' } };
 })(window.AKT);
+
+/* the special issues bring the three leads together: Refaat, Alaa and Abeer in «الشخصيات» on their page */
+(function (A) {
+	var I = A.seriesInfo = A.seriesInfo || {};
+	I.specials = I.specials || {};
+	I.specials.chars = ['refaat', 'alaa', 'abeer'];
+})(window.AKT);

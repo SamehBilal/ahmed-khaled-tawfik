@@ -23,7 +23,9 @@ window.PAGE = {
 		var issues = S.seriesIssues(id);
 		var desc = info.description || s.description || s.synopsis;
 		var hero = s.hero ? App.byId(d.characters, s.hero) : null;
-		var chars = (d.characters || []).filter(function (c) { return c.work === id; });
+		/* its own characters, and any a series names from elsewhere (seriesInfo[id].chars), as the special issues do */
+		var chars = (d.characters || []).filter(function (c) { return c.work === id; })
+			.concat((info.chars || []).map(function (cid) { return App.byId(d.characters, cid); }).filter(Boolean));
 		var adapts = (d.adaptations || []).filter(function (a) { return a.basedOn === id; });
 
 		/* 3D book: own series reuse the works-page book; others get a simple one */
