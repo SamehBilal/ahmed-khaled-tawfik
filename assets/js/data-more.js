@@ -2679,3 +2679,15 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if ((is.title || {}).ar === 'أسطورة ميسيا') { is.year = 2003; is.pages = 20; }
 	});
 })(window.AKT);
+
+/* «كتاب الصيف» 1 and «مولوتوف» 2: the scans are their back covers, not their fronts */
+(function (A) {
+	var B = 'assets/img/covers/back/';
+	['sayf-x0', 'molotov-2'].forEach(function (key) {
+		var i = (A.issueInfo || {})[key];
+		if (i && /covers\/series\/(sayf-1|molotov-2)\.webp$/.test(i.ownCover || '')) delete i.ownCover;
+	});
+	A.backCovers = A.backCovers || {};
+	A.backCovers['sayf-x0'] = B + 'sayf-1.webp';
+	A.backCovers['molotov-2'] = B + 'molotov-2.webp';
+})(window.AKT);
