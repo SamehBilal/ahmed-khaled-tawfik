@@ -3184,3 +3184,15 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			en: 'An Egyptian publisher founded in 2004 by Mohamed Sami and backed by many leading Egyptian cultural figures, Ahmed Khaled Tawfik, Nabil Farouk and Alaa Al Aswany among them, along with many young intellectuals. From the start it worked for reason and freedom of opinion, thought, creativity and belief, through its books, talks and discussions, and championed new and avant-garde writing, bringing forward many young talents who are now at the heart of Egyptian culture.' };
 	});
 })(window.AKT);
+
+/* Kotopia (كتوبيا للنشر والتوزيع), Alexandria: it publishes Lasheen, the series grown from Ma Wara' al-Tabi'a, and «اسمه خالد» */
+(function (A) {
+	A.publishers = A.publishers || [];
+	if (A.publishers.some(function (p) { return p.id === 'kotopia'; })) return;
+	A.publishers.push({ id: 'kotopia', name: { ar: 'كتوبيا للنشر والتوزيع', en: 'Kotopia Publishing & Distribution' }, match: 'كتوبيا',
+		logo: 'assets/img/publishers/kotopia.webp',
+		about: { ar: 'دار مصرية مقرها مدينة الإسكندرية، تأسست عام 2016 على يد مجموعة من الشباب المهتمين بالثقافة امتدادًا لنشاطهم المعرفي على شبكات التواصل الاجتماعي، وأصدرت أول أعمالها في نوفمبر 2016، كتاب «التاريخ كما كان» الذي يجمع مقالات ودراسات تاريخية لفريق «بصمة».',
+			en: 'An Egyptian publisher based in Alexandria, founded in 2016 by young people interested in culture as an extension of their work on social media. Its first book, in November 2016, was «History as It Was», essays and studies in history by the Basma team.' },
+		links: [{ kind: 'site', url: 'https://www.kotopia.org/' }, { kind: 'shop', url: 'https://m.kotopia.store/' },
+			{ kind: 'facebook', url: 'https://www.facebook.com/Kotopia/' }, { kind: 'instagram', url: 'https://www.instagram.com/kotopiap/' }] });
+})(window.AKT);

@@ -59,7 +59,11 @@ window.PAGE = {
 		/* the latest is the one that reached the house's last year (a series by its last issue), not just the last listed */
 		var last = c.list.filter(function (it) { return (it.yearTo || it.year) === c.to; }).pop() || c.list[c.list.length - 1];
 		var q = function (x) { return L('«', '“') + t(x) + L('»', '”'); };
-		var link = L('أول ما صدر له عنها ', 'The first of his books from this house was ') + q(first.title) + (first.year ? L(' عام ', ' in ') + App.num(first.year) : '') +
+		/* a house with nothing of his own: what it published of his world, or about him */
+		var w0 = (c.world || [])[0], a0 = (c.about || [])[0];
+		var link = !first ? (w0 ? L('صدرت عنها سلسلة ', 'It publishes ') + q(w0.title) + L(' التي خرجت من عالمه', ', a series grown from his world') + (w0.year ? L(' منذ ', ' since ') + App.num(w0.year) : '') + '.'
+				: a0 ? L('صدر عنها كتاب عنه: ', 'It published a book about him: ') + q(a0.title) + '.' : '')
+			: L('أول ما صدر له عنها ', 'The first of his books from this house was ') + q(first.title) + (first.year ? L(' عام ', ' in ') + App.num(first.year) : '') +
 			(c.list.length > 1 && last === first ? (c.to && c.to !== first.year ? L('، واستمر صدوره عنها حتى ', ', and it went on coming out here until ') + App.num(c.to) : '')
 				/* a series' last book is one of its issues: «وآخره عدد من سلسلة «سافاري»» */
 				: c.list.length > 1 ? (last.series ? L('، وآخره عدد من سلسلة ', ', and the latest an issue of ') + q(last.title) : L('، وآخره ', ', and the latest ') + q(last.title)) + (c.to && c.to !== first.year ? L(' عام ', ' in ') + App.num(c.to) : '') : '') + '.';
@@ -91,8 +95,9 @@ window.PAGE = {
 			block(L('السلاسل', 'Series'), series) +
 			block(L('أعادت نشرها', 'Reissued here'), c.later) +
 			/* the books others wrote about him that this house published */
-			block(L('كتب عنه', 'Books about him'), (App.data().aboutBooks || []).filter(function (b) { return b.publisher && new RegExp(p.match).test(b.publisher.ar || ''); })
-				.map(function (b) { return { href: S.bookHref(b.id), cover: b.cover, color: b.color || '#3a2a1f', title: b.title, by: b.by, year: b.year }; })) +
+			/* series grown from his world that it publishes (Lasheen at Kotopia) */
+			block(L('من عالمه', 'From his world'), c.world || []) +
+			block(L('كتب عنه', 'Books about him'), c.about || []) +
 			'<section class="section"><div class="wrap"><h2 class="wp-h">' + L('دور أخرى', 'Other houses') + '</h2><div class="wp-people">' + all.map(house).join('') + '</div>' +
 				'<div class="pn wp-pn"><a href="' + e(S.publisherHref(prev.p.id)) + '">' + L('→ ', '← ') + e(t(prev.p.name)) + '</a><a href="' + e(S.publisherHref(next.p.id)) + '">' + e(t(next.p.name)) + L(' ←', ' →') + '</a></div>' +
 			'</div></section>';

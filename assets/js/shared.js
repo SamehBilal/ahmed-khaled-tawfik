@@ -336,8 +336,15 @@
 			later = later.map(own);
 			/* its years run to the last a book or series of his came out with it (a series' last issue, not its first) */
 			var ys = mine.map(function (it) { return it.year; }).filter(Boolean), ye = mine.map(function (it) { return it.yearTo || it.year; }).filter(Boolean);
-			return { p: p, list: mine, later: later, from: ys.length ? Math.min.apply(null, ys) : 0, to: ye.length ? Math.max.apply(null, ye) : 0 };
-		}).filter(function (c) { return c.list.length; })
+			/* and what it published of his world that isn't his: a series grown from his work (Lasheen), and books about him */
+			var world = inspiredSeries().filter(function (s) { return s.publisher && pubMatches(p, s.publisher.ar || ''); }).map(function (s) {
+				return { id: s.id, title: s.title, href: seriesHref(s.id), year: yearOf(s.years), yearTo: lastYearOf(s.years), issues: seriesIssues(s.id).length, cover: seriesCover(s.id), color: s.color, series: true, world: true, by: s.author };
+			});
+			var about = (d.aboutBooks || []).filter(function (b) { return b.publisher && pubMatches(p, b.publisher.ar || ''); }).map(function (b) {
+				return { id: b.id, title: b.title, href: bookHref(b.id), year: b.year, cover: b.cover, color: b.color || '#3a2a1f', by: b.by, about: true };
+			});
+			return { p: p, list: mine, later: later, world: world, about: about, from: ys.length ? Math.min.apply(null, ys) : 0, to: ye.length ? Math.max.apply(null, ye) : 0 };
+		}).filter(function (c) { return c.list.length || c.later.length || c.world.length || c.about.length; })
 			.sort(function (a, b) { return (a.from || 9999) - (b.from || 9999); });
 	}
 	/* a publisher's name as printed, linked to the page of the first house it names (or plain text) */
@@ -363,6 +370,8 @@
 		/* «٣ كتب · ٢٨٩ عددًا في ٧ سلاسل»: its books, then the issues of its series and how many series they make */
 		var what = [books ? count(books, 'كتاب', 'كتابان', 'كتب', 'كتابًا', 'book', 'books') : '',
 			series.length ? (issues ? count(issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + L(' في ', ' in ') : '') + count(series.length, 'سلسلة', issues ? 'سلسلتين' : 'سلسلتان', 'سلاسل', 'سلسلة', 'series', 'series') : ''].filter(Boolean).join(' · ');
+		/* a house that published only his world or books about him says that instead */
+		if (!what) what = [(c.world || []).length ? L('سلسلة من عالمه', 'A series from his world') : '', (c.about || []).length ? (c.about.length === 1 ? L('كتاب عنه', '1 book about him') : count(c.about.length, 'كتاب عنه', 'كتابان عنه', 'كتب عنه', 'كتابًا عنه', 'book about him', 'books about him')) : ''].filter(Boolean).join(' · ');
 		return '<article class="pub rise">' +
 			'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)\s+/, '').charAt(0)) + '</span>') + '<h3><a class="pub-a" href="' + e(publisherHref(c.p.id)) + '">' + tx(c.p.name) + '</a>' + closedBadge(c.p) + '</h3>' +
 				'</div>' +
@@ -370,9 +379,10 @@
 			'<div class="pub-yr">' + (c.from ? App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') : '') + (what ? '<span class="pub-n">' + what + '</span>' : '') + '</div>' +
 			(c.p.note ? '<p class="pub-note">' + tx(c.p.note) + '</p>' : '') +
 			'<a class="pub-more" href="' + e(publisherHref(c.p.id)) + '">' + L('صفحة الدار ←', 'The house’s page →') + '</a>' +
-			'<ul class="pub-list">' + c.list.map(function (it) {
+			/* his books and series, then what it published of his world and about him */
+			'<ul class="pub-list">' + c.list.concat(c.world || [], c.about || []).map(function (it) {
 				/* a series says how many of its issues are his */
-				return '<li' + (it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + (it.series && it.issues ? ' <small class="pub-is">(' + App.num(it.issues) + ')</small>' : '') + '</a></li>';
+				return '<li' + (it.world ? ' class="is-series is-world"' : it.about ? ' class="is-about"' : it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + (it.series && it.issues ? ' <small class="pub-is">(' + App.num(it.issues) + ')</small>' : '') + '</a></li>';
 			}).join('') + '</ul></article>';
 	}
 
