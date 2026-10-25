@@ -3167,3 +3167,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		p.links = (p.links || []).filter(function (l) { return l.kind !== 'site'; }).concat([{ kind: 'site', url: 'http://www.daimond-book.com/' }]);
 	});
 })(window.AKT);
+
+/* Dar Merit's website */
+(function (A) {
+	(A.publishers || []).forEach(function (p) {
+		if (p.id === 'merit') p.links = (p.links || []).filter(function (l) { return l.kind !== 'site'; }).concat([{ kind: 'site', url: 'https://www.darmerit.com/' }]);
+	});
+})(window.AKT);
