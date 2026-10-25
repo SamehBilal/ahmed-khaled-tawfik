@@ -3151,3 +3151,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		p.closed = { year: 2015 };
 	});
 })(window.AKT);
+
+/* Dar Lila, Diamond Book and Dar Merit have closed too (their years are not recorded, so their badges name none) */
+(function (A) {
+	(A.publishers || []).forEach(function (p) { if (['lila', 'diamond', 'merit'].indexOf(p.id) >= 0 && !p.closed) p.closed = {}; });
+})(window.AKT);
