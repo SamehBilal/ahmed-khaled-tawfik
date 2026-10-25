@@ -2654,3 +2654,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		});
 	}
 })(window.AKT);
+
+/* back covers scanned for the special issues, «رجفة الخوف», WWW 1, 2 and 4, the two comics, «أسطورة بلية», «سوبر ميجا» and
+   «حتى تحترق النجوم (خوف 4)»; front covers for «كتاب الصيف» 1, «مولوتوف» 2 and the comic «أسطورة ميسيا» (Rewayat Comics,
+   2003, about 20 pages, from the Modern Arab Association) */
+(function (A) {
+	var B = 'assets/img/covers/back/', F = 'assets/img/covers/series/';
+	A.backCovers = A.backCovers || {};
+	A.issueInfo = A.issueInfo || {};
+	for (var n = 1; n <= 10; n++) { A.backCovers['specials-' + n] = B + 'specials-' + n + '.webp'; A.backCovers['shivers-' + n] = B + 'shivers-' + n + '.webp'; }
+	[1, 2, 4].forEach(function (n) { A.backCovers['www-' + n] = B + 'www-' + n + '.webp'; });
+	A.backCovers['comics-x0'] = B + 'comics-myssia.webp';
+	A.backCovers['comics-x1'] = B + 'comics-snake-woman.webp';
+	A.backCovers['bley-x0'] = B + 'bley-balya.webp';
+	A.backCovers['supermega-x0'] = B + 'supermega.webp';
+	A.backCovers['about-hatta-tahtareq'] = B + 'about-hatta-tahtareq.webp';
+	var own = function (key, cover) { var i = A.issueInfo[key] = A.issueInfo[key] || {}; i.ownCover = cover; return i; };
+	own('sayf-x0', F + 'sayf-1.webp');
+	own('molotov-2', F + 'molotov-2.webp');
+	var my = own('comics-x0', F + 'comics-myssia.webp');
+	my.editions = [{ title: { ar: 'أسطورة ميسيا', en: 'The Legend of Myssia' }, publisher: { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' },
+		year: 2003, lang: 'ar', pages: 20, format: { ar: 'قصة مصورة (كوميكس)', en: 'Comic' }, cover: F + 'comics-myssia.webp', back: B + 'comics-myssia.webp' }].concat(my.editions || []);
+	((A.otherSeries || []).filter(function (s) { return s.id === 'comics'; })[0] || { issues: [] }).issues.forEach(function (is) {
+		if ((is.title || {}).ar === 'أسطورة ميسيا') { is.year = 2003; is.pages = 20; }
+	});
+})(window.AKT);
