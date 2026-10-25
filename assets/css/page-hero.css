@@ -42,12 +42,13 @@ html[data-theme="light"] .ph { --ph-bg: #1c1712; border-bottom-color: rgba(0, 0,
 
 /* ---------- characters: the lineup ---------- */
 /* a steady wash of light on the wall, so it never goes dark in the middle while the spot is off to one side */
-/* the wall is papered: an old damask, faint stripes between its rows, darker towards the ceiling and the floor */
+/* the wall is papered: an old damask with the three heroes' emblems in its rows (Refaat's bat, Alaa's heartbeat, Abeer's moon and star), faint stripes between its rows, darker towards the ceiling and the floor */
 .ph[data-ph="characters"] { border-bottom: 0;
 	background:
 		radial-gradient(70% 100% at 50% 0%, rgba(255, 235, 190, .07), transparent 70%),
 		linear-gradient(rgba(8, 9, 12, .55), transparent 30%, transparent 60%, rgba(8, 9, 12, .7)),
-		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='130' viewBox='0 0 90 130'%3E%3Cg fill='%23d9c9a3' fill-opacity='.075'%3E%3Cpath d='M45 8c6 10 16 14 16 28 0 10-8 16-16 22-8-6-16-12-16-22 0-14 10-18 16-28z'/%3E%3Cpath d='M45 58c-3 6-9 9-14 7 4 5 10 6 14 2 4 4 10 3 14-2-5 2-11-1-14-7z'/%3E%3Cpath d='M29 36c-9-2-15 4-13 12 3-5 8-7 13-6zM61 36c9-2 15 4 13 12-3-5-8-7-13-6z'/%3E%3Ccircle cx='45' cy='96' r='4'/%3E%3Cpath d='M0 73c6 10 16 14 16 28 0 10-8 16-16 22zM90 73c-6 10-16 14-16 28 0 10 8 16 16 22z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 90px 130px,
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='270' height='130' viewBox='0 0 270 130'%3E%3Cg fill='%23d9c9a3' fill-opacity='.14' stroke='%23d9c9a3' stroke-opacity='.14'%3E%3Cpath stroke='none' d='M45 92c-2-3-3-3-4-6-1 2-1 3-2 4-4-3-10-3-14 0 3 1 5 4 5 7 2-2 5-2 7 0 1-2 4-3 6-2 1 2 1 3 2 4 1-1 1-2 2-4 2-1 5 0 6 2 2-2 5-2 7 0 0-3 2-6 5-7-4-3-10-3-14 0-1-1-1-2-2-4-1 3-2 3-4 6z'/%3E%3Cpath fill='none' stroke-width='1.6' stroke-linejoin='round' d='M119 96h7l3-6 4 13 4-17 3 10h11'/%3E%3Cpath stroke='none' d='M228 86a10 10 0 1 0 6 16 8 8 0 1 1-6-16z'/%3E%3Cpath stroke='none' d='M236 86l1 3 3 1-3 1-1 3-1-3-3-1 3-1z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 270px 130px,
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='130' viewBox='0 0 90 130'%3E%3Cg fill='%23d9c9a3' fill-opacity='.075'%3E%3Cpath d='M45 8c6 10 16 14 16 28 0 10-8 16-16 22-8-6-16-12-16-22 0-14 10-18 16-28z'/%3E%3Cpath d='M45 58c-3 6-9 9-14 7 4 5 10 6 14 2 4 4 10 3 14-2-5 2-11-1-14-7z'/%3E%3Cpath d='M29 36c-9-2-15 4-13 12 3-5 8-7 13-6zM61 36c9-2 15 4 13 12-3-5-8-7-13-6z'/%3E%3Cpath d='M0 73c6 10 16 14 16 28 0 10-8 16-16 22zM90 73c-6 10-16 14-16 28 0 10 8 16 16 22z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 90px 130px,
 		repeating-linear-gradient(90deg, transparent 0 43px, rgba(217, 201, 163, .035) 43px 47px),
 		linear-gradient(#262126, #100e12); }
 /* no line under it: its foot fades into the page */
