@@ -3143,3 +3143,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		p.links = [{ kind: 'site', url: 'https://spark-books.site/' }, { kind: 'instagram', url: 'https://www.instagram.com/spark_books/' }];
 	});
 })(window.AKT);
+
+/* Bloomsbury Qatar Foundation Publishing has closed (in 2015, when Hamad Bin Khalifa University Press took over its list): a badge says so */
+(function (A) {
+	(A.publishers || []).forEach(function (p) {
+		if (p.id !== 'bloomsbury') return;
+		p.closed = { year: 2015 };
+	});
+})(window.AKT);

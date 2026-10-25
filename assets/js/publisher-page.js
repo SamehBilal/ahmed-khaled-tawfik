@@ -83,7 +83,7 @@ window.PAGE = {
 			'<section class="wp-hero" style="--c:#7a5a1c"><div class="wrap">' +
 				'<nav class="crumbs"><a href="works.html">' + L('الأعمال', 'Works') + '</a> / <a href="publishers.html">' + L('دور النشر', 'Publishers') + '</a> / <span>' + e(t(p.name)) + '</span></nav>' +
 				'<div class="wp-head">' + logo +
-					'<div class="wp-id"><p class="eyebrow">' + L('دار نشر', 'Publisher') + '</p><h1>' + tx(p.name) + '</h1>' +
+					'<div class="wp-id"><p class="eyebrow">' + L('دار نشر', 'Publisher') + '</p><h1>' + tx(p.name) + S.closedBadge(p) + '</h1>' +
 						'<p class="wp-alt">' + e(App.alt(p.name)) + '</p><div class="wp-chips">' + chips + '</div>' + linksHtml +
 						about + (p.note ? '<p class="wp-bio">' + tx(p.note) + '</p>' : '') + '<p class="wp-link">' + e(link) + '</p></div>' +
 				'</div></div></section>' +

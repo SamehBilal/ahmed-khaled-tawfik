@@ -347,6 +347,12 @@
 		return p ? '<a href="' + App.esc(publisherHref(p.id)) + '">' + App.esc(text) + '</a>' : App.esc(text);
 	}
 
+	/* a house that has closed says so in a small badge, with the year when it is known (p.closed: { year }) */
+	function closedBadge(p) {
+		var App = window.App, L = App.L;
+		return p.closed ? ' <span class="pub-closed" title="' + App.esc(L('توقفت الدار عن النشر', 'This house no longer publishes')) + '">' + L('مغلقة', 'Closed') + (p.closed.year ? ' · ' + App.num(p.closed.year) : '') + '</span>' : '';
+	}
+
 	/* a house's card (works page, publishers.html): logo, name, count, years, note and its books */
 	function publisherCard(c) {
 		var App = window.App, e = App.esc, tx = App.tx, L = App.L;
@@ -358,7 +364,7 @@
 		var what = [books ? count(books, 'كتاب', 'كتابان', 'كتب', 'كتابًا', 'book', 'books') : '',
 			series.length ? (issues ? count(issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + L(' في ', ' in ') : '') + count(series.length, 'سلسلة', issues ? 'سلسلتين' : 'سلسلتان', 'سلاسل', 'سلسلة', 'series', 'series') : ''].filter(Boolean).join(' · ');
 		return '<article class="pub rise">' +
-			'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)\s+/, '').charAt(0)) + '</span>') + '<h3><a class="pub-a" href="' + e(publisherHref(c.p.id)) + '">' + tx(c.p.name) + '</a></h3>' +
+			'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)\s+/, '').charAt(0)) + '</span>') + '<h3><a class="pub-a" href="' + e(publisherHref(c.p.id)) + '">' + tx(c.p.name) + '</a>' + closedBadge(c.p) + '</h3>' +
 				'</div>' +
 			/* its years at one end, what it published at the other */
 			'<div class="pub-yr">' + (c.from ? App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') : '') + (what ? '<span class="pub-n">' + what + '</span>' : '') + '</div>' +
@@ -401,7 +407,7 @@
 	}
 
 	window.WorksShared = {
-		issuePanel: issuePanel,
+		issuePanel: issuePanel, closedBadge: closedBadge,
 		backOf: backOf, entryBooks: entryBooks, entryBookHref: entryBookHref, publishers: publishers, publisherHref: publisherHref, publisherLink: publisherLink, publisherCard: publisherCard,
 		ownSeries: ownSeries, contributedSeries: contributedSeries, awardsList: awardsList, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
