@@ -119,8 +119,14 @@ window.PAGE = {
 						/* collected volumes, box sets and the series logo, from the stores and Wikimedia */
 						this.volumesHtml(id, s) +
 						this.buyHtml(s) +
+						/* each adaptation in a card with its poster, as on the Works page */
 						(adapts.length ? '<section class="d-block"><h3>' + L('على الشاشة', 'On screen') + '</h3>' + adapts.map(function (a) {
-							return '<p><b>' + tx(a.title) + '</b> (' + App.num(a.year || '') + ') — ' + tx(a.text) + '</p>'; }).join('') + '</section>' : '') +
+							return '<article class="adapt d-adapt' + (a.poster ? ' has-poster' : '') + '">' +
+								(a.poster ? '<a class="adapt-poster" href="' + e(a.posterSource || a.poster) + '" target="_blank" rel="noopener"><img src="' + e(a.poster) + '" alt="' + e(L('ملصق ', 'Poster: ') + t(a.title)) + '" loading="lazy"></a>' : '') +
+								'<div>' + (a.kind ? '<div class="kind">' + tx(a.kind) + '</div>' : '') +
+								'<h3>' + tx(a.title) + '</h3>' +
+								(a.year ? '<div class="yr">' + App.num(a.year) + '</div>' : '') +
+								'<p>' + tx(a.text) + '</p></div></article>'; }).join('') + '</section>' : '') +
 					'</div>' +
 				'</div>' +
 				(ser.own && hero && issues.length ? this.proximityHtml(s, hero, issues) : '') +

@@ -323,3 +323,6 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 .sv-volumes .editions + .sv-covers { margin-top: 18px; }
 .sv-ed-cover { display: block; }
 .sv-ed-cover .mini-cover { width: 84px; }
+/* a series' On screen block: the Works page's poster cards (site.css .adapt), one under another */
+.d-adapt + .d-adapt { margin-top: 14px; }
+.d-block .d-adapt h3 { margin: 4px 0 2px; font-size: 22px; }
