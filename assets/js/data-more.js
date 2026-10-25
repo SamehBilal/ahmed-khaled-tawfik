@@ -3015,3 +3015,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		[8, 'أنا الرئيس', 'I Am the President', 6775695]
 	].map(function (x) { return { n: x[0], title: { ar: x[1], en: x[2] }, by: MS, cover: C + x[0] + '.webp', url: G + x[3] }; });
 })(window.AKT);
+
+/* «كتاب الصيف»: Nabil Farouk wrote in it with him — in «شاركوه السلسلة» on its page */
+(function (A) {
+	var I = A.seriesInfo = A.seriesInfo || {};
+	I.sayf = I.sayf || {};
+	I.sayf.with = (I.sayf.with || []).concat([{ id: 'nabil-farouk', role: { ar: 'كتب فيه معه', en: 'Wrote in it alongside him' } }]);
+})(window.AKT);
