@@ -149,6 +149,20 @@ html[dir="rtl"] .ch-quotes blockquote { border-radius: 10px 0 0 10px; }
 	color: var(--paper); text-decoration: none;
 }
 .ch-place svg { grid-row: 1 / 4; width: 24px; height: 24px; color: var(--gold); }
+/* the country's outline in place of the pin: drawn in the pin's gold, a dot on the place with a ring that pulses out from it */
+.ch-places:has(.ch-place-map) { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+.ch-place:has(.ch-place-map) { grid-template-columns: 52px 1fr; column-gap: 12px; }
+.ch-place.has-cover { grid-template-columns: 52px 1fr 54px; }
+.ch-place .ch-place-map { width: 52px; height: 52px; overflow: visible; }
+.ch-place-map path { fill: color-mix(in srgb, var(--gold) 16%, transparent); stroke: currentColor; stroke-width: .9; stroke-linejoin: round; }
+.ch-place-map circle { fill: currentColor; }
+.ch-place-map .ring { fill: none; stroke: currentColor; stroke-width: .7; transform-box: fill-box; transform-origin: center; animation: ch-ping 2.4s ease-out infinite; }
+@keyframes ch-ping { from { transform: scale(.6); opacity: 1; } to { transform: scale(2.4); opacity: 0; } }
+.ch-place-cover {
+	grid-row: 1 / 4; grid-column: 3; width: 54px; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 4px;
+	box-shadow: 0 6px 14px rgba(0, 0, 0, .4); transition: transform .25s;
+}
+.ch-place:hover .ch-place-cover { transform: translateY(-3px) rotate(-2deg); }
 .ch-place b { font-family: var(--f-display); }
 .ch-place span, .ch-place small { color: var(--paper-dim); font-size: 13px; }
 .ch-place:hover { border-color: var(--gold); }
@@ -180,7 +194,7 @@ html[data-theme="light"] .ch-stars { filter: invert(1); opacity: .35; }
 .ch-theme-fantasy-body .ch-group h3::before { content: '✦'; color: #b39cff; }
 
 @media (prefers-reduced-motion: reduce) {
-	.ch-fog span, .ch-ecg path, .ch-stars, .ch-portal, .ch-theme-ghosts .ch-portrait img, .ch-lantern .glow, .ch-lantern .moth b, .ch-lantern .moth b::before, .ch-lantern .moth b::after { animation: none; }
+	.ch-fog span, .ch-ecg path, .ch-stars, .ch-portal, .ch-theme-ghosts .ch-portrait img, .ch-lantern .glow, .ch-lantern .moth b, .ch-lantern .moth b::before, .ch-lantern .moth b::after, .ch-place-map .ring { animation: none; }
 	.ch-lantern .moth { display: none; }
 	.ch-ecg path { stroke-dashoffset: 0; }
 }

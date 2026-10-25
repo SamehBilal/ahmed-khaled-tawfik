@@ -81,11 +81,16 @@ window.PAGE = {
 			html += '<section class="section ch-themed ch-theme-' + e(hero.theme) + '-body"><div class="wrap">' +
 				'<div class="section-head"><div><h2>' + tx(hero.sectionTitle) + '</h2><p>' + tx(hero.sectionText) + '</p></div></div>' +
 				(hero.places ? '<div class="ch-places" role="list">' + hero.places.map(function (p) {
-					var is = byN(p.issue);
-					return '<a role="listitem" class="ch-place" href="' + e(is ? S.bookHref(S.issueKey(c.work, is)) : '#') + '">' +
-						'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-7.2 7-12.5A7 7 0 0 0 5 9.5C5 14.8 12 22 12 22z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" fill="currentColor"/></svg>' +
+					var is = byN(p.issue), key = is && S.issueKey(c.work, is), cov = is && S.coverOf((d.issueInfo || {})[key] || {});
+					/* the outline of its country with a dot on the place, as the pin had its head; else the pin */
+					var mark = p.map
+						? '<svg class="ch-place-map" viewBox="0 0 24 24" aria-hidden="true"><path d="' + e(p.map.d) + '" fill-rule="evenodd"/>' +
+							'<circle class="ring" cx="' + p.map.dot[0] + '" cy="' + p.map.dot[1] + '" r="2.4"/><circle cx="' + p.map.dot[0] + '" cy="' + p.map.dot[1] + '" r="1.3"/></svg>'
+						: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-7.2 7-12.5A7 7 0 0 0 5 9.5C5 14.8 12 22 12 22z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" fill="currentColor"/></svg>';
+					return '<a role="listitem" class="ch-place' + (cov ? ' has-cover' : '') + '" href="' + e(is ? S.bookHref(key) : '#') + '">' + mark +
 						'<b>' + tx(p.name) + '</b><span>' + tx(p.where) + '</span>' +
-						(is ? '<small>' + L('العدد ', 'Issue ') + e(App.num(is.n)) + '</small>' : '') + '</a>';
+						(is ? '<small>' + L('العدد ', 'Issue ') + e(App.num(is.n)) + '</small>' : '') +
+						(cov ? '<img class="ch-place-cover" src="' + e(cov) + '" alt="" loading="lazy">' : '') + '</a>';
 				}).join('') + '</div>' : '') +
 				hero.groups.map(function (g) {
 					var list = g.issues.map(byN).filter(Boolean);
