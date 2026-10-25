@@ -2938,3 +2938,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ id: 'sherine-hanaey', role: { ar: 'صاحبة السلسلة، تكمل عالم «أسطورة بعد منتصف الليل»', en: 'Its author, carrying on the world of “The Legend of After Midnight”' } }
 	]);
 })(window.AKT);
+
+/* their numbers in their own series: «سوبر ميجا» 1, «بلية العجيب» 17, «كتاب الصيف» 1 and the two comics, 1 and 2.
+   A numbered issue's id is <series>-<n>, so whatever was kept under its old id (<series>-x<i>) moves to the new one;
+   the old links still open it (shared.js resolveBook) */
+(function (A) {
+	var NUM = { supermega: [1], bley: [17], sayf: [1], comics: [1, 2] };
+	var moved = {};
+	(A.otherSeries || []).forEach(function (s) {
+		(NUM[s.id] || []).forEach(function (n, i) {
+			var is = (s.issues || [])[i];
+			if (!is || is.n != null) return;
+			is.n = n;
+			moved[s.id + '-x' + i] = s.id + '-' + n;
+		});
+	});
+	Object.keys(A).forEach(function (k) {
+		var map = A[k];
+		if (!map || typeof map !== 'object' || Array.isArray(map)) return;
+		Object.keys(moved).forEach(function (from) {
+			if (!(from in map)) return;
+			if (!(moved[from] in map)) map[moved[from]] = map[from];
+			delete map[from];
+		});
+	});
+})(window.AKT);

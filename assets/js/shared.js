@@ -167,6 +167,11 @@
 				return { kind: 'issue', id: id, item: list[i], series: ser, index: i, list: list, info: ((d.issueInfo || {})[id]) || {} };
 			}
 		}
+		/* an old link to an issue that has since been numbered (<series>-x<i>) still opens it */
+		var x = /^x(\d+)$/.exec(m[2]);
+		for (var j = 0; x && j < list.length; j++) {
+			if (list[j]._idx === +x[1] && list[j].n != null) { var nid = issueKey(m[1], list[j]); return { kind: 'issue', id: nid, item: list[j], series: ser, index: j, list: list, info: ((d.issueInfo || {})[nid]) || {} }; }
+		}
 		return null;
 	}
 

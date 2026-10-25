@@ -8,6 +8,11 @@ window.PAGE = {
 		var e = App.esc, t = App.t, tx = App.tx, L = App.L;
 		var id = new URLSearchParams(location.search).get('id') || '';
 		var r = S.resolveBook(id);
+		/* an old link to an issue since numbered: carry on under its id now, and show that in the address bar */
+		if (r && r.kind === 'issue' && r.id !== id) {
+			id = r.id;
+			try { history.replaceState(null, '', 'book.html?id=' + encodeURIComponent(id) + location.hash); } catch (err) {}
+		}
 		var root = document.getElementById('content');
 
 		if (!r) {
