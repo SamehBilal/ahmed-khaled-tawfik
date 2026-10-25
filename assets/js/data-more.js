@@ -2644,6 +2644,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	A.charFigures = A.charFigures || {};
 	A.charFigures.refaat = 'assets/img/characters/refaat-lantern.webp';
 	A.charFigures.alaa = 'assets/img/characters/alaa-figure.webp';
+	A.charFigures.abeer = 'assets/img/characters/abeer-figure.webp';
 })(window.AKT);
 
 /* Alaa Abdel Azim's picture: on his card and his page */
