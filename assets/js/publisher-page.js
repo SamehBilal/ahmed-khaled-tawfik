@@ -60,8 +60,8 @@ window.PAGE = {
 			(c.list.length > 1 ? L('، وآخره ', ', and the latest ') + q(c.list[c.list.length - 1].title) + (c.to && c.to !== first.year ? L(' عام ', ' in ') + App.num(c.to) : '') : '') + '.';
 
 		var card = function (it) {
-			return '<a class="cover-link" href="' + e(it.href) + '">' + S.miniCover({ img: it.cover, color: it.color, title: t(it.title), sub: it.series ? L('سلسلة', 'Series') : '' }) +
-				'<span class="cl-t">' + tx(it.title) + (it.year ? ' · ' + App.num(it.year) + (it.yearTo > it.year ? '–' + App.num(it.yearTo) : '') : '') +
+			return '<a class="cover-link" href="' + e(it.href) + '">' + S.miniCover({ img: it.cover, color: it.color, title: t(it.title), sub: it.series ? L('سلسلة', 'Series') : '', by: it.by ? t(it.by) : '' }) +
+				'<span class="cl-t">' + tx(it.title) + (it.by ? ' — ' + tx(it.by) : '') + (it.year ? ' · ' + App.num(it.year) + (it.yearTo > it.year ? '–' + App.num(it.yearTo) : '') : '') +
 					(it.series && it.issues ? ' · ' + count(it.issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') : '') + '</span></a>';
 		};
 		var block = function (title, list) {
@@ -85,6 +85,9 @@ window.PAGE = {
 			block(L('صدر عنها أولًا', 'First published here'), books) +
 			block(L('السلاسل', 'Series'), series) +
 			block(L('أعادت نشرها', 'Reissued here'), c.later) +
+			/* the books others wrote about him that this house published */
+			block(L('كتب عنه', 'Books about him'), (App.data().aboutBooks || []).filter(function (b) { return b.publisher && new RegExp(p.match).test(b.publisher.ar || ''); })
+				.map(function (b) { return { href: S.bookHref(b.id), cover: b.cover, color: b.color || '#3a2a1f', title: b.title, by: b.by, year: b.year }; })) +
 			'<section class="section"><div class="wrap"><h2 class="wp-h">' + L('دور أخرى', 'Other houses') + '</h2><div class="wp-people">' + all.map(house).join('') + '</div>' +
 				'<div class="pn wp-pn"><a href="' + e(S.publisherHref(prev.p.id)) + '">' + L('→ ', '← ') + e(t(prev.p.name)) + '</a><a href="' + e(S.publisherHref(next.p.id)) + '">' + e(t(next.p.name)) + L(' ←', ' →') + '</a></div>' +
 			'</div></section>';

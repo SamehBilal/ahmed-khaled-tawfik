@@ -3062,3 +3062,17 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		p.links = (p.links || []).filter(function (l) { return l.kind !== 'site'; }).concat([{ kind: 'site', url: 'https://rewayatmasreya.com/' }]);
 	});
 })(window.AKT);
+
+/* pictures for two honours: ArabLit's announcement of Utopia among the 2012 SF&F Translation Awards finalists, and the
+   tent of the Tanta Book Fair named after him (Youm7, 2 August 2018) */
+(function (A) {
+	var img = {
+		'القائمة القصيرة لجوائز ترجمة الخيال العلمي والفانتازيا': { src: 'assets/img/prizes/arablit-utopia-2012.webp',
+			alt: { ar: 'إعلان موقع ArabLit (29 مايو 2012) عن «يوتوبيا» بين المرشحين النهائيين لجوائز ترجمة الخيال العلمي والفانتازيا لعام 2012', en: 'ArabLit’s post (29 May 2012) naming Utopia among the finalists for the 2012 SF&F Translation Awards' },
+			source: 'https://arablit.org/2012/05/29/towfiks-utopia-finalist-for-2012-sff-translation-awards/' },
+		'معرض طنطا للكتاب يحمل اسمه': { src: 'assets/img/timeline/tanta-book-fair-2018.webp',
+			alt: { ar: 'خيمة معرض طنطا الثالث للكتاب قبل افتتاحه في أغسطس 2018 (اليوم السابع)', en: 'The tent of the third Tanta Book Fair before it opened in August 2018 (Youm7)' },
+			source: 'https://www.youm7.com/story/2018/8/2/%D8%B4%D8%A7%D9%87%D8%AF-%D8%A2%D8%AE%D8%B1-%D8%A7%D8%B3%D8%AA%D8%B9%D8%AF%D8%A7%D8%AF%D8%A7%D8%AA-%D9%85%D8%B9%D8%B1%D8%B6-%D8%B7%D9%86%D8%B7%D8%A7-%D9%84%D9%84%D9%83%D8%AA%D8%A7%D8%A8-%D9%82%D8%A8%D9%84-%D8%A7%D9%81%D8%AA%D8%AA%D8%A7%D8%AD%D9%87/3896181' }
+	};
+	(A.awards || []).forEach(function (a) { var i = img[(a.title || {}).ar]; if (i && !a.image) a.image = i; });
+})(window.AKT);
