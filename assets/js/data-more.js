@@ -2922,3 +2922,19 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	if (!b.authors.some(function (a) { return a.ar === 'تامر إبراهيم'; }))
 		b.authors.push({ ar: 'تامر إبراهيم', en: 'Tamer Ibrahim', role: { ar: 'مؤلف مشارك في طبعة دايموند الثانية، 2009', en: 'Co-author of Diamond Book’s 2nd printing, 2009' } });
 })(window.AKT);
+
+/* «شاركوه السلسلة» on a series' page: the writers who wrote the series with him, each linked to their page (People ids) */
+(function (A) {
+	var I = A.seriesInfo = A.seriesInfo || {};
+	var set = function (id, list) { I[id] = I[id] || {}; I[id].with = list; };
+	set('molotov', [
+		{ id: 'mohamed-sami', role: { ar: 'من كتّابها مع آخرين', en: 'One of its writers' } },
+		{ id: 'michel-hanna', role: { ar: 'من مؤلفي عددها الثاني', en: 'A co-author of its second issue' } }
+	]);
+	set('rwg', [
+		{ id: 'nabil-farouk', role: { ar: 'بدأ السلسلة وكتب أعدادها 1–6', en: 'Began the series and wrote issues 1–6' } }
+	]);
+	set('lasheen', [
+		{ id: 'sherine-hanaey', role: { ar: 'صاحبة السلسلة، تكمل عالم «أسطورة بعد منتصف الليل»', en: 'Its author, carrying on the world of “The Legend of After Midnight”' } }
+	]);
+})(window.AKT);

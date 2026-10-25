@@ -338,3 +338,14 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 .prox.prox-mid { min-height: 320px; }
 .prox.prox-mid .prox-grid, .prox.has-img.prox-mid .prox-grid { grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 10px; padding: 24px; }
 @media (max-width: 640px) { .prox.prox-mid .prox-grid, .prox.has-img.prox-mid .prox-grid { grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); } }
+/* «شاركوه السلسلة»: the writers who wrote a series with him, each a link to their page */
+.sv-with-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.sv-person { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2);
+	color: var(--paper); text-decoration: none; transition: border-color .2s, transform .2s; }
+.sv-person:hover, .sv-person:focus-visible { border-color: var(--ember); transform: translateY(-2px); color: var(--paper); }
+.sv-person-pic { flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--ink-3, #1d1915) center / cover no-repeat;
+	box-shadow: 0 0 0 2px var(--line); font-family: var(--f-display); font-size: 20px; color: var(--gold); }
+.sv-person-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.sv-person-txt b { font-family: var(--f-display); font-size: 18px; font-weight: 400; line-height: 1.3; }
+.sv-person-txt small { font-size: 13px; color: var(--paper-dim); line-height: 1.5; }
+.sv-person-txt i { font-style: normal; font-family: var(--f-display); font-size: 13px; color: var(--ember); }

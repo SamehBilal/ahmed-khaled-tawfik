@@ -137,6 +137,7 @@ window.PAGE = {
 				(chars.length && window.CharCards ? '<section class="d-block d-wide sv-chars"><div class="d-head"><h3>' + L('الشخصيات', 'Characters') + ' <small>(' + App.num(chars.length) + ')</small></h3></div>' +
 					'<div class="char-grid cc-grid cc-minor">' + chars.filter(function (c) { return c.main; }).concat(chars.filter(function (c) { return !c.main; })).map(function (c) { return window.CharCards.card(c); }).join('') + '</div>' +
 				'</section>' : '') +
+				this.withHtml(id) +
 				((specials.length + extraSpecials.length) ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('الأعداد الخاصة', 'Special issues') + ' <small>(' + App.num(specials.length + extraSpecials.length) + ')</small></h3></div><div class="cover-grid">' +
 					specials.map(function (is) {
 						var au = d.audio && d.audio.youtube && d.audio.youtube.issues[id + '-s' + is.n];
@@ -180,6 +181,21 @@ window.PAGE = {
 		this.initVolumes(id);
 		var cs = document.querySelector('.sv-chars');
 		if (cs) window.CharCards.bindFlip(cs);
+	},
+
+	/* ---------- «شاركوه السلسلة»: the writers who wrote the series with him (seriesInfo[id].with), each linked to their page ---------- */
+	withHtml: function (id) {
+		var App = window.App, e = App.esc, t = App.t, tx = App.tx, L = App.L, P = window.People;
+		var list = (((App.data().seriesInfo || {})[id] || {}).with || []).map(function (x) { return { p: P && P.byId(x.id), role: x.role }; }).filter(function (x) { return x.p; });
+		if (!list.length) return '';
+		return '<section class="d-block d-wide sv-with"><div class="d-head"><h3>' + L('شاركوه السلسلة', 'They shared the series with him') + ' <small>(' + App.num(list.length) + ')</small></h3>' +
+				'<a href="writers.html">' + L('الكُتّاب ←', 'Writers →') + '</a></div>' +
+			'<div class="sv-with-list">' + list.map(function (x) {
+				var p = x.p, name = t(p.name);
+				return '<a class="sv-person" href="' + e(P.href(p)) + '">' +
+					'<span class="sv-person-pic"' + (p.photo ? ' style="background-image:url(&quot;' + e(p.photo.url) + '&quot;)"' : '') + '>' + (p.photo ? '' : e(P.initials(name, App.lang))) + '</span>' +
+					'<span class="sv-person-txt"><b>' + e(name) + '</b>' + (x.role ? '<small>' + tx(x.role) + '</small>' : '') + '<i>' + L(p.female ? 'صفحتها ←' : 'صفحته ←', 'Their page →') + '</i></span></a>';
+			}).join('') + '</div></section>';
 	},
 
 	/* ---------- collected volumes, box sets and the series logo (d.seriesCovers) ----------
