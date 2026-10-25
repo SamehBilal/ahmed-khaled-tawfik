@@ -130,7 +130,13 @@ window.PAGE = {
 								'<p>' + tx(a.text) + '</p></div></article>'; }).join('') + '</section>' : '') +
 					'</div>' +
 				'</div>' +
-				(issues.length ? this.proximityHtml(s, hero, issues) : '') +
+				/* the library holds everything of this world: its issues, its special issues and comics, its stories in other
+				   series and the books of the series that grew from it, written by him or not */
+				(issues.length ? this.proximityHtml(s, hero, issues.map(function (is) { return { sid: id, is: is }; })
+					.concat(specials.map(function (is) { return { sid: id, is: is, tag: L('خاص ', 'Special ') }; }))
+					.concat(extraSpecials.map(function (r) { return { sid: r.s.id, is: r.is, tag: L('كوميكس', 'Comic'), color: r.s.color }; }))
+					.concat(related.map(function (r) { return { sid: r.s.id, is: r.is, tag: t(r.s.title), color: r.s.color }; }))
+					.concat([].concat.apply([], grown.map(function (x) { return S.seriesIssues(x.id).map(function (is) { return { sid: x.id, is: is, tag: t(x.title) + ' ', color: x.color }; }); })))) : '') +
 				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
 					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid is-ranked" id="issue-grid" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
 				/* its characters, the cards of the characters page, all small and the same size, about as big as the covers above (leads first), right under every issue */
@@ -359,21 +365,24 @@ window.PAGE = {
 	   Every series has one: the library of its lead, or of the series itself when it has none. The lead (or the series'
 	   own picture) is the backdrop; every issue cover hides on top of it and scales / fades in as the cursor gets near.
 	   The closest cover shows its title. The panel is sized to the issues: short for a dozen or fewer, middling up to 30. */
-	proximityHtml: function (s, hero, issues) {
+	proximityHtml: function (s, hero, items) {
 		var App = window.App, S = window.WorksShared, e = App.esc, tx = App.tx, L = App.L;
 		/* a series can give its library a picture of its own (seriesInfo[id].library), else the hero's portrait */
 		var lib = ((App.data().seriesInfo || {})[s.id] || {}).library || {};
 		var img = lib.image || (hero && hero.image) || '', credit = lib.image ? lib.credit : hero && hero.imageCredit;
 		var name = hero ? hero.name : s.title, role = hero ? hero.role : s.tagline;
-		var n = issues.length, size = n <= 12 ? ' prox-few' : n <= 30 ? ' prox-mid' : '';
+		var n = items.length, size = n <= 12 ? ' prox-few' : n <= 30 ? ' prox-mid' : '';
 		return '<section class="d-block d-wide"><div class="d-head"><h3>' + L('مكتبة ', 'The library of ') + tx(name) + '</h3>' +
 				'<span class="prox-hint">' + L('حرّك المؤشر فوق الصورة لتظهر الأعداد', 'Move your cursor over the picture to reveal the issues') + '</span></div>' +
 			/* a short series gets a shorter panel, its covers bigger and spread across the middle */
 			'<div class="prox' + (img ? ' has-img' : '') + size + '" id="prox" style="--n:' + n + ';--c:' + e(s.color || '#3a1414') + (img ? ';background-image:url(\'' + e(img) + '\')' : '') + '">' +
 				(img ? '' : '<div class="prox-art" aria-hidden="true"><span class="pa-name">' + tx(name) + '</span>' + (role ? '<span class="pa-role">' + tx(role) + '</span>' : '') + '</div>') +
-				'<ul class="prox-grid">' + issues.map(function (is) {
-					return '<li><a href="' + App.issueHref(s.id, is) + '" data-n="' + e(App.num(is.n)) + (is.part ? '/' + e(App.num(is.part)) : '') + '" data-t="' + e(App.t(is.title)) + '">' +
-						S.miniCover({ img: S.issueCover(s.id, is), color: s.color, title: App.t(is.title), num: is.n != null ? App.num(is.n) : '' }) + '</a></li>';
+				'<ul class="prox-grid">' + items.map(function (x) {
+					/* a cover from beyond the series' own issues says what it is: «خاص 3», «كوميكس», «لاشين 5» */
+					var is = x.is, num = is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '';
+					var tagged = x.tag ? (x.tag + (/ $/.test(x.tag) || !num ? '' : ' ') + num).trim() : num;
+					return '<li' + (x.tag ? ' class="is-extra"' : '') + '><a href="' + App.issueHref(x.sid, is) + '" data-n="' + e(tagged) + '" data-t="' + e(App.t(is.title)) + '">' +
+						S.miniCover({ img: S.issueCover(x.sid, is), color: x.color || s.color, title: App.t(is.title), num: tagged }) + '</a></li>';
 				}).join('') + '</ul>' +
 				'<div class="prox-label" aria-hidden="true"></div>' +
 				(credit ? '<span class="prox-credit">' + tx(credit) + '</span>' : '') +
