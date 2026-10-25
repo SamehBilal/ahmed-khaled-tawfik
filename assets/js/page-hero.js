@@ -38,11 +38,23 @@
 		characters: function (d, A) {
 			var e = A.esc, t = A.t, list = (d.characters || []).slice(0, 7), chart = '';
 			for (var cm = 200; cm >= 140; cm -= 10) chart += '<span><b>' + e(A.num(cm)) + '</b></span>';
+			/* in the lineup, the three series heroes as cards (after codepen.io/gayane-gasparyan/pen/wvxewXO): a hover tips
+			   their series' cover back, lifts their name, and their drawn figure (AKT.charFigures) steps out of the card */
+			var S = window.WorksShared, heroes = [['alaa', 'safari'], ['refaat', 'mwt'], ['abeer', 'fantasia']];
+			var cards = heroes.map(function (h) {
+				var c = A.byId(d.characters, h[0]), s = A.byId(d.series, h[1]);
+				if (!c || !s || !S) return '';
+				var fig = (d.charFigures || {})[c.id];
+				return '<a class="ph-hc' + (fig ? ' has-fig' : '') + '" href="' + e(A.charHref(c.id)) + '" tabindex="-1" style="--c:' + e(s.color || '#5a2a22') + '">' +
+					'<span class="ph-hc-wrap"><img src="' + e(S.seriesCover(s.id)) + '" alt="" loading="lazy"></span>' +
+					'<span class="ph-hc-name">' + e(t(c.name).replace(/^(د\.|Dr\.)\s*/, '')) + '<small>' + e(t(s.title)) + '</small></span>' +
+					(fig ? '<img class="ph-hc-fig" src="' + e(fig) + '" alt="" loading="lazy">' : '') + '</a>';
+			}).join('');
 			return '<div class="ph-chart">' + chart + '</div><i class="ph-spot"></i>' +
-				'<div class="ph-lineup">' + list.map(function (c, i) {
+				(cards ? '<div class="ph-heroes">' + cards + '</div>' : '<div class="ph-lineup">' + list.map(function (c, i) {
 					return '<div class="ph-suspect" style="--s:' + (0.86 + rnd(i, 6) * 0.2).toFixed(2) + '"><i class="head"></i><i class="body"></i>' +
 						'<span class="plate"><em>' + e(A.num(i + 1)) + '</em>' + e(clip(t(c.name), 18)) + '</span></div>';
-				}).join('') + '</div>';
+				}).join('') + '</div>');
 		},
 
 		/* contact: letters drifting across the night */
