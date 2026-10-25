@@ -3022,3 +3022,13 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	I.sayf = I.sayf || {};
 	I.sayf.with = (I.sayf.with || []).concat([{ id: 'nabil-farouk', role: { ar: 'كتب فيه معه', en: 'Wrote in it alongside him' } }]);
 })(window.AKT);
+
+/* «سوبر ميجا»: Nabil Farouk and Sally Adel wrote in it with him — in «شاركوه السلسلة» on its page */
+(function (A) {
+	var I = A.seriesInfo = A.seriesInfo || {};
+	I.supermega = I.supermega || {};
+	I.supermega.with = (I.supermega.with || []).concat([
+		{ id: 'nabil-farouk', role: { ar: 'كتب فيها معه', en: 'Wrote in it alongside him' } },
+		{ id: 'sally-adel', role: { ar: 'كتبت فيها معه', en: 'Wrote in it alongside him' } }
+	]);
+})(window.AKT);
