@@ -1044,3 +1044,5 @@ html[dir="rtl"] .ft-copy { text-align: right; }
 /* the Arabic copyright line: Poppins has no Arabic letters, so the site's Arabic face at the same size and weight */
 .ft-copy.is-ar, html[dir="rtl"] .ft-copy.is-ar { font-family: 'Poppins', var(--f-display), sans-serif; }
 .ft-copy .ascii.owl { direction: ltr; unicode-bidi: isolate; }
+/* in English the line reads in the footer's own type, like the links and notes around it */
+.ft-copy:not(.is-ar) { font-family: var(--f-latin); font-size: 15px; font-weight: 400; }
