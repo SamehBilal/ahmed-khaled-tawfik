@@ -3076,3 +3076,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	};
 	(A.awards || []).forEach(function (a) { var i = img[(a.title || {}).ar]; if (i && !a.image) a.image = i; });
 })(window.AKT);
+
+/* the Modern Arab Association wears its Rewayat Masreya logo */
+(function (A) {
+	(A.publishers || []).forEach(function (p) { if (p.id === 'maa') p.logo = 'assets/img/publishers/maa-rewayat-masreya.webp'; });
+})(window.AKT);
