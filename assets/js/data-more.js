@@ -2734,3 +2734,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		(info.sources = info.sources || []).push('https://asfar.io/product/' + asfar[k][0] + '/');
 	});
 })(window.AKT);
+
+/* the front covers of «كتاب الصيف» 1 «أشباح.. ولكن» and «مولوتوف» 2 */
+(function (A) {
+	var F = 'assets/img/covers/series/';
+	A.issueInfo = A.issueInfo || {};
+	(A.issueInfo['sayf-x0'] = A.issueInfo['sayf-x0'] || {}).ownCover = F + 'sayf-1.webp';
+	(A.issueInfo['molotov-2'] = A.issueInfo['molotov-2'] || {}).ownCover = F + 'molotov-2.webp';
+})(window.AKT);
