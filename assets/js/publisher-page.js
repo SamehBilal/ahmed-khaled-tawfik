@@ -60,8 +60,9 @@ window.PAGE = {
 		var last = c.list.filter(function (it) { return (it.yearTo || it.year) === c.to; }).pop() || c.list[c.list.length - 1];
 		var q = function (x) { return L('«', '“') + t(x) + L('»', '”'); };
 		/* a house with nothing of his own: what it published of his world, or about him */
-		var w0 = (c.world || [])[0], a0 = (c.about || [])[0];
-		var link = !first ? (w0 ? L('صدرت عنها سلسلة ', 'It publishes ') + q(w0.title) + L(' التي خرجت من عالمه', ', a series grown from his world') + (w0.year ? L(' منذ ', ' since ') + App.num(w0.year) : '') + '.'
+		var w0 = (c.world || [])[0], a0 = (c.about || [])[0], h = c.heard || [];
+		var link = !first ? (h.length ? L('حوّلت ', 'It turned ') + h.map(function (x) { return q(x.title); }).join(L(' و', ', ')) + L(' إلى كتب مسموعة ودراما إذاعية.', ' into audiobooks and radio drama.')
+				: w0 ? L('صدرت عنها سلسلة ', 'It publishes ') + q(w0.title) + L(' التي خرجت من عالمه', ', a series grown from his world') + (w0.year ? L(' منذ ', ' since ') + App.num(w0.year) : '') + '.'
 				: a0 ? L('صدر عنها كتاب عنه: ', 'It published a book about him: ') + q(a0.title) + '.' : '')
 			: L('أول ما صدر له عنها ', 'The first of his books from this house was ') + q(first.title) + (first.year ? L(' عام ', ' in ') + App.num(first.year) : '') +
 			(c.list.length > 1 && last === first ? (c.to && c.to !== first.year ? L('، واستمر صدوره عنها حتى ', ', and it went on coming out here until ') + App.num(c.to) : '')
@@ -95,6 +96,8 @@ window.PAGE = {
 			block(L('السلاسل', 'Series'), series) +
 			block(L('أعادت نشرها', 'Reissued here'), c.later) +
 			/* the books others wrote about him that this house published */
+			/* his series it made into audiobooks (Audiohat), each with how many issues */
+			block(L('صدر عنها مسموعًا', 'Published here on audio'), c.heard || []) +
 			/* series grown from his world that it publishes (Lasheen at Kotopia) */
 			block(L('من عالمه', 'From his world'), c.world || []) +
 			block(L('كتب عنه', 'Books about him'), c.about || []) +

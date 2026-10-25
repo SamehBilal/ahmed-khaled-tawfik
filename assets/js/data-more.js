@@ -3196,3 +3196,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		links: [{ kind: 'site', url: 'https://www.kotopia.org/' }, { kind: 'shop', url: 'https://m.kotopia.store/' },
 			{ kind: 'facebook', url: 'https://www.facebook.com/Kotopia/' }, { kind: 'instagram', url: 'https://www.instagram.com/kotopiap/' }] });
 })(window.AKT);
+
+/* Audiohat (أوديوهات): the audio house that turned Ma Wara' al-Tabi'a, Fantasia and the special issues into audiobooks and
+   radio drama; its issues are counted from its episodes on the site (p.audio names its YouTube channel) */
+(function (A) {
+	A.publishers = A.publishers || [];
+	if (A.publishers.some(function (p) { return p.id === 'audiohat'; })) return;
+	A.publishers.push({ id: 'audiohat', name: { ar: 'أوديوهات', en: 'Audiohat' }, match: 'أوديوهات|Audiohat', audio: 'أوديوهات|Audiohat',
+		logo: 'assets/img/publishers/audiohat.webp',
+		about: { ar: 'أول منصة عربية مستقلة وتطبيق مخصص للدراما الإذاعية والكتب الصوتية، تحوّل الروايات والقصص المكتوبة إلى إنتاجات صوتية كاملة بأصوات ممثلين ومؤثرات صوتية وموسيقى.',
+			en: 'The first independent Arab platform and mobile app dedicated to radio drama and audiobooks, turning novels and written stories into full-cast audio productions with sound effects and music.' },
+		links: [{ kind: 'site', url: 'https://www.audiohatdar.com/' }, { kind: 'youtube', url: 'https://www.youtube.com/channel/UChbuN_2CW93jVZmJGPwkQ_A' },
+			{ kind: 'facebook', url: 'https://www.facebook.com/Audiohat/' }] });
+})(window.AKT);

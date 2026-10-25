@@ -343,8 +343,19 @@
 			var about = (d.aboutBooks || []).filter(function (b) { return b.publisher && pubMatches(p, b.publisher.ar || ''); }).map(function (b) {
 				return { id: b.id, title: b.title, href: bookHref(b.id), year: b.year, cover: b.cover, color: b.color || '#3a2a1f', by: b.by, about: true };
 			});
-			return { p: p, list: mine, later: later, world: world, about: about, from: ys.length ? Math.min.apply(null, ys) : 0, to: ye.length ? Math.max.apply(null, ye) : 0 };
-		}).filter(function (c) { return c.list.length || c.later.length || c.world.length || c.about.length; })
+			/* an audio house (p.audio) made his series into audiobooks: how many issues of each, from its episodes on the site
+			   (Audiohat's own pages, and its YouTube channel's), the special issues of every series counted together */
+			var heard = [];
+			if (p.audio) {
+				var A = d.audio || {}, Y = A.youtube || {}, n = {};
+				var take = function (k) { var m = /^([a-z]+)-(s?)\d+$/.exec(k); if (!m || m[1] === 'specials') return; var sid = m[2] ? 'specials' : m[1]; n[sid] = n[sid] || {}; n[sid][k] = 1; };
+				Object.keys(A.issues || {}).forEach(take);
+				Object.keys(Y.issues || {}).forEach(function (k) { if (new RegExp(p.audio).test(((Y.channels || {})[k] || {}).name || '')) take(k); });
+				heard = Object.keys(n).map(function (sid) { var s = anySeries(sid).s; return s && { id: sid, title: s.title, href: seriesHref(sid), cover: seriesCover(sid), color: s.color, series: true, heard: true, issues: Object.keys(n[sid]).length }; })
+					.filter(Boolean).sort(function (a, b) { return b.issues - a.issues; });
+			}
+			return { p: p, list: mine, later: later, world: world, about: about, heard: heard, from: ys.length ? Math.min.apply(null, ys) : 0, to: ye.length ? Math.max.apply(null, ye) : 0 };
+		}).filter(function (c) { return c.list.length || c.later.length || c.world.length || c.about.length || c.heard.length; })
 			.sort(function (a, b) { return (a.from || 9999) - (b.from || 9999); });
 	}
 	/* a publisher's name as printed, linked to the page of the first house it names (or plain text) */
@@ -371,6 +382,8 @@
 		var what = [books ? count(books, 'كتاب', 'كتابان', 'كتب', 'كتابًا', 'book', 'books') : '',
 			series.length ? (issues ? count(issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + L(' في ', ' in ') : '') + count(series.length, 'سلسلة', issues ? 'سلسلتين' : 'سلسلتان', 'سلاسل', 'سلسلة', 'series', 'series') : ''].filter(Boolean).join(' · ');
 		/* a house that published only his world or books about him says that instead */
+		var heard = (c.heard || []).reduce(function (m, it) { return m + it.issues; }, 0);
+		if (!what && heard) what = L('مسموعًا: ', 'On audio: ') + count(heard, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + L(' في ', ' in ') + count(c.heard.length, 'سلسلة', 'سلسلتين', 'سلاسل', 'سلسلة', 'series', 'series');
 		if (!what) what = [(c.world || []).length ? L('سلسلة من عالمه', 'A series from his world') : '', (c.about || []).length ? (c.about.length === 1 ? L('كتاب عنه', '1 book about him') : count(c.about.length, 'كتاب عنه', 'كتابان عنه', 'كتب عنه', 'كتابًا عنه', 'book about him', 'books about him')) : ''].filter(Boolean).join(' · ');
 		return '<article class="pub rise">' +
 			'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)\s+/, '').charAt(0)) + '</span>') + '<h3><a class="pub-a" href="' + e(publisherHref(c.p.id)) + '">' + tx(c.p.name) + '</a>' + closedBadge(c.p) + '</h3>' +
@@ -380,7 +393,7 @@
 			(c.p.note ? '<p class="pub-note">' + tx(c.p.note) + '</p>' : '') +
 			'<a class="pub-more" href="' + e(publisherHref(c.p.id)) + '">' + L('صفحة الدار ←', 'The house’s page →') + '</a>' +
 			/* his books and series, then what it published of his world and about him */
-			'<ul class="pub-list">' + c.list.concat(c.world || [], c.about || []).map(function (it) {
+			'<ul class="pub-list">' + c.list.concat(c.heard || [], c.world || [], c.about || []).map(function (it) {
 				/* a series says how many of its issues are his */
 				return '<li' + (it.world ? ' class="is-series is-world"' : it.about ? ' class="is-about"' : it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + (it.series && it.issues ? ' <small class="pub-is">(' + App.num(it.issues) + ')</small>' : '') + '</a></li>';
 			}).join('') + '</ul></article>';
