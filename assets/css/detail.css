@@ -357,6 +357,8 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 .row-car.is-scrollable .row-car-btn { display: grid; }
 .row-car-btn:hover, .row-car-btn:focus-visible { border-color: var(--ember); color: var(--ember); }
 .row-car-btn:disabled { opacity: 0; pointer-events: none; }
+/* ‹ and › mirror in right-to-left text; set them left to right so each points the way its button goes */
+.row-car-btn span { direction: ltr; unicode-bidi: isolate; }
 .row-car-prev { inset-inline-start: -14px; }
 .row-car-next { inset-inline-end: -14px; }
 @media (max-width: 640px) { .row-car-prev { inset-inline-start: -4px; } .row-car-next { inset-inline-end: -4px; } }

@@ -436,7 +436,11 @@
 					b.type = 'button';
 					b.className = 'row-car-btn row-car-' + dir;
 					b.setAttribute('aria-label', label);
-					b.textContent = glyph;
+					/* the arrow in a span of its own, set left to right, so right-to-left text doesn't mirror it */
+					var g = document.createElement('span');
+					g.setAttribute('aria-hidden', 'true');
+					g.textContent = glyph;
+					b.appendChild(g);
 					b.addEventListener('click', function () {
 						var step = Math.max(row.clientWidth * 0.85, 140) * (dir === 'next' ? 1 : -1) * (rtl ? -1 : 1);
 						row.scrollBy({ left: step, behavior: 'smooth' });
