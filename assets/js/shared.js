@@ -100,7 +100,9 @@
 			var o = window.App.byId(d.otherSeries, id);
 			list = ((o && o.issues) || []).map(function (is, i) { return Object.assign({ _idx: i }, is); });
 		}
-		return list.sort(function (a, b) { return (a.n || 9999) - (b.n || 9999) || (a.part || 0) - (b.part || 0) || (a._idx || 0) - (b._idx || 0); });
+		/* an unnumbered book can say which number it comes after ("after: 17") */
+		var at = function (x) { return x.n || (x.after != null ? x.after + .5 : 9999); };
+		return list.sort(function (a, b) { return at(a) - at(b) || (a.part || 0) - (b.part || 0) || (a._idx || 0) - (b._idx || 0); });
 	}
 
 	/* الأعداد الخاصة of a series, flagged so links go to <series>-s<n> */

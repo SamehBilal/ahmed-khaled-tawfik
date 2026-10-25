@@ -530,11 +530,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 })(window.AKT);
 
 /* Lasheen's spin-off: «أشباح الموالد», the book Soheir Zaher wrote inside the series, published for real (Kotopia, 2025).
-   It has no number, so its page is book.html?id=lasheen-x18 (the 19th entry). */
+   It has no number, so its page is book.html?id=lasheen-x18 (the 19th entry); on the series page it stands between 17 and 18 with a dash for a number. */
 (function (A) {
 	var L = A.otherSeries.filter(function (s) { return s.id === 'lasheen'; })[0];
 	L.issues.push({
-		title: { ar: 'أشباح الموالد', en: 'Ghosts of the Moulids' }, year: 2025, spinoff: true,
+		title: { ar: 'أشباح الموالد', en: 'Ghosts of the Moulids' }, year: 2025, spinoff: true, after: 17, mark: '–',
 		original: { ar: 'كتاب جانبي — كتاب سهير زاهر', en: 'Spin-off — Soheir Zaher’s book' },
 		synopsis: {
 			ar: 'الكتاب الذي تذكره السلسلة لسهير زاهر، صادرًا باسم مؤلفتها: مصورة من طنطا تعشق الموالد منذ طفولتها، تسجّل زحامها وطقوسها وأصواتها وحِرَف شوارعها، وتحمل لعنة أن ترى الأشباح وتظهر لها في صورها. تنتقل من مولد إلى آخر، حتى ليلة مولد السيد البدوي، فيصير المولد مكانًا تنفتح فيه الحياة العادية على العجيب والمخيف.',
