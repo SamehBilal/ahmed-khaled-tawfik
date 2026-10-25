@@ -3315,11 +3315,13 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var amr = inf.filter(function (w) { return w.name.en === 'Amr Salama'; });
 	if (amr[0] && !amr[0].work) {
 		amr[0].work = { ar: 'مسلسل «ما وراء الطبيعة» — نتفليكس، 2020', en: 'Paranormal, the Netflix series (2020)' };
+		amr[0].cover = 'assets/img/posters/paranormal.jpg';
 		amr[0].text = { ar: amr[0].text.ar + ' فأخرج مع ماجد الأنصاري مسلسل «ما وراء الطبيعة» الذي عرضته نتفليكس عام 2020، وأدّى فيه أحمد أمين دور د. رفعت إسماعيل.',
 			en: amr[0].text.en + ' He went on to direct, with Majid Al Ansari, Paranormal, shown on Netflix in 2020, with Ahmed Amin as Dr. Refaat Ismail.' };
 	}
 	if (amr[0] && !amr.some(function (w) { return /Like Today/.test((w.work || {}).en || ''); }))
-		inf.push({ name: amr[0].name, photo: amr[0].photo, year: 2008,
+		/* the poster from its producer, Film Clinic (film-clinic.com) */
+		inf.push({ name: amr[0].name, photo: amr[0].photo, year: 2008, cover: 'assets/img/posters/zay-el-naharda.webp',
 			work: { ar: 'فيلم «زي النهارده»', en: 'On a Day Like Today, the film' },
 			text: { ar: 'في أول أفلامه «زي النهارده» (2008)، ولأنه لم يجد بعدُ من يتحمس لإنتاج «ما وراء الطبيعة»، استأذن العرّاب في أن تلجأ بطلة الفيلم حين تحتاج من يشرح لها شيئًا خارقًا إلى أستاذ جامعي «بيفهم في الحاجات ديه» اسمه د. رفعت إسماعيل، وأدّاه هناء عبد الفتاح. يقول إنها كانت تمهيدًا للشخصية عند الناس، وإن العرّاب كان «في غاية السعادة» حين شاهدها.',
 				en: 'In his first film, On a Day Like Today (2008), with no one yet willing to produce Ma Wara’ al-Tabi’a, he asked Tawfik’s leave to send his heroine, when she needed something supernatural explained, to a university professor who “understands these things” named Dr. Refaat Ismail, played by Hanaa Abdel Fattah. He says it was a way of introducing the character, and that Tawfik was “overjoyed” when he saw it.' },
