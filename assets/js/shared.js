@@ -67,7 +67,8 @@
 			pages: pages,
 			info: {
 				title: t(s.title), sub: App.alt(s.title), text: t(s.tagline),
-				extra: charXref(s.id) + '<a class="more-link" href="series.html?id=' + s.id + '">' + L('صفحة السلسلة وكل أعدادها ←', 'Series page & every issue →') + '</a> ' + App.fixLink(t(s.title)),
+				/* of the characters only the lead is named, in the facts below; the others are on the series page */
+				extra: '<a class="more-link" href="series.html?id=' + s.id + '">' + L('صفحة السلسلة وكل أعدادها ←', 'Series page & every issue →') + '</a> ' + App.fixLink(t(s.title)),
 				facts: [
 					[L('السنوات', 'Years'), App.num(s.years || '')],
 					[L('الأعداد', 'Issues'), s.count ? App.num(s.count) : ''],
