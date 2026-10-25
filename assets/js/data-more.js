@@ -2847,3 +2847,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if (C[sid]) C[sid] = C[sid].filter(function (c) { return ['سافاري 41', 'فانتازيا 41'].indexOf(c.label.ar) < 0; });
 	});
 })(window.AKT);
+
+/* «مكتبة د. رفعت إسماعيل» on the Ma Wara' al-Tabi'a page: Ahmed Amin as Refaat with his lantern, a still from Netflix's Paranormal (2020) */
+(function (A) {
+	var I = A.seriesInfo && A.seriesInfo.mwt;
+	if (I) I.library = { image: 'assets/img/photos/refaat-lantern-netflix.webp',
+		credit: { ar: 'أحمد أمين في دور رفعت إسماعيل — «ما وراء الطبيعة»، نتفليكس (2020)', en: 'Ahmed Amin as Refaat Ismail — Paranormal, Netflix (2020)' } };
+})(window.AKT);

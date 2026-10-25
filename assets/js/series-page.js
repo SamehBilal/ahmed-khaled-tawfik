@@ -344,7 +344,9 @@ window.PAGE = {
 	   scales / fades in as the cursor gets near. The closest cover shows its title. */
 	proximityHtml: function (s, hero, issues) {
 		var App = window.App, S = window.WorksShared, e = App.esc, tx = App.tx, L = App.L;
-		var img = hero.image || '';
+		/* a series can give its library a picture of its own (seriesInfo[id].library), else the hero's portrait */
+		var lib = ((App.data().seriesInfo || {})[s.id] || {}).library || {};
+		var img = lib.image || hero.image || '', credit = lib.image ? lib.credit : hero.imageCredit;
 		return '<section class="d-block d-wide"><div class="d-head"><h3>' + L('مكتبة ', 'The library of ') + tx(hero.name) + '</h3>' +
 				'<span class="prox-hint">' + L('حرّك المؤشر فوق الصورة لتظهر الأعداد', 'Move your cursor over the picture to reveal the issues') + '</span></div>' +
 			'<div class="prox' + (img ? ' has-img' : '') + '" id="prox" style="--c:' + e(s.color || '#3a1414') + (img ? ';background-image:url(\'' + e(img) + '\')' : '') + '">' +
@@ -354,7 +356,7 @@ window.PAGE = {
 						S.miniCover({ img: S.issueCover(s.id, is), color: s.color, title: App.t(is.title), num: is.n != null ? App.num(is.n) : '' }) + '</a></li>';
 				}).join('') + '</ul>' +
 				'<div class="prox-label" aria-hidden="true"></div>' +
-				(hero.imageCredit ? '<span class="prox-credit">' + tx(hero.imageCredit) + '</span>' : '') +
+				(credit ? '<span class="prox-credit">' + tx(credit) + '</span>' : '') +
 			'</div></section>';
 	},
 
