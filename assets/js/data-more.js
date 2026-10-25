@@ -3296,3 +3296,32 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if (!/ولد/.test(sm.work.ar)) sm.work = { ar: sm.work.ar + '، ولد قليل الأدب، 7 وجوه للحب', en: sm.work.en + ', Walad Qalil al-Adab, 7 Faces of Love' };
 	}
 })(window.AKT);
+
+/* front covers beside the page with his words: «مطرقة الساحرات» by its dedication (Goodreads, book 50694785) and
+   Ahmed Mourad's «1919» by its back cover (Dar El Shorouk, 2014; Goodreads, book 42104087) */
+(function (A) {
+	((A.writers || {}).dedications || []).forEach(function (w) {
+		if ((w.book || {}).ar === 'مطرقة الساحرات' && !w.cover) w.cover = 'assets/img/covers/about/matraqat-al-saherat-cover.webp';
+	});
+	((A.writers || {}).introductions || []).forEach(function (w) {
+		if ((w.book || {}).ar === '1919' && /Mourad/.test(w.name.en || '') && !w.cover) w.cover = 'assets/img/covers/outro/1919-ahmed-mourad-front.webp';
+	});
+})(window.AKT);
+
+/* Amr Salama: the Netflix «ما وراء الطبيعة» he directed, and «زي النهارده» (2008), his first film, where a university professor
+   named Dr. Refaat Ismail first came to the screen, with Tawfik's leave (Salama on Instagram, via Nogoum FM, 18 November 2020) */
+(function (A) {
+	var inf = (A.writers = A.writers || {}).influenced = A.writers.influenced || [];
+	var amr = inf.filter(function (w) { return w.name.en === 'Amr Salama'; });
+	if (amr[0] && !amr[0].work) {
+		amr[0].work = { ar: 'مسلسل «ما وراء الطبيعة» — نتفليكس، 2020', en: 'Paranormal, the Netflix series (2020)' };
+		amr[0].text = { ar: amr[0].text.ar + ' فأخرج مع ماجد الأنصاري مسلسل «ما وراء الطبيعة» الذي عرضته نتفليكس عام 2020، وأدّى فيه أحمد أمين دور د. رفعت إسماعيل.',
+			en: amr[0].text.en + ' He went on to direct, with Majid Al Ansari, Paranormal, shown on Netflix in 2020, with Ahmed Amin as Dr. Refaat Ismail.' };
+	}
+	if (amr[0] && !amr.some(function (w) { return /Like Today/.test((w.work || {}).en || ''); }))
+		inf.push({ name: amr[0].name, photo: amr[0].photo, year: 2008,
+			work: { ar: 'فيلم «زي النهارده»', en: 'On a Day Like Today, the film' },
+			text: { ar: 'في أول أفلامه «زي النهارده» (2008)، ولأنه لم يجد بعدُ من يتحمس لإنتاج «ما وراء الطبيعة»، استأذن العرّاب في أن تلجأ بطلة الفيلم حين تحتاج من يشرح لها شيئًا خارقًا إلى أستاذ جامعي «بيفهم في الحاجات ديه» اسمه د. رفعت إسماعيل، وأدّاه هناء عبد الفتاح. يقول إنها كانت تمهيدًا للشخصية عند الناس، وإن العرّاب كان «في غاية السعادة» حين شاهدها.',
+				en: 'In his first film, On a Day Like Today (2008), with no one yet willing to produce Ma Wara’ al-Tabi’a, he asked Tawfik’s leave to send his heroine, when she needed something supernatural explained, to a university professor who “understands these things” named Dr. Refaat Ismail, played by Hanaa Abdel Fattah. He says it was a way of introducing the character, and that Tawfik was “overjoyed” when he saw it.' },
+			source: 'https://www.nogoumfm.net/news/2020/11/%D8%B9%D9%85%D8%B1%D9%88-%D8%B3%D9%84%D8%A7%D9%85%D8%A9-%D9%8A%D9%83%D8%B4%D9%81-%D8%B9%D9%86-%D8%A3%D9%88%D9%84-%D8%B8%D9%87%D9%88%D8%B1-%D9%84%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9-%D8%B1%D9%81%D8%B9/' });
+})(window.AKT);
