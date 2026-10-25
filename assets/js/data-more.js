@@ -3104,3 +3104,15 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		p.links = (p.links || []).filter(function (l) { return l.kind !== 'facebook'; }).concat([{ kind: 'facebook', url: 'https://www.facebook.com/comics.publishing/' }]);
 	});
 })(window.AKT);
+
+/* Sama Publishing & Distribution (سما للنشر والتوزيع): its logo, full name, what it is and its website */
+(function (A) {
+	(A.publishers || []).forEach(function (p) {
+		if (p.id !== 'sama') return;
+		p.name = { ar: 'سما للنشر والتوزيع', en: 'Sama Publishing & Distribution' };
+		p.logo = 'assets/img/publishers/sama-publishing.webp';
+		p.about = { ar: 'إحدى دور النشر العربية المصرية، تعمل في نشر وتوزيع الكتب الثقافية والأدبية والروايات والكتب الفكرية والتنموية، ولها حضور في المعارض العربية والدولية للكتاب.',
+			en: 'An Egyptian publisher of cultural and literary books, novels, and books of ideas and self-development, present at Arab and international book fairs.' };
+		p.links = (p.links || []).filter(function (l) { return l.kind !== 'site'; }).concat([{ kind: 'site', url: 'https://samapublishing.com/' }]);
+	});
+})(window.AKT);
