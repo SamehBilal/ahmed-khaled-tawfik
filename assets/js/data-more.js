@@ -3032,3 +3032,18 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ id: 'sally-adel', role: { ar: 'كتبت فيها معه', en: 'Wrote in it alongside him' } }
 	]);
 })(window.AKT);
+
+/* «بلية العجيب»'s other nineteen issues, by Abdel Hamid Abdel Maqsoud (Goodreads series 113306): in its library, around his 17 by number */
+(function (A) {
+	var I = A.seriesInfo = A.seriesInfo || {};
+	I.bley = I.bley || {};
+	var G = 'https://www.goodreads.com/book/show/', C = 'assets/img/covers/series/bley/goodreads-bley-';
+	var BY = { ar: 'عبد الحميد عبد المقصود', en: 'Abdel Hamid Abdel Maqsoud' };
+	I.bley.libraryMore = [
+		[1, 'لقاء الجبابرة', 18591525], [2, 'صراع في النادي', 18591528], [3, 'سر البلية المسحورة', 18591536], [4, 'لغز أبو الهول الذهبي', 18591540],
+		[5, 'نجمة الصباح', 18591542], [6, 'بطل الأدغال', 18591546], [7, 'عودة بلبلة', 18591549], [8, 'الزلزال المدمر', 18591551],
+		[9, 'مسدس العجائب', 18591553], [10, 'عمالقة وادي نمنم', 18591556], [11, 'كنز القرصان الأحول', 18591560], [12, 'كنوز الملك أحمس', 18591567],
+		[13, 'الأشباح', 18591570], [14, 'النظارة المسحورة', 18591574], [15, 'الأقزام والمغول', 18591572], [16, 'الاختراع الرهيب', 18591577],
+		[18, 'الشاطر بلية', 18591582], [19, 'خيال في خيال', 18591586], [20, 'اللعبة المدمرة', 18591588]
+	].map(function (x) { return { n: x[0], title: { ar: x[1], en: x[1] }, by: BY, cover: C + x[0] + '.webp', url: G + x[2] }; });
+})(window.AKT);
