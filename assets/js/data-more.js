@@ -2691,3 +2691,46 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	A.backCovers['sayf-x0'] = B + 'sayf-1.webp';
 	A.backCovers['molotov-2'] = B + 'molotov-2.webp';
 })(window.AKT);
+
+/* «روايات عالمية للجيب» 7–20: each keeps the cover of its first release as its own (ownCover), and gains the later
+   «روايات عالمية» reissue from Asfar (asfar.io/series/international-novels-pocket-books): its front and back covers
+   (the back cut from Asfar's wraparound scan), its back-cover text, and its credits — five of these issues were
+   translated by Inas El-Naggar and prepared by him (إعداد) */
+(function (A) {
+	var C = 'assets/img/covers/series/rwg/', B = 'assets/img/covers/back/', MA = { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' };
+	var INAS = { 8: 1, 11: 1, 12: 1, 13: 1, 14: 1 };
+	var asfar = {
+		7: ['journey-to-the-center-of-the-earth', ''],
+		8: ['coma-robin-cook', 'المستشفى هو المكان الذي نحمل إليه آلامنا وجراحنا كي نتخفف منها، لكن مستشفى بوسطون التذكاري يختلف كثيرًا، إنه المكان الذي تنتهي فيه الحياة ويبدأ الكابوس، وكانت الدكتورة سوزان هناك حين بدأت تشعر أن شيئًا شريرًا يحدث، شيئًا يفوق كل كوابيسها.'],
+		9: ['misery-stephen-king', 'لا تخافوا من آني، صحيح أنها تهوى القتل، صحيح أنها تعيش وحدها في عالم مريع، صحيح أنها مخبولة تمامًا، صحيح أنها تمسك فأسًا وتتسلى بتمزيق وجهها، لكنها إنسانة لطيفة، تهوى القراءة، وحين يقع كاتبها المفضل بول شيلدون أسيرًا في قبضتها فإنها تحسن استقباله.'],
+		10: ['close-encounters-of-the-third-kind', 'لقاءات قريبة من النوع الأول: رؤية جسم طائر مجهول الهوية. لقاءات قريبة من النوع الثاني: رؤية آثار مادية مؤكدة لهذا الجسم. لقاءات قريبة من النوع الثالث: حدوث لقاء فعلي بين ركاب الجسم الطائر وبين البشر. من يدري؟ لربما كنت أنت طرفًا في اللقاء القادم! لهذا ندعوك على سبيل الاحتياط لقراءة هذه القصة الممتعة.'],
+		11: ['came-a-spider-edward-levy', 'العناكب ضيوف شرف في أي كابوس مريع. والرواية التي نقدمها لك هنا تتحدث عن كابوس عاشه سكان (لوس أنجلوس): غزو العناكب الرهيبة القادمة من شبكة مجاري المدينة لتحيل حياة البشر جحيمًا، وإدوارد ليفي يقتحم في هذا الكتاب بعدًا جديدًا من أبعاد الرعب غير المسبوق، والذي لا يحتمله إلا أقوياء الأعصاب حقًا.'],
+		12: ['queens-pawn-victor-canning', 'التقاعد في قمة النجاح شيء رائع، وكان (رايكس) من الأذكياء القلائل الذين عرفوا نقطة التوقف، لكنه قابل من أجبره على الاستمرار، أجبره على الاشتراك في عملية أخيرة. إن التقاعد في قمة النجاح شيء رائع، أما الفشل بعد هذه القمة فشيء مروّع! وكان (رايكس) من هؤلاء الفاشلين!'],
+		13: ['the-deep-peter-benchley', 'يقولون إن القبور تذخر بالأبطال الذين لم يمتلكوا من الحظ قدر ما امتلكوا من الشجاعة، ولم يكن (ديفيد ساندرز) وزوجته بطلين، كانا مجرد زوجين شابين أرادا قضاء شهر العسل في (برمودا)، لكنهما وجدا نفسيهما مقحمين في هذه القصة الرهيبة كالبحر ذاته، الغامضة كالبحر ذاته.'],
+		14: ['murder-without-a-fee-donald-ross', 'نحن نقدم لك عرضًا لا يُرفض، يمكننا أن نتخلص من أي شخص تختاره، ولن نطلب أتعابنا إلا بعد انتهاء المهمة، ولكن حذار من التلاعب بنا، حذار من التظاهر بالبراءة، حذار من التظاهر بسوء الفهم، إن شركة (جولكندا) لقادرة على العثور على من يرغب في الخلاص منك أنت.'],
+		15: ['the-andromeda-strain-michael-crichton', 'نحن في ورطة حقيقية، أول أزمة بيولوجية في التاريخ، إن الخلية (أندروميدا) قد جاءت من الفضاء الخارجي لتنشر الذعر والوباء في الأرض، تعالوا يا سادة إلى معمل (وايلدفاير) المتقدم، ولنحاول معًا استعمال عقولنا الأرضية لفك هذا اللغز الرهيب.'],
+		16: ['the-red-room-h-g-wells', 'هـ. ج. ويلز يأخذنا معه في رحلة عبر شطآن الخيال الإنساني المترامية، نفر من رأس مقطوع لآكل لحوم بشر، لنواجه النمل المفترس على ضفاف نهر الأمازون، ونواجه وحشًا غامضًا في الظلام داخل مرصد، لنجد أنفسنا وقد دخلنا بكامل إرادتنا إلى الغرفة الحمراء.'],
+		17: ['the-valley-of-the-spiders', 'رحلة أخرى ممتعة مع أفضل ما كتب (هـ. ج. ويلز) من قصص خيالية: الفرار من مطاردة العميان المحمومة بحثًا عنك، التخبط في وادي العناكب، البحث عن لغز متجر الدمى العجيب، ثم الانحدار إلى هاوية المحيط. يحتوي الكتاب على القصص التالية: في الهاوية، المتجر المسحور، وادي العناكب، بلد العميان، غزاة البحر، القلنسوة الأرجوانية.'],
+		18: ['the-picture-of-dorian-gray', ''],
+		19: ['the-lost-world-arthur-conan-doyle', 'هناك في موضع ما بقرب نهر الأمازون أرض لم يرتدها بشر من قبل، لم ترسمها أي خارطة من قبل، وحتى من يعيشون قرب هذه الأرض يتحدثون عنها في همس متوجس، إنها أرض غفل عنها الزمن، لهذا هي مفعمة بالاحتمالات والأخطار، فلتحزموا حقائبكم وتودعوا أحباءكم لأننا راحلون إلى هناك، مع البروفيسور (تشالنجر) ورفاقه.'],
+		20: ['the-rainmaker-john-grisham', 'وحيدًا، مفلسًا، حديث التخرج، يحاول (رودي) المحامي الشاب أن يواجه فساد شركة تأمين ضخمة، تقف ضده بجيش من المحامين العتيدين ذوي الخبرة، ولا يملك (رودي) في هذه الحرب المخيفة سوى إيمانه بأن موكله قد ظُلم ظلمًا فادحًا، فهل ينجح؟']
+	};
+	var issues = (A.otherSeries || []).filter(function (s) { return s.id === 'rwg'; }).map(function (s) { return s.issues || []; })[0] || [];
+	A.issueInfo = A.issueInfo || {};
+	Object.keys(asfar).forEach(function (k) {
+		var n = +k, is = issues.filter(function (x) { return x.n === n; })[0] || {}, key = 'rwg-' + n;
+		var info = A.issueInfo[key] = A.issueInfo[key] || {};
+		var first = info.ownCover || '';
+		var tr = INAS[n] ? { ar: 'إيناس النجار (إعداد: د. أحمد خالد توفيق)', en: 'Inas El-Naggar (prepared by Ahmed Khaled Tawfik)' } : { ar: 'د. أحمد خالد توفيق', en: 'Ahmed Khaled Tawfik' };
+		var eds = [];
+		if (first) eds.push({ title: is.title, publisher: MA, lang: 'ar', format: { ar: 'روايات عالمية للجيب', en: 'World Pocket Novels' },
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, translator: tr, cover: first });
+		eds.push({ title: is.title, publisher: MA, lang: 'ar', format: { ar: 'غلاف ورقي', en: 'Paperback' },
+			edition: { ar: 'إعادة الطبع في «روايات عالمية»', en: 'Reissued as Rewayat Alamiya' }, translator: tr,
+			cover: C + 'asfar-rwg-' + n + '.webp', back: B + 'rwg-' + n + '-asfar.webp', source: 'https://asfar.io/product/' + asfar[k][0] + '/' });
+		info.editions = eds.concat(info.editions || []);
+		if (!first) info.ownCover = C + 'asfar-rwg-' + n + '.webp';
+		if (asfar[k][1]) info.blurb = { ar: asfar[k][1], by: { ar: 'أسفار', en: 'Asfar' }, src: 'https://asfar.io/product/' + asfar[k][0] + '/' };
+		(info.sources = info.sources || []).push('https://asfar.io/product/' + asfar[k][0] + '/');
+	});
+})(window.AKT);
