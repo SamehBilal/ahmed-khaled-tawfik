@@ -60,7 +60,10 @@ window.PAGE = {
 
 		var html = '<section class="ch-hero' + (hero ? ' ch-theme-' + e(hero.theme) : '') + '" style="--c:' + e(color) + '">' + backdrop +
 			'<div class="wrap ch-hero-grid">' +
-				'<div class="ch-portrait' + (figure ? ' is-figure' : '') + '">' + portrait + '</div>' +
+				'<div class="ch-portrait' + (figure ? ' is-figure' : '') + '">' + portrait +
+					/* Refaat's lantern: its glow breathes and flickers, and moths circle it */
+					(figure && hero && hero.theme === 'ghosts' ? '<span class="ch-lantern" aria-hidden="true"><b class="glow"></b>' +
+						[0, 1, 2].map(function (i) { return '<i class="moth" style="--i:' + i + '"><b></b></i>'; }).join('') + '</span>' : '') + '</div>' +
 				'<div class="ch-text">' +
 					'<p class="eyebrow">' + (hero ? tx(hero.eyebrow) + ' · ' : '') +
 						(ser ? '<a href="' + e(S.seriesHref(c.work)) + '">' + tx(ser.s.title) + '</a>' : work ? App.workLink(c.work) : '') + '</p>' +
