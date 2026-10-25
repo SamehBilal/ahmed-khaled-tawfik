@@ -2403,7 +2403,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + '5853529.webp', source: GR + '5853529' },
 		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, year: 2007, date: '2007-01-01', lang: 'ar', isbn: second.isbn, pages: 294, format: PB,
 			edition: second.isbn ? { ar: 'الطبعة الثانية', en: '2nd printing' } : undefined, cover: C + '23124714.webp', source: GR + '23124714' },
-		{ title: T, publisher: { ar: 'دار ليلى ودار الشروق', en: 'Dar Lila & Dar El Shorouk' }, year: 2016, date: '2016-01-01', lang: 'ar', asin: 'B0DMF91MYP', pages: 295, format: PB,
+		/* a Lila printing (Goodreads names «الشرق» on it, not the house Dar El Shorouk) */
+		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, year: 2016, date: '2016-01-01', lang: 'ar', asin: 'B0DMF91MYP', pages: 295, format: PB,
 			edition: { ar: 'طبعة خاصة', en: 'Special edition' }, cover: C + '39718362.webp', source: GR + '39718362' },
 		{ title: T, publisher: KAYAN, year: 2017, date: '2017-07-01', lang: 'ar', isbn: '9789778200294', isbn10: '9778200297', asin: '9778200297', pages: 229, format: PB,
 			cover: kayan.cover || '', back: 'assets/img/covers/back/sandoq-kayan.webp', source: kayan.source },
