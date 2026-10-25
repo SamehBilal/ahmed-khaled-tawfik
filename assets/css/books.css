@@ -538,11 +538,15 @@ body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grays
 	#series.bk-list > li { zoom: var(--z); }
 	#series .bk-info { zoom: calc(1 / var(--z)); width: 100%; margin-top: calc(var(--z) * 400px + 22px); }
 	#series .bk-info h3 { font-size: 19px; margin-top: 10px; }
-	#series .bk-info .bk-actions { flex-wrap: wrap; }
+	#series .bk-info .bk-actions { flex-wrap: wrap; gap: 6px; }
 }
 @media (min-width: 1100px) and (max-width: 1279px) {
 	#series.bk-list { --z: .52; gap: 28px 16px; }
 }
+/* the series books: smaller flip / view-inside buttons, and the title in the reader's language only */
+#series .bk-info .bk-actions { flex-wrap: nowrap; gap: 5px; }
+#series .bk-info button { flex: 1 1 auto; font-size: 12px; padding: 2px 6px; white-space: nowrap; }
+#series .bk-info h3 small { display: none; }
 /* the page arrows and counter sit inside the mirrored book, so they are flipped back too */
 .bk-list .bk-page > nav { transform: scaleX(-1); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 
