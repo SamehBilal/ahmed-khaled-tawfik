@@ -2812,3 +2812,30 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		}
 	});
 })(window.AKT);
+
+/* Safari, Fantasia and Rewayat Alamiya volumes: their Goodreads covers, issues, pages and year; the Aseer Al Kotb page
+   stays as where to buy each (each label ends in the volume's ordinal) */
+(function (A) {
+	var C = A.seriesCovers || {}, AM = { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' };
+	var ORD = ['', 'الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس'];
+	var GR = {
+		safari: { 1: [44245474, '1–7', 431], 2: [44245476, '8–13', 431], 3: [45303214, '14–19', 431], 4: [49086595, '20–25', 445], 5: [58749595, '26–31', 429, 2021], 6: [145302758, '32–37', 446, 2022] },
+		fantasia: { 1: [34525774, '1–6', 383], 2: [53809363, '7–11', 284, 2017], 3: [54907275, '12–17', 398], 4: [54952643, '18–23', 431], 5: [54952701, '24–29', 414], 6: [197027597, '30–34', 398, 2021] },
+		rwg: { 2: [35192957, '', 415, 2016], 3: [35194481, '', 399, 2017], 4: [208183518, '', 414, 2017], 5: [245833119, '', 398, 2018], 6: [137606633, '', 429, 2020] }
+	};
+	Object.keys(GR).forEach(function (sid) {
+		(C[sid] || []).forEach(function (c) {
+			var label = c.label.ar.replace(/ى/g, 'ي');
+			for (var n = 1; n < ORD.length; n++) {
+				var g = GR[sid][n];
+				if (!g || !/(?:المجلد|الجزء)\s/.test(label) || label.slice(-ORD[n].length) !== ORD[n]) continue;
+				c.cover = 'assets/img/covers/series/' + sid + '/goodreads-vol-' + n + '.webp';
+				c.goodreads = 'https://www.goodreads.com/book/show/' + g[0];
+				if (g[1]) c.issues = g[1];
+				if (g[2]) c.pages = g[2];
+				if (g[3]) c.year = g[3];
+				c.publisher = AM;
+			}
+		});
+	});
+})(window.AKT);
