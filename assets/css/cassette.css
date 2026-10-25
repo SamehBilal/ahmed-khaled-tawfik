@@ -15,7 +15,10 @@
 .cs-l { left: 109px; box-shadow: 0 0 0 var(--tl) #120a08; transition: box-shadow .7s ease; }
 .cs-r { right: 113px; box-shadow: 0 0 0 var(--tr) #120a08; transition: box-shadow .7s ease; }
 .cs-wheel div { width: 100%; height: 100%; background: url('../img/cassette/cs_wheel.png') no-repeat center; }
-.cs-front { position: absolute; inset: 0; background: url('../img/cassette/cs_front.png') no-repeat center; pointer-events: none; }
+/* the card is printed for him: his name, his title, his three series and his years, an «العرّاب» seal, a bat, his name as
+   lettered on the Ma Wara' al-Tabi'a covers on the window between the reels, and «العرّاب» pressed into the shell
+   (drawn over the original card, keeping its blue so the skins still tint it) */
+.cs-front { position: absolute; inset: 0; background: url('../img/cassette/cs_front_akt.png') no-repeat center; pointer-events: none; }
 
 @keyframes csSpinL { to { transform: rotate(-360deg); } }
 @keyframes csSpinR { to { transform: rotate(360deg); } }
