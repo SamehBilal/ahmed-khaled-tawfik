@@ -160,7 +160,7 @@ html[lang="en"] .prox-art .pa-name { font-family: var(--f-display); font-weight:
 .prox-art .pa-role { font-family: var(--f-display); font-size: 20px; color: rgba(239,230,210,.25); margin-top: 10px; }
 .prox-grid {
 	position: relative; z-index: 1; list-style: none; margin: 0; padding: 18px;
-	display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px;
+	display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 6px;
 }
 .prox-grid li { position: relative; }
 .prox-grid a {
@@ -334,3 +334,7 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 .prox.prox-few .prox-grid, .prox.has-img.prox-few .prox-grid { flex: 1; grid-template-columns: repeat(var(--n), minmax(0, 96px)); justify-content: center; gap: 18px; padding: 30px 18px; }
 .prox.prox-few .prox-grid .mini-cover .mc-t { font-size: 12px; }
 @media (max-width: 640px) { .prox.prox-few .prox-grid, .prox.has-img.prox-few .prox-grid { grid-template-columns: repeat(auto-fit, minmax(70px, 96px)); gap: 14px; } }
+/* a middling series' library (13 to 30 issues): a shorter panel, its covers a little bigger */
+.prox.prox-mid { min-height: 320px; }
+.prox.prox-mid .prox-grid, .prox.has-img.prox-mid .prox-grid { grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 10px; padding: 24px; }
+@media (max-width: 640px) { .prox.prox-mid .prox-grid, .prox.has-img.prox-mid .prox-grid { grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); } }

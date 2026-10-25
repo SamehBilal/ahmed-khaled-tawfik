@@ -130,7 +130,7 @@ window.PAGE = {
 								'<p>' + tx(a.text) + '</p></div></article>'; }).join('') + '</section>' : '') +
 					'</div>' +
 				'</div>' +
-				(ser.own && hero && issues.length ? this.proximityHtml(s, hero, issues) : '') +
+				(issues.length ? this.proximityHtml(s, hero, issues) : '') +
 				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
 					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid is-ranked" id="issue-grid" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
 				/* its characters, the cards of the characters page, all small and the same size, about as big as the covers above (leads first), right under every issue */
@@ -340,18 +340,21 @@ window.PAGE = {
 	},
 
 	/* ---------- Thumbnail proximity effect (Codrops demo 3) ----------
-	   The series' hero is the backdrop; every issue cover hides on top of it and
-	   scales / fades in as the cursor gets near. The closest cover shows its title. */
+	   Every series has one: the library of its lead, or of the series itself when it has none. The lead (or the series'
+	   own picture) is the backdrop; every issue cover hides on top of it and scales / fades in as the cursor gets near.
+	   The closest cover shows its title. The panel is sized to the issues: short for a dozen or fewer, middling up to 30. */
 	proximityHtml: function (s, hero, issues) {
 		var App = window.App, S = window.WorksShared, e = App.esc, tx = App.tx, L = App.L;
 		/* a series can give its library a picture of its own (seriesInfo[id].library), else the hero's portrait */
 		var lib = ((App.data().seriesInfo || {})[s.id] || {}).library || {};
-		var img = lib.image || hero.image || '', credit = lib.image ? lib.credit : hero.imageCredit;
-		return '<section class="d-block d-wide"><div class="d-head"><h3>' + L('مكتبة ', 'The library of ') + tx(hero.name) + '</h3>' +
+		var img = lib.image || (hero && hero.image) || '', credit = lib.image ? lib.credit : hero && hero.imageCredit;
+		var name = hero ? hero.name : s.title, role = hero ? hero.role : s.tagline;
+		var n = issues.length, size = n <= 12 ? ' prox-few' : n <= 30 ? ' prox-mid' : '';
+		return '<section class="d-block d-wide"><div class="d-head"><h3>' + L('مكتبة ', 'The library of ') + tx(name) + '</h3>' +
 				'<span class="prox-hint">' + L('حرّك المؤشر فوق الصورة لتظهر الأعداد', 'Move your cursor over the picture to reveal the issues') + '</span></div>' +
-			/* a short series (a dozen issues or fewer) gets a shorter panel, its covers bigger and spread across the middle */
-			'<div class="prox' + (img ? ' has-img' : '') + (issues.length <= 12 ? ' prox-few' : '') + '" id="prox" style="--n:' + issues.length + ';--c:' + e(s.color || '#3a1414') + (img ? ';background-image:url(\'' + e(img) + '\')' : '') + '">' +
-				(img ? '' : '<div class="prox-art" aria-hidden="true"><span class="pa-name">' + tx(hero.name) + '</span><span class="pa-role">' + tx(hero.role) + '</span></div>') +
+			/* a short series gets a shorter panel, its covers bigger and spread across the middle */
+			'<div class="prox' + (img ? ' has-img' : '') + size + '" id="prox" style="--n:' + n + ';--c:' + e(s.color || '#3a1414') + (img ? ';background-image:url(\'' + e(img) + '\')' : '') + '">' +
+				(img ? '' : '<div class="prox-art" aria-hidden="true"><span class="pa-name">' + tx(name) + '</span>' + (role ? '<span class="pa-role">' + tx(role) + '</span>' : '') + '</div>') +
 				'<ul class="prox-grid">' + issues.map(function (is) {
 					return '<li><a href="' + App.issueHref(s.id, is) + '" data-n="' + e(App.num(is.n)) + (is.part ? '/' + e(App.num(is.part)) : '') + '" data-t="' + e(App.t(is.title)) + '">' +
 						S.miniCover({ img: S.issueCover(s.id, is), color: s.color, title: App.t(is.title), num: is.n != null ? App.num(is.n) : '' }) + '</a></li>';
