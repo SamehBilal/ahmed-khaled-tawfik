@@ -130,13 +130,12 @@ window.PAGE = {
 								'<p>' + tx(a.text) + '</p></div></article>'; }).join('') + '</section>' : '') +
 					'</div>' +
 				'</div>' +
-				/* the library holds everything of this world: its issues, its special issues and comics, its stories in other
-				   series and the books of the series that grew from it, written by him or not */
+				/* the library holds everything of this world: its issues, its special issues and comics and its stories in other
+				   series, written by him or not (the series that grew from it, like Lasheen, stay in «ما خرج من عالمها») */
 				(issues.length ? this.proximityHtml(s, hero, issues.map(function (is) { return { sid: id, is: is }; })
 					.concat(specials.map(function (is) { return { sid: id, is: is, tag: L('خاص ', 'Special ') }; }))
 					.concat(extraSpecials.map(function (r) { return { sid: r.s.id, is: r.is, tag: L('كوميكس', 'Comic'), color: r.s.color }; }))
-					.concat(related.map(function (r) { return { sid: r.s.id, is: r.is, tag: t(r.s.title), color: r.s.color }; }))
-					.concat([].concat.apply([], grown.map(function (x) { return S.seriesIssues(x.id).map(function (is) { return { sid: x.id, is: is, tag: t(x.title) + ' ', color: x.color }; }); })))) : '') +
+					.concat(related.map(function (r) { return { sid: r.s.id, is: r.is, tag: t(r.s.title), color: r.s.color }; }))) : '') +
 				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
 					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid is-ranked" id="issue-grid" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
 				/* its characters, the cards of the characters page, all small and the same size, about as big as the covers above (leads first), right under every issue */
