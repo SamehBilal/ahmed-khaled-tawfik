@@ -3209,3 +3209,21 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		links: [{ kind: 'site', url: 'https://www.audiohatdar.com/' }, { kind: 'youtube', url: 'https://www.youtube.com/channel/UChbuN_2CW93jVZmJGPwkQ_A' },
 			{ kind: 'facebook', url: 'https://www.facebook.com/Audiohat/' }] });
 })(window.AKT);
+
+/* photos for four writers who had none: Ashraf Hamdy (Wikimedia Commons, CC BY 4.0), and Sanad Rashed, Mohamed Sami and
+   Mahmoud Abdel Shakour from their Goodreads author pages */
+(function (A) {
+	var W = 'assets/img/photos/writers/', GR = { ar: 'جودريدز', en: 'Goodreads' };
+	var photos = {
+		'أشرف حمدي': { url: W + 'wikimedia-ashraf-hamdi.webp', license: 'CC BY 4.0', file: 'https://commons.wikimedia.org/wiki/File:Ashraf_Hamdi_(cropped).jpg' },
+		'سند راشد دخيل': { url: W + 'goodreads-sanad-rashed.webp', file: 'https://www.goodreads.com/author/show/2674278', source: GR },
+		'محمد سامي': { url: W + 'goodreads-mohamed-sami.webp', file: 'https://www.goodreads.com/author/show/2694626', source: GR },
+		'محمود عبد الشكور': { url: W + 'goodreads-mahmoud-abdel-shakour.webp', file: 'https://www.goodreads.com/author/show/10795254', source: GR }
+	};
+	Object.keys(A.writers || {}).forEach(function (sh) {
+		(A.writers[sh] || []).forEach(function (w) {
+			var p = photos[String((w.name || {}).ar || '').replace(/^د\.\s*/, '').trim()];
+			if (p && !w.photo) w.photo = p;
+		});
+	});
+})(window.AKT);
