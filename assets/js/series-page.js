@@ -114,7 +114,6 @@ window.PAGE = {
 									return '<li>' + head + (it.meta ? ' <span class="meta">' + tx(it.meta) + '</span>' : '') + (it.text ? '<br><span class="ex-t">' + tx(it.text) + '</span>' : '') + '</li>';
 								}).join('') + '</ul>' : '') + '</section>';
 						}).join('') +
-						(chars.length ? '<section class="d-block"><h3>' + L('الشخصيات', 'Characters') + '</h3><p class="chips-line">' + chars.map(function (c) { return App.charLink(c.id); }).join('') + '</p></section>' : '') +
 						(eds ? '<section class="d-block"><h3>' + L('الطبعات', 'Editions') + '</h3><ul class="ed-list">' + eds + '</ul></section>' : '') +
 						/* collected volumes, box sets and the series logo, from the stores and Wikimedia */
 						this.volumesHtml(id, s) +
