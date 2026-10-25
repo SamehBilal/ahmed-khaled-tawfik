@@ -308,10 +308,14 @@
 			var mine = items.filter(function (it) { return pubMatches(p, it.pub); })
 				.sort(function (a, b) { return ((a.year || 9999) - (b.year || 9999)) || String(a.date || '').localeCompare(String(b.date || '')); });
 			/* later editions of other books of his that this house reissued */
+			/* a series a house later gathered and reissued says so in its publisher, «(ثم جمعتها كيان في مجلد واحد عام 2017)» */
+			var then = function (it) { var m = it.series && String(it.pub || '').match(/\(ثم([^)]*)\)/); return m && new RegExp(p.match).test(m[1]) ? m[1] : ''; };
 			var later = items.filter(function (it) {
-				if (it.series || mine.indexOf(it) >= 0) return false;
+				if (mine.indexOf(it) >= 0) return false;
+				if (it.series) return !!then(it);
 				return (((d.bookInfo || {})[it.id] || {}).editions || []).some(function (ed) { return ed.publisher && pubMatches(p, ed.publisher.ar || ''); });
 			}).map(function (it) {
+				if (it.series) return Object.assign({}, it, { year: yearOf(then(it)), yearTo: 0, inOne: /مجلد واحد/.test(then(it)) });
 				var ys = ((d.bookInfo || {})[it.id].editions || []).filter(function (ed) { return ed.publisher && pubMatches(p, ed.publisher.ar || ''); })
 					.map(function (ed) { return yearOf(ed.year); }).filter(Boolean);
 				return Object.assign({}, it, { year: ys.length ? Math.min.apply(null, ys) : 0 });

@@ -67,7 +67,7 @@ window.PAGE = {
 		var card = function (it) {
 			return '<a class="cover-link" href="' + e(it.href) + '">' + S.miniCover({ img: it.cover, color: it.color, title: t(it.title), sub: it.series ? L('سلسلة', 'Series') : '', by: it.by ? t(it.by) : '' }) +
 				'<span class="cl-t">' + tx(it.title) + (it.by ? ' — ' + tx(it.by) : '') + (it.year ? ' · ' + App.num(it.year) + (it.yearTo > it.year ? '–' + App.num(it.yearTo) : '') : '') +
-					(it.series && it.issues ? ' · ' + count(it.issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') : '') + '</span></a>';
+					(it.series && it.issues ? ' · ' + count(it.issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + (it.inOne ? L(' في مجلد واحد', ' in one volume') : '') : '') + '</span></a>';
 		};
 		var block = function (title, list) {
 			return list.length ? '<section class="section"><div class="wrap"><h2 class="wp-h">' + title + ' <small class="pb-n">(' + App.num(list.length) + ')</small></h2><div class="cover-row">' + list.map(card).join('') + '</div></div></section>' : '';
