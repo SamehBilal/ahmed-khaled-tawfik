@@ -28,6 +28,7 @@ window.PAGE = {
 					return '<button type="button" class="chip" data-f="' + e(g) + '">' + (w ? tx(w.title) : e(g)) + '<span class="count">' + App.num(n) + '</span></button>';
 				}).join('') +
 			'</div></div>' +
+			/* the leads at full size; everyone else follows as the same card, smaller */
 			'<div class="char-grid cc-grid" id="char-grid">' +
 				chars.map(function (c) {
 					var w = App.findWork(c.work);
@@ -74,10 +75,24 @@ window.PAGE = {
 
 		document.getElementById('content').innerHTML = html;
 
+		/* the others move to a grid of their own under the leads, where their cards are drawn smaller */
 		var grid = document.getElementById('char-grid');
+		var minor = document.createElement('div');
+		minor.className = 'char-grid cc-grid cc-minor';
+		minor.id = 'char-grid-minor';
+		chars.forEach(function (c) { if (!c.main) minor.appendChild(document.getElementById('c-' + c.id)); });
+		var minorHead = document.createElement('h2');
+		minorHead.className = 'cc-minor-head';
+		minorHead.textContent = App.L('شخصيات أخرى', 'Other characters');
+		grid.after(minorHead, minor);
 		var filters = document.getElementById('char-filters');
 		function apply() {
-			grid.querySelectorAll('.char-cell').forEach(function (c) { c.hidden = !(self.filter === 'all' || c.getAttribute('data-work') === self.filter); });
+			[grid, minor].forEach(function (g) {
+				var shown = 0;
+				g.querySelectorAll('.char-cell').forEach(function (c) { c.hidden = !(self.filter === 'all' || c.getAttribute('data-work') === self.filter); if (!c.hidden) shown++; });
+				g.hidden = !shown;
+				if (g === minor) minorHead.hidden = !shown;
+			});
 			filters.querySelectorAll('.chip').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-f') === self.filter)); });
 		}
 		filters.addEventListener('click', function (ev) {
@@ -86,7 +101,7 @@ window.PAGE = {
 			self.filter = b.getAttribute('data-f');
 			apply();
 		});
-		grid.addEventListener('click', function (ev) {
+		grid.parentNode.addEventListener('click', function (ev) {
 			var c = ev.target.closest('.char');
 			if (!c) return;
 			var on = !c.classList.contains('is-flipped');

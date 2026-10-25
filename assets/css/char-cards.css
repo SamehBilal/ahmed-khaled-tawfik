@@ -5,6 +5,15 @@
    --c is the colour of their series or book.
    ========================================================= */
 .cc-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 64px 48px; padding: 20px 10px 40px; }
+/* the characters without a page of their own: the same card, drawn at --s of its size (the card is zoomed down;
+   a percentage width is not zoomed, so it still fills its column) */
+.cc-minor-head { margin: 24px 0 0; font-family: var(--f-display); font-size: 26px; }
+.cc-grid.cc-minor { --s: .62; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 44px 30px; }
+.cc-minor .cc { zoom: var(--s); width: 100%; }
+.cc-minor .char-meta { font-size: 12px; }
+@media (max-width: 640px) {
+	.cc-grid.cc-minor, html[dir="rtl"] .cc-grid.cc-minor { --s: .55; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 22px; padding-inline: 8px 26px; }
+}
 .cc-cell { gap: 12px; }
 .cc { --paper: #e2d5bb; --ink: #241f1e; --brown: #614e4b; --off: #f2e9e4;
 	position: relative; display: block; width: 100%; height: 430px; padding: 0; border: 0; background: none; color: var(--ink);
