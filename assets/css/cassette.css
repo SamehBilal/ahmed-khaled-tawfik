@@ -112,6 +112,16 @@ html[lang="en"] .cs-meta { direction: ltr; }
 }
 .ep-list button:hover { border-color: var(--ember); color: var(--ember); }
 .ep-list li.cur { border-color: var(--ember); box-shadow: 0 0 0 1px var(--ember) inset; }
+/* an issue in several episodes: its button opens them all in a list under it, and the row takes the full width */
+.ep-list > li { flex-wrap: wrap; }
+.ep-list > li.open { grid-column: 1 / -1; }
+.ep-list button[data-eps]::after { content: ' ▾'; }
+.ep-list button[data-eps][aria-expanded="true"]::after { content: ' ▴'; }
+.ep-sub { flex-basis: 100%; list-style: none; margin: 4px 0 0; padding: 8px 0 0; border-top: 1px dashed var(--line);
+	display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 8px; }
+.ep-sub[hidden] { display: none; }
+.ep-list .ep-sub li { padding: 6px 10px; background: var(--ink-3, #1d1915); }
+.ep-list .ep-sub .no { min-width: 22px; font-size: 14px; }
 .audio-credit { color: var(--muted); font-size: 14px; margin-top: 28px; }
 
 /* "Audiohat ↗" key and the tape progress bar */

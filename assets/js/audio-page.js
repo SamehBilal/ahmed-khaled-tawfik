@@ -31,7 +31,7 @@ window.PAGE = {
 				if ((!A.issues[key] && !Y[key]) || is.part > 1) return;
 				var start = tracks.length;
 				var cover = S.issueCover(sid, is), eps = A.issues[key] || [];
-				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr, k) { tr.sub = t(s.title) + ' #' + App.num(is.n) + (tr.sub !== 'Audiohat' ? ' · ' + tr.sub : ''); tr.skin = sid; if (!tr.yt) tr.art = (eps[k] && TH[eps[k][0]]) || cover || ''; tracks.push(tr); });
+				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr, k) { tr.ep = tr.sub; tr.sub = t(s.title) + ' #' + App.num(is.n) + (tr.sub !== 'Audiohat' ? ' · ' + tr.sub : ''); tr.skin = sid; if (!tr.yt) tr.art = (eps[k] && TH[eps[k][0]]) || cover || ''; tracks.push(tr); });
 				var thumb = (eps[0] && TH[eps[0][0]]) || (Y[key] ? ytThumb(Y[key][0][0]) : '') || cover;
 				rows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), thumb: thumb, start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
 			});
@@ -41,7 +41,7 @@ window.PAGE = {
 			S.specialIssues(sid).forEach(function (is) {
 				var key = sid + '-s' + is.n;
 				var start = tracks.length;
-				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = L('عدد خاص ', 'Special ') + App.num(is.n) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
+				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.ep = tr.sub; tr.sub = L('عدد خاص ', 'Special ') + App.num(is.n) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
 				if (tracks.length > start) srows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), thumb: (tracks[start].yt ? ytThumb(tracks[start].yt) : '') || S.issueCover(sid, is), start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
 			});
 			/* issues of other series that count as its specials (e.g. «ثلاثة» in «كتاب الصيف»), listed once, under the first of their series */
@@ -50,7 +50,7 @@ window.PAGE = {
 					var key = S.issueKey(x.id, is);
 					if (!is.asSpecial || [].concat(is.related || []).indexOf(sid) < 0 || shown[key]) return;
 					var start = tracks.length;
-					window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.sub = t(x.title) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
+					window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.ep = tr.sub; tr.sub = t(x.title) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
 					if (tracks.length === start) return;
 					shown[key] = 1;
 					srows.push({ n: is.n, title: is.title, href: App.issueHref(x.id, is), thumb: (tracks[start].yt ? ytThumb(tracks[start].yt) : '') || S.issueCover(x.id, is), start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
@@ -89,12 +89,20 @@ window.PAGE = {
 				return '<div class="ep-group"><h3>' + tx(g.title) + ' <small style="color:var(--muted);font-family:var(--f-latin);font-size:15px">(' + App.num(g.rows.length) + (g.total ? ' / ' + App.num(g.total) : '') + ')</small></h3>' +
 					(g.note ? '<p style="color:var(--muted);margin:-6px 0 12px">' + tx(g.note) + '</p>' : '') +
 					'<ul class="ep-list">' + g.rows.map(function (r) {
-						return '<li data-start="' + r.start + '">' +
+						return '<li data-start="' + r.start + '" data-count="' + r.count + '">' +
 							(r.n != null ? '<span class="no">' + e(App.num(r.n)) + '</span>' : '<span class="no">♪</span>') +
 							'<span class="th' + (r.thumb ? '' : ' none') + '" aria-hidden="true">' + (r.thumb ? '<img src="' + e(r.thumb) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">' : '') + '</span>' +
 							'<span class="tt">' + (r.href ? '<a href="' + r.href + '">' + tx(r.title) + '</a>' : tx(r.title)) +
 								'<small>' + (r.count > 1 ? App.num(r.count) + ' ' + L('حلقات', 'episodes') + ' · ' : '') + (r.mins ? App.num(r.mins) + ' ' + L('دقيقة', 'min') : '') + '</small></span>' +
-							'<button type="button" data-start="' + r.start + '">' + L('ضعه في المسجل', 'Load tape') + '</button>' +
+							/* an issue or video in several episodes opens the list of all of them, each to put in the recorder */
+							(r.count > 1
+								? '<button type="button" data-eps aria-expanded="false">' + L('الحلقات', 'Episodes') + ' (' + App.num(r.count) + ')</button>' +
+									'<ol class="ep-sub" hidden>' + tracks.slice(r.start, r.start + r.count).map(function (tr, k) {
+										return '<li data-start="' + (r.start + k) + '"><span class="no">' + e(App.num(k + 1)) + '</span>' +
+											'<span class="tt">' + e(tr.ep || tr.title) + '<small>' + (tr.yt ? e(tr.channel || 'YouTube') : 'Audiohat') + (tr.mins ? ' · ' + App.num(tr.mins) + ' ' + L('دقيقة', 'min') : '') + '</small></span>' +
+											'<button type="button" data-start="' + (r.start + k) + '">' + L('ضعها في المسجل', 'Load tape') + '</button></li>';
+									}).join('') + '</ol>'
+								: '<button type="button" data-start="' + r.start + '">' + L('ضعه في المسجل', 'Load tape') + '</button>') +
 						'</li>';
 					}).join('') + '</ul></div>';
 			}).join('') + '</div>' +
@@ -104,8 +112,22 @@ window.PAGE = {
 
 		var deck = window.Cassette.mount(document.getElementById('a-cassette'), { tracks: tracks });
 		var lists = root.querySelectorAll('.ep-list li');
-		function mark(i) { lists.forEach(function (li) { var s = +li.getAttribute('data-start'); li.classList.toggle('cur', s === i); }); }
+		/* the row of the issue on the tape, and in its opened list the episode itself */
+		function mark(i) {
+			lists.forEach(function (li) {
+				var s = +li.getAttribute('data-start'), n = +(li.getAttribute('data-count') || 1);
+				li.classList.toggle('cur', i >= s && i < s + n);
+			});
+		}
 		root.addEventListener('click', function (ev) {
+			var eb = ev.target.closest('button[data-eps]');
+			if (eb) {
+				var li = eb.closest('li'), sub = li.querySelector('.ep-sub'), open = eb.getAttribute('aria-expanded') !== 'true';
+				eb.setAttribute('aria-expanded', String(open));
+				sub.hidden = !open;
+				li.classList.toggle('open', open);
+				return;
+			}
 			var b = ev.target.closest('button[data-start]');
 			if (!b) return;
 			var i = +b.getAttribute('data-start');
