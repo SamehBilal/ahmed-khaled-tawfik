@@ -159,10 +159,9 @@ window.PAGE = {
 							'<span class="cl-t">' + L('سلسلة ', 'The series ') + tx(x.title) + (x.author ? ' · ' + tx(x.author) : '') +
 								(x.count ? ' · ' + App.num(x.count) + ' ' + L('كتابًا', 'books') : '') + '</span></a>';
 					}).join('') + '</div></section>' : '') +
-				/* its characters, the cards of the characters page: the leads at full size, the others smaller */
+				/* its characters, the cards of the characters page, all small and the same size, about as big as the covers above (leads first) */
 				(chars.length && window.CharCards ? '<section class="d-block d-wide sv-chars"><div class="d-head"><h3>' + L('الشخصيات', 'Characters') + ' <small>(' + App.num(chars.length) + ')</small></h3></div>' +
-					(chars.some(function (c) { return c.main; }) ? '<div class="char-grid cc-grid">' + chars.filter(function (c) { return c.main; }).map(function (c) { return window.CharCards.card(c); }).join('') + '</div>' : '') +
-					(chars.some(function (c) { return !c.main; }) ? '<div class="char-grid cc-grid cc-minor">' + chars.filter(function (c) { return !c.main; }).map(function (c) { return window.CharCards.card(c); }).join('') + '</div>' : '') +
+					'<div class="char-grid cc-grid cc-minor">' + chars.filter(function (c) { return c.main; }).concat(chars.filter(function (c) { return !c.main; })).map(function (c) { return window.CharCards.card(c); }).join('') + '</div>' +
 				'</section>' : '') +
 				'<section class="d-block d-wide"><div class="d-head"><h3>' + L('سلاسل أخرى', 'Other series') + '</h3></div><div class="cover-row">' +
 					all.filter(function (x) { return x.id !== id; }).map(function (x) {
