@@ -3047,3 +3047,18 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		[18, 'الشاطر بلية', 18591582], [19, 'خيال في خيال', 18591586], [20, 'اللعبة المدمرة', 18591588]
 	].map(function (x) { return { n: x[0], title: { ar: x[1], en: x[1] }, by: BY, cover: C + x[0] + '.webp', url: G + x[2] }; });
 })(window.AKT);
+
+/* «كتاب الصيف» came out from the Modern Arab Association, in its Egyptian Pocket Novels */
+(function (A) {
+	(A.otherSeries || []).forEach(function (s) {
+		if (s.id === 'sayf') s.publisher = { ar: 'المؤسسة العربية الحديثة — روايات مصرية للجيب', en: 'Modern Arab Association — Egyptian Pocket Novels' };
+	});
+})(window.AKT);
+
+/* the Modern Arab Association's website, on its publisher page */
+(function (A) {
+	(A.publishers || []).forEach(function (p) {
+		if (p.id !== 'maa') return;
+		p.links = (p.links || []).filter(function (l) { return l.kind !== 'site'; }).concat([{ kind: 'site', url: 'https://rewayatmasreya.com/' }]);
+	});
+})(window.AKT);
