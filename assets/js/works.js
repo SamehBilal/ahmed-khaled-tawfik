@@ -285,24 +285,23 @@ window.PAGE = {
 	},
 
 	openIssue: function (b) {
-		var App = window.App, d = App.data(), e = App.esc, tx = App.tx;
 		var shelf = document.getElementById('issues'), card = document.getElementById('issue-card');
 		var open = b.getAttribute('aria-expanded') === 'true';
-		shelf.querySelectorAll('.issue').forEach(function (x) { x.setAttribute('aria-expanded', 'false'); });
-		if (open) { card.hidden = true; return; }
+		var close = function () { card.hidden = true; shelf.querySelectorAll('.issue').forEach(function (x) { x.setAttribute('aria-expanded', 'false'); }); };
+		close();
+		if (open) return;
 		b.setAttribute('aria-expanded', 'true');
+		/* the same panel as an issue opened on its series page */
 		var S = window.WorksShared, s = S.anySeries(this.issueSeries).s;
 		var is = S.seriesIssues(this.issueSeries)[+b.getAttribute('data-i')];
-		var chars = (is.chars || []).map(App.charLink).filter(Boolean);
-		card.innerHTML =
-			'<h4>' + tx(is.title) + '</h4>' +
-			'<p class="sub">' + e(App.alt(is.title)) + '</p>' +
-			'<p class="meta">' + tx(s.title) + (is.n != null ? ' — ' + App.L('العدد ', 'Issue ') + e(App.num(is.n)) : '') + (is.year ? ' · ' + e(App.num(is.year)) : '') + '</p>' +
-			(is.note ? '<p class="meta">' + tx(is.note) + '</p>' : '') +
-			(chars.length ? '<p class="meta">' + App.L('يظهر فيه: ', 'Featuring: ') + chars.join(App.L('، ', ', ')) + '</p>' : '') +
-			'<a class="more-link" href="' + App.issueHref(s.id, is) + '">' + App.L('صفحة العدد ←', 'Issue page →') + '</a> ' +
-			App.fixLink(App.t(s.title) + (is.n != null ? ' #' + is.n : ' — ' + App.t(is.title)));
+		card.className = 'issue-panel';
+		card.style.setProperty('--c', s.color || '#c0392b');
+		card.innerHTML = S.issuePanel(s.id, s, is);
 		card.hidden = false;
+		card.querySelector('.ip-close').onclick = function () { close(); b.focus(); };
+		if (!this.escBound) { this.escBound = true; document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !card.hidden) close(); }); }
+		var r = card.getBoundingClientRect();
+		if (r.bottom > window.innerHeight) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 	},
 
 	/* #s-id opens a series book, #w-id opens a hardcover, #i-series-n pulls an issue */

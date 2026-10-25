@@ -347,7 +347,38 @@
 			}).join('') + '</ul></article>';
 	}
 
+	/* what an opened issue shows (the series page's grid and the Works shelf): its cover, a few facts and the words on
+	   its back, with a link to its page and a ✕ to close it */
+	function issuePanel(sid, s, is) {
+		var App = window.App, d = App.data(), e = App.esc, t = App.t, tx = App.tx, L = App.L;
+		var key = issueKey(sid, is), info = (d.issueInfo || {})[key] || {}, eds = info.editions || [];
+		var blurb = (d.blurbs || {})[key] || info.blurb || null;
+		var text = blurb ? blurb.ar : (is.synopsis ? t(is.synopsis) : '');
+		var first = function (f) { for (var i = 0; i < eds.length; i++) if (eds[i][f]) return eds[i][f]; return ''; };
+		/* its year is the earliest edition's, whatever order the editions are listed in */
+		var years = eds.map(function (x) { return parseInt(x.year || x.date, 10); }).filter(function (y) { return y > 0; });
+		var year = is.year || info.firstPublished || (years.length ? Math.min.apply(null, years) : ''), pages = is.pages || first('pages');
+		var chars = (is.chars || []).map(App.charLink).filter(Boolean).join(L('، ', ', '));
+		var audio = d.audio && (d.audio.issues[sid + '-' + is.n] || (d.audio.youtube && d.audio.youtube.issues[sid + '-' + is.n]));
+		var facts = [
+			is.n != null ? [L('العدد', 'Issue'), App.num(is.n) + (is.part ? ' / ' + L('الجزء ', 'part ') + App.num(is.part) : '')] : null,
+			year ? [L('سنة الصدور', 'Year'), App.num(String(year).slice(0, 4))] : null,
+			pages ? [L('الصفحات', 'Pages'), App.num(pages)] : null,
+			is.original ? [L('عن', 'From'), tx(is.original)] : null,
+			chars ? [L('الشخصيات', 'Characters'), chars] : null,
+			audio ? [L('مسموع', 'Audio'), '<a href="audio.html">' + L('استمع ♪', 'Listen ♪') + '</a>'] : null
+		].filter(Boolean);
+		var img = issueCover(sid, is);
+		return '<button type="button" class="ip-close" aria-label="' + e(L('إغلاق', 'Close')) + '">✕</button>' +
+			'<a class="ip-cover" href="' + e(App.issueHref(sid, is)) + '">' + (img ? '<img src="' + e(img) + '" alt="">' : miniCover({ color: s.color, title: t(is.title) })) + '</a>' +
+			'<div class="ip-body"><h4>' + tx(is.title) + '</h4>' +
+				(facts.length ? '<dl class="ip-facts">' + facts.map(function (f) { return '<div><dt>' + e(f[0]) + '</dt><dd>' + (/</.test(f[1]) ? f[1] : e(f[1])) + '</dd></div>'; }).join('') + '</dl>' : '') +
+				(text ? '<p class="ip-text" dir="rtl" lang="ar">' + e(text) + '</p>' : '') +
+				'<a class="ip-more" href="' + e(App.issueHref(sid, is)) + '">' + L('صفحة العدد ←', 'Issue page →') + '</a></div>';
+	}
+
 	window.WorksShared = {
+		issuePanel: issuePanel,
 		backOf: backOf, entryBooks: entryBooks, entryBookHref: entryBookHref, publishers: publishers, publisherHref: publisherHref, publisherLink: publisherLink, publisherCard: publisherCard,
 		ownSeries: ownSeries, contributedSeries: contributedSeries, awardsList: awardsList, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,

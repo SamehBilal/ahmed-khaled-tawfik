@@ -316,3 +316,6 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 	.ip-text { font-size: 14.5px; }
 }
 @media (prefers-reduced-motion: reduce) { .issue-panel { animation: none; } }
+/* on the Works shelf it opens below the spines, in the old card's place */
+.issue-card .issue-panel { margin-top: 24px; }
+.issue-panel[hidden] { display: none; }
