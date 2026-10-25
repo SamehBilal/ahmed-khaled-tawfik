@@ -3227,3 +3227,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		});
 	});
 })(window.AKT);
+
+/* «شآبيب» named best book of 2018 in the viewers' vote of «معكم منى الشاذلي» (Shorouk News, 27 December 2018) */
+(function (A) {
+	A.awards = A.awards || [];
+	if (A.awards.some(function (a) { return a.work === 'shaabeeb' && a.year === 2018; })) return;
+	A.awards.push({ year: 2018, kind: 'win', work: 'shaabeeb', posthumous: true,
+		title: { ar: 'أفضل كتاب لعام 2018 — استفتاء «معكم منى الشاذلي» — بعد الرحيل', en: 'Best Book of 2018, “Ma’akom Mona El-Shazly” viewers’ vote, posthumous' },
+		text: { ar: 'أعلنت الإعلامية منى الشاذلي فوز «شآبيب» (دار الشروق، 2018) بلقب أفضل كتاب لعام 2018، بعد أن نالت 54.5% من أصوات المشاركين في استفتاء برنامجها نهاية العام.',
+			en: 'Mona El-Shazly announced that Shaabeeb (Dar El Shorouk, 2018) was voted the best book of 2018, with 54.5% of the votes in her programme’s year-end poll.' },
+		source: 'https://www.shorouknews.com/news/view.aspx?cdate=27122018&id=28370922-7075-4cd5-8eac-8749da393411' });
+})(window.AKT);
