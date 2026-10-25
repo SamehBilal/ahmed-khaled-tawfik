@@ -3130,3 +3130,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		p.links.unshift({ kind: 'site', url: 'https://www.shorouk.com/' });
 	});
 })(window.AKT);
+
+/* Spark Books (سبارك بوكس): its logo, name, what it is, its website and Instagram */
+(function (A) {
+	(A.publishers || []).forEach(function (p) {
+		if (p.id !== 'sparks') return;
+		p.name = { ar: 'سبارك بوكس', en: 'Spark Books' };
+		p.match = 'سبارك';
+		p.logo = 'assets/img/publishers/spark-books.webp';
+		p.about = { ar: 'دار نشر وتوزيع عربية لها فروع في الكويت ومصر ودبي وقطر والرياض، تهتم بأنواع الأدب غير المنتشرة مثل الخيال العلمي والرعب، وكانت السبّاقة إلى النشر الإلكتروني في الوطن العربي.',
+			en: 'An Arab publisher and distributor with branches in Kuwait, Egypt, Dubai, Qatar and Riyadh, given to the less common kinds of fiction such as science fiction and horror, and a pioneer of e-publishing in the Arab world.' };
+		p.links = [{ kind: 'site', url: 'https://spark-books.site/' }, { kind: 'instagram', url: 'https://www.instagram.com/spark_books/' }];
+	});
+})(window.AKT);
