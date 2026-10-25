@@ -64,13 +64,13 @@ html[lang="en"] .d-alt { font-family: var(--f-display); }
 	border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; color: var(--muted);
 }
 .chips-line { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
-.chips-line a, .chips-line .char-name {
+.chips-line a, .chips-line .char-plain {
 	font-family: var(--f-display); padding: 4px 14px; border-radius: 999px;
 	background: var(--ink-2); border: 1px solid var(--line); color: var(--paper);
 }
 .chips-line a:hover { border-color: var(--ember); color: var(--ember); }
 /* a character without a page of their own: the same chip, quieter, not a link */
-.chips-line .char-name { color: var(--paper-dim); border-style: dashed; }
+.chips-line .char-plain { color: var(--paper-dim); border-style: dashed; }
 
 .editions { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; }
 .edition {
@@ -290,3 +290,29 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 .d-print small { font-family: var(--f-latin); font-size: 12px; color: var(--muted); }
 .d-print:hover, .d-print:focus-visible { border-color: var(--ember); color: var(--paper); transform: translateY(-1px); }
 .d-print[aria-pressed="true"] { border-color: var(--gold); color: var(--paper); box-shadow: 0 0 0 1px var(--gold) inset; }
+
+/* ---------- a series' issue opened under its row (series-page.js initIssuePanel) ---------- */
+.issue-panel { grid-column: 1 / -1; position: relative; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 22px; align-items: start;
+	padding: 20px 22px; border: 1px solid var(--line); border-inline-start: 4px solid var(--c); border-radius: 12px;
+	background: linear-gradient(135deg, color-mix(in srgb, var(--c) 14%, var(--ink-2)), var(--ink-2) 60%); box-shadow: var(--shadow);
+	animation: ip-open .35s cubic-bezier(.2, .8, .2, 1); }
+@keyframes ip-open { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.ip-cover { display: block; }
+.ip-cover img, .ip-cover .mini-cover { display: block; width: 100%; border-radius: 4px; box-shadow: 0 12px 24px rgba(0, 0, 0, .45); }
+.ip-body h4 { margin: 0 0 10px; padding-inline-end: 34px; font-family: var(--f-display); font-size: 22px; line-height: 1.3; color: var(--paper); }
+.ip-facts { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0 0 12px; }
+.ip-facts div { display: flex; gap: 6px; align-items: baseline; }
+.ip-facts dt { font-family: var(--f-display); font-size: 13px; color: var(--muted); }
+.ip-facts dd { margin: 0; font-size: 15px; color: var(--paper); }
+.ip-text { margin: 0 0 12px; color: var(--paper-dim); line-height: 1.85; font-size: 15.5px; }
+.ip-more { font-family: var(--f-display); font-size: 15px; }
+.ip-close { position: absolute; top: 10px; inset-inline-end: 12px; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+	background: transparent; color: var(--paper-dim); border: 1px solid var(--line); font-size: 14px; line-height: 1; }
+.ip-close:hover { color: var(--ember); border-color: var(--ember); }
+.cover-grid.is-ranked .cover-link.is-open .mini-cover { box-shadow: 0 0 0 3px var(--c), 0 14px 28px rgba(0, 0, 0, .5); transform: translateY(-6px); }
+@media (max-width: 640px) {
+	.issue-panel { grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 16px 14px; }
+	.ip-body h4 { font-size: 18px; }
+	.ip-text { font-size: 14.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .issue-panel { animation: none; } }

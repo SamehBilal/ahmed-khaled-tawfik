@@ -55,9 +55,9 @@ window.PAGE = {
 		/* each issue's number stands beside its cover, as on the guide (.step-n) */
 		/* the widest number sets the column all the numbers stand in, so every cover is the same width */
 		var digits = Math.max.apply(null, [1].concat(issues.map(function (is) { return is.n != null ? String(is.n).length : 1; })));
-		var issueGrid = issues.map(function (is) {
+		var issueGrid = issues.map(function (is, i) {
 			var n = is.n != null ? App.num(is.n) + (is.part ? '/' + App.num(is.part) : '') : '';
-			return '<a class="cover-link" href="' + App.issueHref(id, is) + '" title="' + e(t(is.title)) + '">' +
+			return '<a class="cover-link" href="' + App.issueHref(id, is) + '" data-i="' + i + '" title="' + e(t(is.title)) + '">' +
 				'<span class="cl-cover">' + S.miniCover({ img: S.issueCover(id, is), color: s.color, title: t(is.title), sub: is.original ? t(is.original) : '', by: t(S.seriesAuthor(ser)) }) +
 					(n ? '<b class="cl-n"' + (is.part ? ' data-part' : '') + '>' + e(n) + '</b>' : '') + '</span>' +
 				'<span class="cl-t">' + tx(is.title) + '</span>' +
@@ -127,7 +127,7 @@ window.PAGE = {
 				'</div>' +
 				(ser.own && hero && issues.length ? this.proximityHtml(s, hero, issues) : '') +
 				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
-					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid is-ranked" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
+					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid is-ranked" id="issue-grid" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
 				((specials.length + extraSpecials.length) ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('الأعداد الخاصة', 'Special issues') + ' <small>(' + App.num(specials.length + extraSpecials.length) + ')</small></h3></div><div class="cover-grid">' +
 					specials.map(function (is) {
 						var au = d.audio && d.audio.youtube && d.audio.youtube.issues[id + '-s' + is.n];
@@ -167,6 +167,66 @@ window.PAGE = {
 
 		window.Books.initShowcase(document.getElementById('d-book'));
 		this.initProximity(document.getElementById('prox'));
+		this.initIssuePanel(document.getElementById('issue-grid'), issues, id, s);
+	},
+
+	/* a click on an issue opens it under its row: its cover, a few facts and the words on its back, with a link to its
+	   page; the same issue again, ✕ or Escape closes it; a click with a modifier key still opens the page */
+	initIssuePanel: function (grid, issues, sid, s) {
+		if (!grid) return;
+		var App = window.App, S = window.WorksShared, d = App.data(), e = App.esc, t = App.t, tx = App.tx, L = App.L;
+		var panel = null, openI = -1;
+		var close = function () { if (panel) panel.remove(); panel = null; openI = -1; grid.querySelectorAll('.is-open').forEach(function (a) { a.classList.remove('is-open'); a.setAttribute('aria-expanded', 'false'); }); };
+		var html = function (is) {
+			var key = S.issueKey(sid, is), info = (d.issueInfo || {})[key] || {}, eds = info.editions || [];
+			var blurb = (d.blurbs || {})[key] || info.blurb || null;
+			var text = blurb ? blurb.ar : (is.synopsis ? t(is.synopsis) : '');
+			var first = function (f) { for (var i = 0; i < eds.length; i++) if (eds[i][f]) return eds[i][f]; return ''; };
+			var year = is.year || first('year'), pages = is.pages || first('pages');
+			var chars = (is.chars || []).map(App.charLink).filter(Boolean).join(L('، ', ', '));
+			var audio = d.audio && (d.audio.issues[sid + '-' + is.n] || (d.audio.youtube && d.audio.youtube.issues[sid + '-' + is.n]));
+			var facts = [
+				is.n != null ? [L('العدد', 'Issue'), App.num(is.n) + (is.part ? ' / ' + L('الجزء ', 'part ') + App.num(is.part) : '')] : null,
+				year ? [L('سنة الصدور', 'Year'), App.num(String(year).slice(0, 4))] : null,
+				pages ? [L('الصفحات', 'Pages'), App.num(pages)] : null,
+				is.original ? [L('عن', 'From'), tx(is.original)] : null,
+				chars ? [L('الشخصيات', 'Characters'), chars] : null,
+				audio ? [L('مسموع', 'Audio'), '<a href="audio.html">' + L('استمع ♪', 'Listen ♪') + '</a>'] : null
+			].filter(Boolean);
+			var img = S.issueCover(sid, is);
+			return '<button type="button" class="ip-close" aria-label="' + e(L('إغلاق', 'Close')) + '">✕</button>' +
+				'<a class="ip-cover" href="' + e(App.issueHref(sid, is)) + '">' + (img ? '<img src="' + e(img) + '" alt="">' : S.miniCover({ color: s.color, title: t(is.title) })) + '</a>' +
+				'<div class="ip-body"><h4>' + tx(is.title) + '</h4>' +
+					(facts.length ? '<dl class="ip-facts">' + facts.map(function (f) { return '<div><dt>' + e(f[0]) + '</dt><dd>' + (/</.test(f[1]) ? f[1] : e(f[1])) + '</dd></div>'; }).join('') + '</dl>' : '') +
+					(text ? '<p class="ip-text" dir="rtl" lang="ar">' + e(text) + '</p>' : '') +
+					'<a class="ip-more" href="' + e(App.issueHref(sid, is)) + '">' + L('صفحة العدد ←', 'Issue page →') + '</a></div>';
+		};
+		grid.addEventListener('click', function (ev) {
+			if (ev.target.closest('.ip-close')) { var back = grid.querySelector('[data-i="' + openI + '"]'); close(); if (back) back.focus(); return; }
+			var a = ev.target.closest('.cover-link[data-i]');
+			if (!a || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey || ev.button) return;
+			ev.preventDefault();
+			var i = +a.getAttribute('data-i');
+			if (i === openI) { close(); return; }
+			close();
+			/* the panel goes after the last cover of the clicked cover's row */
+			var top = a.offsetTop, last = a, links = [].slice.call(grid.querySelectorAll('.cover-link[data-i]'));
+			for (var k = links.indexOf(a) + 1; k < links.length && links[k].offsetTop === top; k++) last = links[k];
+			panel = document.createElement('div');
+			panel.className = 'issue-panel';
+			panel.setAttribute('style', '--c:' + (s.color || '#c0392b'));
+			panel.innerHTML = html(issues[i]);
+			last.after(panel);
+			openI = i;
+			a.classList.add('is-open');
+			a.setAttribute('aria-expanded', 'true');
+			var r = panel.getBoundingClientRect();
+			if (r.bottom > window.innerHeight) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+		});
+		document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && panel) close(); });
+		/* the rows reflow when the width changes (not when a phone's address bar comes and goes) */
+		var w = window.innerWidth;
+		window.addEventListener('resize', function () { if (window.innerWidth !== w) { w = window.innerWidth; if (panel) close(); } });
 	},
 
 	/* ---------- Thumbnail proximity effect (Codrops demo 3) ----------

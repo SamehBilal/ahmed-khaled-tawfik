@@ -126,7 +126,7 @@
 		charLink: function (id) {
 			var c = App.byId(App.data().characters, id);
 			if (!c) return '';
-			return c.main ? '<a href="' + App.charHref(id) + '">' + App.tx(c.name) + '</a>' : '<span class="char-name">' + App.tx(c.name) + '</span>';
+			return c.main ? '<a href="' + App.charHref(id) + '">' + App.tx(c.name) + '</a>' : '<span class="char-plain">' + App.tx(c.name) + '</span>';
 		},
 		/* scroll to #hash after a render, and let the page react (open / flip) */
 		/* a picture full size in a dialog, with its caption (the home timeline, a book's back cover) */
