@@ -60,7 +60,8 @@ window.PAGE = {
 		var q = function (x) { return L('«', '“') + t(x) + L('»', '”'); };
 		var link = L('أول ما صدر له عنها ', 'The first of his books from this house was ') + q(first.title) + (first.year ? L(' عام ', ' in ') + App.num(first.year) : '') +
 			(c.list.length > 1 && last === first ? (c.to && c.to !== first.year ? L('، واستمر صدوره عنها حتى ', ', and it went on coming out here until ') + App.num(c.to) : '')
-				: c.list.length > 1 ? L('، وآخره ', ', and the latest ') + q(last.title) + (c.to && c.to !== first.year ? L(' عام ', ' in ') + App.num(c.to) : '') : '') + '.';
+				/* a series' last book is one of its issues: «وآخره عدد من سلسلة «سافاري»» */
+				: c.list.length > 1 ? (last.series ? L('، وآخره عدد من سلسلة ', ', and the latest an issue of ') + q(last.title) : L('، وآخره ', ', and the latest ') + q(last.title)) + (c.to && c.to !== first.year ? L(' عام ', ' in ') + App.num(c.to) : '') : '') + '.';
 
 		var card = function (it) {
 			return '<a class="cover-link" href="' + e(it.href) + '">' + S.miniCover({ img: it.cover, color: it.color, title: t(it.title), sub: it.series ? L('سلسلة', 'Series') : '', by: it.by ? t(it.by) : '' }) +
