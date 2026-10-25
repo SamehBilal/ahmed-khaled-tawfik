@@ -41,10 +41,10 @@ html[data-theme="light"] .ph { --ph-bg: #1c1712; border-bottom-color: rgba(0, 0,
 }
 
 /* ---------- characters: the lineup ---------- */
-.ph[data-ph="characters"] { background: linear-gradient(#1a1c22, #0c0d11); }
-.ph-chart { position: absolute; inset: 30px 0 60px; display: flex; flex-direction: column; justify-content: space-between; }
-.ph-chart span { position: relative; height: 1px; background: rgba(239, 230, 210, .14); }
-.ph-chart b { position: absolute; inset-inline-start: 7%; top: -9px; font-family: var(--f-latin); font-weight: 400; font-size: 13px; color: var(--ph-dim); background: #14161b; padding: 0 6px; }
+.ph[data-ph="characters"] { background: linear-gradient(#1a1c22, #0c0d11); border-bottom: 0; }
+/* no line under it: its foot fades into the page */
+.ph[data-ph="characters"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 70px; z-index: 7; pointer-events: none;
+	background: linear-gradient(transparent, var(--ink)); }
 .ph-spot { position: absolute; top: -40%; left: 50%; width: 46%; height: 180%; margin-left: -23%; pointer-events: none;
 	background: radial-gradient(closest-side, rgba(255, 235, 190, .16), transparent); animation: ph-spot 9s ease-in-out infinite alternate; }
 @keyframes ph-spot { from { transform: translateX(-60%); } to { transform: translateX(60%); } }
@@ -61,7 +61,7 @@ html[data-theme="light"] .ph { --ph-bg: #1c1712; border-bottom-color: rgba(0, 0,
 .ph-hc { --h: 230px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
 	width: calc(var(--h) / 1.5); height: var(--h); padding: 0 14px 14px; perspective: 2500px; color: #f6efdc; text-decoration: none; }
 
-/* leaning on the wall (after codepen.io/lynnandtonic/pen/dyGjvLB): the lineup chart is the wall, a floor runs away
+/* leaning on the wall (after codepen.io/lynnandtonic/pen/dyGjvLB): the band is the wall, a floor runs away
    from us, and each card leans back on it, the further ones smaller and higher, a shadow cast behind it on the wall
    and the floor; a hover stands the card up off the wall, and then the figure steps out */
 .ph-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; z-index: 1; pointer-events: none;

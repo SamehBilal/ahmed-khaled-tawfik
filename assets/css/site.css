@@ -125,7 +125,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* phones: the links fold away behind a menu button — three books lying in a stack that fold into an ✕ — and open as a
-   book's contents page, swinging down from the header: a spine down one edge, ruled lines, each link with its page
+   book's contents page, swinging down from the header: a spine down one edge, each link with its page
    number on a dotted leader, a red ribbon on the page you are on */
 @media (max-width: 760px) {
 	.site-header .wrap { gap: 12px; padding-block: 10px; }
@@ -164,7 +164,6 @@ img { max-width: 100%; display: block; }
 		border: 1px solid var(--line); border-radius: 6px 14px 14px 6px;
 		background:
 			linear-gradient(to var(--spine-side, right), transparent 18px, rgba(0, 0, 0, .18) 18px, transparent 26px),
-			repeating-linear-gradient(transparent 0 37px, var(--line) 37px 38px),
 			var(--ink-2);
 		box-shadow: var(--shadow), inset 12px 0 0 -6px var(--ember);
 		transform-origin: 50% 0; transform: perspective(900px) rotateX(-92deg);
@@ -632,7 +631,7 @@ html[lang="en"] .ft-end { font-family: var(--f-display); }
 html.intro-on, html.intro-on body { overflow: hidden; }
 
 .intro {
-	--hole: 0%; --hx: 50%; --hy: 30%;
+	--hole: -1%; --hx: 50%; --hy: 30%;
 	position: fixed; inset: 0; z-index: 1000;
 	display: flex; align-items: center; justify-content: center;
 	background: radial-gradient(circle at 50% 40%, #1a1c24, #0b0c0f 70%);

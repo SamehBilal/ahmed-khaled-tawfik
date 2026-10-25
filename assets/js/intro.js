@@ -1,5 +1,5 @@
 /* Opening reveal — adapted from the "Believe" GSAP animation.
-   "العراب" drops in and squashes like the "i", its shadda (ّ) falls onto the ر like the i's dot,
+   "العراب" drops in and squashes like the "i" (with no mark above it: #iDot is only the point the rings and the reveal start from),
    the three words of his name spring in from the centre, coloured rings bloom
    inside the letters, then a growing hole opens the page underneath.
    Plays once per browser session; click / Esc / the Skip button ends it. */
@@ -113,7 +113,7 @@
 		tl.add('reveal', '+=1.2')
 		.call(centreHole, null, 'reveal')
 		.to('#introSVG', { scale: 1.25, duration: 1.1, ease: 'power2.in' }, 'reveal')
-		.fromTo(overlay, { '--hole': '0%' }, { '--hole': '150%', duration: 1.1, ease: 'power3.in' }, 'reveal')
+		.fromTo(overlay, { '--hole': '-1%' }, { '--hole': '150%', duration: 1.1, ease: 'power3.in' }, 'reveal')
 		.from('.home-hero .wrap > *', { y: 40, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out' }, 'reveal+=0.7');
 
 		tl.timeScale(0.8);

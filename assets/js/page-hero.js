@@ -34,10 +34,9 @@
 				}).join('');
 		},
 
-		/* characters: a police lineup against a height chart, each figure holding a name */
+		/* characters: a police lineup under a sweeping spotlight, each figure holding a name */
 		characters: function (d, A) {
-			var e = A.esc, t = A.t, list = (d.characters || []).slice(0, 7), chart = '';
-			for (var cm = 200; cm >= 140; cm -= 10) chart += '<span><b>' + e(A.num(cm)) + '</b></span>';
+			var e = A.esc, t = A.t, list = (d.characters || []).slice(0, 7);
 			/* in the lineup, the three series heroes as cards (after codepen.io/gayane-gasparyan/pen/wvxewXO): a hover tips
 			   their series' cover back, lifts their name, and their drawn figure (AKT.charFigures) steps out of the card */
 			/* they lean against the lineup wall on a floor that runs away from us (after codepen.io/lynnandtonic/pen/dyGjvLB):
@@ -52,7 +51,7 @@
 					'<span class="ph-hc-name">' + e(t(c.name).replace(/^(د\.|Dr\.)\s*/, '')) + '<small>' + e(t(s.title)) + '</small></span>' +
 					(fig ? '<img class="ph-hc-fig" src="' + e(fig) + '" alt="" loading="lazy">' : '') + '</a>';
 			}).join('');
-			return '<div class="ph-chart">' + chart + '</div><i class="ph-spot"></i>' +
+			return '<i class="ph-spot"></i>' +
 				(cards ? '<i class="ph-floor"></i><div class="ph-heroes">' + cards + '</div>' : '<div class="ph-lineup">' + list.map(function (c, i) {
 					return '<div class="ph-suspect" style="--s:' + (0.86 + rnd(i, 6) * 0.2).toFixed(2) + '"><i class="head"></i><i class="body"></i>' +
 						'<span class="plate"><em>' + e(A.num(i + 1)) + '</em>' + e(clip(t(c.name), 18)) + '</span></div>';
