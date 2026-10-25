@@ -2627,3 +2627,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 (function (A) {
 	(A.characters || []).forEach(function (c) { if (c.id === 'alaa') c.image = 'assets/img/characters/alaa-doctor.webp'; });
 })(window.AKT);
+
+/* Abeer Abdel Rahman's picture, from the cover of Fantasia 17 «اقتلوا بطوط»: on her card and her page */
+(function (A) {
+	(A.characters || []).forEach(function (c) { if (c.id === 'abeer') c.image = 'assets/img/characters/abeer-fantasia-17.webp'; });
+})(window.AKT);
