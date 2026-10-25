@@ -349,3 +349,14 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 .sv-person-txt b { font-family: var(--f-display); font-size: 18px; font-weight: 400; line-height: 1.3; }
 .sv-person-txt small { font-size: 13px; color: var(--paper-dim); line-height: 1.5; }
 .sv-person-txt i { font-style: normal; font-family: var(--f-display); font-size: 13px; color: var(--ember); }
+/* a row of covers as a carousel (publisher-page.js carousels): round buttons over its two ends, shown only when it scrolls */
+.row-car { position: relative; }
+.row-car-btn { position: absolute; top: calc(50% - 26px); z-index: 2; display: none; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+	border: 1px solid var(--line); background: color-mix(in srgb, var(--ink-2) 88%, transparent); color: var(--paper); font-size: 24px; line-height: 1;
+	cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, .4); backdrop-filter: blur(4px); transition: opacity .2s, border-color .2s, color .2s; }
+.row-car.is-scrollable .row-car-btn { display: grid; }
+.row-car-btn:hover, .row-car-btn:focus-visible { border-color: var(--ember); color: var(--ember); }
+.row-car-btn:disabled { opacity: 0; pointer-events: none; }
+.row-car-prev { inset-inline-start: -14px; }
+.row-car-next { inset-inline-end: -14px; }
+@media (max-width: 640px) { .row-car-prev { inset-inline-start: -4px; } .row-car-next { inset-inline-end: -4px; } }
