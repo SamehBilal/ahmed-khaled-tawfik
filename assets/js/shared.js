@@ -53,12 +53,12 @@
 				s.notable.map(function (n) { return '<li>' + tx(n) + '</li>'; }).join('') + '</ol>');
 		}
 
-		/* the cover: the first issue's, else a collected volume's */
+		/* the cover: its own front when it names one (s.front), else the first issue's, else a collected volume's */
 		var first = seriesIssues(s.id)[0];
 		var vol = ((App.data().seriesCovers || {})[s.id] || []).filter(function (c) { return /cdn.(abjjad|aseeralkotb)|covers\/books\/(abjjad|aseeralkotb)-/.test(c.cover); })[0];
 		return {
 			id: 's-' + s.id,
-			img: (first && issueCover(s.id, first)) || (vol && vol.cover) || '',
+			img: s.front || (first && issueCover(s.id, first)) || (vol && vol.cover) || '',
 			color: s.color, title: s.title,
 			num: s.count ? '№ ' + s.count : '',
 			motif: monogram(s.title),
@@ -185,9 +185,11 @@
 
 	/* a series' cover: the cover of its first book that has one, else the series' own cover */
 	function seriesCover(id) {
+		var s = window.App.byId(window.App.data().series, id) || window.App.byId(window.App.data().otherSeries, id);
+		/* a front cover the series names for itself (s.front) comes first */
+		if (s && s.front) return s.front;
 		var list = seriesIssues(id);
 		for (var i = 0; i < list.length; i++) { var c = issueCover(id, list[i]); if (c) return c; }
-		var s = window.App.byId(window.App.data().series, id) || window.App.byId(window.App.data().otherSeries, id);
 		return (s && s.cover) || '';
 	}
 
