@@ -391,3 +391,9 @@ window.AKT.audio.thumbs = {
 	Y.issues["specials-1"] = Y.issues["mwt-s1"];
 	Y.channels["specials-1"] = Y.channels["mwt-s1"];
 })(window.AKT.audio.youtube);
+
+/* «ثلاثة» (كتاب الصيف) read on YouTube by Dubvo, the audio publisher. Checked 2026-10-25. */
+(function (Y) {
+	Y.channels["sayf-1"] = { name: "دار النشر الصوتية - Dubvo", url: "https://www.youtube.com/@DubvoTV" };
+	Y.issues["sayf-1"] = [["0xkoQGo8jFk", 1, "ثلاثة · Dubvo"]];
+})(window.AKT.audio.youtube);
