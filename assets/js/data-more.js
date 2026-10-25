@@ -2877,3 +2877,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		C.fantasia = C.fantasia.filter(function (c) { return c.kind !== 'logo'; }).concat([box], logo);
 	}
 })(window.AKT);
+
+/* «مكتبة عبير عبد الرحمن» on the Fantasia page: the cover of Fantasia 32, «في مملكة الأخوين» */
+(function (A) {
+	var I = A.seriesInfo && A.seriesInfo.fantasia;
+	if (I) I.library = { image: 'assets/img/photos/fantasia-32-library.webp',
+		credit: { ar: 'غلاف «في مملكة الأخوين» — فانتازيا 32', en: 'The cover of In the Brothers\u2019 Kingdom — Fantasia 32' } };
+})(window.AKT);
