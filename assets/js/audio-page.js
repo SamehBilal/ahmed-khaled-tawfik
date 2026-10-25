@@ -59,13 +59,29 @@ window.PAGE = {
 			if (srows.length) groups.push({ title: { ar: t(s.title) + ' — الأعداد الخاصة', en: (s.title.en || '') + ' — special issues' }, rows: srows });
 		});
 		var midStart = tracks.length;
-		A.midnight.forEach(function (m) {
+		(A.midnight || []).forEach(function (m) {
 			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], sample: m[3] || '', skin: 'midnight', art: TH[m[1]] || '' });
 		});
-		groups.push({
+		if ((A.midnight || []).length) groups.push({
 			title: { ar: 'بعد منتصف الليل', en: 'After Midnight' },
 			note: { ar: 'برنامج من Audiohat لقصص قصيرة له.', en: 'An Audiohat programme of his short stories.' },
 			rows: A.midnight.map(function (m, k) { return { title: { ar: m[0], en: m[0] }, thumb: TH[m[1]] || '', start: midStart + k, count: 1, mins: m[2] }; })
+		});
+		/* the show's later seasons by Sherine Hanaey, out of which the Lasheen novels grew: one row a season, its episodes inside */
+		var srows2 = (A.seasons || []).map(function (se) {
+			var start = tracks.length, name = L('بعد منتصف الليل ', 'After Midnight ') + App.num(se.n);
+			se.eps.forEach(function (ep, k) {
+				var label = ep[2] || L('الحلقة ', 'Episode ') + App.num(k + 1);
+				tracks.push({ title: name, ep: label, sub: L('الموسم ', 'Season ') + App.num(se.n) + ' · ' + label, url: window.Cassette.pageUrl(A, ep[0]), mins: ep[1] || null, skin: 'midnight', art: se.art });
+			});
+			return { title: { ar: 'الموسم ' + App.num(se.n) + ' (' + App.num(se.year) + ')', en: 'Season ' + se.n + ' (' + se.year + ')' }, thumb: se.art, start: start, count: se.eps.length,
+				mins: se.eps.reduce(function (m, ep) { return m + (ep[1] || 0); }, 0) };
+		});
+		if (srows2.length) groups.push({
+			title: { ar: 'بعد منتصف الليل — مواسم «لاشين»', en: 'After Midnight — the Lasheen seasons' },
+			note: { ar: 'عاد البرنامج الذي كتب عنه في «أسطورة بعد منتصف الليل» بمواسم جديدة على Audiohat من تأليف شيرين هنائي، ومنها خرجت روايات «لاشين».',
+				en: 'The radio show he wrote of in “The Legend of After Midnight” came back on Audiohat in new seasons written by Sherine Hanaey, out of which the Lasheen novels grew.' },
+			rows: srows2
 		});
 
 		var hero = document.querySelector('.page-hero');
