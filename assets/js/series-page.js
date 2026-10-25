@@ -349,7 +349,8 @@ window.PAGE = {
 		var img = lib.image || hero.image || '', credit = lib.image ? lib.credit : hero.imageCredit;
 		return '<section class="d-block d-wide"><div class="d-head"><h3>' + L('مكتبة ', 'The library of ') + tx(hero.name) + '</h3>' +
 				'<span class="prox-hint">' + L('حرّك المؤشر فوق الصورة لتظهر الأعداد', 'Move your cursor over the picture to reveal the issues') + '</span></div>' +
-			'<div class="prox' + (img ? ' has-img' : '') + '" id="prox" style="--c:' + e(s.color || '#3a1414') + (img ? ';background-image:url(\'' + e(img) + '\')' : '') + '">' +
+			/* a short series (a dozen issues or fewer) gets a shorter panel, its covers bigger and spread across the middle */
+			'<div class="prox' + (img ? ' has-img' : '') + (issues.length <= 12 ? ' prox-few' : '') + '" id="prox" style="--n:' + issues.length + ';--c:' + e(s.color || '#3a1414') + (img ? ';background-image:url(\'' + e(img) + '\')' : '') + '">' +
 				(img ? '' : '<div class="prox-art" aria-hidden="true"><span class="pa-name">' + tx(hero.name) + '</span><span class="pa-role">' + tx(hero.role) + '</span></div>') +
 				'<ul class="prox-grid">' + issues.map(function (is) {
 					return '<li><a href="' + App.issueHref(s.id, is) + '" data-n="' + e(App.num(is.n)) + (is.part ? '/' + e(App.num(is.part)) : '') + '" data-t="' + e(App.t(is.title)) + '">' +

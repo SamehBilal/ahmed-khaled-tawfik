@@ -329,3 +329,8 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 .sv-pic-img { display: block; width: 84px; }
 .sv-pic-img img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 6px; background: #fff; }
 .ed-pop-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+/* a short series' library (series-page.js, a dozen issues or fewer): a shorter panel, its covers bigger and spread across the middle */
+.prox.prox-few { min-height: 0; display: flex; align-items: center; justify-content: center; padding: 34px 0; }
+.prox.prox-few .prox-grid, .prox.has-img.prox-few .prox-grid { flex: 1; grid-template-columns: repeat(var(--n), minmax(0, 96px)); justify-content: center; gap: 18px; padding: 30px 18px; }
+.prox.prox-few .prox-grid .mini-cover .mc-t { font-size: 12px; }
+@media (max-width: 640px) { .prox.prox-few .prox-grid, .prox.has-img.prox-few .prox-grid { grid-template-columns: repeat(auto-fit, minmax(70px, 96px)); gap: 14px; } }
