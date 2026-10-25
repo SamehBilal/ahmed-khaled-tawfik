@@ -2632,3 +2632,12 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 (function (A) {
 	(A.characters || []).forEach(function (c) { if (c.id === 'abeer') c.image = 'assets/img/characters/abeer-fantasia-17.webp'; });
 })(window.AKT);
+
+/* Ma Wara' al-Tabi'a's page: the «روايات كوميكس» issues count among its special issues (specialsOf), and «لاشين» is
+   listed among what grew from its world (grewFrom), beside «أسطورة بلية» */
+(function (A) {
+	(A.otherSeries || []).forEach(function (s) {
+		if (s.id === 'comics') s.specialsOf = 'mwt';
+		if (s.id === 'lasheen') s.grewFrom = 'mwt';
+	});
+})(window.AKT);

@@ -77,10 +77,16 @@ window.PAGE = {
 		/* other series list for navigation */
 		var all = S.ownSeries().map(function (x) { return { id: x.id, title: x.title, color: x.color, own: true }; })
 			.concat(S.contributedSeries().map(function (x) { return { id: x.id, title: x.title, color: x.color, own: false }; }));
-		var related = [];
+		/* from this world in other series: a series that counts as this one's specials (specialsOf, e.g. the comics) joins
+		   its special issues; the rest, with the series that grew out of it (grewFrom, e.g. Lasheen), is "what came of it" */
+		var related = [], extraSpecials = [];
 		S.contributedSeries().forEach(function (x) {
-			S.seriesIssues(x.id).forEach(function (is) { if (is.related === id) related.push({ s: x, is: is }); });
+			S.seriesIssues(x.id).forEach(function (is) {
+				if (is.related === id) (x.specialsOf === id ? extraSpecials : related).push({ s: x, is: is });
+			});
 		});
+		var grown = (d.otherSeries || []).filter(function (x) { return x.inspired && x.grewFrom === id; });
+		var specials = S.specialIssues(id);
 
 		root.innerHTML =
 			'<section class="detail"><div class="wrap">' +
@@ -122,21 +128,33 @@ window.PAGE = {
 				(ser.own && hero && issues.length ? this.proximityHtml(s, hero, issues) : '') +
 				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
 					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid is-ranked" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
-				(S.specialIssues(id).length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('الأعداد الخاصة', 'Special issues') + ' <small>(' + App.num(S.specialIssues(id).length) + ')</small></h3></div><div class="cover-grid">' +
-					S.specialIssues(id).map(function (is) {
+				((specials.length + extraSpecials.length) ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('الأعداد الخاصة', 'Special issues') + ' <small>(' + App.num(specials.length + extraSpecials.length) + ')</small></h3></div><div class="cover-grid">' +
+					specials.map(function (is) {
 						var au = d.audio && d.audio.youtube && d.audio.youtube.issues[id + '-s' + is.n];
 						return '<a class="cover-link" href="' + App.issueHref(id, is) + '" title="' + e(t(is.title)) + '">' +
 							S.miniCover({ img: S.issueCover(id, is), color: '#1f1b2e', title: t(is.title), num: L('خاص ', 'S') + App.num(is.n) }) +
 							'<span class="cl-t">' + L('عدد خاص ', 'Special ') + App.num(is.n) + '. ' + tx(is.title) + '</span>' +
 							(au ? '<span class="cl-audio">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
 						'</a>';
+					}).join('') +
+					/* the comics: special issues too, told in pictures */
+					extraSpecials.map(function (r) {
+						return '<a class="cover-link" href="' + App.issueHref(r.s.id, r.is) + '" title="' + e(t(r.is.title)) + '">' +
+							S.miniCover({ img: S.issueCover(r.s.id, r.is), color: r.s.color, title: t(r.is.title), num: L('كوميكس', 'Comic'), sub: t(r.s.title) }) +
+							'<span class="cl-t">' + tx(r.is.title) + ' · ' + tx(r.s.title) + '</span></a>';
 					}).join('') + '</div></section>' : '') +
-				/* stories from this world that came out in other series (comics, anthologies) */
-				(related.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('من عالمها في سلاسل أخرى', 'From this world, in other series') + ' <small>(' + App.num(related.length) + ')</small></h3></div><div class="cover-grid">' +
+				/* what came of this world: its stories in other series, and the series that grew out of it */
+				((related.length + grown.length) ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('ما خرج من عالمها', 'What grew from this world') + ' <small>(' + App.num(related.length + grown.length) + ')</small></h3></div><div class="cover-grid">' +
 					related.map(function (r) {
 						return '<a class="cover-link" href="' + App.issueHref(r.s.id, r.is) + '" title="' + e(t(r.is.title)) + '">' +
 							S.miniCover({ img: S.issueCover(r.s.id, r.is), color: r.s.color, title: t(r.is.title), sub: t(r.s.title) }) +
 							'<span class="cl-t">' + tx(r.is.title) + ' · ' + tx(r.s.title) + '</span></a>';
+					}).join('') +
+					grown.map(function (x) {
+						return '<a class="cover-link" href="' + S.seriesHref(x.id) + '" title="' + e(t(x.title)) + '">' +
+							S.miniCover({ img: S.seriesCover(x.id), color: x.color, title: t(x.title), sub: x.author ? t(x.author) : '' }) +
+							'<span class="cl-t">' + L('سلسلة ', 'The series ') + tx(x.title) + (x.author ? ' · ' + tx(x.author) : '') +
+								(x.count ? ' · ' + App.num(x.count) + ' ' + L('كتابًا', 'books') : '') + '</span></a>';
 					}).join('') + '</div></section>' : '') +
 				'<section class="d-block d-wide"><div class="d-head"><h3>' + L('سلاسل أخرى', 'Other series') + '</h3></div><div class="cover-row">' +
 					all.filter(function (x) { return x.id !== id; }).map(function (x) {
