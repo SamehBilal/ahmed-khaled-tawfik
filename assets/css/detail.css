@@ -326,8 +326,6 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 /* a series' On screen block: the Works page's poster cards (site.css .adapt), one under another */
 .d-adapt + .d-adapt { margin-top: 14px; }
 .d-block .d-adapt h3 { margin: 4px 0 2px; font-size: 22px; }
-.sv-buy { display: inline-block; margin-top: 10px; font-size: 13.5px; }
 .sv-pic-img { display: block; width: 84px; }
 .sv-pic-img img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 6px; background: #fff; }
 .ed-pop-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
-.sv-buy[hidden] { display: none; }

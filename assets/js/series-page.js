@@ -220,8 +220,6 @@ window.PAGE = {
 				'<div class="ed-years" role="group" aria-label="' + e(grp.vols ? L('المجلدات', 'Volumes') : L('الطبعة', 'Printing')) + '">' + grp.list.map(function (v, vi) {
 					return '<button type="button" class="ed-yr" data-g="' + gi + '" data-v="' + vi + '" aria-expanded="false">' + (grp.vols ? e(App.num(v.n)) : L('التفاصيل', 'Details')) + '</button>';
 				}).join('') + '</div>' +
-				/* its Goodreads page, under the card; for the volumes, the one picked last */
-				'<a class="buy-btn sv-buy" href="' + e(first.goodreads || '#') + '" target="_blank" rel="noopener"' + (first.goodreads ? '' : ' hidden') + '>' + L('على Goodreads', 'On Goodreads') + (grp.vols ? ' · ' + L('المجلد ', 'volume ') + App.num(grp.list[0].n) : '') + ' ↗</a>' +
 				'</div></article>';
 		}).join('');
 		/* the logo and photos as cards too, the picture beside what it is */
@@ -256,13 +254,8 @@ window.PAGE = {
 			openBtn = btn;
 			btn.setAttribute('aria-expanded', 'true');
 			var grp = groups[+btn.getAttribute('data-g')], c = grp.list[+btn.getAttribute('data-v')].c;
-			var card = btn.closest('.edition'), img = card.querySelector('.sv-ed-cover img'), gr = card.querySelector('.sv-buy');
+			var img = btn.closest('.edition').querySelector('.sv-ed-cover img');
 			if (img) img.src = c.cover;
-			if (gr && grp.vols) {
-				gr.hidden = !c.goodreads;
-				gr.href = c.goodreads || '#';
-				gr.textContent = L('على Goodreads', 'On Goodreads') + ' · ' + L('المجلد ', 'volume ') + App.num(grp.list[+btn.getAttribute('data-v')].n) + ' ↗';
-			}
 			var row = function (k, v) { return v ? '<dt>' + k + '</dt><dd>' + v + '</dd>' : ''; };
 			pop.innerHTML = '<dl>' + row(L('العنوان', 'Title'), e(t(c.label))) +
 				row(L('الأعداد', 'Issues'), c.issues ? e(App.num(c.issues)) : '') +
