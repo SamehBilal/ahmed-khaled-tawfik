@@ -2990,7 +2990,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var I = A.seriesInfo = A.seriesInfo || {};
 	I.rwg = I.rwg || {};
 	var NF = { ar: 'نبيل فاروق', en: 'Nabil Farouk' }, P = 'https://asfar.io/product/', C = 'assets/img/covers/series/rwg/asfar-rwg-';
-	I.rwg.libraryBefore = [
+	I.rwg.libraryMore = [
 		[1, 'فلاش جوردن', 'Flash Gordon', 'flash-gordon-alex-raymond'],
 		[2, 'كنوز الملك سليمان', 'King Solomon’s Mines', 'king-solomon-s-mines-h-rider-haggard'],
 		[3, 'دكتور نو', 'Dr. No', 'doctor-no-james-bond'],
@@ -2998,4 +2998,20 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		[5, 'الفك المفترس', 'Jaws', 'jaws-peter-benchley'],
 		[6, 'فوق مستوى الشبهات', 'Above Suspicion', 'above-suspicion-helen-macinnes']
 	].map(function (x) { return { n: x[0], title: { ar: x[1], en: x[2] }, by: NF, cover: C + x[0] + '.webp', url: P + x[3] + '/' }; });
+})(window.AKT);
+
+/* Molotov's other six books, by Mohamed Sami and others (Goodreads series 65516): in its library, among his two by number */
+(function (A) {
+	var I = A.seriesInfo = A.seriesInfo || {};
+	I.molotov = I.molotov || {};
+	var G = 'https://www.goodreads.com/book/show/', C = 'assets/img/covers/series/molotov/goodreads-molotov-';
+	var MS = { ar: 'محمد سامي وآخرون', en: 'Mohamed Sami and others' };
+	I.molotov.libraryMore = [
+		[1, 'عزيزي الوغد', 'Dear Scoundrel', 6023049],
+		[3, 'قارة زينهم المفقودة', 'The Lost Continent of Zeinhom', 6019200],
+		[4, 'نورت مصر', 'Welcome to Egypt', 6017247],
+		[6, 'أسطورة المؤلف', 'The Legend of the Author', 6017348],
+		[7, 'جمعية الباحثات عن عرسان', 'The Society of Women Seeking Grooms', 6017342],
+		[8, 'أنا الرئيس', 'I Am the President', 6775695]
+	].map(function (x) { return { n: x[0], title: { ar: x[1], en: x[2] }, by: MS, cover: C + x[0] + '.webp', url: G + x[3] }; });
 })(window.AKT);
