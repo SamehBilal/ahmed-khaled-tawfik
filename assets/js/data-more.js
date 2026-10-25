@@ -2839,3 +2839,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		});
 	});
 })(window.AKT);
+
+/* Safari's and Fantasia's volumes and covers: without the single «سافاري 41» and «فانتازيا 41», as with «ما وراء الطبيعة 81» */
+(function (A) {
+	var C = A.seriesCovers || {};
+	['safari', 'fantasia'].forEach(function (sid) {
+		if (C[sid]) C[sid] = C[sid].filter(function (c) { return ['سافاري 41', 'فانتازيا 41'].indexOf(c.label.ar) < 0; });
+	});
+})(window.AKT);
