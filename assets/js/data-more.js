@@ -2860,3 +2860,20 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	A.volumesCover = A.volumesCover || {};
 	A.volumesCover.mwt = 'assets/img/covers/series/paranormal/volumes-box.webp';
 })(window.AKT);
+
+/* the box of every Safari and Fantasia issue in the pocket printing: a photo of it, on both series' pages */
+(function (A) {
+	var C = A.seriesCovers = A.seriesCovers || {}, box = null;
+	(C.safari || []).forEach(function (c) {
+		if (c.label.ar !== 'بوكس سلسلة سافاري وفانتازيا') return;
+		c.cover = 'assets/img/covers/series/fantasia/safari-fantasia-box.webp';
+		c.storeTitle = c.label;
+		c.label = { ar: 'بوكس سافاري وفانتازيا — الأعداد كاملة بطبعة الجيب', en: 'Safari and Fantasia box — every issue in the pocket printing' };
+		c.publisher = { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' };
+		box = c;
+	});
+	if (box && C.fantasia && !C.fantasia.some(function (c) { return c === box; })) {
+		var logo = C.fantasia.filter(function (c) { return c.kind === 'logo'; });
+		C.fantasia = C.fantasia.filter(function (c) { return c.kind !== 'logo'; }).concat([box], logo);
+	}
+})(window.AKT);
