@@ -109,15 +109,9 @@
 				'<span class="ph-seal">' + A.esc(A.L('ع', 'G')) + '</span></div>';
 		},
 
-		/* publishers: their logos on a wall, each on a white card */
-		publishers: function (d, A) {
-			var e = A.esc, t = A.t, list = (d.publishers || []).filter(function (p) { return p.logo; });
-			if (!list.length) return '';
-			var frames = list.map(function (p, i) {
-				return '<figure class="ph-frame ph-logo" style="--r:' + ((rnd(i, 21) - 0.5) * 5).toFixed(1) + 'deg"><img src="' + e(p.logo) + '" alt="" loading="lazy" decoding="async">' +
-					'<figcaption>' + e(t(p.name)) + '</figcaption></figure>';
-			}).join('');
-			return '<div class="ph-wall"><div class="track">' + frames + frames + '</div></div>';
+		/* publishers: a dark bookshelf that a flashlight finds in colour (page-hero.css .ph-shelf) */
+		publishers: function () {
+			return '<div class="ph-shelf"></div>';
 		},
 
 		/* tributes: a gallery wall of the people who wrote about him */
