@@ -3238,3 +3238,12 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			en: 'Mona El-Shazly announced that Shaabeeb (Dar El Shorouk, 2018) was voted the best book of 2018, with 54.5% of the votes in her programme’s year-end poll.' },
 		source: 'https://www.shorouknews.com/news/view.aspx?cdate=27122018&id=28370922-7075-4cd5-8eac-8749da393411' });
 })(window.AKT);
+
+/* the Best Book of 2018 award: its picture, his son receiving it from Mona El-Shazly on her programme */
+(function (A) {
+	(A.awards || []).forEach(function (a) {
+		if (a.work !== 'shaabeeb' || a.year !== 2018 || a.image) return;
+		a.image = { src: 'assets/img/prizes/mona-elshazly-2018.webp',
+			alt: { ar: 'ابنه يتسلّم جائزة أفضل كتاب لعام 2018 عن «شآبيب» من منى الشاذلي في برنامج «معكم منى الشاذلي»', en: 'His son receives the Best Book of 2018 award for Shaabeeb from Mona El-Shazly on “Ma’akom Mona El-Shazly”' } };
+	});
+})(window.AKT);
