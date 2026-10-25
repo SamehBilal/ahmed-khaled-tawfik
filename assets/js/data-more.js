@@ -2603,3 +2603,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		L.splice(at, 0, ev);
 	}
 })(window.AKT);
+
+/* his last book is «ألغام في بحر الذكريات» (5 July 2025), after «دعني أخبرك بشيء» (21 January 2025): the works list keeps that order */
+(function (A) {
+	var W = A.works || [], ids = W.map(function (w) { return w.id; });
+	var g = ids.indexOf('alghaam'), d = ids.indexOf('daani-okhberak');
+	if (g >= 0 && d > g) W.splice(d + 1, 0, W.splice(g, 1)[0]);
+})(window.AKT);

@@ -61,8 +61,9 @@ window.PAGE = {
 
 		this.renderIssues();
 
-		/* standalone books — hardcovers, sorted by year */
-		var works = (d.works || []).slice().sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+		/* standalone books — hardcovers, sorted by year, and within a year by the day each first came out */
+		var firstOut = function (w) { return String(((d.bookInfo || {})[w.id] || {}).firstPublished || ''); };
+		var works = (d.works || []).slice().sort(function (a, b) { return ((a.year || 9999) - (b.year || 9999)) || firstOut(a).localeCompare(firstOut(b)); });
 		var types = [];
 		works.forEach(function (w) { if (types.indexOf(w.type) < 0) types.push(w.type); });
 
