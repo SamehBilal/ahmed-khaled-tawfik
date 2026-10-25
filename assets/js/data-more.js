@@ -1795,6 +1795,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	};
 })(window.AKT);
 
+/* «قصتي مع اللوفر» (Sanad Rashed Dakheel, Diamond Book, Kuwait 2008): a satirical guide to Paris that carries an article
+   of his; the cover from a photo of a copy (sto1or.com), the details from Goodreads */
+(function (A) {
+	var DIAMOND = { ar: 'دايموند بوك', en: 'Diamond Book' }, T = { ar: 'قصتي مع اللوفر', en: 'My Story with the Louvre' };
+	var COVER = 'assets/img/covers/books/qessati-maa-allouvre.webp';
+	A.works = A.works || [];
+	if (!A.works.some(function (w) { return w.id === 'qessati-maa-allouvre'; }))
+		A.works.push({ id: 'qessati-maa-allouvre', title: T, year: 2008, type: 'collab', publisher: DIAMOND, color: '#2a6f9e',
+			synopsis: { ar: 'دليل سياحي ساخر لسند راشد دخيل عن أربعة أيام في باريس، شارك فيه أحمد خالد توفيق بمقالة داخل الكتاب.',
+				en: 'Sanad Rashed Dakheel’s satirical travel guide to four days in Paris, with an article by Ahmed Khaled Tawfik inside.' } });
+	A.bookInfo = A.bookInfo || {};
+	A.bookInfo['qessati-maa-allouvre'] = {
+		description: { ar: 'دليل سياحي ساخر يشرح لك كيف تقضي أربعة أيام في ربوع باريس، كتبه سند راشد دخيل، وشارك فيه أحمد خالد توفيق بمقالة داخل الكتاب.\n\nصدر عن دايموند بوك في الكويت عام 2008.',
+			en: 'A satirical travel guide on how to spend four days in Paris, by Sanad Rashed Dakheel, with an article by Ahmed Khaled Tawfik inside.\n\nPublished by Diamond Book in Kuwait in 2008.' },
+		authors: [{ ar: 'سند راشد دخيل', en: 'Sanad Rashed Dakheel' }],
+		language: 'ar', pages: 147, ownCover: COVER,
+		editions: [{ title: T, publisher: DIAMOND, year: 2008, lang: 'ar', asin: 'B0DLT6J5F4', pages: 147,
+			format: { ar: 'غلاف ورقي', en: 'Paperback' }, cover: COVER, source: 'https://www.goodreads.com/book/show/5866982' }],
+		sources: ['https://www.goodreads.com/book/show/5866982', 'https://sto1or.com/p1063026215']
+	};
+})(window.AKT);
+
 /* «عقل بلا جسد»: its eight editions — Diamond Book (2008 paperback, Kindle 2019 and 2022), Dar Lila (2008), Kayan (2017 paperback
    with its back cover from Samawy (samawy.com/i/1004108) and its text, Kindle 2018 and 2024) and the Persian translation (Qatreh);
    the book opens on the first edition's cover */
