@@ -285,6 +285,8 @@
 	/* a house that only took a book over later («ثم …») is not counted for it */
 	function pubMatches(p, name) { return !!name && new RegExp(p.match).test(name.replace(/\(ثم[^)]*\)/g, '')); }
 	function yearOf(y) { var m = String(y || '').match(/\d{4}/); return m ? +m[0] : 0; }
+	/* the last year a span names («1996–2018» → 2018) */
+	function lastYearOf(y) { var m = String(y || '').match(/\d{4}/g); return m ? +m[m.length - 1] : 0; }
 	/* every house with what it published first, oldest partnership first:
 	   [{ p, list: [{ id, title, href, year, cover, color, series }], from, to, later: [...] }] */
 	function publishers() {
@@ -299,7 +301,8 @@
 		var items = (d.works || []).map(function (w) {
 			return { id: w.id, title: w.title, href: App.workHref(w.id), year: yearOf(w.year), date: ((d.bookInfo || {})[w.id] || {}).firstPublished || '', pub: house(w), cover: coverOf((d.bookInfo || {})[w.id]), color: w.color };
 		}).concat(ownSeries().concat(contributedSeries()).map(function (s) {
-			return { id: s.id, title: s.title, href: seriesHref(s.id), year: yearOf(s.years), pub: (s.publisher && s.publisher.ar) || '', cover: seriesCover(s.id), color: s.color, series: true };
+			/* a series brings its last year and how many of its issues are his */
+			return { id: s.id, title: s.title, href: seriesHref(s.id), year: yearOf(s.years), yearTo: lastYearOf(s.years), issues: seriesIssues(s.id).length, pub: (s.publisher && s.publisher.ar) || '', cover: seriesCover(s.id), color: s.color, series: true };
 		}));
 		return (d.publishers || []).map(function (p) {
 			var mine = items.filter(function (it) { return pubMatches(p, it.pub); })
@@ -327,8 +330,9 @@
 			};
 			mine = mine.map(own);
 			later = later.map(own);
-			var ys = mine.map(function (it) { return it.year; }).filter(Boolean);
-			return { p: p, list: mine, later: later, from: ys.length ? Math.min.apply(null, ys) : 0, to: ys.length ? Math.max.apply(null, ys) : 0 };
+			/* its years run to the last a book or series of his came out with it (a series' last issue, not its first) */
+			var ys = mine.map(function (it) { return it.year; }).filter(Boolean), ye = mine.map(function (it) { return it.yearTo || it.year; }).filter(Boolean);
+			return { p: p, list: mine, later: later, from: ys.length ? Math.min.apply(null, ys) : 0, to: ye.length ? Math.max.apply(null, ye) : 0 };
 		}).filter(function (c) { return c.list.length; })
 			.sort(function (a, b) { return (a.from || 9999) - (b.from || 9999); });
 	}
@@ -342,15 +346,22 @@
 	/* a house's card (works page, publishers.html): logo, name, count, years, note and its books */
 	function publisherCard(c) {
 		var App = window.App, e = App.esc, tx = App.tx, L = App.L;
-		var n = c.list.length;
+		var books = c.list.filter(function (it) { return !it.series; }).length, series = c.list.filter(function (it) { return it.series; });
+		var issues = series.reduce(function (m, it) { return m + (it.issues || 0); }, 0);
+		/* Arabic counts: one, two (the dual), up to ten the plural, then the accusative singular */
+		var count = function (n, one, two, few, many, en1, enN) { return n === 2 ? L(two, '2 ' + enN) : n === 1 ? L(one + (/ة$/.test(one) ? ' واحدة' : ' واحد'), '1 ' + en1) : App.num(n) + ' ' + L(n <= 10 ? few : many, enN); };
+		/* «٣ كتب · ٢٨٩ عددًا في ٧ سلاسل»: its books, then the issues of its series and how many series they make */
+		var what = [books ? count(books, 'كتاب', 'كتابان', 'كتب', 'كتابًا', 'book', 'books') : '',
+			series.length ? (issues ? count(issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + L(' في ', ' in ') : '') + count(series.length, 'سلسلة', issues ? 'سلسلتين' : 'سلسلتان', 'سلاسل', 'سلسلة', 'series', 'series') : ''].filter(Boolean).join(' · ');
 		return '<article class="pub rise">' +
 			'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)\s+/, '').charAt(0)) + '</span>') + '<h3><a class="pub-a" href="' + e(publisherHref(c.p.id)) + '">' + tx(c.p.name) + '</a></h3>' +
-				'<span class="pub-n">' + (n === 2 ? L('عملان', '2 works') : App.num(n) + ' ' + (n === 1 ? L('عمل', 'work') : L(n <= 10 ? 'أعمال' : 'عملًا', 'works'))) + '</span></div>' +
+				'<span class="pub-n">' + what + '</span></div>' +
 			(c.from ? '<div class="pub-yr">' + App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') + '</div>' : '') +
 			(c.p.note ? '<p class="pub-note">' + tx(c.p.note) + '</p>' : '') +
 			'<a class="pub-more" href="' + e(publisherHref(c.p.id)) + '">' + L('صفحة الدار ←', 'The house’s page →') + '</a>' +
 			'<ul class="pub-list">' + c.list.map(function (it) {
-				return '<li' + (it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + '</a></li>';
+				/* a series says how many of its issues are his */
+				return '<li' + (it.series ? ' class="is-series"' : '') + '><a href="' + e(it.href) + '">' + tx(it.title) + '</a>' + (it.series && it.issues ? ' <small class="pub-is">' + count(it.issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + '</small>' : '') + '</li>';
 			}).join('') + '</ul></article>';
 	}
 

@@ -26,11 +26,13 @@ window.PAGE = {
 			: '<div class="wp-photo wp-mono pb-mono" aria-hidden="true">' + e(initial(p)) + '</div>';
 		var books = c.list.filter(function (it) { return !it.series; }), series = c.list.filter(function (it) { return it.series; });
 		/* Arabic: one takes the singular, two the dual on its own, up to ten the plural, then the accusative singular */
-		var count = function (n, one, two, few, many, en1, enN) { return n === 2 ? L(two, '2 ' + enN) : App.num(n) + ' ' + (n === 1 ? L(one, en1) : L(n <= 10 ? few : many, enN)); };
+		var count = function (n, one, two, few, many, en1, enN) { return n === 2 ? L(two, '2 ' + enN) : n === 1 ? L(one + (/ة$/.test(one) ? ' واحدة' : ' واحد'), '1 ' + en1) : App.num(n) + ' ' + L(n <= 10 ? few : many, enN); };
 		var chips = [
 			c.from ? '<span class="wp-chip">' + App.num(c.from) + (c.to > c.from ? '–' + App.num(c.to) : '') + '</span>' : '',
 			books.length ? '<span class="wp-chip">' + count(books.length, 'كتاب', 'كتابان', 'كتب', 'كتابًا', 'book', 'books') + '</span>' : '',
 			series.length ? '<span class="wp-chip">' + count(series.length, 'سلسلة', 'سلسلتان', 'سلاسل', 'سلسلة', 'series', 'series') + '</span>' : '',
+			/* and how many issues of his those series hold */
+			(function (n) { return n ? '<span class="wp-chip">' + count(n, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + L(' في السلاسل', ' in the series') + '</span>' : ''; })(series.reduce(function (m, it) { return m + (it.issues || 0); }, 0)),
 			c.later.length ? '<span class="wp-chip">' + L('أعادت نشر ', 'Reissued ') + count(c.later.length, 'كتاب', 'كتابين', 'كتب', 'كتابًا', 'book', 'books') + '</span>' : ''
 		].join('');
 		/* the house's own website, shop and accounts, as icon buttons */
@@ -59,7 +61,8 @@ window.PAGE = {
 
 		var card = function (it) {
 			return '<a class="cover-link" href="' + e(it.href) + '">' + S.miniCover({ img: it.cover, color: it.color, title: t(it.title), sub: it.series ? L('سلسلة', 'Series') : '' }) +
-				'<span class="cl-t">' + tx(it.title) + (it.year ? ' · ' + App.num(it.year) : '') + '</span></a>';
+				'<span class="cl-t">' + tx(it.title) + (it.year ? ' · ' + App.num(it.year) + (it.yearTo > it.year ? '–' + App.num(it.yearTo) : '') : '') +
+					(it.series && it.issues ? ' · ' + count(it.issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') : '') + '</span></a>';
 		};
 		var block = function (title, list) {
 			return list.length ? '<section class="section"><div class="wrap"><h2 class="wp-h">' + title + ' <small class="pb-n">(' + App.num(list.length) + ')</small></h2><div class="cover-row">' + list.map(card).join('') + '</div></div></section>' : '';
