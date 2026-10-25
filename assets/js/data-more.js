@@ -2897,7 +2897,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 /* WWW wears the collected edition's cover (from Abjjad) as its front cover */
 (function (A) {
 	(A.series || []).forEach(function (s) { if (s.id === 'www') s.front = 'assets/img/covers/series/www/abjjad-c790bc32b24a.png'; });
-	/* and it leaves «المجلدات والأغلفة», where it was a card of its own */
+	/* «المجلدات والأغلفة» keeps that card, without the Aseer Al Kotb «www» */
 	var C = A.seriesCovers || {};
-	if (C.www) C.www = C.www.filter(function (c) { return c.cover !== 'assets/img/covers/series/www/abjjad-c790bc32b24a.png'; });
+	if (C.www) C.www = C.www.filter(function (c) { return c.label.ar !== 'www'; });
 })(window.AKT);
