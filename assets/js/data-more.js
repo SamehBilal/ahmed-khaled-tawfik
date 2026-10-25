@@ -2641,3 +2641,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if (s.id === 'lasheen') s.grewFrom = 'mwt';
 	});
 })(window.AKT);
+
+/* special issue 9 «جاءوا من الوادي» belongs to Fantasia, not Ma Wara' al-Tabi'a: each hero's series lists its specials again */
+(function (A) {
+	var sp = (A.issues || {}).specials || [];
+	sp.forEach(function (is) { if (is.n === 9) is.hero = 'fantasia'; });
+	if (sp.length) {
+		A.specials = {};
+		['mwt', 'fantasia', 'safari'].forEach(function (sid) {
+			A.specials[sid] = sp.filter(function (is) { return is.hero === sid || is.hero === 'crossover'; })
+				.map(function (is) { return { n: is.n, title: is.title, note: is.note, year: is.year }; });
+		});
+	}
+})(window.AKT);

@@ -225,6 +225,7 @@ window.AKT.seriesInfo = {
   var WIKI_RWG = "https://ar.wikipedia.org/wiki/%D8%B1%D9%88%D8%A7%D9%8A%D8%A7%D8%AA_%D8%B9%D8%A7%D9%84%D9%85%D9%8A%D8%A9_%D9%84%D9%84%D8%AC%D9%8A%D8%A8";
   // [n, ar title, en title, original (ar), original (en), goodreads id or null]
   var rwgRows = [
+    [7, "رحلة إلى مركز الأرض", "Journey to the Center of the Earth", "«رحلة إلى مركز الأرض» — جول فيرن", "Journey to the Center of the Earth — Jules Verne", null],
     [8, "الغيبوبة", "Coma", "«غيبوبة» — روبن كوك", "Coma — Robin Cook", "6366538"],
     [9, "الشيطانة", "Misery", "«البؤس» — ستيفن كينج", "Misery — Stephen King", "6366555"],
     [10, "لقاءات من النوع الثالث", "Close Encounters of the Third Kind", "«لقاءات قريبة من النوع الثالث» — ستيفن سبيلبرج", "Close Encounters of the Third Kind — Steven Spielberg", "6366590"],
@@ -314,13 +315,13 @@ window.AKT.seriesInfo = {
     {
       "id": "rwg",
       "title": { "ar": "روايات عالمية للجيب", "en": "Rewayat Alamiya lil-Geib (World Pocket Novels)" },
-      "owner": { "ar": "سلسلة متعددة المؤلفين بدأها نبيل فاروق (الأعداد 1–7)", "en": "Multi-author line, launched by Nabil Farouk (#1–7)" },
+      "owner": { "ar": "سلسلة متعددة المؤلفين بدأها نبيل فاروق (الأعداد 1–6)", "en": "Multi-author line, launched by Nabil Farouk (#1–6)" },
       "publisher": { "ar": "المؤسسة العربية الحديثة — روايات مصرية للجيب", "en": "Modern Arab Association — Egyptian Pocket Novels" },
       "years": "",
-      "role": { "ar": "مترجم ومُعِدّ (الأعداد 8–83)", "en": "Translator / adapter (#8–83)" },
+      "role": { "ar": "مترجم ومُعِدّ (الأعداد 7–83)", "en": "Translator / adapter (#7–83)" },
       "description": {
-        "ar": "سلسلة تقدّم روائع الأدب العالمي وروايات الإثارة الحديثة بالعربية في صورة مبسّطة ومختصرة بحجم كتاب الجيب. كتب نبيل فاروق أعدادها السبعة الأولى، ثم تولاها أحمد خالد توفيق نيابة عنه لانشغاله، فصار مترجم كل الأعداد التالية حتى العدد 83. امتدت اختياراته من الكلاسيكيات (ستيفنسون وويلز وكونراد وملفيل) إلى الرعب (لافكرافت وستيفن كينج وكلايف باركر) والجريمة (أجاثا كريستي وجون جريشام). ثم جُمعت الأعداد لاحقًا في مجلدات بعنوان «روايات عالمية» (2016–2020).",
-        "en": "A pocket line that brings world classics and modern thrillers into Arabic in simplified, abridged form. Nabil Farouk wrote the first seven issues; Ahmed Khaled Tawfik then took over on his behalf, since Farouk was busy, and translated every later issue up to #83. His picks run from classics (Stevenson, Wells, Conrad, Melville) to horror (Lovecraft, Stephen King, Clive Barker) and crime (Agatha Christie, John Grisham). The issues were later collected in hardcover volumes titled Rewayat Alamiya (2016–2020)."
+        "ar": "سلسلة تقدّم روائع الأدب العالمي وروايات الإثارة الحديثة بالعربية في صورة مبسّطة ومختصرة بحجم كتاب الجيب. كتب نبيل فاروق أعدادها الستة الأولى، ثم تولاها أحمد خالد توفيق نيابة عنه لانشغاله بدءًا من العدد 7، فصار مترجم كل الأعداد حتى العدد 83. امتدت اختياراته من الكلاسيكيات (ستيفنسون وويلز وكونراد وملفيل) إلى الرعب (لافكرافت وستيفن كينج وكلايف باركر) والجريمة (أجاثا كريستي وجون جريشام). ثم جُمعت الأعداد لاحقًا في مجلدات بعنوان «روايات عالمية» (2016–2020).",
+        "en": "A pocket line that brings world classics and modern thrillers into Arabic in simplified, abridged form. Nabil Farouk wrote the first six issues; Ahmed Khaled Tawfik then took over on his behalf from #7, since Farouk was busy, and translated every issue up to #83. His picks run from classics (Stevenson, Wells, Conrad, Melville) to horror (Lovecraft, Stephen King, Clive Barker) and crime (Agatha Christie, John Grisham). The issues were later collected in hardcover volumes titled Rewayat Alamiya (2016–2020)."
       },
       "color": "#7a4e1d",
       "issues": rwgIssues,
