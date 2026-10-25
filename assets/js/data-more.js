@@ -3117,3 +3117,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		p.links = (p.links || []).filter(function (l) { return l.kind !== 'site'; }).concat([{ kind: 'site', url: 'https://samapublishing.com/' }]);
 	});
 })(window.AKT);
+
+/* Dar El Shorouk: its logo, what it is (in the words of its Wikipedia entry), and shorouk.com as its website */
+(function (A) {
+	(A.publishers || []).forEach(function (p) {
+		if (p.id !== 'shorouk') return;
+		p.logo = 'assets/img/publishers/shorouk-logo.webp';
+		p.about = { ar: 'إحدى دور النشر العربية، وهي ناشر عام للكتب السياسية والسير والمذكرات وكتب التاريخ والفلسفة والعلوم الاجتماعية والدين والفكر القومي والكتب الفنية المصورة وكتب الأطفال.',
+			en: 'One of the Arab publishing houses, a general publisher of politics, biography and memoir, history, philosophy, social science, religion, nationalist thought, illustrated art books and children’s books.',
+			src: (p.about || {}).src };
+		p.links = (p.links || []).filter(function (l) { return !/shorouk\.com/.test(l.url); });
+		p.links.unshift({ kind: 'site', url: 'https://www.shorouk.com/' });
+	});
+})(window.AKT);
