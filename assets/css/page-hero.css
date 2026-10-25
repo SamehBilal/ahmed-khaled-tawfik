@@ -66,7 +66,7 @@ html[data-theme="light"] .ph { --ph-bg: #1c1712; border-bottom-color: rgba(0, 0,
    from us, and each card leans back on it, the further ones smaller and higher, a shadow cast behind it on the wall
    and the floor; a hover stands the card up off the wall, and then the figure steps out */
 .ph-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; z-index: 1; pointer-events: none;
-	background: linear-gradient(176deg, transparent 0 34%, rgba(239, 230, 210, .22) 34.4%, #23242c 35.2%, #121319 60%, #08090c 100%); }
+	background: linear-gradient(178deg, transparent 0 34%, rgba(239, 230, 210, .22) 34.4%, #23242c 35.2%, #121319 60%, #08090c 100%); }
 html[dir="rtl"] .ph-floor { transform: scaleX(-1); }
 .ph-heroes { gap: 4%; bottom: 14px; }
 .ph-heroes .ph-hc { --k: calc(1 - var(--i) * .08);
