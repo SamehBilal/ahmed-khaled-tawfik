@@ -2616,3 +2616,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var main = ['refaat', 'abeer', 'alaa', 'virus', 'alaa-utopia', 'gaber', 'essam', 'samanoudi'];
 	(A.characters || []).forEach(function (c) { c.main = main.indexOf(c.id) >= 0; });
 })(window.AKT);
+
+/* drawn full-length figures of the characters: on their card they stand over its corner, on their page free of the frame */
+(function (A) {
+	A.charFigures = A.charFigures || {};
+	A.charFigures.refaat = 'assets/img/characters/refaat-lantern.webp';
+})(window.AKT);

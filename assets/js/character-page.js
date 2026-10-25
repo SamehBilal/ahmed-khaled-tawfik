@@ -44,7 +44,11 @@ window.PAGE = {
 			'</a>';
 		};
 
-		var portrait = c.image
+		/* a drawn full-length figure (AKT.charFigures) stands free of the frame; else their picture; else their initial */
+		var figure = (d.charFigures || {})[id];
+		var portrait = figure
+			? '<img src="' + e(figure) + '" alt="' + e(name) + '">'
+			: c.image
 			? '<img src="' + e(c.image) + '" alt="' + e(name) + '">'
 			: '<span class="ch-mono" aria-hidden="true">' + e(mono) + '</span>';
 
@@ -56,7 +60,7 @@ window.PAGE = {
 
 		var html = '<section class="ch-hero' + (hero ? ' ch-theme-' + e(hero.theme) : '') + '" style="--c:' + e(color) + '">' + backdrop +
 			'<div class="wrap ch-hero-grid">' +
-				'<div class="ch-portrait">' + portrait + '</div>' +
+				'<div class="ch-portrait' + (figure ? ' is-figure' : '') + '">' + portrait + '</div>' +
 				'<div class="ch-text">' +
 					'<p class="eyebrow">' + (hero ? tx(hero.eyebrow) + ' · ' : '') +
 						(ser ? '<a href="' + e(S.seriesHref(c.work)) + '">' + tx(ser.s.title) + '</a>' : work ? App.workLink(c.work) : '') + '</p>' +
