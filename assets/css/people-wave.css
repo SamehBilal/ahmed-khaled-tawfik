@@ -106,3 +106,6 @@ html[data-theme="light"] .pw-person { color: #fff; }
 .dir-body small { color: var(--muted); font-family: var(--f-latin); font-size: 13px; }
 .dir-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
 .dir-tags i { font-style: normal; padding: 1px 8px; border-radius: 999px; background: color-mix(in srgb, var(--c) 70%, transparent); color: #fff; font-size: 11.5px; font-family: var(--f-display); }
+
+/* photos and covers open full size on a click */
+.shelf-card .wr-photo img { cursor: zoom-in; }

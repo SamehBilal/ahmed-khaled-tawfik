@@ -72,7 +72,18 @@ window.PAGE = {
 		this.directory() +
 		'<section class="section"><div class="wrap"><div class="shelf-block rise" id="sources-block"></div></div></section>';
 
-		document.getElementById('content').innerHTML = html;
+		var content = document.getElementById('content');
+		content.innerHTML = html;
+		/* a writer's photo, a cover or a back cover in a pulled-out card opens full size, as on the timeline */
+		if (!content.dataset.pics) {
+			content.dataset.pics = '1';
+			content.addEventListener('click', function (ev) {
+				var img = ev.target.closest('.shelf-card .wr-photo img');
+				if (!img) return;
+				ev.preventDefault();
+				App.showPic(img.getAttribute('src'), img.alt);
+			});
+		}
 		this.wave();
 		this.bindDirectory();
 

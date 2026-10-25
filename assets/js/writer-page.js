@@ -117,5 +117,16 @@ window.PAGE = {
 			'<section class="section"><div class="wrap"><h2 class="wp-h">' + L('كُتّاب آخرون', 'Other writers') + '</h2><div class="wp-people">' + near.map(person).join('') + '</div>' +
 				'<div class="pn wp-pn"><a href="' + e(P.href(prev)) + '">' + L('→ ', '← ') + e(t(prev.name)) + '</a><a href="' + e(P.href(next)) + '">' + e(t(next.name)) + L(' ←', ' →') + '</a></div>' +
 			'</div></section>';
+
+		/* their photo and the covers open full size, as on the timeline */
+		if (!root.dataset.pics) {
+			root.dataset.pics = '1';
+			root.addEventListener('click', function (ev) {
+				var img = ev.target.closest('.wp-photo img, .wp-covers img');
+				if (!img) return;
+				ev.preventDefault();
+				App.showPic(img.getAttribute('src'), img.alt);
+			});
+		}
 	}
 };

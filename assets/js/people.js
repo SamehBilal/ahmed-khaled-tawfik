@@ -143,7 +143,14 @@
 			p.female = FEMALE.indexOf(p.id) >= 0;
 			var hay = norm(p.entries.map(function (x) { var w = x.w; return [(w.work || {}).ar, (w.book || {}).ar, (w.text || {}).ar].join(' '); }).join(' '));
 			p.works = works.filter(function (w) { var t = norm(w.title.ar.replace(/\s*\(.*\)\s*$/, '')); return (t.length > 2 && hay.indexOf(t) >= 0) || (EXTRA_WORKS[p.id] || []).indexOf(w.id) >= 0; }).map(function (w) { return w.id; });
-			p.series = series.filter(function (s) { var t = norm(s.title.ar); return t.length > 2 && hay.indexOf(t) >= 0; }).map(function (s) { return s.id; });
+			p.series = series.filter(function (s) { var t = norm(s.title.ar); return t.length > 2 && hay.indexOf(t) >= 0; }).map(function (s) { return s.id; })
+				.filter(function (id, i, all) { return all.indexOf(id) === i; });
+			/* and the books whose pages credit them as an author, and the series that name them among its writers */
+			var same = function (a) { var k = key(a); return k && (k === p.key || k.indexOf(p.key + ' ') === 0 || p.key.indexOf(k + ' ') === 0); };
+			works.forEach(function (w) { if (p.works.indexOf(w.id) < 0 && ((A.bookInfo || {})[w.id] || {}).authors && A.bookInfo[w.id].authors.some(same)) p.works.push(w.id); });
+			Object.keys(A.seriesInfo || {}).forEach(function (sid) {
+				if (p.series.indexOf(sid) < 0 && (A.seriesInfo[sid].with || []).some(function (x) { return x.id === p.id; })) p.series.push(sid);
+			});
 			p.tribute = (A.tributes || []).filter(function (t) { return key(t.name) === p.key; })[0] || null;
 			if (!p.photo && p.tribute && p.tribute.photo) p.photo = { url: p.tribute.photo, file: p.tribute.photoSource || '' };
 		});

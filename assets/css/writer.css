@@ -84,3 +84,6 @@ html[lang="en"] .wp-h { font-family: var(--f-display); font-weight: 700; }
 .pb-youtube:hover, .pb-youtube:focus-visible { background: #e00; }
 .pb-tiktok:hover, .pb-tiktok:focus-visible { background: #111; }
 @media (max-width: 760px) { .pb-links { justify-content: center; } }
+
+/* photos and covers open full size on a click */
+.wp-photo img, .wp-covers img { cursor: zoom-in; }

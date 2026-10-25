@@ -3247,3 +3247,52 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			alt: { ar: 'ابنه يتسلّم جائزة أفضل كتاب لعام 2018 عن «شآبيب» من منى الشاذلي في برنامج «معكم منى الشاذلي»', en: 'His son receives the Best Book of 2018 award for Shaabeeb from Mona El-Shazly on “Ma’akom Mona El-Shazly”' } };
 	});
 })(window.AKT);
+
+/* the writers' entries caught up with the books and series added since: Nabil Farouk's and Sally Adel's series with him,
+   Sherine Hanaey's «لاشين», Tamer Ibrahim in the 2009 «موسوعة الظلام», and Sanad Rashed's, Mohamed Fathy's and
+   Mohamed Sami's other books with him (each as the site's book and series pages give them) */
+(function (A) {
+	var W = A.writers = A.writers || {};
+	var find = function (shelf, en) { return (W[shelf] || []).filter(function (w) { return (w.name.en || '').replace(/^Dr\.\s*/, '') === en; })[0]; };
+	var add = function (w, ar, en) { if (w && w.text.ar.indexOf(ar.slice(0, 24)) < 0) { w.text = { ar: w.text.ar + ' ' + ar, en: w.text.en + ' ' + en }; } return w; };
+	var photoOf = function (en) { var w = Object.keys(W).map(function (g) { return find(g, en); }).filter(function (x) { return x && x.photo; })[0]; return w && w.photo; };
+	var cols = W.collaborators = W.collaborators || [];
+
+	if (!cols.some(function (w) { return w.name.en === 'Nabil Farouk' && /Rewayat Alamiya/.test((w.work || {}).en || ''); }))
+		cols.push({ name: { ar: 'نبيل فاروق', en: 'Nabil Farouk' }, photo: photoOf('Nabil Farouk'),
+			work: { ar: '«روايات عالمية للجيب»، «كتاب الصيف»، «سوبر ميجا»', en: 'Rewayat Alamiya lil-Geib, Kitab al-Sayf, Super Mega' },
+			text: { ar: 'بدأ نبيل فاروق سلسلة «روايات عالمية للجيب» عن المؤسسة العربية الحديثة وكتب أعدادها الستة الأولى، ثم واصلها العرّاب من عددها السابع. وكتب الاثنان معًا في «كتاب الصيف» و«سوبر ميجا».',
+				en: 'Nabil Farouk began Rewayat Alamiya lil-Geib at the Modern Arab Association and wrote its first six issues; Tawfik carried it on from the seventh. The two also wrote side by side in Kitab al-Sayf and Super Mega.' } });
+
+	if (!cols.some(function (w) { return w.name.en === 'Sally Adel'; }))
+		cols.push({ name: { ar: 'سالي عادل', en: 'Sally Adel' }, photo: photoOf('Sally Adel'),
+			work: { ar: '«سوبر ميجا»', en: 'Super Mega' },
+			text: { ar: 'كتبت مع العرّاب ونبيل فاروق في «سوبر ميجا» عن المؤسسة العربية الحديثة.', en: 'Wrote alongside Tawfik and Nabil Farouk in Super Mega, from the Modern Arab Association.' } });
+
+	var sh = find('influenced', 'Sherine Hanaei') || find('influenced', 'Sherine Hanaey');
+	if (sh) {
+		add(sh, 'وبعد رحيله صارت صاحبة سلسلة «لاشين» عن دار كتوبيا منذ 2021، تكمل عالم «أسطورة بعد منتصف الليل» من «ما وراء الطبيعة»، وبلغت عددها الثامن عشر عام 2026.',
+			'After his death she became the author of the Lasheen series from Kotopia, since 2021, carrying on the world of “The Legend of After Midnight” from Ma Wara’ al-Tabi’a; it reached its eighteenth issue in 2026.');
+		sh.work = { ar: '«صندوق الدمى»، «لاشين»', en: 'The Puppet Box, Lasheen' };
+	}
+
+	var tm = find('collaborators', 'Tamer Ibrahim');
+	if (tm) {
+		add(tm, 'وصار مؤلفًا مشاركًا في الطبعة الثانية من «موسوعة الظلام» عن دايموند بوك عام 2009.', 'He also became a co-author of the second printing of Encyclopedia of Darkness from Diamond Book in 2009.');
+		if (!/موسوعة/.test(tm.work.ar)) tm.work = { ar: tm.work.ar + '، موسوعة الظلام (2009)', en: tm.work.en + ', Encyclopedia of Darkness (2009)' };
+	}
+
+	var sn = find('collaborators', 'Sanad Rashed Dakhil') || find('collaborators', 'Sanad Rashed Dakheel');
+	if (sn) {
+		add(sn, 'ومن كتبهما عن دايموند بوك أيضًا «حدث في الكويت» (2006)، وكتب العرّاب مقالة في كتابه «قصتي مع اللوفر» (2008)، واجتمعا مع آخرين في «7 وجوه للحب» (2007).',
+			'Their Diamond Book titles also include Hadath fi al-Kuwait (2006); Tawfik wrote an essay inside his My Story with the Louvre (2008), and both joined others in 7 Faces of Love (2007).');
+		if (!/الكويت/.test(sn.work.ar)) sn.work = { ar: sn.work.ar + '، حدث في الكويت (2006)، قصتي مع اللوفر (2008)', en: sn.work.en + ', Hadath fi al-Kuwait (2006), My Story with the Louvre (2008)' };
+	}
+
+	add(find('collaborators', 'Mohamed Fathy'), 'وكان من السبعة الذين كتبوا «7 وجوه للحب» (2007).', 'He was also one of the seven writers of 7 Faces of Love (2007).');
+	var sm = find('collaborators', 'Mohamed Sami');
+	if (sm) {
+		add(sm, 'وشارك أيضًا في «ولد قليل الأدب» (2015) وفي «7 وجوه للحب» (2007).', 'He also co-wrote Walad Qalil al-Adab (2015) and 7 Faces of Love (2007).');
+		if (!/ولد/.test(sm.work.ar)) sm.work = { ar: sm.work.ar + '، ولد قليل الأدب، 7 وجوه للحب', en: sm.work.en + ', Walad Qalil al-Adab, 7 Faces of Love' };
+	}
+})(window.AKT);
