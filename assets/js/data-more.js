@@ -2963,3 +2963,12 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		});
 	});
 })(window.AKT);
+
+/* «ثلاثة» in «كتاب الصيف» belongs to all three worlds — Ma Wara' al-Tabi'a, Safari and Fantasia — and counts as a special issue
+   of each (in their «الأعداد الخاصة» and their library, not in «ما خرج من عالمها») */
+(function (A) {
+	(A.otherSeries || []).forEach(function (s) {
+		if (s.id !== 'sayf') return;
+		(s.issues || []).forEach(function (is) { if (is.title && is.title.ar === 'ثلاثة') { is.related = ['mwt', 'safari', 'fantasia']; is.asSpecial = true; } });
+	});
+})(window.AKT);

@@ -84,7 +84,8 @@ window.PAGE = {
 		var related = [], extraSpecials = [];
 		S.contributedSeries().forEach(function (x) {
 			S.seriesIssues(x.id).forEach(function (is) {
-				if (is.related === id) (x.specialsOf === id ? extraSpecials : related).push({ s: x, is: is });
+				/* an issue can belong to several worlds (related: [ids]) and count as their special issue (asSpecial) */
+				if ([].concat(is.related || []).indexOf(id) >= 0) (x.specialsOf === id || is.asSpecial ? extraSpecials : related).push({ s: x, is: is });
 			});
 		});
 		var grown = (d.otherSeries || []).filter(function (x) { return x.inspired && x.grewFrom === id; });
@@ -134,7 +135,7 @@ window.PAGE = {
 				   series, written by him or not (the series that grew from it, like Lasheen, stay in «ما خرج من عالمها») */
 				(issues.length ? this.proximityHtml(s, hero, issues.map(function (is) { return { sid: id, is: is }; })
 					.concat(specials.map(function (is) { return { sid: id, is: is, tag: L('خاص ', 'Special ') }; }))
-					.concat(extraSpecials.map(function (r) { return { sid: r.s.id, is: r.is, tag: L('كوميكس', 'Comic'), color: r.s.color }; }))
+					.concat(extraSpecials.map(function (r) { return { sid: r.s.id, is: r.is, tag: r.s.specialsOf === id ? L('كوميكس', 'Comic') : t(r.s.title), color: r.s.color }; }))
 					.concat(related.map(function (r) { return { sid: r.s.id, is: r.is, tag: t(r.s.title), color: r.s.color }; }))) : '') +
 				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
 					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid is-ranked" id="issue-grid" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
@@ -152,10 +153,10 @@ window.PAGE = {
 							(au ? '<span class="cl-audio">' + L('مسموع ♪', 'Audio ♪') + '</span>' : '') +
 						'</a>';
 					}).join('') +
-					/* the comics: special issues too, told in pictures */
+					/* the comics, and issues of other series that count as its specials (like «كتاب الصيف»'s «ثلاثة») */
 					extraSpecials.map(function (r) {
 						return '<a class="cover-link" href="' + App.issueHref(r.s.id, r.is) + '" title="' + e(t(r.is.title)) + '">' +
-							S.miniCover({ img: S.issueCover(r.s.id, r.is), color: r.s.color, title: t(r.is.title), num: L('كوميكس', 'Comic'), sub: t(r.s.title) }) +
+							S.miniCover({ img: S.issueCover(r.s.id, r.is), color: r.s.color, title: t(r.is.title), num: r.s.specialsOf === id ? L('كوميكس', 'Comic') : t(r.s.title), sub: t(r.s.title) }) +
 							'<span class="cl-t">' + tx(r.is.title) + ' · ' + tx(r.s.title) + '</span></a>';
 					}).join('') + '</div></section>' : '') +
 				/* what came of this world: its stories in other series, and the series that grew out of it */
