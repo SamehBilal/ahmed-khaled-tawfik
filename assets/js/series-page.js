@@ -202,7 +202,8 @@ window.PAGE = {
 			if (n) vols.push({ c: c, n: n }); else cards.push({ list: [{ c: c, n: 0 }] });
 		});
 		vols.sort(function (a, b) { return a.n - b.n; });
-		var groups = (vols.length ? [{ vols: true, list: vols }] : []).concat(cards);
+		/* a picture for the volumes card as a whole (d.volumesCover), else the first volume's cover */
+		var groups = (vols.length ? [{ vols: true, list: vols, cover: ((window.App.data().volumesCover || {})[id]) || '' }] : []).concat(cards);
 		return { groups: groups, pics: pics };
 	},
 	volumesHtml: function (id, s) {
@@ -214,7 +215,7 @@ window.PAGE = {
 			var head = grp.vols ? L('مجلدات ', 'The volumes of ') + t(s.title) : t(first.label);
 			var meta = [first.publisher ? S.publisherLink(first.publisher) : '', grp.vols ? e(n === 2 ? L('مجلدان', '2 volumes') : App.num(n) + ' ' + L(n <= 10 ? 'مجلدات' : 'مجلدًا', 'volumes')) : ''].filter(Boolean).join(' · ');
 			return '<article class="edition" data-g="' + gi + '">' +
-				'<span class="sv-ed-cover">' + S.miniCover({ img: first.cover, color: s.color, title: head }) + '</span>' +
+				'<span class="sv-ed-cover">' + S.miniCover({ img: grp.cover || first.cover, color: s.color, title: head }) + '</span>' +
 				'<div><h4>' + e(head) + '</h4>' + (meta ? '<p class="meta">' + meta + '</p>' : '') +
 				'<div class="ed-years" role="group" aria-label="' + e(grp.vols ? L('المجلدات', 'Volumes') : L('الطبعة', 'Printing')) + '">' + grp.list.map(function (v, vi) {
 					return '<button type="button" class="ed-yr" data-g="' + gi + '" data-v="' + vi + '" aria-expanded="false">' + (grp.vols ? e(App.num(v.n)) : L('التفاصيل', 'Details')) + '</button>';

@@ -2854,3 +2854,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	if (I) I.library = { image: 'assets/img/photos/refaat-lantern-netflix.webp',
 		credit: { ar: 'أحمد أمين في دور رفعت إسماعيل — «ما وراء الطبيعة»، نتفليكس (2020)', en: 'Ahmed Amin as Refaat Ismail — Paranormal, Netflix (2020)' } };
 })(window.AKT);
+
+/* «مجلدات ما وراء الطبيعة» on the series page wears a photo of the volumes and their box */
+(function (A) {
+	A.volumesCover = A.volumesCover || {};
+	A.volumesCover.mwt = 'assets/img/covers/series/paranormal/volumes-box.webp';
+})(window.AKT);
