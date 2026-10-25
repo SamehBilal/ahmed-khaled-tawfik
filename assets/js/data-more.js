@@ -2622,3 +2622,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	A.charFigures = A.charFigures || {};
 	A.charFigures.refaat = 'assets/img/characters/refaat-lantern.webp';
 })(window.AKT);
+
+/* Alaa Abdel Azim's picture: on his card and his page */
+(function (A) {
+	(A.characters || []).forEach(function (c) { if (c.id === 'alaa') c.image = 'assets/img/characters/alaa-doctor.webp'; });
+})(window.AKT);
