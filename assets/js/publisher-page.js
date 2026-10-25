@@ -55,9 +55,12 @@ window.PAGE = {
 			: '';
 		/* one sentence on the partnership, from what the site records */
 		var first = c.list[0];
+		/* the latest is the one that reached the house's last year (a series by its last issue), not just the last listed */
+		var last = c.list.filter(function (it) { return (it.yearTo || it.year) === c.to; }).pop() || c.list[c.list.length - 1];
 		var q = function (x) { return L('«', '“') + t(x) + L('»', '”'); };
 		var link = L('أول ما صدر له عنها ', 'The first of his books from this house was ') + q(first.title) + (first.year ? L(' عام ', ' in ') + App.num(first.year) : '') +
-			(c.list.length > 1 ? L('، وآخره ', ', and the latest ') + q(c.list[c.list.length - 1].title) + (c.to && c.to !== first.year ? L(' عام ', ' in ') + App.num(c.to) : '') : '') + '.';
+			(c.list.length > 1 && last === first ? (c.to && c.to !== first.year ? L('، واستمر صدوره عنها حتى ', ', and it went on coming out here until ') + App.num(c.to) : '')
+				: c.list.length > 1 ? L('، وآخره ', ', and the latest ') + q(last.title) + (c.to && c.to !== first.year ? L(' عام ', ' in ') + App.num(c.to) : '') : '') + '.';
 
 		var card = function (it) {
 			return '<a class="cover-link" href="' + e(it.href) + '">' + S.miniCover({ img: it.cover, color: it.color, title: t(it.title), sub: it.series ? L('سلسلة', 'Series') : '', by: it.by ? t(it.by) : '' }) +
