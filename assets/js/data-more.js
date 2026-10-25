@@ -3092,3 +3092,15 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			en: 'An Egyptian publisher that sets out to raise a new generation of young writers and thinkers, with a varied list of literary, political and intellectual books.' };
 	});
 })(window.AKT);
+
+/* Comics Publishing (كوميكس للنشر): its logo, full name, what it is, and its Facebook page */
+(function (A) {
+	(A.publishers || []).forEach(function (p) {
+		if (p.id !== 'komix') return;
+		p.name = { ar: 'كوميكس للنشر', en: 'Comics Publishing' };
+		p.logo = 'assets/img/publishers/komix-comics-publishing.webp';
+		p.about = { ar: 'أول دار نشر مصرية وعربية متخصصة في نشر القصص المصورة (الكوميكس) الموجهة للكبار، بعدما كانت مقتصرة سابقًا على الأطفال.',
+			en: 'The first Egyptian and Arab publisher devoted to comics for adults, after they had long been made only for children.' };
+		p.links = (p.links || []).filter(function (l) { return l.kind !== 'facebook'; }).concat([{ kind: 'facebook', url: 'https://www.facebook.com/comics.publishing/' }]);
+	});
+})(window.AKT);
