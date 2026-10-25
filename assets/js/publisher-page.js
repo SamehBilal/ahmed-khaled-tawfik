@@ -51,7 +51,8 @@ window.PAGE = {
 			return '<a class="pb-link pb-' + e(l.kind) + '" href="' + e(l.url) + '" target="_blank" rel="noopener" title="' + e(lbl) + '"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">' + (ICON[l.his ? 'shop' : l.kind] || ICON.site) + '</svg><span>' + e(lbl) + '</span></a>';
 		}).join('') + '</div>' : '';
 		var about = p.about
-			? '<p class="wp-bio">' + e(L(p.about.ar, p.about.en)) + ' <a class="wp-src" href="' + e(p.about.src) + '" target="_blank" rel="noopener">' + L('عن ويكيبيديا ↗', 'From Wikipedia ↗') + '</a></p>'
+			/* its source when it has one, named after where it is (Wikipedia, or the house's own site) */
+			? '<p class="wp-bio">' + e(L(p.about.ar, p.about.en)) + (p.about.src ? ' <a class="wp-src" href="' + e(p.about.src) + '" target="_blank" rel="noopener">' + (/wikipedia/.test(p.about.src) ? L('عن ويكيبيديا ↗', 'From Wikipedia ↗') : L('المصدر ↗', 'Source ↗')) + '</a>' : '') + '</p>'
 			: '';
 		/* one sentence on the partnership, from what the site records */
 		var first = c.list[0];

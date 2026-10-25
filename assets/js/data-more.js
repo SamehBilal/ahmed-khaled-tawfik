@@ -3081,3 +3081,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 (function (A) {
 	(A.publishers || []).forEach(function (p) { if (p.id === 'maa') p.logo = 'assets/img/publishers/maa-rewayat-masreya.webp'; });
 })(window.AKT);
+
+/* Dar Delta: its logo, its full name and what it is */
+(function (A) {
+	(A.publishers || []).forEach(function (p) {
+		if (p.id !== 'delta') return;
+		p.name = { ar: 'دار دلتا للنشر والتوزيع', en: 'Dar Delta for Publishing and Distribution' };
+		p.logo = 'assets/img/publishers/delta.webp';
+		p.about = { ar: 'دار نشر مصرية تسعى إلى خلق جيل جديد من المبدعين والمثقفين الشباب، وتقدم مجموعة متنوعة من الإصدارات والكتب الأدبية والسياسية والفكرية.',
+			en: 'An Egyptian publisher that sets out to raise a new generation of young writers and thinkers, with a varied list of literary, political and intellectual books.' };
+	});
+})(window.AKT);
