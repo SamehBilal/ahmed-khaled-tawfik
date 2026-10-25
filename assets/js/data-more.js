@@ -2964,11 +2964,22 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 })(window.AKT);
 
-/* «ثلاثة» in «كتاب الصيف» belongs to all three worlds — Ma Wara' al-Tabi'a, Safari and Fantasia — and counts as a special issue
+/* «ثلاثة» in «كتاب الصيف», a story with Refaat, Alaa and Abeer together, belongs to all three worlds — Ma Wara' al-Tabi'a, Safari and Fantasia — and counts as a special issue
    of each (in their «الأعداد الخاصة» and their library, not in «ما خرج من عالمها») */
 (function (A) {
 	(A.otherSeries || []).forEach(function (s) {
 		if (s.id !== 'sayf') return;
-		(s.issues || []).forEach(function (is) { if (is.title && is.title.ar === 'ثلاثة') { is.related = ['mwt', 'safari', 'fantasia']; is.asSpecial = true; } });
+		(s.issues || []).forEach(function (is) {
+			if (!is.title || is.title.ar !== 'ثلاثة') return;
+			is.related = ['mwt', 'safari', 'fantasia'];
+			is.asSpecial = true;
+			/* the three heroes together in one story */
+			is.chars = ['refaat', 'alaa', 'abeer'];
+			is.note = { ar: 'قصة تجمع رفعت إسماعيل وعلاء عبد العظيم وعبير عبد الرحمن معًا، في «كتاب الصيف – أشباح ولكن».', en: 'A story that brings Refaat Ismail, Alaa Abdel Azim and Abeer Abdel Rahman together, in "Kitab al-Sayf – Ghosts, But…".' };
+		});
+		var I = A.seriesInfo = A.seriesInfo || {};
+		I.sayf = I.sayf || {};
+		I.sayf.chars = ['refaat', 'alaa', 'abeer'];
+		s.description = { ar: 'كتاب صيفي يجمع قصصًا لعدة كُتّاب، كتب فيه قصة «ثلاثة» التي تجمع أبطاله الثلاثة رفعت إسماعيل وعلاء عبد العظيم وعبير عبد الرحمن معًا.', en: 'A summer anthology of stories by several writers. He wrote «Three» for it, a story that brings his three heroes, Refaat Ismail, Alaa Abdel Azim and Abeer Abdel Rahman, together.' };
 	});
 })(window.AKT);
