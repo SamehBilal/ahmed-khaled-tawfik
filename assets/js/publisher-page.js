@@ -94,45 +94,5 @@ window.PAGE = {
 			'<section class="section"><div class="wrap"><h2 class="wp-h">' + L('دور أخرى', 'Other houses') + '</h2><div class="wp-people">' + all.map(house).join('') + '</div>' +
 				'<div class="pn wp-pn"><a href="' + e(S.publisherHref(prev.p.id)) + '">' + L('→ ', '← ') + e(t(prev.p.name)) + '</a><a href="' + e(S.publisherHref(next.p.id)) + '">' + e(t(next.p.name)) + L(' ←', ' →') + '</a></div>' +
 			'</div></section>';
-		this.carousels(root);
-	},
-
-	/* a row of covers that runs past the page gets previous / next buttons at its ends, a page of covers at a time;
-	   they hide when the row fits and dim at either end (in Arabic the row runs right to left) */
-	carousels: function (root) {
-		var L = window.App.L;
-		root.querySelectorAll('.cover-row').forEach(function (row) {
-			var box = document.createElement('div');
-			box.className = 'row-car';
-			row.parentNode.insertBefore(box, row);
-			box.appendChild(row);
-			var rtl = getComputedStyle(row).direction === 'rtl';
-			var btn = function (dir, label, glyph) {
-				var b = document.createElement('button');
-				b.type = 'button';
-				b.className = 'row-car-btn row-car-' + dir;
-				b.setAttribute('aria-label', label);
-				b.textContent = glyph;
-				b.addEventListener('click', function () {
-					var step = Math.max(row.clientWidth * 0.85, 140) * (dir === 'next' ? 1 : -1) * (rtl ? -1 : 1);
-					row.scrollBy({ left: step, behavior: 'smooth' });
-				});
-				box.appendChild(b);
-				return b;
-			};
-			var prev = btn('prev', L('السابق', 'Previous'), rtl ? '›' : '‹');
-			var next = btn('next', L('التالي', 'Next'), rtl ? '‹' : '›');
-			var update = function () {
-				var max = row.scrollWidth - row.clientWidth, at = Math.abs(row.scrollLeft);
-				box.classList.toggle('is-scrollable', max > 4);
-				prev.disabled = at <= 4;
-				next.disabled = at >= max - 4;
-			};
-			row.addEventListener('scroll', update, { passive: true });
-			window.addEventListener('resize', update);
-			update();
-			/* covers load lazily, so measure again once they have */
-			setTimeout(update, 600);
-		});
 	}
 };

@@ -421,6 +421,44 @@
 			els.forEach(function (el) { App._io.observe(el); });
 		},
 
+		/* a row of covers that runs past the page gets previous / next buttons at its ends, a page of covers at a time;
+		   they hide when the row fits and dim at either end (in Arabic the row runs right to left). Rows already done are skipped. */
+		carousels: function (root) {
+			(root || document).querySelectorAll('.cover-row').forEach(function (row) {
+				if (row.parentNode && row.parentNode.classList.contains('row-car')) return;
+				var box = document.createElement('div');
+				box.className = 'row-car';
+				row.parentNode.insertBefore(box, row);
+				box.appendChild(row);
+				var rtl = getComputedStyle(row).direction === 'rtl';
+				var btn = function (dir, label, glyph) {
+					var b = document.createElement('button');
+					b.type = 'button';
+					b.className = 'row-car-btn row-car-' + dir;
+					b.setAttribute('aria-label', label);
+					b.textContent = glyph;
+					b.addEventListener('click', function () {
+						var step = Math.max(row.clientWidth * 0.85, 140) * (dir === 'next' ? 1 : -1) * (rtl ? -1 : 1);
+						row.scrollBy({ left: step, behavior: 'smooth' });
+					});
+					box.appendChild(b);
+					return b;
+				};
+				var prev = btn('prev', App.L('السابق', 'Previous'), rtl ? '›' : '‹');
+				var next = btn('next', App.L('التالي', 'Next'), rtl ? '‹' : '›');
+				var update = box._upd = function () {
+					var max = row.scrollWidth - row.clientWidth, at = Math.abs(row.scrollLeft);
+					box.classList.toggle('is-scrollable', max > 4);
+					prev.disabled = at <= 4;
+					next.disabled = at >= max - 4;
+				};
+				row.addEventListener('scroll', update, { passive: true });
+				update();
+				/* covers load lazily, so measure again once they have */
+				setTimeout(update, 600);
+			});
+		},
+
 		boot: function () {
 			App.applyLang();
 			App.renderChrome();
@@ -435,6 +473,12 @@
 				clearTimeout(el._sbt);
 				el._sbt = setTimeout(function () { el.classList.remove('is-scrolling'); }, 900);
 			}, true);
+			/* rows of covers become carousels, now and whenever a page draws new ones */
+			App.carousels(document);
+			var pend = 0;
+			new MutationObserver(function () { if (!pend) pend = setTimeout(function () { pend = 0; App.carousels(document); }, 60); })
+				.observe(document.body, { childList: true, subtree: true });
+			window.addEventListener('resize', function () { document.querySelectorAll('.row-car').forEach(function (b) { if (b._upd) b._upd(); }); });
 			window.addEventListener('hashchange', function () {
 				if (window.PAGE && window.PAGE.onHash) window.PAGE.onHash(); else App.focusHash();
 			});
