@@ -42,7 +42,14 @@ html[data-theme="light"] .ph { --ph-bg: #1c1712; border-bottom-color: rgba(0, 0,
 
 /* ---------- characters: the lineup ---------- */
 /* a steady wash of light on the wall, so it never goes dark in the middle while the spot is off to one side */
-.ph[data-ph="characters"] { background: radial-gradient(70% 100% at 50% 0%, rgba(255, 235, 190, .07), transparent 70%), linear-gradient(#1f2128, #0c0d11); border-bottom: 0; }
+/* the wall is papered: an old damask, faint stripes between its rows, darker towards the ceiling and the floor */
+.ph[data-ph="characters"] { border-bottom: 0;
+	background:
+		radial-gradient(70% 100% at 50% 0%, rgba(255, 235, 190, .07), transparent 70%),
+		linear-gradient(rgba(8, 9, 12, .55), transparent 30%, transparent 60%, rgba(8, 9, 12, .7)),
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='130' viewBox='0 0 90 130'%3E%3Cg fill='%23d9c9a3' fill-opacity='.075'%3E%3Cpath d='M45 8c6 10 16 14 16 28 0 10-8 16-16 22-8-6-16-12-16-22 0-14 10-18 16-28z'/%3E%3Cpath d='M45 58c-3 6-9 9-14 7 4 5 10 6 14 2 4 4 10 3 14-2-5 2-11-1-14-7z'/%3E%3Cpath d='M29 36c-9-2-15 4-13 12 3-5 8-7 13-6zM61 36c9-2 15 4 13 12-3-5-8-7-13-6z'/%3E%3Ccircle cx='45' cy='96' r='4'/%3E%3Cpath d='M0 73c6 10 16 14 16 28 0 10-8 16-16 22zM90 73c-6 10-16 14-16 28 0 10 8 16 16 22z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 90px 130px,
+		repeating-linear-gradient(90deg, transparent 0 43px, rgba(217, 201, 163, .035) 43px 47px),
+		linear-gradient(#262126, #100e12); }
 /* no line under it: its foot fades into the page */
 .ph[data-ph="characters"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 70px; z-index: 7; pointer-events: none;
 	background: linear-gradient(transparent, var(--ink)); }
