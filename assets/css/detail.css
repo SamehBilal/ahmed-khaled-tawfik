@@ -330,3 +330,4 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 .sv-pic-img { display: block; width: 84px; }
 .sv-pic-img img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 6px; background: #fff; }
 .ed-pop-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; }
+.sv-buy[hidden] { display: none; }

@@ -211,7 +211,6 @@ window.PAGE = {
 		if (!total) return '';
 		var cards = g.groups.map(function (grp, gi) {
 			var first = grp.list[0].c, n = grp.list.length;
-			var store = self.storeOf(first.source);
 			var head = grp.vols ? L('مجلدات ', 'The volumes of ') + t(s.title) : t(first.label);
 			var meta = [first.publisher ? S.publisherLink(first.publisher) : '', grp.vols ? e(n === 2 ? L('مجلدان', '2 volumes') : App.num(n) + ' ' + L(n <= 10 ? 'مجلدات' : 'مجلدًا', 'volumes')) : ''].filter(Boolean).join(' · ');
 			return '<article class="edition" data-g="' + gi + '">' +
@@ -220,8 +219,8 @@ window.PAGE = {
 				'<div class="ed-years" role="group" aria-label="' + e(grp.vols ? L('المجلدات', 'Volumes') : L('الطبعة', 'Printing')) + '">' + grp.list.map(function (v, vi) {
 					return '<button type="button" class="ed-yr" data-g="' + gi + '" data-v="' + vi + '" aria-expanded="false">' + (grp.vols ? e(App.num(v.n)) : L('التفاصيل', 'Details')) + '</button>';
 				}).join('') + '</div>' +
-				/* where to buy it, under the card; for the volumes, the one picked last */
-				(first.source && store ? '<a class="buy-btn sv-buy" href="' + e(first.source) + '" target="_blank" rel="noopener nofollow">' + L('اشترِ' + (grp.vols ? ' المجلد ' + App.num(grp.list[0].n) : '') + ' من ', 'Buy' + (grp.vols ? ' volume ' + grp.list[0].n : '') + ' at ') + e(store) + ' ↗</a>' : '') +
+				/* its Goodreads page, under the card; for the volumes, the one picked last */
+				'<a class="buy-btn sv-buy" href="' + e(first.goodreads || '#') + '" target="_blank" rel="noopener"' + (first.goodreads ? '' : ' hidden') + '>' + L('على Goodreads', 'On Goodreads') + (grp.vols ? ' · ' + L('المجلد ', 'volume ') + App.num(grp.list[0].n) : '') + ' ↗</a>' +
 				'</div></article>';
 		}).join('');
 		/* the logo and photos as cards too, the picture beside what it is */
@@ -255,21 +254,21 @@ window.PAGE = {
 			close();
 			openBtn = btn;
 			btn.setAttribute('aria-expanded', 'true');
-			var c = groups[+btn.getAttribute('data-g')].list[+btn.getAttribute('data-v')].c, store = self.storeOf(c.source);
-			var card = btn.closest('.edition'), img = card.querySelector('.sv-ed-cover img'), buy = card.querySelector('.sv-buy');
+			var grp = groups[+btn.getAttribute('data-g')], c = grp.list[+btn.getAttribute('data-v')].c;
+			var card = btn.closest('.edition'), img = card.querySelector('.sv-ed-cover img'), gr = card.querySelector('.sv-buy');
 			if (img) img.src = c.cover;
-			var v = groups[+btn.getAttribute('data-g')];
-			if (buy && c.source && v.vols) { buy.href = c.source; buy.textContent = L('اشترِ المجلد ', 'Buy volume ') + App.num(v.list[+btn.getAttribute('data-v')].n) + L(' من ', ' at ') + store + ' ↗'; }
+			if (gr && grp.vols) {
+				gr.hidden = !c.goodreads;
+				gr.href = c.goodreads || '#';
+				gr.textContent = L('على Goodreads', 'On Goodreads') + ' · ' + L('المجلد ', 'volume ') + App.num(grp.list[+btn.getAttribute('data-v')].n) + ' ↗';
+			}
 			var row = function (k, v) { return v ? '<dt>' + k + '</dt><dd>' + v + '</dd>' : ''; };
 			pop.innerHTML = '<dl>' + row(L('العنوان', 'Title'), e(t(c.label))) +
-				row(L('في المتجر باسم', 'Sold as'), c.storeTitle ? e(t(c.storeTitle)) : '') +
 				row(L('الأعداد', 'Issues'), c.issues ? e(App.num(c.issues)) : '') +
 				row(L('الناشر', 'Publisher'), c.publisher ? S.publisherLink(c.publisher) : '') +
 				row(L('السنة', 'Year'), c.year ? e(App.num(c.year)) : '') +
 				row(L('الصفحات', 'Pages'), c.pages ? e(App.num(c.pages)) : '') + '</dl>' +
-				'<p class="ed-pop-links">' +
-				(c.source ? '<a href="' + e(c.source) + '" target="_blank" rel="noopener">' + (store && !/ويكيبيديا|Wikipedia|Goodreads/.test(store) ? L('اشترِه من ', 'Buy it at ') + e(store) : L('المصدر', 'Source')) + ' ↗</a>' : '') +
-				(c.goodreads ? ' <a href="' + e(c.goodreads) + '" target="_blank" rel="noopener">Goodreads ↗</a>' : '') + '</p>';
+				(c.goodreads ? '<p class="ed-pop-links"><a href="' + e(c.goodreads) + '" target="_blank" rel="noopener">' + L('على Goodreads ↗', 'On Goodreads ↗') + '</a></p>' : '');
 			pop.hidden = false;
 			var sr = sec.getBoundingClientRect(), br = btn.getBoundingClientRect();
 			pop.style.left = Math.min(Math.max(0, br.left - sr.left + br.width / 2 - pop.offsetWidth / 2), sr.width - pop.offsetWidth) + 'px';
