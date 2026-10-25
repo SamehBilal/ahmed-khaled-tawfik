@@ -3156,3 +3156,13 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 (function (A) {
 	(A.publishers || []).forEach(function (p) { if (['lila', 'diamond', 'merit'].indexOf(p.id) >= 0 && !p.closed) p.closed = {}; });
 })(window.AKT);
+
+/* Diamond Book: what it was (in the past tense, as it has closed) and its website */
+(function (A) {
+	(A.publishers || []).forEach(function (p) {
+		if (p.id !== 'diamond') return;
+		p.about = { ar: 'دار نشر وتوزيع كويتية اشتهرت بإصداراتها الموجهة للشباب، وحصلت على المراكز الأولى في معرض الكويت الدولي للكتاب أربع سنوات متتالية، ووزّعت إصداراتها في أنحاء الوطن العربي والولايات المتحدة الأمريكية وأوروبا. تميزت إصداراتها بجودة الطباعة واهتمامها بالمضمون.',
+			en: 'A Kuwaiti publisher and distributor known for its books for young readers. It took first place at the Kuwait International Book Fair four years running and distributed its books across the Arab world, the United States and Europe, known for fine printing and care for content.' };
+		p.links = (p.links || []).filter(function (l) { return l.kind !== 'site'; }).concat([{ kind: 'site', url: 'http://www.daimond-book.com/' }]);
+	});
+})(window.AKT);
