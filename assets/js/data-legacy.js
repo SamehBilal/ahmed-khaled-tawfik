@@ -82,6 +82,15 @@ window.AKT.legacy = [
     "source": "https://www.masrawy.com/news/news_egypt/details/2019/4/2/1543078/-حي-في-قلوب-مريديه-عام-على-رحيل-أحمد-خالد-توفيق"
   },
   {
+    "date": "2019-05",
+    "image": "assets/img/posters/zodiac.jpg",
+    "title": { "ar": "مسلسل «زودياك»", "en": "The series Zodiac" },
+    "text": {
+      "ar": "عُرض في رمضان 2019 مسلسل «زودياك» المأخوذ عن «حظك اليوم»، وهو أول عمل درامي يُقتبس من أعماله.",
+      "en": "In Ramadan 2019 the series Zodiac, based on Hazzak al-Yawm, airs — the first drama adapted from his work."
+    }
+  },
+  {
     "date": "2019-06-10",
     "image": "yt:34N1Gb2Ylzc",
     "title": { "ar": "جوجل تحتفي بميلاده الـ57", "en": "Google Doodle for his 57th birthday" },
