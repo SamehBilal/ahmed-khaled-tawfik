@@ -90,8 +90,17 @@ html[lang="en"] .cs-meta { direction: ltr; }
 
 .audio-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
 @media (max-width: 900px) { .audio-hero { grid-template-columns: 1fr; } }
-.ep-groups { display: grid; gap: 36px; }
-.ep-group h3 { font-family: var(--f-display); font-size: 24px; margin: 0 0 12px; }
+.ep-groups { display: grid; gap: 14px; }
+.ep-group h3 { font-family: var(--f-display); font-size: 24px; margin: 0; display: inline; }
+/* a section opens and closes on its title, a chevron turning to show which way */
+.ep-group > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 10px 14px; margin: 0 0 12px;
+	border: 1px solid var(--line); border-radius: 10px; background: var(--ink-2); }
+.ep-group > summary::-webkit-details-marker { display: none; }
+.ep-group > summary::after { content: ''; margin-inline-start: auto; width: 10px; height: 10px; border: solid var(--paper-dim); border-width: 0 2px 2px 0;
+	transform: rotate(45deg); transition: transform .2s; }
+.ep-group[open] > summary::after { transform: rotate(-135deg); }
+.ep-group > summary:hover { border-color: var(--ember); }
+.ep-group:not([open]) > summary { margin-bottom: 0; }
 .ep-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 10px; }
 .ep-list li {
 	display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px;

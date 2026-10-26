@@ -106,6 +106,10 @@ window.PAGE = {
 			rows: srows2
 		});
 
+		/* which sections are open, kept for this visit (the first one by default) */
+		var openGroups = [0];
+		try { var og = JSON.parse(sessionStorage.getItem('akt-audio-open') || 'null'); if (Array.isArray(og)) openGroups = og; } catch (x) {}
+
 		var hero = document.querySelector('.page-hero');
 		var deckSec = document.getElementById('audio-deck');
 		if (!deckSec) {
@@ -123,8 +127,9 @@ window.PAGE = {
 					'<p style="color:var(--muted);margin:0">' + App.num(tracks.length) + ' ' + L('حلقة', 'episodes') + ' · ' +
 						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a></p></div>' +
 			'</div></section>' +
-			'<section class="section"><div class="wrap"><div class="ep-groups">' + groups.map(function (g) {
-				return '<div class="ep-group"><h3>' + tx(g.title) + ' <small style="color:var(--muted);font-family:var(--f-latin);font-size:15px">(' + App.num(g.rows.length) + (g.total ? ' / ' + App.num(g.total) : '') + ')</small></h3>' +
+			/* each section opens and closes on its title: the first starts open, and the ones you open stay so while you browse */
+			'<section class="section"><div class="wrap"><div class="ep-groups">' + groups.map(function (g, gi) {
+				return '<details class="ep-group" data-g="' + gi + '"' + (openGroups.indexOf(gi) >= 0 ? ' open' : '') + '><summary><h3>' + tx(g.title) + ' <small style="color:var(--muted);font-family:var(--f-latin);font-size:15px">(' + App.num(g.rows.length) + (g.total ? ' / ' + App.num(g.total) : '') + ')</small></h3></summary>' +
 					(g.note ? '<p style="color:var(--muted);margin:-6px 0 12px">' + tx(g.note) + '</p>' : '') +
 					'<ul class="ep-list">' + g.rows.map(function (r) {
 						return '<li data-start="' + r.start + '" data-count="' + r.count + '">' +
@@ -145,11 +150,18 @@ window.PAGE = {
 									}).join('') + '</ol>'
 								: '<button type="button" data-start="' + r.start + '">' + L('ضعه في المسجل', 'Load tape') + '</button>') +
 						'</li>';
-					}).join('') + '</ul></div>';
+					}).join('') + '</ul></details>';
 			}).join('') + '</div>' +
 			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat و«شركة سلاح التلميذ للطباعة والنشر»، ودراما «سافاري» الإذاعية من قناة «تسجيل» على YouTube. هذا الموقع يربط إليها أو يعرضها عبر مشغّل YouTube فقط، ولا يستضيف أي صوت منها.',
 				'Recordings and rights belong to Audiohat and Salah El Telmeez for Printing & Publishing; the Safari radio drama is from the Tasgeel channel on YouTube. This site only links to them or plays them through the YouTube player, and hosts none of their audio.') + '</p>' +
 			'</div></section>';
+
+		root.querySelectorAll('details.ep-group').forEach(function (d) {
+			d.addEventListener('toggle', function () {
+				var open = [].map.call(root.querySelectorAll('details.ep-group[open]'), function (x) { return +x.getAttribute('data-g'); });
+				try { sessionStorage.setItem('akt-audio-open', JSON.stringify(open)); } catch (x) {}
+			});
+		});
 
 		var deck = window.Cassette.mount(document.getElementById('a-cassette'), { tracks: tracks });
 		var lists = root.querySelectorAll('.ep-list li');
