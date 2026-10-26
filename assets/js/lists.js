@@ -159,7 +159,9 @@
 		var num = x.n != null ? '#' + (App_ ? App_.num(x.n) : x.n) : '';
 		/* a collector's item: which editions, and a key to choose them when the book has more than one */
 		var eds = LISTS[list].mode === 'collector' && x.key[0] === 'b' ? editionsOf(x.key) : [];
-		var edLine = (x.eds || []).length ? tt(x.eds[0].label) + (x.eds.length > 1 ? L(' و', ' + ') + (App_ ? App_.num(x.eds.length - 1) : x.eds.length - 1) + L(' غيرها', ' more') : '') : '';
+		/* (a Kindle edition saved before they were left out is not shown) */
+		var mine = (x.eds || []).filter(function (e) { return !/كيندل|kindle/i.test(e.id + ' ' + (e.label || {}).ar + ' ' + (e.label || {}).en); });
+		var edLine = mine.length ? tt(mine[0].label) + (mine.length > 1 ? L(' و', ' + ') + (App_ ? App_.num(mine.length - 1) : mine.length - 1) + L(' غيرها', ' more') : '') : '';
 		return '<li class="ls-item" data-key="' + esc(x.key) + '">' +
 			'<button type="button" class="ls-grip" data-grip="' + esc(list) + '" data-key="' + esc(x.key) + '" aria-label="' + esc(L('حرّك «', 'Move “') + tt(x.title) + L('» — الأسهم للترتيب والنقل', '” — arrow keys reorder and move')) + '">' +
 				'<svg viewBox="0 0 12 20" aria-hidden="true"><g fill="currentColor"><circle cx="3" cy="4" r="1.6"/><circle cx="9" cy="4" r="1.6"/><circle cx="3" cy="10" r="1.6"/><circle cx="9" cy="10" r="1.6"/><circle cx="3" cy="16" r="1.6"/><circle cx="9" cy="16" r="1.6"/></g></svg></button>' +
@@ -339,13 +341,15 @@
 
 	/* ---------- editions (collectors) ---------- */
 
-	/* the editions we know of a book or issue, each told apart by its ISBN or ASIN, else by publisher, year and format */
+	/* the editions we know of a book or issue, each told apart by its ISBN or ASIN, else by publisher, year and format.
+	   Kindle editions are left out: there is nothing on a shelf to collect. */
+	function isKindle(ed) { var f = ed.format || {}; return /كيندل|kindle/i.test((f.ar || '') + ' ' + (f.en || '') + ' ' + (typeof f === 'string' ? f : '')); }
 	function editionsOf(key) {
 		var S = window.WorksShared, r = null;
 		if (!S || key[0] !== 'b') return [];
 		try { r = S.resolveBook(key.slice(2)); } catch (e) {}
 		var seen = {};
-		return ((r && r.info && r.info.editions) || []).map(function (ed) {
+		return ((r && r.info && r.info.editions) || []).filter(function (ed) { return !isKindle(ed); }).map(function (ed) {
 			var both = function (lang) {
 				var g = function (o) { return !o ? '' : typeof o === 'string' ? o : o[lang] || o.ar || o.en || ''; };
 				return [g(ed.publisher), ed.year || '', g(ed.edition) || g(ed.format), ed.lang && ed.lang !== 'ar' ? ed.lang.toUpperCase() : ''].filter(Boolean).join(' · ');
