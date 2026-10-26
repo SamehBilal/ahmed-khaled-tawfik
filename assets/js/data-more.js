@@ -3555,3 +3555,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	M.push({ kind: 'article', title: { ar: 'أحمد خالد توفيق.. هكذا جلس الشباب على «ضوء إلهامه» يقرأون', en: 'How young people sat reading by the light of his inspiration' }, outlet: { ar: 'الوطن', en: 'El Watan' }, year: 2018, lang: 'ar', url: src });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* Nogoum FM's interview with the makers of Netflix's «ما وراء الطبيعة»: was he Amr Salama's spiritual father? (11 November 2020)
+   — among the videos */
+(function (A) {
+	var M = A.media = A.media || [], url = 'https://www.youtube.com/watch?v=xTz5TrNKUDc';
+	if (M.some(function (m) { return m.url === url; })) return;
+	M.push({ kind: 'interview', title: { ar: 'هل أحمد خالد توفيق الأب الروحي لعمرو سلامة؟', en: 'Was Tawfik Amr Salama’s spiritual father?' },
+		outlet: { ar: 'نجوم إف إم', en: 'Nogoum FM' }, year: 2020, lang: 'ar', url: url,
+		note: { ar: 'من لقاء نجوم إف إم مع صنّاع مسلسل «ما وراء الطبيعة» ونجومه.', en: 'From Nogoum FM’s interview with the makers and cast of Paranormal.' } });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
