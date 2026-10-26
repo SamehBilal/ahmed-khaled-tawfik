@@ -176,8 +176,8 @@ html[dir="rtl"] .cg-tilt { transform: rotate(2deg); }
 	.cg-span-3 { grid-column: 1 / -1; }
 }
 
-/* ---------- the banner above the title, after a CodePen "grid and clip-path" hero, in its teal ---------- */
-.bh { --bh-hl: #b6d2d3; --bh-ink: #15272a; background: #15272a; border-radius: 18px; padding: 1rem; margin: 0 0 40px; }
+/* ---------- the banner above the title, after a CodePen "grid and clip-path" hero, in the site's colours ---------- */
+.bh { --bh-hl: var(--paper); --bh-ink: var(--ink); background: var(--ink-2); border-radius: 18px; padding: 1rem; margin: 0 0 40px; border: 1px solid var(--line); }
 .bh-box { container: bh / inline-size; display: grid; grid-template-columns: minmax(0, 1fr); margin-inline: auto; max-inline-size: 30rem; }
 @media (min-width: 768px) { .bh-box { max-inline-size: 75rem; } }
 .bh-media, .bh-mini { grid-area: 1 / 1 / 2 / 2; }
@@ -185,7 +185,7 @@ html[dir="rtl"] .cg-tilt { transform: rotate(2deg); }
 .bh-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 html[dir="rtl"] .bh-media { transform: scaleX(-1); }
 html[dir="rtl"] .bh-media img { transform: scaleX(-1); }
-.bh-mini { aspect-ratio: 122 / 119; background: #465e5f; border-radius: 12px; justify-self: end; width: 35%; display: grid; position: relative; overflow: hidden; }
+.bh-mini { aspect-ratio: 122 / 119; background: color-mix(in srgb, var(--ember) 22%, var(--ink-3, var(--ink))); border-radius: 12px; justify-self: end; width: 35%; display: grid; position: relative; overflow: hidden; }
 /* the small box: his articles take turns, each a little card (its picture and title) that opens the article */
 .bh-icon { grid-area: 1 / 1 / 2 / 2; display: flex; align-items: center; justify-content: center; margin: 0; text-decoration: none; }
 .bh-card { width: 80%; display: flex; flex-direction: column; gap: 6px; padding: 6px; border-radius: 8px; background: var(--bh-hl); color: var(--bh-ink);
@@ -207,12 +207,12 @@ html[lang="en"] .bh-heading { font-family: var(--f-display); font-weight: 700; }
 html[dir="rtl"] .bh-heading { clip-path: none; }
 .bh-heading > span, .bh-aligned > span { display: inline; }
 .bh-corner { display: none; }
-.bh-body { color: #fff; margin-top: 1.5rem; }
+.bh-body { color: var(--paper-dim); margin-top: 1.5rem; }
 .bh-body p { margin: 0; line-height: 1.75; }
 .bh-ctas { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
-.bh-cta { border: 1px solid #fff; border-radius: 4px; font-size: .85rem; padding: .5rem 1rem; text-align: center; text-decoration: none; font-family: var(--f-display); }
-.bh-cta-1 { background: #fff; color: #15272a; }
-.bh-cta-2 { color: #fff; }
+.bh-cta { border: 1px solid var(--paper); border-radius: 4px; font-size: .85rem; padding: .5rem 1rem; text-align: center; text-decoration: none; font-family: var(--f-display); }
+.bh-cta-1 { background: var(--paper); color: var(--ink); }
+.bh-cta-2 { color: var(--paper); }
 .bh-cta:hover { border-color: var(--ember); }
 .bh-cta-1:hover { background: var(--ember); color: #fff; }
 @container bh (min-width: 343px) { .bh-heading { max-inline-size: 85%; } }
