@@ -192,7 +192,17 @@ window.PAGE = {
 		this.reveal();
 	},
 	save: function () { try { sessionStorage.setItem('akt-blog-level', JSON.stringify({ l: this.level, k: this.kind })); } catch (e) {} },
+	/* the year and month you were in come back when you return from an article; a reload starts the archive afresh, at the top */
 	restore: function () {
+		var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+		/* (once per load: switching the language redraws the page and keeps where you are) */
+		if (nav && nav.type === 'reload' && !this._fresh && !/[?&]post=/.test(location.search)) {
+			this._fresh = true;
+			try { sessionStorage.removeItem('akt-blog-level'); } catch (e) {}
+			if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+			window.scrollTo(0, 0);
+			return null;
+		}
 		try { var s = JSON.parse(sessionStorage.getItem('akt-blog-level') || 'null'); if (s) { this.kind = s.k || 'all'; return s.l; } } catch (e) {}
 		return null;
 	},
