@@ -326,6 +326,7 @@ button.media:hover { transform: translateY(-4px); border-color: var(--ember); }
 .grave-cap p { margin: 0; }
 .g-line { font-family: var(--f-display); font-size: 18px; color: #b9b1a0; }
 .g-quote { font-family: var(--f-chunky); font-size: clamp(36px, 6vw, 64px); line-height: 1.3; color: #f7d417; -webkit-text-stroke: .08em #2b1406; paint-order: stroke fill; }
+html[lang="en"] .g-quote { font-family: var(--f-display); font-weight: 700; }
 .g-sub { font-family: var(--f-display); font-size: 14px; color: #8a8577; margin-top: 4px; }
 @media (prefers-reduced-motion: reduce) { .grave-overlay.on .grave-img { animation: none; } }
 
