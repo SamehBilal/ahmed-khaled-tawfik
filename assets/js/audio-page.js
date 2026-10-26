@@ -1,4 +1,4 @@
-/* audio.html — his audiobooks on Audiohat and Storytel and the Safari radio drama on YouTube, on one cassette, filtered by platform */
+/* audio.html — his audiobooks on Audiohat, Storytel and Iqraaly and the readings and dramas on YouTube, on one cassette, filtered by platform */
 window.PAGE = {
 	id: 'audio',
 	title: { ar: 'مسموع', en: 'Audiobooks' },
@@ -6,8 +6,8 @@ window.PAGE = {
 		eyebrow: { ar: 'كتب مسموعة', en: 'Audiobooks' },
 		title: { ar: 'العرّاب مسموعًا', en: 'The Godfather, out loud' },
 		lead: {
-			ar: 'أعداد «ما وراء الطبيعة» و«فانتازيا» و«سافاري» وكتبه كما سجّلتها Audiohat وStorytel، وحكايات «بعد منتصف الليل» وروايات «لاشين» على Audiohat و«اقرألي»، و«سافاري» دراما إذاعية وكتبه بصوت إسلام عادل على YouTube. اختر منصة أو شريطًا ثم اضغط الزر.',
-			en: 'Beyond Nature, Fantasia and Safari issues and his books as recorded by Audiohat and Storytel, the “After Midnight” stories and the Lasheen novels on Audiohat and Iqraaly, and Safari as a radio drama and his books read by Eslam Adel on YouTube. Pick a platform or a tape, then press the key.'
+			ar: 'كل ما سُجّل له بالصوت في مكان واحد: أعداد «ما وراء الطبيعة» و«فانتازيا» و«سافاري» وأعدادها الخاصة كما قرأتها Audiohat وStorytel؛ ورواياته ومجموعاته ومقالاته على Storytel، ومعها «WWW» كاملة وكتاب عنه وقصص تبيعها منفردة؛ وبرنامج «بعد منتصف الليل» لقصصه القصيرة، ومواسمه الجديدة من تأليف شيرين هنائي وحلقتا «قبل منتصف الليل!» الساخرتان على Audiohat؛ وروايات «لاشين» على «اقرألي» وAudiohat؛ وعلى YouTube «سافاري» دراما إذاعية، و«في كهوف دراجوسان» و«ثلاثة»، وكتبه وقصصه بصوت إسلام عادل. اختر منصة أو قسمًا، ضع شريطًا في المسجل، ثم اضغط الزر.',
+			en: 'Everything of his recorded, in one place: the Beyond Nature, Fantasia and Safari issues and their specials as read on Audiohat and Storytel; his novels, collections and essays on Storytel, with WWW in one book, a book about him and stories sold on their own; the After Midnight programme of his short stories, its new seasons written by Sherine Hanaey and the two comic episodes of “Before Midnight!” on Audiohat; the Lasheen novels on Iqraaly and Audiohat; and on YouTube, Safari as a radio drama, In the Caves of Dragosan, Three, and his books and stories read by Eslam Adel. Pick a platform or a section, put a tape in the recorder, then press the key.'
 		}
 	},
 
@@ -135,16 +135,18 @@ window.PAGE = {
 			return { title: { ar: 'الموسم ' + App.num(se.n) + ' (' + App.num(se.year) + ')', en: 'Season ' + se.n + ' (' + se.year + ')' }, thumb: se.art, start: start, count: tracks.length - start,
 				mins: minsFrom(start) };
 		});
-		/* the Lasheen novels on Iqraaly, books one to eight, one row a book */
+		/* the Lasheen novels as audiobooks, in their own section: books one to eight on Iqraaly, book fifteen on Audiohat */
+		var lrows = [];
+		/* on Iqraaly, one row a book */
 		Object.keys((A.iqraaly && A.iqraaly.items) || {}).forEach(function (k) {
 			var is = (S.seriesIssues('lasheen') || []).filter(function (x) { return 'lasheen-' + x.n === k; })[0];
 			if (!is) return;
 			var start = tracks.length;
 			window.Cassette.iqraalyTracks(k, L('لاشين ', 'Lasheen ') + App.num(is.n) + ': ' + t(is.title)).forEach(function (tr) { tracks.push(tr); });
-			srows2.push({ n: +is.n, title: { ar: 'لاشين ' + App.num(is.n) + ': ' + is.title.ar + ' (اقرألي)', en: 'Lasheen ' + is.n + ': ' + (is.title.en || is.title.ar) + ' (Iqraaly)' },
+			lrows.push({ n: +is.n, title: { ar: 'لاشين ' + App.num(is.n) + ': ' + is.title.ar + ' (اقرألي)', en: 'Lasheen ' + is.n + ': ' + (is.title.en || is.title.ar) + ' (Iqraaly)' },
 				href: App.issueHref('lasheen', is), thumb: ((App.data().issueInfo || {})[k] || {}).cover || '', start: start, count: tracks.length - start, mins: minsFrom(start) });
 		});
-		/* and the Lasheen novels Audiohat has as audiobooks, one row a book, its parts inside */
+		/* on Audiohat, one row a book, its parts inside */
 		(A.lasheenBooks || []).forEach(function (b) {
 			var is = (S.seriesIssues('lasheen') || []).filter(function (x) { return +x.n === b.n; })[0];
 			if (!is) return;
@@ -153,7 +155,7 @@ window.PAGE = {
 				var label = L('الجزء ', 'Part ') + App.num(k + 1);
 				tracks.push({ title: name, ep: label, sub: L('كتاب مسموع', 'Audiobook') + ' · ' + label, url: window.Cassette.pageUrl(A, ep[0]), mins: ep[1] || null, skin: 'midnight', art: b.art });
 			});
-			srows2.push({ n: b.n, title: { ar: 'لاشين: ' + is.title.ar + ' (كتاب مسموع، ' + App.num(b.year) + ')', en: 'Lasheen: ' + (is.title.en || is.title.ar) + ' (audiobook, ' + b.year + ')' },
+			lrows.push({ n: b.n, title: { ar: 'لاشين ' + App.num(b.n) + ': ' + is.title.ar + ' (Audiohat، ' + App.num(b.year) + ')', en: 'Lasheen ' + b.n + ': ' + (is.title.en || is.title.ar) + ' (Audiohat, ' + b.year + ')' },
 				href: App.issueHref('lasheen', is), thumb: b.art, start: start, count: tracks.length - start, mins: minsFrom(start) });
 		});
 		/* and the comic episodes made after the show, «قبل منتصف الليل!» */
@@ -169,9 +171,16 @@ window.PAGE = {
 		srows2 = srows2.filter(function (r) { return r.count > 0; });
 		if (srows2.length) groups.push({
 			title: { ar: 'بعد منتصف الليل — مواسم «لاشين»', en: 'After Midnight — the Lasheen seasons' },
-			note: { ar: 'عاد البرنامج الذي كتب عنه في «أسطورة بعد منتصف الليل» بمواسم جديدة على Audiohat من تأليف شيرين هنائي، ومنها خرجت روايات «لاشين»، وهي هنا مسموعة على «اقرألي» وAudiohat.',
-				en: 'The radio show he wrote of in “The Legend of After Midnight” came back on Audiohat in new seasons written by Sherine Hanaey, out of which the Lasheen novels grew; here they are as audiobooks on Iqraaly and Audiohat.' },
+			note: { ar: 'عاد البرنامج الذي كتب عنه في «أسطورة بعد منتصف الليل» بمواسم جديدة على Audiohat من تأليف شيرين هنائي، ومنها خرجت روايات «لاشين»؛ ومعها حلقتا «قبل منتصف الليل!» الساخرتان.',
+				en: 'The radio show he wrote of in “The Legend of After Midnight” came back on Audiohat in new seasons written by Sherine Hanaey, out of which the Lasheen novels grew; with them, the two comic episodes of “Before Midnight!”.' },
 			rows: srows2
+		});
+		lrows = lrows.filter(function (r) { return r.count > 0; }).sort(function (a, b) { return a.n - b.n; });
+		if (lrows.length) groups.push({
+			title: { ar: 'روايات «لاشين» مسموعة', en: 'The Lasheen novels, out loud' },
+			note: { ar: 'سلسلة شيرين هنائي التي خرجت من «بعد منتصف الليل»: الكتب من الأول إلى الثامن على «اقرألي» بصوت محمد خميس، والخامس عشر على Audiohat؛ الزر يفتح صفحة الكتاب هناك.',
+				en: 'Sherine Hanaey’s series that grew out of After Midnight: books one to eight on Iqraaly, read by Mohamed Khamis, and book fifteen on Audiohat; the key opens the book’s page there.' },
+			rows: lrows
 		});
 
 		/* which sections are open, kept for this visit (the first one always) */
@@ -191,10 +200,11 @@ window.PAGE = {
 		root.innerHTML =
 			'<section class="section audio-help"><div class="wrap">' +
 				'<div><h2 class="d-head" style="font-family:var(--f-display);font-size:28px;margin:0 0 10px">' + L('على الشريط الآن', 'On the tape now') + '</h2>' +
-					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات. حلقات Audiohat وكتب Storytel و«اقرألي» تُسمع على مواقعها: زر «استمع على …» يفتح صفحتها هناك، ودراما YouTube تُشغَّل هنا تحت الشريط.', '◀◀ and ▶▶ wind between episodes. Audiohat episodes and Storytel and Iqraaly audiobooks are heard on their own sites: the «Listen on …» key opens the page there, and YouTube dramas play here, under the tape.') + '</p>' +
+					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات. حلقات Audiohat وكتب Storytel و«اقرألي» تُسمع على مواقعها: زر «استمع على …» يفتح صفحتها هناك، أما فيديوهات YouTube فتُشغَّل هنا تحت الشريط. «الحلقات» تفتح أجزاء العدد أو الكتاب، وكل قسم يُفتح ويُطوى من عنوانه.', '◀◀ and ▶▶ wind between episodes. Audiohat episodes and Storytel and Iqraaly audiobooks are heard on their own sites: the «Listen on …» key opens the page there, while YouTube videos play here, under the tape. «Episodes» opens an issue’s or a book’s parts, and each section opens and closes on its title.') + '</p>' +
 					'<p style="color:var(--muted);margin:0">' + App.num(tracks.length) + ' ' + L('حلقة', 'episodes') + ' · ' +
 						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a>' +
-						(A.storytel ? ' · <a href="' + e(A.storytel.author) + '" target="_blank" rel="noopener">' + L('صفحته على Storytel ↗', 'His page on Storytel ↗') + '</a>' : '') + '</p>' +
+						(A.storytel ? ' · <a href="' + e(A.storytel.author) + '" target="_blank" rel="noopener">' + L('صفحته على Storytel ↗', 'His page on Storytel ↗') + '</a>' : '') +
+						(A.youtube && A.youtube.eslamAdel ? ' · <a href="' + e(A.youtube.eslamAdel.channel.url) + '" target="_blank" rel="noopener">' + L('قائمة إسلام عادل على YouTube ↗', 'Eslam Adel’s list on YouTube ↗') + '</a>' : '') + '</p>' +
 					/* show one platform, or all of them */
 					'<div class="chips au-platforms" role="group" aria-label="' + e(L('المنصة', 'Platform')) + '">' +
 						[['all', L('الكل', 'All')], ['audiohat', 'Audiohat'], ['storytel', 'Storytel'], ['iqraaly', L('اقرألي', 'Iqraaly')], ['youtube', 'YouTube']].filter(function (p) { return p[0] === 'all' || perPlatform[p[0]]; }).map(function (p) {
