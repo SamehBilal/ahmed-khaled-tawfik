@@ -331,6 +331,14 @@ window.PAGE = {
 
 	/* the full text, read from the blog's public feed when the article opens (JSONP: the feed
 	   sends no CORS headers). Its HTML is rebuilt from a short list of safe tags. */
+	/* the post's picture is already shown under the text: the same picture inside the text (at whatever size Blogger serves it) goes */
+	dropLead: function (box, p) {
+		if (!p.img) return;
+		var key = function (u) { return String(u || '').replace(/^https?:\/\/[^/]+/, '').replace(/\/(?:[swh]\d+[^/]*)\//, '/').replace(/[?#].*$/, ''); };
+		var lead = key(this.img(p.img));
+		box.querySelectorAll('figure.np-inline').forEach(function (f) { var im = f.querySelector('img'); if (im && key(im.getAttribute('src')) === lead) f.remove(); });
+	},
+
 	loadFull: function (p) {
 		var App = window.App, L = App.L, e = App.esc, self = this;
 		var box = document.getElementById('np-text');
@@ -343,6 +351,7 @@ window.PAGE = {
 				var clean = App.digits(self.sanitize(html));
 				if (!clean || !box || !box.isConnected) throw 0;
 				box.innerHTML = clean;
+				self.dropLead(box, p);
 				var first = box.firstElementChild;
 				if (first && p.src && first.textContent.trim().indexOf(p.src.split(' - ')[0]) === 0 && first.textContent.length < 80) first.remove();
 				box.insertAdjacentHTML('beforeend', '<p class="np-via">' + L('النص كاملًا من أرشيف مدونة «أحمد خالد توفيق» (عمرو عبيد)، بإذنه: ', 'The full text from the "Ahmed Khaled Tawfik" blog archive (Amr Ebaid), by permission: ') +
@@ -365,6 +374,7 @@ window.PAGE = {
 			var clean = html && App.digits(self.sanitize(html));
 			if (!clean || !box || !box.isConnected) return fail();
 			box.innerHTML = clean;
+			self.dropLead(box, p);
 			/* the first line names the paper and date, already shown in the bar above */
 			var first = box.firstElementChild;
 			if (first && p.src && first.textContent.trim().indexOf(p.src.split(' - ')[0]) === 0 && first.textContent.length < 80) first.remove();
