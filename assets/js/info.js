@@ -26,8 +26,8 @@
 					p: { ar: '<p>صفحات HTML وCSS وJavaScript بسيطة، دون خوادم ولا قواعد بيانات: كل المحتوى في ملفات بيانات نصّية مفتوحة. يُستضاف على GitHub Pages، ويمكن تثبيته تطبيقًا يعمل دون إنترنت. شيفرته كاملة منشورة على ' + ext(REPO, 'GitHub ↗') + '، ويمكن لأي أحد أن يقترح عليها تصحيحًا أو إضافة.</p>',
 						en: '<p>Plain HTML, CSS and JavaScript, with no servers or databases: all the content lives in open, plain-text data files. It is hosted on GitHub Pages and installs as an app that works offline. All of its code is public on ' + ext(REPO, 'GitHub ↗') + ', where anyone can suggest a correction or an addition.</p>' } },
 				{ h: { ar: 'شكر وإسناد', en: 'Credits' },
-					p: { ar: '<ul><li>الكتب ثلاثية الأبعاد مبنية على عروض Codrops (Marco Barría)، ومعها خامات الورق والخشب.</li><li>مشغّل الكاسيت مقتبس من عرض Codrops «Old School Cassette Player»، ورسم الشريط لـ Mauricio Estrella، وأصواته لـ Pogotron على Freesound.</li><li>افتتاحية الصفحة الرئيسية مقتبسة من حركة «Believe» لـ GSAP.</li><li>خط The Godfather من تصميم Jeff Bell، وبقية الخطوط من Google Fonts (رخصة SIL المفتوحة).</li><li>خفافيش التذييل عن عرض Calleb على CodePen (رخصة MIT).</li><li>التلّ المسكون ومشهد السافاري والساحرة في التذييل من ' + ext('https://www.vecteezy.com/', 'Vecteezy.com') + '.</li><li>الأغلفة والصور ملك أصحابها: الناشرين والرسّامين والمصوّرين — راجع ' + '<a href="terms.html">حقوق الاستخدام</a>.</li></ul>',
-						en: '<ul><li>The 3D books are built on Codrops demos (Marco Barría), with their paper and wood textures.</li><li>The cassette player is adapted from Codrops’ “Old School Cassette Player”; tape artwork by Mauricio Estrella, tape sounds by Pogotron on Freesound.</li><li>The home page opening is adapted from the GSAP “Believe” animation.</li><li>“The Godfather” font by Jeff Bell; the other fonts from Google Fonts (SIL Open Font License).</li><li>The footer bats after Calleb on CodePen (MIT licence).</li><li>The footer’s haunted hill, savanna scene and witch from ' + ext('https://www.vecteezy.com/', 'Vecteezy.com') + '.</li><li>Covers and photos belong to their owners — publishers, illustrators and photographers. See <a href="terms.html">Rights &amp; use</a>.</li></ul>' } }
+					p: { ar: '<ul><li>الكتب ثلاثية الأبعاد مبنية على عروض Codrops (Marco Barría)، ومعها خامات الورق والخشب.</li><li>مشغّل الكاسيت مقتبس من عرض Codrops «Old School Cassette Player»، ورسم الشريط لـ Mauricio Estrella؛ ولا يستضيف الموقع أي صوت: الشريط يفتح التسجيلات على منصاتها.</li><li>افتتاحية الصفحة الرئيسية مقتبسة من حركة «Believe» لـ GSAP.</li><li>خط The Godfather من تصميم Jeff Bell، وبقية الخطوط من Google Fonts (رخصة SIL المفتوحة).</li><li>خفافيش التذييل عن عرض Calleb على CodePen (رخصة MIT).</li><li>التلّ المسكون ومشهد السافاري والساحرة في التذييل من ' + ext('https://www.vecteezy.com/', 'Vecteezy.com') + '.</li><li>الأغلفة والصور ملك أصحابها: الناشرين والرسّامين والمصوّرين — راجع ' + '<a href="terms.html">حقوق الاستخدام</a>.</li></ul>',
+						en: '<ul><li>The 3D books are built on Codrops demos (Marco Barría), with their paper and wood textures.</li><li>The cassette player is adapted from Codrops’ “Old School Cassette Player”; tape artwork by Mauricio Estrella. The site hosts no audio: the tape opens each recording on its own platform.</li><li>The home page opening is adapted from the GSAP “Believe” animation.</li><li>“The Godfather” font by Jeff Bell; the other fonts from Google Fonts (SIL Open Font License).</li><li>The footer bats after Calleb on CodePen (MIT licence).</li><li>The footer’s haunted hill, savanna scene and witch from ' + ext('https://www.vecteezy.com/', 'Vecteezy.com') + '.</li><li>Covers and photos belong to their owners — publishers, illustrators and photographers. See <a href="terms.html">Rights &amp; use</a>.</li></ul>' } }
 			]
 		},
 
@@ -123,8 +123,8 @@
 			title: { ar: 'تواصل', en: 'Contact' },
 			eyebrow: { ar: 'لديك تصحيح أو إضافة؟', en: 'A correction or an addition?' },
 			lead: {
-				ar: 'الموقع يكبر بقرّائه. غلاف ناقص، تاريخ خاطئ، اقتباس بلا مصدر، أو طلب من صاحب حق — كلها مرحّب بها.',
-				en: 'The site grows with its readers. A missing cover, a wrong date, an unsourced quote, or a request from a rights holder — all welcome.'
+				ar: 'الموقع يكبر بقرّائه. غلاف أو طبعة ناقصة، رابط لكتاب مسموع أو مقال عنه، تاريخ خاطئ، اقتباس بلا مصدر، أو طلب من صاحب حق — كلها مرحّب بها.',
+				en: 'The site grows with its readers. A missing cover or edition, a link to an audiobook or an article about him, a wrong date, an unsourced quote, or a request from a rights holder — all welcome.'
 			},
 			sections: []
 		}
@@ -154,7 +154,7 @@
 				var mailto = function (subject, body) { return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + (body ? '&body=' + encodeURIComponent(body) : ''); };
 				body = '<div class="info-cards">' +
 					card('✎', L('تصحيح أو إضافة', 'A correction or addition'),
-						L('افتح بلاغًا على GitHub فيه الصفحة والخطأ والتصحيح ورابط المصدر. ستجد زرًّا مثله أسفل كل صفحة وفي صفحات الكتب.', 'Open an issue on GitHub with the page, the mistake, the fix and a link to your source. There is a button like this at the foot of every page and on book pages.'),
+						L('افتح بلاغًا على GitHub فيه الصفحة والخطأ والتصحيح ورابط المصدر — أو الغلاف أو الطبعة أو الرابط الناقص. ستجد زرًّا مثله أسفل كل صفحة وفي صفحات الكتب.', 'Open an issue on GitHub with the page, the mistake, the fix and a link to your source — or the cover, edition or link that is missing. There is a button like this at the foot of every page and on book pages.'),
 						App.fixHref(L('', '')), L('اقترح تصحيحًا ↗', 'Suggest a fix ↗')) +
 					card('⚖', L('طلب من صاحب حق', 'From a rights holder'),
 						L('لإزالة صورة أو نص أو تعديل إسناده، اذكر العمل والصفحة وصفتك. يصل الطلب بالبريد، فلا يُنشر.', 'To remove an image or text or change its credit, name the work, the page, and your role. It goes by email, so it stays private.'),
