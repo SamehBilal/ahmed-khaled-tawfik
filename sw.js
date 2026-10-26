@@ -7,7 +7,7 @@
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'akt-c305333dec';
+var VERSION = 'akt-92e1b66dcc';
 var PRECACHE = [
 	'./',
 	'about.html',
