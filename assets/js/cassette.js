@@ -1,29 +1,16 @@
 /* Cassette player — a vanilla rebuild of Codrops' "Old School Cassette Player".
    The tracks are Audiohat episodes and YouTube radio-drama episodes (Safari: Tasgeel channel).
-   ▶ / ❚❚  plays the episode's sample inside the cassette when we have one (track.sample: a file in
-           assets/audio/ or a permanent URL, added in data-audio.js). Audiohat's own sample links
-           expire daily and can't be fetched from another site, so without a sample ▶ falls back
-           to opening the episode on Audiohat.
+   The site plays no sound of its own: for an Audiohat episode the main key reads «استمع على Audiohat» and opens
+   the episode's page there.
    YouTube episodes (track.yt) play in a visible YouTube player that opens under the cassette, as
    YouTube's terms require; when the uploader has switched embedding off, ▶ opens YouTube instead.
-   ◀◀ / ▶▶ wind the tape to the previous / next episode; ■ stops; the last key always opens the source page.
+   ◀◀ / ▶▶ wind the tape to the previous / next episode; ■ stops; for YouTube the last key opens the video there.
 
-   Cassette.mount(el, { tracks: [{ title, sub, url, mins, sample }], index }) -> { load(i) } */
+   Cassette.mount(el, { tracks: [{ title, sub, url, mins }], index }) -> { load(i) } */
 (function () {
 	'use strict';
 
 	var W = 586, H = 379;
-	var SOUND = {};
-	function sound(name) {
-		try {
-			var a = SOUND[name] || (SOUND[name] = new Audio('assets/audio/' + name + '.mp3'));
-			a.currentTime = 0;
-			a.volume = name === 'click' ? 0.7 : 0.35;
-			var p = a.play();
-			if (p && p.catch) p.catch(function () {});
-			return a;
-		} catch (e) { return null; }
-	}
 
 	var ICON = {
 		rew: 'M11 6v12L2.5 12zM21 6v12l-8.5-6z',
@@ -65,8 +52,6 @@
 		var tracks = opts.tracks || [];
 		var i = Math.max(0, Math.min(tracks.length - 1, opts.index || 0));
 		var windTimer = 0;
-		var audio = new Audio();
-		audio.preload = 'none';
 
 		el.classList.add('cassette');
 		el.innerHTML =
@@ -111,12 +96,13 @@
 
 		function setPlayIcon(playing) {
 			var tr = tracks[i] || {};
-			playBtn.querySelector('.ic').innerHTML = svg(playing ? 'pause' : 'play');
-			var inDeck = tr.sample || (tr.yt && tr.ytEmbed);
+			var inDeck = tr.yt && tr.ytEmbed;
+			/* only a YouTube episode plays here; an Audiohat one is listened to on their page */
+			playBtn.querySelector('.ic').innerHTML = svg(inDeck ? (playing ? 'pause' : 'play') : 'out');
 			playBtn.querySelector('.lb').textContent = inDeck
-				? (playing ? L('إيقاف مؤقت', 'Pause') : (tr.yt ? L('تشغيل', 'Play') : L('تشغيل العيّنة', 'Play sample')))
+				? (playing ? L('إيقاف مؤقت', 'Pause') : L('تشغيل', 'Play'))
 				: (tr.yt ? L('شاهد على YouTube', 'Watch on YouTube') : L('استمع على Audiohat', 'Listen on Audiohat'));
-			playBtn.setAttribute('aria-label', (inDeck ? (playing ? L('إيقاف مؤقت لـ «', 'Pause “') : L('تشغيل عيّنة «', 'Play the sample of “')) : L('استمع إلى «', 'Listen to “')) +
+			playBtn.setAttribute('aria-label', (inDeck ? (playing ? L('إيقاف مؤقت لـ «', 'Pause “') : L('تشغيل «', 'Play “')) : L('استمع إلى «', 'Listen to “')) +
 				(tr.title || '') + (inDeck ? L('»', '”') : (tr.yt ? L('» على YouTube', '” on YouTube') : L('» على Audiohat', '” on Audiohat'))));
 		}
 
@@ -138,11 +124,11 @@
 			el.querySelector('.cs-note').textContent = tr.yt
 				? (tr.ytEmbed ? L('من قناة «' + (tr.channel || 'YouTube') + '» على YouTube — يظهر المشغّل تحت الشريط', 'From the “' + (tr.channel || 'YouTube') + '” channel on YouTube — the player opens under the tape')
 					: L('صاحب الفيديو لا يسمح بتشغيله خارج YouTube، فالتشغيل يفتحه هناك', 'The uploader does not allow playing it outside YouTube, so play opens it there'))
-				: tr.sample
-				? L('عيّنة قصيرة — الحلقة كاملة على Audiohat', 'A short sample — the full episode is on Audiohat')
-				: L('لا توجد عيّنة محفوظة هنا بعد، فالتشغيل يفتح Audiohat في نافذة جديدة', 'No sample saved here yet, so play opens Audiohat in a new tab');
-			el.classList.toggle('has-sample', !!(tr.sample || (tr.yt && tr.ytEmbed)));
-			outBtn.querySelector('.lb').textContent = tr.yt ? 'YouTube' : 'Audiohat';
+				: L('الحلقة على Audiohat — الزر يفتح صفحتها هناك في نافذة جديدة', 'The episode is on Audiohat — the key opens its page there in a new tab');
+			el.classList.toggle('has-sample', !!(tr.yt && tr.ytEmbed));
+			/* the separate source key is for YouTube; for Audiohat the main key already opens it */
+			outBtn.parentNode.hidden = !tr.yt;
+			outBtn.querySelector('.lb').textContent = 'YouTube';
 			outBtn.href = tr.url || '#';
 			outBtn.setAttribute('aria-label', L('افتح «', 'Open “') + (tr.title || '') + (tr.yt ? L('» على YouTube', '” on YouTube') : L('» على Audiohat', '” on Audiohat')));
 			/* tape moves from the left reel to the right one as you go through the episodes */
@@ -156,10 +142,8 @@
 		}
 
 		function stopAudio(rewind) {
-			audio.pause();
 			if (yt && yt.pauseVideo) { try { rewind ? yt.stopVideo() : yt.pauseVideo(); } catch (x) {} }
 			if (rewind) { vbox.hidden = true; clearInterval(ytPoll); }
-			if (rewind) { try { audio.currentTime = 0; } catch (x) {} }
 		}
 
 		function wind(dir) {
@@ -167,12 +151,8 @@
 			if (j < 0 || j >= tracks.length) return;
 			clearTimeout(windTimer);
 			stopAudio(true);
-			audio.removeAttribute('src');
-			sound('click');
-			var s = sound(dir > 0 ? 'fforward' : 'rewind');
 			state(dir > 0 ? 'is-ff' : 'is-rew');
 			windTimer = setTimeout(function () {
-				if (s) s.pause();
 				i = j; render(); state('');
 			}, 700);
 		}
@@ -180,21 +160,9 @@
 		function play() {
 			var tr = tracks[i];
 			if (!tr) return;
-			sound('click');
 			if (tr.yt && tr.ytEmbed) { playYT(tr); return; }
-			if (!tr.sample) {
-				state('is-playing');
-				/* opened synchronously in the click so pop-up blockers allow it */
-				window.open(tr.url, '_blank', 'noopener');
-				return;
-			}
-			if (!audio.paused) { audio.pause(); return; }
-			if (audio.getAttribute('src') !== tr.sample) audio.src = tr.sample;
-			var p = audio.play();
-			if (p && p.catch) p.catch(function () {
-				state('');
-				el.querySelector('.cs-note').textContent = L('تعذّر التشغيل هنا — جرّب الزر الأخير لفتح المصدر', 'Could not play here — try the last key to open the source');
-			});
+			/* Audiohat (or a YouTube video that can't be embedded): opened synchronously in the click so pop-up blockers allow it */
+			window.open(tr.url, '_blank', 'noopener');
 		}
 
 		/* ---------- YouTube ---------- */
@@ -246,24 +214,15 @@
 			el.querySelector('.cs-dur').textContent = clock(c) + ' / ' + clock(d);
 		}
 
-		audio.addEventListener('playing', function () { state('is-playing'); setPlayIcon(true); });
-		audio.addEventListener('pause', function () { if (!el.classList.contains('is-ff') && !el.classList.contains('is-rew')) state(''); setPlayIcon(false); });
-		audio.addEventListener('ended', function () { state(''); setPlayIcon(false); bar.style.width = '100%'; });
-		audio.addEventListener('timeupdate', function () {
-			if (!audio.duration) return;
-			bar.style.width = (audio.currentTime / audio.duration * 100).toFixed(2) + '%';
-			el.querySelector('.cs-dur').textContent = clock(audio.currentTime) + ' / ' + clock(audio.duration);
-		});
-
 		el.querySelector('.cs-controls').addEventListener('click', function (ev) {
 			var b = ev.target.closest('[data-act]');
 			if (!b || b.disabled) return;
 			var act = b.getAttribute('data-act');
 			if (act === 'play') play();
-			else if (act === 'stop') { clearTimeout(windTimer); sound('click'); stopAudio(true); state(''); bar.style.width = '0%'; render(); }
+			else if (act === 'stop') { clearTimeout(windTimer); stopAudio(true); state(''); bar.style.width = '0%'; render(); }
 			else if (act === 'ff') wind(1);
 			else if (act === 'rew') wind(-1);
-			else if (act === 'out') { sound('click'); stopAudio(false); }
+			else if (act === 'out') stopAudio(false);
 		});
 
 		if (window.ResizeObserver) new ResizeObserver(fit).observe(el); else window.addEventListener('resize', fit);
@@ -271,7 +230,7 @@
 
 		return {
 			load: function (j, focus) {
-				clearTimeout(windTimer); stopAudio(true); audio.removeAttribute('src');
+				clearTimeout(windTimer); stopAudio(true);
 				i = Math.max(0, Math.min(tracks.length - 1, j)); state(''); render();
 				if (focus) playBtn.focus();
 			},
@@ -283,7 +242,7 @@
 	function pageUrl(A, slug) { return A.base + encodeURIComponent(slug).replace(/%28/g, '(').replace(/%29/g, ')'); }
 
 	/* episodes of an issue (book.html id like "mwt-12") -> tracks.
-	   data entries: [slug, minutes, sample?, label?] — a label names the episode in place of "Episode n of m" */
+	   data entries: [slug, minutes, (unused), label?] — a label names the episode in place of "Episode n of m" */
 	function issueTracks(key, issueTitle) {
 		var A = (window.App.data().audio) || null;
 		if (!A || !A.issues || !A.issues[key]) return [];
@@ -294,7 +253,6 @@
 				sub: ep[3] ? ep[3] : eps.length > 1 ? L('الحلقة ', 'Episode ') + window.App.num(k + 1) + L(' من ', ' of ') + window.App.num(eps.length) : 'Audiohat',
 				url: pageUrl(A, ep[0]),
 				mins: ep[1],
-				sample: ep[2] || '',
 				skin: key.split('-')[0]
 			};
 		});

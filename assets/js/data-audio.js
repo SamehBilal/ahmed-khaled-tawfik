@@ -1,10 +1,7 @@
 /* Audiobooks on Audiohat (audiohatdar.com) — rights: شركة سلاح التلميذ للطباعة والنشر.
-   Audiohat's own sample links expire daily and can't be fetched from another site, so the
-   site can't play them; the cassette's Audiohat key opens the episode page there instead.
+   The site plays no sound of its own: the cassette's «استمع على Audiohat» key opens the episode's page there.
    Each entry: [Audiohat book slug (https://www.audiohatdar.com/books/<slug>), minutes or null].
-   Optional 3rd item: a sample the cassette can play itself — a file in assets/audio/ (e.g. "assets/audio/mwt-12.mp3")
-   or a permanent URL. Only add audio you have permission to use. Without it, ▶ opens Audiohat instead.
-   The midnight list takes the sample as its 4th item: [title, slug, minutes, sample].
+   The 3rd item is unused; an optional 4th names the episode. The midnight list: [title, slug, minutes].
    Long issues are split into several episodes. Catalogue collected 2026-10-20. */
 window.AKT = window.AKT || {};
 window.AKT.audio = {
@@ -20,7 +17,7 @@ window.AKT.audio = {
 		"fantasia-7": [["07__ألعاب_إغريقية",100]],
 		"fantasia-8": [["08__مملكة_الموتى",103]],
 		"mwt-1": [["01_أسطورة_مصاص_الدماء_",null],["01_أسطورة_الرجل_الذئب_",70]],
-		"mwt-2": [["02_أسطورة_النداهة_",132,"assets/audio/c7aa4d0b-f985-48e1-9b89-b1fe86c56b71.mp3"]],
+		"mwt-2": [["02_أسطورة_النداهة_",132]],
 		"mwt-3": [["03_أسطورة_وحش_البحيرة_",111]],
 		"mwt-4": [["04_أسطورة_آكل_البشر_",109]],
 		"mwt-5": [["05_أسطورة_الموتى_الأحياء_",136]],

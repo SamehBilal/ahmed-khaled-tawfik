@@ -60,7 +60,7 @@ window.PAGE = {
 		});
 		var midStart = tracks.length;
 		(A.midnight || []).forEach(function (m) {
-			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], sample: m[3] || '', skin: 'midnight', art: TH[m[1]] || '' });
+			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], skin: 'midnight', art: TH[m[1]] || '' });
 		});
 		if ((A.midnight || []).length) groups.push({
 			title: { ar: 'بعد منتصف الليل', en: 'After Midnight' },
@@ -119,7 +119,7 @@ window.PAGE = {
 		root.innerHTML =
 			'<section class="section audio-help"><div class="wrap">' +
 				'<div><h2 class="d-head" style="font-family:var(--f-display);font-size:28px;margin:0 0 10px">' + L('على الشريط الآن', 'On the tape now') + '</h2>' +
-					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات، و ▶ يشغّل العيّنة على الشريط إن وُجدت، وزر Audiohat يفتح الحلقة على موقعهم.', '◀◀ and ▶▶ wind between episodes; ▶ plays the sample on the tape when there is one; the Audiohat key opens the episode on their site.') + '</p>' +
+					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات. حلقات Audiohat تُسمع على موقعهم: زر «استمع على Audiohat» يفتح صفحة الحلقة هناك، ودراما YouTube تُشغَّل هنا تحت الشريط.', '◀◀ and ▶▶ wind between episodes. Audiohat episodes are heard on their site: the «Listen on Audiohat» key opens the episode page there, and YouTube dramas play here, under the tape.') + '</p>' +
 					'<p style="color:var(--muted);margin:0">' + App.num(tracks.length) + ' ' + L('حلقة', 'episodes') + ' · ' +
 						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a></p></div>' +
 			'</div></section>' +

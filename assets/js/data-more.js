@@ -3339,7 +3339,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		var key = /^30_/.test(m[1]) ? 'mwt-30' : /^70_/.test(m[1]) ? 'mwt-70' : '';
 		if (!key) return;
 		var eps = Au.issues[key] = Au.issues[key] || [];
-		if (!eps.some(function (ep) { return ep[0] === m[1]; })) eps.push([m[1], m[2], m[3] || '', m[0]]);
+		if (!eps.some(function (ep) { return ep[0] === m[1]; })) eps.push([m[1], m[2], '', m[0]]);
 	});
 	Au.midnight = (Au.midnight || []).filter(function (m) { return !/^(30|70)_/.test(m[1]); });
 	Au.seasons = Au.seasons || [
