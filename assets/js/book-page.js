@@ -324,7 +324,13 @@ window.PAGE = {
 							return bookAwards.length ? '<section class="d-block" id="d-awards"><h3>' + L('جوائز', 'Awards') + '</h3>' + S.awardsList(bookAwards) + '</section>' : '';
 						})() +
 						buyHtml +
-						(audioTracks.length ? '<section class="d-block d-audio"><h3>' + L('استمع إليه', 'Listen') + ' <small>' + e(audioTracks.map(whereOf).filter(function (v, k, arr) { return arr.indexOf(v) === k; }).join(' · ')) + '</small></h3><div id="d-cassette"></div></section>' : '') +
+						/* where it can be heard: one line a recording or part — the platform, which part or who reads it, how long, and its link */
+						(audioTracks.length ? '<section class="d-block d-audio"><h3>' + L('استمع إليه', 'Listen') + ' <small>' + e(audioTracks.map(whereOf).filter(function (v, k, arr) { return arr.indexOf(v) === k; }).join(' · ')) + '</small></h3>' +
+							'<ul class="d-audio-list">' + audioTracks.map(function (x) {
+								var where = whereOf(x), what = String(x.ep || x.sub || '').split(' · ').filter(function (w) { return w && w !== where && w !== x.provider && w !== 'Audiohat'; }).join(' · ');
+								return '<li><a href="' + e(x.url) + '" target="_blank" rel="noopener"><b>' + e(where) + '</b>' + (what ? '<span>' + e(what) + '</span>' : '') +
+									(x.mins ? '<small>' + App.num(x.mins) + ' ' + L('دقيقة', 'min') + '</small>' : '') + '<i aria-hidden="true">↗</i></a></li>';
+							}).join('') + '</ul></section>' : '') +
 						'<dl class="d-facts">' + rows.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + (x[2] || e(x[1])) + '</dd>'; }).join('') + '</dl>' +
 						(info.altTitles && info.altTitles.length ? '<section class="d-block"><h3>' + L('عناوين أخرى', 'Other titles') + '</h3><ul class="alt-titles">' +
 							info.altTitles.map(function (a) { return '<li><b lang="' + e(a.lang || '') + '">' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + (a.lang ? ' <span class="lng">' + e(a.lang) + '</span>' : '') + '</li>'; }).join('') +
@@ -433,7 +439,6 @@ window.PAGE = {
 
 		/* the back cover opens full size, like the pictures on the home timeline */
 		root.querySelectorAll('.d-back-img').forEach(function (bc) { bc.addEventListener('click', function () { App.showPic(bc.dataset.src, bc.dataset.alt); }); });
-		if (audioTracks.length) window.Cassette.mount(document.getElementById('d-cassette'), { tracks: audioTracks });
 
 		function langName(l) {
 			var N = { ar: ['العربية', 'Arabic'], en: ['الإنجليزية', 'English'], fr: ['الفرنسية', 'French'], it: ['الإيطالية', 'Italian'], de: ['الألمانية', 'German'], es: ['الإسبانية', 'Spanish'], tr: ['التركية', 'Turkish'], fa: ['الفارسية', 'Persian'], fi: ['الفنلندية', 'Finnish'], ml: ['المالايالامية', 'Malayalam'], ru: ['الروسية', 'Russian'], ku: ['الكردية', 'Kurdish'], ur: ['الأردية', 'Urdu'], id: ['الإندونيسية', 'Indonesian'] };

@@ -362,3 +362,12 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 .row-car-prev { inset-inline-start: -14px; }
 .row-car-next { inset-inline-end: -14px; }
 @media (max-width: 640px) { .row-car-prev { inset-inline-start: -4px; } .row-car-next { inset-inline-end: -4px; } }
+
+/* the book's recordings, each a link to where it is heard */
+.d-audio-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.d-audio-list a { display: flex; align-items: baseline; gap: 10px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--paper); text-decoration: none; transition: border-color .2s, background .2s; }
+.d-audio-list a:hover, .d-audio-list a:focus-visible { border-color: var(--ember, #b3261e); background: color-mix(in srgb, var(--ember, #b3261e) 8%, transparent); }
+.d-audio-list b { flex: 0 0 auto; font-weight: 700; }
+.d-audio-list span { flex: 1 1 auto; color: var(--paper-dim); font-size: .92em; }
+.d-audio-list small { flex: 0 0 auto; color: var(--muted); font-size: .85em; }
+.d-audio-list i { flex: 0 0 auto; font-style: normal; color: var(--muted); }

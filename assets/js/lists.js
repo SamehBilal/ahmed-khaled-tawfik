@@ -2,6 +2,7 @@
    Adapted from Codrops' "Drag and Drop Interaction Ideas" (bottom slide): start dragging any
    book or issue cover and a panel slides up from the bottom with the lists to drop it on.
    Rebuilt with pointer events instead of Draggabilly (a long press starts the drag on touch).
+   Collectors say which editions they have or look for, and a shelf of every book and issue lights up what is in the lists.
    The lists live in this browser (localStorage) and can be exported as JSON, CSV or text,
    and imported back. Loaded on every page after app.js. */
 (function () {
@@ -122,6 +123,10 @@
 		panel.addEventListener('pointerdown', onGripDown);
 		panel.addEventListener('keydown', onGripKey);
 		panel.addEventListener('change', onImport);
+		panel.addEventListener('toggle', function (ev) {
+			var g = ev.target.closest && ev.target.closest('.ls-shelf-g');
+			if (g) { shelfOpen = shelfOpen || {}; shelfOpen[g.getAttribute('data-g')] = g.open; }
+		}, true);
 		panel.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') close(); });
 
 		fab = document.createElement('button');
@@ -152,6 +157,9 @@
 	function itemHtml(list, x) {
 		var App_ = App();
 		var num = x.n != null ? '#' + (App_ ? App_.num(x.n) : x.n) : '';
+		/* a collector's item: which editions, and a key to choose them when the book has more than one */
+		var eds = LISTS[list].mode === 'collector' && x.key[0] === 'b' ? editionsOf(x.key) : [];
+		var edLine = (x.eds || []).length ? tt(x.eds[0].label) + (x.eds.length > 1 ? L(' و', ' + ') + (App_ ? App_.num(x.eds.length - 1) : x.eds.length - 1) + L(' غيرها', ' more') : '') : '';
 		return '<li class="ls-item" data-key="' + esc(x.key) + '">' +
 			'<button type="button" class="ls-grip" data-grip="' + esc(list) + '" data-key="' + esc(x.key) + '" aria-label="' + esc(L('حرّك «', 'Move “') + tt(x.title) + L('» — الأسهم للترتيب والنقل', '” — arrow keys reorder and move')) + '">' +
 				'<svg viewBox="0 0 12 20" aria-hidden="true"><g fill="currentColor"><circle cx="3" cy="4" r="1.6"/><circle cx="9" cy="4" r="1.6"/><circle cx="3" cy="10" r="1.6"/><circle cx="9" cy="10" r="1.6"/><circle cx="3" cy="16" r="1.6"/><circle cx="9" cy="16" r="1.6"/></g></svg></button>' +
@@ -159,27 +167,59 @@
 				(x.img ? '<img src="' + esc(x.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') +
 				(num ? '<span>' + esc(num) + '</span>' : '') + '</a>' +
 			'<span class="ls-item-t"><a href="' + esc(x.href) + '">' + esc(tt(x.title)) + '</a>' +
-				(x.series ? '<small>' + esc(tt(x.series)) + (num && x.sid ? ' ' + esc(num) : '') + '</small>' : '') + '</span>' +
+				(x.series ? '<small>' + esc(tt(x.series)) + (num && x.sid ? ' ' + esc(num) : '') + '</small>' : '') +
+				(eds.length > 1 ? '<button type="button" class="ls-ed-key" data-eds="' + esc(list) + '" data-key="' + esc(x.key) + '">' +
+					(edLine ? esc(L('الطبعة: ', 'Edition: ') + edLine) : esc(L('أي طبعة؟', 'Which edition?'))) + ' <span aria-hidden="true">✎</span></button>'
+					: edLine ? '<small>' + esc(edLine) + '</small>' : '') + '</span>' +
 			'<button type="button" class="ls-x" data-remove="' + esc(list) + '" data-key="' + esc(x.key) + '" aria-label="' + esc(L('إزالة ', 'Remove ') + tt(x.title)) + '">×</button>' +
 		'</li>';
 	}
 
-	/* collectors and readers: how far along each series they are */
-	function progressHtml() {
-		var S = window.WorksShared, done = MODES[state.mode].done;
-		if (!S) return '';
-		var by = {};
-		state.lists[done].forEach(function (x) { if (x.sid && x.key[0] === 'b') (by[x.sid] = by[x.sid] || []).push(x); });
-		var rows = Object.keys(by).map(function (sid) {
-			var ser = S.anySeries(sid), all = S.seriesIssues(sid).length;
-			if (!ser || !all) return '';
-			var have = Math.min(by[sid].length, all), pct = Math.round(have / all * 100);
-			return '<li><span class="ls-p-t">' + esc(tt(ser.s.title)) + '</span>' +
-				'<span class="ls-bar" style="--p:' + pct + '%"></span>' +
-				'<span class="ls-p-n">' + esc(App().num(have)) + ' / ' + esc(App().num(all)) + '</span></li>';
-		}).filter(Boolean);
-		if (!rows.length) return '';
-		return '<section class="ls-progress"><h3>' + (state.mode === 'reader' ? L('قرأت من السلاسل', 'Series read so far') : L('ما تملكه من السلاسل', 'Series collected so far')) + '</h3><ul>' + rows.join('') + '</ul></section>';
+	/* the shelf: every book of his and every issue of his series, a place each; what is read (or owned) is lit,
+	   what is wanted glows faintly, the rest waits in the dark. Each group shows how far along it is. */
+	var shelfOpen = null;
+	function shelfGroups() {
+		var S = window.WorksShared, A = App();
+		if (!S || !A) return [];
+		var d = A.data(), groups = [];
+		var works = (d.works || []).slice().sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+		groups.push({ id: 'works', title: { ar: 'كتبه', en: 'His books' }, items: works.map(function (w) {
+			return { key: 'b:' + w.id, title: w.title, img: S.coverOf((d.bookInfo || {})[w.id]), color: w.color || '' };
+		}) });
+		S.ownSeries().forEach(function (ser) {
+			var items = S.seriesIssues(ser.id).map(function (is) {
+				var m = /book\.html\?id=([^&#]+)/.exec(A.issueHref(ser.id, is));
+				return m ? { key: 'b:' + decodeURIComponent(m[1]), title: is.title, n: is.n, img: S.issueCover(ser.id, is), color: ser.color || '' } : null;
+			}).filter(Boolean);
+			if (items.length) groups.push({ id: ser.id, title: ser.title, items: items });
+		});
+		return groups;
+	}
+	function shelfHtml() {
+		var A = App(), mode = MODES[state.mode], wishList = mode.lists.filter(function (k) { return k !== mode.done; })[0];
+		var done = {}, wish = {};
+		state.lists[mode.done].forEach(function (x) { done[x.key] = 1; });
+		state.lists[wishList].forEach(function (x) { wish[x.key] = 1; });
+		var groups = shelfGroups();
+		if (!groups.length) return '';
+		return '<section class="ls-shelf"><h3>' + (state.mode === 'reader' ? L('رفّ القارئ', 'The reader’s shelf') : L('رفّ المقتني', 'The collector’s shelf')) + '</h3>' +
+			'<p class="ls-hint">' + (state.mode === 'reader'
+				? L('كل كتبه وأعداده في أماكنها: ما قرأته مضيء، وما تنوي قراءته يلمع خافتًا، والباقي ينتظرك في الظل.', 'All his books and issues in their places: what you have read is lit, what you mean to read glows faintly, and the rest waits in the dark.')
+				: L('كل كتبه وأعداده في أماكنها: ما في مكتبتك مضيء، وما تبحث عنه يلمع خافتًا، والباقي ينتظرك في الظل.', 'All his books and issues in their places: what is in your collection is lit, what you are looking for glows faintly, and the rest waits in the dark.')) + '</p>' +
+			groups.map(function (g) {
+				var lit = g.items.filter(function (x) { return done[x.key]; }).length, all = g.items.length;
+				var isOpen = shelfOpen && g.id in shelfOpen ? shelfOpen[g.id] : lit > 0;
+				return '<details class="ls-shelf-g" data-g="' + esc(g.id) + '"' + (isOpen ? ' open' : '') + '><summary>' +
+					'<span class="ls-p-t">' + esc(tt(g.title)) + '</span><span class="ls-bar" style="--p:' + Math.round(lit / all * 100) + '%"></span>' +
+					'<span class="ls-p-n">' + esc(A.num(lit)) + ' / ' + esc(A.num(all)) + '</span></summary>' +
+					'<div class="ls-slots">' + g.items.map(function (x) {
+						var cls = done[x.key] ? ' is-lit' : wish[x.key] ? ' is-wish' : '';
+						var label = (x.n != null ? '#' + A.num(x.n) + ' ' : '') + tt(x.title) + (done[x.key] ? ' — ' + tt(LISTS[mode.done]) : wish[x.key] ? ' — ' + tt(LISTS[wishList]) : '');
+						return '<a class="ls-slot' + cls + '" href="' + esc('book.html?id=' + encodeURIComponent(x.key.slice(2))) + '" title="' + esc(label) + '" aria-label="' + esc(label) + '" style="--c:' + esc(x.color || '#3a1414') + '">' +
+							(x.img ? '<img src="' + esc(x.img) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">' : '') +
+							(x.n != null ? '<span>' + esc(A.num(x.n)) + '</span>' : '') + '</a>';
+					}).join('') + '</div></details>';
+			}).join('') + '</section>';
 	}
 
 	function render() {
@@ -205,7 +245,7 @@
 					'<span class="ls-check" aria-hidden="true">✓</span>' +
 				'</section>';
 			}).join('') + '</div>' +
-			progressHtml() +
+			shelfHtml() +
 			'<footer class="ls-tools">' +
 				'<span class="ls-tools-l">' + L('تصدير', 'Export') + '</span>' +
 				'<button type="button" data-export="json">JSON</button>' +
@@ -248,6 +288,7 @@
 		if (b.hasAttribute('data-close')) close();
 		else if (b.hasAttribute('data-mode')) { state.mode = b.getAttribute('data-mode'); save(); render(); renderFab(); }
 		else if (b.hasAttribute('data-remove')) remove(b.getAttribute('data-remove'), b.getAttribute('data-key'));
+		else if (b.hasAttribute('data-eds')) chooseEditions(b.getAttribute('data-eds'), b.getAttribute('data-key'));
 		else if (b.hasAttribute('data-export')) exportAs(b.getAttribute('data-export'), b);
 		else if (b.hasAttribute('data-clear')) {
 			if (window.confirm(L('مسح كل القوائم؟ صدّرها أولًا إن أردت الاحتفاظ بها.', 'Clear all lists? Export them first if you want to keep them.'))) {
@@ -256,11 +297,73 @@
 		}
 	}
 
+	/* ---------- editions (collectors) ---------- */
+
+	/* the editions we know of a book or issue, each told apart by its ISBN or ASIN, else by publisher, year and format */
+	function editionsOf(key) {
+		var S = window.WorksShared, r = null;
+		if (!S || key[0] !== 'b') return [];
+		try { r = S.resolveBook(key.slice(2)); } catch (e) {}
+		var seen = {};
+		return ((r && r.info && r.info.editions) || []).map(function (ed) {
+			var both = function (lang) {
+				var g = function (o) { return !o ? '' : typeof o === 'string' ? o : o[lang] || o.ar || o.en || ''; };
+				return [g(ed.publisher), ed.year || '', g(ed.edition) || g(ed.format), ed.lang && ed.lang !== 'ar' ? ed.lang.toUpperCase() : ''].filter(Boolean).join(' · ');
+			};
+			var id = ed.isbn || ed.asin || both('ar');
+			while (seen[id]) id += '+';
+			seen[id] = 1;
+			return { id: id, label: { ar: both('ar'), en: both('en') }, img: ed.cover || '' };
+		});
+	}
+
+	/* after a book goes into a collector's list (or from its key there): which editions you have, or are looking for */
+	var edBox = null;
+	function chooseEditions(list, key) {
+		var x = state.lists[list].filter(function (y) { return y.key === key; })[0], eds = editionsOf(key);
+		if (!x || !eds.length) return;
+		if (eds.length === 1) { x.eds = [{ id: eds[0].id, label: eds[0].label }]; save(); changed(); return; }
+		var picked = {};
+		(x.eds || []).forEach(function (e) { picked[e.id] = 1; });
+		if (edBox) edBox.remove();
+		edBox = document.createElement('div');
+		edBox.className = 'ls-eds';
+		edBox.setAttribute('role', 'dialog');
+		edBox.setAttribute('aria-modal', 'true');
+		edBox.setAttribute('aria-label', L('الطبعات', 'Editions'));
+		edBox.innerHTML = '<div class="ls-eds-card">' +
+			'<h3>' + L('أي طبعة من «', 'Which edition of “') + esc(tt(x.title)) + (list === 'own' ? L('» في مكتبتك؟', '” do you have?') : L('» تبحث عنها؟', '” are you looking for?')) + '</h3>' +
+			'<p class="ls-hint">' + L('اختر طبعة أو أكثر، أو «أي طبعة» إن كانت أيها تكفي.', 'Pick one edition or more, or “Any edition” if any will do.') + '</p>' +
+			'<div class="ls-ed-grid">' + eds.map(function (ed) {
+				return '<label class="ls-ed"><input type="checkbox" value="' + esc(ed.id) + '"' + (picked[ed.id] ? ' checked' : '') + '>' +
+					'<span class="ls-ed-c" style="--c:' + esc(x.color || '#3a1414') + '">' + (ed.img ? '<img src="' + esc(ed.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '<i aria-hidden="true">✓</i></span>' +
+					'<span class="ls-ed-t">' + esc(tt(ed.label)) + '</span></label>';
+			}).join('') + '</div>' +
+			'<div class="ls-eds-act"><button type="button" class="ls-eds-save">' + L('حفظ', 'Save') + '</button>' +
+			'<button type="button" class="ls-eds-any">' + L('أي طبعة', 'Any edition') + '</button></div></div>';
+		document.body.appendChild(edBox);
+		var done = function (chosen) {
+			if (chosen) {
+				x.eds = eds.filter(function (ed) { return chosen.indexOf(ed.id) >= 0; }).map(function (ed) { return { id: ed.id, label: ed.label }; });
+				save(); changed();
+				say(x.eds.length ? L('حُفظت الطبعة: ', 'Edition saved: ') + x.eds.map(function (e) { return tt(e.label); }).join(L('، ', ', ')) : L('أي طبعة تكفي.', 'Any edition will do.'));
+			}
+			edBox.remove(); edBox = null;
+		};
+		edBox.addEventListener('click', function (ev) {
+			if (ev.target === edBox) done(null);
+			else if (ev.target.closest('.ls-eds-save')) done([].map.call(edBox.querySelectorAll('input:checked'), function (i) { return i.value; }));
+			else if (ev.target.closest('.ls-eds-any')) done([]);
+		});
+		edBox.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') { ev.stopPropagation(); done(null); } });
+		setTimeout(function () { var f = edBox && edBox.querySelector('input'); if (f) f.focus(); }, 30);
+	}
+
 	/* ---------- export / import ---------- */
 
 	function rowsFor(list) {
 		return state.lists[list].map(function (x) {
-			return { list: list, title_ar: (x.title || {}).ar || '', title_en: (x.title || {}).en || '', series_ar: (x.series || {}).ar || '', series_en: (x.series || {}).en || '', number: x.n != null ? x.n : '', url: new URL(x.href, location.href).href, added: (x.added || '').slice(0, 10) };
+			return { list: list, title_ar: (x.title || {}).ar || '', title_en: (x.title || {}).en || '', series_ar: (x.series || {}).ar || '', series_en: (x.series || {}).en || '', number: x.n != null ? x.n : '', editions: (x.eds || []).map(function (e) { return tt(e.label); }).join(' / '), url: new URL(x.href, location.href).href, added: (x.added || '').slice(0, 10) };
 		});
 	}
 	function download(name, type, text) {
@@ -277,7 +380,7 @@
 				var items = state.lists[k];
 				if (!items.length) return;
 				out.push(tt(MODES[m]) + ' · ' + tt(LISTS[k]) + ' (' + items.length + ')');
-				items.forEach(function (x) { out.push('- ' + tt(x.title) + (x.series ? ' — ' + tt(x.series) + (x.n != null ? ' #' + x.n : '') : '')); });
+				items.forEach(function (x) { out.push('- ' + tt(x.title) + (x.series ? ' — ' + tt(x.series) + (x.n != null ? ' #' + x.n : '') : '') + ((x.eds || []).length ? ' [' + x.eds.map(function (e) { return tt(e.label); }).join(' / ') + ']' : '')); });
 				out.push('');
 			});
 		});
@@ -288,7 +391,7 @@
 		if (kind === 'json') {
 			download('akt-lists-' + stamp + '.json', 'application/json', JSON.stringify({ app: 'akt-lists', version: 1, exported: new Date().toISOString(), lists: state.lists }, null, 2));
 		} else if (kind === 'csv') {
-			var cols = ['list', 'title_ar', 'title_en', 'series_ar', 'series_en', 'number', 'url', 'added'];
+			var cols = ['list', 'title_ar', 'title_en', 'series_ar', 'series_en', 'number', 'editions', 'url', 'added'];
 			var rows = [].concat.apply([], Object.keys(state.lists).map(rowsFor));
 			var q = function (v) { v = String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
 			/* a BOM so spreadsheet apps read the Arabic as UTF-8 */
@@ -313,7 +416,8 @@
 				Object.keys(state.lists).forEach(function (k) {
 					(data.lists[k] || []).forEach(function (x) {
 						if (x && typeof x.key === 'string' && /^[bs]:/.test(x.key) && !has(k, x.key)) {
-							state.lists[k].push({ key: x.key, href: (x.key[0] === 'b' ? 'book.html?id=' : 'series.html?id=') + encodeURIComponent(x.key.slice(2)), title: x.title, series: x.series || null, sid: x.sid || '', n: x.n != null ? x.n : null, img: typeof x.img === 'string' && /^(https:|assets\/)/.test(x.img) ? x.img : '', color: typeof x.color === 'string' && /^#[0-9a-f]{3,8}$/i.test(x.color) ? x.color : '', added: x.added || '' });
+							state.lists[k].push({ key: x.key, href: (x.key[0] === 'b' ? 'book.html?id=' : 'series.html?id=') + encodeURIComponent(x.key.slice(2)), title: x.title, series: x.series || null, sid: x.sid || '', n: x.n != null ? x.n : null, img: typeof x.img === 'string' && /^(https:|assets\/)/.test(x.img) ? x.img : '', color: typeof x.color === 'string' && /^#[0-9a-f]{3,8}$/i.test(x.color) ? x.color : '', added: x.added || '',
+									eds: Array.isArray(x.eds) ? x.eds.filter(function (e) { return e && typeof e.id === 'string' && e.label; }).map(function (e) { return { id: e.id, label: { ar: String(e.label.ar || ''), en: String(e.label.en || '') } }; }) : [] });
 							added++;
 						}
 					});
@@ -405,7 +509,10 @@
 			z2.classList.add('drop-feedback');
 			say((isNew ? L('أُضيف «', 'Added “') : L('موجود بالفعل في «', 'Already in “')) + tt(d.rec.title) + (isNew ? L('» إلى ', '” to ') : L('» — ', '” — ')) + tt(LISTS[list]), isNew ? 'success' : 'notice');
 			if (ghost) { ghost.classList.add('is-dropped'); }
-			setTimeout(close, 650);
+			setTimeout(function () {
+				close();
+				if (LISTS[list].mode === 'collector') chooseEditions(list, d.key);
+			}, 650);
 		} else close();
 		var g = ghost; ghost = null;
 		if (g) setTimeout(function () { g.remove(); }, zone ? 300 : 0);
@@ -512,6 +619,7 @@
 			var a = document.querySelector('a[href="' + (key[0] === 'b' ? 'book.html?id=' : 'series.html?id=') + key.slice(2) + '"]');
 			add(list, describe(key, a));
 			say(L('أُضيف إلى ', 'Added to ') + tt(LISTS[list]));
+			if (LISTS[list].mode === 'collector') chooseEditions(list, key);
 		}
 	}
 	var _changed = changed;
@@ -540,5 +648,5 @@
 	}
 	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 
-	window.Lists = { buttons: buttons, open: open, add: add, has: has, state: function () { return state; } };
+	window.Lists = { buttons: buttons, open: open, add: add, has: has, editions: chooseEditions, state: function () { return state; } };
 })();
