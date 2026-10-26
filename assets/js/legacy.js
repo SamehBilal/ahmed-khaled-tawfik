@@ -139,10 +139,33 @@ window.PAGE = {
 		box.className = 'lv';
 		box.hidden = true;
 		box.innerHTML = '<button type="button" class="lv-key" aria-pressed="false"><span class="lv-ic" aria-hidden="true"></span></button>' +
-			'<span class="lv-q">' + e(App.t(v.quote || (d.bio || {}).motto || {})) + (v.source ? '<small class="lv-src">— ' + e(App.t(v.source)) + '</small>' : '') + '</span>';
+			'<span class="lv-q"><span class="lv-lines"><span class="lv-line lv-idle is-in">' + e(App.t(v.quote || (d.bio || {}).motto || {})) + '</span>' +
+			(v.lines || []).map(function (ln) {
+				return '<span class="lv-line">' + e(L(ln[1], ln[2])).replace(/\{([^}]+)\}/g, '<span class="lv-em">$1</span>') + '</span>';
+			}).join('') + '</span>' +
+			(v.source ? '<small class="lv-src">— ' + e(App.t(v.source)) + '</small>' : '') + '</span>';
 		document.body.appendChild(box);
 		this._voice = box;
 		var key = box.querySelector('.lv-key');
+		/* the words follow the voice, like the intro's quote: each line rises in and drifts up as the next arrives, and the last one stays */
+		var lines = [].slice.call(box.querySelectorAll('.lv-line')), times = [-1].concat((v.lines || []).map(function (ln) { return ln[0]; })), shownAt = 0, raf = 0;
+		var sync = function () {
+			var k = 0;
+			if (a.currentTime > 0 || !a.paused) for (var j = 1; j < times.length; j++) if (a.currentTime >= times[j]) k = j;
+			if (k === 0 && !a.paused) k = -1;
+			if (k !== shownAt) {
+				lines.forEach(function (el, j) { var was = el.classList.contains('is-in'); el.classList.toggle('is-in', j === k); el.classList.toggle('is-out', j !== k && was); });
+				shownAt = k;
+				box.classList.toggle('lv-last', k === lines.length - 1 && k > 0);
+			}
+			raf = !a.paused ? requestAnimationFrame(sync) : 0;
+		};
+		if (times.length > 1) {
+			a.addEventListener('play', function () { if (!raf) raf = requestAnimationFrame(sync); });
+			['pause', 'seeked'].forEach(function (t) { a.addEventListener(t, sync); });
+			/* at the end the last line stays */
+			a.addEventListener('ended', function () { cancelAnimationFrame(raf); raf = 0; });
+		}
 		var mark = function () {
 			var on = !a.paused;
 			box.classList.toggle('on', on);

@@ -127,6 +127,17 @@ html[dir="rtl"] .lv-ic { margin-inline-start: 0; margin-inline-end: 3px; }
 .lv.on .lv-ic { width: 12px; height: 14px; border: 0; margin: 0; background: linear-gradient(90deg, currentColor 0 4px, transparent 4px 8px, currentColor 8px 12px); }
 .lv-q { font-family: var(--f-display); font-size: 13.5px; line-height: 1.4; color: var(--paper-dim); }
 .lv-src { display: block; margin-top: 3px; font-family: var(--f-body, inherit); font-size: 11.5px; opacity: .75; }
+/* the words being read, all in one spot (the box keeps the size of the longest): the line read now rises in, the one before drifts up */
+.lv-lines { display: grid; }
+.lv-line { grid-area: 1 / 1; align-self: center; opacity: 0; transform: translateY(14px); pointer-events: none;
+	transition: opacity .4s cubic-bezier(.25, .46, .45, .94), transform .4s cubic-bezier(.25, .46, .45, .94); }
+.lv-line.is-in { opacity: 1; transform: none; }
+.lv-line.is-out:not(.is-in) { opacity: 0; transform: translateY(-14px); transition-duration: .35s; transition-timing-function: ease-in; }
+/* «ينتهي» swells in ember on the last line, as «ربما» does in the intro */
+.lv-em { display: inline-block; color: var(--ember, #b3261e); }
+.lv-last .lv-em { animation: lv-swell .7s .5s cubic-bezier(.34, 1.8, .64, 1) both; }
+@keyframes lv-swell { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: scale(1.12); } }
+@media (prefers-reduced-motion: reduce) { .lv-line { transition: opacity .2s; transform: none !important; } .lv-last .lv-em { animation: none; } }
 .lv.on { border-color: var(--ember, #b3261e); box-shadow: 0 0 0 1px var(--ember, #b3261e), 0 10px 26px rgba(0, 0, 0, .45); }
 .lv.on .lv-q { color: var(--paper); }
 @media (max-width: 560px) { .lv { bottom: 76px; } .lv-q { font-size: 12.5px; } }

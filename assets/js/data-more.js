@@ -3446,12 +3446,25 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 })(window.AKT);
 
 /* the Legacy page plays, on the first scroll, a reading of Refaat Ismail's farewell from «أسطورة النبوءة» (Ma Wara' al-Tabi'a), recorded
-   for the site; quote is the line shown beside it, source where it comes from */
+   for the site; quote is the line shown beside it before it plays, source where it comes from, and lines the words as they are read:
+   [second the line starts, Arabic, English], timed from the recording's pauses; {a word} in the last one swells in ember, as in the intro */
 (function (A) {
 	A.legacyVoice = A.legacyVoice || {
 		src: 'assets/audio/legacy-voice.m4a',
 		quote: { ar: 'وداعًا أيها الغريب.. كانت إقامتك قصيرة، لكنها كانت رائعة.. عسى أن تجد جنتك التي فتشت عنها كثيرًا', en: 'Farewell, stranger.. your stay was short, but it was wonderful.. may you find the paradise you searched for so long' },
-		source: { ar: 'ما وراء الطبيعة — أسطورة النبوءة', en: 'Beyond Nature — The Legend of the Prophecy' }
+		source: { ar: 'ما وراء الطبيعة — أسطورة النبوءة', en: 'Beyond Nature — The Legend of the Prophecy' },
+		lines: [
+			[2.2, 'وداعًا أيها الغريب..', 'Farewell, stranger..'],
+			[5.1, 'كانت إقامتك قصيرة، لكنها كانت رائعة..', 'Your stay was short, but it was wonderful..'],
+			[10.1, 'عسى أن تجد جنتك التي فتشت عنها كثيرًا..', 'May you find the paradise you searched for so long..'],
+			[15.9, 'وداعًا أيها الغريب..', 'Farewell, stranger..'],
+			[18.7, 'كانت زيارتك رقصة من رقصات الظل..', 'Your visit was a dance of the shadows..'],
+			[22.5, 'قطرة من قطرات الندى قبل شروق الشمس..', 'A drop of dew before the sunrise..'],
+			[26.9, 'لحنًا سمعناه لثوان هنالك من الدغل..', 'A tune we heard for a few seconds, out there in the thicket..'],
+			[31.6, 'ثم هززنا الرؤوس، وقلنا أننا توهمناه..', 'Then we shook our heads, and said we had imagined it..'],
+			[37.3, 'وداعًا أيها الغريب..', 'Farewell, stranger..'],
+			[39.9, 'لكن كل شيء {ينتهي}...!', 'But everything {ends}...!']
+		]
 	};
 })(window.AKT);
 
