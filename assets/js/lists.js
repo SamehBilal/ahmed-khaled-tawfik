@@ -222,9 +222,20 @@
 			}).join('') + '</section>';
 	}
 
+	/* one list, a place to drop covers on */
+	function zoneHtml(k) {
+		var items = state.lists[k];
+		return '<section class="ls-zone" data-list="' + k + '">' +
+			'<h3>' + icon(k) + '<span>' + esc(tt(LISTS[k])) + '</span><b>' + esc(App() ? App().num(items.length) : items.length) + '</b></h3>' +
+			'<ul class="ls-items">' + items.map(function (x) { return itemHtml(k, x); }).join('') + '</ul>' +
+			(items.length ? '' : '<p class="ls-empty">' + L('لا شيء هنا بعد.', 'Nothing here yet.') + '</p>') +
+			'<span class="ls-check" aria-hidden="true">✓</span>' +
+		'</section>';
+	}
+
+	var dragView = false;
 	function render() {
 		if (!panel) return;
-		var mode = MODES[state.mode];
 		panel.setAttribute('aria-label', L('قوائمي', 'My lists'));
 		panel.innerHTML = '<div class="ls-inner">' +
 			'<header class="ls-head">' +
@@ -236,15 +247,10 @@
 			'</header>' +
 			'<p class="ls-hint ls-hint-drag">' + L('أفلِت الغلاف في القائمة التي تريدها.', 'Drop the cover on a list.') + '</p>' +
 			'<p class="ls-hint ls-hint-browse">' + L('اسحب أي غلاف في الموقع (أو اضغط عليه مطوّلًا على الهاتف) لتضيفه إلى قائمة.', 'Drag any cover on the site (or long-press it on a phone) to add it to a list.') + '</p>' +
-			'<div class="ls-zones">' + mode.lists.map(function (k) {
-				var items = state.lists[k];
-				return '<section class="ls-zone" data-list="' + k + '">' +
-					'<h3>' + icon(k) + '<span>' + esc(tt(LISTS[k])) + '</span><b>' + esc(App() ? App().num(items.length) : items.length) + '</b></h3>' +
-					'<ul class="ls-items">' + items.map(function (x) { return itemHtml(k, x); }).join('') + '</ul>' +
-					(items.length ? '' : '<p class="ls-empty">' + L('لا شيء هنا بعد.', 'Nothing here yet.') + '</p>') +
-					'<span class="ls-check" aria-hidden="true">✓</span>' +
-				'</section>';
-			}).join('') + '</div>' +
+			/* while a cover is dragged, all four lists wait for it — the reader's two and the collector's two — each pair under its name */
+			(dragView ? '<div class="ls-pairs">' : '') + (dragView ? Object.keys(MODES) : [state.mode]).map(function (m) {
+				return (dragView ? '<div class="ls-pair"><h4>' + esc(tt(MODES[m])) + '</h4>' : '') + '<div class="ls-zones">' + MODES[m].lists.map(zoneHtml).join('') + '</div>' + (dragView ? '</div>' : '');
+			}).join('') + (dragView ? '</div>' : '') +
 			shelfHtml() +
 			'<footer class="ls-tools">' +
 				'<span class="ls-tools-l">' + L('تصدير', 'Export') + '</span>' +
@@ -263,6 +269,7 @@
 	var lastFocus = null;
 	function open(drag) {
 		if (!panel) return;
+		dragView = !!drag;
 		render();
 		document.body.classList.toggle('ls-dragging', !!drag);
 		panel.classList.add('show');
@@ -279,6 +286,7 @@
 		overlay.classList.remove('show');
 		panel.setAttribute('aria-hidden', 'true');
 		document.body.classList.remove('ls-dragging');
+		dragView = false;
 		if (lastFocus && lastFocus.focus) { lastFocus.focus(); lastFocus = null; }
 	}
 

@@ -80,6 +80,10 @@ body.ls-dragging .ls-head { justify-content: center; }
 	background: var(--ink); border: 1px solid var(--line);
 	transition: transform .3s, background .3s, border-color .3s;
 }
+/* the reader's pair and the collector's pair side by side, each under its name */
+.ls-pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.ls-pair h4 { margin: 0 0 10px; text-align: center; font-family: var(--f-display); font-size: 17px; color: var(--paper-dim); }
+.ls-pair .ls-zones { gap: 12px; }
 body.ls-dragging .ls-zone { min-height: 150px; display: flex; align-items: center; justify-content: center; border: 2px dashed color-mix(in srgb, var(--paper) 25%, transparent); }
 .ls-zone.highlight { background: color-mix(in srgb, var(--ember) 22%, var(--ink)); border-color: var(--ember); transform: scale3d(1.04, 1.04, 1); }
 .ls-zone h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font-family: var(--f-display); font-size: 19px; }
@@ -255,6 +259,9 @@ a[href*="book.html?id="], a[href*="series.html?id="] { -webkit-touch-callout: no
 @media (max-width: 640px) {
 	.ls-zones { grid-template-columns: 1fr; }
 	body.ls-dragging .ls-zones { grid-template-columns: 1fr 1fr; }
+	.ls-pairs { grid-template-columns: 1fr; gap: 12px; }
+	.ls-pair h4 { margin-bottom: 6px; font-size: 15px; }
+	body.ls-dragging .ls-pair .ls-zone { min-height: 96px; }
 	body.ls-dragging .ls-zone { min-height: 130px; }
 	body.ls-dragging .ls-zone h3 { font-size: 18px; }
 	.ls-progress li, .ls-shelf-g summary { grid-template-columns: 1fr auto; }
