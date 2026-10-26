@@ -34,9 +34,36 @@ window.PAGE = {
 		var App = window.App, blog = App.data().blog || { posts: [] };
 		var id = new URLSearchParams(location.search).get('post');
 		var post = id && blog.posts.filter(function (p) { return p.id === id; })[0];
+		this.wireNav();
 		document.body.classList.toggle('blog-reading', !!post);
+		document.title = (post ? post.t : App.t(this.title)) + ' — ' + App.L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik');
 		if (post) return post.comic ? this.renderComic(post) : this.renderArticle(post);
 		this.renderArchive();
+	},
+
+	/* moving between the archive and its articles stays on this page: the address changes (so links, sharing and Back
+	   still work) but the archive's data, about a megabyte, is not loaded and read again for every article — on a
+	   phone that was the wait after tapping a card */
+	wireNav: function () {
+		if (this._nav) return;
+		this._nav = true;
+		var self = this;
+		var go = function (toPost) {
+			self.render();
+			window.App.observeRise && window.App.observeRise();
+			if (toPost) window.scrollTo(0, 0);
+		};
+		document.addEventListener('click', function (ev) {
+			if (ev.defaultPrevented || ev.button !== 0 || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+			var a = ev.target.closest && ev.target.closest('a[href]');
+			if (!a || a.target === '_blank') return;
+			var href = a.getAttribute('href');
+			if (!/^blog\.html(\?post=[^&#]+)?$/.test(href)) return;
+			ev.preventDefault();
+			if (href !== location.pathname.split('/').pop() + location.search) history.pushState(null, '', href);
+			go(/post=/.test(href));
+		});
+		window.addEventListener('popstate', function () { go(/[?&]post=/.test(location.search)); });
 	},
 
 	/* ---------------- the archive: years → months → articles ---------------- */
