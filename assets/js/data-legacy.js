@@ -131,7 +131,7 @@ window.AKT.legacy = [
     "source": "https://www.goodreads.com/book/show/60173957"
   },
   {
-    "date": "2022",
+    "date": "2022-10-31",
     "image": "yt:yzI-l86BQwM",
     "title": { "ar": "مسلسل \"الغرفة 207\" على شاهد", "en": "\"Room 207\" series on Shahid" },
     "text": {

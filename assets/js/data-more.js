@@ -2605,7 +2605,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		'2019-06-10': 'assets/img/timeline/google-doodle-2019.webp',
 		'2020-11-05': 'assets/img/posters/paranormal.jpg',
 		'2022-01': 'cover:mirante',
-		'2022': 'assets/img/posters/room207.jpg'
+		'2022-10-31': 'assets/img/posters/room207.jpg'
 	};
 	(A.legacy || []).forEach(function (l) {
 		var p = photo[l.date + '|' + ((l.title || {}).ar || '')] || photo[l.date];
@@ -3489,6 +3489,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var M = A.media = A.media || [];
 	if (!M.some(function (m) { return m.url === ev.source; })) {
 		M.push({ kind: 'article', title: { ar: 'آخر رسائل «العراب» أحمد خالد توفيق.. سجلها قبل وفاته رغم سوء حالته', en: 'The Godfather’s last messages, recorded before his death despite his illness' }, outlet: { ar: 'صدى البلد', en: 'Sada El Balad' }, year: 2018, lang: 'ar', url: ev.source });
+		M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+	}
+})(window.AKT);
+
+/* the Legacy timeline: the fourth anniversary of his death in a Youm7 caricature by Ahmed Khalaf (2 April 2022) — and the report
+   among the articles */
+(function (A) {
+	var L = A.legacy = A.legacy || [];
+	var src = 'https://www.youm7.com/story/2022/4/2/%D8%B0%D9%83%D8%B1%D9%89-%D9%88%D9%81%D8%A7%D8%A9-%D8%A7%D9%84%D9%83%D8%A7%D8%AA%D8%A8-%D8%A3%D8%AD%D9%85%D8%AF-%D8%AE%D8%A7%D9%84%D8%AF-%D8%AA%D9%88%D9%81%D9%8A%D9%82-%D9%81%D9%8A-%D9%83%D8%A7%D8%B1%D9%8A%D9%83%D8%A7%D8%AA%D9%8A%D8%B1-%D8%A7%D9%84%D9%8A%D9%88%D9%85-%D8%A7%D9%84%D8%B3%D8%A7%D8%A8%D8%B9/5714274';
+	var ev = { date: '2022-04-02', image: 'assets/img/timeline/youm7-caricature-2022.webp', photo: 'assets/img/timeline/youm7-caricature-2022.webp',
+		title: { ar: 'الذكرى الرابعة في كاريكاتير', en: 'The fourth anniversary, in a caricature' },
+		text: { ar: 'في الذكرى الرابعة لرحيله رسمه الفنان أحمد خلف في كاريكاتير «اليوم السابع»، وذكّرت الجريدة بأنه تنبأ في «قهوة باليورانيوم» بأن يُدفن يوم 3 أبريل بعد صلاة الظهر، وهو ما حدث.',
+			en: 'On the fourth anniversary of his death, Ahmed Khalaf drew him in Youm7’s caricature, and the paper recalled that in Coffee with Uranium he had foreseen being buried on 3 April after the noon prayer — as he was.' },
+		source: src };
+	if (!L.some(function (l) { return l.source === src; })) {
+		var at = L.length;
+		for (var i = 0; i < L.length; i++) if (String(L[i].date) > ev.date) { at = i; break; }
+		L.splice(at, 0, ev);
+	}
+	var M = A.media = A.media || [];
+	if (!M.some(function (m) { return m.url === src; })) {
+		M.push({ kind: 'article', title: { ar: 'ذكرى وفاة الكاتب أحمد خالد توفيق في كاريكاتير «اليوم السابع» بريشة أحمد خلف', en: 'The anniversary of his death in a Youm7 caricature by Ahmed Khalaf' }, outlet: { ar: 'اليوم السابع', en: 'Youm7' }, year: 2022, lang: 'ar', url: src });
 		M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 	}
 })(window.AKT);
