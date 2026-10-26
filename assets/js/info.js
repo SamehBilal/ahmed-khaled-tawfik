@@ -97,16 +97,22 @@
 			title: { ar: 'حقوق الاستخدام', en: 'Rights & use' },
 			eyebrow: { ar: 'لمن هذه الكتب والصور؟', en: 'Whose books and images are these?' },
 			lead: {
-				ar: 'الأعمال لأصحابها. هذا الموقع فهرس ودليل، لا مكتبة تحميل.',
-				en: 'The works belong to their owners. This site is a catalogue and a guide, not a download library.'
+				ar: 'الأعمال لأصحابها. هذا الموقع فهرس ودليل، لا مكتبة تحميل: يدلّك على الكتب والطبعات والتسجيلات في أماكنها.',
+				en: 'The works belong to their owners. This site is a catalogue and a guide, not a download library: it points you to the books, editions and recordings where they are.'
 			},
 			sections: [
 				{ h: { ar: 'حقوق الأعمال', en: 'Rights in the works' },
-					p: { ar: '<p>حقوق كتب أحمد خالد توفيق ونصوصه لورثته ولناشريه. لا ينشر الموقع نصوص الكتب، ولا يقدّم روابط لنسخ مقرصنة؛ بل يدلّك على أماكن شرائها أو قراءتها أو الاستماع إليها بشكل قانوني. الاقتباسات قصيرة، ومذكور مصدرها، للتعريف والتذكّر.</p>',
-						en: '<p>The rights to Ahmed Khaled Tawfik’s books and writing belong to his heirs and his publishers. The site does not publish the books’ text and does not link to pirated copies; it points you to where you can buy, read or listen to them legally. Quotes are short and sourced, for reference and remembrance.</p>' } },
+					p: { ar: '<p>حقوق كتب أحمد خالد توفيق ونصوصه لورثته ولناشريه. لا ينشر الموقع نصوص الكتب، ولا يقدّم روابط لنسخ مقرصنة؛ بل يدلّك على أماكن شرائها أو قراءتها أو الاستماع إليها بشكل قانوني: متاجر الكتب الورقية والإلكترونية، ومنصات الكتب المسموعة. الاقتباسات قصيرة، ومذكور مصدرها، للتعريف والتذكّر. روابط المتاجر روابط بحث عادية، بلا عمولة للموقع.</p>',
+						en: '<p>The rights to Ahmed Khaled Tawfik’s books and writing belong to his heirs and his publishers. The site does not publish the books’ text and does not link to pirated copies; it points you to where you can buy, read or listen to them legally: print and ebook stores, and audiobook platforms. Quotes are short and sourced, for reference and remembrance. Store links are plain searches, with no commission for the site.</p>' } },
+				{ h: { ar: 'المدونة', en: 'The blog' },
+					p: { ar: '<p>مقالاته وقصصه وكوميكسه في <a href="blog.html">المدونة</a> منقولة من أرشيف مدونة «أحمد خالد توفيق» (aktowfik.blogspot.com) بإذن صاحبها عمرو عبيد، وكل منشور يحمل رابطه هناك وتاريخ نشره ومكانه الأول. حقوق النصوص لكاتبها وورثته وللصحف التي نشرتها أولًا.</p>',
+						en: '<p>His columns, stories and comics on the <a href="blog.html">blog</a> page are taken from the archive of the “Ahmed Khaled Tawfik” blog (aktowfik.blogspot.com) with the permission of its keeper, Amr Ebaid, and every post carries its link there, its date and where it first appeared. The rights to the texts remain with their author, his heirs and the papers that first ran them.</p>' } },
+				{ h: { ar: 'المسموع والمرئي', en: 'Audio and video' },
+					p: { ar: '<p>لا يستضيف الموقع أي تسجيل لكتبه. حلقات Audiohat وكتب Storytel و«اقرألي» تُسمع على منصاتها، وزر «استمع على …» يفتح صفحتها هناك؛ أما فيديوهات YouTube فتُعرض عبر مشغّل YouTube نفسه، وحقوقها لقنواتها. المقالات والتقارير عنه مذكورة بعناوينها وروابطها إلى مواقعها، لا منقولة. الصوت الذي يُسمع في صفحة <a href="legacy.html">الإرث</a> قراءة سُجّلت للموقع لكلماته من «أسطورة النبوءة».</p>',
+						en: '<p>The site hosts no recording of his books. Audiohat episodes and Storytel and Iqraaly audiobooks are heard on their own platforms, and the «Listen on …» key opens their page there; YouTube videos play through YouTube’s own player, and belong to their channels. Articles and reports about him are listed by title with links to where they were published, not copied. The voice on the <a href="legacy.html">Legacy</a> page is a reading of his words from “The Legend of the Prophecy”, recorded for the site.</p>' } },
 				{ h: { ar: 'الأغلفة والصور', en: 'Covers and images' },
-					p: { ar: '<p>الأغلفة ملك ناشريها ورسّاميها، وتُعرض صغيرة للتعريف بالكتاب، كما في أي فهرس أو متجر. الملصقات وصور الشاشة لمنتجيها، والصور الشخصية لمصوّريها ومصادرها. أسماء المنصّات والعلامات التجارية لأصحابها.</p>',
-						en: '<p>Covers belong to their publishers and illustrators and are shown small to identify the book, as in any catalogue or store. Posters and stills belong to their producers, photos to their photographers and sources. Platform names and trademarks belong to their owners.</p>' } },
+					p: { ar: '<p>الأغلفة الأمامية والخلفية ملك ناشريها ورسّاميها، وتُعرض للتعريف بالكتاب وطبعاته، كما في أي فهرس أو متجر. الملصقات وصور الشاشة لمنتجيها، والصور الشخصية لمصوّريها ومصادرها، ويُذكر مصدر الصورة ورخصتها حين تكون مفتوحة. أسماء المنصّات والعلامات التجارية لأصحابها.</p>',
+						en: '<p>Front and back covers belong to their publishers and illustrators and are shown to identify the book and its editions, as in any catalogue or store. Posters and stills belong to their producers, photos to their photographers and sources, with the source and licence named when it is an open one. Platform names and trademarks belong to their owners.</p>' } },
 				{ h: { ar: 'طلب الإزالة', en: 'Removal requests' },
 					p: { ar: '<p>إن كنت صاحب حق في صورة أو نص هنا وتريد إزالته أو تعديل إسناده، فراسلنا على ' + mail + ' أو من <a href="contact.html">صفحة التواصل</a> وسنستجيب في أقرب وقت.</p>',
 						en: '<p>If you hold the rights to an image or text here and want it removed or its credit changed, write to ' + mail + ' or use the <a href="contact.html">contact page</a> and we will act on it as soon as we can.</p>' } },
