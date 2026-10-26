@@ -514,8 +514,11 @@
 			var K = {
 				series: { ar: 'سلسلة', en: 'Series' }, work: { ar: 'كتاب', en: 'Book' }, issue: { ar: 'عدد', en: 'Issue' },
 				character: { ar: 'شخصية', en: 'Character' }, writer: { ar: 'كاتب', en: 'Writer' }, quote: { ar: 'اقتباس', en: 'Quote' },
-				legacy: { ar: 'الإرث', en: 'Legacy' }, tribute: { ar: 'قالوا عنه', en: 'Tribute' }, blog: { ar: 'المدونة', en: 'Blog' }, media: { ar: 'لقاء / مقال', en: 'Media' }
+				legacy: { ar: 'الإرث', en: 'Legacy' }, tribute: { ar: 'قالوا عنه', en: 'Tribute' }, blog: { ar: 'المدونة', en: 'Blog' }, media: { ar: 'لقاء / مقال', en: 'Media' },
+				about: { ar: 'كتاب عنه', en: 'Book about him' }, near: { ar: 'كتاب من حوله', en: 'Related book' }, publisher: { ar: 'دار نشر', en: 'Publisher' },
+				award: { ar: 'جائزة', en: 'Award' }, audio: { ar: 'مسموع', en: 'Audio' }
 			};
+			var S = window.WorksShared;
 
 			(d.series || []).forEach(function (s) { add(K.series, s.title, s.years, 'series.html?id=' + s.id, both(s.tagline) + ' ' + both(s.synopsis)); });
 			(d.works || []).forEach(function (w) { add(K.work, w.title, w.year, 'book.html?id=' + w.id, both(w.synopsis)); });
@@ -530,10 +533,33 @@
 				(s.issues || []).forEach(function (is, i) { add(K.issue, is.title, s.title, App.issueHref(s.id, Object.assign({ _idx: i }, is)), both(is.original)); });
 			});
 			(d.characters || []).forEach(function (c) { add(K.character, c.name, App.findWork(c.work) ? App.findWork(c.work).title : '', App.charHref(c.id), both(c.role) + ' ' + both(c.desc)); });
-			var W = d.writers || {};
+			/* each writer once, on their own page (as people.js names it), with every work they share with him */
+			var W = d.writers || {}, people = {};
+			var slugOf = function (name) {
+				return String((name && name.en) || '').replace(/^Dr\.\s*/, '').toLowerCase()
+					.normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'writer';
+			};
 			Object.keys(W).forEach(function (k) {
-				(W[k] || []).forEach(function (w, i) { add(K.writer, w.name, w.work || w.book || '', 'writers.html#wr-' + k + '-' + i, both(w.text)); });
+				(W[k] || []).forEach(function (w) {
+					var id = slugOf(w.name), p = people[id] = people[id] || { name: w.name, work: w.work || w.book || '', body: [] };
+					p.body.push(both(w.work), both(w.book), both(w.text));
+				});
 			});
+			Object.keys(people).forEach(function (id) { var p = people[id]; add(K.writer, p.name, p.work, 'writer.html?id=' + encodeURIComponent(id), p.body.join(' ')); });
+			/* the other writers' books with his words or dedicated to him, and the books about him: each has its page */
+			if (S && S.entryBooks) S.entryBooks().forEach(function (x) { add(K.near, x.w.book, x.w.name, S.bookHref(x.id), both(x.w.text)); });
+			(d.aboutBooks || []).forEach(function (b) { add(K.about, b.title, b.by, 'book.html?id=' + encodeURIComponent(b.id), both(b.by) + ' ' + both(b.publisher)); });
+			if (S && S.publishers) S.publishers().forEach(function (x) { var p = x.p || x; add(K.publisher, p.name, p.city || '', 'publisher.html?id=' + encodeURIComponent(p.id), both(p.note) + ' ' + both(p.about)); });
+			(d.awards || []).forEach(function (a) { add(K.award, a.title, a.year, a.work ? 'book.html?id=' + encodeURIComponent(a.work) : 'works.html#awards-section', both(a.text)); });
+			/* the Audio page's own rows: Eslam Adel's readings, the After Midnight programme, its later seasons and their episodes */
+			var au = d.audio || {};
+			if (au.youtube && au.youtube.eslamAdel) au.youtube.eslamAdel.eps.forEach(function (ep) { add(K.audio, ep[2], { ar: 'بصوت إسلام عادل', en: 'Read by Eslam Adel' }, 'audio.html', 'بصوت إسلام عادل Eslam Adel YouTube'); });
+			(au.midnight || []).forEach(function (m) { add(K.audio, { ar: m[0], en: m[0] }, { ar: 'بعد منتصف الليل', en: 'After Midnight' }, 'audio.html', 'audiohat'); });
+			(au.seasons || []).forEach(function (se) {
+				add(K.audio, { ar: 'بعد منتصف الليل — الموسم ' + se.n, en: 'After Midnight — season ' + se.n }, { ar: String(se.year || ''), en: String(se.year || '') }, 'audio.html',
+					se.eps.map(function (ep) { return ep[2] || ''; }).join(' '));
+			});
+			if (au.midnightSpoofs) add(K.audio, au.midnightSpoofs.title, { ar: au.midnightSpoofs.years || '', en: au.midnightSpoofs.years || '' }, 'audio.html', 'audiohat');
 			(d.quotes || []).forEach(function (q, i) { add(K.quote, q.text, q.from, 'quotes.html#q-' + i, both(q.from)); });
 			(d.legacy || []).forEach(function (l, i) { add(K.legacy, l.title, l.date, 'legacy.html#l-' + i, both(l.text)); });
 			(d.tributes || []).forEach(function (p, i) { add(K.tribute, p.name, p.role, 'tributes.html#t-' + i, both(p.quote) + ' ' + both(p.context)); });

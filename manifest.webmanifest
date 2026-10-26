@@ -2,7 +2,7 @@
 	"id": "./",
 	"name": "العرّاب — أحمد خالد توفيق",
 	"short_name": "العرّاب",
-	"description": "موقع عن أحمد خالد توفيق (العرّاب): حياته وسلاسله ورواياته وشخصياته والكتّاب من حوله، يعمل دون إنترنت. — Ahmed Khaled Tawfik, the Godfather of Arabic horror: his life, series, novels and characters, offline too.",
+	"description": "موقع عن أحمد خالد توفيق (العرّاب): حياته وسلاسله ورواياته وشخصياته والكتّاب من حوله، وتسجيلات كتبه، ومقالات مدونته، وإرثه بعد رحيله، وقوائم للقارئ والمقتني — يعمل دون إنترنت. — Ahmed Khaled Tawfik, the Godfather of Arabic horror: his life, series, novels, characters and the writers around him, his books as recordings, his blog, his legacy, and lists for readers and collectors — offline too.",
 	"lang": "ar",
 	"dir": "rtl",
 	"start_url": "./index.html?source=pwa",
@@ -76,7 +76,7 @@
 		{
 			"name": "مسموع",
 			"short_name": "مسموع",
-			"description": "Audio — the cassette deck",
+			"description": "Audio — his books on Audiohat, Storytel, Iqraaly and YouTube",
 			"url": "./audio.html?source=pwa",
 			"icons": [
 				{
@@ -89,8 +89,21 @@
 		{
 			"name": "المدونة",
 			"short_name": "المدونة",
-			"description": "Blog — his columns",
+			"description": "Blog — his columns, stories and comics",
 			"url": "./blog.html?source=pwa",
+			"icons": [
+				{
+					"src": "assets/img/icons/icon-192.png",
+					"sizes": "192x192",
+					"type": "image/png"
+				}
+			]
+		},
+		{
+			"name": "الإرث",
+			"short_name": "الإرث",
+			"description": "Legacy — what came after him",
+			"url": "./legacy.html?source=pwa",
 			"icons": [
 				{
 					"src": "assets/img/icons/icon-192.png",
@@ -109,18 +122,18 @@
 			"label": "الرئيسية — Home"
 		},
 		{
-			"src": "assets/img/screens/wide-timeline.jpg",
+			"src": "assets/img/screens/wide-legacy.jpg",
 			"sizes": "1280x720",
 			"type": "image/jpeg",
 			"form_factor": "wide",
-			"label": "حياة في محطات — The timeline"
+			"label": "الإرث — Legacy"
 		},
 		{
-			"src": "assets/img/screens/wide-works.jpg",
+			"src": "assets/img/screens/wide-audio.jpg",
 			"sizes": "1280x720",
 			"type": "image/jpeg",
 			"form_factor": "wide",
-			"label": "الأعمال — Works"
+			"label": "مسموع — Audio"
 		},
 		{
 			"src": "assets/img/screens/narrow-home.jpg",
@@ -130,11 +143,11 @@
 			"label": "الرئيسية — Home"
 		},
 		{
-			"src": "assets/img/screens/narrow-works.jpg",
+			"src": "assets/img/screens/narrow-blog.jpg",
 			"sizes": "412x915",
 			"type": "image/jpeg",
 			"form_factor": "narrow",
-			"label": "سلاسل شارك فيها — Series he wrote for"
+			"label": "المدونة — Blog"
 		},
 		{
 			"src": "assets/img/screens/narrow-characters.jpg",
