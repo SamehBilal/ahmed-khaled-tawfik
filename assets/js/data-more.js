@@ -3392,3 +3392,55 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		L.splice(at, 0, ev);
 	}
 })(window.AKT);
+
+/* the Legacy timeline: what else happened after him, from the site's own books and audio and their sources —
+   his posthumous books, «بعد منتصف الليل» back on Audiohat and the Lasheen novels out of it, and Ahmed Amin reading his life
+   for Storytel (Al-Bawaba News, 18 February 2023) */
+(function (A) {
+	var L = A.legacy = A.legacy || [];
+	var add = function (ev) {
+		if (L.some(function (l) { return (l.title || {}).ar === ev.title.ar; })) return;
+		var at = L.length;
+		for (var i = 0; i < L.length; i++) if (String(L[i].date) > ev.date) { at = i; break; }
+		L.splice(at, 0, ev);
+	};
+	add({ date: '2018-07', image: 'cover:che',
+		title: { ar: 'صدور «تشي جيفارا: سيرة مصورة»', en: 'Che: A Graphic Biography published' },
+		text: { ar: 'نشرت دار الشروق بعد رحيله ترجمته للسيرة المصورة لتشي جيفارا برسوم سبين رودريجيز.', en: 'Dar El Shorouk published, after his death, his translation of Spain Rodriguez’s graphic biography of Che Guevara.' } });
+	add({ date: '2019-01-20', image: 'cover:rufaqa',
+		title: { ar: 'صدور «رفقاء الليل»', en: 'Rufaqa al-Lail published' },
+		text: { ar: 'اثنتا عشرة قصة له جمعتها دار الكرمة بعد رحيله.', en: 'Twelve of his stories, gathered by Dar Al Karma after his death.' } });
+	add({ date: '2020-10-31', image: 'assets/img/audio/mid-season-2.webp',
+		title: { ar: '«بعد منتصف الليل» يعود على Audiohat', en: 'After Midnight returns on Audiohat' },
+		text: { ar: 'البرنامج الإذاعي الذي كتب عنه في «أسطورة بعد منتصف الليل» عاد بموسم ثانٍ مسموع من تأليف شيرين هنائي بعد خمسين عامًا من الأول، وتوالت مواسمه كل عام.',
+			en: 'The radio show he wrote of in “The Legend of After Midnight” came back with a second, audio season written by Sherine Hanaey, set fifty years after the first, and a new season has followed every year.' },
+		source: 'https://www.audiohatdar.com/books/01_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_2' });
+	add({ date: '2021', image: 'assets/img/audio/mid-season-3.webp',
+		title: { ar: 'روايات «لاشين» من عالمه', en: 'The Lasheen novels, out of his world' },
+		text: { ar: 'من مواسم «بعد منتصف الليل» خرجت سلسلة «لاشين» لشيرين هنائي عن دار كتوبيا، بدءًا من «عهد الدجالين» عام 2021، وبلغت عددها الثامن عشر عام 2026.',
+			en: 'Out of the After Midnight seasons grew Sherine Hanaey’s Lasheen series from Kotopia, beginning with “The Age of Charlatans” in 2021 and reaching its eighteenth book in 2026.' } });
+	add({ date: '2023-02-19', image: 'assets/img/covers/about/ostoura-khalaf-gaber.webp',
+		title: { ar: 'أحمد أمين يقرأ سيرته', en: 'Ahmed Amin reads his life' },
+		text: { ar: 'صدر على «ستوريتل» كتاب صوتي عن سيرته، «أسطورة أحمد خالد توفيق» لخلف جابر، بصوت أحمد أمين الذي أدّى رفعت إسماعيل في «ما وراء الطبيعة»، وإخراج خالد المهدي.',
+			en: 'Storytel released an audiobook of his life, Khalaf Gaber’s “The Legend of Ahmed Khaled Tawfik”, read by Ahmed Amin, who played Refaat Ismail in Paranormal, and directed by Khaled El-Mahdy.' },
+		source: 'https://www.albawabhnews.com/4755838' });
+	add({ date: '2024', image: 'cover:nashawat-qadima',
+		title: { ar: 'صدور «نشوات قديمة»', en: 'Nashawat Qadima published' },
+		text: { ar: 'نشرت كيان كلمات بعض أغانيه المفضلة وترجمته لها.', en: 'Kayan published the words of some of his favourite songs, with his translations of them.' } });
+	add({ date: '2025-01-21', image: 'cover:daani-okhberak',
+		title: { ar: 'صدور «دعني أخبرك بشيء»', en: 'Let Me Tell You Something published' },
+		text: { ar: 'مختارات من تأملاته عن الحياة والبشر، نشرتها دار الكرمة.', en: 'A selection of his reflections on life and people, published by Dar Al Karma.' } });
+
+	/* the articles behind them, and others the site cites */
+	var M = A.media = A.media || [];
+	[
+		{ kind: 'article', title: { ar: 'مصر تودّع مبدع «يوتوبيا» و«مثل إيكاروس»', en: 'Egypt bids farewell to the author of Utopia and Like Icarus' }, outlet: { ar: 'الإمارات اليوم', en: 'Emarat Al Youm' }, year: 2018, lang: 'ar', url: 'https://www.emaratalyoum.com/life/culture/2018-04-04-1.1086411' },
+		{ kind: 'article', title: { ar: '11 معلومة عن رواية «شآبيب» الفائزة بأفضل كتاب لعام 2018', en: '11 facts about Shaabeeb, best book of 2018' }, outlet: { ar: 'الشروق', en: 'Shorouk News' }, year: 2018, lang: 'ar', url: 'https://www.shorouknews.com/news/view.aspx?cdate=27122018&id=28370922-7075-4cd5-8eac-8749da393411' },
+		{ kind: 'article', title: { ar: 'أبرزهم أحمد خالد توفيق.. مبدعون رحلوا وأعمالهم في معرض الكتاب 2019', en: 'Tawfik first among the writers gone whose books are at the 2019 book fair' }, outlet: { ar: 'مصراوي', en: 'Masrawy' }, year: 2019, lang: 'ar', url: 'https://www.masrawy.com/news/news_egypt/details/2019/1/19/1498961' },
+		{ kind: 'article', title: { ar: 'عمرو سلامة يكشف عن أول ظهور لشخصية «رفعت إسماعيل» في فيلم «زي النهاردة»', en: 'Amr Salama on Refaat Ismail’s first appearance, in On a Day Like Today' }, outlet: { ar: 'نجوم إف إم', en: 'Nogoum FM' }, year: 2020, lang: 'ar', url: 'https://www.nogoumfm.net/news/2020/11/%D8%B9%D9%85%D8%B1%D9%88-%D8%B3%D9%84%D8%A7%D9%85%D8%A9-%D9%8A%D9%83%D8%B4%D9%81-%D8%B9%D9%86-%D8%A3%D9%88%D9%84-%D8%B8%D9%87%D9%88%D8%B1-%D9%84%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9-%D8%B1%D9%81%D8%B9/' },
+		{ kind: 'article', title: { ar: 'من داخل «ما وراء الطبيعة»، مسلسل نتفليكس العربي الجديد', en: 'Inside ‘Paranormal,’ Netflix’s new Arabic series' }, outlet: { ar: 'عرب نيوز', en: 'Arab News' }, year: 2020, lang: 'en', url: 'https://www.arabnews.com/art-culture/inside-paranormal-netflixs-new-arabic-series-1759231' },
+		{ kind: 'article', title: { ar: 'غدًا.. أحمد أمين يقدم سيرة الدكتور أحمد خالد توفيق في كتاب صوتي', en: 'Ahmed Amin presents Tawfik’s life in an audiobook' }, outlet: { ar: 'البوابة نيوز', en: 'Al-Bawaba News' }, year: 2023, lang: 'ar', url: 'https://www.albawabhnews.com/4755838' }
+	].forEach(function (m) { if (!M.some(function (x) { return x.url === m.url; })) M.push(m); });
+	/* in date order, the ones without a year last as before */
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
