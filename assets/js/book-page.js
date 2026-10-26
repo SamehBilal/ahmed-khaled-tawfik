@@ -238,9 +238,10 @@ window.PAGE = {
 			}
 		}
 
-		/* an issue's episodes (Audiohat, YouTube, Storytel, Iqraaly); a book of his has its Storytel audiobooks */
+		/* an issue's episodes (Audiohat, YouTube, Storytel, Iqraaly); a book of his has its Storytel audiobooks and its readings on YouTube */
 		var audioTracks = !window.Cassette ? [] : isIssue ? window.Cassette.issueTracks(r.id, t(title))
-			: (window.Cassette.storytelTracks ? window.Cassette.storytelTracks((r.about ? 'about:' : 'work:') + (r.id || id), t(title)) : []);
+			: (window.Cassette.storytelTracks ? window.Cassette.storytelTracks((r.about ? 'about:' : 'work:') + (r.id || id), t(title)) : [])
+				.concat(r.about ? [] : window.Cassette.youtubeTracks('work:' + (r.id || id), t(title)));
 		var whereOf = function (x) { return x.yt ? (x.channel || 'YouTube') : L(x.providerAr || x.provider || 'Audiohat', x.provider || 'Audiohat'); };
 
 		/* ---------- where to buy: store search links for this title (no affiliate codes) ---------- */

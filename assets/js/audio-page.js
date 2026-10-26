@@ -6,8 +6,8 @@ window.PAGE = {
 		eyebrow: { ar: 'كتب مسموعة', en: 'Audiobooks' },
 		title: { ar: 'العرّاب مسموعًا', en: 'The Godfather, out loud' },
 		lead: {
-			ar: 'أعداد «ما وراء الطبيعة» و«فانتازيا» و«سافاري» وكتبه كما سجّلتها Audiohat وStorytel، وحكايات «بعد منتصف الليل» وروايات «لاشين» على Audiohat و«اقرألي»، و«سافاري» دراما إذاعية على YouTube. اختر منصة أو شريطًا ثم اضغط الزر.',
-			en: 'Beyond Nature, Fantasia and Safari issues and his books as recorded by Audiohat and Storytel, the “After Midnight” stories and the Lasheen novels on Audiohat and Iqraaly, and Safari as a radio drama on YouTube. Pick a platform or a tape, then press the key.'
+			ar: 'أعداد «ما وراء الطبيعة» و«فانتازيا» و«سافاري» وكتبه كما سجّلتها Audiohat وStorytel، وحكايات «بعد منتصف الليل» وروايات «لاشين» على Audiohat و«اقرألي»، و«سافاري» دراما إذاعية وكتبه بصوت إسلام عادل على YouTube. اختر منصة أو شريطًا ثم اضغط الزر.',
+			en: 'Beyond Nature, Fantasia and Safari issues and his books as recorded by Audiohat and Storytel, the “After Midnight” stories and the Lasheen novels on Audiohat and Iqraaly, and Safari as a radio drama and his books read by Eslam Adel on YouTube. Pick a platform or a tape, then press the key.'
 		}
 	},
 
@@ -100,6 +100,20 @@ window.PAGE = {
 			note: { ar: 'كتب صوتية من رواياته ومجموعاته ومقالاته على Storytel، ومعها كتاب عنه وقصص له تبيعها منفردة؛ الزر يفتح صفحة الكتاب هناك.',
 				en: 'Audiobooks of his novels, collections and essays on Storytel, with a book about him and stories of his it sells on their own; the key opens the book’s page there.' },
 			rows: brows
+		});
+
+		/* his books and stories read by Eslam Adel on YouTube, one row a video, played here under the tape */
+		var EA = A.youtube && A.youtube.eslamAdel, erows = [];
+		(EA ? EA.eps : []).forEach(function (ep) {
+			var w = ep[3] ? App.findWork(ep[3]) : null, start = tracks.length;
+			tracks.push({ title: t(ep[2]), ep: L('بصوت إسلام عادل', 'read by Eslam Adel'), sub: (w && t(w.title) !== t(ep[2]) ? t(w.title) + ' · ' : '') + L('بصوت إسلام عادل', 'Read by Eslam Adel'),
+				channel: EA.channel.name, url: 'https://www.youtube.com/watch?v=' + ep[0], yt: ep[0], ytEmbed: true, mins: ep[1], skin: 'specials' });
+			if (tracks.length > start) erows.push({ title: ep[2], href: w ? S.bookHref(w.id) : '', thumb: ytThumb(ep[0]), start: start, count: 1, mins: ep[1], yt: true });
+		});
+		if (erows.length) groups.push({
+			title: { ar: 'بصوت إسلام عادل على YouTube', en: 'Read by Eslam Adel on YouTube' },
+			note: { ar: 'كتب وقصص ومقالات له يقرؤها إسلام عادل على قناته، وتُشغَّل هنا تحت الشريط.', en: 'His books, stories and essays read by Eslam Adel on his channel; they play here, under the tape.' },
+			rows: erows
 		});
 
 		var midStart = tracks.length;

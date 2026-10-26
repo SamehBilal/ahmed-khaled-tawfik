@@ -394,3 +394,35 @@ window.AKT.audio.thumbs = {
 	Y.channels["sayf-1"] = { name: "دار النشر الصوتية - Dubvo", url: "https://www.youtube.com/@DubvoTV" };
 	Y.issues["sayf-1"] = [["0xkoQGo8jFk", 1, "ثلاثة · Dubvo"]];
 })(window.AKT.audio.youtube);
+
+/* His books and stories read by Eslam Adel on his YouTube channel (the playlist «أحمد خالد توفيق | بصوت إسلام عادل», without its
+   «قوس قزح» promo). Checked 2026-10-26. Each entry: [videoId, minutes, title, the book of his it is, or comes from]. Each one with a book
+   also plays on that book's page (issues["work:<id>"]). */
+(function (Y) {
+	Y.eslamAdel = {
+		channel: { name: "Eslam Adel - إسلام عادل", url: "https://www.youtube.com/playlist?list=PLuHVxnWJnT_CBZHyxrIJKtKqYz_ddozPc" },
+		eps: [
+			["HeiSMU-3hLY", 46, { ar: "أكواريل", en: "Aquarelle" }, "aquarelle"],
+			["5cv8hK7WbPA", 169, { ar: "لا مكان للملل", en: "No Room for Boredom" }, "lamakan"],
+			["IC0ctW0dCIc", 154, { ar: "قوس قزح (مع تامر إبراهيم)", en: "Rainbow (with Tamer Ibrahim)" }, "qaws"],
+			["k4ezyZiW5ww", 77, { ar: "رسائل المحبة", en: "Letters of Love" }],
+			["Qi960s8yc_s", 49, { ar: "الشيء في الصندوق", en: "The Thing in the Box" }],
+			["8DcoubXqEm8", 37, { ar: "حقيقة ما حدث", en: "What Really Happened" }],
+			["89b6ti3Aac4", 45, { ar: "أنا أتذكر", en: "I Remember" }],
+			["H7Aa2xOC4Nc", 140, { ar: "زغازيغ", en: "Zaghazigh" }, "zaghazigh"],
+			["BjvlK5vLPiA", 15, { ar: "كلام عجائز", en: "Old Wives' Talk" }],
+			["U5WoQztjZJs", 34, { ar: "كراهية", en: "Hatred" }],
+			["e0oyMk2XENo", 202, { ar: "مقالات مجمعة (١)", en: "Collected essays (1)" }],
+			["jLLkZpA71F4", 203, { ar: "مقالات مجمعة (٢)", en: "Collected essays (2)" }],
+			["FlWWUO5TjYo", 16, { ar: "غير المدعو (دراما صوتية)", en: "The Uninvited (audio drama)" }],
+			["qyz_gSeUF8g", 12, { ar: "خدمة لمدام إيفون", en: "A Favor for Madame Yvonne" }, "aql"],
+			["bEvxEkO13Xk", 12, { ar: "الثقوبة", en: "Al-Thaqouba" }],
+			["LfzwoYc7104", 57, { ar: "قصة الرواية", en: "The Novel's Story" }]
+		]
+	};
+	Y.eslamAdel.eps.forEach(function (ep) {
+		if (!ep[3]) return;
+		Y.issues['work:' + ep[3]] = [[ep[0], 1, ep[2].ar + ' · بصوت إسلام عادل']];
+		Y.channels['work:' + ep[3]] = Y.eslamAdel.channel;
+	});
+})(window.AKT.audio.youtube);
