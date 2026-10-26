@@ -242,6 +242,10 @@ window.PAGE = {
 		var audioTracks = !window.Cassette ? [] : isIssue ? window.Cassette.issueTracks(r.id, t(title))
 			: (window.Cassette.storytelTracks ? window.Cassette.storytelTracks((r.about ? 'about:' : 'work:') + (r.id || id), t(title)) : [])
 				.concat(r.about ? [] : window.Cassette.youtubeTracks('work:' + (r.id || id), t(title)));
+		/* each recording's picture: its own, the YouTube still, Audiohat's picture for the episode, else the book's cover */
+		var AU = d.audio || {}, ahPic = {};
+		Object.keys(AU.thumbs || {}).forEach(function (slug) { if (window.Cassette && AU.base) ahPic[window.Cassette.pageUrl(AU, slug)] = AU.thumbs[slug]; });
+		var audioPic = function (x) { return x.art || (x.yt ? 'https://i.ytimg.com/vi/' + x.yt + '/mqdefault.jpg' : '') || ahPic[x.url] || cover || ''; };
 		var whereOf = function (x) { return x.yt ? (x.channel || 'YouTube') : L(x.providerAr || x.provider || 'Audiohat', x.provider || 'Audiohat'); };
 
 		/* ---------- where to buy: store search links for this title (no affiliate codes) ---------- */
@@ -327,8 +331,11 @@ window.PAGE = {
 						/* where it can be heard: one line a recording or part — the platform, which part or who reads it, how long, and its link */
 						(audioTracks.length ? '<section class="d-block d-audio"><h3>' + L('استمع إليه', 'Listen') + ' <small>' + e(audioTracks.map(whereOf).filter(function (v, k, arr) { return arr.indexOf(v) === k; }).join(' · ')) + '</small></h3>' +
 							'<ul class="d-audio-list">' + audioTracks.map(function (x) {
+								var pic = audioPic(x);
 								var where = whereOf(x), what = String(x.ep || x.sub || '').split(' · ').filter(function (w) { return w && w !== where && w !== x.provider && w !== 'Audiohat'; }).join(' · ');
-								return '<li><a href="' + e(x.url) + '" target="_blank" rel="noopener"><b>' + e(where) + '</b>' + (what ? '<span>' + e(what) + '</span>' : '') +
+								return '<li><a href="' + e(x.url) + '" target="_blank" rel="noopener">' +
+									'<span class="d-audio-th' + (x.yt ? ' wide' : '') + '" aria-hidden="true">' + (pic ? '<img src="' + e(pic) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '</span>' +
+									'<b>' + e(where) + '</b>' + (what ? '<span>' + e(what) + '</span>' : '') +
 									(x.mins ? '<small>' + App.num(x.mins) + ' ' + L('دقيقة', 'min') + '</small>' : '') + '<i aria-hidden="true">↗</i></a></li>';
 							}).join('') + '</ul></section>' : '') +
 						'<dl class="d-facts">' + rows.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + (x[2] || e(x[1])) + '</dd>'; }).join('') + '</dl>' +

@@ -365,9 +365,12 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 
 /* the book's recordings, each a link to where it is heard */
 .d-audio-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.d-audio-list a { display: flex; align-items: baseline; gap: 10px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--paper); text-decoration: none; transition: border-color .2s, background .2s; }
+.d-audio-list a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--paper); text-decoration: none; transition: border-color .2s, background .2s; }
 .d-audio-list a:hover, .d-audio-list a:focus-visible { border-color: var(--ember, #b3261e); background: color-mix(in srgb, var(--ember, #b3261e) 8%, transparent); }
 .d-audio-list b { flex: 0 0 auto; font-weight: 700; }
+.d-audio-th { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 6px; overflow: hidden; background: var(--ink-3, #222); }
+.d-audio-th.wide { width: 64px; height: 36px; }
+.d-audio-th img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .d-audio-list span { flex: 1 1 auto; color: var(--paper-dim); font-size: .92em; }
 .d-audio-list small { flex: 0 0 auto; color: var(--muted); font-size: .85em; }
 .d-audio-list i { flex: 0 0 auto; font-style: normal; color: var(--muted); }
