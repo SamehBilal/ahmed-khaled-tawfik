@@ -1,6 +1,6 @@
 /* =========================================================
    Picture bands above the headline (assets/js/page-hero.js).
-   A night-coloured strip in both themes, like the Works bookshelf; each page draws its own scene.
+   A night-coloured strip, and parchment and daylight in the paper theme (at the end of this file); each page draws its own scene.
    ========================================================= */
 
 .ph {
@@ -344,3 +344,33 @@ html[dir="rtl"] .ph-wall .track { animation-name: ph-marquee-rtl; }
 	90%, 100% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .ph-shelf::before { animation: none; opacity: 1; clip-path: circle(170px at 50% 50%); } }
+
+/* ---------- the paper theme: the bands turn to parchment and daylight, their scenes kept ---------- */
+html[data-theme="light"] .ph { --ph-bg: #ebdfc8; --ph-ink: #2a2017; --ph-dim: #6f6150; --ph-glow: rgba(184, 69, 31, .16); border-bottom-color: var(--line);
+	background: radial-gradient(70% 120% at 50% 0%, #f8f0e0 0%, #ebdfc8 70%); }
+html[data-theme="light"] .ph[data-ph="about"] { background: radial-gradient(80% 120% at 50% 10%, #f7ecd6 0%, #e6d4b4 60%, #dcc7a3 100%); }
+html[data-theme="light"] .ph[data-ph="contact"],
+html[data-theme="light"] .ph[data-ph="privacy"] { background: radial-gradient(70% 120% at 70% 0%, #f4ecdc 0%, #e2d6c0 70%); }
+html[data-theme="light"] .ph[data-ph="sources"],
+html[data-theme="light"] .ph[data-ph="terms"] { background: radial-gradient(80% 120% at 50% 0%, #f8eedb 0%, #e8d8bb 70%); }
+html[data-theme="light"] .ph[data-ph="legacy"] { background: radial-gradient(60% 90% at 50% 100%, #f3dcb8 0%, #ece0c9 60%, #e6dac4 100%); }
+html[data-theme="light"] .ph[data-ph="legacy"] .ph-motto { color: rgba(110, 70, 30, .3); }
+html[data-theme="light"] .ph[data-ph="tributes"] { background: linear-gradient(#e8dcc6, #efe5d3 55%, var(--ink)); }
+/* the stars of the night bands become faint ink specks */
+html[data-theme="light"] .ph-stars,
+html[data-theme="light"] .ph[data-ph="privacy"] .ph-stage::before { filter: invert(1); opacity: .25; }
+/* the characters' damask, inked on cream */
+html[data-theme="light"] .ph[data-ph="characters"] {
+	background:
+		radial-gradient(70% 100% at 50% 0%, rgba(255, 250, 235, .5), transparent 70%),
+		linear-gradient(rgba(120, 90, 50, .14), transparent 30%, transparent 60%, rgba(120, 90, 50, .18)),
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='270' height='130' viewBox='0 0 270 130'%3E%3Cg fill='%235b4530' fill-opacity='.16' stroke='%235b4530' stroke-opacity='.18'%3E%3Cpath stroke='none' d='M45 92c-2-3-3-3-4-6-1 2-1 3-2 4-4-3-10-3-14 0 3 1 5 4 5 7 2-2 5-2 7 0 1-2 4-3 6-2 1 2 1 3 2 4 1-1 1-2 2-4 2-1 5 0 6 2 2-2 5-2 7 0 0-3 2-6 5-7-4-3-10-3-14 0-1-1-1-2-2-4-1 3-2 3-4 6z'/%3E%3Cpath fill='none' stroke-width='1.6' stroke-linejoin='round' d='M119 96h7l3-6 4 13 4-17 3 10h11'/%3E%3Cpath stroke='none' d='M228 86a10 10 0 1 0 6 16 8 8 0 1 1-6-16z'/%3E%3Cpath stroke='none' d='M236 86l1 3 3 1-3 1-1 3-1-3-3-1 3-1z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 270px 130px,
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='130' viewBox='0 0 90 130'%3E%3Cg fill='%235b4530' fill-opacity='.09'%3E%3Cpath d='M45 8c6 10 16 14 16 28 0 10-8 16-16 22-8-6-16-12-16-22 0-14 10-18 16-28z'/%3E%3Cpath d='M45 58c-3 6-9 9-14 7 4 5 10 6 14 2 4 4 10 3 14-2-5 2-11-1-14-7z'/%3E%3Cpath d='M29 36c-9-2-15 4-13 12 3-5 8-7 13-6zM61 36c9-2 15 4 13 12-3-5-8-7-13-6z'/%3E%3Cpath d='M0 73c6 10 16 14 16 28 0 10-8 16-16 22zM90 73c-6 10-16 14-16 28 0 10 8 16 16 22z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 90px 130px,
+		repeating-linear-gradient(90deg, transparent 0 43px, rgba(91, 69, 48, .05) 43px 47px),
+		linear-gradient(#efe3cc, #e2d2b4); }
+/* their stage by day: a light wooden floor */
+html[data-theme="light"] .ph-floor { background: linear-gradient(178deg, transparent 0 34%, rgba(255, 252, 240, .6) 34.4%, #cdb894 35.2%, #b9a07a 60%, #a88e68 100%); }
+html[data-theme="light"] .ph-spot { background: radial-gradient(closest-side, rgba(255, 245, 220, .45), transparent); }
+/* the publishers' shelf by day: the dark shelf turns light, and the torch finds the books in paler colours */
+html[data-theme="light"] .ph[data-ph="publishers"] { background: #eee; }
+html[data-theme="light"] .ph-shelf { filter: invert(1) hue-rotate(180deg); }

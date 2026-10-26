@@ -12,17 +12,18 @@
 		/* about: an investigator's board — index cards with the site's numbers, pinned and joined by a red thread */
 		about: function (d, A) {
 			var S = window.WorksShared, e = A.esc, L = A.L;
-			var own = S ? S.ownSeries() : (d.series || []);
-			var issues = 0;
-			Object.keys(d.issues || {}).forEach(function (k) { issues += (d.issues[k] || []).length; });
+			/* the same counts as the home page: every series' issues (an issue in two parts once), and the main references */
+			var series = d.series || [], issues = 0, refs = {};
+			series.forEach(function (s) { issues += S ? S.seriesIssues(s.id).filter(function (is) { return !(is.part > 1); }).length : (+s.count || 0); });
+			(d.sources || []).concat(d.issuesSources || []).forEach(function (x) { if (x && x.url) refs[x.url] = 1; });
 			var cards = [
-				[issues, L('عددًا في سلاسله', 'series issues')],
+				[issues, L('عددًا في السلاسل', 'series issues')],
 				[(d.works || []).length, L('كتابًا مستقلًا', 'standalone books')],
-				[own.length, L('سلسلة', 'series')],
+				[series.length, L('سلسلة', 'series')],
 				[(d.characters || []).length, L('شخصية', 'characters')],
 				[(d.quotes || []).length, L('اقتباسًا', 'quotes')],
 				[(d.tributes || []).length, L('شهادة عنه', 'tributes')],
-				[(d.sources || []).length, L('مصدرًا', 'sources')]
+				[Object.keys(refs).length, L('مرجعًا رئيسيًا', 'main references')]
 			];
 			var n = cards.length;
 			var pins = cards.map(function (c, i) { return [((i + 0.5) / n) * 100, 22 + rnd(i, 3) * 26]; });

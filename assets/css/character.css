@@ -75,6 +75,8 @@ html[dir="rtl"] .ch-quotes blockquote { border-radius: 10px 0 0 10px; }
 /* ---------- Refaat: fog and candlelight ---------- */
 .ch-theme-ghosts { --c: #2a2e38; }
 .ch-theme-ghosts::before { background: radial-gradient(700px 380px at 75% 10%, rgba(224, 160, 80, .18), transparent 70%), linear-gradient(#07080b, transparent); }
+/* the paper theme: the same lamp-light, from a pale dusk instead of the dark */
+html[data-theme="light"] .ch-theme-ghosts::before { background: radial-gradient(700px 380px at 75% 10%, rgba(224, 160, 80, .28), transparent 70%), linear-gradient(#e2d5bd, transparent); }
 .ch-theme-ghosts .ch-portrait img { filter: grayscale(.4) contrast(1.05); animation: ch-flicker 6s infinite; }
 @keyframes ch-flicker { 0%, 100% { filter: grayscale(.4) brightness(1); } 47% { filter: grayscale(.4) brightness(1); } 48% { filter: grayscale(.4) brightness(.7); } 50% { filter: grayscale(.4) brightness(1.05); } 52% { filter: grayscale(.4) brightness(.8); } 54% { filter: grayscale(.4) brightness(1); } }
 .ch-fog { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }

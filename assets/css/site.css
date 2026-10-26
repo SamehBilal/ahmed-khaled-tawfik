@@ -455,7 +455,7 @@ html[lang="en"] .spine span { transform: rotate(180deg); writing-mode: vertical-
 
 /* ---------- Footer ---------- */
 
-/* always night down here, in the paper theme too */
+/* night down here; in the paper theme, dusk (see the end of the footer rules) */
 .site-footer {
 	--ft-bg: #07080b; --ft-text: #b9b1a0; --ft-dim: #7d776b; --ft-bright: #efe6d2; --ft-eye: #ffb347;
 	position: relative; margin-top: 60px; color: var(--ft-text); font-size: 15px; overflow: hidden;
@@ -609,6 +609,26 @@ html[lang="en"] .ft-end { font-family: var(--f-display); }
 	.ft-book { width: 54px; height: 27px; }
 	.ft-eyes.e2 { inset-inline-end: calc(17% + 64px); bottom: 100px; }
 }
+
+/* the paper theme: dusk instead of night — a parchment sky with the same silhouettes against it, and a light ground;
+   the headstone stays stone */
+html[data-theme="light"] .site-footer { --ft-bg: #e3d5ba; --ft-text: #4a3e30; --ft-dim: #7a6b57; --ft-bright: #1d150e; }
+html[data-theme="light"] .ft-night {
+	background:
+		radial-gradient(240px 90px at 78% 67px, rgba(255, 236, 190, .55), transparent 70%),
+		linear-gradient(to bottom, transparent, #e9d9bb 45%, var(--ft-bg));
+}
+html[data-theme="light"][dir="ltr"] .ft-night {
+	background: radial-gradient(240px 90px at 22% 67px, rgba(255, 236, 190, .55), transparent 70%), linear-gradient(to bottom, transparent, #e9d9bb 45%, var(--ft-bg));
+}
+html[data-theme="light"] .ft-moon { box-shadow: 0 0 40px 12px rgba(255, 220, 150, .45), 0 0 120px 40px rgba(255, 220, 150, .2); }
+html[data-theme="light"] .ft-stars, html[data-theme="light"] .ft-shoot { display: none; }
+html[data-theme="light"] .ft-fog { background: radial-gradient(closest-side, rgba(255, 250, 235, .5), transparent); }
+html[data-theme="light"] .ft-links a:hover, html[data-theme="light"] .ft-links a:focus-visible { text-shadow: none; color: var(--ember); }
+html[data-theme="light"] .ft-notes a, html[data-theme="light"] .save-offline { color: var(--ember); }
+html[data-theme="light"] .ft-maker-links a { border-color: rgba(42, 34, 24, .22); }
+html[data-theme="light"] .ft-copy { border-top-color: rgba(42, 34, 24, .16); }
+html[data-theme="light"] .save-offline:hover, html[data-theme="light"] .save-offline:focus-visible { color: var(--ft-bright); text-shadow: none; }
 
 /* ---------- Reveal-on-scroll ---------- */
 
