@@ -667,10 +667,15 @@ html.is-app body { padding-bottom: env(safe-area-inset-bottom); }
 .adapt-poster { display: block; margin: 0; }
 .adapt-poster img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 6px; box-shadow: 0 10px 22px rgba(0, 0, 0, .45); }
 /* three to a row, two on a tablet, one on a phone */
-.awards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: start; }
+/* every card as tall as the tallest, its "for" and source links at the foot */
+.awards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 18px; }
 @media (max-width: 900px) { .awards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .awards { grid-template-columns: minmax(0, 1fr); } }
-.award { position: relative; padding: 18px 18px 16px 58px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
+/* one under another on a phone: each card its own height */
+@media (max-width: 560px) { .awards { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; } }
+.award { position: relative; padding: 18px 18px 16px 58px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); display: flex; flex-direction: column; }
+.award .for, .award .src { margin-top: auto; }
+.award .for + .src { margin-top: 0; }
+.award .src { align-self: flex-start; }
 html[dir="rtl"] .award { padding: 18px 58px 16px 18px; }
 .award::before { content: ''; position: absolute; top: 18px; inset-inline-start: 16px; width: 28px; height: 28px; border-radius: 50%;
 	background: radial-gradient(circle at 35% 35%, #ffe7a8, #c9962e 60%, #7a5a14); box-shadow: 0 0 14px rgba(224, 170, 60, .45); }
