@@ -159,8 +159,8 @@
 		var num = x.n != null ? '#' + (App_ ? App_.num(x.n) : x.n) : '';
 		/* a collector's item: which editions, and a key to choose them when the book has more than one */
 		var eds = LISTS[list].mode === 'collector' && x.key[0] === 'b' ? editionsOf(x.key) : [];
-		/* (a Kindle edition saved before they were left out is not shown) */
-		var mine = (x.eds || []).filter(function (e) { return !/كيندل|kindle/i.test(e.id + ' ' + (e.label || {}).ar + ' ' + (e.label || {}).en); });
+		/* (a Kindle or audiobook edition saved before they were left out is not shown) */
+		var mine = (x.eds || []).filter(function (e) { return !NOT_ON_SHELF.test(e.id + ' ' + (e.label || {}).ar + ' ' + (e.label || {}).en); });
 		var edLine = mine.length ? tt(mine[0].label) + (mine.length > 1 ? L(' و', ' + ') + (App_ ? App_.num(mine.length - 1) : mine.length - 1) + L(' غيرها', ' more') : '') : '';
 		return '<li class="ls-item" data-key="' + esc(x.key) + '">' +
 			'<button type="button" class="ls-grip" data-grip="' + esc(list) + '" data-key="' + esc(x.key) + '" aria-label="' + esc(L('حرّك «', 'Move “') + tt(x.title) + L('» — الأسهم للترتيب والنقل', '” — arrow keys reorder and move')) + '">' +
@@ -342,8 +342,9 @@
 	/* ---------- editions (collectors) ---------- */
 
 	/* the editions we know of a book or issue, each told apart by its ISBN or ASIN, else by publisher, year and format.
-	   Kindle editions are left out: there is nothing on a shelf to collect. */
-	function isKindle(ed) { var f = ed.format || {}; return /كيندل|kindle/i.test((f.ar || '') + ' ' + (f.en || '') + ' ' + (typeof f === 'string' ? f : '')); }
+	   Kindle and audiobook editions are left out: there is nothing on a shelf to collect. */
+	var NOT_ON_SHELF = /كيندل|kindle|مسموع|صوتي|audible|audiobook/i;
+	function isKindle(ed) { var f = ed.format || {}; return NOT_ON_SHELF.test((f.ar || '') + ' ' + (f.en || '') + ' ' + (typeof f === 'string' ? f : '')); }
 	function editionsOf(key) {
 		var S = window.WorksShared, r = null;
 		if (!S || key[0] !== 'b') return [];
