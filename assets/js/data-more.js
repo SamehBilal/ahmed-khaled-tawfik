@@ -139,6 +139,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		'7 باب': C + 'intro/7-bab.jpg',
 		'تاريخ شكل تاني': C + 'intro/tarikh-shakl-tani.webp',
 		'وطن.. بين دفتي دفتر (بدايات 1)': C + 'intro/watan-bidayat-1.webp',
+		'البرزخ (سلسلة الطارق 1)': C + 'intro/barzakh-tariq-1.webp',
 		'نيكروفيليا': C + 'outro/necrophilia-sherine-hanaei-rewaq.jpg'
 	};
 	var intros = (A.writers = A.writers || {}).introductions = A.writers.introductions || [];
@@ -146,6 +147,15 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		intros.push({ name: { ar: 'شيرين هنائي', en: 'Sherine Hanaey' }, book: { ar: 'نيكروفيليا', en: 'Necrophilia' }, year: 2011, direction: 'back_akt',
 			text: { ar: 'طُبع تعليق العرّاب على الرواية على غلافها الخارجي، إلى جانب تعليق نبيل فاروق.', en: 'Tawfik’s comment on the novel is printed on its outer cover, next to one by Nabil Farouk.' },
 			source: 'https://abjjad.com/review/1985576990' });
+	}
+	/* «البرزخ», the first of Sayed Zahran's «الطارق»: he read it on the Modern Arab Association's reading committee and passed it for
+	   publication (2018), as Zahran says in the book's introduction; abjjad.com/book/2805760006 */
+	if (!intros.some(function (w) { return w.book && w.book.ar === 'البرزخ (سلسلة الطارق 1)'; })) {
+		var k9 = intros.map(function (w) { return (w.book || {}).ar; }).indexOf('الكاردينال (سلسلة الطارق 9)');
+		intros.splice(k9 < 0 ? intros.length : k9, 0, { name: { ar: 'سيد زهران', en: 'Sayed Zahran' }, book: { ar: 'البرزخ (سلسلة الطارق 1)', en: 'Al-Barzakh (Al-Tariq #1)' }, year: 2018, direction: 'back_akt',
+			text: { ar: 'العدد الأول من «الطارق» عن «روايات مصرية للجيب»: قرأه العرّاب في لجنة القراءة بالمؤسسة العربية الحديثة وأجازه للنشر، ويذكر الكاتب ذلك في مقدمة الكتاب.',
+				en: 'The first Al-Tariq novel, in the Egyptian Pocket Novels: Tawfik read it on the Modern Arab Association’s reading committee and passed it for publication, as the author says in the book’s introduction.' },
+			source: 'https://www.abjjad.com/book/2805760006' });
 	}
 	intros.forEach(function (w) { if (w.book && byBook[w.book.ar] && !w.cover) w.cover = byBook[w.book.ar]; });
 
