@@ -1848,7 +1848,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004108/');
 })(window.AKT);
 
-/* «ضحكات كئيبة»: its four editions — Spark (2012), Kayan (2019 paperback with its back cover from Samawy (samawy.com/i/1004107)
+/* «ضحكات كئيبة»: its five editions — Spark (2012, and Kuwait 2015), Kayan (2019 paperback with its back cover from Samawy (samawy.com/i/1004107)
    and its text; Kindle 2024) and the Persian translation (Saad, 2022); the book opens on the first edition's cover */
 (function (A) {
 	var b = (A.bookInfo = A.bookInfo || {}).dahakat = A.bookInfo.dahakat || {};
@@ -1860,6 +1860,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.editions = [
 		{ title: T, publisher: { ar: 'سبارك للنشر والتوزيع', en: 'Spark Publishing' }, year: 2012, date: '2012-01-01', lang: 'ar', asin: 'B0DLT4TQLL', pages: 238, format: PB,
 			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'dahakat-2012.webp', source: 'https://www.goodreads.com/book/show/13418296' },
+		{ title: T, publisher: { ar: 'سبارك للنشر والتوزيع', en: 'Spark Publishing' }, year: 2015, date: '2015-01-01', lang: 'ar', format: PB,
+			edition: { ar: 'طبعة الكويت', en: 'Kuwait printing' }, cover: C + 'dahakat-2015.webp' },
 		{ title: T, publisher: KAYAN, year: 2019, date: '2019-01-01', lang: 'ar', isbn: '9789778200621', asin: 'B0DMFXDMLV', pages: 246, format: PB,
 			cover: kayan.cover || '', back: 'assets/img/covers/back/dahakat-kayan.webp' },
 		{ title: { ar: 'خنده های غم انگیز', en: 'Khandeh-ha-ye gham-angiz (Persian)' }, publisher: { ar: 'صاد', en: 'Saad' }, year: 2022, date: '2022-01-01', lang: 'fa',
