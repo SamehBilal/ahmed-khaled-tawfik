@@ -138,6 +138,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		'نادمًا خرج القط': C + 'intro/nadman-kharag-al-qett.jpg',
 		'7 باب': C + 'intro/7-bab.jpg',
 		'تاريخ شكل تاني': C + 'intro/tarikh-shakl-tani.webp',
+		'وطن.. بين دفتي دفتر (بدايات 1)': C + 'intro/watan-bidayat-1.webp',
 		'نيكروفيليا': C + 'outro/necrophilia-sherine-hanaei-rewaq.jpg'
 	};
 	var intros = (A.writers = A.writers || {}).introductions = A.writers.introductions || [];
