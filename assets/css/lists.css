@@ -156,6 +156,7 @@ body.ls-sorting .ls-zone .ls-items { min-height: 48px; }
 .ls-shelf > h3 { font-family: var(--f-display); font-size: 20px; margin: 0; }
 .ls-shelf > .ls-hint { margin: 6px 0 14px; font-size: 14px; }
 .ls-shelf-g { border-top: 1px solid var(--line); }
+.ls-shelf-sub { margin: 18px 0 6px; font-family: var(--f-display); font-size: 15px; font-weight: 400; color: var(--paper-dim); }
 .ls-shelf-g summary { display: grid; grid-template-columns: minmax(120px, 220px) 1fr auto; align-items: center; gap: 12px; padding: 10px 0; cursor: pointer; list-style: none; }
 .ls-shelf-g summary::-webkit-details-marker { display: none; }
 .ls-shelf-g summary .ls-p-t::before { content: '▸'; display: inline-block; margin-inline-end: 8px; color: var(--muted); transition: transform .2s; }

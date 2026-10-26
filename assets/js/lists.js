@@ -186,13 +186,43 @@
 		groups.push({ id: 'works', title: { ar: 'كتبه', en: 'His books' }, items: works.map(function (w) {
 			return { key: 'b:' + w.id, title: w.title, img: S.coverOf((d.bookInfo || {})[w.id]), color: w.color || '' };
 		}) });
-		S.ownSeries().forEach(function (ser) {
+		/* his own series, then the series he wrote or translated for (a book already on the shelf keeps its one place) */
+		var placed = {};
+		groups[0].items.forEach(function (x) { placed[x.key] = 1; });
+		S.ownSeries().map(function (ser) { return [ser, false]; }).concat(S.contributedSeries().map(function (ser) { return [ser, true]; })).forEach(function (sc) {
+			var ser = sc[0];
 			var items = S.seriesIssues(ser.id).map(function (is) {
 				var m = /book\.html\?id=([^&#]+)/.exec(A.issueHref(ser.id, is));
-				return m ? { key: 'b:' + decodeURIComponent(m[1]), title: is.title, n: is.n, img: S.issueCover(ser.id, is), color: ser.color || '' } : null;
+				var key = m ? 'b:' + decodeURIComponent(m[1]) : '';
+				if (!key || placed[key]) return null;
+				placed[key] = 1;
+				return { key: key, title: is.title, n: is.n, img: S.issueCover(ser.id, is), color: ser.color || '' };
 			}).filter(Boolean);
-			if (items.length) groups.push({ id: ser.id, title: ser.title, items: items });
+			if (items.length) groups.push({ id: ser.id, title: ser.title, items: items, part: sc[1] ? 'contrib' : '' });
 		});
+		/* a collector's shelf holds every book on the site: the series that grew out of his work, the books about him,
+		   and the other writers' books he introduced, that introduced him or that were dedicated to him */
+		if (state.mode === 'collector') {
+			var more = function (id, title, list) {
+				list = list.filter(function (x) { if (placed[x.key]) return false; placed[x.key] = 1; return true; });
+				if (list.length) groups.push({ id: id, title: title, items: list, part: 'more' });
+			};
+			S.inspiredSeries().forEach(function (ser) {
+				more(ser.id, ser.title, S.seriesIssues(ser.id).map(function (is) {
+					var m = /book\.html\?id=([^&#]+)/.exec(A.issueHref(ser.id, is));
+					return m ? { key: 'b:' + decodeURIComponent(m[1]), title: is.title, n: is.n, img: S.issueCover(ser.id, is), color: ser.color || '' } : null;
+				}).filter(Boolean));
+			});
+			more('about', { ar: 'كتب عنه', en: 'Books about him' }, (d.aboutBooks || []).map(function (b) {
+				return { key: 'b:' + b.id, title: b.title, img: b.cover || S.coverOf((d.bookInfo || {})[b.id]), color: '#3a2a1f' };
+			}));
+			var eb = S.entryBooks();
+			[['introductions', { ar: 'كتب قدّم لها أو قُدّمت له', en: 'Books he introduced, or that introduced him' }], ['dedications', { ar: 'كتب أُهديت إليه', en: 'Books dedicated to him' }]].forEach(function (sh) {
+				more('entry-' + sh[0], sh[1], eb.filter(function (x) { return x.shelf === sh[0]; }).map(function (x) {
+					return { key: 'b:' + x.id, title: x.w.book, img: x.w.cover || '', color: '#3a2a1f' };
+				}));
+			});
+		}
 		return groups;
 	}
 	function shelfHtml() {
@@ -206,10 +236,12 @@
 			'<p class="ls-hint">' + (state.mode === 'reader'
 				? L('كل كتبه وأعداده في أماكنها: ما قرأته مضيء، وما تنوي قراءته يلمع خافتًا، والباقي ينتظرك في الظل.', 'All his books and issues in their places: what you have read is lit, what you mean to read glows faintly, and the rest waits in the dark.')
 				: L('كل كتبه وأعداده في أماكنها: ما في مكتبتك مضيء، وما تبحث عنه يلمع خافتًا، والباقي ينتظرك في الظل.', 'All his books and issues in their places: what is in your collection is lit, what you are looking for glows faintly, and the rest waits in the dark.')) + '</p>' +
-			groups.map(function (g) {
+			groups.map(function (g, gi) {
 				var lit = g.items.filter(function (x) { return done[x.key]; }).length, all = g.items.length;
 				var isOpen = shelfOpen && g.id in shelfOpen ? shelfOpen[g.id] : lit > 0;
-				return '<details class="ls-shelf-g" data-g="' + esc(g.id) + '"' + (isOpen ? ' open' : '') + '><summary>' +
+				var SUB = { contrib: L('سلاسل شارك فيها', 'Series he contributed to'), more: L('كتب من عالمه وعنه', 'Books from his world, and about him') };
+				var sub = g.part && g.part !== (groups[gi - 1] || {}).part ? '<h4 class="ls-shelf-sub">' + SUB[g.part] + '</h4>' : '';
+				return sub + '<details class="ls-shelf-g" data-g="' + esc(g.id) + '"' + (isOpen ? ' open' : '') + '><summary>' +
 					'<span class="ls-p-t">' + esc(tt(g.title)) + '</span><span class="ls-bar" style="--p:' + Math.round(lit / all * 100) + '%"></span>' +
 					'<span class="ls-p-n">' + esc(A.num(lit)) + ' / ' + esc(A.num(all)) + '</span></summary>' +
 					'<div class="ls-slots">' + g.items.map(function (x) {
