@@ -2613,10 +2613,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 })(window.AKT);
 
-/* the Legacy timeline: his publisher's obituary in Al-Ahram, 5 April 2018 */
+/* the Legacy timeline: his publisher's obituary in Al-Ahram, 4 April 2018 */
 (function (A) {
 	var L = A.legacy = A.legacy || [];
-	var ev = { date: '2018-04-05', image: 'assets/img/timeline/obituary-arab-modern-2018.webp',
+	var ev = { date: '2018-04-04', image: 'assets/img/timeline/obituary-arab-modern-2018.webp',
 		title: { ar: 'نعي المؤسسة العربية الحديثة', en: 'His publisher’s obituary' },
 		text: { ar: 'نعته المؤسسة العربية الحديثة، بيته الأول، في صفحة كاملة بجريدة «الأهرام»: «لا ترثيك ولكننا نرثي نبعًا من الإبداع كنا نتمنى أن يبقى ألف عام… إنه ليس وداعًا، إنما سلامًا طيبًا لروحك الجميلة الباقية في نفوسنا ونفوس محبيك». ووقّعتها: «من بيتك: المؤسسة العربية الحديثة».',
 			en: 'The Modern Arab Foundation, his first publishing home, mourned him in Al-Ahram: “Not a farewell, but a gentle peace to your beautiful soul, which lives on in us and in all who love you.” It was signed “From your home: the Modern Arab Foundation.”' } };
