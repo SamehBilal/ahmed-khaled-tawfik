@@ -146,6 +146,7 @@ window.PAGE = {
 			this.stapel.set([{ key: lv.y + '-' + lv.m, label: crumb.textContent, items: list.map(function (p) {
 				return { href: 'blog.html?post=' + p.id, img: thumb(p), title: p.t, sub: p.src || '', kind: self.kindOf(p) };
 			}) }], lv.y + '-' + lv.m);
+			this.reveal();
 			return;
 		}
 
@@ -164,8 +165,18 @@ window.PAGE = {
 		this.stapel.set(piles, lv ? lv.y : null, function (pileKey, item) {
 			/* clicking a closed pile opens the year; clicking a month opens the month */
 			if (item && item.month) { self.level = { y: pileKey, m: item.month }; self.show(); }
-			else { self.level = { y: pileKey }; crumb.textContent = App.num(pileKey); back.hidden = false; sub.textContent = ''; self.save(); }
+			else { self.level = { y: pileKey }; crumb.textContent = App.num(pileKey); back.hidden = false; sub.textContent = ''; self.save(); self.reveal(); }
 		});
+	},
+	/* after a year or a month opens (or closes) the piles change height; if the archive's bar has gone above
+	   the screen — the pile was opened far down — bring it back under the header, so what opened is in view */
+	reveal: function () {
+		var bar = document.querySelector('.tp-bar');
+		if (!bar) return;
+		setTimeout(function () {
+			var h = document.querySelector('.site-header'), top = h ? h.getBoundingClientRect().bottom : 0;
+			if (bar.getBoundingClientRect().top < top) window.scrollTo({ top: window.scrollY + bar.getBoundingClientRect().top - top - 12, behavior: 'smooth' });
+		}, 60);
 	},
 	back: function () {
 		var App = window.App;
@@ -177,6 +188,7 @@ window.PAGE = {
 		document.getElementById('tp-crumb').textContent = App.L('الأرشيف', 'The archive');
 		document.getElementById('tp-sub').textContent = App.num(this.groups().length) + ' ' + App.L('سنة', 'years');
 		this.save();
+		this.reveal();
 	},
 	save: function () { try { sessionStorage.setItem('akt-blog-level', JSON.stringify({ l: this.level, k: this.kind })); } catch (e) {} },
 	restore: function () {
