@@ -1,6 +1,7 @@
 /* What well-known people said about him — the "Tributes" page.
  * Each quote is copied as published on the page in "source" (news reports quoting the post,
- * tweet or broadcast). Photos are Wikimedia Commons files under free licences, or empty.
+ * tweet or broadcast). Photos are Wikimedia Commons files under free licences, or the person's author page or the
+ * report that carried their words (photoSource), or empty.
  * Keep the list in date order: tributes.html#t-<index> links depend on it. */
 window.AKT = window.AKT || {};
 
@@ -135,7 +136,8 @@ window.AKT.tributes = [
     },
     "context": { "ar": "تغريدة ترد على عبارته الشهيرة «وداعًا أيها الغريب»، نقلها صدى البلد.", "en": "Tweet answering his famous line \"Farewell, stranger\", quoted by Sada El Balad." },
     "source": "https://www.elbalad.news/3244707",
-    "photo": ""
+    "photo": "assets/img/photos/wikimedia-hend-sabry-2011.webp",
+    "photoSource": "https://commons.wikimedia.org/wiki/File:Couv-Tunivisions_Juin_2011.jpg"
   },
   {
     "name": { "ar": "إبراهيم عبد المجيد", "en": "Ibrahim Abdel Meguid" },
@@ -147,7 +149,8 @@ window.AKT.tributes = [
     },
     "context": { "ar": "منشور على فيسبوك نقلته الجزيرة نت في خبر الوفاة.", "en": "Facebook post quoted by Al Jazeera Net in its report on the death." },
     "source": "https://www.ajnet.me/culture/2018/4/3/%D9%88%D9%81%D8%A7%D8%A9-%D8%B1%D9%88%D8%A7%D8%A6%D9%8A-%D8%A7%D9%84%D8%AE%D9%8A%D8%A7%D9%84-%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A-%D8%A3%D8%AD%D9%85%D8%AF-%D8%AA%D9%88%D9%81%D9%8A%D9%82",
-    "photo": ""
+    "photo": "assets/img/photos/writers/aseeralkotb-author-175090.webp",
+    "photoSource": "https://www.aseeralkotb.com/ar/authors/إبراهيم-عبد-المجيد"
   },
   {
     "name": { "ar": "تامر أمين", "en": "Tamer Amin" },
@@ -159,7 +162,8 @@ window.AKT.tributes = [
     },
     "context": { "ar": "خلال تقديمه برنامج «الحياة اليوم» على قناة الحياة.", "en": "On his show \"El Hayah El Youm\" on Al Hayah TV." },
     "source": "https://www.elwatannews.com/news/details/3238537",
-    "photo": ""
+    "photo": "assets/img/photos/tamer-amin-elwatan.webp",
+    "photoSource": "https://www.elwatannews.com/news/details/3238537"
   },
   {
     "name": { "ar": "نبيل فاروق", "en": "Nabil Farouk" },
