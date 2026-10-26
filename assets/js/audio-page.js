@@ -72,7 +72,7 @@ window.PAGE = {
 			var start = tracks.length, name = L('بعد منتصف الليل ', 'After Midnight ') + App.num(se.n);
 			se.eps.forEach(function (ep, k) {
 				var label = ep[2] || L('الحلقة ', 'Episode ') + App.num(k + 1);
-				tracks.push({ title: name, ep: label, sub: L('الموسم ', 'Season ') + App.num(se.n) + ' · ' + label, url: window.Cassette.pageUrl(A, ep[0]), mins: ep[1] || null, skin: 'midnight', art: se.art });
+				tracks.push({ title: name, ep: label, sub: L('الموسم ', 'Season ') + App.num(se.n) + ' · ' + label, url: window.Cassette.pageUrl(A, ep[0]), mins: ep[1] || null, skin: 'midnight', art: ep[3] || se.art });
 			});
 			return { title: { ar: 'الموسم ' + App.num(se.n) + ' (' + App.num(se.year) + ')', en: 'Season ' + se.n + ' (' + se.year + ')' }, thumb: se.art, start: start, count: se.eps.length,
 				mins: se.eps.reduce(function (m, ep) { return m + (ep[1] || 0); }, 0) };
