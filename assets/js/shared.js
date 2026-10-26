@@ -354,6 +354,22 @@
 				heard = Object.keys(n).map(function (sid) { var s = anySeries(sid).s; return s && { id: sid, title: s.title, href: seriesHref(sid), cover: seriesCover(sid), color: s.color, series: true, heard: true, issues: Object.keys(n[sid]).length }; })
 					.filter(Boolean).sort(function (a, b) { return b.issues - a.issues; });
 			}
+			/* a house whose recordings the site lists (p.heardOn: Storytel, Iqraaly): its issues by series, then his books and
+			   the books about him it recorded (a story it sells on its own is not counted) */
+			var own2 = ((d.audio || {})[p.heardOn] || {}).items;
+			if (own2) {
+				var bySeries = {}, books = [];
+				Object.keys(own2).forEach(function (k) {
+					var m = /^([a-z]+)-\d+$/.exec(k), w = /^work:(.+)$/.exec(k), sr = /^series:(.+)$/.exec(k), ab = /^about:(.+)$/.exec(k);
+					if (m) { bySeries[m[1]] = (bySeries[m[1]] || 0) + 1; return; }
+					if (sr) { var s0 = anySeries(sr[1]); if (s0) books.push({ id: sr[1], title: s0.s.title, href: seriesHref(sr[1]), cover: seriesCover(sr[1]), color: s0.s.color, heard: true }); return; }
+					var wk = w && App.byId(d.works, w[1]), bk = ab && App.byId(d.aboutBooks, ab[1]);
+					if (wk) books.push({ id: wk.id, title: wk.title, href: App.workHref(wk.id), year: yearOf(wk.year), cover: coverOf((d.bookInfo || {})[wk.id]), color: wk.color, heard: true });
+					if (bk) books.push({ id: bk.id, title: bk.title, href: bookHref(bk.id), year: bk.year, cover: bk.cover, color: bk.color || '#3a2a1f', by: bk.by, about: true, heard: true });
+				});
+				heard = heard.concat(Object.keys(bySeries).map(function (sid) { var s = anySeries(sid); return s && { id: sid, title: s.s.title, href: seriesHref(sid), cover: seriesCover(sid), color: s.s.color, series: true, heard: true, issues: bySeries[sid] }; })
+					.filter(Boolean).sort(function (a, b) { return b.issues - a.issues; }), books.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); }));
+			}
 			return { p: p, list: mine, later: later, world: world, about: about, heard: heard, from: ys.length ? Math.min.apply(null, ys) : 0, to: ye.length ? Math.max.apply(null, ye) : 0 };
 		}).filter(function (c) { return c.list.length || c.later.length || c.world.length || c.about.length || c.heard.length; })
 			.sort(function (a, b) { return (a.from || 9999) - (b.from || 9999); });
@@ -382,8 +398,10 @@
 		var what = [books ? count(books, 'كتاب', 'كتابان', 'كتب', 'كتابًا', 'book', 'books') : '',
 			series.length ? (issues ? count(issues, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + L(' في ', ' in ') : '') + count(series.length, 'سلسلة', issues ? 'سلسلتين' : 'سلسلتان', 'سلاسل', 'سلسلة', 'series', 'series') : ''].filter(Boolean).join(' · ');
 		/* a house that published only his world or books about him says that instead */
-		var heard = (c.heard || []).reduce(function (m, it) { return m + it.issues; }, 0);
-		if (!what && heard) what = L('مسموعًا: ', 'On audio: ') + count(heard, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + L(' في ', ' in ') + count(c.heard.length, 'سلسلة', 'سلسلتين', 'سلاسل', 'سلسلة', 'series', 'series');
+		var hs = (c.heard || []).filter(function (it) { return it.series; }), hb = (c.heard || []).length - hs.length;
+		var heard = hs.reduce(function (m, it) { return m + it.issues; }, 0);
+		if (!what && (heard || hb)) what = L('مسموعًا: ', 'On audio: ') + [heard ? count(heard, 'عدد', 'عددان', 'أعداد', 'عددًا', 'issue', 'issues') + L(' في ', ' in ') + count(hs.length, 'سلسلة', 'سلسلتين', 'سلاسل', 'سلسلة', 'series', 'series') : '',
+			hb ? count(hb, 'كتاب', 'كتابان', 'كتب', 'كتابًا', 'book', 'books') : ''].filter(Boolean).join(' · ');
 		if (!what) what = [(c.world || []).length ? L('سلسلة من عالمه', 'A series from his world') : '', (c.about || []).length ? (c.about.length === 1 ? L('كتاب عنه', '1 book about him') : count(c.about.length, 'كتاب عنه', 'كتابان عنه', 'كتب عنه', 'كتابًا عنه', 'book about him', 'books about him')) : ''].filter(Boolean).join(' · ');
 		return '<article class="pub rise">' +
 			'<div class="pub-head">' + (c.p.logo ? '<span class="pub-logo"><img src="' + e(c.p.logo) + '" alt="' + e(App.t(c.p.name)) + '" loading="lazy"></span>' : '<span class="pub-logo is-mono" aria-hidden="true">' + e(App.t(c.p.name).replace(/^(دار|Dar)\s+/, '').charAt(0)) + '</span>') + '<h3><a class="pub-a" href="' + e(publisherHref(c.p.id)) + '">' + tx(c.p.name) + '</a>' + closedBadge(c.p) + '</h3>' +

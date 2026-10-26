@@ -143,11 +143,11 @@
 			"label": "الرئيسية — Home"
 		},
 		{
-			"src": "assets/img/screens/narrow-blog.jpg",
+			"src": "assets/img/screens/narrow-works.jpg",
 			"sizes": "412x915",
 			"type": "image/jpeg",
 			"form_factor": "narrow",
-			"label": "المدونة — Blog"
+			"label": "الأعمال — Works"
 		},
 		{
 			"src": "assets/img/screens/narrow-characters.jpg",

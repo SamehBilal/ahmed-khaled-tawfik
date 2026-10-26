@@ -61,7 +61,11 @@ window.PAGE = {
 		var q = function (x) { return L('«', '“') + t(x) + L('»', '”'); };
 		/* a house with nothing of his own: what it published of his world, or about him */
 		var w0 = (c.world || [])[0], a0 = (c.about || [])[0], h = c.heard || [];
-		var link = !first ? (h.length ? L('حوّلت ', 'It turned ') + h.map(function (x) { return q(x.title); }).join(L(' و', ', ')) + L(' إلى كتب مسموعة ودراما إذاعية.', ' into audiobooks and radio drama.')
+		/* (an audio house: the series it recorded, and how many of his books besides) */
+		var hs = h.filter(function (x) { return x.series; }), hb = h.filter(function (x) { return !x.series && !x.about; }).length;
+		var link = !first ? (h.length ? L('حوّلت ', 'It turned ') + [hs.map(function (x) { return q(x.title); }).join(L(' و', ', ')),
+				hb ? count(hb, 'كتابًا', 'كتابين', 'كتب', 'كتابًا', 'book', 'books') + L(' من كتبه', ' of his books') : ''].filter(Boolean).join(L(' و', ' and ')) +
+				(p.heardOn ? L(' إلى كتب مسموعة.', ' into audiobooks.') : L(' إلى كتب مسموعة ودراما إذاعية.', ' into audiobooks and radio drama.'))
 				: w0 ? L('صدرت عنها سلسلة ', 'It publishes ') + q(w0.title) + L(' التي خرجت من عالمه', ', a series grown from his world') + (w0.year ? L(' منذ ', ' since ') + App.num(w0.year) : '') + '.'
 				: a0 ? L('صدر عنها كتاب عنه: ', 'It published a book about him: ') + q(a0.title) + '.' : '')
 			: L('أول ما صدر له عنها ', 'The first of his books from this house was ') + q(first.title) + (first.year ? L(' عام ', ' in ') + App.num(first.year) : '') +

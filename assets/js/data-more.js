@@ -3623,3 +3623,20 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		}
 	};
 })(window.AKT);
+
+/* Storytel (ستوريتل) and Iqraaly (اقرألي): audio houses like Audiohat. What each made audiobooks of is counted from its
+   recordings on the site (p.heardOn: AKT.audio.storytel in data-storytel.js, AKT.audio.iqraaly above) */
+(function (A) {
+	A.publishers = A.publishers || [];
+	var have = function (id) { return A.publishers.some(function (p) { return p.id === id; }); };
+	if (!have('storytel')) A.publishers.push({ id: 'storytel', name: { ar: 'ستوريتل', en: 'Storytel' }, match: 'ستوريتل|Storytel', heardOn: 'storytel',
+		logo: 'assets/img/publishers/storytel.webp',
+		about: { ar: 'منصة سويدية للكتب المسموعة والإلكترونية بالاشتراك، تأسست في ستوكهولم عام 2005 وتعمل في أكثر من عشرين بلدًا، ودخلت العالم العربي عام 2017 من دبي. أنتجت بالعربية مكتبة كبيرة من الكتب المسموعة، بينها معظم «ما وراء الطبيعة» و«فانتازيا» و«سافاري» وكثير من رواياته وكتبه.',
+			en: 'A Swedish subscription service for audiobooks and e-books, founded in Stockholm in 2005 and working in more than twenty countries; it came to the Arab world from Dubai in 2017. In Arabic it has produced a large library of audiobooks, among them most of Ma Wara’ al-Tabi’a, Fantasia and Safari and many of his novels and books.' },
+		links: [{ kind: 'site', url: 'https://www.storytel.com/eg' }, { kind: 'site', his: true, url: 'https://www.storytel.com/eg/authors/%D8%A3%D8%AD%D9%85%D8%AF-%D8%AE%D8%A7%D9%84%D8%AF-%D8%AA%D9%88%D9%81%D9%8A%D9%82-70756' }] });
+	if (!have('iqraaly')) A.publishers.push({ id: 'iqraaly', name: { ar: 'اقرألي', en: 'Iqraaly' }, match: 'اقرألي|Iqraaly', heardOn: 'iqraaly',
+		logo: 'assets/img/publishers/iqraaly.webp',
+		about: { ar: 'منصة مصرية للكتب المسموعة بالعربية، تأسست في القاهرة عام 2012، تسجّل الروايات والكتب بأصوات قرّاء محترفين وتقدّمها حلقاتٍ على موقعها وتطبيقها.',
+			en: 'An Egyptian platform for Arabic audiobooks, founded in Cairo in 2012, that records novels and books in the voices of professional readers and offers them in episodes on its site and app.' },
+		links: [{ kind: 'site', url: 'https://iqraaly.com/' }] });
+})(window.AKT);
