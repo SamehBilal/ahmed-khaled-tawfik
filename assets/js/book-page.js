@@ -238,10 +238,10 @@ window.PAGE = {
 			}
 		}
 
-		/* an issue's episodes (Audiohat, YouTube, Storytel); a book of his has its Storytel audiobooks */
+		/* an issue's episodes (Audiohat, YouTube, Storytel, Iqraaly); a book of his has its Storytel audiobooks */
 		var audioTracks = !window.Cassette ? [] : isIssue ? window.Cassette.issueTracks(r.id, t(title))
 			: (window.Cassette.storytelTracks ? window.Cassette.storytelTracks((r.about ? 'about:' : 'work:') + (r.id || id), t(title)) : []);
-		var whereOf = function (x) { return x.yt ? (x.channel || 'YouTube') : (x.provider || 'Audiohat'); };
+		var whereOf = function (x) { return x.yt ? (x.channel || 'YouTube') : L(x.providerAr || x.provider || 'Audiohat', x.provider || 'Audiohat'); };
 
 		/* ---------- where to buy: store search links for this title (no affiliate codes) ---------- */
 		var qAr = (isIssue && ser ? t(ser.s.title) + ' ' : '') + (title.ar || '') + ' ' + authorAr;

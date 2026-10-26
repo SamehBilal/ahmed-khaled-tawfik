@@ -96,14 +96,14 @@
 
 		function setPlayIcon(playing) {
 			var tr = tracks[i] || {};
-			var inDeck = tr.yt && tr.ytEmbed, where = tr.provider || 'Audiohat';
+			var inDeck = tr.yt && tr.ytEmbed, where = tr.provider || 'Audiohat', whereAr = tr.providerAr || where;
 			/* only a YouTube episode plays here; an Audiohat or Storytel one is listened to on its page there */
 			playBtn.querySelector('.ic').innerHTML = svg(inDeck ? (playing ? 'pause' : 'play') : 'out');
 			playBtn.querySelector('.lb').textContent = inDeck
 				? (playing ? L('إيقاف مؤقت', 'Pause') : L('تشغيل', 'Play'))
-				: (tr.yt ? L('شاهد على YouTube', 'Watch on YouTube') : L('استمع على ' + where, 'Listen on ' + where));
+				: (tr.yt ? L('شاهد على YouTube', 'Watch on YouTube') : L('استمع على ' + whereAr, 'Listen on ' + where));
 			playBtn.setAttribute('aria-label', (inDeck ? (playing ? L('إيقاف مؤقت لـ «', 'Pause “') : L('تشغيل «', 'Play “')) : L('استمع إلى «', 'Listen to “')) +
-				(tr.title || '') + (inDeck ? L('»', '”') : (tr.yt ? L('» على YouTube', '” on YouTube') : L('» على ' + where, '” on ' + where))));
+				(tr.title || '') + (inDeck ? L('»', '”') : (tr.yt ? L('» على YouTube', '” on YouTube') : L('» على ' + whereAr, '” on ' + where))));
 		}
 
 		function render() {
@@ -126,6 +126,8 @@
 					: L('صاحب الفيديو لا يسمح بتشغيله خارج YouTube، فالتشغيل يفتحه هناك', 'The uploader does not allow playing it outside YouTube, so play opens it there'))
 				: tr.provider === 'Storytel'
 				? L('الكتاب الصوتي على Storytel' + (tr.by ? ' بصوت ' + tr.by : '') + ' — الزر يفتح صفحته هناك في نافذة جديدة', 'The audiobook is on Storytel' + (tr.by ? ', read by ' + tr.by : '') + ' — the key opens its page there in a new tab')
+				: tr.provider === 'Iqraaly'
+				? L('الكتاب الصوتي على «اقرألي»' + (tr.by ? ' بصوت ' + tr.by : '') + ' — الزر يفتح صفحته هناك في نافذة جديدة', 'The audiobook is on Iqraaly' + (tr.by ? ', read by ' + tr.by : '') + ' — the key opens its page there in a new tab')
 				: L('الحلقة على Audiohat — الزر يفتح صفحتها هناك في نافذة جديدة', 'The episode is on Audiohat — the key opens its page there in a new tab');
 			el.classList.toggle('has-sample', !!(tr.yt && tr.ytEmbed));
 			/* the separate source key is for YouTube; for Audiohat the main key already opens it */
@@ -293,6 +295,18 @@
 		});
 	}
 
-	window.Cassette = { mount: mount, issueTracks: function (key, title) { return issueTracks(key, title).concat(youtubeTracks(key, title), storytelTracks(key, title)); },
-		youtubeTracks: youtubeTracks, storytelTracks: storytelTracks, pageUrl: pageUrl };
+	/* audiobooks on Iqraaly (data-more.js: the Lasheen novels) -> tracks. key: lasheen-<n>; data entries: [book id, minutes, narrator, episodes] */
+	function iqraalyTracks(key, title) {
+		var D = window.App.data(), A = D.audio || null, Q = A && A.iqraaly;
+		if (!Q || !Q.items || !Q.items[key]) return [];
+		var L = window.App.L, num = window.App.num, info = (D.issueInfo || {})[key] || {};
+		return Q.items[key].map(function (ep) {
+			var label = [ep[2] ? L('بصوت ', 'read by ') + ep[2] : '', ep[3] ? num(ep[3]) + L(' حلقات', ' episodes') : ''].filter(Boolean).join(' · ');
+			return { title: title, ep: label || L('اقرألي', 'Iqraaly'), sub: L('اقرألي', 'Iqraaly') + (label ? ' · ' + label : ''), url: Q.base + ep[0],
+				mins: ep[1] || null, by: ep[2] || '', provider: 'Iqraaly', providerAr: 'اقرألي', skin: 'midnight', art: info.cover || '' };
+		});
+	}
+
+	window.Cassette = { mount: mount, issueTracks: function (key, title) { return issueTracks(key, title).concat(youtubeTracks(key, title), storytelTracks(key, title), iqraalyTracks(key, title)); },
+		youtubeTracks: youtubeTracks, storytelTracks: storytelTracks, iqraalyTracks: iqraalyTracks, pageUrl: pageUrl };
 })();

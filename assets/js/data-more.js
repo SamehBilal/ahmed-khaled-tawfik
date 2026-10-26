@@ -3566,3 +3566,24 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		note: { ar: 'من لقاء نجوم إف إم مع صنّاع مسلسل «ما وراء الطبيعة» ونجومه.', en: 'From Nogoum FM’s interview with the makers and cast of Paranormal.' } });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* The Lasheen novels on Iqraaly (اقرألي, iqraaly.com), books one to eight, read by Mohamed Khamis for Kotopia; collected 2026-10-26.
+   The site plays none of them: the cassette's «استمع على اقرألي» key opens the book's page there.
+   Keys: lasheen-<n>; each entry: [Iqraaly book id (iqraaly.com/books/<id>), minutes, narrator, episodes] */
+(function (A) {
+	var Au = A.audio;
+	if (!Au) return;
+	Au.iqraaly = Au.iqraaly || {
+		base: 'https://iqraaly.com/books/',
+		items: {
+			'lasheen-1': [[2781, 260, 'محمد خميس', 6]],
+			'lasheen-2': [[2780, 139, 'محمد خميس', 6]],
+			'lasheen-3': [[3388, 192, 'محمد خميس', 17]],
+			'lasheen-4': [[3455, 175, 'محمد خميس', 8]],
+			'lasheen-5': [[4042, 306, 'محمد خميس', 10]],
+			'lasheen-6': [[4303, 237, 'محمد خميس', 7]],
+			'lasheen-7': [[4958, 190, 'محمد خميس', 5]],
+			'lasheen-8': [[5370, 189, 'محمد خميس', 5]]
+		}
+	};
+})(window.AKT);

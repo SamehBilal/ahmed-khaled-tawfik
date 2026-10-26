@@ -6,8 +6,8 @@ window.PAGE = {
 		eyebrow: { ar: 'كتب مسموعة', en: 'Audiobooks' },
 		title: { ar: 'العرّاب مسموعًا', en: 'The Godfather, out loud' },
 		lead: {
-			ar: 'أعداد «ما وراء الطبيعة» و«فانتازيا» و«سافاري» وكتبه كما سجّلتها Audiohat وStorytel، وحكايات «بعد منتصف الليل»، و«سافاري» دراما إذاعية على YouTube. اختر منصة أو شريطًا ثم اضغط الزر.',
-			en: 'Beyond Nature, Fantasia and Safari issues and his books as recorded by Audiohat and Storytel, the “After Midnight” stories, and Safari as a radio drama on YouTube. Pick a platform or a tape, then press the key.'
+			ar: 'أعداد «ما وراء الطبيعة» و«فانتازيا» و«سافاري» وكتبه كما سجّلتها Audiohat وStorytel، وحكايات «بعد منتصف الليل» وروايات «لاشين» على Audiohat و«اقرألي»، و«سافاري» دراما إذاعية على YouTube. اختر منصة أو شريطًا ثم اضغط الزر.',
+			en: 'Beyond Nature, Fantasia and Safari issues and his books as recorded by Audiohat and Storytel, the “After Midnight” stories and the Lasheen novels on Audiohat and Iqraaly, and Safari as a radio drama on YouTube. Pick a platform or a tape, then press the key.'
 		}
 	},
 
@@ -22,8 +22,8 @@ window.PAGE = {
 		/* the platform filter: every track goes through push, which counts it for its platform and keeps it only if it is shown */
 		var self = this;
 		if (!this.platform) { try { this.platform = sessionStorage.getItem('akt-audio-platform') || 'all'; } catch (x) { this.platform = 'all'; } }
-		var platform = this.platform, perPlatform = { all: 0, audiohat: 0, storytel: 0, youtube: 0 };
-		var platformOf = function (tr) { return tr.yt ? 'youtube' : tr.provider === 'Storytel' ? 'storytel' : 'audiohat'; };
+		var platform = this.platform, perPlatform = { all: 0, audiohat: 0, storytel: 0, iqraaly: 0, youtube: 0 };
+		var platformOf = function (tr) { return tr.yt ? 'youtube' : tr.provider === 'Storytel' ? 'storytel' : tr.provider === 'Iqraaly' ? 'iqraaly' : 'audiohat'; };
 		var push0 = tracks.push, counted = {};
 		tracks.push = function (tr) {
 			/* (a track offered twice, as a special under two series, is counted once) */
@@ -121,6 +121,15 @@ window.PAGE = {
 			return { title: { ar: 'الموسم ' + App.num(se.n) + ' (' + App.num(se.year) + ')', en: 'Season ' + se.n + ' (' + se.year + ')' }, thumb: se.art, start: start, count: tracks.length - start,
 				mins: minsFrom(start) };
 		});
+		/* the Lasheen novels on Iqraaly, books one to eight, one row a book */
+		Object.keys((A.iqraaly && A.iqraaly.items) || {}).forEach(function (k) {
+			var is = (S.seriesIssues('lasheen') || []).filter(function (x) { return 'lasheen-' + x.n === k; })[0];
+			if (!is) return;
+			var start = tracks.length;
+			window.Cassette.iqraalyTracks(k, L('لاشين ', 'Lasheen ') + App.num(is.n) + ': ' + t(is.title)).forEach(function (tr) { tracks.push(tr); });
+			srows2.push({ n: +is.n, title: { ar: 'لاشين ' + App.num(is.n) + ': ' + is.title.ar + ' (اقرألي)', en: 'Lasheen ' + is.n + ': ' + (is.title.en || is.title.ar) + ' (Iqraaly)' },
+				href: App.issueHref('lasheen', is), thumb: ((App.data().issueInfo || {})[k] || {}).cover || '', start: start, count: tracks.length - start, mins: minsFrom(start) });
+		});
 		/* and the Lasheen novels Audiohat has as audiobooks, one row a book, its parts inside */
 		(A.lasheenBooks || []).forEach(function (b) {
 			var is = (S.seriesIssues('lasheen') || []).filter(function (x) { return +x.n === b.n; })[0];
@@ -146,8 +155,8 @@ window.PAGE = {
 		srows2 = srows2.filter(function (r) { return r.count > 0; });
 		if (srows2.length) groups.push({
 			title: { ar: 'بعد منتصف الليل — مواسم «لاشين»', en: 'After Midnight — the Lasheen seasons' },
-			note: { ar: 'عاد البرنامج الذي كتب عنه في «أسطورة بعد منتصف الليل» بمواسم جديدة على Audiohat من تأليف شيرين هنائي، ومنها خرجت روايات «لاشين».',
-				en: 'The radio show he wrote of in “The Legend of After Midnight” came back on Audiohat in new seasons written by Sherine Hanaey, out of which the Lasheen novels grew.' },
+			note: { ar: 'عاد البرنامج الذي كتب عنه في «أسطورة بعد منتصف الليل» بمواسم جديدة على Audiohat من تأليف شيرين هنائي، ومنها خرجت روايات «لاشين»، وهي هنا مسموعة على «اقرألي» وAudiohat.',
+				en: 'The radio show he wrote of in “The Legend of After Midnight” came back on Audiohat in new seasons written by Sherine Hanaey, out of which the Lasheen novels grew; here they are as audiobooks on Iqraaly and Audiohat.' },
 			rows: srows2
 		});
 
@@ -168,13 +177,13 @@ window.PAGE = {
 		root.innerHTML =
 			'<section class="section audio-help"><div class="wrap">' +
 				'<div><h2 class="d-head" style="font-family:var(--f-display);font-size:28px;margin:0 0 10px">' + L('على الشريط الآن', 'On the tape now') + '</h2>' +
-					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات. حلقات Audiohat وكتب Storytel تُسمع على موقعيهما: زر «استمع على …» يفتح صفحتها هناك، ودراما YouTube تُشغَّل هنا تحت الشريط.', '◀◀ and ▶▶ wind between episodes. Audiohat episodes and Storytel audiobooks are heard on their own sites: the «Listen on …» key opens the page there, and YouTube dramas play here, under the tape.') + '</p>' +
+					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات. حلقات Audiohat وكتب Storytel و«اقرألي» تُسمع على مواقعها: زر «استمع على …» يفتح صفحتها هناك، ودراما YouTube تُشغَّل هنا تحت الشريط.', '◀◀ and ▶▶ wind between episodes. Audiohat episodes and Storytel and Iqraaly audiobooks are heard on their own sites: the «Listen on …» key opens the page there, and YouTube dramas play here, under the tape.') + '</p>' +
 					'<p style="color:var(--muted);margin:0">' + App.num(tracks.length) + ' ' + L('حلقة', 'episodes') + ' · ' +
 						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a>' +
 						(A.storytel ? ' · <a href="' + e(A.storytel.author) + '" target="_blank" rel="noopener">' + L('صفحته على Storytel ↗', 'His page on Storytel ↗') + '</a>' : '') + '</p>' +
 					/* show one platform, or all of them */
 					'<div class="chips au-platforms" role="group" aria-label="' + e(L('المنصة', 'Platform')) + '">' +
-						[['all', L('الكل', 'All')], ['audiohat', 'Audiohat'], ['storytel', 'Storytel'], ['youtube', 'YouTube']].filter(function (p) { return p[0] === 'all' || perPlatform[p[0]]; }).map(function (p) {
+						[['all', L('الكل', 'All')], ['audiohat', 'Audiohat'], ['storytel', 'Storytel'], ['iqraaly', L('اقرألي', 'Iqraaly')], ['youtube', 'YouTube']].filter(function (p) { return p[0] === 'all' || perPlatform[p[0]]; }).map(function (p) {
 							return '<button type="button" class="chip" data-platform="' + p[0] + '" aria-pressed="' + (platform === p[0]) + '">' + e(p[1]) + '<span class="count">' + App.num(perPlatform[p[0]]) + '</span></button>';
 						}).join('') + '</div></div>' +
 			'</div></section>' +
@@ -203,8 +212,8 @@ window.PAGE = {
 						'</li>';
 					}).join('') + '</ul></details>';
 			}).join('') + '</div>' +
-			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat وStorytel وناشريها («شركة سلاح التلميذ للطباعة والنشر» وغيرها)، ودراما «سافاري» الإذاعية من قناة «تسجيل» على YouTube. هذا الموقع يربط إليها أو يعرضها عبر مشغّل YouTube فقط، ولا يستضيف أي صوت منها.',
-				'Recordings and rights belong to Audiohat, Storytel and their publishers (Salah El Telmeez for Printing & Publishing and others); the Safari radio drama is from the Tasgeel channel on YouTube. This site only links to them or plays them through the YouTube player, and hosts none of their audio.') + '</p>' +
+			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat وStorytel و«اقرألي» وناشريها («شركة سلاح التلميذ للطباعة والنشر» وغيرها)، ودراما «سافاري» الإذاعية من قناة «تسجيل» على YouTube. هذا الموقع يربط إليها أو يعرضها عبر مشغّل YouTube فقط، ولا يستضيف أي صوت منها.',
+				'Recordings and rights belong to Audiohat, Storytel, Iqraaly and their publishers (Salah El Telmeez for Printing & Publishing and others); the Safari radio drama is from the Tasgeel channel on YouTube. This site only links to them or plays them through the YouTube player, and hosts none of their audio.') + '</p>' +
 			'</div></section>';
 
 		root.querySelectorAll('details.ep-group').forEach(function (d) {
