@@ -3235,7 +3235,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		/* Hanan El-Karargy, who drew «تأثير الجرادة»: a still from a TV interview, sent by the site's editor */
 		'حنان الكرارجي': { url: W + 'hanan-el-karargy.webp' },
 		/* Tarek Azzam, one of the artists of the short comics he scripted for Bos w Tol and Ida2at: sent by the site's editor */
-		'طارق عزام': { url: W + 'tarek-azzam.webp' }
+		'طارق عزام': { url: W + 'tarek-azzam.webp' },
+		/* Sayed Zahran, author of «الطارق» («البرزخ», «الكاردينال»): sent by the site's editor */
+		'سيد زهران': { url: W + 'sayed-zahran.webp' }
 	};
 	Object.keys(A.writers || {}).forEach(function (sh) {
 		(A.writers[sh] || []).forEach(function (w) {
