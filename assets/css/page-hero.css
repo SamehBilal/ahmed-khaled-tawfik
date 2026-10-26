@@ -170,7 +170,11 @@ html[dir="ltr"] .ph-env { left: auto; right: 100%; animation-name: ph-fly-ltr; }
 @keyframes ph-ripple { from { transform: scale(.6); opacity: .9; } to { transform: scale(3.2); opacity: 0; } }
 
 /* ---------- sources: the card catalogue ---------- */
-.ph[data-ph="sources"] { background: radial-gradient(80% 120% at 50% 0%, #2c1d12 0%, #120c08 70%); }
+/* no line under it: the dark fades down into the page */
+.ph[data-ph="sources"] { border-bottom: 0; background: radial-gradient(80% 120% at 50% 0%, #2c1d12 0%, #120c08 70%); }
+.ph[data-ph="sources"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; z-index: 6; pointer-events: none;
+	background: linear-gradient(transparent, var(--ink)); }
+.ph[data-ph="sources"] + .page-hero { padding-top: 36px; }
 .ph-catalog { position: absolute; left: 50%; top: 50%; width: min(1040px, 92%); transform: translate(-50%, -50%);
 	display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; padding: 12px; border-radius: 6px;
 	background: linear-gradient(#5a3a22, #3a2414); box-shadow: 0 24px 50px rgba(0, 0, 0, .6), inset 0 0 0 3px rgba(0, 0, 0, .3); }
