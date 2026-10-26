@@ -3444,3 +3444,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	/* in date order, the ones without a year last as before */
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* the Legacy page plays his voice reading a line of his on the first scroll: put the recording in assets/audio and name it here
+   (the file now is only a placeholder chime); quote is what the page shows beside it, his wish for his grave by default */
+(function (A) {
+	A.legacyVoice = A.legacyVoice || { src: 'assets/audio/legacy-voice.wav', quote: null };
+})(window.AKT);

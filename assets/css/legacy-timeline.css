@@ -112,3 +112,20 @@ button.tlx-pic { cursor: zoom-in; }
 	.tlx-item, .tlx-item::before, .tlx-content, .tlx-bg img { transition: none; }
 	.tlx-content, .tlx-item::before { transform: none; }
 }
+
+/* his voice: a small key in the corner with the words being read; it glows while it plays */
+.lv { position: fixed; z-index: 40; bottom: 18px; inset-inline-start: 18px; max-width: min(360px, calc(100vw - 36px));
+	display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; border-radius: 999px;
+	background: color-mix(in srgb, var(--ink-2) 92%, transparent); border: 1px solid var(--line); box-shadow: 0 10px 26px rgba(0, 0, 0, .45);
+	backdrop-filter: blur(6px); transition: border-color .3s, box-shadow .3s; }
+html[dir="rtl"] .lv { padding: 8px 8px 8px 14px; }
+.lv[hidden] { display: none; }
+.lv-key { flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
+	background: var(--ember, #b3261e); color: #fff; }
+.lv-ic { width: 0; height: 0; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent currentColor; margin-inline-start: 3px; }
+html[dir="rtl"] .lv-ic { margin-inline-start: 0; margin-inline-end: 3px; }
+.lv.on .lv-ic { width: 12px; height: 14px; border: 0; margin: 0; background: linear-gradient(90deg, currentColor 0 4px, transparent 4px 8px, currentColor 8px 12px); }
+.lv-q { font-family: var(--f-display); font-size: 13.5px; line-height: 1.4; color: var(--paper-dim); }
+.lv.on { border-color: var(--ember, #b3261e); box-shadow: 0 0 0 1px var(--ember, #b3261e), 0 10px 26px rgba(0, 0, 0, .45); }
+.lv.on .lv-q { color: var(--paper); }
+@media (max-width: 560px) { .lv { bottom: 76px; } .lv-q { font-size: 12.5px; } }

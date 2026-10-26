@@ -122,7 +122,46 @@ window.PAGE = {
 			};
 			this.focusTimeline(tl);
 		}
+		this.voice();
 		App.focusHash();
+	},
+
+	/* his voice reading one of his best-known lines (AKT.legacyVoice: the file and its words), started by the first scroll.
+	   Browsers let a page make sound only after a click, tap or key, so if the scroll is refused it starts on the first of those.
+	   A small key pauses and replays it; if the file is missing the key never shows. */
+	voice: function () {
+		var App = window.App, d = App.data(), L = App.L, e = App.esc;
+		var v = d.legacyVoice;
+		if (!v || !v.src || this._voice) return;
+		var a = new Audio(v.src), started = false, self = this;
+		a.preload = 'auto';
+		var box = document.createElement('div');
+		box.className = 'lv';
+		box.hidden = true;
+		box.innerHTML = '<button type="button" class="lv-key" aria-pressed="false"><span class="lv-ic" aria-hidden="true"></span></button>' +
+			'<span class="lv-q">' + e(App.t(v.quote || (d.bio || {}).motto || {})) + '</span>';
+		document.body.appendChild(box);
+		this._voice = box;
+		var key = box.querySelector('.lv-key');
+		var mark = function () {
+			var on = !a.paused;
+			box.classList.toggle('on', on);
+			key.setAttribute('aria-pressed', String(on));
+			key.setAttribute('aria-label', on ? L('أوقف صوته', 'Pause his voice') : L('استمع إلى صوته', 'Play his voice'));
+		};
+		a.addEventListener('canplay', function () { box.hidden = false; }, { once: true });
+		a.addEventListener('error', function () { box.remove(); self._voice = null; });
+		['play', 'pause', 'ended'].forEach(function (t) { a.addEventListener(t, mark); });
+		key.onclick = function () { started = true; off(); if (a.paused) { if (a.ended) a.currentTime = 0; a.play().catch(function () {}); } else a.pause(); };
+		var start = function () {
+			if (started) return off();
+			var p = a.play();
+			if (p && p.then) p.then(function () { started = true; off(); }, function () { /* refused: wait for a click, tap or key */ });
+		};
+		var events = ['scroll', 'pointerdown', 'keydown', 'touchend'];
+		var off = function () { events.forEach(function (t) { window.removeEventListener(t, start, true); }); };
+		events.forEach(function (t) { window.addEventListener(t, start, { capture: true, passive: true }); });
+		mark();
 	},
 
 	/* an event's picture: "portrait", "yt:<id>" (a video thumbnail), "cover:<book id>" or a path.
