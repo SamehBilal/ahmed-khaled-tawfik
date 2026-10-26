@@ -240,7 +240,7 @@ window.PAGE = {
 
 		/* an issue's episodes (Audiohat, YouTube, Storytel); a book of his has its Storytel audiobooks */
 		var audioTracks = !window.Cassette ? [] : isIssue ? window.Cassette.issueTracks(r.id, t(title))
-			: (window.Cassette.storytelTracks ? window.Cassette.storytelTracks('work:' + (r.id || id), t(title)) : []);
+			: (window.Cassette.storytelTracks ? window.Cassette.storytelTracks((r.about ? 'about:' : 'work:') + (r.id || id), t(title)) : []);
 		var whereOf = function (x) { return x.yt ? (x.channel || 'YouTube') : (x.provider || 'Audiohat'); };
 
 		/* ---------- where to buy: store search links for this title (no affiliate codes) ---------- */

@@ -61,31 +61,32 @@ window.PAGE = {
 			});
 			if (srows.length) groups.push({ title: { ar: t(s.title) + ' — الأعداد الخاصة', en: (s.title.en || '') + ' — special issues' }, rows: srows });
 		});
-		/* his books on Storytel (novels, collections, articles), the WWW series in one book, and stories it sells on their own */
+		/* his books on Storytel (novels, collections, articles), the WWW series in one book, books about him, and stories it sells on their own */
 		var ST = (A.storytel && A.storytel.items) || {}, brows = [];
 		Object.keys(ST).forEach(function (k) {
-			var m = k.match(/^(work|series|story):(.+)$/);
+			var m = k.match(/^(work|series|story|about):(.+)$/);
 			if (!m) return;
 			var w = m[1] === 'work' ? App.findWork(m[2]) : null, ser = m[1] === 'series' ? S.anySeries(m[2]) : null;
-			if (m[1] === 'work' && !w) return;
-			var title = w ? w.title : ser ? ser.s.title : { ar: m[2], en: m[2] };
+			var ab = m[1] === 'about' ? (d.aboutBooks || []).filter(function (b) { return b.id === m[2]; })[0] : null;
+			if ((m[1] === 'work' && !w) || (m[1] === 'about' && !ab)) return;
+			var title = w ? w.title : ser ? ser.s.title : ab ? ab.title : { ar: m[2], en: m[2] };
 			var start = tracks.length;
 			window.Cassette.storytelTracks(k, t(title)).forEach(function (tr) {
-				tr.sub = (m[1] === 'story' ? L('قصة', 'Story') : m[1] === 'series' ? L('السلسلة كاملة', 'The whole series') : L('كتاب', 'Book')) + ' · ' + tr.sub;
+				tr.sub = (m[1] === 'story' ? L('قصة', 'Story') : m[1] === 'series' ? L('السلسلة كاملة', 'The whole series') : m[1] === 'about' ? L('كتاب عنه', 'A book about him') : L('كتاب', 'Book')) + ' · ' + tr.sub;
 				tr.skin = 'specials';
-				tr.art = w ? S.coverOf((d.bookInfo || {})[w.id] || {}) : ser ? S.seriesCover(m[2]) : '';
+				tr.art = w ? S.coverOf((d.bookInfo || {})[w.id] || {}) : ser ? S.seriesCover(m[2]) : ab ? (ab.cover || '') : '';
 				tracks.push(tr);
 			});
 			if (tracks.length === start) return;
-			brows.push({ title: title, href: w ? S.bookHref(w.id) : ser ? S.seriesHref(m[2]) : '', thumb: tracks[start].art || '', start: start, count: tracks.length - start, mins: minsFrom(start),
-				year: w ? w.year : 0, story: m[1] === 'story' });
+			brows.push({ title: title, href: w ? S.bookHref(w.id) : ser ? S.seriesHref(m[2]) : ab ? S.bookHref(ab.id) : '', thumb: tracks[start].art || '', start: start, count: tracks.length - start, mins: minsFrom(start),
+				year: w ? w.year : 0, rank: m[1] === 'work' ? 0 : m[1] === 'series' ? 1 : m[1] === 'about' ? 2 : 3 });
 		});
-		/* books in the order he published them, the stories last */
-		brows.sort(function (a, b) { return (a.story - b.story) || ((a.year || 9999) - (b.year || 9999)); });
+		/* his books in the order he published them, then WWW, the books about him, and the stories */
+		brows.sort(function (a, b) { return (a.rank - b.rank) || ((a.year || 9999) - (b.year || 9999)); });
 		if (brows.length) groups.push({
 			title: { ar: 'كتبه على Storytel', en: 'His books on Storytel' },
-			note: { ar: 'كتب صوتية من رواياته ومجموعاته ومقالاته على Storytel، ومعها قصص له تبيعها منفردة؛ الزر يفتح صفحة الكتاب هناك.',
-				en: 'Audiobooks of his novels, collections and essays on Storytel, with stories of his it sells on their own; the key opens the book’s page there.' },
+			note: { ar: 'كتب صوتية من رواياته ومجموعاته ومقالاته على Storytel، ومعها كتاب عنه وقصص له تبيعها منفردة؛ الزر يفتح صفحة الكتاب هناك.',
+				en: 'Audiobooks of his novels, collections and essays on Storytel, with a book about him and stories of his it sells on their own; the key opens the book’s page there.' },
 			rows: brows
 		});
 
