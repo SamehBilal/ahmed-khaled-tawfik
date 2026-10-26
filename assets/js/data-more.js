@@ -3453,7 +3453,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 (function (A) {
 	A.legacyVoice = A.legacyVoice || {
 		src: 'assets/audio/legacy-voice.m4a',
-		quote: { ar: 'وداعًا أيها الغريب.. كانت إقامتك قصيرة، لكنها كانت رائعة.. عسى أن تجد جنتك التي فتشت عنها كثيرًا', en: 'Farewell, stranger.. your stay was short, but it was wonderful.. may you find the paradise you searched for so long' },
+		quote: { ar: 'وداعًا أيها الغريب....', en: 'Farewell, stranger....' },
 		source: { ar: 'ما وراء الطبيعة — أسطورة النبوءة', en: 'Beyond Nature — The Legend of the Prophecy' },
 		lines: [
 			[2.2, 'وداعًا أيها الغريب..', 'Farewell, stranger..'],
