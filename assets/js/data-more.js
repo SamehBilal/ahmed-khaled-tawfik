@@ -3514,3 +3514,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 	}
 })(window.AKT);
+
+/* Safari 30, «قصاصات»: read again after 7 October 2023 for its picture of the Israeli–Palestinian conflict, as young writers told
+   Al-Dostour (5 December 2023) — on the issue's page, on the Legacy timeline and among the articles */
+(function (A) {
+	var src = 'https://www.dostor.org/4570856';
+	var info = (A.issueInfo = A.issueInfo || {})['safari-30'] = A.issueInfo['safari-30'] || {};
+	info.links = info.links || [];
+	if (!info.links.some(function (l) { return l.url === src; })) info.links.push({ label: 'الدستور: «قصاصات» والمأساة الفلسطينية', url: src });
+	var L = A.legacy = A.legacy || [];
+	var ev = { date: '2023-12-05', image: 'assets/img/covers/series/safari/abjjad-ad0334bc7892.png', photo: 'assets/img/covers/series/safari/abjjad-ad0334bc7892.png',
+		title: { ar: '«قصاصات» تُقرأ من جديد', en: 'Clippings read anew' },
+		text: { ar: 'بعد السابع من أكتوبر 2023 تداول كثيرون عدد «سافاري» الثلاثين، «قصاصات»، الذي تنتقل فيه ذاكرة طبيب إسرائيلي إلى علاء عبد العظيم فتنكشف جذور الصراع منذ وعد بلفور. وقالت عنه شيرين هنائي إنه رواية يجب أن تُترجم إلى كل لغات العالم.',
+			en: 'After 7 October 2023 many shared Safari’s thirtieth issue, Clippings, in which an Israeli doctor’s memories pass to Alaa Abdel Azim and lay bare the roots of the conflict since the Balfour Declaration. Sherine Hanaey said it is a novel that should be translated into every language.' },
+		source: src };
+	if (!L.some(function (l) { return l.source === src; })) {
+		var at = L.length;
+		for (var i = 0; i < L.length; i++) if (String(L[i].date) > ev.date) { at = i; break; }
+		L.splice(at, 0, ev);
+	}
+	var M = A.media = A.media || [];
+	if (!M.some(function (m) { return m.url === src; })) {
+		M.push({ kind: 'article', title: { ar: 'أدباء شباب: هكذا سرد أحمد خالد توفيق المأساة الفلسطينية في روايته «قصاصات»', en: 'Young writers on how he told the Palestinian tragedy in Clippings' }, outlet: { ar: 'الدستور', en: 'Al-Dostour' }, year: 2023, lang: 'ar', url: src });
+		M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+	}
+})(window.AKT);
