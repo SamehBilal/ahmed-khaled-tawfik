@@ -74,7 +74,7 @@ window.PAGE = {
 	},
 
 	/* the banner above the page title (after a CodePen "grid and clip-path" hero, in its teal): a notched
-	   picture (AKT.blog.heroImage, a placeholder for now), three of his articles taking turns in the small
+	   picture (AKT.blog.heroImage, else three readers at his blog), three of his articles taking turns in the small
 	   box — a different three on each visit, each opening its page — and the heading on stacked highlight blocks */
 	hero: function () {
 		var App = window.App, e = App.esc, L = App.L, self = this;
@@ -89,7 +89,7 @@ window.PAGE = {
 		var el = document.createElement('section');
 		el.className = 'bh';
 		el.innerHTML = '<div class="bh-box">' +
-			'<div class="bh-media"><img src="' + e(blog.heroImage || 'assets/img/blog-hero.png') + '" alt=""></div>' +
+			'<div class="bh-media"><img src="' + e(blog.heroImage || 'assets/img/blog-hero.webp') + '" alt=""></div>' +
 			'<div class="bh-mini">' + picks.map(function (p) {
 				return '<a class="bh-icon" href="blog.html?post=' + e(p.id) + '"><span class="bh-card"><img src="' + e(self.img(p.img)) + '" alt="" referrerpolicy="no-referrer">' +
 					'<span class="bh-card-t">' + e(p.t) + '</span></span></a>';
