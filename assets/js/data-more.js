@@ -3539,3 +3539,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 	}
 })(window.AKT);
+
+/* Comics Gate's farewell, by its founder Ahmed Abdo (4 April 2018): the novelist who loved comics — among the articles */
+(function (A) {
+	var M = A.media = A.media || [], src = 'https://www.comicsgate.net/home/2018/04/04/ahmedkhaled-rip/';
+	if (M.some(function (m) { return m.url === src; })) return;
+	M.push({ kind: 'article', title: { ar: 'وفاة أحمد خالد توفيق… روائي عَشِق الكوميكس!', en: 'Ahmed Khaled Tawfik dies: a novelist who loved comics' }, outlet: { ar: 'كوميكس جيت', en: 'ComicsGate' }, year: 2018, lang: 'ar', url: src });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
