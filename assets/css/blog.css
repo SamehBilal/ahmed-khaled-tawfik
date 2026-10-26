@@ -217,7 +217,9 @@ html[dir="rtl"] .bh-heading { clip-path: none; }
 .bh-cta-1:hover { background: var(--ember); color: #fff; }
 @container bh (min-width: 343px) { .bh-heading { max-inline-size: 85%; } }
 @container bh (min-width: 736px) {
-	.bh-media { align-self: end; clip-path: url(#bh-clip-full); width: 51%; }
+	/* the picture starts a line of the heading (its 1.15 line height plus the block's padding) and a gap below the top,
+	   whatever the length of the text beside it, so the first block never runs over it */
+	.bh-media { align-self: start; margin-top: calc(1.15 * 7.125cqw + 1rem + 24px); clip-path: url(#bh-clip-full); width: 51%; }
 	.bh-mini { aspect-ratio: 260 / 240; width: 20%; }
 	.bh-text { grid-area: 1 / 1 / 2 / 2; position: relative; z-index: 2; display: grid; grid-template-rows: 1fr auto; }
 	.bh-heading { background: none; clip-path: none; display: grid; align-items: start; justify-items: start; font-size: 7.125cqw; margin: 0; max-inline-size: 100%; padding: 0; }
