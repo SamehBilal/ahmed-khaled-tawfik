@@ -3376,3 +3376,19 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		eps: [['قبل_منتصف_الليل_!', 24, 'قبل منتصف الليل!', 'assets/img/audio/qabl-midnight-1.webp'], ['قبل_منتصف_الليل_02', 40, 'قبل منتصف الليل 02', 'assets/img/audio/qabl-midnight-2.webp']]
 	};
 })(window.AKT);
+
+/* the Legacy timeline: «شآبيب» named best book of 2018 in the viewers' vote of «معكم منى الشاذلي», his son receiving it
+   (Shorouk News, 27 December 2018) */
+(function (A) {
+	var L = A.legacy = A.legacy || [];
+	var ev = { date: '2018-12-27', image: 'assets/img/prizes/mona-elshazly-2018.webp', photo: 'assets/img/prizes/mona-elshazly-2018.webp',
+		title: { ar: '«شآبيب» أفضل كتاب لعام 2018', en: 'Shaabeeb, best book of 2018' },
+		text: { ar: 'فازت روايته الأخيرة «شآبيب» (دار الشروق) بلقب أفضل كتاب لعام 2018 في استفتاء برنامج «معكم منى الشاذلي» بعد أن نالت 54.5% من أصوات المشاهدين، وتسلّم ابنه الجائزة من منى الشاذلي.',
+			en: 'His last novel, Shaabeeb (Dar El Shorouk), was named best book of 2018 in the viewers’ vote of “Ma’akom Mona El-Shazly”, with 54.5% of the votes; his son received the award from Mona El-Shazly.' },
+		source: 'https://www.shorouknews.com/news/view.aspx?cdate=27122018&id=28370922-7075-4cd5-8eac-8749da393411' };
+	if (!L.some(function (l) { return l.date === ev.date && l.photo === ev.photo; })) {
+		var at = L.length;
+		for (var i = 0; i < L.length; i++) if (String(L[i].date) > ev.date) { at = i; break; }
+		L.splice(at, 0, ev);
+	}
+})(window.AKT);
