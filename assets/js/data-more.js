@@ -3547,3 +3547,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	M.push({ kind: 'article', title: { ar: 'وفاة أحمد خالد توفيق… روائي عَشِق الكوميكس!', en: 'Ahmed Khaled Tawfik dies: a novelist who loved comics' }, outlet: { ar: 'كوميكس جيت', en: 'ComicsGate' }, year: 2018, lang: 'ar', url: src });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* El Watan, the day after his death (3 April 2018): young readers on how he made them read — among the articles */
+(function (A) {
+	var M = A.media = A.media || [], src = 'https://www.elwatannews.com/news/details/3237100';
+	if (M.some(function (m) { return m.url === src; })) return;
+	M.push({ kind: 'article', title: { ar: 'أحمد خالد توفيق.. هكذا جلس الشباب على «ضوء إلهامه» يقرأون', en: 'How young people sat reading by the light of his inspiration' }, outlet: { ar: 'الوطن', en: 'El Watan' }, year: 2018, lang: 'ar', url: src });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
