@@ -77,6 +77,28 @@ window.PAGE = {
 			return { title: { ar: 'الموسم ' + App.num(se.n) + ' (' + App.num(se.year) + ')', en: 'Season ' + se.n + ' (' + se.year + ')' }, thumb: se.art, start: start, count: se.eps.length,
 				mins: se.eps.reduce(function (m, ep) { return m + (ep[1] || 0); }, 0) };
 		});
+		/* and the Lasheen novels Audiohat has as audiobooks, one row a book, its parts inside */
+		(A.lasheenBooks || []).forEach(function (b) {
+			var is = (S.seriesIssues('lasheen') || []).filter(function (x) { return +x.n === b.n; })[0];
+			if (!is) return;
+			var start = tracks.length, name = L('لاشين ', 'Lasheen ') + App.num(b.n) + ': ' + t(is.title);
+			b.eps.forEach(function (ep, k) {
+				var label = L('الجزء ', 'Part ') + App.num(k + 1);
+				tracks.push({ title: name, ep: label, sub: L('كتاب مسموع', 'Audiobook') + ' · ' + label, url: window.Cassette.pageUrl(A, ep[0]), mins: ep[1] || null, skin: 'midnight', art: b.art });
+			});
+			srows2.push({ n: b.n, title: { ar: 'لاشين: ' + is.title.ar + ' (كتاب مسموع، ' + App.num(b.year) + ')', en: 'Lasheen: ' + (is.title.en || is.title.ar) + ' (audiobook, ' + b.year + ')' },
+				href: App.issueHref('lasheen', is), thumb: b.art, start: start, count: b.eps.length, mins: b.eps.reduce(function (m, ep) { return m + (ep[1] || 0); }, 0) });
+		});
+		/* and the comic episodes made after the show, «قبل منتصف الليل!» */
+		var sp = A.midnightSpoofs;
+		if (sp && sp.eps.length) {
+			var spStart = tracks.length;
+			sp.eps.forEach(function (ep) {
+				tracks.push({ title: t(sp.title), ep: ep[2], sub: L('حلقة ساخرة', 'Comic episode') + ' · ' + ep[2], url: window.Cassette.pageUrl(A, ep[0]), mins: ep[1] || null, skin: 'midnight', art: ep[3] || sp.art });
+			});
+			srows2.push({ title: { ar: sp.title.ar + ' (' + sp.years + ')', en: sp.title.en + ' (' + sp.years + ')' }, thumb: sp.art, start: spStart, count: sp.eps.length,
+				mins: sp.eps.reduce(function (m, ep) { return m + (ep[1] || 0); }, 0) });
+		}
 		if (srows2.length) groups.push({
 			title: { ar: 'بعد منتصف الليل — مواسم «لاشين»', en: 'After Midnight — the Lasheen seasons' },
 			note: { ar: 'عاد البرنامج الذي كتب عنه في «أسطورة بعد منتصف الليل» بمواسم جديدة على Audiohat من تأليف شيرين هنائي، ومنها خرجت روايات «لاشين».',

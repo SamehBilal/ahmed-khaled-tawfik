@@ -3355,3 +3355,24 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ n: 7, year: 2025, art: 'assets/img/audio/mid-season-7.webp', eps: [['01_أنا_ومهاب_وليالي_العذاب', 45, 'أنا ومهاب وليالي العذاب'], ['02_هات_حِتَّة!', 44, 'هات حِتَّة!'], ['03_دمبلدور', 32, 'دمبلدور'], ['04_تيك_تيك!', 27, 'تيك تيك!'], ['05_المسودَّة', 33, 'المسودَّة'], ['06_نوني_عرايس', 41, 'نوني عرايس'], ['07_جدو_علي', 27, 'جدو علي'], ['08_ميموري_بايت', 28, 'ميموري بايت'], ['09_مكنسة_وعجَّان_ومشابِك_غسيل', 44, 'مكنسة وعجَّان ومشابِك غسيل'], ['10_نادي_بعد_منتصف_الليل', 74, 'نادي بعد منتصف الليل']] }
 	];
 })(window.AKT);
+
+/* Lasheen as audiobooks on Audiohat: «عن الرعب والسفر», the series' fifteenth book, in four parts (7 May 2026), produced by
+   the «اقرأ لي» platform with Kotopia — [slug, minutes] per part */
+(function (A) {
+	var Au = A.audio;
+	if (!Au) return;
+	Au.lasheenBooks = Au.lasheenBooks || [
+		{ n: 15, year: 2026, art: 'assets/img/audio/lasheen-15.webp', eps: [['عن_الرعب_والسفر_01', 62], ['عن_الرعب_والسفر_02', 75], ['عن_الرعب_والسفر_03', 107], ['عن_الرعب_والسفر_04', 115]] }
+	];
+})(window.AKT);
+
+/* «قبل منتصف الليل!» (Audiohat): two comic episodes inspired by «بعد منتصف الليل», made by the Origo team and dedicated to
+   Audiohat (2 February 2023, 31 July 2026) — [slug, minutes, title, picture] */
+(function (A) {
+	var Au = A.audio;
+	if (!Au) return;
+	Au.midnightSpoofs = Au.midnightSpoofs || {
+		title: { ar: 'قبل منتصف الليل! (حلقات ساخرة)', en: 'Before Midnight! (comic episodes)' }, years: '2023–2026', art: 'assets/img/audio/qabl-midnight-1.webp',
+		eps: [['قبل_منتصف_الليل_!', 24, 'قبل منتصف الليل!', 'assets/img/audio/qabl-midnight-1.webp'], ['قبل_منتصف_الليل_02', 40, 'قبل منتصف الليل 02', 'assets/img/audio/qabl-midnight-2.webp']]
+	};
+})(window.AKT);
