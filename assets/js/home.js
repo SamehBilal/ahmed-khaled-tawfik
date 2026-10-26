@@ -16,10 +16,20 @@ window.PAGE = {
 		var series = d.series || [], works = d.works || [], chars = d.characters || [], w = d.writers || {};
 
 		var year = function (iso) { return iso ? App.num(String(iso).slice(0, 4)) : ''; };
-		var issues = series.reduce(function (n, s) { return n + (+s.count || 0); }, 0);
+		/* the issues of his own series as the data has them (an issue in two parts counts once) */
+		var S = window.WorksShared;
+		var issues = series.reduce(function (n, s) { return n + (S ? S.seriesIssues(s.id).filter(function (is) { return !(is.part > 1); }).length : (+s.count || 0)); }, 0);
 		var writersCount = ['collaborators', 'introductions', 'influenced', 'contemporaries', 'translated']
 			.reduce(function (n, k) { return n + ((w[k] || []).length); }, 0);
-		var au = d.audio || {}, audioCount = Object.keys(au.issues || {}).length + (au.midnight || []).length;
+		/* every recording once, on every platform: Audiohat's episodes, Storytel's and Iqraaly's audiobooks, the videos on YouTube */
+		var au = d.audio || {}, heard = {};
+		var hear = function (where, eps, at) { (eps || []).forEach(function (ep) { heard[where + ':' + ep[at || 0]] = 1; }); };
+		Object.keys(au.issues || {}).forEach(function (k) { hear('ah', au.issues[k]); });
+		hear('ah', au.midnight, 1);
+		(au.seasons || []).concat(au.lasheenBooks || [], au.midnightSpoofs ? [au.midnightSpoofs] : []).forEach(function (x) { hear('ah', x.eps); });
+		[au.storytel, au.iqraaly].forEach(function (P, k) { if (P && P.items) Object.keys(P.items).forEach(function (key) { hear(k ? 'iq' : 'st', P.items[key]); }); });
+		if (au.youtube) { Object.keys(au.youtube.issues || {}).forEach(function (k) { hear('yt', au.youtube.issues[k]); }); if (au.youtube.eslamAdel) hear('yt', au.youtube.eslamAdel.eps); }
+		var audioCount = Object.keys(heard).length;
 
 		/* hero text */
 		document.getElementById('hero-text').innerHTML =
@@ -93,7 +103,7 @@ window.PAGE = {
 			{ href: 'legacy.html', big: (d.media || []).length || '∞', title: { ar: 'الإرث', en: 'The legacy' },
 			  text: { ar: 'الوداع والتكريم، ولقاءاته ومحاضراته بصوته.', en: 'The farewell, the tributes, and his interviews and talks.' } },
 			{ href: 'audio.html', big: audioCount || '▶', title: { ar: 'مسموع', en: 'Audio' },
-			  text: { ar: 'أعداده كتبًا مسموعة على شريط كاسيت — اضغط تشغيل واسمع.', en: 'His books as audiobooks on a cassette — press play and listen.' } },
+			  text: { ar: 'أعداده وكتبه مسموعة على Audiohat وStorytel و«اقرألي» وYouTube، على شريط كاسيت واحد.', en: 'His issues and books as recordings on Audiohat, Storytel, Iqraaly and YouTube, on one cassette.' } },
 			{ href: 'tributes.html', big: (d.tributes || []).length || '❝', title: { ar: 'قالوا عنه', en: 'Tributes' },
 			  text: { ar: 'ما قاله عنه كُتّاب ومشاهير، يوم رحيله وبعده.', en: 'What well-known people said about him when he left, and after.' } },
 			{ href: 'blog.html', big: (d.blog && d.blog.posts || []).length || '✒', title: { ar: 'المدونة', en: 'The Blog' },
