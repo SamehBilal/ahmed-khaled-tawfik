@@ -139,7 +139,7 @@ window.PAGE = {
 		box.className = 'lv';
 		box.hidden = true;
 		box.innerHTML = '<button type="button" class="lv-key" aria-pressed="false"><span class="lv-ic" aria-hidden="true"></span></button>' +
-			'<span class="lv-q">' + e(App.t(v.quote || (d.bio || {}).motto || {})) + '</span>';
+			'<span class="lv-q">' + e(App.t(v.quote || (d.bio || {}).motto || {})) + (v.source ? '<small class="lv-src">— ' + e(App.t(v.source)) + '</small>' : '') + '</span>';
 		document.body.appendChild(box);
 		this._voice = box;
 		var key = box.querySelector('.lv-key');

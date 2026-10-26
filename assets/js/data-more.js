@@ -3445,10 +3445,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
 
-/* the Legacy page plays his voice reading a line of his on the first scroll: put the recording in assets/audio and name it here
-   (the file now is only a placeholder chime); quote is what the page shows beside it, his wish for his grave by default */
+/* the Legacy page plays, on the first scroll, a reading of Refaat Ismail's farewell from «أسطورة النبوءة» (Ma Wara' al-Tabi'a), recorded
+   for the site; quote is the line shown beside it, source where it comes from */
 (function (A) {
-	A.legacyVoice = A.legacyVoice || { src: 'assets/audio/legacy-voice.wav', quote: null };
+	A.legacyVoice = A.legacyVoice || {
+		src: 'assets/audio/legacy-voice.m4a',
+		quote: { ar: 'وداعًا أيها الغريب.. كانت إقامتك قصيرة، لكنها كانت رائعة.. عسى أن تجد جنتك التي فتشت عنها كثيرًا', en: 'Farewell, stranger.. your stay was short, but it was wonderful.. may you find the paradise you searched for so long' },
+		source: { ar: 'ما وراء الطبيعة — أسطورة النبوءة', en: 'Beyond Nature — The Legend of the Prophecy' }
+	};
 })(window.AKT);
 
 /* the Legacy timeline: the fourth «روايات مصرية للجيب» salon, on him «بين الأدب والدراما» (Veto Gate, 29 May 2023) — his son

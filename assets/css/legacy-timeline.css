@@ -126,6 +126,7 @@ html[dir="rtl"] .lv { padding: 8px 8px 8px 14px; }
 html[dir="rtl"] .lv-ic { margin-inline-start: 0; margin-inline-end: 3px; }
 .lv.on .lv-ic { width: 12px; height: 14px; border: 0; margin: 0; background: linear-gradient(90deg, currentColor 0 4px, transparent 4px 8px, currentColor 8px 12px); }
 .lv-q { font-family: var(--f-display); font-size: 13.5px; line-height: 1.4; color: var(--paper-dim); }
+.lv-src { display: block; margin-top: 3px; font-family: var(--f-body, inherit); font-size: 11.5px; opacity: .75; }
 .lv.on { border-color: var(--ember, #b3261e); box-shadow: 0 0 0 1px var(--ember, #b3261e), 0 10px 26px rgba(0, 0, 0, .45); }
 .lv.on .lv-q { color: var(--paper); }
 @media (max-width: 560px) { .lv { bottom: 76px; } .lv-q { font-size: 12.5px; } }
