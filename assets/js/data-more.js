@@ -3450,3 +3450,24 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 (function (A) {
 	A.legacyVoice = A.legacyVoice || { src: 'assets/audio/legacy-voice.wav', quote: null };
 })(window.AKT);
+
+/* the Legacy timeline: the fourth «روايات مصرية للجيب» salon, on him «بين الأدب والدراما» (Veto Gate, 29 May 2023) — his son
+   received the Modern Arab Association's shield in his name — and the report among the articles */
+(function (A) {
+	var L = A.legacy = A.legacy || [];
+	var ev = { date: '2023-05', image: 'assets/img/timeline/maa-salon-2023.webp', photo: 'assets/img/timeline/maa-salon-2023.webp',
+		title: { ar: 'صالون «روايات مصرية للجيب» يحتفي به', en: 'The Egyptian Pocket Novels salon honours him' },
+		text: { ar: 'خصّصت المؤسسة العربية الحديثة مع منصة «اقرأ لي» صالونها الرابع لـ«أحمد خالد توفيق بين الأدب والدراما»، بحضور ابنه د. محمد أحمد خالد توفيق الذي تسلّم درع المؤسسة باسمه، وشيرين هنائي وتامر إبراهيم ومحمد سليمان عبد الملك وخالد الصفتي وخلف جابر. وقالت المؤسسة إن مبيعات كتبه زادت كثيرًا بعد رحيله وبعد «ما وراء الطبيعة» و«الغرفة 207».',
+			en: 'The Modern Arab Association and the «Read to Me» platform gave their fourth salon to “Ahmed Khaled Tawfik between literature and drama”, with his son Dr. Mohamed Ahmed Khaled Tawfik, who received the Association’s shield in his name, and Sherine Hanaey, Tamer Ibrahim, Mohamed Soliman Abdel Malek, Khaled El-Safty and Khalaf Gaber. The Association said his books sold far more after his death, and after Paranormal and Room 207.' },
+		source: 'https://www.vetogate.com/4894975' };
+	if (!L.some(function (l) { return l.source === ev.source; })) {
+		var at = L.length;
+		for (var i = 0; i < L.length; i++) if (String(L[i].date) > ev.date) { at = i; break; }
+		L.splice(at, 0, ev);
+	}
+	var M = A.media = A.media || [];
+	if (!M.some(function (m) { return m.url === ev.source; })) {
+		M.push({ kind: 'article', title: { ar: 'نجل وتلاميذ أحمد خالد توفيق يحتفون بالعراب', en: 'His son and his disciples celebrate the Godfather' }, outlet: { ar: 'فيتو', en: 'Veto Gate' }, year: 2023, lang: 'ar', url: ev.source });
+		M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+	}
+})(window.AKT);
