@@ -96,14 +96,14 @@
 
 		function setPlayIcon(playing) {
 			var tr = tracks[i] || {};
-			var inDeck = tr.yt && tr.ytEmbed;
-			/* only a YouTube episode plays here; an Audiohat one is listened to on their page */
+			var inDeck = tr.yt && tr.ytEmbed, where = tr.provider || 'Audiohat';
+			/* only a YouTube episode plays here; an Audiohat or Storytel one is listened to on its page there */
 			playBtn.querySelector('.ic').innerHTML = svg(inDeck ? (playing ? 'pause' : 'play') : 'out');
 			playBtn.querySelector('.lb').textContent = inDeck
 				? (playing ? L('إيقاف مؤقت', 'Pause') : L('تشغيل', 'Play'))
-				: (tr.yt ? L('شاهد على YouTube', 'Watch on YouTube') : L('استمع على Audiohat', 'Listen on Audiohat'));
+				: (tr.yt ? L('شاهد على YouTube', 'Watch on YouTube') : L('استمع على ' + where, 'Listen on ' + where));
 			playBtn.setAttribute('aria-label', (inDeck ? (playing ? L('إيقاف مؤقت لـ «', 'Pause “') : L('تشغيل «', 'Play “')) : L('استمع إلى «', 'Listen to “')) +
-				(tr.title || '') + (inDeck ? L('»', '”') : (tr.yt ? L('» على YouTube', '” on YouTube') : L('» على Audiohat', '” on Audiohat'))));
+				(tr.title || '') + (inDeck ? L('»', '”') : (tr.yt ? L('» على YouTube', '” on YouTube') : L('» على ' + where, '” on ' + where))));
 		}
 
 		function render() {
@@ -124,6 +124,8 @@
 			el.querySelector('.cs-note').textContent = tr.yt
 				? (tr.ytEmbed ? L('من قناة «' + (tr.channel || 'YouTube') + '» على YouTube — يظهر المشغّل تحت الشريط', 'From the “' + (tr.channel || 'YouTube') + '” channel on YouTube — the player opens under the tape')
 					: L('صاحب الفيديو لا يسمح بتشغيله خارج YouTube، فالتشغيل يفتحه هناك', 'The uploader does not allow playing it outside YouTube, so play opens it there'))
+				: tr.provider === 'Storytel'
+				? L('الكتاب الصوتي على Storytel' + (tr.by ? ' بصوت ' + tr.by : '') + ' — الزر يفتح صفحته هناك في نافذة جديدة', 'The audiobook is on Storytel' + (tr.by ? ', read by ' + tr.by : '') + ' — the key opens its page there in a new tab')
 				: L('الحلقة على Audiohat — الزر يفتح صفحتها هناك في نافذة جديدة', 'The episode is on Audiohat — the key opens its page there in a new tab');
 			el.classList.toggle('has-sample', !!(tr.yt && tr.ytEmbed));
 			/* the separate source key is for YouTube; for Audiohat the main key already opens it */
@@ -277,5 +279,20 @@
 		});
 	}
 
-	window.Cassette = { mount: mount, issueTracks: function (key, title) { return issueTracks(key, title).concat(youtubeTracks(key, title)); }, youtubeTracks: youtubeTracks, pageUrl: pageUrl };
+	/* audiobooks on Storytel (data-storytel.js) -> tracks. key: an issue (a special issue under its hero, "mwt-s2", is "specials-2"),
+	   "work:<id>", "series:www" or "story:<title>"; data entries: [slug, minutes, narrator, year, part?] */
+	function storytelTracks(key, title) {
+		var A = (window.App.data().audio) || null, S = A && A.storytel;
+		if (!S || !S.items) return [];
+		var k = String(key).replace(/^(mwt|fantasia|safari)-s(\d+)$/, 'specials-$2');
+		var eps = S.items[k] || [], L = window.App.L, num = window.App.num;
+		return eps.map(function (ep) {
+			var label = [ep[4] || '', ep[2] ? L('بصوت ', 'read by ') + ep[2] : '', ep[3] ? num(ep[3]) : ''].filter(Boolean).join(' · ');
+			return { title: title, ep: label || 'Storytel', sub: 'Storytel' + (label ? ' · ' + label : ''), url: S.base + encodeURIComponent(ep[0]),
+				mins: ep[1] || null, by: ep[2] || '', provider: 'Storytel', skin: k.split('-')[0] };
+		});
+	}
+
+	window.Cassette = { mount: mount, issueTracks: function (key, title) { return issueTracks(key, title).concat(youtubeTracks(key, title), storytelTracks(key, title)); },
+		youtubeTracks: youtubeTracks, storytelTracks: storytelTracks, pageUrl: pageUrl };
 })();

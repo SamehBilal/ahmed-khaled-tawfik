@@ -238,7 +238,10 @@ window.PAGE = {
 			}
 		}
 
-		var audioTracks = (isIssue && window.Cassette) ? window.Cassette.issueTracks(r.id, t(title)) : [];
+		/* an issue's episodes (Audiohat, YouTube, Storytel); a book of his has its Storytel audiobooks */
+		var audioTracks = !window.Cassette ? [] : isIssue ? window.Cassette.issueTracks(r.id, t(title))
+			: (window.Cassette.storytelTracks ? window.Cassette.storytelTracks('work:' + (r.id || id), t(title)) : []);
+		var whereOf = function (x) { return x.yt ? (x.channel || 'YouTube') : (x.provider || 'Audiohat'); };
 
 		/* ---------- where to buy: store search links for this title (no affiliate codes) ---------- */
 		var qAr = (isIssue && ser ? t(ser.s.title) + ' ' : '') + (title.ar || '') + ' ' + authorAr;
@@ -263,9 +266,10 @@ window.PAGE = {
 				['Kindle', 'https://www.amazon.com/s?k=' + Q + '&i=digital-text']
 			] }
 		];
-		if (audioTracks.length) shops.push({ kind: L('مسموع', 'Audio'), items: [
-			audioTracks[0].yt ? ['YouTube — ' + (audioTracks[0].channel || ''), audioTracks[0].url] : ['Audiohat', audioTracks[0].url]
-		] });
+		/* one link for each place it can be heard: its first episode there */
+		if (audioTracks.length) shops.push({ kind: L('مسموع', 'Audio'), items: audioTracks.filter(function (x, k, arr) {
+			return arr.findIndex(function (y) { return whereOf(y) === whereOf(x); }) === k;
+		}).map(function (x) { return [x.yt ? 'YouTube — ' + (x.channel || '') : whereOf(x), x.url]; }) });
 		if (qEn) shops.push({ kind: L('بالإنجليزية', 'In English'), items: [
 			['Amazon', 'https://www.amazon.com/s?k=' + encodeURIComponent(qEn) + '&i=stripbooks']
 		] });
@@ -319,7 +323,7 @@ window.PAGE = {
 							return bookAwards.length ? '<section class="d-block" id="d-awards"><h3>' + L('جوائز', 'Awards') + '</h3>' + S.awardsList(bookAwards) + '</section>' : '';
 						})() +
 						buyHtml +
-						(audioTracks.length ? '<section class="d-block d-audio"><h3>' + L('استمع إليه', 'Listen') + ' <small>' + e(audioTracks.map(function (x) { return x.yt ? (x.channel || 'YouTube') : 'Audiohat'; }).filter(function (v, k, arr) { return arr.indexOf(v) === k; }).join(' · ')) + '</small></h3><div id="d-cassette"></div></section>' : '') +
+						(audioTracks.length ? '<section class="d-block d-audio"><h3>' + L('استمع إليه', 'Listen') + ' <small>' + e(audioTracks.map(whereOf).filter(function (v, k, arr) { return arr.indexOf(v) === k; }).join(' · ')) + '</small></h3><div id="d-cassette"></div></section>' : '') +
 						'<dl class="d-facts">' + rows.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + (x[2] || e(x[1])) + '</dd>'; }).join('') + '</dl>' +
 						(info.altTitles && info.altTitles.length ? '<section class="d-block"><h3>' + L('عناوين أخرى', 'Other titles') + '</h3><ul class="alt-titles">' +
 							info.altTitles.map(function (a) { return '<li><b lang="' + e(a.lang || '') + '">' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + (a.lang ? ' <span class="lng">' + e(a.lang) + '</span>' : '') + '</li>'; }).join('') +

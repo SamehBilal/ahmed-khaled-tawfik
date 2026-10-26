@@ -22,18 +22,21 @@ window.PAGE = {
 		var Y = (A.youtube && A.youtube.issues) || {}, TH = A.thumbs || {};
 		/* a row's picture: Audiohat's own, else the YouTube still, else the book cover */
 		function ytThumb(v) { return 'https://i.ytimg.com/vi/' + v + '/mqdefault.jpg'; }
+		/* the minutes of a row's tracks, whoever has them (Audiohat, YouTube, Storytel) */
+		function minsFrom(start) { return tracks.slice(start).reduce(function (m, tr) { return m + (tr.mins || 0); }, 0); }
 		var shown = {};
 		['mwt', 'fantasia', 'safari'].forEach(function (sid) {
 			var s = App.byId(d.series, sid);
 			var rows = [];
 			S.seriesIssues(sid).forEach(function (is) {
 				var key = sid + '-' + is.n;
-				if ((!A.issues[key] && !Y[key]) || is.part > 1) return;
+				if (is.part > 1) return;
 				var start = tracks.length;
 				var cover = S.issueCover(sid, is), eps = A.issues[key] || [];
-				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr, k) { tr.ep = tr.sub; tr.sub = t(s.title) + ' #' + App.num(is.n) + (tr.sub !== 'Audiohat' ? ' · ' + tr.sub : ''); tr.skin = sid; if (!tr.yt) tr.art = (eps[k] && TH[eps[k][0]]) || cover || ''; tracks.push(tr); });
+				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr, k) { tr.ep = tr.ep || tr.sub; tr.sub = t(s.title) + ' #' + App.num(is.n) + (tr.sub !== 'Audiohat' ? ' · ' + tr.sub : ''); tr.skin = sid; if (!tr.yt) tr.art = (eps[k] && TH[eps[k][0]]) || cover || ''; tracks.push(tr); });
+				if (tracks.length === start) return;
 				var thumb = (eps[0] && TH[eps[0][0]]) || (Y[key] ? ytThumb(Y[key][0][0]) : '') || cover;
-				rows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), thumb: thumb, start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
+				rows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), thumb: thumb, start: start, count: tracks.length - start, mins: minsFrom(start), yt: !!Y[key] });
 			});
 			if (rows.length) groups.push({ title: s.title, total: S.seriesIssues(sid).length, rows: rows });
 			/* special issues of the series (e.g. «في كهوف دراجوسان»), one row each, all their videos on the tape */
@@ -41,8 +44,8 @@ window.PAGE = {
 			S.specialIssues(sid).forEach(function (is) {
 				var key = sid + '-s' + is.n;
 				var start = tracks.length;
-				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.ep = tr.sub; tr.sub = L('عدد خاص ', 'Special ') + App.num(is.n) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
-				if (tracks.length > start) srows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), thumb: (tracks[start].yt ? ytThumb(tracks[start].yt) : '') || S.issueCover(sid, is), start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
+				window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.ep = tr.ep || tr.sub; tr.sub = L('عدد خاص ', 'Special ') + App.num(is.n) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
+				if (tracks.length > start) srows.push({ n: is.n, title: is.title, href: App.issueHref(sid, is), thumb: (tracks[start].yt ? ytThumb(tracks[start].yt) : '') || S.issueCover(sid, is), start: start, count: tracks.length - start, mins: minsFrom(start), yt: !!Y[key] });
 			});
 			/* issues of other series that count as its specials (e.g. «ثلاثة» in «كتاب الصيف»), listed once, under the first of their series */
 			S.contributedSeries().forEach(function (x) {
@@ -50,14 +53,42 @@ window.PAGE = {
 					var key = S.issueKey(x.id, is);
 					if (!is.asSpecial || [].concat(is.related || []).indexOf(sid) < 0 || shown[key]) return;
 					var start = tracks.length;
-					window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.ep = tr.sub; tr.sub = t(x.title) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
+					window.Cassette.issueTracks(key, t(is.title)).forEach(function (tr) { tr.ep = tr.ep || tr.sub; tr.sub = t(x.title) + ' · ' + tr.sub; tr.skin = 'specials'; tracks.push(tr); });
 					if (tracks.length === start) return;
 					shown[key] = 1;
-					srows.push({ n: is.n, title: is.title, href: App.issueHref(x.id, is), thumb: (tracks[start].yt ? ytThumb(tracks[start].yt) : '') || S.issueCover(x.id, is), start: start, count: tracks.length - start, mins: (A.issues[key] || []).reduce(function (m, ep) { return m + (ep[1] || 0); }, 0), yt: !!Y[key] });
+					srows.push({ n: is.n, title: is.title, href: App.issueHref(x.id, is), thumb: (tracks[start].yt ? ytThumb(tracks[start].yt) : '') || S.issueCover(x.id, is), start: start, count: tracks.length - start, mins: minsFrom(start), yt: !!Y[key] });
 				});
 			});
 			if (srows.length) groups.push({ title: { ar: t(s.title) + ' — الأعداد الخاصة', en: (s.title.en || '') + ' — special issues' }, rows: srows });
 		});
+		/* his books on Storytel (novels, collections, articles), the WWW series in one book, and stories it sells on their own */
+		var ST = (A.storytel && A.storytel.items) || {}, brows = [];
+		Object.keys(ST).forEach(function (k) {
+			var m = k.match(/^(work|series|story):(.+)$/);
+			if (!m) return;
+			var w = m[1] === 'work' ? App.findWork(m[2]) : null, ser = m[1] === 'series' ? S.anySeries(m[2]) : null;
+			if (m[1] === 'work' && !w) return;
+			var title = w ? w.title : ser ? ser.s.title : { ar: m[2], en: m[2] };
+			var start = tracks.length;
+			window.Cassette.storytelTracks(k, t(title)).forEach(function (tr) {
+				tr.sub = (m[1] === 'story' ? L('قصة', 'Story') : m[1] === 'series' ? L('السلسلة كاملة', 'The whole series') : L('كتاب', 'Book')) + ' · ' + tr.sub;
+				tr.skin = 'specials';
+				tr.art = w ? S.coverOf((d.bookInfo || {})[w.id] || {}) : ser ? S.seriesCover(m[2]) : '';
+				tracks.push(tr);
+			});
+			if (tracks.length === start) return;
+			brows.push({ title: title, href: w ? S.bookHref(w.id) : ser ? S.seriesHref(m[2]) : '', thumb: tracks[start].art || '', start: start, count: tracks.length - start, mins: minsFrom(start),
+				year: w ? w.year : 0, story: m[1] === 'story' });
+		});
+		/* books in the order he published them, the stories last */
+		brows.sort(function (a, b) { return (a.story - b.story) || ((a.year || 9999) - (b.year || 9999)); });
+		if (brows.length) groups.push({
+			title: { ar: 'كتبه على Storytel', en: 'His books on Storytel' },
+			note: { ar: 'كتب صوتية من رواياته ومجموعاته ومقالاته على Storytel، ومعها قصص له تبيعها منفردة؛ الزر يفتح صفحة الكتاب هناك.',
+				en: 'Audiobooks of his novels, collections and essays on Storytel, with stories of his it sells on their own; the key opens the book’s page there.' },
+			rows: brows
+		});
+
 		var midStart = tracks.length;
 		(A.midnight || []).forEach(function (m) {
 			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], skin: 'midnight', art: TH[m[1]] || '' });
@@ -123,9 +154,10 @@ window.PAGE = {
 		root.innerHTML =
 			'<section class="section audio-help"><div class="wrap">' +
 				'<div><h2 class="d-head" style="font-family:var(--f-display);font-size:28px;margin:0 0 10px">' + L('على الشريط الآن', 'On the tape now') + '</h2>' +
-					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات. حلقات Audiohat تُسمع على موقعهم: زر «استمع على Audiohat» يفتح صفحة الحلقة هناك، ودراما YouTube تُشغَّل هنا تحت الشريط.', '◀◀ and ▶▶ wind between episodes. Audiohat episodes are heard on their site: the «Listen on Audiohat» key opens the episode page there, and YouTube dramas play here, under the tape.') + '</p>' +
+					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات. حلقات Audiohat وكتب Storytel تُسمع على موقعيهما: زر «استمع على …» يفتح صفحتها هناك، ودراما YouTube تُشغَّل هنا تحت الشريط.', '◀◀ and ▶▶ wind between episodes. Audiohat episodes and Storytel audiobooks are heard on their own sites: the «Listen on …» key opens the page there, and YouTube dramas play here, under the tape.') + '</p>' +
 					'<p style="color:var(--muted);margin:0">' + App.num(tracks.length) + ' ' + L('حلقة', 'episodes') + ' · ' +
-						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a></p></div>' +
+						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a>' +
+						(A.storytel ? ' · <a href="' + e(A.storytel.author) + '" target="_blank" rel="noopener">' + L('صفحته على Storytel ↗', 'His page on Storytel ↗') + '</a>' : '') + '</p></div>' +
 			'</div></section>' +
 			/* each section opens and closes on its title: the first starts open, and the ones you open stay so while you browse */
 			'<section class="section"><div class="wrap"><div class="ep-groups">' + groups.map(function (g, gi) {
@@ -145,15 +177,15 @@ window.PAGE = {
 										var pic = tr.art || (tr.yt ? ytThumb(tr.yt) : '') || r.thumb || '';
 										return '<li data-start="' + (r.start + k) + '"><span class="no">' + e(App.num(k + 1)) + '</span>' +
 											'<span class="th' + (pic ? '' : ' none') + '" aria-hidden="true">' + (pic ? '<img src="' + e(pic) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">' : '') + '</span>' +
-											'<span class="tt">' + e(tr.ep || tr.title) + '<small>' + (tr.yt ? e(tr.channel || 'YouTube') : 'Audiohat') + (tr.mins ? ' · ' + App.num(tr.mins) + ' ' + L('دقيقة', 'min') : '') + '</small></span>' +
+											'<span class="tt">' + e(tr.ep || tr.title) + '<small>' + (tr.yt ? e(tr.channel || 'YouTube') : (tr.provider || 'Audiohat')) + (tr.mins ? ' · ' + App.num(tr.mins) + ' ' + L('دقيقة', 'min') : '') + '</small></span>' +
 											'<button type="button" data-start="' + (r.start + k) + '">' + L('ضعها في المسجل', 'Load tape') + '</button></li>';
 									}).join('') + '</ol>'
 								: '<button type="button" data-start="' + r.start + '">' + L('ضعه في المسجل', 'Load tape') + '</button>') +
 						'</li>';
 					}).join('') + '</ul></details>';
 			}).join('') + '</div>' +
-			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat و«شركة سلاح التلميذ للطباعة والنشر»، ودراما «سافاري» الإذاعية من قناة «تسجيل» على YouTube. هذا الموقع يربط إليها أو يعرضها عبر مشغّل YouTube فقط، ولا يستضيف أي صوت منها.',
-				'Recordings and rights belong to Audiohat and Salah El Telmeez for Printing & Publishing; the Safari radio drama is from the Tasgeel channel on YouTube. This site only links to them or plays them through the YouTube player, and hosts none of their audio.') + '</p>' +
+			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat وStorytel وناشريها («شركة سلاح التلميذ للطباعة والنشر» وغيرها)، ودراما «سافاري» الإذاعية من قناة «تسجيل» على YouTube. هذا الموقع يربط إليها أو يعرضها عبر مشغّل YouTube فقط، ولا يستضيف أي صوت منها.',
+				'Recordings and rights belong to Audiohat, Storytel and their publishers (Salah El Telmeez for Printing & Publishing and others); the Safari radio drama is from the Tasgeel channel on YouTube. This site only links to them or plays them through the YouTube player, and hosts none of their audio.') + '</p>' +
 			'</div></section>';
 
 		root.querySelectorAll('details.ep-group').forEach(function (d) {
