@@ -192,7 +192,10 @@ html[dir="rtl"] .ph-catalog { transform: translate(50%, -50%); left: auto; right
 @media (max-width: 640px) { .ph-scroll { width: 280px; height: 200px; margin: -100px 0 0 -140px; } .ph-scroll .sheet { padding: 26px 26px; } .ph-scroll .sheet b { font-size: 22px; } .ph-seal { width: 52px; height: 52px; font-size: 22px; } }
 
 /* ---------- tributes: the gallery wall ---------- */
-.ph[data-ph="tributes"] { background: linear-gradient(#211a16, #0e0b0a); }
+/* no line under it: the wall's dark fades down into the page */
+.ph[data-ph="tributes"] { border-bottom: 0; background: linear-gradient(#211a16, #0e0b0a 55%, var(--ink)); }
+.ph[data-ph="tributes"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 80px; z-index: 6; pointer-events: none;
+	background: linear-gradient(transparent, var(--ink)); }
 .ph-wall { position: absolute; inset: 0; display: flex; align-items: center; overflow: hidden; }
 .ph-wall .track { display: flex; gap: 34px; width: max-content; padding: 0 17px; animation: ph-marquee 70s linear infinite; }
 html[dir="rtl"] .ph-wall .track { animation-name: ph-marquee-rtl; }

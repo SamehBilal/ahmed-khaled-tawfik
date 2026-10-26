@@ -6,13 +6,23 @@
 	'use strict';
 	var stack = null;
 
+	/* the notes start just under the site's header, whatever its height on this screen, never over the menu */
+	function place() {
+		var h = document.querySelector('.site-header');
+		var b = h ? h.getBoundingClientRect().bottom : 0;
+		stack.style.top = Math.max(10, Math.round(b) + 12) + 'px';
+	}
+
 	function ensure() {
-		if (stack && stack.isConnected) return stack;
+		if (stack && stack.isConnected) { place(); return stack; }
 		stack = document.createElement('div');
 		stack.className = 'ns-stack';
 		stack.setAttribute('role', 'status');
 		stack.setAttribute('aria-live', 'polite');
 		document.body.appendChild(stack);
+		place();
+		window.addEventListener('resize', place);
+		window.addEventListener('scroll', place, { passive: true });
 		return stack;
 	}
 
