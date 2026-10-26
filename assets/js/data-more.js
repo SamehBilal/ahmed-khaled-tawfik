@@ -3244,7 +3244,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	(A.awards || []).forEach(function (a) {
 		if (a.work !== 'shaabeeb' || a.year !== 2018 || a.image) return;
 		a.image = { src: 'assets/img/prizes/mona-elshazly-2018.webp',
-			alt: { ar: 'ابنه يتسلّم جائزة أفضل كتاب لعام 2018 عن «شآبيب» من منى الشاذلي في برنامج «معكم منى الشاذلي»', en: 'His son receives the Best Book of 2018 award for Shaabeeb from Mona El-Shazly on “Ma’akom Mona El-Shazly”' } };
+			alt: { ar: 'ابنه د. محمد أحمد خالد توفيق يتسلّم جائزة أفضل كتاب لعام 2018 عن «شآبيب» من منى الشاذلي في برنامج «معكم منى الشاذلي»', en: 'His son, Dr. Mohamed Ahmed Khaled Tawfik, receives the Best Book of 2018 award for Shaabeeb from Mona El-Shazly on “Ma’akom Mona El-Shazly”' } };
 	});
 })(window.AKT);
 
@@ -3383,8 +3383,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var L = A.legacy = A.legacy || [];
 	var ev = { date: '2018-12-27', image: 'assets/img/prizes/mona-elshazly-2018.webp', photo: 'assets/img/prizes/mona-elshazly-2018.webp',
 		title: { ar: '«شآبيب» أفضل كتاب لعام 2018', en: 'Shaabeeb, best book of 2018' },
-		text: { ar: 'فازت روايته الأخيرة «شآبيب» (دار الشروق) بلقب أفضل كتاب لعام 2018 في استفتاء برنامج «معكم منى الشاذلي» بعد أن نالت 54.5% من أصوات المشاهدين، وتسلّم ابنه الجائزة من منى الشاذلي.',
-			en: 'His last novel, Shaabeeb (Dar El Shorouk), was named best book of 2018 in the viewers’ vote of “Ma’akom Mona El-Shazly”, with 54.5% of the votes; his son received the award from Mona El-Shazly.' },
+		text: { ar: 'فازت روايته الأخيرة «شآبيب» (دار الشروق) بلقب أفضل كتاب لعام 2018 في استفتاء برنامج «معكم منى الشاذلي» بعد أن نالت 54.5% من أصوات المشاهدين، وتسلّم ابنه د. محمد أحمد خالد توفيق الجائزة من منى الشاذلي.',
+			en: 'His last novel, Shaabeeb (Dar El Shorouk), was named best book of 2018 in the viewers’ vote of “Ma’akom Mona El-Shazly”, with 54.5% of the votes; his son, Dr. Mohamed Ahmed Khaled Tawfik, received the award from Mona El-Shazly.' },
 		source: 'https://www.shorouknews.com/news/view.aspx?cdate=27122018&id=28370922-7075-4cd5-8eac-8749da393411' };
 	if (!L.some(function (l) { return l.date === ev.date && l.photo === ev.photo; })) {
 		var at = L.length;
