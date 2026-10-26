@@ -3471,3 +3471,24 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 	}
 })(window.AKT);
+
+/* the Legacy timeline: «ترانزيت», the students' documentary he was filmed for on 19 March 2018, two weeks before his death,
+   with his last wish and a message in it (Sada El Balad, 24 April 2018) — and the report among the articles */
+(function (A) {
+	var L = A.legacy = A.legacy || [];
+	var ev = { date: '2018-04-24', image: 'assets/img/timeline/transit-2018.webp', photo: 'assets/img/timeline/transit-2018.webp',
+		title: { ar: 'آخر رسائله في فيلم «ترانزيت»', en: 'His last message, in the film Transit' },
+		text: { ar: 'كشف طلاب قسم علوم الاتصال والإعلام بكلية الآداب أنه صوّر معهم فيلمهم التسجيلي «ترانزيت»، مشروع تخرجهم، في 19 مارس 2018 قبل رحيله بأسبوعين؛ جاء من طنطا إلى القاهرة رغم سوء حالته الصحية، وقال لهم: «كنتُ في انتظار نتائج التحاليل… وخشيت التأخير عليكم». وفي الفيلم آخر أمنية له ورسالة منه.',
+			en: 'Mass-communication students revealed that he was filmed for their graduation documentary, Transit, on 19 March 2018, two weeks before his death; he came from Tanta to Cairo despite his poor health, telling them: “I was waiting for my test results… and was afraid of keeping you waiting.” The film holds his last wish and a message from him.' },
+		source: 'https://www.elbalad.news/3276989' };
+	if (!L.some(function (l) { return l.source === ev.source; })) {
+		var at = L.length;
+		for (var i = 0; i < L.length; i++) if (String(L[i].date) > ev.date) { at = i; break; }
+		L.splice(at, 0, ev);
+	}
+	var M = A.media = A.media || [];
+	if (!M.some(function (m) { return m.url === ev.source; })) {
+		M.push({ kind: 'article', title: { ar: 'آخر رسائل «العراب» أحمد خالد توفيق.. سجلها قبل وفاته رغم سوء حالته', en: 'The Godfather’s last messages, recorded before his death despite his illness' }, outlet: { ar: 'صدى البلد', en: 'Sada El Balad' }, year: 2018, lang: 'ar', url: ev.source });
+		M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+	}
+})(window.AKT);
