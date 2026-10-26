@@ -176,7 +176,8 @@ window.PAGE = {
 		if (spec.indexOf('cover:') === 0) {
 			return { src: window.WorksShared.coverOf((window.App.data().bookInfo || {})[spec.slice(6)] || {}), tall: true };
 		}
-		return { src: spec, tall: /\/posters\//.test(spec) };
+		/* posters and book covers stand upright */
+		return { src: spec, tall: /\/(posters|covers)\//.test(spec) };
 	},
 
 	/* the event nearest the middle of the screen is in focus and lends the section its backdrop */

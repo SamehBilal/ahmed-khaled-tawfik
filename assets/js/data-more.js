@@ -3415,7 +3415,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		text: { ar: 'البرنامج الإذاعي الذي كتب عنه في «أسطورة بعد منتصف الليل» عاد بموسم ثانٍ مسموع من تأليف شيرين هنائي بعد خمسين عامًا من الأول، وتوالت مواسمه كل عام.',
 			en: 'The radio show he wrote of in “The Legend of After Midnight” came back with a second, audio season written by Sherine Hanaey, set fifty years after the first, and a new season has followed every year.' },
 		source: 'https://www.audiohatdar.com/books/01_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_2' });
-	add({ date: '2021', image: 'assets/img/audio/mid-season-3.webp',
+	add({ date: '2021', image: 'assets/img/covers/lasheen/01.jpg',
 		title: { ar: 'روايات «لاشين» من عالمه', en: 'The Lasheen novels, out of his world' },
 		text: { ar: 'من مواسم «بعد منتصف الليل» خرجت سلسلة «لاشين» لشيرين هنائي عن دار كتوبيا، بدءًا من «عهد الدجالين» عام 2021، وبلغت عددها الثامن عشر عام 2026.',
 			en: 'Out of the After Midnight seasons grew Sherine Hanaey’s Lasheen series from Kotopia, beginning with “The Age of Charlatans” in 2021 and reaching its eighteenth book in 2026.' } });
