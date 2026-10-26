@@ -201,7 +201,8 @@ window.PAGE = {
 			'<section class="section audio-help"><div class="wrap">' +
 				'<div><h2 class="d-head" style="font-family:var(--f-display);font-size:28px;margin:0 0 10px">' + L('على الشريط الآن', 'On the tape now') + '</h2>' +
 					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات. حلقات Audiohat وكتب Storytel و«اقرألي» تُسمع على مواقعها: زر «استمع على …» يفتح صفحتها هناك، أما فيديوهات YouTube فتُشغَّل هنا تحت الشريط. «الحلقات» تفتح أجزاء العدد أو الكتاب، وكل قسم يُفتح ويُطوى من عنوانه.', '◀◀ and ▶▶ wind between episodes. Audiohat episodes and Storytel and Iqraaly audiobooks are heard on their own sites: the «Listen on …» key opens the page there, while YouTube videos play here, under the tape. «Episodes» opens an issue’s or a book’s parts, and each section opens and closes on its title.') + '</p>' +
-					'<p style="color:var(--muted);margin:0">' + App.num(tracks.length) + ' ' + L('حلقة', 'episodes') + ' · ' +
+					/* each episode once (a special listed under two series is one), as the platform chips count them */
+					'<p style="color:var(--muted);margin:0">' + App.num(perPlatform[platform] || 0) + ' ' + L('حلقة', 'episodes') + ' · ' +
 						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a>' +
 						(A.storytel ? ' · <a href="' + e(A.storytel.author) + '" target="_blank" rel="noopener">' + L('صفحته على Storytel ↗', 'His page on Storytel ↗') + '</a>' : '') +
 						(A.youtube && A.youtube.eslamAdel ? ' · <a href="' + e(A.youtube.eslamAdel.channel.url) + '" target="_blank" rel="noopener">' + L('قائمة إسلام عادل على YouTube ↗', 'Eslam Adel’s list on YouTube ↗') + '</a>' : '') + '</p>' +
