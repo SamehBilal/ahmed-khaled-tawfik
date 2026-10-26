@@ -73,25 +73,26 @@ window.PAGE = {
 		this.show();
 	},
 
-	/* the banner above the page title (after a CodePen "grid and clip-path" hero): a notched
-	   picture from the newest post, three comic panels taking turns in the small box, and the
-	   heading on stacked highlight blocks */
+	/* the banner above the page title (after a CodePen "grid and clip-path" hero, in its teal): a notched
+	   picture (AKT.blog.heroImage, a placeholder for now), three of his articles taking turns in the small
+	   box — a different three on each visit, each opening its page — and the heading on stacked highlight blocks */
 	hero: function () {
 		var App = window.App, e = App.esc, L = App.L, self = this;
 		var wrap = document.querySelector('.page-hero .wrap');
 		if (!wrap) return;
 		var old = wrap.querySelector('.bh'); if (old) old.remove();
-		var posts = (App.data().blog || { posts: [] }).posts;
-		var lead = posts.filter(function (p) { return p.img && !p.comic; })[0] || posts[0];
-		var comics = posts.filter(function (p) { return p.comic && p.img; }).slice(0, 3);
+		var blog = App.data().blog || { posts: [] }, posts = blog.posts;
+		var pool = posts.filter(function (p) { return p.img && !p.comic; }), picks = [];
+		while (picks.length < 3 && pool.length) picks.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
 		var years = posts.map(function (p) { return +p.d.slice(0, 4); });
 		var corner = '<svg class="bh-corner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 12" aria-hidden="true"><path fill="currentColor" d="M12 12C12 5.373 6.627 0 0 0h12v12Z"/></svg>';
 		var el = document.createElement('section');
 		el.className = 'bh';
 		el.innerHTML = '<div class="bh-box">' +
-			'<a class="bh-media" href="blog.html?post=' + e(lead.id) + '" aria-label="' + e(lead.t) + '"><img src="' + e(self.img(lead.img).replace(/\/s640\//, '/s1200/')) + '" alt="" referrerpolicy="no-referrer"></a>' +
-			'<div class="bh-mini" aria-hidden="true">' + comics.map(function (c) {
-				return '<figure class="bh-icon"><img src="' + e(self.img(c.img)) + '" alt="" referrerpolicy="no-referrer"></figure>';
+			'<div class="bh-media"><img src="' + e(blog.heroImage || 'assets/img/blog-hero.png') + '" alt=""></div>' +
+			'<div class="bh-mini">' + picks.map(function (p) {
+				return '<a class="bh-icon" href="blog.html?post=' + e(p.id) + '"><span class="bh-card"><img src="' + e(self.img(p.img)) + '" alt="" referrerpolicy="no-referrer">' +
+					'<span class="bh-card-t">' + e(p.t) + '</span></span></a>';
 			}).join('') + '</div>' +
 			'<div class="bh-text">' +
 				'<div><h2 class="bh-heading"><span class="bh-aligned">' +
