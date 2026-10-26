@@ -96,9 +96,10 @@ window.PAGE = {
 			}).join('') + '</div>' +
 			'<div class="bh-text">' +
 				'<div><h2 class="bh-heading"><span class="bh-aligned">' +
-					'<span class="bh-1">' + L('مقالاته', 'His columns,') + '</span> ' +
-					'<span class="bh-2">' + L('وقصصه', 'his stories') + corner + corner + '</span>' +
-				'</span> <span class="bh-3">' + L('وكوميكس', 'and comics') + corner + '</span></h2></div>' +
+					/* one sentence over three blocks, each as long as the design's (about ¾, then ½ and ½ of the width) */
+					'<span class="bh-1">' + L('مقالاته وقصصه القصيرة كلها', 'His columns and stories') + '</span> ' +
+					'<span class="bh-2">' + L('والكوميكس التي', 'and the comics') + corner + corner + '</span>' +
+				'</span> <span class="bh-3">' + L('نشرها في الصحف', 'he wrote for print') + corner + '</span></h2></div>' +
 				'<div class="bh-body"><div class="bh-body-in">' +
 					'<p>' + L(App.num(posts.length) + ' منشورًا بين ' + App.num(Math.min.apply(null, years)) + ' و' + App.num(Math.max.apply(null, years)) + '، من «الدستور» و«التحرير» و«بص وطل» و«إضاءات» وغيرها، كما جمعها عمرو عبيد.',
 						App.num(posts.length) + ' posts from ' + Math.min.apply(null, years) + ' to ' + Math.max.apply(null, years) + ', from Al-Dostour, Al-Tahrir, Bos w Tol, Ida2at and more, as collected by Amr Ebaid.') + '</p>' +
