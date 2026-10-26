@@ -1,4 +1,4 @@
-/* audio.html — every Audiohat audiobook of his, on one cassette */
+/* audio.html — his audiobooks on Audiohat and Storytel and the Safari radio drama on YouTube, on one cassette, filtered by platform */
 window.PAGE = {
 	id: 'audio',
 	title: { ar: 'مسموع', en: 'Audiobooks' },
@@ -6,8 +6,8 @@ window.PAGE = {
 		eyebrow: { ar: 'كتب مسموعة', en: 'Audiobooks' },
 		title: { ar: 'العرّاب مسموعًا', en: 'The Godfather, out loud' },
 		lead: {
-			ar: 'أعداد «ما وراء الطبيعة» و«فانتازيا» وحكايات «بعد منتصف الليل» كما سجّلتها Audiohat، و«سافاري» دراما إذاعية على YouTube. اختر شريطًا ثم اضغط تشغيل.',
-			en: 'Beyond Nature and Fantasia issues and the “After Midnight” stories as recorded by Audiohat, plus Safari as a radio drama on YouTube. Pick a tape, then press play.'
+			ar: 'أعداد «ما وراء الطبيعة» و«فانتازيا» و«سافاري» وكتبه كما سجّلتها Audiohat وStorytel، وحكايات «بعد منتصف الليل»، و«سافاري» دراما إذاعية على YouTube. اختر منصة أو شريطًا ثم اضغط الزر.',
+			en: 'Beyond Nature, Fantasia and Safari issues and his books as recorded by Audiohat and Storytel, the “After Midnight” stories, and Safari as a radio drama on YouTube. Pick a platform or a tape, then press the key.'
 		}
 	},
 
@@ -19,6 +19,18 @@ window.PAGE = {
 
 		/* one long playlist: issues in series order, then the midnight programme */
 		var tracks = [], groups = [];
+		/* the platform filter: every track goes through push, which counts it for its platform and keeps it only if it is shown */
+		var self = this;
+		if (!this.platform) { try { this.platform = sessionStorage.getItem('akt-audio-platform') || 'all'; } catch (x) { this.platform = 'all'; } }
+		var platform = this.platform, perPlatform = { all: 0, audiohat: 0, storytel: 0, youtube: 0 };
+		var platformOf = function (tr) { return tr.yt ? 'youtube' : tr.provider === 'Storytel' ? 'storytel' : 'audiohat'; };
+		var push0 = tracks.push, counted = {};
+		tracks.push = function (tr) {
+			/* (a track offered twice, as a special under two series, is counted once) */
+			if (!counted[tr.url]) { counted[tr.url] = 1; perPlatform.all++; perPlatform[platformOf(tr)]++; }
+			if (platform === 'all' || platformOf(tr) === platform) push0.call(tracks, tr);
+			return tracks.length;
+		};
 		var Y = (A.youtube && A.youtube.issues) || {}, TH = A.thumbs || {};
 		/* a row's picture: Audiohat's own, else the YouTube still, else the book cover */
 		function ytThumb(v) { return 'https://i.ytimg.com/vi/' + v + '/mqdefault.jpg'; }
@@ -106,8 +118,8 @@ window.PAGE = {
 				var label = ep[2] || L('الحلقة ', 'Episode ') + App.num(k + 1);
 				tracks.push({ title: name, ep: label, sub: L('الموسم ', 'Season ') + App.num(se.n) + ' · ' + label, url: window.Cassette.pageUrl(A, ep[0]), mins: ep[1] || null, skin: 'midnight', art: ep[3] || se.art });
 			});
-			return { title: { ar: 'الموسم ' + App.num(se.n) + ' (' + App.num(se.year) + ')', en: 'Season ' + se.n + ' (' + se.year + ')' }, thumb: se.art, start: start, count: se.eps.length,
-				mins: se.eps.reduce(function (m, ep) { return m + (ep[1] || 0); }, 0) };
+			return { title: { ar: 'الموسم ' + App.num(se.n) + ' (' + App.num(se.year) + ')', en: 'Season ' + se.n + ' (' + se.year + ')' }, thumb: se.art, start: start, count: tracks.length - start,
+				mins: minsFrom(start) };
 		});
 		/* and the Lasheen novels Audiohat has as audiobooks, one row a book, its parts inside */
 		(A.lasheenBooks || []).forEach(function (b) {
@@ -119,7 +131,7 @@ window.PAGE = {
 				tracks.push({ title: name, ep: label, sub: L('كتاب مسموع', 'Audiobook') + ' · ' + label, url: window.Cassette.pageUrl(A, ep[0]), mins: ep[1] || null, skin: 'midnight', art: b.art });
 			});
 			srows2.push({ n: b.n, title: { ar: 'لاشين: ' + is.title.ar + ' (كتاب مسموع، ' + App.num(b.year) + ')', en: 'Lasheen: ' + (is.title.en || is.title.ar) + ' (audiobook, ' + b.year + ')' },
-				href: App.issueHref('lasheen', is), thumb: b.art, start: start, count: b.eps.length, mins: b.eps.reduce(function (m, ep) { return m + (ep[1] || 0); }, 0) });
+				href: App.issueHref('lasheen', is), thumb: b.art, start: start, count: tracks.length - start, mins: minsFrom(start) });
 		});
 		/* and the comic episodes made after the show, «قبل منتصف الليل!» */
 		var sp = A.midnightSpoofs;
@@ -128,9 +140,10 @@ window.PAGE = {
 			sp.eps.forEach(function (ep) {
 				tracks.push({ title: t(sp.title), ep: ep[2], sub: L('حلقة ساخرة', 'Comic episode') + ' · ' + ep[2], url: window.Cassette.pageUrl(A, ep[0]), mins: ep[1] || null, skin: 'midnight', art: ep[3] || sp.art });
 			});
-			srows2.push({ title: { ar: sp.title.ar + ' (' + sp.years + ')', en: sp.title.en + ' (' + sp.years + ')' }, thumb: sp.art, start: spStart, count: sp.eps.length,
-				mins: sp.eps.reduce(function (m, ep) { return m + (ep[1] || 0); }, 0) });
+			srows2.push({ title: { ar: sp.title.ar + ' (' + sp.years + ')', en: sp.title.en + ' (' + sp.years + ')' }, thumb: sp.art, start: spStart, count: tracks.length - spStart,
+				mins: minsFrom(spStart) });
 		}
+		srows2 = srows2.filter(function (r) { return r.count > 0; });
 		if (srows2.length) groups.push({
 			title: { ar: 'بعد منتصف الليل — مواسم «لاشين»', en: 'After Midnight — the Lasheen seasons' },
 			note: { ar: 'عاد البرنامج الذي كتب عنه في «أسطورة بعد منتصف الليل» بمواسم جديدة على Audiohat من تأليف شيرين هنائي، ومنها خرجت روايات «لاشين».',
@@ -138,7 +151,7 @@ window.PAGE = {
 			rows: srows2
 		});
 
-		/* which sections are open, kept for this visit (the first one by default) */
+		/* which sections are open, kept for this visit (the first one always) */
 		var openGroups = [0];
 		try { var og = JSON.parse(sessionStorage.getItem('akt-audio-open') || 'null'); if (Array.isArray(og)) openGroups = og; } catch (x) {}
 
@@ -158,11 +171,16 @@ window.PAGE = {
 					'<p style="color:var(--paper-dim);margin:0 0 14px">' + L('◀◀ و ▶▶ ينقلانك بين الحلقات. حلقات Audiohat وكتب Storytel تُسمع على موقعيهما: زر «استمع على …» يفتح صفحتها هناك، ودراما YouTube تُشغَّل هنا تحت الشريط.', '◀◀ and ▶▶ wind between episodes. Audiohat episodes and Storytel audiobooks are heard on their own sites: the «Listen on …» key opens the page there, and YouTube dramas play here, under the tape.') + '</p>' +
 					'<p style="color:var(--muted);margin:0">' + App.num(tracks.length) + ' ' + L('حلقة', 'episodes') + ' · ' +
 						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a>' +
-						(A.storytel ? ' · <a href="' + e(A.storytel.author) + '" target="_blank" rel="noopener">' + L('صفحته على Storytel ↗', 'His page on Storytel ↗') + '</a>' : '') + '</p></div>' +
+						(A.storytel ? ' · <a href="' + e(A.storytel.author) + '" target="_blank" rel="noopener">' + L('صفحته على Storytel ↗', 'His page on Storytel ↗') + '</a>' : '') + '</p>' +
+					/* show one platform, or all of them */
+					'<div class="chips au-platforms" role="group" aria-label="' + e(L('المنصة', 'Platform')) + '">' +
+						[['all', L('الكل', 'All')], ['audiohat', 'Audiohat'], ['storytel', 'Storytel'], ['youtube', 'YouTube']].filter(function (p) { return p[0] === 'all' || perPlatform[p[0]]; }).map(function (p) {
+							return '<button type="button" class="chip" data-platform="' + p[0] + '" aria-pressed="' + (platform === p[0]) + '">' + e(p[1]) + '<span class="count">' + App.num(perPlatform[p[0]]) + '</span></button>';
+						}).join('') + '</div></div>' +
 			'</div></section>' +
 			/* each section opens and closes on its title: the first starts open, and the ones you open stay so while you browse */
 			'<section class="section"><div class="wrap"><div class="ep-groups">' + groups.map(function (g, gi) {
-				return '<details class="ep-group" data-g="' + gi + '"' + (openGroups.indexOf(gi) >= 0 ? ' open' : '') + '><summary><h3>' + tx(g.title) + ' <small style="color:var(--muted);font-family:var(--f-latin);font-size:15px">(' + App.num(g.rows.length) + (g.total ? ' / ' + App.num(g.total) : '') + ')</small></h3></summary>' +
+				return '<details class="ep-group" data-g="' + gi + '"' + (gi === 0 || openGroups.indexOf(gi) >= 0 ? ' open' : '') + '><summary><h3>' + tx(g.title) + ' <small style="color:var(--muted);font-family:var(--f-latin);font-size:15px">(' + App.num(g.rows.length) + (g.total ? ' / ' + App.num(g.total) : '') + ')</small></h3></summary>' +
 					(g.note ? '<p style="color:var(--muted);margin:-6px 0 12px">' + tx(g.note) + '</p>' : '') +
 					'<ul class="ep-list">' + g.rows.map(function (r) {
 						return '<li data-start="' + r.start + '" data-count="' + r.count + '">' +
@@ -205,7 +223,15 @@ window.PAGE = {
 				li.classList.toggle('cur', i >= s && i < s + n);
 			});
 		}
-		root.addEventListener('click', function (ev) {
+		/* (assigned, not added: the page is drawn again when the platform changes) */
+		root.onclick = function (ev) {
+			var pb = ev.target.closest('button[data-platform]');
+			if (pb) {
+				self.platform = pb.getAttribute('data-platform');
+				try { sessionStorage.setItem('akt-audio-platform', self.platform); } catch (x) {}
+				self.render();
+				return;
+			}
 			var eb = ev.target.closest('button[data-eps]');
 			if (eb) {
 				var li = eb.closest('li'), sub = li.querySelector('.ep-sub'), open = eb.getAttribute('aria-expanded') !== 'true';
@@ -220,6 +246,6 @@ window.PAGE = {
 			deck.load(i, true);
 			mark(i);
 			document.getElementById('a-cassette').scrollIntoView({ behavior: 'smooth', block: 'center' });
-		});
+		};
 	}
 };

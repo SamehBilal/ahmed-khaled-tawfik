@@ -194,3 +194,6 @@ html[lang="en"] .cs-meta { direction: ltr; }
 .cs-art img { display: block; width: 100%; height: 100%; object-fit: cover; filter: sepia(.25) contrast(1.05); }
 .has-art .cs-t { font-size: 19px; }
 .ep-list .ep-sub .th { width: 40px; height: 40px; }
+
+/* the platform filter under the help text */
+.au-platforms { margin-top: 14px; }
