@@ -153,6 +153,11 @@ html[dir="ltr"] .ph-env { left: auto; right: 100%; animation-name: ph-fly-ltr; }
 
 /* ---------- privacy: the padlock ---------- */
 .ph[data-ph="privacy"] .ph-stage::before { content: ''; }
+/* no line under it: the dark fades down into the page */
+.ph[data-ph="privacy"] { border-bottom: 0; }
+.ph[data-ph="privacy"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; z-index: 6; pointer-events: none;
+	background: linear-gradient(transparent, var(--ink)); }
+.ph[data-ph="privacy"] + .page-hero { padding-top: 36px; }
 .ph-lock { position: absolute; left: 50%; top: 50%; width: 120px; height: 150px; margin: -80px 0 0 -60px; filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .6)); }
 .ph-lock .shackle { fill: none; stroke: #b9b1a0; stroke-width: 12px; stroke-linecap: round; }
 .ph-lock .body { fill: #7a1d16; stroke: #d9a441; stroke-width: 3px; }
