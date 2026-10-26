@@ -3458,8 +3458,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
 
-/* the Legacy page plays, on the first scroll, a reading of Refaat Ismail's farewell from «أسطورة النبوءة» (Ma Wara' al-Tabi'a), recorded
-   for the site; quote is the line shown beside it before it plays, source where it comes from, and lines the words as they are read:
+/* the Legacy page plays, on the first scroll, Refaat Ismail's farewell from «أسطورة النبوءة» (Ma Wara' al-Tabi'a #53),
+   a short sample of Audiohat's episode read by Amr Yousry (credited on the About and Terms pages); quote is the line shown beside it before it plays, source where it comes from, and lines the words as they are read:
    [second the line starts, Arabic, English], timed from the recording's pauses; {a word} in the last one swells in ember, as in the intro */
 (function (A) {
 	A.legacyVoice = A.legacyVoice || {
