@@ -60,8 +60,8 @@ window.PAGE = {
 		/* the widest number sets the column all the numbers stand in, so every cover is the same width */
 		var digits = Math.max.apply(null, [1].concat(issues.map(function (is) { return is.n != null ? String(is.n).length : 1; })));
 		var issueGrid = issues.map(function (is, i) {
-			/* (a split issue: its number as big as the rest, and its part, «/1», small beside it) */
-			var n = is.n != null ? App.num(is.n) : (is.mark || ''), part = is.n != null && is.part ? '<small class="cl-part">/' + e(App.num(is.part)) + '</small>' : '';
+			/* (a split issue: its number as big as the rest, and its part, «1», small beside it) */
+			var n = is.n != null ? App.num(is.n) : (is.mark || ''), part = is.n != null && is.part ? '<small class="cl-part">' + e(App.num(is.part)) + '</small>' : '';
 			return '<a class="cover-link" href="' + App.issueHref(id, is) + '" data-i="' + i + '" title="' + e(t(is.title)) + '">' +
 				'<span class="cl-cover">' + S.miniCover({ img: S.issueCover(id, is), color: s.color, title: t(is.title), sub: is.original ? t(is.original) : '', by: t(S.seriesAuthor(ser)) }) +
 					(n ? '<b class="cl-n"' + (part ? ' data-part' : '') + '>' + e(n) + part + '</b>' : '') + '</span>' +
