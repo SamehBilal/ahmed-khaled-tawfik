@@ -3718,3 +3718,27 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		photo: { url: 'assets/img/photos/writers/lyan-logo.webp' }
 	});
 })(window.AKT);
+
+/* the Legacy timeline: at the 56th Cairo International Book Fair (January 2025) Kayan stood a life-size figure of him at the front of
+   its pavilion in Hall 2, among his books — Veto's report and photo (27 January 2025, Mahmoud Said; photo Sayed Hassan) — and the
+   report among the articles */
+(function (A) {
+	var L = A.legacy = A.legacy || [];
+	var src = 'https://www.vetogate.com/5335646', img = 'assets/img/timeline/veto-kayan-fair-2025.webp';
+	var ev = { date: '2025-01-27', image: img, photo: img,
+		title: { ar: 'الغائب الحاضر في معرض الكتاب 2025', en: 'Absent yet present at the 2025 Book Fair' },
+		text: { ar: 'في الدورة السادسة والخمسين لمعرض القاهرة الدولي للكتاب وضعت دار كيان مجسمًا للعرّاب بالحجم الطبيعي في مقدمة جناحها بالصالة 2، بين أعماله التي أقبل عليها زوار المعرض من محبيه.',
+			en: 'At the 56th Cairo International Book Fair, Kayan stood a life-size figure of the Godfather at the front of its pavilion in Hall 2, among his books, which drew visitors who loved him.' },
+		source: src };
+	if (!L.some(function (l) { return l.source === src; })) {
+		var at = L.length;
+		for (var i = 0; i < L.length; i++) if (String(L[i].date) > ev.date) { at = i; break; }
+		L.splice(at, 0, ev);
+	}
+	var M = A.media = A.media || [];
+	if (!M.some(function (m) { return m.url === src; })) {
+		M.push({ kind: 'article', title: { ar: 'الغائب الحاضر، أحمد خالد توفيق في مقدمة جناح «كيان» بمعرض الكتاب 2025', en: 'Absent yet present: Ahmed Khaled Tawfik at the front of Kayan’s pavilion at the 2025 Book Fair' },
+			outlet: { ar: 'فيتو', en: 'Veto' }, year: 2025, lang: 'ar', url: src });
+		M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+	}
+})(window.AKT);
