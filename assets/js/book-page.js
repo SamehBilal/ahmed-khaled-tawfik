@@ -375,6 +375,8 @@ window.PAGE = {
 				/* its own back cover, else the book's (the one the page opened with) */
 				if (lk.back) { backEl.classList.add('has-img'); backEl.innerHTML = '<img class="bk-back-img" src="' + e(lk.back) + '" alt="">'; }
 				else { backEl.classList.remove('has-img'); backEl.innerHTML = '<p>' + backText + '</p>' + (backMeta ? '<div class="bk-meta">' + e(backMeta) + '</div>' : ''); }
+				/* (a plain back takes this edition's cover colour) */
+				if (!lk.back) window.Books.matchBack(bookEl);
 			});
 			/* ?pub=<house> (a publisher's page links here) opens on that house's edition */
 			var pub = new URLSearchParams(location.search).get('pub');

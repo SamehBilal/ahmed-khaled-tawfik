@@ -22,7 +22,7 @@
 		return '' +
 		'<li class="rise' + (o.href ? ' bk-linked' : '') + '"' + (o.id ? ' id="' + e(o.id) + '"' : '') + (o.key ? ' data-ls-key="' + e(o.key) + '"' : '') + (o.href ? ' data-href="' + e(o.href) + '"' : '') + '>' +
 			/* mirrored, so the spine is on the right and the cover opens to the right, as Arabic books do */
-			'<div class="bk-mirror"' + (o.href ? ' role="link" tabindex="0" aria-label="' + e(o.info.title) + '"' : '') + '><div class="bk-book bk-bookdefault" style="--bk-c:' + e(o.color || '#333') + '">' +
+			'<div class="bk-mirror"' + (o.href ? ' role="link" tabindex="0" aria-label="' + e(o.info.title) + '"' : '') + '><div class="bk-book bk-bookdefault"' + (o.fixedColor ? ' data-fixed' : '') + ' style="--bk-c:' + e(o.color || '#333') + '">' +
 				'<div class="bk-front">' +
 					'<div class="bk-cover-back"></div>' +
 					'<div class="bk-cover' + (o.img ? ' has-img' : '') + '">' +
@@ -67,10 +67,36 @@
 		}, true);
 	}
 
+	/* a book with no photo of its back gets a plain back in the colour of its front cover: the average of the cover's edges
+	   (where its background shows), read once the cover has loaded, with light or dark lettering to suit; a book that sets its
+	   own colour (data-fixed), or whose cover cannot be read (another site's, without permission), keeps its colour */
+	function matchBack(book) {
+		var back = book && book.querySelector('.bk-back'), img = book && book.querySelector('.bk-img');
+		if (!back || back.classList.contains('has-img') || !img || book.hasAttribute('data-fixed')) return;
+		var run = function () {
+			try {
+				var W = 30, H = 45, c = document.createElement('canvas'); c.width = W; c.height = H;
+				var x = c.getContext('2d'); x.drawImage(img, 0, 0, W, H);
+				var d = x.getImageData(0, 0, W, H).data, r = 0, g = 0, b = 0, n = 0;
+				for (var j = 0; j < H; j++) for (var i = 0; i < W; i++) {
+					if (i > 2 && i < W - 3 && j > 2 && j < H - 3) continue;
+					var k = (j * W + i) * 4; r += d[k]; g += d[k + 1]; b += d[k + 2]; n++;
+				}
+				r = Math.round(r / n); g = Math.round(g / n); b = Math.round(b / n);
+				book.style.setProperty('--bk-c', 'rgb(' + r + ',' + g + ',' + b + ')');
+				var ink = (0.299 * r + 0.587 * g + 0.114 * b) > 160 ? '#231d16' : '#fff', spine = book.querySelector('.bk-left h2');
+				back.style.color = ink;
+				if (spine) spine.style.color = ink;
+			} catch (err) {}
+		};
+		if (img.complete && img.naturalWidth) run(); else img.addEventListener('load', run, { once: true });
+	}
+
 	function initShowcase(list) {
 		wireScroll();
 		var items = Array.prototype.slice.call(list.children);
 		var books = items.map(function (li) { return li.querySelector('.bk-book'); });
+		books.forEach(matchBack);
 
 		items.forEach(function (li, idx) {
 			var book = books[idx];
@@ -190,5 +216,5 @@
 		});
 	}
 
-	window.Books = { showcase: showcase, initShowcase: initShowcase, hardcover: hardcover, initHardcovers: initHardcovers };
+	window.Books = { showcase: showcase, initShowcase: initShowcase, matchBack: matchBack, hardcover: hardcover, initHardcovers: initHardcovers };
 })();
