@@ -2,8 +2,8 @@
    "العراب" drops in and squashes like the "i" (with no mark above it: #iDot is only the point the rings and the reveal start from),
    the three words of his name spring in from the centre, coloured rings bloom
    inside the letters, then a growing hole opens the page underneath.
-   Plays once per browser session, with «حتى تحترق النجوم» in Refaat Ismail's voice on the web (where the browser keeps a page silent until it is touched, the words keep the voice's pace and the first click brings it in)
-   and silent in the installed app; click / Esc / the Skip button ends it. */
+   Plays once per browser session, silent; the button at the bottom right plays «حتى تحترق النجوم» in Refaat Ismail's voice,
+   the words following it. Click / Esc / the Skip button ends it. */
 (function () {
 	'use strict';
 
@@ -38,9 +38,6 @@
 	document.documentElement.classList.add('intro-on');
 	/* (hidden under the intro until its entrance) */
 	window.gsap.set(HERO, { opacity: 0 });
-	/* the installed app opens quietly; on the web the quote is heard */
-	var app = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
-	var withVoice = false, silent = false;
 
 	var gsap = window.gsap;
 	if (window.CustomEase) gsap.registerPlugin(window.CustomEase);
@@ -65,53 +62,22 @@
 		gsap.to(overlay, { autoAlpha: 0, duration: 0.35, onComplete: remove });
 	}
 	overlay.querySelector('.intro-skip').addEventListener('click', function (e) { e.stopPropagation(); finish(); });
-	/* a click skips the intro, except the first one while the browser is still keeping the voice silent: that one brings the voice in */
-	overlay.addEventListener('click', function () { if (silent) unmute(); else finish(); });
+	overlay.addEventListener('click', finish);
 	document.addEventListener('keydown', function onKey(e) {
 		if (e.key === 'Escape') { document.removeEventListener('keydown', onKey); finish(); }
-		else if (silent) unmute();
 	});
 
 	var fontsReady = (document.fonts && document.fonts.load)
 		? Promise.all([document.fonts.load('150px Lalezar', 'العرّاب'), document.fonts.load('40px "Reem Kufi"', 'جعل الشباب يقرؤون')]).catch(function () {})
 		: Promise.resolve();
 
-	/* never wait for the fonts and the voice more than 2.5s; then, on the web, find out whether the voice may play now (a silent try). A browser that
-	   keeps a page silent until it is touched still gets the quote at the voice's pace, and the visitor's first click or key starts
-	   the voice from where the words are; the app starts silent */
-	Promise.race([Promise.all([fontsReady, app ? null : voiceReady]), new Promise(function (r) { setTimeout(r, 2500); })]).then(function () {
-		if (app || !voice || !voice.src) { withVoice = false; play(); return; }
-		withVoice = true;
-		var vol = voice.volume;
-		voice.volume = 0;
-		var p = voice.play();
-		var ok = function () { voice.pause(); voice.currentTime = 0; voice.volume = vol; play(); };
-		var no = function () { voice.volume = vol; silent = true; play(); };
-		if (p && p.then) p.then(ok, no); else ok();
-	});
-
-	/* the first touch lets the voice play: before the quote it is only unlocked (started and rewound), during it, it joins the words */
-	function unmute() {
-		silent = false;
-		if (!q || !q.isActive()) {
-			var p = voice.play();
-			if (p && p.then) p.then(function () { if (!q) { voice.pause(); voice.currentTime = 0; } else join(); }, function () {});
-			return;
-		}
-		join();
-	}
-	function join() {
-		var at = q.time();
-		if (at >= VOICE.reveal) return;
-		q.pause();
-		voice.currentTime = at;
-		var p = voice.play();
-		var go = function () { gsap.ticker.add(follow); };
-		if (p && p.then) p.then(go, function () { q.play(); }); else go();
-	}
+	/* never wait for fonts more than 1.5s */
+	Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 1500); })]).then(play);
 
 	function play() {
 		if (!overlay.parentNode) return;
+		/* the voice is offered from the start */
+		if (voice) offerVoice();
 
 		var ringEase = window.CustomEase ? window.CustomEase.create('ringEase', 'M0,0 C0.484,0.274 0.79,0.698 1,1 ') : 'power1.in';
 		var ringRadialEase = window.CustomEase ? window.CustomEase.create('ringRadial', 'M0,0 C0,0.908 0.78,1 1,1 ') : 'expo.out';
@@ -161,17 +127,11 @@
 		tl.timeScale(0.8);
 	}
 
-	/* the voice starts with the first line; if it still cannot play, the quote runs quick and silent with a button that plays it again with the voice */
+	/* the quote, quick and silent, unless the visitor has already asked for the voice */
+	var heard = false;
 	function startQuote() {
-		if (!overlay.parentNode) return;
-		/* (the app, or no audio: silent, with a button to hear it) */
-		if (!voice || !withVoice) { quick(); if (voice) offerVoice(); return; }
-		/* still silent: the words keep the voice's pace on their own clock, until a click brings the voice in */
-		if (silent) { q = quote(VOICE); q.play(); return; }
-		voice.currentTime = 0;
-		var p = voice.play();
-		if (p && p.then) p.then(voiced, function () { silent = true; q = quote(VOICE); q.play(); });
-		else voiced();
+		if (!overlay.parentNode || heard) return;
+		quick();
 	}
 
 	/* each line rises in and drifts up before the next; then «ربما أتوقف» stays, «ربما» swells in ember,
@@ -227,10 +187,14 @@
 		b.addEventListener('click', function (e) {
 			e.stopPropagation();
 			b.remove();
+			heard = true;
 			if (q) q.kill();
 			gsap.set('#iQuote .ql, #qEnd', { opacity: 0 });
-			voice.currentTime = 0;
-			voice.play().then(voiced, function () {});
+			/* (once the clip has loaded; if it cannot play, the quote goes on silent) */
+			voiceReady.then(function () {
+				voice.currentTime = 0;
+				return voice.play();
+			}).then(voiced, function () { heard = false; if (!q || !q.isActive()) startQuote(); });
 		});
 		overlay.appendChild(b);
 	}

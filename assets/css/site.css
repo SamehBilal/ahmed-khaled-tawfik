@@ -668,14 +668,15 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 	padding: 6px 16px; cursor: pointer;
 }
 .intro-skip:hover { color: var(--paper); border-color: var(--paper-dim); }
-/* when the browser kept the voice silent: a button to hear «حتى تحترق النجوم» with it (intro.js offerVoice) */
+/* the intro is silent; this button at the bottom right plays «حتى تحترق النجوم» with the voice (intro.js offerVoice), Skip moving to the left */
 .intro-voice {
-	position: absolute; bottom: 24px; inset-inline-start: 24px;
+	position: absolute; bottom: 24px; right: 24px;
 	font: inherit; font-family: var(--f-display); font-size: 16px;
 	background: var(--ember); color: #fff; border: 0; border-radius: 999px; padding: 8px 18px; cursor: pointer;
 	box-shadow: 0 6px 18px rgba(0, 0, 0, .4); animation: introVoice .5s ease-out both;
 }
 .intro-voice:hover, .intro-voice:focus-visible { filter: brightness(1.12); }
+.intro-skip { inset-inline-end: auto; left: 24px; }
 @keyframes introVoice { from { opacity: 0; transform: translateY(8px); } }
 @media (prefers-reduced-motion: reduce) {
 	.ft-moon, .ft-eyes, .ft-eyes i, .ft-fog, .ft-end, .ft-stars i, .ft-shoot, .ft-fantasia, .ft-sparks i, .ft-giraffe .neck, .ft-bat, .ft-bat svg, .ft-lit path, .ft-cat-eyes { animation: none !important; }
