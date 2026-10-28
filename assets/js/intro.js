@@ -32,9 +32,18 @@
 	if (window.CustomEase) gsap.registerPlugin(window.CustomEase);
 	if (window.CustomWiggle) gsap.registerPlugin(window.CustomWiggle);
 
-	var tl;
+	/* «حتى تحترق النجوم…» in Refaat Ismail's voice, from the Netflix series «ما وراء الطبيعة» (2020): when each line is said, in seconds
+	   (from the recording's word timings), when «فقط عند ذلك ربما أتوقف» and the last «ربما» come, and when the page opens */
+	var VOICE = { src: 'assets/audio/until-the-stars-burn.mp3', at: [0.8, 3.3, 6.4, 11.5, 20, 39.4, 46.4], end: 51.4, maybe: 57.5, reveal: 60, hold: 7.5 };
+	var voice = null;
+	try { voice = new Audio(VOICE.src); voice.preload = 'auto'; } catch (e) {}
+
+	var tl, q;
 	function finish() {
 		if (tl) tl.kill();
+		if (q) q.kill();
+		gsap.ticker.remove(follow);
+		if (voice && !voice.paused) gsap.to(voice, { volume: 0, duration: 0.6, onComplete: function () { voice.pause(); } });
 		gsap.to(overlay, { autoAlpha: 0, duration: 0.35, onComplete: remove });
 	}
 	overlay.querySelector('.intro-skip').addEventListener('click', function (e) { e.stopPropagation(); finish(); });
@@ -64,7 +73,7 @@
 		/* explicit SVG origins: these elements live in <defs>, where bounding boxes are unreliable */
 		gsap.utils.toArray('#introSVG [data-o]').forEach(function (el) { gsap.set(el, { smoothOrigin: false, svgOrigin: el.getAttribute('data-o') }); });
 
-		tl = window.__introTL = gsap.timeline({ onComplete: finish });
+		tl = window.__introTL = gsap.timeline();
 
 		tl.add('drop')
 		.fromTo('#iWord', { y: -420 }, { y: 0, duration: 0.14, ease: 'sine.in' }, 'drop')
@@ -95,28 +104,81 @@
 			opacity: 1,
 			ease: ringRadialEase
 		}, '-=1.7')
-		/* «حتى تحترق النجوم…»: each line rises in and drifts up as the next arrives,
-		   then the last two lines stay and «ربما» swells in ember */
-		.add('quote', '-=1.4');
-		var qLines = gsap.utils.toArray('#iQuote .ql'), STEP = 1.05;
-		qLines.forEach(function (ln, k) {
-			tl.fromTo(ln, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 'quote+=' + (k * STEP))
-				.to(ln, { opacity: 0, y: -14, duration: 0.35, ease: 'power1.in' }, 'quote+=' + (k * STEP + 0.75));
-		});
-		tl.add('qend', 'quote+=' + (qLines.length * STEP))
-		.to('#qEnd', { opacity: 1, duration: 0.5 }, 'qend')
-		.from('#qEnd text:first-child', { y: 12, duration: 0.5, ease: 'power2.out' }, 'qend')
-		.from('#qMaybe', { opacity: 0, scale: 0.6, transformOrigin: '50% 50%', duration: 0.7, ease: 'back.out(2)' }, 'qend+=0.9')
-		.to('#qEnd text:first-child', { opacity: 0.45, duration: 0.6 }, 'qend+=1.5');
+		/* then «حتى تحترق النجوم…», with his voice when the browser lets it play */
+		.call(startQuote, null, '-=1.4');
 
-		/* reveal: a hole grows from the dot and uncovers the page */
-		tl.add('reveal', '+=1.2')
+		tl.timeScale(0.8);
+	}
+
+	/* the voice starts with the first line; a browser that blocks sound until a tap gets the quick, silent quote
+	   and a button that plays it again with the voice */
+	function startQuote() {
+		if (!overlay.parentNode) return;
+		if (!voice) { quick(); return; }
+		voice.currentTime = 0;
+		var p = voice.play();
+		if (p && p.then) p.then(voiced, function () { quick(); offerVoice(); });
+		else voiced();
+	}
+
+	/* each line rises in and drifts up before the next; then «فقط عند ذلك ربما أتوقف» stays, «ربما» swells in ember,
+	   and a hole grows from the dot and uncovers the page. T: when each happens, in seconds */
+	function quote(T) {
+		var t = gsap.timeline({ paused: true, onComplete: finish });
+		var lines = gsap.utils.toArray('#iQuote .ql');
+		lines.forEach(function (ln, k) {
+			var at = T.at[k], next = k + 1 < lines.length ? T.at[k + 1] : T.end;
+			t.fromTo(ln, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, at)
+				.to(ln, { opacity: 0, y: -14, duration: 0.35, ease: 'power1.in' }, Math.min(next - 0.35, at + T.hold));
+		});
+		t.fromTo('#qEnd', { opacity: 0 }, { opacity: 1, duration: 0.5 }, T.end)
+		.fromTo('#qEnd text:first-child', { y: 12, opacity: 1 }, { y: 0, duration: 0.5, ease: 'power2.out' }, T.end)
+		.fromTo('#qMaybe', { opacity: 0, scale: 0.6, transformOrigin: '50% 50%' }, { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(2)' }, T.maybe)
+		.to('#qEnd text:first-child', { opacity: 0.45, duration: 0.6 }, T.maybe + 0.6)
+		.add('reveal', T.reveal)
 		.call(centreHole, null, 'reveal')
 		.to('#introSVG', { scale: 1.25, duration: 1.1, ease: 'power2.in' }, 'reveal')
 		.fromTo(overlay, { '--hole': '-1%' }, { '--hole': '150%', duration: 1.1, ease: 'power3.in' }, 'reveal')
 		.from('.home-hero .wrap > *', { y: 40, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out' }, 'reveal+=0.7');
+		return t;
+	}
 
-		tl.timeScale(0.8);
+	/* without sound: a line every 1.05 s, as before */
+	function quick() {
+		var STEP = 1.05, n = gsap.utils.toArray('#iQuote .ql').length, end = n * STEP;
+		q = quote({ at: Array.apply(null, Array(n)).map(function (x, k) { return k * STEP; }), end: end, maybe: end + 0.9, reveal: end + 2.7, hold: 0.75 });
+		q.timeScale(0.8).play();
+	}
+
+	/* with the voice: the quote follows the recording's clock, so the words keep pace with it */
+	function voiced() {
+		if (!overlay.parentNode) { voice.pause(); return; }
+		q = quote(VOICE);
+		gsap.ticker.add(follow);
+	}
+	function follow() {
+		if (!q) return;
+		var now = voice.currentTime;
+		/* the opening runs on its own once the voice has said its last word */
+		if (now >= VOICE.reveal || voice.ended) { gsap.ticker.remove(follow); q.play(Math.max(now, VOICE.reveal)); return; }
+		q.time(now);
+	}
+
+	function offerVoice() {
+		if (overlay.querySelector('.intro-voice')) return;
+		var b = document.createElement('button');
+		b.type = 'button';
+		b.className = 'intro-voice';
+		b.textContent = document.documentElement.lang === 'en' ? '🔊 Hear it in Refaat’s voice' : '🔊 اسمعها بصوت رفعت إسماعيل';
+		b.addEventListener('click', function (e) {
+			e.stopPropagation();
+			b.remove();
+			if (q) q.kill();
+			gsap.set('#iQuote .ql, #qEnd', { opacity: 0 });
+			voice.currentTime = 0;
+			voice.play().then(voiced, function () {});
+		});
+		overlay.appendChild(b);
 	}
 
 	/* centre the reveal hole on the shadda's on-screen position */
