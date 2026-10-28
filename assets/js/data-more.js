@@ -3701,7 +3701,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 
 /* «أهدوا إليه»: Dar Lyan (دار ليان للنشر والتوزيع) dedicated editions of its project reviving Abbas Mahmoud al-Aqqad's «العبقريات»
    to him (with Nabil Farouk and the martyr Ahmed Mansi), for their part in shaping young people's minds and getting them to read;
-   its back cover, «إهداء إلى العراب د. أحمد خالد توفيق — جعل الشباب يقرأون», and the house's logo from it, sent by the site's editor */
+   its back cover, «إهداء إلى العراب د. أحمد خالد توفيق — جعل الشباب يقرأون», and the house's logo, sent by the site's editor */
 (function (A) {
 	var W = (A.writers = A.writers || {});
 	W.dedications = W.dedications || [];
@@ -3715,7 +3715,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			ar: 'في مشروعها الثقافي لإعادة إحياء «العبقريات» للمفكر عباس محمود العقاد وتوزيعها (مثل «عبقرية عمر» و«عبقرية محمد»)، خصّصت دار ليان نسخًا إهداءً وتكريمًا لروح العرّاب، إلى جانب د. نبيل فاروق والشهيد أحمد منسي، تقديرًا لدورهم في تشكيل وعي الشباب وحثّهم على القراءة. وعلى غلافها الخلفي صورته وعبارة «إهداء إلى العراب د. أحمد خالد توفيق — جعل الشباب يقرأون».',
 			en: 'In its project reviving and distributing the “Abqariyyat” of the thinker Abbas Mahmoud al-Aqqad (such as “The Genius of Omar” and “The Genius of Muhammad”), Dar Lyan set aside editions as a dedication and tribute to the Godfather’s memory, alongside Dr. Nabil Farouk and the martyr Ahmed Mansi, for their part in shaping young people’s minds and urging them to read. Its back cover carries his photo and the words “Dedicated to the Godfather, Dr. Ahmed Khaled Tawfik — he made the young read”.'
 		},
-		photo: { url: 'assets/img/photos/writers/lyan-logo.webp' }
+		photo: { url: 'assets/img/photos/writers/lyan-logo-2.webp' }
 	});
 })(window.AKT);
 
