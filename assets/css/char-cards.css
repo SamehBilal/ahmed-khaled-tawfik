@@ -81,3 +81,13 @@ html[dir="rtl"] .cc:hover .cc-figure, html[dir="rtl"] .cc:focus-visible .cc-figu
 html[lang="en"] .cc-name { display: block; }
 html[lang="en"] .cc-name b { display: inline; vertical-align: -12px; }
 @media (max-width: 640px) { .cc-info, .cc-traits { max-width: 100%; } .cc-name b.w { font-size: 48px; } }
+
+/* a main character's page: a button laid over the card's foot (outside the card's own button), there on the front and the
+   back as the card turns; the flip hint moves up above it, and the back's text stops short of it (char-cards.js) */
+.cc-hold { position: relative; display: block; }
+.cc-go { position: absolute; z-index: 6; bottom: 20px; inset-inline-start: 24px; padding: 6px 14px; border-radius: 999px;
+	background: var(--c, var(--ember)); color: #fff; font-family: var(--f-display); font-size: 14px; line-height: 1.3; text-decoration: none;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, .3); transition: transform .2s, filter .2s; }
+.cc-go:hover, .cc-go:focus-visible { transform: translateY(-2px); filter: brightness(1.15); outline: none; }
+.cc-hold.has-go .cc .flip-hint { bottom: 58px; }
+.cc-hold.has-go .cc-text { height: calc(100% - 96px); }

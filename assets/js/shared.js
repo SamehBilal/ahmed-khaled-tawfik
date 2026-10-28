@@ -189,6 +189,13 @@
 	}
 
 	/* a series' cover: the cover of its first book that has one, else the series' own cover */
+	/* the cover of a series' first issue that has one, whatever cover stands for the series elsewhere */
+	function firstIssueCover(id) {
+		var list = seriesIssues(id);
+		for (var i = 0; i < list.length; i++) { var c = issueCover(id, list[i]); if (c) return c; }
+		return '';
+	}
+
 	function seriesCover(id) {
 		var s = window.App.byId(window.App.data().series, id) || window.App.byId(window.App.data().otherSeries, id);
 		/* the cover chosen for the whole series (AKT.seriesFronts), then a front cover it names for itself (s.front) */
@@ -455,6 +462,6 @@
 		ownSeries: ownSeries, contributedSeries: contributedSeries, awardsList: awardsList, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
 		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook, issueCover: issueCover,
-		bookHref: bookHref, seriesHref: seriesHref, miniCover: miniCover, coverOf: coverOf, seriesCover: seriesCover
+		bookHref: bookHref, seriesHref: seriesHref, miniCover: miniCover, coverOf: coverOf, seriesCover: seriesCover, firstIssueCover: firstIssueCover
 	};
 })();

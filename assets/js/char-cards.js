@@ -32,6 +32,8 @@ window.CharCards = {
 		var plain = name.replace(/^(د\.|Dr\.)\s*/, '');
 		var row = function (k, v) { return v ? '<li><span>' + e(k) + '</span>' + v + '</li>' : ''; };
 		return '<div class="char-cell cc-cell rise" id="c-' + e(c.id) + '" data-work="' + e(c.work) + '">' +
+			/* (a main character's page is a link laid over the card's foot, so it shows on the front and the back as it turns) */
+			'<div class="cc-hold' + (c.main ? ' has-go' : '') + '" style="--c:' + e(info.color) + '">' +
 			'<button type="button" class="char cc" aria-pressed="false" style="--c:' + e(info.color) + '">' +
 			/* the character, standing over the card's corner */
 			(info.figure ? '<span class="cc-figure' + (info.cutout ? ' is-cutout' : '') + '" aria-hidden="true"><img src="' + e(info.figure) + '" alt="" loading="lazy"></span>' : '') +
@@ -60,6 +62,8 @@ window.CharCards = {
 				'</span></span>' +
 			'</span>' +
 		'</button>' +
+			(c.main ? '<a class="cc-go" href="character.html?id=' + e(c.id) + '">' + L('صفحة ' + plain + ' ←', plain + '’s page →') + '</a>' : '') +
+			'</div>' +
 			'<div class="char-meta">' + [c.main ? '<a class="char-page" href="character.html?id=' + e(c.id) + '">' + L('صفحة الشخصية', 'Character page') + '</a>' : '',
 				w ? L('من ', 'From ') + App.workLink(c.work) : '', App.fixLink(name)].filter(Boolean).join(' · ') + '</div>' +
 		'</div>';

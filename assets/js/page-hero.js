@@ -48,7 +48,8 @@
 				if (!c || !s || !S) return '';
 				var fig = (d.charFigures || {})[c.id];
 				return '<a class="ph-hc' + (fig ? ' has-fig' : '') + '" href="' + e(A.charHref(c.id)) + '" tabindex="-1" style="--c:' + e(s.color || '#5a2a22') + ';--i:' + i + '">' +
-					'<span class="ph-hc-wrap"><img src="' + e(S.seriesCover(s.id)) + '" alt="" loading="lazy"></span>' +
+					/* the cover of the series' first issue */
+					'<span class="ph-hc-wrap"><img src="' + e(S.firstIssueCover(s.id) || S.seriesCover(s.id)) + '" alt="" loading="lazy"></span>' +
 					'<span class="ph-hc-name">' + e(t(c.name).replace(/^(د\.|Dr\.)\s*/, '')) + '<small>' + e(t(s.title)) + '</small></span>' +
 					(fig ? '<img class="ph-hc-fig" src="' + e(fig) + '" alt="" loading="lazy">' : '') + '</a>';
 			}).join('');
