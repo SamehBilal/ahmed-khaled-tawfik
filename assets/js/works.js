@@ -38,7 +38,7 @@ window.PAGE = {
 		document.getElementById('contrib').innerHTML = contrib.map(function (o) {
 			var n = S.seriesIssues(o.id).length;
 			return '<a class="cover-link" href="' + S.seriesHref(o.id) + '">' +
-				S.miniCover({ img: S.seriesLogo(o.id), color: o.color, title: t(o.title), sub: o.owner ? t(o.owner) : '', by: o.role ? t(o.role) : ' ' }) +
+				S.miniCover({ img: S.seriesCover(o.id), color: o.color, title: t(o.title), sub: o.owner ? t(o.owner) : '', by: o.role ? t(o.role) : ' ' }) +
 				'<span class="cl-t">' + tx(o.title) + (n ? ' · ' + (n === 1 ? App.L('عنوان واحد', '1 title') : n === 2 ? App.L('عنوانان', '2 titles') : App.num(n) + App.L(n <= 10 ? ' عناوين' : ' عنوانًا', ' titles')) : '') + '</span></a>';
 		}).join('');
 		/* series by others that grew out of his work */

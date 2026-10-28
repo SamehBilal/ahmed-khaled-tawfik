@@ -67,7 +67,7 @@
 				}
 			} else if (S && key[0] === 's') {
 				var ser = S.anySeries(id);
-				if (ser) { rec.title = ser.s.title; rec.series = { ar: 'سلسلة', en: 'Series' }; rec.sid = id; rec.img = (S.seriesLogo ? S.seriesLogo(id) : '') || S.coverOf(ser.info); rec.color = ser.s.color || ''; }
+				if (ser) { rec.title = ser.s.title; rec.series = { ar: 'سلسلة', en: 'Series' }; rec.sid = id; rec.img = S.seriesCover(id) || S.coverOf(ser.info); rec.color = ser.s.color || ''; }
 			}
 		} catch (e) {}
 		if (!rec.title) {

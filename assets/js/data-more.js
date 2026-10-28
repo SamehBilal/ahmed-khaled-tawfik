@@ -3679,21 +3679,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
 
-/* Each series' logo, on a card in its colour, standing for the whole series (WorksShared.seriesLogo): cropped from its covers —
-   the owl of «ما وراء الطبيعة», the «فانتازيا» disc, the «سافاري» splash, «كتاب الصيف», «المغامر», «سوبر ميجا», «مولوتوف», «أدبيات»,
-   «بلية العجيب», «روايات كوميكس» and «لاشين» — or from Arabic Wikipedia's wordmarks of «رجفة الخوف» and «روايات عالمية للجيب».
-   The special issues and WWW have none of their own, and keep their covers. */
+/* The cover that stands for the whole series wherever it appears (WorksShared.seriesCover), sent by the site's editor, for four:
+   the owl's eyes of «ما وراء الطبيعة», the skyline of «روايات عالمية», the splash of «سافاري» and the raven of «فانتازيا».
+   Every other series shows its first issue's cover; an issue keeps its own */
 (function (A) {
-	var D = 'assets/img/covers/logos/';
-	A.seriesLogos = A.seriesLogos || {};
-	['mwt', 'fantasia', 'safari', 'shivers', 'rwg', 'molotov', 'sayf', 'mughamer', 'maqalat', 'supermega', 'bley', 'comics', 'lasheen']
-		.forEach(function (id) { if (!A.seriesLogos[id]) A.seriesLogos[id] = D + id + '.webp'; });
-})(window.AKT);
-
-/* The guide page's covers for four series, sent by the site's editor: the owl's eyes of «ما وراء الطبيعة», the skyline of
-   «روايات عالمية», the splash of «سافاري» and the raven of «فانتازيا» (guide.js; an issue named there keeps its own cover) */
-(function (A) {
-	var G = 'assets/img/covers/guide/';
-	A.guideCovers = A.guideCovers || {};
-	['mwt', 'rwg', 'safari', 'fantasia'].forEach(function (id) { if (!A.guideCovers[id]) A.guideCovers[id] = G + id + '.webp'; });
+	var G = 'assets/img/covers/fronts/';
+	A.seriesFronts = A.seriesFronts || {};
+	['mwt', 'rwg', 'safari', 'fantasia'].forEach(function (id) { if (!A.seriesFronts[id]) A.seriesFronts[id] = G + id + '.webp'; });
 })(window.AKT);

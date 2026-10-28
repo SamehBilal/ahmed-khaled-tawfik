@@ -140,8 +140,7 @@ window.PAGE = {
 				var is = S.seriesIssues(st.ref).filter(function (x) { return +x.n === st.issue && !(x.part > 1); })[0];
 				img = is ? S.issueCover(st.ref, is) : '';
 			} else if (App.byId(d.works, st.ref)) img = latestWithBack((d.bookInfo || {})[st.ref]) || S.coverOf((d.bookInfo || {})[st.ref]);
-			/* a series shows its own cover for the guide (AKT.guideCovers), else its first issue's cover art — not its logo */
-			else img = (d.guideCovers || {})[w.id] || S.seriesCover(w.id) || S.seriesBook(w).img;
+			else img = S.seriesCover(w.id) || S.seriesBook(w).img;
 			return S.miniCover({ img: img, color: w.color, title: title });
 		};
 

@@ -95,7 +95,7 @@ window.PAGE = {
 		}).concat(p.series.map(function (sid) {
 			var s = S.anySeries(sid);
 			if (!s) return '';
-			return '<a class="cover-link" href="' + e(S.seriesHref(sid)) + '">' + S.miniCover({ img: S.seriesLogo(sid), color: s.s.color, title: t(s.s.title) }) +
+			return '<a class="cover-link" href="' + e(S.seriesHref(sid)) + '">' + S.miniCover({ img: S.seriesCover(sid), color: s.s.color, title: t(s.s.title) }) +
 				'<span class="cl-t">' + tx(s.s.title) + ' · ' + L('سلسلة', 'series') + '</span></a>';
 		})).join('');
 
