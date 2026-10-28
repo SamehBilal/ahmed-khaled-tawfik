@@ -3641,3 +3641,40 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		});
 	});
 })(window.AKT);
+
+/* the Legacy timeline: «وداعًا أحمد خالد توفيق», Sameh Samir's cartoon dedicated to his memory (April 2018) — he and his Refaat Ismail
+   running to meet in the clouds; from the artist's site (samehcartoon.com/cartoons, «اهداء الى روح د. أحمد خالد توفيق»), sent by the
+   site's editor. And among the articles: two ArabLit pieces by Emad El-Din Aysha (2018, 2020) Waleed's farewell on his blog (2018), and Egyptoon's video episode on him (2019) */
+(function (A) {
+	var L = A.legacy = A.legacy || [];
+	var src = 'https://www.samehcartoon.com/cartoons';
+	var ev = { date: '2018-04', image: 'assets/img/timeline/sameh-samir-farewell-2018.webp', photo: 'assets/img/timeline/sameh-samir-farewell-2018.webp',
+		title: { ar: 'وداعًا في كاريكاتير سامح سمير', en: 'Farewell, in a cartoon by Sameh Samir' },
+		text: { ar: 'أهدى رسام الكاريكاتير سامح سمير إلى روحه رسمًا بعنوان «وداعًا أحمد خالد توفيق»: يركض العرّاب فوق السحاب فاتحًا ذراعيه، ويركض إليه بطله رفعت إسماعيل ببذلته وربطة عنقه.',
+			en: 'The cartoonist Sameh Samir dedicated a drawing to his memory, “Farewell Ahmed Khaled Tawfik”: the Godfather runs across the clouds with open arms, and his hero Refaat Ismail, in his suit and tie, runs to meet him.' },
+		source: src };
+	if (!L.some(function (l) { return l.source === src; })) {
+		/* after the first days of April 2018 (it gives no day) */
+		var at = L.length;
+		for (var i = 0; i < L.length; i++) if (String(L[i].date) > '2018-04-09') { at = i; break; }
+		L.splice(at, 0, ev);
+	}
+	var M = A.media = A.media || [];
+	[{ kind: 'article', title: { ar: 'في رثاء أحمد خالد توفيق: الرجل والرسالة', en: 'In Memoriam: Ahmed Khalid Tawfik, the Man and the Mission' }, outlet: { ar: 'ArabLit', en: 'ArabLit' }, year: 2018, lang: 'en',
+		url: 'https://arablit.org/2018/11/21/in-memoriam-ahmed-khalid-tawfik-the-man-and-the-mission/',
+		note: { ar: 'عماد الدين عيشة: أربعة كتّاب يستعيدون حياته وأعماله.', en: 'Emad El-Din Aysha: four authors look back at his life and work.' } },
+	 { kind: 'article', title: { ar: 'ولادة البطل القبيح: د. رفعت إسماعيل', en: 'Birthing the Ugly Hero: Dr. Refaat Ismail' }, outlet: { ar: 'ArabLit', en: 'ArabLit' }, year: 2020, lang: 'en',
+		url: 'https://arablit.org/2020/11/05/birthing-the-ugly-hero-dr-refaat-ismail/',
+		note: { ar: 'عماد الدين عيشة، يوم عرض مسلسل «ما وراء الطبيعة» على Netflix: عن رفعت إسماعيل وأثر الكتب في قرائها الشباب، من ندوة عن رواياته عام 2018.', en: 'Emad El-Din Aysha, on the day Netflix released Paranormal: on Refaat Ismail and the books’ hold on young readers, from a 2018 symposium on his novels.' } },
+	 { kind: 'article', title: { ar: 'وداعاً أيها العراب..', en: 'Farewell, Godfather..' }, outlet: { ar: 'آفاق وليد (مدونة)', en: 'Afaq Waleed (blog)' }, year: 2018, lang: 'ar',
+		url: 'https://waleedgadry.com/2018/04/04/%D9%88%D8%AF%D8%A7%D8%B9%D8%A7%D9%8B-%D8%A3%D9%8A%D9%87%D8%A7-%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D8%A8/',
+		note: { ar: 'رثاء قارئ وكاتب يعدّه قدوته في الكتابة، بعد رحيله بيومين.', en: 'A reader and writer who calls him his model in writing, two days after his death.' } },
+	 { kind: 'article', title: { ar: 'وداعًا أحمد خالد توفيق (كاريكاتير)', en: 'Farewell Ahmed Khaled Tawfik (cartoon)' }, outlet: { ar: 'سامح سمير', en: 'Sameh Samir' }, year: 2018, lang: 'ar', url: src,
+		note: { ar: 'رسم مهدى إلى روحه، على موقع الفنان.', en: 'A drawing dedicated to his memory, on the artist’s site.' } },
+	 /* and a video: Egyptoon's «أيمون المجنون» on why he was so loved (14 June 2019, 9 min) */
+	 { kind: 'profile', title: { ar: 'حتى تحترق النجوم | حلقة عن دكتور أحمد خالد توفيق', en: 'Until the Stars Burn: an episode about Dr. Ahmed Khaled Tawfik' }, outlet: { ar: 'إيجيبتون — برنامج «أيمون المجنون»', en: 'Egyptoon — “Aymon the Mad”' }, year: 2019, lang: 'ar',
+		url: 'https://www.youtube.com/watch?v=Jyblb8sWg3k',
+		note: { ar: 'لماذا كل هذا الحب له، وكل هذا الحزن على رحيله، وجنازته وقبره على هذا النحو.', en: 'Why he was so loved and so mourned, and why his funeral and his grave looked as they did.' } }
+	].forEach(function (m) { if (!M.some(function (x) { return x.url === m.url; })) M.push(m); });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
