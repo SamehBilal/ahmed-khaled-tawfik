@@ -33,8 +33,8 @@
 	if (window.CustomWiggle) gsap.registerPlugin(window.CustomWiggle);
 
 	/* «حتى تحترق النجوم…» in Refaat Ismail's voice, from the Netflix series «ما وراء الطبيعة» (2020): when each line is said, in seconds
-	   phrase by phrase as Ahmed Amin says them (from the recording's word timings), when «ربما أتوقف» and the last «ربما» come, and when the page opens */
-	var VOICE = { src: 'assets/audio/until-the-stars-burn.mp3', at: [0.8, 3.3, 6.4, 8.75, 11.5, 17.4, 20, 22.7, 39.4, 46.4, 50.6], end: 53.5, maybe: 57.5, reveal: 60, hold: 7.5 };
+	   phrase by phrase as Ahmed Amin says them (where his voice starts each one, from the voice band of the recording, checked against a speech model's word timings), when «ربما أتوقف» and the last «ربما» come, and when the page opens */
+	var VOICE = { src: 'assets/audio/until-the-stars-burn.mp3', at: [0.85, 3.3, 6.4, 8.7, 13.2, 17.3, 20, 22.75, 39.75, 46.8, 51.7], end: 54.25, maybe: 57.6, reveal: 60, hold: 7.5, lead: 0.2 };
 	var voice = null;
 	try { voice = new Audio(VOICE.src); voice.preload = 'auto'; } catch (e) {}
 
@@ -127,7 +127,8 @@
 		var t = gsap.timeline({ paused: true, onComplete: finish });
 		var lines = gsap.utils.toArray('#iQuote .ql');
 		lines.forEach(function (ln, k) {
-			var at = T.at[k], next = k + 1 < lines.length ? T.at[k + 1] : T.end;
+			/* (lead: a phrase starts to rise a moment before it is said, to be fully there with the first word) */
+			var at = Math.max(0, T.at[k] - (T.lead || 0)), next = (k + 1 < lines.length ? T.at[k + 1] : T.end) - (T.lead || 0);
 			t.fromTo(ln, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, at)
 				.to(ln, { opacity: 0, y: -14, duration: 0.35, ease: 'power1.in' }, Math.min(next - 0.35, at + T.hold));
 		});
