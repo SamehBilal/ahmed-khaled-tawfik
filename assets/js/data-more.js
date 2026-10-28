@@ -712,7 +712,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var MAA = { ar: 'المؤسسة العربية الحديثة — روايات مصرية للجيب', en: 'Modern Arab Association — Egyptian Pocket Novels' };
 	var set = {
 		rwg: { cover: C + 'rwg.webp' },
-		comics: { cover: C + 'comics.webp', publisher: MAA },
+		comics: { cover: C + 'comics-snake-woman.webp', publisher: MAA },
 		bley: { cover: C + 'bley.webp', publisher: MAA },
 		maqalat: { cover: C + 'maqalat.webp', publisher: { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' } },
 		supermega: { cover: C + 'supermega.webp', publisher: MAA },
@@ -887,7 +887,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
    Still none found anywhere: روايات عالمية للجيب 70 «ماتيلدا», «أسطورة ميسيا», «لا تأخذه معك». */
 (function (A) {
 	var C = 'assets/img/covers/contrib/';
-	var set = { 'molotov-2': 'molotov-2.webp', 'molotov-5': 'molotov.webp', 'sayf-x0': 'sayf.webp', 'maqalat-x0': 'maqalat.webp', 'bley-x0': 'bley.webp', 'comics-x1': 'comics.webp' };
+	var set = { 'molotov-2': 'molotov-2.webp', 'molotov-5': 'molotov.webp', 'sayf-x0': 'sayf.webp', 'maqalat-x0': 'maqalat.webp', 'bley-x0': 'bley.webp', 'comics-x1': 'comics-snake-woman.webp' };
 	A.issueInfo = A.issueInfo || {};
 	Object.keys(set).forEach(function (k) {
 		A.issueInfo[k] = A.issueInfo[k] || {};
