@@ -414,3 +414,12 @@ html[data-theme="light"] .sv-theme-ghosts .sv-scene { background: radial-gradien
 .sv-scene .ch-code { z-index: 0; opacity: .26; }
 html[data-theme="light"] .sv-theme-code .sv-scene { background: radial-gradient(800px 400px at 78% 10%, rgba(40, 180, 100, .16), transparent 70%); }
 .sv-theme-code .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #39e08a; }
+/* on a desktop the scene stays put while the page scrolls, as the book beside the text does; clipped to the series' own section
+   (on a phone, where the book scrolls too, it scrolls with the page) */
+@media (min-width: 901px) {
+	.detail.sv-theme { clip-path: inset(0); }
+	.sv-scene { position: fixed; top: 0; height: 100vh; -webkit-mask-image: linear-gradient(#000 75%, transparent); mask-image: linear-gradient(#000 75%, transparent); }
+	.sv-lamp { top: 160px; }
+	.sv-scene .ch-portal { top: 370px; }
+	.sv-scene .ch-ecg { top: 90px; }
+}

@@ -140,4 +140,5 @@ html[dir="rtl"] .lv-ic { margin-inline-start: 0; margin-inline-end: 3px; }
 @media (prefers-reduced-motion: reduce) { .lv-line { transition: opacity .2s; transform: none !important; } .lv-last .lv-em { animation: none; } }
 .lv.on { border-color: var(--ember, #b3261e); box-shadow: 0 0 0 1px var(--ember, #b3261e), 0 10px 26px rgba(0, 0, 0, .45); }
 .lv.on .lv-q { color: var(--paper); }
-@media (max-width: 560px) { .lv { bottom: 76px; } .lv-q { font-size: 12.5px; } }
+/* on a phone: on the same line as the «My lists» button (round there), leaving room for it beside */
+@media (max-width: 560px) { .lv { bottom: 15px; max-width: calc(100vw - 36px - 58px); } .lv-q { font-size: 12.5px; } }
