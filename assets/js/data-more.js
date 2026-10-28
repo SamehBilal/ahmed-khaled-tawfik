@@ -3698,3 +3698,23 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		desc: { ar: 'رجل يرقد في غيبوبة لا يعرف الأطباء سببها، فيصحو في عالم غرق في الظلام بعد سقوط نيزك، حيث يراه الناس مخلّصهم.',
 			en: 'A man lying in a coma no doctor can explain, who wakes in a world sunk in darkness after a meteor struck, where people take him for their saviour.' } });
 })(window.AKT);
+
+/* «أهدوا إليه»: Dar Lyan (دار ليان للنشر والتوزيع) dedicated editions of its project reviving Abbas Mahmoud al-Aqqad's «العبقريات»
+   to him (with Nabil Farouk and the martyr Ahmed Mansi), for their part in shaping young people's minds and getting them to read;
+   its back cover, «إهداء إلى العراب د. أحمد خالد توفيق — جعل الشباب يقرأون», and the house's logo from it, sent by the site's editor */
+(function (A) {
+	var W = (A.writers = A.writers || {});
+	W.dedications = W.dedications || [];
+	if (W.dedications.some(function (w) { return (w.name || {}).ar === 'دار ليان للنشر والتوزيع'; })) return;
+	W.dedications.push({
+		name: { ar: 'دار ليان للنشر والتوزيع', en: 'Dar Lyan Publishing' },
+		book: { ar: 'عبقريات العقاد', en: 'Al-Aqqad’s Abqariyyat' },
+		direction: 'dedication',
+		back: 'assets/img/covers/about/lyan-abqariyyat-dedication.webp',
+		text: {
+			ar: 'في مشروعها الثقافي لإعادة إحياء «العبقريات» للمفكر عباس محمود العقاد وتوزيعها (مثل «عبقرية عمر» و«عبقرية محمد»)، خصّصت دار ليان نسخًا إهداءً وتكريمًا لروح العرّاب، إلى جانب د. نبيل فاروق والشهيد أحمد منسي، تقديرًا لدورهم في تشكيل وعي الشباب وحثّهم على القراءة. وعلى غلافها الخلفي صورته وعبارة «إهداء إلى العراب د. أحمد خالد توفيق — جعل الشباب يقرأون».',
+			en: 'In its project reviving and distributing the “Abqariyyat” of the thinker Abbas Mahmoud al-Aqqad (such as “The Genius of Omar” and “The Genius of Muhammad”), Dar Lyan set aside editions as a dedication and tribute to the Godfather’s memory, alongside Dr. Nabil Farouk and the martyr Ahmed Mansi, for their part in shaping young people’s minds and urging them to read. Its back cover carries his photo and the words “Dedicated to the Godfather, Dr. Ahmed Khaled Tawfik — he made the young read”.'
+		},
+		photo: { url: 'assets/img/photos/writers/lyan-logo.webp' }
+	});
+})(window.AKT);
