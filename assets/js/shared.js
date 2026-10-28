@@ -58,7 +58,7 @@
 		var vol = ((App.data().seriesCovers || {})[s.id] || []).filter(function (c) { return /cdn.(abjjad|aseeralkotb)|covers\/books\/(abjjad|aseeralkotb)-/.test(c.cover); })[0];
 		return {
 			id: 's-' + s.id,
-			img: s.front || (first && issueCover(s.id, first)) || (vol && vol.cover) || '',
+			img: (window.App.data().seriesLogos || {})[s.id] || s.front || (first && issueCover(s.id, first)) || (vol && vol.cover) || '',
 			color: s.color, title: s.title,
 			num: s.count ? '№ ' + s.count : '',
 			motif: monogram(s.title),
@@ -189,6 +189,10 @@
 	}
 
 	/* a series' cover: the cover of its first book that has one, else the series' own cover */
+	/* the series' logo, on a card in its colour (AKT.seriesLogos), where it stands for the whole series: the works page's series,
+	   its own page, the lists, publishers and writers; else its cover */
+	function seriesLogo(id) { return (window.App.data().seriesLogos || {})[id] || seriesCover(id); }
+
 	function seriesCover(id) {
 		var s = window.App.byId(window.App.data().series, id) || window.App.byId(window.App.data().otherSeries, id);
 		/* a front cover the series names for itself (s.front) comes first */
@@ -302,7 +306,7 @@
 			return { id: w.id, title: w.title, href: App.workHref(w.id), year: yearOf(w.year), date: ((d.bookInfo || {})[w.id] || {}).firstPublished || '', pub: house(w), cover: coverOf((d.bookInfo || {})[w.id]), color: w.color };
 		}).concat(ownSeries().concat(contributedSeries()).map(function (s) {
 			/* a series brings its last year and how many of its issues are his */
-			return { id: s.id, title: s.title, href: seriesHref(s.id), year: yearOf(s.years), yearTo: lastYearOf(s.years), issues: seriesIssues(s.id).length, pub: (s.publisher && s.publisher.ar) || '', cover: seriesCover(s.id), color: s.color, series: true };
+			return { id: s.id, title: s.title, href: seriesHref(s.id), year: yearOf(s.years), yearTo: lastYearOf(s.years), issues: seriesIssues(s.id).length, pub: (s.publisher && s.publisher.ar) || '', cover: seriesLogo(s.id), color: s.color, series: true };
 		}));
 		return (d.publishers || []).map(function (p) {
 			var mine = items.filter(function (it) { return pubMatches(p, it.pub); })
@@ -338,7 +342,7 @@
 			var ys = mine.map(function (it) { return it.year; }).filter(Boolean), ye = mine.map(function (it) { return it.yearTo || it.year; }).filter(Boolean);
 			/* and what it published of his world that isn't his: a series grown from his work (Lasheen), and books about him */
 			var world = inspiredSeries().filter(function (s) { return s.publisher && pubMatches(p, s.publisher.ar || ''); }).map(function (s) {
-				return { id: s.id, title: s.title, href: seriesHref(s.id), year: yearOf(s.years), yearTo: lastYearOf(s.years), issues: seriesIssues(s.id).length, cover: seriesCover(s.id), color: s.color, series: true, world: true, by: s.author };
+				return { id: s.id, title: s.title, href: seriesHref(s.id), year: yearOf(s.years), yearTo: lastYearOf(s.years), issues: seriesIssues(s.id).length, cover: seriesLogo(s.id), color: s.color, series: true, world: true, by: s.author };
 			});
 			var about = (d.aboutBooks || []).filter(function (b) { return b.publisher && pubMatches(p, b.publisher.ar || ''); }).map(function (b) {
 				return { id: b.id, title: b.title, href: bookHref(b.id), year: b.year, cover: b.cover, color: b.color || '#3a2a1f', by: b.by, about: true };
@@ -351,7 +355,7 @@
 				var take = function (k) { var m = /^([a-z]+)-(s?)\d+$/.exec(k); if (!m || m[1] === 'specials') return; var sid = m[2] ? 'specials' : m[1]; n[sid] = n[sid] || {}; n[sid][k] = 1; };
 				Object.keys(A.issues || {}).forEach(take);
 				Object.keys(Y.issues || {}).forEach(function (k) { if (new RegExp(p.audio).test(((Y.channels || {})[k] || {}).name || '')) take(k); });
-				heard = Object.keys(n).map(function (sid) { var s = anySeries(sid).s; return s && { id: sid, title: s.title, href: seriesHref(sid), cover: seriesCover(sid), color: s.color, series: true, heard: true, issues: Object.keys(n[sid]).length }; })
+				heard = Object.keys(n).map(function (sid) { var s = anySeries(sid).s; return s && { id: sid, title: s.title, href: seriesHref(sid), cover: seriesLogo(sid), color: s.color, series: true, heard: true, issues: Object.keys(n[sid]).length }; })
 					.filter(Boolean).sort(function (a, b) { return b.issues - a.issues; });
 			}
 			/* a house whose recordings the site lists (p.heardOn: Storytel, Iqraaly): its issues by series, then his books and
@@ -362,12 +366,12 @@
 				Object.keys(own2).forEach(function (k) {
 					var m = /^([a-z]+)-\d+$/.exec(k), w = /^work:(.+)$/.exec(k), sr = /^series:(.+)$/.exec(k), ab = /^about:(.+)$/.exec(k);
 					if (m) { bySeries[m[1]] = (bySeries[m[1]] || 0) + 1; return; }
-					if (sr) { var s0 = anySeries(sr[1]); if (s0) books.push({ id: sr[1], title: s0.s.title, href: seriesHref(sr[1]), cover: seriesCover(sr[1]), color: s0.s.color, heard: true }); return; }
+					if (sr) { var s0 = anySeries(sr[1]); if (s0) books.push({ id: sr[1], title: s0.s.title, href: seriesHref(sr[1]), cover: seriesLogo(sr[1]), color: s0.s.color, heard: true }); return; }
 					var wk = w && App.byId(d.works, w[1]), bk = ab && App.byId(d.aboutBooks, ab[1]);
 					if (wk) books.push({ id: wk.id, title: wk.title, href: App.workHref(wk.id), year: yearOf(wk.year), cover: coverOf((d.bookInfo || {})[wk.id]), color: wk.color, heard: true });
 					if (bk) books.push({ id: bk.id, title: bk.title, href: bookHref(bk.id), year: bk.year, cover: bk.cover, color: bk.color || '#3a2a1f', by: bk.by, about: true, heard: true });
 				});
-				heard = heard.concat(Object.keys(bySeries).map(function (sid) { var s = anySeries(sid); return s && { id: sid, title: s.s.title, href: seriesHref(sid), cover: seriesCover(sid), color: s.s.color, series: true, heard: true, issues: bySeries[sid] }; })
+				heard = heard.concat(Object.keys(bySeries).map(function (sid) { var s = anySeries(sid); return s && { id: sid, title: s.s.title, href: seriesHref(sid), cover: seriesLogo(sid), color: s.s.color, series: true, heard: true, issues: bySeries[sid] }; })
 					.filter(Boolean).sort(function (a, b) { return b.issues - a.issues; }), books.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); }));
 			}
 			return { p: p, list: mine, later: later, world: world, about: about, heard: heard, from: ys.length ? Math.min.apply(null, ys) : 0, to: ye.length ? Math.max.apply(null, ye) : 0 };
@@ -453,6 +457,6 @@
 		ownSeries: ownSeries, contributedSeries: contributedSeries, awardsList: awardsList, inspiredSeries: inspiredSeries, seriesAuthor: seriesAuthor,
 		TYPES: TYPES, seriesBook: seriesBook, monogram: monogram, charXref: charXref,
 		anySeries: anySeries, seriesIssues: seriesIssues, specialIssues: specialIssues, issueKey: issueKey, resolveBook: resolveBook, issueCover: issueCover,
-		bookHref: bookHref, seriesHref: seriesHref, miniCover: miniCover, coverOf: coverOf, seriesCover: seriesCover
+		bookHref: bookHref, seriesHref: seriesHref, miniCover: miniCover, coverOf: coverOf, seriesCover: seriesCover, seriesLogo: seriesLogo
 	};
 })();

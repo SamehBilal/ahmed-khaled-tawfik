@@ -67,7 +67,7 @@ window.PAGE = {
 			if (!m) { var wk = App.findWork(id); return wk && { title: wk.title, href: 'book.html?id=' + wk.id, img: S.coverOf((d.bookInfo || {})[wk.id]), color: wk.color }; }
 			var sr = S.anySeries(m[2]);
 			if (!sr) return null;
-			if (m[1] === 's') return { title: sr.s.title, href: S.seriesHref(m[2]), img: S.seriesCover(m[2]), color: sr.s.color };
+			if (m[1] === 's') return { title: sr.s.title, href: S.seriesHref(m[2]), img: S.seriesLogo(m[2]), color: sr.s.color };
 			var is = S.seriesIssues(m[2]).filter(function (x) { return x.n === +m[3]; })[0];
 			return is && { title: is.title, href: App.issueHref(m[2], is), img: S.issueCover(m[2], is), color: sr.s.color };
 		}).filter(Boolean);

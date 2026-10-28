@@ -31,7 +31,7 @@ window.PAGE = {
 		/* 3D book: own series reuse the works-page book; others get a simple one */
 		var bookOpts = ser.own ? S.seriesBook(s) : {
 			/* the cover of its first book (the first issue that has one), else the series' own */
-			img: S.seriesCover(s.id),
+			img: S.seriesLogo(s.id),
 			color: s.color || '#4b3b2a', title: s.title, motif: S.monogram(s.title),
 			back: tx(s.description || ''), meta: s.years || '',
 			pages: ['<h4>' + tx(s.title) + '</h4>' + App.paras(s.description)],
@@ -173,13 +173,13 @@ window.PAGE = {
 					}).join('') +
 					grown.map(function (x) {
 						return '<a class="cover-link" href="' + S.seriesHref(x.id) + '" title="' + e(t(x.title)) + '">' +
-							S.miniCover({ img: S.seriesCover(x.id), color: x.color, title: t(x.title), sub: x.author ? t(x.author) : '' }) +
+							S.miniCover({ img: S.seriesLogo(x.id), color: x.color, title: t(x.title), sub: x.author ? t(x.author) : '' }) +
 							'<span class="cl-t">' + L('سلسلة ', 'The series ') + tx(x.title) + (x.author ? ' · ' + tx(x.author) : '') +
 								(x.count ? ' · ' + App.num(x.count) + ' ' + L('كتابًا', 'books') : '') + '</span></a>';
 					}).join('') + '</div></section>' : '') +
 				'<section class="d-block d-wide"><div class="d-head"><h3>' + L('سلاسل أخرى', 'Other series') + '</h3></div><div class="cover-row">' +
 					all.filter(function (x) { return x.id !== id; }).map(function (x) {
-						return '<a class="cover-link" href="' + S.seriesHref(x.id) + '">' + S.miniCover({ img: S.seriesCover(x.id), color: x.color, title: t(x.title), sub: x.own ? '' : L('مشاركة', 'Contributor') }) + '</a>';
+						return '<a class="cover-link" href="' + S.seriesHref(x.id) + '">' + S.miniCover({ img: S.seriesLogo(x.id), color: x.color, title: t(x.title), sub: x.own ? '' : L('مشاركة', 'Contributor') }) + '</a>';
 					}).join('') + '</div></section>' +
 				(sources.length ? '<section class="d-block d-sources d-wide"><h3>' + L('المصادر', 'Sources') + '</h3><ul>' +
 					sources.map(function (u) { return '<li><a href="' + e(u) + '" target="_blank" rel="noopener">' + e(u.replace(/^https?:\/\/(www\.)?/, '').slice(0, 70)) + '</a></li>'; }).join('') + '</ul></section>' : '') +

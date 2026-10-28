@@ -3678,3 +3678,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	].forEach(function (m) { if (!M.some(function (x) { return x.url === m.url; })) M.push(m); });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* Each series' logo, on a card in its colour, standing for the whole series (WorksShared.seriesLogo): cropped from its covers —
+   the owl of «ما وراء الطبيعة», the «فانتازيا» disc, the «سافاري» splash, «كتاب الصيف», «المغامر», «سوبر ميجا», «مولوتوف», «أدبيات»,
+   «بلية العجيب», «روايات كوميكس» and «لاشين» — or from Arabic Wikipedia's wordmarks of «رجفة الخوف» and «روايات عالمية للجيب».
+   The special issues and WWW have none of their own, and keep their covers. */
+(function (A) {
+	var D = 'assets/img/covers/logos/';
+	A.seriesLogos = A.seriesLogos || {};
+	['mwt', 'fantasia', 'safari', 'shivers', 'rwg', 'molotov', 'sayf', 'mughamer', 'maqalat', 'supermega', 'bley', 'comics', 'lasheen']
+		.forEach(function (id) { if (!A.seriesLogos[id]) A.seriesLogos[id] = D + id + '.webp'; });
+})(window.AKT);
