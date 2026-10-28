@@ -3689,3 +3689,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	['mwt', 'fantasia', 'safari', 'shivers', 'rwg', 'molotov', 'sayf', 'mughamer', 'maqalat', 'supermega', 'bley', 'comics', 'lasheen']
 		.forEach(function (id) { if (!A.seriesLogos[id]) A.seriesLogos[id] = D + id + '.webp'; });
 })(window.AKT);
+
+/* The guide page's covers for four series, sent by the site's editor: the owl's eyes of «ما وراء الطبيعة», the skyline of
+   «روايات عالمية», the splash of «سافاري» and the raven of «فانتازيا» (guide.js; an issue named there keeps its own cover) */
+(function (A) {
+	var G = 'assets/img/covers/guide/';
+	A.guideCovers = A.guideCovers || {};
+	['mwt', 'rwg', 'safari', 'fantasia'].forEach(function (id) { if (!A.guideCovers[id]) A.guideCovers[id] = G + id + '.webp'; });
+})(window.AKT);
