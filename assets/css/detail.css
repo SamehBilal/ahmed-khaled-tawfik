@@ -409,3 +409,8 @@ html[data-theme="light"] .sv-theme-ghosts .sv-scene { background: radial-gradien
 .sv-theme-fantasy .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #b39cff; }
 @media (max-width: 760px) { .sv-lamp, .sv-scene .ch-portal { width: 300px; height: 300px; } }
 @media (prefers-reduced-motion: reduce) { .sv-lamp { animation: none; } }
+/* WWW: the Virus's code falling behind the page, in its green */
+.sv-theme-code .sv-scene { background: radial-gradient(800px 400px at 78% 10%, rgba(40, 220, 120, .14), transparent 70%), linear-gradient(#040806, transparent 80%); }
+.sv-scene .ch-code { z-index: 0; opacity: .26; }
+html[data-theme="light"] .sv-theme-code .sv-scene { background: radial-gradient(800px 400px at 78% 10%, rgba(40, 180, 100, .16), transparent 70%); }
+.sv-theme-code .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #39e08a; }

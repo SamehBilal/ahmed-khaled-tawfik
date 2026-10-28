@@ -94,13 +94,15 @@ window.PAGE = {
 		var grown = (d.otherSeries || []).filter(function (x) { return x.inspired && x.grewFrom === id; });
 		var specials = S.specialIssues(id);
 
-		/* the three heroes' series wear their hero's scene behind the book (as on their character pages, character.css):
-		   Refaat's fog and lamplight, Alaa's heartbeat, Abeer's stars and portal */
-		var theme = { mwt: 'ghosts', safari: 'medicine', fantasia: 'fantasy' }[id] || '';
+		/* the heroes' series wear their hero's scene behind the book (as on their character pages, character.css):
+		   Refaat's fog and lamplight, Alaa's heartbeat, Abeer's stars and portal, the Virus's falling code */
+		var theme = { mwt: 'ghosts', safari: 'medicine', fantasia: 'fantasy', www: 'code' }[id] || '';
 		var scene = {
 			ghosts: '<div class="ch-fog"><span></span><span></span><span></span></div><i class="sv-lamp"></i>',
 			medicine: '<svg class="ch-ecg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 60 H380 L400 60 L415 30 L430 95 L450 10 L470 110 L485 60 H700 L715 45 L730 75 L745 60 H1200" /></svg>',
-			fantasy: '<div class="ch-stars"></div><div class="ch-portal"></div>'
+			fantasy: '<div class="ch-stars"></div><div class="ch-portal"></div>',
+			/* WWW: the Virus's code, falling in columns */
+			code: '<div class="ch-code">' + [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (i) { var bits = ''; for (var k = 0; k < 28; k++) bits += (i * 7 + k * 13) % 3 ? '1' : '0'; return '<span style="--i:' + i + '">' + bits + '</span>'; }).join('') + '</div>'
 		}[theme] || '';
 
 		root.innerHTML =
