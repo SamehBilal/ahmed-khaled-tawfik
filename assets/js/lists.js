@@ -91,6 +91,24 @@
 		save(); changed();
 		return true;
 	}
+	/* every issue of a series, as list keys (an issue in two parts counts once, by its first) */
+	function issueKeys(sid) {
+		var S = window.WorksShared;
+		if (!S || !S.seriesIssues) return [];
+		try { return S.seriesIssues(sid).filter(function (is) { return !(is.part > 1); }).map(function (is) { return 'b:' + S.issueKey(sid, is); }); } catch (e) { return []; }
+	}
+	/* add many at once (in their order, the first ending at the top), saving once; returns how many were new */
+	function addAll(list, keys) {
+		var other = { toread: 'read', read: 'toread', own: 'want', want: 'own' }[list], n = 0;
+		keys.slice().reverse().forEach(function (key) {
+			if (has(list, key)) return;
+			state.lists[other] = state.lists[other].filter(function (x) { return x.key !== key; });
+			state.lists[list].unshift(describe(key, null));
+			n++;
+		});
+		if (n) { save(); changed(); }
+		return n;
+	}
 	function remove(list, key) { state.lists[list] = state.lists[list].filter(function (x) { return x.key !== key; }); save(); changed(); }
 	/* put an item at a position in a list (the same list to reorder, the other one to move it) */
 	function move(from, key, to, index) {
@@ -549,8 +567,18 @@
 		if (zone) {
 			zone.classList.remove('highlight');
 			var list = zone.getAttribute('data-list');
-			var isNew = add(list, d.rec);
+			/* a series brings all its issues (the first at the top), each as its own item */
+			var issues = d.key[0] === 's' ? issueKeys(d.key.slice(2)) : [];
 			var z2 = panel.querySelector('.ls-zone[data-list="' + list + '"]') || zone;
+			if (issues.length) {
+				var added = addAll(list, issues);
+				z2.classList.add('drop-feedback');
+				say(added ? L('أُضيف ' + App().num(added) + ' ' + (added === 1 ? 'عدد' : added === 2 ? 'عددان' : added <= 10 ? 'أعداد' : 'عددًا') + ' من «', 'Added ' + added + ' issue' + (added === 1 ? '' : 's') + ' of “') + tt(d.rec.title) + L('» إلى ', '” to ') + tt(LISTS[list])
+					: L('كل أعداد «', 'Every issue of “') + tt(d.rec.title) + L('» موجود بالفعل في ', '” is already in ') + tt(LISTS[list]), added ? 'success' : 'notice');
+				if (ghost) { ghost.classList.add('is-dropped'); }
+				setTimeout(close, 650);
+			} else {
+			var isNew = add(list, d.rec);
 			z2.classList.add('drop-feedback');
 			say((isNew ? L('أُضيف «', 'Added “') : L('موجود بالفعل في «', 'Already in “')) + tt(d.rec.title) + (isNew ? L('» إلى ', '” to ') : L('» — ', '” — ')) + tt(LISTS[list]), isNew ? 'success' : 'notice');
 			if (ghost) { ghost.classList.add('is-dropped'); }
@@ -558,6 +586,7 @@
 				close();
 				if (LISTS[list].mode === 'collector') chooseEditions(list, d.key);
 			}, 650);
+			}
 		} else close();
 		var g = ghost; ghost = null;
 		if (g) setTimeout(function () { g.remove(); }, zone ? 300 : 0);
