@@ -2,7 +2,8 @@
    "العراب" drops in and squashes like the "i" (with no mark above it: #iDot is only the point the rings and the reveal start from),
    the three words of his name spring in from the centre, coloured rings bloom
    inside the letters, then a growing hole opens the page underneath.
-   Plays once per browser session; click / Esc / the Skip button ends it. */
+   Plays once per browser session, with «حتى تحترق النجوم» in Refaat Ismail's voice on the web (after a tap where the browser asks for one)
+   and silent in the installed app; click / Esc / the Skip button ends it. */
 (function () {
 	'use strict';
 
@@ -16,17 +17,30 @@
 	var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	var forced = /[?&]intro=1/.test(location.search);
 
+	/* the home page's own entrance, once: its title and portrait rise into view as the intro opens (or is skipped) */
+	var HERO = '.home-hero .wrap > *', heroDone = false;
+	function heroIn() {
+		if (heroDone || !window.gsap) return;
+		heroDone = true;
+		window.gsap.fromTo(HERO, { y: 40, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.12, duration: 0.9, ease: 'power3.out', clearProps: 'transform,opacity' });
+	}
+
 	function remove() {
 		if (!overlay.parentNode) return;
-		if (window.gsap) window.gsap.set('.home-hero .wrap > *', { clearProps: 'all' });
+		heroIn();
 		overlay.parentNode.removeChild(overlay);
 		document.documentElement.classList.remove('intro-on');
 		markSeen();
 	}
 
-	if ((seen() && !forced) || reduce || !window.gsap) { remove(); return; }
+	if ((seen() && !forced) || reduce || !window.gsap) { heroDone = true; remove(); return; }
 
 	document.documentElement.classList.add('intro-on');
+	/* (hidden under the intro until its entrance) */
+	window.gsap.set(HERO, { opacity: 0 });
+	/* the installed app opens quietly; on the web the quote is heard */
+	var app = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+	var withVoice = false, waiting = false;
 
 	var gsap = window.gsap;
 	if (window.CustomEase) gsap.registerPlugin(window.CustomEase);
@@ -44,10 +58,12 @@
 		if (q) q.kill();
 		gsap.ticker.remove(follow);
 		if (voice && !voice.paused) gsap.to(voice, { volume: 0, duration: 0.6, onComplete: function () { voice.pause(); } });
+		heroIn();
 		gsap.to(overlay, { autoAlpha: 0, duration: 0.35, onComplete: remove });
 	}
 	overlay.querySelector('.intro-skip').addEventListener('click', function (e) { e.stopPropagation(); finish(); });
-	overlay.addEventListener('click', finish);
+	/* a click skips the intro, except while it waits for the tap that lets the voice play */
+	overlay.addEventListener('click', function () { if (waiting) begin(true); else finish(); });
 	document.addEventListener('keydown', function onKey(e) {
 		if (e.key === 'Escape') { document.removeEventListener('keydown', onKey); finish(); }
 	});
@@ -56,8 +72,42 @@
 		? Promise.all([document.fonts.load('150px Lalezar', 'العرّاب'), document.fonts.load('40px "Reem Kufi"', 'جعل الشباب يقرؤون')]).catch(function () {})
 		: Promise.resolve();
 
-	/* never wait for fonts more than 1.5s */
-	Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 1500); })]).then(play);
+	/* never wait for fonts more than 1.5s; then, on the web, find out whether the voice may play: a browser that keeps a page
+	   silent until it is tapped gets a «tap to begin» first, so the intro starts with the voice; the app starts silent */
+	Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 1500); })]).then(function () {
+		if (app || !voice) { begin(false); return; }
+		var vol = voice.volume;
+		voice.volume = 0;
+		var p = voice.play();
+		var ok = function () { voice.pause(); voice.currentTime = 0; voice.volume = vol; begin(true); };
+		var no = function () { voice.volume = vol; askTap(); };
+		if (p && p.then) p.then(ok, no); else ok();
+	});
+
+	function askTap() {
+		if (!overlay.parentNode) return;
+		waiting = true;
+		var b = document.createElement('button');
+		b.type = 'button';
+		b.className = 'intro-start';
+		b.innerHTML = document.documentElement.lang === 'en' ? '<b>🔊</b> Tap to begin<small>Until the stars burn…</small>' : '<b>🔊</b> اضغط لتبدأ<small>حتى تحترق النجوم…</small>';
+		overlay.appendChild(b);
+		b.focus();
+	}
+
+	/* the tap itself lets the voice play: it is started inside it, then rewound for the quote */
+	function begin(voiced) {
+		if (!overlay.parentNode) return;
+		if (waiting) {
+			waiting = false;
+			var b = overlay.querySelector('.intro-start');
+			if (b) b.remove();
+			var p = voice.play();
+			if (p && p.then) p.then(function () { voice.pause(); voice.currentTime = 0; }, function () {});
+		}
+		withVoice = voiced;
+		play();
+	}
 
 	function play() {
 		if (!overlay.parentNode) return;
@@ -110,11 +160,11 @@
 		tl.timeScale(0.8);
 	}
 
-	/* the voice starts with the first line; a browser that blocks sound until a tap gets the quick, silent quote
-	   and a button that plays it again with the voice */
+	/* the voice starts with the first line; if it still cannot play, the quote runs quick and silent with a button that plays it again with the voice */
 	function startQuote() {
 		if (!overlay.parentNode) return;
-		if (!voice) { quick(); return; }
+		/* (the app, or no audio: silent, with a button to hear it) */
+		if (!voice || !withVoice) { quick(); if (voice) offerVoice(); return; }
 		voice.currentTime = 0;
 		var p = voice.play();
 		if (p && p.then) p.then(voiced, function () { quick(); offerVoice(); });
@@ -140,7 +190,7 @@
 		.call(centreHole, null, 'reveal')
 		.to('#introSVG', { scale: 1.25, duration: 1.1, ease: 'power2.in' }, 'reveal')
 		.fromTo(overlay, { '--hole': '-1%' }, { '--hole': '150%', duration: 1.1, ease: 'power3.in' }, 'reveal')
-		.from('.home-hero .wrap > *', { y: 40, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out' }, 'reveal+=0.7');
+		.call(heroIn, null, 'reveal+=0.7');
 		return t;
 	}
 

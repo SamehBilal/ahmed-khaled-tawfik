@@ -677,6 +677,19 @@ html.intro-on, html.intro-on body { overflow: hidden; }
 }
 .intro-voice:hover, .intro-voice:focus-visible { filter: brightness(1.12); }
 @keyframes introVoice { from { opacity: 0; transform: translateY(8px); } }
+/* on the web, when the browser waits for a tap before any sound: the intro starts on it, with the voice (intro.js askTap) */
+.intro-start {
+	position: absolute; top: 50%; left: 50%; translate: -50% -50%;
+	display: flex; flex-direction: column; align-items: center; gap: 6px;
+	font: inherit; font-family: var(--f-display); font-size: 22px; color: #fff;
+	background: var(--ember); border: 0; border-radius: 22px; padding: 18px 30px; cursor: pointer;
+	box-shadow: 0 0 0 0 rgba(224, 112, 58, .55), 0 14px 32px rgba(0, 0, 0, .5);
+	animation: introVoice .5s ease-out both, introPulse 2.2s ease-out .5s infinite;
+}
+.intro-start b { font-size: 30px; line-height: 1; }
+.intro-start small { font-size: 15px; opacity: .85; font-family: 'Reem Kufi', var(--f-display); }
+.intro-start:hover, .intro-start:focus-visible { filter: brightness(1.1); outline: none; }
+@keyframes introPulse { 0% { box-shadow: 0 0 0 0 rgba(224, 112, 58, .55), 0 14px 32px rgba(0, 0, 0, .5); } 70%, 100% { box-shadow: 0 0 0 26px rgba(224, 112, 58, 0), 0 14px 32px rgba(0, 0, 0, .5); } }
 @media (prefers-reduced-motion: reduce) {
 	.ft-moon, .ft-eyes, .ft-eyes i, .ft-fog, .ft-end, .ft-stars i, .ft-shoot, .ft-fantasia, .ft-sparks i, .ft-giraffe .neck, .ft-bat, .ft-bat svg, .ft-lit path, .ft-cat-eyes { animation: none !important; }
 	.ft-eyes { opacity: 1; }
