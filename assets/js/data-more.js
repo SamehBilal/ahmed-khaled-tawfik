@@ -2376,7 +2376,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.pages = 220;
 	b.editions = [
 		{ title: T, publisher: { ar: 'دايموند بوك', en: 'Diamond Book' }, year: 2006, date: '2006-01-01', lang: 'ar', asin: 'B0DLT5XXZ6', pages: 220, format: PB,
-			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'diamond-2006.webp', source: GR + '10954529' },
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'diamond-2006-front.webp', source: GR + '10954529' },
 		{ title: T, publisher: LILAKC, lang: 'ar', asin: 'B0DMZ9GJQG', pages: 220, format: PB, cover: C + 'lila-220.webp', source: GR + '5854156' },
 		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, lang: 'ar', isbn: '9789776386105', isbn10: '9776386105', asin: '9776386105', pages: 188, format: PB,
 			cover: C + 'lila.webp', source: GR + '17643627' },
@@ -2385,7 +2385,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			cover: kayan.cover || '', back: 'assets/img/covers/back/mawsoua-kayan.webp', source: kayan.source },
 		{ title: T, publisher: KAYAN, year: 2024, date: '2024-04-03', lang: 'ar', asin: 'B0FLYRP5B6', pages: 131, format: { ar: 'نسخة كيندل', en: 'Kindle edition' } }
 	].concat(old.filter(function (ed) { return ed.store; }));
-	b.ownCover = C + 'diamond-2006.webp';
+	b.ownCover = C + 'diamond-2006-front.webp';
 	b.blurb = { by: { ar: 'كيان', en: 'Kayan' },
 		ar: 'موسوعة الظلام.. نتحدث عن الرعب.. عن المجهول.. عن الجانب المظلم من القمر، والناحية الأخرى من الباب الموصد.. نتحدث عما ينتظرنا في زاوية المنعطف، وعن الذي يقرع جرس الباب بعد منتصف الليل.. نتحدث عن سبب عواء الكلب وانتصاب شعر القط.. نتحدث عن أسرار منسية وفنون بائدة يتداولون سرها همسًا.. نتحدث عن طقوس غامضة وقلاع مهجورة.. موسوعة الظلام.. نتحدث عن كتب كانوا يحرقون من يمتلكها، وعن أشياء لا اسم لها.. نتحدث عن هذه الأسرار الرهيبة وعن الذين كتبوا عنها أو صوروها. موسوعة الظلام هي محاولة جريئة هي أن تجمع كل هذا في موسوعة، كأنك يمكن أن تحتوي خيال الإنسان وكوابيسه في كلمات، لكننا حاولنا.. والنتيجة ما زالت بعيدة عن الكمال، لكنها تمنحك ساعات لا شك فيها من الإثارة والخيال.. نستطيع أن نعطيك هذا الوعد ونفي به!' };
 	(b.sources = b.sources || []).push('https://www.samawy.com/i/1004112/');
