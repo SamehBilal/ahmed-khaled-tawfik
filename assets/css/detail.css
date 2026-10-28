@@ -257,11 +257,11 @@ html[dir="rtl"] .d-award-badge { padding: 4px 6px 4px 12px; }
 .d-award-badge.finalist { border-color: #8d8d8d; color: #e6e6e6; background: linear-gradient(180deg, #2f2f2f, #1d1d1d); }
 html[data-theme="light"] .d-award-badge { background: linear-gradient(180deg, #fff6dc, #f3e2b0); color: #6b4a0e; }
 /* an award's photo (the prize ceremony), opening full size */
-/* a book's prizes: compact cards (about half the column each), the photo a small thumbnail beside the text that opens full size */
+/* a book's prizes: compact cards (about half the column each), the photo a small thumbnail above the text that opens full size */
 #d-awards .awards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); grid-auto-rows: auto; }
-#d-awards .award { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 14px; align-content: start; }
-#d-awards .award > * { grid-column: 1; }
-#d-awards .aw-pic { grid-column: 2; grid-row: 1 / span 6; align-self: start; width: 116px; margin: 2px 0 0; border-radius: 6px; }
+#d-awards .award { display: flex; flex-direction: column; }
+/* (one column: the photo, small, first; then the year, the title and the words) */
+#d-awards .aw-pic { order: -1; align-self: flex-start; width: 150px; margin: 0 0 12px; border-radius: 6px; }
 #d-awards .aw-pic img { aspect-ratio: 4 / 3; object-fit: cover; }
 #d-awards .award .for, #d-awards .award .src { display: block; margin-top: 6px; }
 .aw-pic { display: block; margin: 8px 0 8px; padding: 0; border: 1px solid var(--line); border-radius: 8px; background: none; overflow: hidden; cursor: zoom-in; }
