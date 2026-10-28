@@ -140,7 +140,8 @@ window.PAGE = {
 				var is = S.seriesIssues(st.ref).filter(function (x) { return +x.n === st.issue && !(x.part > 1); })[0];
 				img = is ? S.issueCover(st.ref, is) : '';
 			} else if (App.byId(d.works, st.ref)) img = latestWithBack((d.bookInfo || {})[st.ref]) || S.coverOf((d.bookInfo || {})[st.ref]);
-			else img = S.seriesBook(w).img;
+			/* a series shows its first issue's cover art here, not its logo */
+			else img = S.seriesCover(w.id) || S.seriesBook(w).img;
 			return S.miniCover({ img: img, color: w.color, title: title });
 		};
 
