@@ -1,7 +1,7 @@
 /* character.html?id=<character id> — one page per character.
-   The three series heroes get a themed section from data-heroes.js: Refaat's bestiary of
-   legends, Alaa's medical case files from Africa, Abeer's doors into other worlds.
-   Everyone else gets their card, their appearances and the people around them. */
+   The main characters get a themed page from data-heroes.js: Refaat's bestiary of legends, Alaa's medical case files from
+   Africa, Abeer's doors into other worlds; the Virus's infected files; and the heroes of the novels, the turns of their
+   story beside their book. Everyone gets their appearances and the people around them. */
 window.PAGE = {
 	id: 'characters',
 	title: { ar: 'شخصية', en: 'Character' },
@@ -30,7 +30,8 @@ window.PAGE = {
 		var issues = ser ? S.seriesIssues(c.work) : [];
 		var byN = function (n) { for (var i = 0; i < issues.length; i++) if (+issues[i].n === +n && !issues[i].part) return issues[i]; for (var j = 0; j < issues.length; j++) if (+issues[j].n === +n) return issues[j]; return null; };
 		var name = t(c.name);
-		var mono = (App.lang === 'ar' ? (c.name.ar || '') : (c.name.en || '')).replace(/^(د\.|Dr\.)\s*/, '').charAt(0);
+		/* (the initial: past «د.», and past the article «ال» / «The») */
+		var mono = (App.lang === 'ar' ? (c.name.ar || '') : (c.name.en || '')).replace(/^(د\.|Dr\.)\s*/, '').replace(/^(ال|The\s+)/, '').charAt(0);
 
 		/* an issue as a small cover that links to its page (and can be dragged to My lists) */
 		var issueCard = function (is) {
@@ -50,12 +51,25 @@ window.PAGE = {
 			? '<img src="' + e(figure) + '" alt="' + e(name) + '">'
 			: c.image
 			? '<img src="' + e(c.image) + '" alt="' + e(name) + '">'
+			/* a novel's hero with no picture of their own stands on the novel's cover */
+			: work && S.coverOf((d.bookInfo || {})[work.id])
+			? '<img class="ch-bookcover" src="' + e(S.coverOf((d.bookInfo || {})[work.id])) + '" alt="' + e(t(work.title)) + '">'
 			: '<span class="ch-mono" aria-hidden="true">' + e(mono) + '</span>';
 
 		var backdrop = {
 			ghosts: '<div class="ch-fog" aria-hidden="true"><span></span><span></span><span></span></div>',
 			medicine: '<svg class="ch-ecg" aria-hidden="true" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 60 H380 L400 60 L415 30 L430 95 L450 10 L470 110 L485 60 H700 L715 45 L730 75 L745 60 H1200" /></svg>',
-			fantasy: '<div class="ch-stars" aria-hidden="true"></div><div class="ch-portal" aria-hidden="true"></div>'
+			fantasy: '<div class="ch-stars" aria-hidden="true"></div><div class="ch-portal" aria-hidden="true"></div>',
+			/* the Virus: columns of code falling behind him */
+			code: '<div class="ch-code" aria-hidden="true">' + [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (i) { var bits = ''; for (var k = 0; k < 28; k++) bits += (i * 7 + k * 13) % 3 ? '1' : '0'; return '<span style="--i:' + i + '">' + bits + '</span>'; }).join('') + '</div>',
+			/* Utopia: the wall, gold on its inner side, grey outside */
+			wall: '<div class="ch-wall ch-wall-' + e((hero && hero.side) || 'in') + '" aria-hidden="true"><span></span></div>',
+			/* al-Senga: a scrawled, unreadable word on a wall */
+			graffiti: '<div class="ch-graffiti" aria-hidden="true"><b>؟</b></div>',
+			/* Like Icarus: a burning sun, and feathers drifting down */
+			sun: '<div class="ch-sun" aria-hidden="true"></div><div class="ch-feathers" aria-hidden="true">' + [0, 1, 2, 3, 4, 5].map(function (i) { return '<i style="--i:' + i + '"></i>'; }).join('') + '</div>',
+			/* In the Rats’ Corridor: darkness, and a small light that follows the pointer */
+			dark: '<div class="ch-dark" aria-hidden="true"></div>'
 		}[hero && hero.theme] || '';
 
 		var html = '<section class="ch-hero' + (hero ? ' ch-theme-' + e(hero.theme) : '') + '" style="--c:' + e(color) + '">' + backdrop +
@@ -103,6 +117,23 @@ window.PAGE = {
 			'</div></section>';
 		}
 
+		/* a novel's hero: the turns of their story, and the book beside them (and, for In the Rats’ Corridor, the issue it grew from) */
+		if (hero && hero.beats) {
+			var rel = hero.related && S.anySeries(hero.related.series), relIs = rel && S.seriesIssues(hero.related.series).filter(function (x) { return +x.n === hero.related.issue && !(x.part > 1); })[0];
+			var bookCard = function (img, href, title, sub, col) {
+				return '<a class="ch-book rise" href="' + e(href) + '">' + S.miniCover({ img: img, color: col || color, title: t(title) }) + '<b>' + tx(title) + '</b>' + (sub ? '<span>' + sub + '</span>' : '') + '</a>';
+			};
+			html += '<section class="section ch-themed ch-theme-' + e(hero.theme) + '-body"><div class="wrap">' +
+				'<div class="section-head"><div><h2>' + tx(hero.sectionTitle) + '</h2><p>' + tx(hero.sectionText) + '</p></div></div>' +
+				'<div class="ch-story">' +
+					'<ol class="ch-beats">' + hero.beats.map(function (b, i) { return '<li class="ch-beat rise" style="--i:' + i + '"><span class="ch-beat-n">' + e(App.num(i + 1)) + '</span><h3>' + tx(b.title) + '</h3><p>' + tx(b.text) + '</p></li>'; }).join('') + '</ol>' +
+					'<div class="ch-books">' +
+						(work ? bookCard(S.coverOf((d.bookInfo || {})[work.id]), App.workHref(work.id), work.title, work.year ? App.num(work.year) : '', work.color) : '') +
+						(relIs ? bookCard(S.issueCover(hero.related.series, relIs), S.bookHref(S.issueKey(hero.related.series, relIs)), relIs.title, L('أصلها: ', 'Grew from: ') + tx(rel.s.title) + ' ' + e(App.num(relIs.n)), rel.s.color) : '') +
+					'</div>' +
+				'</div></div></section>';
+		}
+
 		/* appearances: a hero is in every issue; others are listed by the issues that name them */
 		var seen = issues.filter(function (is) { return (is.chars || []).indexOf(id) >= 0; });
 		if (hero && ser) {
@@ -141,5 +172,9 @@ window.PAGE = {
 
 		html += '<section class="section"><div class="wrap"><p class="ch-back"><a href="characters.html">' + L('→ كل الشخصيات', '← All characters') + '</a></p></div></section>';
 		root.innerHTML = html;
+
+		/* in the darkness, a small light follows the pointer */
+		var dark = hero && hero.theme === 'dark' && root.querySelector('.ch-hero');
+		if (dark) dark.addEventListener('pointermove', function (ev) { var r = dark.getBoundingClientRect(); dark.style.setProperty('--mx', (ev.clientX - r.left) + 'px'); dark.style.setProperty('--my', (ev.clientY - r.top) + 'px'); });
 	}
 };

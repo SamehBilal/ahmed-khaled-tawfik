@@ -79,3 +79,83 @@ window.AKT.heroes = {
 	};
 	(((A.heroes || {}).alaa || {}).places || []).forEach(function (p) { if (maps[p.issue] && !p.map) p.map = maps[p.issue]; });
 })(window.AKT);
+
+/* The other main characters' pages: a themed backdrop and a section of their own. The Virus has the WWW issues it narrates;
+   the heroes of the novels have the turns of their story (beats), told from the books' own descriptions (and, for «في ممر
+   الفئران», Arabic Wikipedia's account of it), with the book beside them. (Its hero, «الشرقاوي», is among the characters in data-more.js.) */
+(function (A) {
+	var H = A.heroes = A.heroes || {};
+	H.virus = H.virus || { theme: 'code',
+		eyebrow: { ar: 'يسكن الأجهزة', en: 'Lives in the machines' },
+		intro: { ar: 'لا وجه له ولا جسد: الفيروس برنامج خبيث يتسلل من جهاز إلى جهاز، يقرأ الرسائل والأسرار، ثم يحكيها لك بنفسه، مخاطبًا إياك مباشرة. بصوته روى أحمد خالد توفيق «WWW»، خماسيته عن عالم الإنترنت بين 2006 و2012: ما يفعله البشر حين يظنون أن أحدًا لا يراهم.',
+			en: 'It has no face and no body: the Virus is a malicious program slipping from machine to machine, reading messages and secrets, then telling them to you itself, speaking straight to you. In its voice Ahmed Khaled Tawfik told WWW, his five books about the internet between 2006 and 2012: what people do when they think no one is watching.' },
+		sectionTitle: { ar: 'الملفات المصابة', en: 'Infected files' },
+		sectionText: { ar: 'الأجزاء الخمسة التي رواها، بترتيبها. اضغط على جزء لتفتح صفحته.', en: 'The five parts it narrates, in order. Open one to read about it.' },
+		groups: [{ title: { ar: 'خماسية WWW', en: 'The WWW quintet' }, issues: [1, 2, 3, 4, 5] }] };
+
+	H['alaa-utopia'] = H['alaa-utopia'] || { theme: 'wall', side: 'in',
+		eyebrow: { ar: 'من داخل السور', en: 'From inside the wall' },
+		intro: { ar: 'علاء ابن «يوتوبيا»، المستعمرة المسوّرة التي يعيش فيها الأثرياء على الساحل الشمالي عام 2023 تحت حراسة المارينز. ملّ كل شيء، فقرر مع صديقته جرمينال أن يتسلل إلى عالم «الأغيار» خارج السور، ليصطاد واحدًا منهم ويعود بجزء من جسده تذكارًا. صوته أحد صوتين تتناوب بينهما الرواية.',
+			en: 'Alaa is a son of Utopia, the walled colony where the rich live on the north coast in 2023, guarded by Marines. Bored with everything, he and his girlfriend Germinal decide to slip out into the world of the “Others” beyond the wall, to hunt one of them and bring back a piece of the body as a trophy. His is one of the two voices the novel moves between.' },
+		sectionTitle: { ar: 'عالمان', en: 'Two worlds' },
+		sectionText: { ar: 'يوتوبيا وما خارجها، كما يراهما الصياد.', en: 'Utopia and what lies outside it, as the hunter sees them.' },
+		beats: [
+			{ title: { ar: 'يوتوبيا', en: 'Utopia' }, text: { ar: 'مستعمرة مسوّرة للأثرياء على الساحل الشمالي، يحرسها جنود المارينز، فيها كل شيء إلا المعنى.', en: 'A walled colony for the rich on the north coast, guarded by Marines, with everything in it but meaning.' } },
+			{ title: { ar: 'الملل', en: 'Boredom' }, text: { ar: 'لم يعد شيء يدهشه، فصار الصيد في عالم الفقراء آخر ما بقي من الإثارة.', en: 'Nothing surprises him any more, so hunting in the world of the poor is the last thrill left.' } },
+			{ title: { ar: 'إلى الخارج', en: 'Outside' }, text: { ar: 'يتسلل مع جرمينال إلى عالم «الأغيار»، فيرى ما فعله الفقر بالناس خارج السور.', en: 'He slips out with Germinal into the world of the Others, and sees what poverty has made of people beyond the wall.' } },
+			{ title: { ar: 'في بيت جابر', en: 'In Gaber’s house' }, text: { ar: 'حين يطاردهما الغوغاء ينقذهما جابر، الشاب الفقير المثقف، ويؤويهما في بيته.', en: 'When a mob hunts them down, Gaber, a poor and well-read young man, saves them and takes them into his home.' } }
+		] };
+
+	H.gaber = H.gaber || { theme: 'wall', side: 'out',
+		eyebrow: { ar: 'من خارج السور', en: 'From outside the wall' },
+		intro: { ar: 'جابر شاب فقير قرأ كثيرًا، يعيش مع أخته صفية في عالم «الأغيار» خارج أسوار يوتوبيا، حيث الجوع والعنف وانهيار كل شيء. حين يطارد الغوغاء شابًا وفتاة تسللا من يوتوبيا، ينقذهما ويؤويهما في بيته، فيصير صوته الصوت الثاني في الرواية.',
+			en: 'Gaber is a poor young man who has read a great deal, living with his sister Safiya in the world of the “Others” beyond Utopia’s walls, among hunger, violence and the collapse of everything. When a mob hunts down a young man and woman who slipped out of Utopia, he saves them and shelters them in his home, and his becomes the novel’s second voice.' },
+		sectionTitle: { ar: 'عالمان', en: 'Two worlds' },
+		sectionText: { ar: 'يوتوبيا وما خارجها، كما يراهما جابر.', en: 'Utopia and what lies outside it, as Gaber sees them.' },
+		beats: [
+			{ title: { ar: 'الأغيار', en: 'The Others' }, text: { ar: 'هكذا يسمي أهل يوتوبيا الفقراء خارج سورهم، وجابر واحد منهم.', en: 'That is what Utopia calls the poor beyond its wall, and Gaber is one of them.' } },
+			{ title: { ar: 'القارئ', en: 'The reader' }, text: { ar: 'شاب مثقف في عالم يتآكل، يفهم ما يجري حوله أكثر مما يقدر على تغييره.', en: 'A well-read young man in a crumbling world, who understands what is happening around him better than he can change it.' } },
+			{ title: { ar: 'صفية', en: 'Safiya' }, text: { ar: 'أخته التي تعيش معه، وفيها يرى ثمن الفقر على من يحب.', en: 'His sister, who lives with him, and in whom he sees what poverty costs those he loves.' } },
+			{ title: { ar: 'الضيفان', en: 'The guests' }, text: { ar: 'ينقذ علاء وجرمينال من الغوغاء ويؤويهما، فيجد نفسه بين عالمين.', en: 'He saves Alaa and Germinal from the mob and shelters them, and finds himself between two worlds.' } }
+		] };
+
+	H.essam = H.essam || { theme: 'graffiti',
+		eyebrow: { ar: 'يتتبع كلمة على جدار', en: 'Following a word on a wall' },
+		intro: { ar: 'عصام الشرقاوي كاتب مغمور. تنتحر عفاف، فتاة من عشوائيات القاهرة، بعد أن تكتب على جدار مصنع مهجور كلمة واحدة غامضة، فيقرر أن يتتبع سر هذه الكلمة، فيغوص في عالم «دحديرة الشناوي» حيث العنف والفقر وقانون البقاء.',
+			en: 'Essam El-Sharkawy is an obscure writer. When Afaf, a girl from Cairo’s slums, takes her own life after writing a single mysterious word on the wall of an abandoned factory, he sets out to trace the secret of that word, and sinks into the world of “Dahdeerat El-Shennawy”, where violence, poverty and the law of survival rule.' },
+		sectionTitle: { ar: 'الكلمة', en: 'The word' },
+		sectionText: { ar: 'خيوط الحكاية التي يتبعها.', en: 'The threads of the story he follows.' },
+		beats: [
+			{ title: { ar: 'على الجدار', en: 'On the wall' }, text: { ar: 'كلمة واحدة على جدار مصنع مهجور، هي كل ما تركته عفاف، والخيط الذي يمسكه.', en: 'A single word on the wall of an abandoned factory: all Afaf left, and the thread he holds.' } },
+			{ title: { ar: 'عفاف', en: 'Afaf' }, text: { ar: 'فتاة من العشوائيات قادتها قسوة الحياة إلى الانتحار، ويريد أن يعرف لماذا.', en: 'A girl from the slums driven to suicide by the cruelty of her life, and he wants to know why.' } },
+			{ title: { ar: 'دحديرة الشناوي', en: 'Dahdeerat El-Shennawy' }, text: { ar: 'حي يحكمه العنف والفقر وقانون البقاء، يدخله غريبًا يسأل.', en: 'A quarter ruled by violence, poverty and the law of survival, which he enters as a stranger asking questions.' } }
+		] };
+
+	H.samanoudi = H.samanoudi || { theme: 'sun',
+		eyebrow: { ar: 'اقترب من الشمس', en: 'Too near the sun' },
+		intro: { ar: 'محمود السمنودي طفل غريب الأطوار منعزل، يكبر رجلًا يتجنبه الناس، لأنه يرى الماضي والمستقبل. لا تجلب له هذه المعرفة إلا العزلة والعذاب، كإيكاروس الذي اقترب من الشمس أكثر مما ينبغي، حتى ينتهي إلى صمت اختاره لنفسه في غرفة بمصحة نفسية.',
+			en: 'Mahmoud El-Samanoudi is a strange, solitary child who grows into a man people avoid, because he can see the past and the future. That knowledge brings him nothing but isolation and torment, like Icarus who flew too near the sun, until he ends in a silence he chose for himself, in a room in a psychiatric clinic.' },
+		sectionTitle: { ar: 'جناحا الشمع', en: 'Wings of wax' },
+		sectionText: { ar: 'ما رآه، وما دفعه ثمنًا لما رأى.', en: 'What he saw, and what it cost him.' },
+		beats: [
+			{ title: { ar: 'الطفل الغريب', en: 'The strange child' }, text: { ar: 'منعزل منذ صغره، يكبر رجلًا يتجنبه الناس.', en: 'Solitary from childhood, he grows into a man people avoid.' } },
+			{ title: { ar: 'المعرفة', en: 'Knowing' }, text: { ar: 'يرى ما كان وما سيكون، فلا يجد في ذلك نعمة بل عزلة وعذابًا.', en: 'He sees what was and what will be, and finds in it no gift, only isolation and torment.' } },
+			{ title: { ar: 'إيكاروس', en: 'Icarus' }, text: { ar: 'كالفتى الذي طار بجناحين من شمع فاقترب من الشمس فذابا.', en: 'Like the boy who flew on wings of wax, came too near the sun, and saw them melt.' } },
+			{ title: { ar: 'الصمت', en: 'Silence' }, text: { ar: 'ينتهي إلى صمت اختاره لنفسه في غرفة بمصحة نفسية.', en: 'He ends in a silence of his own choosing, in a room in a psychiatric clinic.' } }
+		] };
+
+	H.sharqawi = H.sharqawi || { theme: 'dark',
+		eyebrow: { ar: 'في عالم الظلام', en: 'In the world of darkness' },
+		intro: { ar: 'يرقد الشرقاوي في غيبوبة لا يعرف الأطباء سببها، فينتقل إلى عالم آخر: سقط نيزك على الأرض فحجب الشمس، وغرق كل شيء في ظلام حالك. هناك يفرض «القومندان» عقيدة الظلام، ويُعدم كل من يُضبط وهو يصنع نورًا. يرى فيه الناس مخلّصهم، فينضم إلى شباب «النورانيين» الذين يطالبون بالضوء حقًا للجميع.',
+			en: 'El-Sharkawy lies in a coma no doctor can explain, and crosses into another world: a meteor struck the Earth and blotted out the sun, and everything sank into pitch darkness. There “the Commandant” imposes a creed of darkness, and anyone caught making light is put to death. People take him for their saviour, and he joins the young “Illuminati” who demand light as everyone’s right.' },
+		sectionTitle: { ar: 'في ممر الفئران', en: 'In the rats’ corridor' },
+		sectionText: { ar: 'رحلته في عالم الظلام. الرواية تطوير لعدد «أسطورة أرض الظلام» من «ما وراء الطبيعة».', en: 'His journey through the world of darkness. The novel reworks the Ma Wara’ al-Tabi’a issue “The Legend of the Land of Darkness”.' },
+		related: { series: 'mwt', issue: 68 },
+		beats: [
+			{ title: { ar: 'الغيبوبة', en: 'The coma' }, text: { ar: 'يرقد في المستشفى والجميع ينتظر أن يفيق، بينما ينتقل هو إلى عالم آخر.', en: 'He lies in hospital as everyone waits for him to wake, while he crosses into another world.' } },
+			{ title: { ar: 'عالم بلا شمس', en: 'A world without sun' }, text: { ar: 'نيزك ضخم حجب الشمس، فاختفت مصادر الطاقة، وغرق العالم في الظلام وبدأ يتعفن.', en: 'A huge meteor blotted out the sun; every source of energy failed, and the world sank into darkness and began to rot.' } },
+			{ title: { ar: 'القومندان', en: 'The Commandant' }, text: { ar: 'يفرض عقيدة الظلام دينًا جديدًا: من يُضبط وهو يشعل نارًا يُعدم دون محاكمة.', en: 'He imposes darkness as a new faith: whoever is caught lighting even a fire is executed without trial.' } },
+			{ title: { ar: 'النورانيون', en: 'The Illuminati' }, text: { ar: 'شباب متمردون يطالبون بالنور حقًا للجميع، ينضم إليهم فيصير مطاردًا.', en: 'Young rebels demanding light as everyone’s right; he joins them and becomes a hunted man.' } },
+			{ title: { ar: 'نحو الهيمالايا', en: 'Towards the Himalayas' }, text: { ar: 'مغامرة غير محسوبة العواقب، على أمل إعادة الشمس، أو العبور من عالم الظلام إلى عالم النور.', en: 'A reckless journey, in the hope of bringing back the sun, or of crossing from the world of darkness into the world of light.' } }
+		] };
+})(window.AKT);

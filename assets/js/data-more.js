@@ -3689,3 +3689,12 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	/* «روايات عالمية للجيب»'s book on its page: a plain back in the skyline cover's teal, with the series' description, not an issue's back */
 	[].concat(A.otherSeries || [], A.series || []).forEach(function (s) { if (s.id === 'rwg') { s.plainBack = true; s.bookColor = '#0b8f8c'; } });
 })(window.AKT);
+
+/* «في ممر الفئران»: its hero, «الشرقاوي», with a page of his own (data-heroes.js) */
+(function (A) {
+	var C = A.characters = A.characters || [];
+	if (!C.some(function (c) { return c.id === 'sharqawi'; })) C.push({ id: 'sharqawi', name: { ar: 'الشرقاوي', en: 'El-Sharkawy' }, work: 'rats', main: true,
+		role: { ar: 'البطل', en: 'Protagonist' },
+		desc: { ar: 'رجل يرقد في غيبوبة لا يعرف الأطباء سببها، فيصحو في عالم غرق في الظلام بعد سقوط نيزك، حيث يراه الناس مخلّصهم.',
+			en: 'A man lying in a coma no doctor can explain, who wakes in a world sunk in darkness after a meteor struck, where people take him for their saviour.' } });
+})(window.AKT);

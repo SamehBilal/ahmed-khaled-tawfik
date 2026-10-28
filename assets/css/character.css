@@ -1,6 +1,7 @@
 /* =========================================================
-   Character pages. A shared layout, and three themes for the
-   series heroes: ghosts (Refaat), medicine (Alaa), fantasy (Abeer).
+   Character pages. A shared layout, three themes for the series heroes — ghosts (Refaat), medicine (Alaa),
+   fantasy (Abeer) — and five for the other main characters: code (the Virus), wall (Utopia’s Alaa and Gaber),
+   graffiti (Essam), sun (Samanoudi) and dark (El-Sharkawy).
    ========================================================= */
 
 .ch-hero { position: relative; overflow: hidden; isolation: isolate; padding: 64px 0 48px; border-bottom: 1px solid var(--line); }
@@ -199,4 +200,87 @@ html[data-theme="light"] .ch-stars { filter: invert(1); opacity: .35; }
 	.ch-fog span, .ch-ecg path, .ch-stars, .ch-portal, .ch-theme-ghosts .ch-portrait img, .ch-lantern .glow, .ch-lantern .moth b, .ch-lantern .moth b::before, .ch-lantern .moth b::after, .ch-place-map .ring { animation: none; }
 	.ch-lantern .moth { display: none; }
 	.ch-ecg path { stroke-dashoffset: 0; }
+}
+
+/* ---------- the other main characters (data-heroes.js): their themes, the turns of their story, and their book ---------- */
+
+/* a novel's hero with no picture of their own: the novel's cover, tilted like a book on a desk */
+.ch-portrait img.ch-bookcover { object-fit: cover; transform: rotate(-3deg) scale(.86); border-radius: 4px; box-shadow: 0 18px 30px rgba(0, 0, 0, .5); }
+html[dir="rtl"] .ch-portrait img.ch-bookcover { transform: rotate(3deg) scale(.86); }
+
+/* the story: its turns in a numbered line, the book (and where it came from) beside them */
+.ch-story { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 40px; align-items: start; }
+.ch-beats { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: beat; }
+.ch-beat { position: relative; padding: 16px 20px 16px; padding-inline-start: 64px; border: 1px solid var(--line); border-radius: 12px;
+	background: linear-gradient(135deg, color-mix(in srgb, var(--c, #5a2a22) 14%, var(--ink-2)), var(--ink-2) 65%); }
+.ch-beat-n { position: absolute; top: 14px; inset-inline-start: 16px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+	background: var(--c, var(--ember)); color: #fff; font-family: var(--f-display); font-size: 16px; }
+.ch-beat h3 { margin: 0 0 4px; font-family: var(--f-display); font-size: 19px; color: var(--paper); }
+.ch-beat p { margin: 0; color: var(--paper-dim); line-height: 1.8; }
+.ch-books { display: grid; gap: 18px; position: sticky; top: 90px; }
+.ch-book { display: grid; gap: 6px; text-decoration: none; color: var(--paper); }
+.ch-book .mini-cover { width: 100%; box-shadow: 0 16px 30px rgba(0, 0, 0, .45); transition: transform .25s; }
+.ch-book:hover .mini-cover, .ch-book:focus-visible .mini-cover { transform: translateY(-4px) rotate(-1deg); }
+.ch-book b { font-family: var(--f-display); font-size: 16px; }
+.ch-book span { color: var(--muted); font-size: 13px; }
+@media (max-width: 760px) {
+	.ch-story { grid-template-columns: 1fr; }
+	.ch-books { position: static; grid-template-columns: repeat(2, minmax(0, 150px)); }
+}
+
+/* the Virus: code falling in columns, green on black */
+.ch-theme-code { --c: #0f3d2a; }
+.ch-theme-code::before { background: radial-gradient(800px 400px at 78% 10%, rgba(40, 220, 120, .16), transparent 70%), linear-gradient(#040806, transparent); }
+.ch-code { position: absolute; inset: 0; z-index: -1; display: flex; justify-content: space-around; overflow: hidden; pointer-events: none; opacity: .32; }
+.ch-code span { writing-mode: vertical-rl; font-family: ui-monospace, Consolas, monospace; font-size: 15px; letter-spacing: .3em; color: #39e08a;
+	text-shadow: 0 0 6px rgba(57, 224, 138, .8); animation: ch-rain calc(9s + var(--i) * .7s) linear infinite; animation-delay: calc(var(--i) * -1.3s); }
+@keyframes ch-rain { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
+.ch-theme-code .ch-role { color: #39e08a; font-family: ui-monospace, Consolas, monospace; }
+.ch-theme-code-body .ch-group h3::before { content: '> '; color: #39e08a; font-family: ui-monospace, Consolas, monospace; }
+html[data-theme="light"] .ch-code span { color: #13804a; text-shadow: none; }
+
+/* Utopia: the wall across the scene — gold light inside it, grey dust outside */
+.ch-theme-wall::before { background: linear-gradient(90deg, rgba(212, 170, 80, .22), transparent 48%, transparent 52%, rgba(120, 120, 120, .2)); }
+.ch-wall { position: absolute; top: 0; bottom: 0; left: 50%; width: 26px; margin-left: -13px; z-index: -1; pointer-events: none;
+	background: repeating-linear-gradient(0deg, #4a4036 0 22px, #3a3129 22px 24px); box-shadow: 0 0 40px rgba(0, 0, 0, .6); opacity: .55; }
+.ch-wall span { position: absolute; top: 0; left: -6px; right: -6px; height: 14px;
+	background: repeating-linear-gradient(90deg, #6b5d4f 0 6px, transparent 6px 9px); }
+.ch-wall-in ~ .ch-hero-grid .ch-role { color: #e3b95c; }
+.ch-wall-out ~ .ch-hero-grid .ch-role { color: #b9b1a0; }
+.ch-theme-wall-body .ch-beat:nth-child(odd) { border-inline-start: 3px solid #d4aa50; }
+.ch-theme-wall-body .ch-beat:nth-child(even) { border-inline-start: 3px solid #8c8c8c; }
+
+/* al-Senga: one scrawled word on a factory wall — what it says, nobody can read */
+.ch-theme-graffiti::before { background: radial-gradient(700px 360px at 80% 20%, rgba(180, 60, 40, .18), transparent 70%),
+	repeating-linear-gradient(0deg, rgba(255, 255, 255, .025) 0 2px, transparent 2px 26px), repeating-linear-gradient(90deg, rgba(255, 255, 255, .02) 0 2px, transparent 2px 54px); }
+.ch-graffiti { position: absolute; inset-inline-end: 6%; top: 8%; z-index: -1; pointer-events: none; transform: rotate(-8deg); }
+.ch-graffiti b { font-family: var(--f-chunky); font-size: 260px; line-height: 1; color: rgba(200, 50, 30, .22); filter: blur(.6px); }
+.ch-theme-graffiti .ch-role { color: #e0603e; }
+.ch-theme-graffiti-body .ch-beat-n { background: #b8331f; border-radius: 4px; transform: rotate(-4deg); }
+
+/* Like Icarus: a sun that burns at the top of the scene, and feathers falling from it */
+.ch-theme-sun::before { background: radial-gradient(600px 300px at 80% -10%, rgba(255, 190, 80, .35), transparent 70%); }
+.ch-sun { position: absolute; top: -90px; inset-inline-end: 12%; width: 200px; height: 200px; border-radius: 50%; z-index: -1; pointer-events: none;
+	background: radial-gradient(circle, #fff3c4, #ffc04d 45%, rgba(255, 140, 30, 0) 70%); animation: ch-burn 5s ease-in-out infinite; }
+@keyframes ch-burn { 0%, 100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.08); opacity: 1; } }
+.ch-feathers { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.ch-feathers i { position: absolute; top: -40px; left: calc(15% + var(--i) * 14%); width: 10px; height: 34px; border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
+	background: linear-gradient(#f6ead2, #c9b28a); opacity: .55; animation: ch-feather calc(9s + var(--i) * 1.6s) linear infinite; animation-delay: calc(var(--i) * -2.2s); }
+@keyframes ch-feather { 0% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(30px, 260px) rotate(120deg); } 100% { transform: translate(-10px, 560px) rotate(260deg); opacity: 0; } }
+.ch-theme-sun .ch-role { color: #ffc04d; }
+
+/* In the Rats’ Corridor: darkness all over, and a small circle of light where the pointer is */
+.ch-theme-dark { --mx: 70%; --my: 40%; }
+.ch-theme-dark::before { background: #050505; }
+.ch-dark { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+	background: radial-gradient(160px 160px at var(--mx) var(--my), rgba(255, 220, 150, .22), rgba(255, 200, 120, .06) 50%, transparent 72%); transition: background .08s; }
+.ch-theme-dark .ch-role { color: #f0c46a; }
+.ch-theme-dark .ch-portrait img { filter: brightness(.75); }
+.ch-theme-dark-body .ch-beat { background: linear-gradient(135deg, #0b0b0b, var(--ink-2)); }
+.ch-theme-dark-body .ch-beat-n { background: #f0c46a; color: #1b130c; box-shadow: 0 0 14px rgba(240, 196, 106, .6); }
+html[data-theme="light"] .ch-theme-dark::before { background: #1b1712; }
+html[data-theme="light"] .ch-theme-dark { color: #f3ebda; }
+
+@media (prefers-reduced-motion: reduce) {
+	.ch-code span, .ch-sun, .ch-feathers i { animation: none; }
 }
