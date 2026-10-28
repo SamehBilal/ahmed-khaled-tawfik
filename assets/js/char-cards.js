@@ -64,8 +64,8 @@ window.CharCards = {
 		'</button>' +
 			(c.main ? '<a class="cc-go" href="character.html?id=' + e(c.id) + '">' + L('صفحة ' + plain + ' ←', plain + '’s page →') + '</a>' : '') +
 			'</div>' +
-			'<div class="char-meta">' + [c.main ? '<a class="char-page" href="character.html?id=' + e(c.id) + '">' + L('صفحة الشخصية', 'Character page') + '</a>' : '',
-				w ? L('من ', 'From ') + App.workLink(c.work) : '', App.fixLink(name)].filter(Boolean).join(' · ') + '</div>' +
+			/* (a main character's page is the button on the card) */
+			'<div class="char-meta">' + [w ? L('من ', 'From ') + App.workLink(c.work) : '', App.fixLink(name)].filter(Boolean).join(' · ') + '</div>' +
 		'</div>';
 	},
 
