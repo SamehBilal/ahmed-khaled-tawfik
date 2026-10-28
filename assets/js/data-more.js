@@ -2376,7 +2376,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	b.pages = 220;
 	b.editions = [
 		{ title: T, publisher: { ar: 'دايموند بوك', en: 'Diamond Book' }, year: 2006, date: '2006-01-01', lang: 'ar', asin: 'B0DLT5XXZ6', pages: 220, format: PB,
-			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'diamond-2006-front.webp', source: GR + '10954529' },
+			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'diamond-2006-front.webp', back: 'assets/img/covers/back/mawsoua-diamond-2006.webp', source: GR + '10954529' },
 		{ title: T, publisher: LILAKC, lang: 'ar', asin: 'B0DMZ9GJQG', pages: 220, format: PB, cover: C + 'lila-220.webp', source: GR + '5854156' },
 		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, lang: 'ar', isbn: '9789776386105', isbn10: '9776386105', asin: '9776386105', pages: 188, format: PB,
 			cover: C + 'lila.webp', source: GR + '17643627' },
