@@ -31,7 +31,8 @@ window.PAGE = {
 	},
 
 	/* one entry inside a writer's card: its covers, what it was, the story, the source */
-	entry: function (w) {
+	/* (noBooks: the panel gathers every entry's books into one row after them) */
+	entry: function (w, noBooks) {
 		var App = window.App, e = App.esc, t = App.t, L = App.L, meta = window.People.meta(w), S = window.WorksShared;
 		return '<div class="wr-entry">' +
 			((w.cover || w.back) ? '<div class="wr-entry-covers">' +
@@ -44,9 +45,18 @@ window.PAGE = {
 			(w.source ? '<a href="' + e(w.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
 			(w.book && w.book.en && S ? ' <a class="wr-book" href="' + e(S.entryBookHref(w)) + '">' + L('صفحة الكتاب ←', 'Book page →') + '</a>' : '') +
 			(w.shop ? ' <a class="wr-shop" href="' + e(w.shop.url) + '" target="_blank" rel="noopener">' + L('اشترِه من ', 'Buy it from ') + t(w.shop.name) + ' ↗</a>' : '') +
-			this.books(w) +
+			(noBooks ? '' : this.books(w)) +
 		'</div>';
 	},
+
+	/* every book a writer shares with him, across their entries, each once */
+	allBooks: function (g) {
+		var out = [];
+		g.entries.forEach(function (w) { (w.books || []).forEach(function (b) { if (out.indexOf(b) < 0) out.push(b); }); });
+		return out;
+	},
+	/* the number on a spine: all the works they share with him, else how many things they did */
+	count: function (g) { return this.allBooks(g).length || g.entries.length; },
 
 	/* the books an entry names (w.books: a work's id, "s:<series>" or "i:<series>:<n>"), as a row of covers, each leading to its page */
 	books: function (w) {
@@ -88,7 +98,7 @@ window.PAGE = {
 					var h = 160 + ((i * 37 + si * 13) % 60);
 					var c = sh.palette[i % sh.palette.length];
 					return '<button type="button" class="spine" id="wr-' + sh.key + '-' + g.person.id + '" data-s="' + sh.key + '" aria-expanded="false" aria-controls="wr-card" data-i="' + i + '" style="--h:' + h + 'px;--c:' + c + '"><span>' + tx(g.person.name) + '</span>' +
-						(g.entries.length > 1 ? '<b class="spine-n">' + App.num(g.entries.length) + '</b>' : '') + '</button>';
+						(self.count(g) > 1 ? '<b class="spine-n">' + App.num(self.count(g)) + '</b>' : '') + '</button>';
 				}).join('');
 			}).join('') + '</div>' +
 			'<div class="issue-card"><div class="issue-panel wr-panel" id="wr-card" aria-live="polite" hidden></div></div>' +
@@ -139,7 +149,7 @@ window.PAGE = {
 					: '<span class="wr-initials">' + e(P.initials(t(p.name), App.lang)) + '</span>') + '</div>' +
 				'<div class="ip-body"><h4>' + tx(p.name) + '</h4>' +
 					'<p class="sub">' + e(App.alt(p.name)) + '</p>' +
-					g.entries.map(function (w) { return self.entry(w); }).join('') +
+					g.entries.map(function (w) { return self.entry(w, true); }).join('') + self.books({ books: self.allBooks(g) }) +
 					'<p class="wr-more"><a class="ip-more" href="' + e(P.href(p)) + '">' + L('صفحة ' + t(p.name) + ' ←', t(p.name) + '’s page →') + '</a> ' + App.fixLink(t(p.name)) + '</p></div>';
 			card.hidden = false;
 			card.querySelector('.ip-close').onclick = function () { close(); b.focus(); };
