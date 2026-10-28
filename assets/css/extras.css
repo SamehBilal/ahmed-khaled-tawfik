@@ -332,9 +332,9 @@ html[lang="en"] .g-quote { font-family: var(--f-display); font-weight: 700; }
 
 /* ---------- Works on phones: chip rows and issue shelves scroll sideways ---------- */
 @media (max-width: 560px) {
-	#filters, #issue-tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; margin-inline: -16px; padding-inline: 16px; }
-	#filters::-webkit-scrollbar, #issue-tabs::-webkit-scrollbar { display: none; }
-	#filters .chip, #issue-tabs .chip { flex: 0 0 auto; white-space: nowrap; }
+	#filters, #issue-tabs, #wr-tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; margin-inline: -16px; padding-inline: 16px; }
+	#filters::-webkit-scrollbar, #issue-tabs::-webkit-scrollbar, #wr-tabs::-webkit-scrollbar { display: none; }
+	#filters .chip, #issue-tabs .chip, #wr-tabs .chip { flex: 0 0 auto; white-space: nowrap; }
 	.issues { flex-wrap: nowrap; overflow-x: auto; padding-top: 28px; scroll-snap-type: x proximity; }
 	.issue { flex: 0 0 30px; scroll-snap-align: start; }
 }

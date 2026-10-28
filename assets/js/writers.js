@@ -47,38 +47,43 @@ window.PAGE = {
 		'</div>';
 	},
 
+	shelf: null,
+
 	render: function () {
 		var App = window.App, d = App.data(), e = App.esc, t = App.t, tx = App.tx, L = App.L, P = window.People, self = this;
 		var W = d.writers || {};
 		var grouped = {};
 		this.shelves.forEach(function (sh) { grouped[sh.key] = self.group(W[sh.key] || []); });
+		var shelves = this.shelves.filter(function (sh) { return grouped[sh.key].length; });
+		if (!shelves.some(function (sh) { return sh.key === self.shelf; })) this.shelf = shelves.length ? shelves[0].key : null;
 
-		var html = '<section class="section"><div class="wrap">' + this.shelves.map(function (sh, si) {
-			var list = grouped[sh.key];
-			if (!list.length) return '';
-			return '<div class="shelf-block rise" data-shelf="' + si + '">' +
-				'<h3>' + tx(sh.title) + ' <small style="color:var(--muted);font-family:var(--f-latin)">(' + App.num(list.length) + ')</small></h3>' +
-				'<p>' + tx(sh.text) + '</p>' +
-				'<div class="shelf">' + list.map(function (g, i) {
+		/* one shelf for every connection with a chip for each (as Every issue on the works page): all the spines stand on it,
+		   the chips show one connection's at a time, and a pulled spine opens its writer in a panel under it */
+		var html = '<section class="section" id="wr-shelves"><div class="wrap">' +
+			'<div class="section-head"><div><h2>' + L('رفوف الكُتّاب', 'The writers’ shelves') + '</h2><p id="wr-hint"></p></div>' +
+				'<div class="chips issues-tabs" id="wr-tabs" role="group" aria-label="' + e(L('حسب العلاقة', 'By connection')) + '">' + shelves.map(function (sh) {
+					return '<button type="button" class="chip" data-s="' + sh.key + '" aria-pressed="false">' + tx(sh.title) + '<span class="count">' + App.num(grouped[sh.key].length) + '</span></button>';
+				}).join('') + '</div></div>' +
+			'<div class="shelf" id="wr-shelf">' + shelves.map(function (sh, si) {
+				return grouped[sh.key].map(function (g, i) {
 					var h = 160 + ((i * 37 + si * 13) % 60);
 					var c = sh.palette[i % sh.palette.length];
-					return '<button type="button" class="spine" id="wr-' + sh.key + '-' + g.person.id + '" aria-expanded="false" aria-controls="card-' + si + '" data-i="' + i + '" style="--h:' + h + 'px;--c:' + c + '"><span>' + tx(g.person.name) + '</span>' +
+					return '<button type="button" class="spine" id="wr-' + sh.key + '-' + g.person.id + '" data-s="' + sh.key + '" aria-expanded="false" aria-controls="wr-card" data-i="' + i + '" style="--h:' + h + 'px;--c:' + c + '"><span>' + tx(g.person.name) + '</span>' +
 						(g.entries.length > 1 ? '<b class="spine-n">' + App.num(g.entries.length) + '</b>' : '') + '</button>';
-				}).join('') + '</div>' +
-				'<div class="shelf-card" id="card-' + si + '" aria-live="polite"></div>' +
-			'</div>';
-		}).join('') +
+				}).join('');
+			}).join('') + '</div>' +
+			'<div class="issue-card"><div class="issue-panel wr-panel" id="wr-card" aria-live="polite" hidden></div></div>' +
 		'</div></section>' +
 		this.directory() +
 		'<section class="section"><div class="wrap"><div class="shelf-block rise" id="sources-block"></div></div></section>';
 
 		var content = document.getElementById('content');
 		content.innerHTML = html;
-		/* a writer's photo, a cover or a back cover in a pulled-out card opens full size, as on the timeline */
+		/* a writer's photo, a cover or a back cover in the opened panel shows full size, as on the timeline */
 		if (!content.dataset.pics) {
 			content.dataset.pics = '1';
 			content.addEventListener('click', function (ev) {
-				var img = ev.target.closest('.shelf-card .wr-photo img');
+				var img = ev.target.closest('.wr-panel .wr-photo img');
 				if (!img) return;
 				ev.preventDefault();
 				App.showPic(img.getAttribute('src'), img.alt);
@@ -87,31 +92,43 @@ window.PAGE = {
 		this.wave();
 		this.bindDirectory();
 
-		var shelves = this.shelves;
-		document.querySelectorAll('.shelf-block[data-shelf]').forEach(function (block) {
-			var sh = shelves[+block.getAttribute('data-shelf')];
-			var list = grouped[sh.key];
-			var card = block.querySelector('.shelf-card');
-			block.querySelector('.shelf').addEventListener('click', function (ev) {
-				var b = ev.target.closest('.spine');
-				if (!b) return;
-				var open = b.getAttribute('aria-expanded') === 'true';
-				block.querySelectorAll('.spine').forEach(function (x) { x.setAttribute('aria-expanded', 'false'); });
-				if (open) { card.classList.remove('is-open'); return; }
-				b.setAttribute('aria-expanded', 'true');
-				var g = list[+b.getAttribute('data-i')], p = g.person;
-				card.innerHTML =
-					(p.photo ? '<figure class="wr-photo"><img src="' + e(p.photo.url) + '" alt="' + e(t(p.name)) + '" referrerpolicy="no-referrer">' +
-						(p.photo.file ? '<figcaption><a href="' + e(p.photo.file) + '" target="_blank" rel="noopener">' + (p.photo.license ? e(p.photo.license) + ' · ' : '') + (p.photo.source ? tx(p.photo.source) : 'Wikimedia Commons') + '</a></figcaption>' : '') + '</figure>' : '') +
-					'<h4>' + tx(p.name) + '</h4>' +
+		var tabs = document.getElementById('wr-tabs'), shelfEl = document.getElementById('wr-shelf'), card = document.getElementById('wr-card');
+		var close = function () { card.hidden = true; shelfEl.querySelectorAll('.spine').forEach(function (x) { x.setAttribute('aria-expanded', 'false'); }); };
+		var show = function (key) {
+			self.shelf = key;
+			var sh = shelves.filter(function (x) { return x.key === key; })[0];
+			tabs.querySelectorAll('.chip').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-s') === key)); });
+			shelfEl.querySelectorAll('.spine').forEach(function (b) { b.hidden = b.getAttribute('data-s') !== key; });
+			document.getElementById('wr-hint').innerHTML = sh ? tx(sh.text) : '';
+			close();
+		};
+		this.showShelf = show;
+		tabs.onclick = function (ev) { var b = ev.target.closest('.chip'); if (b) show(b.getAttribute('data-s')); };
+		show(this.shelf);
+
+		this.openSpine = function (b) {
+			var open = b.getAttribute('aria-expanded') === 'true';
+			close();
+			if (open) return;
+			b.setAttribute('aria-expanded', 'true');
+			var g = grouped[b.getAttribute('data-s')][+b.getAttribute('data-i')], p = g.person;
+			card.style.setProperty('--c', b.style.getPropertyValue('--c') || '#6e1a14');
+			/* the same panel as an issue pulled off a shelf on the works page: the writer's photo, then what they shared with him */
+			card.innerHTML = '<button type="button" class="ip-close" aria-label="' + e(L('إغلاق', 'Close')) + '">✕</button>' +
+				'<div class="ip-cover">' + (p.photo ? '<figure class="wr-photo"><img src="' + e(p.photo.url) + '" alt="' + e(t(p.name)) + '" referrerpolicy="no-referrer">' +
+					(p.photo.file ? '<figcaption><a href="' + e(p.photo.file) + '" target="_blank" rel="noopener">' + (p.photo.license ? e(p.photo.license) + ' · ' : '') + (p.photo.source ? tx(p.photo.source) : 'Wikimedia Commons') + '</a></figcaption>' : '') + '</figure>'
+					: '<span class="wr-initials">' + e(P.initials(t(p.name), App.lang)) + '</span>') + '</div>' +
+				'<div class="ip-body"><h4>' + tx(p.name) + '</h4>' +
 					'<p class="sub">' + e(App.alt(p.name)) + '</p>' +
 					g.entries.map(function (w) { return self.entry(w); }).join('') +
-					'<p class="wr-more"><a class="btn-link" href="' + e(P.href(p)) + '">' + L('صفحة ' + t(p.name) + ' ←', t(p.name) + '’s page →') + '</a> ' + App.fixLink(t(p.name)) + '</p>';
-				card.classList.remove('is-open');
-				void card.offsetWidth;
-				card.classList.add('is-open');
-			});
-		});
+					'<p class="wr-more"><a class="ip-more" href="' + e(P.href(p)) + '">' + L('صفحة ' + t(p.name) + ' ←', t(p.name) + '’s page →') + '</a> ' + App.fixLink(t(p.name)) + '</p></div>';
+			card.hidden = false;
+			card.querySelector('.ip-close').onclick = function () { close(); b.focus(); };
+			var r = card.getBoundingClientRect();
+			if (r.bottom > window.innerHeight) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+		};
+		shelfEl.onclick = function (ev) { var b = ev.target.closest('.spine'); if (b) self.openSpine(b); };
+		if (!this.escBound) { this.escBound = true; document.addEventListener('keydown', function (ev) { var c = document.getElementById('wr-card'); if (ev.key === 'Escape' && c && !c.hidden) close(); }); }
 
 		/* sources */
 		var src = d.sources || [];
@@ -122,7 +139,7 @@ window.PAGE = {
 				src.map(function (s) { return '<li><a href="' + e(s.url) + '" target="_blank" rel="noopener">' + e(s.label || s.url) + '</a></li>'; }).join('') + '</ul>';
 		} else sb.remove();
 
-		/* #wr-shelf-id pulls that writer's book off the shelf */
+		/* #wr-shelf-id turns to that writer's shelf and pulls their book off it */
 		this.onHash = function () {
 			/* #all (and the old authors.html) opens at the top of the A to Z list */
 			/* (instantly, once the page has loaded: a smooth scroll this long gets cut off) */
@@ -131,7 +148,9 @@ window.PAGE = {
 				if (document.readyState === 'complete') setTimeout(go, 60); else window.addEventListener('load', function () { setTimeout(go, 60); }, { once: true });
 				return;
 			}
-			App.focusHash(function (el) { if (el.getAttribute('aria-expanded') !== 'true') el.click(); });
+			var at = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+			if (at && at.classList.contains('spine') && at.getAttribute('data-s') !== self.shelf) self.showShelf(at.getAttribute('data-s'));
+			App.focusHash(function (el) { if (el.classList.contains('spine') && el.getAttribute('aria-expanded') !== 'true') self.openSpine(el); });
 		};
 		this.onHash();
 	},

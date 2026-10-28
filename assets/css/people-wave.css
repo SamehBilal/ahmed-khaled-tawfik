@@ -109,3 +109,25 @@ html[data-theme="light"] .pw-person { color: #fff; }
 
 /* photos and covers open full size on a click */
 .shelf-card .wr-photo img { cursor: zoom-in; }
+
+/* writers.html: one shelf for every connection, its chips showing one at a time, and a writer opened in the works page's
+   issue panel under it (writers.js render) */
+#wr-shelf .spine[hidden] { display: none; }
+.wr-panel { margin-top: 36px; }
+.wr-panel .ip-cover .wr-photo { float: none; width: 100%; margin: 0; }
+.wr-panel .ip-cover .wr-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; border-radius: 6px; box-shadow: 0 12px 24px rgba(0, 0, 0, .45); }
+.wr-initials { display: grid; place-items: center; aspect-ratio: 4 / 5; border-radius: 6px; background: var(--c); color: #f6d79a; font-family: var(--f-chunky); font-size: 40px;
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12), 0 12px 24px rgba(0, 0, 0, .45); }
+.wr-panel .sub { margin: -6px 0 10px; color: var(--muted); font-family: var(--f-latin); font-size: 14px; }
+.wr-panel .meta { margin: 0 0 8px; color: var(--gold); font-family: var(--f-display); font-size: 15px; }
+.wr-panel .wr-entry p { margin: 0 0 10px; color: var(--paper-dim); line-height: 1.85; font-size: 15.5px; }
+.wr-panel .wr-entry a { color: var(--ember); font-family: var(--f-latin); font-size: 15px; }
+.wr-panel .wr-entry { border-top-color: var(--line); }
+.wr-panel .wr-entry-covers .wr-photo { width: 96px; }
+.wr-panel .wr-entry-covers .wr-photo img { width: 96px; height: auto; }
+.wr-panel .wr-more { border-top-color: var(--line); }
+.wr-panel .wr-photo img { cursor: zoom-in; }
+@media (max-width: 640px) {
+	.wr-panel .wr-entry-covers { float: none; margin: 0 0 10px; }
+	.wr-initials { font-size: 26px; }
+}
