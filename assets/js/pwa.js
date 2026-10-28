@@ -118,6 +118,54 @@
 	if (footer) new MutationObserver(placeSaveLink).observe(footer, { childList: true });
 	placeSaveLink();
 
+	/* ---------- after a while: offer the app and offline reading ----------
+	   Time spent reading the site (a page in view, counted across pages and visits) adds up; after three minutes a card offers
+	   to install it (where the browser can, or the steps on iPhone/iPad) and to save it for reading offline — whichever is
+	   still to do. «Later» puts it off for two weeks; it never shows in the installed app */
+	var INVITE_AFTER = 3 * 60 * 1000, INVITE_PAUSE = 14 * 864e5;
+	function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, String(v)); } catch (e) { return null; } }
+	function saved() { return !!store('akt-offline-saved'); }
+	var invited = false;
+	function invite() {
+		if (invited || standalone || document.visibilityState !== 'visible') return;
+		var off = +store('akt-invite-off') || 0;
+		if (Date.now() - off < INVITE_PAUSE) return;
+		var canInstall = canOffer(), canSave = !saved() && ('caches' in window) && ('serviceWorker' in navigator);
+		if (!canInstall && !canSave) return;
+		invited = true;
+		var n = Notify(
+			(canInstall && canSave ? L('ثبّته على جهازك ليفتح كتطبيق بضغطة، واحفظه ليعمل دون إنترنت: الأغلفة والصور والصفحات التي تزورها.',
+				'Install it to open like an app in one tap, and save it to work without the internet: its covers, photos and the pages you visit.')
+			: canInstall ? L('ثبّته على جهازك ليفتح كتطبيق بضغطة، ويعمل ما زرته منه دون إنترنت.', 'Install it to open like an app in one tap; what you have visited works without the internet.')
+			: L('احفظه على جهازك ليعمل دون إنترنت: كل الأغلفة والصور، والصفحات التي تزورها.', 'Save it on this device to work without the internet: every cover and photo, and the pages you visit.')) +
+			'<span class="ns-actions">' +
+				(canInstall ? '<button type="button" class="ns-action" data-do="install">' + L('ثبّت التطبيق', 'Install the app') + '</button>' : '') +
+				(canSave ? '<button type="button" class="ns-action" data-do="save">' + L('احفظه دون اتصال', 'Save for offline') + '</button>' : '') +
+				'<button type="button" class="ns-action ns-later" data-do="later">' + L('لاحقًا', 'Later') + '</button>' +
+			'</span>',
+			{ title: L('العرّاب معك أينما كنت', 'Take the Godfather with you'), html: true, ttl: 0 });
+		n.el.addEventListener('click', function (ev) {
+			/* (closing it counts as «later») */
+			if (ev.target.closest('.ns-close')) { store('akt-invite-off', Date.now()); return; }
+			var b = ev.target.closest('[data-do]');
+			if (!b) return;
+			var what = b.getAttribute('data-do');
+			store('akt-invite-off', Date.now());
+			n.dismiss();
+			if (what === 'install') install();
+			else if (what === 'save') saveOffline();
+		});
+	}
+	if (!standalone) {
+		var tick = 15000;
+		setInterval(function () {
+			if (document.visibilityState !== 'visible' || invited) return;
+			var t = (+store('akt-browse-ms') || 0) + tick;
+			store('akt-browse-ms', t);
+			if (t >= INVITE_AFTER) invite();
+		}, tick);
+	}
+
 	/* ---------- service worker and updates ---------- */
 	if (!('serviceWorker' in navigator) || location.protocol === 'file:') return;
 	var reloading = false;

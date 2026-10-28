@@ -89,3 +89,10 @@ html[data-theme="light"] .ns-box { background: #2a1f17; color: #f6efe0; }
 }
 @media (max-width: 600px) { .ns-stack { top: 10px; inset-inline: 10px; width: auto; } }
 @media (prefers-reduced-motion: reduce) { .ns-effect-jelly.ns-show { animation: animFade .2s; } }
+
+/* a notification's buttons (the update offer; the invitation to install the app and save it offline, pwa.js invite) */
+.ns-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.ns-action { font: inherit; font-size: 14px; font-weight: 600; padding: 6px 14px; border-radius: 999px; cursor: pointer;
+	background: var(--ember); color: #fff; border: 1px solid var(--ember); }
+.ns-action:hover, .ns-action:focus-visible { filter: brightness(1.12); outline: none; }
+.ns-action.ns-later { background: transparent; color: inherit; border-color: rgba(255, 255, 255, .3); font-weight: 400; }
