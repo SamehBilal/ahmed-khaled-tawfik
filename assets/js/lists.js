@@ -363,20 +363,35 @@
 	   Kindle and audiobook editions are left out: there is nothing on a shelf to collect. */
 	var NOT_ON_SHELF = /كيندل|kindle|مسموع|صوتي|audible|audiobook/i;
 	function isKindle(ed) { var f = ed.format || {}; return NOT_ON_SHELF.test((f.ar || '') + ' ' + (f.en || '') + ' ' + (typeof f === 'string' ? f : '')); }
+	/* the editions of a book a collector can choose from: prints that share one cover picture are one edition, named by their
+	   publisher(s) and all their years («دار ليلى · 2008، 2010»); each keeps the ids of its prints (ids), so a choice saved
+	   before on any of them still counts */
 	function editionsOf(key) {
 		var S = window.WorksShared, r = null;
 		if (!S || key[0] !== 'b') return [];
 		try { r = S.resolveBook(key.slice(2)); } catch (e) {}
-		var seen = {};
-		return ((r && r.info && r.info.editions) || []).filter(function (ed) { return !isKindle(ed); }).map(function (ed) {
-			var both = function (lang) {
-				var g = function (o) { return !o ? '' : typeof o === 'string' ? o : o[lang] || o.ar || o.en || ''; };
-				return [g(ed.publisher), ed.year || '', g(ed.edition) || g(ed.format), ed.lang && ed.lang !== 'ar' ? ed.lang.toUpperCase() : ''].filter(Boolean).join(' · ');
-			};
-			var id = ed.isbn || ed.asin || both('ar');
+		var g = function (o, lang) { return !o ? '' : typeof o === 'string' ? o : o[lang] || o.ar || o.en || ''; };
+		var seen = {}, groups = [], byCover = {};
+		((r && r.info && r.info.editions) || []).filter(function (ed) { return !isKindle(ed); }).forEach(function (ed) {
+			var label = function (lang) { return [g(ed.publisher, lang), ed.year || '', g(ed.edition, lang) || g(ed.format, lang), ed.lang && ed.lang !== 'ar' ? ed.lang.toUpperCase() : ''].filter(Boolean).join(' · '); };
+			var id = ed.isbn || ed.asin || label('ar');
 			while (seen[id]) id += '+';
 			seen[id] = 1;
-			return { id: id, label: { ar: both('ar'), en: both('en') }, img: ed.cover || '' };
+			var grp = ed.cover && byCover[ed.cover];
+			if (!grp) { grp = { prints: [], img: ed.cover || '' }; groups.push(grp); if (ed.cover) byCover[ed.cover] = grp; }
+			grp.prints.push({ id: id, ed: ed, label: { ar: label('ar'), en: label('en') } });
+		});
+		return groups.map(function (grp) {
+			if (grp.prints.length === 1) { var p = grp.prints[0]; return { id: p.id, ids: [p.id], label: p.label, img: grp.img }; }
+			/* one edition: its publishers (each once), then its years */
+			var merged = function (lang) {
+				var uniq = function (a) { return a.filter(function (x, i) { return x && a.indexOf(x) === i; }); };
+				var pubs = uniq(grp.prints.map(function (p) { return g(p.ed.publisher, lang); }));
+				var years = uniq(grp.prints.map(function (p) { return String(p.ed.year || ''); })).sort();
+				var langs = uniq(grp.prints.map(function (p) { return p.ed.lang && p.ed.lang !== 'ar' ? p.ed.lang.toUpperCase() : ''; }));
+				return [pubs.join(lang === 'ar' ? ' / ' : ' / '), years.join(lang === 'ar' ? '، ' : ', ')].concat(langs).filter(Boolean).join(' · ');
+			};
+			return { id: grp.prints[0].id, ids: grp.prints.map(function (p) { return p.id; }), label: { ar: merged('ar'), en: merged('en') }, img: grp.img };
 		});
 	}
 
@@ -398,7 +413,7 @@
 			'<h3>' + L('أي طبعة من «', 'Which edition of “') + esc(tt(x.title)) + (list === 'own' ? L('» في مكتبتك؟', '” do you have?') : L('» تبحث عنها؟', '” are you looking for?')) + '</h3>' +
 			'<p class="ls-hint">' + L('اختر طبعة أو أكثر، أو «أي طبعة» إن كانت أيها تكفي.', 'Pick one edition or more, or “Any edition” if any will do.') + '</p>' +
 			'<div class="ls-ed-grid">' + eds.map(function (ed) {
-				return '<label class="ls-ed"><input type="checkbox" value="' + esc(ed.id) + '"' + (picked[ed.id] ? ' checked' : '') + '>' +
+				return '<label class="ls-ed"><input type="checkbox" value="' + esc(ed.id) + '"' + (ed.ids.some(function (id) { return picked[id]; }) ? ' checked' : '') + '>' +
 					'<span class="ls-ed-c" style="--c:' + esc(x.color || '#3a1414') + '">' + (ed.img ? '<img src="' + esc(ed.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '<i aria-hidden="true">✓</i></span>' +
 					'<span class="ls-ed-t">' + esc(tt(ed.label)) + '</span></label>';
 			}).join('') + '</div>' +
