@@ -332,6 +332,7 @@ window.PAGE = {
 		App.applyLang();
 		var MON = this.MONTHS[App.lang === 'ar' ? 'ar' : 'en'];
 		var outlet = p.src ? p.src.split(' - ')[0] : (p.l || []).filter(function (x) { return !/مقالات|رأي|قصة|كوميكس|مما سبق/.test(x); })[0] || '';
+		var IDA = (App.data().blog || {}).ida2at, ida = IDA && IDA.posts[p.id] ? IDA.base + IDA.posts[p.id] + '/' : '';
 		var when = p.src ? p.src.split(' - ').slice(1).join(' - ') : '';
 		var posted = App.num(+p.d.slice(8, 10)) + ' ' + MON[+p.d.slice(5, 7) - 1] + ' ' + App.num(p.d.slice(0, 4));
 		var i = posts.indexOf(p), newer = posts[i - 1], older = posts[i + 1];
@@ -362,7 +363,9 @@ window.PAGE = {
 					(older ? '<a href="blog.html?post=' + e(older.id) + '" class="np-older"><small>' + L('الأقدم', 'Older') + '</small>' + e(older.t) + '</a>' : '<span></span>') +
 					(newer ? '<a href="blog.html?post=' + e(newer.id) + '" class="np-newer"><small>' + L('الأحدث', 'Newer') + '</small>' + e(newer.t) + '</a>' : '<span></span>') +
 				'</nav>' +
-				'<p class="np-credit">' + L('نُشر في المدونة: ', 'Posted on the blog: ') + e(posted) + ' · <a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a></p>' +
+				'<p class="np-credit">' + L('نُشر في المدونة: ', 'Posted on the blog: ') + e(posted) + ' · <a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a>' +
+					/* a column or story episode he first published on Ida2at links to it there */
+					(ida ? ' · <a class="np-ida" href="' + e(ida) + '" target="_blank" rel="noopener">' + L('نُشر أولًا في «إضاءات» ↗', 'First published on Ida2at ↗') + '</a>' : '') + '</p>' +
 			'</article></div></section>';
 		this.wireGoto();
 		if (!p.body) this.loadFull(p);
