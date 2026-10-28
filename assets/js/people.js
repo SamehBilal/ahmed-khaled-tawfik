@@ -187,7 +187,7 @@
 			var App = window.App, t = App.t, L = App.L;
 			if (w.book) return (w.direction === 'by_akt' ? L('قدّم له العرّاب: ', 'Foreword by AKT: ') : w.direction === 'back_akt' ? L('كلمة العرّاب على غلافه: ', 'AKT on the back cover: ') : w.direction === 'dedication' ? L('أهدى إليه: ', 'Dedicated to him: ') : L('كتب مقدّمة: ', 'Wrote the foreword to: ')) + t(w.book) + (w.year ? ' (' + App.num(w.year) + ')' : '');
 			/* a title that already names its years keeps them; otherwise the year goes after it */
-			if (w.work) return L('العمل: ', 'Work: ') + t(w.work) + (w.year && !/d{4}/.test(t(w.work)) ? ' (' + App.num(w.year) + ')' : '');
+			if (w.work) return L('العمل: ', 'Work: ') + t(w.work) + (w.year && !/\d{4}/.test(t(w.work)) ? ' (' + App.num(w.year) + ')' : '');
 			return '';
 		}
 	};

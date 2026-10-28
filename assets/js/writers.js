@@ -32,7 +32,7 @@ window.PAGE = {
 
 	/* one entry inside a writer's card: its covers, what it was, the story, the source */
 	entry: function (w) {
-		var App = window.App, e = App.esc, t = App.t, L = App.L, meta = window.People.meta(w);
+		var App = window.App, e = App.esc, t = App.t, L = App.L, meta = window.People.meta(w), S = window.WorksShared;
 		return '<div class="wr-entry">' +
 			((w.cover || w.back) ? '<div class="wr-entry-covers">' +
 				(w.cover ? '<figure class="wr-photo wr-cover"><img src="' + e(w.cover) + '" alt="' + e(t(w.book)) + '" loading="lazy"></figure>' : '') +
@@ -42,9 +42,28 @@ window.PAGE = {
 			(meta ? '<p class="meta">' + e(meta) + '</p>' : '') +
 			App.paras(w.text) +
 			(w.source ? '<a href="' + e(w.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
-			(w.book && w.book.en && window.WorksShared ? ' <a class="wr-book" href="' + e(window.WorksShared.entryBookHref(w)) + '">' + L('صفحة الكتاب ←', 'Book page →') + '</a>' : '') +
+			(w.book && w.book.en && S ? ' <a class="wr-book" href="' + e(S.entryBookHref(w)) + '">' + L('صفحة الكتاب ←', 'Book page →') + '</a>' : '') +
 			(w.shop ? ' <a class="wr-shop" href="' + e(w.shop.url) + '" target="_blank" rel="noopener">' + L('اشترِه من ', 'Buy it from ') + t(w.shop.name) + ' ↗</a>' : '') +
+			this.books(w) +
 		'</div>';
+	},
+
+	/* the books an entry names (w.books: a work's id, "s:<series>" or "i:<series>:<n>"), as a row of covers, each leading to its page */
+	books: function (w) {
+		var App = window.App, d = App.data(), e = App.esc, t = App.t, S = window.WorksShared;
+		if (!S || !(w.books || []).length) return '';
+		var list = w.books.map(function (id) {
+			var m = /^([si]):([a-z0-9-]+)(?::(\d+))?$/.exec(id);
+			if (!m) { var wk = App.findWork(id); return wk && { title: wk.title, href: 'book.html?id=' + wk.id, img: S.coverOf((d.bookInfo || {})[wk.id]), color: wk.color }; }
+			var sr = S.anySeries(m[2]);
+			if (!sr) return null;
+			if (m[1] === 's') return { title: sr.s.title, href: S.seriesHref(m[2]), img: S.seriesCover(m[2]), color: sr.s.color };
+			var is = S.seriesIssues(m[2]).filter(function (x) { return x.n === +m[3]; })[0];
+			return is && { title: is.title, href: App.issueHref(m[2], is), img: S.issueCover(m[2], is), color: sr.s.color };
+		}).filter(Boolean);
+		return list.length ? '<div class="wr-bks">' + list.map(function (b) {
+			return '<a class="wr-bk" href="' + e(b.href) + '">' + (b.img ? '<img src="' + e(b.img) + '" alt="" loading="lazy">' : S.miniCover({ color: b.color, title: t(b.title) })) + '<span>' + App.tx(b.title) + '</span></a>';
+		}).join('') + '</div>' : '';
 	},
 
 	shelf: null,

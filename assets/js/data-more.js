@@ -3236,7 +3236,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		/* Tarek Azzam, one of the artists of the short comics he scripted for Bos w Tol and Ida2at: sent by the site's editor */
 		'طارق عزام': { url: W + 'tarek-azzam.webp' },
 		/* Sayed Zahran, author of «الطارق» («البرزخ»): sent by the site's editor */
-		'سيد زهران': { url: W + 'sayed-zahran.webp' }
+		'سيد زهران': { url: W + 'sayed-zahran.webp' },
+		/* Spain Rodriguez, whose graphic biography of Che Guevara he translated: sent by the site's editor */
+		'سبين رودريجيز': { url: W + 'spain-rodriguez.webp' }
 	};
 	Object.keys(A.writers || {}).forEach(function (sh) {
 		(A.writers[sh] || []).forEach(function (w) {
@@ -3638,4 +3640,36 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		about: { ar: 'منصة مصرية للكتب المسموعة بالعربية، تأسست في القاهرة عام 2012، تسجّل الروايات والكتب بأصوات قرّاء محترفين وتقدّمها حلقاتٍ على موقعها وتطبيقها.',
 			en: 'An Egyptian platform for Arabic audiobooks, founded in Cairo in 2012, that records novels and books in the voices of professional readers and offers them in episodes on its site and app.' },
 		links: [{ kind: 'site', url: 'https://iqraaly.com/' }] });
+})(window.AKT);
+
+/* The books behind «كتبوا معه» and «ترجم لهم»: each entry's books (w.books: a work's id, "s:<series>" or "i:<series>:<n>"), so a
+   writer's panel on the writers page shows their covers, each leading to its page. Nabil Farouk is there twice: for «7 وجوه للحب»,
+   and for the series he began and Tawfik wrote for; the short comics on Bos w Tol and Ida2at have no book. */
+(function (A) {
+	var W = A.writers || {};
+	var by = {
+		collaborators: [
+			['تامر إبراهيم', null, ['qaws', 'oshaq-al-adrenaline', 'sabaa-wogooh-lel-hob', 'mawsoua']],
+			['سند راشد دخيل', null, ['mawsoua', 'hadem-al-asateer', 'al-hafa', 'hadath-fi-alkuwait', 'qessati-maa-allouvre']],
+			['محمد سامي', null, ['s:molotov', 'walad', 'sabaa-wogooh-lel-hob']],
+			['محمد فتحي', null, ['walad']],
+			['نبيل فاروق', /روايات عالمية/, ['s:rwg', 's:sayf', 's:supermega']],
+			['نبيل فاروق', /7 وجوه/, ['sabaa-wogooh-lel-hob']],
+			['حنان الكرارجي', null, ['jarada']],
+			['تامر أحمد', null, ['sabaa-wogooh-lel-hob']],
+			['ميشيل حنا', null, ['i:molotov:2']],
+			['فلاشندي', null, ['qessa-tokmeloha-anta']], ['تامر الباجوري', null, ['qessa-tokmeloha-anta']],
+			['مديحة محمد', null, ['qessa-tokmeloha-anta']], ['ريهام إبراهيم', null, ['qessa-tokmeloha-anta']],
+			['سالي عادل', null, ['s:supermega']]
+		],
+		translated: [['تشاك بولانيك', null, ['fightclub']], ['كريج كليفنجر', null, ['dermaphoria']], ['خالد حسيني', null, ['kiterunner']],
+			['نيل جايمان', null, ['graveyard']], ['سبين رودريجيز', null, ['che']]]
+	};
+	Object.keys(by).forEach(function (sh) {
+		(W[sh] || []).forEach(function (w) {
+			if (w.books) return;
+			var hit = by[sh].filter(function (x) { return x[0] === (w.name || {}).ar && (!x[1] || x[1].test((w.work || {}).ar || '')); })[0];
+			if (hit) w.books = hit[2];
+		});
+	});
 })(window.AKT);

@@ -131,3 +131,12 @@ html[data-theme="light"] .pw-person { color: #fff; }
 	.wr-panel .wr-entry-covers { float: none; margin: 0 0 10px; }
 	.wr-initials { font-size: 26px; }
 }
+
+/* the books a writer shares with him, as a row of covers under their entry, each leading to its page (writers.js books) */
+.wr-bks { clear: both; display: flex; flex-wrap: wrap; gap: 14px; margin: 12px 0 4px; }
+.wr-bk { display: flex; flex-direction: column; gap: 6px; width: 84px; text-decoration: none; }
+.wr-panel .wr-bk { font-family: inherit; }
+.wr-bk img, .wr-bk .mini-cover { display: block; width: 84px; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 2px 5px 5px 2px; box-shadow: 0 8px 16px rgba(0, 0, 0, .4); transition: transform .2s; }
+.wr-bk span { color: var(--paper-dim); font-family: var(--f-display); font-size: 12.5px; line-height: 1.35; }
+.wr-bk:hover img, .wr-bk:focus-visible img, .wr-bk:hover .mini-cover { transform: translateY(-3px); }
+.wr-bk:hover span, .wr-bk:focus-visible span { color: var(--ember); }
