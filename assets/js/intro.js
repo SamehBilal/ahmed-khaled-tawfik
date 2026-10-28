@@ -2,7 +2,7 @@
    "العراب" drops in and squashes like the "i" (with no mark above it: #iDot is only the point the rings and the reveal start from),
    the three words of his name spring in from the centre, coloured rings bloom
    inside the letters, then a growing hole opens the page underneath.
-   Plays once per browser session, with «حتى تحترق النجوم» in Refaat Ismail's voice on the web (after a tap where the browser asks for one)
+   Plays once per browser session, with «حتى تحترق النجوم» in Refaat Ismail's voice on the web (where the browser keeps a page silent until it is touched, the words keep the voice's pace and the first click brings it in)
    and silent in the installed app; click / Esc / the Skip button ends it. */
 (function () {
 	'use strict';
@@ -40,7 +40,7 @@
 	window.gsap.set(HERO, { opacity: 0 });
 	/* the installed app opens quietly; on the web the quote is heard */
 	var app = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
-	var withVoice = false, waiting = false;
+	var withVoice = false, silent = false;
 
 	var gsap = window.gsap;
 	if (window.CustomEase) gsap.registerPlugin(window.CustomEase);
@@ -50,7 +50,10 @@
 	   phrase by phrase as Ahmed Amin says them (where his voice starts each one, from the voice band of the recording, checked against a speech model's word timings), when «ربما أتوقف» and the last «ربما» come, and when the page opens */
 	var VOICE = { src: 'assets/audio/until-the-stars-burn.mp3', at: [0.85, 3.3, 6.4, 8.7, 13.2, 17.3, 20, 22.75, 39.75, 46.8, 51.7], end: 54.25, maybe: 57.6, reveal: 60, hold: 7.5, lead: 0.2 };
 	var voice = null;
-	try { voice = new Audio(VOICE.src); voice.preload = 'auto'; } catch (e) {}
+	try { voice = new Audio(); voice.preload = 'auto'; } catch (e) {}
+	/* read whole into memory, so the voice can start from any phrase (a server or the offline cache may not serve parts of a file) */
+	var voiceReady = !voice ? Promise.resolve() : fetch(VOICE.src).then(function (r) { if (!r.ok) throw 0; return r.blob(); })
+		.then(function (b) { voice.src = URL.createObjectURL(b); }, function () { voice.src = VOICE.src; });
 
 	var tl, q;
 	function finish() {
@@ -62,51 +65,49 @@
 		gsap.to(overlay, { autoAlpha: 0, duration: 0.35, onComplete: remove });
 	}
 	overlay.querySelector('.intro-skip').addEventListener('click', function (e) { e.stopPropagation(); finish(); });
-	/* a click skips the intro, except while it waits for the tap that lets the voice play */
-	overlay.addEventListener('click', function () { if (waiting) begin(true); else finish(); });
+	/* a click skips the intro, except the first one while the browser is still keeping the voice silent: that one brings the voice in */
+	overlay.addEventListener('click', function () { if (silent) unmute(); else finish(); });
 	document.addEventListener('keydown', function onKey(e) {
 		if (e.key === 'Escape') { document.removeEventListener('keydown', onKey); finish(); }
+		else if (silent) unmute();
 	});
 
 	var fontsReady = (document.fonts && document.fonts.load)
 		? Promise.all([document.fonts.load('150px Lalezar', 'العرّاب'), document.fonts.load('40px "Reem Kufi"', 'جعل الشباب يقرؤون')]).catch(function () {})
 		: Promise.resolve();
 
-	/* never wait for fonts more than 1.5s; then, on the web, find out whether the voice may play: a browser that keeps a page
-	   silent until it is tapped gets a «tap to begin» first, so the intro starts with the voice; the app starts silent */
-	Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 1500); })]).then(function () {
-		if (app || !voice) { begin(false); return; }
+	/* never wait for the fonts and the voice more than 2.5s; then, on the web, find out whether the voice may play now (a silent try). A browser that
+	   keeps a page silent until it is touched still gets the quote at the voice's pace, and the visitor's first click or key starts
+	   the voice from where the words are; the app starts silent */
+	Promise.race([Promise.all([fontsReady, app ? null : voiceReady]), new Promise(function (r) { setTimeout(r, 2500); })]).then(function () {
+		if (app || !voice || !voice.src) { withVoice = false; play(); return; }
+		withVoice = true;
 		var vol = voice.volume;
 		voice.volume = 0;
 		var p = voice.play();
-		var ok = function () { voice.pause(); voice.currentTime = 0; voice.volume = vol; begin(true); };
-		var no = function () { voice.volume = vol; askTap(); };
+		var ok = function () { voice.pause(); voice.currentTime = 0; voice.volume = vol; play(); };
+		var no = function () { voice.volume = vol; silent = true; play(); };
 		if (p && p.then) p.then(ok, no); else ok();
 	});
 
-	function askTap() {
-		if (!overlay.parentNode) return;
-		waiting = true;
-		var b = document.createElement('button');
-		b.type = 'button';
-		b.className = 'intro-start';
-		b.innerHTML = document.documentElement.lang === 'en' ? '<b>🔊</b> Tap to begin<small>Until the stars burn…</small>' : '<b>🔊</b> اضغط لتبدأ<small>حتى تحترق النجوم…</small>';
-		overlay.appendChild(b);
-		b.focus();
-	}
-
-	/* the tap itself lets the voice play: it is started inside it, then rewound for the quote */
-	function begin(voiced) {
-		if (!overlay.parentNode) return;
-		if (waiting) {
-			waiting = false;
-			var b = overlay.querySelector('.intro-start');
-			if (b) b.remove();
+	/* the first touch lets the voice play: before the quote it is only unlocked (started and rewound), during it, it joins the words */
+	function unmute() {
+		silent = false;
+		if (!q || !q.isActive()) {
 			var p = voice.play();
-			if (p && p.then) p.then(function () { voice.pause(); voice.currentTime = 0; }, function () {});
+			if (p && p.then) p.then(function () { if (!q) { voice.pause(); voice.currentTime = 0; } else join(); }, function () {});
+			return;
 		}
-		withVoice = voiced;
-		play();
+		join();
+	}
+	function join() {
+		var at = q.time();
+		if (at >= VOICE.reveal) return;
+		q.pause();
+		voice.currentTime = at;
+		var p = voice.play();
+		var go = function () { gsap.ticker.add(follow); };
+		if (p && p.then) p.then(go, function () { q.play(); }); else go();
 	}
 
 	function play() {
@@ -165,9 +166,11 @@
 		if (!overlay.parentNode) return;
 		/* (the app, or no audio: silent, with a button to hear it) */
 		if (!voice || !withVoice) { quick(); if (voice) offerVoice(); return; }
+		/* still silent: the words keep the voice's pace on their own clock, until a click brings the voice in */
+		if (silent) { q = quote(VOICE); q.play(); return; }
 		voice.currentTime = 0;
 		var p = voice.play();
-		if (p && p.then) p.then(voiced, function () { quick(); offerVoice(); });
+		if (p && p.then) p.then(voiced, function () { silent = true; q = quote(VOICE); q.play(); });
 		else voiced();
 	}
 
