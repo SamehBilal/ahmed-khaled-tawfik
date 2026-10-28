@@ -94,8 +94,17 @@ window.PAGE = {
 		var grown = (d.otherSeries || []).filter(function (x) { return x.inspired && x.grewFrom === id; });
 		var specials = S.specialIssues(id);
 
+		/* the three heroes' series wear their hero's scene behind the book (as on their character pages, character.css):
+		   Refaat's fog and lamplight, Alaa's heartbeat, Abeer's stars and portal */
+		var theme = { mwt: 'ghosts', safari: 'medicine', fantasia: 'fantasy' }[id] || '';
+		var scene = {
+			ghosts: '<div class="ch-fog"><span></span><span></span><span></span></div><i class="sv-lamp"></i>',
+			medicine: '<svg class="ch-ecg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 60 H380 L400 60 L415 30 L430 95 L450 10 L470 110 L485 60 H700 L715 45 L730 75 L745 60 H1200" /></svg>',
+			fantasy: '<div class="ch-stars"></div><div class="ch-portal"></div>'
+		}[theme] || '';
+
 		root.innerHTML =
-			'<section class="detail"><div class="wrap">' +
+			'<section class="detail' + (theme ? ' sv-theme sv-theme-' + theme : '') + '">' + (scene ? '<div class="sv-scene" aria-hidden="true">' + scene + '</div>' : '') + '<div class="wrap">' +
 				'<nav class="crumbs"><a href="works.html">' + L('الأعمال', 'Works') + '</a> / <span>' + tx(s.title) + '</span></nav>' +
 				'<div class="detail-grid">' +
 					'<aside class="d-cover"><ul class="bk-list bk-solo" id="d-book">' + window.Books.showcase(bookOpts) + '</ul>' +

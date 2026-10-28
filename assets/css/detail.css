@@ -384,3 +384,28 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 .d-audio-list span { flex: 1 1 auto; color: var(--paper-dim); font-size: .92em; }
 .d-audio-list small { flex: 0 0 auto; color: var(--muted); font-size: .85em; }
 .d-audio-list i { flex: 0 0 auto; font-style: normal; color: var(--muted); }
+
+/* ---------- the three heroes' series: their hero's scene behind the book (series-page.js; the pieces are character.css's) ----------
+   the scene covers the top of the page and fades out before the issues */
+.detail.sv-theme { position: relative; isolation: isolate; }
+.sv-scene { position: absolute; top: 0; left: 0; right: 0; height: 760px; z-index: -1; pointer-events: none; overflow: hidden;
+	-webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
+.sv-scene .ch-fog, .sv-scene .ch-stars { z-index: 0; }
+/* Ma Wara' al-Tabi'a: night fog, and a lamp's warm light breathing behind the book */
+.sv-theme-ghosts .sv-scene { background: radial-gradient(700px 420px at 80% 18%, rgba(224, 160, 80, .14), transparent 70%), linear-gradient(#07080b, transparent 80%); }
+.sv-lamp { position: absolute; top: 140px; inset-inline-start: calc(max(0px, (100% - 1180px) / 2) + 160px - 260px); width: 520px; height: 520px; border-radius: 50%;
+	background: radial-gradient(closest-side, rgba(255, 196, 92, .5), rgba(240, 150, 60, .2) 45%, transparent); animation: ch-glow 3.2s ease-in-out infinite; }
+.sv-theme-ghosts .ch-fog span { opacity: .85; }
+.sv-theme-ghosts .ch-fog span:nth-child(2) { opacity: .6; }
+html[data-theme="light"] .sv-theme-ghosts .sv-scene { background: radial-gradient(700px 420px at 80% 18%, rgba(224, 160, 80, .26), transparent 70%), linear-gradient(#e2d5bd, transparent 80%); }
+.sv-theme-ghosts .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #e0a050; }
+/* Safari: the heartbeat across the top, in the green of the field hospital */
+.sv-theme-medicine .sv-scene { background: radial-gradient(800px 380px at 80% 0%, rgba(60, 160, 120, .2), transparent 70%); }
+.sv-scene .ch-ecg { bottom: auto; top: 20px; height: 90px; opacity: .5; z-index: 0; }
+.sv-theme-medicine .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #4fc39a; }
+/* Fantasia: stars, and a portal turning behind the book */
+.sv-theme-fantasy .sv-scene { background: radial-gradient(800px 420px at 78% 10%, rgba(140, 110, 230, .22), transparent 70%); }
+.sv-scene .ch-portal { top: 350px; inset-inline-start: calc(max(0px, (100% - 1180px) / 2) + 160px - 250px); width: 500px; height: 500px; z-index: 0; }
+.sv-theme-fantasy .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #b39cff; }
+@media (max-width: 760px) { .sv-lamp, .sv-scene .ch-portal { width: 300px; height: 300px; } }
+@media (prefers-reduced-motion: reduce) { .sv-lamp { animation: none; } }
