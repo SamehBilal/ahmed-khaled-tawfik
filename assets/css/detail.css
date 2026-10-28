@@ -260,7 +260,8 @@ html[data-theme="light"] .d-award-badge { background: linear-gradient(180deg, #f
 /* a book's prizes: compact cards (about half the column each), the photo a small thumbnail above the text that opens full size */
 #d-awards .awards { grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); grid-auto-rows: auto; }
 #d-awards .award { display: flex; flex-direction: column; }
-/* (one column: the photo, small, first; then the year, the title and the words) */
+/* (one column: the year and kind first, then the photo, small; then the title and the words) */
+#d-awards .award .yr { order: -2; margin-bottom: 8px; }
 #d-awards .aw-pic { order: -1; align-self: flex-start; width: 150px; margin: 0 0 12px; border-radius: 6px; }
 #d-awards .aw-pic img { aspect-ratio: 4 / 3; object-fit: cover; }
 #d-awards .award .for, #d-awards .award .src { display: block; margin-top: 6px; }
