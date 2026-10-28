@@ -151,8 +151,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	/* «البرزخ», the first of Sayed Zahran's «الطارق»: he read it on the Modern Arab Association's reading committee and passed it for
 	   publication (2018), as Zahran says in the book's introduction; abjjad.com/book/2805760006 */
 	if (!intros.some(function (w) { return w.book && w.book.ar === 'البرزخ (سلسلة الطارق 1)'; })) {
-		var k9 = intros.map(function (w) { return (w.book || {}).ar; }).indexOf('الكاردينال (سلسلة الطارق 9)');
-		intros.splice(k9 < 0 ? intros.length : k9, 0, { name: { ar: 'سيد زهران', en: 'Sayed Zahran' }, book: { ar: 'البرزخ (سلسلة الطارق 1)', en: 'Al-Barzakh (Al-Tariq #1)' }, year: 2018, direction: 'back_akt',
+		intros.push({ name: { ar: 'سيد زهران', en: 'Sayed Zahran' }, book: { ar: 'البرزخ (سلسلة الطارق 1)', en: 'Al-Barzakh (Al-Tariq #1)' }, year: 2018, direction: 'back_akt',
 			text: { ar: 'العدد الأول من «الطارق» عن «روايات مصرية للجيب»: قرأه العرّاب في لجنة القراءة بالمؤسسة العربية الحديثة وأجازه للنشر، ويذكر الكاتب ذلك في مقدمة الكتاب.',
 				en: 'The first Al-Tariq novel, in the Egyptian Pocket Novels: Tawfik read it on the Modern Arab Association’s reading committee and passed it for publication, as the author says in the book’s introduction.' },
 			source: 'https://www.abjjad.com/book/2805760006' });
@@ -3236,7 +3235,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		'حنان الكرارجي': { url: W + 'hanan-el-karargy.webp' },
 		/* Tarek Azzam, one of the artists of the short comics he scripted for Bos w Tol and Ida2at: sent by the site's editor */
 		'طارق عزام': { url: W + 'tarek-azzam.webp' },
-		/* Sayed Zahran, author of «الطارق» («البرزخ», «الكاردينال»): sent by the site's editor */
+		/* Sayed Zahran, author of «الطارق» («البرزخ»): sent by the site's editor */
 		'سيد زهران': { url: W + 'sayed-zahran.webp' }
 	};
 	Object.keys(A.writers || {}).forEach(function (sh) {
