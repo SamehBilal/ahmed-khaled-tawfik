@@ -6,8 +6,8 @@ window.PAGE = {
 		eyebrow: { ar: 'كتب مسموعة', en: 'Audiobooks' },
 		title: { ar: 'العرّاب مسموعًا', en: 'The Godfather, out loud' },
 		lead: {
-			ar: 'كل ما سُجّل له بالصوت في مكان واحد: أعداد «ما وراء الطبيعة» و«فانتازيا» و«سافاري» وأعدادها الخاصة كما قرأتها Audiohat وStorytel؛ ورواياته ومجموعاته ومقالاته على Storytel، ومعها «WWW» كاملة وكتاب عنه وقصص تبيعها منفردة؛ وبرنامج «بعد منتصف الليل» لقصصه القصيرة، ومواسمه الجديدة من تأليف شيرين هنائي وحلقتا «قبل منتصف الليل!» الساخرتان على Audiohat؛ وروايات «لاشين» على «اقرألي» وAudiohat؛ وعلى YouTube «سافاري» دراما إذاعية، و«في كهوف دراجوسان» و«ثلاثة»، وكتبه وقصصه بصوت إسلام عادل. اختر منصة أو قسمًا، ضع شريطًا في المسجل، ثم اضغط الزر.',
-			en: 'Everything of his recorded, in one place: the Beyond Nature, Fantasia and Safari issues and their specials as read on Audiohat and Storytel; his novels, collections and essays on Storytel, with WWW in one book, a book about him and stories sold on their own; the After Midnight programme of his short stories, its new seasons written by Sherine Hanaey and the two comic episodes of “Before Midnight!” on Audiohat; the Lasheen novels on Iqraaly and Audiohat; and on YouTube, Safari as a radio drama, In the Caves of Dragosan, Three, and his books and stories read by Eslam Adel. Pick a platform or a section, put a tape in the recorder, then press the key.'
+			ar: 'كل ما سُجّل له بالصوت في مكان واحد: أعداد «ما وراء الطبيعة» و«فانتازيا» و«سافاري» وأعدادها الخاصة كما قرأتها Audiohat وStorytel؛ ورواياته ومجموعاته ومقالاته على Storytel، ومعها «WWW» كاملة وكتاب عنه وقصص تبيعها منفردة؛ وبرنامج «بعد منتصف الليل» لقصصه القصيرة، ومواسمه الجديدة من تأليف شيرين هنائي وحلقتا «قبل منتصف الليل!» الساخرتان على Audiohat؛ وروايات «لاشين» على «اقرألي» وAudiohat؛ وعلى YouTube «سافاري» و«فانتازيا» دراما إذاعية، و«في كهوف دراجوسان» و«ثلاثة»، وكتبه وقصصه بصوت إسلام عادل. اختر منصة أو قسمًا، ضع شريطًا في المسجل، ثم اضغط الزر.',
+			en: 'Everything of his recorded, in one place: the Beyond Nature, Fantasia and Safari issues and their specials as read on Audiohat and Storytel; his novels, collections and essays on Storytel, with WWW in one book, a book about him and stories sold on their own; the After Midnight programme of his short stories, its new seasons written by Sherine Hanaey and the two comic episodes of “Before Midnight!” on Audiohat; the Lasheen novels on Iqraaly and Audiohat; and on YouTube, Safari and Fantasia as radio drama, In the Caves of Dragosan, Three, and his books and stories read by Eslam Adel. Pick a platform or a section, put a tape in the recorder, then press the key.'
 		}
 	},
 
@@ -205,7 +205,8 @@ window.PAGE = {
 					'<p style="color:var(--muted);margin:0">' + App.num(perPlatform[platform] || 0) + ' ' + L('حلقة', 'episodes') + ' · ' +
 						'<a href="' + e(A.author) + '" target="_blank" rel="noopener">' + L('صفحته على Audiohat ↗', 'His page on Audiohat ↗') + '</a>' +
 						(A.storytel ? ' · <a href="' + e(A.storytel.author) + '" target="_blank" rel="noopener">' + L('صفحته على Storytel ↗', 'His page on Storytel ↗') + '</a>' : '') +
-						(A.youtube && A.youtube.eslamAdel ? ' · <a href="' + e(A.youtube.eslamAdel.channel.url) + '" target="_blank" rel="noopener">' + L('قائمة إسلام عادل على YouTube ↗', 'Eslam Adel’s list on YouTube ↗') + '</a>' : '') + '</p>' +
+						(A.youtube && A.youtube.eslamAdel ? ' · <a href="' + e(A.youtube.eslamAdel.channel.url) + '" target="_blank" rel="noopener">' + L('قائمة إسلام عادل على YouTube ↗', 'Eslam Adel’s list on YouTube ↗') + '</a>' : '') +
+						(A.youtube && A.youtube.dubvoFantasia ? ' · <a href="' + e(A.youtube.dubvoFantasia.url) + '" target="_blank" rel="noopener">' + L('«فانتازيا» من Dubvo على YouTube ↗', 'Fantasia by Dubvo on YouTube ↗') + '</a>' : '') + '</p>' +
 					/* show one platform, or all of them */
 					'<div class="chips au-platforms" role="group" aria-label="' + e(L('المنصة', 'Platform')) + '">' +
 						[['all', L('الكل', 'All')], ['audiohat', 'Audiohat'], ['storytel', 'Storytel'], ['iqraaly', L('اقرألي', 'Iqraaly')], ['youtube', 'YouTube']].filter(function (p) { return p[0] === 'all' || perPlatform[p[0]]; }).map(function (p) {
@@ -237,8 +238,8 @@ window.PAGE = {
 						'</li>';
 					}).join('') + '</ul></details>';
 			}).join('') + '</div>' +
-			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat وStorytel و«اقرألي» وناشريها («شركة سلاح التلميذ للطباعة والنشر» وغيرها)، ودراما «سافاري» الإذاعية من قناة «تسجيل» على YouTube. هذا الموقع يربط إليها أو يعرضها عبر مشغّل YouTube فقط، ولا يستضيف أي صوت منها.',
-				'Recordings and rights belong to Audiohat, Storytel, Iqraaly and their publishers (Salah El Telmeez for Printing & Publishing and others); the Safari radio drama is from the Tasgeel channel on YouTube. This site only links to them or plays them through the YouTube player, and hosts none of their audio.') + '</p>' +
+			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat وStorytel و«اقرألي» وناشريها («شركة سلاح التلميذ للطباعة والنشر» وغيرها)، ودراما «سافاري» الإذاعية من قناة «تسجيل» و«فانتازيا» من «دار النشر الصوتية – Dubvo» على YouTube. هذا الموقع يربط إليها أو يعرضها عبر مشغّل YouTube فقط، ولا يستضيف أي صوت منها.',
+				'Recordings and rights belong to Audiohat, Storytel, Iqraaly and their publishers (Salah El Telmeez for Printing & Publishing and others); the Safari radio drama is from the Tasgeel channel and Fantasia from Dubvo, on YouTube. This site only links to them or plays them through the YouTube player, and hosts none of their audio.') + '</p>' +
 			'</div></section>';
 
 		root.querySelectorAll('details.ep-group').forEach(function (d) {

@@ -426,3 +426,33 @@ window.AKT.audio.thumbs = {
 		Y.channels['work:' + ep[3]] = Y.eslamAdel.channel;
 	});
 })(window.AKT.audio.youtube);
+
+/* Fantasia as radio drama on YouTube, from Dubvo's playlist «سلسلة فانتازيا بالترتيب» (issues 1–40, 53 and 63, with
+   «حكايات من والاشيا» in two parts and an earlier first half of «حب في أغسطس»), the special issue «30» and a second «ثلاثة»;
+   its three trailers left out, and the 11 videos YouTube hides as unavailable. Checked 2026-10-28, all embeddable.
+   Entries: [videoId, 1, label, minutes]. */
+(function (Y) {
+	var ch = { name: "دار النشر الصوتية - Dubvo", url: "https://www.youtube.com/playlist?list=PLBYDwVauAIiUy8nnNKydnbsp6qCWoNMzO" };
+	Y.dubvoFantasia = ch;
+	var D = "دراما إذاعية · Dubvo";
+	var fan = {
+		1: [["R0lWlYxkXQY", 106]], 2: [["0k9tUeGp_eo", 55, "الجزء الأول · Dubvo"], ["02Z8CZOS-2U", 49, "الجزء الثاني · Dubvo"]],
+		3: [["pJ1NMwL61sU", 98]], 4: [["_ZDv9NDs1z0", 101]], 5: [["F2LVviY_77k", 85]], 6: [["_KWs61JHGhU", 98]], 7: [["OPIqNEIf9Bs", 90]],
+		8: [["Z4vU4yzW_zc", 87]], 9: [["aHoLvLfxqmI", 113]], 10: [["vgw74vtbqjs", 126]], 11: [["mZxE0WCFKtU", 99]], 12: [["gqHkP4aOEgg", 79]],
+		13: [["nLjcAFqJ7W8", 79]], 14: [["VpBypGGO9rY", 78]], 15: [["ajaduH82fTg", 82]], 16: [["08kCHUgTG4w", 95]], 17: [["6FEPdpNBGoQ", 102]],
+		18: [["PPR_HV9VLQU", 99]], 19: [["mFV3xuga6xQ", 106]], 20: [["CsPZqfM8pbo", 99]], 21: [["ZEzcxi50zXQ", 107]], 22: [["1XSWTt2OE7c", 103]],
+		23: [["VFj8_a5H3UQ", 108]], 24: [["m96h8KEU_No", 117]], 25: [["gLyQ46GTY5w", 101]], 26: [["QixYjDRrXqI", 119]], 27: [["qcDD6t_hQtU", 126]],
+		28: [["YwiCGj8VtBE", 117]], 29: [["pH-gOq6xsO0", 134]], 30: [["17AcjFEgeGo", 125]], 31: [["EoJr46J51qY", 118]], 32: [["NjzN8E4Zav4", 124]],
+		33: [["vpHnmlVlPOI", 136]], 34: [["rSWD64NqUiQ", 139]], 35: [["ZsjU3PLlDwc", 139]],
+		36: [["y2tCM6YzIvo", 119], ["sC55Pi5H36Q", 43, "قراءة سابقة · الجزء الأول · Dubvo"]],
+		37: [["PNffINKesOI", 151]], 38: [["f1mP-zEW8XY", 145]], 39: [["GYUDzJoFlzw", 142]], 40: [["SFs2yHipaMc", 164]],
+		53: [["utIKreeVH7s", 102]], 63: [["8lRZDgm8qPM", 131]]
+	};
+	Object.keys(fan).forEach(function (n) {
+		Y.issues['fantasia-' + n] = fan[n].map(function (v) { return [v[0], 1, v[2] || D, v[1]]; });
+		Y.channels['fantasia-' + n] = ch;
+	});
+	/* «30», a special issue of all three series: on its own page (specials-10) and under each series on the audio page */
+	['specials-10', 'mwt-s10', 'fantasia-s10', 'safari-s10'].forEach(function (k) { Y.issues[k] = [["FP6WpjDPxPs", 1, "العدد الخاص · Dubvo", 112]]; Y.channels[k] = ch; });
+	Y.issues['sayf-1'] = (Y.issues['sayf-1'] || []).concat([["RIU8JZUJr8s", 1, "ثلاثة · قراءة أخرى · Dubvo", 47]]);
+})(window.AKT.audio.youtube);

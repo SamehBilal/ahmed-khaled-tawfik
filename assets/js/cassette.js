@@ -276,6 +276,8 @@
 				channel: ch.name || 'YouTube',
 				url: 'https://www.youtube.com/watch?v=' + ep[0],
 				yt: ep[0], ytEmbed: ep[1] !== 0,
+				/* (its length, when the data gives it: [id, embeddable, label, minutes]) */
+				mins: ep[3] || null,
 				skin: key.split('-')[0]
 			};
 		});
