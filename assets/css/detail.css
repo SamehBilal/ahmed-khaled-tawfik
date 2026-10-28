@@ -232,9 +232,11 @@ html[lang="en"] .prox-art .pa-name { font-family: var(--f-display); font-weight:
 	color: var(--ink-2); -webkit-text-stroke: 4px #595959; paint-order: stroke fill; transition: -webkit-text-stroke-color .3s; }
 .is-ranked[data-digits="2"] .cl-n { font-size: 92px; }
 .is-ranked[data-digits="3"] .cl-n { font-size: 66px; }
-/* a split issue ("80/1") shrinks to the same column */
-.is-ranked .cl-n[data-part] { font-size: 48px; letter-spacing: -.06em; }
-.is-ranked[data-digits="2"] .cl-n[data-part] { width: calc(2 * .56em * 92 / 48 + .12em); --tuck: calc(-.2em * 92 / 48); }
+/* a split issue: its number as big as the rest, and its part («/1») small and solid at the top of it, on the side the cover does not hide */
+.cl-part { position: absolute; top: -.62em; z-index: 2; font-size: .3em; line-height: 1; letter-spacing: 0; padding: 2px 6px; border-radius: 999px;
+	-webkit-text-stroke: 0; color: #1b130c; background: var(--gold); box-shadow: 0 2px 6px rgba(0, 0, 0, .4); direction: ltr; unicode-bidi: isolate; }
+html[dir="rtl"] .cl-part { right: 0; }
+html[dir="ltr"] .cl-part { left: 0; }
 .cover-grid.is-ranked .cover-link:hover { transform: none; }
 .cover-grid.is-ranked .cover-link:hover .mini-cover, .cover-grid.is-ranked .cover-link:focus-visible .mini-cover { transform: translateY(-6px) rotate(-2deg); box-shadow: 0 20px 34px rgba(0, 0, 0, .55); }
 .cover-grid.is-ranked .cover-link:hover .cl-n, .cover-grid.is-ranked .cover-link:focus-visible .cl-n { -webkit-text-stroke-color: var(--c); }
