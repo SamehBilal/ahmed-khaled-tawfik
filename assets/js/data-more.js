@@ -3686,4 +3686,6 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var G = 'assets/img/covers/fronts/';
 	A.seriesFronts = A.seriesFronts || {};
 	['mwt', 'rwg', 'safari', 'fantasia'].forEach(function (id) { if (!A.seriesFronts[id]) A.seriesFronts[id] = G + id + '.webp'; });
+	/* «روايات عالمية للجيب»'s book on its page: a plain back in the skyline cover's teal, with the series' description, not an issue's back */
+	[].concat(A.otherSeries || [], A.series || []).forEach(function (s) { if (s.id === 'rwg') { s.plainBack = true; s.bookColor = '#0b8f8c'; } });
 })(window.AKT);
