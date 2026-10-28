@@ -81,7 +81,9 @@ window.PAGE = {
 				'<h2 id="tp-crumb">' + L('الأرشيف', 'The archive') + '</h2><span id="tp-sub"></span></div>' +
 			'<div class="tp-wrap"><ul class="tp-grid" id="tp-grid"></ul></div>' +
 			'<p class="bl-credit">' + L('المصدر: ', 'Source: ') + '<a href="' + e(blog.source) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a> — ' +
-				L('أرشيف جمعه ' + (blog.curator === 'Amr Ebaid' ? 'عمرو عبيد' : blog.curator) + '. هنا العنوان ومقتطف قصير، والنص الكامل في المدونة.', 'an archive collected by ' + blog.curator + '. Here: the title and a short excerpt; the full text is on the blog.') + '</p>' +
+				L('أرشيف جمعه ' + (blog.curator === 'Amr Ebaid' ? 'عمرو عبيد' : blog.curator) + '. هنا العنوان ومقتطف قصير، والنص الكامل في المدونة.', 'an archive collected by ' + blog.curator + '. Here: the title and a short excerpt; the full text is on the blog.') +
+				/* checked against his page on Ida2at (2016–2018): every column and story episode he wrote there is in the archive */
+				' ' + L('ومقالاته وحلقات قصصه على ', 'His columns and story episodes on ') + '<a href="https://www.ida2at.com/author/aktowfik/" target="_blank" rel="noopener">' + L('«إضاءات» ↗', 'Ida2at ↗') + '</a>' + L(' (2016–2018) كلها هنا.', ' (2016–2018) are all here.') + '</p>' +
 		'</div></section>';
 
 		this.hero();
