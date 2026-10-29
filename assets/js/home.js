@@ -107,7 +107,12 @@ window.PAGE = {
 			{ href: 'tributes.html', big: (d.tributes || []).length || '❝', title: { ar: 'قالوا عنه', en: 'Tributes' },
 			  text: { ar: 'ما قاله عنه كُتّاب ومشاهير، يوم رحيله وبعده.', en: 'What well-known people said about him when he left, and after.' } },
 			{ href: 'blog.html', big: (d.blog && d.blog.posts || []).length || '✒', title: { ar: 'المدونة', en: 'The Blog' },
-			  text: { ar: 'مقالاته وقصصه القصيرة وكوميكسه، مجموعة من أرشيف المدونة.', en: 'His columns, short stories and comics, gathered from the blog archive.' } }
+			  text: { ar: 'مقالاته وقصصه القصيرة وكوميكسه، مجموعة من أرشيف المدونة.', en: 'His columns, short stories and comics, gathered from the blog archive.' } },
+			/* (their totals from the data build, tools/build-data.js: this page loads neither the blog nor the map) */
+			{ href: 'papers.html', big: (d.stats || {}).outlets || '📰', title: { ar: 'في الصحف', en: 'In the papers' },
+			  text: { ar: 'أين نُشرت مقالاته، جريدةً جريدة وعامًا عامًا: التحرير وبص وطل وإضاءات والدستور وغيرها.', en: 'Where his columns ran, paper by paper and year by year: Al-Tahrir, Bos w Tol, Ida2at, Al-Dostour and more.' } },
+			{ href: 'map.html', big: (d.stats || {}).places || '✦', title: { ar: 'الخريطة', en: 'The map' },
+			  text: { ar: 'الأماكن التي تذكرها كتبه على خريطة العالم، من غابات رومانيا إلى نهر الأمازون.', en: 'The places his books name, on a map of the world, from the forests of Romania to the Amazon.' } }
 		];
 		this.onThisDay();
 		document.getElementById('explore').innerHTML = cards.map(function (c) {

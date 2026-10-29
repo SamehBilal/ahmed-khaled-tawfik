@@ -137,6 +137,78 @@
 			}).join('') + '</div>';
 		},
 
+		/* papers: his papers folded on a desk under a lamp — a masthead each, the most he wrote for first, with his count in it */
+		papers: function (d, A) {
+			var e = A.esc, P = window.PAGE, posts = ((d.blog || {}).posts) || [];
+			var same = (P && P.SAME) || {}, info = (P && P.INFO) || {}, n = {};
+			posts.forEach(function (p) {
+				if (!p.src || /^من كتاب/.test(p.src)) return;
+				var k = p.src.split(' - ')[0].trim(); k = same[k] || k; n[k] = (n[k] || 0) + 1;
+			});
+			var top = Object.keys(n).sort(function (a, b) { return n[b] - n[a]; }).slice(0, 7);
+			return '<i class="ph-desk-light"></i>' + top.map(function (k, i) {
+				var name = A.lang === 'en' && info[k] && info[k].en ? info[k].en : k;
+				return '<div class="ph-paper" style="--x:' + (3 + i * 12.6).toFixed(1) + '%;--y:' + (24 + rnd(i, 21) * 30).toFixed(1) + '%;--r:' + ((rnd(i, 22) - 0.5) * 16).toFixed(1) + 'deg;--d:' + (-i * 1.3).toFixed(1) + 's">' +
+					'<b>' + e(name) + '</b><span class="ph-paper-rule">' + e(A.num(n[k])) + ' ' + e(A.L('مقالًا', 'pieces')) + '</span>' +
+					'<i class="ph-paper-cols"></i></div>';
+			}).join('');
+		},
+
+		/* numbers: a scoreboard, its figures counting up from nought once drawn (all at once when motion is reduced) */
+		numbers: function (d, A) {
+			/* (the band can be drawn again as the page starts, so each frame finds the figures afresh) */
+			var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches, t0 = 0, dur = 1800;
+			/* (a timer measured against the clock, not animation frames, which a background tab may all but stop) */
+			var step = function () {
+				var now = Date.now();
+				if (!t0) t0 = now;
+				var done = true;
+				document.querySelectorAll('.ph-count b[data-to]').forEach(function (b, k) {
+					var f = still ? 1 : Math.min(1, Math.max(0, (now - t0 - k * 150) / dur));
+					b.textContent = A.num(Math.round(+b.getAttribute('data-to') * (1 - Math.pow(1 - f, 3))));
+					if (f < 1) done = false;
+				});
+				if (!done) setTimeout(step, 30); else R._counting = false;
+			};
+			if (!R._counting) { R._counting = true; setTimeout(step, 30); }
+			var e = A.esc, L = A.L, S = window.WorksShared;
+			var issues = (d.series || []).reduce(function (s, x) { return s + (S ? S.seriesIssues(x.id).filter(function (is) { return !(is.part > 1); }).length : 0); }, 0);
+			var cells = [[issues, L('عددًا', 'issues')], [(d.works || []).length, L('كتابًا', 'books')], [(((d.blog || {}).posts) || []).length, L('منشورًا', 'posts')],
+				[(d.characters || []).length, L('شخصية', 'characters')], [(d.quotes || []).length, L('اقتباسًا', 'quotes')]];
+			return '<i class="ph-bars">' + [32, 58, 44, 76, 51, 88, 63, 70, 40, 92, 57, 66].map(function (h, i) { return '<i style="--h:' + h + '%;--i:' + i + '"></i>'; }).join('') + '</i>' +
+				'<div class="ph-board">' + cells.filter(function (c) { return c[0]; }).map(function (c, i) {
+					return '<div class="ph-count"><b data-to="' + c[0] + '">' + e(A.num(0)) + '</b><span>' + e(c[1]) + '</span></div>';
+				}).join('') + '</div>';
+		},
+
+		/* quiz: a question mark glowing over four answers, the right one lighting in turn */
+		quiz: function (d, A) {
+			var e = A.esc, L = A.L, marks = '';
+			for (var i = 0; i < 14; i++) marks += '<i class="ph-qm" style="--x:' + (rnd(i, 31) * 96).toFixed(1) + '%;--s:' + (18 + rnd(i, 32) * 46).toFixed(0) + 'px;--d:' + (-rnd(i, 33) * 12).toFixed(1) + 's">؟</i>';
+			var opts = L(['أ', 'ب', 'ج', 'د'], ['A', 'B', 'C', 'D']);
+			return marks + '<div class="ph-quiz"><b class="ph-quiz-q">؟</b><div class="ph-quiz-opts">' + opts.map(function (o, i) {
+				return '<span style="--i:' + i + '"><em>' + e(o) + '</em><i></i></span>';
+			}).join('') + '</div></div>';
+		},
+
+		/* map: a navigator's chart — the lines of latitude and longitude, dashed routes from Tanta to places his books name, a compass */
+		map: function (d, A) {
+			/* [longitude, latitude]: Tanta, then Romania, the Amazon, Tibet, London, America, Australia, Cameroon, Tunisia, Moscow */
+			var home = [31.0, 30.8], spots = [[24.97, 45.9], [-62.2, -3.4], [88, 31.7], [-0.13, 51.5], [-98.6, 39.8], [133.8, -25.3], [12.4, 5.7], [9.5, 34], [37.6, 55.75]];
+			var X = function (lon) { return (lon + 180) / 360 * 1000; }, Y = function (lat) { return (75 - lat) / 135 * 340; };
+			var hx = X(home[0]), hy = Y(home[1]), grid = '';
+			for (var lon = -150; lon <= 180; lon += 30) grid += 'M' + X(lon) + ',0V340';
+			for (var lat = -45; lat <= 75; lat += 30) grid += 'M0,' + Y(lat).toFixed(1) + 'H1000';
+			var routes = spots.map(function (s, i) {
+				var x = X(s[0]), y = Y(s[1]), mx = (hx + x) / 2, my = Math.max(24, Math.min(hy, y) - 18 - Math.abs(x - hx) * 0.07);
+				return '<path class="ph-route" d="M' + hx.toFixed(1) + ',' + hy.toFixed(1) + 'Q' + mx.toFixed(1) + ',' + my.toFixed(1) + ' ' + x.toFixed(1) + ',' + y.toFixed(1) + '" style="--d:' + (i * 0.6).toFixed(1) + 's"/>' +
+					'<circle class="ph-spot-pin" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="5" style="--d:' + (i * 0.6 + 1.6).toFixed(1) + 's"/>';
+			}).join('');
+			return '<svg class="ph-chart" viewBox="0 0 1000 340" preserveAspectRatio="xMidYMin slice"><path class="ph-chart-grid" d="' + grid + '"/>' + routes +
+				'<circle class="ph-home" cx="' + hx.toFixed(1) + '" cy="' + hy.toFixed(1) + '" r="7"/></svg>' +
+				'<svg class="ph-rose" viewBox="-50 -50 100 100"><circle r="44"/><circle r="30"/><path d="M0 -46L6 0 0 46-6 0Z"/><path class="n" d="M0 -46L6 0H-6Z"/><path d="M-46 0L0 5 46 0 0-5Z" opacity=".55"/></svg>';
+		},
+
 		/* publishers: a dark bookshelf that a flashlight finds in colour (page-hero.css .ph-shelf) */
 		publishers: function () {
 			return '<div class="ph-shelf"></div>';

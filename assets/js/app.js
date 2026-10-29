@@ -20,7 +20,12 @@
 			{ id: 'tributes', href: 'tributes.html', ar: 'قالوا عنه', en: 'Tributes' },
 			{ id: 'blog', href: 'blog.html', ar: 'المدونة', en: 'Blog' },
 			/* in the phone menu only (on a wider screen the «My lists» button is always at hand) */
-			{ id: 'lists', href: 'lists.html', ar: 'قوائمي', en: 'My lists', phone: true }
+			{ id: 'lists', href: 'lists.html', ar: 'قوائمي', en: 'My lists', phone: true },
+			/* and the pages made from the data, which on a wider screen the footer lists */
+			{ id: 'papers', href: 'papers.html', ar: 'في الصحف', en: 'In the papers', phone: true },
+			{ id: 'numbers', href: 'numbers.html', ar: 'بالأرقام', en: 'In numbers', phone: true },
+			{ id: 'quiz', href: 'quiz.html', ar: 'اختبر نفسك', en: 'Test yourself', phone: true },
+			{ id: 'map', href: 'map.html', ar: 'الخريطة', en: 'The map', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
