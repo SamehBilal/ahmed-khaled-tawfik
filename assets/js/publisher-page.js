@@ -19,6 +19,12 @@ window.PAGE = {
 		var p = c.p;
 		this.title = p.name;
 		App.applyLang();
+		App.seo({
+			path: S.publisherHref(id), desc: p.about || p.note, image: p.logo, imageAlt: p.name,
+			ld: { '@type': 'Organization', name: t(p.name), alternateName: App.L(p.name.en, p.name.ar), logo: p.logo ? 'https://samehbilal.github.io/ahmed-khaled-tawfik/' + p.logo : undefined,
+				sameAs: (p.links || []).filter(function (l) { return !l.his && l.url; }).map(function (l) { return l.url; }) },
+			crumbs: [[L('دور النشر', 'Publishers'), 'publishers.html'], [p.name]]
+		});
 
 		var initial = function (q) { return t(q.name).replace(/^(دار|Dar)\s+/, '').charAt(0); };
 		var logo = p.logo

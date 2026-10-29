@@ -22,6 +22,11 @@ window.PAGE = {
 		}
 		this.title = c.name;
 		App.applyLang();
+		App.seo({
+			path: 'character.html?id=' + encodeURIComponent(id), desc: ((d.heroes || {})[id] || {}).intro || c.desc,
+			image: (d.charFigures || {})[id] || c.image, imageAlt: c.name,
+			crumbs: [[L('الشخصيات', 'Characters'), 'characters.html'], [c.name]]
+		});
 
 		var hero = (d.heroes || {})[id] || null;
 		var ser = S.anySeries(c.work);

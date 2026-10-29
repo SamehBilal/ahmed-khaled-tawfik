@@ -22,6 +22,13 @@ window.PAGE = {
 
 		var issues = S.seriesIssues(id);
 		var desc = info.description || s.description || s.synopsis;
+		var by = S.seriesAuthor(ser);
+		App.seo({
+			path: S.seriesHref(id), desc: desc, image: S.seriesCover(id), imageAlt: L('غلاف ', 'Cover of ') + t(s.title),
+			ld: { '@type': 'BookSeries', name: t(s.title), inLanguage: 'ar',
+				author: ser.own ? App.seoAuthor : { '@type': 'Person', name: by.ar, alternateName: by.en } },
+			crumbs: [[L('الأعمال', 'Works'), 'works.html'], [s.title]]
+		});
 		var hero = s.hero ? App.byId(d.characters, s.hero) : null;
 		/* its own characters, and any a series names from elsewhere (seriesInfo[id].chars), as the special issues do */
 		var chars = (d.characters || []).filter(function (c) { return c.work === id; })

@@ -160,6 +160,51 @@
 			}, 60);
 		},
 
+		/* search and sharing for a page drawn from the data (a book, a series, a person, an article): its own address as the
+		   canonical one, its title, a description from its text, its picture, and what it is for search engines (JSON-LD),
+		   with the trail to it. o = { path, desc, image, ld: {…schema.org…}, crumbs: [[name, path], …] } */
+		seo: function (o) {
+			var SITE = 'https://samehbilal.github.io/ahmed-khaled-tawfik/';
+			var abs = function (u) { return !u ? '' : /^https?:/.test(u) ? u : SITE + String(u).replace(/^\.?\//, ''); };
+			var url = abs(o.path);
+			var text = function (v) { return String(v == null ? '' : typeof v === 'object' ? App.t(v) : v).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim(); };
+			var head = document.head, d0 = head.querySelector('meta[name="description"]');
+			/* the page's own description, for when it shows no one item (the blog's archive after an article) */
+			if (d0 && App._desc0 == null) App._desc0 = d0.getAttribute('content');
+			var desc = text(o.desc);
+			if (desc.length > 160) desc = desc.slice(0, 157).replace(/\s+\S*$/, '') + '…';
+			desc = desc || App._desc0 || '';
+			var set = function (sel, make, attr, val) {
+				var m = head.querySelector(sel);
+				if (!val) { if (m && make) m.remove(); return; }
+				if (!m) { m = document.createElement(make ? make[0] : 'meta'); make && m.setAttribute(make[1], make[2]); head.appendChild(m); }
+				m.setAttribute(attr, val);
+			};
+			set('link[rel="canonical"]', ['link', 'rel', 'canonical'], 'href', url);
+			set('meta[property="og:url"]', ['meta', 'property', 'og:url'], 'content', url);
+			set('meta[property="og:title"]', null, 'content', document.title);
+			set('meta[name="twitter:title"]', null, 'content', document.title);
+			if (desc) ['meta[name="description"]', 'meta[property="og:description"]', 'meta[name="twitter:description"]'].forEach(function (s) { set(s, null, 'content', desc); });
+			var img = abs(o.image);
+			if (img) {
+				/* its own picture is not the 1200×630 card the page carries, so its size and alt go with the card's */
+				['meta[property="og:image:width"]', 'meta[property="og:image:height"]', 'meta[property="og:image:type"]'].forEach(function (s) { var m = head.querySelector(s); if (m) m.remove(); });
+				['meta[property="og:image"]', 'meta[property="og:image:secure_url"]', 'meta[name="twitter:image"]'].forEach(function (s) { set(s, null, 'content', img); });
+				['meta[property="og:image:alt"]', 'meta[name="twitter:image:alt"]'].forEach(function (s) { set(s, null, 'content', text(o.imageAlt) || document.title); });
+			}
+			var graph = [];
+			if (o.ld) graph.push(Object.assign({ '@context': 'https://schema.org', url: url, mainEntityOfPage: url }, desc && !o.ld.description ? { description: desc } : {}, img && !o.ld.image ? { image: img } : {}, o.ld));
+			if (o.crumbs) graph.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [[App.L('الرئيسية', 'Home'), '']].concat(o.crumbs).map(function (c, i) {
+				return { '@type': 'ListItem', position: i + 1, name: text(c[0]), item: c[1] == null ? url : SITE + c[1] };
+			}) });
+			var ld = document.getElementById('ld-page');
+			if (!graph.length) { if (ld) ld.remove(); return; }
+			if (!ld) { ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.id = 'ld-page'; head.appendChild(ld); }
+			ld.textContent = JSON.stringify(graph.length === 1 ? graph[0] : graph);
+		},
+		/* him, as the books' author in their JSON-LD: the Person the home page describes */
+		seoAuthor: { '@type': 'Person', '@id': 'https://samehbilal.github.io/ahmed-khaled-tawfik/#akt', name: 'أحمد خالد توفيق', alternateName: 'Ahmed Khaled Tawfik' },
+
 		/* "suggest a correction" link to a pre-filled GitHub issue */
 		fixHref: function (subject) {
 			var title = (App.lang === 'ar' ? 'تصحيح: ' : 'Correction: ') + (subject || document.title);

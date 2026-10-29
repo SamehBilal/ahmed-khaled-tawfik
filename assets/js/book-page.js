@@ -93,6 +93,20 @@ window.PAGE = {
 		/* a book about him, or a book of a series his work inspired, is by someone else */
 		var otherAuthor = r.about ? item.by : (isIssue && ser.inspired ? S.seriesAuthor(ser) : null);
 		var authorAr = otherAuthor ? otherAuthor.ar : 'أحمد خالد توفيق';
+		var year = String(info.firstPublished || item.year || '').match(/\d{4}/);
+		/* a book he translated (World Pocket Novels: «ماتيلدا» — رولد دال) is its writer's, with him as the translator */
+		var origBy = item.original && / — /.test(item.original.en || '') ? { ar: (item.original.ar || '').split(' — ').pop(), en: item.original.en.split(' — ').pop() } : null;
+		var translated = !otherAuthor && (origBy || item.type === 'translation');
+		App.seo({
+			path: 'book.html?id=' + encodeURIComponent(id), desc: blurb ? blurb.ar : desc || item.synopsis, image: cover || (isIssue ? S.issueCover(ser.s.id, item) : ''),
+			imageAlt: L('غلاف ', 'Cover of ') + t(title),
+			ld: Object.assign({ '@type': 'Book', name: t(title), inLanguage: item.lang || 'ar', bookFormat: 'https://schema.org/Paperback',
+				author: otherAuthor ? { '@type': 'Person', name: otherAuthor.ar, alternateName: otherAuthor.en } : translated ? (origBy ? { '@type': 'Person', name: origBy.ar, alternateName: origBy.en } : undefined) : App.seoAuthor },
+				translated ? { translator: App.seoAuthor } : {},
+				year ? { datePublished: year[0] } : {},
+				isIssue ? { isPartOf: { '@type': 'BookSeries', name: t(ser.s.title), url: 'https://samehbilal.github.io/ahmed-khaled-tawfik/' + S.seriesHref(ser.s.id) }, position: item.n } : {}),
+			crumbs: [[L('الأعمال', 'Works'), 'works.html']].concat(isIssue ? [[ser.s.title, S.seriesHref(ser.s.id)]] : []).concat([[title]])
+		});
 		/* the book's other people, without repeating the author already named first (some lists include him) */
 		var bare = function (n) { return String(n || '').replace(/^(د\.|Dr\.)\s*/, '').replace(/\s+/g, ' ').trim(); };
 		var people = (otherAuthor ? '<span>' + tx(otherAuthor) + '</span>' : '<a href="index.html">' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + '</a>') +

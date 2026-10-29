@@ -30,3 +30,6 @@ sw = sw.replace(/var VERSION = '[^']*';/, "var VERSION = '" + version + "';")
 	.replace(/var PRECACHE = \[[\s\S]*?\n\];/, 'var PRECACHE = [\n' + list.map(f => "\t'" + f + "'").join(',\n') + '\n];');
 fs.writeFileSync(swPath, sw);
 console.log(version, list.length, 'files');
+
+// the sitemap is read from the same data, so it is rebuilt with every change too
+require('./build-sitemap.js');

@@ -51,6 +51,12 @@ window.PAGE = {
 		}
 		this.title = p.name;
 		App.applyLang();
+		App.seo({
+			path: 'writer.html?id=' + encodeURIComponent(id), desc: p.bio ? L(p.bio.ar, p.bio.en) : this.link(p), image: p.photo && p.photo.url, imageAlt: p.name,
+			ld: { '@type': p.org ? 'Organization' : 'Person', name: t(p.name), alternateName: App.L(p.name.en, p.name.ar),
+				sameAs: p.bio ? [p.bio.src, p.bio.srcEn].filter(Boolean) : undefined },
+			crumbs: [[L('الكُتّاب', 'Writers'), 'writers.html'], [p.name]]
+		});
 
 		var first = this.SHELF[p.shelves[0]] || this.SHELF.collaborators;
 		var name = t(p.name);

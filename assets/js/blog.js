@@ -37,6 +37,11 @@ window.PAGE = {
 		this.wireNav();
 		document.body.classList.toggle('blog-reading', !!post);
 		document.title = (post ? post.t : App.t(this.title)) + ' — ' + App.L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik');
+		App.seo(post ? {
+			path: 'blog.html?post=' + encodeURIComponent(post.id), desc: post.ex, image: this.img(post.img), imageAlt: post.t,
+			ld: { '@type': 'BlogPosting', headline: post.t, datePublished: post.d, inLanguage: 'ar', author: App.seoAuthor, keywords: (post.l || []).join(', ') },
+			crumbs: [[App.L('المدونة', 'Blog'), 'blog.html'], [post.t]]
+		} : { path: 'blog.html' });
 		if (post) return post.comic ? this.renderComic(post) : this.renderArticle(post);
 		this.renderArchive();
 	},

@@ -1,0 +1,9 @@
+# Crawlers read robots.txt only at a host's root, so while the site lives at samehbilal.github.io/ahmed-khaled-tawfik/
+# this file is not read; the sitemap is submitted in Google Search Console and Bing Webmaster Tools instead.
+# It takes effect if the site moves to a domain of its own.
+User-agent: *
+Allow: /
+Disallow: /offline.html
+Disallow: /lists.html
+
+Sitemap: https://samehbilal.github.io/ahmed-khaled-tawfik/sitemap.xml
