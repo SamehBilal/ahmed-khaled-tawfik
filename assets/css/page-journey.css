@@ -1,0 +1,38 @@
+/* «رحلتي» (journey.html, journey.js) */
+.ph[data-ph="journey"] { background: radial-gradient(60% 120% at 50% 30%, #241a2a 0%, #0d0b10 70%); }
+.jr-ring { position: absolute; left: var(--x); top: var(--y); width: 110px; height: 110px; fill: none; stroke-width: 9; opacity: .8; }
+.jr-ring circle { stroke: rgba(239, 230, 210, .1); }
+.jr-ring .v { stroke: var(--c); stroke-linecap: round; stroke-dasharray: 0 100; transform: rotate(-90deg); transform-origin: 50% 50%; animation: jr-fill 6s var(--d) ease-in-out infinite; }
+@keyframes jr-fill { 0%, 100% { stroke-dasharray: 4 100; } 50% { stroke-dasharray: 88 100; } }
+html[data-theme="light"] .ph[data-ph="journey"] { background: radial-gradient(60% 120% at 50% 30%, #f3e6ef 0%, #e2d4dc 70%); }
+@media (prefers-reduced-motion: reduce) { .jr-ring .v { animation: none; stroke-dasharray: 60 100; } }
+@media (max-width: 640px) { .jr-ring { width: 70px; height: 70px; } }
+
+.jr-dial { flex: none; }
+.jr-dial circle { fill: none; stroke: var(--line); stroke-width: 8; }
+.jr-dial .v { stroke: var(--c); stroke-linecap: round; transition: stroke-dasharray .6s; }
+.jr-dial text { fill: var(--paper); font-family: var(--f-latin); font-size: 20px; font-weight: 700; text-anchor: middle; }
+.jr-head { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin: 0 0 30px; }
+.jr-head h2 { font-family: var(--f-latin); font-size: 64px; line-height: 1; margin: 4px 0; }
+.jr-head h2 small { font-size: .45em; color: var(--muted); }
+.jr-head p { margin: 0 0 6px; color: var(--paper-dim); }
+.jr-act { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px !important; }
+.jr-act .share-btn { margin: 0; }
+.jr-pic { background: var(--ember) !important; border-color: var(--ember) !important; color: #fff !important; }
+.jr-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin: 0 0 30px; }
+.jr-card { display: flex; align-items: center; gap: 16px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); }
+.jr-card.is-idle { opacity: .7; }
+.jr-card h3 { font-family: var(--f-display); font-size: 20px; margin: 0 0 2px; }
+.jr-card h3 a { color: var(--paper); }
+.jr-count { margin: 0 0 6px; font-family: var(--f-latin); color: var(--muted); }
+.jr-next { font-family: var(--f-display); font-size: 14px; }
+.jr-months { margin: 0 0 24px; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); }
+.jr-months figcaption { font-family: var(--f-display); margin: 0 0 10px; }
+.jr-bars { display: flex; align-items: flex-end; gap: 6px; height: 120px; direction: ltr; overflow-x: auto; }
+.jr-bars span { flex: 1 0 28px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+.jr-bars i { display: block; width: 70%; min-height: 3px; border-radius: 4px 4px 0 0; background: var(--ember); }
+.jr-bars small { font-family: var(--f-latin); font-size: 11px; color: var(--muted); margin-top: 4px; }
+.jr-note { color: var(--muted); font-size: 14px; }
+.jr-empty { max-width: 640px; margin: 0 auto; text-align: center; padding: 40px 0; }
+.jr-empty h2 { font-family: var(--f-display); font-size: 32px; }
+.jr-empty .jr-act { justify-content: center; }
