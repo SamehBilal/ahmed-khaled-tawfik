@@ -25,7 +25,14 @@
 			{ id: 'papers', href: 'papers.html', ar: 'في الصحف', en: 'In the papers', phone: true },
 			{ id: 'numbers', href: 'numbers.html', ar: 'بالأرقام', en: 'In numbers', phone: true },
 			{ id: 'quiz', href: 'quiz.html', ar: 'اختبر نفسك', en: 'Test yourself', phone: true },
-			{ id: 'map', href: 'map.html', ar: 'الخريطة', en: 'The map', phone: true }
+			{ id: 'map', href: 'map.html', ar: 'الخريطة', en: 'The map', phone: true },
+			{ id: 'world', href: 'world.html', ar: 'حول العالم', en: 'Around the world', phone: true },
+			{ id: 'screen', href: 'screen.html', ar: 'على الشاشة', en: 'On screen', phone: true },
+			{ id: 'covers', href: 'covers.html', ar: 'جدار الأغلفة', en: 'The cover wall', phone: true },
+			{ id: 'journey', href: 'journey.html', ar: 'رحلتي', en: 'My journey', phone: true },
+			{ id: 'editions', href: 'editions.html', ar: 'الطبعات', en: 'The editions', phone: true },
+			{ id: 'talks', href: 'talks.html', ar: 'لقاءاته', en: 'Interviews', phone: true },
+			{ id: 'awards', href: 'awards.html', ar: 'الجوائز', en: 'Awards', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
@@ -36,7 +43,15 @@
 			{ href: 'papers.html', ar: 'في الصحف', en: 'In the papers' },
 			{ href: 'numbers.html', ar: 'بالأرقام', en: 'In numbers' },
 			{ href: 'quiz.html', ar: 'اختبر نفسك', en: 'Test yourself' },
-			{ href: 'map.html', ar: 'الخريطة', en: 'The map' }
+			{ href: 'map.html', ar: 'الخريطة', en: 'The map' },
+			/* and seven more: his books in translation, on screen, every cover, your own journey, the editions, his interviews, his awards */
+			{ href: 'world.html', ar: 'حول العالم', en: 'Around the world' },
+			{ href: 'screen.html', ar: 'على الشاشة', en: 'On screen' },
+			{ href: 'covers.html', ar: 'جدار الأغلفة', en: 'The cover wall' },
+			{ href: 'journey.html', ar: 'رحلتي', en: 'My journey' },
+			{ href: 'editions.html', ar: 'الطبعات', en: 'The editions' },
+			{ href: 'talks.html', ar: 'لقاءاته', en: 'Interviews' },
+			{ href: 'awards.html', ar: 'الجوائز', en: 'Awards' }
 		],
 		/* pages linked only from the footer, not the header */
 		legal: [
