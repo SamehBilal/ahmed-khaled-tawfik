@@ -1107,3 +1107,19 @@ h1 .pub-closed { font-size: 15px; padding: 3px 12px; }
 	border: 1px solid var(--line); background: none; color: var(--paper); }
 .share-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
 .share-btn:hover { border-color: var(--ember); color: var(--ember); }
+
+/* «في مثل هذا اليوم» on the home page (home.js onThisDay): a card per moment, its year large, how long ago, what it was */
+.otd-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+.otd-card { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px 20px 20px; min-height: 150px; overflow: hidden;
+	border-radius: var(--radius); background: var(--ink-2); border: 1px solid var(--line); color: var(--paper);
+	transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s; }
+.otd-card:hover { transform: translateY(-4px); border-color: var(--ember); color: var(--paper); }
+.otd-y { font-family: var(--f-latin); font-size: 38px; font-weight: 700; line-height: 1; color: var(--ember); }
+.otd-ago { font-size: 13px; color: var(--muted); margin-top: -2px; }
+.otd-k { font-family: var(--f-display); font-size: 13px; color: var(--paper-dim); margin-top: auto; }
+.otd-card b { font-family: var(--f-display); font-size: 18px; font-weight: 700; line-height: 1.35; }
+/* the moments of his own life stand out */
+.otd-born, .otd-died { background: linear-gradient(135deg, color-mix(in srgb, var(--ember) 18%, var(--ink-2)), var(--ink-2)); border-color: color-mix(in srgb, var(--ember) 45%, var(--line)); }
+.otd-issue .otd-y, .otd-book .otd-y { color: #d9a45a; }
+.otd-legacy .otd-y { color: #c9a2e8; }
+.otd-all[hidden], .otd-more[hidden] { display: none !important; }

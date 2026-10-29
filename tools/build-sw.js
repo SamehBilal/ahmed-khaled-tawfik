@@ -5,6 +5,8 @@ const fs = require('fs'), path = require('path'), crypto = require('crypto');
 const root = path.resolve(__dirname, '..');
 // the data first: the pages load it built into one file (data-built.js), not the files it is edited in
 const DATA = require('./build-data.js').map(f => 'assets/js/' + f + '.js');
+// and «في مثل هذا اليوم»'s dates, a small file a month (assets/data/days/), kept offline with the rest
+require('./build-days.js');
 
 const list = ['./'];
 const add = (rel) => list.push(rel.split(path.sep).join('/'));
@@ -17,6 +19,7 @@ const walk = (dir, test) => fs.readdirSync(path.join(root, dir), { withFileTypes
 });
 walk('assets/js', f => /\.js$/.test(f) && DATA.indexOf(f.split(path.sep).join('/')) < 0);
 walk('assets/css', f => /\.css$/.test(f));
+walk('assets/data', f => /\.json$/.test(f));
 walk('assets/fonts', f => /\.(woff2?|ttf)$/.test(f));
 walk('assets/img/icons', () => true);
 walk('assets/img/cassette', f => /\.(png|jpe?g|webp)$/.test(f));
