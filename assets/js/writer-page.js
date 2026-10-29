@@ -88,7 +88,9 @@ window.PAGE = {
 						'<div class="wp-entry-body">' + (meta ? '<p class="wp-meta">' + e(meta) + '</p>' : '') + App.paras(w.text) +
 						(w.source ? '<a class="wp-src" href="' + e(w.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
 							(w.book && w.book.en ? ' <a class="wp-src" href="' + e(S.entryBookHref(w)) + '">' + L('صفحة الكتاب ←', 'Book page →') + '</a>' : '') +
-							(w.shop ? ' <a class="wp-src" href="' + e(w.shop.url) + '" target="_blank" rel="noopener">' + L('اشترِه من ', 'Buy it from ') + t(w.shop.name) + ' ↗</a>' : '') + '</div>' +
+							(w.shop ? ' <a class="wp-src" href="' + e(w.shop.url) + '" target="_blank" rel="noopener">' + L('اشترِه من ', 'Buy it from ') + t(w.shop.name) + ' ↗</a>' : '') +
+							/* a page of the site's own the entry points to (an article, say) */
+							(w.link ? ' <a class="wp-src" href="' + e(w.link.href) + '">' + e(t(w.link.label)) + '</a>' : '') + '</div>' +
 					'</article>';
 				}).join('') + '</div>';
 		}).join('');

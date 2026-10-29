@@ -4289,3 +4289,19 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		'zaghazigh': B + '2077425664/%D8%B2%D8%BA%D8%A7%D8%B2%D9%8A%D8%BA/2719350792'
 	});
 })(window.AKT);
+
+/* «رفاق الطريق»: Ismail Diab (1936–2005), the painter of the Egyptian Pocket Novels' covers, the first covers of Ma Wara' al-Tabi'a,
+   Fantasia and Safari among them; Tawfik mourned him in «القطرات الأخيرة». Photo: Arabic Wikipedia (public domain). Sent by the site's editor */
+(function (A) {
+	var W = A.writers = A.writers || {}, C = W.contemporaries = W.contemporaries || [];
+	if (C.some(function (w) { return (w.name || {}).ar === 'إسماعيل دياب'; })) return;
+	C.push({
+		name: { ar: 'إسماعيل دياب', en: 'Ismail Diab' },
+		work: { ar: 'أغلفة «روايات مصرية للجيب»', en: 'The Egyptian Pocket Novels’ covers' },
+		text: { ar: 'رسّام أغلفة «روايات مصرية للجيب» منذ الثمانينيات، ومنها أغلفة «ما وراء الطبيعة» و«فانتازيا» و«سافاري» الأولى. قال عنه العرّاب إن رسومه «تحفر نفسها بقوة في تعاريج جيل كامل»، ورثاه حين رحل عام 2005 في مقاله «القطرات الأخيرة».',
+			en: 'The painter of the Egyptian Pocket Novels’ covers from the 1980s, the first covers of Ma Wara’ al-Tabi’a, Fantasia and Safari among them. Tawfik said his drawings “carve themselves into the folds of a whole generation”, and mourned him in his column “The Last Drops” when he died in 2005.' },
+		source: 'https://ar.wikipedia.org/wiki/%D8%A5%D8%B3%D9%85%D8%A7%D8%B9%D9%8A%D9%84_%D8%AF%D9%8A%D8%A7%D8%A8',
+		link: { href: 'blog.html?post=7959249718309921300', label: { ar: 'رثاؤه: «القطرات الأخيرة» ←', en: 'His elegy: “The Last Drops” →' } },
+		photo: { url: 'assets/img/photos/writers/ismail-diab.webp', file: 'https://ar.wikipedia.org/wiki/%D9%85%D9%84%D9%81:%D8%A7%D8%B3%D9%85%D8%A7%D8%B9%D9%8A%D9%84_%D8%AF%D9%8A%D8%A7%D8%A8.jpg', source: { ar: 'ويكيبيديا', en: 'Wikipedia' } }
+	});
+})(window.AKT);
