@@ -3908,3 +3908,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		'إلقاء جماعي': 'a group reading', 'أحمد أمين': 'Ahmed Amin', 'مهدي أبركان': 'Mehdi Aberkan', 'محمد خميس': 'Mohamed Khamis', 'فريق «رُواة»': 'the Ruwah team'
 	});
 })(window.AKT);
+
+/* روايات عالمية للجيب 76, «الأفق المفقود» (James Hilton's Lost Horizon): its cover, sent by the site's editor — the bookshop's
+   picture for this issue was in fact the cover of #70, «ماتيلدا» */
+(function (A) {
+	var i = (A.issueInfo = A.issueInfo || {})['rwg-76'] = A.issueInfo['rwg-76'] || {};
+	i.ownCover = 'assets/img/covers/series/rwg/rwg-76-lost-horizon.webp';
+	if (i.cover && /bookhome-rwg-76/.test(i.cover)) { delete i.cover; delete i.coverSource; }
+})(window.AKT);

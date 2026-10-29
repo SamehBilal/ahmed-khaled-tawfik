@@ -103,13 +103,35 @@ window.PAGE = {
 
 		/* the heroes' series wear their hero's scene behind the book (as on their character pages, character.css):
 		   Refaat's fog and lamplight, Alaa's heartbeat, Abeer's stars and portal, the Virus's falling code */
-		var theme = { mwt: 'ghosts', safari: 'medicine', fantasia: 'fantasy', www: 'code' }[id] || '';
+		/* and every other series a scene of its own (detail.css): the specials, the three heroes' lights meeting; Shivers, rain and
+		   lightning; the World Pocket Novels, a turning globe; Molotov, rising embers; the Summer Book, a sun; the Adventurer, a
+		   compass and a trail; Adabiyat, ruled paper and ink; Super Mega, comic dots and a burst; Balya, bouncing marbles; the comics,
+		   panels; Lasheen, a clock at midnight (it grew from «بعد منتصف الليل») */
+		var theme = { mwt: 'ghosts', safari: 'medicine', fantasia: 'fantasy', www: 'code', specials: 'crossing', shivers: 'storm', rwg: 'globe',
+			molotov: 'embers', sayf: 'summer', mughamer: 'compass', maqalat: 'ink', supermega: 'pop', bley: 'marbles', comics: 'panels', lasheen: 'midnight' }[id] || '';
+		var many = function (n, f) { var out = ''; for (var i = 0; i < n; i++) out += f(i); return out; };
 		var scene = {
 			ghosts: '<div class="ch-fog"><span></span><span></span><span></span></div><i class="sv-lamp"></i>',
 			medicine: '<svg class="ch-ecg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 60 H380 L400 60 L415 30 L430 95 L450 10 L470 110 L485 60 H700 L715 45 L730 75 L745 60 H1200" /></svg>',
 			fantasy: '<div class="ch-stars"></div><div class="ch-portal"></div>',
 			/* WWW: the Virus's code, falling in columns */
-			code: '<div class="ch-code">' + [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (i) { var bits = ''; for (var k = 0; k < 28; k++) bits += (i * 7 + k * 13) % 3 ? '1' : '0'; return '<span style="--i:' + i + '">' + bits + '</span>'; }).join('') + '</div>'
+			code: '<div class="ch-code">' + [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (i) { var bits = ''; for (var k = 0; k < 28; k++) bits += (i * 7 + k * 13) % 3 ? '1' : '0'; return '<span style="--i:' + i + '">' + bits + '</span>'; }).join('') + '</div>',
+			crossing: '<i class="sv-orb" style="--o:#e0a050;--x:-60px;--y:-30px"></i><i class="sv-orb" style="--o:#3fbf8a;--x:70px;--y:-10px;animation-delay:-3s"></i><i class="sv-orb" style="--o:#9a7cff;--x:0px;--y:60px;animation-delay:-6s"></i>',
+			storm: '<div class="sv-rain"></div><i class="sv-flash"></i>',
+			globe: '<svg class="sv-globe" viewBox="-110 -110 220 220"><circle r="100"/>' +
+				many(5, function (i) { return '<ellipse class="mer" rx="100" ry="100" style="animation-delay:' + (-i * 2.4) + 's"/>'; }) +
+				[-60, -30, 0, 30, 60].map(function (y) { var r = Math.sqrt(10000 - y * y * 1.6); return '<ellipse rx="' + r.toFixed(1) + '" ry="' + (r * 0.18).toFixed(1) + '" cy="' + y + '"/>'; }).join('') + '</svg>',
+			embers: many(16, function (i) { return '<i class="sv-ember" style="--l:' + ((i * 37) % 100) + '%;--d:' + (-(i * 0.9) % 8).toFixed(1) + 's;--s:' + (3 + (i % 4)) + 'px"></i>'; }),
+			summer: '<i class="sv-sun"></i>',
+			compass: '<svg class="sv-trail" viewBox="0 0 600 300" preserveAspectRatio="none"><path d="M10 250 C 120 180, 160 290, 280 210 S 460 80, 590 60"/></svg>' +
+				'<svg class="sv-compass" viewBox="-100 -100 200 200"><circle r="92"/><circle r="70"/>' + many(16, function (i) { return '<line y1="-92" y2="' + (i % 4 ? -84 : -76) + '" transform="rotate(' + i * 22.5 + ')"/>'; }) +
+				'<g class="needle"><path d="M0 -66 L9 0 L0 66 L-9 0 Z"/><path class="n" d="M0 -66 L9 0 L-9 0 Z"/></g></svg>',
+			ink: '<div class="sv-ruled"></div><i class="sv-blot"></i>',
+			pop: '<div class="sv-dots"></div><i class="sv-burst"></i>',
+			marbles: many(7, function (i) { return '<i class="sv-marble" style="--l:' + (8 + i * 13) + '%;--h:' + (60 + (i * 47) % 120) + 'px;--d:' + (-(i * 0.37)).toFixed(2) + 's;--m:hsl(' + (i * 51) % 360 + ' 70% 55%)"></i>'; }),
+			panels: '<div class="sv-panels">' + many(6, function (i) { return '<i style="--d:' + (i * 0.5) + 's"></i>'; }) + '</div>',
+			midnight: '<svg class="sv-clock" viewBox="-100 -100 200 200"><circle r="94"/>' + many(12, function (i) { return '<line y1="-86" y2="' + (i % 3 ? -78 : -70) + '" transform="rotate(' + i * 30 + ')"/>'; }) +
+				'<line class="h" y2="-46"/><line class="m" y2="-72"/><circle class="c" r="4"/></svg>'
 		}[theme] || '';
 
 		root.innerHTML =
@@ -264,7 +286,9 @@ window.PAGE = {
 		var App = window.App, e = App.esc, t = App.t, tx = App.tx, L = App.L, P = window.People;
 		var list = (((App.data().seriesInfo || {})[id] || {}).with || []).map(function (x) { return { p: P && P.byId(x.id), role: x.role }; }).filter(function (x) { return x.p; });
 		if (!list.length) return '';
-		return '<section class="d-block d-wide sv-with"><div class="d-head"><h3>' + L('شاركوه السلسلة', 'They shared the series with him') + ' <small>(' + App.num(list.length) + ')</small></h3>' +
+		/* a series that grew out of his work (Lasheen) is its writer's own: they are not «with him» but who made it */
+		var own = (window.WorksShared.anySeries(id) || {}).inspired;
+		return '<section class="d-block d-wide sv-with"><div class="d-head"><h3>' + (own ? L('صاحب السلسلة', 'Created by') : L('شاركوه السلسلة', 'They shared the series with him') + ' <small>(' + App.num(list.length) + ')</small>') + '</h3>' +
 				'<a href="writers.html">' + L('الكُتّاب ←', 'Writers →') + '</a></div>' +
 			'<div class="sv-with-list">' + list.map(function (x) {
 				var p = x.p, name = t(p.name);
