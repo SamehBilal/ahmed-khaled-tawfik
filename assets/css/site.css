@@ -1123,3 +1123,21 @@ h1 .pub-closed { font-size: 15px; padding: 3px 12px; }
 .otd-issue .otd-y, .otd-book .otd-y { color: #d9a45a; }
 .otd-legacy .otd-y { color: #c9a2e8; }
 .otd-all[hidden], .otd-more[hidden] { display: none !important; }
+
+/* the quotes' «صورة» dialog (quotes.js image): the picture as it will be, the size and the look beside it */
+.qimg { width: min(920px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 1px solid var(--line); border-radius: var(--radius);
+	background: var(--ink-2); color: var(--paper); }
+.qimg::backdrop { background: rgba(0, 0, 0, .7); }
+.qimg-in { display: grid; grid-template-columns: 1fr 260px; gap: 24px; padding: 24px; align-items: center; }
+.qimg-view { display: grid; place-items: center; min-height: 0; }
+.qimg-view canvas { display: block; max-width: 100%; max-height: calc(100vh - 120px); width: auto; height: auto; border-radius: 6px; box-shadow: 0 12px 40px rgba(0, 0, 0, .5); }
+.qimg-side h3 { font-family: var(--f-display); margin: 0 0 16px; font-size: 22px; }
+.qimg-opts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.qimg-opts .chip[aria-pressed="true"] { background: var(--ember); border-color: var(--ember); color: #fff; }
+.qimg-act { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.qimg-act .share-btn { margin: 0; }
+.qimg-share, .qimg-save { background: var(--ember) !important; border-color: var(--ember) !important; color: #fff !important; }
+@media (max-width: 700px) {
+	.qimg-in { grid-template-columns: 1fr; padding: 16px; gap: 14px; }
+	.qimg-view canvas { max-height: 52vh; }
+}
