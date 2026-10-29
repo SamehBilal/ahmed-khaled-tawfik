@@ -3916,3 +3916,20 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	i.ownCover = 'assets/img/covers/series/rwg/rwg-76-lost-horizon.webp';
 	if (i.cover && /bookhome-rwg-76/.test(i.cover)) { delete i.cover; delete i.coverSource; }
 })(window.AKT);
+
+/* «سوبر ميجا»: Sayed Zahran wrote in it with him too, as the site's editor tells — on the series' page, and among «كتبوا معه» */
+(function (A) {
+	var I = A.seriesInfo = A.seriesInfo || {};
+	I.supermega = I.supermega || {};
+	I.supermega.with = I.supermega.with || [];
+	if (!I.supermega.with.some(function (x) { return x.id === 'sayed-zahran'; })) I.supermega.with.push({ id: 'sayed-zahran', role: { ar: 'كتب فيها معه', en: 'Wrote in it alongside him' } });
+	var W = A.writers = A.writers || {}, C = W.collaborators = W.collaborators || [];
+	if (C.some(function (w) { return (w.name || {}).ar === 'سيد زهران'; })) return;
+	var intro = (W.introductions || []).filter(function (w) { return (w.name || {}).ar === 'سيد زهران'; })[0] || {};
+	C.push({
+		name: { ar: 'سيد زهران', en: 'Sayed Zahran' }, photo: intro.photo,
+		work: { ar: '«سوبر ميجا»', en: 'Super Mega' },
+		text: { ar: 'كتب مع العرّاب ونبيل فاروق وسالي عادل في «سوبر ميجا» عن المؤسسة العربية الحديثة.', en: 'Wrote alongside Tawfik, Nabil Farouk and Sally Adel in Super Mega, from the Modern Arab Association.' },
+		books: ['s:supermega']
+	});
+})(window.AKT);
