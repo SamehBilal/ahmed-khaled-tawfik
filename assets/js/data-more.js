@@ -3965,3 +3965,13 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		note: { ar: 'عرض مصوّر لرواية «يوتوبيا» في 26 دقيقة.', en: 'The novel Utopia retold on screen, in 26 minutes.' } });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* Legacy articles: the Egyptian Researchers magazine's portrait of him, «العراب الذي جعل الشباب يقرأون» (19 September 2018), sent by the site's editor */
+(function (A) {
+	var M = A.media = A.media || [], url = 'https://egyresmag.com/%D8%A3%D8%AD%D9%85%D8%AF-%D8%AE%D8%A7%D9%84%D8%AF-%D8%AA%D9%88%D9%81%D9%8A%D9%82/';
+	if (M.some(function (m) { return m.url === url; })) return;
+	M.push({ kind: 'article', title: { ar: 'أحمد خالد توفيق: العراب الذي جعل الشباب يقرأون', en: 'Ahmed Khaled Tawfik: the Godfather who made the young read' },
+		outlet: { ar: 'مجلة الباحثون المصريون', en: 'Egyptian Researchers Magazine' }, year: 2018, lang: 'ar', url: url,
+		note: { ar: 'بقلم هبة خميس: بورتريه عن حياته ومرضه وكتابته، نُشر بعد رحيله بأشهر.', en: 'By Heba Khamis: a portrait of his life, illness and writing, published months after his death.' } });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
