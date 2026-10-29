@@ -4033,3 +4033,13 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	].forEach(function (m) { if (!M.some(function (x) { return x.url === m.url; })) M.push(m); });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* Legacy videos: Medhat El-Adl's «إنت حر» on CBC Two, a whole episode with him (17 February 2015), sent by the site's editor */
+(function (A) {
+	var M = A.media = A.media || [], url = 'https://www.youtube.com/watch?v=l2ulWlnnruk';
+	if (M.some(function (m) { return m.url === url; })) return;
+	M.push({ kind: 'interview', title: { ar: '«إنت حر»: لقاء خاص مع الكاتب أحمد خالد توفيق', en: 'Enta Hor: a special interview with Ahmed Khaled Tawfik' },
+		outlet: { ar: 'سي بي سي تو', en: 'CBC Two' }, year: 2015, lang: 'ar', url: url,
+		note: { ar: 'الحلقة الكاملة مع مدحت العدل بتاريخ 17 فبراير 2015.', en: 'The full episode with Medhat El-Adl, 17 February 2015.' } });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
