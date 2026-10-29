@@ -14,13 +14,25 @@ const x = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(
 const NAME = 'أحمد خالد توفيق';
 
 const out = path.join(root, 'share');
+/* a WebP picture of the site's own is shared as a JPG copy (assets/img/share/, tools/share-jpg.py, made once): WhatsApp on older
+   phones, LinkedIn and others show no preview for WebP. Without Python and Pillow the WebP is kept */
+const cp = require('child_process');
+const PY = ['py', 'python3', 'python'].find(c => { try { return cp.spawnSync(c, (c === 'py' ? ['-3'] : []).concat(['-c', 'import PIL']), { stdio: 'ignore' }).status === 0; } catch (e) { return false; } });
+const toJpg = [];
+const shareImg = (rel) => {
+	if (!PY || !/^assets\/.+\.webp$/i.test(rel || '') || !fs.existsSync(path.join(root, rel))) return rel;
+	const jpg = 'assets/img/share/' + rel.replace(/^assets\/img\//, '').replace(/\.webp$/i, '').replace(/\//g, '_') + '.jpg';
+	const src = path.join(root, rel), dst = path.join(root, jpg);
+	if (!fs.existsSync(dst) || fs.statSync(dst).mtimeMs < fs.statSync(src).mtimeMs) toJpg.push([src, dst]);
+	return jpg;
+};
 /* a page is rewritten only when it changed, and one whose item is gone is removed (the folder syncs with OneDrive, which locks files) */
 const made = new Set();
 let count = 0, written = 0;
 function page(kind, id, real, o) {
 	const title = cut(clean(o.title), 90) + ' — ' + (o.suffix || NAME);
 	const desc = cut(clean(o.desc) || o.fallback, 200);
-	const img = abs(o.image) || SITE + 'assets/img/og/' + (o.og || 'index') + '.jpg';
+	const img = abs(shareImg(o.image)) || SITE + 'assets/img/og/' + (o.og || 'index') + '.jpg';
 	const own = SITE + 'share/' + kind + '/' + id + '.html', to = SITE + real;
 	const html = '<!DOCTYPE html>\n<html lang="ar" dir="rtl">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
 		'<title>' + x(title) + '</title>\n<meta name="description" content="' + x(desc) + '">\n<meta name="robots" content="noindex, follow">\n' +
@@ -82,6 +94,11 @@ const blog = d.blog || {};
 	title: p.t, desc: p.ex, og: 'blog', wide: true, fallback: 'من مدونة ' + NAME + '.',
 	image: !p.img ? '' : p.img.indexOf('g:') === 0 ? blog.img + p.img.slice(2) : p.img }));
 
+if (toJpg.length) {
+	const seen = {}, todo = toJpg.filter(p => !seen[p[1]] && (seen[p[1]] = 1));
+	const r = cp.spawnSync(PY, (PY === 'py' ? ['-3'] : []).concat([path.join(__dirname, 'share-jpg.py')]), { input: JSON.stringify(todo), encoding: 'utf8' });
+	console.log('share pictures:', (r.stdout || '').trim(), 'JPG copies made' + (r.stderr ? ' — ' + r.stderr.trim() : ''));
+}
 let gone = 0;
 if (fs.existsSync(out)) fs.readdirSync(out).forEach(k => fs.readdirSync(path.join(out, k)).forEach(f => {
 	const file = path.join(out, k, f);
