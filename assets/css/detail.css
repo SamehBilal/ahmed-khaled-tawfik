@@ -423,3 +423,16 @@ html[data-theme="light"] .sv-theme-code .sv-scene { background: radial-gradient(
 	.sv-scene .ch-portal { top: 370px; }
 	.sv-scene .ch-ecg { top: 90px; }
 }
+
+/* series pages: the reader's progress through the series, from their lists (series-page.js progress) */
+.sv-prog { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px 18px; margin: 0 0 22px; padding: 14px 18px;
+	border: 1px solid var(--line); border-radius: 12px; background: color-mix(in srgb, var(--c, var(--ember)) 8%, transparent); }
+.sv-prog p { margin: 0; font-family: var(--f-display); }
+.sv-prog-bar { grid-column: 1 / -1; grid-row: 2; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.sv-prog-bar i { display: block; height: 100%; border-radius: inherit; background: var(--c, var(--ember)); transition: width .4s; }
+.sv-prog-next { font-family: var(--f-display); white-space: nowrap; }
+@media (max-width: 640px) { .sv-prog { grid-template-columns: 1fr; } .sv-prog-next { white-space: normal; } }
+/* a read (or, for a collector, owned) issue: a small check on its cover */
+#issue-grid .cover-link.is-done .cl-cover::after { content: '✓'; position: absolute; top: 6px; inset-inline-end: 6px; z-index: 3;
+	display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--c, var(--ember)); color: #fff; font-size: 13px; font-weight: 700;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .4); }

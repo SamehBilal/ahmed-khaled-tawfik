@@ -163,7 +163,7 @@ window.PAGE = {
 					.concat(related.map(function (r) { return { sid: r.s.id, is: r.is, tag: t(r.s.title), color: r.s.color }; }))
 					/* of a series that grew from it (Lasheen), only its first book */
 					.concat(grown.map(function (x) { var is = S.seriesIssues(x.id)[0]; return is && { sid: x.id, is: is, tag: t(x.title) + ' ', color: x.color }; }).filter(Boolean))) : '') +
-				(issues.length ? '<section class="d-block d-wide"><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
+				(issues.length ? '<section class="d-block d-wide"><div id="sv-progress"></div><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
 					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid is-ranked" id="issue-grid" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
 				/* its characters, the cards of the characters page, all small and the same size, about as big as the covers above (leads first), right under every issue */
 				(chars.length && window.CharCards ? '<section class="d-block d-wide sv-chars"><div class="d-head"><h3>' + L('الشخصيات', 'Characters') + ' <small>(' + App.num(chars.length) + ')</small></h3></div>' +
@@ -210,9 +210,41 @@ window.PAGE = {
 		window.Books.initShowcase(document.getElementById('d-book'));
 		this.initProximity(document.getElementById('prox'));
 		this.initIssuePanel(document.getElementById('issue-grid'), issues, id, s);
+		this.progress(issues, id);
 		this.initVolumes(id);
 		var cs = document.querySelector('.sv-chars');
 		if (cs) window.CharCards.bindFlip(cs);
+	},
+
+	/* the reader's progress through the series, from their lists (lists.js): how many issues they have read (a collector: own),
+	   a bar, and the first one not yet read (owned) to go to next; each read or owned cover is marked. Redrawn as the lists change */
+	progress: function (issues, id) {
+		var App = window.App, Ls = window.Lists, e = App.esc, t = App.t, L = App.L, self = this;
+		var box = document.getElementById('sv-progress'), grid = document.getElementById('issue-grid');
+		if (!box || !grid || !Ls) return;
+		if (!this._progWired) { this._progWired = true; document.addEventListener('akt-lists', function () { if (self._prog) self.progress(self._prog[0], self._prog[1]); }); }
+		this._prog = [issues, id];
+		var st = Ls.state(), collector = st.mode === 'collector';
+		var inList = function (k) { var m = {}; (st.lists[k] || []).forEach(function (x) { m[x.key] = 1; }); return m; };
+		var read = inList('read'), own = inList('own');
+		var keyOf = function (is) { return 'b:' + decodeURIComponent(App.issueHref(id, is).replace(/^book\.html\?id=/, '')); };
+		grid.querySelectorAll('.cover-link[data-i]').forEach(function (a) {
+			var k = keyOf(issues[+a.getAttribute('data-i')]);
+			a.classList.toggle('is-done', !!(collector ? own : read)[k]);
+		});
+		/* an issue in two parts counts once, done when its first part is */
+		var whole = issues.filter(function (is) { return !(is.part > 1); }), done = collector ? own : read;
+		var n = whole.filter(function (is) { return done[keyOf(is)]; }).length;
+		if (!n) { box.innerHTML = ''; return; }
+		var next = whole.filter(function (is) { return !done[keyOf(is)]; })[0];
+		var pct = Math.round(n / whole.length * 100);
+		box.innerHTML = '<div class="sv-prog">' +
+			'<p><b>' + e(collector ? L('في مكتبتك ', 'In your collection: ') : L('قرأت ', 'You have read ')) + e(App.num(n)) + L(' من ', ' of ') + e(App.num(whole.length)) + '</b>' +
+				(n === whole.length ? ' — ' + e(collector ? L('السلسلة كاملة عندك.', 'the whole series.') : L('قرأت السلسلة كلها.', 'the whole series.')) : '') + '</p>' +
+			'<span class="sv-prog-bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + whole.length + '" aria-valuenow="' + n + '"><i style="width:' + pct + '%"></i></span>' +
+			(next ? '<a class="sv-prog-next" href="' + e(App.issueHref(id, next)) + '">' + e(collector ? L('ينقصك: ', 'Missing: ') : L('التالي: ', 'Next: ')) +
+				(next.n != null ? '#' + e(App.num(next.n)) + ' ' : '') + '«' + e(t(next.title)) + '» ' + L('←', '→') + '</a>' : '') +
+		'</div>';
 	},
 
 	/* ---------- «شاركوه السلسلة»: the writers who wrote the series with him (seriesInfo[id].with), each linked to their page ---------- */
