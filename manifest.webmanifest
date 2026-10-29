@@ -61,6 +61,19 @@
 			]
 		},
 		{
+			"name": "قوائمي",
+			"short_name": "قوائمي",
+			"description": "My lists — what you have read, want to read, own and are looking for",
+			"url": "./lists.html?source=pwa",
+			"icons": [
+				{
+					"src": "assets/img/icons/icon-192.png",
+					"sizes": "192x192",
+					"type": "image/png"
+				}
+			]
+		},
+		{
 			"name": "من أين أبدأ؟",
 			"short_name": "ابدأ هنا",
 			"description": "Start here — reading paths",
