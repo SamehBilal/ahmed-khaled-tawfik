@@ -4006,3 +4006,30 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	].forEach(function (m) { if (!M.some(function (x) { return x.url === m.url; })) M.push(m); });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* Legacy videos, sent by the site's editor: «لقاء السحاب» (Ibrahim Eissa with him and Nabil Farouk, 2015), Bilal Fadl's «عصير الكتب»
+   episode in his honour (January 2011, in two parts) and the programme's look at his science fiction (2018), «عز الشباب» (March 2013),
+   and Al Nahar's «باب الخلق» episode in his memory (April 2018). Already here: «بلدنا بالمصري» (2011) */
+(function (A) {
+	var M = A.media = A.media || [], Y = function (id) { return 'https://www.youtube.com/watch?v=' + id; };
+	[{ kind: 'interview', title: { ar: 'لقاء السحاب.. إبراهيم عيسى يحاور د. أحمد خالد توفيق ود. نبيل فاروق', en: 'Ibrahim Eissa talks with Ahmed Khaled Tawfik and Nabil Farouk' },
+		outlet: { ar: 'دار ليلى / كيان', en: 'Dar Lila / Kayan' }, year: 2015, lang: 'ar', url: Y('PZKOj41JVXI'),
+		note: { ar: 'العرّاب ونبيل فاروق معًا في حوار واحد، 44 دقيقة.', en: 'The two pocket-book pioneers in one conversation, 44 minutes.' } },
+	 { kind: 'interview', title: { ar: 'بلال فضل يحاور أحمد خالد توفيق في «عصير الكتب» (الجزء الأول)', en: 'Bilal Fadl talks with him on Aseer al-Kotob (part 1)' },
+		outlet: { ar: 'عصير الكتب (رفع من مستخدم)', en: 'Aseer al-Kotob (user upload)' }, year: 2011, lang: 'ar', url: Y('8uFQKOuNDk0'),
+		note: { ar: 'حلقة احتفاء به بتاريخ 23 يناير 2011، 27 دقيقة.', en: 'An episode in his honour, 23 January 2011, 27 minutes.' } },
+	 { kind: 'interview', title: { ar: 'بلال فضل يحاور أحمد خالد توفيق في «عصير الكتب» (الجزء الثاني)', en: 'Bilal Fadl talks with him on Aseer al-Kotob (part 2)' },
+		outlet: { ar: 'عصير الكتب (رفع من مستخدم)', en: 'Aseer al-Kotob (user upload)' }, year: 2011, lang: 'ar', url: Y('ZVmtWvN4IhU'),
+		note: { ar: 'تتمة الحلقة، 22 دقيقة.', en: 'The rest of the episode, 22 minutes.' } },
+	 { kind: 'interview', title: { ar: 'أحمد خالد توفيق في برنامج «عز الشباب»', en: 'On the programme Ezz El Shabab' },
+		outlet: { ar: 'عز الشباب (رفع من مستخدم)', en: 'Ezz El Shabab (user upload)' }, year: 2013, lang: 'ar', url: Y('hU8MKrNljx8'),
+		note: { ar: 'حلقة 31 مارس 2013، 16 دقيقة.', en: 'Episode of 31 March 2013, 16 minutes.' } },
+	 { kind: 'profile', title: { ar: 'دور الدكتور أحمد خالد توفيق في أدب الخيال العلمي', en: 'Ahmed Khaled Tawfik’s place in science fiction' },
+		outlet: { ar: 'عصير الكتب', en: 'Aseer al-Kotob' }, year: 2018, lang: 'ar', url: Y('NPqTAzMQBvI'),
+		note: { ar: '32 دقيقة عن الخيال العلمي في أدبه.', en: '32 minutes on science fiction in his work.' } },
+	 { kind: 'profile', title: { ar: '«باب الخلق»: حلقة في حب الراحل أحمد خالد توفيق', en: 'Bab El Khalq: an episode in memory of Ahmed Khaled Tawfik' },
+		outlet: { ar: 'قناة النهار', en: 'Al Nahar TV' }, year: 2018, lang: 'ar', url: Y('j9JPVAHpeN0'),
+		note: { ar: 'الحلقة الكاملة بتاريخ 7 أبريل 2018، بعد رحيله بخمسة أيام.', en: 'The full episode of 7 April 2018, five days after his death.' } }
+	].forEach(function (m) { if (!M.some(function (x) { return x.url === m.url; })) M.push(m); });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
