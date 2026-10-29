@@ -883,7 +883,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 
 /* Covers for the books of the series he wrote for, so each series can show its first book:
    Molotov 2 (Goodreads) and 5, كتاب الصيف «أشباح ولكن» (the reader's scan), دماغي كده, أسطورة بلية, أسطورة المرأة الأفعى.
-   Still none found anywhere: روايات عالمية للجيب 70 «ماتيلدا», «أسطورة ميسيا», «لا تأخذه معك». */
+   Still none found anywhere: «لا تأخذه معك» (روايات عالمية للجيب 70 «ماتيلدا» and «أسطورة ميسيا» were found later). */
 (function (A) {
 	var C = 'assets/img/covers/contrib/';
 	var set = { 'molotov-2': 'molotov-2.webp', 'molotov-5': 'molotov.webp', 'sayf-x0': 'sayf.webp', 'maqalat-x0': 'maqalat.webp', 'bley-x0': 'bley.webp', 'comics-x1': 'comics-snake-woman.webp' };
@@ -3741,4 +3741,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			outlet: { ar: 'فيتو', en: 'Veto' }, year: 2025, lang: 'ar', url: src });
 		M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 	}
+})(window.AKT);
+
+/* روايات عالمية للجيب 70, «ماتيلدا» (Roald Dahl's Matilda, translated and prepared by him): its cover, sent by the site's editor —
+   the one issue The Book Home shows without a cover */
+(function (A) {
+	var i = (A.issueInfo = A.issueInfo || {})['rwg-70'] = A.issueInfo['rwg-70'] || {};
+	i.ownCover = 'assets/img/covers/series/rwg/rwg-70-matilda.webp';
 })(window.AKT);
