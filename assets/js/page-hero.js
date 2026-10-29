@@ -231,7 +231,8 @@
 		if (!A) return;
 		var d = A.data();
 		[].slice.call(document.querySelectorAll('section.ph[data-ph]')).forEach(function (el) {
-			var f = R[el.getAttribute('data-ph')];
+			/* (a page may bring its own band: PAGE.band(d, App), kept in its own script) */
+			var f = R[el.getAttribute('data-ph')] || (window.PAGE && window.PAGE.band);
 			el.setAttribute('aria-hidden', 'true');
 			el.innerHTML = f ? '<div class="ph-stage">' + f(d, A) + '</div>' : '';
 		});
