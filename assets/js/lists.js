@@ -137,14 +137,7 @@
 		panel.setAttribute('role', 'dialog');
 		panel.setAttribute('aria-modal', 'true');
 		panel.setAttribute('aria-hidden', 'true');
-		panel.addEventListener('click', onPanelClick);
-		panel.addEventListener('pointerdown', onGripDown);
-		panel.addEventListener('keydown', onGripKey);
-		panel.addEventListener('change', onImport);
-		panel.addEventListener('toggle', function (ev) {
-			var g = ev.target.closest && ev.target.closest('.ls-shelf-g');
-			if (g) { shelfOpen = shelfOpen || {}; shelfOpen[g.getAttribute('data-g')] = g.open; }
-		}, true);
+		wire(panel);
 		panel.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') close(); });
 
 		fab = document.createElement('button');
@@ -162,6 +155,31 @@
 		document.body.appendChild(fab);
 		document.body.appendChild(live);
 		renderFab();
+	}
+
+	/* what the lists answer to, wherever they are shown: the floating panel, or the lists page */
+	function wire(p) {
+		p.addEventListener('click', onPanelClick);
+		p.addEventListener('pointerdown', onGripDown);
+		p.addEventListener('keydown', onGripKey);
+		p.addEventListener('change', onImport);
+		p.addEventListener('toggle', function (ev) {
+			var g = ev.target.closest && ev.target.closest('.ls-shelf-g');
+			if (g) { shelfOpen = shelfOpen || {}; shelfOpen[g.getAttribute('data-g')] = g.open; }
+		}, true);
+	}
+
+	/* lists.html: the lists in the page itself, always open; the floating panel steps aside, and «My lists» brings you to them */
+	var inPage = false;
+	function mountPage(el) {
+		if (!el) return;
+		if (panel && panel.parentNode && panel !== el) panel.remove();
+		panel = el;
+		inPage = true;
+		el.classList.add('ls-panel', 'ls-inpage', 'show');
+		el.setAttribute('aria-label', L('قوائمي', 'My lists'));
+		wire(el);
+		render();
 	}
 
 	function renderFab() {
@@ -323,6 +341,7 @@
 		if (!panel) return;
 		dragView = !!drag;
 		render();
+		if (inPage) { document.body.classList.toggle('ls-dragging', !!drag); if (!drag) panel.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
 		document.body.classList.toggle('ls-dragging', !!drag);
 		panel.classList.add('show');
 		overlay.classList.add('show');
@@ -334,6 +353,7 @@
 	}
 	function close() {
 		if (!panel) return;
+		if (inPage) { document.body.classList.remove('ls-dragging'); dragView = false; render(); return; }
 		panel.classList.remove('show');
 		overlay.classList.remove('show');
 		panel.setAttribute('aria-hidden', 'true');
@@ -737,5 +757,5 @@
 	}
 	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 
-	window.Lists = { buttons: buttons, open: open, add: add, has: has, editions: chooseEditions, state: function () { return state; } };
+	window.Lists = { buttons: buttons, open: open, mountPage: mountPage, add: add, has: has, editions: chooseEditions, state: function () { return state; } };
 })();

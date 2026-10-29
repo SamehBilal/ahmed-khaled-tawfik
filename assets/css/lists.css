@@ -272,3 +272,11 @@ a[href*="book.html?id="], a[href*="series.html?id="] { -webkit-touch-callout: no
 @media (prefers-reduced-motion: reduce) {
 	.ls-panel, .ls-panel.show, .ls-inner, .ls-zone, .ls-check, .ls-live, .ls-slot, .ls-ed-c, .ls-ed-c i { transition: none; }
 }
+
+/* lists.html: the same lists in the page, always open — no sliding panel, no close button (lists.js mountPage) */
+.ls-panel.ls-inpage, .ls-panel.ls-inpage.show, body.ls-dragging .ls-panel.ls-inpage {
+	position: static; z-index: auto; top: auto; height: auto; transform: none; visibility: visible; transition: none; overflow: visible;
+	border-top: 0; border-radius: var(--radius); background: var(--ink-2); border: 1px solid var(--line); }
+.ls-inpage .ls-inner, .ls-panel.ls-inpage.show .ls-inner { width: auto; padding: 24px 24px 28px; transform: none; transition: none; }
+.ls-inpage .ls-close, .ls-inpage .ls-head h2 { display: none; }
+@media (max-width: 640px) { .ls-inpage .ls-inner, .ls-panel.ls-inpage.show .ls-inner { padding: 16px 14px 20px; } }

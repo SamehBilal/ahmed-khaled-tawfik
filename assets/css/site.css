@@ -1097,3 +1097,6 @@ html[dir="rtl"] .ft-copy { text-align: right; }
 .pub-closed { display: inline-block; vertical-align: middle; margin-inline-start: 8px; padding: 2px 10px; border: 1px solid rgba(192, 57, 43, .55); border-radius: 999px;
 	background: rgba(192, 57, 43, .12); color: #e06a5a; font-family: var(--f-display); font-size: 12px; font-weight: 400; line-height: 1.6; letter-spacing: 0; white-space: nowrap; }
 h1 .pub-closed { font-size: 15px; padding: 3px 12px; }
+
+/* a header link for the phone menu only (UI.nav phone: true — «My lists») */
+@media (min-width: 761px) { .nav a.nav-phone { display: none; } }
