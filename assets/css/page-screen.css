@@ -1,0 +1,46 @@
+/* «على الشاشة» (screen.html, screen.js) */
+.ph[data-ph="screen"] { background: #07070a; }
+.sc-beam { position: absolute; inset: 0; background: conic-gradient(from 200deg at 92% -10%, transparent 0deg, rgba(255, 230, 170, .14) 12deg, transparent 26deg); pointer-events: none; z-index: 2; }
+.sc-strip { position: absolute; left: 0; right: 0; top: 50%; height: 170px; margin-top: -85px; overflow: hidden; direction: ltr;
+	background: #111; border-block: 14px solid #111; transform: rotate(-3deg) scale(1.05);
+	-webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.sc-strip::before, .sc-strip::after { content: ''; position: absolute; left: 0; right: 0; height: 8px; z-index: 2;
+	background: repeating-linear-gradient(90deg, #e9e2cf 0 10px, transparent 10px 24px); opacity: .55; }
+.sc-strip::before { top: -11px; } .sc-strip::after { bottom: -11px; }
+.sc-run { display: flex; gap: 10px; height: 100%; width: max-content; animation: sc-run 40s linear infinite; }
+.sc-run i { width: 112px; height: 100%; background: center / cover; border-radius: 3px; filter: sepia(.25) contrast(1.05); }
+@keyframes sc-run { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .sc-run { animation: none; } }
+
+.sc-item { display: grid; grid-template-columns: 240px 1fr; gap: 30px; padding: 0 0 40px; margin: 0 0 40px; border-bottom: 1px solid var(--line); }
+.sc-item:last-child { border-bottom: 0; }
+.sc-item.is-cameo { grid-template-columns: 180px 1fr; }
+.sc-poster { position: relative; align-self: start; }
+.sc-poster img { display: block; width: 100%; border-radius: 8px; box-shadow: 0 16px 40px rgba(0, 0, 0, .5); }
+.sc-year { position: absolute; bottom: -14px; inset-inline-start: -12px; font-family: var(--f-latin); font-size: 44px; line-height: 1; color: var(--ember);
+	text-shadow: 0 2px 0 var(--ink), 0 0 18px var(--ink); }
+.sc-body h2 { font-family: var(--f-display); font-size: clamp(30px, 4vw, 44px); margin: 2px 0 10px; }
+.sc-text { font-size: 17px; line-height: 1.9; color: var(--paper-dim); margin: 0 0 16px; max-width: 70ch; }
+.sc-from { display: inline-flex; align-items: center; gap: 12px; padding: 8px 14px 8px 8px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); color: var(--paper); margin: 0 0 18px; }
+html[dir="rtl"] .sc-from { padding: 8px 8px 8px 14px; }
+.sc-from:hover { border-color: var(--ember); color: var(--paper); }
+.sc-from img { width: 40px; height: 58px; object-fit: cover; border-radius: 2px 4px 4px 2px; }
+.sc-from span { display: flex; flex-direction: column; }
+.sc-from small { color: var(--muted); font-size: 12px; }
+.sc-from b { font-family: var(--f-display); font-size: 17px; }
+.sc-videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin: 0 0 18px; }
+.sc-yt, .sc-frame { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 10px; overflow: hidden; background: #000 center / cover; cursor: pointer; }
+.sc-yt::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 45%, rgba(0, 0, 0, .75)); }
+.sc-play { position: absolute; left: 50%; top: 50%; width: 62px; height: 62px; margin: -31px 0 0 -31px; border-radius: 50%; display: grid; place-items: center;
+	background: rgba(224, 99, 58, .92); color: #fff; font-size: 22px; z-index: 2; transition: transform .2s; }
+.sc-yt:hover .sc-play { transform: scale(1.1); }
+.sc-yt-l { position: absolute; inset-inline: 12px; bottom: 10px; z-index: 2; color: #fff; font-family: var(--f-display); font-size: 14px; text-align: start; }
+.sc-press h3 { font-family: var(--f-display); font-size: 18px; margin: 0 0 6px; }
+.sc-press ul { margin: 0 0 12px; padding-inline-start: 18px; }
+.sc-press li { margin: 0 0 4px; }
+.sc-press small { color: var(--muted); }
+.sc-src { font-size: 13px; }
+@media (max-width: 760px) {
+	.sc-item, .sc-item.is-cameo { grid-template-columns: 1fr; gap: 22px; }
+	.sc-poster { max-width: 220px; }
+}
