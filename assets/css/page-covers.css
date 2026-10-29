@@ -1,0 +1,27 @@
+/* «جدار الأغلفة» (covers.html, covers.js) */
+.ph[data-ph="covers"] { background: #0b0b0e; }
+.cw-row { height: 33.4%; overflow: hidden; direction: ltr; opacity: .55; }
+.cw-row > div { display: flex; gap: 6px; height: 100%; width: max-content; padding: 3px 0; animation: cw-slide var(--t) linear infinite; animation-direction: var(--d); }
+.cw-row i { height: 100%; aspect-ratio: 2 / 3; background: center / cover; border-radius: 2px; }
+@keyframes cw-slide { to { transform: translateX(-50%); } }
+.ph[data-ph="covers"]::after { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 90% at 50% 50%, transparent, rgba(11, 11, 14, .85)); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .cw-row > div { animation: none; } }
+
+.cw-bar { margin: 0 0 22px; }
+.cw-bar .chip b { font-family: var(--f-latin); color: var(--ember); margin-inline-start: 4px; }
+.cw-bar .chip[aria-pressed="true"] { background: var(--ember); border-color: var(--ember); color: #fff; }
+.cw-bar .chip[aria-pressed="true"] b { color: #fff; }
+.cw-wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
+.cw-wall:not(.is-pairs) > a { display: block; aspect-ratio: 2 / 3; border-radius: 3px; overflow: hidden; background: var(--ink-2); transition: transform .2s, box-shadow .2s; }
+.cw-wall:not(.is-pairs) > a:hover { transform: scale(1.08); box-shadow: 0 10px 24px rgba(0, 0, 0, .5); z-index: 2; position: relative; }
+.cw-wall img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cw-wall.is-pairs { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.cw-pair { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); color: var(--paper); }
+.cw-pair:hover { border-color: var(--ember); color: var(--paper); }
+.cw-pair figure { margin: 0; }
+.cw-pair img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 3px; display: block; }
+.cw-pair figcaption { font-size: 12px; color: var(--muted); text-align: center; margin-top: 4px; }
+.cw-pair b { grid-column: 1 / -1; font-family: var(--f-display); font-size: 16px; text-align: center; }
+.cw-n { position: absolute; top: -10px; inset-inline-start: -8px; z-index: 2; min-width: 32px; padding: 2px 8px; border-radius: 999px; background: var(--ember); color: #fff;
+	font-family: var(--f-latin); font-weight: 700; text-align: center; }
+@media (max-width: 640px) { .cw-wall { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 5px; } }
