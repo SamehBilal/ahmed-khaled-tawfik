@@ -146,9 +146,12 @@ window.PAGE = {
 			if (!list.length) { box.hidden = true; return; }
 			var today = day.getDate() === now.getDate() && day.getMonth() === now.getMonth();
 			list = list.slice().sort(function (a, b) { return ORDER.indexOf(a[0]) - ORDER.indexOf(b[0]) || a[1] - b[1]; });
+			/* its picture: a blog picture after the address the month's file gives once («g:…»), a cover upright, the rest square */
+			var base = (by[day.getMonth() + 1] || {})._g || '';
 			var card = function (x) {
-				var years = now.getFullYear() - x[1];
-				return '<a class="otd-card otd-' + e(x[0]) + '" href="' + e(x[3]) + '">' +
+				var years = now.getFullYear() - x[1], src = x[5] ? (x[5].indexOf('g:') === 0 ? base + x[5].slice(2) : x[5]) : '';
+				return '<a class="otd-card otd-' + e(x[0]) + (src ? ' has-pic' : '') + '" href="' + e(x[3]) + '">' +
+					(src ? '<span class="otd-pic' + (/\/covers\//.test(src) ? ' is-tall' : '') + '"><img src="' + e(src) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></span>' : '') +
 					'<span class="otd-y">' + e(App.num(x[1])) + '</span><span class="otd-ago">' + e(years > 0 ? ago(years) : '') + '</span>' +
 					'<span class="otd-k">' + e(t(KIND[x[0]] || x[0])) + (x[4] ? ' · ' + e(t(x[4])) : '') + '</span>' +
 					'<b>' + e(t(x[2])) + '</b></a>';

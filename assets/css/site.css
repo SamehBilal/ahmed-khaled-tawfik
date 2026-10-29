@@ -1141,3 +1141,11 @@ h1 .pub-closed { font-size: 15px; padding: 3px 12px; }
 	.qimg-in { grid-template-columns: 1fr; padding: 16px; gap: 14px; }
 	.qimg-view canvas { max-height: 52vh; }
 }
+/* its picture, small in the top corner across from the year: a photo or a video's frame square, a cover upright */
+.otd-pic { position: absolute; top: 16px; inset-inline-end: 16px; width: 72px; height: 72px; border-radius: 10px; overflow: hidden;
+	background: var(--ink); box-shadow: 0 4px 14px rgba(0, 0, 0, .35); }
+.otd-pic.is-tall { width: 56px; height: 80px; border-radius: 3px 6px 6px 3px; }
+.otd-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.otd-card.has-pic { min-height: 160px; }
+.otd-card.has-pic b { padding-inline-end: 0; }
+.otd-card.has-pic .otd-y, .otd-card.has-pic .otd-ago { padding-inline-end: 84px; }
