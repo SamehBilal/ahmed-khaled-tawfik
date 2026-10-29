@@ -614,7 +614,7 @@
 				character: { ar: 'شخصية', en: 'Character' }, writer: { ar: 'كاتب', en: 'Writer' }, quote: { ar: 'اقتباس', en: 'Quote' },
 				legacy: { ar: 'الإرث', en: 'Legacy' }, tribute: { ar: 'قالوا عنه', en: 'Tribute' }, blog: { ar: 'المدونة', en: 'Blog' }, media: { ar: 'لقاء / مقال', en: 'Media' },
 				about: { ar: 'كتاب عنه', en: 'Book about him' }, near: { ar: 'كتاب من حوله', en: 'Related book' }, publisher: { ar: 'دار نشر', en: 'Publisher' },
-				award: { ar: 'جائزة', en: 'Award' }, audio: { ar: 'مسموع', en: 'Audio' }
+				award: { ar: 'جائزة', en: 'Award' }, audio: { ar: 'مسموع', en: 'Audio' }, page: { ar: 'صفحة', en: 'Page' }
 			};
 			var S = window.WorksShared;
 
@@ -659,6 +659,15 @@
 			});
 			if (au.midnightSpoofs) add(K.audio, au.midnightSpoofs.title, { ar: au.midnightSpoofs.years || '', en: au.midnightSpoofs.years || '' }, 'audio.html', 'audiohat');
 			(d.quotes || []).forEach(function (q, i) { add(K.quote, q.text, q.from, 'quotes.html#q-' + i, both(q.from)); });
+			/* the site's own pages, the header's and the footer's, found by their names and what they hold */
+			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات statistics', quiz: 'اختبار مسابقة أسئلة quiz',
+				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
+				covers: 'أغلفة غلاف covers', journey: 'قراءة قوائم تقدم reading progress', editions: 'طبعات طبعة دور نشر editions publishers',
+				talks: 'لقاءات حوارات فيديو interviews videos', awards: 'جوائز جائزة تكريم awards prizes', publishers: 'دور نشر ناشر publishers' };
+			UI.nav.concat(UI.more).forEach(function (n) {
+				var id = n.href.replace(/\.html$/, '');
+				if (n.href !== 'index.html') add(K.page, { ar: n.ar, en: n.en }, '', n.href, PAGE_WORDS[id] || '');
+			});
 			(d.legacy || []).forEach(function (l, i) { add(K.legacy, l.title, l.date, 'legacy.html#l-' + i, both(l.text)); });
 			(d.tributes || []).forEach(function (p, i) { add(K.tribute, p.name, p.role, 'tributes.html#t-' + i, both(p.quote) + ' ' + both(p.context)); });
 			(d.media || []).forEach(function (m, i) { add(K.media, m.title, m.outlet, 'legacy.html#m-' + i, both(m.note)); });
