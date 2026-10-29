@@ -3828,3 +3828,83 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if ((info.sources = info.sources || []).indexOf(url) < 0) info.sources.push(url);
 	});
 })(window.AKT);
+
+/* an edition titled exactly as its book or issue takes that book's English title when it has none of its own
+   (the WWW issues' and the special issues' printings, from the store listings) — so the English pages show no Arabic there */
+(function (A) {
+	var en = {};
+	var take = function (t) { if (t && t.ar && t.en && !en[t.ar]) en[t.ar] = t.en; };
+	(A.works || []).forEach(function (w) { take(w.title); });
+	Object.keys(A.issues || {}).forEach(function (k) { (A.issues[k] || []).forEach(function (is) { take(is.title); }); });
+	(A.series || []).concat(A.otherSeries || []).forEach(function (s) { (s.issues || []).forEach(function (is) { take(is.title); }); });
+	[A.issueInfo, A.bookInfo].forEach(function (store) {
+		Object.keys(store || {}).forEach(function (k) {
+			(store[k].editions || []).forEach(function (ed) {
+				if (ed.title && ed.title.ar && !ed.title.en && en[ed.title.ar]) ed.title.en = en[ed.title.ar];
+			});
+		});
+	});
+})(window.AKT);
+
+/* English that was the Arabic repeated, now English: the printing house Selah El-Telmeez (as the store listings name it),
+   the collected volumes' labels (ordinals turned into numbers: «سافارى المجلد السادس» → Safari — Volume 6), and the titles of
+   the other «بلية العجيب» issues in the library */
+(function (A) {
+	var arabic = /[ء-ي]/;
+	var ORD = { 'الأول': 1, 'الثاني': 2, 'الثانى': 2, 'الثالث': 3, 'الرابع': 4, 'الخامس': 5, 'السادس': 6, 'السابع': 7, 'الثامن': 8, 'التاسع': 9, 'العاشر': 10,
+		'الحادي عشر': 11, 'الحادى عشر': 11, 'الثاني عشر': 12, 'الثانى عشر': 12, 'الثالث عشر': 13, 'الرابع عشر': 14, 'الخامس عشر': 15, 'السادس عشر': 16 };
+	var SER = [[/ما وراء الطبيعة/, 'Ma Wara’ al-Tabi’a'], [/روايات عالمية/, 'Rewayat Alamiya'], [/فانتازيا/, 'Fantasia'], [/ساف[اى]ر[يى]/, 'Safari']];
+	var volume = function (ar) {
+		var s = SER.filter(function (x) { return x[0].test(ar); })[0];
+		if (!s) return '';
+		var m = /(?:المجلد|الجزء)\s+(.+)$/.exec(ar), n = m ? ORD[m[1].trim()] : 0;
+		if (!n) { var j = /ج\s*(\d+)$/.exec(ar); n = j ? +j[1] : 0; }
+		if (n) return s[1] + ' — Volume ' + n;
+		var r = /المجلدات من (\d+) إلى (\d+)/.exec(ar);
+		if (r) return s[1] + ' box set — Volumes ' + r[1] + ' to ' + r[2];
+		if (/الأعداد الكاملة/.test(ar)) return s[1] + ' — the complete issues';
+		if (/بوكس/.test(ar) && /فانتازيا/.test(ar) && /ساف/.test(ar)) return 'Safari and Fantasia box set';
+		return '';
+	};
+	var seen = [];
+	(function walk(o) {
+		if (!o || typeof o !== 'object' || seen.indexOf(o) >= 0) return;
+		seen.push(o);
+		if (typeof o.en === 'string' && /سلاح التلميذ/.test(o.en)) o.en = 'Selah El-Telmeez';
+		for (var k in o) walk(o[k]);
+	})({ issueInfo: A.issueInfo, bookInfo: A.bookInfo });
+	Object.keys(A.seriesCovers || {}).forEach(function (sid) {
+		(A.seriesCovers[sid] || []).forEach(function (c) {
+			['label', 'storeTitle'].forEach(function (f) {
+				var t = c[f];
+				if (!t || !t.ar || (t.en && !arabic.test(t.en))) return;
+				t.en = /^WWW/.test(t.ar) ? 'WWW' : volume(t.ar) || t.en;
+			});
+		});
+	});
+	var BLEY = ['Clash of the Titans', 'Trouble at the Club', 'The Secret of the Enchanted Marble', 'The Riddle of the Golden Sphinx', 'The Morning Star',
+		'Hero of the Jungle', 'Balbala Returns', 'The Devastating Earthquake', 'The Wonder Pistol', 'The Giants of Namnam Valley', 'The Cross-Eyed Pirate’s Treasure',
+		'The Treasures of King Ahmose', 'The Ghosts', 'The Enchanted Glasses', 'The Dwarves and the Mongols', 'The Terrible Invention', 'Clever Balya',
+		'Fantasy upon Fantasy', 'The Destructive Game'];
+	((A.seriesInfo || {}).bley || {}).libraryMore && A.seriesInfo.bley.libraryMore.forEach(function (x, i) {
+		if (x.title && BLEY[i] && (!x.title.en || arabic.test(x.title.en))) x.title.en = BLEY[i];
+	});
+})(window.AKT);
+
+/* the narrators of the Storytel and Iqraaly audiobooks in Latin letters, for «read by …» on the English pages (cassette.js) */
+(function (A) {
+	var Au = (A.audio = A.audio || {});
+	Au.narratorsEn = Object.assign(Au.narratorsEn || {}, {
+		'معتز صقر': 'Moataz Saqr', 'آية زكريا': 'Aya Zakaria', 'محمود سلام': 'Mahmoud Sallam', 'أيمن مسعود': 'Ayman Massoud', 'محمد ريان': 'Mohamed Rayan',
+		'صفا زياني': 'Safa Ziani', 'محمد حسام': 'Mohamed Hossam', 'مي سمير': 'Mai Samir', 'نهى نصير': 'Noha Nasir', 'رهام زيدان': 'Reham Zidan',
+		'رهام حمدي زيدان': 'Reham Hamdy Zidan', 'أشرف يحيى': 'Ashraf Yehia', 'ضحى طارق': 'Doha Tarek', 'الشيماء أحمد': 'El-Shaimaa Ahmed',
+		'إسراء جلبط': 'Esraa Galbat', 'داليا فتحي': 'Dalia Fathy', 'عبد الحى محمد': 'Abdelhay Mohamed', 'عبد الحي محمد': 'Abdelhay Mohamed',
+		'عمر حسن': 'Omar Hassan', 'دانية مرعي': 'Dania Merhi', 'منة التلاوي': 'Menna El-Telawy', 'رامي علي': 'Ramy Ali', 'سرى صقر': 'Sura Saqr',
+		'هشام عبد المقصود': 'Hesham Abdelmaksoud', 'أسامة عبد الغني': 'Osama Abdelghany', 'محمد عبد الرحمن': 'Mohamed Abdelrahman',
+		'رضوان صوان': 'Radwan Sawan', 'مجموعة من القراء': 'several readers', 'معتز أبو طالب': 'Moataz Abou Taleb', 'صبري سراج': 'Sabry Serag',
+		'أسماء سمير': 'Asmaa Samir', 'كريم مسعد': 'Karim Mosaad', 'حمدي التايه': 'Hamdy El-Tayeh', 'مصطفى خضر': 'Mostafa Khedr',
+		'شادي عباس': 'Shady Abbas', 'محمد العربي': 'Mohamed El-Araby', 'فاطمة عبد القادر': 'Fatma Abdelkader', 'إسلام عادل': 'Eslam Adel',
+		'نورهان علام': 'Nourhan Allam', 'كريم الغزولي': 'Karim El-Ghazouly', 'محمد الخيام': 'Mohamed El-Khayam', 'ريحانة صوابي': 'Rayhana Sawabi',
+		'إلقاء جماعي': 'a group reading', 'أحمد أمين': 'Ahmed Amin', 'مهدي أبركان': 'Mehdi Aberkan', 'محمد خميس': 'Mohamed Khamis', 'فريق «رُواة»': 'the Ruwah team'
+	});
+})(window.AKT);

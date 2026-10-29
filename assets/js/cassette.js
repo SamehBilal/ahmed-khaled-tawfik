@@ -283,6 +283,9 @@
 		});
 	}
 
+	/* a narrator's name in Latin letters on the English pages (AKT.audio.narratorsEn), else as written */
+	function narrator(name) { var M = ((window.App.data().audio) || {}).narratorsEn || {}; return M[name] || name; }
+
 	/* audiobooks on Storytel (data-storytel.js) -> tracks. key: an issue (a special issue under its hero, "mwt-s2", is "specials-2"),
 	   "work:<id>", "series:www" or "story:<title>"; data entries: [slug, minutes, narrator, year, part?] */
 	function storytelTracks(key, title) {
@@ -291,7 +294,7 @@
 		var k = String(key).replace(/^(mwt|fantasia|safari)-s(\d+)$/, 'specials-$2');
 		var eps = S.items[k] || [], L = window.App.L, num = window.App.num;
 		return eps.map(function (ep) {
-			var label = [ep[4] || '', ep[2] ? L('بصوت ', 'read by ') + ep[2] : '', ep[3] ? num(ep[3]) : ''].filter(Boolean).join(' · ');
+			var label = [ep[4] || '', ep[2] ? L('بصوت ' + ep[2], 'read by ' + narrator(ep[2])) : '', ep[3] ? num(ep[3]) : ''].filter(Boolean).join(' · ');
 			return { title: title, ep: label || 'Storytel', sub: 'Storytel' + (label ? ' · ' + label : ''), url: S.base + encodeURIComponent(ep[0]),
 				mins: ep[1] || null, by: ep[2] || '', provider: 'Storytel', skin: k.split('-')[0] };
 		});
@@ -303,7 +306,7 @@
 		if (!Q || !Q.items || !Q.items[key]) return [];
 		var L = window.App.L, num = window.App.num, info = (D.issueInfo || {})[key] || {};
 		return Q.items[key].map(function (ep) {
-			var label = [ep[2] ? L('بصوت ', 'read by ') + ep[2] : '', ep[3] ? num(ep[3]) + L(' حلقات', ' episodes') : ''].filter(Boolean).join(' · ');
+			var label = [ep[2] ? L('بصوت ' + ep[2], 'read by ' + narrator(ep[2])) : '', ep[3] ? num(ep[3]) + L(' حلقات', ' episodes') : ''].filter(Boolean).join(' · ');
 			return { title: title, ep: label || L('اقرألي', 'Iqraaly'), sub: L('اقرألي', 'Iqraaly') + (label ? ' · ' + label : ''), url: Q.base + ep[0],
 				mins: ep[1] || null, by: ep[2] || '', provider: 'Iqraaly', providerAr: 'اقرألي', skin: 'midnight', art: info.cover || '' };
 		});

@@ -5,6 +5,8 @@
 const fs = require('fs'), path = require('path');
 const load = require('./load-data.js'), root = load.root;
 const { App, S, P, d } = load();
+/* AKT.more is where data-more.js stages its additions before merging them; the pages never read it (build-data.js drops it) */
+delete d.more;
 const report = {};
 const add = (kind, what) => { (report[kind] = report[kind] || []).push(what); };
 
@@ -61,13 +63,22 @@ Object.keys(d.bookInfo || {}).forEach(k => { if (!App.byId(d.works, k) && !App.b
 /* text with Arabic but no English (with --en) */
 if (process.argv.includes('--en')) {
 	seen.clear();
-	const walkObj = (o, at) => {
+	/* the back-cover blurbs, and a series page's «On the back cover» block, are the printed text, shown in Arabic as printed */
+	const printed = (at, parent) => /^AKT\.blurbs\.|\.blurb$/.test(at) || /back cover/i.test(String(((parent || {}).title || {}).en || ''));
+	const walkObj = (o, at, parent) => {
 		if (!o || typeof o !== 'object' || seen.has(o)) return;
 		seen.add(o);
-		if (typeof o.ar === 'string' && o.ar.trim() && !('en' in o && String(o.en || '').trim())) add('no English', at);
-		for (const k in o) walkObj(o[k], at + (Array.isArray(o) ? '[' + k + ']' : '.' + k));
+		if (typeof o.ar === 'string' && o.ar.trim() && !String(o.en || '').trim() && !printed(at, parent)) add('no English', at);
+		/* «English» that is the Arabic again */
+		else if (typeof o.en === 'string' && /[ء-ي]/.test(o.en) && !printed(at, parent)) add('Arabic in the English', at + ' → ' + o.en.slice(0, 60));
+		for (const k in o) walkObj(o[k], at + (Array.isArray(o) ? '[' + k + ']' : '.' + k), o);
 	};
 	walkObj(d, 'AKT');
+	/* the audiobooks' narrators ([…, minutes, narrator, …] on Storytel and Iqraaly) need their name in Latin letters too */
+	const au = d.audio || {}, names = au.narratorsEn || {};
+	[au.storytel, au.iqraaly].forEach(src => Object.values((src || {}).items || {}).forEach(eps => (eps || []).forEach(ep => {
+		if (ep && typeof ep[2] === 'string' && /[ء-ي]/.test(ep[2]) && !names[ep[2]]) add('narrator without English', ep[2]);
+	})));
 }
 
 const kinds = Object.keys(report);
