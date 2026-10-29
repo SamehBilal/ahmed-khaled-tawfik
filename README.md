@@ -61,7 +61,9 @@ It builds, in order:
 - **`sitemap.xml`** (`tools/build-sitemap.js`) — every page, book, issue, series, character, writer, publisher and blog article, for search engines.
 - **`share/`** (`tools/build-share.js`) — a small page per book, series, character, writer, publisher and article with its own title and picture for WhatsApp, Facebook and X; the «شارك» buttons hand these out.
 
- Covers are cached as they're viewed, or all at once with "Save for offline" in the footer.
+To check the data for pictures that are missing, links to pages the site does not have, orphaned details and similar slips, run `node tools/check-data.js` (add `--en` to list text with no English yet).
+
+Covers are cached as they're viewed, or all at once with "Save for offline" in the footer.
 
 ## Credits
 
