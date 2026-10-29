@@ -3955,3 +3955,13 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		});
 	});
 })(window.AKT);
+
+/* Legacy videos: ReadTube («جيل يقرأ») on «يوتوبيا», a 26-minute retelling of the novel (YouTube, March 2023), sent by the site's editor */
+(function (A) {
+	var M = A.media = A.media || [], url = 'https://www.youtube.com/watch?v=vHhXMKsaEGE';
+	if (M.some(function (m) { return m.url === url; })) return;
+	M.push({ kind: 'documentary', title: { ar: 'يوتوبيا — رواية أحمد خالد توفيق كما لم تشاهدها من قبل', en: 'Utopia: Ahmed Khaled Tawfik’s novel as you have never seen it' },
+		outlet: { ar: 'ReadTube — جيل يقرأ', en: 'ReadTube (Jeel Yaqra)' }, year: 2023, lang: 'ar', url: url, work: 'utopia',
+		note: { ar: 'عرض مصوّر لرواية «يوتوبيا» في 26 دقيقة.', en: 'The novel Utopia retold on screen, in 26 minutes.' } });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
