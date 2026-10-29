@@ -3749,3 +3749,57 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var i = (A.issueInfo = A.issueInfo || {})['rwg-70'] = A.issueInfo['rwg-70'] || {};
 	i.ownCover = 'assets/img/covers/series/rwg/rwg-70-matilda.webp';
 })(window.AKT);
+
+/* ما وراء الطبيعة: the first editions' covers (the Modern Arab Association's original design: the owl over «روايات مصرية للجيب»,
+   before the reprints with the dripping white top), from the publisher's own store, Rewayat Masreya — 33 issues whose old prints it
+   still sells, put on each issue's first-edition print, with the store's page among its sources; #80 part 2 gets its 2014 print */
+(function (A) {
+	var M = {"mwt-30":"بعد-منتصف-الليل-30-عدد-خاص-ما-وراء-الطبيع",
+		"mwt-1":"مصاص-الدماء-وأسطورة-الرجل-الذئب-1-ما-ورا",
+		"mwt-2":"أسطورة-النداهة-2-ما-وراء-الطبيعة",
+		"mwt-3":"أسطورة-وحش-البحيرة-3-ما-وراء-الطبيعة",
+		"mwt-5":"أسطورة-الموتى-الأحياء-5-ما-وراء-الطبيعة",
+		"mwt-8":"أسطورة-أرض-أخرى-8-ما-وراء-الطبيعة",
+		"mwt-17":"أسطورة-حسناء-المقبرة-17-ما-وراء-الطبيعة",
+		"mwt-21":"أسطورة-عدو-الشمس-21-ما-وراء-الطبيعة",
+		"mwt-23":"أسطورة-رعب-المستنقعات-23-ما-وراء-الطبيعة",
+		"mwt-29":"أسطورة-الجاثوم-29-ما-وراء-الطبيعة",
+		"mwt-31":"أسطورتها-31-ما-وراء-الطبيعة",
+		"mwt-34":"أسطورة-الشاحبين-34-ما-وراء-الطبيعة",
+		"mwt-36":"أسطورة-الفصيلة-السادسة-36-ما-وراء-الطبيع",
+		"mwt-38":"أسطورة-النصف-الآخر-38-ما-وراء-الطبيعة",
+		"mwt-39":"أسطورة-التوءمين-39-ما-وراء-الطبيعة",
+		"mwt-42":"أسطورة-الكلمات-السبع-42-ما-وراء-الطبيعة",
+		"mwt-43":"أسطورة-تختلف-43-ما-وراء-الطبيعة",
+		"mwt-49":"أسطورة-العشيرة-49-ما-وراء-الطبيعة",
+		"mwt-51":"أسطورة-الرقم-المشئوم-51-ما-وراء-الطبيعة",
+		"mwt-52":"أسطورة-مملة-52-ما-وراء-الطبيعة",
+		"mwt-53":"أسطورة-النبوءة-53-ما-وراء-الطبيعة",
+		"mwt-54":"أسطورة-العراف-54-ما-وراء-الطبيعة",
+		"mwt-55":"أسطورة-99-55-ما-وراء-الطبيعة",
+		"mwt-56":"أسطورة-ملك-الذباب-56-ما-وراء-الطبيعة",
+		"mwt-58":"أسطورة-أرض-العظايا-58-ما-وراء-الطبيعة",
+		"mwt-59":"أسطورة-رونيل-السوداء-59-ما-وراء-الطبيعة",
+		"mwt-61":"أسطورة-الشيء-61-ما-وراء-الطبيعة",
+		"mwt-62":"أسطورة-صندوق-بندورا-62-ما-وراء-الطبيعة",
+		"mwt-63":"أسطورة-المحركين-63-ما-وراء-الطبيعة",
+		"mwt-64":"أسطورتهم-64-ما-وراء-الطبيعة",
+		"mwt-67":"أسطورة-بيت-الأشباح-67-ما-وراء-الطبيعة",
+		"mwt-71":"أسطورة-الظلال-71-ما-وراء-الطبيعة",
+		"mwt-80-2":"أسطورة-الأساطير-الجزء-الثاني-80-ما-وراء"};
+	var I = (A.issueInfo = A.issueInfo || {});
+	var maa = function (e) { return /الحديثة/.test(((e || {}).publisher || {}).ar || ''); };
+	Object.keys(M).forEach(function (k) {
+		var info = I[k] = I[k] || {}, eds = info.editions = info.editions || [];
+		if (k === 'mwt-80-2' && !eds.some(maa)) {
+			var p2 = ((I['mwt-80'] || {}).editions || []).filter(function (e) { return maa(e) && e.part === 2; })[0];
+			if (p2) eds.push(Object.assign({}, p2, { edition: 'الطبعة الأولى' }));
+		}
+		var ed = eds.filter(function (e) { return maa(e) && e.edition === 'الطبعة الأولى'; })[0] || eds.filter(maa)[0];
+		if (!ed) return;
+		var url = 'https://rewayatmasreya.com/products/' + encodeURIComponent(M[k]);
+		ed.cover = 'assets/img/covers/series/paranormal/first-ed-' + k + '.webp';
+		ed.coverSource = url;
+		if ((info.sources = info.sources || []).indexOf(url) < 0) info.sources.push(url);
+	});
+})(window.AKT);
