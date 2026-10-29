@@ -436,3 +436,5 @@ html[data-theme="light"] .sv-theme-code .sv-scene { background: radial-gradient(
 #issue-grid .cover-link.is-done .cl-cover::after { content: '✓'; position: absolute; top: 6px; inset-inline-end: 6px; z-index: 3;
 	display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--c, var(--ember)); color: #fff; font-size: 13px; font-weight: 700;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, .4); }
+.sv-random { margin: 0; }
+.sv-random svg { fill: none; }

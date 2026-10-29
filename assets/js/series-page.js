@@ -164,7 +164,9 @@ window.PAGE = {
 					/* of a series that grew from it (Lasheen), only its first book */
 					.concat(grown.map(function (x) { var is = S.seriesIssues(x.id)[0]; return is && { sid: x.id, is: is, tag: t(x.title) + ' ', color: x.color }; }).filter(Boolean))) : '') +
 				(issues.length ? '<section class="d-block d-wide"><div id="sv-progress"></div><div class="d-head"><h3>' + (ser.own ? L('كل الأعداد', 'Every issue') : ser.inspired ? L('كتب السلسلة', 'The books') : L('ما كتبه أو ترجمه فيها', 'What he wrote or translated in it')) +
-					' <small>(' + App.num(issues.length) + ')</small></h3></div><div class="cover-grid is-ranked" id="issue-grid" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
+					' <small>(' + App.num(issues.length) + ')</small></h3>' +
+					(issues.length > 2 ? '<button type="button" class="share-btn sv-random" data-random><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="3.5"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.3" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.3" fill="currentColor"/></svg>' +
+						e(L('عدد عشوائي', 'A random issue')) + '</button>' : '') + '</div><div class="cover-grid is-ranked" id="issue-grid" data-digits="' + digits + '" style="--c:' + e(s.color || '#c0392b') + ';--d:' + digits + '">' + issueGrid + '</div></section>' : '') +
 				/* its characters, the cards of the characters page, all small and the same size, about as big as the covers above (leads first), right under every issue */
 				(chars.length && window.CharCards ? '<section class="d-block d-wide sv-chars"><div class="d-head"><h3>' + L('الشخصيات', 'Characters') + ' <small>(' + App.num(chars.length) + ')</small></h3></div>' +
 					'<div class="char-grid cc-grid cc-minor">' + chars.filter(function (c) { return c.main; }).concat(chars.filter(function (c) { return !c.main; })).map(function (c) { return window.CharCards.card(c); }).join('') + '</div>' +
@@ -211,6 +213,16 @@ window.PAGE = {
 		this.initProximity(document.getElementById('prox'));
 		this.initIssuePanel(document.getElementById('issue-grid'), issues, id, s);
 		this.progress(issues, id);
+		/* «عدد عشوائي»: any issue, or for a reader with lists one not yet read (a collector: one not yet owned) */
+		var dice = document.querySelector('[data-random]');
+		if (dice) dice.addEventListener('click', function () {
+			var st = window.Lists ? window.Lists.state() : null, skip = {};
+			if (st) (st.lists[st.mode === 'collector' ? 'own' : 'read'] || []).forEach(function (x) { skip[x.key] = 1; });
+			var all = issues.filter(function (is) { return !(is.part > 1); });
+			var fresh = all.filter(function (is) { return !skip['b:' + decodeURIComponent(App.issueHref(id, is).replace(/^book\.html\?id=/, ''))]; });
+			var pool = fresh.length ? fresh : all;
+			location.href = App.issueHref(id, pool[Math.floor(Math.random() * pool.length)]);
+		});
 		this.initVolumes(id);
 		var cs = document.querySelector('.sv-chars');
 		if (cs) window.CharCards.bindFlip(cs);
