@@ -64,3 +64,30 @@ html[data-theme="light"] {
 .pp-year li b { font-family: var(--f-display); font-size: 16px; font-weight: 600; line-height: 1.35; }
 .pp-year li small { color: var(--muted); font-size: 13px; }
 @media (max-width: 640px) { .pp-cards { grid-template-columns: 1fr 1fr; } .pp-card .pp-n { font-size: 18px; } .pp-chart { padding: 12px 8px 4px; } }
+
+/* ---------- «بالأرقام» ---------- */
+.nm-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin: 0 0 30px; }
+.nm-tile { display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--ink-2); color: var(--paper);
+	transition: transform .2s, border-color .2s; }
+.nm-tile:hover { transform: translateY(-3px); border-color: var(--ember); color: var(--paper); }
+.nm-tile b { font-family: var(--f-latin); font-size: 42px; line-height: 1; color: var(--ember); }
+.nm-tile span { font-family: var(--f-display); font-size: 15px; color: var(--paper-dim); }
+.nm-chart figcaption a { font-size: 14px; margin-inline-start: 10px; }
+.nm-span { opacity: .92; transition: opacity .2s; }
+a:hover .nm-span { opacity: 1; }
+.nm-span-t { fill: #fff; font-family: var(--f-display); font-size: 14px; paint-order: stroke; stroke: rgba(0, 0, 0, .35); stroke-width: 3px; }
+.nm-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 6px; font-size: 14px; color: var(--paper-dim); }
+.nm-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.nm-legend i { width: 11px; height: 11px; border-radius: 3px; }
+.nm-tip-d { display: block; margin-top: 6px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.nm-bars { list-style: none; margin: 4px 0 6px; padding: 0; display: grid; gap: 8px; }
+.nm-bars a { display: grid; grid-template-columns: minmax(120px, 220px) 1fr; align-items: center; gap: 12px; color: var(--paper); }
+.nm-bar-n { font-family: var(--f-display); font-size: 15px; }
+.nm-bar { display: flex; align-items: center; gap: 8px; }
+.nm-bar i { display: block; height: 16px; border-radius: 0 4px 4px 0; background: var(--pp-1); min-width: 4px; }
+html[dir="rtl"] .nm-bar i { border-radius: 4px 0 0 4px; }
+.nm-bar b { font-family: var(--f-latin); font-size: 16px; }
+.nm-bars a:hover .nm-bar i { filter: brightness(1.15); }
+@media (max-width: 640px) { .nm-tile b { font-size: 32px; } .nm-bars a { grid-template-columns: 1fr; gap: 2px; } }
+.nm-span-t.is-out { fill: var(--paper); stroke: none; }
+.nm-note { display: block; font-family: var(--f-body); font-size: 13px; color: var(--muted); margin-top: 2px; }
