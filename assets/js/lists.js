@@ -334,7 +334,7 @@
 		'</div>';
 	}
 
-	function changed() { renderFab(); if (panel && panel.classList.contains('show')) render(); }
+	function changed() { renderFab(); if (panel && panel.classList.contains('show')) render(); try { document.dispatchEvent(new CustomEvent('akt-lists')); } catch (e) {} }
 
 	var lastFocus = null;
 	function open(drag) {
@@ -366,7 +366,7 @@
 		var b = ev.target.closest('button');
 		if (!b) return;
 		if (b.hasAttribute('data-close')) close();
-		else if (b.hasAttribute('data-mode')) { state.mode = b.getAttribute('data-mode'); save(); render(); renderFab(); }
+		else if (b.hasAttribute('data-mode')) { state.mode = b.getAttribute('data-mode'); save(); render(); renderFab(); try { document.dispatchEvent(new CustomEvent('akt-lists')); } catch (e) {} }
 		else if (b.hasAttribute('data-remove')) remove(b.getAttribute('data-remove'), b.getAttribute('data-key'));
 		else if (b.hasAttribute('data-eds')) chooseEditions(b.getAttribute('data-eds'), b.getAttribute('data-key'));
 		else if (b.hasAttribute('data-export')) exportAs(b.getAttribute('data-export'), b);
@@ -757,5 +757,5 @@
 	}
 	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 
-	window.Lists = { buttons: buttons, open: open, mountPage: mountPage, add: add, has: has, editions: chooseEditions, state: function () { return state; } };
+	window.Lists = { LISTS: LISTS, buttons: buttons, open: open, mountPage: mountPage, add: add, has: has, editions: chooseEditions, state: function () { return state; } };
 })();

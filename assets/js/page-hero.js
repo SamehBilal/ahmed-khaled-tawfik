@@ -111,6 +111,32 @@
 				'<span class="ph-seal">' + A.esc(A.L('ع', 'G')) + '</span></div>';
 		},
 
+		/* lists: four wooden crates under a hanging lamp, one per list, holding the reader's own covers (the newest in front) and
+		   the count on a plate; an empty crate has a cover dropping into it, as one is dragged onto a list. The current mode's
+		   two crates stand lit, the other two in the shade; redrawn whenever the lists change (lists.js 'akt-lists') */
+		lists: function (d, A) {
+			var e = A.esc, t = A.t, Ls = window.Lists, S = window.WorksShared;
+			if (!Ls || !Ls.state) return '';
+			if (!R._listsWired) { R._listsWired = true; document.addEventListener('akt-lists', function () { render(); }); }
+			var st = Ls.state(), LI = Ls.LISTS;
+			var mode = { toread: 'reader', read: 'reader', own: 'collector', want: 'collector' };
+			var drops = S ? ['mwt', 'safari', 'fantasia', 'rwg'].map(function (id) { return S.seriesCover(id); }) : [];
+			return '<i class="ph-lamp"></i><div class="ph-crates">' + ['toread', 'read', 'own', 'want'].map(function (k, i) {
+				var list = (st.lists || {})[k] || [], few = list.slice(0, 4);
+				var covers = few.length ? few.map(function (x, j) {
+					var r = ((rnd(j, 30 + i) - 0.5) * 10).toFixed(1);
+					return x.img
+						? '<img class="ph-cv" src="' + e(x.img) + '" alt="" loading="lazy" style="--j:' + j + ';--r:' + r + 'deg">'
+						: '<i class="ph-cv ph-cv-drawn" style="--j:' + j + ';--r:' + r + 'deg;background:' + e(x.color || '#5a2a22') + '"><b>' + e(t(x.title)) + '</b></i>';
+				}).reverse().join('')
+					: (drops[i] ? '<img class="ph-cv ph-drop" src="' + e(drops[i]) + '" alt="" loading="lazy" style="--d:' + (i * 1.1).toFixed(1) + 's">' : '');
+				return '<div class="ph-crate' + (mode[k] === st.mode ? ' on' : '') + (few.length ? '' : ' empty') + '">' +
+					'<div class="ph-crate-in">' + covers + '</div>' +
+					'<div class="ph-crate-box"><span class="ph-plate"><svg viewBox="0 0 24 24"><path d="' + LI[k].icon + '"/></svg>' +
+						'<b>' + e(A.L(LI[k].ar, LI[k].en)) + '</b><em>' + e(A.num(list.length)) + '</em></span></div></div>';
+			}).join('') + '</div>';
+		},
+
 		/* publishers: a dark bookshelf that a flashlight finds in colour (page-hero.css .ph-shelf) */
 		publishers: function () {
 			return '<div class="ph-shelf"></div>';

@@ -380,3 +380,61 @@ html[data-theme="light"] .fc .wax {
 	background: linear-gradient(90deg, #17120d, #231d16 40%, #3a2f24 55%, #1a140f);
 	box-shadow: 0 1px 0 0 rgba(255, 238, 221, .25) inset, 0 12px 20px 2px rgba(35, 29, 22, .2);
 }
+
+/* ---------- lists: four wooden crates under a hanging lamp, one per list ---------- */
+.ph[data-ph="lists"] { background: radial-gradient(55% 110% at 50% 0%, #3a2616 0%, #1a120c 55%, #0d0a08 100%); }
+/* the lamp: a cord, a brass shade and the pool of light it throws on the crates */
+.ph-lamp { position: absolute; top: 0; left: 50%; width: 2px; height: 46px; margin-left: -1px; background: #4a3b2c; z-index: 3; }
+.ph-lamp::before { content: ''; position: absolute; top: 44px; left: 50%; width: 74px; height: 30px; margin-left: -37px; border-radius: 40px 40px 6px 6px;
+	background: linear-gradient(#c49a52, #7a5a2a); box-shadow: 0 6px 0 -2px #ffe2a8; }
+.ph-lamp::after { content: ''; position: absolute; top: 72px; left: 50%; width: 900px; height: 360px; margin-left: -450px; pointer-events: none;
+	background: radial-gradient(closest-side at 50% 0%, rgba(255, 214, 150, .2), transparent); clip-path: polygon(46% 0, 54% 0, 100% 100%, 0 100%); }
+/* the floor they stand on */
+.ph[data-ph="lists"] .ph-stage::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 46px; z-index: 0;
+	background: linear-gradient(#2a1c12, #140e09); border-top: 1px solid rgba(255, 214, 150, .12); }
+.ph-crates { position: absolute; left: 0; right: 0; bottom: 30px; z-index: 2; display: flex; justify-content: center; align-items: flex-end; gap: 3.5%; padding: 0 6%; }
+.ph-crate { position: relative; width: 170px; flex: 0 1 170px; filter: brightness(.55) saturate(.7); transition: filter .4s; }
+.ph-crate.on { filter: none; }
+/* the covers inside: up to four, leaning, the newest in front */
+.ph-crate-in { position: relative; height: 150px; margin-bottom: -38px; }
+.ph-cv { position: absolute; bottom: 0; left: 50%; width: 82px; height: 118px; margin-left: -41px; object-fit: cover; border-radius: 2px 4px 4px 2px;
+	box-shadow: 0 6px 14px rgba(0, 0, 0, .5); transform: translateX(calc((var(--j, 0) - 1.5) * 15px)) translateY(calc(var(--j, 0) * 4px)) rotate(var(--r, 0deg)); }
+.ph-cv-drawn { display: flex; align-items: center; justify-content: center; padding: 8px; text-align: center; overflow: hidden; }
+.ph-cv-drawn b { font-family: var(--f-display); font-size: 12px; color: #f4ead6; line-height: 1.3; }
+/* an empty crate: a cover drops in, again and again, as one is dragged onto a list */
+.ph-drop { opacity: 0; animation: ph-drop 5.5s var(--d, 0s) infinite cubic-bezier(.5, 0, .7, 1); }
+@keyframes ph-drop {
+	0% { opacity: 0; transform: translateY(-120px) rotate(-12deg); }
+	12% { opacity: .95; }
+	42% { transform: translateY(0) rotate(4deg); }
+	48% { transform: translateY(-8px) rotate(2deg); }
+	54%, 80% { opacity: .95; transform: translateY(0) rotate(3deg); }
+	100% { opacity: 0; transform: translateY(0) rotate(3deg); }
+}
+/* the crate: slats of wood, and a brass plate with the list's name and how many it holds */
+.ph-crate-box { position: relative; z-index: 1; height: 76px; border-radius: 3px;
+	background: repeating-linear-gradient(#8a5a2e 0 26px, #5a3a1c 26px 30px), #7a4f28;
+	box-shadow: inset 6px 0 0 #6b4422, inset -6px 0 0 #6b4422, 0 10px 18px rgba(0, 0, 0, .55); }
+.ph-plate { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 6px; white-space: nowrap;
+	padding: 5px 10px; border-radius: 3px; background: linear-gradient(#e9cf8f, #b88f45); color: #2a1a0b; box-shadow: 0 1px 2px rgba(0, 0, 0, .5); }
+.ph-plate svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.ph-plate b { font-family: var(--f-display); font-size: 14px; font-weight: 700; }
+.ph-plate em { font-style: normal; font-family: var(--f-latin); font-size: 13px; min-width: 20px; padding: 0 5px; border-radius: 9px; background: #2a1a0b; color: #f1d898; text-align: center; }
+@media (max-width: 640px) {
+	.ph-crates { gap: 2.5%; padding: 0 3%; bottom: 22px; }
+	.ph-crate-in { height: 104px; margin-bottom: -26px; }
+	.ph-lamp { height: 20px; } .ph-lamp::before { top: 18px; width: 52px; height: 22px; margin-left: -26px; } .ph-lamp::after { top: 40px; }
+	.ph-cv { width: 54px; height: 78px; margin-left: -27px; transform: translateX(calc((var(--j, 0) - 1.5) * 8px)) translateY(calc(var(--j, 0) * 3px)) rotate(var(--r, 0deg)); }
+	.ph-crate-box { height: 58px; }
+	.ph-plate { flex-direction: column; gap: 2px; padding: 4px 6px; }
+	.ph-plate svg { display: none; }
+	.ph-plate b { font-size: 11px; }
+	.ph-plate em { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { .ph-drop { animation: none; opacity: .5; } }
+/* by day: a lit storeroom in pale wood */
+html[data-theme="light"] .ph[data-ph="lists"] { background: radial-gradient(55% 110% at 50% 0%, #fbf1dc 0%, #ecdcbf 60%, #dfcaa6 100%); }
+html[data-theme="light"] .ph[data-ph="lists"] .ph-stage::after { background: linear-gradient(#c9ad80, #b39264); border-top-color: rgba(90, 60, 30, .2); }
+html[data-theme="light"] .ph-lamp::after { background: radial-gradient(closest-side at 50% 0%, rgba(255, 236, 190, .55), transparent); }
+html[data-theme="light"] .ph-crate { filter: brightness(.8) saturate(.6); }
+html[data-theme="light"] .ph-crate.on { filter: none; }
