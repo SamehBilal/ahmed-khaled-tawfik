@@ -401,7 +401,8 @@
 							'<span class="ft-dates" dir="ltr">1962 — 2018</span>' +
 						'</div>' +
 						'<nav class="ft-links" aria-label="' + App.L('صفحات الموقع', 'Site pages') + '">' +
-							UI.nav.concat(UI.more).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+							/* (the phone menu's own entries are the footer's own pages already, or the «My lists» button) */
+							UI.nav.filter(function (n) { return !n.phone; }).concat(UI.more).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 						'</nav>' +
 						'<nav class="ft-legal" aria-labelledby="ft-legal-h"><h2 id="ft-legal-h">' + App.L('خلف الكواليس', 'Behind the site') + '</h2>' +
 							UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
