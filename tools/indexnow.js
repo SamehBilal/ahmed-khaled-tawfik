@@ -9,7 +9,8 @@ const keyFile = fs.readdirSync(root).filter(f => /^[0-9a-f]{32}\.txt$/.test(f))[
 if (!keyFile) { console.error('no key file'); process.exit(1); }
 const key = keyFile.slice(0, 32);
 const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1].replace(/&amp;/g, '&'));
-fetch('https://api.indexnow.org/indexnow', {
+/* sent to Bing, which shares it with the other IndexNow engines (the shared api.indexnow.org refused the key at first) */
+fetch('https://www.bing.com/indexnow', {
 	method: 'POST', headers: { 'Content-Type': 'application/json; charset=utf-8' },
 	body: JSON.stringify({ host: 'samehbilal.github.io', key: key, keyLocation: SITE + keyFile, urlList: urls })
 }).then(r => console.log('IndexNow', r.status, r.statusText, urls.length, 'addresses'), e => console.error(e.message));
