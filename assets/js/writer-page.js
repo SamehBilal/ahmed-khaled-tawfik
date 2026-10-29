@@ -21,6 +21,7 @@ window.PAGE = {
 		if (has('influenced')) parts.push(L('خرج من عباءته قارئًا ثم كاتبًا', 'grew up reading him before becoming a writer', 'خرجت من عباءته قارئةً ثم كاتبةً'));
 		if (has('contemporaries')) parts.push(L('كان من رفاق جيله في كتب الجيب', 'was one of his peers in the pocket books', 'كانت من رفاق جيله في كتب الجيب'));
 		if (has('translated')) parts.push(L('نقل العرّاب أعماله إلى العربية', 'was translated into Arabic by him'));
+		if (has('about')) parts.push(L('ألّف كتابًا عنه', 'wrote a book about him', 'ألّفت كتابًا عنه'));
 		/* and what the site's other data says they did: a series from his world, a screen adaptation they directed or wrote */
 		var d = App.data(), S = window.WorksShared;
 		p.series.forEach(function (sid) {

@@ -5,7 +5,7 @@
 (function () {
 	'use strict';
 
-	var SHELVES = ['collaborators', 'introductions', 'dedications', 'influenced', 'contemporaries', 'translated'];
+	var SHELVES = ['collaborators', 'introductions', 'dedications', 'influenced', 'contemporaries', 'translated', 'about'];
 	var WP = function (t) { return 'https://ar.wikipedia.org/wiki/' + encodeURIComponent(t.replace(/ /g, '_')); };
 	var EN = function (t) { return 'https://en.wikipedia.org/wiki/' + encodeURIComponent(t.replace(/ /g, '_')); };
 	var AK = function (s) { return 'https://www.aseeralkotb.com/ar/authors/' + encodeURIComponent(s); };
@@ -108,7 +108,7 @@
 	};
 
 	/* the women, so Arabic speaks of them in the feminine */
-	var FEMALE = ['sherine-hanaey', 'sally-adel', 'hanan-el-karargy', 'madiha-mohamed', 'reham-ibrahim'];
+	var FEMALE = ['sherine-hanaey', 'sally-adel', 'hanan-el-karargy', 'madiha-mohamed', 'reham-ibrahim', 'engy-khaled-ahmed'];
 
 	var cache = null;
 	var key = function (name) { return String((name && name.ar) || '').replace(/^د\.\s*/, '').trim(); };
@@ -169,7 +169,8 @@
 			dedications: { ar: 'أهدى إليه', arF: 'أهدت إليه', en: 'Dedicated a book to him', c: '#5a1f3a' },
 			influenced: { ar: 'تأثّر به', arF: 'تأثّرت به', en: 'Influenced by him', c: '#7a5a1c' },
 			contemporaries: { ar: 'رفيق الطريق', arF: 'رفيقة الطريق', en: 'Contemporary', c: '#334155' },
-			translated: { ar: 'ترجم له', en: 'He translated them', c: '#3b3b58' }
+			translated: { ar: 'ترجم له', en: 'He translated them', c: '#3b3b58' },
+			about: { ar: 'كتب عنه', arF: 'كتبت عنه', en: 'Wrote about him', c: '#6b4a1c' }
 		},
 		key: key,
 		all: function () { if (!cache) cache = build(); return cache.list; },
@@ -185,7 +186,7 @@
 		/* one line for an entry: what the book was and which way the words went */
 		meta: function (w) {
 			var App = window.App, t = App.t, L = App.L;
-			if (w.book) return (w.direction === 'by_akt' ? L('قدّم له العرّاب: ', 'Foreword by AKT: ') : w.direction === 'back_akt' ? L('كلمة العرّاب على غلافه: ', 'AKT on the back cover: ') : w.direction === 'dedication' ? L('أهدى إليه: ', 'Dedicated to him: ') : L('كتب مقدّمة: ', 'Wrote the foreword to: ')) + t(w.book) + (w.year ? ' (' + App.num(w.year) + ')' : '');
+			if (w.book) return (w.direction === 'by_akt' ? L('قدّم له العرّاب: ', 'Foreword by AKT: ') : w.direction === 'back_akt' ? L('كلمة العرّاب على غلافه: ', 'AKT on the back cover: ') : w.direction === 'dedication' ? L('أهدى إليه: ', 'Dedicated to him: ') : w.direction === 'about' ? L('كتاب عنه: ', 'A book about him: ') : L('كتب مقدّمة: ', 'Wrote the foreword to: ')) + t(w.book) + (w.year ? ' (' + App.num(w.year) + ')' : '');
 			/* a title that already names its years keeps them; otherwise the year goes after it */
 			if (w.work) return L('العمل: ', 'Work: ') + t(w.work) + (w.year && !/\d{4}/.test(t(w.work)) ? ' (' + App.num(w.year) + ')' : '');
 			return '';

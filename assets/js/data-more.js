@@ -3933,3 +3933,25 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		books: ['s:supermega']
 	});
 })(window.AKT);
+
+/* «كتب عنه» on the writers page: the writers of the books about him (AKT.aboutBooks, the tributes page), one each, linked to the book */
+(function (A) {
+	var W = A.writers = A.writers || {}, list = W.about = W.about || [];
+	(A.aboutBooks || []).forEach(function (b) {
+		if (!b.by || !b.by.ar || list.some(function (w) { return w.books && w.books[0] === 'b:' + b.id; })) return;
+		var info = (A.bookInfo || {})[b.id] || {}, year = b.year || (String(info.firstPublished || '').match(/\d{4}/) || [])[0] || '';
+		var pub = b.publisher || {};
+		list.push({
+			name: b.by,
+			book: b.title,
+			direction: 'about',
+			year: year ? +year : undefined,
+			text: {
+				ar: '«' + b.title.ar + '»: كتاب عن أحمد خالد توفيق' + (pub.ar ? '، صدر عن ' + pub.ar : '') + (year ? ' (' + year + ')' : '') + '.',
+				en: b.title.en + ': a book about Ahmed Khaled Tawfik' + (pub.en ? ', published by ' + pub.en : '') + (year ? ' (' + year + ')' : '') + '.'
+			},
+			cover: b.cover,
+			books: ['b:' + b.id]
+		});
+	});
+})(window.AKT);
