@@ -251,3 +251,6 @@ html[dir="rtl"] .bh-heading { clip-path: none; }
 .np-cont { column-span: all; margin: 18px 0 6px; text-align: center; }
 .np-cont-btn { display: inline-block; padding: 9px 22px; border: 2px solid var(--np-ink); background: var(--np-ink); color: var(--np-paper, #f3ead6); font-family: var(--f-display); font-size: 17px; text-decoration: none; transition: background .2s, color .2s; }
 .np-cont-btn:hover, .np-cont-btn:focus-visible { background: transparent; color: var(--np-ink); }
+
+/* on a phone the big «مقالاته وقصصه القصيرة جميعًا…» heading is left out: the page's own title follows just below */
+@media (max-width: 699px) { .bh-heading { display: none; } }
