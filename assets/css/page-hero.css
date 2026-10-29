@@ -382,7 +382,11 @@ html[data-theme="light"] .fc .wax {
 }
 
 /* ---------- lists: four wooden crates under a hanging lamp, one per list ---------- */
-.ph[data-ph="lists"] { background: radial-gradient(55% 110% at 50% 0%, #3a2616 0%, #1a120c 55%, #0d0a08 100%); }
+.ph[data-ph="lists"] { --ph-bg: var(--ink); border-bottom: 0; background: radial-gradient(55% 110% at 50% 0%, #3a2616 0%, #1a120c 55%, #0d0a08 100%); }
+/* no line under it: the floor fades into the page, behind the crates, and the headline comes up closer */
+.ph[data-ph="lists"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 130px; z-index: 1; pointer-events: none;
+	background: linear-gradient(transparent, var(--ink)); }
+.ph[data-ph="lists"] + .page-hero { padding-top: 36px; }
 /* the lamp: a cord, a brass shade and the pool of light it throws on the crates */
 .ph-lamp { position: absolute; top: 0; left: 50%; width: 2px; height: 46px; margin-left: -1px; background: #4a3b2c; z-index: 3; }
 .ph-lamp::before { content: ''; position: absolute; top: 44px; left: 50%; width: 74px; height: 30px; margin-left: -37px; border-radius: 40px 40px 6px 6px;
@@ -433,7 +437,7 @@ html[data-theme="light"] .fc .wax {
 }
 @media (prefers-reduced-motion: reduce) { .ph-drop { animation: none; opacity: .5; } }
 /* by day: a lit storeroom in pale wood */
-html[data-theme="light"] .ph[data-ph="lists"] { background: radial-gradient(55% 110% at 50% 0%, #fbf1dc 0%, #ecdcbf 60%, #dfcaa6 100%); }
+html[data-theme="light"] .ph[data-ph="lists"] { --ph-bg: var(--ink); background: radial-gradient(55% 110% at 50% 0%, #fbf1dc 0%, #ecdcbf 60%, #dfcaa6 100%); }
 html[data-theme="light"] .ph[data-ph="lists"] .ph-stage::after { background: linear-gradient(#c9ad80, #b39264); border-top-color: rgba(90, 60, 30, .2); }
 html[data-theme="light"] .ph-lamp::after { background: radial-gradient(closest-side at 50% 0%, rgba(255, 236, 190, .55), transparent); }
 html[data-theme="light"] .ph-crate { filter: brightness(.8) saturate(.6); }
