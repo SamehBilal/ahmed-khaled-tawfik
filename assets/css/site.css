@@ -1100,3 +1100,10 @@ h1 .pub-closed { font-size: 15px; padding: 3px 12px; }
 
 /* a header link for the phone menu only (UI.nav phone: true — «My lists») */
 @media (min-width: 761px) { .nav a.nav-phone { display: none; } }
+
+/* «شارك» on the pages of a book, series, character, writer, publisher or article (App.shareButton) */
+.share-btn { display: inline-flex; align-items: center; gap: 6px; margin: 10px 0 4px; cursor: pointer;
+	font-family: var(--f-display); font-size: 14px; padding: 6px 14px; border-radius: 999px;
+	border: 1px solid var(--line); background: none; color: var(--paper); }
+.share-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.share-btn:hover { border-color: var(--ember); color: var(--ember); }

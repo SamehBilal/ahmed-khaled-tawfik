@@ -370,7 +370,7 @@ window.PAGE = {
 				'</nav>' +
 				'<p class="np-credit">' + L('نُشر في المدونة: ', 'Posted on the blog: ') + e(posted) + ' · <a href="' + e(self.url(p)) + '" target="_blank" rel="noopener">aktowfik.blogspot.com ↗</a>' +
 					/* a column or story episode he first published on Ida2at links to it there */
-					(ida ? ' · <a class="np-ida" href="' + e(ida) + '" target="_blank" rel="noopener">' + L('نُشر أولًا في «إضاءات» ↗', 'First published on Ida2at ↗') + '</a>' : '') + '</p>' +
+					(ida ? ' · <a class="np-ida" href="' + e(ida) + '" target="_blank" rel="noopener">' + L('نُشر أولًا في «إضاءات» ↗', 'First published on Ida2at ↗') + '</a>' : '') + '</p>' + App.shareButton() +
 			'</article></div></section>';
 		this.wireGoto();
 		if (!p.body) this.loadFull(p);

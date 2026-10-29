@@ -202,6 +202,21 @@
 			if (!ld) { ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.id = 'ld-page'; head.appendChild(ld); }
 			ld.textContent = JSON.stringify(graph.length === 1 ? graph[0] : graph);
 		},
+		/* the address to share for this page: a book's, series', character's, writer's, publisher's or article's own small page
+		   (share/<kind>/<id>.html, tools/build-share.js), which gives WhatsApp, Facebook and X its title and picture and opens
+		   the page; any other page, its own address */
+		shareUrl: function () {
+			var SITE = 'https://samehbilal.github.io/ahmed-khaled-tawfik/', q = new URLSearchParams(location.search);
+			var page = location.pathname.split('/').pop().replace(/\.html$/, '');
+			var kind = { book: 'book', series: 'series', character: 'character', writer: 'writer', publisher: 'publisher' }[page];
+			var id = kind ? q.get('id') : page === 'blog' ? q.get('post') : null;
+			if (page === 'blog' && id) kind = 'post';
+			return kind && id && /^[\w.-]+$/.test(id) ? SITE + 'share/' + kind + '/' + id + '.html' : SITE + (page && page !== 'index' ? page + '.html' : '') + location.search;
+		},
+		shareButton: function () {
+			return '<button type="button" class="share-btn" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8l7.4-4.3M8.3 13.2l7.4 4.3"/></svg>' +
+				App.esc(App.L('شارك', 'Share')) + '</button>';
+		},
 		/* him, as the books' author in their JSON-LD: the Person the home page describes */
 		seoAuthor: { '@type': 'Person', '@id': 'https://samehbilal.github.io/ahmed-khaled-tawfik/#akt', name: 'أحمد خالد توفيق', alternateName: 'Ahmed Khaled Tawfik' },
 
@@ -516,6 +531,16 @@
 			App.fillStrings();
 			if (window.PAGE && typeof window.PAGE.render === 'function') window.PAGE.render();
 			App.observeRise();
+			/* «شارك»: the phone's share sheet where there is one, else the address copied */
+			document.addEventListener('click', function (ev) {
+				var b = ev.target.closest && ev.target.closest('[data-share]');
+				if (!b) return;
+				var url = App.shareUrl(), title = document.title;
+				var copied = function () { if (window.Notify) window.Notify(App.L('نُسخ الرابط؛ الصقه حيث تريد.', 'Link copied; paste it anywhere.'), { type: 'success' }); };
+				if (navigator.share) navigator.share({ title: title, url: url }).catch(function () {});
+				else if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(copied, function () { window.prompt(App.L('انسخ الرابط:', 'Copy the link:'), url); });
+				else window.prompt(App.L('انسخ الرابط:', 'Copy the link:'), url);
+			});
 			/* rows of covers show their scrollbar only while they are being scrolled */
 			document.addEventListener('scroll', function (ev) {
 				var el = ev.target;

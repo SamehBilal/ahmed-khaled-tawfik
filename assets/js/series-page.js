@@ -122,7 +122,7 @@ window.PAGE = {
 						'<p class="eyebrow">' + (ser.own ? L('سلسلة من تأليفه', 'His series') : ser.inspired ? L('عالم خرج من أدبه', 'A world grown from his work') : L('سلسلة شارك فيها', 'A series he contributed to')) + '</p>' +
 						'<h1>' + tx(s.title) + '</h1>' +
 						'<p class="d-alt">' + e(App.alt(s.title)) + '</p>' +
-						(s.tagline ? '<p class="d-by">' + tx(s.tagline) + '</p>' : '') +
+						(s.tagline ? '<p class="d-by">' + tx(s.tagline) + '</p>' : '') + App.shareButton() +
 						(desc ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
 						(info.genres && info.genres.length ? '<div class="d-genres">' + info.genres.map(function (g) { return '<span>' + tx(g) + '</span>'; }).join('') + '</div>' : '') +
 						'<dl class="d-facts">' + facts.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + (x[2] || e(x[1])) + '</dd>'; }).join('') + '</dl>' +

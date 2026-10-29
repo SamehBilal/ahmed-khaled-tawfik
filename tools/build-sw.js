@@ -33,3 +33,5 @@ console.log(version, list.length, 'files');
 
 // the sitemap is read from the same data, so it is rebuilt with every change too
 require('./build-sitemap.js');
+// and the pages that give shared links their own title and picture (share/)
+require('./build-share.js');

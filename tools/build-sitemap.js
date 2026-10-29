@@ -2,29 +2,12 @@
 // character, writer, publisher and blog article, read from the same data and link helpers the pages use,
 // with each book's and series' cover for image search. robots.txt points to it.
 // Run from the repo root after changing the data:  node tools/build-sitemap.js
-const fs = require('fs'), path = require('path'), vm = require('vm'), cp = require('child_process');
+const fs = require('fs'), path = require('path'), cp = require('child_process');
 const root = path.resolve(__dirname, '..');
 const SITE = 'https://samehbilal.github.io/ahmed-khaled-tawfik/';
 
-/* the data and helpers, loaded as the pages load them, in a bare window: no page is drawn */
-const noop = () => {};
-const el = () => ({ style: {}, classList: { add: noop, remove: noop, toggle: noop, contains: () => false }, setAttribute: noop, getAttribute: () => null, appendChild: noop, addEventListener: noop });
-const win = {
-	console, setTimeout, clearTimeout, URLSearchParams,
-	document: { readyState: 'loading', addEventListener: noop, documentElement: el(), body: el(), head: el(), querySelector: () => null, querySelectorAll: () => [], getElementById: () => null, createElement: el },
-	location: { search: '', hash: '', pathname: '/', href: SITE },
-	history: { replaceState: noop, pushState: noop },
-	navigator: { userAgent: 'node' },
-	localStorage: { getItem: () => null, setItem: noop, removeItem: noop },
-	matchMedia: () => ({ matches: false, addEventListener: noop }),
-	addEventListener: noop, requestAnimationFrame: noop
-};
-win.window = win; win.self = win;
-const ctx = vm.createContext(win);
-['data', 'data-issues', 'data-quotes', 'data-legacy', 'data-books-a', 'data-books-b', 'data-series-more', 'data-audio', 'data-storytel',
-	'data-tributes', 'data-more', 'data-blurbs', 'data-blog', 'data-heroes', 'people', 'books', 'shared', 'app']
-	.forEach(f => vm.runInContext(fs.readFileSync(path.join(root, 'assets/js', f + '.js'), 'utf8'), ctx, { filename: f + '.js' }));
-const App = win.App, S = win.WorksShared, P = win.People, d = App.data();
+/* the data and helpers, loaded as the pages load them (tools/load-data.js) */
+const { App, S, P, d } = require('./load-data.js')();
 
 /* the last time a file changed, by git, for the section pages */
 const lastmod = (f) => { try { return cp.execSync('git log -1 --format=%cs -- "' + f + '"', { cwd: root }).toString().trim(); } catch (e) { return ''; } };

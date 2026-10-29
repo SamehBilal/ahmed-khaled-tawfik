@@ -318,7 +318,7 @@ window.PAGE = {
 						'<p class="d-by">' + (isIssue && !ser.own && !ser.inspired ? L('دوره: ', 'His role: ') + tx(ser.s.role || { ar: 'مساهم', en: 'Contributor' }) + ' — ' : item.type === 'translation' ? L('ترجمة ', 'translated by ') : L('تأليف ', 'by ')) + people + '</p>' +
 						(r.about && !r.entry ? '<p class="d-by">' + L('كتاب عن ', 'About ') + '<a href="index.html">' + L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik') + '</a></p>' : '') +
 						(isIssue && ser.inspired && ser.s.role ? '<p class="d-by">' + L('صلتها به: ', 'Link to him: ') + tx(ser.s.role) + '</p>' : '') +
-						(window.Lists ? window.Lists.buttons('b:' + id) : '') +
+						(window.Lists ? window.Lists.buttons('b:' + id) : '') + App.shareButton() +
 						((desc && !(blurb && desc.ar === blurb.ar)) ? '<div class="d-desc">' + App.paras(desc) + '</div>' : '') +
 						(r.entry ? '<section class="d-block d-why-block"><h3>' + L('لماذا هذا الكتاب هنا؟', 'Why this book is here') + '</h3><p class="d-why">' +
 							(item.type === 'dedicated' ? L('أهداه مؤلفه إلى أحمد خالد توفيق.', 'Its author dedicated it to Ahmed Khaled Tawfik.') :

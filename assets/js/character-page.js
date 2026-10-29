@@ -88,7 +88,7 @@ window.PAGE = {
 						(ser ? '<a href="' + e(S.seriesHref(c.work)) + '">' + tx(ser.s.title) + '</a>' : work ? App.workLink(c.work) : '') + '</p>' +
 					'<h1>' + e(name) + '</h1>' +
 					'<p class="ch-alt">' + e(App.alt(c.name)) + '</p>' +
-					'<p class="ch-role">' + tx(c.role) + '</p>' +
+					'<p class="ch-role">' + tx(c.role) + '</p>' + App.shareButton() +
 					/* a hero's longer introduction replaces the card text, which says the same in brief */
 					App.paras(hero ? hero.intro : c.desc) +
 					(c.traits && c.traits.length ? '<div class="traits">' + c.traits.map(function (x) { return '<span>' + tx(x) + '</span>'; }).join('') + '</div>' : '') +

@@ -100,7 +100,7 @@ window.PAGE = {
 				'<div class="wp-head">' + logo +
 					'<div class="wp-id"><p class="eyebrow">' + L('دار نشر', 'Publisher') + '</p><h1>' + tx(p.name) + S.closedBadge(p) + '</h1>' +
 						'<p class="wp-alt">' + e(App.alt(p.name)) + '</p><div class="wp-chips">' + chips + '</div>' + linksHtml +
-						about + (p.note ? '<p class="wp-bio">' + tx(p.note) + '</p>' : '') + '<p class="wp-link">' + e(link) + '</p></div>' +
+						about + (p.note ? '<p class="wp-bio">' + tx(p.note) + '</p>' : '') + '<p class="wp-link">' + e(link) + '</p>' + App.shareButton() + '</div>' +
 				'</div></div></section>' +
 			block(L('صدر عنها أولًا', 'First published here'), books) +
 			block(L('السلاسل', 'Series'), series) +

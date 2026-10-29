@@ -127,7 +127,7 @@ window.PAGE = {
 				'<div class="wp-head">' + portrait +
 					'<div class="wp-id"><p class="eyebrow">' + L('حول العرّاب', 'Around the Godfather') + '</p><h1>' + tx(p.name) + '</h1>' +
 						'<p class="wp-alt">' + e(App.alt(p.name)) + '</p><div class="wp-chips">' + chips + '</div>' +
-						bio + '<p class="wp-link">' + e(this.link(p)) + '</p></div>' +
+						bio + '<p class="wp-link">' + e(this.link(p)) + '</p>' + App.shareButton() + '</div>' +
 				'</div></div></section>' +
 			'<section class="section"><div class="wrap"><h2 class="wp-h">' + L('ما جمعه بالعرّاب', 'What they did with him') + '</h2>' + together + '</div></section>' +
 			(books ? '<section class="section"><div class="wrap"><h2 class="wp-h">' + L('على الموقع', 'On this site') + '</h2><div class="cover-row">' + books + '</div></div></section>' : '') +
