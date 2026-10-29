@@ -1,0 +1,31 @@
+/* «حول العالم» (world.html, world.js) */
+.ph[data-ph="world"] { background: radial-gradient(60% 120% at 50% 40%, #13263a 0%, #0a1018 70%); }
+.wd-globe { position: absolute; left: 50%; top: 50%; width: 260px; height: 260px; margin: -130px 0 0 -130px; border-radius: 50%;
+	background: repeating-linear-gradient(90deg, transparent 0 24px, rgba(140, 190, 230, .16) 24px 25px), repeating-linear-gradient(transparent 0 24px, rgba(140, 190, 230, .16) 24px 25px),
+		radial-gradient(circle at 35% 30%, rgba(120, 180, 230, .35), rgba(10, 20, 35, .9) 70%);
+	box-shadow: 0 0 80px rgba(80, 150, 220, .3); animation: wd-turn 30s linear infinite; background-size: 50px 100%, 100% 100%, 100% 100%; }
+@keyframes wd-turn { to { background-position: 50px 0, 0 0, 0 0; } }
+.wd-word { position: absolute; top: var(--y); left: 100%; font-family: var(--f-display); font-size: var(--s); color: rgba(239, 230, 210, .55); white-space: nowrap;
+	animation: wd-drift var(--t) var(--d) linear infinite; direction: ltr; }
+@keyframes wd-drift { to { transform: translateX(calc(-100vw - 100%)); } }
+html[data-theme="light"] .ph[data-ph="world"] { background: radial-gradient(60% 120% at 50% 40%, #e3ecf2 0%, #cfd9e0 70%); }
+html[data-theme="light"] .wd-word { color: rgba(30, 50, 70, .5); }
+@media (prefers-reduced-motion: reduce) { .wd-globe, .wd-word { animation: none; } .wd-word { left: calc(var(--y) * 1.1); } }
+
+.wd-sum { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 20px; }
+.wd-sum div { display: flex; flex-direction: column; padding: 14px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); min-width: 120px; }
+.wd-sum b { font-family: var(--f-latin); font-size: 38px; line-height: 1; color: var(--ember); }
+.wd-sum span { font-family: var(--f-display); color: var(--paper-dim); font-size: 14px; }
+.wd-langs { margin: 0 0 30px; }
+.wd-langs .chip b { font-family: var(--f-latin); color: var(--ember); margin-inline-start: 4px; }
+.wd-lang { margin: 0 0 34px; scroll-margin-top: 90px; }
+.wd-lang h2 { font-family: var(--f-display); font-size: 28px; margin: 0 0 14px; display: flex; align-items: baseline; gap: 12px; }
+.wd-lang h2 span { font-size: 18px; color: var(--muted); font-weight: 400; }
+.wd-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.wd-ed { display: flex; gap: 14px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
+.wd-cover img, .wd-cover i { display: block; width: 84px; height: 124px; object-fit: cover; border-radius: 2px 6px 6px 2px; box-shadow: 0 6px 16px rgba(0, 0, 0, .4); background: var(--ink); }
+.wd-ed h3 { font-family: var(--f-display); font-size: 19px; margin: 0 0 4px; line-height: 1.3; }
+.wd-ed p { margin: 0 0 3px; font-size: 14px; color: var(--paper-dim); }
+.wd-ed .wd-pub { color: var(--muted); }
+.wd-src { font-size: 13px; }
+.wd-note { color: var(--muted); font-size: 14px; }
