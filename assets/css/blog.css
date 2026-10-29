@@ -177,7 +177,8 @@ html[dir="rtl"] .cg-tilt { transform: rotate(2deg); }
 }
 
 /* ---------- the banner above the title, after a CodePen "grid and clip-path" hero, in the site's colours ---------- */
-.bh { --bh-hl: var(--paper); --bh-ink: var(--ink); background: var(--ink-2); border-radius: 18px; padding: 1rem; margin: 0 0 40px; border: 1px solid var(--line); }
+/* no box of its own: the heading, the picture and the links stand straight on the page */
+.bh { --bh-hl: var(--paper); --bh-ink: var(--ink); margin: 0 0 40px; }
 .bh-box { container: bh / inline-size; display: grid; grid-template-columns: minmax(0, 1fr); margin-inline: auto; max-inline-size: 30rem; }
 @media (min-width: 768px) { .bh-box { max-inline-size: 75rem; } }
 .bh-media, .bh-mini { grid-area: 1 / 1 / 2 / 2; }
