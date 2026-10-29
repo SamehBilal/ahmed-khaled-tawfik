@@ -280,7 +280,8 @@ window.PAGE = {
 				['Noon', 'https://www.noon.com/egypt-ar/search/?q=' + Q]
 			]) },
 			{ kind: L('إلكتروني', 'Ebook'), items: [
-				['Abjjad', 'https://www.abjjad.com/search?q=' + Q],
+				/* Abjad: the book's own page there when we know it (AKT.abjjad), else a search */
+				['Abjjad', (d.abjjad || {})[r.id] || (d.abjjad || {})[id] || 'https://www.abjjad.com/search?q=' + Q],
 				['Google Play Books', 'https://play.google.com/store/search?q=' + Q + '&c=books'],
 				['Kindle', 'https://www.amazon.com/s?k=' + Q + '&i=digital-text']
 			] }
