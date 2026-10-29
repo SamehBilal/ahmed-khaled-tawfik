@@ -3803,3 +3803,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if ((info.sources = info.sources || []).indexOf(url) < 0) info.sources.push(url);
 	});
 })(window.AKT);
+
+/* the special issues (سلسلة الأعداد الخاصة): their covers from the publisher's own store, Rewayat Masreya — the same artwork the site
+   had, scanned clean (without the later printer's stamp) — as each issue's cover, and on the Modern Arab Association's print where one
+   is listed, with the store's page among its sources */
+(function (A) {
+	var M = {"specials-1":"عدد-خاص-1-ما-وراء-الطبيعة-فى-كهوف-دراجوس",
+		"specials-2":"عدد-خاص-2-ما-وراء-الطبيعة-٣٦",
+		"specials-3":"عدد-خاص-3-ما-وراء-الطبيعة-الأبجديَّة",
+		"specials-4":"عدد-خاص-4-ما-وراء-الطبيعة-قصتان",
+		"specials-5":"عدد-خاص-فانتازيا-5",
+		"specials-6":"عدد-خاص-سافاري-6-p-c-r",
+		"specials-7":"عدد-خاص-7-ما-وراء-الطبيعة-أغانى-المهد",
+		"specials-8":"عدد-خاص-ماوراء-الطبيعة-8-تلك-المدينة",
+		"specials-9":"عدد-خاص-فانتازيا-9-جاءوا-من-الوادى",
+		"specials-10":"عدد-خاص-فانتازيا-10-30عام"};
+	var I = (A.issueInfo = A.issueInfo || {});
+	Object.keys(M).forEach(function (k) {
+		var info = I[k] = I[k] || {}, url = 'https://rewayatmasreya.com/products/' + encodeURIComponent(M[k]);
+		var img = 'assets/img/covers/series/specials/rm-special-' + k.split('-')[1] + '.jpg';
+		info.ownCover = img;
+		var ed = (info.editions || []).filter(function (e) { return /الحديثة/.test(((e || {}).publisher || {}).ar || ''); })[0];
+		if (ed) { ed.cover = img; ed.coverSource = url; }
+		if ((info.sources = info.sources || []).indexOf(url) < 0) info.sources.push(url);
+	});
+})(window.AKT);
