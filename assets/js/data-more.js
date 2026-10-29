@@ -3989,3 +3989,20 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	Y.issues['work:esp'] = eps.map(function (ep, i) { return [ep[0], 1, 'الحلقة ' + (i + 1) + ': ' + ep[1] + ' · Dubvo', ep[2]]; });
 	Y.channels['work:esp'] = ch;
 })(window.AKT);
+
+/* Legacy videos, sent by the site's editor: «حياة وثائقية»'s 40-minute documentary on his life and work (2024), and his two-part
+   interview with The Insider Tanta (December 2014 and May 2015) */
+(function (A) {
+	var M = A.media = A.media || [];
+	[{ kind: 'documentary', title: { ar: 'أحمد خالد توفيق.. دكتور وكاتب جعل الشباب يقرأون', en: 'Ahmed Khaled Tawfik: the doctor and writer who made the young read' },
+		outlet: { ar: 'حياة وثائقية', en: 'Hayah Documentary' }, year: 2024, lang: 'ar', url: 'https://www.youtube.com/watch?v=oywXnW8JquY',
+		note: { ar: 'فيلم في 40 دقيقة عن نشأته وأدب الرعب وسلاسله ورواياته وشهرته.', en: 'A 40-minute film on his upbringing, horror fiction, series, novels and fame.' } },
+	 { kind: 'interview', title: { ar: 'د. أحمد خالد توفيق — حياته الشخصية (الجزء الأول)', en: 'Dr Ahmed Khaled Tawfik: his personal life (part 1)' },
+		outlet: { ar: 'The Insider Tanta', en: 'The Insider Tanta' }, year: 2014, lang: 'ar', url: 'https://www.youtube.com/watch?v=tJU4lb-b04s',
+		note: { ar: 'لقاء معه في طنطا، 6 دقائق.', en: 'An interview with him in Tanta, 6 minutes.' } },
+	 { kind: 'interview', title: { ar: 'د. أحمد خالد توفيق (الجزء الثاني)', en: 'Dr Ahmed Khaled Tawfik (part 2)' },
+		outlet: { ar: 'The Insider Tanta', en: 'The Insider Tanta' }, year: 2015, lang: 'ar', url: 'https://www.youtube.com/watch?v=KjM76dD4S5M',
+		note: { ar: 'تتمة اللقاء، 7 دقائق.', en: 'The rest of the interview, 7 minutes.' } }
+	].forEach(function (m) { if (!M.some(function (x) { return x.url === m.url; })) M.push(m); });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
