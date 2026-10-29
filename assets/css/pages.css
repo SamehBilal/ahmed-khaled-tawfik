@@ -132,3 +132,47 @@ html[dir="rtl"] .nm-bar i { border-radius: 4px 0 0 4px; }
 	.qz-q.has-img { grid-template-columns: 1fr; justify-items: center; text-align: center; }
 	.qz-img { width: 140px; }
 }
+
+/* ---------- «الخريطة» ---------- */
+:root { --map-sea: #0b0d12; --map-land: #2b2620; --map-edge: #0b0d12; --map-grid: rgba(239, 230, 210, .06); --map-pin: #e0633a; }
+html[data-theme="light"] { --map-sea: #e9e0cd; --map-land: #cbbd9f; --map-edge: #e9e0cd; --map-grid: rgba(42, 32, 23, .08); --map-pin: #b8451f; }
+.mp-map { position: relative; margin: 0 0 14px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--map-sea); }
+.mp-stage { direction: ltr; }
+.mp-stage svg { display: block; width: 100%; height: auto; }
+.mp-wait { padding: 120px 20px; text-align: center; color: var(--muted); margin: 0; }
+.mp-grid { fill: none; stroke: var(--map-grid); stroke-width: 1; }
+.mp-land { fill: var(--map-land); stroke: var(--map-edge); stroke-width: .6; stroke-linejoin: round; }
+.mp-pin { cursor: pointer; }
+.mp-dot { fill: var(--map-pin); stroke: var(--map-sea); stroke-width: 2; transition: transform .2s; }
+.mp-halo { fill: var(--map-pin); opacity: .18; animation: mp-pulse 2.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes mp-pulse { 0% { transform: scale(.6); opacity: .35; } 100% { transform: scale(1.6); opacity: 0; } }
+.mp-pin:hover .mp-dot, .mp-pin.is-on .mp-dot { transform: scale(1.25); }
+.mp-pin.is-on .mp-dot { fill: #fff; stroke: var(--map-pin); stroke-width: 3; }
+.mp-pin.is-on .mp-n { fill: var(--map-pin); }
+.mp-n { fill: #fff; font-family: var(--f-latin); font-size: 11px; font-weight: 700; text-anchor: middle; pointer-events: none; }
+.mp-panel { position: absolute; top: 12px; bottom: 12px; inset-inline-end: 12px; width: min(360px, 46%); overflow: auto; padding: 18px 16px 16px;
+	border-radius: 14px; border: 1px solid var(--line); background: color-mix(in srgb, var(--ink-2) 94%, transparent); backdrop-filter: blur(6px); box-shadow: 0 14px 40px rgba(0, 0, 0, .45); }
+.mp-panel h3 { font-family: var(--f-display); font-size: 26px; margin: 0; }
+.mp-sub { margin: 2px 0 12px; color: var(--muted); font-size: 14px; }
+.mp-x { position: absolute; top: 8px; inset-inline-end: 10px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: none; color: var(--paper-dim); font-size: 22px; cursor: pointer; }
+.mp-x:hover { background: var(--ink); color: var(--paper); }
+.mp-panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.mp-panel li a { display: flex; gap: 12px; padding: 8px; border-radius: 10px; color: var(--paper); }
+.mp-panel li a:hover { background: var(--ink); color: var(--paper); }
+.mp-panel li img, .mp-nocover { width: 48px; height: 68px; object-fit: cover; border-radius: 2px 5px 5px 2px; flex: none; background: var(--ink); box-shadow: 0 3px 10px rgba(0, 0, 0, .35); }
+.mp-panel li span { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.mp-panel li b { font-family: var(--f-display); font-size: 16px; line-height: 1.3; }
+.mp-panel li small { color: var(--muted); font-size: 12px; }
+.mp-panel q { display: block; margin-top: 4px; font-size: 13px; line-height: 1.6; color: var(--paper-dim); quotes: none; }
+.mp-panel mark { background: color-mix(in srgb, var(--map-pin) 30%, transparent); color: var(--paper); border-radius: 3px; padding: 0 2px; }
+.mp-note { color: var(--muted); font-size: 14px; margin: 0 0 26px; }
+.mp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.mp-chips .chip b { font-family: var(--f-latin); color: var(--ember); margin-inline-start: 4px; }
+.mp-chips .chip[aria-pressed="true"] { background: var(--ember); border-color: var(--ember); color: #fff; }
+.mp-chips .chip[aria-pressed="true"] b { color: #fff; }
+@media (max-width: 760px) {
+	.mp-map { overflow: visible; }
+	.mp-panel { position: static; width: auto; margin: 0; border-radius: 0 0 var(--radius) var(--radius); border-width: 1px 0 0; box-shadow: none; backdrop-filter: none; max-height: 60vh; }
+	.mp-n { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .mp-halo { animation: none; opacity: .15; } }

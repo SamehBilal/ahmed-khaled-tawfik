@@ -24,9 +24,14 @@
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
-		/* the publishers directory, linked from the footer and the home page, not the header */
+		/* the publishers directory and the pages made from the data, linked from the footer (and the home page), not the header */
 		more: [
-			{ href: 'publishers.html', ar: 'دور النشر', en: 'Publishers' }
+			{ href: 'publishers.html', ar: 'دور النشر', en: 'Publishers' },
+			/* the pages made from the data: his columns by paper, his work in numbers, the quiz, the map */
+			{ href: 'papers.html', ar: 'في الصحف', en: 'In the papers' },
+			{ href: 'numbers.html', ar: 'بالأرقام', en: 'In numbers' },
+			{ href: 'quiz.html', ar: 'اختبر نفسك', en: 'Test yourself' },
+			{ href: 'map.html', ar: 'الخريطة', en: 'The map' }
 		],
 		/* pages linked only from the footer, not the header */
 		legal: [

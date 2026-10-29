@@ -7,6 +7,8 @@ const root = path.resolve(__dirname, '..');
 const DATA = require('./build-data.js').map(f => 'assets/js/' + f + '.js');
 // and «في مثل هذا اليوم»'s dates, a small file a month (assets/data/days/), kept offline with the rest
 require('./build-days.js');
+// and the map's places (assets/data/places.json); its world outline (world.json) is drawn once by tools/build-world.js
+require('./build-places.js');
 
 const list = ['./'];
 const add = (rel) => list.push(rel.split(path.sep).join('/'));
