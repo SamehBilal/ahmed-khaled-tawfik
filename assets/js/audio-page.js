@@ -116,6 +116,22 @@ window.PAGE = {
 			rows: erows
 		});
 
+		/* «E.S.P» as radio drama from Dubvo on YouTube: one row, its twelve episodes under the tape */
+		var DE = A.youtube && A.youtube.dubvoEsp;
+		if (DE && DE.eps.length) {
+			var ew = App.findWork(DE.work), eStart = tracks.length, eMins = 0;
+			DE.eps.forEach(function (ep, k) {
+				eMins += ep[2];
+				tracks.push({ title: t(ew.title), ep: L('الحلقة ', 'Episode ') + App.num(k + 1) + ': ' + ep[1], sub: ep[1] + ' · Dubvo',
+					channel: DE.channel.name, url: 'https://www.youtube.com/watch?v=' + ep[0], yt: ep[0], ytEmbed: true, mins: ep[2], skin: 'specials' });
+			});
+			groups.push({
+				title: { ar: '«E.S.P» دراما إذاعية على YouTube', en: 'E.S.P as radio drama on YouTube' },
+				note: { ar: 'روايته «E.S.P» في اثنتي عشرة حلقة من «دار النشر الصوتية — Dubvo»، تُشغَّل هنا تحت الشريط.', en: 'His novel E.S.P in twelve episodes from Dubvo, played here under the tape.' },
+				rows: [{ title: ew.title, href: S.bookHref(ew.id), thumb: ytThumb(DE.eps[0][0]), start: eStart, count: DE.eps.length, mins: eMins, yt: true }]
+			});
+		}
+
 		var midStart = tracks.length;
 		(A.midnight || []).forEach(function (m) {
 			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], skin: 'midnight', art: TH[m[1]] || '' });

@@ -3975,3 +3975,17 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		note: { ar: 'بقلم هبة خميس: بورتريه عن حياته ومرضه وكتابته، نُشر بعد رحيله بأشهر.', en: 'By Heba Khamis: a portrait of his life, illness and writing, published months after his death.' } });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* «E.S.P» as radio drama on YouTube, from Dubvo's playlist «E.S.P رواية أحمد خالد توفيق»: twelve episodes, sent by the site's editor
+   (checked 2026-10-29). On the book's page under the tape, and on the audio page. Entries: [videoId, 1, label, minutes] */
+(function (A) {
+	var Y = (A.audio = A.audio || {}).youtube = A.audio.youtube || {};
+	Y.issues = Y.issues || {}; Y.channels = Y.channels || {};
+	var ch = { name: 'دار النشر الصوتية - Dubvo', url: 'https://www.youtube.com/playlist?list=PLBYDwVauAIiXE-BeENJyhwr2e82-l9N9o' };
+	var eps = [['hG_MjesJKRI', 'خمني يا هند', 14], ['Xd1kv2zh7wM', 'عنوان الحقيقة', 15], ['nWsIKXoEzVc', 'اضرب.. وفر', 12], ['Z6HM3Psb5Ww', 'رائحة ما', 15],
+		['fozXBIq9JHs', 'أنا قلقة', 12], ['UK7CKjw5pnU', 'لقد شفيت', 14], ['sTgm1T_7u9s', 'ما رأيك أنت', 15], ['Vp9DLndClAo', 'احترسوا من تلك السيارة', 15],
+		['cp0pDjaAA34', 'جريمة ربع كاملة', 14], ['s3QXCj2Zc-Y', 'يمكنني بسهولة', 14], ['Vlt3CuP5jUQ', 'أحدهم كان هنا', 16], ['BeRXvBDWsAQ', 'جلسة مخيفة', 17]];
+	Y.dubvoEsp = { channel: ch, work: 'esp', eps: eps };
+	Y.issues['work:esp'] = eps.map(function (ep, i) { return [ep[0], 1, 'الحلقة ' + (i + 1) + ': ' + ep[1] + ' · Dubvo', ep[2]]; });
+	Y.channels['work:esp'] = ch;
+})(window.AKT);
