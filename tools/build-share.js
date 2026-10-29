@@ -14,8 +14,9 @@ const x = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(
 const NAME = 'أحمد خالد توفيق';
 
 const out = path.join(root, 'share');
-fs.rmSync(out, { recursive: true, force: true });
-let count = 0;
+/* a page is rewritten only when it changed, and one whose item is gone is removed (the folder syncs with OneDrive, which locks files) */
+const made = new Set();
+let count = 0, written = 0;
 function page(kind, id, real, o) {
 	const title = cut(clean(o.title), 90) + ' — ' + (o.suffix || NAME);
 	const desc = cut(clean(o.desc) || o.fallback, 200);
@@ -33,9 +34,14 @@ function page(kind, id, real, o) {
 		'<meta http-equiv="refresh" content="0; url=../../' + x(real) + '">\n<script>location.replace(\'../../' + real.replace(/'/g, '%27') + '\' + location.hash);</script>\n' +
 		'</head>\n<body style="background:#0e0f13;color:#efe6d2;font-family:sans-serif;text-align:center;padding:40px 16px">\n' +
 		'<p><a style="color:#e0633a" href="../../' + x(real) + '">' + x(clean(o.title)) + '</a></p>\n</body>\n</html>\n';
-	fs.mkdirSync(path.join(out, kind), { recursive: true });
-	fs.writeFileSync(path.join(out, kind, id + '.html'), html);
+	const file = path.join(out, kind, id + '.html');
+	made.add(file);
 	count++;
+	let old = null; try { old = fs.readFileSync(file, 'utf8'); } catch (e) {}
+	if (old === html) return;
+	fs.mkdirSync(path.join(out, kind), { recursive: true });
+	fs.writeFileSync(file, html);
+	written++;
 }
 
 /* books and issues: the blurb on the back, else its description; its cover */
@@ -76,4 +82,9 @@ const blog = d.blog || {};
 	title: p.t, desc: p.ex, og: 'blog', wide: true, fallback: 'من مدونة ' + NAME + '.',
 	image: !p.img ? '' : p.img.indexOf('g:') === 0 ? blog.img + p.img.slice(2) : p.img }));
 
-console.log('share/', count, 'pages');
+let gone = 0;
+if (fs.existsSync(out)) fs.readdirSync(out).forEach(k => fs.readdirSync(path.join(out, k)).forEach(f => {
+	const file = path.join(out, k, f);
+	if (!made.has(file)) { try { fs.unlinkSync(file); gone++; } catch (e) { console.warn('could not remove', file); } }
+}));
+console.log('share/', count, 'pages,', written, 'written,', gone, 'removed');

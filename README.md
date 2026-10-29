@@ -2,7 +2,7 @@
 
 A bilingual (Arabic / English) fan "Bio-bibliography" of Dr. Ahmed Khaled Tawfik (1962–2018): his life, his series and standalone books, his characters, and the writers around him.
 
-Static site, no build step. Open `index.html` or serve the folder (e.g. GitHub Pages).
+Static site. Open `index.html` or serve the folder (e.g. GitHub Pages). After any change, run `node tools/build-sw.js` (see below): the pages load the data built into one file.
 
 ## Pages
 
@@ -54,7 +54,14 @@ The site installs as an app and works offline (`manifest.webmanifest`, `sw.js`, 
 node tools/build-sw.js
 ```
 
-It refreshes the service worker's file list and version, so installed copies show "A newer version is ready". Covers are cached as they're viewed, or all at once with "Save for offline" in the footer.
+It builds, in order:
+
+- **`assets/js/data-built.js`** (`tools/build-data.js`) — the eleven data files from `data.js` to `data-more.js`, run once with their corrections applied: the pages load this one file, not those. Edit the data in those files, never in this one, then rebuild.
+- **`sw.js`** — the service worker's file list and version, so installed copies show "A newer version is ready".
+- **`sitemap.xml`** (`tools/build-sitemap.js`) — every page, book, issue, series, character, writer, publisher and blog article, for search engines.
+- **`share/`** (`tools/build-share.js`) — a small page per book, series, character, writer, publisher and article with its own title and picture for WhatsApp, Facebook and X; the «شارك» buttons hand these out.
+
+ Covers are cached as they're viewed, or all at once with "Save for offline" in the footer.
 
 ## Credits
 

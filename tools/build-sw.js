@@ -3,6 +3,8 @@
 // Run from the repo root after changing files:  node tools/build-sw.js
 const fs = require('fs'), path = require('path'), crypto = require('crypto');
 const root = path.resolve(__dirname, '..');
+// the data first: the pages load it built into one file (data-built.js), not the files it is edited in
+const DATA = require('./build-data.js').map(f => 'assets/js/' + f + '.js');
 
 const list = ['./'];
 const add = (rel) => list.push(rel.split(path.sep).join('/'));
@@ -13,7 +15,7 @@ const walk = (dir, test) => fs.readdirSync(path.join(root, dir), { withFileTypes
 	const rel = path.join(dir, d.name);
 	if (d.isDirectory()) walk(rel, test); else if (test(rel)) add(rel);
 });
-walk('assets/js', f => /\.js$/.test(f));
+walk('assets/js', f => /\.js$/.test(f) && DATA.indexOf(f.split(path.sep).join('/')) < 0);
 walk('assets/css', f => /\.css$/.test(f));
 walk('assets/fonts', f => /\.(woff2?|ttf)$/.test(f));
 walk('assets/img/icons', () => true);
