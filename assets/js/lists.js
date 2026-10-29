@@ -81,6 +81,45 @@
 		return rec;
 	}
 
+	/* a list as a link (lists.html#share=read/mwt~1-20_25,utopia,!fantasia): the issues of a series as runs of numbers, other
+	   books by id, a series kept whole with a «!» — short enough to send, and read back by the lists page (lists-page.js) */
+	function encodeKeys(keys) {
+		var runs = {}, order = [], rest = [];
+		keys.forEach(function (k) {
+			var m = /^b:([a-z]+)-(\d+)$/.exec(k);
+			if (m) { if (!runs[m[1]]) { runs[m[1]] = []; order.push(m[1]); } runs[m[1]].push(+m[2]); }
+			else rest.push(k[0] === 's' ? '!' + k.slice(2) : k.slice(2));
+		});
+		return order.map(function (sid) {
+			var ns = runs[sid].sort(function (a, b) { return a - b; }), out = [];
+			for (var i = 0; i < ns.length; i++) {
+				var j = i; while (j + 1 < ns.length && ns[j + 1] === ns[j] + 1) j++;
+				out.push(j > i ? ns[i] + '-' + ns[j] : String(ns[i])); i = j;
+			}
+			return sid + '~' + out.join('_');
+		}).concat(rest).join(',');
+	}
+	function decodeKeys(str) {
+		var keys = [];
+		String(str || '').split(',').forEach(function (p) {
+			if (!p) return;
+			var m = /^([a-z]+)~([\d_-]+)$/.exec(p);
+			if (m) m[2].split('_').forEach(function (r) {
+				var ab = r.split('-'), a = +ab[0], b = ab.length > 1 ? +ab[1] : a;
+				for (var n = a; n <= b && n - a < 500; n++) keys.push('b:' + m[1] + '-' + n);
+			});
+			else if (/^!?[\w.-]+$/.test(p)) keys.push(p[0] === '!' ? 's:' + p.slice(1) : 'b:' + p);
+		});
+		return keys;
+	}
+	function shareList(k) {
+		var url = 'https://samehbilal.github.io/ahmed-khaled-tawfik/lists.html#share=' + k + '/' + encodeKeys(state.lists[k].map(function (x) { return x.key; }));
+		var title = L('قائمتي «', 'My list “') + tt(LISTS[k]) + L('» — أحمد خالد توفيق', '” — Ahmed Khaled Tawfik');
+		if (navigator.share) { navigator.share({ title: title, url: url }).catch(function () {}); return; }
+		if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(function () { say(L('نُسخ رابط القائمة؛ من يفتحه يرى أغلفتها.', 'List link copied; whoever opens it sees its covers.')); }, function () { window.prompt('', url); });
+		else window.prompt('', url);
+	}
+
 	function has(list, key) { return state.lists[list].some(function (x) { return x.key === key; }); }
 	function add(list, rec) {
 		if (has(list, rec.key)) return false;
@@ -296,7 +335,8 @@
 	function zoneHtml(k) {
 		var items = state.lists[k];
 		return '<section class="ls-zone" data-list="' + k + '">' +
-			'<h3>' + icon(k) + '<span>' + esc(tt(LISTS[k])) + '</span><b>' + esc(App() ? App().num(items.length) : items.length) + '</b></h3>' +
+			'<h3>' + icon(k) + '<span>' + esc(tt(LISTS[k])) + '</span><b>' + esc(App() ? App().num(items.length) : items.length) + '</b>' +
+				(items.length ? '<button type="button" class="ls-share" data-share-list="' + k + '" title="' + esc(L('شارك القائمة', 'Share the list')) + '" aria-label="' + esc(L('شارك القائمة', 'Share the list')) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8l7.4-4.3M8.3 13.2l7.4 4.3"/></svg></button>' : '') + '</h3>' +
 			'<ul class="ls-items">' + items.map(function (x) { return itemHtml(k, x); }).join('') + '</ul>' +
 			(items.length ? '' : '<p class="ls-empty">' + L('لا شيء هنا بعد.', 'Nothing here yet.') + '</p>') +
 			'<span class="ls-check" aria-hidden="true">✓</span>' +
@@ -370,6 +410,7 @@
 		else if (b.hasAttribute('data-remove')) remove(b.getAttribute('data-remove'), b.getAttribute('data-key'));
 		else if (b.hasAttribute('data-eds')) chooseEditions(b.getAttribute('data-eds'), b.getAttribute('data-key'));
 		else if (b.hasAttribute('data-export')) exportAs(b.getAttribute('data-export'), b);
+		else if (b.hasAttribute('data-share-list')) shareList(b.getAttribute('data-share-list'));
 		else if (b.hasAttribute('data-clear')) {
 			if (window.confirm(L('مسح كل القوائم؟ صدّرها أولًا إن أردت الاحتفاظ بها.', 'Clear all lists? Export them first if you want to keep them.'))) {
 				state.lists = blank().lists; save(); changed();
@@ -757,5 +798,5 @@
 	}
 	if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 
-	window.Lists = { LISTS: LISTS, buttons: buttons, open: open, mountPage: mountPage, add: add, has: has, editions: chooseEditions, state: function () { return state; } };
+	window.Lists = { LISTS: LISTS, MODES: MODES, describe: describe, encodeKeys: encodeKeys, decodeKeys: decodeKeys, buttons: buttons, open: open, mountPage: mountPage, add: add, has: has, editions: chooseEditions, state: function () { return state; } };
 })();

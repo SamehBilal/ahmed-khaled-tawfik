@@ -280,3 +280,15 @@ a[href*="book.html?id="], a[href*="series.html?id="] { -webkit-touch-callout: no
 .ls-inpage .ls-inner, .ls-panel.ls-inpage.show .ls-inner { width: auto; padding: 24px 24px 28px; transform: none; transition: none; }
 .ls-inpage .ls-close, .ls-inpage .ls-head h2 { display: none; }
 @media (max-width: 640px) { .ls-inpage .ls-inner, .ls-panel.ls-inpage.show .ls-inner { padding: 16px 14px 20px; } }
+
+/* a list's share button, in its heading */
+.ls-zone h3 .ls-share { display: inline-grid; place-items: center; width: 30px; height: 30px; padding: 0; border-radius: 50%; cursor: pointer;
+	border: 1px solid var(--line); background: none; color: var(--paper-dim); }
+.ls-zone h3 .ls-share svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; color: inherit; }
+.ls-zone h3 .ls-share:hover { border-color: var(--ember); color: var(--ember); }
+body.ls-dragging .ls-zone h3 .ls-share { display: none; }
+/* a list shared with you (lists.html#share=…), above your own */
+.ls-shared h2 { font-family: var(--f-display); margin: 4px 0 18px; }
+.ls-shared h2 b { font-family: var(--f-latin); font-size: .6em; color: var(--paper-dim); font-weight: 600; }
+.ls-shared-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 16px; }
+.ls-shared-act { margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
