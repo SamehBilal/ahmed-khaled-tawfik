@@ -32,8 +32,7 @@
 			{ id: 'journey', href: 'journey.html', ar: 'رحلتي', en: 'My journey', phone: true },
 			{ id: 'editions', href: 'editions.html', ar: 'الطبعات', en: 'The editions', phone: true },
 			{ id: 'talks', href: 'talks.html', ar: 'لقاءاته', en: 'Interviews', phone: true },
-			{ id: 'awards', href: 'awards.html', ar: 'الجوائز', en: 'Awards', phone: true },
-			{ id: 'museum', href: 'museum.html', ar: 'المتحف', en: 'The museum', phone: true }
+			{ id: 'awards', href: 'awards.html', ar: 'الجوائز', en: 'Awards', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
@@ -52,8 +51,7 @@
 			{ href: 'journey.html', ar: 'رحلتي', en: 'My journey' },
 			{ href: 'editions.html', ar: 'الطبعات', en: 'The editions' },
 			{ href: 'talks.html', ar: 'لقاءاته', en: 'Interviews' },
-			{ href: 'awards.html', ar: 'الجوائز', en: 'Awards' },
-			{ href: 'museum.html', ar: 'المتحف', en: 'The museum' }
+			{ href: 'awards.html', ar: 'الجوائز', en: 'Awards' }
 		],
 		/* pages linked only from the footer, not the header */
 		legal: [
@@ -665,7 +663,7 @@
 			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات statistics', quiz: 'اختبار مسابقة أسئلة quiz',
 				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
 				covers: 'أغلفة غلاف covers', journey: 'قراءة قوائم تقدم reading progress', editions: 'طبعات طبعة دور نشر editions publishers',
-				talks: 'لقاءات حوارات فيديو interviews videos', awards: 'جوائز جائزة تكريم awards prizes', museum: 'متحف مجسم مجسمات ثلاثي الأبعاد تمثال 3d figure statue', publishers: 'دور نشر ناشر publishers' };
+				talks: 'لقاءات حوارات فيديو interviews videos', awards: 'جوائز جائزة تكريم awards prizes', publishers: 'دور نشر ناشر publishers' };
 			UI.nav.concat(UI.more).forEach(function (n) {
 				var id = n.href.replace(/\.html$/, '');
 				if (n.href !== 'index.html') add(K.page, { ar: n.ar, en: n.en }, '', n.href, PAGE_WORDS[id] || '');

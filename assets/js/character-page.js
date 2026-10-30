@@ -179,8 +179,7 @@ window.PAGE = {
 		var f3 = window.Figure3D && Object.keys(d.figures3d || {}).filter(function (k) { return (d.figures3d[k].chars || []).indexOf(id) >= 0; })[0];
 		if (f3) html += '<section class="section"><div class="wrap ch-figure3d">' + window.Figure3D.html(f3) +
 			'<div><p class="eyebrow">' + L('مجسّم', 'A figure') + '</p><h2>' + L('في ثلاثة أبعاد', 'In three dimensions') + '</h2>' +
-			'<p>' + L('أدِره بإصبعك أو بالفأرة، وقرّبه وأبعده. وعلى الهاتف ضعه على مكتبك بالكاميرا من زر «ضعه في غرفتك».', 'Turn it with a finger or the mouse, and zoom in and out. On a phone, set it on your desk through the camera with “See it in your room”.') + '</p>' +
-			'<p><a href="museum.html">' + L('المتحف: كل المجسّمات ←', 'The museum: every figure →') + '</a></p></div></div></section>';
+			'<p>' + L('أدِره بإصبعك أو بالفأرة، وقرّبه وأبعده. وعلى الهاتف ضعه على مكتبك بالكاميرا من زر «ضعه في غرفتك».', 'Turn it with a finger or the mouse, and zoom in and out. On a phone, set it on your desk through the camera with “See it in your room”.') + '</p></div></div></section>';
 		html += '<section class="section"><div class="wrap"><p class="ch-back"><a href="characters.html">' + L('→ كل الشخصيات', '← All characters') + '</a></p></div></section>';
 		root.innerHTML = html;
 

@@ -15,7 +15,7 @@
 	}
 	function A() { return window.App; }
 
-	/* the block: { id } of AKT.figures3d; opt.big for the museum's pedestals */
+	/* the block: { id } of AKT.figures3d; opt.big for a larger stage */
 	function html(id, opt) {
 		var App = A(), f = (App.data().figures3d || {})[id], e = App.esc, L = App.L;
 		if (!f) return '';
