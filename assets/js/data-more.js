@@ -4332,3 +4332,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		source: VICE
 	});
 })(window.AKT);
+
+/* Legacy articles: Sameh Fayez's interview with him in Al-Qahira newspaper, «أنا مجرد شخص يحاول تقديم حاجة مسلية», as the clipping
+   posted on Facebook shows it (sent by the site's editor; no copy found online). The clipping prints no date: it speaks of
+   «ضحكات كئيبة», «أكواريل» and «السنجة» (2012) and of a new series «في معرض الكتاب المقبل», so about late 2012 — left undated */
+(function (A) {
+	var M = A.media = A.media || [], url = 'https://www.facebook.com/photo?fbid=10152522907548722';
+	if (M.some(function (m) { return m.url === url; })) return;
+	M.push({ kind: 'interview', title: { ar: 'أحمد خالد توفيق: أنا مجرد شخص يحاول تقديم حاجة مسلية', en: 'Ahmed Khaled Tawfik: “I’m just someone trying to offer something entertaining”' },
+		outlet: { ar: 'جريدة القاهرة', en: 'Al-Qahira newspaper' }, lang: 'ar', url: url,
+		note: { ar: 'حوار أجراه سامح فايز مع «الأب الروحي لكتّاب الرعب»، نحو أواخر 2012؛ صورة الصفحة المطبوعة على فيسبوك.', en: 'Sameh Fayez interviews “the godfather of horror writers”, about late 2012; a photo of the printed page on Facebook.' } });
+})(window.AKT);
