@@ -7,7 +7,7 @@
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'akt-a8cf2f1068';
+var VERSION = 'akt-d583ceca28';
 var PRECACHE = [
 	'./',
 	'about.html',
@@ -40,6 +40,7 @@ var PRECACHE = [
 	'sources.html',
 	'talks.html',
 	'terms.html',
+	'translations.html',
 	'tributes.html',
 	'works.html',
 	'world.html',
@@ -90,6 +91,7 @@ var PRECACHE = [
 	'assets/js/shared.js',
 	'assets/js/shelf-hero.js',
 	'assets/js/talks.js',
+	'assets/js/translations.js',
 	'assets/js/tributes.js',
 	'assets/js/works.js',
 	'assets/js/world.js',
@@ -116,6 +118,7 @@ var PRECACHE = [
 	'assets/css/page-journey.css',
 	'assets/css/page-screen.css',
 	'assets/css/page-talks.css',
+	'assets/css/page-translations.css',
 	'assets/css/page-world.css',
 	'assets/css/pages.css',
 	'assets/css/people-wave.css',

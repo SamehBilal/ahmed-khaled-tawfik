@@ -1,0 +1,41 @@
+/* «ترجماته» (translations.html, translations.js); the summary and the book cards borrow «حول العالم»'s (.wd-*) */
+.ph[data-ph="translations"] { background: radial-gradient(60% 120% at 50% 50%, #2a2016 0%, #0e0b08 72%); }
+.tr-row { position: absolute; left: 0; right: 0; overflow: hidden; white-space: nowrap; }
+.tr-ren { top: 26%; }
+.tr-rar { top: 60%; }
+.tr-track { display: inline-flex; align-items: baseline; gap: 22px; animation: tr-slide 90s linear infinite; }
+.tr-track span { font-size: 26px; color: rgba(239, 230, 210, .5); }
+.tr-ren .tr-track span { font-family: "Cormorant Garamond", serif; font-style: italic; letter-spacing: .02em; }
+.tr-rar .tr-track span { font-family: var(--f-display); color: rgba(246, 215, 154, .7); }
+.tr-track i { font-style: normal; font-size: 12px; color: var(--ember); opacity: .7; }
+@keyframes tr-slide { to { transform: translateX(-50%); } }
+.tr-rar .tr-track { animation-name: tr-slide-r; }
+@keyframes tr-slide-r { to { transform: translateX(50%); } }
+/* the quill between the two rows */
+.tr-quill { position: absolute; left: 50%; top: 50%; width: 120px; height: 2px; margin: -1px 0 0 -60px; z-index: 2;
+	background: linear-gradient(90deg, transparent, var(--ember), transparent); box-shadow: 0 0 18px rgba(224, 99, 58, .6); }
+.tr-quill svg { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; transform: translate(-50%, -50%); padding: 8px; box-sizing: content-box;
+	color: #f6d79a; filter: drop-shadow(0 0 8px rgba(224, 99, 58, .7)); background: radial-gradient(circle, #1a130d 55%, transparent 72%); }
+html[data-theme="light"] .ph[data-ph="translations"] { background: radial-gradient(60% 120% at 50% 50%, #f6ecd8 0%, #e3d3b4 72%); }
+html[data-theme="light"] .tr-track span { color: rgba(60, 40, 20, .5); }
+html[data-theme="light"] .tr-rar .tr-track span { color: rgba(140, 70, 20, .7); }
+html[data-theme="light"] .tr-quill svg { background: radial-gradient(circle, #efe3cb 55%, transparent 72%); color: #8a3b12; }
+@media (max-width: 640px) { .tr-track span { font-size: 19px; } }
+@media (prefers-reduced-motion: reduce) { .tr-track { animation: none; } }
+
+.tr-jump { margin: 0 0 30px; }
+.tr-part { margin: 0 0 44px; scroll-margin-top: 90px; }
+.tr-part h2 { font-family: var(--f-display); font-size: 30px; margin: 0 0 10px; }
+.tr-part h2 a { color: var(--paper); }
+.tr-part h2 a:hover { color: var(--ember); }
+.tr-about { max-width: 820px; color: var(--paper-dim); line-height: 1.9; margin: 0 0 16px; }
+.tr .wd-ed h3 a { color: var(--paper); }
+.tr .wd-ed h3 a:hover { color: var(--ember); }
+.tr-en { font-family: "Cormorant Garamond", serif; font-size: 16px !important; color: var(--muted) !important; }
+.tr-syn { margin-top: 6px !important; line-height: 1.7; }
+.tr-authors { margin: 0 0 22px; }
+.tr-authors .chip { cursor: pointer; font: inherit; font-family: var(--f-display); }
+.tr-authors .chip b { font-family: var(--f-latin); color: var(--ember); margin-inline-start: 4px; }
+.tr-authors .chip.is-on { border-color: var(--ember); color: var(--paper); background: color-mix(in srgb, var(--ember) 16%, transparent); }
+.tr-of { font-size: 12px; line-height: 1.5; color: var(--muted); }
+.tr-grid .cover-link[hidden] { display: none; }
