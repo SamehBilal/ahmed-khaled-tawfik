@@ -22,35 +22,48 @@ window.PAGE = {
 		});
 	},
 
-	/* the band: a trophy cabinet — the prizes on the top shelf (gold for a win, silver for the shortlist, bronze for an honour),
-	   the other honours as medals below, each on a pedestal with its year; a hover tells which, a click goes to it below */
+	/* the band: a trophy cabinet of wood — the prizes on the top shelf and the other honours below, each a cup on a black
+	   base: gold for a win, silver for the shortlist, bronze for an honour, its stars by the same order; a hover tells which and
+	   when, a click goes to it below */
 	band: function (d, A) {
 		var P = window.PAGE, e = A.esc, t = A.t, L = A.L;
+		var STARS = { win: 3, finalist: 2, honour: 1 }, LINE = { win: '#6b4508', finalist: '#4a4f56', honour: '#5a2f10' };
+		var star = function (cx, cy, R, r) {
+			for (var p = [], i = 0; i < 10; i++) { var a = Math.PI / 5 * i - Math.PI / 2, q = i % 2 ? r : R; p.push((cx + q * Math.cos(a)).toFixed(1) + ' ' + (cy + q * Math.sin(a)).toFixed(1)); }
+			return 'M' + p.join('L') + 'Z';
+		};
 		var cup = function (k) {
-			return '<svg class="awc-svg" viewBox="0 0 64 64" aria-hidden="true">' +
-				'<path d="M15 10c-9 0-11 6-9 11 2 6 9 9 13 10M49 10c9 0 11 6 9 11-2 6-9 9-13 10" fill="none" stroke="url(#awg-' + k + ')" stroke-width="4" stroke-linecap="round"/>' +
-				'<path d="M13 5h38v14c0 15-9 23-19 23S13 34 13 19z" fill="url(#awg-' + k + ')"/>' +
-				'<path d="M18 9v10c0 8 4 14 9 17" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.5" stroke-linecap="round"/>' +
-				(k === 'win' ? '<path d="M32 13l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z" fill="rgba(120,70,0,.45)"/>' : '') +
-				'<path d="M29 42h6v7h-6z" fill="url(#awg-' + k + ')"/><ellipse cx="32" cy="45" rx="5" ry="2" fill="url(#awg-' + k + ')"/>' +
-				'<path d="M21 49h22l3 9H18z" fill="url(#awg-' + k + ')"/></svg>';
+			var o = LINE[k], g = 'url(#awg-' + k + ')', s = '';
+			for (var i = 0; i < 3; i++) s += '<path d="' + star(28 + i * 12, 94, 4.6, 2) + '" fill="' + (i < STARS[k] ? '#f6d356' : '#7d7d7d') + '" stroke="#000" stroke-width=".6"/>';
+			return '<svg class="awc-svg" viewBox="0 0 80 110" aria-hidden="true">' +
+				'<path d="M22 20C6 16 4 44 30 48M58 20C74 16 76 44 50 48" fill="none" stroke="' + o + '" stroke-width="8" stroke-linecap="round"/>' +
+				'<path d="M22 20C6 16 4 44 30 48M58 20C74 16 76 44 50 48" fill="none" stroke="' + g + '" stroke-width="4.5" stroke-linecap="round"/>' +
+				'<path d="M36 55h8l-1 11h-6z" fill="' + g + '" stroke="' + o + '" stroke-width="1.6"/>' +
+				'<path d="M14 12h52c0 28-10 42-26 44C24 54 14 40 14 12z" fill="url(#awr-' + k + ')" stroke="' + o + '" stroke-width="2.2"/>' +
+				'<ellipse cx="40" cy="12" rx="26" ry="4.5" fill="' + g + '" stroke="' + o + '" stroke-width="2"/><ellipse cx="40" cy="12.5" rx="21" ry="2.6" fill="rgba(0,0,0,.28)"/>' +
+				'<path d="M21 18c0 16 4 26 11 32" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="3" stroke-linecap="round"/>' +
+				'<path d="' + star(40, 31, 10, 4.2) + '" fill="' + g + '" stroke="' + o + '" stroke-width="1.8" stroke-linejoin="round"/>' +
+				'<ellipse cx="40" cy="63" rx="6.5" ry="2.8" fill="' + g + '" stroke="' + o + '" stroke-width="1.4"/>' +
+				'<path d="M30 67h20l4 8H26z" fill="' + g + '" stroke="' + o + '" stroke-width="1.6" stroke-linejoin="round"/>' +
+				'<rect x="21" y="75" width="38" height="7" rx="1.5" fill="url(#awb)" stroke="#000" stroke-width="1"/>' +
+				'<rect x="15" y="82" width="50" height="24" rx="2" fill="url(#awb)" stroke="#000" stroke-width="1"/>' + s + '</svg>';
 		};
-		var medal = '<svg class="awc-svg" viewBox="0 0 64 64" aria-hidden="true">' +
-			'<path d="M22 2h9l5 18h-9zM42 2h-9l-5 18h9z" fill="#b3261e"/><path d="M33 2h9l-5 18h-9z" fill="#8a1c16"/>' +
-			'<circle cx="32" cy="38" r="17" fill="url(#awg-honour)"/><circle cx="32" cy="38" r="12" fill="none" stroke="rgba(255,240,210,.5)" stroke-width="1.5"/>' +
-			'<path d="M32 30l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8z" fill="rgba(90,45,10,.55)"/></svg>';
-		var item = function (svg, title, kind, year, to) {
-			return '<div class="awc-item" data-to="' + e(to) + '">' + svg + '<span class="awc-ped"><b>' + e(A.num(year)) + '</b></span>' +
-				'<span class="awc-tip"><b>' + e(title) + '</b><small>' + e(kind) + ' · ' + e(A.num(year)) + '</small></span></div>';
+		var item = function (k, title, kind, year, to) {
+			return '<div class="awc-item" data-to="' + e(to) + '">' + cup(k) +
+				'<span class="awc-tip"><b>' + e(title) + '</b><small>' + e(kind) + '<br>' + e(A.num(year)) + '</small></span></div>';
 		};
-		var grad = function (id, a, b, c) { return '<linearGradient id="awg-' + id + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + a + '"/><stop offset=".45" stop-color="' + b + '"/><stop offset="1" stop-color="' + c + '"/></linearGradient>'; };
-		return '<svg width="0" height="0" style="position:absolute"><defs>' + grad('win', '#fff3c4', '#e9b949', '#94650f') + grad('finalist', '#ffffff', '#c9ccd2', '#6b7078') +
-				grad('honour', '#ffd9b0', '#c27a3a', '#6a3a14') + '</defs></svg>' +
+		var defs = function (k, hi, mid, lo, deep) {
+			return '<radialGradient id="awr-' + k + '" cx=".34" cy=".28" r=".85"><stop offset="0" stop-color="' + hi + '"/><stop offset=".35" stop-color="' + mid + '"/><stop offset=".78" stop-color="' + lo + '"/><stop offset="1" stop-color="' + deep + '"/></radialGradient>' +
+				'<linearGradient id="awg-' + k + '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + hi + '"/><stop offset=".45" stop-color="' + mid + '"/><stop offset="1" stop-color="' + lo + '"/></linearGradient>';
+		};
+		return '<svg width="0" height="0" style="position:absolute"><defs>' + defs('win', '#fffbe0', '#f7d04a', '#c9901c', '#8a5a08') +
+				defs('finalist', '#ffffff', '#e1e5ea', '#9aa1aa', '#5d636b') + defs('honour', '#ffe2c2', '#e09a58', '#a8642a', '#6a3a14') +
+				'<linearGradient id="awb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a3a3a"/><stop offset=".2" stop-color="#1c1c1c"/><stop offset="1" stop-color="#080808"/></linearGradient></defs></svg>' +
 			'<div class="awc"><div class="awc-shelf">' + P.sorted(d).map(function (a, i) {
-				return item(cup(P.KIND[a.kind] ? a.kind : 'honour'), t(a.title).split(/\s+—\s+/)[0].replace(/\s*\([^)]*\)$/, ''), t(P.KIND[a.kind] || P.KIND.honour), a.year, 'aw-' + i);
+				return item(STARS[a.kind] ? a.kind : 'honour', t(a.title).split(/\s+—\s+/)[0].replace(/\s*\([^)]*\)$/, ''), t(P.KIND[a.kind] || P.KIND.honour), a.year, 'aw-' + i);
 			}).join('') + '</div><div class="awc-shelf">' + P.honours(d).map(function (l, i) {
-				return item(medal, t(l.title), L('تكريم', 'Honour'), String(l.date).slice(0, 4), 'awh-' + i);
-			}).join('') + '</div><i class="awc-glass"></i></div>';
+				return item('honour', t(l.title), L('تكريم', 'Honour'), String(l.date).slice(0, 4), 'awh-' + i);
+			}).join('') + '</div></div>';
 	},
 
 	render: function () {
