@@ -26,7 +26,10 @@ window.PAGE = {
 		'اليوم': { en: 'Al-Youm' },
 		'بوابة الشباب': { en: 'Bawabet al-Shabab', kind: { ar: 'موقع', en: 'Website' } },
 		'مجلة نور': { en: 'Nour magazine', kind: { ar: 'مجلة', en: 'Magazine' } },
-		'المصري اليوم': { en: 'Al-Masry Al-Youm', kind: { ar: 'جريدة', en: 'Newspaper' } }
+		'المصري اليوم': { en: 'Al-Masry Al-Youm', kind: { ar: 'جريدة', en: 'Newspaper' } },
+		/* the Tagammu' party's paper, where he first wrote on politics and public affairs (e3lam.com/704514) */
+		'التجمع': { en: 'Al-Tagammu', kind: { ar: 'جريدة', en: 'Newspaper' },
+			note: { ar: 'جريدة حزب التجمع؛ فيها كتب مقالاته الأولى في السياسة والشأن العام', en: 'The Tagammu’ party’s paper, where he first wrote on politics and public affairs' } }
 	},
 	/* the first six outlets take the categorical colours in order (validated for both themes); the rest are «أخرى» */
 	COLORS: 6,
@@ -60,7 +63,7 @@ window.PAGE = {
 		var card = function (name) {
 			var list = by[name], ys = list.map(function (a) { return a.y; }), info = self.INFO[name] || {};
 			var span = Math.min.apply(null, ys) === Math.max.apply(null, ys) ? App.num(ys[0]) : App.num(Math.min.apply(null, ys)) + '–' + App.num(Math.max.apply(null, ys));
-			return '<button type="button" class="pp-card" data-o="' + e(name) + '" style="--s:var(--pp-' + slot(name) + ')" aria-pressed="false">' +
+			return '<button type="button" class="pp-card" data-o="' + e(name) + '" style="--s:var(--pp-' + slot(name) + ')" aria-pressed="false"' + (info.note ? ' title="' + e(App.t(info.note)) + '"' : '') + '>' +
 				'<i class="pp-dot" aria-hidden="true"></i><b>' + e(nm(name)) + '</b>' +
 				'<span class="pp-n">' + (list.length === 1 ? '<small>' + e(L('مقال واحد', '1 piece')) + '</small>' : e(App.num(list.length)) + ' <small>' + e(L(list.length === 2 ? 'مقالان' : list.length > 10 ? 'مقالًا' : 'مقالات', 'pieces')) + '</small>') + '</span>' +
 				'<span class="pp-meta">' + (info.kind ? e(App.t(info.kind)) + ' · ' : '') + e(span) + '</span></button>';
