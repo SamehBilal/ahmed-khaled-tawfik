@@ -4356,3 +4356,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			text: { ar: 'طبيب «سافاري» وسماعته على صدره، وبرنادت إلى جانبه، كما عملا معًا في وحدة الكاميرون.', en: 'Safari’s doctor with his stethoscope, Bernadette at his side, as they worked together in the Cameroon unit.' } }
 	});
 })(window.AKT);
+
+/* Khalaf Gaber's photograph (author of «أسطورة أحمد خالد توفيق»), sent by the site's editor — on «كتب عنه» and his page */
+(function (A) {
+	((A.writers || {}).about || []).forEach(function (w) {
+		if ((w.name || {}).ar === 'خلف جابر' && !w.photo) w.photo = { url: 'assets/img/photos/writers/khalaf-gaber.webp', source: { ar: 'أرسلها محرر الموقع', en: 'Sent by the site’s editor' } };
+	});
+})(window.AKT);
