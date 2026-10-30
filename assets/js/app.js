@@ -420,16 +420,17 @@
 							/* (the phone menu's own entries are the footer's own pages already, or the «My lists» button) */
 							UI.nav.filter(function (n) { return !n.phone; }).concat(UI.more.filter(function (n) { return n.main; })).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 						'</nav>' +
-						/* the pages made from the data, then the site's own, one above the other */
+						/* the pages made from the data (and, under them, pwa.js's «احفظ الموقع دون اتصال») */
 						'<div class="ft-side">' +
-							'<nav class="ft-legal" aria-labelledby="ft-more-h"><h2 id="ft-more-h">' + App.L('اكتشف أكثر', 'Discover more') + '</h2>' +
+							'<nav class="ft-legal ft-more" aria-labelledby="ft-more-h"><h2 id="ft-more-h">' + App.L('اكتشف أكثر', 'Discover more') + '</h2>' +
 								UI.more.filter(function (n) { return !n.main; }).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
-							'</nav>' +
-							'<nav class="ft-legal" aria-labelledby="ft-legal-h"><h2 id="ft-legal-h">' + App.L('خلف الكواليس', 'Behind the site') + '</h2>' +
-								UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 							'</nav>' +
 						'</div>' +
 						'<div class="ft-maker">' +
+							/* the site's own pages, at the head of the column that says who made it */
+							'<nav class="ft-legal" aria-labelledby="ft-legal-h"><h2 id="ft-legal-h">' + App.L('خلف الكواليس', 'Behind the site') + '</h2>' +
+								UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+							'</nav>' +
 							'<p class="ft-maker-line">' + App.t(UI.maker.line) + '</p>' +
 							'<div class="ft-maker-links">' +
 								'<a href="mailto:' + UI.maker.email + '"><svg viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.4" d="M1.5 3.5h13v9h-13zM1.5 3.5l6.5 5.5 6.5-5.5"/></svg>' + App.L('Email me', 'Email me') + '</a>' +

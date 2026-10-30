@@ -902,10 +902,12 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 .ft-legal a { color: var(--ft-text); transition: color .2s, text-shadow .2s; }
 .ft-legal a:hover, .ft-legal a:focus-visible { color: var(--ft-bright); text-shadow: 0 0 12px rgba(224, 99, 58, .9); }
 .ft-legal a + a::before { content: none; }
-/* «اكتشف أكثر» above «خلف الكواليس», each in three short columns, so the footer stays low */
+/* «اكتشف أكثر» in three short columns, so the footer stays low; «خلف الكواليس» in a line or two above who made the site */
 .ft-side { display: flex; flex-direction: column; gap: 22px; }
 .ft-side .ft-legal { display: grid; grid-template-columns: repeat(3, max-content); gap: 4px 26px; }
 .ft-side .ft-legal h2 { grid-column: 1 / -1; }
+.ft-maker .ft-legal { flex-direction: row; flex-wrap: wrap; gap: 4px 22px; margin: 0 0 18px; }
+.ft-maker .ft-legal h2 { flex-basis: 100%; }
 @media (max-width: 900px) {
 	.ft-body .wrap { grid-template-columns: 1fr; }
 	.ft-legal, .ft-side .ft-legal { display: flex; flex-direction: row; flex-wrap: wrap; gap: 4px 24px; }

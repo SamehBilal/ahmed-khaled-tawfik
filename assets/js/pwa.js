@@ -105,7 +105,7 @@
 		});
 	}
 	function placeSaveLink() {
-		var links = document.querySelector('.site-footer .ft-links');
+		var links = document.querySelector('.site-footer .ft-more');
 		if (!links || links.querySelector('.save-offline') || !('caches' in window) || !('serviceWorker' in navigator)) return;
 		var b = document.createElement('button');
 		b.type = 'button';
