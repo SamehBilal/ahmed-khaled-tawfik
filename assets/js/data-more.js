@@ -4314,6 +4314,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var W = A.writers = A.writers || {}, I = W.influenced = W.influenced || [];
 	if (!I.some(function (w) { return (w.name || {}).ar === 'غادة عبد العال'; })) I.push({
 		name: { ar: 'غادة عبد العال', en: 'Ghada Abdel Aal' },
+		photo: { url: 'assets/img/photos/writers/ghada-abdel-aal.webp', source: { ar: 'أرسلها محرر الموقع', en: 'Sent by the site’s editor' } },
 		work: { ar: '«عايزة أتجوز»', en: 'Ayza Atgawez (I Want to Get Married)' },
 		text: { ar: 'الصيدلانية والكاتبة الساخرة صاحبة «عايزة أتجوز»، كتبت بعد رحيله في VICE «أحمد خالد توفيق: أبانا الذي في طنطا لم يأتِ هذا العام»، وقالت فيه إن بصماته «شكلت أجزاءً من وجداننا». وكان العرّاب قد حضر ورشة لفنون الكتابة عقدتها مع طلبة كلية الطب، وكتب عنها في مقاله «كاساندرا من جديد» (2014).',
 			en: 'The pharmacist and satirist of Ayza Atgawez wrote, after his death, “Ahmed Khaled Tawfik: Our Father in Tanta Did Not Come This Year” for VICE, saying his marks “shaped parts of our very feelings”. Tawfik had sat in on a writing workshop she ran with medical students, and wrote about it in his column “Cassandra Again” (2014).' },
@@ -4323,7 +4324,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	var T = A.tributes = A.tributes || [];
 	if (!T.some(function (x) { return x.source === VICE; })) T.push({
-		name: { ar: 'غادة عبد العال', en: 'Ghada Abdel Aal' }, role: { ar: 'كاتبة', en: 'Writer' }, date: '2019-02-17',
+		name: { ar: 'غادة عبد العال', en: 'Ghada Abdel Aal' }, role: { ar: 'كاتبة', en: 'Writer' }, date: '2019-02-17', photo: 'assets/img/photos/writers/ghada-abdel-aal.webp',
 		quote: { ar: 'ستظل كلماته حاضرة في عقولنا، وبصماته التي شكلت أجزاءً من وجداننا لن تختفي بسهولة مع الأيام.',
 			en: 'His words will stay present in our minds, and the marks that shaped parts of our very feelings will not easily fade with the days.' },
 		context: { ar: 'من مقالها «أحمد خالد توفيق: أبانا الذي في طنطا لم يأتِ هذا العام» في VICE عربية، في معرض القاهرة للكتاب الأول بعد رحيله.',
