@@ -4363,3 +4363,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if ((w.name || {}).ar === 'خلف جابر' && !w.photo) w.photo = { url: 'assets/img/photos/writers/khalaf-gaber.webp', source: { ar: 'أرسلها محرر الموقع', en: 'Sent by the site’s editor' } };
 	});
 })(window.AKT);
+
+/* Ehab Moustafa's photograph (author of «العرّاب»), sent by the site's editor — on «كتب عنه» and his page */
+(function (A) {
+	((A.writers || {}).about || []).forEach(function (w) {
+		if ((w.name || {}).ar === 'إيهاب مصطفى' && !w.photo) w.photo = { url: 'assets/img/photos/writers/ehab-moustafa.webp', source: { ar: 'أرسلها محرر الموقع', en: 'Sent by the site’s editor' } };
+	});
+})(window.AKT);
