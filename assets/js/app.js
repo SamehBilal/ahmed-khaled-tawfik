@@ -36,9 +36,10 @@
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
-		/* the publishers directory and the pages made from the data, linked from the footer (and the home page), not the header */
+		/* the publishers directory and the pages made from the data, linked from the footer (and the home page), not the header —
+		   the directory among the main pages, the rest under «اكتشف أكثر» */
 		more: [
-			{ href: 'publishers.html', ar: 'دور النشر', en: 'Publishers' },
+			{ href: 'publishers.html', ar: 'دور النشر', en: 'Publishers', main: true },
 			/* the pages made from the data: his columns by paper, his work in numbers, the quiz, the map */
 			{ href: 'papers.html', ar: 'في الصحف', en: 'In the papers' },
 			{ href: 'numbers.html', ar: 'بالأرقام', en: 'In numbers' },
@@ -417,11 +418,17 @@
 						'</div>' +
 						'<nav class="ft-links" aria-label="' + App.L('صفحات الموقع', 'Site pages') + '">' +
 							/* (the phone menu's own entries are the footer's own pages already, or the «My lists» button) */
-							UI.nav.filter(function (n) { return !n.phone; }).concat(UI.more).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+							UI.nav.filter(function (n) { return !n.phone; }).concat(UI.more.filter(function (n) { return n.main; })).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 						'</nav>' +
-						'<nav class="ft-legal" aria-labelledby="ft-legal-h"><h2 id="ft-legal-h">' + App.L('خلف الكواليس', 'Behind the site') + '</h2>' +
-							UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
-						'</nav>' +
+						/* the pages made from the data, then the site's own, one above the other */
+						'<div class="ft-side">' +
+							'<nav class="ft-legal" aria-labelledby="ft-more-h"><h2 id="ft-more-h">' + App.L('اكتشف أكثر', 'Discover more') + '</h2>' +
+								UI.more.filter(function (n) { return !n.main; }).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+							'</nav>' +
+							'<nav class="ft-legal" aria-labelledby="ft-legal-h"><h2 id="ft-legal-h">' + App.L('خلف الكواليس', 'Behind the site') + '</h2>' +
+								UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+							'</nav>' +
+						'</div>' +
 						'<div class="ft-maker">' +
 							'<p class="ft-maker-line">' + App.t(UI.maker.line) + '</p>' +
 							'<div class="ft-maker-links">' +
