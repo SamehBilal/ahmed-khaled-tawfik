@@ -1,0 +1,21 @@
+/* «المتحف» (museum.html, museum.js) */
+.ph[data-ph="museum"] { background: linear-gradient(#0a0a0c, #16120d); }
+.mu-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 32%; background: linear-gradient(#20180f, #0d0a07); }
+.mu-spot { position: absolute; top: 0; left: var(--x); width: 180px; height: 100%; transform: translateX(-50%);
+	background: conic-gradient(from 180deg at 50% 0, transparent 165deg, rgba(255, 226, 170, .22) 175deg, rgba(255, 226, 170, .3) 180deg, rgba(255, 226, 170, .22) 185deg, transparent 195deg);
+	animation: mu-flick 7s var(--d) ease-in-out infinite; }
+@keyframes mu-flick { 0%, 100% { opacity: .9; } 50% { opacity: .55; } }
+.mu-ped { position: absolute; bottom: 18%; left: var(--x); width: 70px; height: 70px; transform: translateX(-50%);
+	background: linear-gradient(90deg, #3a2c1e, #5a4430 50%, #2a1f15); border-radius: 3px 3px 0 0; box-shadow: 0 -2px 0 #6b5238; }
+html[data-theme="light"] .ph[data-ph="museum"] { background: linear-gradient(#efe6d4, #dccbae); }
+html[data-theme="light"] .mu-floor { background: linear-gradient(#cbb796, #b19c79); }
+@media (prefers-reduced-motion: reduce) { .mu-spot { animation: none; } }
+@media (max-width: 640px) { .mu-spot { width: 110px; } .mu-ped { width: 44px; height: 44px; } }
+
+.mu-hall { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px 30px; margin: 0 0 40px; }
+.mu-item { display: grid; gap: 10px; justify-items: center; padding: 20px 14px 22px; border-radius: var(--radius);
+	background: radial-gradient(70% 60% at 50% 30%, rgba(255, 226, 170, .07), transparent 70%); }
+.mu-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; margin: 0; font-family: var(--f-display); }
+.mu-how { max-width: 760px; padding: 18px 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); }
+.mu-how h2 { font-family: var(--f-display); font-size: 22px; margin: 0 0 8px; }
+.mu-how ul { margin: 0; padding-inline-start: 20px; color: var(--paper-dim); line-height: 1.9; }

@@ -7,7 +7,7 @@
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'akt-c0ec3bd597';
+var VERSION = 'akt-9ef50f5a30';
 var PRECACHE = [
 	'./',
 	'about.html',
@@ -27,6 +27,7 @@ var PRECACHE = [
 	'legacy.html',
 	'lists.html',
 	'map.html',
+	'museum.html',
 	'numbers.html',
 	'offline.html',
 	'papers.html',
@@ -63,6 +64,7 @@ var PRECACHE = [
 	'assets/js/data-built.js',
 	'assets/js/data-heroes.js',
 	'assets/js/editions.js',
+	'assets/js/figure3d.js',
 	'assets/js/guide.js',
 	'assets/js/home.js',
 	'assets/js/info.js',
@@ -73,6 +75,7 @@ var PRECACHE = [
 	'assets/js/lists.js',
 	'assets/js/map.js',
 	'assets/js/mosaic.js',
+	'assets/js/museum.js',
 	'assets/js/notfound.js',
 	'assets/js/notify.js',
 	'assets/js/numbers.js',
@@ -101,6 +104,7 @@ var PRECACHE = [
 	'assets/css/character.css',
 	'assets/css/detail.css',
 	'assets/css/extras.css',
+	'assets/css/figure3d.css',
 	'assets/css/fonts.css',
 	'assets/css/legacy-timeline.css',
 	'assets/css/lists.css',
@@ -112,6 +116,7 @@ var PRECACHE = [
 	'assets/css/page-editions.css',
 	'assets/css/page-hero.css',
 	'assets/css/page-journey.css',
+	'assets/css/page-museum.css',
 	'assets/css/page-screen.css',
 	'assets/css/page-talks.css',
 	'assets/css/page-world.css',

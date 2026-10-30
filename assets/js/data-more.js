@@ -4343,3 +4343,16 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		outlet: { ar: 'جريدة القاهرة', en: 'Al-Qahira newspaper' }, lang: 'ar', url: url,
 		note: { ar: 'حوار أجراه سامح فايز مع «الأب الروحي لكتّاب الرعب»، نحو أواخر 2012؛ صورة الصفحة المطبوعة على فيسبوك.', en: 'Sameh Fayez interviews “the godfather of horror writers”, about late 2012; a photo of the printed page on Facebook.' } });
 })(window.AKT);
+
+/* 3D figures (figure3d.js): statues made by the site's editor with Meshy AI (October 2026) as 3D-printing files, turned into
+   light bronze-finished models for the web by tools/stl-to-glb.js — on their characters' pages and on «المتحف» */
+(function (A) {
+	A.figures3d = Object.assign(A.figures3d || {}, {
+		refaat: { chars: ['refaat'], src: 'assets/models/refaat.glb', poster: 'assets/img/figures/refaat-3d.webp',
+			title: { ar: 'د. رفعت إسماعيل', en: 'Dr. Refaat Ismail' },
+			text: { ar: 'جالسًا على كرسيه بالمقلوب، ذراعاه على ظهره، يتأمل حكاية أخرى لم يصدّقها أحد.', en: 'Astride his chair, arms on its back, pondering another tale nobody believed.' } },
+		alaa: { chars: ['alaa', 'bernadette'], src: 'assets/models/alaa-bernadette.glb', poster: 'assets/img/figures/alaa-bernadette-3d.webp',
+			title: { ar: 'د. علاء عبد العظيم وبرنادت', en: 'Dr. Alaa Abdel Azim and Bernadette' },
+			text: { ar: 'طبيب «سافاري» وسماعته على صدره، وبرنادت إلى جانبه، كما عملا معًا في وحدة الكاميرون.', en: 'Safari’s doctor with his stethoscope, Bernadette at his side, as they worked together in the Cameroon unit.' } }
+	});
+})(window.AKT);
