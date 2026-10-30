@@ -4391,3 +4391,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if ((w.name || {}).ar === 'محمود حافظ' && !w.photo) w.photo = { url: 'assets/img/photos/writers/mahmoud-hafez.webp', source: { ar: 'أرسلها محرر الموقع', en: 'Sent by the site’s editor' } };
 	});
 })(window.AKT);
+
+/* Legacy videos: a special episode of Ahmed Mourad's «ليل داخلي» (Radio Energy 92.1 FM) on him, with Ahmed El-Aidy and Tamer
+   Ibrahim, three days after his death (on Mourad's channel, 5 April 2018), sent by the site's editor */
+(function (A) {
+	var M = A.media = A.media || [], url = 'https://www.youtube.com/watch?v=CFqNko-7TNA';
+	if (M.some(function (m) { return m.url === url; })) return;
+	M.push({ kind: 'profile', title: { ar: '«ليل داخلي»: حلقة خاصة عن الراحل أحمد خالد توفيق', en: 'Leil Dakhly: a special episode on the late Ahmed Khaled Tawfik' },
+		outlet: { ar: 'راديو إنرجي 92.1', en: 'Radio Energy 92.1 FM' }, year: 2018, lang: 'ar', url: url,
+		note: { ar: 'أحمد مراد مع ضيفيه أحمد العايدي وتامر إبراهيم، بعد رحيله بأيام (أبريل 2018).', en: 'Ahmed Mourad with his guests Ahmed El-Aidy and Tamer Ibrahim, days after his death (April 2018).' } });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
