@@ -4377,3 +4377,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if ((w.name || {}).ar === 'إنجي خالد أحمد' && !w.photo) w.photo = { url: 'assets/img/photos/writers/engy-khaled-ahmed.webp', source: { ar: 'أرسلها محرر الموقع', en: 'Sent by the site’s editor' } };
 	});
 })(window.AKT);
+
+/* Hany Haggag's photograph, sent by the site's editor — on «كتب عنه» and his page */
+(function (A) {
+	((A.writers || {}).about || []).forEach(function (w) {
+		if ((w.name || {}).ar === 'هاني حجاج' && !w.photo) w.photo = { url: 'assets/img/photos/writers/hany-haggag.webp', source: { ar: 'أرسلها محرر الموقع', en: 'Sent by the site’s editor' } };
+	});
+})(window.AKT);
