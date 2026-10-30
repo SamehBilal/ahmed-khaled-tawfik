@@ -906,6 +906,9 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 .ft-side { display: flex; flex-direction: column; gap: 22px; }
 .ft-side .ft-legal { display: grid; grid-template-columns: repeat(3, max-content); gap: 4px 26px; }
 .ft-side .ft-legal h2 { grid-column: 1 / -1; }
+/* and «صفحات الموقع» over the main pages, as the other two columns have */
+.ft-links h2 { grid-column: 1 / -1; margin: 0 0 6px; font-family: var(--f-display); font-size: 13px; font-weight: 400; letter-spacing: .08em; color: var(--ember); }
+@media (max-width: 900px) { .ft-links h2 { flex-basis: 100%; text-align: center; } }
 @media (max-width: 900px) {
 	.ft-body .wrap { grid-template-columns: 1fr; }
 	.ft-legal, .ft-side .ft-legal { display: flex; flex-direction: row; flex-wrap: wrap; gap: 4px 24px; }

@@ -416,7 +416,7 @@
 							'<div class="motto">' + App.tx(UI.motto) + '</div>' +
 							'<span class="ft-dates" dir="ltr">1962 — 2018</span>' +
 						'</div>' +
-						'<nav class="ft-links" aria-label="' + App.L('صفحات الموقع', 'Site pages') + '">' +
+						'<nav class="ft-links" aria-labelledby="ft-links-h"><h2 id="ft-links-h">' + App.L('صفحات الموقع', 'Site pages') + '</h2>' +
 							/* (the phone menu's own entries are the footer's own pages already, or the «My lists» button) */
 							UI.nav.filter(function (n) { return !n.phone; }).concat(UI.more.filter(function (n) { return n.main; })).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 						'</nav>' +
