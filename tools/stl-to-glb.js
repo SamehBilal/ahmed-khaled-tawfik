@@ -1,7 +1,8 @@
 // Turns a 3D-printing STL (shape only, no colour) into a light GLB for the web: the shared corners welded, the mesh simplified
 // by vertex clustering to about the size asked for, smooth normals, stood upright on the ground and centred, quantized
-// (KHR_mesh_quantization) and given one material — a statue's bronze — since an STL carries no paint.
-// node tools/stl-to-glb.js <in.stl> <out.glb> [grid cells along the tallest side, default 220] [colour hex, default bronze]
+// (KHR_mesh_quantization) and, since an STL carries no paint, given a cast bronze's finish worked out from its shape:
+// patina in the folds, bright on the ridges, mottled (vertex colours).
+// node tools/stl-to-glb.js <in.stl> <out.glb> [grid cells along the tallest side, default 220] [bronze hex, default #5e3d22]
 const fs = require('fs');
 const [inp, out, gridArg, colArg] = process.argv.slice(2);
 const b = fs.readFileSync(inp), n = b.readUInt32LE(80);
@@ -61,6 +62,51 @@ for (let i = 0; i < tris.length; i += 3) {
 	[a, c1, c2].forEach(v => { nor[v * 3] += nx; nor[v * 3 + 1] += ny; nor[v * 3 + 2] += nz; });
 }
 
+/* a cast bronze's finish, painted on the corners (COLOR_0): dark patina settled in the folds, the raised parts rubbed bright,
+   a little verdigris where rain would sit, and a slow mottle so no two spots are quite the same colour */
+const nb = Array.from({ length: V }, () => new Set());
+for (let i = 0; i < tris.length; i += 3) for (let k = 0; k < 3; k++) { nb[tris[i + k]].add(tris[i + (k + 1) % 3]); nb[tris[i + k]].add(tris[i + (k + 2) % 3]); }
+const un = new Float32Array(V * 3);
+for (let v = 0; v < V; v++) { const l = Math.hypot(nor[v * 3], nor[v * 3 + 1], nor[v * 3 + 2]) || 1; for (let a = 0; a < 3; a++) un[v * 3 + a] = nor[v * 3 + a] / l; }
+/* how hollow each corner sits: the way its neighbours' middle lies along its normal, in edge lengths (+ in a fold, − on a ridge) */
+let cav = new Float32Array(V);
+for (let v = 0; v < V; v++) {
+	let mx = 0, my = 0, mz = 0, e = 0; const m = nb[v].size || 1;
+	nb[v].forEach(u => { mx += out3[u * 3]; my += out3[u * 3 + 1]; mz += out3[u * 3 + 2]; e += Math.hypot(out3[u * 3] - out3[v * 3], out3[u * 3 + 1] - out3[v * 3 + 1], out3[u * 3 + 2] - out3[v * 3 + 2]); });
+	const dx = mx / m - out3[v * 3], dy = my / m - out3[v * 3 + 1], dz = mz / m - out3[v * 3 + 2];
+	cav[v] = (dx * un[v * 3] + dy * un[v * 3 + 1] + dz * un[v * 3 + 2]) / ((e / m) || 1);
+}
+/* spread it, so a fold reads as a fold and not as a speck: a fine pass and a broad one */
+const blur = (f, times) => { for (let t = 0; t < times; t++) { const g = new Float32Array(V); for (let v = 0; v < V; v++) { let s = f[v]; nb[v].forEach(u => { s += f[u]; }); g[v] = s / (nb[v].size + 1); } f = g; } return f; };
+const fine = blur(cav, 2), broad = blur(cav, 14);
+const sd = (f) => { let s = 0; for (let v = 0; v < V; v++) s += f[v] * f[v]; return Math.sqrt(s / V) || 1; };
+const sf = sd(fine), sb = sd(broad);
+/* a soft 3D value noise for the mottle */
+const hsh = (x, y, z) => { const h = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453; return h - Math.floor(h); };
+const sm = (t) => t * t * (3 - 2 * t), lerp = (a, c, t) => a + (c - a) * t;
+const noise = (x, y, z) => {
+	const X = Math.floor(x), Y = Math.floor(y), Z = Math.floor(z), fx = sm(x - X), fy = sm(y - Y), fz = sm(z - Z);
+	const c = (i, j, k) => hsh(X + i, Y + j, Z + k);
+	return lerp(lerp(lerp(c(0, 0, 0), c(1, 0, 0), fx), lerp(c(0, 1, 0), c(1, 1, 0), fx), fy), lerp(lerp(c(0, 0, 1), c(1, 0, 1), fx), lerp(c(0, 1, 1), c(1, 1, 1), fx), fy), fz);
+};
+const lin = (h) => [0, 2, 4].map(i => Math.pow(parseInt(h.slice(i, i + 2), 16) / 255, 2.2));
+const BRONZE = lin(((colArg || '#5e3d22').replace('#', ''))), DARK = lin('1c120b'), BRIGHT = lin('c08f55'), VERD = lin('3f6a55');
+const colQ = Buffer.alloc(V * 4);
+for (let v = 0; v < V; v++) {
+	const x = out3[v * 3], y = out3[v * 3 + 1], z = out3[v * 3 + 2];
+	const hollow = Math.max(-1.5, Math.min(2.5, fine[v] / sf * 0.6 + broad[v] / sb * 0.7));
+	const mott = noise(x * 9, y * 9, z * 9) * 0.65 + noise(x * 31, y * 31, z * 31) * 0.35;
+	let c = BRONZE.map((b0, a) => b0 * (0.7 + 0.6 * mott));
+	const dk = Math.max(0, Math.min(1, hollow / 1.3)); /* into the folds, the dark patina */
+	c = c.map((c0, a) => lerp(c0, DARK[a], dk * 0.9));
+	const vd = dk * Math.max(0, un[v * 3 + 1] * 0.5 + 0.5) * Math.max(0, mott - 0.35) * 1.4; /* and some green where it would settle */
+	c = c.map((c0, a) => lerp(c0, VERD[a], Math.min(0.55, vd)));
+	const br = Math.max(0, Math.min(1, -hollow / 1.6)); /* on the ridges, rubbed bright */
+	c = c.map((c0, a) => lerp(c0, BRIGHT[a], br * 0.6));
+	for (let a = 0; a < 3; a++) colQ.writeUInt8(Math.round(Math.max(0, Math.min(1, c[a])) * 255), v * 4 + a); /* (glTF's vertex colours are linear) */
+	colQ.writeUInt8(255, v * 4 + 3);
+}
+
 /* quantized: positions as normalized int16 within the box (a node scale and offset restore them), normals as int8 */
 let qlo = [Infinity, Infinity, Infinity], qhi = [-Infinity, -Infinity, -Infinity];
 for (let i = 0; i < out3.length; i += 3) for (let a = 0; a < 3; a++) { qlo[a] = Math.min(qlo[a], out3[i + a]); qhi[a] = Math.max(qhi[a], out3[i + a]); }
@@ -78,23 +124,24 @@ for (let v = 0; v < V; v++) {
 const idx = V < 65536 ? Buffer.alloc(tris.length * 2) : Buffer.alloc(tris.length * 4);
 tris.forEach((t, i) => V < 65536 ? idx.writeUInt16LE(t, i * 2) : idx.writeUInt32LE(t, i * 4));
 const pad4 = (buf) => buf.length % 4 ? Buffer.concat([buf, Buffer.alloc(4 - buf.length % 4)]) : buf;
-const bin = Buffer.concat([posQ, norQ, pad4(idx)]);
+const bin = Buffer.concat([posQ, norQ, colQ, pad4(idx)]);
 /* the positions' int16 range back to the model's units: x = q * s + o, with q in [-1, 1] */
 const s = ext / 2, o = qlo.map(v => v + ext / 2);
-const hex = (colArg || '#6e4c2c').replace('#', ''), rgb = [0, 2, 4].map(i => Math.pow(parseInt(hex.slice(i, i + 2), 16) / 255, 2.2));
 const gltf = {
 	asset: { version: '2.0', generator: 'tools/stl-to-glb.js' }, extensionsUsed: ['KHR_mesh_quantization'], extensionsRequired: ['KHR_mesh_quantization'],
 	scene: 0, scenes: [{ nodes: [0] }],
 	nodes: [{ mesh: 0, scale: [s, s, s], translation: o }],
-	meshes: [{ primitives: [{ attributes: { POSITION: 0, NORMAL: 1 }, indices: 2, material: 0 }] }],
-	materials: [{ name: 'bronze', pbrMetallicRoughness: { baseColorFactor: rgb.concat([1]), metallicFactor: 0.7, roughnessFactor: 0.48 } }],
+	meshes: [{ primitives: [{ attributes: { POSITION: 0, NORMAL: 1, COLOR_0: 3 }, indices: 2, material: 0 }] }],
+	materials: [{ name: 'bronze', pbrMetallicRoughness: { baseColorFactor: [1, 1, 1, 1], metallicFactor: 0.6, roughnessFactor: 0.58 } }],
 	buffers: [{ byteLength: bin.length }],
 	bufferViews: [{ buffer: 0, byteOffset: 0, byteLength: posQ.length, byteStride: 8, target: 34962 },
 		{ buffer: 0, byteOffset: posQ.length, byteLength: norQ.length, byteStride: 4, target: 34962 },
-		{ buffer: 0, byteOffset: posQ.length + norQ.length, byteLength: idx.length, target: 34963 }],
+		{ buffer: 0, byteOffset: posQ.length + norQ.length + colQ.length, byteLength: idx.length, target: 34963 },
+		{ buffer: 0, byteOffset: posQ.length + norQ.length, byteLength: colQ.length, byteStride: 4, target: 34962 }],
 	accessors: [{ bufferView: 0, componentType: 5122, normalized: true, count: V, type: 'VEC3', min: pmin.map(q => q / 32767), max: pmax.map(q => q / 32767) },
 		{ bufferView: 1, componentType: 5120, normalized: true, count: V, type: 'VEC3' },
-		{ bufferView: 2, componentType: V < 65536 ? 5123 : 5125, count: tris.length, type: 'SCALAR' }]
+		{ bufferView: 2, componentType: V < 65536 ? 5123 : 5125, count: tris.length, type: 'SCALAR' },
+		{ bufferView: 3, componentType: 5121, normalized: true, count: V, type: 'VEC4' }]
 };
 const json = pad4(Buffer.from(JSON.stringify(gltf), 'utf8'));
 const jsonP = Buffer.concat([json.slice(0, Buffer.from(JSON.stringify(gltf)).length), Buffer.alloc(json.length - Buffer.from(JSON.stringify(gltf)).length, 0x20)]);
