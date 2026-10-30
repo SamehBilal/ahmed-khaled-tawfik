@@ -35,6 +35,9 @@
 		'ahmed-sabry-ghabashi': { src: WP('أحمد صبري غباشي'),
 			ar: 'ممثل ومخرج مسرحي وكاتب مصري، درس في المعهد العالي للفنون المسرحية، وأسّس فرقة «ميلوفرينيا» للمسرح الحر، وله مجموعات قصصية ومقالات.',
 			en: 'An Egyptian actor, stage director and writer, a graduate of the Higher Institute of Dramatic Arts and founder of the Melophrenia free-theatre troupe, with books of stories and essays.' },
+		'ghada-abdel-aal': { src: WP('غادة عبد العال'),
+			ar: 'كاتبة وسيناريست وصيدلانية مصرية من المحلة الكبرى، بدأت مدوّنةً بـ«عايزة أتجوز» (2006) التي صارت كتابًا عن دار الشروق (2009) ثم مسلسلًا (2010)، وتكتب المقال الساخر في الصحف.',
+			en: 'An Egyptian writer, screenwriter and pharmacist from Mahalla al-Kubra whose blog Ayza Atgawez (2006) became a Dar El Shorouk book (2009) and then a TV series (2010); she writes satirical columns for the press.' },
 		'ismail-diab': { src: WP('إسماعيل دياب'),
 			ar: 'رسّام مصري (1936–2005) من الإسماعيلية، تخرّج في كلية الفنون الجميلة عام 1962 وعمل في «روز اليوسف»، ثم رسم أغلفة سلاسل «روايات مصرية للجيب» للمؤسسة العربية الحديثة.',
 			en: 'An Egyptian painter (1936–2005) from Ismailia, a 1962 graduate of the Faculty of Fine Arts who worked at Rose al-Youssef, then painted the covers of the Modern Arab Association’s Egyptian Pocket Novels series.' },
@@ -111,7 +114,7 @@
 	};
 
 	/* the women, so Arabic speaks of them in the feminine */
-	var FEMALE = ['sherine-hanaey', 'sally-adel', 'hanan-el-karargy', 'madiha-mohamed', 'reham-ibrahim', 'engy-khaled-ahmed'];
+	var FEMALE = ['sherine-hanaey', 'sally-adel', 'hanan-el-karargy', 'madiha-mohamed', 'reham-ibrahim', 'engy-khaled-ahmed', 'ghada-abdel-aal'];
 
 	var cache = null;
 	var key = function (name) { return String((name && name.ar) || '').replace(/^د\.\s*/, '').trim(); };

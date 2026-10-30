@@ -18,7 +18,9 @@ window.PAGE = {
 		if (has('collaborators')) parts.push(L('شارك أحمد خالد توفيق الكتابة', 'wrote with Ahmed Khaled Tawfik', 'شاركت أحمد خالد توفيق الكتابة'));
 		if (has('introductions')) parts.push(L('جمعتهما مقدّمة أو كلمة على غلاف', 'shared a foreword or a back-cover word with him'));
 		if (has('dedications')) parts.push(L('أهدى إليه كتابًا', 'dedicated a book to him', 'أهدت إليه كتابًا'));
-		if (has('influenced')) parts.push(L('خرج من عباءته قارئًا ثم كاتبًا', 'grew up reading him before becoming a writer', 'خرجت من عباءته قارئةً ثم كاتبةً'));
+		/* (an entry may say in its own words what tied them, where the shelf's sentence would say more than the source does) */
+		var own = p.entries.filter(function (x) { return x.shelf === 'influenced' && x.w.line; })[0];
+		if (has('influenced')) parts.push(own ? App.t(own.w.line) : L('خرج من عباءته قارئًا ثم كاتبًا', 'grew up reading him before becoming a writer', 'خرجت من عباءته قارئةً ثم كاتبةً'));
 		if (has('contemporaries')) parts.push(L('كان من رفاق جيله في كتب الجيب', 'was one of his peers in the pocket books', 'كانت من رفاق جيله في كتب الجيب'));
 		if (has('translated')) parts.push(L('نقل العرّاب أعماله إلى العربية', 'was translated into Arabic by him'));
 		if (has('about')) parts.push(L('ألّف كتابًا عنه', 'wrote a book about him', 'ألّفت كتابًا عنه'));

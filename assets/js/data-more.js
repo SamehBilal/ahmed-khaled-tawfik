@@ -4305,3 +4305,29 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		photo: { url: 'assets/img/photos/writers/ismail-diab.webp', file: 'https://ar.wikipedia.org/wiki/%D9%85%D9%84%D9%81:%D8%A7%D8%B3%D9%85%D8%A7%D8%B9%D9%8A%D9%84_%D8%AF%D9%8A%D8%A7%D8%A8.jpg', source: { ar: 'ويكيبيديا', en: 'Wikipedia' } }
 	});
 })(window.AKT);
+
+/* Ghada Abdel Aal, the satirist and pharmacist of «عايزة أتجوز»: on «تأثروا به», worded no further than her own words — in VICE
+   (17 February 2019) she wrote that his marks «شكلت أجزاءً من وجداننا» — with Tawfik's own visit to her writing workshop
+   («كاساندرا من جديد», التحرير, 31 March 2014); and her words on «قالوا عنه». Asked for by the site's editor; both checked at the source */
+(function (A) {
+	var VICE = 'https://www.vice.com/ar/article/%d8%a3%d8%ad%d9%85%d8%af-%d8%ae%d8%a7%d9%84%d8%af-%d8%aa%d9%88%d9%81%d9%8a%d9%82-%d8%a3%d8%a8%d8%a7%d9%86%d8%a7-%d8%a7%d9%84%d8%b0%d9%8a-%d9%81%d9%8a-%d8%b7%d9%86%d8%b7%d8%a7-%d9%84%d9%85-%d9%8a%d8%a3/';
+	var W = A.writers = A.writers || {}, I = W.influenced = W.influenced || [];
+	if (!I.some(function (w) { return (w.name || {}).ar === 'غادة عبد العال'; })) I.push({
+		name: { ar: 'غادة عبد العال', en: 'Ghada Abdel Aal' },
+		work: { ar: '«عايزة أتجوز»', en: 'Ayza Atgawez (I Want to Get Married)' },
+		text: { ar: 'الصيدلانية والكاتبة الساخرة صاحبة «عايزة أتجوز»، كتبت بعد رحيله في VICE «أحمد خالد توفيق: أبانا الذي في طنطا لم يأتِ هذا العام»، وقالت فيه إن بصماته «شكلت أجزاءً من وجداننا». وكان العرّاب قد حضر ورشة لفنون الكتابة عقدتها مع طلبة كلية الطب، وكتب عنها في مقاله «كاساندرا من جديد» (2014).',
+			en: 'The pharmacist and satirist of Ayza Atgawez wrote, after his death, “Ahmed Khaled Tawfik: Our Father in Tanta Did Not Come This Year” for VICE, saying his marks “shaped parts of our very feelings”. Tawfik had sat in on a writing workshop she ran with medical students, and wrote about it in his column “Cassandra Again” (2014).' },
+		line: { ar: 'كتبت أن بصماته شكّلت أجزاءً من وجدان جيلها، وحضر العرّاب ورشتها للكتابة', en: 'wrote that his marks shaped part of her generation’s feelings, and Tawfik sat in on her writing workshop' },
+		source: VICE,
+		link: { href: 'blog.html?post=8601052440245274378', label: { ar: 'مقاله عن ورشتها: «كاساندرا من جديد» ←', en: 'His column on her workshop: “Cassandra Again” →' } }
+	});
+	var T = A.tributes = A.tributes || [];
+	if (!T.some(function (x) { return x.source === VICE; })) T.push({
+		name: { ar: 'غادة عبد العال', en: 'Ghada Abdel Aal' }, role: { ar: 'كاتبة', en: 'Writer' }, date: '2019-02-17',
+		quote: { ar: 'ستظل كلماته حاضرة في عقولنا، وبصماته التي شكلت أجزاءً من وجداننا لن تختفي بسهولة مع الأيام.',
+			en: 'His words will stay present in our minds, and the marks that shaped parts of our very feelings will not easily fade with the days.' },
+		context: { ar: 'من مقالها «أحمد خالد توفيق: أبانا الذي في طنطا لم يأتِ هذا العام» في VICE عربية، في معرض القاهرة للكتاب الأول بعد رحيله.',
+			en: 'From her VICE Arabia piece “Ahmed Khaled Tawfik: Our Father in Tanta Did Not Come This Year”, at the first Cairo Book Fair after his death.' },
+		source: VICE
+	});
+})(window.AKT);
