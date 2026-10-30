@@ -73,6 +73,10 @@ html[dir="rtl"] .tlx-item::after { transform: translate(50%, -50%); }
 	font-family: var(--f-latin); font-weight: 700; font-size: clamp(40px, 5vw, 60px); line-height: 1;
 	color: var(--paper); margin: 0 0 18px;
 }
+/* under its picture, the year rises onto the picture's bottom edge (as the CodePen's title sits under its image) */
+.tlx-yr.on-pic { position: relative; z-index: 1; margin: -.55em 0 14px; padding-inline-start: 14px; font-size: clamp(48px, 6vw, 72px);
+	text-shadow: 0 2px 0 var(--ink), 0 0 22px rgba(0, 0, 0, .65); }
+.tlx-media.tall + .tlx-yr.on-pic { margin-top: -.45em; }
 .tlx-media {
 	display: block; margin: 0 0 18px; border-radius: 4px; overflow: hidden; line-height: 0;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, .45); background: var(--ink-2);
@@ -106,6 +110,7 @@ button.tlx-pic { cursor: zoom-in; }
 		transform: none;
 	}
 	.tlx-yr { font-size: 40px; margin-bottom: 14px; }
+	.tlx-yr.on-pic { font-size: 48px; margin-top: -.5em; }
 }
 
 @media (prefers-reduced-motion: reduce) {

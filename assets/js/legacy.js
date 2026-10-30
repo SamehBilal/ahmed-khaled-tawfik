@@ -46,10 +46,11 @@ window.PAGE = {
 					var mi = vid.yt ? media.findIndex(function (m) { return self.youtubeId(m.url) === vid.yt; }) : -1;
 					var big = im.yt ? 'https://i.ytimg.com/vi/' + im.yt + '/hqdefault.jpg' : im.src;
 					return '<li class="tlx-item" id="l-' + i + '" data-text="' + e(fmtDate(l.date)) + '"><div class="tlx-content">' +
-						'<div class="tlx-yr">' + e(App.num(String(l.date).slice(0, 4))) + '</div>' +
 						(!im.src ? '' : (im.yt && mi >= 0)
 							? '<button type="button" class="tlx-media" data-yt="' + e(im.yt) + '" data-i="' + mi + '" aria-label="' + e(L('شاهد: ', 'Watch: ') + App.t(media[mi].title)) + '">' + pic + '</button>'
 							: '<button type="button" class="tlx-media tlx-pic' + (im.tall ? ' tall' : '') + '" data-src="' + e(big) + '" data-alt="' + e(title) + '" aria-label="' + e(L('تكبير الصورة: ', 'Enlarge the picture: ') + title) + '">' + pic + '</button>') +
+						/* the year under the picture, its foot on the picture's bottom edge, as in the CodePen this follows */
+						'<div class="tlx-yr' + (im.src ? ' on-pic' : '') + '">' + e(App.num(String(l.date).slice(0, 4))) + '</div>' +
 						'<h3>' + tx(l.title) + '</h3><p>' + tx(l.text) + '</p>' +
 						(l.photo && mi >= 0 ? '<button type="button" class="tlx-watch" data-yt="' + e(vid.yt) + '" data-i="' + mi + '">▶ ' + L('شاهد', 'Watch') + '</button> ' : '') +
 						(l.source ? '<a class="src" href="' + e(l.source) + '" target="_blank" rel="noopener">' + L('المصدر ↗', 'Source ↗') + '</a>' : '') +
