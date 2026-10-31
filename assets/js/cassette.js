@@ -128,6 +128,8 @@
 				? L('الكتاب الصوتي على Storytel' + (tr.by ? ' بصوت ' + tr.by : '') + ' — الزر يفتح صفحته هناك في نافذة جديدة', 'The audiobook is on Storytel' + (tr.by ? ', read by ' + tr.by : '') + ' — the key opens its page there in a new tab')
 				: tr.provider === 'Iqraaly'
 				? L('الكتاب الصوتي على «اقرألي»' + (tr.by ? ' بصوت ' + tr.by : '') + ' — الزر يفتح صفحته هناك في نافذة جديدة', 'The audiobook is on Iqraaly' + (tr.by ? ', read by ' + tr.by : '') + ' — the key opens its page there in a new tab')
+				: tr.provider === 'StoriaPod'
+				? L('على «ستوريا بود»' + (tr.by ? ' بصوت ' + tr.by : '') + ' — الزر يفتح صفحته هناك في نافذة جديدة', 'On StoriaPod' + (tr.by ? ', read by ' + tr.by : '') + ' — the key opens its page there in a new tab')
 				: L('الحلقة على Audiohat — الزر يفتح صفحتها هناك في نافذة جديدة', 'The episode is on Audiohat — the key opens its page there in a new tab');
 			el.classList.toggle('has-sample', !!(tr.yt && tr.ytEmbed));
 			/* the separate source key is for YouTube; for Audiohat the main key already opens it */
@@ -312,6 +314,18 @@
 		});
 	}
 
-	window.Cassette = { mount: mount, issueTracks: function (key, title) { return issueTracks(key, title).concat(youtubeTracks(key, title), storytelTracks(key, title), iqraalyTracks(key, title)); },
-		youtubeTracks: youtubeTracks, storytelTracks: storytelTracks, iqraalyTracks: iqraalyTracks, pageUrl: pageUrl };
+	/* audiobooks on StoriaPod (data-more.js: the Lasheen novels) -> tracks. key: lasheen-<n>; data entries: [show slug, minutes, narrator, episodes] */
+	function storiapodTracks(key, title) {
+		var D = window.App.data(), A = D.audio || null, Q = A && A.storiapod;
+		if (!Q || !Q.items || !Q.items[key]) return [];
+		var L = window.App.L, num = window.App.num, info = (D.issueInfo || {})[key] || {};
+		return Q.items[key].map(function (ep) {
+			var label = [ep[2] ? L('بصوت ' + ep[2], 'read by ' + narrator(ep[2])) : '', ep[3] ? num(ep[3]) + L(' حلقات', ' episodes') : ''].filter(Boolean).join(' · ');
+			return { title: title, ep: label || 'StoriaPod', sub: L('ستوريا بود', 'StoriaPod') + (label ? ' · ' + label : ''), url: Q.base + encodeURIComponent(ep[0]),
+				mins: ep[1] || null, by: ep[2] || '', provider: 'StoriaPod', providerAr: 'ستوريا بود', skin: 'midnight', art: info.cover || '' };
+		});
+	}
+
+	window.Cassette = { mount: mount, issueTracks: function (key, title) { return issueTracks(key, title).concat(youtubeTracks(key, title), storytelTracks(key, title), iqraalyTracks(key, title), storiapodTracks(key, title)); },
+		youtubeTracks: youtubeTracks, storytelTracks: storytelTracks, iqraalyTracks: iqraalyTracks, storiapodTracks: storiapodTracks, pageUrl: pageUrl };
 })();

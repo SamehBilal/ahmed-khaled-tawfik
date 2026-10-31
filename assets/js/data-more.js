@@ -503,6 +503,17 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 				items: [{"title":{"ar":"الموسم الثاني","en":"Season Two"},"url":"https://www.audiohatdar.com/serieses/_02_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2020 · 9 حلقات","en":"2020 · 9 episodes"},"text":{"ar":"«عودة آلة الرعب»","en":"The return of the horror machine"}},{"title":{"ar":"الموسم الثالث","en":"Season Three"},"url":"https://www.audiohatdar.com/serieses/_03_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2021 · 10 حلقات","en":"2021 · 10 episodes"}},{"title":{"ar":"الموسم الرابع","en":"Season Four"},"url":"https://www.audiohatdar.com/serieses/_04_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2022 · 10 حلقات","en":"2022 · 10 episodes"}},{"title":{"ar":"الموسم الخامس","en":"Season Five"},"url":"https://www.audiohatdar.com/serieses/_05_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2023 · 10 حلقات","en":"2023 · 10 episodes"}},{"title":{"ar":"الموسم السادس","en":"Season Six"},"url":"https://www.audiohatdar.com/serieses/_06_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2024 · 10 حلقات","en":"2024 · 10 episodes"}},{"title":{"ar":"الموسم السابع","en":"Season Seven"},"url":"https://www.audiohatdar.com/serieses/_07_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B3%D8%A7%D8%A8%D8%B9_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2025 · 10 حلقات","en":"2025 · 10 episodes"}},{"title":{"ar":"الموسم الثامن","en":"Season Eight"},"url":"https://www.audiohatdar.com/serieses/_08_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%85%D9%86_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2026 · يُذاع الآن","en":"2026 · airing now"},"text":{"ar":"الحلقة الأولى: «المال والبنون»","en":"Episode one: Money and Sons"}}].concat([{ title: { ar: 'لاشين 15: عن الرعب والسفر — مسموعًا', en: 'Lasheen 15: On Horror and Travel — audiobook' }, url: ah('لاشين:_عن_الرعب_والسفر_'), meta: { ar: '4 حلقات · إنتاج «اقرأ لي»', en: '4 parts · produced by Iqra Li' } }])
 			},
 			{
+				title: { ar: 'على ستوريا بود', en: 'On StoriaPod' },
+				text: { ar: 'الكتب الأربعة الأولى مسموعة بصوت محمد خميس، ومسلسل صوتي عن الكتاب الأول، كلها بحقوق دار كتوبيا.', en: 'The first four books as audiobooks read by Mohamed Khamis, and an audio drama of book one, all licensed by Kotopia.' },
+				items: [
+					{ title: { ar: 'مسلسل لاشين (العهد)', en: 'Lasheen: The Covenant (audio drama)' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('مسلسل-لاشين-العهد'), meta: { ar: '2026 · 6 حلقات · سيناريو وإخراج كريم قنديل', en: '2026 · 6 episodes · written and directed by Karim Kandil' } },
+					{ title: { ar: 'الكتاب الأول: عهد الدجالين', en: 'Book one: The Age of Charlatans' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('لاشين-الكتاب-الأول-عهد-الدجالين'), meta: { ar: '6 أجزاء', en: '6 parts' } },
+					{ title: { ar: 'الكتاب الثاني: أبناء ديهيا', en: 'Book two: Sons of Dihya' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('لاشين-الكتاب-الثاني-أبناء-ديهيا'), meta: { ar: '6 أجزاء', en: '6 parts' } },
+					{ title: { ar: 'الكتاب الثالث: كاهنة الأوراس', en: 'Book three: The Priestess of the Aurès' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('لاشين-الكتاب-الثالث-كاهنة-الأوراس'), meta: { ar: '17 جزءًا', en: '17 parts' } },
+					{ title: { ar: 'الكتاب الرابع: خلف قسم اللبان', en: 'Book four: Behind al-Labban Station' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('لاشين-الكتاب-الرابع-خلف-قسم-اللبان'), meta: { ar: '8 أجزاء', en: '8 parts' } }
+				]
+			},
+			{
 				title: { ar: 'عصا أبناء ديهيا', en: 'The Staff of the Sons of Dihya' },
 				text: {
 					ar: 'قطعة مقتنيات فنية صمّمتها وأنتجتها شركة «أوتوجراف» بالتعاون مع دار كتوبيا، أُعلن عنها في نوفمبر 2025. تجسّد رمزًا محوريًا في السلسلة: إرثًا تنتقل قوته عبر الأجيال، وقُدّمت بوصفها أول قطعة تترجم عالمًا أدبيًا مصريًا إلى مقتنى ملموس في مصر والوطن العربي.',
@@ -3595,6 +3606,32 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	};
 })(window.AKT);
 
+/* The Lasheen novels on StoriaPod (ستوريا بود, storiapod.com), books one to four, read by Mohamed Khamis for Kotopia (20 July 2026;
+   book three's second part 21 September); and «مسلسل لاشين (العهد)», its audio drama of book one, written and directed by
+   Karim Kandil, one episode a week from 25 September to 30 October 2026. Collected 2026-10-31; the site plays none of them.
+   Keys: lasheen-<n>; each entry: [show slug (storiapod.com/show/<slug>), minutes, narrator, episodes].
+   drama.eps: [episode slug (storiapod.com/episode/<slug>), minutes, title, date] */
+(function (A) {
+	var Au = A.audio;
+	if (!Au) return;
+	Au.storiapod = Au.storiapod || {
+		base: 'https://www.storiapod.com/show/', episode: 'https://www.storiapod.com/episode/',
+		items: {
+			'lasheen-1': [['لاشين-الكتاب-الأول-عهد-الدجالين', 260, 'محمد خميس', 6]],
+			'lasheen-2': [['لاشين-الكتاب-الثاني-أبناء-ديهيا', 139, 'محمد خميس', 6]],
+			'lasheen-3': [['لاشين-الكتاب-الثالث-كاهنة-الأوراس', 193, 'محمد خميس', 17]],
+			'lasheen-4': [['لاشين-الكتاب-الرابع-خلف-قسم-اللبان', 176, 'محمد خميس', 8]]
+		},
+		drama: {
+			title: { ar: 'مسلسل لاشين (العهد)', en: 'Lasheen: The Covenant (audio drama)' }, slug: 'مسلسل-لاشين-العهد', n: 1, year: 2026,
+			by: { ar: 'سيناريو وإخراج كريم قنديل', en: 'written and directed by Karim Kandil' }, art: 'assets/img/audio/lasheen-al-ahd.webp',
+			eps: [['مسلسل-لاشين-العهد-1-المولد', 26, 'المولد', '2026-09-25'], ['مسلسل-لاشين-العهد-2-بعد-منتصف-الليل', 28, 'بعد منتصف الليل', '2026-10-02'],
+				['مسلسل-لاشين-العهد-3-آلة-الرعب', 24, 'آلة الرعب', '2026-10-08'], ['مسلسل-لاشين-العهد-4-جبر', 31, 'جبر', '2026-10-16'],
+				['مسلسل-لاشين-العهد-5-آدم', 23, 'آدم', '2026-10-23'], ['مسلسل-لاشين-العهد-الأول-و-الأخير', 38, 'الأول والأخير', '2026-10-30']]
+		}
+	};
+})(window.AKT);
+
 /* Storytel (ستوريتل) and Iqraaly (اقرألي): audio houses like Audiohat. What each made audiobooks of is counted from its
    recordings on the site (p.heardOn: AKT.audio.storytel in data-storytel.js, AKT.audio.iqraaly above) */
 (function (A) {
@@ -3610,6 +3647,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		about: { ar: 'منصة مصرية للكتب المسموعة بالعربية، تأسست في القاهرة عام 2012، تسجّل الروايات والكتب بأصوات قرّاء محترفين وتقدّمها حلقاتٍ على موقعها وتطبيقها.',
 			en: 'An Egyptian platform for Arabic audiobooks, founded in Cairo in 2012, that records novels and books in the voices of professional readers and offers them in episodes on its site and app.' },
 		links: [{ kind: 'site', url: 'https://iqraaly.com/' }] });
+	if (!have('storiapod')) A.publishers.push({ id: 'storiapod', name: { ar: 'ستوريا بود', en: 'StoriaPod' }, match: 'ستوريا بود|StoriaPod', heardOn: 'storiapod',
+		logo: 'assets/img/publishers/storiapod.webp',
+		about: { ar: 'منصة عربية للقصص والدراما الصوتية والبودكاست، مقرها برلين (Storia Pod GmbH)، تقدّم أعمالًا صوتية أصلية إلى جانب مختارات من المحتوى الصوتي العربي في تطبيق واحد.',
+			en: 'An Arabic platform for audio stories, audio drama and podcasts, based in Berlin (Storia Pod GmbH), offering original audio productions alongside a selection of Arabic audio in one app.' },
+		links: [{ kind: 'site', url: 'https://www.storiapod.com/' }] });
 })(window.AKT);
 
 /* The books behind «كتبوا معه» and «ترجم لهم»: each entry's books (w.books: a work's id, "s:<series>" or "i:<series>:<n>"), so a

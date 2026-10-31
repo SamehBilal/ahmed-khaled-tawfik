@@ -76,7 +76,7 @@ if (process.argv.includes('--en')) {
 	walkObj(d, 'AKT');
 	/* the audiobooks' narrators ([…, minutes, narrator, …] on Storytel and Iqraaly) need their name in Latin letters too */
 	const au = d.audio || {}, names = au.narratorsEn || {};
-	[au.storytel, au.iqraaly].forEach(src => Object.values((src || {}).items || {}).forEach(eps => (eps || []).forEach(ep => {
+	[au.storytel, au.iqraaly, au.storiapod].forEach(src => Object.values((src || {}).items || {}).forEach(eps => (eps || []).forEach(ep => {
 		if (ep && typeof ep[2] === 'string' && /[ء-ي]/.test(ep[2]) && !names[ep[2]]) add('narrator without English', ep[2]);
 	})));
 }

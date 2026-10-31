@@ -21,13 +21,14 @@ window.PAGE = {
 		var issues = series.reduce(function (n, s) { return n + (S ? S.seriesIssues(s.id).filter(function (is) { return !(is.part > 1); }).length : (+s.count || 0)); }, 0);
 		var writersCount = ['collaborators', 'introductions', 'influenced', 'contemporaries', 'translated']
 			.reduce(function (n, k) { return n + ((w[k] || []).length); }, 0);
-		/* every recording once, on every platform: Audiohat's episodes, Storytel's and Iqraaly's audiobooks, the videos on YouTube */
+		/* every recording once, on every platform: Audiohat's episodes, Storytel's, Iqraaly's and StoriaPod's audiobooks, the videos on YouTube */
 		var au = d.audio || {}, heard = {};
 		var hear = function (where, eps, at) { (eps || []).forEach(function (ep) { heard[where + ':' + ep[at || 0]] = 1; }); };
 		Object.keys(au.issues || {}).forEach(function (k) { hear('ah', au.issues[k]); });
 		hear('ah', au.midnight, 1);
 		(au.seasons || []).concat(au.lasheenBooks || [], au.midnightSpoofs ? [au.midnightSpoofs] : []).forEach(function (x) { hear('ah', x.eps); });
-		[au.storytel, au.iqraaly].forEach(function (P, k) { if (P && P.items) Object.keys(P.items).forEach(function (key) { hear(k ? 'iq' : 'st', P.items[key]); }); });
+		[au.storytel, au.iqraaly, au.storiapod].forEach(function (P, k) { if (P && P.items) Object.keys(P.items).forEach(function (key) { hear(['st', 'iq', 'sp'][k], P.items[key]); }); });
+		if (au.storiapod && au.storiapod.drama) hear('sp', au.storiapod.drama.eps);
 		if (au.youtube) { Object.keys(au.youtube.issues || {}).forEach(function (k) { hear('yt', au.youtube.issues[k]); }); if (au.youtube.eslamAdel) hear('yt', au.youtube.eslamAdel.eps); }
 		var audioCount = Object.keys(heard).length;
 

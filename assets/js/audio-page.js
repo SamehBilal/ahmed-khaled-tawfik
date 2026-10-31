@@ -162,6 +162,27 @@ window.PAGE = {
 			lrows.push({ n: +is.n, title: { ar: 'لاشين ' + App.num(is.n) + ': ' + is.title.ar + ' (اقرألي)', en: 'Lasheen ' + is.n + ': ' + (is.title.en || is.title.ar) + ' (Iqraaly)' },
 				href: App.issueHref('lasheen', is), thumb: ((App.data().issueInfo || {})[k] || {}).cover || '', start: start, count: tracks.length - start, mins: minsFrom(start) });
 		});
+		/* on StoriaPod, one row a book; then its audio drama of book one, one row with its episodes inside */
+		var SP = A.storiapod;
+		Object.keys((SP && SP.items) || {}).forEach(function (k) {
+			var is = (S.seriesIssues('lasheen') || []).filter(function (x) { return 'lasheen-' + x.n === k; })[0];
+			if (!is) return;
+			var start = tracks.length;
+			window.Cassette.storiapodTracks(k, L('لاشين ', 'Lasheen ') + App.num(is.n) + ': ' + t(is.title)).forEach(function (tr) { tracks.push(tr); });
+			lrows.push({ n: +is.n + .1, title: { ar: 'لاشين ' + App.num(is.n) + ': ' + is.title.ar + ' (ستوريا بود)', en: 'Lasheen ' + is.n + ': ' + (is.title.en || is.title.ar) + ' (StoriaPod)' },
+				href: App.issueHref('lasheen', is), thumb: ((App.data().issueInfo || {})[k] || {}).cover || '', start: start, count: tracks.length - start, mins: minsFrom(start) });
+		});
+		var dr = SP && SP.drama;
+		if (dr) {
+			var drIs = (S.seriesIssues('lasheen') || []).filter(function (x) { return +x.n === dr.n; })[0], drStart = tracks.length;
+			dr.eps.forEach(function (ep, k) {
+				var label = App.num(k + 1) + '. ' + ep[2];
+				tracks.push({ title: t(dr.title), ep: label, sub: L('دراما صوتية', 'Audio drama') + ' · ' + label, url: SP.episode + encodeURIComponent(ep[0]), mins: ep[1] || null,
+					provider: 'StoriaPod', providerAr: 'ستوريا بود', skin: 'midnight', art: dr.art });
+			});
+			lrows.push({ n: dr.n + .2, title: { ar: dr.title.ar + ' — ' + dr.by.ar + ' (ستوريا بود، ' + App.num(dr.year) + ')', en: dr.title.en + ', ' + dr.by.en + ' (StoriaPod, ' + dr.year + ')' },
+				href: drIs ? App.issueHref('lasheen', drIs) : '', thumb: dr.art, start: drStart, count: tracks.length - drStart, mins: minsFrom(drStart) });
+		}
 		/* on Audiohat, one row a book, its parts inside */
 		(A.lasheenBooks || []).forEach(function (b) {
 			var is = (S.seriesIssues('lasheen') || []).filter(function (x) { return +x.n === b.n; })[0];
@@ -194,8 +215,8 @@ window.PAGE = {
 		lrows = lrows.filter(function (r) { return r.count > 0; }).sort(function (a, b) { return a.n - b.n; });
 		if (lrows.length) groups.push({
 			title: { ar: 'روايات «لاشين» مسموعة', en: 'The Lasheen novels, out loud' },
-			note: { ar: 'سلسلة شيرين هنائي التي خرجت من «بعد منتصف الليل»: الكتب من الأول إلى الثامن على «اقرألي» بصوت محمد خميس، والخامس عشر على Audiohat؛ الزر يفتح صفحة الكتاب هناك.',
-				en: 'Sherine Hanaey’s series that grew out of After Midnight: books one to eight on Iqraaly, read by Mohamed Khamis, and book fifteen on Audiohat; the key opens the book’s page there.' },
+			note: { ar: 'سلسلة شيرين هنائي التي خرجت من «بعد منتصف الليل»: الكتب من الأول إلى الثامن على «اقرألي» بصوت محمد خميس، ومن الأول إلى الرابع على «ستوريا بود» بصوته أيضًا ومعها مسلسل «العهد» الصوتي، والخامس عشر على Audiohat؛ الزر يفتح صفحة الكتاب هناك.',
+				en: 'Sherine Hanaey’s series that grew out of After Midnight: books one to eight on Iqraaly, read by Mohamed Khamis; one to four on StoriaPod, read by him too, with the audio drama “The Covenant”; and book fifteen on Audiohat. The key opens the book’s page there.' },
 			rows: lrows
 		});
 
