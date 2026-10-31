@@ -1,12 +1,43 @@
 /* «سجل التحديثات» (changelog.html, changelog.js) */
-.ph[data-ph="changelog"] { background: radial-gradient(60% 120% at 50% 30%, #22201c 0%, #0b0b0c 72%); }
-.cl-day { position: absolute; top: 50%; left: calc(14% + var(--i) * 11%); width: 80px; height: 92px; margin-top: -46px; border-radius: 8px; background: #efe6d2; box-shadow: 0 12px 24px rgba(0, 0, 0, .5);
-	transform-origin: 50% 0; animation: cl-flip 7.7s var(--d) ease-in-out infinite; overflow: hidden; }
-.cl-day::before { content: ''; display: block; height: 22px; background: var(--ember); }
-.cl-day b { display: block; text-align: center; font-family: var(--f-latin); font-size: 40px; color: #2a1d14; line-height: 64px; }
-@keyframes cl-flip { 0%, 70%, 100% { transform: rotateX(0); opacity: 1; } 80% { transform: rotateX(80deg); opacity: .3; } 90% { transform: rotateX(0); opacity: 1; } }
-@media (max-width: 640px) { .cl-day:nth-child(n+5) { display: none; } .cl-day { left: calc(8% + var(--i) * 22%); } }
-@media (prefers-reduced-motion: reduce) { .cl-day { animation: none; } }
+/* the band: «Date Ruler» (changelog.js, band and ruler), after Paul Troshkin's pen — a card with the weekday and the year,
+   the date on reels, and three rulers under a needle; the band grows to hold it, in the site's colours in either theme */
+.ph[data-ph="changelog"] { height: auto; }
+.ph[data-ph="changelog"]::after { display: none; }
+.ph[data-ph="changelog"] .ph-stage { position: relative; display: grid; place-items: center; padding: 28px 16px; }
+.dr-card { display: grid; gap: 4px; width: min(520px, 100%); padding: 22px 0 16px; border-radius: 28px; color: var(--ph-ink);
+	background: color-mix(in srgb, var(--ph-ink) 7%, transparent); border: 1px solid color-mix(in srgb, var(--ph-ink) 10%, transparent);
+	box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ph-ink) 6%, transparent), 0 10px 30px rgba(0, 0, 0, .3); }
+.dr-meta, .dr-date { display: flex; align-items: center; justify-content: space-between; margin: 0; padding: 0 26px; }
+.dr-meta { font-family: var(--f-display); font-size: 17px; color: var(--ph-dim); }
+.dr-years { display: flex; font-family: var(--f-latin); font-size: 20px; font-weight: 600; }
+.dr-date { justify-content: flex-start; gap: .28em; padding-bottom: 10px; font-family: var(--f-display); font-size: clamp(40px, 9vw, 54px); line-height: 1; }
+.dr-num { display: flex; font-family: var(--f-latin); font-weight: 600; }
+.dr-reel { display: block; height: 1.2em; overflow: hidden; -webkit-mask: linear-gradient(transparent, #000 22% 78%, transparent); mask: linear-gradient(transparent, #000 22% 78%, transparent); }
+.dr-strip { display: grid; transition: transform .65s cubic-bezier(.2, .9, .25, 1); }
+.dr-strip i { display: block; height: 1.2em; line-height: 1.2em; font-style: normal; white-space: nowrap; }
+.dr-dt { width: .52em; transition: width .4s; }
+.dr-dt .dr-strip { justify-items: end; }
+.dr-dt.is-none { width: 0; }
+/* a ruler: a label under each tick, a short tick between, sliding so the value sits under the needle */
+.dr-ruler { --gap: 34px; position: relative; height: 54px; overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none;
+	-webkit-mask: linear-gradient(90deg, transparent, #000 30% 70%, transparent); mask: linear-gradient(90deg, transparent, #000 30% 70%, transparent); }
+.dr-ruler.is-drag { cursor: grabbing; }
+.dr-ruler::after { content: ''; position: absolute; top: 4px; left: calc(50% - 1.5px); z-index: 2; width: 3px; height: 24px; border-radius: 2px; background: var(--ember); }
+.dr-ruler input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.dr-ruler:has(input:focus-visible) { background: color-mix(in srgb, var(--ph-ink) 6%, transparent); }
+.dr-ruler:has(input:focus-visible)::after { box-shadow: 0 0 0 3px color-mix(in srgb, var(--ember) 40%, transparent); }
+.dr-track { position: absolute; top: 0; bottom: 0; left: calc(50% - var(--gap) / 2); display: flex; transition: transform .65s cubic-bezier(.2, .9, .25, 1); }
+.dr-track span { flex: none; width: var(--gap); padding-top: 30px; text-align: center; color: var(--ph-dim); font: 400 14px/1 var(--f-latin); white-space: nowrap;
+	background: linear-gradient(var(--ph-ink), var(--ph-ink)) 50% 6px / 2px 18px no-repeat, linear-gradient(var(--ph-dim), var(--ph-dim)) 0 6px / 1.5px 10px no-repeat; }
+.dr-month .dr-track span { font-family: var(--f-display); font-size: 13px; }
+/* the days, months and years the site changed, in the ember colour; the days past the month's end, faded */
+.dr-track span.is-mark { color: var(--ember); font-weight: 700; background: linear-gradient(var(--ember), var(--ember)) 50% 6px / 2px 18px no-repeat, linear-gradient(var(--ph-dim), var(--ph-dim)) 0 6px / 1.5px 10px no-repeat; }
+.dr-track span.is-out { opacity: .2; }
+.dr-out { margin: 8px 0 0; text-align: center; font-family: var(--f-display); font-size: 14px; color: var(--ph-dim); min-height: 30px; }
+.dr-go { padding: 6px 14px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--ember) 50%, transparent); background: color-mix(in srgb, var(--ember) 14%, transparent);
+	color: var(--ph-ink); font: inherit; cursor: pointer; }
+.dr-go:hover { background: color-mix(in srgb, var(--ember) 26%, transparent); }
+@media (prefers-reduced-motion: reduce) { .dr-strip, .dr-track, .dr-dt { transition: none; } }
 .cl-sum, .cl-note { color: var(--muted); line-height: 1.9; }
 .cl-note a { color: var(--ember); }
 .cl-bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin: 8px 0 24px; }

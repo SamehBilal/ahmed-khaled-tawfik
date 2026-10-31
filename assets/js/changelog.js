@@ -13,13 +13,106 @@ window.PAGE = {
 	},
 	KINDS: [['page', { ar: 'صفحات جديدة', en: 'New pages' }], ['data', { ar: 'كتب ومقالات وبيانات', en: 'Books, articles, data' }], ['pics', { ar: 'أغلفة وصور', en: 'Covers & pictures' }],
 		['audio', { ar: 'مسموع ومرئي', en: 'Audio & video' }], ['design', { ar: 'تصميم', en: 'Design' }], ['fix', { ar: 'تصحيحات', en: 'Fixes' }]],
-	kind: 'all', q: '', shown: 3,
+	kind: 'all', q: '', shown: 3, day: '',
 
-	/* the band: a calendar's pages turning, each with a day the site changed */
+	/* the band, after Paul Troshkin's «Date Ruler» on CodePen (made there with Reactive CSS; here in plain script): a card with
+	   the weekday and the year, the date on reels that roll to it, and a ruler each for the day, the month and the year, dragged
+	   sideways (or stepped with the arrow keys) under a needle. It opens on the newest day the site changed; the days, months
+	   and years it changed are marked on the rulers, and the line under the card leads to that day's changes */
 	band: function () {
-		var out = '';
-		for (var i = 0; i < 7; i++) out += '<span class="cl-day" style="--i:' + i + ';--d:' + (-i * 1.1).toFixed(1) + 's"><b>' + (3 + i * 4) + '</b><i></i></span>';
-		return out;
+		var A = window.App, L = A.L, e = A.esc;
+		var reel = function (cls, items) { return '<span class="dr-reel ' + cls + '"><span class="dr-strip">' + items.map(function (x) { return '<i>' + e(x) + '</i>'; }).join('') + '</span></span>'; };
+		var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+		var ruler = function (k, label) { return '<div class="dr-ruler dr-' + k + '" dir="ltr"><input type="range" aria-label="' + e(label) + '"><div class="dr-track"></div></div>'; };
+		/* (called on its own by page-hero.js, so through window.PAGE) */
+		setTimeout(function () { window.PAGE.ruler(); }, 0);
+		return '<form class="dr-card" aria-label="' + e(L('اختر يومًا من سجل التحديثات', 'Pick a day of the changelog')) + '" onsubmit="return false">' +
+			'<p class="dr-meta" aria-hidden="true">' + reel('dr-wd', window.PAGE.WEEKDAYS()) + '<span class="dr-years" dir="ltr">' + reel('dr-y1', digits) + reel('dr-y2', digits) + reel('dr-y3', digits) + reel('dr-y4', digits) + '</span></p>' +
+			'<p class="dr-date" aria-hidden="true"><span class="dr-num" dir="ltr">' + reel('dr-dt', ['0', '1', '2', '3']) + reel('dr-du', digits) + '</span>' + reel('dr-mo', window.PAGE.MONTHS()) + '</p>' +
+			ruler('day', L('اليوم', 'Day')) + ruler('month', L('الشهر', 'Month')) + ruler('year', L('السنة', 'Year')) +
+			'<p class="dr-out" aria-live="polite"></p></form>';
+	},
+	MONTHS: function () { return window.App.lang === 'en' ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] : ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']; },
+	WEEKDAYS: function () { return window.App.lang === 'en' ? ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] : ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت']; },
+
+	/* the rulers at work, once the log is in (they mark the days it changed) */
+	ruler: function () {
+		var card = document.querySelector('.dr-card'), self = this, A = window.App, L = A.L;
+		if (!card || !this.log || card.getAttribute('data-on')) return;
+		card.setAttribute('data-on', '1');
+		var ph = card.closest('.ph');
+		if (ph) ph.removeAttribute('aria-hidden'); /* (this band is a control, not a decoration) */
+		var by = {}; this.log.forEach(function (x) { by[x.d] = (by[x.d] || 0) + 1; });
+		var newest = this.log[0].d, oldest = this.log[this.log.length - 1].d, at = this.day || newest;
+		var v = { y: +at.slice(0, 4), m: +at.slice(5, 7), d: +at.slice(8) };
+		var Y0 = +oldest.slice(0, 4) - 1, Y1 = Math.max(+newest.slice(0, 4), new Date().getFullYear()) + 1;
+		var two = function (n) { return ('0' + n).slice(-2); };
+		var len = function () { return new Date(v.y, v.m, 0).getDate(); };
+		var key = function () { return v.y + '-' + two(v.m) + '-' + two(Math.min(v.d, len())); };
+		var has = function (prefix) { return Object.keys(by).some(function (k) { return k.indexOf(prefix) === 0; }); };
+		var R = {
+			day: { min: 1, max: 31, gap: 34, get: function () { return v.d; }, set: function (n) { v.d = n; }, label: function (n) { return n; }, mark: function (n) { return by[v.y + '-' + two(v.m) + '-' + two(n)]; } },
+			month: { min: 1, max: 12, gap: 64, get: function () { return v.m; }, set: function (n) { v.m = n; }, label: function (n) { return self.MONTHS()[n - 1]; }, mark: function (n) { return has(v.y + '-' + two(n)); } },
+			year: { min: Y0, max: Y1, gap: 64, get: function () { return v.y; }, set: function (n) { v.y = n; }, label: function (n) { return n; }, mark: function (n) { return has(n + '-'); } }
+		};
+		/* each ruler: a label under each tick, the marked ones in the ember colour */
+		var T = {};
+		Object.keys(R).forEach(function (k) {
+			var r = R[k], el = card.querySelector('.dr-' + k), out = '';
+			for (var n = r.min; n <= r.max; n++) out += '<span data-n="' + n + '">' + A.esc(String(r.label(n))) + '</span>';
+			el.querySelector('.dr-track').innerHTML = out;
+			el.style.setProperty('--gap', r.gap + 'px');
+			T[k] = { el: el, track: el.querySelector('.dr-track'), input: el.querySelector('input') };
+			T[k].input.min = r.min; T[k].input.max = r.max;
+		});
+		var reelTo = function (cls, n) { var st = card.querySelector('.' + cls + ' .dr-strip'); if (st) st.style.transform = 'translateY(' + (-n * 1.2) + 'em)'; };
+		var paint = function (live) {
+			var n = len(), dd = Math.min(v.d, n);
+			Object.keys(R).forEach(function (k) {
+				var r = R[k], t = T[k], pos = live && live.k === k ? live.pos : (k === 'day' ? dd : r.get());
+				t.track.style.transition = live && live.k === k ? 'none' : '';
+				t.track.style.transform = 'translateX(' + (-(pos - r.min) * r.gap) + 'px)';
+				t.input.value = k === 'day' ? dd : r.get();
+				[].forEach.call(t.track.children, function (sp) { var m = +sp.getAttribute('data-n'); sp.classList.toggle('is-mark', !!r.mark(m)); sp.classList.toggle('is-out', k === 'day' && m > n); });
+			});
+			reelTo('dr-dt', Math.floor(dd / 10)); reelTo('dr-du', dd % 10);
+			card.querySelector('.dr-dt').classList.toggle('is-none', dd < 10);
+			reelTo('dr-mo', v.m - 1); reelTo('dr-wd', new Date(v.y, v.m - 1, dd).getDay());
+			String(v.y).split('').forEach(function (c, i) { reelTo('dr-y' + (i + 1), +c); });
+			var c = by[key()];
+			card.querySelector('.dr-out').innerHTML = c ? '<button type="button" class="dr-go">' + A.esc(L(A.num(c) + ' تحديثًا في هذا اليوم ↓', c + ' change' + (c > 1 ? 's' : '') + ' on this day ↓')) + '</button>'
+				: '<span>' + A.esc(L('لم يتغير الموقع في هذا اليوم', 'The site did not change on this day')) + '</span>';
+		};
+		/* the day is cut to the month's end once the month or the year has moved */
+		var settle = function () { v.d = Math.min(v.d, len()); paint(); };
+		Object.keys(R).forEach(function (k) {
+			var r = R[k], t = T[k], start = null, moved = false;
+			t.el.addEventListener('pointerdown', function (ev) { start = { x: ev.clientX, n: r.get() }; moved = false; t.el.setPointerCapture(ev.pointerId); t.el.classList.add('is-drag'); });
+			t.el.addEventListener('pointermove', function (ev) {
+				if (!start) return;
+				if (Math.abs(ev.clientX - start.x) > 3) moved = true;
+				var pos = Math.max(r.min, Math.min(r.max, start.n - (ev.clientX - start.x) / r.gap));
+				r.set(Math.round(pos));
+				paint({ k: k, pos: pos });
+			});
+			var end = function (ev) {
+				if (!start) return;
+				start = null; t.el.classList.remove('is-drag');
+				/* a tap, not a drag: go to the label tapped */
+				if (!moved && ev && ev.type === 'pointerup') { var sp = document.elementsFromPoint(ev.clientX, ev.clientY).filter(function (x) { return x.parentNode === t.track; })[0]; if (sp) r.set(+sp.getAttribute('data-n')); }
+				settle();
+			};
+			t.el.addEventListener('pointerup', end); t.el.addEventListener('pointercancel', end);
+			/* the arrow keys step it, as the range it holds */
+			t.input.addEventListener('input', function () { r.set(+t.input.value); settle(); });
+		});
+		card.querySelector('.dr-out').addEventListener('click', function (ev) {
+			if (!ev.target.closest('.dr-go')) return;
+			self.day = key(); self.shown = 3; self.list();
+			var box = document.querySelector('.cl-list');
+			if (box) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		});
+		paint();
 	},
 
 	render: function () {
@@ -45,8 +138,12 @@ window.PAGE = {
 				self.list();
 			};
 			root.querySelector('.cl-q').oninput = function (ev) { self.q = ev.target.value.trim().toLowerCase(); self.shown = 3; self.list(); };
-			root.querySelector('.cl-list').onclick = function (ev) { if (ev.target.closest('.cl-more')) { self.shown += 3; self.list(); } };
+			root.querySelector('.cl-list').onclick = function (ev) {
+				if (ev.target.closest('.cl-more')) { self.shown += 3; self.list(); }
+				if (ev.target.closest('.cl-all')) { self.day = ''; self.shown = 3; self.list(); }
+			};
 			self.list();
+			self.ruler();
 		}).catch(function () {
 			document.querySelector('.cl .wrap').innerHTML = '<p class="cl-sum">' + e(L('تعذّر تحميل السجل الآن.', 'The log could not be loaded just now.')) + '</p>';
 		});
@@ -58,7 +155,7 @@ window.PAGE = {
 		var kindName = {}; this.KINDS.forEach(function (k) { kindName[k[0]] = k[1]; });
 		var MONTHS = App.lang === 'en' ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 			: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-		var rows = this.log.filter(function (x) { return (self.kind === 'all' || x.k.indexOf(self.kind) >= 0) && (!self.q || (x.s + ' ' + (x.a || '')).toLowerCase().indexOf(self.q) >= 0); });
+		var rows = this.log.filter(function (x) { return (!self.day || x.d === self.day) && (self.kind === 'all' || x.k.indexOf(self.kind) >= 0) && (!self.q || (x.s + ' ' + (x.a || '')).toLowerCase().indexOf(self.q) >= 0); });
 		/* a block a day (the site is young: its months are long) */
 		var days = [], by = {};
 		rows.forEach(function (x) { if (!by[x.d]) { by[x.d] = []; days.push(x.d); } by[x.d].push(x); });
@@ -69,6 +166,7 @@ window.PAGE = {
 				var ar = App.lang !== 'en' && x.a;
 				return '<li><span class="cl-d">•</span><div>' + (ar ? '<p class="cl-ar">' + e(x.a) + '</p><details class="cl-en"><summary>' + e(L('النص الأصلي', 'Original')) + '</summary><p dir="ltr">' + e(x.s) + '</p></details>' : '<p dir="ltr">' + e(x.s) + '</p>') + (x.k.length ? '<p class="cl-k">' + x.k.map(function (k) { return '<span class="cl-' + k + '">' + e(t(kindName[k])) + '</span>'; }).join('') + '</p>' : '') + '</div></li>';
 			}).join('') + '</ol></section>';
-		}).join('') + (days.length > this.shown ? '<button type="button" class="share-btn cl-more">' + e(L('أيام أقدم', 'Older days')) + '</button>' : '');
+		}).join('') + (days.length > this.shown ? '<button type="button" class="share-btn cl-more">' + e(L('أيام أقدم', 'Older days')) + '</button>' : '') +
+			(this.day ? ' <button type="button" class="share-btn cl-all">' + e(L('كل الأيام', 'All days')) + '</button>' : '');
 	}
 };
