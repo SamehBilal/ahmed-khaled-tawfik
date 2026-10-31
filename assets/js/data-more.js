@@ -4523,3 +4523,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ name: { ar: 'محمد فراج', en: 'Mohamed Farrag' }, work: { ar: 'جمال في «الغرفة 207»', en: 'Gamal in Room 207' }, year: 2022, text: { ar: 'أدّى دور جمال، موظف الاستقبال في فندق الستينيات، في «الغرفة 207».', en: 'He played Gamal, the receptionist of the 1960s hotel, in Room 207.' }, source: R207 }
 	];
 })(window.AKT);
+
+/* Legacy videos: «الرجل الذي علّمنا كيف نقرأ», an 11-minute portrait of him on «متع عقلك | شخصيات» (YouTube, 3 April 2018,
+   the day after his death), sent by the site's editor */
+(function (A) {
+	var M = A.media = A.media || [], url = 'https://www.youtube.com/watch?v=bPZMu0t6IdY';
+	if (M.some(function (m) { return m.url === url; })) return;
+	M.push({ kind: 'documentary', title: { ar: 'أحمد خالد توفيق: الرجل الذي علّمنا كيف نقرأ', en: 'Ahmed Khaled Tawfik: the man who taught us to read' },
+		outlet: { ar: 'متع عقلك | شخصيات', en: 'Matta3 Aqlak: Characters' }, year: 2018, lang: 'ar', url: url,
+		note: { ar: 'فيلم قصير في 11 دقيقة عن حياة العرّاب ورائد أدب الرعب العربي، نُشر غداة رحيله.', en: 'An 11-minute film on the life of the Godfather, the pioneer of Arabic horror fiction, published the day after his death.' } });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
