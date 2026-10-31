@@ -15,9 +15,12 @@ window.PAGE = {
 	},
 
 	/* the band, after Kyungsung Kim's «Interactive ropes background» on CodePen (codepen.io/rudtjd2548/pen/rNrxopK): Verlet
-	   ropes hanging from the top, a light at each end. Here each main page hangs from the top as a glowing node, and the pages
-	   that belong to it hang from it on ropes of their own, so related pages are tied together; the nodes keep apart from each
-	   other, the pointer catches and swings them, the nearest family lights up with its names, and a tap on a node opens it */
+	   ropes hanging close together from the top, a light at each end. Here each main page hangs from the top as a glowing node,
+	   and from it hang the pages that belong to it and, smaller, its pages made one per thing (the series under «الأعمال», the
+	   leads under «الشخصيات», his circle's people and the publishers under «دائرته»), so related pages are tied together:
+	   some hundred and sixty lights. The
+	   pointer catches and swings them, the nearest family lights up with its names, and a tap on a node opens it. The ropes and
+	   names take the page's own colours, so the band is one with the page in either theme */
 	band: function () {
 		/* (called on its own by page-hero.js, so through window.PAGE, not this) */
 		setTimeout(function () { window.PAGE.ropes(document.querySelector('.sm-ropes')); }, 0);
@@ -29,49 +32,60 @@ window.PAGE = {
 		if (this._stop) this._stop();
 		var tree = this.tree, ctx = canvas.getContext('2d'), rtl = window.App.lang !== 'en', dpr = Math.min(2, window.devicePixelRatio || 1);
 		var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-		var W, H, dots, sticks, ends, mouse = { x: -1e4, y: -1e4, r: 26 }, active = -1, picked = -1, raf = 0, alive = true;
+		var W, H, dots, sticks, ends, ink = '', dim = '', tick = 0, mouse = { x: -1e4, y: -1e4, r: 26 }, active = -1, picked = -1, raf = 0, alive = true;
 		var dot = function (x, y, pinned) { var p = { x: x, y: y, ox: x, oy: y, pinned: !!pinned }; dots.push(p); return p; };
 		var chain = function (from, n, gap, dx) {
 			var prev = from;
-			for (var i = 1; i <= n; i++) { var p = dot(from.x + dx * i / n, from.y + gap * i); sticks.push([prev, p, Math.hypot(p.x - prev.x, p.y - prev.y)]); prev = p; }
+			/* (a rope hung from another page's light holds on to it without dragging it down: dozens hanging from one light would
+			   otherwise stretch its rope to the floor) */
+			for (var i = 1; i <= n; i++) { var p = dot(from.x + dx * i / n, from.y + gap * i); sticks.push([prev, p, Math.hypot(p.x - prev.x, p.y - prev.y), i === 1 && !from.pinned]); prev = p; }
 			return prev;
 		};
+		/* the same "random" lengths every time, from each node's place */
+		var rnd = function (n) { var x = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); };
 		var build = function () {
 			var r = canvas.getBoundingClientRect();
 			W = r.width; H = r.height;
 			canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 			dots = []; sticks = []; ends = [];
-			var n = tree.length, s = H / 340;
+			/* the main pages close together in the middle, as the pen's ropes are (wider on a phone, to keep them apart), each
+			   given room as its family is large */
+			var from = W < 640 ? 0.08 : 0.12, span = 1 - 2 * from;
+			var room = tree.map(function (c) { return 1.8 + Math.sqrt(c.kids.length + (c.ones || []).length) * 0.5; }), all = room.reduce(function (a, b) { return a + b; }, 0), at = 0;
 			tree.forEach(function (c, i) {
-				var x = W * (0.1 + 0.8 * (n > 1 ? i / (n - 1) : 0.5));
+				var x = W * (from + span * (at + room[i] / 2) / all);
+				at += room[i];
 				if (rtl) x = W - x;
-				var top = chain(dot(x, 0, true), 6, (95 + (i % 3) * 32) * s / 6, 0), fam = { node: top, main: true, c: c, i: i, kids: [] };
+				var top = chain(dot(x, 0, true), 8, H * (0.26 + 0.22 * rnd(i)) / 8, 0), fam = { node: top, main: true, c: c, i: i };
 				ends.push(fam);
-				c.kids.forEach(function (k, j) {
-					var spread = (j - (c.kids.length - 1) / 2) * 16;
-					var end = chain(top, 4, (62 + (j % 3) * 20) * s / 4, spread);
-					var kid = { node: end, main: false, c: k, i: i };
-					fam.kids.push(kid); ends.push(kid);
+				c.kids.concat(c.ones || []).forEach(function (k, j, all) {
+					var one = j >= c.kids.length, long = H * (one ? 0.14 + 0.34 * rnd(i * 31 + j) : 0.12 + 0.18 * rnd(i * 17 + j));
+					var end = chain(top, one ? 6 : 5, long / (one ? 6 : 5), (j - (all.length - 1) / 2) * 5);
+					ends.push({ node: end, main: false, one: one, c: k, i: i });
 				});
 			});
 		};
 		var step = function () {
+			/* the pointer catches only the one light nearest it; the rest it only tugs at */
+			var caught = null, cd = mouse.r * 0.5;
+			dots.forEach(function (p) { var d = Math.hypot(mouse.x - p.x, mouse.y - p.y); if (!p.pinned && d < cd) { cd = d; caught = p; } });
 			dots.forEach(function (p) {
 				if (p.pinned) return;
 				var vx = (p.x - p.ox) * 0.97, vy = (p.y - p.oy) * 0.97 + 0.35;
 				p.ox = p.x; p.oy = p.y;
 				var dx = mouse.x - p.x, dy = mouse.y - p.y, dist = Math.hypot(dx, dy) || 1, f = Math.max((mouse.r - dist) / mouse.r, 0);
-				if (f > 0.6) { p.x = mouse.x; p.y = mouse.y; }
-				else { p.x += vx + dx / dist * f; p.y += vy + dy / dist * f; }
+				if (p === caught) { p.x = mouse.x; p.y = mouse.y; }
+				else { p.x += vx + dx / dist * f * 0.5; p.y += vy + dy / dist * f * 0.5; }
 			});
 			/* the nodes keep apart, so a family fans out instead of hanging in one line */
 			for (var a = 0; a < ends.length; a++) for (var b = a + 1; b < ends.length; b++) {
-				var p = ends[a].node, q = ends[b].node, ddx = q.x - p.x, ddy = q.y - p.y, d = Math.hypot(ddx, ddy) || 0.01, R = 34;
+				var p = ends[a].node, q = ends[b].node, ddx = q.x - p.x, ddy = q.y - p.y, d = Math.hypot(ddx, ddy) || 0.01, R = ends[a].main && ends[b].main ? 30 : 9;
 				if (d < R) { var k = (R - d) / d * 0.25; p.x -= ddx * k; p.y -= ddy * k; q.x += ddx * k; q.y += ddy * k; }
 			}
 			for (var it = 0; it < 10; it++) sticks.forEach(function (st) {
 				var p = st[0], q = st[1], dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy) || 0.01, diff = (d - st[2]) / d * 0.3;
 				var ox = dx * diff, oy = dy * diff;
+				if (st[3]) { q.x -= ox; q.y -= oy; return; }
 				if (!p.pinned) { p.x += ox / 2; p.y += oy / 2; }
 				if (!q.pinned) { q.x -= ox / 2; q.y -= oy / 2; }
 			});
@@ -84,21 +98,25 @@ window.PAGE = {
 		};
 		var draw = function () {
 			ctx.clearRect(0, 0, W, H);
+			/* the page's colours, looked at now and then (the theme may change) */
+			if (!(tick++ % 30)) { var cs = getComputedStyle(document.documentElement); ink = cs.getPropertyValue('--paper').trim() || '#efe6d2'; dim = cs.getPropertyValue('--paper-dim').trim() || '#b9b1a0'; }
 			var hit = near(mouse.x, mouse.y, 90);
 			active = hit ? hit.i : picked;
-			ctx.lineWidth = 1;
-			sticks.forEach(function (st) { ctx.beginPath(); ctx.moveTo(st[0].x, st[0].y); ctx.lineTo(st[1].x, st[1].y); ctx.strokeStyle = 'rgba(239,230,210,.22)'; ctx.stroke(); });
+			ctx.lineWidth = 1; ctx.strokeStyle = ink; ctx.globalAlpha = 0.22;
+			ctx.beginPath();
+			sticks.forEach(function (st) { ctx.moveTo(st[0].x, st[0].y); ctx.lineTo(st[1].x, st[1].y); });
+			ctx.stroke(); ctx.globalAlpha = 1;
 			ctx.textAlign = 'center'; ctx.direction = rtl ? 'rtl' : 'ltr';
 			ends.forEach(function (e) {
-				var on = e.i === active, p = e.node, r = e.main ? (on ? 16 : 12) : (on ? 9 : 6);
+				var on = e.i === active, p = e.node, r = e.main ? (on ? 16 : 12) : e.one ? (on ? 6 : 4.5) : (on ? 9 : 6);
 				var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
 				g.addColorStop(0, e.main ? 'rgba(255,236,170,1)' : 'rgba(248,208,64,.95)'); g.addColorStop(.35, e.main ? 'rgba(248,208,64,.8)' : 'rgba(224,99,58,.6)'); g.addColorStop(1, 'rgba(224,99,58,0)');
 				ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fill();
 				/* the main pages' names always, but on a narrow screen only the family tapped; a name kept inside the band */
-				if ((e.main && (W >= 640 || active < 0)) || on) {
+				if ((e.main && (W >= 640 || active < 0)) || (on && !e.one) || e === hit) {
 					ctx.font = (e.main ? '600 13px' : '400 11px') + ' "Reem Kufi", sans-serif';
 					if (W < 640 && e.main && !on) ctx.font = '600 10px "Reem Kufi", sans-serif';
-					ctx.fillStyle = e.main ? (on ? '#ffe7a8' : '#efe6d2') : '#c9b48e';
+					ctx.fillStyle = e.main && !on ? ink : on && e.main ? '#e0633a' : dim;
 					var half = ctx.measureText(e.c.name).width / 2 + 4;
 					ctx.fillText(e.c.name, Math.max(half, Math.min(W - half, p.x)), p.y + (e.main ? 24 : 18));
 				}
@@ -108,7 +126,10 @@ window.PAGE = {
 		var pos = function (ev) { var r = canvas.getBoundingClientRect(), t = ev.touches ? ev.touches[0] : ev; return t ? [t.clientX - r.left, t.clientY - r.top] : [-1e4, -1e4]; };
 		var down = null;
 		canvas.onpointermove = function (ev) { var p = pos(ev); mouse.x = p[0]; mouse.y = p[1]; };
-		canvas.onpointerleave = function () { mouse.x = mouse.y = -1e4; };
+		var loose = function () { mouse.x = mouse.y = -1e4; };
+		canvas.onpointerleave = loose;
+		/* (scrolling moves the band from under a still pointer: let go) */
+		window.addEventListener('scroll', loose, { passive: true });
 		canvas.onpointerdown = function (ev) { down = pos(ev); };
 		canvas.onpointerup = function (ev) {
 			var p = pos(ev), hit = down && Math.hypot(p[0] - down[0], p[1] - down[1]) < 6 ? near(p[0], p[1], 22) : null;
@@ -121,7 +142,7 @@ window.PAGE = {
 			}
 			if (hit) location.href = hit.c.href;
 		};
-		var stop = this._stop = function () { alive = false; cancelAnimationFrame(raf); if (ro) ro.disconnect(); };
+		var stop = this._stop = function () { alive = false; cancelAnimationFrame(raf); if (ro) ro.disconnect(); window.removeEventListener('scroll', loose); };
 		var ro = window.ResizeObserver ? new ResizeObserver(function () { build(); if (still) { for (var i = 0; i < 300; i++) step(); draw(); } }) : null;
 		build();
 		if (ro) ro.observe(canvas);
@@ -163,7 +184,15 @@ window.PAGE = {
 		var rest = Object.keys(page).filter(function (h) { return !placed[h]; });
 		if (rest.length) TREE[TREE.length - 1][1] = TREE[TREE.length - 1][1].concat(rest);
 		/* the same tree for the band, which is drawn just after the page */
-		this.tree = TREE.map(function (c) { return { href: c[0], name: name(c[0]), kids: c[1].map(function (h) { return { href: h, name: name(h) }; }) }; });
+		/* with, smaller, the pages made one per thing: each series under the Works, each lead under the Characters, each
+		   person of his circle and each publisher under his circle */
+		var ONES = {
+			'works.html': own.concat(wrote).map(function (s) { return { href: S.seriesHref(s.id), name: App.t(s.title) }; }),
+			'characters.html': (d.characters || []).filter(function (c) { return App.charHasPage(c.id); }).map(function (c) { return { href: App.charHref(c.id), name: App.t(c.name) }; }),
+			'writers.html': (window.People ? window.People.all() : []).map(function (p) { return { href: 'writer.html?id=' + encodeURIComponent(p.id), name: App.t(p.name) }; })
+				.concat(S.publishers().map(function (c) { return { href: S.publisherHref(c.p.id), name: App.t(c.p.name) }; }))
+		};
+		this.tree = TREE.map(function (c) { return { href: c[0], name: name(c[0]), kids: c[1].map(function (h) { return { href: h, name: name(h) }; }), ones: ONES[c[0]] || [] }; });
 		var k = 0, tile = function (cls, href, inner) { return '<a class="sm-item ' + cls + '" href="' + e(href) + '" style="--i:' + (k++) + '">' + inner + '</a>'; };
 		var cols = TREE.map(function (c, i) {
 			return '<div class="sm-col">' + tile('sm-main', c[0], '<span class="sm-n">' + e(App.num(('0' + (i + 1)).slice(-2))) + '</span><span class="sm-p">' + e(name(c[0])) + '</span>') +
