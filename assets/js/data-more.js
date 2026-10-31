@@ -4052,6 +4052,22 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	Y.channels['work:esp'] = ch;
 })(window.AKT);
 
+/* «شربة الحاج داوود» read on YouTube, from Dubvo's playlist of the same name: eleven of its essays, sent by the site's editor
+   (checked 2026-10-31; the playlist's twelfth video, parts 1–6 of «عن طب المناطق الحارة» joined in one, is left out). Same shape as E.S.P's */
+(function (A) {
+	var Y = A.audio.youtube;
+	var ch = { name: 'دار النشر الصوتية - Dubvo', url: 'https://www.youtube.com/playlist?list=PLBYDwVauAIiWR_bbqmaoyKjNsTOKELyed' };
+	var eps = [['ARSbzcQp-Zc', 'حكايات النوم', 12], ['Twfw88pSDio', 'وفاة فيروس', 8], ['Q4m-x6t-yzg', 'اجعلهم يمرضون', 7], ['YdLuyFOxi3I', 'باثوفيليا', 8],
+		['SFvJ8YCVHT0', 'عن طب المناطق الحارة (1)', 8], ['v__YJI1lc2o', 'عن طب المناطق الحارة (2)', 9], ['Pnbe7cHN3B8', 'عن طب المناطق الحارة (3)', 9],
+		['59mYJYXgWgY', 'حتى يمر المونديال بسلام بالنسبة للنساء', 6], ['vlSy-XZbEho', 'عن طب المناطق الحارة (4)', 9], ['_-HWmt4F_WI', 'عن طب المناطق الحارة (5)', 9],
+		['K4X_HAUAOrY', 'عن طب المناطق الحارة (6)', 5]];
+	Y.dubvoSharba = { channel: ch, work: 'sharba', eps: eps, ar: 'مقالة', en: 'Essay',
+		title: { ar: '«شربة الحاج داوود» مقروءة على YouTube', en: 'Hajj Dawoud’s Tonic read on YouTube' },
+		note: { ar: 'إحدى عشرة مقالة من كتابه «شربة الحاج داوود» بصوت «دار النشر الصوتية — Dubvo»، تُشغَّل هنا تحت الشريط.', en: 'Eleven essays from his Hajj Dawoud’s Tonic read by Dubvo, played here under the tape.' } };
+	Y.issues['work:sharba'] = eps.map(function (ep) { return [ep[0], 1, ep[1] + ' · Dubvo', ep[2]]; });
+	Y.channels['work:sharba'] = ch;
+})(window.AKT);
+
 /* Legacy videos, sent by the site's editor: «حياة وثائقية»'s 40-minute documentary on his life and work (2024), and his two-part
    interview with The Insider Tanta (December 2014 and May 2015) */
 (function (A) {
