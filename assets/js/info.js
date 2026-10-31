@@ -208,12 +208,12 @@
 				'<section class="info-sec info-give" id="contribute"><h2>' + e(L('ساهم معنا', 'Contribute')) + '</h2>' +
 					'<p>' + L('الموقع مبني على ما يرسله القرّاء. هذا ما ينقصه أكثر من غيره:', 'The site is built on what its readers send. This is what it misses most:') + '</p>' +
 					'<ul class="info-give-list">' + [
-						['📕', L('غلاف طبعة', 'An edition’s cover'), L('صورة واضحة للغلاف الأمامي أو الخلفي لطبعة غير موجودة، ومعها اسم الناشر وسنة الطبع.', 'A clear photo of the front or back cover of an edition the site lacks, with its publisher and year.')],
-						['✍', L('بخط يده', 'In his hand'), L('إهداء كتبه لك في نسختك، أو رسالة أو ورقة بخطه، إن أحببت أن يراها القرّاء.', 'A dedication he wrote in your copy, or a letter or note in his hand, if you would like readers to see it.')],
-						['📰', L('مقال أو لقاء', 'An article or interview'), L('رابط لمقال كتبه أو لقاء معه أو تقرير عنه لم يذكره الموقع.', 'A link to an article he wrote, an interview with him or a report about him the site does not have.')],
-						['🎧', L('تسجيل', 'A recording'), L('رابط لكتاب مسموع أو دراما صوتية أو قراءة من أعماله.', 'A link to an audiobook, an audio drama or a reading of his work.')],
-						['📷', L('صورة وذكرى', 'A photo and a memory'), L('صورة معه في ندوة أو حفل توقيع، وسطر عن اليوم، مع إذنك بنشرها.', 'A photo with him at a talk or signing, and a line about the day, with your leave to show it.')]
-					].map(function (x) { return '<li><span aria-hidden="true">' + x[0] + '</span><b>' + e(x[1]) + '</b><p>' + e(x[2]) + '</p></li>'; }).join('') + '</ul>' +
+						['▣', L('غلاف طبعة', 'An edition’s cover'), L('صورة واضحة للغلاف الأمامي أو الخلفي لطبعة غير موجودة، ومعها اسم الناشر وسنة الطبع.', 'A clear photo of the front or back cover of an edition the site lacks, with its publisher and year.')],
+						['✒︎', L('بخط يده', 'In his hand'), L('إهداء كتبه لك في نسختك، أو رسالة أو ورقة بخطه، إن أحببت أن يراها القرّاء.', 'A dedication he wrote in your copy, or a letter or note in his hand, if you would like readers to see it.')],
+						['¶', L('مقال أو لقاء', 'An article or interview'), L('رابط لمقال كتبه أو لقاء معه أو تقرير عنه لم يذكره الموقع.', 'A link to an article he wrote, an interview with him or a report about him the site does not have.')],
+						['♫', L('تسجيل', 'A recording'), L('رابط لكتاب مسموع أو دراما صوتية أو قراءة من أعماله.', 'A link to an audiobook, an audio drama or a reading of his work.')],
+						['◉', L('صورة وذكرى', 'A photo and a memory'), L('صورة معه في ندوة أو حفل توقيع، وسطر عن اليوم، مع إذنك بنشرها.', 'A photo with him at a talk or signing, and a line about the day, with your leave to show it.')]
+					].map(function (x) { return '<li><span class="info-ic" aria-hidden="true">' + x[0] + '</span><b>' + e(x[1]) + '</b><p>' + e(x[2]) + '</p></li>'; }).join('') + '</ul>' +
 					'<p class="info-give-act"><a class="buy-btn" href="' + e(mailto(L('مساهمة للموقع', 'A contribution to the site'), L('ما أرسله (غلاف / إهداء / مقال / تسجيل / صورة):\n\nالعمل أو الصفحة:\n\nالمصدر أو الرابط:\n\nهل يُذكر اسمك؟ (نعم / لا):\n', 'What I am sending (cover / dedication / article / recording / photo):\n\nThe work or page:\n\nSource or link:\n\nMay we name you? (yes / no):\n'))) + '">' + e(L('أرسل مساهمتك بالبريد', 'Send it by email')) + '</a> ' +
 						'<a class="buy-btn" href="' + e(App.fixHref(L('', ''))) + '" target="_blank" rel="noopener">' + e(L('أو على GitHub ↗', 'or on GitHub ↗')) + '</a></p>' +
 					'<p class="info-note">' + L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها إن أراد، وفي «سجل التحديثات».', 'Each contribution that goes up names its sender on its page if they wish, and in the Changelog.') + '</p>' +
