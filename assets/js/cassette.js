@@ -314,15 +314,16 @@
 		});
 	}
 
-	/* audiobooks on StoriaPod (data-more.js: the Lasheen novels) -> tracks. key: lasheen-<n>; data entries: [show slug, minutes, narrator, episodes] */
+	/* audiobooks and audio dramas on StoriaPod (data-more.js: the Lasheen novels, his Ida2at stories) -> tracks.
+	   key: lasheen-<n> or story:<title>; data entries: [show slug, minutes, narrator, episodes, picture?] */
 	function storiapodTracks(key, title) {
 		var D = window.App.data(), A = D.audio || null, Q = A && A.storiapod;
 		if (!Q || !Q.items || !Q.items[key]) return [];
 		var L = window.App.L, num = window.App.num, info = (D.issueInfo || {})[key] || {};
 		return Q.items[key].map(function (ep) {
-			var label = [ep[2] ? L('بصوت ' + ep[2], 'read by ' + narrator(ep[2])) : '', ep[3] ? num(ep[3]) + L(' حلقات', ' episodes') : ''].filter(Boolean).join(' · ');
+			var label = [ep[2] ? L('بصوت ' + ep[2], 'read by ' + narrator(ep[2])) : '', ep[3] > 1 ? num(ep[3]) + L(' حلقات', ' episodes') : ''].filter(Boolean).join(' · ');
 			return { title: title, ep: label || 'StoriaPod', sub: L('ستوريا بود', 'StoriaPod') + (label ? ' · ' + label : ''), url: Q.base + encodeURIComponent(ep[0]),
-				mins: ep[1] || null, by: ep[2] || '', provider: 'StoriaPod', providerAr: 'ستوريا بود', skin: 'midnight', art: info.cover || '' };
+				mins: ep[1] || null, by: ep[2] || '', provider: 'StoriaPod', providerAr: 'ستوريا بود', skin: 'midnight', art: ep[4] || info.cover || '' };
 		});
 	}
 

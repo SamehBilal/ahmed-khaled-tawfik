@@ -28,7 +28,7 @@ window.PAGE = {
 		hear('ah', au.midnight, 1);
 		(au.seasons || []).concat(au.lasheenBooks || [], au.midnightSpoofs ? [au.midnightSpoofs] : []).forEach(function (x) { hear('ah', x.eps); });
 		[au.storytel, au.iqraaly, au.storiapod].forEach(function (P, k) { if (P && P.items) Object.keys(P.items).forEach(function (key) { hear(['st', 'iq', 'sp'][k], P.items[key]); }); });
-		if (au.storiapod && au.storiapod.drama) hear('sp', au.storiapod.drama.eps);
+		((au.storiapod || {}).dramas || []).forEach(function (x) { hear('sp', x.eps); });
 		if (au.youtube) { Object.keys(au.youtube.issues || {}).forEach(function (k) { hear('yt', au.youtube.issues[k]); }); if (au.youtube.eslamAdel) hear('yt', au.youtube.eslamAdel.eps); }
 		var audioCount = Object.keys(heard).length;
 

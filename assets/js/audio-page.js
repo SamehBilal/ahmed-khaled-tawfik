@@ -22,8 +22,8 @@ window.PAGE = {
 		/* the platform filter: every track goes through push, which counts it for its platform and keeps it only if it is shown */
 		var self = this;
 		if (!this.platform) { try { this.platform = sessionStorage.getItem('akt-audio-platform') || 'all'; } catch (x) { this.platform = 'all'; } }
-		var platform = this.platform, perPlatform = { all: 0, audiohat: 0, storytel: 0, iqraaly: 0, youtube: 0 };
-		var platformOf = function (tr) { return tr.yt ? 'youtube' : tr.provider === 'Storytel' ? 'storytel' : tr.provider === 'Iqraaly' ? 'iqraaly' : 'audiohat'; };
+		var platform = this.platform, perPlatform = { all: 0, audiohat: 0, storytel: 0, iqraaly: 0, storiapod: 0, youtube: 0 };
+		var platformOf = function (tr) { return tr.yt ? 'youtube' : tr.provider === 'Storytel' ? 'storytel' : tr.provider === 'Iqraaly' ? 'iqraaly' : tr.provider === 'StoriaPod' ? 'storiapod' : 'audiohat'; };
 		var push0 = tracks.push, counted = {};
 		tracks.push = function (tr) {
 			/* (a track offered twice, as a special under two series, is counted once) */
@@ -101,6 +101,22 @@ window.PAGE = {
 				en: 'Audiobooks of his novels, collections and essays on Storytel, with a book about him and stories of his it sells on their own; the key opens the book’s page there.' },
 			rows: brows
 		});
+		/* his Ida2at serial stories as audio dramas on StoriaPod, one row a story, leading to its first episode in the blog archive */
+		var SPI = (A.storiapod && A.storiapod.items) || {}, SPP = (A.storiapod && A.storiapod.posts) || {}, sprows = [];
+		Object.keys(SPI).forEach(function (k) {
+			var m = k.match(/^story:(.+)$/);
+			if (!m) return;
+			var start = tracks.length;
+			window.Cassette.storiapodTracks(k, m[1]).forEach(function (tr) { tr.sub = L('قصة', 'Story') + ' · ' + tr.sub; tracks.push(tr); });
+			if (tracks.length === start) return;
+			sprows.push({ title: { ar: m[1], en: m[1] }, href: SPP[k] ? 'blog.html?post=' + SPP[k] : '', thumb: tracks[start].art || '', start: start, count: tracks.length - start, mins: minsFrom(start) });
+		});
+		if (sprows.length) groups.push({
+			title: { ar: 'قصصه على ستوريا بود', en: 'His stories on StoriaPod' },
+			note: { ar: 'قصصه المسلسلة التي نشرها في «إضاءات» (2016–2017) دراما صوتية من إنتاج فريق «رُواة»؛ العنوان يفتح حلقتها الأولى في أرشيف المدونة، والزر يفتح صفحتها هناك.',
+				en: 'The serial stories he wrote for Ida2at (2016–2017) as audio dramas by the Ruwah team; the title opens the first episode in the blog archive, the key opens its page there.' },
+			rows: sprows
+		});
 
 		/* his books and stories read by Eslam Adel on YouTube, one row a video, played here under the tape */
 		var EA = A.youtube && A.youtube.eslamAdel, erows = [];
@@ -162,7 +178,7 @@ window.PAGE = {
 			lrows.push({ n: +is.n, title: { ar: 'لاشين ' + App.num(is.n) + ': ' + is.title.ar + ' (اقرألي)', en: 'Lasheen ' + is.n + ': ' + (is.title.en || is.title.ar) + ' (Iqraaly)' },
 				href: App.issueHref('lasheen', is), thumb: ((App.data().issueInfo || {})[k] || {}).cover || '', start: start, count: tracks.length - start, mins: minsFrom(start) });
 		});
-		/* on StoriaPod, one row a book; then its audio drama of book one, one row with its episodes inside */
+		/* on StoriaPod, one row a book; then its audio dramas (of book one, and of the spin-off), one row each with its episodes inside */
 		var SP = A.storiapod;
 		Object.keys((SP && SP.items) || {}).forEach(function (k) {
 			var is = (S.seriesIssues('lasheen') || []).filter(function (x) { return 'lasheen-' + x.n === k; })[0];
@@ -172,17 +188,17 @@ window.PAGE = {
 			lrows.push({ n: +is.n + .1, title: { ar: 'لاشين ' + App.num(is.n) + ': ' + is.title.ar + ' (ستوريا بود)', en: 'Lasheen ' + is.n + ': ' + (is.title.en || is.title.ar) + ' (StoriaPod)' },
 				href: App.issueHref('lasheen', is), thumb: ((App.data().issueInfo || {})[k] || {}).cover || '', start: start, count: tracks.length - start, mins: minsFrom(start) });
 		});
-		var dr = SP && SP.drama;
-		if (dr) {
-			var drIs = (S.seriesIssues('lasheen') || []).filter(function (x) { return +x.n === dr.n; })[0], drStart = tracks.length;
+		((SP && SP.dramas) || []).forEach(function (dr) {
+			/* lasheen-1 sits after book one; the spin-off lasheen-x18 between books 17 and 18 */
+			var m = /^lasheen-(x?)(\d+)$/.exec(dr.key) || [], drStart = tracks.length;
 			dr.eps.forEach(function (ep, k) {
 				var label = App.num(k + 1) + '. ' + ep[2];
 				tracks.push({ title: t(dr.title), ep: label, sub: L('دراما صوتية', 'Audio drama') + ' · ' + label, url: SP.episode + encodeURIComponent(ep[0]), mins: ep[1] || null,
 					provider: 'StoriaPod', providerAr: 'ستوريا بود', skin: 'midnight', art: dr.art });
 			});
-			lrows.push({ n: dr.n + .2, title: { ar: dr.title.ar + ' — ' + dr.by.ar + ' (ستوريا بود، ' + App.num(dr.year) + ')', en: dr.title.en + ', ' + dr.by.en + ' (StoriaPod, ' + dr.year + ')' },
-				href: drIs ? App.issueHref('lasheen', drIs) : '', thumb: dr.art, start: drStart, count: tracks.length - drStart, mins: minsFrom(drStart) });
-		}
+			lrows.push({ n: m[1] ? m[2] - .5 : +m[2] + .2, title: { ar: dr.title.ar + ' — ' + dr.by.ar + ' (ستوريا بود، ' + App.num(dr.year) + ')', en: dr.title.en + ', ' + dr.by.en + ' (StoriaPod, ' + dr.year + ')' },
+				href: 'book.html?id=' + encodeURIComponent(dr.key), thumb: dr.art, start: drStart, count: tracks.length - drStart, mins: minsFrom(drStart) });
+		});
 		/* on Audiohat, one row a book, its parts inside */
 		(A.lasheenBooks || []).forEach(function (b) {
 			var is = (S.seriesIssues('lasheen') || []).filter(function (x) { return +x.n === b.n; })[0];
@@ -246,7 +262,7 @@ window.PAGE = {
 						(A.youtube && A.youtube.dubvoFantasia ? ' · <a href="' + e(A.youtube.dubvoFantasia.url) + '" target="_blank" rel="noopener">' + L('«فانتازيا» من Dubvo على YouTube ↗', 'Fantasia by Dubvo on YouTube ↗') + '</a>' : '') + '</p>' +
 					/* show one platform, or all of them */
 					'<div class="chips au-platforms" role="group" aria-label="' + e(L('المنصة', 'Platform')) + '">' +
-						[['all', L('الكل', 'All')], ['audiohat', 'Audiohat'], ['storytel', 'Storytel'], ['iqraaly', L('اقرألي', 'Iqraaly')], ['youtube', 'YouTube']].filter(function (p) { return p[0] === 'all' || perPlatform[p[0]]; }).map(function (p) {
+						[['all', L('الكل', 'All')], ['audiohat', 'Audiohat'], ['storytel', 'Storytel'], ['iqraaly', L('اقرألي', 'Iqraaly')], ['storiapod', L('ستوريا بود', 'StoriaPod')], ['youtube', 'YouTube']].filter(function (p) { return p[0] === 'all' || perPlatform[p[0]]; }).map(function (p) {
 							return '<button type="button" class="chip" data-platform="' + p[0] + '" aria-pressed="' + (platform === p[0]) + '">' + e(p[1]) + '<span class="count">' + App.num(perPlatform[p[0]]) + '</span></button>';
 						}).join('') + '</div></div>' +
 			'</div></section>' +

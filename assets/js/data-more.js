@@ -504,13 +504,14 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			},
 			{
 				title: { ar: 'على ستوريا بود', en: 'On StoriaPod' },
-				text: { ar: 'الكتب الأربعة الأولى مسموعة بصوت محمد خميس، ومسلسل صوتي عن الكتاب الأول، كلها بحقوق دار كتوبيا.', en: 'The first four books as audiobooks read by Mohamed Khamis, and an audio drama of book one, all licensed by Kotopia.' },
+				text: { ar: 'الكتب الأربعة الأولى مسموعة بصوت محمد خميس، ومسلسل صوتي عن الكتاب الأول، وميني دراما «أشباح الموالد»، بحقوق دار كتوبيا.', en: 'The first four books as audiobooks read by Mohamed Khamis, an audio drama of book one, and the Ghosts of the Moulids mini-drama, licensed by Kotopia.' },
 				items: [
 					{ title: { ar: 'مسلسل لاشين (العهد)', en: 'Lasheen: The Covenant (audio drama)' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('مسلسل-لاشين-العهد'), meta: { ar: '2026 · 6 حلقات · سيناريو وإخراج كريم قنديل', en: '2026 · 6 episodes · written and directed by Karim Kandil' } },
 					{ title: { ar: 'الكتاب الأول: عهد الدجالين', en: 'Book one: The Age of Charlatans' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('لاشين-الكتاب-الأول-عهد-الدجالين'), meta: { ar: '6 أجزاء', en: '6 parts' } },
 					{ title: { ar: 'الكتاب الثاني: أبناء ديهيا', en: 'Book two: Sons of Dihya' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('لاشين-الكتاب-الثاني-أبناء-ديهيا'), meta: { ar: '6 أجزاء', en: '6 parts' } },
 					{ title: { ar: 'الكتاب الثالث: كاهنة الأوراس', en: 'Book three: The Priestess of the Aurès' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('لاشين-الكتاب-الثالث-كاهنة-الأوراس'), meta: { ar: '17 جزءًا', en: '17 parts' } },
-					{ title: { ar: 'الكتاب الرابع: خلف قسم اللبان', en: 'Book four: Behind al-Labban Station' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('لاشين-الكتاب-الرابع-خلف-قسم-اللبان'), meta: { ar: '8 أجزاء', en: '8 parts' } }
+					{ title: { ar: 'الكتاب الرابع: خلف قسم اللبان', en: 'Book four: Behind al-Labban Station' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('لاشين-الكتاب-الرابع-خلف-قسم-اللبان'), meta: { ar: '8 أجزاء', en: '8 parts' } },
+					{ title: { ar: 'أشباح الموالد (ميني دراما)', en: 'Ghosts of the Moulids (mini-drama)' }, url: 'https://www.storiapod.com/show/' + encodeURIComponent('أشباح-الموالد'), meta: { ar: '6 حلقات · إخراج كريم قنديل', en: '6 episodes · directed by Karim Kandil' } }
 				]
 			},
 			{
@@ -3608,9 +3609,12 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 
 /* The Lasheen novels on StoriaPod (ستوريا بود, storiapod.com), books one to four, read by Mohamed Khamis for Kotopia (20 July 2026;
    book three's second part 21 September); and «مسلسل لاشين (العهد)», its audio drama of book one, written and directed by
-   Karim Kandil, one episode a week from 25 September to 30 October 2026. Collected 2026-10-31; the site plays none of them.
-   Keys: lasheen-<n>; each entry: [show slug (storiapod.com/show/<slug>), minutes, narrator, episodes].
-   drama.eps: [episode slug (storiapod.com/episode/<slug>), minutes, title, date] */
+   Karim Kandil, one episode a week from 25 September to 30 October 2026; and «أشباح الموالد», the mini-drama of the spin-off
+   (17 July 2026). With them, six of his own Ida2at serial stories (2016–2017) as audio dramas by the «رُواة» team (15–16 July 2026),
+   the same recordings Storytel sells («story:<title>» in data-storytel.js). Collected 2026-10-31; the site plays none of them.
+   Keys: lasheen-<n> or story:<title>; each entry: [show slug (storiapod.com/show/<slug>), minutes, narrator, episodes, picture?].
+   posts: each story's first episode in the blog archive (blog.html?post=<id>).
+   dramas[].eps: [episode slug (storiapod.com/episode/<slug>), minutes, title, date] */
 (function (A) {
 	var Au = A.audio;
 	if (!Au) return;
@@ -3620,15 +3624,28 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			'lasheen-1': [['لاشين-الكتاب-الأول-عهد-الدجالين', 260, 'محمد خميس', 6]],
 			'lasheen-2': [['لاشين-الكتاب-الثاني-أبناء-ديهيا', 139, 'محمد خميس', 6]],
 			'lasheen-3': [['لاشين-الكتاب-الثالث-كاهنة-الأوراس', 193, 'محمد خميس', 17]],
-			'lasheen-4': [['لاشين-الكتاب-الرابع-خلف-قسم-اللبان', 176, 'محمد خميس', 8]]
+			'lasheen-4': [['لاشين-الكتاب-الرابع-خلف-قسم-اللبان', 176, 'محمد خميس', 8]],
+			'story:معرض الموت': [['معرض-الموت', 47, 'محمد خميس', 1, 'assets/img/audio/sp-maarad.webp']],
+			'story:تنصت': [['تنصت', 56, 'زينب سليم ومعتز صقر', 5, 'assets/img/audio/sp-tanasot.webp']],
+			'story:عشر علامات': [['عشر-علامات', 57, '', 1, 'assets/img/audio/sp-ashr.webp']],
+			'story:سفاح المستنقعات': [['سفاح-المستنقعات', 67, '', 1, 'assets/img/audio/sp-saffah.webp']],
+			'story:هشام يخفي سرًا': [['هشام-يخفي-سرا', 70, '', 1, 'assets/img/audio/sp-hesham.webp']],
+			'story:حكاية للأطفال فقط': [['حكاية-للأطفال-فقط', 73, 'فريق «رُواة»', 1, 'assets/img/audio/sp-hekaya.webp']]
 		},
-		drama: {
-			title: { ar: 'مسلسل لاشين (العهد)', en: 'Lasheen: The Covenant (audio drama)' }, slug: 'مسلسل-لاشين-العهد', n: 1, year: 2026,
+		posts: { 'story:عشر علامات': '1521315781708921959', 'story:تنصت': '6644599912660901183', 'story:هشام يخفي سرًا': '3056050198209768194',
+			'story:معرض الموت': '4393954591891437727', 'story:حكاية للأطفال فقط': '6107927745439006629', 'story:سفاح المستنقعات': '6366116755229273166' },
+		dramas: [{
+			key: 'lasheen-1', title: { ar: 'مسلسل لاشين (العهد)', en: 'Lasheen: The Covenant (audio drama)' }, slug: 'مسلسل-لاشين-العهد', year: 2026,
 			by: { ar: 'سيناريو وإخراج كريم قنديل', en: 'written and directed by Karim Kandil' }, art: 'assets/img/audio/lasheen-al-ahd.webp',
 			eps: [['مسلسل-لاشين-العهد-1-المولد', 26, 'المولد', '2026-09-25'], ['مسلسل-لاشين-العهد-2-بعد-منتصف-الليل', 28, 'بعد منتصف الليل', '2026-10-02'],
 				['مسلسل-لاشين-العهد-3-آلة-الرعب', 24, 'آلة الرعب', '2026-10-08'], ['مسلسل-لاشين-العهد-4-جبر', 31, 'جبر', '2026-10-16'],
 				['مسلسل-لاشين-العهد-5-آدم', 23, 'آدم', '2026-10-23'], ['مسلسل-لاشين-العهد-الأول-و-الأخير', 38, 'الأول والأخير', '2026-10-30']]
-		}
+		}, {
+			key: 'lasheen-x18', title: { ar: 'أشباح الموالد (ميني دراما)', en: 'Ghosts of the Moulids (mini-drama)' }, slug: 'أشباح-الموالد', year: 2026,
+			by: { ar: 'إخراج كريم قنديل', en: 'directed by Karim Kandil' }, art: 'assets/img/audio/sp-ashbah.webp',
+			eps: [['1-دقة-ليل', 5, 'دقة ليل', '2026-07-17'], ['2-رنة-خلخال', 8, 'رنة خلخال', '2026-07-17'], ['3-رقص-القرود', 5, 'رقص القرود', '2026-07-17'],
+				['4-المسخة', 5, 'المسخة', '2026-07-17'], ['5-أبين-زين', 4, 'أبين زين', '2026-07-17'], ['6-المولد', 7, 'المولد', '2026-07-17']]
+		}]
 	};
 })(window.AKT);
 
@@ -3939,7 +3956,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 (function (A) {
 	var Au = (A.audio = A.audio || {});
 	Au.narratorsEn = Object.assign(Au.narratorsEn || {}, {
-		'معتز صقر': 'Moataz Saqr', 'آية زكريا': 'Aya Zakaria', 'محمود سلام': 'Mahmoud Sallam', 'أيمن مسعود': 'Ayman Massoud', 'محمد ريان': 'Mohamed Rayan',
+		'معتز صقر': 'Moataz Saqr', 'زينب سليم ومعتز صقر': 'Zeinab Selim and Moataz Saqr', 'آية زكريا': 'Aya Zakaria', 'محمود سلام': 'Mahmoud Sallam', 'أيمن مسعود': 'Ayman Massoud', 'محمد ريان': 'Mohamed Rayan',
 		'صفا زياني': 'Safa Ziani', 'محمد حسام': 'Mohamed Hossam', 'مي سمير': 'Mai Samir', 'نهى نصير': 'Noha Nasir', 'رهام زيدان': 'Reham Zidan',
 		'رهام حمدي زيدان': 'Reham Hamdy Zidan', 'أشرف يحيى': 'Ashraf Yehia', 'ضحى طارق': 'Doha Tarek', 'الشيماء أحمد': 'El-Shaimaa Ahmed',
 		'إسراء جلبط': 'Esraa Galbat', 'داليا فتحي': 'Dalia Fathy', 'عبد الحى محمد': 'Abdelhay Mohamed', 'عبد الحي محمد': 'Abdelhay Mohamed',
