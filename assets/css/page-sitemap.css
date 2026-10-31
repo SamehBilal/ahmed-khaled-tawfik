@@ -19,3 +19,5 @@
 .sm-counts a:hover { border-color: var(--ember); }
 .sm-counts b { font-family: var(--f-latin); font-size: 32px; color: var(--ember); line-height: 1; }
 .sm-counts span { font-size: 14px; }
+.sm-xml { margin-top: 22px; color: var(--muted); }
+.sm-xml a { color: var(--ember); }

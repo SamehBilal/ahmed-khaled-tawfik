@@ -9,8 +9,28 @@ const SITE = 'https://samehbilal.github.io/ahmed-khaled-tawfik/';
 /* the data and helpers, loaded as the pages load them (tools/load-data.js) */
 const { App, S, P, d } = require('./load-data.js')();
 
-/* the last time a file changed, by git, for the section pages */
-const lastmod = (f) => { try { return cp.execSync('git log -1 --format=%cs -- "' + f + '"', { cwd: root }).toString().trim(); } catch (e) { return ''; } };
+/* the last time a file changed, by git */
+const changed = (f) => { try { return cp.execSync('git log -1 --format=%cs -- "' + f + '"', { cwd: root }).toString().trim(); } catch (e) { return ''; } };
+/* a section page's date: the newest of its own .html, the scripts and styles only it (and a few others) load — those every page
+   loads are left out, or every page would carry the same date — and the data files its content comes from */
+const DATA = {
+	'index.html': ['data-built.js'], 'works.html': ['data.js', 'data-issues.js', 'data-books-a.js', 'data-books-b.js', 'data-series-more.js', 'data-more.js'],
+	'characters.html': ['data.js', 'data-more.js'], 'writers.html': ['data-more.js'], 'legacy.html': ['data-legacy.js', 'data-more.js'],
+	'audio.html': ['data-audio.js', 'data-storytel.js', 'data-more.js'], 'quotes.html': ['data-quotes.js'], 'tributes.html': ['data-tributes.js'],
+	'publishers.html': ['data-books-a.js', 'data-books-b.js', 'data-more.js'], 'papers.html': ['data-blog.js'], 'blog.html': ['data-blog.js'],
+	'numbers.html': ['data-built.js'], 'covers.html': ['data-built.js'], 'screen.html': ['data-more.js'], 'awards.html': ['data.js', 'data-more.js'],
+	'translations.html': ['data.js', 'data-more.js'], 'talks.html': ['data.js', 'data-more.js'], 'guide.html': ['data.js'],
+	'map.html': ['../data/places.json'], 'world.html': ['../data/world.json'], 'style.html': ['../data/style.json'], 'changelog.html': ['../data/changelog.json']
+};
+const pageFiles = {};
+fs.readdirSync(root).filter(f => f.endsWith('.html')).forEach(f => {
+	const s = fs.readFileSync(path.join(root, f), 'utf8');
+	pageFiles[f] = [...new Set([...s.matchAll(/(?:src|href)="(assets\/[^"?#]+\.(?:js|css))/g)].map(m => m[1]))];
+});
+const everywhere = {};
+Object.values(pageFiles).forEach(list => list.forEach(a => { everywhere[a] = (everywhere[a] || 0) + 1; }));
+const lastmod = (f) => [f].concat((pageFiles[f] || []).filter(a => everywhere[a] <= 12), (DATA[f] || []).map(a => path.posix.join('assets/js', a)))
+	.map(changed).filter(Boolean).sort().pop() || '';
 
 const urls = new Map();
 const add = (href, o) => {
