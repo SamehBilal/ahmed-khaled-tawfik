@@ -15,12 +15,13 @@
 }
 
 .bk-list > li {
+	--bk-h: 400px; /* the book's height; a book on its own page takes its cover's (books.js fitHeight) */
 	position: relative; width: 300px; z-index: 1;
 	perspective: 1800px; -webkit-perspective: 1800px;
 }
 
 .bk-list .bk-book {
-	position: absolute; width: 100%; height: 400px; direction: ltr;
+	position: absolute; width: 100%; height: var(--bk-h); direction: ltr;
 	transform-style: preserve-3d; -webkit-transform-style: preserve-3d;
 	transition: transform .5s;
 }
@@ -46,7 +47,7 @@
 
 .bk-list .bk-page {
 	transform: translate3d(0,0,19px);
-	display: none; width: 295px; height: 390px; top: 5px;
+	display: none; width: 295px; height: calc(var(--bk-h) - 10px); top: 5px;
 	backface-visibility: hidden; -webkit-backface-visibility: hidden;
 	z-index: 9;
 }
@@ -54,7 +55,7 @@
 
 .bk-list .bk-front,
 .bk-list .bk-back,
-.bk-list .bk-front > div { width: 300px; height: 400px; }
+.bk-list .bk-front > div { width: 300px; height: var(--bk-h); }
 
 .bk-list .bk-left,
 .bk-list .bk-right { width: 40px; left: -20px; }
@@ -74,14 +75,14 @@
 .bk-list .bk-cover-back { background-color: #000; transform: rotate3d(0,1,0,-179deg); }
 
 .bk-list .bk-right {
-	height: 390px; top: 5px;
+	height: calc(var(--bk-h) - 10px); top: 5px;
 	transform: rotate3d(0,1,0,90deg) translate3d(0,0,295px);
 	backface-visibility: hidden; -webkit-backface-visibility: hidden;
 }
 
-.bk-list .bk-left { height: 400px; transform: rotate3d(0,1,0,-90deg); }
+.bk-list .bk-left { height: var(--bk-h); transform: rotate3d(0,1,0,-90deg); }
 .bk-list .bk-top { transform: rotate3d(1,0,0,90deg); }
-.bk-list .bk-bottom { transform: rotate3d(1,0,0,-90deg) translate3d(0,0,390px); }
+.bk-list .bk-bottom { transform: rotate3d(1,0,0,-90deg) translate3d(0,0,calc(var(--bk-h) - 10px)); }
 
 .bk-list .bk-viewinside .bk-front { transform: translate3d(0,0,20px) rotate3d(0,1,0,-160deg); }
 .bk-list .bk-book.bk-viewinside { transform: translate3d(0,0,150px) rotate3d(0,1,0,0deg); }
@@ -144,7 +145,7 @@
 .bk-cover h2 .by { display: block; font-family: var(--f-display); font-size: 13px; font-weight: 400; opacity: .75; margin-top: 6px; direction: rtl; }
 
 .bk-left h2 {
-	width: 400px; height: 40px; margin: 0;
+	width: var(--bk-h, 400px); height: 40px; margin: 0;
 	transform-origin: 0 0; transform: rotate(90deg) translateY(-40px);
 	color: #fff; font-size: 15px; line-height: 40px; padding: 0 16px;
 	display: flex; justify-content: space-between; white-space: nowrap; overflow: hidden;
@@ -521,7 +522,7 @@ body.hc-dim .hc-grid > .hc-item:not(.details-open) { opacity: .22; filter: grays
    other way), and what is written or drawn on it is flipped back so it reads normally. Each flipped
    piece hides its own back, or it would show through when the cover opens or the book turns. */
 .bk-list .bk-mirror {
-	position: absolute; top: 0; left: 0; width: 100%; height: 400px;
+	position: absolute; top: 0; left: 0; width: 100%; height: var(--bk-h);
 	transform: scaleX(-1); transform-style: preserve-3d; -webkit-transform-style: preserve-3d;
 }
 .bk-list .bk-cover > *, .bk-list .bk-back > *, .bk-list .bk-page > .bk-content {

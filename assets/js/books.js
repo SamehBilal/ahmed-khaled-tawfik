@@ -92,11 +92,24 @@
 		if (img.complete && img.naturalWidth) run(); else img.addEventListener('load', run, { once: true });
 	}
 
+	/* a book on its own (a book's or a series' page) takes the height of its cover: 300px wide, as tall as the picture's
+	   proportions make it (--bk-h, kept between 340 and 520px), read whenever a cover loads, so a chosen edition's cover too */
+	function fitHeight(li) {
+		var fit = function (img) {
+			if (!img || !img.naturalWidth) return;
+			var h = Math.round(Math.min(520, Math.max(340, 300 * img.naturalHeight / img.naturalWidth)));
+			li.style.setProperty('--bk-h', h + 'px');
+		};
+		fit(li.querySelector('.bk-img'));
+		li.addEventListener('load', function (ev) { if (ev.target.classList && ev.target.classList.contains('bk-img')) fit(ev.target); }, true);
+	}
+
 	function initShowcase(list) {
 		wireScroll();
 		var items = Array.prototype.slice.call(list.children);
 		var books = items.map(function (li) { return li.querySelector('.bk-book'); });
 		books.forEach(matchBack);
+		if (list.classList.contains('bk-solo')) items.forEach(fitHeight);
 
 		items.forEach(function (li, idx) {
 			var book = books[idx];

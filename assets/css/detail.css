@@ -13,7 +13,7 @@
 .d-cover { position: sticky; top: 90px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
 .bk-solo { justify-content: center; }
 .bk-solo > li { margin-inline: auto; }
-.bk-solo .bk-info { margin-top: 430px; }
+.bk-solo .bk-info { margin-top: calc(var(--bk-h) + 30px); }
 .bk-solo .bk-info h3, .bk-solo .bk-info > p { display: none; }
 .bk-solo .bk-actions { justify-content: center; }
 .d-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
