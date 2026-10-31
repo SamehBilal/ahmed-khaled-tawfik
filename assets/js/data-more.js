@@ -553,10 +553,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 })(window.AKT);
 
 /* Lasheen's spin-off: «أشباح الموالد», the book Soheir Zaher wrote inside the series, published for real (Kotopia, 2025).
-   It has no number, so its page is book.html?id=lasheen-x18 (the 19th entry); on the series page it stands between 17 and 18 with a dash for a number. */
+   It has no number, so its page is book.html?id=lasheen-x18 — the key comes from its place in the list, so it is kept at index 18 however many
+   books follow; on the series page it stands between 17 and 18 with a dash for a number. */
 (function (A) {
 	var L = A.otherSeries.filter(function (s) { return s.id === 'lasheen'; })[0];
-	L.issues.push({
+	L.issues.splice(18, 0, {
 		title: { ar: 'أشباح الموالد', en: 'Ghosts of the Moulids' }, year: 2025, spinoff: true, after: 17, mark: '–',
 		original: { ar: 'كتاب جانبي — كتاب سهير زاهر', en: 'Spin-off — Soheir Zaher’s book' },
 		synopsis: {
