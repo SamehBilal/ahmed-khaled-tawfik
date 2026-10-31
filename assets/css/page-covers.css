@@ -25,3 +25,15 @@
 .cw-n { position: absolute; top: -10px; inset-inline-start: -8px; z-index: 2; min-width: 32px; padding: 2px 8px; border-radius: 999px; background: var(--ember); color: #fff;
 	font-family: var(--f-latin); font-weight: 700; text-align: center; }
 @media (max-width: 640px) { .cw-wall { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 5px; } }
+
+/* one page for the wall, the editions (page-editions.css) and the site's numbers */
+.cw-jump { margin-top: 8px; margin-bottom: -10px; }
+.cw-h { font-family: var(--f-display); font-size: 32px; margin: 0 0 8px; }
+.cw-lead { max-width: 820px; color: var(--paper-dim); line-height: 1.9; margin: 0 0 20px; }
+.cw-lead a { color: var(--ember); }
+#wall, #editions, #stats { scroll-margin-top: 80px; }
+.cw-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+.cw-tile { display: flex; flex-direction: column; gap: 4px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); color: var(--paper-dim); text-decoration: none; transition: transform .2s, border-color .2s; }
+.cw-tile:hover { transform: translateY(-3px); border-color: var(--ember); }
+.cw-tile b { font-family: var(--f-latin); font-size: 36px; font-weight: 700; line-height: 1; color: var(--ember); }
+.cw-tile span { font-size: 14px; }

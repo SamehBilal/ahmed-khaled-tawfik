@@ -11,7 +11,7 @@
 
 	var PAGES = {
 		about: {
-			title: { ar: 'عن الموقع', en: 'About this site' },
+			title: { ar: 'عن الموقع والأسئلة الشائعة', en: 'About & FAQ' },
 			eyebrow: { ar: 'من صنع هذا؟', en: 'Who made this?' },
 			lead: {
 				ar: 'موقع محبّين غير رسمي عن د. أحمد خالد توفيق: حياته وسلاسله ورواياته وشخصياته والكتّاب من حوله، بالعربية والإنجليزية.',
@@ -32,6 +32,32 @@
 						en: '<ul><li>The 3D books are built on Codrops demos (Marco Barría), with their paper and wood textures.</li><li>The cassette player is adapted from Codrops’ “Old School Cassette Player”; tape artwork by Mauricio Estrella. The tape opens each recording on its own platform.</li><li>The voice on the Legacy page is a short sample from Audiohat’s episode of Ma Wara’ al-Tabi’a #53, “The Legend of the Prophecy”, read by Amr Yousry — ' + ext(VOICE, 'hear it in full on Audiohat ↗') + '.</li><li>The voice in the home page’s opening, “Until the stars burn”, is a clip from the Netflix series Paranormal (Ma Wara’ al-Tabi’a, 2020); its rights are Netflix’s.</li><li>The home page opening is adapted from the GSAP “Believe” animation.</li><li>Also from Codrops: the book preview (Book Preview), the piles of years (Stapel), the 3D timeline, the notifications (Notification Styles), and dragging covers into My lists (Drag and Drop Interaction Ideas).</li><li>From CodePen: the timeline with a changing background, the newspaper page for articles (CSS Grid Newspaper), the animated comic, the blog banner (grid and clip-path), the book cover effect, and the floating candles on the Legacy page (zepha) and their flames (menashebouhadana).</li><li>His columns and stories on the blog page come from Amr Ebaid’s archive of the “Ahmed Khaled Tawfik” blog, by his permission.</li><li>“The Godfather” font by Jeff Bell; the other fonts from Google Fonts (SIL Open Font License).</li><li>The footer bats after Calleb on CodePen (MIT licence).</li><li>The footer’s haunted hill, savanna scene and witch from ' + ext('https://www.vecteezy.com/', 'Vecteezy.com') + '.</li><li>Covers and photos belong to their owners — publishers, illustrators and photographers. See <a href="terms.html">Rights &amp; use</a>.</li></ul>' } }
 			]
 		},
+
+		/* «الأسئلة الشائعة», on the about page under the rest: [question, answer (html)] */
+		faq: [
+			[{ ar: 'هل هذا موقع رسمي؟', en: 'Is this an official site?' },
+				{ ar: '<p>لا. هو موقع محبّين غير رسمي، لا يمثّل أسرة الكاتب ولا ناشريه، ولا يبيع شيئًا. روابط الشراء تقود إلى المتاجر نفسها.</p>', en: '<p>No. It is an unofficial fan site; it speaks for neither the author’s family nor his publishers, and sells nothing. The buying links lead to the shops themselves.</p>' }],
+			[{ ar: 'من أين جاءت المعلومات؟', en: 'Where does the information come from?' },
+				{ ar: '<p>من الكتب نفسها وأغلفتها، ومن مواقع الناشرين ومتاجر الكتب، ومن الصحف واللقاءات، ومن أرشيف المدونة التي جمع فيها عمرو عبيد مقالاته. كل مصدر مذكور في صفحته، وطريقة الجمع كلها في <a href="sources.html">المصادر وطريقة الجمع</a>.</p>', en: '<p>From the books and their covers, the publishers’ and bookshops’ sites, the papers and interviews, and the blog archive where Amr Ebaid gathered his articles. Each source is named on its page; the method is on <a href="sources.html">Sources & method</a>.</p>' }],
+			[{ ar: 'وجدت خطأً أو لديّ غلاف ناقص، ماذا أفعل؟', en: 'I found a mistake, or have a missing cover. What do I do?' },
+				{ ar: '<p>من صفحة <a href="contact.html#contribute">تواصل وساهم</a>: بلاغ على GitHub للتصحيحات، أو بريد إن لم يكن لديك حساب. أرفق المصدر أو صورة الغلاف.</p>', en: '<p>From <a href="contact.html#contribute">Contact & contribute</a>: an issue on GitHub for corrections, or an email if you have no account. Send the source or a photo of the cover.</p>' }],
+			[{ ar: 'هل يمكنني قراءة كتبه أو سماعها هنا؟', en: 'Can I read or listen to his books here?' },
+				{ ar: '<p>لا يستضيف الموقع كتبه ولا تسجيلاتها. يدلّك على أماكنها: المتاجر الإلكترونية والورقية في صفحة كل كتاب، والتسجيلات على Audiohat وStorytel و«اقرألي» و«ستوريا بود» وYouTube في صفحة <a href="audio.html">مسموع</a>؛ فيديو YouTube وحده يُشغَّل هنا.</p>', en: '<p>The site hosts neither his books nor their recordings. It points to where they are: the e-book and paper shops on each book’s page, and the recordings on Audiohat, Storytel, Iqraaly, StoriaPod and YouTube on the <a href="audio.html">Audio</a> page; only YouTube videos play here.</p>' }],
+			[{ ar: 'من أين أبدأ القراءة؟', en: 'Where should I start reading?' },
+				{ ar: '<p>صفحة <a href="guide.html">من أين أبدأ؟</a> تقترح طرقًا حسب ما تحب: الرعب أو المغامرة أو الخيال أو الرواية الطويلة.</p>', en: '<p>The <a href="guide.html">Start here</a> page suggests paths by what you like: horror, adventure, fantasy or the full-length novel.</p>' }],
+			[{ ar: 'أين تُحفظ قوائمي ورحلتي؟', en: 'Where are my lists and journey kept?' },
+				{ ar: '<p>على جهازك وحده، في متصفحك. لا حساب ولا خادم؛ لنقلها إلى جهاز آخر استعمل «تصدير» و«استيراد» في <a href="lists.html">قوائمي ورحلتي</a>.</p>', en: '<p>On your device only, in your browser. There is no account and no server; to move them to another device use Export and Import on <a href="lists.html">My lists & journey</a>.</p>' }],
+			[{ ar: 'هل يعمل الموقع دون إنترنت؟', en: 'Does the site work offline?' },
+				{ ar: '<p>نعم. «احفظ الموقع دون اتصال» في أسفل كل صفحة يثبّته على جهازك تطبيقًا، فتفتح صفحاته بلا اتصال بعد زيارتها.</p>', en: '<p>Yes. “Save the site offline” at the foot of every page installs it on your device as an app, so its pages open without a connection once visited.</p>' }],
+			[{ ar: 'لماذا تختلف أغلفة العدد الواحد؟', en: 'Why does one issue have several covers?' },
+				{ ar: '<p>لأن أعداده طُبعت مرات كثيرة وعند أكثر من ناشر، ولكل طبعة غلافها. صفحة كل عدد تعرض طبعاته، و<a href="covers.html">الأغلفة والطبعات</a> تجمعها كلها.</p>', en: '<p>Because his issues were printed many times and by more than one publisher, each edition with its own cover. Each issue’s page shows its editions, and <a href="covers.html">Covers & editions</a> gathers them all.</p>' }],
+			[{ ar: 'كيف أبحث في الموقع؟', en: 'How do I search the site?' },
+				{ ar: '<p>زر البحث في أعلى كل صفحة يبحث في الأعداد والكتب والشخصيات والكتّاب والمقالات والصفحات، بالعربية أو الإنجليزية. وكل الصفحات في <a href="sitemap.html">خريطة الموقع</a>.</p>', en: '<p>The search button at the top of every page looks through the issues, books, characters, writers, articles and pages, in Arabic or English. Every page is listed on the <a href="sitemap.html">Site map</a>.</p>' }],
+			[{ ar: 'هل يمكنني استعمال الصور والنصوص؟', en: 'May I use the pictures and texts?' },
+				{ ar: '<p>الأغلفة والصور والنصوص لأصحابها؛ التفاصيل في <a href="terms.html">حقوق الاستخدام</a>. أما كود الموقع فمفتوح على GitHub.</p>', en: '<p>The covers, pictures and texts belong to their owners; the details are on <a href="terms.html">Rights & use</a>. The site’s code is open on GitHub.</p>' }],
+			[{ ar: 'ما الجديد في الموقع؟', en: 'What is new on the site?' },
+				{ ar: '<p>كل إضافة بتاريخها في <a href="changelog.html">سجل التحديثات</a>.</p>', en: '<p>Every addition, with its date, is on the <a href="changelog.html">Changelog</a>.</p>' }]
+		],
 
 		sources: {
 			title: { ar: 'المصادر وطريقة الجمع', en: 'Sources & method' },
@@ -132,7 +158,7 @@
 		},
 
 		contact: {
-			title: { ar: 'تواصل', en: 'Contact' },
+			title: { ar: 'تواصل وساهم', en: 'Contact & contribute' },
 			eyebrow: { ar: 'لديك تصحيح أو إضافة؟', en: 'A correction or an addition?' },
 			lead: {
 				ar: 'الموقع يكبر بقرّائه. غلاف أو طبعة ناقصة، رابط لكتاب مسموع أو مقال عنه، تاريخ خاطئ، اقتباس بلا مصدر، أو طلب من صاحب حق — كلها مرحّب بها.',
@@ -157,6 +183,8 @@
 				var sid = id === 'about' && i === cfg.sections.length - 1 ? ' id="credits"' : '';
 				return '<section class="info-sec"' + sid + '><h2>' + e(t(s.h)) + '</h2>' + t(s.p) + '</section>';
 			}).join('');
+			if (id === 'about') body += '<section class="info-sec info-faq" id="faq"><h2>' + e(L('الأسئلة الشائعة', 'Frequently asked questions')) + '</h2>' +
+				PAGES.faq.map(function (q) { return '<details><summary>' + e(t(q[0])) + '</summary>' + t(q[1]) + '</details>'; }).join('') + '</section>';
 
 			if (id === 'contact') {
 				var card = function (icon, h, p, href, btn) {
@@ -176,6 +204,20 @@
 						L('اقتراح لصفحة جديدة، أو ذكرى مع كتبه تحب أن تشاركها، أو مجرد تحية، على ', 'An idea for a new page, a memory of his books you’d like to share, or just hello, at ') + mail + '.',
 						mailto(L('رسالة من الموقع', 'A note from the site')), L('أرسل بريدًا', 'Send an email')) +
 				'</div>' +
+				/* «ساهم معنا»: what helps most, and how to send it */
+				'<section class="info-sec info-give" id="contribute"><h2>' + e(L('ساهم معنا', 'Contribute')) + '</h2>' +
+					'<p>' + L('الموقع مبني على ما يرسله القرّاء. هذا ما ينقصه أكثر من غيره:', 'The site is built on what its readers send. This is what it misses most:') + '</p>' +
+					'<ul class="info-give-list">' + [
+						['📕', L('غلاف طبعة', 'An edition’s cover'), L('صورة واضحة للغلاف الأمامي أو الخلفي لطبعة غير موجودة، ومعها اسم الناشر وسنة الطبع.', 'A clear photo of the front or back cover of an edition the site lacks, with its publisher and year.')],
+						['✍', L('بخط يده', 'In his hand'), L('إهداء كتبه لك في نسختك، أو رسالة أو ورقة بخطه، إن أحببت أن يراها القرّاء.', 'A dedication he wrote in your copy, or a letter or note in his hand, if you would like readers to see it.')],
+						['📰', L('مقال أو لقاء', 'An article or interview'), L('رابط لمقال كتبه أو لقاء معه أو تقرير عنه لم يذكره الموقع.', 'A link to an article he wrote, an interview with him or a report about him the site does not have.')],
+						['🎧', L('تسجيل', 'A recording'), L('رابط لكتاب مسموع أو دراما صوتية أو قراءة من أعماله.', 'A link to an audiobook, an audio drama or a reading of his work.')],
+						['📷', L('صورة وذكرى', 'A photo and a memory'), L('صورة معه في ندوة أو حفل توقيع، وسطر عن اليوم، مع إذنك بنشرها.', 'A photo with him at a talk or signing, and a line about the day, with your leave to show it.')]
+					].map(function (x) { return '<li><span aria-hidden="true">' + x[0] + '</span><b>' + e(x[1]) + '</b><p>' + e(x[2]) + '</p></li>'; }).join('') + '</ul>' +
+					'<p class="info-give-act"><a class="buy-btn" href="' + e(mailto(L('مساهمة للموقع', 'A contribution to the site'), L('ما أرسله (غلاف / إهداء / مقال / تسجيل / صورة):\n\nالعمل أو الصفحة:\n\nالمصدر أو الرابط:\n\nهل يُذكر اسمك؟ (نعم / لا):\n', 'What I am sending (cover / dedication / article / recording / photo):\n\nThe work or page:\n\nSource or link:\n\nMay we name you? (yes / no):\n'))) + '">' + e(L('أرسل مساهمتك بالبريد', 'Send it by email')) + '</a> ' +
+						'<a class="buy-btn" href="' + e(App.fixHref(L('', ''))) + '" target="_blank" rel="noopener">' + e(L('أو على GitHub ↗', 'or on GitHub ↗')) + '</a></p>' +
+					'<p class="info-note">' + L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها إن أراد، وفي «سجل التحديثات».', 'Each contribution that goes up names its sender on its page if they wish, and in the Changelog.') + '</p>' +
+				'</section>' +
 				'<p class="info-note">' + L('التصحيحات تُرسل عبر GitHub وتحتاج حسابًا مجانيًا هناك، وتكون علنية؛ أما البريد إلى ', 'Corrections go through GitHub, need a free account there, and are public; email to ') + mail + L(' فيبقى خاصًا — انظر ', ' stays private — see ') + '<a href="privacy.html">' + L('الخصوصية', 'Privacy') + '</a>.</p>';
 			}
 

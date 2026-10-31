@@ -9,6 +9,10 @@ const DATA = require('./build-data.js').map(f => 'assets/js/' + f + '.js');
 require('./build-days.js');
 // and the map's places (assets/data/places.json); its world outline (world.json) is drawn once by tools/build-world.js
 require('./build-places.js');
+// and «سجل التحديثات»'s history from git (assets/data/changelog.json)
+require('./build-changelog.js');
+// and «اللغة والأسلوب»'s counts of his writing (assets/data/style.json)
+require('./build-style.js');
 
 const list = ['./'];
 const add = (rel) => list.push(rel.split(path.sep).join('/'));

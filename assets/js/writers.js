@@ -1,12 +1,12 @@
 window.PAGE = {
 	id: 'writers',
-	title: { ar: 'الكُتّاب', en: 'Writers' },
+	title: { ar: 'دائرة العرّاب', en: 'The Godfather’s circle' },
 	strings: {
 		eyebrow: { ar: 'حول العرّاب', en: 'Around the Godfather' },
-		title: { ar: 'الكُتّاب', en: 'The Writers' },
+		title: { ar: 'دائرة العرّاب', en: 'The Godfather’s circle' },
 		lead: {
-			ar: 'رفاق الطريق، ومن شاركوه الغلاف، ومن قدّم لهم وقدّموا له، والجيل الذي خرج من عباءته. اسحب كتابًا من الرف لتقرأ قصته.',
-			en: 'Fellow travellers, co-authors, the writers he introduced and who introduced him, and the generation that grew up reading him. Pull a book off the shelf to read its story.'
+			ar: 'كل من مرّ في حياته وعمله: رفاق الطريق، ومن شاركوه الغلاف، ومن قدّم لهم وقدّموا له، والرسّامون، ومن أكملوا عالمه وحملوه إلى الشاشة، والجيل الذي خرج من عباءته. اسحب كتابًا من الرف لتقرأ قصته.',
+			en: 'Everyone who passed through his life and work: fellow travellers, co-authors, the writers he introduced and who introduced him, the artists, those who carried his worlds on and brought them to the screen, and the generation that grew up reading him. Pull a book off the shelf to read its story.'
 		}
 	},
 
@@ -17,6 +17,9 @@ window.PAGE = {
 		{ key: 'influenced', title: { ar: 'تأثّروا به', en: 'Influenced by him' }, text: { ar: 'كُتّاب يقولون بأنفسهم إنهم خرجوا من عباءته.', en: 'Writers who, in their own words, grew up under his influence.' }, palette: ['#7a5a1c', '#5b3a6e', '#8c2f39'] },
 		{ key: 'contemporaries', title: { ar: 'رفاق الطريق', en: 'Contemporaries' }, text: { ar: 'زملاء جيله ورفاقه في عالم كتب الجيب.', en: 'Peers from his generation and from the world of pocket books.' }, palette: ['#334155', '#4b3b2a', '#2f4f3f'] },
 		{ key: 'about', title: { ar: 'كتب عنه', en: 'Wrote about him' }, text: { ar: 'كُتّاب ألّفوا كتابًا عن العرّاب: سيرة أو دراسة أو تحية.', en: 'Writers who wrote a book about him: a life, a study or a tribute.' }, palette: ['#6b4a1c', '#3a2a1f', '#5a3d2b'] },
+		{ key: 'artists', title: { ar: 'رسموا عالمه', en: 'Drew his world' }, text: { ar: 'رسّامون رسموا أغلفته وقصصه المصوّرة، أو رسموه هو.', en: 'Artists who painted his covers and comics, or drew him.' }, palette: ['#6a2c5a', '#4a2a4a', '#7a3a5a'] },
+		{ key: 'continued', title: { ar: 'أكملوا عالمه', en: 'Carried his world on' }, text: { ar: 'من حملوا عوالمه إلى حكايات جديدة بعده.', en: 'Those who took his worlds on into new stories after him.' }, palette: ['#2f5a3a', '#264a32', '#3a6a46'] },
+		{ key: 'screen', title: { ar: 'على الشاشة', en: 'On screen' }, text: { ar: 'المخرجون والممثلون الذين نقلوا أعماله إلى الشاشة.', en: 'The directors and actors who brought his work to the screen.' }, palette: ['#5a3a1c', '#6b4a24', '#4a2e16'] },
 		{ key: 'translated', title: { ar: 'ترجم لهم', en: 'Authors he translated' }, text: { ar: 'كُتّاب عالميون نقل أعمالهم إلى العربية.', en: 'Foreign authors whose work he brought into Arabic.' }, palette: ['#3b3b58', '#5a3d2b', '#28485a'] }
 	],
 

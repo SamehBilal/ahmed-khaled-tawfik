@@ -1,0 +1,31 @@
+/* «يوميات رفعت إسماعيل» (refaat-life.html, refaat-life.js) */
+.ph[data-ph="refaat-life"] { background: radial-gradient(50% 120% at 70% 30%, #3a2a16 0%, #0d0a07 72%); }
+.rl-page { position: absolute; left: 50%; top: 10%; bottom: 8%; width: min(560px, 86%); transform: translateX(-50%) rotate(-2deg); padding: 18px 26px;
+	background: repeating-linear-gradient(transparent 0 27px, rgba(80, 60, 30, .25) 27px 28px), #e9dcc0; border-radius: 3px; box-shadow: 0 20px 40px rgba(0, 0, 0, .6); overflow: hidden; }
+.rl-page p { margin: 0; line-height: 28px; font-family: var(--f-display); font-size: 16px; color: #3a2a18; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; animation: rl-ink 1s var(--d) forwards; }
+.rl-page b { display: inline-block; min-width: 110px; color: #8a2a12; font-weight: 400; }
+@keyframes rl-ink { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .rl-page p { animation: none; opacity: 1; } }
+.rl-lamp { position: absolute; right: 6%; top: -10%; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 200, 120, .35), transparent 65%); pointer-events: none; }
+.rl-intro { display: flex; gap: 22px; align-items: center; max-width: 900px; margin-bottom: 30px; }
+.rl-intro img { width: 130px; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, .5)); }
+.rl-intro p { margin: 0 0 8px; color: var(--paper-dim); line-height: 1.9; }
+.rl-links a { color: var(--ember); }
+.rl-line { list-style: none; margin: 0; padding: 0; position: relative; max-width: 900px; }
+.rl-line::before { content: ''; position: absolute; top: 6px; bottom: 6px; inset-inline-start: 118px; width: 2px; background: linear-gradient(var(--ember), transparent); }
+.rl-line li { display: grid; grid-template-columns: 104px 1fr; gap: 34px; padding: 0 0 26px; position: relative; }
+.rl-line li::before { content: ''; position: absolute; inset-inline-start: 112px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); border: 2px solid var(--ember); }
+.rl-when { font-family: var(--f-display); color: var(--ember); text-align: end; font-size: 15px; line-height: 1.5; padding-top: 4px; }
+.rl-body h3 { margin: 0 0 4px; font-family: var(--f-display); font-size: 21px; }
+.rl-body p { margin: 0 0 10px; color: var(--paper-dim); line-height: 1.85; }
+.rl-issue { display: inline-flex; gap: 10px; align-items: center; color: var(--muted); text-decoration: none; font-size: 13px; }
+.rl-issue .mini-cover { width: 44px; }
+.rl-issue b { display: block; color: var(--paper-dim); font-weight: 600; }
+.rl-issue:hover b { color: var(--ember); }
+.rl-src { display: block; margin-top: 6px; font-size: 12px; color: var(--muted); }
+.rl-note { color: var(--muted); line-height: 1.9; }
+@media (max-width: 600px) {
+	.rl-line::before { inset-inline-start: 6px; } .rl-line li::before { inset-inline-start: 0; }
+	.rl-line li { grid-template-columns: 1fr; gap: 4px; padding-inline-start: 26px; } .rl-when { text-align: start; }
+	.rl-intro { flex-direction: column; text-align: center; }
+}

@@ -1,0 +1,17 @@
+/* «مكتبته» (library.html, library.js) */
+.ph[data-ph="library"] { background: radial-gradient(60% 120% at 50% 20%, #2c2016 0%, #0e0b08 72%); }
+.lb-shelf { position: absolute; left: 4%; right: 4%; bottom: 18%; height: 66%; display: flex; align-items: flex-end; gap: 4px; justify-content: center; }
+.lb-shelf span { position: relative; flex: 0 0 var(--w); height: var(--h); background: linear-gradient(90deg, rgba(0,0,0,.35), transparent 30%, transparent 70%, rgba(0,0,0,.35)), var(--c); border-radius: 3px 3px 0 0; box-shadow: inset 0 6px 0 rgba(255,255,255,.08); overflow: hidden; }
+.lb-shelf b { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap; font-family: var(--f-display); font-weight: 400; font-size: 13px; color: rgba(246,215,154,.85); }
+.lb-plank { position: absolute; left: 2%; right: 2%; bottom: calc(18% - 14px); height: 14px; background: linear-gradient(#6a4526, #3d2614); box-shadow: 0 10px 20px rgba(0,0,0,.5); }
+@media (max-width: 640px) { .lb-shelf span:nth-child(n+12) { display: none; } }
+.lb-sum, .lb-note { color: var(--muted); line-height: 1.9; }
+.lb-bar { margin: 6px 0 26px; }
+.lb-h { font-family: var(--f-display); font-size: 28px; margin: 30px 0 14px; }
+.lb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.lb-item { display: flex; flex-direction: column; gap: 6px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); border-top: 3px solid var(--ember); }
+.lb-film { border-top-color: #c9a2e8; } .lb-writer { border-top-color: #d9a45a; } .lb-music, .lb-other { border-top-color: #6fb8a8; }
+.lb-item h3 { margin: 0; font-family: var(--f-display); font-size: 20px; }
+.lb-by { margin: 0; color: var(--muted); font-size: 14px; }
+.lb-said { margin: 4px 0 8px; color: var(--paper-dim); line-height: 1.8; font-size: 15px; }
+.lb-src { margin-top: auto; color: var(--ember); font-size: 14px; }

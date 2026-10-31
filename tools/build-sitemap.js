@@ -19,9 +19,9 @@ const add = (href, o) => {
 };
 const img = (src) => src && !/^https?:/.test(src) ? SITE + src : src || '';
 
-/* the section pages (not 404, offline, the redirect authors.html, or lists.html, which holds only the reader's own lists) */
+/* the section pages (not 404, offline, the redirects authors.html, journey.html and editions.html, or lists.html, which holds only the reader's own lists) */
 const PAGES = { 'index.html': 1, 'works.html': 0.9, 'characters.html': 0.8, 'writers.html': 0.8, 'legacy.html': 0.8, 'audio.html': 0.8, 'blog.html': 0.8,
-	'quotes.html': 0.7, 'guide.html': 0.7, 'tributes.html': 0.7, 'publishers.html': 0.7, 'papers.html': 0.7, 'numbers.html': 0.6, 'quiz.html': 0.6, 'map.html': 0.6, 'world.html': 0.6, 'screen.html': 0.6, 'covers.html': 0.6, 'editions.html': 0.5, 'talks.html': 0.6, 'awards.html': 0.5, 'translations.html': 0.7, 'journey.html': 0.4, 'about.html': 0.5, 'sources.html': 0.5, 'contact.html': 0.3,
+	'quotes.html': 0.7, 'guide.html': 0.7, 'tributes.html': 0.7, 'publishers.html': 0.7, 'papers.html': 0.7, 'numbers.html': 0.6, 'quiz.html': 0.6, 'map.html': 0.6, 'world.html': 0.6, 'screen.html': 0.6, 'covers.html': 0.6, 'talks.html': 0.6, 'awards.html': 0.5, 'translations.html': 0.7, 'library.html': 0.7, 'glossary.html': 0.7, 'creatures.html': 0.7, 'refaat-life.html': 0.7, 'network.html': 0.6, 'tanta.html': 0.6, 'handwriting.html': 0.5, 'style.html': 0.6, 'changelog.html': 0.4, 'sitemap.html': 0.3, 'about.html': 0.5, 'sources.html': 0.5, 'contact.html': 0.3,
 	'privacy.html': 0.2, 'terms.html': 0.2 };
 Object.keys(PAGES).forEach(f => add(f === 'index.html' ? '' : f, { priority: PAGES[f], lastmod: lastmod(f) }));
 

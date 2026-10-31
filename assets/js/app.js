@@ -13,27 +13,34 @@
 			{ id: 'guide', href: 'guide.html', ar: 'من أين أبدأ؟', en: 'Start here' },
 			{ id: 'works', href: 'works.html', ar: 'الأعمال', en: 'Works' },
 			{ id: 'characters', href: 'characters.html', ar: 'الشخصيات', en: 'Characters' },
-			{ id: 'writers', href: 'writers.html', ar: 'الكُتّاب', en: 'Writers' },
+			{ id: 'writers', href: 'writers.html', ar: 'دائرته', en: 'His circle' },
 			{ id: 'quotes', href: 'quotes.html', ar: 'اقتباسات', en: 'Quotes' },
 			{ id: 'audio', href: 'audio.html', ar: 'مسموع', en: 'Audio' },
 			{ id: 'legacy', href: 'legacy.html', ar: 'الإرث', en: 'Legacy' },
 			{ id: 'tributes', href: 'tributes.html', ar: 'قالوا عنه', en: 'Tributes' },
 			{ id: 'blog', href: 'blog.html', ar: 'المدونة', en: 'Blog' },
 			/* in the phone menu only (on a wider screen the «My lists» button is always at hand) */
-			{ id: 'lists', href: 'lists.html', ar: 'قوائمي', en: 'My lists', phone: true },
+			{ id: 'lists', href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey', phone: true },
 			/* and the pages made from the data, which on a wider screen the footer lists */
 			{ id: 'papers', href: 'papers.html', ar: 'في الصحف', en: 'In the papers', phone: true },
 			{ id: 'numbers', href: 'numbers.html', ar: 'بالأرقام', en: 'In numbers', phone: true },
-			{ id: 'quiz', href: 'quiz.html', ar: 'اختبر نفسك', en: 'Test yourself', phone: true },
+			{ id: 'quiz', href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner', phone: true },
 			{ id: 'map', href: 'map.html', ar: 'الخريطة', en: 'The map', phone: true },
 			{ id: 'world', href: 'world.html', ar: 'حول العالم', en: 'Around the world', phone: true },
 			{ id: 'screen', href: 'screen.html', ar: 'على الشاشة', en: 'On screen', phone: true },
-			{ id: 'covers', href: 'covers.html', ar: 'جدار الأغلفة', en: 'The cover wall', phone: true },
-			{ id: 'journey', href: 'journey.html', ar: 'رحلتي', en: 'My journey', phone: true },
-			{ id: 'editions', href: 'editions.html', ar: 'الطبعات', en: 'The editions', phone: true },
-			{ id: 'talks', href: 'talks.html', ar: 'لقاءاته', en: 'Interviews', phone: true },
+			{ id: 'covers', href: 'covers.html', ar: 'الأغلفة والطبعات', en: 'Covers & editions', phone: true },
+			{ id: 'talks', href: 'talks.html', ar: 'سيرته ولقاءاته', en: 'His life & interviews', phone: true },
 			{ id: 'awards', href: 'awards.html', ar: 'الجوائز', en: 'Awards', phone: true },
-			{ id: 'translations', href: 'translations.html', ar: 'ترجماته', en: 'His translations', phone: true }
+			{ id: 'translations', href: 'translations.html', ar: 'ترجماته', en: 'His translations', phone: true },
+			{ id: 'library', href: 'library.html', ar: 'مكتبته', en: 'His library', phone: true },
+			/* «عالم العرّاب» (the footer's block of its own) */
+			{ id: 'glossary', href: 'glossary.html', ar: 'قاموس العرّاب', en: 'The phrasebook', phone: true },
+			{ id: 'creatures', href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends', phone: true },
+			{ id: 'refaat-life', href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life', phone: true },
+			{ id: 'network', href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web', phone: true },
+			{ id: 'tanta', href: 'tanta.html', ar: 'طنطا', en: 'Tanta', phone: true },
+			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true },
+			{ id: 'style', href: 'style.html', ar: 'اللغة والأسلوب', en: 'Language & style', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
@@ -41,28 +48,41 @@
 		   the directory among the main pages, the rest under «اكتشف أكثر» */
 		more: [
 			{ href: 'publishers.html', ar: 'دور النشر', en: 'Publishers', main: true },
+			/* and beside it, the books and films he loved */
+			{ href: 'library.html', ar: 'مكتبته', en: 'His library', main: true },
 			/* the pages made from the data: his columns by paper, his work in numbers, the quiz, the map */
 			{ href: 'papers.html', ar: 'في الصحف', en: 'In the papers' },
 			{ href: 'numbers.html', ar: 'بالأرقام', en: 'In numbers' },
-			{ href: 'quiz.html', ar: 'اختبر نفسك', en: 'Test yourself' },
+			{ href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner' },
 			{ href: 'map.html', ar: 'الخريطة', en: 'The map' },
 			/* and seven more: his books in translation, on screen, every cover, your own journey, the editions, his interviews, his awards */
 			{ href: 'world.html', ar: 'حول العالم', en: 'Around the world' },
 			{ href: 'screen.html', ar: 'على الشاشة', en: 'On screen' },
-			{ href: 'covers.html', ar: 'جدار الأغلفة', en: 'The cover wall' },
-			{ href: 'journey.html', ar: 'رحلتي', en: 'My journey' },
-			{ href: 'editions.html', ar: 'الطبعات', en: 'The editions' },
-			{ href: 'talks.html', ar: 'لقاءاته', en: 'Interviews' },
+			{ href: 'covers.html', ar: 'الأغلفة والطبعات', en: 'Covers & editions' },
+			{ href: 'talks.html', ar: 'سيرته ولقاءاته', en: 'His life & interviews' },
 			{ href: 'awards.html', ar: 'الجوائز', en: 'Awards' },
-			{ href: 'translations.html', ar: 'ترجماته', en: 'His translations' }
+			{ href: 'translations.html', ar: 'ترجماته', en: 'His translations' },
+			/* his city, his handwriting, and his writing in numbers */
+			{ href: 'tanta.html', ar: 'طنطا', en: 'Tanta' },
+			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' },
+			{ href: 'style.html', ar: 'اللغة والأسلوب', en: 'Language & style' }
+		],
+		/* «عالم العرّاب»: the pages inside his world, a block of their own under «صفحات الموقع» */
+		world: [
+			{ href: 'glossary.html', ar: 'قاموس العرّاب', en: 'The phrasebook' },
+			{ href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends' },
+			{ href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life' },
+			{ href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web' }
 		],
 		/* pages linked only from the footer, not the header */
 		legal: [
-			{ href: 'about.html', ar: 'عن الموقع', en: 'About' },
+			{ href: 'about.html', ar: 'عن الموقع والأسئلة', en: 'About & FAQ' },
 			{ href: 'sources.html', ar: 'المصادر وطريقة الجمع', en: 'Sources & method' },
 			{ href: 'privacy.html', ar: 'الخصوصية', en: 'Privacy' },
 			{ href: 'terms.html', ar: 'حقوق الاستخدام', en: 'Rights & use' },
-			{ href: 'contact.html', ar: 'تواصل', en: 'Contact' }
+			{ href: 'contact.html', ar: 'تواصل وساهم', en: 'Contact & contribute' },
+			{ href: 'changelog.html', ar: 'سجل التحديثات', en: 'Changelog' },
+			{ href: 'sitemap.html', ar: 'خريطة الموقع', en: 'Site map' }
 		],
 		fix: { ar: 'وجدت خطأً أو لديك إضافة؟ اقترح تصحيحًا ↗', en: 'Spotted a mistake or have an addition? Suggest a correction ↗' },
 		/* the footer's last column: who made the site (the notes and credits live on about.html) */
@@ -418,10 +438,14 @@
 							'<div class="motto">' + App.tx(UI.motto) + '</div>' +
 							'<span class="ft-dates" dir="ltr">1962 — 2018</span>' +
 						'</div>' +
-						'<nav class="ft-links" aria-labelledby="ft-links-h"><h2 id="ft-links-h">' + App.L('صفحات الموقع', 'Site pages') + '</h2>' +
+						'<div class="ft-col"><nav class="ft-links" aria-labelledby="ft-links-h"><h2 id="ft-links-h">' + App.L('صفحات الموقع', 'Site pages') + '</h2>' +
 							/* (the phone menu's own entries are the footer's own pages already, or the «My lists» button) */
 							UI.nav.filter(function (n) { return !n.phone; }).concat(UI.more.filter(function (n) { return n.main; })).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 						'</nav>' +
+						/* and under them, the pages inside his world */
+						'<nav class="ft-links ft-world" aria-labelledby="ft-world-h"><h2 id="ft-world-h">' + App.L('عالم العرّاب', 'The Godfather’s world') + '</h2>' +
+							UI.world.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+						'</nav></div>' +
 						/* the pages made from the data (and, under them, pwa.js's «احفظ الموقع دون اتصال») */
 						'<div class="ft-side">' +
 							'<nav class="ft-legal ft-more" aria-labelledby="ft-more-h"><h2 id="ft-more-h">' + App.L('اكتشف أكثر', 'Discover more') + '</h2>' +
@@ -670,11 +694,16 @@
 			if (au.midnightSpoofs) add(K.audio, au.midnightSpoofs.title, { ar: au.midnightSpoofs.years || '', en: au.midnightSpoofs.years || '' }, 'audio.html', 'audiohat');
 			(d.quotes || []).forEach(function (q, i) { add(K.quote, q.text, q.from, 'quotes.html#q-' + i, both(q.from)); });
 			/* the site's own pages, the header's and the footer's, found by their names and what they hold */
-			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات statistics', quiz: 'اختبار مسابقة أسئلة quiz',
+			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات statistics', quiz: 'اختبار مسابقة أسئلة شخصية بطاقة القارئ اقرأ معنا نادي القراءة quiz character reader card reading club',
 				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
-				covers: 'أغلفة غلاف covers', journey: 'قراءة قوائم تقدم reading progress', editions: 'طبعات طبعة دور نشر editions publishers',
-				talks: 'لقاءات حوارات فيديو interviews videos', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers' };
-			UI.nav.concat(UI.more).forEach(function (n) {
+				covers: 'أغلفة غلاف طبعات طبعة إحصاءات الموقع covers editions statistics', lists: 'قوائم رحلتي قراءة تقدم lists journey reading progress',
+				talks: 'سيرة حياة لقاءات حوارات فيديو biography life interviews videos', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',
+				library: 'كتب أفلام موسيقى مفضلة نصح books films music favourite', glossary: 'عبارات قاموس لزمات حتى تحترق النجوم phrases glossary',
+				creatures: 'وحوش أساطير مصاص دماء مذءوب نداهة مومياء monsters legends vampire werewolf', 'refaat-life': 'رفعت إسماعيل حياة سيرة يوميات Refaat life',
+				network: 'شبكة شخصيات علاقات characters web relations', tanta: 'طنطا مدينته بيته قبره Tanta city', handwriting: 'خط يده إهداء توقيع مخطوط handwriting dedication signature',
+				style: 'أسلوب لغة كلمات style language words', writers: 'كتاب رسامون مخرجون ممثلون دائرة writers artists directors actors circle',
+				changelog: 'تحديثات جديد سجل changelog updates', sitemap: 'خريطة الموقع صفحات sitemap pages', about: 'عن الموقع أسئلة شائعة about faq', contact: 'تواصل ساهم مساهمة contact contribute' };
+			UI.nav.concat(UI.more, UI.world, UI.legal).forEach(function (n) {
 				var id = n.href.replace(/\.html$/, '');
 				if (n.href !== 'index.html') add(K.page, { ar: n.ar, en: n.en }, '', n.href, PAGE_WORDS[id] || '');
 			});

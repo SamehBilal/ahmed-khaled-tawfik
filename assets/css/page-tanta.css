@@ -1,0 +1,24 @@
+/* «طنطا» (tanta.html, tanta.js) */
+.ph[data-ph="tanta"] { background: #0c0b10; overflow: hidden; }
+.tn-sky { position: absolute; inset: 0; background: linear-gradient(#1a1430 0%, #4a2a3a 55%, #c8643a 92%); opacity: .85; }
+.tn-roofs { position: absolute; left: 0; right: 0; bottom: 0; height: 100%; }
+.tn-roofs i { position: absolute; bottom: 0; background: #0d0a10; }
+.tn-mosque { position: absolute; left: 50%; bottom: 0; width: 220px; height: 70%; transform: translateX(-50%); }
+.tn-mosque .dome { position: absolute; left: 50%; bottom: 0; width: 120px; height: 120px; margin-left: -60px; background: #0d0a10; border-radius: 60px 60px 0 0; }
+.tn-mosque .dome::before { content: ''; position: absolute; left: 50%; top: -30px; width: 4px; height: 30px; margin-left: -2px; background: #0d0a10; }
+.tn-mosque .m1, .tn-mosque .m2 { position: absolute; bottom: 0; width: 16px; height: 100%; background: #0d0a10; border-radius: 8px 8px 0 0; }
+.tn-mosque .m1 { left: 10px; } .tn-mosque .m2 { right: 10px; }
+.tn-dates { display: flex; flex-wrap: wrap; gap: 14px; margin: 0 0 18px; }
+.tn-dates div { display: flex; flex-direction: column; gap: 4px; padding: 14px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
+.tn-dates b { font-family: var(--f-latin); font-size: 34px; color: var(--ember); line-height: 1; }
+.tn-dates span { color: var(--paper-dim); font-size: 14px; }
+.tn-h { font-family: var(--f-display); font-size: 28px; margin: 30px 0 14px; }
+.tn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+.tn-card { position: relative; display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
+.tn-y { position: absolute; top: 14px; inset-inline-end: 16px; font-family: var(--f-latin); color: var(--ember); }
+.tn-card h3 { margin: 0 0 8px; padding-inline-end: 50px; font-family: var(--f-display); font-size: 19px; line-height: 1.5; }
+.tn-card p { margin: 0 0 10px; color: var(--paper-dim); line-height: 1.8; font-size: 15px; }
+.tn-src { margin: auto 0 0 !important; font-size: 13px; }
+.tn-src a { color: var(--ember); }
+.tn-grave, .tn-mosque-card { border-color: color-mix(in srgb, var(--ember) 40%, var(--line)); }
+.tn-note { color: var(--muted); line-height: 1.9; margin-top: 26px; }

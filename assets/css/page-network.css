@@ -1,0 +1,40 @@
+/* «شبكة العرّاب» (network.html, network.js) */
+.ph[data-ph="network"] { background: radial-gradient(60% 120% at 50% 40%, #1a1a2a 0%, #08080c 72%); }
+.nw-band { position: absolute; inset: 8% 3%; width: 94%; height: 84%; }
+.nw-band line { stroke: rgba(224, 99, 58, .5); stroke-width: .12; stroke-dasharray: 60; stroke-dashoffset: 60; animation: nw-draw 8s var(--d) ease-in-out infinite; }
+.nw-band circle { fill: #f6d79a; }
+@keyframes nw-draw { 40%, 60% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -60; } }
+@media (prefers-reduced-motion: reduce) { .nw-band line { animation: none; stroke-dashoffset: 0; } }
+.nw-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; }
+.nw-stage { border: 1px solid var(--line); border-radius: 16px; background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--ember) 8%, var(--ink-2)), var(--ink)); }
+.nw-map { display: block; width: 100%; height: auto; }
+.nw-map line { stroke-width: 1.4; transition: opacity .25s, stroke-width .25s; }
+.nw-l-rel { stroke-width: 2.4 !important; stroke-dasharray: 6 5; opacity: .55; }
+.nw-stage.is-focus .nw-l-rel { opacity: .1; }
+.nw-stage.is-focus .nw-l-rel.is-on { opacity: 1; stroke-width: 3.6 !important; stroke-dasharray: none; }
+.nw-me circle { fill: var(--ember); filter: drop-shadow(0 0 18px rgba(224, 99, 58, .7)); }
+.nw-me text { fill: #fff; font-family: var(--f-display); font-size: 20px; text-anchor: middle; }
+.nw-work circle { stroke: rgba(255, 255, 255, .25); stroke-width: 2; }
+.nw-work text { fill: #fff; font-family: var(--f-display); font-size: 15px; text-anchor: middle; pointer-events: none; }
+.nw-work:hover circle { stroke: #fff; }
+.nw-node { cursor: pointer; outline: none; }
+.nw-node circle { fill: var(--paper-dim); stroke: var(--ink); stroke-width: 3; transition: r .2s, fill .2s; }
+.nw-node text { fill: var(--paper-dim); font-family: var(--f-display); font-size: 17px; text-anchor: middle; transition: fill .2s; }
+.nw-stage.is-focus .nw-node:not(.is-on):not(.is-linked) { opacity: .45; }
+.nw-node.is-on circle, .nw-node:focus-visible circle { fill: var(--ember); r: 13; }
+.nw-node.is-on text, .nw-node.is-linked text { fill: var(--paper); }
+.nw-node.is-linked circle { fill: #f6d79a; }
+.nw-panel { position: sticky; top: 90px; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); }
+.nw-panel h2 { margin: 2px 0 6px; font-family: var(--f-display); font-size: 26px; }
+.nw-panel p { color: var(--paper-dim); line-height: 1.85; margin: 0 0 10px; }
+.nw-work-name { margin: 0 !important; font-size: 13px; }
+.nw-work-name a { color: var(--ember); }
+.nw-role { color: var(--muted) !important; font-size: 14px; }
+.nw-ties { list-style: none; margin: 0 0 14px; padding: 0; font-size: 14px; color: var(--paper-dim); }
+.nw-ties li { margin: 0 0 6px; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.nw-ties i, .nw-legend i { flex: 0 0 auto; display: inline-block; width: 14px; height: 4px; border-radius: 2px; transform: translateY(-3px); }
+.nw-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; color: var(--muted); font-size: 14px; }
+.nw-legend span { display: inline-flex; gap: 8px; align-items: center; }
+.nw-legend i { transform: none; }
+.nw-hint { color: var(--muted) !important; }
+@media (max-width: 900px) { .nw-wrap { grid-template-columns: 1fr; } .nw-panel { position: static; } }

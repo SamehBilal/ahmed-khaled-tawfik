@@ -1,18 +1,11 @@
-/* editions.html — «الطبعات»: his books through the years of publishing, from the editions the site records (Arabic ones; the
+/* «الطبعات», on the covers page (covers.html#editions; editions.html sends there): his books through the years of publishing, from the editions the site records (Arabic ones; the
    translations are on «حول العالم»). The three series' move from the Modern Arab Association to Selah El-Telmeez; then a
    timeline a book, a dot an edition, coloured by the house that printed it (matched as the book pages match it, S.publisherLink),
    each dot naming its house and year. */
-window.PAGE = {
-	id: 'editions',
-	title: { ar: 'الطبعات', en: 'The editions' },
-	strings: {
-		eyebrow: { ar: 'رحلة الكتب بين الدور', en: 'The books’ journey between houses' },
-		title: { ar: 'الطبعات', en: 'The editions' },
-		lead: {
-			ar: 'كيف تنقّلت كتبه بين دور النشر عامًا بعد عام: سلاسل الجيب من المؤسسة العربية الحديثة إلى «سلاح التلميذ»، ورواياته ومجموعاته من دار إلى دار.',
-			en: 'How his books moved between publishers year by year: the pocket series from the Modern Arab Association to Selah El-Telmeez, his novels and collections from house to house.'
-		}
-	},
+window.Editions = {
+	/* drawn into el (covers.html: #editions, under the wall) */
+	mount: function (el) { this.el = el; this.render(); },
+
 	/* the house an edition's printed publisher names: { id, name } (or its printed name) */
 	house: function (pub) {
 		var App = window.App, S = window.WorksShared, link = S.publisherLink(pub || ''), m = /publisher\.html\?id=([^"&]+)/.exec(link);
@@ -26,13 +19,6 @@ window.PAGE = {
 	},
 	editionsOf: function (store, key) {
 		return (((window.App.data()[store] || {})[key] || {}).editions || []).filter(function (ed) { return (ed.lang || 'ar') === 'ar' && +ed.year; });
-	},
-
-	/* the band: books stamped by one press after another — a colophon stamp moving along a shelf */
-	band: function (d, A) {
-		var spines = '';
-		for (var i = 0; i < 26; i++) spines += '<i style="--h:' + (62 + (i * 37) % 30) + '%;--c:hsl(' + ((i * 47) % 360) + ' 35% ' + (24 + (i * 13) % 18) + '%)"></i>';
-		return '<div class="ed-shelf">' + spines + '</div><div class="ed-stamp"><b>' + A.esc(A.L('طبعة', 'Edition')) + '</b><span>1993 · 2023</span></div>';
 	},
 
 	render: function () {
@@ -63,7 +49,9 @@ window.PAGE = {
 		var axis = [];
 		for (var y = Math.ceil(y0 / 5) * 5; y <= y1; y += 5) axis.push(y);
 
-		document.getElementById('content').innerHTML = '<section class="section ed"><div class="wrap">' +
+		this.el.innerHTML = '<section class="section ed"><div class="wrap">' +
+			'<h2 class="cw-h">' + e(L('الطبعات', 'The editions')) + '</h2>' +
+			'<p class="cw-lead">' + e(L('كيف تنقّلت كتبه بين دور النشر عامًا بعد عام: سلاسل الجيب من المؤسسة العربية الحديثة إلى «سلاح التلميذ»، ورواياته ومجموعاته من دار إلى دار.', 'How his books moved between publishers year by year: the pocket series from the Modern Arab Association to Selah El-Telmeez, his novels and collections from house to house.')) + '</p>' +
 			'<h2 class="pp-h">' + e(L('سلاسل الجيب', 'The pocket series')) + '</h2>' +
 			'<div class="ed-series">' + series.map(function (x) {
 				return '<article><h3><a href="' + e(S.seriesHref(x.s.id)) + '">' + e(t(x.s.title)) + '</a></h3><ol>' + x.houses.map(function (b) {

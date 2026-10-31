@@ -1,0 +1,40 @@
+/* «ركن القرّاء» (quiz.html): under «اختبر نفسك», the character quiz, the reader's card and the reading club (corner.js) */
+.cr-jump { margin-top: 8px; margin-bottom: -10px; }
+.qz, .cr { scroll-margin-top: 80px; }
+.cr-h { font-family: var(--f-display); font-size: 32px; margin: 0 0 8px; }
+.cr-lead { max-width: 760px; color: var(--paper-dim); line-height: 1.9; margin: 0 0 18px; }
+.cr-who, .cr-card, .cr-club { max-width: 860px; padding: 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--ink-2); }
+.cr-step { margin: 0 0 6px; font-family: var(--f-latin); color: var(--ember); letter-spacing: .08em; font-size: 14px; }
+.cr-who h3, .cr-club h3 { font-family: var(--f-display); font-size: 24px; margin: 0 0 16px; }
+.cr-opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.cr-opts button { text-align: start; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--ink); color: var(--paper); font: inherit; cursor: pointer; transition: border-color .2s, transform .2s; }
+.cr-opts button:hover, .cr-opts button:focus-visible { border-color: var(--ember); transform: translateY(-2px); }
+.cr-res { display: flex; gap: 24px; align-items: flex-start; }
+.cr-res img { width: 170px; max-height: 240px; object-fit: contain; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .5)); }
+.cr-mono { display: grid; place-items: center; flex: 0 0 140px; height: 140px; border-radius: 50%; background: var(--ember); color: #fff; font-family: var(--f-display); font-size: 64px; }
+.cr-res h3 a { color: var(--paper); }
+.cr-res h3 a:hover { color: var(--ember); }
+.cr-why { color: var(--paper); font-size: 17px; line-height: 1.9; margin: 0 0 8px; }
+.cr-desc { color: var(--muted); font-size: 14.5px; line-height: 1.8; margin: 0 0 14px; }
+.cr-act { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0 0; }
+.cr-hint { color: var(--muted); font-size: 13px; }
+.cr-form { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.cr-form label { display: flex; flex-direction: column; gap: 6px; color: var(--paper-dim); font-size: 14px; }
+.cr-form input, .cr-form select { padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--ink); color: var(--paper); font: inherit; }
+.cr-form input:focus, .cr-form select:focus { outline: none; border-color: var(--ember); }
+.cr-form .cr-act { grid-column: 1 / -1; }
+.cr-month { display: flex; gap: 24px; align-items: flex-start; }
+.cr-month-cover { flex: 0 0 150px; }
+.cr-month h3 a { color: var(--paper); }
+.cr-month h3 small { font-size: 15px; color: var(--muted); }
+.cr-qs { margin: 0; padding-inline-start: 20px; color: var(--paper-dim); line-height: 1.9; }
+.cr-next-h { font-family: var(--f-display); font-size: 19px; margin: 26px 0 12px; }
+.cr-next { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 14px; }
+.cr-next a { display: flex; flex-direction: column; gap: 4px; color: var(--paper-dim); text-decoration: none; font-size: 13px; line-height: 1.5; }
+.cr-next b { color: var(--ember); font-family: var(--f-display); font-size: 14px; }
+.cr-next a:hover span { color: var(--paper); }
+@media (max-width: 600px) {
+	.cr-res, .cr-month { flex-direction: column; align-items: center; text-align: center; }
+	.cr-month-cover { flex-basis: auto; width: 140px; }
+	.cr-act { justify-content: center; }
+}

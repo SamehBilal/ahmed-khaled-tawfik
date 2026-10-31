@@ -1,0 +1,19 @@
+/* «وحوش وأساطير» (creatures.html, creatures.js) */
+.ph[data-ph="creatures"] { background: radial-gradient(70% 120% at 50% 100%, #1d1a12 0%, #070708 70%); }
+.cr-eyes { position: absolute; display: flex; gap: 10px; animation: cx-blink 6s var(--d) infinite; }
+.cr-eyes i { width: 10px; height: 6px; border-radius: 50%; background: #ffcf5a; box-shadow: 0 0 12px #ff9a3a, 0 0 24px rgba(255, 120, 40, .6); }
+@keyframes cx-blink { 0%, 40%, 100% { opacity: 0; transform: scaleY(.1); } 48%, 88% { opacity: 1; transform: scaleY(1); } 92% { transform: scaleY(.1); } }
+.cr-name { position: absolute; font-family: var(--f-display); font-size: 20px; color: rgba(239, 230, 210, .22); white-space: nowrap; animation: cx-fade 9s var(--d) ease-in-out infinite; }
+@keyframes cx-fade { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .cr-eyes, .cr-name { animation: none; opacity: .6; } }
+.cx-bar { margin: 6px 0 26px; }
+.cx-note { color: var(--muted); line-height: 1.9; }
+.cx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+.cx-card { display: flex; flex-direction: column; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(180deg, color-mix(in srgb, var(--ember) 7%, var(--ink-2)), var(--ink-2)); scroll-margin-top: 90px; }
+.cx-kind { margin: 0; font-size: 13px; color: var(--ember); font-family: var(--f-display); }
+.cx-card h3 { margin: 2px 0 10px; font-family: var(--f-display); font-size: 24px; }
+.cx-card h4 { margin: 8px 0 2px; font-size: 13px; color: var(--muted); font-weight: 600; }
+.cx-card p { margin: 0; color: var(--paper-dim); line-height: 1.8; font-size: 15px; }
+.cx-covers { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+.cx-covers a { width: 58px; }
+.cx-src { margin-top: auto; padding-top: 10px; font-size: 13px; color: var(--muted); }

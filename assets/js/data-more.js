@@ -4464,3 +4464,46 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		note: { ar: 'أحمد مراد مع ضيفيه أحمد العايدي وتامر إبراهيم، بعد رحيله بأيام (أبريل 2018).', en: 'Ahmed Mourad with his guests Ahmed El-Aidy and Tamer Ibrahim, days after his death (April 2018).' } });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* «دائرة العرّاب» (writers.html): three more shelves, so the page holds everyone around him, not the writers alone —
+   «رسموا عالمه» (the artists: Ismail Diab, moved here from «رفاق الطريق», Hanan El-Karargy and Tarek Azzam, who drew the books
+   and comics he wrote, and Sameh Samir's farewell cartoon), «أكملوا عالمه» (Sherine Hanaey's Lasheen, out of his «بعد منتصف الليل»;
+   Tamer Ibrahim's script of «الغرفة 207») and «على الشاشة» (who brought him to the screen, as the adaptations on «على الشاشة» name them) */
+(function (A) {
+	var W = A.writers = A.writers || {};
+	var ZOD = 'https://ar.wikipedia.org/wiki/%D8%B2%D9%88%D8%AF%D9%8A%D8%A7%D9%83_(%D9%85%D8%B3%D9%84%D8%B3%D9%84)';
+	var PAR = 'https://en.wikipedia.org/wiki/Paranormal_(TV_series)';
+	var R207 = 'https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D8%BA%D8%B1%D9%81%D8%A9_207_(%D9%85%D8%B3%D9%84%D8%B3%D9%84)';
+	var copy = function (from, name) { return (W[from] || []).filter(function (w) { return (w.name || {}).ar === name; })[0]; };
+	if (W.artists) return;
+	/* the artists: Ismail Diab leaves «رفاق الطريق» for here */
+	var diab = copy('contemporaries', 'إسماعيل دياب');
+	W.contemporaries = (W.contemporaries || []).filter(function (w) { return w !== diab; });
+	var karargy = copy('collaborators', 'حنان الكرارجي'), azzam = copy('collaborators', 'طارق عزام');
+	W.artists = [diab,
+		karargy && Object.assign({}, karargy, { text: { ar: 'رسمت «تأثير الجرادة»، الكتاب المصوّر الذي كتبه العرّاب.', en: 'She drew The Grasshopper Effect, the illustrated book he wrote.' } }),
+		azzam && Object.assign({}, azzam, { text: { ar: 'من رسّامي القصص القصيرة المصوّرة التي كتبها العرّاب لـ«بص وطل» و«إضاءات»، ورسوم مقالاته فيها.', en: 'One of the artists of the short comics he wrote for Bos w Tol and Ida2at, and of the drawings with his articles there.' } }),
+		{ name: { ar: 'سامح سمير', en: 'Sameh Samir' }, work: { ar: 'رسم «وداعًا أحمد خالد توفيق»', en: 'The cartoon “Farewell, Ahmed Khaled Tawfik”' }, year: 2018,
+			text: { ar: 'رسّام كاريكاتير أهدى إلى روحه رسمًا يجري فيه العرّاب ورفعت إسماعيل ليلتقيا بين السحب.', en: 'A cartoonist who dedicated to his memory a drawing of him and Refaat Ismail running to meet in the clouds.' },
+			source: 'https://samehcartoon.com/cartoons' }
+	].filter(Boolean);
+	/* who carried his worlds on */
+	var hanaey = copy('influenced', 'شيرين هنائي');
+	W.continued = [
+		Object.assign({}, hanaey || { name: { ar: 'شيرين هنائي', en: 'Sherine Hanaey' } }, { work: { ar: 'سلسلة «لاشين» ومواسم «بعد منتصف الليل»', en: 'The Lasheen series and the After Midnight seasons' }, year: 2020,
+			text: { ar: 'أعادت البرنامج الإذاعي الذي ابتكره في «أسطورة بعد منتصف الليل» بمواسم مسموعة منذ 2020، ومنها خرجت سلسلة «لاشين» (كتوبيا).', en: 'She brought back the radio show he made up in “The Legend of After Midnight” in audio seasons from 2020, out of which grew the Lasheen series (Kotopia).' },
+			link: { href: 'series.html?id=lasheen', label: { ar: 'سلسلة «لاشين» ←', en: 'The Lasheen series →' } } }),
+		{ name: { ar: 'تامر إبراهيم', en: 'Tamer Ibrahim' }, work: { ar: 'سيناريو «الغرفة 207»', en: 'The screenplay of Room 207' }, year: 2022,
+			text: { ar: 'كتب السيناريو والحوار لمسلسل «الغرفة 207» عن مجموعته «سر الغرفة 207».', en: 'He wrote the screenplay and dialogue of the series Room 207, from his collection The Secret of Room 207.' }, source: R207 }
+	];
+	/* who brought him to the screen */
+	W.screen = [
+		{ name: { ar: 'محمود كامل', en: 'Mahmoud Kamel' }, work: { ar: 'إخراج «زودياك»', en: 'Director of Zodiac' }, year: 2019, text: { ar: 'أخرج «زودياك» (2019)، أول عمل درامي يُقتبس من أعماله.', en: 'He directed Zodiac (2019), the first drama adapted from his work.' }, source: ZOD },
+		{ name: { ar: 'عمرو سلامة', en: 'Amr Salama' }, work: { ar: 'مسلسل «ما وراء الطبيعة» — نتفليكس', en: 'Paranormal, the Netflix series' }, year: 2020, text: { ar: 'صنع مسلسل «ما وراء الطبيعة» وأخرجه، أول مسلسل مصري أصلي على نتفليكس.', en: 'He created and directed Paranormal, Netflix’s first Egyptian original.' }, source: PAR },
+		{ name: { ar: 'ماجد الأنصاري', en: 'Majid Al Ansari' }, work: { ar: 'إخراج مشارك لـ«ما وراء الطبيعة»', en: 'Co-director of Paranormal' }, year: 2020, text: { ar: 'شارك عمرو سلامة إخراج «ما وراء الطبيعة».', en: 'He co-directed Paranormal with Amr Salama.' }, source: PAR },
+		{ name: { ar: 'أحمد أمين', en: 'Ahmed Amin' }, work: { ar: 'رفعت إسماعيل في «ما وراء الطبيعة»', en: 'Refaat Ismail in Paranormal' }, year: 2020, text: { ar: 'أدّى دور رفعت إسماعيل في مسلسل نتفليكس، وقرأ بصوته سيرة العرّاب على Storytel.', en: 'He played Refaat Ismail in the Netflix series, and read the Godfather’s life on Storytel.' }, source: PAR, link: { href: 'character.html?id=refaat', label: { ar: 'رفعت إسماعيل ←', en: 'Refaat Ismail →' } } },
+		{ name: { ar: 'رزان جمال', en: 'Razane Jammal' }, work: { ar: 'ماجي في «ما وراء الطبيعة»', en: 'Maggie in Paranormal' }, year: 2020, text: { ar: 'أدّت دور ماجي في مسلسل نتفليكس.', en: 'She played Maggie in the Netflix series.' }, source: PAR, link: { href: 'character.html?id=maggie', label: { ar: 'ماجي ←', en: 'Maggie →' } } },
+		{ name: { ar: 'محمد بكير', en: 'Mohamed Bakir' }, work: { ar: 'إخراج «الغرفة 207»', en: 'Director of Room 207' }, year: 2022, text: { ar: 'أخرج مسلسل «الغرفة 207» (2022).', en: 'He directed the series Room 207 (2022).' }, source: R207 },
+		{ name: { ar: 'محمد فراج', en: 'Mohamed Farrag' }, work: { ar: 'جمال في «الغرفة 207»', en: 'Gamal in Room 207' }, year: 2022, text: { ar: 'أدّى دور جمال، موظف الاستقبال في فندق الستينيات، في «الغرفة 207».', en: 'He played Gamal, the receptionist of the 1960s hotel, in Room 207.' }, source: R207 }
+	];
+})(window.AKT);

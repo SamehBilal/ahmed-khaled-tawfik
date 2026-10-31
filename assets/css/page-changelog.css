@@ -1,0 +1,29 @@
+/* «سجل التحديثات» (changelog.html, changelog.js) */
+.ph[data-ph="changelog"] { background: radial-gradient(60% 120% at 50% 30%, #22201c 0%, #0b0b0c 72%); }
+.cl-day { position: absolute; top: 50%; left: calc(14% + var(--i) * 11%); width: 80px; height: 92px; margin-top: -46px; border-radius: 8px; background: #efe6d2; box-shadow: 0 12px 24px rgba(0, 0, 0, .5);
+	transform-origin: 50% 0; animation: cl-flip 7.7s var(--d) ease-in-out infinite; overflow: hidden; }
+.cl-day::before { content: ''; display: block; height: 22px; background: var(--ember); }
+.cl-day b { display: block; text-align: center; font-family: var(--f-latin); font-size: 40px; color: #2a1d14; line-height: 64px; }
+@keyframes cl-flip { 0%, 70%, 100% { transform: rotateX(0); opacity: 1; } 80% { transform: rotateX(80deg); opacity: .3; } 90% { transform: rotateX(0); opacity: 1; } }
+@media (max-width: 640px) { .cl-day:nth-child(n+5) { display: none; } .cl-day { left: calc(8% + var(--i) * 22%); } }
+@media (prefers-reduced-motion: reduce) { .cl-day { animation: none; } }
+.cl-sum, .cl-note { color: var(--muted); line-height: 1.9; }
+.cl-note a { color: var(--ember); }
+.cl-bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin: 8px 0 24px; }
+.cl-q { min-width: 240px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--ink-2); color: var(--paper); font: inherit; }
+.cl-q:focus { outline: none; border-color: var(--ember); }
+.cl-month { margin: 0 0 30px; }
+.cl-month h2 { font-family: var(--f-display); font-size: 26px; margin: 0 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+.cl-month h2 small { font-family: var(--f-latin); font-size: 15px; color: var(--ember); }
+.cl-month ol { list-style: none; margin: 0; padding: 0; }
+.cl-month li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px dashed color-mix(in srgb, var(--line) 60%, transparent); }
+.cl-d { font-family: var(--f-latin); font-size: 20px; font-weight: 700; color: var(--ember); text-align: center; }
+.cl-month li p { margin: 0; color: var(--paper-dim); font-size: 14px; line-height: 1.75; text-align: left; font-family: var(--f-latin), sans-serif; }
+.cl-k { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px !important; direction: rtl; text-align: start !important; }
+html[dir="ltr"] .cl-k { direction: ltr; }
+.cl-k span { padding: 1px 8px; border-radius: 999px; font-size: 12px; font-family: var(--f-display); background: color-mix(in srgb, var(--ember) 16%, transparent); color: var(--paper); }
+.cl-k .cl-page { background: color-mix(in srgb, #c9a2e8 25%, transparent); }
+.cl-k .cl-pics { background: color-mix(in srgb, #d9a45a 22%, transparent); }
+.cl-k .cl-audio { background: color-mix(in srgb, #6fb8a8 25%, transparent); }
+.cl-k .cl-fix { background: color-mix(in srgb, #c94a4a 25%, transparent); }
+.cl-more { margin-top: 6px; }

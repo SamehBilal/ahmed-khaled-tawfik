@@ -1,11 +1,11 @@
-/* The writers around him as people: every entry in AKT.writers merged by name, so each person is one
+/* The people around him (writers, artists, those who carried his worlds on and brought them to the screen): every entry in AKT.writers merged by name, so each person is one
    card per shelf and one page (writer.html?id=<id>), with all they did with him in one place.
    Bios are short summaries, each linked to its source (Wikipedia or the author's page on Aseer Al Kotb);
    people the sources do not cover are introduced only by what they did with him. */
 (function () {
 	'use strict';
 
-	var SHELVES = ['collaborators', 'introductions', 'dedications', 'influenced', 'contemporaries', 'translated', 'about'];
+	var SHELVES = ['collaborators', 'introductions', 'dedications', 'influenced', 'contemporaries', 'artists', 'continued', 'screen', 'translated', 'about'];
 	var WP = function (t) { return 'https://ar.wikipedia.org/wiki/' + encodeURIComponent(t.replace(/ /g, '_')); };
 	var EN = function (t) { return 'https://en.wikipedia.org/wiki/' + encodeURIComponent(t.replace(/ /g, '_')); };
 	var AK = function (s) { return 'https://www.aseeralkotb.com/ar/authors/' + encodeURIComponent(s); };
@@ -175,6 +175,9 @@
 			dedications: { ar: 'أهدى إليه', arF: 'أهدت إليه', en: 'Dedicated a book to him', c: '#5a1f3a' },
 			influenced: { ar: 'تأثّر به', arF: 'تأثّرت به', en: 'Influenced by him', c: '#7a5a1c' },
 			contemporaries: { ar: 'رفيق الطريق', arF: 'رفيقة الطريق', en: 'Contemporary', c: '#334155' },
+			artists: { ar: 'رسم عالمه', arF: 'رسمت عالمه', en: 'Drew his world', c: '#6a2c5a' },
+			continued: { ar: 'أكمل عالمه', arF: 'أكملت عالمه', en: 'Carried his world on', c: '#2f5a3a' },
+			screen: { ar: 'على الشاشة', en: 'On screen', c: '#5a3a1c' },
 			translated: { ar: 'ترجم له', en: 'He translated them', c: '#3b3b58' },
 			about: { ar: 'كتب عنه', arF: 'كتبت عنه', en: 'Wrote about him', c: '#6b4a1c' }
 		},

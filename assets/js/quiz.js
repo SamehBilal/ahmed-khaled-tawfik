@@ -1,15 +1,16 @@
-/* quiz.html — «اختبر نفسك»: ten questions drawn from the site's own data each round — a cover and its issue, a quote and its
+/* quiz.html — «ركن القرّاء»: «اختبر نفسك» first (here), then the character quiz, the reader's card and the reading club (corner.js).
+   «اختبر نفسك»: ten questions drawn from the site's own data each round — a cover and its issue, a quote and its
    book, a character and their series, an issue and its series, a book and its year, a description and the character —
    four answers each, the right one shown with a link to its page; then the score, and the score as a picture to share. */
 window.PAGE = {
 	id: 'quiz',
-	title: { ar: 'اختبر نفسك', en: 'Test yourself' },
+	title: { ar: 'ركن القرّاء', en: 'Readers’ corner' },
 	strings: {
-		eyebrow: { ar: 'لعبة', en: 'A game' },
-		title: { ar: 'اختبر نفسك', en: 'Test yourself' },
+		eyebrow: { ar: 'العب واقرأ', en: 'Play and read' },
+		title: { ar: 'ركن القرّاء', en: 'Readers’ corner' },
 		lead: {
-			ar: 'عشرة أسئلة عن عالم العرّاب، تتغيّر في كل جولة: أغلفة واقتباسات وشخصيات وسنوات. كم تعرف؟',
-			en: 'Ten questions on the Godfather’s world, new each round: covers, quotes, characters and years. How much do you know?'
+			ar: 'اختبر معرفتك بعالم العرّاب، واعرف أي شخصياته أنت، وارسم بطاقتك قارئًا، واقرأ معنا كتاب الشهر.',
+			en: 'Test what you know of the Godfather’s world, find which of his characters you are, draw your reader’s card, and read this month’s book with us.'
 		}
 	},
 	ROUND: 10,
@@ -94,7 +95,10 @@ window.PAGE = {
 	render: function () {
 		this.qs = this.round();
 		this.at = 0; this.score = 0;
-		document.getElementById('content').innerHTML = '<section class="section qz"><div class="wrap"><div class="qz-box"></div></div></section>';
+		var L = window.App.L, e = window.App.esc;
+		document.getElementById('content').innerHTML = '<nav class="chips cr-jump wrap"><a class="chip" href="#quiz">' + e(L('اختبر نفسك', 'Test yourself')) + '</a><a class="chip" href="#who">' + e(L('أي شخصية أنت؟', 'Which character are you?')) + '</a><a class="chip" href="#card">' + e(L('بطاقة القارئ', 'Reader’s card')) + '</a><a class="chip" href="#club">' + e(L('اقرأ معنا', 'Read with us')) + '</a></nav>' +
+			'<section class="section qz" id="quiz"><div class="wrap"><h2 class="cr-h">' + e(L('اختبر نفسك', 'Test yourself')) + '</h2><p class="cr-lead">' + e(L('عشرة أسئلة عن عالم العرّاب، تتغيّر في كل جولة: أغلفة واقتباسات وشخصيات وسنوات. كم تعرف؟', 'Ten questions on the Godfather’s world, new each round: covers, quotes, characters and years. How much do you know?')) + '</p><div class="qz-box"></div></div></section><div id="corner"></div>';
+		if (window.Corner) window.Corner.mount(document.getElementById('corner'));
 		var self = this;
 		document.querySelector('.qz-box').addEventListener('click', function (ev) {
 			var b = ev.target.closest('button');
