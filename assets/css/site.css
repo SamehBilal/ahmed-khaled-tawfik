@@ -898,16 +898,13 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 .info-hosts { list-style: none; padding: 0 !important; display: flex; flex-wrap: wrap; gap: 8px; }
 .info-hosts li { margin: 0; padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; font-family: var(--f-latin); font-size: 15px; }
 .info-hosts b { color: var(--ember); font-weight: 600; margin-inline-start: 4px; }
-/* the contact cards, one to a row: the icon, the title over its words, and the button at the end, so the words run wide */
-.info-cards { display: grid; grid-template-columns: 1fr; gap: 14px; }
+/* the contact cards, three to a row across the page's full width (one to a row on a narrow screen) */
+.info-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1000px) { .info-cards { grid-template-columns: 1fr; } }
 .info-cards + .info-sec { margin-top: 44px; padding-top: 32px; border-top: 1px solid var(--line); }
-.info-card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "ic h btn" "ic p btn"; column-gap: 20px; align-items: center; padding: 20px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); }
-.info-card .info-ic { grid-area: ic; align-self: start; margin: 4px 0 0; }
-.info-card h2 { grid-area: h; margin-bottom: 6px; }
-.info-card .buy-btn { grid-area: btn; white-space: nowrap; }
-.info-card h2 { font-size: 22px; }
-.info-card p { grid-area: p; margin: 0; color: var(--paper-dim); }
-@media (max-width: 640px) { .info-card { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "ic h" "p p" "btn btn"; row-gap: 10px; } .info-card .buy-btn { justify-self: start; } }
+.info-card { display: flex; flex-direction: column; align-items: flex-start; padding: 22px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); }
+.info-card h2 { font-size: 22px; margin-bottom: 8px; }
+.info-card p { flex: 1; margin: 0 0 18px; color: var(--paper-dim); }
 .info-ic { font-size: 28px; line-height: 1; color: var(--ember); margin-bottom: 14px; }
 .info-note { margin-top: 22px; color: var(--muted); font-size: .95em; }
 @media (max-width: 860px) {
