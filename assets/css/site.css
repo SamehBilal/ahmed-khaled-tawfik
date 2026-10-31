@@ -869,7 +869,8 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 .info-tabs a { padding: 8px 18px; color: var(--paper-dim); font-family: var(--f-display); border-inline-start: 2px solid transparent; margin-inline-start: -1px; transition: color .2s, border-color .2s; }
 .info-tabs a:hover { color: var(--paper); }
 .info-tabs a[aria-current="page"] { color: var(--ember); border-inline-start-color: var(--ember); }
-.info-body { max-width: 760px; }
+/* the full width of the page beside the menu, as the rest of the site */
+.info-body { min-width: 0; }
 .info-sec + .info-sec { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line); }
 .info-sec h2, .info-card h2 { font-family: var(--f-display); font-size: 26px; margin: 0 0 12px; color: var(--paper); }
 .info-sec p { margin: 0 0 12px; color: var(--paper-dim); }
