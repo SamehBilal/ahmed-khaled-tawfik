@@ -1,16 +1,17 @@
-/* lists.html — the reader's and collector's lists on a page of their own: the same lists as the «My lists» panel
+/* lists.html — «قوائمي ورحلتي»: the reader's journey through his work first (journey.js, #journey; journey.html sends here),
+   then the reader's and collector's lists: the same lists as the «My lists» panel
    (lists.js), here always open — the modes, the lists to drop covers on, the shelf of everything, export and import.
    A shared list (lists.html#share=<list>/<keys>, from a list's share button) shows first, its covers read-only, with a
    button to add them all to the same list of one's own. */
 window.PAGE = {
 	id: 'lists',
-	title: { ar: 'قوائمي', en: 'My lists' },
+	title: { ar: 'قوائمي ورحلتي', en: 'My lists & journey' },
 	strings: {
 		eyebrow: { ar: 'مكتبتك', en: 'Your library' },
-		title: { ar: 'قوائمي', en: 'My lists' },
+		title: { ar: 'قوائمي ورحلتي', en: 'My lists & journey' },
 		lead: {
-			ar: 'ما قرأته وما تنوي قراءته إن كنت قارئًا، وما في مكتبتك وما تبحث عنه إن كنت مقتنيًا. اسحب أي غلاف في الموقع إلى قائمة، أو استعمل أزرار القوائم في صفحة كل كتاب؛ وتبقى القوائم على جهازك.',
-			en: 'What you have read and what you mean to read, as a reader; what is on your shelves and what you are looking for, as a collector. Drag any cover on the site onto a list, or use the list buttons on each book’s page; the lists stay on your device.'
+			ar: 'كم قرأت من عالم العرّاب، دائرةً لكل سلسلة، ثم قوائمك: ما قرأته وما تنوي قراءته إن كنت قارئًا، وما في مكتبتك وما تبحث عنه إن كنت مقتنيًا. اسحب أي غلاف في الموقع إلى قائمة، أو استعمل أزرار القوائم في صفحة كل كتاب؛ وتبقى القوائم على جهازك.',
+			en: 'How much of the Godfather’s world you have read, a ring for each series; then your lists: what you have read and what you mean to read, as a reader; what is on your shelves and what you are looking for, as a collector. Drag any cover on the site onto a list, or use the list buttons on each book’s page; the lists stay on your device.'
 		}
 	},
 
@@ -43,7 +44,9 @@ window.PAGE = {
 	render: function () {
 		var self = this, sh = this.shared();
 		document.getElementById('content').innerHTML = (sh ? '<div id="ls-shared">' + this.sharedHtml(sh) + '</div>' : '') +
-			'<section class="section"><div class="wrap"><div id="ls-page"></div></div></section>';
+			'<div id="journey"></div>' +
+			'<section class="section" id="lists"><div class="wrap"><h2 class="ls-h">' + window.App.L('قوائمي', 'My lists') + '</h2><div id="ls-page"></div></div></section>';
+		if (window.Journey) window.Journey.mount(document.getElementById('journey'));
 		if (window.Lists && window.Lists.mountPage) window.Lists.mountPage(document.getElementById('ls-page'));
 		if (this._wired) return;
 		this._wired = true;

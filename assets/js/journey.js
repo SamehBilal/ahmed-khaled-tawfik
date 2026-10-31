@@ -1,17 +1,9 @@
-/* journey.html — «رحلتي»: the reader's own progress through his work, from their lists (lists.js; on this device only) —
+/* «رحلتي», on the lists page (lists.html#journey, above «قوائمي»): the reader's own progress through his work, from their lists (lists.js; on this device only) —
    a ring for each series and one for his books, how much is read (a collector: owned) and what comes next, the months it
    happened in, and the whole as a picture to share. A reader with empty lists is shown where to begin. */
-window.PAGE = {
-	id: 'journey',
-	title: { ar: 'رحلتي', en: 'My journey' },
-	strings: {
-		eyebrow: { ar: 'من قوائمي', en: 'From my lists' },
-		title: { ar: 'رحلتي', en: 'My journey' },
-		lead: {
-			ar: 'كم قرأت من عالم العرّاب: لكل سلسلة دائرة تمتلئ بما قرأته منها، وما ينتظرك بعدها. كل ذلك من «قوائمي» على جهازك، لا يُرسل إلى أحد.',
-			en: 'How much of the Godfather’s world you have read: a ring for each series, filling as you read, and what comes next. All from “My lists” on your device; nothing is sent anywhere.'
-		}
-	},
+window.Journey = {
+	/* drawn into el (lists.html: #journey, above the lists) */
+	mount: function (el) { this.el = el; this.render(); },
 
 	/* the reader's progress: { mode, done: {key:1}, rows: [{ id, title, color, href, total, n, next }], months: {YYYY-MM: n} } */
 	progress: function () {
@@ -31,15 +23,6 @@ window.PAGE = {
 		return { mode: mode, count: list.length, rows: rows, months: months };
 	},
 
-	/* the band: rings filling and emptying, in the series' colours */
-	band: function (d, A) {
-		var cols = (d.series || []).map(function (s) { return s.color; }).concat(['#7a4e1d']), out = '';
-		cols.forEach(function (c, i) {
-			out += '<svg class="jr-ring" viewBox="0 0 100 100" style="--c:' + A.esc(c || '#e0633a') + ';--x:' + (4 + i * 12.5) + '%;--y:' + (i % 2 ? 52 : 18) + '%;--d:' + (-i * 0.9) + 's"><circle r="40" cx="50" cy="50"/><circle class="v" r="40" cx="50" cy="50" pathLength="100"/></svg>';
-		});
-		return out;
-	},
-
 	ring: function (n, total, color, size) {
 		var p = total ? n / total : 0, r = 40, c = (2 * Math.PI * r);
 		return '<svg class="jr-dial" viewBox="0 0 100 100" width="' + (size || 120) + '" height="' + (size || 120) + '" style="--c:' + window.App.esc(color || '#e0633a') + '">' +
@@ -52,20 +35,20 @@ window.PAGE = {
 		var col = p.mode === 'collector';
 		if (!this._wired) { this._wired = true; document.addEventListener('akt-lists', function () { self.render(); }); }
 		if (!p.count) {
-			document.getElementById('content').innerHTML = '<section class="section jr"><div class="wrap"><div class="jr-empty">' +
+			this.el.innerHTML = '<section class="section jr"><div class="wrap"><div class="jr-empty">' +
 				'<h2>' + e(col ? L('مكتبتك فارغة بعد', 'Your collection is empty so far') : L('لم تبدأ رحلتك بعد', 'Your journey has not begun')) + '</h2>' +
 				'<p>' + e(L('أضف ما قرأته إلى «قرأته» من زر القوائم في صفحة كل عدد أو كتاب، أو اسحب غلافه إلى «قوائمي»، وستمتلئ الدوائر هنا.', 'Add what you have read to “Read” from the list buttons on any issue or book page, or drag its cover onto “My lists”, and the rings here will fill.')) + '</p>' +
-				'<p class="jr-act"><a class="share-btn" href="guide.html">' + e(L('من أين أبدأ؟', 'Start here')) + '</a> <a class="share-btn" href="lists.html">' + e(L('قوائمي', 'My lists')) + '</a></p></div></div></section>';
+				'<p class="jr-act"><a class="share-btn" href="guide.html">' + e(L('من أين أبدأ؟', 'Start here')) + '</a> <a class="share-btn" href="#lists">' + e(L('قوائمي', 'My lists')) + '</a></p></div></div></section>';
 			return;
 		}
 		var started = p.rows.filter(function (r) { return r.n; }), all = p.rows.reduce(function (s, r) { return s + r.total; }, 0), sum = p.rows.reduce(function (s, r) { return s + r.n; }, 0);
 		var months = Object.keys(p.months).sort(), mmax = Math.max.apply(null, months.map(function (m) { return p.months[m]; }).concat([1]));
-		document.getElementById('content').innerHTML = '<section class="section jr"><div class="wrap">' +
+		this.el.innerHTML = '<section class="section jr"><div class="wrap">' +
 			'<div class="jr-head">' + this.ring(sum, all, '#e0633a', 170) +
 				'<div><p class="eyebrow">' + e(col ? L('مكتبتك', 'Your collection') : L('ما قرأته', 'What you have read')) + '</p>' +
 				'<h2>' + e(App.num(sum)) + ' <small>' + e(L('من ', 'of ')) + e(App.num(all)) + '</small></h2>' +
 				'<p>' + e(L('عددًا وكتابًا من سلاسله وكتبه', 'issues and books of his series and books')) + (started.length ? ' · ' + e(L('بدأت ' + App.num(started.length) + ' منها', 'started ' + started.length + ' of them')) : '') + '</p>' +
-				'<p class="jr-act"><button type="button" class="share-btn jr-pic">' + e(L('شارك رحلتك صورةً', 'Share your journey')) + '</button> <a class="share-btn" href="lists.html">' + e(L('قوائمي', 'My lists')) + '</a></p></div></div>' +
+				'<p class="jr-act"><button type="button" class="share-btn jr-pic">' + e(L('شارك رحلتك صورةً', 'Share your journey')) + '</button> <a class="share-btn" href="#lists">' + e(L('قوائمي', 'My lists')) + '</a></p></div></div>' +
 			'<div class="jr-grid">' + p.rows.map(function (r) {
 				return '<article class="jr-card' + (r.n ? '' : ' is-idle') + '">' + self.ring(r.n, r.total, r.color, 96) +
 					'<div><h3><a href="' + e(r.href) + '">' + e(t(r.title)) + '</a></h3>' +
@@ -78,7 +61,7 @@ window.PAGE = {
 			}).join('') + '</div></figure>' : '') +
 			'<p class="jr-note">' + e(L('تُحسب الرحلة من «' + (col ? 'في مكتبتي' : 'قرأته') + '» في «قوائمي»؛ غيّر بين «قارئ» و«مقتنٍ» من هناك.', 'Counted from “' + (col ? 'In my collection' : 'Read') + '” in My lists; switch between Reader and Collector there.')) + '</p>' +
 		'</div></section>';
-		document.querySelector('.jr-pic').onclick = function () { self.picture(p, sum, all); };
+		this.el.querySelector('.jr-pic').onclick = function () { self.picture(p, sum, all); };
 	},
 
 	/* the journey as a 1080×1350 picture: the big ring and a row a series */
