@@ -54,6 +54,8 @@
 			{ href: 'papers.html', ar: 'في الصحف', en: 'In the papers' },
 			{ href: 'numbers.html', ar: 'بالأرقام', en: 'In numbers' },
 			{ href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner' },
+			/* the reader's own lists and journey: the «My lists» button's page, in the footer too */
+			{ href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey' },
 			{ href: 'map.html', ar: 'الخريطة', en: 'The map' },
 			/* and seven more: his books in translation, on screen, every cover, your own journey, the editions, his interviews, his awards */
 			{ href: 'world.html', ar: 'حول العالم', en: 'Around the world' },
