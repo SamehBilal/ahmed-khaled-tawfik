@@ -39,8 +39,13 @@ html .ph[data-ph="changelog"], html[data-theme="light"] .ph[data-ph="changelog"]
 @media (prefers-reduced-motion: reduce) { .dr-strip, .dr-track, .dr-dt { transition: none; } }
 .cl-sum, .cl-note { color: var(--muted); line-height: 1.9; }
 .cl-note a { color: var(--ember); }
-.cl-bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin: 8px 0 24px; }
-.cl-q { min-width: 240px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--ink-2); color: var(--paper); font: inherit; }
+/* the kinds and the search on one row: small chips, and the search taking the room left (on a narrow screen they wrap) */
+.cl-bar { display: flex; flex-wrap: nowrap; gap: 10px; align-items: center; margin: 8px 0 24px; }
+.cl-bar .chips { flex-wrap: nowrap; gap: 6px; flex: none; }
+.cl-bar .chip { padding: 4px 11px; font-size: 13px; white-space: nowrap; }
+.cl-bar .chip b { font-size: 12px; }
+@media (max-width: 900px) { .cl-bar { flex-wrap: wrap; } .cl-bar .chips { flex-wrap: wrap; flex: 1 1 100%; } }
+.cl-q { flex: 1 1 160px; min-width: 140px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--ink-2); color: var(--paper); font: inherit; font-size: 14px; }
 .cl-q:focus { outline: none; border-color: var(--ember); }
 .cl-month { margin: 0 0 30px; }
 .cl-month h2 { font-family: var(--f-display); font-size: 26px; margin: 0 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
