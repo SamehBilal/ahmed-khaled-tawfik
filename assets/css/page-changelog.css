@@ -27,3 +27,7 @@ html[dir="ltr"] .cl-k { direction: ltr; }
 .cl-k .cl-audio { background: color-mix(in srgb, #6fb8a8 25%, transparent); }
 .cl-k .cl-fix { background: color-mix(in srgb, #c94a4a 25%, transparent); }
 .cl-more { margin-top: 6px; }
+.cl-month li p.cl-ar { text-align: start; font-family: inherit; font-size: 15px; color: var(--paper); }
+.cl-en { margin-top: 4px; }
+.cl-en summary { cursor: pointer; font-size: 12px; color: var(--muted); width: max-content; }
+.cl-en p { margin-top: 4px !important; font-size: 13px !important; }

@@ -1,5 +1,5 @@
 /* changelog.html — «سجل التحديثات»: everything added to the site and when, from its history (assets/data/changelog.json,
-   tools/build-changelog.js): a day at a time, newest first, filtered by kind or searched; each change as it was recorded. */
+   tools/build-changelog.js): a day at a time, newest first, filtered by kind or searched; each change in Arabic where it has a line (x.a), with the words it was recorded in under it. */
 window.PAGE = {
 	id: 'changelog',
 	title: { ar: 'سجل التحديثات', en: 'Changelog' },
@@ -35,7 +35,7 @@ window.PAGE = {
 					self.KINDS.filter(function (k) { return count[k[0]]; }).map(function (k) { return '<button type="button" class="chip" data-k="' + k[0] + '" aria-pressed="false">' + e(App.t(k[1])) + ' <b>' + e(App.num(count[k[0]])) + '</b></button>'; }).join('') +
 				'</div><input type="search" class="cl-q" placeholder="' + e(L('ابحث في السجل…', 'Search the log…')) + '"></div>' +
 				'<div class="cl-list"></div>' +
-				'<p class="cl-note">' + e(L('يُكتب السجل بالإنجليزية كما سُجّل في تاريخ الموقع على GitHub.', 'The log is in English, as recorded in the site’s history on GitHub.')) + ' <a href="https://github.com/SamehBilal/ahmed-khaled-tawfik/commits/main" target="_blank" rel="noopener">GitHub ↗</a></p>';
+				'<p class="cl-note">' + e(L('كُتب السجل أولًا بالإنجليزية في تاريخ الموقع على GitHub؛ وتحت كل سطر عربي نصّه الأصلي.', 'The log is written in the site’s history on GitHub, as it was recorded there.')) + ' <a href="https://github.com/SamehBilal/ahmed-khaled-tawfik/commits/main" target="_blank" rel="noopener">GitHub ↗</a></p>';
 			var root = document.querySelector('.cl');
 			root.querySelector('.chips').onclick = function (ev) {
 				var b = ev.target.closest('[data-k]');
@@ -58,7 +58,7 @@ window.PAGE = {
 		var kindName = {}; this.KINDS.forEach(function (k) { kindName[k[0]] = k[1]; });
 		var MONTHS = App.lang === 'en' ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 			: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-		var rows = this.log.filter(function (x) { return (self.kind === 'all' || x.k.indexOf(self.kind) >= 0) && (!self.q || x.s.toLowerCase().indexOf(self.q) >= 0); });
+		var rows = this.log.filter(function (x) { return (self.kind === 'all' || x.k.indexOf(self.kind) >= 0) && (!self.q || (x.s + ' ' + (x.a || '')).toLowerCase().indexOf(self.q) >= 0); });
 		/* a block a day (the site is young: its months are long) */
 		var days = [], by = {};
 		rows.forEach(function (x) { if (!by[x.d]) { by[x.d] = []; days.push(x.d); } by[x.d].push(x); });
@@ -66,7 +66,8 @@ window.PAGE = {
 		if (!rows.length) { box.innerHTML = '<p class="cl-sum">' + e(L('لا شيء يطابق.', 'Nothing matches.')) + '</p>'; return; }
 		box.innerHTML = days.slice(0, this.shown).map(function (dd) {
 			return '<section class="cl-month"><h2>' + e(App.num(+dd.slice(8)) + ' ' + MONTHS[+dd.slice(5, 7) - 1] + ' ' + App.num(dd.slice(0, 4))) + ' <small>' + e(App.num(by[dd].length)) + '</small></h2><ol>' + by[dd].map(function (x) {
-				return '<li><span class="cl-d">•</span><div><p dir="ltr">' + e(x.s) + '</p>' + (x.k.length ? '<p class="cl-k">' + x.k.map(function (k) { return '<span class="cl-' + k + '">' + e(t(kindName[k])) + '</span>'; }).join('') + '</p>' : '') + '</div></li>';
+				var ar = App.lang !== 'en' && x.a;
+				return '<li><span class="cl-d">•</span><div>' + (ar ? '<p class="cl-ar">' + e(x.a) + '</p><details class="cl-en"><summary>' + e(L('النص الأصلي', 'Original')) + '</summary><p dir="ltr">' + e(x.s) + '</p></details>' : '<p dir="ltr">' + e(x.s) + '</p>') + (x.k.length ? '<p class="cl-k">' + x.k.map(function (k) { return '<span class="cl-' + k + '">' + e(t(kindName[k])) + '</span>'; }).join('') + '</p>' : '') + '</div></li>';
 			}).join('') + '</ol></section>';
 		}).join('') + (days.length > this.shown ? '<button type="button" class="share-btn cl-more">' + e(L('أيام أقدم', 'Older days')) + '</button>' : '');
 	}

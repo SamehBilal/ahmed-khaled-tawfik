@@ -1,0 +1,55 @@
+name: إهداء أو ورقة بخطه — A dedication or a page in his hand
+description: أرسل صورة إهداء أو توقيع أو ورقة كتبها أحمد خالد توفيق بيده، لصفحة «بخط يده». Send a photo of a dedication, a signature or a page in his hand.
+title: "بخط يده: "
+labels: ["handwriting"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        شكرًا لك! هذه الصفحة تُنشر في «بخط يده» على موقع العرّاب: https://samehbilal.github.io/ahmed-khaled-tawfik/handwriting.html
+        Thank you! What you send here may go up on the site's «بخط يده» page.
+  - type: input
+    id: name
+    attributes:
+      label: اسمك كما تحب أن يظهر — Your name as you'd like it shown
+      placeholder: اتركه فارغًا إن أردت ألا يُذكر اسمك
+  - type: dropdown
+    id: kind
+    attributes:
+      label: ما الذي ترسله؟ — What are you sending?
+      options:
+        - إهداء على نسختي — A dedication in my copy
+        - توقيع — A signature
+        - قصاصة أو ورقة بخطه — A note or page in his hand
+        - رسالة منه — A letter from him
+    validations:
+      required: true
+  - type: input
+    id: book
+    attributes:
+      label: الكتاب أو العدد — The book or issue
+  - type: input
+    id: when
+    attributes:
+      label: متى وأين؟ — When and where?
+      placeholder: مثال — معرض القاهرة للكتاب، يناير 2014
+  - type: textarea
+    id: story
+    attributes:
+      label: حكاية اليوم — The story of that day
+  - type: textarea
+    id: photos
+    attributes:
+      label: الصور — The photos
+      description: اسحب الصور إلى هنا أو الصقها. Drag or paste the photos here.
+    validations:
+      required: true
+  - type: dropdown
+    id: credit
+    attributes:
+      label: هل نذكر اسمك مع الصورة؟ — May we show your name with it?
+      options:
+        - نعم — Yes
+        - لا، انشرها دون اسمي — No, without my name
+    validations:
+      required: true

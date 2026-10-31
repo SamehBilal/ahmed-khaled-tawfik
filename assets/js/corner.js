@@ -1,6 +1,7 @@
 /* quiz.html, «ركن القرّاء»: after «اختبر نفسك» (quiz.js), three more things to do with his world —
    «أي شخصية أنت؟» (seven questions; the answers lean to one of six of his characters, with a picture to share),
    «بطاقة القارئ» (the reader's first book, favourite book and character, and how much they have read, as a card to share),
+   «صمّم غلافك» (a pocket-book cover with the reader's title, name, number and picture, drawn as they type),
    and «اقرأ معنا» (a book a month, the same for everyone, with questions to talk over). Nothing is sent anywhere. */
 (function () {
 	'use strict';
@@ -82,9 +83,11 @@
 					'<p class="cr-lead">' + esc(L('سبعة أسئلة، وفي آخرها شخصية من عالمه تشبهك.', 'Seven questions, and at the end one of his characters who is like you.')) + '</p><div class="cr-who"></div></div></section>' +
 				'<section class="section cr" id="card"><div class="wrap"><h2 class="cr-h">' + esc(L('بطاقة القارئ', 'Reader’s card')) + '</h2>' +
 					'<p class="cr-lead">' + esc(L('أول ما قرأت له، وأحب كتبه إليك، وشخصيتك المفضلة، في بطاقة تشاركها. لا يُرسل شيء؛ البطاقة تُرسم على جهازك.', 'The first thing of his you read, your favourite book and character, on a card to share. Nothing is sent; the card is drawn on your device.')) + '</p><div class="cr-card"></div></div></section>' +
+				'<section class="section cr" id="cover"><div class="wrap"><h2 class="cr-h">' + esc(L('صمّم غلافك', 'Design your cover')) + '</h2>' +
+					'<p class="cr-lead">' + esc(L('غلاف كتاب جيب على طريقة سلاسله: عنوانك واسمك ورقم العدد وصورتك. لا تُرفع الصورة إلى أي مكان؛ الغلاف يُرسم على جهازك.', 'A pocket-book cover in the manner of his series: your title, your name, an issue number and your picture. The picture goes nowhere; the cover is drawn on your device.')) + '</p><div class="cr-cover"></div></div></section>' +
 				'<section class="section cr" id="club"><div class="wrap"><h2 class="cr-h">' + esc(L('اقرأ معنا', 'Read with us')) + '</h2>' +
 					'<p class="cr-lead">' + esc(L('كتاب كل شهر، الكتاب نفسه لكل القرّاء، وأسئلة تتحدث فيها مع أصدقائك.', 'A book a month, the same one for every reader, with questions to talk over with your friends.')) + '</p><div class="cr-club"></div></div></section>';
-			this.who(); this.card(); this.club();
+			this.who(); this.card(); this.cover(); this.club();
 		},
 
 		/* «أي شخصية أنت؟» */
@@ -147,6 +150,76 @@
 			};
 		},
 
+		/* «صمّم غلافك»: a 780×1200 pocket-book cover drawn as the reader types — the series' band at the top, the issue's number
+		   in its disc, the reader's picture (read from the device, never sent) or a moonlit sky, the title and «بقلم» below */
+		cover: function () {
+			var A = App(), L = A.L, self = this, box = this.el.querySelector('.cr-cover'), pic = null;
+			var LOOKS = {
+				mwt: [L('ما وراء الطبيعة', 'Ma Wara’ al-Tabi’a'), '#0b0b0b', '#a8121b', '#f2c14e'],
+				fantasia: [L('فانتازيا', 'Fantasia'), '#1d1036', '#6b3fa0', '#f6d79a'],
+				safari: [L('سافاري', 'Safari'), '#0f2a1a', '#2f7d3a', '#f4d03f'],
+				own: [L('سلسلتي', 'My series'), '#1a1410', '#e0633a', '#f6d79a']
+			};
+			box.innerHTML = '<div class="cr-cv"><form class="cr-form" autocomplete="off">' +
+				'<label>' + esc(L('عنوان العدد', 'The title')) + '<input name="title" maxlength="60" value="' + esc(L('أسطورة القارئ', 'The Legend of the Reader')) + '"></label>' +
+				'<label>' + esc(L('اسمك', 'Your name')) + '<input name="name" maxlength="40"></label>' +
+				'<label>' + esc(L('رقم العدد', 'Issue number')) + '<input name="n" type="number" min="1" max="999" value="1"></label>' +
+				'<label>' + esc(L('على طريقة', 'In the manner of')) + '<select name="look">' + Object.keys(LOOKS).map(function (k) { return '<option value="' + k + '">' + esc(LOOKS[k][0]) + '</option>'; }).join('') + '</select></label>' +
+				'<label>' + esc(L('اسم سلسلتك', 'Your series’ name')) + '<input name="series" maxlength="30" placeholder="' + esc(L('اتركه لاسم السلسلة', 'Leave it for the series’ name')) + '"></label>' +
+				'<label>' + esc(L('صورة الغلاف', 'Cover picture')) + '<input name="pic" type="file" accept="image/*"></label>' +
+				'<p class="cr-act"><button type="button" class="share-btn" data-act="save">' + esc(L('احفظ الغلاف', 'Save the cover')) + '</button></p></form>' +
+				'<canvas class="cr-cv-art" width="780" height="1200" aria-label="' + esc(L('الغلاف', 'The cover')) + '"></canvas></div>';
+			var form = box.querySelector('form'), c = box.querySelector('canvas'), x = c.getContext('2d');
+			var fonts = document.fonts && document.fonts.load ? Promise.all(['400 90px Lalezar', '600 40px "Reem Kufi"'].map(function (f) { return document.fonts.load(f).catch(function () {}); })) : Promise.resolve();
+			var draw = function () {
+				var f = form.elements, look = LOOKS[f.look.value], rtl = A.lang !== 'en';
+				var bg = look[1], band = look[2], gold = look[3], W = 780, H = 1200;
+				x.direction = rtl ? 'rtl' : 'ltr'; x.textAlign = 'center';
+				x.fillStyle = bg; x.fillRect(0, 0, W, H);
+				/* the picture, filling its window */
+				x.save(); x.beginPath(); x.rect(30, 180, W - 60, 760); x.clip();
+				if (pic) {
+					var k = Math.max((W - 60) / pic.width, 760 / pic.height), pw = pic.width * k, ph = pic.height * k;
+					x.drawImage(pic, W / 2 - pw / 2, 560 - ph / 2, pw, ph);
+				} else {
+					var g = x.createLinearGradient(0, 180, 0, 940); g.addColorStop(0, band); g.addColorStop(1, bg);
+					x.fillStyle = g; x.fillRect(30, 180, W - 60, 760);
+					x.fillStyle = 'rgba(255,240,200,.85)'; x.beginPath(); x.arc(520, 400, 110, 0, Math.PI * 2); x.fill();
+					x.fillStyle = bg; x.beginPath(); x.moveTo(30, 940); x.lineTo(30, 800); x.lineTo(160, 760); x.lineTo(230, 640); x.lineTo(300, 760); x.lineTo(420, 700); x.lineTo(560, 820); x.lineTo(W - 30, 760); x.lineTo(W - 30, 940); x.fill();
+				}
+				var sh = x.createLinearGradient(0, 700, 0, 940); sh.addColorStop(0, 'rgba(0,0,0,0)'); sh.addColorStop(1, bg);
+				x.fillStyle = sh; x.fillRect(30, 700, W - 60, 240);
+				x.restore();
+				/* the band, the number's disc, the frame */
+				x.fillStyle = band; x.fillRect(0, 0, W, 170);
+				var series = f.series.value.trim() || look[0];
+				x.fillStyle = gold; x.font = '400 ' + fitSize(series, 640, 92, 'Lalezar, sans-serif') + 'px Lalezar, sans-serif'; x.fillText(series, W / 2, 112);
+				x.fillStyle = '#fff'; x.font = '600 26px "Reem Kufi", sans-serif'; x.fillText(L('قصص للجيب', 'Pocket stories'), W / 2, 152);
+				var nx = rtl ? 100 : W - 100;
+				x.fillStyle = gold; x.beginPath(); x.arc(nx, 262, 62, 0, Math.PI * 2); x.fill();
+				x.fillStyle = bg; x.font = '400 64px Lalezar, sans-serif'; x.fillText(A.num(Math.max(1, +f.n.value || 1)), nx, 286);
+				/* the title and the pen */
+				var title = f.title.value.trim() || L('بلا عنوان', 'Untitled');
+				x.fillStyle = gold; x.font = '400 ' + fitSize(title, 700, 110, 'Lalezar, sans-serif') + 'px Lalezar, sans-serif';
+				x.shadowColor = 'rgba(0,0,0,.7)'; x.shadowBlur = 18; x.fillText(title, W / 2, 1040); x.shadowBlur = 0;
+				x.fillStyle = '#efe6d2'; x.font = '600 38px "Reem Kufi", sans-serif'; x.fillText(L('بقلم: ', 'by ') + (f.name.value.trim() || L('قارئ العرّاب', 'a reader of the Godfather')), W / 2, 1110);
+				x.fillStyle = 'rgba(239,230,210,.55)'; x.font = '400 18px Georgia, serif'; x.direction = 'ltr'; x.fillText('samehbilal.github.io/ahmed-khaled-tawfik', W / 2, 1172);
+				x.strokeStyle = gold; x.lineWidth = 6; x.strokeRect(14, 14, W - 28, H - 28);
+			};
+			var fitSize = function (s, max, size, fam) { var f = size; do { x.font = '400 ' + f + 'px ' + fam; f -= 2; } while (x.measureText(s).width > max && f > 24); return f + 2; };
+			form.addEventListener('input', function (ev) {
+				if (ev.target.name !== 'pic') return draw();
+				var file = ev.target.files && ev.target.files[0];
+				if (!file) { pic = null; return draw(); }
+				var img = new Image();
+				img.onload = function () { pic = img; draw(); };
+				img.src = URL.createObjectURL(file);
+			});
+			box.querySelector('[data-act="save"]').onclick = function () { self.save(c, 'akt-my-cover.png'); };
+			fonts.then(draw);
+			draw();
+		},
+
 		/* «اقرأ معنا»: this month's book, its questions, and the year ahead */
 		club: function () {
 			var A = App(), t = A.t, L = A.L, box = this.el.querySelector('.cr-club'), Ls = window.Lists;
@@ -185,7 +258,7 @@
 
 		/* a 1080×1350 picture in the night look of the quiz's: lines = [eyebrow, big, line] (who) or [name, first, fav, character, count] (card) */
 		picture: function (kind, lines, img) {
-			var A = App(), L = A.L, rtl = A.lang !== 'en';
+			var A = App(), L = A.L, rtl = A.lang !== 'en', self = this;
 			var c = document.createElement('canvas'); c.width = 1080; c.height = 1350;
 			var x = c.getContext('2d');
 			var pic = new Image(), ready = new Promise(function (res) { if (!img) return res(); pic.onload = res; pic.onerror = function () { img = ''; res(); }; pic.src = img; });
@@ -219,12 +292,17 @@
 				}
 				text('العرّاب', 1210, '400 48px Lalezar, sans-serif', '#e0633a');
 				text('samehbilal.github.io/ahmed-khaled-tawfik/quiz.html', 1262, '400 24px "Cormorant Garamond", Georgia, serif', '#c9b48e', 'ltr');
-				c.toBlob(function (blob) {
-					var name = kind === 'who' ? 'akt-character.png' : 'akt-reader-card.png', file = new File([blob], name, { type: 'image/png' });
-					if (navigator.canShare && navigator.canShare({ files: [file] })) navigator.share({ files: [file] }).catch(function () {});
-					else { var a = document.createElement('a'); a.download = name; a.href = URL.createObjectURL(blob); a.click(); }
-				}, 'image/png');
+				self.save(c, kind === 'who' ? 'akt-character.png' : 'akt-reader-card.png');
 			});
+		},
+
+		/* a drawn picture, shared where the device can share files, else saved */
+		save: function (c, name) {
+			c.toBlob(function (blob) {
+				var file = new File([blob], name, { type: 'image/png' });
+				if (navigator.canShare && navigator.canShare({ files: [file] })) navigator.share({ files: [file] }).catch(function () {});
+				else { var a = document.createElement('a'); a.download = name; a.href = URL.createObjectURL(blob); a.click(); }
+			}, 'image/png');
 		}
 	};
 	window.Corner = Corner;

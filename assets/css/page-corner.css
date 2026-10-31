@@ -38,3 +38,11 @@
 	.cr-month-cover { flex-basis: auto; width: 140px; }
 	.cr-act { justify-content: center; }
 }
+/* «صمّم غلافك» */
+.cr-cover { max-width: 860px; padding: 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--ink-2); }
+.cr-cv { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 24px; align-items: start; }
+.cr-cv .cr-form { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.cr-cv .cr-form input { min-width: 0; }
+.cr-cv .cr-form input[type="file"] { padding: 7px; font-size: 13px; }
+.cr-cv-art { width: 100%; height: auto; border-radius: 4px 10px 10px 4px; box-shadow: 0 16px 32px rgba(0, 0, 0, .5); }
+@media (max-width: 900px) { .cr-cv { grid-template-columns: minmax(0, 1fr); } .cr-cv-art { max-width: 300px; margin: 0 auto; } }
