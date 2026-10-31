@@ -64,7 +64,7 @@
 		contact: function (d, A) {
 			var h = '';
 			for (var i = 0; i < 11; i++) {
-				h += '<i class="ph-env" style="--y:' + (8 + rnd(i, 7) * 72).toFixed(0) + '%;--s:' + (0.55 + rnd(i, 8) * 0.8).toFixed(2) + ';--t:' + (16 + rnd(i, 9) * 16).toFixed(0) + 's;--d:' + (-rnd(i, 10) * 30).toFixed(1) + 's;--r:' + ((rnd(i, 11) - 0.5) * 30).toFixed(0) + 'deg"><b></b></i>';
+				h += '<i class="ph-env" style="--y:' + (8 + rnd(i, 7) * 72).toFixed(0) + '%;--s:' + (0.55 + rnd(i, 8) * 0.8).toFixed(2) + ';--t:' + (16 + rnd(i, 9) * 16).toFixed(0) + 's;--d:' + (-rnd(i, 10) * 30).toFixed(1) + 's;--r:' + ((rnd(i, 11) - 0.5) * 30).toFixed(0) + 'deg"></i>';
 			}
 			return '<div class="ph-stars"></div>' + h + '<div class="ph-stamp">' + A.esc(A.L('بريد القرّاء', 'Readers\' mail')) + '</div>';
 		},
