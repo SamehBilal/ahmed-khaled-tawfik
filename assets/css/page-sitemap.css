@@ -3,7 +3,8 @@
 html .ph[data-ph="sitemap"], html[data-theme="light"] .ph[data-ph="sitemap"] { background: transparent; border-bottom: 0; }
 .ph[data-ph="sitemap"]::after { display: none; }
 /* the ropes (sitemap-page.js, ropes): the main pages hanging from the top, their pages from them */
-.sm-ropes { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; }
+/* as wide as the page's content (.wrap), not the whole window */
+.sm-ropes { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: min(1180px, 100% - 32px); height: 100%; display: block; cursor: grab; touch-action: pan-y; }
 /* the tree, after G. Norman's CodePen sitemap: a tall numbered tile per main page, its pages in tiles under it, the pages made
    one per thing in lighter tiles; the tiles sit close, rounded like the rest of the site, and rise in one after another */
 .sm-tree { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; align-items: start; }
