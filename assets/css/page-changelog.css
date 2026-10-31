@@ -1,12 +1,11 @@
 /* «سجل التحديثات» (changelog.html, changelog.js) */
 /* the band: «Date Ruler» (changelog.js, band and ruler), after Paul Troshkin's pen — a card with the weekday and the year,
-   the date on reels, and three rulers under a needle; the band grows to hold it, in the site's colours in either theme */
-.ph[data-ph="changelog"] { height: auto; }
+   the date on reels, and three rulers under a needle; no card and no band of its own: it sits on the page, in the page's
+   colours in either theme, with no line under it */
+html .ph[data-ph="changelog"], html[data-theme="light"] .ph[data-ph="changelog"] { height: auto; background: transparent; border-bottom: 0; --ph-ink: var(--paper); --ph-dim: var(--muted); }
 .ph[data-ph="changelog"]::after { display: none; }
 .ph[data-ph="changelog"] .ph-stage { position: relative; display: grid; place-items: center; padding: 28px 16px; }
-.dr-card { display: grid; gap: 4px; width: min(520px, 100%); padding: 22px 0 16px; border-radius: 28px; color: var(--ph-ink);
-	background: color-mix(in srgb, var(--ph-ink) 7%, transparent); border: 1px solid color-mix(in srgb, var(--ph-ink) 10%, transparent);
-	box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ph-ink) 6%, transparent), 0 10px 30px rgba(0, 0, 0, .3); }
+.dr-card { display: grid; gap: 4px; width: min(620px, 100%); padding: 10px 0 0; color: var(--ph-ink); }
 .dr-meta, .dr-date { display: flex; align-items: center; justify-content: space-between; margin: 0; padding: 0 26px; }
 .dr-meta { font-family: var(--f-display); font-size: 17px; color: var(--ph-dim); }
 .dr-years { display: flex; font-family: var(--f-latin); font-size: 20px; font-weight: 600; }
