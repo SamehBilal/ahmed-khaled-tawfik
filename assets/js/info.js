@@ -188,7 +188,9 @@
 
 			if (id === 'contact') {
 				var card = function (icon, h, p, href, btn) {
-					return '<div class="info-card"><span class="info-ic" aria-hidden="true">' + icon + '</span><h2>' + h + '</h2><p>' + p + '</p>' +
+					/* an airmail envelope: the striped edge is the card's border (site.css), and this the flap and the folds behind the words */
+					return '<div class="info-card"><svg class="info-flap" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">' +
+						'<path class="info-flap-top" d="M0 0 L44 46 Q50 52 56 46 L100 0 Z"/><path d="M0 100 L42 50 M100 100 L58 50"/></svg><span class="info-ic" aria-hidden="true">' + icon + '</span><h2>' + h + '</h2><p>' + p + '</p>' +
 						'<a class="buy-btn" href="' + e(href) + '"' + (/^mailto:/.test(href) ? '' : ' target="_blank" rel="noopener"') + '>' + btn + '</a></div>';
 				};
 				var mailto = function (subject, body) { return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + (body ? '&body=' + encodeURIComponent(body) : ''); };
