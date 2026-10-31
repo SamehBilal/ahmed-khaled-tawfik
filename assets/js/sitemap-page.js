@@ -1,6 +1,7 @@
-/* sitemap.html — «خريطة الموقع»: every page in one place, from the same lists the header and footer are built from (App.UI),
-   then the pages made one per series, issue, book, character and person, with how many there are — counted as sitemap.xml
-   counts them (tools/build-sitemap.js) — and a link to sitemap.xml. */
+/* sitemap.html — «خريطة الموقع», drawn as G. Norman's CodePen sitemap draws one (codepen.io/g-norman/pen/RwwgmWy): a tall numbered
+   tile for each main page, the pages that belong to it in tiles under it, and in lighter tiles the pages made one per series,
+   issue, book, character and person with how many there are — counted as sitemap.xml counts them (tools/build-sitemap.js);
+   the tiles rise in one after another. Names come from the lists the header and footer are built from (App.UI). */
 window.PAGE = {
 	id: 'sitemap',
 	title: { ar: 'خريطة الموقع', en: 'Site map' },
@@ -21,39 +22,49 @@ window.PAGE = {
 	},
 
 	render: function () {
-		var App = window.App, d = App.data(), S = window.WorksShared, e = App.esc, t = App.t, L = App.L, UI = App.UI;
-		var link = function (n) { return '<li><a href="' + e(n.href) + '">' + e(n[App.lang === 'en' ? 'en' : 'ar']) + '</a></li>'; };
-		var seen = {}, once = function (list) { return list.filter(function (n) { if (seen[n.href]) return false; seen[n.href] = 1; return true; }); };
-		var main = once(UI.nav.filter(function (n) { return !n.phone; }).concat(UI.more.filter(function (n) { return n.main; })));
-		var world = once(UI.world), more = once(UI.more.filter(function (n) { return !n.main; }).concat(UI.nav.filter(function (n) { return n.phone; }))), legal = once(UI.legal);
+		var App = window.App, d = App.data(), S = window.WorksShared, e = App.esc, L = App.L, UI = App.UI;
+		/* every page the header and footer know, by its address, so a name here is the name there */
+		var page = {};
+		UI.nav.concat(UI.more, UI.world, UI.legal).forEach(function (n) { if (!page[n.href]) page[n.href] = n; });
+		var name = function (href) { return (page[href] || {})[App.lang === 'en' ? 'en' : 'ar'] || href; };
 		/* the pages made one per thing, counted as tools/build-sitemap.js counts them for sitemap.xml */
-		var asLink = function (s) { return { href: S.seriesHref(s.id), ar: s.title.ar, en: s.title.en }; };
-		var own = S.ownSeries(), wrote = S.contributedSeries(), issues = 0, books = 0;
-		var seen2 = {};
-		own.concat(wrote).forEach(function (s) { S.seriesIssues(s.id).forEach(function (is, i) { issues++; seen2[App.issueHref(s.id, Object.assign({ _idx: i }, is))] = 1; }); });
+		var own = S.ownSeries(), wrote = S.contributedSeries(), issues = 0, books = 0, seen = {};
+		own.concat(wrote).forEach(function (s) { S.seriesIssues(s.id).forEach(function (is, i) { issues++; seen[App.issueHref(s.id, Object.assign({ _idx: i }, is))] = 1; }); });
 		/* a book that is also an issue (as «دماغي كده») has one page, counted once */
-		(d.works || []).map(function (w) { return App.workHref(w.id); }).concat(S.entryBooks().map(function (x) { return S.entryBookHref(x.w); })).forEach(function (h) { if (!seen2[h]) { seen2[h] = 2; books++; } });
-		var people = window.People ? window.People.all().length : 0;
-		var block = function (title, list, note) { return '<section class="sm-block"><h2>' + e(title) + '</h2>' + (note ? '<p>' + e(note) + '</p>' : '') + '<ul>' + list.map(link).join('') + '</ul></section>'; };
-		var counts = [
-			[own.length + wrote.length, L('سلسلة: سلاسله والسلاسل التي كتب فيها', 'series: his own and those he wrote for'), 'works.html'],
-			[issues, L('عددًا من أعداد السلاسل', 'issues of the series'), 'works.html'],
-			[books, L('كتابًا خارج السلاسل، منها كتب عنه ومقدماته', 'books outside the series, with the books about him and his forewords'), 'works.html'],
-			[(d.characters || []).filter(function (c) { return App.charHasPage(c.id); }).length, L('من أبطاله لكل منهم صفحة، بين ' + App.num((d.characters || []).length) + ' شخصية', 'of his leads with a page, among ' + (d.characters || []).length + ' characters'), 'characters.html'],
-			[people, L('اسمًا من دائرته', 'people in his circle'), 'writers.html'],
-			[S.publishers().length, L('دار نشر ومنصة', 'publishers and platforms'), 'publishers.html'],
-			[((d.blog || {}).posts || []).length || (d.stats || {}).posts, L('مقالًا في المدونة', 'articles in the blog'), 'blog.html']
-		].filter(function (x) { return x[0]; });
-		document.getElementById('content').innerHTML = '<section class="section sm"><div class="wrap"><div class="sm-grid">' +
-			block(L('الصفحات الرئيسية', 'The main pages'), main) +
-			block(L('عالم العرّاب', 'The Godfather’s world'), world) +
-			block(L('اكتشف أكثر', 'Discover more'), more) +
-			block(L('خلف الكواليس', 'Behind the site'), legal) +
-			block(L('سلاسله', 'His series'), own.map(asLink)) +
-			(wrote.length ? block(L('سلاسل كتب فيها', 'Series he wrote for'), wrote.map(asLink)) : '') +
-			'</div><h2 class="sm-h">' + e(L('صفحات كثيرة، واحدة لكل…', 'Many pages, one for each…')) + '</h2><div class="sm-counts">' + counts.map(function (x) {
-				return '<a href="' + e(x[2]) + '"><b>' + e(App.num(x[0])) + '</b><span>' + e(x[1]) + '</span></a>';
-			}).join('') + '</div>' +
+		(d.works || []).map(function (w) { return App.workHref(w.id); }).concat(S.entryBooks().map(function (x) { return S.entryBookHref(x.w); })).forEach(function (h) { if (!seen[h]) { seen[h] = 1; books++; } });
+		var chars = (d.characters || []).filter(function (c) { return App.charHasPage(c.id); }).length;
+		/* the tree, as the CodePen sitemap draws it: a tall numbered tile for each main page, under it the pages that belong to
+		   it, and in a lighter tile the pages made one per thing, with how many */
+		var TREE = [
+			['index.html', ['guide.html']],
+			['works.html', ['covers.html', 'translations.html', 'world.html', 'screen.html'], [[own.length + wrote.length, L('صفحة سلسلة', 'series pages')], [issues, L('صفحة عدد', 'issue pages')], [books, L('صفحة كتاب', 'book pages')]]],
+			['characters.html', ['glossary.html', 'creatures.html', 'refaat-life.html', 'network.html'], [[chars, L('صفحة بطل', 'lead’s pages')]]],
+			['writers.html', ['publishers.html', 'library.html'], [[window.People ? window.People.all().length : 0, L('صفحة اسم من دائرته', 'pages of his circle')], [S.publishers().length, L('صفحة دار نشر', 'publisher pages')]]],
+			['quotes.html', []],
+			['audio.html', []],
+			['legacy.html', ['talks.html', 'awards.html', 'tanta.html', 'handwriting.html', 'map.html']],
+			['tributes.html', []],
+			['blog.html', ['papers.html', 'style.html', 'numbers.html'], [[((d.blog || {}).posts || []).length || (d.stats || {}).posts, L('مقال', 'articles')]]],
+			['quiz.html', ['lists.html']],
+			['about.html', UI.legal.map(function (n) { return n.href; }).filter(function (h) { return h !== 'about.html'; })]
+		];
+		/* a page the header or footer gains later and the tree does not place yet still shows, in the last column */
+		var placed = {};
+		TREE.forEach(function (c) { placed[c[0]] = 1; c[1].forEach(function (h) { placed[h] = 1; }); });
+		var rest = Object.keys(page).filter(function (h) { return !placed[h]; });
+		if (rest.length) TREE[TREE.length - 1][1] = TREE[TREE.length - 1][1].concat(rest);
+		var k = 0, tile = function (cls, href, inner) { return '<a class="sm-item ' + cls + '" href="' + e(href) + '" style="--i:' + (k++) + '">' + inner + '</a>'; };
+		var cols = TREE.map(function (c, i) {
+			return '<div class="sm-col">' + tile('sm-main', c[0], '<span class="sm-n">' + e(App.num(('0' + (i + 1)).slice(-2))) + '</span><span class="sm-p">' + e(name(c[0])) + '</span>') +
+				c[1].map(function (h) { return tile('sm-sub', h, '<span class="sm-p">' + e(name(h)) + '</span>'); }).join('') +
+				(c[2] || []).filter(function (x) { return x[0]; }).map(function (x) { return tile('sm-one', c[0], '<span class="sm-p"><b>' + e(App.num(x[0])) + '</b> ' + e(x[1]) + '</span>'); }).join('') + '</div>';
+		}).join('');
+		var row = function (title, list) {
+			return '<h2 class="sm-h">' + e(title) + '</h2><div class="sm-row">' + list.map(function (s) { return tile('sm-one', S.seriesHref(s.id), '<span class="sm-p">' + e(App.t(s.title)) + '</span>'); }).join('') + '</div>';
+		};
+		document.getElementById('content').innerHTML = '<section class="section sm"><div class="wrap">' +
+			'<div class="sm-tree">' + cols + '</div>' +
+			row(L('سلاسله', 'His series'), own) + (wrote.length ? row(L('سلاسل كتب فيها', 'Series he wrote for'), wrote) : '') +
 			'<p class="sm-xml">' + e(L('ولمحركات البحث: ', 'And for search engines: ')) + '<a href="sitemap.xml" dir="ltr">sitemap.xml</a>' + e(L('، فيها كل هذه العناوين مع أغلفتها.', ', with all these addresses and their covers.')) + '</p></div></section>';
 	}
 };
