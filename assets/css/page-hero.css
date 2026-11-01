@@ -16,33 +16,90 @@ html[data-theme="light"] .ph { --ph-bg: #1c1712; border-bottom-color: rgba(0, 0,
 	background: linear-gradient(90deg, var(--ph-bg) 0, transparent 9%, transparent 91%, var(--ph-bg) 100%); }
 @media (max-width: 640px) { .ph { height: 250px; } }
 
-/* ---------- about: the investigator's board ---------- */
-/* no line under it: the dark fades down into the page */
-.ph[data-ph="about"] { border-bottom: 0; background: radial-gradient(80% 120% at 50% 10%, #3a2a1c 0%, #1c140d 60%, #120d09 100%); }
-.ph[data-ph="about"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; z-index: 6; pointer-events: none;
+/* ---------- about: five panels that open ---------- */
+/* After Nikolay Talanov's «Cool Layout with Complex Chainable Animation» on CodePen (assets/js/page-hero.js draws and wires it):
+   five panels, each the site's number over its own picture, rising in one after another (the pen slices one wide picture
+   across them; here each panel has its own, whole, and it widens with the panel); a hover dims the others and lifts the panel's number
+   from below; opened, a panel first slides to the start, then spreads across the row while the rest shrink away, and its words
+   come in. No line under the band: the dark fades down into the page */
+.ph[data-ph="about"] { height: 420px; border-bottom: 0; background: radial-gradient(80% 120% at 50% 10%, #3a2a1c 0%, #1c140d 60%, #120d09 100%); }
+.ph[data-ph="about"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 24px; z-index: 6; pointer-events: none;
 	background: linear-gradient(transparent, var(--ink)); }
-.ph[data-ph="about"] + .page-hero { padding-top: 36px; }
-.ph[data-ph="about"] .ph-stage { inset: 30px 6% 40px; }
-.ph-thread { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.ph-thread polyline { fill: none; stroke: #c0392b; stroke-width: 2px; vector-effect: non-scaling-stroke; opacity: .85; }
-.ph-card {
-	position: absolute; width: 132px; padding: 22px 12px 14px; margin: -14px 0 0 -66px; text-align: center;
-	background: #f1e7cf; color: #2a2118; border-radius: 2px; box-shadow: 0 12px 22px rgba(0, 0, 0, .45);
-	transform: rotate(var(--r)); animation: ph-sway 7s ease-in-out infinite var(--d); transform-origin: 50% 0;
-	background-image: repeating-linear-gradient(transparent 0 21px, rgba(60, 110, 170, .25) 21px 22px);
+.ph[data-ph="about"]::after { display: none; }
+.ph[data-ph="about"] + .page-hero { padding-top: 30px; }
+.ab { --gap: 1cqw; --w: calc((100cqw - (var(--n) - 1) * var(--gap)) / var(--n)); --ab-ink: #f3ead7; --ab-back: #3a2b20;
+	position: absolute; inset: 26px max(5%, 16px) 84px; container-type: inline-size; }
+.ab-el { --x: calc(var(--i) * (var(--w) + var(--gap)));
+	position: absolute; top: 0; inset-inline-start: var(--x); width: var(--w); height: 100%; background: #1d1611; border-radius: 6px; outline: none;
+	transition: inset-inline-start .6s .7s, width .7s, opacity .6s .7s, transform .6s .7s, z-index 0s 1.3s; }
+.ab-el:not(.s--active) { cursor: pointer; }
+.ab-el:focus-visible { box-shadow: 0 0 0 2px var(--ember); }
+.ab-overflow { overflow: hidden; position: relative; height: 100%; border-radius: inherit; }
+.ab-inner { overflow: hidden; position: relative; height: 100%; transition: transform 1s calc(var(--i) * .1s); }
+.ab.s--inactive .ab-inner { transform: translate3d(0, 100%, 0); }
+/* the picture, the panel's own */
+.ab-bg { position: absolute; inset: 0; }
+.ab-bg::before { content: ''; position: absolute; left: 0; top: -5%; width: 100%; height: 110%; background: var(--img) center 28% / cover;
+	filter: brightness(.55) saturate(.9); transform: translate3d(0, 0, 0) scale(1); transition: transform 1s calc(var(--i) * .1s); }
+.ab.s--inactive .ab-bg::before { transform: translate3d(0, -100%, 0) scale(1.2); }
+.ab-bg::after { content: ''; position: absolute; inset: 0; z-index: 1; background: rgba(0, 0, 0, .45); opacity: 0; transition: opacity .5s; }
+.ab:hover .ab-bg::after { opacity: 1; }
+.ab .ab-el:hover .ab-bg::after { opacity: 0; }
+.ab.s--el-active .ab-bg::after { opacity: 1 !important; transition: opacity .5s 1.4s; }
+/* its name in the middle */
+.ab-preview { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; padding: 0 8px; text-align: center;
+	transition: all .3s 1.2s; }
+.ab.s--inactive .ab-preview { opacity: 0; transform: translateY(10px); }
+.ab.s--el-active .ab-preview { opacity: 0; transform: translateY(30px); transition: all .5s; }
+.ab-heading { margin: 0; color: #fff; font-family: var(--f-display); font-size: 20px; font-weight: 400; text-shadow: 0 2px 10px rgba(0, 0, 0, .6); }
+/* opened: the number, what it counts, and the way there */
+.ab-content { position: absolute; inset: 0; z-index: -1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px;
+	padding: 28px 40px; color: #fff; opacity: 0; pointer-events: none; transition: all .1s; }
+.ab-el.s--active .ab-content { z-index: 2; opacity: 1; pointer-events: auto; transition: all .5s 1.4s; }
+.ab-num { font-family: var(--f-latin); font-size: clamp(54px, 9cqw, 96px); line-height: .9; color: var(--ember); }
+.ab-text { max-width: 560px; margin: 0; font-size: 18px; line-height: 1.6; color: rgba(255, 255, 255, .88); }
+.ab-text span { display: block; font-family: var(--f-display); font-size: 26px; color: #fff; }
+.ab-go { margin-top: 6px; padding: 6px 16px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 999px; color: #fff; font-size: 15px; text-decoration: none; }
+.ab-go:hover, .ab-go:focus-visible { background: var(--ember); border-color: var(--ember); outline: none; }
+/* the cross: two bars that slide in one after the other */
+.ab-close { position: absolute; top: 14px; inset-inline-end: 14px; z-index: -1; width: 40px; height: 40px; padding: 0; border: 0; background: none; opacity: 0;
+	pointer-events: none; cursor: pointer; transition: all 0s .45s; }
+.ab-el.s--active .ab-close { z-index: 5; opacity: 1; pointer-events: auto; transition: all 0s 1.4s; }
+.ab-close:focus-visible { outline: 2px solid var(--ember); outline-offset: 4px; }
+.ab-close::before, .ab-close::after { content: ''; position: absolute; left: 0; top: 50%; width: 100%; height: 5px; margin-top: -2.5px; border-radius: 3px; background: #fff;
+	opacity: 0; transition: opacity 0s; }
+.ab-el.s--active .ab-close::before, .ab-el.s--active .ab-close::after { opacity: 1; }
+.ab-close::before { transform: rotate(45deg) translateX(100%); }
+.ab-close::after { transform: rotate(-45deg) translateX(100%); }
+.ab-el.s--active .ab-close::before { transform: rotate(45deg) translateX(0); transition: all .3s 1.4s cubic-bezier(.72, .09, .32, 1.57); }
+.ab-el.s--active .ab-close::after { transform: rotate(-45deg) translateX(0); transition: all .3s 1.55s cubic-bezier(.72, .09, .32, 1.57); }
+/* the number under each panel: its shadow shows on a hover, and the number itself rises into place */
+.ab-index { overflow: hidden; position: absolute; left: 0; bottom: -84px; width: 100%; height: 100%; min-height: 160px; pointer-events: none; text-align: center;
+	font-family: var(--f-latin); font-size: clamp(34px, 6cqw, 84px); font-weight: 700; line-height: .85;
+	transform: translate3d(0, 1cqw, 0); transition: transform .5s, opacity .3s 1.4s; }
+.ab-el:hover .ab-index, .ab-el:focus-visible .ab-index { transform: translate3d(0, 0, 0); }
+.ab.s--el-active .ab-index { opacity: 0; transition: transform .5s, opacity .3s; }
+.ab-index-back, .ab-index-front { position: absolute; left: 0; bottom: 22px; width: 100%; } /* (above the fade at the band's foot) */
+.ab-index-back { color: var(--ab-back); opacity: 0; transition: opacity .25s .25s; }
+.ab-el:hover .ab-index-back, .ab-el:focus-visible .ab-index-back { opacity: 1; transition: opacity .25s; }
+.ab-index-overlay { overflow: hidden; position: relative; color: transparent; transform: translate3d(0, 100%, 0); transition: transform .5s .1s; }
+.ab-index-overlay::before { content: attr(data-index); position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; color: var(--ab-ink);
+	transform: translate3d(0, -100%, 0); transition: transform .5s .1s; }
+.ab-el:hover .ab-index-overlay, .ab-el:hover .ab-index-overlay::before,
+.ab-el:focus-visible .ab-index-overlay, .ab-el:focus-visible .ab-index-overlay::before { transform: translate3d(0, 0, 0); }
+/* opened: it slides to the start, then spreads; the others shrink away */
+.ab.s--el-active .ab-el:not(.s--active) { transform: scale(.5); opacity: 0; transition: transform 1.05s, opacity 1.05s; }
+.ab-el.s--active { z-index: 1; inset-inline-start: 0; width: 100cqw; transition: inset-inline-start .6s, width .7s .7s, z-index 0s; }
+.ab-el.s--active .ab-bg::before { transform: scale(1.1); transition: transform .8s .6s; }
+@media (max-width: 760px) {
+	.ph[data-ph="about"] { height: 360px; }
+	.ab { inset: 20px 16px 64px; }
+	.ab-index { bottom: -64px; font-size: 30px; }
+	.ab-heading { font-size: 15px; writing-mode: vertical-rl; }
+	.ab-content { padding: 20px 22px; }
+	.ab-text { font-size: 15px; } .ab-text span { font-size: 21px; }
 }
-.ph-card::before { content: ''; position: absolute; left: 0; right: 0; top: 14px; height: 1px; background: rgba(192, 57, 43, .5); }
-.ph-card .pin { position: absolute; top: -7px; left: 50%; width: 15px; height: 15px; margin-left: -7px; border-radius: 50%;
-	background: radial-gradient(circle at 35% 30%, #ff8a7a, #b3261e 60%, #5e1410); box-shadow: 0 3px 4px rgba(0, 0, 0, .5); }
-.ph-card b { display: block; font-family: var(--f-latin); font-size: 38px; line-height: 1; color: #8c1f17; }
-.ph-card span { display: block; margin-top: 6px; font-family: var(--f-display); font-size: 14px; }
-@keyframes ph-sway { 0%, 100% { transform: rotate(var(--r)); } 50% { transform: rotate(calc(var(--r) * -0.6)); } }
-@media (max-width: 900px) { .ph-card { width: 92px; margin-left: -46px; padding: 18px 6px 10px; } .ph-card b { font-size: 26px; } .ph-card span { font-size: 11px; } }
-@media (max-width: 640px) {
-	.ph[data-ph="about"] .ph-stage { inset: 0; display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 22px 10px; padding: 0 12px; }
-	.ph-card { position: relative; left: auto !important; top: auto !important; width: 80px; margin: 0; }
-	.ph-thread { display: none; }
-}
+@media (prefers-reduced-motion: reduce) { .ab *, .ab *::before, .ab *::after, .ab-el { transition-duration: 0s !important; transition-delay: 0s !important; } }
 
 /* ---------- characters: the lineup ---------- */
 /* a steady wash of light on the wall, so it never goes dark in the middle while the spot is off to one side */
@@ -460,6 +517,7 @@ html[dir="rtl"] .ph-wall .track { animation-name: ph-marquee-rtl; }
 html[data-theme="light"] .ph { --ph-bg: #ebdfc8; --ph-ink: #2a2017; --ph-dim: #6f6150; --ph-glow: rgba(184, 69, 31, .16); border-bottom-color: var(--line);
 	background: radial-gradient(70% 120% at 50% 0%, #f8f0e0 0%, #ebdfc8 70%); }
 html[data-theme="light"] .ph[data-ph="about"] { background: radial-gradient(80% 120% at 50% 10%, #f7ecd6 0%, #e6d4b4 60%, #dcc7a3 100%); }
+html[data-theme="light"] .ab { --ab-ink: #2a2017; --ab-back: #d8c4a0; }
 html[data-theme="light"] .ph[data-ph="contact"],
 html[data-theme="light"] .ph[data-ph="privacy"] { background: radial-gradient(70% 120% at 70% 0%, #f4ecdc 0%, #e2d6c0 70%); }
 html[data-theme="light"] .ph[data-ph="sources"] { background: radial-gradient(80% 120% at 50% 0%, rgba(255, 245, 225, .3) 0%, rgba(60, 30, 10, .2) 75%), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27600%27%20height%3D%27300%27%3E%3Cfilter%20id%3D%27w%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.003%20.12%27%20numOctaves%3D%275%27%20seed%3D%2711%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270.93%200%200%200%200.031%20%200.63%200%200%200%200.021%20%200.36%200%200%200%200.012%20%200%200%200%200%201%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23w)%27%2F%3E%3C%2Fsvg%3E") 0 0 / 600px 300px, #a8794a; }

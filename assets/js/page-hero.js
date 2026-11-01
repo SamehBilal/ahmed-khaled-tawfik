@@ -9,30 +9,39 @@
 	function clip(s, n) { s = String(s || '').replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1).trim() + '…' : s; }
 
 	var R = {
-		/* about: an investigator's board — index cards with the site's numbers, pinned and joined by a red thread */
+		/* about: after Nikolay Talanov's «Cool Layout with Complex Chainable Animation» on CodePen — five panels, one a number of
+		   the site's, that rise in one after another, each its own picture; hovering one lifts its number from below, and opening
+		   one slides it to the start, spreads it across the band and tells what is behind the number, with the way there.
+		   Wired by aboutBand below */
 		about: function (d, A) {
 			var S = window.WorksShared, e = A.esc, L = A.L;
-			/* the same counts as the home page: every series' issues (an issue in two parts once), and the main references */
-			var series = d.series || [], issues = 0, refs = {};
+			/* the same counts as the home page: every series' issues (an issue in two parts once) */
+			var series = d.series || [], issues = 0;
 			series.forEach(function (s) { issues += S ? S.seriesIssues(s.id).filter(function (is) { return !(is.part > 1); }).length : (+s.count || 0); });
-			(d.sources || []).concat(d.issuesSources || []).forEach(function (x) { if (x && x.url) refs[x.url] = 1; });
-			var cards = [
-				[issues, L('عددًا في السلاسل', 'series issues')],
-				[(d.works || []).length, L('كتابًا مستقلًا', 'standalone books')],
-				[series.length, L('سلسلة', 'series')],
-				[(d.characters || []).length, L('شخصية', 'characters')],
-				[(d.quotes || []).length, L('اقتباسًا', 'quotes')],
-				[(d.tributes || []).length, L('شهادة عنه', 'tributes')],
-				[Object.keys(refs).length, L('مرجعًا رئيسيًا', 'main references')]
+			var utopia = (d.works || []).filter(function (w) { return w.id === 'utopia'; })[0];
+			var panels = [
+				[issues, L('عددًا في السلاسل', 'series issues'), S ? S.seriesCover('mwt') : '', 'works.html',
+					L('كل أعداد سلاسله، من «ما وراء الطبيعة» إلى «سافاري» و«فانتازيا»، عددًا عددًا بأغلفتها.', 'Every issue of his series, from Paranormal to Safari and Fantasia, cover by cover.'), L('الأعمال', 'The works')],
+				[(d.works || []).length, L('كتابًا مستقلًا', 'standalone books'), S && utopia ? S.coverOf((d.bookInfo || {}).utopia) : '', 'works.html',
+					L('رواياته وكتبه خارج السلاسل، من «يوتوبيا» إلى «شآبيب».', 'His novels and books outside the series, from Utopia to Shaabeeb.'), L('الأعمال', 'The works')],
+				[(d.characters || []).length, L('شخصية', 'characters'), 'assets/img/refaat.jpg', 'characters.html',
+					L('أبطاله ومن حولهم: رفعت إسماعيل وعلاء عبد العظيم وعبير، ومن عاشوا معهم.', 'His heroes and those around them: Refaat Ismail, Alaa Abdel Azim, Abeer and the rest.'), L('الشخصيات', 'The characters')],
+				[(d.quotes || []).length, L('اقتباسًا', 'quotes'), S ? S.seriesCover('fantasia') : '', 'quotes.html',
+					L('جمل من كتبه ومقالاته، كلٌّ بمصدره.', 'Lines from his books and essays, each with its source.'), L('الاقتباسات', 'The quotes')],
+				[(d.tributes || []).length, L('شهادة عنه', 'tributes'), 'assets/img/grave.webp', 'tributes.html',
+					L('ما كتبه عنه الكتّاب والقرّاء بعد رحيله.', 'What writers and readers wrote of him after he was gone.'), L('قالوا عنه', 'Tributes')]
 			];
-			var n = cards.length;
-			var pins = cards.map(function (c, i) { return [((i + 0.5) / n) * 100, 22 + rnd(i, 3) * 26]; });
-			return '<svg class="ph-thread" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="' +
-					pins.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ') + '"/></svg>' +
-				cards.map(function (c, i) {
-					return '<div class="ph-card" style="left:' + pins[i][0].toFixed(1) + '%;top:' + pins[i][1].toFixed(1) + '%;--r:' + ((rnd(i, 1) - 0.5) * 12).toFixed(1) + 'deg;--d:' + (i * -0.7).toFixed(1) + 's">' +
-						'<i class="pin"></i><b>' + e(A.num(c[0])) + '</b><span>' + e(c[1]) + '</span></div>';
-				}).join('');
+			setTimeout(aboutBand, 0);
+			return '<div class="ab s--inactive" style="--n:' + panels.length + '">' + panels.map(function (p, i) {
+				return '<div class="ab-el" style="--i:' + i + '" role="button" tabindex="0" aria-expanded="false" aria-label="' + e(A.num(p[0]) + ' ' + p[1]) + '">' +
+					'<div class="ab-overflow"><div class="ab-inner"><div class="ab-bg" style="--img:url(\'' + e(new URL(p[2], document.baseURI).href) + '\')"></div>' + /* (whole, or a url() handed through a variable is read from the stylesheet's folder) */
+					'<div class="ab-preview"><h2 class="ab-heading">' + e(p[1]) + '</h2></div>' +
+					'<div class="ab-content"><b class="ab-num">' + e(A.num(p[0])) + '</b><p class="ab-text"><span>' + e(p[1]) + '</span>' + e(p[4]) + '</p>' +
+					'<a class="ab-go" href="' + p[3] + '" tabindex="-1">' + e(p[5]) + L(' ←', ' →') + '</a><button type="button" class="ab-close" tabindex="-1" aria-label="' + e(L('إغلاق', 'Close')) + '"></button></div>' +
+					'</div></div>' +
+					'<div class="ab-index" aria-hidden="true"><div class="ab-index-back">' + e(A.num(p[0])) + '</div><div class="ab-index-front"><div class="ab-index-overlay" data-index="' + e(A.num(p[0])) + '">' + e(A.num(p[0])) + '</div></div></div>' +
+				'</div>';
+			}).join('') + '</div>';
 		},
 
 		/* characters: a police lineup under a sweeping spotlight, each figure holding a name */
@@ -259,6 +268,35 @@
 			return '<div class="ph-wall"><div class="track">' + frames + frames + '</div></div>';
 		}
 	};
+
+	/* the about band at work: the panels rise in, a click (or Enter) opens one, the cross or Escape closes it */
+	function aboutBand() {
+		var el = document.querySelector('.ab');
+		if (!el || el.getAttribute('data-on')) return;
+		el.setAttribute('data-on', '1');
+		var ph = el.closest('.ph');
+		if (ph) ph.removeAttribute('aria-hidden'); /* (this band is a control, not a decoration) */
+		var els = [].slice.call(el.querySelectorAll('.ab-el'));
+		var focusable = function (p, on) { [].forEach.call(p.querySelectorAll('.ab-go, .ab-close'), function (x) { x.tabIndex = on ? 0 : -1; }); };
+		var open = function (p) {
+			if (p.classList.contains('s--active')) return;
+			el.classList.add('s--el-active'); p.classList.add('s--active'); p.setAttribute('aria-expanded', 'true'); focusable(p, true);
+		};
+		var close = function () {
+			var p = el.querySelector('.ab-el.s--active');
+			if (!p) return;
+			el.classList.remove('s--el-active'); p.classList.remove('s--active'); p.setAttribute('aria-expanded', 'false'); focusable(p, false); p.focus();
+		};
+		els.forEach(function (p) {
+			p.addEventListener('click', function () { open(p); });
+			p.addEventListener('keydown', function (ev) {
+				if (ev.target === p && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); open(p); }
+				if (ev.key === 'Escape') close();
+			});
+			p.querySelector('.ab-close').addEventListener('click', function (ev) { ev.stopPropagation(); close(); });
+		});
+		setTimeout(function () { el.classList.remove('s--inactive'); }, 200);
+	}
 
 	/* the terms band at work: the knob follows the pull with a growing lag, x (1 + 2.2x) / (1 + x + 2.2x²) of the free length, so it
 	   never quite gets there; let go past .72 and it runs to the end, or else it snaps back. The pixelated covers clear in eight steps */
