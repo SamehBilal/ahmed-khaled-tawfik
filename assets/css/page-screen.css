@@ -1,5 +1,7 @@
 /* «على الشاشة» (screen.html, screen.js) */
-.ph[data-ph="screen"] { background: #07070a; }
+/* the band is the page itself: no ground of its own, no line under it, in either theme — only the film strip and the projector's beam */
+.ph[data-ph="screen"], html[data-theme="light"] .ph[data-ph="screen"] { background: transparent; border-bottom: 0; }
+.ph[data-ph="screen"]::before, .ph[data-ph="screen"]::after { display: none; }
 .sc-beam { position: absolute; inset: 0; background: conic-gradient(from 200deg at 92% -10%, transparent 0deg, rgba(255, 230, 170, .14) 12deg, transparent 26deg); pointer-events: none; z-index: 2; }
 .sc-strip { position: absolute; left: 0; right: 0; top: 50%; height: 170px; margin-top: -85px; overflow: hidden; direction: ltr;
 	background: #111; border-block: 14px solid #111; transform: rotate(-3deg) scale(1.05);
