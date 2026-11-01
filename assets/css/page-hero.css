@@ -183,20 +183,28 @@ html[data-theme="light"] .ph-avatar { --tear: #efe5d3; }
 
 /* ---------- sources: the card catalogue ---------- */
 /* no line under it: the dark fades down into the page */
-.ph[data-ph="sources"] { border-bottom: 0; background: radial-gradient(80% 120% at 50% 0%, #2c1d12 0%, #120c08 70%); }
+/* real wood, not a flat colour: a grain drawn by SVG noise stretched along its length, stained walnut — dark on the wall, a shade
+   lighter on the cabinet, lighter still on the drawers, each drawer's grain at its own place so no two match */
+.ph[data-ph="sources"] { border-bottom: 0;
+	background: radial-gradient(80% 120% at 50% 0%, rgba(255, 190, 120, .08) 0%, rgba(0, 0, 0, .6) 75%), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27600%27%20height%3D%27300%27%3E%3Cfilter%20id%3D%27w%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.003%20.12%27%20numOctaves%3D%275%27%20seed%3D%2711%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270.45%200%200%200%200.015%20%200.24%200%200%200%200.008%20%200.12%200%200%200%200.004%20%200%200%200%200%201%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23w)%27%2F%3E%3C%2Fsvg%3E") 0 0 / 600px 300px, #2a170b; }
 .ph[data-ph="sources"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; z-index: 6; pointer-events: none;
 	background: linear-gradient(transparent, var(--ink)); }
 .ph[data-ph="sources"] + .page-hero { padding-top: 36px; }
 .ph-catalog { position: absolute; left: 50%; top: 50%; width: min(1040px, 92%); transform: translate(-50%, -50%);
 	display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; padding: 12px; border-radius: 6px;
-	background: linear-gradient(#5a3a22, #3a2414); box-shadow: 0 24px 50px rgba(0, 0, 0, .6), inset 0 0 0 3px rgba(0, 0, 0, .3); }
+	background: linear-gradient(rgba(255, 220, 170, .06), rgba(0, 0, 0, .25)), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27600%27%20height%3D%27300%27%3E%3Cfilter%20id%3D%27w%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.004%20.2%27%20numOctaves%3D%275%27%20seed%3D%277%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270.63%200%200%200%200.021%20%200.315%200%200%200%200.011%20%200.15%200%200%200%200.005%20%200%200%200%200%201%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23w)%27%2F%3E%3C%2Fsvg%3E") 0 0 / 600px 300px, #4a2812;
+	box-shadow: 0 24px 50px rgba(0, 0, 0, .6), inset 0 0 0 3px rgba(0, 0, 0, .35), inset 0 2px 0 rgba(255, 220, 170, .12); }
 html[dir="rtl"] .ph-catalog { transform: translate(50%, -50%); left: auto; right: 50%; }
-.ph-drawer { position: relative; height: 64px; border-radius: 3px; background: linear-gradient(#7a5233, #5e3d24); box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .25), 0 2px 0 rgba(255, 220, 170, .08);
+.ph-drawer { --gx: 0px; --gy: 0px; position: relative; height: 64px; border-radius: 3px;
+	background: linear-gradient(rgba(255, 225, 180, .14), transparent 35%, rgba(0, 0, 0, .25)), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27600%27%20height%3D%27300%27%3E%3Cfilter%20id%3D%27w%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.006%20.28%27%20numOctaves%3D%275%27%20seed%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%271.17%200%200%200%200.039%20%200.63%200%200%200%200.021%20%200.3%200%200%200%200.01%20%200%200%200%200%201%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23w)%27%2F%3E%3C%2Fsvg%3E") var(--gx) var(--gy) / 600px 300px, #8a4f26;
+	box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 225, 180, .25), 0 2px 0 rgba(255, 220, 170, .08);
 	animation: ph-drawer 24s ease-in-out infinite var(--d); }
 .ph-drawer .tag { position: absolute; left: 12%; right: 12%; top: 9px; min-height: 20px; padding: 3px 4px; border: 2px solid #b8913f; border-radius: 2px; background: #efe4cb;
 	color: #3a2317; font-family: var(--f-latin); font-size: 11px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; direction: ltr; }
 .ph-drawer .pull { position: absolute; left: 50%; bottom: 9px; width: 26px; height: 10px; margin-left: -13px; border-radius: 0 0 13px 13px; border: 3px solid #c9a24c; border-top: 0; }
-@keyframes ph-drawer { 0%, 92%, 100% { transform: none; box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .25); } 95%, 97% { transform: translateY(6px) scale(1.06); box-shadow: 0 10px 16px rgba(0, 0, 0, .55); } }
+.ph-drawer:nth-child(3n+1) { --gx: -157px; --gy: -120px; } .ph-drawer:nth-child(3n+2) { --gx: -331px; --gy: -33px; } .ph-drawer:nth-child(4n) { --gx: -488px; --gy: -201px; }
+.ph-drawer:nth-child(5n) { filter: brightness(.9) saturate(1.1); } .ph-drawer:nth-child(7n+3) { filter: brightness(1.06); }
+@keyframes ph-drawer { 0%, 92%, 100% { transform: none; box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 225, 180, .25), 0 2px 0 rgba(255, 220, 170, .08); } 95%, 97% { transform: translateY(6px) scale(1.06); box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 225, 180, .25), 0 10px 16px rgba(0, 0, 0, .55); } }
 @media (max-width: 900px) { .ph-catalog { grid-template-columns: repeat(6, 1fr); } .ph-drawer:nth-child(n+19) { display: none; } }
 @media (max-width: 640px) { .ph-catalog { grid-template-columns: repeat(4, 1fr); gap: 6px; } .ph-drawer { height: 48px; } .ph-drawer:nth-child(n+13) { display: none; } .ph-drawer .tag { font-size: 9px; top: 6px; } }
 
@@ -454,7 +462,7 @@ html[data-theme="light"] .ph { --ph-bg: #ebdfc8; --ph-ink: #2a2017; --ph-dim: #6
 html[data-theme="light"] .ph[data-ph="about"] { background: radial-gradient(80% 120% at 50% 10%, #f7ecd6 0%, #e6d4b4 60%, #dcc7a3 100%); }
 html[data-theme="light"] .ph[data-ph="contact"],
 html[data-theme="light"] .ph[data-ph="privacy"] { background: radial-gradient(70% 120% at 70% 0%, #f4ecdc 0%, #e2d6c0 70%); }
-html[data-theme="light"] .ph[data-ph="sources"],
+html[data-theme="light"] .ph[data-ph="sources"] { background: radial-gradient(80% 120% at 50% 0%, rgba(255, 245, 225, .3) 0%, rgba(60, 30, 10, .2) 75%), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27600%27%20height%3D%27300%27%3E%3Cfilter%20id%3D%27w%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.003%20.12%27%20numOctaves%3D%275%27%20seed%3D%2711%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270.93%200%200%200%200.031%20%200.63%200%200%200%200.021%20%200.36%200%200%200%200.012%20%200%200%200%200%201%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23w)%27%2F%3E%3C%2Fsvg%3E") 0 0 / 600px 300px, #a8794a; }
 html[data-theme="light"] .ph[data-ph="terms"] { background: radial-gradient(80% 120% at 50% 0%, #f8eedb 0%, #e8d8bb 70%); }
 html[data-theme="light"] .tb { --pill: rgba(70, 45, 20, .1); --pill-ink: #8a7457; }
 html[data-theme="light"] .tb-idle { background-image: linear-gradient(100deg, var(--pill-ink) 40%, #2a1d10 50%, var(--pill-ink) 60%); }
