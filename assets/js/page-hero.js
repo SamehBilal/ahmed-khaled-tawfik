@@ -233,11 +233,10 @@
 			setTimeout(numbersDeck, 0);
 			return '<div class="ph-deck" tabindex="0" role="group" aria-roledescription="' + e(L('شريط بطاقات', 'carousel')) + '" aria-label="' + e(L('الموقع بالأرقام', 'The site in numbers')) + '">' +
 					'<ul class="ph-cards">' + cells.map(function (c, i) {
-						/* a playing card, as the pen's: its label at the head and upside down at the foot, the site's name down each side,
-						   the number in the middle, all in the card's gradient inside a thin frame of it */
-						return '<li class="ph-count" style="--a:' + c[3] + ';--b:' + c[4] + (String(c[0]).length > 3 ? ';--fs:.78' : '') + '">' /* (four figures a little smaller, clear of the sides) */ + '<a href="' + c[2] + '" tabindex="-1">' +
-							'<span class="pc-top">' + e(c[1]) + '</span><b data-to="' + c[0] + '">' + e(A.num(0)) + '</b><span class="pc-bot" aria-hidden="true">' + e(c[1]) + '</span>' +
-							'<i class="pc-side" aria-hidden="true">' + e(L('العرّاب', 'The Godfather')) + '</i><i class="pc-side is-end" aria-hidden="true">' + e(L('العرّاب', 'The Godfather')) + '</i></a></li>';
+						/* a playing card, as the pen's: its label at the head and upside down at the foot, the number in the middle, all
+						   in the card's gradient inside a thin frame of it */
+						return '<li class="ph-count" style="--a:' + c[3] + ';--b:' + c[4] + (String(c[0]).length > 3 ? ';--fs:.85' : '') + '">' /* (four figures a little smaller, within the frame) */ + '<a href="' + c[2] + '" tabindex="-1">' +
+							'<span class="pc-top">' + e(c[1]) + '</span><b data-to="' + c[0] + '">' + e(A.num(0)) + '</b><span class="pc-bot" aria-hidden="true">' + e(c[1]) + '</span>' + '</a></li>';
 					}).join('') + '</ul>' +
 					'<p class="ph-deck-nav"><button type="button" class="ph-prev">' + e(L('السابق', 'Prev')) + '</button><button type="button" class="ph-next">' + e(L('التالي', 'Next')) + '</button></p>' +
 				'</div>' +
