@@ -38,7 +38,8 @@ window.PAGE = {
 		var count = {}; media.forEach(function (m) { count[m.kind] = (count[m.kind] || 0) + 1; });
 		var vids = media.filter(function (m) { return self.yt(m.url); }).length;
 		var chip = function (k, label, n) { return '<button type="button" class="chip" data-k="' + k + '" aria-pressed="' + (self.kind === k) + '">' + e(label) + ' <b>' + e(App.num(n)) + '</b></button>'; };
-		document.getElementById('content').innerHTML = this.life() + '<section class="section tk" id="talks"><div class="wrap">' +
+		/* his life, then his city (tanta.js, once a page of its own), then the interviews */
+		document.getElementById('content').innerHTML = this.life() + (window.TantaSection ? window.TantaSection.html() : '') + '<section class="section tk" id="talks"><div class="wrap">' +
 			'<h2 class="tk-h">' + e(L('لقاءاته', 'Interviews')) + '</h2>' +
 			'<p class="tk-sum">' + e(L(App.num(media.length) + ' لقاءً وفيلمًا ومقالًا، منها ' + App.num(vids) + ' فيديو يُشاهَد هنا.', media.length + ' interviews, films and articles, ' + vids + ' of them videos you can watch here.')) + '</p>' +
 			'<div class="tk-bar"><div class="chips">' + chip('all', L('الكل', 'All'), media.length) + chip('video', L('فيديو', 'Video'), vids) +
@@ -62,6 +63,21 @@ window.PAGE = {
 			b.replaceWith(f);
 		};
 		this.list();
+		/* drawn after the page loaded, so the browser cannot go to a part of it (tanta.html sends its visitors to #tanta) by itself:
+		   once the page has loaded, straight there — and again a few times while «سيرته»'s two columns settle (its fonts and pictures
+		   coming in move what is below them), unless the reader has started scrolling */
+		if (/^#(life|tanta|talks|ch-\d)$/.test(location.hash) && !this.jumped) {
+			this.jumped = true;
+			var to = document.getElementById(location.hash.slice(1)), moved = false;
+			var stop = function () { moved = true; };
+			['wheel', 'touchstart', 'keydown'].forEach(function (k) { window.addEventListener(k, stop, { once: true, passive: true }); });
+			var go = function () {
+				[50, 400, 1000, 2000].forEach(function (ms) {
+					setTimeout(function () { if (!moved && Math.abs(to.getBoundingClientRect().top - 80) > 40) to.scrollIntoView({ behavior: 'instant' }); }, ms);
+				});
+			};
+			if (to) { if (document.readyState === 'complete') go(); else window.addEventListener('load', go); }
+		}
 	},
 
 	/* «سيرته»: the summary, then a chapter a period — its events from the timeline (after him, the Legacy page's), and the
@@ -94,6 +110,7 @@ window.PAGE = {
 			'<h2 class="tk-h">' + e(L('سيرته', 'His life')) + '</h2>' +
 			'<div class="bio-sum">' + paras.map(function (p) { return '<p>' + e(p) + '</p>'; }).join('') + '</div>' +
 			'<nav class="chips bio-jump">' + this.CHAPTERS.map(function (c, i) { return '<a class="chip" href="#ch-' + (i + 1) + '">' + e(App.num(i + 1) + '. ' + t(c[2])) + '</a>'; }).join('') +
+				(window.TantaSection ? '<a class="chip" href="#tanta">' + e(L('طنطا، مدينته', 'Tanta, his city')) + '</a>' : '') +
 				'<a class="chip" href="#talks">' + e(L('لقاءاته', 'Interviews')) + '</a></nav>' +
 			chapters + '</div></section>';
 	},

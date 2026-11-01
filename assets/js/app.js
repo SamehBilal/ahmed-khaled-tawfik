@@ -38,7 +38,6 @@
 			{ id: 'creatures', href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends', phone: true },
 			{ id: 'refaat-life', href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life', phone: true },
 			{ id: 'network', href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web', phone: true },
-			{ id: 'tanta', href: 'tanta.html', ar: 'طنطا', en: 'Tanta', phone: true },
 			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
@@ -63,8 +62,7 @@
 			{ href: 'talks.html', ar: 'سيرته ولقاءاته', en: 'His life & interviews' },
 			{ href: 'awards.html', ar: 'الجوائز', en: 'Awards' },
 			{ href: 'translations.html', ar: 'ترجماته', en: 'His translations' },
-			/* his city and his handwriting */
-			{ href: 'tanta.html', ar: 'طنطا', en: 'Tanta' },
+			/* his handwriting (his city is a part of «سيرته» on talks.html) */
 			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' }
 		],
 		/* «عالم العرّاب»: the pages inside his world, a block of their own under «صفحات الموقع» */
@@ -705,10 +703,10 @@
 			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات إحصاءات الموقع أسلوب لغة كلمات جمل statistics site numbers style language words', quiz: 'اختبار مسابقة أسئلة شخصية بطاقة القارئ اقرأ معنا نادي القراءة quiz character reader card reading club',
 				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
 				covers: 'أغلفة غلاف طبعات طبعة covers editions', lists: 'قوائم رحلتي قراءة تقدم lists journey reading progress',
-				talks: 'سيرة حياة لقاءات حوارات فيديو biography life interviews videos', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',
+				talks: 'سيرة حياة لقاءات حوارات فيديو طنطا مدينته بيته قبره biography life interviews videos Tanta city', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',
 				library: 'كتب أفلام موسيقى مفضلة نصح books films music favourite', glossary: 'عبارات قاموس لزمات حتى تحترق النجوم phrases glossary',
 				creatures: 'وحوش أساطير مصاص دماء مذءوب نداهة مومياء monsters legends vampire werewolf', 'refaat-life': 'رفعت إسماعيل حياة سيرة يوميات Refaat life',
-				network: 'شبكة شخصيات علاقات characters web relations', tanta: 'طنطا مدينته بيته قبره Tanta city', handwriting: 'خط يده إهداء توقيع مخطوط handwriting dedication signature',
+				network: 'شبكة شخصيات علاقات characters web relations', handwriting: 'خط يده إهداء توقيع مخطوط handwriting dedication signature',
 				style: 'أسلوب لغة كلمات style language words', writers: 'كتاب رسامون مخرجون ممثلون دائرة writers artists directors actors circle',
 				changelog: 'تحديثات جديد سجل changelog updates', sitemap: 'خريطة الموقع صفحات sitemap pages', about: 'عن الموقع أسئلة شائعة about faq', contact: 'تواصل ساهم مساهمة contact contribute' };
 			UI.nav.concat(UI.more, UI.world, UI.legal).forEach(function (n) {
