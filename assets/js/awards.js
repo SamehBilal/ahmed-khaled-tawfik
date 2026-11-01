@@ -22,9 +22,11 @@ window.PAGE = {
 		});
 	},
 
-	/* the band: a trophy cabinet of wood — the prizes on the top shelf and the other honours below, each a cup on a black
-	   base: gold for a win, silver for the shortlist, bronze for an honour, its stars by the same order; a hover tells which and
-	   when, a click goes to it below */
+	/* the band: a trophy cabinet of wood — the prizes on the top shelf and the other honours below, each on a black base, its
+	   stars by order (three for a win, two for the shortlist, one for an honour): a cup for a prize, gold for a win and silver for
+	   the shortlist; an honour is no prize won, so not a cup but a thing of its own in bronze — a plaque for a name given, a
+	   rosette for a day kept, a shield for a gathering held, a medal for the tributes; a hover tells which and when, a click goes
+	   to it below */
 	band: function (d, A) {
 		var P = window.PAGE, e = A.esc, t = A.t, L = A.L;
 		var STARS = { win: 3, finalist: 2, honour: 1 }, LINE = { win: '#6b4508', finalist: '#4a4f56', honour: '#5a2f10' };
@@ -32,9 +34,57 @@ window.PAGE = {
 			for (var p = [], i = 0; i < 10; i++) { var a = Math.PI / 5 * i - Math.PI / 2, q = i % 2 ? r : R; p.push((cx + q * Math.cos(a)).toFixed(1) + ' ' + (cy + q * Math.sin(a)).toFixed(1)); }
 			return 'M' + p.join('L') + 'Z';
 		};
-		var cup = function (k) {
-			var o = LINE[k], g = 'url(#awg-' + k + ')', s = '';
-			for (var i = 0; i < 3; i++) s += '<path d="' + star(28 + i * 12, 94, 4.6, 2) + '" fill="' + (i < STARS[k] ? '#f6d356' : '#7d7d7d') + '" stroke="#000" stroke-width=".6"/>';
+		/* an honour's shape, by what it was */
+		var shapeOf = function (title) {
+			return /معرض|يحمل اسمه|باسمه/.test(title) ? 'plaque' : /جوجل|دودل|ميلاد/.test(title) ? 'rosette' : /صالون|ندوة|أمسية/.test(title) ? 'shield' : 'medal';
+		};
+		/* the black base and its stars, under every one */
+		var base = function (k) {
+			for (var s = '', i = 0; i < 3; i++) s += '<path d="' + star(28 + i * 12, 94, 4.6, 2) + '" fill="' + (i < STARS[k] ? '#f6d356' : '#7d7d7d') + '" stroke="#000" stroke-width=".6"/>';
+			return '<rect x="21" y="75" width="38" height="7" rx="1.5" fill="url(#awb)" stroke="#000" stroke-width="1"/>' +
+				'<rect x="15" y="82" width="50" height="24" rx="2" fill="url(#awb)" stroke="#000" stroke-width="1"/>' + s;
+		};
+		var honourShape = function (shape) {
+			var o = LINE.honour, g = 'url(#awg-honour)', rg = 'url(#awr-honour)', st = star(40, 0, 0, 0);
+			var svg = '<svg class="awc-svg" viewBox="0 0 80 110" aria-hidden="true">';
+			if (shape === 'plaque') {
+				/* a plaque on a stand, his name engraved: a fair named after him */
+				svg += '<path d="M36 66h8v9h-8z" fill="' + g + '" stroke="' + o + '" stroke-width="1.4"/>' +
+					'<rect x="12" y="14" width="56" height="52" rx="4" fill="' + rg + '" stroke="' + o + '" stroke-width="2.2"/>' +
+					'<rect x="17" y="19" width="46" height="42" rx="2" fill="none" stroke="' + o + '" stroke-width="1.2" stroke-opacity=".7"/>' +
+					'<path d="' + star(40, 33, 8, 3.4) + '" fill="' + g + '" stroke="' + o + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+					'<path d="M24 48h32M28 54h24" stroke="' + o + '" stroke-width="2" stroke-linecap="round" opacity=".8"/>' +
+					'<path d="M15 18c3 10 3 26 1 40" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round"/>';
+			} else if (shape === 'rosette') {
+				/* a ribbon rosette, its two tails hanging: a day kept for his birth */
+				var pts = [];
+				for (var i = 0; i < 24; i++) { var a = Math.PI / 12 * i, q = i % 2 ? 19 : 23; pts.push((40 + q * Math.cos(a)).toFixed(1) + ' ' + (32 + q * Math.sin(a)).toFixed(1)); }
+				svg += '<path d="M30 46 22 75l9-5 5 7 4-28zM50 46l8 29-9-5-5 7-4-28z" fill="#b8441f" stroke="' + o + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+					'<path d="M' + pts.join('L') + 'Z" fill="' + g + '" stroke="' + o + '" stroke-width="1.6" stroke-linejoin="round"/>' +
+					'<circle cx="40" cy="32" r="14" fill="' + rg + '" stroke="' + o + '" stroke-width="1.8"/>' +
+					'<path d="' + star(40, 32, 7.5, 3.2) + '" fill="' + g + '" stroke="' + o + '" stroke-width="1.3" stroke-linejoin="round"/>';
+			} else if (shape === 'shield') {
+				/* a shield on a short stem: a gathering held for him */
+				svg += '<path d="M36 64h8v11h-8z" fill="' + g + '" stroke="' + o + '" stroke-width="1.4"/>' +
+					'<path d="M40 8 64 16v18c0 16-10 26-24 32C26 60 16 50 16 34V16z" fill="' + rg + '" stroke="' + o + '" stroke-width="2.2" stroke-linejoin="round"/>' +
+					'<path d="M40 14 58 20v14c0 12-7 20-18 25-11-5-18-13-18-25V20z" fill="none" stroke="' + o + '" stroke-width="1.2" stroke-opacity=".7"/>' +
+					'<path d="' + star(40, 34, 9, 3.8) + '" fill="' + g + '" stroke="' + o + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+					'<path d="M21 20c0 14 2 24 8 32" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.2" stroke-linecap="round"/>';
+			} else {
+				/* a medal on its ribbon, over a small stand: the tributes */
+				svg += '<path d="M26 6h10l8 26h-10zM54 6H44l-8 26h10z" fill="#b8441f" stroke="' + o + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+					'<path d="M31 6h3l7 23h-3zM49 6h-3l-7 23h3z" fill="#f3c48a" opacity=".8"/>' +
+					'<path d="M37 64h6v11h-6z" fill="' + g + '" stroke="' + o + '" stroke-width="1.4"/>' +
+					'<circle cx="40" cy="47" r="18" fill="' + rg + '" stroke="' + o + '" stroke-width="2.2"/>' +
+					'<circle cx="40" cy="47" r="13.5" fill="none" stroke="' + o + '" stroke-width="1.2" stroke-opacity=".7"/>' +
+					'<path d="' + star(40, 47, 9, 3.8) + '" fill="' + g + '" stroke="' + o + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+					'<path d="M27 40c-2 6-1 12 2 16" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.2" stroke-linecap="round"/>';
+			}
+			return svg + base('honour') + '</svg>';
+		};
+		var cup = function (k, title) {
+			if (k === 'honour') return honourShape(shapeOf(title || ''));
+			var o = LINE[k], g = 'url(#awg-' + k + ')';
 			return '<svg class="awc-svg" viewBox="0 0 80 110" aria-hidden="true">' +
 				'<path d="M22 20C6 16 4 44 30 48M58 20C74 16 76 44 50 48" fill="none" stroke="' + o + '" stroke-width="8" stroke-linecap="round"/>' +
 				'<path d="M22 20C6 16 4 44 30 48M58 20C74 16 76 44 50 48" fill="none" stroke="' + g + '" stroke-width="4.5" stroke-linecap="round"/>' +
@@ -44,12 +94,10 @@ window.PAGE = {
 				'<path d="M21 18c0 16 4 26 11 32" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="3" stroke-linecap="round"/>' +
 				'<path d="' + star(40, 31, 10, 4.2) + '" fill="' + g + '" stroke="' + o + '" stroke-width="1.8" stroke-linejoin="round"/>' +
 				'<ellipse cx="40" cy="63" rx="6.5" ry="2.8" fill="' + g + '" stroke="' + o + '" stroke-width="1.4"/>' +
-				'<path d="M30 67h20l4 8H26z" fill="' + g + '" stroke="' + o + '" stroke-width="1.6" stroke-linejoin="round"/>' +
-				'<rect x="21" y="75" width="38" height="7" rx="1.5" fill="url(#awb)" stroke="#000" stroke-width="1"/>' +
-				'<rect x="15" y="82" width="50" height="24" rx="2" fill="url(#awb)" stroke="#000" stroke-width="1"/>' + s + '</svg>';
+				'<path d="M30 67h20l4 8H26z" fill="' + g + '" stroke="' + o + '" stroke-width="1.6" stroke-linejoin="round"/>' + base(k) + '</svg>';
 		};
 		var item = function (k, title, kind, year, to) {
-			return '<div class="awc-item" data-to="' + e(to) + '">' + cup(k) +
+			return '<div class="awc-item" data-to="' + e(to) + '">' + cup(k, title) +
 				'<span class="awc-tip"><b>' + e(title) + '</b><small>' + e(kind) + '<br>' + e(A.num(year)) + '</small></span></div>';
 		};
 		var defs = function (k, hi, mid, lo, deep) {
