@@ -69,29 +69,38 @@ window.PAGE = {
 		/* the series' spans */
 		this.spans(seriesIds);
 		/* Ma Wara' al-Tabi'a, by the year of each issue's first edition */
-		var mwt = {};
-		S.seriesIssues('mwt').filter(function (is) { return !(is.part > 1); }).forEach(function (is) {
-			var eds = ((d.issueInfo || {})[S.issueKey('mwt', is)] || {}).editions || [];
-			var y = +is.year || Math.min.apply(null, eds.filter(function (ed) { return /الحديثة/.test((ed.publisher || {}).ar || '') && ed.year; }).map(function (ed) { return +ed.year; }).concat([9999]));
-			if (y && y < 9999) (mwt[y] = mwt[y] || []).push(is);
-		});
+		var Y = this.yearly(), mwt = Y.mwt;
 		this.columns('nm-mwt', mwt, [{ key: 'all', name: L('عدد', 'issue'), slot: 2 }], function (list) { return { all: list.length }; },
 			function (y, list) { return list.map(function (is) { return '#' + App.num(is.n) + ' ' + t(is.title); }).slice(0, 8).join('<br>') + (list.length > 8 ? '<br>…' : ''); });
 		/* his books by kind */
 		var KINDS = [['novel', L('رواية', 'Novel')], ['stories', L('قصص', 'Stories')], ['articles', L('مقالات', 'Essays')], ['collab', L('عمل مشترك', 'Collaboration')],
 			['translation', L('ترجمة', 'Translation')], ['other', L('أخرى', 'Other')]];
-		var books = {};
-		works.forEach(function (w) { var y = +((String(w.year || '').match(/\d{4}/) || [])[0] || 0); if (y) (books[y] = books[y] || []).push(w); });
+		var books = Y.books;
 		this.columns('nm-books', books, KINDS.map(function (k, i) { return { key: k[0], name: k[1], slot: i === 5 ? 0 : i + 1 }; }), function (list) {
 			var c = {}; list.forEach(function (w) { var k = KINDS.some(function (x) { return x[0] === w.type; }) ? w.type : 'other'; c[k] = (c[k] || 0) + 1; }); return c;
 		}, function (y, list) { return list.map(function (w) { return t(w.title); }).slice(0, 8).join('<br>'); });
 		/* the papers */
-		var py = {};
-		printed.forEach(function (p) { var y = +p.src.match(/(19|20)\d\d/)[0]; (py[y] = py[y] || []).push(p); });
+		var py = Y.papers;
 		this.columns('nm-papers', py, [{ key: 'all', name: L('مقال', 'piece'), slot: 1 }], function (list) { return { all: list.length }; }, null);
 		/* the publishers */
 		this.hbars('nm-houses', S.publishers().filter(function (c) { return c.list.length; }).sort(function (a, b) { return b.list.length - a.list.length; })
 			.map(function (c) { return { name: t(c.p.name), n: c.list.length, href: S.publisherHref(c.p.id) }; }));
+	},
+
+	/* his work year by year, for the charts below and the band's (page-hero.js): Ma Wara' al-Tabi'a's issues by the year of
+	   each one's first edition, his standalone books, and his pieces in the papers — each { year: [items] } */
+	yearly: function () {
+		var App = window.App, d = App.data(), S = window.WorksShared, mwt = {}, books = {}, papers = {};
+		S.seriesIssues('mwt').filter(function (is) { return !(is.part > 1); }).forEach(function (is) {
+			var eds = ((d.issueInfo || {})[S.issueKey('mwt', is)] || {}).editions || [];
+			var y = +is.year || Math.min.apply(null, eds.filter(function (ed) { return /الحديثة/.test((ed.publisher || {}).ar || '') && ed.year; }).map(function (ed) { return +ed.year; }).concat([9999]));
+			if (y && y < 9999) (mwt[y] = mwt[y] || []).push(is);
+		});
+		(d.works || []).forEach(function (w) { var y = +((String(w.year || '').match(/\d{4}/) || [])[0] || 0); if (y) (books[y] = books[y] || []).push(w); });
+		(((d.blog || {}).posts) || []).filter(function (p) { return p.src && !/^من كتاب/.test(p.src) && /(19|20)\d\d/.test(p.src); }).forEach(function (p) {
+			var y = +p.src.match(/(19|20)\d\d/)[0]; (papers[y] = papers[y] || []).push(p);
+		});
+		return { mwt: mwt, books: books, papers: papers };
 	},
 
 	/* each series as a bar from its first year to its last, in its own colour and named on the bar */

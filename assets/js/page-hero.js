@@ -200,7 +200,9 @@
 		},
 
 		/* numbers (with «اللغة والأسلوب», once style.html's): a scoreboard, its figures counting up from nought once drawn (all at
-		   once when motion is reduced), and under it his trailing dots, a line at a time typed and erased (StyleSection.LINES) */
+		   once when motion is reduced); under it his career year by year in one chart, after amCharts' «CSS Animations» on CodePen
+		   (made there with their library; here in plain SVG, drawn by numbersChart below); and under that his trailing dots, a
+		   line at a time typed and erased (StyleSection.LINES) */
 		numbers: function (d, A) {
 			/* (the band can be drawn again as the page starts, so each frame finds the figures afresh) */
 			var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches, t0 = 0, dur = 1800;
@@ -221,10 +223,10 @@
 			var issues = (d.series || []).reduce(function (s, x) { return s + (S ? S.seriesIssues(x.id).filter(function (is) { return !(is.part > 1); }).length : 0); }, 0);
 			var cells = [[issues, L('عددًا', 'issues')], [(d.works || []).length, L('كتابًا', 'books')], [(((d.blog || {}).posts) || []).length, L('منشورًا', 'posts')],
 				[(d.characters || []).length, L('شخصية', 'characters')], [(d.quotes || []).length, L('اقتباسًا', 'quotes')]];
-			return '<i class="ph-bars">' + [32, 58, 44, 76, 51, 88, 63, 70, 40, 92, 57, 66].map(function (h, i) { return '<i style="--h:' + h + '%;--i:' + i + '"></i>'; }).join('') + '</i>' +
-				'<div class="ph-board">' + cells.filter(function (c) { return c[0]; }).map(function (c, i) {
+			return '<div class="ph-board">' + cells.filter(function (c) { return c[0]; }).map(function (c, i) {
 					return '<div class="ph-count"><b data-to="' + c[0] + '">' + e(A.num(0)) + '</b><span>' + e(c[1]) + '</span></div>';
 				}).join('') + '</div>' +
+				numbersChart(d, A) +
 				'<div class="ph-type">' + ((window.StyleSection || {}).LINES || []).map(function (l, i) { return '<p style="--d:' + (i ? i * 3 - 9 : 0) + 's"><span>' /* (started part-way, not waiting: a waiting line would show its caret) */ + e(L(l[0], l[1])) + '</span></p>'; }).join('') + '</div>';
 		},
 
@@ -272,6 +274,88 @@
 			return '<div class="ph-wall"><div class="track">' + frames + frames + '</div></div>';
 		}
 	};
+
+	/* the numbers band's chart, as amCharts' pen draws its trip: Ma Wara' al-Tabi'a's issues each year as columns that rise in and
+	   light up under the pointer; his standalone books as a dashed line whose dashes keep moving, a round bullet a year sized by
+	   how many, the milestones named, the last one pulsing; his pieces in the papers as a red line that draws itself in, square
+	   bullets on it. Each on its own scale. Under it a legend: the totals, or the year under the pointer */
+	function numbersChart(d, A) {
+		var P = window.PAGE;
+		if (!P || typeof P.yearly !== 'function') return '';
+		var e = A.esc, L = A.L, t = A.t, Y = P.yearly(), rtl = A.lang !== 'en';
+		var n = function (o, y) { return (o[y] || []).length; };
+		var ys = [].concat(Object.keys(Y.mwt), Object.keys(Y.books), Object.keys(Y.papers)).map(Number);
+		var y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys), years = [];
+		for (var y = y0; y <= y1; y++) years.push(y);
+		var max = function (o) { return Math.max.apply(null, years.map(function (y) { return n(o, y); })) || 1; };
+		var mM = max(Y.mwt), mB = max(Y.books), mP = max(Y.papers);
+		var W = 1000, H = 240, pT = 26, pB = 26, pS = 18, bw = (W - 2 * pS) / years.length;
+		var X = function (i) { return rtl ? W - pS - (i + 1) * bw : pS + i * bw; };
+		var cx = function (i) { return X(i) + bw / 2; };
+		var V = function (v, m, top) { return H - pB - v / m * (H - pB - pT - (top || 0)); };
+		var svg = '<svg class="nmc" viewBox="0 0 ' + W + ' ' + H + '" aria-hidden="true">';
+		/* the grid, a faint line a year, and the years every five */
+		years.forEach(function (y, i) {
+			svg += '<line class="nmc-grid" x1="' + cx(i).toFixed(1) + '" x2="' + cx(i).toFixed(1) + '" y1="' + pT + '" y2="' + (H - pB) + '"/>';
+			if (y % 5 === 0) svg += '<text class="nmc-ax" x="' + cx(i).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle">' + e(A.num(y)) + '</text>';
+		});
+		svg += '<line class="nmc-axis" x1="' + pS + '" x2="' + (W - pS) + '" y1="' + (H - pB) + '" y2="' + (H - pB) + '"/>';
+		/* the columns */
+		years.forEach(function (y, i) {
+			var v = n(Y.mwt, y);
+			if (v) svg += '<rect class="nmc-col" data-y="' + y + '" style="--i:' + i + '" x="' + (X(i) + bw * .16).toFixed(1) + '" y="' + V(v, mM).toFixed(1) + '" width="' + (bw * .68).toFixed(1) + '" height="' + (H - pB - V(v, mM)).toFixed(1) + '"/>';
+		});
+		/* the papers: a line drawing itself in, square bullets */
+		var pp = years.map(function (y, i) { return [cx(i), V(n(Y.papers, y), mP, 30), n(Y.papers, y)]; }).filter(function (p) { return p[2]; });
+		if (pp.length) {
+			svg += '<path class="nmc-papers" pathLength="1" d="M' + pp.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join('L') + '"/>';
+			svg += pp.map(function (p) { return '<rect class="nmc-sq" x="' + (p[0] - 3.5).toFixed(1) + '" y="' + (p[1] - 3.5).toFixed(1) + '" width="7" height="7"/>'; }).join('');
+		}
+		/* the books: a dashed line, bullets by how many, the milestones named */
+		var bp = years.map(function (y, i) { return [cx(i), V(n(Y.books, y), mB, 46), n(Y.books, y), y]; }).filter(function (p) { return p[2]; });
+		var named = {}, peak = bp.reduce(function (a, p) { return p[2] > a[2] ? p : a; }, bp[0] || [0, 0, 0, 0]);
+		var utopia = (d.works || []).filter(function (w) { return w.id === 'utopia'; })[0], uy = utopia && +((String(utopia.year || '').match(/\d{4}/) || [])[0]);
+		if (bp.length) { named[bp[0][3]] = 1; named[peak[3]] = 1; named[bp[bp.length - 1][3]] = 1; if (uy) named[uy] = 1; }
+		var title = function (y) {
+			var list = Y.books[y] || [], u = list.filter(function (w) { return utopia && w.id === utopia.id; })[0] || list[0];
+			return u ? t(u.title) : '';
+		};
+		if (bp.length) {
+			svg += '<path class="nmc-books" d="M' + bp.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join('L') + '"/>';
+			svg += bp.map(function (p, k) {
+				var rr = 3 + Math.sqrt(p[2]) * 3.2, last = k === bp.length - 1;
+				return '<circle class="nmc-dot' + (last ? ' is-last' : '') + '" cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="' + rr.toFixed(1) + '"/>' +
+					(named[p[3]] ? '<text class="nmc-name' + (p[3] === uy ? ' is-key' : '') + '" x="' + (p[0] + (rtl ? -1 : 1) * (rr + 5)).toFixed(1) + '" y="' + (p[1] + 4).toFixed(1) + '" text-anchor="start" direction="' + (rtl ? 'rtl' : 'ltr') + '">' + e(title(p[3])) + '</text>' : '');
+			}).join('');
+		}
+		/* a band a year that the pointer finds */
+		years.forEach(function (y, i) { svg += '<rect class="nmc-hit" data-y="' + y + '" x="' + X(i).toFixed(1) + '" y="0" width="' + bw.toFixed(1) + '" height="' + H + '"/>'; });
+		svg += '</svg>';
+		var tot = function (o) { return Object.keys(o).reduce(function (a, k) { return a + o[k].length; }, 0); };
+		setTimeout(function () { numbersChartWire(Y, A); }, 0);
+		return '<div class="nmc-wrap">' + svg + '<p class="nmc-legend" aria-live="polite">' +
+			'<span class="k-col"><i></i>' + e(L('أعداد «ما وراء الطبيعة»', 'Ma Wara’ al-Tabi’a issues')) + ' <b data-k="mwt" data-all="' + tot(Y.mwt) + '"></b></span>' +
+			'<span class="k-books"><i></i>' + e(L('كتبه المستقلة', 'standalone books')) + ' <b data-k="books" data-all="' + tot(Y.books) + '"></b></span>' +
+			'<span class="k-papers"><i></i>' + e(L('مقالاته في الصحف', 'pieces in the papers')) + ' <b data-k="papers" data-all="' + tot(Y.papers) + '"></b></span>' +
+			'<em class="nmc-year"></em></p></div>';
+	}
+	/* the legend follows the pointer: a year's three numbers, or the totals when it leaves */
+	function numbersChartWire(Y, A) {
+		var wrap = document.querySelector('.nmc-wrap');
+		if (!wrap || wrap.getAttribute('data-on')) return;
+		wrap.setAttribute('data-on', '1');
+		var L = A.L, bs = [].slice.call(wrap.querySelectorAll('.nmc-legend b')), yr = wrap.querySelector('.nmc-year');
+		var show = function (y) {
+			bs.forEach(function (b) { b.textContent = A.num(y ? (Y[b.getAttribute('data-k')][y] || []).length : +b.getAttribute('data-all')); });
+			yr.textContent = y ? A.num(y) : L('المجموع', 'in all');
+			/* the year's band and its column light up (the bands lie over the columns, so a hover of the column's own cannot) */
+			[].forEach.call(wrap.querySelectorAll('.is-on'), function (h) { h.classList.remove('is-on'); });
+			if (y) [].forEach.call(wrap.querySelectorAll('[data-y="' + y + '"]'), function (h) { h.classList.add('is-on'); });
+		};
+		wrap.addEventListener('pointermove', function (ev) { var h = ev.target.closest('.nmc-hit'); show(h ? +h.getAttribute('data-y') : 0); });
+		wrap.addEventListener('pointerleave', function () { show(0); });
+		show(0);
+	}
 
 	/* the about band at work: the panels rise in, a click (or Enter) opens one, the cross or Escape closes it */
 	function aboutBand() {

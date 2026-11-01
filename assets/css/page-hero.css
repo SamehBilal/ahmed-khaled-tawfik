@@ -627,22 +627,62 @@ html[data-theme="light"] .ph-crate.on { filter: none; }
 html[data-theme="light"] .ph[data-ph="papers"] { background: radial-gradient(60% 120% at 50% 0%, #f6ead2 0%, #e2d0ae 70%); }
 html[data-theme="light"] .ph-paper { box-shadow: 0 12px 22px rgba(60, 40, 20, .25); }
 
-/* ---------- numbers (and style): a scoreboard counting up over a faint bar chart, his trailing dots typed under it ---------- */
+/* ---------- numbers (and style): a scoreboard counting up, his career in one chart, his trailing dots typed under it ---------- */
 /* the band is the page itself: no ground of its own, no glow, no line under it, in either theme */
 .ph[data-ph="numbers"], html[data-theme="light"] .ph[data-ph="numbers"] { background: transparent; border-bottom: 0; }
 .ph[data-ph="numbers"]::before, .ph[data-ph="numbers"]::after { display: none; }
 /* the lines take turns in one place over nine seconds: each typed, held, erased, then gone while the next is typed */
-.ph-type { position: absolute; left: 0; right: 0; bottom: 26px; height: 40px; z-index: 2; pointer-events: none; }
+.ph-type { position: relative; height: 40px; margin: 6px 0 0; pointer-events: none; }
 .ph-type p { position: absolute; top: 0; left: 50%; margin: 0; transform: translateX(-50%); white-space: nowrap; font-family: var(--f-display); font-size: 24px; color: var(--paper-dim); }
 .ph-type span { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; width: 0; border-inline-end: 2px solid var(--ember);
 	animation: ph-type 9s var(--d) steps(20) infinite both; }
 @keyframes ph-type { 0% { width: 0; visibility: visible; } 13%, 26% { width: 100%; } 32% { width: 0; visibility: visible; } 33%, 100% { width: 0; visibility: hidden; } }
-@media (max-width: 640px) { .ph-type { bottom: 14px; } .ph-type p { font-size: 18px; } }
+@media (max-width: 640px) { .ph-type p { font-size: 18px; } }
 @media (prefers-reduced-motion: reduce) { .ph-type span { animation: none; width: auto; border: 0; } .ph-type p + p { display: none; } }
-.ph-bars { position: absolute; inset: 30% 4% 0; display: flex; align-items: flex-end; gap: 2%; opacity: .14; }
-.ph-bars i { flex: 1; height: var(--h); border-radius: 4px 4px 0 0; background: var(--ember); transform-origin: bottom; animation: ph-rise 1.4s calc(var(--i) * .06s) cubic-bezier(.2, .8, .2, 1) both; }
-@keyframes ph-rise { from { transform: scaleY(0); } }
-.ph-board { position: absolute; inset: 0 0 56px; display: flex; justify-content: center; align-items: center; gap: clamp(10px, 3vw, 40px); padding: 0 4%; z-index: 2; flex-wrap: wrap; }
+/* the band as a column: the scoreboard, the chart and its legend, the typed line */
+.ph[data-ph="numbers"] { height: auto; }
+.ph[data-ph="numbers"] .ph-stage { position: relative; display: flex; flex-direction: column; align-items: center; padding: 24px 0 18px; }
+/* the chart (numbersChart in page-hero.js), after amCharts' «CSS Animations» pen */
+.nmc-wrap { width: min(1100px, 100% - 32px); margin-top: 14px; }
+.nmc { display: block; width: 100%; height: auto; overflow: visible; }
+.nmc-grid { stroke: var(--paper); stroke-opacity: .07; }
+.nmc-axis { stroke: var(--paper); stroke-opacity: .25; }
+.nmc-ax { fill: var(--muted); font-family: var(--f-latin); font-size: 15px; }
+/* the columns rise in one after another, and light up under the pointer */
+.nmc-col { fill: var(--paper); fill-opacity: .13; transform-box: fill-box; transform-origin: bottom; animation: nmc-rise .9s calc(var(--i) * .03s) cubic-bezier(.2, .8, .2, 1) both;
+	transition: fill .3s .3s, fill-opacity .3s .3s; }
+@keyframes nmc-rise { from { transform: scaleY(0); } }
+/* the red line draws itself in, square bullets on it */
+.nmc-papers { fill: none; stroke: #ff5755; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: nmc-draw 4s .4s ease-out forwards; }
+@keyframes nmc-draw { to { stroke-dashoffset: 0; } }
+.nmc-sq { fill: var(--ink); stroke: #ff5755; stroke-width: 1.4; opacity: 0; animation: nmc-in .4s 2.2s forwards; }
+@keyframes nmc-in { to { opacity: 1; } }
+/* the dashed line of his books, its dashes moving, round bullets sized by how many, the last one pulsing */
+.nmc-books { fill: none; stroke: #c9a36a; stroke-width: 1.4; stroke-dasharray: 3 3; stroke-linejoin: round; stroke-linecap: round; animation: nmc-dash 1s linear infinite; }
+@keyframes nmc-dash { to { stroke-dashoffset: -6; } }
+.nmc-dot { fill: var(--ink); stroke: #c9a36a; stroke-width: 2; }
+.nmc-dot.is-last { animation: nmc-pulse 1.2s ease-out infinite; }
+@keyframes nmc-pulse { 0% { stroke-opacity: 1; stroke-width: 2; } 100% { stroke-opacity: 0; stroke-width: 40; } }
+.nmc-name { fill: var(--paper); font-family: var(--f-display); font-size: 16px; paint-order: stroke; stroke: var(--ink); stroke-width: 4px; stroke-linejoin: round; }
+/* the year under the pointer */
+.nmc-hit { fill: var(--paper); fill-opacity: 0; }
+.nmc-hit.is-on { fill-opacity: .05; }
+.nmc-col.is-on { fill: var(--ember); fill-opacity: .85; transition: fill .3s, fill-opacity .3s; }
+/* the legend: what each mark is, and its total or the year's number */
+.nmc-legend { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 22px; margin: 8px 0 0; color: var(--paper-dim); font-size: 14px; }
+.nmc-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.nmc-legend b { color: var(--paper); font-family: var(--f-latin); font-size: 17px; font-weight: 600; min-width: 2ch; }
+.nmc-legend i { display: inline-block; width: 12px; height: 12px; }
+.nmc-legend .k-col i { background: var(--paper); opacity: .3; border-radius: 2px; }
+.nmc-legend .k-books i { border: 2px solid #c9a36a; border-radius: 50%; }
+.nmc-legend .k-papers i { width: 9px; height: 9px; border: 1.5px solid #ff5755; }
+.nmc-year { color: var(--ember); font-style: normal; font-family: var(--f-latin); font-size: 17px; }
+html[data-theme="light"] .nmc-books, html[data-theme="light"] .nmc-dot { stroke: #9a7232; }
+html[data-theme="light"] .nmc-legend .k-books i { border-color: #9a7232; }
+html[data-theme="light"] .nmc-papers, html[data-theme="light"] .nmc-sq, html[data-theme="light"] .nmc-legend .k-papers i { stroke: #d6403e; border-color: #d6403e; }
+@media (max-width: 640px) { .nmc-name { font-size: 26px; } .nmc-name:not(.is-key) { display: none; } /* (the first and last would run off the screen) */ .nmc-ax { font-size: 26px; } .nmc-legend { font-size: 13px; gap: 4px 14px; } }
+@media (prefers-reduced-motion: reduce) { .nmc-col, .nmc-papers, .nmc-sq, .nmc-books, .nmc-dot { animation: none; stroke-dashoffset: 0; opacity: 1; } .nmc-books { stroke-dasharray: 3 3; } }
+.ph-board { position: relative; display: flex; justify-content: center; align-items: center; gap: clamp(10px, 3vw, 40px); padding: 0 4%; z-index: 2; flex-wrap: wrap; }
 .ph-count { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 18px 12px; min-width: 120px; border-radius: 12px;
 	background: rgba(14, 15, 19, .72); border: 1px solid rgba(239, 230, 210, .12); box-shadow: inset 0 -40px 40px -40px rgba(224, 99, 58, .35); }
 .ph-count b { font-family: var(--f-latin); font-size: clamp(34px, 5vw, 56px); line-height: 1; color: var(--ember); font-variant-numeric: tabular-nums; }
@@ -690,6 +730,6 @@ html[data-theme="light"] .ph-rose { stroke: #2a4a5e; }
 html[data-theme="light"] .ph-spot-pin { fill: #9e2219; }
 
 @media (prefers-reduced-motion: reduce) {
-	.ph-paper, .ph-bars i, .ph-qm, .ph-quiz-q, .ph-quiz-opts span, .ph-route, .ph-spot-pin, .ph-rose { animation: none; }
+	.ph-paper, .ph-qm, .ph-quiz-q, .ph-quiz-opts span, .ph-route, .ph-spot-pin, .ph-rose { animation: none; }
 	.ph-route { stroke-dashoffset: 0; } .ph-spot-pin { opacity: 1; }
 }
