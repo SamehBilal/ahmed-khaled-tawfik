@@ -2,15 +2,21 @@
 /* the band is the page itself: no ground of its own, no glow, no line under it, in either theme — only the handwritten sheet */
 .ph[data-ph="handwriting"], html[data-theme="light"] .ph[data-ph="handwriting"] { background: transparent; border-bottom: 0; }
 .ph[data-ph="handwriting"]::before, .ph[data-ph="handwriting"]::after { display: none; }
-.hw-page { position: absolute; left: 50%; top: 12%; bottom: 10%; width: min(520px, 86%); transform: translateX(-50%) rotate(1.5deg); padding: 30px 34px;
-	background: #f1e6cf; border-radius: 2px 6px 6px 2px; box-shadow: 0 20px 40px rgba(0, 0, 0, .6), inset 18px 0 24px -18px rgba(0, 0, 0, .35); display: flex; flex-direction: column; justify-content: center; gap: 18px; }
-.hw-page p { margin: 0; font-family: var(--f-display); color: #1d3a7a; }
+/* the sheet, as Robert Messerle's «Lined Paper Email Form» on CodePen: white paper ruled in light blue every 30px below a blank head,
+   a salmon margin line down the side the writing starts from, and the writing sitting on the rules */
+.hw-page { --rule: 30px; --head: 60px; position: absolute; left: 50%; top: 12%; bottom: 10%; width: min(520px, 86%); transform: translateX(-50%) rotate(1.5deg); overflow: hidden;
+	padding: var(--head) 26px 0; padding-inline-start: 74px; border-radius: 2px 6px 6px 2px;
+	background: linear-gradient(#fff 0 calc(var(--head) - 1px), transparent calc(var(--head) - 1px)), linear-gradient(#add8e6 1px, transparent 1px) 0 0 / 100% var(--rule), #fff;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, .6), inset 18px 0 24px -18px rgba(0, 0, 0, .18); }
+.hw-page::before { content: ''; position: absolute; top: 0; bottom: 0; inset-inline-start: 58px; width: 1px; background: salmon; }
+.hw-page p { margin: 0; font-family: var(--f-display); line-height: var(--rule); color: #1d3a7a; }
+.hw-page .hw-sign { margin-top: var(--rule); }
 .hw-page span { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; width: 0; animation: hw-write 10s ease-in-out infinite; }
 .hw-line { font-size: 22px; }
 .hw-sign { font-size: 26px; text-align: end; font-style: italic; }
 .hw-sign span { animation-delay: 2.5s; }
 @keyframes hw-write { 0% { width: 0; } 35%, 85% { width: 100%; } 100% { width: 100%; opacity: 0; } }
-@media (max-width: 640px) { .hw-line { font-size: 16px; } .hw-sign { font-size: 19px; } }
+@media (max-width: 640px) { .hw-page { --rule: 26px; --head: 44px; padding-inline-start: 50px; } .hw-page::before { inset-inline-start: 38px; } .hw-line { font-size: 16px; } .hw-sign { font-size: 19px; } }
 @media (prefers-reduced-motion: reduce) { .hw-page span { animation: none; width: auto; } }
 .hw-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
 .hw-card { display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); border-inline-start: 4px solid #3a5aa0; }
