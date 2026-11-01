@@ -42,7 +42,12 @@ html[data-theme="light"] .tr-quill svg { background: radial-gradient(circle, var
 .tr-authors .chip b { font-family: var(--f-latin); color: var(--ember); margin-inline-start: 4px; }
 .tr-authors .chip.is-on { border-color: var(--ember); color: var(--paper); background: color-mix(in srgb, var(--ember) 16%, transparent); }
 .tr-of { font-size: 12px; line-height: 1.5; color: var(--muted); }
-.tr-grid .cover-link[hidden] { display: none; }
+.tr-grid .tr-cell[hidden] { display: none; }
+/* each cell the cover's link and, under it, the novel's author as a link of its own */
+.tr-cell { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+/* the names on the page that lead somewhere: a publisher's page here, an author on Wikipedia, the contact page */
+.tr-name { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--ember) 45%, transparent); text-underline-offset: 3px; }
+.tr-name:hover, .tr-name:focus-visible { color: var(--ember); text-decoration-color: var(--ember); }
 /* the books he translated: each cover whole inside «حول العالم»'s frame, not cut to it — a cover of another shape (the Che Guevara
    graphic biography, The Graveyard Book) sits within it, its shadow its own */
 .tr .wd-cover img { object-fit: contain; object-position: center top; background: none; box-shadow: none; border-radius: 0; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .4)); }

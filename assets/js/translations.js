@@ -16,7 +16,28 @@ window.PAGE = {
 	BY: {
 		fightclub: { ar: 'تشاك بولانيك', en: 'Chuck Palahniuk' }, dermaphoria: { ar: 'كريج كليفنجر', en: 'Craig Clevenger' },
 		kiterunner: { ar: 'خالد حسيني', en: 'Khaled Hosseini' }, che: { ar: 'سبين رودريجيز', en: 'Spain Rodriguez' },
-		graveyard: { ar: 'نيل جايمان', en: 'Neil Gaiman' }, 'nashawat-qadima': { ar: 'أغانٍ أحبها', en: 'Songs he loved' }
+		graveyard: { ar: 'نيل جايمان', en: 'Neil Gaiman' }, 'nashawat-qadima': { ar: 'أغانٍ أحبها', en: 'Songs he loved', none: 1 }
+	},
+
+	/* every name on the page a link: a publisher to its page here, an author (none has a page here) to Wikipedia in the language
+	   shown, which opens the article itself when the name is one */
+	authorLink: function (name, en) {
+		var App = window.App, e = App.esc, ar = App.lang !== 'en', q = ar ? name : (en || name);
+		return '<a class="tr-name" href="https://' + (ar ? 'ar' : 'en') + '.wikipedia.org/w/index.php?search=' + encodeURIComponent(q) + '" target="_blank" rel="noopener">' + e(ar ? name : (en || name)) + '</a>';
+	},
+	/* a book's publisher line, each publisher in it that the site has a page for linked there (by its Arabic name; the English line,
+	   whose names differ, is linked whole to the first) */
+	publisherLinks: function (pub) {
+		var App = window.App, S = window.WorksShared, e = App.esc, t = App.t, ar = App.lang !== 'en', text = t(pub), src = (pub && pub.ar) || '';
+		var hits = S.publishers().filter(function (c) { var n = (c.p.name || {}).ar || ''; return n && src.indexOf(n.replace(/ للنشر والتوزيع$/, '')) >= 0; });
+		if (!hits.length) return e(text);
+		if (!ar) return '<a class="tr-name" href="' + e(S.publisherHref(hits[0].p.id)) + '">' + e(text) + '</a>';
+		var out = e(text);
+		hits.forEach(function (c) {
+			var n = e(c.p.name.ar.replace(/ للنشر والتوزيع$/, '')), i = out.indexOf(n);
+			if (i >= 0) out = out.slice(0, i) + '<a class="tr-name" href="' + e(S.publisherHref(c.p.id)) + '">' + n + '</a>' + out.slice(i + n.length);
+		});
+		return out;
 	},
 	filter: '',
 
@@ -57,12 +78,13 @@ window.PAGE = {
 			var digits = String(Math.max.apply(null, list.map(function (is) { return is.n || 0; }))).length;
 			return '<div class="cover-grid is-ranked tr-grid" data-digits="' + digits + '" style="--c:' + e(ser.color || '#7a4e1d') + ';--d:' + digits + '">' + list.map(function (is) {
 				var o = self.orig(is, lang);
-				return '<a class="cover-link" href="' + App.issueHref(sid, is) + '" data-a="' + e(akey(is)) + '" title="' + e(t(is.title)) + '">' +
+				var oe = self.orig(is, 'en'), oa = self.orig(is, 'ar');
+				return '<div class="tr-cell" data-a="' + e(akey(is)) + '"><a class="cover-link" href="' + App.issueHref(sid, is) + '" title="' + e(t(is.title)) + '">' +
 					'<span class="cl-cover">' + S.miniCover({ img: S.issueCover(sid, is), color: ser.color, title: t(is.title), sub: is.original ? t(is.original) : '' }) +
 						(is.n != null ? '<b class="cl-n">' + e(App.num(is.n)) + '</b>' : '') + '</span>' +
-					'<span class="cl-t">' + e(t(is.title)) + '</span>' +
-					(o ? '<span class="tr-of"><span dir="auto">' + e(o.title) + '</span> · ' + e(o.author) + '</span>' : '') +
-				'</a>';
+					'<span class="cl-t">' + e(t(is.title)) + '</span></a>' +
+					(o ? '<span class="tr-of"><span dir="auto">' + e(o.title) + '</span> · ' + self.authorLink(oa ? oa.author : o.author, oe && oe.author) + '</span>' : '') +
+				'</div>';
 			}).join('') + '</div>';
 		};
 
@@ -82,8 +104,8 @@ window.PAGE = {
 					'<a class="wd-cover" href="' + e(S.bookHref(w.id)) + '">' + (cover ? '<img src="' + e(cover) + '" alt="" loading="lazy">' : '<i></i>') + '</a>' +
 					'<div><h3><a href="' + e(S.bookHref(w.id)) + '">' + e(t(w.title)) + '</a></h3>' +
 					(lang === 'ar' && w.title.en ? '<p class="tr-en" dir="ltr">' + e(w.title.en) + '</p>' : '') +
-					(by ? '<p>' + e(L('عن ', 'From ')) + e(t(by)) + '</p>' : '') +
-					'<p class="wd-pub">' + e(t(w.publisher)) + ' · ' + e(App.num(w.year)) + '</p>' +
+					(by ? '<p>' + e(L('عن ', 'From ')) + (by.none ? e(t(by)) : self.authorLink(by.ar, by.en)) + '</p>' : '') +
+					'<p class="wd-pub">' + self.publisherLinks(w.publisher) + ' · ' + e(App.num(w.year)) + '</p>' +
 					'<p class="tr-syn">' + e(t(w.synopsis)) + '</p></div></article>';
 			}).join('') + '</div></section>' +
 
@@ -101,7 +123,8 @@ window.PAGE = {
 			(shv.length ? '<section class="tr-part" id="tr-shivers"><h2><a href="' + e(S.seriesHref('shivers')) + '">' + e(t(ss.title || {})) + '</a></h2>' +
 				(ss.synopsis ? '<p class="tr-about">' + e(t(ss.synopsis)) + '</p>' : '') + grid('shivers', ss, shv) + '</section>' : '') +
 
-			'<p class="wd-note">' + e(L('هذه الترجمات التي عرفها الموقع؛ إن كانت لديك ترجمة له غيرها فاقترح إضافتها من صفحة «تواصل».', 'These are the translations the site knows of; if you know another, suggest it from the Contact page.')) + '</p>' +
+			'<p class="wd-note">' + e(L('هذه الترجمات التي عرفها الموقع؛ إن كانت لديك ترجمة له غيرها فاقترح إضافتها من صفحة ', 'These are the translations the site knows of; if you know another, suggest it from the ')) +
+				'<a class="tr-name" href="contact.html#contribute">' + e(L('«تواصل وساهم»', 'Contact & contribute page')) + '</a>' + e(L('.', '.')) + '</p>' +
 		'</div></section>';
 
 		/* an author chip shows only that author's novels */
@@ -111,7 +134,7 @@ window.PAGE = {
 			if (!b) return;
 			var a = b.getAttribute('data-a');
 			box.querySelectorAll('button').forEach(function (x) { var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-			document.querySelectorAll('#tr-rwg .cover-link').forEach(function (c) { c.hidden = !!a && c.getAttribute('data-a') !== a; });
+			document.querySelectorAll('#tr-rwg .tr-cell').forEach(function (c) { c.hidden = !!a && c.getAttribute('data-a') !== a; });
 		});
 	}
 };
