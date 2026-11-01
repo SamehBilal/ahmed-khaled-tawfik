@@ -16,18 +16,16 @@ html[data-theme="light"] .ph { --ph-bg: #1c1712; border-bottom-color: rgba(0, 0,
 	background: linear-gradient(90deg, var(--ph-bg) 0, transparent 9%, transparent 91%, var(--ph-bg) 100%); }
 @media (max-width: 640px) { .ph { height: 250px; } }
 
-/* ---------- about: five panels that open ---------- */
+/* ---------- about: six panels that open ---------- */
 /* After Nikolay Talanov's «Cool Layout with Complex Chainable Animation» on CodePen (assets/js/page-hero.js draws and wires it):
-   five panels, each the site's number over its own picture, rising in one after another (the pen slices one wide picture
+   six panels, each the site's number over its own picture, rising in one after another (the pen slices one wide picture
    across them; here each panel has its own, whole, and it widens with the panel); a hover dims the others and lifts the panel's number
    from below; opened, a panel first slides to the start, then spreads across the row while the rest shrink away, and its words
-   come in. No line under the band: the dark fades down into the page */
-.ph[data-ph="about"] { height: 420px; border-bottom: 0; background: radial-gradient(80% 120% at 50% 10%, #3a2a1c 0%, #1c140d 60%, #120d09 100%); }
-.ph[data-ph="about"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 24px; z-index: 6; pointer-events: none;
-	background: linear-gradient(transparent, var(--ink)); }
-.ph[data-ph="about"]::after { display: none; }
+   come in. The band is the page itself: no ground of its own, no glow, no line under it */
+.ph[data-ph="about"], html[data-theme="light"] .ph[data-ph="about"] { height: 420px; border-bottom: 0; background: transparent; }
+.ph[data-ph="about"]::before, .ph[data-ph="about"]::after { display: none; }
 .ph[data-ph="about"] + .page-hero { padding-top: 30px; }
-.ab { --gap: 1cqw; --w: calc((100cqw - (var(--n) - 1) * var(--gap)) / var(--n)); --ab-ink: #f3ead7; --ab-back: #3a2b20;
+.ab { --gap: 1cqw; --w: calc((100cqw - (var(--n) - 1) * var(--gap)) / var(--n)); --ab-ink: var(--paper); --ab-back: var(--ink-2);
 	position: absolute; inset: 26px max(5%, 16px) 84px; container-type: inline-size; }
 .ab-el { --x: calc(var(--i) * (var(--w) + var(--gap)));
 	position: absolute; top: 0; inset-inline-start: var(--x); width: var(--w); height: 100%; background: #1d1611; border-radius: 6px; outline: none;
@@ -75,14 +73,15 @@ html[data-theme="light"] .ph { --ph-bg: #1c1712; border-bottom-color: rgba(0, 0,
 .ab-el.s--active .ab-close::after { transform: rotate(-45deg) translateX(0); transition: all .3s 1.55s cubic-bezier(.72, .09, .32, 1.57); }
 /* the number under each panel: its shadow shows on a hover, and the number itself rises into place */
 .ab-index { overflow: hidden; position: absolute; left: 0; bottom: -84px; width: 100%; height: 100%; min-height: 160px; pointer-events: none; text-align: center;
-	font-family: var(--f-latin); font-size: clamp(34px, 6cqw, 84px); font-weight: 700; line-height: .85;
+	font-family: var(--f-latin); font-size: clamp(34px, 6cqw, 84px); font-weight: 700; line-height: 1.15; /* (tighter, and the hidden number's foot shows) */
 	transform: translate3d(0, 1cqw, 0); transition: transform .5s, opacity .3s 1.4s; }
 .ab-el:hover .ab-index, .ab-el:focus-visible .ab-index { transform: translate3d(0, 0, 0); }
 .ab.s--el-active .ab-index { opacity: 0; transition: transform .5s, opacity .3s; }
 .ab-index-back, .ab-index-front { position: absolute; left: 0; bottom: 22px; width: 100%; } /* (above the fade at the band's foot) */
 .ab-index-back { color: var(--ab-back); opacity: 0; transition: opacity .25s .25s; }
 .ab-el:hover .ab-index-back, .ab-el:focus-visible .ab-index-back { opacity: 1; transition: opacity .25s; }
-.ab-index-overlay { overflow: hidden; position: relative; color: transparent; transform: translate3d(0, 100%, 0); transition: transform .5s .1s; }
+.ab-index-overlay { overflow: hidden; position: relative; color: transparent; transform: translate3d(0, 100%, 0); visibility: hidden; transition: transform .5s .1s, visibility 0s .6s; }
+.ab-el:hover .ab-index-overlay, .ab-el:focus-visible .ab-index-overlay { visibility: visible; transition: transform .5s .1s, visibility 0s; } /* (hidden once down, or the digits' feet show under the panels) */
 .ab-index-overlay::before { content: attr(data-index); position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; color: var(--ab-ink);
 	transform: translate3d(0, -100%, 0); transition: transform .5s .1s; }
 .ab-el:hover .ab-index-overlay, .ab-el:hover .ab-index-overlay::before,
@@ -516,7 +515,6 @@ html[dir="rtl"] .ph-wall .track { animation-name: ph-marquee-rtl; }
 /* ---------- the paper theme: the bands turn to parchment and daylight, their scenes kept ---------- */
 html[data-theme="light"] .ph { --ph-bg: #ebdfc8; --ph-ink: #2a2017; --ph-dim: #6f6150; --ph-glow: rgba(184, 69, 31, .16); border-bottom-color: var(--line);
 	background: radial-gradient(70% 120% at 50% 0%, #f8f0e0 0%, #ebdfc8 70%); }
-html[data-theme="light"] .ph[data-ph="about"] { background: radial-gradient(80% 120% at 50% 10%, #f7ecd6 0%, #e6d4b4 60%, #dcc7a3 100%); }
 html[data-theme="light"] .ab { --ab-ink: #2a2017; --ab-back: #d8c4a0; }
 html[data-theme="light"] .ph[data-ph="contact"],
 html[data-theme="light"] .ph[data-ph="privacy"] { background: radial-gradient(70% 120% at 70% 0%, #f4ecdc 0%, #e2d6c0 70%); }

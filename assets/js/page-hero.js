@@ -9,7 +9,7 @@
 	function clip(s, n) { s = String(s || '').replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1).trim() + '…' : s; }
 
 	var R = {
-		/* about: after Nikolay Talanov's «Cool Layout with Complex Chainable Animation» on CodePen — five panels, one a number of
+		/* about: after Nikolay Talanov's «Cool Layout with Complex Chainable Animation» on CodePen — six panels, one a number of
 		   the site's, that rise in one after another, each its own picture; hovering one lifts its number from below, and opening
 		   one slides it to the start, spreads it across the band and tells what is behind the number, with the way there.
 		   Wired by aboutBand below */
@@ -24,6 +24,8 @@
 					L('كل أعداد سلاسله، من «ما وراء الطبيعة» إلى «سافاري» و«فانتازيا»، عددًا عددًا بأغلفتها.', 'Every issue of his series, from Paranormal to Safari and Fantasia, cover by cover.'), L('الأعمال', 'The works')],
 				[(d.works || []).length, L('كتابًا مستقلًا', 'standalone books'), S && utopia ? S.coverOf((d.bookInfo || {}).utopia) : '', 'works.html',
 					L('رواياته وكتبه خارج السلاسل، من «يوتوبيا» إلى «شآبيب».', 'His novels and books outside the series, from Utopia to Shaabeeb.'), L('الأعمال', 'The works')],
+				[series.length, L('سلسلة', 'series'), S ? S.seriesCover('safari') : '', 'works.html',
+					L('سلاسله، ومنها ما كتب فيه مع غيره: «ما وراء الطبيعة» و«فانتازيا» و«سافاري» و«روايات عالمية للجيب» وغيرها.', 'His series, and those he wrote for with others: Paranormal, Fantasia, Safari, World Pocket Novels and the rest.'), L('الأعمال', 'The works')],
 				[(d.characters || []).length, L('شخصية', 'characters'), 'assets/img/refaat.jpg', 'characters.html',
 					L('أبطاله ومن حولهم: رفعت إسماعيل وعلاء عبد العظيم وعبير، ومن عاشوا معهم.', 'His heroes and those around them: Refaat Ismail, Alaa Abdel Azim, Abeer and the rest.'), L('الشخصيات', 'The characters')],
 				[(d.quotes || []).length, L('اقتباسًا', 'quotes'), S ? S.seriesCover('fantasia') : '', 'quotes.html',
