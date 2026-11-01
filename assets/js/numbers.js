@@ -31,11 +31,17 @@ window.PAGE = {
 		};
 		var seriesIds = own.concat(other).filter(function (s) { return /\d{4}/.test(String(s.years || '')); });
 
+		var step = function (n, kicker, h, lead) {
+			return '<div class="flow-head"><span class="flow-mark" aria-hidden="true">' + e(App.num(n)) + '</span><p class="flow-kicker">' + e(kicker) + '</p><h2>' + e(h) + '</h2><p class="flow-lead">' + e(lead) + '</p></div>';
+		};
 		document.getElementById('content').innerHTML =
 			'<section class="section nm"><div class="wrap">' +
-				/* the two parts, a jump to each */
-				'<nav class="nm-parts" aria-label="' + e(L('أقسام الصفحة', 'On this page')) + '"><a href="#career">' + e(L('المسيرة', 'The career')) + '</a><a href="#style">' + e(L('اللغة والأسلوب', 'Language & style')) + '</a></nav>' +
-				'<h2 class="nm-part" id="career">' + e(L('المسيرة', 'The career')) + '</h2>' +
+				/* one story in two steps, «المسيرة» (what he wrote) then «اللغة والأسلوب» (how he wrote it), as the contact page's
+				   (the flow in site.css): a map of the two, then a thread down the side from one numbered step to the next */
+				'<nav class="flow-map" aria-label="' + e(L('خطوتان', 'Two steps')) + '"><a href="#career"><i>' + e(App.num(1)) + '</i>' + e(L('المسيرة', 'The career')) + '</a><b></b>' +
+					'<a href="#style"><i>' + e(App.num(2)) + '</i>' + e(L('اللغة والأسلوب', 'Language & style')) + '</a></nav>' +
+				'<div class="flow"><section class="flow-step" id="career">' + step(1, L('ما كتبه', 'What he wrote'), L('المسيرة', 'The career'),
+					L('ربع قرن من الأعداد والكتب والمقالات: كم كتب، ومتى، ولمن.', 'A quarter-century of issues, books and articles: how much he wrote, when, and for whom.')) +
 				'<div class="nm-tiles">' +
 					tile(issues, ['عددًا في السلاسل', 'أعداد في السلاسل', 'series issues'], 'works.html') +
 					tile(main.length, ['سلسلة', 'سلاسل', 'series'], 'works.html') +
@@ -53,9 +59,11 @@ window.PAGE = {
 				'<figure class="nm-chart" id="nm-books"><figcaption>' + e(L('كتبه المستقلة في كل عام، بأنواعها', 'His standalone books each year, by kind')) + '<small class="nm-note">' + e(L('ما بعد 2018 كتب جُمعت ونُشرت بعد رحيله.', 'The books after 2018 were collected and published after his death.')) + '</small></figcaption><div class="nm-legend"></div><div class="nm-plot"></div><div class="nm-tip" hidden></div></figure>' +
 				'<figure class="nm-chart" id="nm-papers"><figcaption>' + e(L('مقالاته في الصحف في كل عام', 'His pieces in the papers each year')) + ' <a href="papers.html">' + e(L('في الصحف ←', 'In the papers →')) + '</a></figcaption><div class="nm-plot"></div><div class="nm-tip" hidden></div></figure>' +
 				'<figure class="nm-chart" id="nm-houses"><figcaption>' + e(L('دور النشر، بعدد كتبه عن كل منها', 'Publishers, by how many of his books each put out')) + '</figcaption><div class="nm-plot"></div></figure>' +
-			'</div></section>' +
-			'<section class="section st" id="style"><div class="wrap"><h2 class="nm-part">' + e(L('اللغة والأسلوب', 'Language & style')) + '</h2>' +
-				'<p class="st-lead">' + e(L('كيف كان يكتب: أسلوبه بالأرقام، من أرشيف مقالاته.', 'How he wrote: his style in numbers, from the archive of his columns.')) + '</p><div class="st-body"></div></div></section>';
+			'</section>' +
+			'<section class="flow-step" id="style">' + step(2, L('وكيف كتبه', 'And how he wrote it'), L('اللغة والأسلوب', 'Language & style'),
+				L('ومن وراء هذه الأرقام كاتبٌ له صوت: الكلمات التي عاد إليها، وجمله القصيرة، ونقاطه المعلّقة «..»، من أرشيف مقالاته.', 'And behind those numbers, a writer with a voice: the words he came back to, his short sentences, his hanging “..”, from the archive of his columns.')) +
+				'<div class="st-body"></div></section></div>' +
+			'</div></section>';
 		if (window.StyleSection) window.StyleSection.render(document.querySelector('.st-body'));
 		/* drawn after the page loaded, so the browser cannot go to #style (style.html sends its visitors there) by itself */
 		if (/^#(style|career)$/.test(location.hash) && !this.jumped) {

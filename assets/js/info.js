@@ -188,11 +188,20 @@
 
 			if (id === 'contact') {
 				var card = function (icon, h, p, href, btn) {
-					return '<div class="info-card"><span class="info-ic" aria-hidden="true">' + icon + '</span><h2>' + h + '</h2><p>' + p + '</p>' +
+					return '<div class="info-card"><span class="info-ic" aria-hidden="true">' + icon + '</span><h3>' + h + '</h3><p>' + p + '</p>' +
 						'<a class="buy-btn" href="' + e(href) + '"' + (/^mailto:/.test(href) ? '' : ' target="_blank" rel="noopener"') + '>' + btn + '</a></div>';
 				};
 				var mailto = function (subject, body) { return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + (body ? '&body=' + encodeURIComponent(body) : ''); };
-				body = '<div class="info-cards">' +
+				/* the page is one story in two steps, «تواصل» then «ساهم معنا» (the flow in site.css): a map of the two, then a thread
+				   down the side from one numbered step to the next, the second's lead carrying on from the first */
+				var step = function (n, kicker, h, lead) {
+					return '<div class="flow-head"><span class="flow-mark" aria-hidden="true">' + e(App.num(n)) + '</span><p class="flow-kicker">' + e(kicker) + '</p><h2>' + e(h) + '</h2><p class="flow-lead">' + lead + '</p></div>';
+				};
+				body = '<nav class="flow-map" aria-label="' + e(L('خطوتان', 'Two steps')) + '"><a href="#reach"><i>' + e(App.num(1)) + '</i>' + e(L('تواصل', 'Get in touch')) + '</a><b></b>' +
+						'<a href="#contribute"><i>' + e(App.num(2)) + '</i>' + e(L('ساهم معنا', 'Contribute')) + '</a></nav>' +
+					'<div class="flow"><section class="flow-step" id="reach">' +
+					step(1, L('قل لنا', 'Tell us'), L('تواصل', 'Get in touch'), e(L('خطأ رأيته، أو حقّ لك، أو فكرة: ثلاث طرق تصلنا بها، كلٌّ بما يناسبها.', 'A mistake you saw, a right of yours, or an idea: three ways to reach us, each by what suits it.'))) +
+					'<div class="info-cards">' +
 					card('✎', L('تصحيح أو إضافة', 'A correction or addition'),
 						L('افتح بلاغًا على GitHub فيه الصفحة والخطأ والتصحيح ورابط المصدر — أو الغلاف أو الطبعة أو الرابط الناقص. ستجد زرًّا مثله أسفل كل صفحة وفي صفحات الكتب.', 'Open an issue on GitHub with the page, the mistake, the fix and a link to your source — or the cover, edition or link that is missing. There is a button like this at the foot of every page and on book pages.'),
 						App.fixHref(L('', '')), L('اقترح تصحيحًا ↗', 'Suggest a fix ↗')) +
@@ -203,10 +212,10 @@
 					card('✉', L('فكرة أو رسالة', 'An idea or a note'),
 						L('اقتراح لصفحة جديدة، أو ذكرى مع كتبه تحب أن تشاركها، أو مجرد تحية، على ', 'An idea for a new page, a memory of his books you’d like to share, or just hello, at ') + mail + '.',
 						mailto(L('رسالة من الموقع', 'A note from the site')), L('أرسل بريدًا', 'Send an email')) +
-				'</div>' +
+				'</div></section>' +
 				/* «ساهم معنا»: what helps most, and how to send it */
-				'<section class="info-sec info-give" id="contribute"><h2>' + e(L('ساهم معنا', 'Contribute')) + '</h2>' +
-					'<p>' + L('الموقع مبني على ما يرسله القرّاء. هذا ما ينقصه أكثر من غيره:', 'The site is built on what its readers send. This is what it misses most:') + '</p>' +
+				'<section class="flow-step info-give" id="contribute">' +
+					step(2, L('أرسل لنا', 'Send us'), L('ساهم معنا', 'Contribute'), e(L('وإن كان عندك ما يضيف إلى الموقع نفسه، فهو مبنيّ على ما يرسله القرّاء. هذا ما ينقصه أكثر من غيره:', 'And if you have something to add to the site itself: it is built on what its readers send. This is what it misses most:'))) +
 					'<ul class="info-give-list">' + [
 						['▣', L('غلاف طبعة', 'An edition’s cover'), L('صورة واضحة للغلاف الأمامي أو الخلفي لطبعة غير موجودة، ومعها اسم الناشر وسنة الطبع.', 'A clear photo of the front or back cover of an edition the site lacks, with its publisher and year.')],
 						['✒︎', L('بخط يده', 'In his hand'), L('إهداء كتبه لك في نسختك، أو رسالة أو ورقة بخطه، إن أحببت أن يراها القرّاء.', 'A dedication he wrote in your copy, or a letter or note in his hand, if you would like readers to see it.')],
@@ -217,7 +226,7 @@
 					'<p class="info-give-act"><a class="buy-btn" href="' + e(mailto(L('مساهمة للموقع', 'A contribution to the site'), L('ما أرسله (غلاف / إهداء / مقال / تسجيل / صورة):\n\nالعمل أو الصفحة:\n\nالمصدر أو الرابط:\n\nهل يُذكر اسمك؟ (نعم / لا):\n', 'What I am sending (cover / dedication / article / recording / photo):\n\nThe work or page:\n\nSource or link:\n\nMay we name you? (yes / no):\n'))) + '">' + e(L('أرسل مساهمتك بالبريد', 'Send it by email')) + '</a> ' +
 						'<a class="buy-btn" href="' + e(App.fixHref(L('', ''))) + '" target="_blank" rel="noopener">' + e(L('أو على GitHub ↗', 'or on GitHub ↗')) + '</a></p>' +
 					'<p class="info-note">' + L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها إن أراد، وفي «سجل التحديثات».', 'Each contribution that goes up names its sender on its page if they wish, and in the Changelog.') + '</p>' +
-				'</section>' +
+				'</section></div>' +
 				'<p class="info-note">' + L('التصحيحات تُرسل عبر GitHub وتحتاج حسابًا مجانيًا هناك، وتكون علنية؛ أما البريد إلى ', 'Corrections go through GitHub, need a free account there, and are public; email to ') + mail + L(' فيبقى خاصًا — انظر ', ' stays private — see ') + '<a href="privacy.html">' + L('الخصوصية', 'Privacy') + '</a>.</p>';
 			}
 
