@@ -1040,7 +1040,7 @@ html[dir="rtl"] .ft-copy { text-align: right; }
 /* publisher logos on the Works page cards (initial letter where there is no logo) */
 .pub-head { align-items: center; }
 .pub-logo { flex: none; display: grid; place-items: center; width: 64px; height: 52px; padding: 5px; border-radius: 10px; background: #fff; box-shadow: 0 4px 12px rgba(0, 0, 0, .3); overflow: hidden; }
-.pub-logo img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.pub-logo img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; } /* (the box's size, not max-: a grid cell gives max-height no height to go by, so square and tall logos spilled out of it) */
 .pub-logo.is-mono { background: var(--ink-3); color: var(--gold); font-family: var(--f-chunky); font-size: 26px; box-shadow: inset 0 0 0 1px var(--line); }
 .pub-head h3 { flex: 1; }
 .pub-a { color: inherit; text-decoration: none; }
