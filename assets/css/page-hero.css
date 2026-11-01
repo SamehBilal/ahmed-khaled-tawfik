@@ -161,34 +161,25 @@ html[dir="ltr"] .ph-env { left: auto; right: 100%; animation-name: ph-fly-ltr; }
 .ph[data-ph="privacy"] { border-bottom: 0; }
 .ph[data-ph="privacy"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; z-index: 6; pointer-events: none;
 	background: linear-gradient(transparent, var(--ink)); }
-.ph[data-ph="privacy"] + .page-he/* After Ghaste's «User Avatar with animated ripped border» on CodePen: a circle cut by a turbulent mask, so its edge is torn, and three
-   borders that writhe under animated SVG turbulence (assets/js/page-hero.js holds the filters) — one in the ember, two in paper */
+.ph[data-ph="privacy"] + .page-hero { padding-top: 36px; }
+/* After Ghaste's «User Avatar with animated ripped border» on CodePen: a circle cut by a turbulent mask, so its edge is torn, and three
+   borders in the band's own colour that writhe under animated SVG turbulence and bite into it (assets/js/page-hero.js holds the
+   filters); inside, as the pen's photo, a black figure on an ember ground */
 .ph-sq-defs { position: absolute; width: 0; height: 0; }
-.ph-avatar { --size: 210px; position: absolute; left: 50%; top: 46%; width: var(--size); height: var(--size); margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2); }
-.ph-avatar-in { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; color: rgba(239, 230, 210, .75);
-	background: radial-gradient(circle at 50% 30%, #3a2a22, #160f0c 70%);
-	-webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" preserveAspectRatio="none"><filter id="n"><feTurbulence baseFrequency="0.01" numOctaves="3" seed="0"><animate attributeName="baseFrequency" dur="40s" values="0.1 0.2; 0.3 0.4; 0.1 0.2" repeatCount="indefinite"/></feTurbulence><feDisplacementMap scale="10" in="SourceGraphic"/></filter><circle filter="url(%23n)" r="70" cx="75" cy="75"/></svg>') center / 100% 100%; mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" preserveAspectRatio="none"><filter id="n"><feTurbulence baseFrequency="0.01" numOctaves="3" seed="0"><animate attributeName="baseFrequency" dur="40s" values="0.1 0.2; 0.3 0.4; 0.1 0.2" repeatCount="indefinite"/></feTurbulence><feDisplacementMap scale="10" in="SourceGraphic"/></filter><circle filter="url(%23n)" r="70" cx="75" cy="75"/></svg>') center / 100% 100%; }
-.ph-avatar-in::before, .ph-avatar-in::after, .ph-avatar::before { content: ''; position: absolute; inset: 6%; border-radius: 50%; border: 7px solid; pointer-events: none; }
-.ph-avatar-in::before { filter: url(#ph-sq1); color: rgba(239, 230, 210, .55); }
-.ph-avatar-in::after { filter: url(#ph-sq2); color: var(--ember); }
-.ph-avatar::before { inset: 2%; border-width: 3px; color: rgba(239, 230, 210, .35); filter: url(#ph-sq0); }
-.ph-avatar .who { position: absolute; inset: 14% 14% 0; width: 72%; height: 86%; fill: rgba(239, 230, 210, .16); }
-.ph-avatar .who text { fill: rgba(239, 230, 210, .5); font: 400 22px/1 var(--f-chunky); }
-/* the padlock on its rim, its keyhole glowing */
-.ph-avatar-lock { position: absolute; z-index: 2; right: 4%; bottom: 2%; width: 50px; height: 62px; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .6)); }
-html[dir="rtl"] .ph-avatar-lock { right: auto; left: 4%; }
-.ph-avatar-lock .shackle { fill: none; stroke: #b9b1a0; stroke-width: 12px; stroke-linecap: round; }
-.ph-avatar-lock .body { fill: #7a1d16; stroke: #d9a441; stroke-width: 3px; }
-.ph-avatar-lock .hole { fill: #ffcc66; filter: drop-shadow(0 0 8px #ffb347); animation: ph-glow 3s ease-in-out infinite; }
-@keyframes ph-glow { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
-.ph-anon { position: absolute; left: 0; right: 0; top: calc(46% + 118px); margin: 0; text-align: center; color: var(--ph-dim); font-family: var(--f-display); font-size: 16px; letter-spacing: .02em; }
-@media (max-width: 640px) { .ph-avatar { --size: 150px; } .ph-anon { top: calc(46% + 86px); font-size: 14px; } .ph-avatar-lock { width: 38px; height: 48px; } }
-html[data-theme="light"] .ph-avatar-in { background: radial-gradient(circle at 50% 30%, #fbf3e3, #dccbad 70%); }
-html[data-theme="light"] .ph-avatar-in::before, html[data-theme="light"] .ph-avatar::before { color: rgba(70, 45, 20, .45); }
-html[data-theme="light"] .ph-avatar .who { fill: rgba(70, 45, 20, .2); }
-html[data-theme="light"] .ph-avatar .who text { fill: rgba(70, 45, 20, .55); }
-
-le(3.2); opacity: 0; } }
+.ph-avatar { --size: 260px; --tear: #0d0a09; position: absolute; left: 50%; top: 50%; width: var(--size); height: var(--size); margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2); }
+.ph-avatar-in { position: absolute; inset: 0; border-radius: 50%; color: var(--tear);
+	background: linear-gradient(160deg, #e2582a 0%, #c63f17 45%, #8e220c 100%);
+	-webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" preserveAspectRatio="none"><filter id="n"><feTurbulence baseFrequency="0.01" numOctaves="5" seed="0"><animate attributeName="baseFrequency" dur="40s" values="0.1 0.2; 0.3 0.4; 0.1 0.2" repeatCount="indefinite"/></feTurbulence><feDisplacementMap scale="10" in="SourceGraphic"/></filter><circle filter="url(%23n)" r="70" cx="75" cy="75"/></svg>') center / 100% 100%; mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" preserveAspectRatio="none"><filter id="n"><feTurbulence baseFrequency="0.01" numOctaves="5" seed="0"><animate attributeName="baseFrequency" dur="40s" values="0.1 0.2; 0.3 0.4; 0.1 0.2" repeatCount="indefinite"/></feTurbulence><feDisplacementMap scale="10" in="SourceGraphic"/></filter><circle filter="url(%23n)" r="70" cx="75" cy="75"/></svg>') center / 100% 100%; }
+.ph-avatar-in::before, .ph-avatar-in::after, .ph-avatar .who-rim { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 4px solid; pointer-events: none; }
+.ph-avatar-in::before { filter: url(#ph-sq1); }
+.ph-avatar-in::after { filter: url(#ph-sq2); }
+.ph-avatar .who { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 50%; fill: #070606; }
+.ph-avatar .who-rim { filter: url(#ph-sq0); }
+/* a soft ember glow behind it, so the torn edge reads against the dark where the figure meets it */
+.ph-avatar { filter: drop-shadow(0 0 26px rgba(224, 99, 58, .38)); }
+html[data-theme="light"] .ph-avatar { filter: drop-shadow(0 10px 24px rgba(120, 50, 20, .28)); }
+@media (max-width: 640px) { .ph-avatar { --size: 190px; } }
+html[data-theme="light"] .ph-avatar { --tear: #efe5d3; }
 
 /* ---------- sources: the card catalogue ---------- */
 /* no line under it: the dark fades down into the page */

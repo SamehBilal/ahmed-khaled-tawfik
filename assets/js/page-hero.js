@@ -81,23 +81,22 @@
 			return '<p class="ph-motto">' + A.tx(((d.bio || {}).motto) || '') + '</p><div class="ph-floating">' + h + '</div>';
 		},
 
-		/* privacy: after Ghaste's «User Avatar with animated ripped border» on CodePen — the reader's avatar, a faceless silhouette
-		   (the site keeps no account and knows no one), in a circle with a torn edge and three borders that writhe under SVG
-		   turbulence, and a small padlock on its rim */
-		privacy: function (d, A) {
-			var sq = function (id, freq, to, scale, scales) {
-				return '<filter id="' + id + '" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="' + freq + '" numOctaves="3" seed="0">' +
+		/* privacy: after Ghaste's «User Avatar with animated ripped border» on CodePen — the reader's avatar, a faceless black
+		   silhouette (the site keeps no account and knows no one) filling an ember circle, its edge torn by a turbulent mask and
+		   by three borders in the band's own colour that writhe under SVG turbulence, as the pen's do; the scales are the pen's,
+		   in proportion to the circle (the filters' own sizes are in pixels) */
+		privacy: function () {
+			var sq = function (id, type, freq, to, scale, scales) {
+				return '<filter id="' + id + '" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence' + (type ? ' type="' + type + '"' : '') + ' baseFrequency="' + freq + '" numOctaves="5" seed="0">' +
 					'<animate attributeName="baseFrequency" dur="40s" values="' + freq + '; ' + to + '; ' + freq + '" repeatCount="indefinite"/></feTurbulence>' +
 					'<feDisplacementMap in="SourceGraphic" scale="' + scale + '">' + (scales ? '<animate attributeName="scale" dur="4s" values="' + scales + '" repeatCount="indefinite"/>' : '') +
 					'</feDisplacementMap></filter>';
 			};
-			return '<svg class="ph-sq-defs" aria-hidden="true">' + sq('ph-sq0', '0.01', '0.04', 12) + sq('ph-sq1', '.01 .02', '.03 .04', 40) +
-				sq('ph-sq2', '.05 .06', '.1 .12', 10, '10;20;26;44;70;34;18;10') + '</svg>' +
-				'<div class="ph-avatar"><div class="ph-avatar-in"><svg class="who" viewBox="0 0 100 100"><circle cx="50" cy="38" r="17"/><path d="M14 100c2-24 17-36 36-36s34 12 36 36z"/>' +
-				'<text x="50" y="45" text-anchor="middle">?</text></svg></div>' +
-				'<svg class="ph-avatar-lock" viewBox="0 0 120 150"><path class="shackle" d="M30 66V44a30 30 0 0 1 60 0v22"/><rect class="body" x="14" y="62" width="92" height="80" rx="14"/>' +
-				'<path class="hole" d="M60 88a10 10 0 0 1 6 18l4 18H50l4-18a10 10 0 0 1 6-18z"/></svg></div>' +
-				'<p class="ph-anon">' + A.esc(A.L('زائر بلا اسم', 'A visitor with no name')) + '</p>';
+			return '<svg class="ph-sq-defs" aria-hidden="true">' + sq('ph-sq0', '', '0.04', '0.16', 13) + sq('ph-sq1', 'fractalNoise', '.04 .08', '.12 .16', 65) +
+				sq('ph-sq2', 'fractalNoise', '.2 .24', '.4 .48', 13, '13;26;33;65;130;43;22;13') + '</svg>' +
+				'<div class="ph-avatar"><div class="ph-avatar-in"><svg class="who" viewBox="0 0 100 100" preserveAspectRatio="xMidYMax slice">' +
+				'<path d="M47 9c11-1 20 7 21 19 1 6 0 11-2 15 2 0 3 2 2 5-1 4-3 6-5 6-2 6-6 10-11 12v8c10 3 26 8 33 16 3 4 5 10 6 16H4c1-7 4-13 8-17 8-8 21-11 30-15v-8c-6-3-10-9-11-16-3 0-4-3-4-6 0-2 1-4 3-4-1-4-1-8 0-12 2-10 9-18 17-19z"/>' +
+				'</svg><i class="who-rim"></i></div></div>';
 		},
 
 		/* sources: a library card catalogue, a drawer for each source */
