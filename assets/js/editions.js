@@ -69,11 +69,28 @@ window.Editions = {
 				return '<li><a class="ed-name" href="' + e(S.bookHref(b.w.id)) + '">' + e(t(b.w.title)) + '</a><span class="ed-line">' +
 					'<i class="ed-span" style="inset-inline-start:' + pct(b.eds[0].year) + '%;width:' + (pct(b.eds[b.eds.length - 1].year) - pct(b.eds[0].year)).toFixed(2) + '%"></i>' +
 					b.eds.map(function (ed) {
-						var h = self.house(ed.publisher);
-						return '<i class="ed-dot" tabindex="0" style="inset-inline-start:' + pct(+ed.year) + '%;background:var(--pp-' + slot(h.id) + ')" title="' + e(h.name + ' · ' + ed.year) + '"></i>';
+						var h = self.house(ed.publisher), p = +pct(+ed.year), cover = ed.cover || S.coverOf((d.bookInfo || {})[b.w.id]);
+						/* its card, as Codrops' «Tooltip Styles» classic tooltip (page-editions.css): the edition's cover beside its title in bold,
+						   which edition, its house, year and pages; kept within the page near the line's ends */
+						var info = [ed.edition ? t(ed.edition) : '', h.name, App.num(+ed.year), ed.pages ? App.num(ed.pages) + ' ' + L('صفحة', 'pages') : '', ed.format ? t(ed.format) : ''].filter(Boolean);
+						return '<span class="ed-dot tooltip tooltip-effect-1" tabindex="0" style="inset-inline-start:' + p + '%">' +
+							'<i class="tooltip-item" style="background:var(--pp-' + slot(h.id) + ')" aria-hidden="true"></i>' +
+							'<span class="tooltip-content" role="tooltip">' + (cover ? '<img src="' + e(cover) + '" alt="" loading="lazy" decoding="async">' : '') +
+								'<span class="tooltip-text"><strong>' + e(ed.title ? t(ed.title) : t(b.w.title)) + '</strong>' + info.map(function (x) { return '<span>' + e(x) + '</span>'; }).join('') + '</span></span></span>';
 					}).join('') + '</span><span class="ed-n">' + e(App.num(b.eds.length)) + '</span></li>';
 			}).join('') + '</ol>' +
-			'<p class="ed-note">' + e(L('كل نقطة طبعة يعرفها الموقع بسنتها؛ مرّر عليها لترى دارها. طبعات بلا سنة لا تظهر هنا.', 'Each dot is an edition the site knows with its year; hover for its house. Editions without a year are left out.')) + '</p>' +
+			'<p class="ed-note">' + e(L('كل نقطة طبعة يعرفها الموقع بسنتها؛ مرّر عليها لترى بطاقتها: غلافها ودارها وسنتها. طبعات بلا سنة لا تظهر هنا.', 'Each dot is an edition the site knows with its year; hover for its card: its cover, house and year. Editions without a year are left out.')) + '</p>' +
 		'</div></section>';
+		/* a card is placed as it opens: centred on its dot, but kept within the chart, its arrow still pointing at the dot */
+		var list = this.el.querySelector('.ed-books');
+		var place = function (ev) {
+			var dot = ev.target.closest && ev.target.closest('.ed-dot');
+			if (!dot || !list) return;
+			var card = dot.querySelector('.tooltip-content'), box = list.getBoundingClientRect(), r = dot.getBoundingClientRect(), w = card.offsetWidth, c = r.left + r.width / 2;
+			var left = Math.max(box.left + 4, Math.min(box.right - 4 - w, c - w / 2));
+			card.style.marginLeft = (left - c) + 'px';
+			card.style.setProperty('--arrow', (c - left) + 'px');
+		};
+		if (list) { list.addEventListener('pointerover', place); list.addEventListener('focusin', place); }
 	}
 };

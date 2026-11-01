@@ -28,16 +28,38 @@ html[data-theme="light"] .ed-stamp { background: rgba(244, 233, 214, .8); }
 .ed-axis { position: relative; height: 22px; margin-inline-start: 220px; margin-inline-end: 34px; border-bottom: 1px solid var(--line); }
 .ed-axis span { position: absolute; bottom: 4px; transform: translateX(-50%); font-family: var(--f-latin); font-size: 12px; color: var(--muted); }
 html[dir="rtl"] .ed-axis span { transform: translateX(50%); }
-.ed-books { list-style: none; margin: 0 0 16px; padding: 0; }
+.ed-books { list-style: none; margin: 0 -10px 16px; padding: 0 10px; overflow-x: clip; overflow-y: visible; } /* (its cards, hidden or shown, never widen the page; 10px of room each side for the end dots) */
 .ed-books li { display: grid; grid-template-columns: 210px 1fr 24px; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 1px dashed var(--line); }
 .ed-name { font-family: var(--f-display); font-size: 15px; color: var(--paper); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ed-line { position: relative; height: 18px; }
 .ed-span { position: absolute; top: 8px; height: 2px; background: var(--line); }
-.ed-dot { position: absolute; top: 3px; width: 12px; height: 12px; margin-inline-start: -6px; border-radius: 50%; border: 2px solid var(--ink-2); cursor: help; }
-.ed-dot:hover, .ed-dot:focus { transform: scale(1.4); outline: none; }
+/* an edition: a dot on its book's line, and above it, on hover or focus, its card — Codrops' «Tooltip Styles» (Mary Lou), the classic one
+   with its first effect: a dark box with the cover on one side and the words on the other, an arrow beneath, dropping in as it fades in */
+.ed-dot { position: absolute; top: 3px; width: 12px; height: 12px; margin-inline-start: -6px; outline: none; }
+.ed-dot .tooltip-item { display: block; width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--ink-2); cursor: pointer; transition: transform .2s; }
+.ed-dot:hover, .ed-dot:focus-within, .ed-dot:focus { z-index: 50; }
+.ed-dot:hover .tooltip-item, .ed-dot:focus .tooltip-item { transform: scale(1.4); }
+.ed-dot:focus-visible .tooltip-item { box-shadow: 0 0 0 2px var(--ember); }
+/* the gap filler: the pointer can cross from the dot to the card without it closing */
+.ed-dot .tooltip-item::after { content: ''; position: absolute; bottom: 100%; left: 50%; width: 300px; height: 20px; transform: translateX(-50%); pointer-events: none; }
+.ed-dot:hover .tooltip-item::after { pointer-events: auto; }
+.ed-dot .tooltip-content { position: absolute; z-index: 9999; bottom: 100%; left: 50%; width: 300px; margin: 0 0 16px -150px; display: flow-root; text-align: start;
+	font-size: 14px; line-height: 1.4; background: #2a3035; box-shadow: -5px -5px 15px rgba(48, 54, 61, .2), 0 14px 30px rgba(0, 0, 0, .35); opacity: 0; cursor: default; pointer-events: none;
+	transform: translate3d(0, -10px, 0); transition: opacity .3s, transform .3s; }
+.ed-dot:hover .tooltip-content, .ed-dot:focus .tooltip-content { pointer-events: auto; opacity: 1; transform: translate3d(0, 0, 0); }
+/* where the card sits is measured as it opens (editions.js), so it stays within the chart, its arrow on the dot */
+/* the arrow */
+.ed-dot .tooltip-content::after { content: ''; position: absolute; top: 100%; left: var(--arrow, 50%); width: 0; height: 0; margin-left: -10px; border: 10px solid transparent; border-top-color: #2a3035; pointer-events: none; }
+/* the cover on one side, the words on the other */
+.ed-dot .tooltip-content img { float: inline-start; height: 150px; width: auto; max-width: 104px; object-fit: cover; margin-inline-end: 14px; display: block; background: #1c2024; }
+.ed-dot .tooltip-text { display: block; padding: 16px 14px 14px 0; padding-inline: 0 14px; color: #fff; font-size: 13px; line-height: 1.55; }
+.ed-dot .tooltip-content:not(:has(img)) .tooltip-text { padding-inline-start: 14px; }
+.ed-dot .tooltip-text strong { display: block; margin-bottom: 6px; font-family: var(--f-display); font-size: 17px; font-weight: 400; line-height: 1.35; color: #fff; }
+.ed-dot .tooltip-text span { display: block; color: rgba(255, 255, 255, .78); }
 .ed-n { font-family: var(--f-latin); color: var(--muted); font-size: 13px; text-align: center; }
 .ed-note { color: var(--muted); font-size: 14px; }
 @media (max-width: 700px) {
+	.ed-dot .tooltip-content { width: 240px; margin-left: -120px; } .ed-dot .tooltip-content img { height: 120px; max-width: 84px; }
 	.ed-books li { grid-template-columns: 1fr 24px; }
 	.ed-books .ed-line { grid-column: 1 / -1; grid-row: 2; }
 	.ed-axis { margin-inline-start: 0; margin-inline-end: 0; }
