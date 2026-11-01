@@ -90,7 +90,7 @@ window.PAGE = {
 				}).join(' · ') + (talks.length > 4 ? ' · ' + e(L('و' + App.num(talks.length - 4) + ' غيرها', 'and ' + (talks.length - 4) + ' more')) : '') + '</p>' : '') +
 			'</section>';
 		}).join('');
-		return '<section class="section bio" id="life"><div class="wrap">' +
+		return '<section class="section tk-life" id="life"><div class="wrap">' + /* (not .bio: the home page's biography, set in two columns, has it) */
 			'<h2 class="tk-h">' + e(L('سيرته', 'His life')) + '</h2>' +
 			'<div class="bio-sum">' + paras.map(function (p) { return '<p>' + e(p) + '</p>'; }).join('') + '</div>' +
 			'<nav class="chips bio-jump">' + this.CHAPTERS.map(function (c, i) { return '<a class="chip" href="#ch-' + (i + 1) + '">' + e(App.num(i + 1) + '. ' + t(c[2])) + '</a>'; }).join('') +
