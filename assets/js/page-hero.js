@@ -81,11 +81,23 @@
 			return '<p class="ph-motto">' + A.tx(((d.bio || {}).motto) || '') + '</p><div class="ph-floating">' + h + '</div>';
 		},
 
-		/* privacy: a padlock with a glowing keyhole */
-		privacy: function () {
-			return '<i class="ph-ring r1"></i><i class="ph-ring r2"></i><i class="ph-ring r3"></i>' +
-				'<svg class="ph-lock" viewBox="0 0 120 150"><path class="shackle" d="M30 66V44a30 30 0 0 1 60 0v22" /><rect class="body" x="14" y="62" width="92" height="80" rx="14" />' +
-				'<path class="hole" d="M60 88a10 10 0 0 1 6 18l4 18H50l4-18a10 10 0 0 1 6-18z" /></svg>';
+		/* privacy: after Ghaste's «User Avatar with animated ripped border» on CodePen — the reader's avatar, a faceless silhouette
+		   (the site keeps no account and knows no one), in a circle with a torn edge and three borders that writhe under SVG
+		   turbulence, and a small padlock on its rim */
+		privacy: function (d, A) {
+			var sq = function (id, freq, to, scale, scales) {
+				return '<filter id="' + id + '" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="' + freq + '" numOctaves="3" seed="0">' +
+					'<animate attributeName="baseFrequency" dur="40s" values="' + freq + '; ' + to + '; ' + freq + '" repeatCount="indefinite"/></feTurbulence>' +
+					'<feDisplacementMap in="SourceGraphic" scale="' + scale + '">' + (scales ? '<animate attributeName="scale" dur="4s" values="' + scales + '" repeatCount="indefinite"/>' : '') +
+					'</feDisplacementMap></filter>';
+			};
+			return '<svg class="ph-sq-defs" aria-hidden="true">' + sq('ph-sq0', '0.01', '0.04', 12) + sq('ph-sq1', '.01 .02', '.03 .04', 40) +
+				sq('ph-sq2', '.05 .06', '.1 .12', 10, '10;20;26;44;70;34;18;10') + '</svg>' +
+				'<div class="ph-avatar"><div class="ph-avatar-in"><svg class="who" viewBox="0 0 100 100"><circle cx="50" cy="38" r="17"/><path d="M14 100c2-24 17-36 36-36s34 12 36 36z"/>' +
+				'<text x="50" y="45" text-anchor="middle">?</text></svg></div>' +
+				'<svg class="ph-avatar-lock" viewBox="0 0 120 150"><path class="shackle" d="M30 66V44a30 30 0 0 1 60 0v22"/><rect class="body" x="14" y="62" width="92" height="80" rx="14"/>' +
+				'<path class="hole" d="M60 88a10 10 0 0 1 6 18l4 18H50l4-18a10 10 0 0 1 6-18z"/></svg></div>' +
+				'<p class="ph-anon">' + A.esc(A.L('زائر بلا اسم', 'A visitor with no name')) + '</p>';
 		},
 
 		/* sources: a library card catalogue, a drawer for each source */
