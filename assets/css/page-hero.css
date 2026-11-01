@@ -687,19 +687,28 @@ html[data-theme="light"] .nmc-papers, html[data-theme="light"] .nmc-sq, html[dat
 .ph-deck { position: relative; width: 100%; outline: none; }
 .ph-cards { position: relative; height: 13.5rem; margin: 0; padding: 0; list-style: none; overflow: hidden; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
 .ph-cards:active { cursor: grabbing; }
-.ph-count { position: absolute; left: 50%; top: 50%; width: 10rem; height: 12.5rem; border-radius: .8rem; transform: translate(-50%, -50%) scale(0); opacity: 0;
-	background: linear-gradient(160deg, color-mix(in srgb, var(--c) 82%, #fff 18%), var(--c) 55%, color-mix(in srgb, var(--c) 70%, #000 30%));
-	box-shadow: 0 18px 36px -14px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .18); will-change: transform, opacity; }
-.ph-count a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; height: 100%; padding: 0 12px; color: #fff; text-align: center; text-decoration: none; -webkit-user-drag: none; }
-.ph-count b { font-family: var(--f-latin); font-size: 58px; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; text-shadow: 0 2px 12px rgba(0, 0, 0, .25); }
-.ph-count span { font-family: var(--f-display); font-size: 16px; line-height: 1.3; color: rgba(255, 255, 255, .88); }
+.ph-count { position: absolute; left: 50%; top: 50%; width: 10rem; height: 12.5rem; border-radius: .9rem; transform: translate(-50%, -50%) scale(0); opacity: 0;
+	background: #0f1111; box-shadow: 0 18px 36px -14px rgba(0, 0, 0, .7); will-change: transform, opacity; }
+/* the frame: a thin line in the card's gradient, set in from the edge */
+.ph-count::before { content: ''; position: absolute; inset: 5px; border-radius: .7rem; padding: 2px; pointer-events: none;
+	background: linear-gradient(160deg, var(--a), var(--b) 55%, var(--a));
+	-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.ph-count a { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 0 22px; text-align: center; text-decoration: none; -webkit-user-drag: none; }
+/* the number and the words, filled with the gradient */
+.ph-count b, .ph-count .pc-top, .ph-count .pc-bot, .ph-count .pc-side { background: linear-gradient(120deg, var(--a), var(--b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ph-count b { font-family: var(--f-latin); font-size: calc(62px * var(--fs, 1)); font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.ph-count .pc-top, .ph-count .pc-bot { position: absolute; left: 14px; right: 14px; font-family: var(--f-display); font-size: 14px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ph-count .pc-top { top: 16px; }
+.ph-count .pc-bot { bottom: 16px; transform: rotate(180deg); }
+.ph-count .pc-side { position: absolute; top: 50%; left: 10px; /* (left and right: an inline side would follow its own vertical writing) */ font-style: normal; font-family: var(--f-chunky); font-size: 10px; letter-spacing: .04em; writing-mode: vertical-rl; transform: translateY(-50%) rotate(180deg); }
+.ph-count .pc-side.is-end { left: auto; right: 10px; transform: translateY(-50%); }
 .ph-count.is-mid a:focus-visible { outline: 2px solid #fff; outline-offset: -8px; border-radius: .8rem; }
 .ph-deck:focus-visible .ph-cards { outline: 2px solid var(--ember); outline-offset: 4px; border-radius: 12px; }
 /* Prev and Next, pill buttons under the row, as the pen's */
 .ph-deck-nav { display: flex; justify-content: center; gap: 12px; margin: 6px 0 0; }
 .ph-deck-nav button { padding: 7px 20px; border: 2px solid var(--paper-dim); border-radius: 99px; background: transparent; color: var(--paper); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
 .ph-deck-nav button:hover, .ph-deck-nav button:focus-visible { border-color: var(--ember); color: var(--ember); outline: none; }
-@media (max-width: 640px) { .ph-cards { height: 11rem; } .ph-count { width: 8rem; height: 10rem; } .ph-count b { font-size: 44px; } .ph-count span { font-size: 14px; } }
+@media (max-width: 640px) { .ph-cards { height: 11rem; } .ph-count { width: 8rem; height: 10rem; } .ph-count b { font-size: calc(46px * var(--fs, 1)); } .ph-count .pc-top, .ph-count .pc-bot { font-size: 12px; top: 13px; } .ph-count .pc-bot { top: auto; bottom: 13px; } }
 
 /* ---------- quiz: a question mark glowing over four answers ---------- */
 .ph[data-ph="quiz"] { background: radial-gradient(50% 90% at 50% 40%, #2a1830 0%, #110c16 60%, #0b0a0e 100%); }

@@ -225,15 +225,19 @@
 			var posts = ((d.blog || {}).posts) || [];
 			var papers = posts.filter(function (p) { return p.src && !/^من كتاب/.test(p.src) && /(19|20)\d\d/.test(p.src); }).length;
 			var houses = S ? S.publishers().filter(function (c) { return c.list.length; }).length : 0;
-			/* [number, label, where it leads, the card's colour] */
-			var cells = [[issues, L('عددًا في السلاسل', 'series issues'), 'works.html', '#b8441f'], [(d.series || []).length, L('سلسلة', 'series'), 'works.html', '#7a2a1a'],
-				[(d.works || []).length, L('كتابًا مستقلًا', 'standalone books'), 'works.html', '#a8741c'], [posts.length, L('منشورًا في المدونة', 'blog posts'), 'blog.html', '#1f4e6b'],
-				[papers, L('مقالًا في الصحف', 'pieces in the papers'), 'papers.html', '#8c2232'], [(d.characters || []).length, L('شخصية', 'characters'), 'characters.html', '#2f5d3a'],
-				[(d.quotes || []).length, L('اقتباسًا', 'quotes'), 'quotes.html', '#5b2f6e'], [houses, L('دار نشر', 'publishers'), 'publishers.html', '#3c4652']].filter(function (c) { return c[0]; });
+			/* [number, label, where it leads, the card's two colours, its gradient running from one to the other] */
+			var cells = [[issues, L('عددًا في السلاسل', 'series issues'), 'works.html', '#e0633a', '#f6c98a'], [(d.series || []).length, L('سلسلة', 'series'), 'works.html', '#6d4aff', '#dcc8f4'],
+				[(d.works || []).length, L('كتابًا مستقلًا', 'standalone books'), 'works.html', '#ff8a1c', '#f4b8f0'], [posts.length, L('منشورًا في المدونة', 'blog posts'), 'blog.html', '#1fa2a6', '#c2f2dc'],
+				[papers, L('مقالًا في الصحف', 'pieces in the papers'), 'papers.html', '#d1343e', '#ffc7ad'], [(d.characters || []).length, L('شخصية', 'characters'), 'characters.html', '#3f9b4f', '#dcf29e'],
+				[(d.quotes || []).length, L('اقتباسًا', 'quotes'), 'quotes.html', '#3b6cff', '#aee6ff'], [houses, L('دار نشر', 'publishers'), 'publishers.html', '#c79a3b', '#f6ecc8']].filter(function (c) { return c[0]; });
 			setTimeout(numbersDeck, 0);
 			return '<div class="ph-deck" tabindex="0" role="group" aria-roledescription="' + e(L('شريط بطاقات', 'carousel')) + '" aria-label="' + e(L('الموقع بالأرقام', 'The site in numbers')) + '">' +
 					'<ul class="ph-cards">' + cells.map(function (c, i) {
-						return '<li class="ph-count" style="--c:' + c[3] + '"><a href="' + c[2] + '" tabindex="-1"><b data-to="' + c[0] + '">' + e(A.num(0)) + '</b><span>' + e(c[1]) + '</span></a></li>';
+						/* a playing card, as the pen's: its label at the head and upside down at the foot, the site's name down each side,
+						   the number in the middle, all in the card's gradient inside a thin frame of it */
+						return '<li class="ph-count" style="--a:' + c[3] + ';--b:' + c[4] + (String(c[0]).length > 3 ? ';--fs:.78' : '') + '">' /* (four figures a little smaller, clear of the sides) */ + '<a href="' + c[2] + '" tabindex="-1">' +
+							'<span class="pc-top">' + e(c[1]) + '</span><b data-to="' + c[0] + '">' + e(A.num(0)) + '</b><span class="pc-bot" aria-hidden="true">' + e(c[1]) + '</span>' +
+							'<i class="pc-side" aria-hidden="true">' + e(L('العرّاب', 'The Godfather')) + '</i><i class="pc-side is-end" aria-hidden="true">' + e(L('العرّاب', 'The Godfather')) + '</i></a></li>';
 					}).join('') + '</ul>' +
 					'<p class="ph-deck-nav"><button type="button" class="ph-prev">' + e(L('السابق', 'Prev')) + '</button><button type="button" class="ph-next">' + e(L('التالي', 'Next')) + '</button></p>' +
 				'</div>' +
