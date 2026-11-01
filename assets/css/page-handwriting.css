@@ -1,5 +1,7 @@
 /* «بخط يده» (handwriting.html, handwriting.js) */
-.ph[data-ph="handwriting"] { background: radial-gradient(60% 120% at 50% 40%, #2a2016 0%, #0d0a07 72%); }
+/* the band is the page itself: no ground of its own, no glow, no line under it, in either theme — only the handwritten sheet */
+.ph[data-ph="handwriting"], html[data-theme="light"] .ph[data-ph="handwriting"] { background: transparent; border-bottom: 0; }
+.ph[data-ph="handwriting"]::before, .ph[data-ph="handwriting"]::after { display: none; }
 .hw-page { position: absolute; left: 50%; top: 12%; bottom: 10%; width: min(520px, 86%); transform: translateX(-50%) rotate(1.5deg); padding: 30px 34px;
 	background: #f1e6cf; border-radius: 2px 6px 6px 2px; box-shadow: 0 20px 40px rgba(0, 0, 0, .6), inset 18px 0 24px -18px rgba(0, 0, 0, .35); display: flex; flex-direction: column; justify-content: center; gap: 18px; }
 .hw-page p { margin: 0; font-family: var(--f-display); color: #1d3a7a; }
@@ -16,7 +18,8 @@
 .hw-card h3 { margin: 4px 0 8px; font-family: var(--f-display); font-size: 19px; line-height: 1.5; }
 .hw-card p { margin: 0 0 10px; color: var(--paper-dim); line-height: 1.8; font-size: 15px; }
 .hw-src { margin-top: auto; color: var(--ember); font-size: 14px; }
-.hw-call { margin-top: 30px; padding: 24px; border: 1px dashed var(--ember); border-radius: 16px; background: color-mix(in srgb, var(--ember) 7%, var(--ink-2)); max-width: 860px; }
+/* the call for dedications and its form: on the page itself, no box of its own, the full width */
+.hw-call { margin-top: 44px; }
 .hw-call h2 { margin: 0 0 8px; font-family: var(--f-display); font-size: 24px; }
 .hw-call p { color: var(--paper-dim); line-height: 1.9; margin: 0 0 14px; }
 .hw-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin-top: 6px; }
