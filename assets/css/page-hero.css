@@ -267,14 +267,13 @@ html[dir="rtl"] .ph-catalog { transform: translate(50%, -50%); left: auto; right
 /* ---------- terms: stretch to reveal ---------- */
 /* After Paul Troshkin's «Stretch to reveal» on CodePen (assets/js/page-hero.js draws it and wires the drag): a pill with a white knob
    that stretches like goo — two circles and a tapered neck melted together by an SVG goo filter — and five covers on instant prints,
-   each scrambled its own way, that come clear as it is pulled. No line under the band: the dark fades down into the page */
+   each scrambled its own way, that come clear as it is pulled. The band is the page itself: no ground, no glow, no line under it */
 @property --tb-max { syntax: "<length>"; inherits: true; initial-value: 400px; }
 @property --tb-front { syntax: "<number>"; inherits: true; initial-value: 0; }
 @property --tb-tail { syntax: "<number>"; inherits: true; initial-value: 0; }
-.ph[data-ph="terms"] { height: auto; border-bottom: 0; background: radial-gradient(70% 120% at 50% 0%, #2a1f16 0%, #0e0b09 70%); }
-.ph[data-ph="terms"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 70px; z-index: 6; pointer-events: none;
-	background: linear-gradient(transparent, var(--ink)); }
-.ph[data-ph="terms"]::after { display: none; }
+.ph[data-ph="terms"], html[data-theme="light"] .ph[data-ph="terms"] { height: auto; border-bottom: 0; background: transparent; }
+/* merged with the page: no ground of its own, no glow, no fade under it */
+.ph[data-ph="terms"]::before, .ph[data-ph="terms"]::after { display: none; }
 .ph[data-ph="terms"] .ph-stage { position: relative; }
 .ph[data-ph="terms"] + .page-hero { padding-top: 20px; }
 .tb-filters { position: absolute; width: 0; height: 0; }
@@ -519,7 +518,6 @@ html[data-theme="light"] .ab { --ab-ink: #2a2017; --ab-back: #d8c4a0; }
 html[data-theme="light"] .ph[data-ph="contact"],
 html[data-theme="light"] .ph[data-ph="privacy"] { background: radial-gradient(70% 120% at 70% 0%, #f4ecdc 0%, #e2d6c0 70%); }
 html[data-theme="light"] .ph[data-ph="sources"] { background: radial-gradient(80% 120% at 50% 0%, rgba(255, 245, 225, .3) 0%, rgba(60, 30, 10, .2) 75%), url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27600%27%20height%3D%27300%27%3E%3Cfilter%20id%3D%27w%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%27.003%20.12%27%20numOctaves%3D%275%27%20seed%3D%2711%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270.93%200%200%200%200.031%20%200.63%200%200%200%200.021%20%200.36%200%200%200%200.012%20%200%200%200%200%201%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23w)%27%2F%3E%3C%2Fsvg%3E") 0 0 / 600px 300px, #a8794a; }
-html[data-theme="light"] .ph[data-ph="terms"] { background: radial-gradient(80% 120% at 50% 0%, #f8eedb 0%, #e8d8bb 70%); }
 html[data-theme="light"] .tb { --pill: rgba(70, 45, 20, .1); --pill-ink: #8a7457; }
 html[data-theme="light"] .tb-idle { background-image: linear-gradient(100deg, var(--pill-ink) 40%, #2a1d10 50%, var(--pill-ink) 60%); }
 html[data-theme="light"] .tb-body { filter: url(#tb-goo) drop-shadow(0 2px 6px rgba(70, 45, 20, .3)); }
