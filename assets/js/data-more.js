@@ -4552,3 +4552,15 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			en: 'Twelve horror tales from the channel Ghawy Hekayat: a reader moves into Refaat Ismail’s flat in Dokki, finds his secret memoirs and becomes his heir. A fan’s sequel, not his writing; played here under the tape, and some are for adults.' }
 	};
 })(window.AKT);
+
+/* Legacy articles: Manshoor's «أحمد خالد توفيق: من المحيط إلى الخليج» (4 April 2018, two days after his death), his readers
+   from across the Arab world telling what he was to them; sent by the site's editor (checked 2026-11-01). Its pieces by
+   Abdulwahab Al-Rifai and Ashraf Fagih are already the source for them in «دائرة العرّاب» */
+(function (A) {
+	var M = A.media = A.media || [], url = 'https://manshoor.com/society/arabs-remembering-ahmed-khaled-tawfik/';
+	if (M.some(function (m) { return m.url === url; })) return;
+	M.push({ kind: 'article', title: { ar: 'أحمد خالد توفيق: من المحيط إلى الخليج', en: 'Ahmed Khaled Tawfik: from the Ocean to the Gulf' },
+		outlet: { ar: 'منشور', en: 'Manshoor' }, year: 2018, lang: 'ar', url: url,
+		note: { ar: 'جمعها يحيى: قرّاؤه وتلاميذه من بلاد عربية مختلفة يحكون عن علاقتهم به، وأغلبهم لم يلقه وجهًا لوجه. نُشر بعد رحيله بيومين.', en: 'Gathered by Yehia: his readers and pupils from across the Arab world tell what he was to them, most of whom never met him. Published two days after his death.' } });
+	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
