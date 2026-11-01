@@ -43,3 +43,6 @@ html[data-theme="light"] .tr-quill svg { background: radial-gradient(circle, var
 .tr-authors .chip.is-on { border-color: var(--ember); color: var(--paper); background: color-mix(in srgb, var(--ember) 16%, transparent); }
 .tr-of { font-size: 12px; line-height: 1.5; color: var(--muted); }
 .tr-grid .cover-link[hidden] { display: none; }
+/* the books he translated: each cover whole inside «حول العالم»'s frame, not cut to it — a cover of another shape (the Che Guevara
+   graphic biography, The Graveyard Book) sits within it, its shadow its own */
+.tr .wd-cover img { object-fit: contain; object-position: center top; background: none; box-shadow: none; border-radius: 0; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .4)); }
