@@ -2,7 +2,12 @@
 /* the band is the page itself: no ground of its own, no line under it, in either theme — only the film strip and the projector's beam */
 .ph[data-ph="screen"], html[data-theme="light"] .ph[data-ph="screen"] { background: transparent; border-bottom: 0; }
 .ph[data-ph="screen"]::before, .ph[data-ph="screen"]::after { display: none; }
-.sc-beam { position: absolute; inset: 0; background: conic-gradient(from 200deg at 92% -10%, transparent 0deg, rgba(255, 230, 170, .14) 12deg, transparent 26deg); pointer-events: none; z-index: 2; }
+/* the projector's beam runs on past the band and fades out over the headline, not cut off at the band's edge: the band lets it out below
+   (still clipped at the sides, where the tilted film strip would spill) */
+.ph[data-ph="screen"] { overflow-x: clip; overflow-y: visible; }
+.sc-beam { position: absolute; inset: 0 0 -340px; background: conic-gradient(from 200deg at 92% -10%, transparent 0deg, rgba(255, 230, 170, .14) 12deg, transparent 26deg); pointer-events: none; z-index: 2;
+	-webkit-mask-image: linear-gradient(#000 35%, rgba(0, 0, 0, .5) 62%, transparent); mask-image: linear-gradient(#000 35%, rgba(0, 0, 0, .5) 62%, transparent); }
+html[data-theme="light"] .sc-beam { background: conic-gradient(from 200deg at 92% -10%, transparent 0deg, rgba(200, 140, 40, .14) 12deg, transparent 26deg); }
 .sc-strip { position: absolute; left: 0; right: 0; top: 50%; height: 170px; margin-top: -85px; overflow: hidden; direction: ltr;
 	background: #111; border-block: 14px solid #111; transform: rotate(-3deg) scale(1.05);
 	-webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
