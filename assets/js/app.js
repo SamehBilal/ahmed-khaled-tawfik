@@ -206,6 +206,14 @@
 				el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 				el.classList.remove('is-target'); void el.offsetWidth; el.classList.add('is-target');
 			}, 60);
+			/* a smooth scroll begun while the page is still loading is cut short as the rest comes in (a link from another page to an
+			   entry far down, as the awards page's to the Legacy timeline): once it has loaded, if the entry is not in sight, straight there */
+			if (document.readyState !== 'complete') window.addEventListener('load', function () {
+				setTimeout(function () {
+					var r = el.getBoundingClientRect();
+					if (r.bottom < 0 || r.top > window.innerHeight) el.scrollIntoView({ behavior: 'instant', block: 'center' });
+				}, 120);
+			}, { once: true });
 		},
 
 		/* search and sharing for a page drawn from the data (a book, a series, a person, an article): its own address as the

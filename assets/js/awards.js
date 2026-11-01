@@ -1,5 +1,5 @@
 /* awards.html — «الجوائز»: his prizes and the honours given in his name (AKT.awards), each with its photograph, the book it was
-   for and its source; then the other honours the Legacy timeline records — a doodle, a salon, a fair — linked there. */
+   for and its source; then the other honours the Legacy timeline records — a doodle, a salon, a fair — each linked to its own entry there. */
 window.PAGE = {
 	id: 'awards',
 	title: { ar: 'الجوائز', en: 'Awards' },
@@ -130,7 +130,8 @@ window.PAGE = {
 					'</li>';
 			}).join('') + '</ol>' +
 			(honours.length ? '<h2 class="pp-h">' + e(L('تكريمات أخرى', 'Other honours')) + '</h2><div class="aw-more">' + honours.map(function (l, i) {
-				return '<a href="legacy.html" class="aw-hon" id="awh-' + i + '"><b>' + e(String(l.date).slice(0, 4)) + '</b><span>' + e(t(l.title)) + '</span></a>';
+				/* to its own entry on the Legacy timeline (legacy.js numbers them by their place in AKT.legacy) */
+				return '<a href="legacy.html#l-' + (d.legacy || []).indexOf(l) + '" class="aw-hon" id="awh-' + i + '"><b>' + e(String(l.date).slice(0, 4)) + '</b><span>' + e(t(l.title)) + '</span></a>';
 			}).join('') + '</div>' : '') +
 		'</div></section>';
 		/* a trophy in the cabinet takes one to its entry */
