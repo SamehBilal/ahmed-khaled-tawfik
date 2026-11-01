@@ -4534,3 +4534,21 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		note: { ar: 'فيلم قصير في 11 دقيقة عن حياة العرّاب ورائد أدب الرعب العربي، نُشر غداة رحيله.', en: 'An 11-minute film on the life of the Godfather, the pioneer of Arabic horror fiction, published the day after his death.' } });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
 })(window.AKT);
+
+/* «عودة رفعت إسماعيل» on YouTube, from the playlist of «غاوي حكايات»: twelve horror stories a reader tells of finding Refaat
+   Ismail's flat in Dokki and his secret memoirs, and of being his heir — a fan's sequel to «ما وراء الطبيعة», not his own,
+   sent by the site's editor (checked 2026-11-01). On the audio page, under the tape. Entries: [videoId, label, minutes] */
+(function (A) {
+	var Y = A.audio.youtube;
+	Y.ghawyRefaat = {
+		channel: { name: 'غاوي حكايات', url: 'https://www.youtube.com/playlist?list=PLxUorxKceTKrzolGBa5RxlhiO7rtYmt-v' },
+		series: 'mwt',
+		eps: [['MdyQOduZKCE', 'سكنت في شقة رفعت إسماعيل بالدقي', 43], ['rl--m_V2LCU', 'أسطورة الوريث', 29], ['Szce7Xun8qw', 'شبح رفعت إسماعيل أنقذني من الموت', 51],
+			['QylCIRJmFjk', 'رحلة الإسكندرية: «أوبرا الجماجم»', 37], ['RPowPTiOYFs', 'سر مقبرة «راس الغول»', 37], ['jy_SA_S7o3Y', 'سر عودة ماجي', 33],
+			['yQKkqRWNQY4', 'سر مرض رفعت إسماعيل الحقيقي', 40], ['VQU9JWEEnxw', 'عودة شيراز من الموت', 41], ['f3UVKA_reZc', 'أسطورة التردد الموازي', 45],
+			['lHwZhnFNOhU', 'رفعت إسماعيل والدارك ويب', 48], ['USt5bS9WzgQ', 'الفخ الذي خدع رفعت إسماعيل وزار الدرب الأحمر', 48], ['ARuBNEOq9sk', 'ليلة الزار (النهاية)', 41]],
+		title: { ar: '«عودة رفعت إسماعيل» — حكايات قارئ على YouTube', en: 'The Return of Refaat Ismail: a reader’s tales on YouTube' },
+		note: { ar: 'اثنتا عشرة حكاية رعب من قناة «غاوي حكايات»: قارئ يسكن شقة رفعت إسماعيل في الدقي ويجد مذكراته السرية، فيصير وريثه. تكملة من صنع معجب، لا من كتابته؛ تُشغَّل هنا تحت الشريط، وبعضها للكبار.',
+			en: 'Twelve horror tales from the channel Ghawy Hekayat: a reader moves into Refaat Ismail’s flat in Dokki, finds his secret memoirs and becomes his heir. A fan’s sequel, not his writing; played here under the tape, and some are for adults.' }
+	};
+})(window.AKT);

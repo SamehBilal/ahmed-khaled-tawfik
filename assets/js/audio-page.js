@@ -151,6 +151,21 @@ window.PAGE = {
 			});
 		});
 
+		/* «عودة رفعت إسماعيل»: a fan's sequel to the series told on «غاوي حكايات», one row, its episodes under the tape */
+		var GR = A.youtube && A.youtube.ghawyRefaat;
+		if (GR && GR.eps.length) {
+			var gStart = tracks.length, gMins = 0, gName = L('عودة رفعت إسماعيل', 'The Return of Refaat Ismail');
+			GR.eps.forEach(function (ep, k) {
+				gMins += ep[2];
+				tracks.push({ title: gName, ep: L('الحلقة', 'Episode') + ' ' + App.num(k + 1) + ': ' + ep[1], sub: ep[1] + ' · ' + GR.channel.name,
+					channel: GR.channel.name, url: 'https://www.youtube.com/watch?v=' + ep[0], yt: ep[0], ytEmbed: true, mins: ep[2], skin: 'specials' });
+			});
+			groups.push({
+				title: GR.title, note: GR.note,
+				rows: [{ title: { ar: 'عودة رفعت إسماعيل', en: 'The Return of Refaat Ismail' }, href: S.seriesHref(GR.series), thumb: ytThumb(GR.eps[0][0]), start: gStart, count: GR.eps.length, mins: gMins, yt: true }]
+			});
+		}
+
 		var midStart = tracks.length;
 		(A.midnight || []).forEach(function (m) {
 			tracks.push({ title: m[0], sub: L('برنامج «بعد منتصف الليل»', 'After Midnight programme'), url: window.Cassette.pageUrl(A, m[1]), mins: m[2], skin: 'midnight', art: TH[m[1]] || '' });
