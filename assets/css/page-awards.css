@@ -46,6 +46,9 @@ html[dir="rtl"] .aw-book { padding: 6px 6px 6px 12px; }
 .aw-src { display: block; font-size: 13px; }
 .aw-pic { margin: 0; }
 .aw-pic img { display: block; width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, .4); }
+/* a click opens it full size (App.showPic), with the home timeline's lift under the pointer */
+.aw-zoom { display: block; width: 100%; padding: 0; border: 1px solid transparent; border-radius: 10px; background: none; cursor: zoom-in; transition: transform .2s, border-color .2s; }
+.aw-zoom:hover, .aw-zoom:focus-visible { transform: translateY(-3px) rotate(-.6deg); border-color: var(--ember); outline: none; }
 .aw-more { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
 .aw-hon { display: flex; gap: 12px; align-items: baseline; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--ink-2); color: var(--paper); }
 .aw-hon:hover { border-color: var(--ember); color: var(--paper); }

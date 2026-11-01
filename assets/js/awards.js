@@ -126,7 +126,9 @@ window.PAGE = {
 					'<div class="aw-body"><h2>' + e(t(a.title).replace(/\s*—\s*بعد الرحيل$/, '')) + '</h2><p>' + e(t(a.text)) + '</p>' +
 						(w ? '<a class="aw-book" href="' + e(S.bookHref(w.id)) + '">' + (S.coverOf((d.bookInfo || {})[w.id]) ? '<img src="' + e(S.coverOf(d.bookInfo[w.id])) + '" alt="" loading="lazy">' : '') + '<span>' + e(t(w.title)) + '</span></a>' : '') +
 						(a.source ? '<a class="aw-src" href="' + e(a.source) + '" target="_blank" rel="noopener">' + e(L('المصدر ↗', 'Source ↗')) + '</a>' : '') + '</div>' +
-					(a.image ? '<figure class="aw-pic"><img src="' + e(a.image.src) + '" alt="' + e(t(a.image.alt)) + '" loading="lazy"></figure>' : '') +
+					/* its photograph opens full size with its caption, as the home timeline's do */
+					(a.image ? '<figure class="aw-pic"><button type="button" class="aw-zoom" data-src="' + e(a.image.src) + '" data-alt="' + e(t(a.image.alt)) + '" aria-label="' + e(L('تكبير الصورة', 'Enlarge the photo')) + '">' +
+						'<img src="' + e(a.image.src) + '" alt="' + e(t(a.image.alt)) + '" loading="lazy"></button></figure>' : '') +
 					'</li>';
 			}).join('') + '</ol>' +
 			(honours.length ? '<h2 class="pp-h">' + e(L('تكريمات أخرى', 'Other honours')) + '</h2><div class="aw-more">' + honours.map(function (l, i) {
@@ -134,10 +136,12 @@ window.PAGE = {
 				return '<a href="legacy.html#l-' + (d.legacy || []).indexOf(l) + '" class="aw-hon" id="awh-' + i + '"><b>' + e(String(l.date).slice(0, 4)) + '</b><span>' + e(t(l.title)) + '</span></a>';
 			}).join('') + '</div>' : '') +
 		'</div></section>';
-		/* a trophy in the cabinet takes one to its entry */
+		/* a trophy in the cabinet takes one to its entry; a prize's photograph opens full size */
 		if (!self.wired) {
 			self.wired = true;
 			document.addEventListener('click', function (ev) {
+				var z = ev.target.closest && ev.target.closest('.aw-zoom');
+				if (z) { App.showPic(z.getAttribute('data-src'), z.getAttribute('data-alt')); return; }
 				var it = ev.target.closest && ev.target.closest('.awc-item[data-to]'), to = it && document.getElementById(it.getAttribute('data-to'));
 				if (!to) return;
 				to.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
