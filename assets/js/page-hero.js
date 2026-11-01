@@ -200,7 +200,8 @@
 		},
 
 		/* numbers (with «اللغة والأسلوب», once style.html's): a scoreboard, its figures counting up from nought once drawn (all at
-		   once when motion is reduced); under it his career year by year in one chart, after amCharts' «CSS Animations» on CodePen
+		   once when motion is reduced), its figures on cards in an endless row after GreenSock's «Infinite Scrolling Cards» on
+		   CodePen (made there with GSAP; here in plain script, numbersDeck below); under it his career year by year in one chart, after amCharts' «CSS Animations» on CodePen
 		   (made there with their library; here in plain SVG, drawn by numbersChart below); and under that his trailing dots, a
 		   line at a time typed and erased (StyleSection.LINES) */
 		numbers: function (d, A) {
@@ -221,11 +222,21 @@
 			if (!R._counting) { R._counting = true; setTimeout(step, 30); }
 			var e = A.esc, L = A.L, S = window.WorksShared;
 			var issues = (d.series || []).reduce(function (s, x) { return s + (S ? S.seriesIssues(x.id).filter(function (is) { return !(is.part > 1); }).length : 0); }, 0);
-			var cells = [[issues, L('عددًا', 'issues')], [(d.works || []).length, L('كتابًا', 'books')], [(((d.blog || {}).posts) || []).length, L('منشورًا', 'posts')],
-				[(d.characters || []).length, L('شخصية', 'characters')], [(d.quotes || []).length, L('اقتباسًا', 'quotes')]];
-			return '<div class="ph-board">' + cells.filter(function (c) { return c[0]; }).map(function (c, i) {
-					return '<div class="ph-count"><b data-to="' + c[0] + '">' + e(A.num(0)) + '</b><span>' + e(c[1]) + '</span></div>';
-				}).join('') + '</div>' +
+			var posts = ((d.blog || {}).posts) || [];
+			var papers = posts.filter(function (p) { return p.src && !/^من كتاب/.test(p.src) && /(19|20)\d\d/.test(p.src); }).length;
+			var houses = S ? S.publishers().filter(function (c) { return c.list.length; }).length : 0;
+			/* [number, label, where it leads, the card's colour] */
+			var cells = [[issues, L('عددًا في السلاسل', 'series issues'), 'works.html', '#b8441f'], [(d.series || []).length, L('سلسلة', 'series'), 'works.html', '#7a2a1a'],
+				[(d.works || []).length, L('كتابًا مستقلًا', 'standalone books'), 'works.html', '#a8741c'], [posts.length, L('منشورًا في المدونة', 'blog posts'), 'blog.html', '#1f4e6b'],
+				[papers, L('مقالًا في الصحف', 'pieces in the papers'), 'papers.html', '#8c2232'], [(d.characters || []).length, L('شخصية', 'characters'), 'characters.html', '#2f5d3a'],
+				[(d.quotes || []).length, L('اقتباسًا', 'quotes'), 'quotes.html', '#5b2f6e'], [houses, L('دار نشر', 'publishers'), 'publishers.html', '#3c4652']].filter(function (c) { return c[0]; });
+			setTimeout(numbersDeck, 0);
+			return '<div class="ph-deck" tabindex="0" role="group" aria-roledescription="' + e(L('شريط بطاقات', 'carousel')) + '" aria-label="' + e(L('الموقع بالأرقام', 'The site in numbers')) + '">' +
+					'<ul class="ph-cards">' + cells.map(function (c, i) {
+						return '<li class="ph-count" style="--c:' + c[3] + '"><a href="' + c[2] + '" tabindex="-1"><b data-to="' + c[0] + '">' + e(A.num(0)) + '</b><span>' + e(c[1]) + '</span></a></li>';
+					}).join('') + '</ul>' +
+					'<p class="ph-deck-nav"><button type="button" class="ph-prev">' + e(L('السابق', 'Prev')) + '</button><button type="button" class="ph-next">' + e(L('التالي', 'Next')) + '</button></p>' +
+				'</div>' +
 				numbersChart(d, A) +
 				'<div class="ph-type">' + ((window.StyleSection || {}).LINES || []).map(function (l, i) { return '<p style="--d:' + (i ? i * 3 - 9 : 0) + 's"><span>' /* (started part-way, not waiting: a waiting line would show its caret) */ + e(L(l[0], l[1])) + '</span></p>'; }).join('') + '</div>';
 		},
@@ -274,6 +285,78 @@
 			return '<div class="ph-wall"><div class="track">' + frames + frames + '</div></div>';
 		}
 	};
+
+	/* the numbers band's cards, as GreenSock's pen moves them: a card a tenth of the way along one second's run from four widths on
+	   one side to four on the other, growing to full size in the middle and shrinking again (scale and opacity (1 - 0.2·steps)²),
+	   the middle one on top, round and round without end. The pen drives it by the page's scroll; here a drag, Prev and Next, the
+	   arrow keys, or a slow turn of its own that a pointer over it stops. The middle card is a link; a card beside it comes to the
+	   middle when clicked */
+	function numbersDeck() {
+		var deck = document.querySelector('.ph-deck');
+		if (!deck || deck.getAttribute('data-on')) return;
+		deck.setAttribute('data-on', '1');
+		var ph = deck.closest('.ph');
+		if (ph) ph.removeAttribute('aria-hidden'); /* (this band is a control, not a decoration) */
+		var cards = [].slice.call(deck.querySelectorAll('.ph-cards li')), n = cards.length, pos = 0, to = 0, from = 0, t0 = 0, timer = 0, auto = 0, hold = false;
+		var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+		var rtl = function () { return getComputedStyle(deck).direction === 'rtl'; };
+		var place = function () {
+			var dir = rtl() ? -1 : 1, mid = Math.round(pos);
+			cards.forEach(function (li, i) {
+				var k = ((i - pos) % n + n) % n; if (k > n / 2) k -= n;
+				var a = Math.min(1, Math.abs(k) * .2), sc = (1 - a) * (1 - a);
+				li.style.transform = 'translate(-50%, -50%) translateX(' + (k * 80 * dir).toFixed(2) + '%) scale(' + sc.toFixed(3) + ')';
+				li.style.opacity = sc.toFixed(3);
+				li.style.zIndex = 100 - Math.round(Math.abs(k) * 10);
+				var on = ((mid % n) + n) % n === i;
+				li.classList.toggle('is-mid', on);
+				li.querySelector('a').tabIndex = on ? 0 : -1;
+			});
+		};
+		/* a smooth glide to the target, eased out (the pen's power3), measured against the clock */
+		var glide = function () {
+			var f = Math.min(1, (Date.now() - t0) / 500), ease = 1 - Math.pow(1 - f, 3);
+			pos = from + (to - from) * ease;
+			place();
+			timer = f < 1 ? setTimeout(glide, 16) : 0;
+		};
+		var go = function (target) { from = pos; to = target; t0 = Date.now(); if (still) { pos = to; place(); return; } clearTimeout(timer); glide(); };
+		var step = function (d) { go(Math.round(to) + d); };
+		deck.querySelector('.ph-next').addEventListener('click', function () { step(1); });
+		deck.querySelector('.ph-prev').addEventListener('click', function () { step(-1); });
+		deck.addEventListener('keydown', function (ev) {
+			var fwd = rtl() ? 'ArrowLeft' : 'ArrowRight', back = rtl() ? 'ArrowRight' : 'ArrowLeft';
+			if (ev.key === fwd) { ev.preventDefault(); step(1); } else if (ev.key === back) { ev.preventDefault(); step(-1); }
+		});
+		/* a drag: a card's width moved is a card along; let go, it settles on the nearest */
+		var ul = deck.querySelector('.ph-cards'), x0 = null, p0 = 0, moved = 0;
+		ul.addEventListener('pointerdown', function (ev) { x0 = ev.clientX; p0 = pos; moved = 0; clearTimeout(timer); ul.setPointerCapture(ev.pointerId); });
+		ul.addEventListener('pointermove', function (ev) {
+			if (x0 == null) return;
+			var dx = ev.clientX - x0; moved = Math.max(moved, Math.abs(dx));
+			pos = p0 - dx / (cards[0].offsetWidth * .8) * (rtl() ? -1 : 1); to = pos; place();
+		});
+		var up = function () { if (x0 == null) return; x0 = null; go(Math.round(pos)); };
+		ul.addEventListener('pointerup', up); ul.addEventListener('pointercancel', up);
+		/* a click: on the middle card it follows the link, on another it brings that one to the middle; after a drag, nothing */
+		cards.forEach(function (li, i) {
+			li.querySelector('a').addEventListener('click', function (ev) {
+				if (moved > 6) { ev.preventDefault(); return; }
+				if (!li.classList.contains('is-mid')) {
+					ev.preventDefault();
+					var k = ((i - Math.round(to)) % n + n) % n; if (k > n / 2) k -= n;
+					go(Math.round(to) + k);
+				}
+			});
+		});
+		/* its own slow turn, every three seconds, stopped while a pointer or the focus is on it */
+		deck.addEventListener('pointerenter', function () { hold = true; });
+		deck.addEventListener('pointerleave', function () { hold = false; });
+		deck.addEventListener('focusin', function () { hold = true; });
+		deck.addEventListener('focusout', function () { hold = false; });
+		if (!still) auto = setInterval(function () { if (!hold && document.body.contains(deck)) step(1); else if (!document.body.contains(deck)) clearInterval(auto); }, 3000);
+		place();
+	}
 
 	/* the numbers band's chart, as amCharts' pen draws its trip: Ma Wara' al-Tabi'a's issues each year as columns that rise in and
 	   light up under the pointer; his standalone books as a dashed line whose dashes keep moving, a round bullet a year sized by

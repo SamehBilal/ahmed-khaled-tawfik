@@ -682,13 +682,24 @@ html[data-theme="light"] .nmc-legend .k-books i { border-color: #9a7232; }
 html[data-theme="light"] .nmc-papers, html[data-theme="light"] .nmc-sq, html[data-theme="light"] .nmc-legend .k-papers i { stroke: #d6403e; border-color: #d6403e; }
 @media (max-width: 640px) { .nmc-name { font-size: 26px; } .nmc-name:not(.is-key) { display: none; } /* (the first and last would run off the screen) */ .nmc-ax { font-size: 26px; } .nmc-legend { font-size: 13px; gap: 4px 14px; } }
 @media (prefers-reduced-motion: reduce) { .nmc-col, .nmc-papers, .nmc-sq, .nmc-books, .nmc-dot { animation: none; stroke-dashoffset: 0; opacity: 1; } .nmc-books { stroke-dasharray: 3 3; } }
-.ph-board { position: relative; display: flex; justify-content: center; align-items: center; gap: clamp(10px, 3vw, 40px); padding: 0 4%; z-index: 2; flex-wrap: wrap; }
-.ph-count { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 18px 12px; min-width: 120px; border-radius: 12px;
-	background: rgba(14, 15, 19, .72); border: 1px solid rgba(239, 230, 210, .12); box-shadow: inset 0 -40px 40px -40px rgba(224, 99, 58, .35); }
-.ph-count b { font-family: var(--f-latin); font-size: clamp(34px, 5vw, 56px); line-height: 1; color: var(--ember); font-variant-numeric: tabular-nums; }
-.ph-count span { font-family: var(--f-display); font-size: 14px; color: var(--ph-dim); }
-@media (max-width: 640px) { .ph-count { min-width: 84px; padding: 10px 10px 8px; } .ph-count:nth-child(n+5) { display: none; } }
-html[data-theme="light"] .ph-count { background: rgba(251, 246, 234, .85); border-color: rgba(42, 32, 23, .12); }
+/* the figures on cards in an endless row (numbersDeck in page-hero.js), after GreenSock's «Infinite Scrolling Cards» pen:
+   tall rounded cards, each its own colour, full size in the middle and smaller and fainter to each side */
+.ph-deck { position: relative; width: 100%; outline: none; }
+.ph-cards { position: relative; height: 13.5rem; margin: 0; padding: 0; list-style: none; overflow: hidden; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+.ph-cards:active { cursor: grabbing; }
+.ph-count { position: absolute; left: 50%; top: 50%; width: 10rem; height: 12.5rem; border-radius: .8rem; transform: translate(-50%, -50%) scale(0); opacity: 0;
+	background: linear-gradient(160deg, color-mix(in srgb, var(--c) 82%, #fff 18%), var(--c) 55%, color-mix(in srgb, var(--c) 70%, #000 30%));
+	box-shadow: 0 18px 36px -14px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .18); will-change: transform, opacity; }
+.ph-count a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; height: 100%; padding: 0 12px; color: #fff; text-align: center; text-decoration: none; -webkit-user-drag: none; }
+.ph-count b { font-family: var(--f-latin); font-size: 58px; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; text-shadow: 0 2px 12px rgba(0, 0, 0, .25); }
+.ph-count span { font-family: var(--f-display); font-size: 16px; line-height: 1.3; color: rgba(255, 255, 255, .88); }
+.ph-count.is-mid a:focus-visible { outline: 2px solid #fff; outline-offset: -8px; border-radius: .8rem; }
+.ph-deck:focus-visible .ph-cards { outline: 2px solid var(--ember); outline-offset: 4px; border-radius: 12px; }
+/* Prev and Next, pill buttons under the row, as the pen's */
+.ph-deck-nav { display: flex; justify-content: center; gap: 12px; margin: 6px 0 0; }
+.ph-deck-nav button { padding: 7px 20px; border: 2px solid var(--paper-dim); border-radius: 99px; background: transparent; color: var(--paper); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.ph-deck-nav button:hover, .ph-deck-nav button:focus-visible { border-color: var(--ember); color: var(--ember); outline: none; }
+@media (max-width: 640px) { .ph-cards { height: 11rem; } .ph-count { width: 8rem; height: 10rem; } .ph-count b { font-size: 44px; } .ph-count span { font-size: 14px; } }
 
 /* ---------- quiz: a question mark glowing over four answers ---------- */
 .ph[data-ph="quiz"] { background: radial-gradient(50% 90% at 50% 40%, #2a1830 0%, #110c16 60%, #0b0a0e 100%); }
