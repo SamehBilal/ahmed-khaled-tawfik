@@ -22,14 +22,82 @@
 .hw-call { margin-top: 44px; }
 .hw-call h2 { margin: 0 0 8px; font-family: var(--f-display); font-size: 24px; }
 .hw-call p { color: var(--paper-dim); line-height: 1.9; margin: 0 0 14px; }
-.hw-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin-top: 6px; }
+/* the form, after Muhammed Erdem's «Credit Card Form» pen (handwriting.js draws and wires it): a card that fills in as it is written,
+   over the top of the form's panel, as the pen's sits over its own — here the dedication, a book's first page over its cover */
+.hw-form-wrap { margin-top: 22px; }
+.dc { position: relative; z-index: 2; width: min(460px, 92%); height: 290px; margin: 0 auto -140px; perspective: 2000px; }
+.dc-card { position: relative; width: 100%; height: 100%; }
+.dc-side { position: absolute; inset: 0; overflow: hidden; border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, .55); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+	transform-style: preserve-3d; transition: transform .8s cubic-bezier(.71, .03, .56, .85); color: #fff; }
+.dc-front { transform: rotateY(0); }
+.dc-back { transform: rotateY(-180deg); }
+.dc.is-back .dc-front { transform: rotateY(180deg); }
+.dc.is-back .dc-back { transform: rotateY(0); }
+/* the cover behind, darkened as the pen darkens its pictures */
+.dc-cover { position: absolute; inset: 0; background: #1c1d27 center 30% / cover no-repeat; transition: background-image .4s; }
+.dc-cover::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(14, 8, 4, .68), rgba(14, 8, 4, .86)); }
+.dc-back .dc-cover { transform: scaleX(-1); }
+/* the frame that glides to the part of the card being written */
+.dc-focus { position: absolute; z-index: 3; left: 0; top: 0; width: 100%; height: 100%; border: 2px solid rgba(255, 255, 255, .65); border-radius: 8px; opacity: 0; pointer-events: none;
+	transition: all .35s cubic-bezier(.71, .03, .56, .85); }
+.dc-focus::after { content: ''; position: absolute; inset: 0; border-radius: 8px; background: #0b0603; filter: blur(25px); opacity: .5; }
+.dc-focus.is-on { opacity: 1; }
+.dc-front > *:not(.dc-cover):not(.dc-focus), .dc-back > *:not(.dc-cover) { position: relative; z-index: 4; }
+.dc-top { display: flex; align-items: flex-start; justify-content: space-between; padding: 22px 24px 0; }
+/* the pen's chip: a gold nib */
+.dc-nib { width: 40px; height: 40px; }
+.dc-nib path:first-child { fill: #d9a441; }
+.dc-nib .cut { fill: none; stroke: #6b4a12; stroke-width: 2; }
+.dc-nib circle.cut { fill: #6b4a12; stroke: none; }
+.dc-kind { padding: 4px 10px; font-family: var(--f-display); font-size: 18px; color: #f6d79a; }
+.dc-kind b { display: inline-block; font-weight: 400; }
+.dc-book { display: block; margin: 26px 14px 0; padding: 8px 12px; min-height: 52px; font-family: var(--f-display); font-size: 28px; line-height: 1.3; text-shadow: 0 4px 12px rgba(0, 0, 0, .6);
+	white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dc-foot { position: absolute !important; left: 14px; right: 14px; bottom: 16px; display: flex; align-items: flex-end; gap: 12px; }
+.dc-to, .dc-when { margin: 0; padding: 8px 12px; min-width: 0; }
+.dc-to { flex: 1; }
+.dc-when { flex: 0 1 46%; text-align: end; }
+.dc-foot small, .dc-story small { display: block; margin-bottom: 4px; font-size: 13px; opacity: .7; }
+.dc-val { display: block; font-family: var(--f-display); font-size: 19px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dc-when .dc-val { font-size: 15px; }
+.dc-ph { opacity: .55; }
+/* the words slide in as they are written, as the pen's letters do */
+.dc-w { display: inline-block; }
+.dc-w.is-new, .dc-ph.is-new, .dc-kind b.is-new { animation: dc-in .3s .05s ease-in-out both; }
+@keyframes dc-in { from { opacity: 0; transform: translateY(14px); } }
+/* the back: a dark band, the story written on a pale strip, and his signature */
+.dc-band { height: 46px; margin-top: 26px; background: rgba(0, 0, 0, .8); }
+.dc-story { margin: 16px 18px 0; }
+.dc-story-t { margin: 0; min-height: 70px; max-height: 92px; overflow: hidden; padding: 10px 14px; border-radius: 6px; background: #f3ead7; color: #2a1d10;
+	font-family: var(--f-display); font-size: 15px; line-height: 1.6; box-shadow: 0 10px 20px -8px rgba(0, 0, 0, .5); }
+.dc-sign { position: absolute !important; bottom: 14px; inset-inline-end: 22px; margin: 0; font-family: var(--f-display); font-size: 22px; font-style: italic; color: #f6d79a; transform: rotate(-4deg); }
+/* the panel: the form under the card, across the page, no ground of its own */
+.hw-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 28px; padding: 172px 32px 32px; border: 1px solid var(--line); border-radius: 16px; }
 .hw-form label { display: flex; flex-direction: column; gap: 6px; font-family: var(--f-display); font-size: 14px; color: var(--paper-dim); }
-.hw-form input, .hw-form select, .hw-form textarea { font: inherit; font-family: var(--f-body, inherit); padding: 9px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--ink); color: var(--paper); }
-.hw-form textarea { resize: vertical; }
+.hw-form input, .hw-form select, .hw-form textarea { width: 100%; min-width: 0; box-sizing: border-box; height: 50px; padding: 5px 15px; border: 1px solid var(--line); border-radius: 6px; background: none; color: var(--paper);
+	font: inherit; font-family: var(--f-body, inherit); font-size: 17px; transition: border-color .3s, box-shadow .3s; }
+.hw-form select { background: var(--ink); }
+.hw-form textarea { height: auto; padding: 12px 15px; resize: vertical; }
+.hw-form input:hover, .hw-form select:hover, .hw-form textarea:hover, .hw-form input:focus, .hw-form select:focus, .hw-form textarea:focus { border-color: var(--ember); outline: none; }
+.hw-form input:focus, .hw-form select:focus, .hw-form textarea:focus { box-shadow: 0 10px 20px -13px rgba(224, 99, 58, .6); }
 .hw-form .hw-wide { grid-column: 1 / -1; }
 .hw-form .hw-check { flex-direction: row; align-items: center; gap: 8px; }
-.hw-form .hw-check input { width: 18px; height: 18px; accent-color: var(--ember); }
+.hw-form .hw-check input { flex: none; width: 18px; height: 18px; accent-color: var(--ember); }
 .hw-form .hw-how { margin: 0; font-size: 14px; color: var(--muted); }
-.hw-form .hw-acts { margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-.hw-form button { cursor: pointer; font: inherit; }
-@media (max-width: 640px) { .hw-form { grid-template-columns: 1fr; } }
+/* the pen's wide button, here two side by side: GitHub, and email */
+.hw-form .hw-acts { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.hw-go { height: 55px; border: 0; border-radius: 6px; background: var(--ember); color: #fff; font: inherit; font-family: var(--f-display); font-size: 19px; cursor: pointer;
+	box-shadow: 3px 10px 20px 0 rgba(224, 99, 58, .3); transition: transform .2s, box-shadow .2s; }
+.hw-go:hover, .hw-go:focus-visible { transform: translateY(-2px); box-shadow: 3px 14px 24px 0 rgba(224, 99, 58, .4); outline: none; }
+.hw-go.is-alt { background: transparent; color: var(--paper); border: 2px solid var(--line); box-shadow: none; }
+.hw-go.is-alt:hover, .hw-go.is-alt:focus-visible { border-color: var(--ember); color: var(--ember); }
+@media (max-width: 640px) {
+	.dc { height: 210px; margin-bottom: -110px; }
+	.dc-top { padding: 14px 16px 0; } .dc-nib { width: 30px; height: 30px; } .dc-kind { font-size: 15px; }
+	.dc-book { margin-top: 10px; font-size: 21px; min-height: 40px; }
+	.dc-foot { bottom: 8px; } .dc-val { font-size: 16px; } .dc-when .dc-val { font-size: 13px; }
+	.dc-band { height: 36px; margin-top: 18px; } .dc-story-t { min-height: 50px; max-height: 64px; font-size: 13px; } .dc-sign { font-size: 17px; bottom: 8px; }
+	.hw-form { grid-template-columns: 1fr; padding: 132px 16px 20px; }
+	.hw-form .hw-acts { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .dc-side, .dc-focus { transition: none; } .dc-w.is-new, .dc-ph.is-new, .dc-kind b.is-new { animation: none; } }
