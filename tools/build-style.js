@@ -1,4 +1,4 @@
-// «اللغة والأسلوب» (style.html): his writing in numbers, counted once from the blog archive's titles and excerpts (data-blog.js)
+// «اللغة والأسلوب» (numbers.html#style, once style.html): his writing in numbers, counted once from the blog archive's titles and excerpts (data-blog.js)
 // and the series' issue titles (data-built.js) — written to assets/data/style.json. Run by tools/build-sw.js; on its own:
 //   node tools/build-style.js
 const fs = require('fs'), path = require('path');

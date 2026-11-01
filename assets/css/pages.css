@@ -66,6 +66,13 @@ html[data-theme="light"] {
 @media (max-width: 640px) { .pp-cards { grid-template-columns: 1fr 1fr; } .pp-card .pp-n { font-size: 18px; } .pp-chart { padding: 12px 8px 4px; } }
 
 /* ---------- «بالأرقام» ---------- */
+/* the page's two parts, «المسيرة» and «اللغة والأسلوب», a jump to each at the top and a title over each */
+.nm-parts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; }
+.nm-parts a { padding: 6px 16px; border: 1px solid var(--line); border-radius: 999px; color: var(--paper-dim); font-family: var(--f-display); font-size: 15px; }
+.nm-parts a:hover, .nm-parts a:focus-visible { border-color: var(--ember); color: var(--ember); }
+.nm-part { margin: 0 0 18px; font-family: var(--f-display); font-size: 34px; scroll-margin-top: 90px; }
+#style { scroll-margin-top: 70px; }
+.st .nm-part { padding-top: 34px; border-top: 1px solid var(--line); }
 .nm-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin: 0 0 30px; }
 .nm-tile { display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--ink-2); color: var(--paper);
 	transition: transform .2s, border-color .2s; }

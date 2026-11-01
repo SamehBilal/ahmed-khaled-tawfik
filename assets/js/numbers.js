@@ -1,16 +1,17 @@
-/* numbers.html — «بالأرقام»: his work counted from the site's own data. The headline numbers as tiles; then the series'
-   spans on one timeline, Ma Wara' al-Tabi'a's issues year by year (every one of its first editions is dated), his books
-   year by year by kind, his pieces in the papers year by year (the blog archive), and the publishers by how many of his
-   books each put out. Years the data does not hold well (the other series' issues) are not charted. */
+/* numbers.html — «بالأرقام والأسلوب», in two parts. «المسيرة»: his work counted from the site's own data — the headline numbers
+   as tiles; then the series' spans on one timeline, Ma Wara' al-Tabi'a's issues year by year (every one of its first editions
+   is dated), his books year by year by kind, his pieces in the papers year by year (the blog archive), and the publishers by
+   how many of his books each put out (years the data does not hold well, the other series' issues, are not charted).
+   «اللغة والأسلوب» (#style, style.js, once style.html): his writing itself counted, drawn by StyleSection. */
 window.PAGE = {
 	id: 'numbers',
-	title: { ar: 'بالأرقام', en: 'In numbers' },
+	title: { ar: 'بالأرقام والأسلوب', en: 'Numbers & style' },
 	strings: {
-		eyebrow: { ar: 'مسيرة في أرقام', en: 'A career in figures' },
-		title: { ar: 'بالأرقام', en: 'In numbers' },
+		eyebrow: { ar: 'مسيرة وأسلوب في أرقام', en: 'A career and a style in figures' },
+		title: { ar: 'بالأرقام والأسلوب', en: 'Numbers & style' },
 		lead: {
-			ar: 'ربع قرن من الكتابة كما يحصيها هذا الموقع: الأعداد والكتب والمقالات والشخصيات ودور النشر، ومتى صدر كل منها.',
-			en: 'A quarter-century of writing as this site counts it: issues, books, articles, characters and publishers, and when each came out.'
+			ar: 'ربع قرن من الكتابة كما يحصيها هذا الموقع: الأعداد والكتب والمقالات والشخصيات ودور النشر ومتى صدر كل منها، ثم أسلوبه نفسه: الكلمات التي تكررت في مقالاته، وطول جمله ونقاطه المتتالية «..»، وعناوين سلاسله.',
+			en: 'A quarter-century of writing as this site counts it: issues, books, articles, characters and publishers, and when each came out; then his style itself: the words that recur in his columns, the length of his sentences and his trailing “..”, and the titles of his series.'
 		}
 	},
 
@@ -32,6 +33,9 @@ window.PAGE = {
 
 		document.getElementById('content').innerHTML =
 			'<section class="section nm"><div class="wrap">' +
+				/* the two parts, a jump to each */
+				'<nav class="nm-parts" aria-label="' + e(L('أقسام الصفحة', 'On this page')) + '"><a href="#career">' + e(L('المسيرة', 'The career')) + '</a><a href="#style">' + e(L('اللغة والأسلوب', 'Language & style')) + '</a></nav>' +
+				'<h2 class="nm-part" id="career">' + e(L('المسيرة', 'The career')) + '</h2>' +
 				'<div class="nm-tiles">' +
 					tile(issues, ['عددًا في السلاسل', 'أعداد في السلاسل', 'series issues'], 'works.html') +
 					tile(main.length, ['سلسلة', 'سلاسل', 'series'], 'works.html') +
@@ -49,7 +53,18 @@ window.PAGE = {
 				'<figure class="nm-chart" id="nm-books"><figcaption>' + e(L('كتبه المستقلة في كل عام، بأنواعها', 'His standalone books each year, by kind')) + '<small class="nm-note">' + e(L('ما بعد 2018 كتب جُمعت ونُشرت بعد رحيله.', 'The books after 2018 were collected and published after his death.')) + '</small></figcaption><div class="nm-legend"></div><div class="nm-plot"></div><div class="nm-tip" hidden></div></figure>' +
 				'<figure class="nm-chart" id="nm-papers"><figcaption>' + e(L('مقالاته في الصحف في كل عام', 'His pieces in the papers each year')) + ' <a href="papers.html">' + e(L('في الصحف ←', 'In the papers →')) + '</a></figcaption><div class="nm-plot"></div><div class="nm-tip" hidden></div></figure>' +
 				'<figure class="nm-chart" id="nm-houses"><figcaption>' + e(L('دور النشر، بعدد كتبه عن كل منها', 'Publishers, by how many of his books each put out')) + '</figcaption><div class="nm-plot"></div></figure>' +
-			'</div></section>';
+			'</div></section>' +
+			'<section class="section st" id="style"><div class="wrap"><h2 class="nm-part">' + e(L('اللغة والأسلوب', 'Language & style')) + '</h2>' +
+				'<p class="st-lead">' + e(L('كيف كان يكتب: أسلوبه بالأرقام، من أرشيف مقالاته.', 'How he wrote: his style in numbers, from the archive of his columns.')) + '</p><div class="st-body"></div></div></section>';
+		if (window.StyleSection) window.StyleSection.render(document.querySelector('.st-body'));
+		/* drawn after the page loaded, so the browser cannot go to #style (style.html sends its visitors there) by itself */
+		if (/^#(style|career)$/.test(location.hash) && !this.jumped) {
+			this.jumped = true;
+			var to = document.getElementById(location.hash.slice(1));
+			/* once the page has loaded, and at once: a smooth scroll started earlier is cut short as the rest comes in */
+			var go = function () { setTimeout(function () { to.scrollIntoView({ behavior: 'instant' }); }, 50); };
+			if (to) { if (document.readyState === 'complete') go(); else window.addEventListener('load', go); }
+		}
 
 		/* the series' spans */
 		this.spans(seriesIds);

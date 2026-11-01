@@ -199,7 +199,8 @@
 			}).join('');
 		},
 
-		/* numbers: a scoreboard, its figures counting up from nought once drawn (all at once when motion is reduced) */
+		/* numbers (with «اللغة والأسلوب», once style.html's): a scoreboard, its figures counting up from nought once drawn (all at
+		   once when motion is reduced), and under it his trailing dots, a line at a time typed and erased (StyleSection.LINES) */
 		numbers: function (d, A) {
 			/* (the band can be drawn again as the page starts, so each frame finds the figures afresh) */
 			var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches, t0 = 0, dur = 1800;
@@ -223,7 +224,8 @@
 			return '<i class="ph-bars">' + [32, 58, 44, 76, 51, 88, 63, 70, 40, 92, 57, 66].map(function (h, i) { return '<i style="--h:' + h + '%;--i:' + i + '"></i>'; }).join('') + '</i>' +
 				'<div class="ph-board">' + cells.filter(function (c) { return c[0]; }).map(function (c, i) {
 					return '<div class="ph-count"><b data-to="' + c[0] + '">' + e(A.num(0)) + '</b><span>' + e(c[1]) + '</span></div>';
-				}).join('') + '</div>';
+				}).join('') + '</div>' +
+				'<div class="ph-type">' + ((window.StyleSection || {}).LINES || []).map(function (l, i) { return '<p style="--d:' + (i ? i * 3 - 9 : 0) + 's"><span>' /* (started part-way, not waiting: a waiting line would show its caret) */ + e(L(l[0], l[1])) + '</span></p>'; }).join('') + '</div>';
 		},
 
 		/* quiz: a question mark glowing over four answers, the right one lighting in turn */

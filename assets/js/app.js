@@ -23,7 +23,7 @@
 			{ id: 'lists', href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey', phone: true },
 			/* and the pages made from the data, which on a wider screen the footer lists */
 			{ id: 'papers', href: 'papers.html', ar: 'في الصحف', en: 'In the papers', phone: true },
-			{ id: 'numbers', href: 'numbers.html', ar: 'بالأرقام', en: 'In numbers', phone: true },
+			{ id: 'numbers', href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style', phone: true },
 			{ id: 'quiz', href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner', phone: true },
 			{ id: 'map', href: 'map.html', ar: 'الخريطة', en: 'The map', phone: true },
 			{ id: 'world', href: 'world.html', ar: 'حول العالم', en: 'Around the world', phone: true },
@@ -39,8 +39,7 @@
 			{ id: 'refaat-life', href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life', phone: true },
 			{ id: 'network', href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web', phone: true },
 			{ id: 'tanta', href: 'tanta.html', ar: 'طنطا', en: 'Tanta', phone: true },
-			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true },
-			{ id: 'style', href: 'style.html', ar: 'اللغة والأسلوب', en: 'Language & style', phone: true }
+			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
@@ -50,9 +49,9 @@
 			{ href: 'publishers.html', ar: 'دور النشر', en: 'Publishers', main: true },
 			/* and beside it, the books and films he loved */
 			{ href: 'library.html', ar: 'مكتبته', en: 'His library', main: true },
-			/* the pages made from the data: his columns by paper, his work in numbers, the quiz, the map */
+			/* the pages made from the data: his columns by paper, his work and his style in numbers, the quiz, the map */
 			{ href: 'papers.html', ar: 'في الصحف', en: 'In the papers' },
-			{ href: 'numbers.html', ar: 'بالأرقام', en: 'In numbers' },
+			{ href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style' },
 			{ href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner' },
 			/* the reader's own lists and journey: the «My lists» button's page, in the footer too */
 			{ href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey' },
@@ -64,10 +63,9 @@
 			{ href: 'talks.html', ar: 'سيرته ولقاءاته', en: 'His life & interviews' },
 			{ href: 'awards.html', ar: 'الجوائز', en: 'Awards' },
 			{ href: 'translations.html', ar: 'ترجماته', en: 'His translations' },
-			/* his city, his handwriting, and his writing in numbers */
+			/* his city and his handwriting */
 			{ href: 'tanta.html', ar: 'طنطا', en: 'Tanta' },
-			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' },
-			{ href: 'style.html', ar: 'اللغة والأسلوب', en: 'Language & style' }
+			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' }
 		],
 		/* «عالم العرّاب»: the pages inside his world, a block of their own under «صفحات الموقع» */
 		world: [
@@ -696,7 +694,7 @@
 			if (au.midnightSpoofs) add(K.audio, au.midnightSpoofs.title, { ar: au.midnightSpoofs.years || '', en: au.midnightSpoofs.years || '' }, 'audio.html', 'audiohat');
 			(d.quotes || []).forEach(function (q, i) { add(K.quote, q.text, q.from, 'quotes.html#q-' + i, both(q.from)); });
 			/* the site's own pages, the header's and the footer's, found by their names and what they hold */
-			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات statistics', quiz: 'اختبار مسابقة أسئلة شخصية بطاقة القارئ اقرأ معنا نادي القراءة quiz character reader card reading club',
+			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات أسلوب لغة كلمات جمل statistics style language words', quiz: 'اختبار مسابقة أسئلة شخصية بطاقة القارئ اقرأ معنا نادي القراءة quiz character reader card reading club',
 				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
 				covers: 'أغلفة غلاف طبعات طبعة إحصاءات الموقع covers editions statistics', lists: 'قوائم رحلتي قراءة تقدم lists journey reading progress',
 				talks: 'سيرة حياة لقاءات حوارات فيديو biography life interviews videos', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',
