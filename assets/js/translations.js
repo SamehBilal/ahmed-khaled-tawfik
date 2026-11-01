@@ -28,13 +28,13 @@ window.PAGE = {
 		return { title: o[0].replace(/^على الأرجح\s*|^Likely\s*/, '').replace(/[«»]/g, '').trim(), author: m ? m[1].trim() : a };
 	},
 
-	/* the band: the novels' own titles drifting one way, his Arabic titles the other */
+	/* the band: the novels' own titles drifting one way, his Arabic titles the other, each with its issue's cover, very small, beside it */
 	band: function (d, A) {
 		var P = window.PAGE, S = window.WorksShared, is = S.seriesIssues('rwg'), e = A.esc;
-		var en = is.map(function (x) { var o = P.orig(x, 'en'); return o && o.title; }).filter(Boolean).slice(0, 26);
-		var ar = is.map(function (x) { return x.title && x.title.ar; }).filter(Boolean).slice(0, 26);
+		var en = is.map(function (x) { var o = P.orig(x, 'en'); return o && [o.title, S.issueCover('rwg', x)]; }).filter(Boolean).slice(0, 26);
+		var ar = is.map(function (x) { return x.title && x.title.ar && [x.title.ar, S.issueCover('rwg', x)]; }).filter(Boolean).slice(0, 26);
 		var row = function (list, k, dir) {
-			var s = list.map(function (w) { return '<span>' + e(w) + '</span>'; }).join('<i>✦</i>');
+			var s = list.map(function (w) { return '<span>' + (w[1] ? '<img class="tr-cv" src="' + e(w[1]) + '" alt="" loading="lazy" decoding="async">' : '') + e(w[0]) + '</span>'; }).join('<i>✦</i>');
 			return '<div class="tr-row tr-r' + k + '" dir="' + dir + '"><div class="tr-track">' + s + '<i>✦</i>' + s + '<i>✦</i></div></div>';
 		};
 		return row(en, 'en', 'ltr') + '<i class="tr-quill" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 3C14 4 9 8 6.5 14L5 19l1.2.8 3-3.6C14 15 19 10 21 3z" fill="currentColor"/><path d="M6.2 19.8 9 15" stroke="#1a130d" stroke-width=".9"/></svg></i>' + row(ar, 'ar', 'rtl');

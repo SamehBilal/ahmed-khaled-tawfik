@@ -1,10 +1,15 @@
 /* «ترجماته» (translations.html, translations.js); the summary and the book cards borrow «حول العالم»'s (.wd-*) */
-.ph[data-ph="translations"] { background: radial-gradient(60% 120% at 50% 50%, #2a2016 0%, #0e0b08 72%); }
+/* the band is the page itself: no ground of its own, no glow, no line under it, in either theme */
+.ph[data-ph="translations"], html[data-theme="light"] .ph[data-ph="translations"] { background: transparent; border-bottom: 0; }
+.ph[data-ph="translations"]::before, .ph[data-ph="translations"]::after { display: none; }
 .tr-row { position: absolute; left: 0; right: 0; overflow: hidden; white-space: nowrap; }
 .tr-ren { top: 26%; }
 .tr-rar { top: 60%; }
-.tr-track { display: inline-flex; align-items: baseline; gap: 22px; animation: tr-slide 90s linear infinite; }
-.tr-track span { font-size: 26px; color: rgba(239, 230, 210, .5); }
+.tr-track { display: inline-flex; align-items: center; gap: 22px; animation: tr-slide 90s linear infinite; }
+.tr-track span { display: inline-flex; align-items: center; gap: 10px; font-size: 26px; color: rgba(239, 230, 210, .5); }
+.tr-track i { align-self: center; }
+/* each title's cover, very small, beside it */
+.tr-cv { flex: none; width: 24px; height: 34px; object-fit: cover; border-radius: 2px; box-shadow: 0 2px 6px rgba(0, 0, 0, .45); opacity: .85; }
 .tr-ren .tr-track span { font-family: "Cormorant Garamond", serif; font-style: italic; letter-spacing: .02em; }
 .tr-rar .tr-track span { font-family: var(--f-display); color: rgba(246, 215, 154, .7); }
 .tr-track i { font-style: normal; font-size: 12px; color: var(--ember); opacity: .7; }
@@ -15,12 +20,11 @@
 .tr-quill { position: absolute; left: 50%; top: 50%; width: 120px; height: 2px; margin: -1px 0 0 -60px; z-index: 2;
 	background: linear-gradient(90deg, transparent, var(--ember), transparent); box-shadow: 0 0 18px rgba(224, 99, 58, .6); }
 .tr-quill svg { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; transform: translate(-50%, -50%); padding: 8px; box-sizing: content-box;
-	color: #f6d79a; filter: drop-shadow(0 0 8px rgba(224, 99, 58, .7)); background: radial-gradient(circle, #1a130d 55%, transparent 72%); }
-html[data-theme="light"] .ph[data-ph="translations"] { background: radial-gradient(60% 120% at 50% 50%, #f6ecd8 0%, #e3d3b4 72%); }
+	color: #f6d79a; filter: drop-shadow(0 0 8px rgba(224, 99, 58, .7)); background: radial-gradient(circle, var(--ink) 55%, transparent 72%); }
 html[data-theme="light"] .tr-track span { color: rgba(60, 40, 20, .5); }
 html[data-theme="light"] .tr-rar .tr-track span { color: rgba(140, 70, 20, .7); }
-html[data-theme="light"] .tr-quill svg { background: radial-gradient(circle, #efe3cb 55%, transparent 72%); color: #8a3b12; }
-@media (max-width: 640px) { .tr-track span { font-size: 19px; } }
+html[data-theme="light"] .tr-quill svg { background: radial-gradient(circle, var(--ink) 55%, transparent 72%); color: #8a3b12; }
+@media (max-width: 640px) { .tr-track span { font-size: 19px; } .tr-cv { width: 18px; height: 26px; } }
 @media (prefers-reduced-motion: reduce) { .tr-track { animation: none; } }
 
 .tr-jump { margin: 0 0 30px; }
