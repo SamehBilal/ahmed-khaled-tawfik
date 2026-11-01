@@ -18,6 +18,7 @@ window.PAGE = {
 		mwt: { yt: 's9jBzFebPEM', ytLabel: { ar: 'الإعلان الرسمي — Netflix MENA', en: 'Official trailer — Netflix MENA' },
 			more: [['Z5np6U8Wo9c', { ar: 'وثائقي «ما وراء القصة» — Netflix MENA', en: 'Behind the story, a documentary — Netflix MENA' }]],
 			press: /nogoumfm|denofgeek|arabnews\.com\/art-culture\/inside-paranormal|birthing-the-ugly-hero|xTz5TrNKUDc|ajnet\.me\/arts\/2021\/4\/2|masrawy.*994476/ },
+		zay: { yt: 'F_XBUNGB7_U', ytLabel: { ar: 'الإعلان — قناة عمرو سلامة', en: 'Trailer — Amr Salama’s channel' } },
 		room207: { yt: 'WfiTOt3CKZk', ytLabel: { ar: 'الإعلان — شاهد', en: 'Trailer — Shahid' }, press: /ahram\.org\.eg\/News\/482542/ }
 	},
 
