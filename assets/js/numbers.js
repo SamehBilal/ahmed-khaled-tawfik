@@ -36,10 +36,12 @@ window.PAGE = {
 		};
 		document.getElementById('content').innerHTML =
 			'<section class="section nm"><div class="wrap">' +
-				/* one story in two steps, «المسيرة» (what he wrote) then «اللغة والأسلوب» (how he wrote it), as the contact page's
-				   (the flow in site.css): a map of the two, then a thread down the side from one numbered step to the next */
-				'<nav class="flow-map" aria-label="' + e(L('خطوتان', 'Two steps')) + '"><a href="#career"><i>' + e(App.num(1)) + '</i>' + e(L('المسيرة', 'The career')) + '</a><b></b>' +
-					'<a href="#style"><i>' + e(App.num(2)) + '</i>' + e(L('اللغة والأسلوب', 'Language & style')) + '</a></nav>' +
+				/* one story in three steps, «المسيرة» (what he wrote), «اللغة والأسلوب» (how he wrote it), then «إحصاءات الموقع» (what
+				   this site holds of it, site-stats.js; once on the covers page), as the contact page's (the flow in site.css): a map of
+				   them, then a thread down the side from one numbered step to the next */
+				'<nav class="flow-map" aria-label="' + e(L('ثلاث خطوات', 'Three steps')) + '"><a href="#career"><i>' + e(App.num(1)) + '</i>' + e(L('المسيرة', 'The career')) + '</a><b></b>' +
+					'<a href="#style"><i>' + e(App.num(2)) + '</i>' + e(L('اللغة والأسلوب', 'Language & style')) + '</a><b></b>' +
+					'<a href="#stats"><i>' + e(App.num(3)) + '</i>' + e(L('إحصاءات الموقع', 'The site in numbers')) + '</a></nav>' +
 				'<div class="flow"><section class="flow-step" id="career">' + step(1, L('ما كتبه', 'What he wrote'), L('المسيرة', 'The career'),
 					L('ربع قرن من الأعداد والكتب والمقالات: كم كتب، ومتى، ولمن.', 'A quarter-century of issues, books and articles: how much he wrote, when, and for whom.')) +
 				'<div class="nm-tiles">' +
@@ -62,11 +64,17 @@ window.PAGE = {
 			'</section>' +
 			'<section class="flow-step" id="style">' + step(2, L('وكيف كتبه', 'And how he wrote it'), L('اللغة والأسلوب', 'Language & style'),
 				L('ومن وراء هذه الأرقام كاتبٌ له صوت: الكلمات التي عاد إليها، وجمله القصيرة، ونقاطه المعلّقة «..»، من أرشيف مقالاته.', 'And behind those numbers, a writer with a voice: the words he came back to, his short sentences, his hanging “..”, from the archive of his columns.')) +
-				'<div class="st-body"></div></section></div>' +
+				'<div class="st-body"></div></section>' +
+			'<section class="flow-step" id="stats">' + step(3, L('وما يحفظه الموقع منه', 'And what this site keeps of it'), L('إحصاءات الموقع', 'The site in numbers'),
+				L('ما يحفظه هذا الأرشيف حتى اليوم، محسوبًا من بياناته نفسها. وكل إضافة بتاريخها في «سجل التحديثات».', 'What this archive holds so far, counted from its own data. Every addition, with its date, is on the Changelog.')) +
+				'<div class="nm-tiles">' + (window.SiteStats ? window.SiteStats.tiles() : []).map(function (x) {
+					return '<a class="nm-tile" href="' + e(x[2]) + '"><b>' + e(App.num(x[0])) + '</b><span>' + e(x[1]) + '</span></a>';
+				}).join('') + '</div>' +
+				'<p class="st-note"><a href="changelog.html">' + e(L('سجل التحديثات ←', 'The Changelog →')) + '</a></p></section></div>' +
 			'</div></section>';
 		if (window.StyleSection) window.StyleSection.render(document.querySelector('.st-body'));
 		/* drawn after the page loaded, so the browser cannot go to #style (style.html sends its visitors there) by itself */
-		if (/^#(style|career)$/.test(location.hash) && !this.jumped) {
+		if (/^#(style|career|stats)$/.test(location.hash) && !this.jumped) {
 			this.jumped = true;
 			var to = document.getElementById(location.hash.slice(1));
 			/* once the page has loaded, and at once: a smooth scroll started earlier is cut short as the rest comes in */

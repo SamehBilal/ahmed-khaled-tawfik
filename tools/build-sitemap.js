@@ -18,7 +18,7 @@ const DATA = {
 	'characters.html': ['data.js', 'data-more.js'], 'writers.html': ['data-more.js'], 'legacy.html': ['data-legacy.js', 'data-more.js'],
 	'audio.html': ['data-audio.js', 'data-storytel.js', 'data-more.js'], 'quotes.html': ['data-quotes.js'], 'tributes.html': ['data-tributes.js'],
 	'publishers.html': ['data-books-a.js', 'data-books-b.js', 'data-more.js'], 'papers.html': ['data-blog.js'], 'blog.html': ['data-blog.js'],
-	'numbers.html': ['data-built.js', 'data-blog.js', 'style.js', '../data/style.json'], 'covers.html': ['data-built.js'], 'screen.html': ['data-more.js'], 'awards.html': ['data.js', 'data-more.js'],
+	'numbers.html': ['data-built.js', 'data-blog.js', 'style.js', 'site-stats.js', '../data/style.json'], 'covers.html': ['data-built.js'], 'screen.html': ['data-more.js'], 'awards.html': ['data.js', 'data-more.js'],
 	'translations.html': ['data.js', 'data-more.js'], 'talks.html': ['data.js', 'data-more.js'], 'guide.html': ['data.js'],
 	'map.html': ['../data/places.json'], 'world.html': ['../data/world.json'], 'changelog.html': ['../data/changelog.json']
 };

@@ -702,9 +702,9 @@
 			if (au.midnightSpoofs) add(K.audio, au.midnightSpoofs.title, { ar: au.midnightSpoofs.years || '', en: au.midnightSpoofs.years || '' }, 'audio.html', 'audiohat');
 			(d.quotes || []).forEach(function (q, i) { add(K.quote, q.text, q.from, 'quotes.html#q-' + i, both(q.from)); });
 			/* the site's own pages, the header's and the footer's, found by their names and what they hold */
-			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات أسلوب لغة كلمات جمل statistics style language words', quiz: 'اختبار مسابقة أسئلة شخصية بطاقة القارئ اقرأ معنا نادي القراءة quiz character reader card reading club',
+			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات إحصاءات الموقع أسلوب لغة كلمات جمل statistics site numbers style language words', quiz: 'اختبار مسابقة أسئلة شخصية بطاقة القارئ اقرأ معنا نادي القراءة quiz character reader card reading club',
 				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
-				covers: 'أغلفة غلاف طبعات طبعة إحصاءات الموقع covers editions statistics', lists: 'قوائم رحلتي قراءة تقدم lists journey reading progress',
+				covers: 'أغلفة غلاف طبعات طبعة covers editions', lists: 'قوائم رحلتي قراءة تقدم lists journey reading progress',
 				talks: 'سيرة حياة لقاءات حوارات فيديو biography life interviews videos', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',
 				library: 'كتب أفلام موسيقى مفضلة نصح books films music favourite', glossary: 'عبارات قاموس لزمات حتى تحترق النجوم phrases glossary',
 				creatures: 'وحوش أساطير مصاص دماء مذءوب نداهة مومياء monsters legends vampire werewolf', 'refaat-life': 'رفعت إسماعيل حياة سيرة يوميات Refaat life',
