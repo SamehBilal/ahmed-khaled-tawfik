@@ -1,5 +1,6 @@
 /* «الطبعات», on the covers page (covers.html#editions; editions.html sends there): his books through the years of publishing, from the editions the site records (Arabic ones; the
-   translations are on «حول العالم»). The three series' move from the Modern Arab Association to Selah El-Telmeez; then a
+   translations are on «حول العالم»). The series in their one house — the Modern Arab Association, its editions printed under
+   «سلاح التلميذ» too, «روايات مصرية» today (the house's match, data-more.js) — and their years there; then a
    timeline a book, a dot an edition, coloured by the house that printed it (matched as the book pages match it, S.publisherLink),
    each dot naming its house and year. */
 window.Editions = {
@@ -9,13 +10,14 @@ window.Editions = {
 	/* the house an edition's printed publisher names: { id, name } (or its printed name) */
 	house: function (pub) {
 		var App = window.App, S = window.WorksShared, link = S.publisherLink(pub || ''), m = /publisher\.html\?id=([^"&]+)/.exec(link);
-		/* a house with no page here: one name for its spellings («شركة سلاح التلميذ للطباعة والنشر» is «سلاح التلميذ») */
+		/* a house with no page here: one name for its spellings («شركة X للطباعة والنشر» is «X») */
 		if (!m) {
 			var n = App.t(pub || {}).replace(/\s*[—(].*$/, '').replace(/^(شركة|دار)\s+/, '').replace(/\s+(للطباعة والنشر|للنشر والتوزيع|للنشر)$/, '').trim();
 			return { id: 'x:' + n, name: n };
 		}
 		var p = (App.data().publishers || []).filter(function (x) { return x.id === decodeURIComponent(m[1]); })[0];
-		return { id: p.id, name: App.t(p.name), href: S.publisherHref(p.id) };
+		/* (the Modern Arab Association by its name today too, so its editions under «سلاح التلميذ» read as the same house) */
+		return { id: p.id, name: App.t(p.name) + (p.id === 'maa' ? App.L(' («روايات مصرية» اليوم)', ' (Rewayat Masreya today)') : ''), href: S.publisherHref(p.id) };
 	},
 	editionsOf: function (store, key) {
 		return (((window.App.data()[store] || {})[key] || {}).editions || []).filter(function (ed) { return (ed.lang || 'ar') === 'ar' && +ed.year; });
@@ -51,7 +53,7 @@ window.Editions = {
 
 		this.el.innerHTML = '<section class="section ed"><div class="wrap">' +
 			'<h2 class="cw-h">' + e(L('الطبعات', 'The editions')) + '</h2>' +
-			'<p class="cw-lead">' + e(L('كيف تنقّلت كتبه بين دور النشر عامًا بعد عام: سلاسل الجيب من المؤسسة العربية الحديثة إلى «سلاح التلميذ»، ورواياته ومجموعاته من دار إلى دار.', 'How his books moved between publishers year by year: the pocket series from the Modern Arab Association to Selah El-Telmeez, his novels and collections from house to house.')) + '</p>' +
+			'<p class="cw-lead">' + e(L('كتبه عامًا بعد عام عند ناشريها: سلاسل الجيب في دار واحدة منذ عددها الأول، المؤسسة العربية الحديثة — التي تحمل طبعاتها الأحدث اسم «سلاح التلميذ»، واسمها اليوم «روايات مصرية» — ورواياته ومجموعاته من دار إلى دار.', 'His books year by year with their publishers: the pocket series in one house since their first issue, the Modern Arab Association — its later editions carrying the Selah El-Telmeez name, and called «Rewayat Masreya» today — and his novels and collections from house to house.')) + '</p>' +
 			'<h2 class="pp-h">' + e(L('سلاسل الجيب', 'The pocket series')) + '</h2>' +
 			'<div class="ed-series">' + series.map(function (x) {
 				return '<article><h3><a href="' + e(S.seriesHref(x.s.id)) + '">' + e(t(x.s.title)) + '</a></h3><ol>' + x.houses.map(function (b) {

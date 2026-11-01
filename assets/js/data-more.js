@@ -739,8 +739,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 
 	A.publishers = [
-		{ id: 'maa', name: { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' }, match: 'المؤسسة العربية الحديثة',
-		  note: { ar: 'بيت «روايات مصرية للجيب»، ومنها بدأ كل شيء.', en: 'Home of the Egyptian Pocket Novels, where it all began.' } },
+		/* one house under its names: the Modern Arab Association, «سلاح التلميذ» (the company that prints its books, on most of the series'
+		   later editions) and «روايات مصرية», its name today — the series never left it */
+		{ id: 'maa', name: { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' }, match: 'المؤسسة العربية الحديثة|سلاح التلميذ|^روايات مصرية',
+		  note: { ar: 'بيت «روايات مصرية للجيب»، ومنها بدأ كل شيء؛ اسمها اليوم «روايات مصرية».', en: 'Home of the Egyptian Pocket Novels, where it all began; today it goes by «Rewayat Masreya».' } },
 		{ id: 'diamond', name: { ar: 'دايموند بوك', en: 'Diamond Book' }, match: 'دايموند' },
 		{ id: 'lila', name: { ar: 'دار ليلى', en: 'Dar Lila' }, match: 'ليلى' },
 		{ id: 'merit', name: { ar: 'دار ميريت', en: 'Merit' }, match: 'ميريت' },
@@ -879,8 +881,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
    what the site records of their books with him. */
 (function (A) {
 	var about = {
-		maa: { ar: 'دار نشر مصرية تأسست عام 1960، صاحبها ومديرها حمدي مصطفى. تصدر كتب «سلاح التلميذ» المدرسية، وتوجّه إصداراتها إلى الشباب خاصة، وأشهرها «روايات مصرية للجيب»: سلاسل نبيل فاروق وسلاسل أحمد خالد توفيق.',
-			en: 'An Egyptian publisher founded in 1960, owned and run by Hamdy Mostafa. It puts out the Selah El Telmeez school books and aims its list at young readers, best known for the Egyptian Pocket Novels: Nabil Farouk’s series and Ahmed Khaled Tawfik’s.',
+		maa: { ar: 'دار نشر مصرية تأسست عام 1960، صاحبها ومديرها حمدي مصطفى. تصدر كتب «سلاح التلميذ» المدرسية، وتوجّه إصداراتها إلى الشباب خاصة، وأشهرها «روايات مصرية للجيب»: سلاسل نبيل فاروق وسلاسل أحمد خالد توفيق. تغيّر اسمها اليوم إلى «روايات مصرية»، وتحمل طبعات سلاسله الأحدث اسم «سلاح التلميذ»، وهي الدار نفسها: لم تنتقل سلاسله منها.',
+			en: 'An Egyptian publisher founded in 1960, owned and run by Hamdy Mostafa. It puts out the Selah El Telmeez school books and aims its list at young readers, best known for the Egyptian Pocket Novels: Nabil Farouk’s series and Ahmed Khaled Tawfik’s. It has since changed its name to «Rewayat Masreya», and the later editions of his series carry the Selah El Telmeez name — the same house: his series never left it.',
 			src: 'https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D9%85%D8%A4%D8%B3%D8%B3%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AB%D8%A9' },
 		merit: { ar: 'دار نشر مصرية تأسست عام 1998 بمبادرة من مؤسسها محمد هاشم، واحتضنها عدد كبير من رموز الثقافة المصرية، وسعت منذ بدايتها إلى ترسيخ العقلانية وحرية الرأي والإبداع بالكتب والندوات.',
 			en: 'An Egyptian publisher founded in 1998 by Mohamed Hashem, backed from the start by many figures of Egyptian culture, and set on furthering reason and free thought and expression through its books and seminars.',
