@@ -65,8 +65,8 @@ window.PAGE = {
 				'<label class="hw-wide">' + e(L('حكاية اليوم', 'The story of that day')) + '<textarea name="story" rows="4"></textarea></label>' +
 				'<label class="hw-wide hw-check"><input type="checkbox" name="credit" checked> ' + e(L('اذكروا اسمي مع الصورة', 'Show my name with it')) + '</label>' +
 				'<p class="hw-wide hw-how">' + e(L('اختر طريقة الإرسال، ثم أرفق صور الإهداء هناك: على GitHub اسحب الصور إلى خانة «الصور»، وفي البريد أرفقها بالرسالة.', 'Pick how to send it, then attach the photos there: on GitHub drag them into the «Photos» box; by email, attach them to the message.')) + '</p>' +
-				'<p class="hw-wide hw-acts"><button type="submit" class="hw-go" value="github">' + e(L('أرسل عبر GitHub ↗', 'Send on GitHub ↗')) + '</button>' +
-				'<button type="submit" class="hw-go is-alt" value="mail">' + e(L('أرسل بالبريد', 'Send by email')) + '</button></p>' +
+				'<p class="hw-wide hw-acts"><button type="submit" class="buy-btn" value="github">' + e(L('أرسل عبر GitHub ↗', 'Send on GitHub ↗')) + '</button>' +
+				'<button type="submit" class="share-btn" value="mail">' + e(L('أرسل بالبريد', 'Send by email')) + '</button></p>' +
 			'</form></div>';
 	},
 

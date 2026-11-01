@@ -9,7 +9,7 @@
 	background: linear-gradient(#fff 0 calc(var(--head) - 1px), transparent calc(var(--head) - 1px)), linear-gradient(#add8e6 1px, transparent 1px) 0 0 / 100% var(--rule), #fff;
 	box-shadow: 0 20px 40px rgba(0, 0, 0, .6), inset 18px 0 24px -18px rgba(0, 0, 0, .18); }
 .hw-page::before { content: ''; position: absolute; top: 0; bottom: 0; inset-inline-start: 58px; width: 1px; background: salmon; }
-.hw-page p { margin: 0; font-family: var(--f-display); line-height: var(--rule); color: #1d3a7a; }
+.hw-page p { margin: 0; font-family: var(--f-display); line-height: var(--rule); color: #0e0f13; }
 .hw-page .hw-sign { margin-top: var(--rule); }
 .hw-page span { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; width: 0; animation: hw-write 10s ease-in-out infinite; }
 .hw-line { font-size: 22px; }
@@ -90,13 +90,9 @@
 .hw-form .hw-check { flex-direction: row; align-items: center; gap: 8px; }
 .hw-form .hw-check input { flex: none; width: 18px; height: 18px; accent-color: var(--ember); }
 .hw-form .hw-how { margin: 0; font-size: 14px; color: var(--muted); }
-/* the pen's wide button, here two side by side: GitHub, and email */
-.hw-form .hw-acts { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.hw-go { height: 55px; border: 0; border-radius: 6px; background: var(--ember); color: #fff; font: inherit; font-family: var(--f-display); font-size: 19px; cursor: pointer;
-	box-shadow: 3px 10px 20px 0 rgba(224, 99, 58, .3); transition: transform .2s, box-shadow .2s; }
-.hw-go:hover, .hw-go:focus-visible { transform: translateY(-2px); box-shadow: 3px 14px 24px 0 rgba(224, 99, 58, .4); outline: none; }
-.hw-go.is-alt { background: transparent; color: var(--paper); border: 2px solid var(--line); box-shadow: none; }
-.hw-go.is-alt:hover, .hw-go.is-alt:focus-visible { border-color: var(--ember); color: var(--ember); }
+/* the site's own buttons, as everywhere else: GitHub, and email */
+.hw-form .hw-acts { margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.hw-form .hw-acts button { display: inline-flex; align-items: center; margin: 0; padding: 6px 16px; cursor: pointer; font-family: var(--f-display); font-size: 14px; line-height: 1.4; }
 @media (max-width: 640px) {
 	.dc { height: 210px; margin-bottom: -110px; }
 	.dc-top { padding: 14px 16px 0; } .dc-nib { width: 30px; height: 30px; } .dc-kind { font-size: 15px; }
@@ -104,6 +100,5 @@
 	.dc-foot { bottom: 8px; } .dc-val { font-size: 16px; } .dc-when .dc-val { font-size: 13px; }
 	.dc-band { height: 36px; margin-top: 18px; } .dc-story-t { min-height: 50px; max-height: 64px; font-size: 13px; } .dc-sign { font-size: 17px; bottom: 8px; }
 	.hw-form { grid-template-columns: 1fr; padding: 132px 16px 20px; }
-	.hw-form .hw-acts { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { .dc-side, .dc-focus { transition: none; } .dc-w.is-new, .dc-ph.is-new, .dc-kind b.is-new { animation: none; } }
