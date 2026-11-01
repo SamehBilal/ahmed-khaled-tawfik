@@ -55,3 +55,7 @@ html[data-theme="light"] .ph[data-ph="talks"] { background: radial-gradient(50% 
 .bio-talks a, .bio-more a { color: var(--paper-dim); }
 .bio-talks a:hover, .bio-more a:hover { color: var(--ember); }
 #talks { scroll-margin-top: 80px; }
+/* «سيرته» in the two columns of the home page's biography (.bio, site.css), but within the site's width: the columns on its .wrap,
+   not on the section, which spans the window */
+.tk-life.bio { columns: auto; }
+.tk-life .wrap { columns: 2 340px; column-gap: 48px; }
