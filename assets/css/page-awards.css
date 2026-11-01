@@ -1,7 +1,8 @@
 /* «الجوائز» (awards.html, awards.js) */
 /* the band: a trophy cabinet of wood (assets/img/awards/wood.webp, made for the site), two shelves of cups */
-.ph[data-ph="awards"] { background: radial-gradient(60% 110% at 50% 0%, #3a2c12 0%, #120e07 75%); }
-html[data-theme="light"] .ph[data-ph="awards"] { background: radial-gradient(60% 110% at 50% 0%, #fbf0d4 0%, #ead9b2 75%); }
+/* the band is the page itself: no ground of its own, no glow, no line under it, in either theme — only the cabinet */
+.ph[data-ph="awards"], html[data-theme="light"] .ph[data-ph="awards"] { background: transparent; border-bottom: 0; }
+.ph[data-ph="awards"]::before, .ph[data-ph="awards"]::after { display: none; }
 .awc { --s: 1; position: absolute; left: 50%; bottom: 0; top: 18px; width: min(94%, 640px); transform: translateX(-50%); display: grid; grid-template-rows: 1fr 1fr;
 	border: 10px solid #6b3f17; border-bottom: 0; border-radius: 4px 4px 0 0;
 	box-shadow: 0 0 0 2px #3a210b, 0 20px 60px rgba(0, 0, 0, .6);
