@@ -885,8 +885,11 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 .info-faq details > p { padding-bottom: 6px; }
 .info-sec#contribute, .info-sec#faq { scroll-margin-top: 90px; }
 /* (its tiles the same cards as «تواصل»'s, so the page reads as one) */
-.info-give .info-give-list { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
-.info-give-list li { margin: 0; padding: 20px 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); }
+.info-give .info-give-list { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+/* two rows, three and then two, so each card is wide enough for its words to run in lines, not a tall column */
+@media (max-width: 1000px) { .info-give .info-give-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .info-give .info-give-list { grid-template-columns: 1fr; } }
+.info-give-list li { margin: 0; padding: 22px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); }
 /* (its icons are the cards' above: one colour, not emoji) */
 .info-give-list li .info-ic { display: block; font-size: 28px; margin-bottom: 14px; }
 .info-give-list li b { display: block; font-family: var(--f-display); font-size: 22px; font-weight: 400; color: var(--paper); margin: 0 0 8px; }
