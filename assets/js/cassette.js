@@ -327,6 +327,18 @@
 		});
 	}
 
+	/* music on SoundCloud that came with a book (data-more.js) -> tracks. key: work:<id>; data entries: [track id, page, minutes, by, picture] */
+	function soundcloudTracks(key, title) {
+		var A = (window.App.data().audio) || null, Q = A && A.soundcloud;
+		if (!Q || !Q.items || !Q.items[key]) return [];
+		var L = window.App.L, note = (Q.note || {})[key];
+		return Q.items[key].map(function (ep) {
+			var label = L('موسيقى صدرت مع الكتاب', 'Music that came with the book');
+			return { title: title, ep: label, sub: 'SoundCloud · ' + label, url: Q.base + ep[1], sc: ep[0], mins: ep[2] || null, by: ep[3] || '',
+				note: note ? window.App.t(note) : '', provider: 'SoundCloud', skin: 'midnight', art: ep[4] || '' };
+		});
+	}
+
 	window.Cassette = { mount: mount, issueTracks: function (key, title) { return issueTracks(key, title).concat(youtubeTracks(key, title), storytelTracks(key, title), iqraalyTracks(key, title), storiapodTracks(key, title)); },
-		youtubeTracks: youtubeTracks, storytelTracks: storytelTracks, iqraalyTracks: iqraalyTracks, storiapodTracks: storiapodTracks, pageUrl: pageUrl };
+		youtubeTracks: youtubeTracks, storytelTracks: storytelTracks, iqraalyTracks: iqraalyTracks, storiapodTracks: storiapodTracks, soundcloudTracks: soundcloudTracks, pageUrl: pageUrl };
 })();

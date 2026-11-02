@@ -1277,6 +1277,19 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'لعلك قرأت بعض هذه المقالات، ولعلك قرأتها كلها.. لكن اجتماعها في كتاب واحد يعطيك نظرة أشمل، وأعمق.\n\nقد يروق لك هذا الكتاب، وقد يبرهن على أنني حسن الظن في نفسي أكثر من اللازم، ولكني في جميع الأحوال أعدك بشيء واحد: هذه مقالات صادقة تمامًا؛ لم أكتبها طلبًا للمادة، أو نفاقًا لمسؤول، أو دفاعًا عن جهة ما..\n\nعندما حاول بعض المحيطين بعبد الناصر أن يوغروا صدره على العظيم (أحمد بهاء الدين)، قال لهم: اتركوه؛ نحن راقبناه، وندرك أنه لا علاقة له بأحد.. هذا رجل (دماغه كده)..\n\n(دماغي كده).. عنوان مناسب جدًا لهذه المقالات.. فقط هناك شخص واحد كتبت وهو في ذهني، ويهمني بالطبع رضاه والفوز باحترامه – إن لم يكن بحبه –، ويغريني بممارسة تلك اللعبة المعقدة؛ بين قول ما أريد قوله، وكتابة ما يريد قراءته؛ فلا أتورط في أسلوب (ما يطلبه المستمعون)، أو أمارس الاستفزاز المجاني لمجرد التميز.. وهذا الشخص هو القادر على جعلي أتردد، أو أراجع دماغي هذه.. وهو الوحيد الذي أدين له بكل شيء: القارئ.' };
 })(window.AKT);
 
+/* music on SoundCloud that came with a book of his, to be heard while it is read (cassette.js soundcloudTracks): «أكواريل»'s
+   horror music, sold with the book, as Nada Elhariri put it up (10 August 2016). Keys: work:<id>; each entry: [track id,
+   page (soundcloud.com/<page>), minutes, by, picture] */
+(function (A) {
+	var Au = A.audio;
+	if (!Au) return;
+	Au.soundcloud = Au.soundcloud || {
+		base: 'https://soundcloud.com/',
+		items: { 'work:aquarelle': [[277652422, 'nada-elhariri/l6dcts8sehxv', 53, 'Nada Elhariri', 'assets/img/audio/aquarelle-soundcloud.jpg']] },
+		note: { 'work:aquarelle': { ar: 'موسيقى رعب صدرت مع الكتاب، ليُسمع وهو يُقرأ.', en: 'Horror music that came with the book, to be heard as it is read.' } }
+	};
+})(window.AKT);
+
 /* «أكواريل»: two printings from Dar Sama, 2013 and 2014, each with its own cover */
 (function (A) {
 	var b = (A.bookInfo = A.bookInfo || {}).aquarelle = A.bookInfo.aquarelle || {};

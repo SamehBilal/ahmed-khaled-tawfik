@@ -255,10 +255,18 @@ window.PAGE = {
 			}
 		}
 
-		/* an issue's episodes (Audiohat, YouTube, Storytel, Iqraaly); a book of his has its Storytel audiobooks and its readings on YouTube */
+		/* an issue's episodes (Audiohat, YouTube, Storytel, Iqraaly); a book of his has its Storytel audiobooks, its readings on
+		   YouTube and the music that came with it on SoundCloud */
 		var audioTracks = !window.Cassette ? [] : isIssue ? window.Cassette.issueTracks(r.id, t(title))
 			: (window.Cassette.storytelTracks ? window.Cassette.storytelTracks((r.about ? 'about:' : 'work:') + (r.id || id), t(title)) : [])
-				.concat(r.about ? [] : window.Cassette.youtubeTracks('work:' + (r.id || id), t(title)));
+				.concat(r.about ? [] : window.Cassette.youtubeTracks('work:' + (r.id || id), t(title)),
+					r.about || !window.Cassette.soundcloudTracks ? [] : window.Cassette.soundcloudTracks('work:' + (r.id || id), t(title)));
+		/* the music that came with it, played here in SoundCloud's own player */
+		var scPlayers = audioTracks.filter(function (x) { return x.sc; }).map(function (x) {
+			return '<div class="d-sc">' + (x.note ? '<p>' + e(x.note) + '</p>' : '') +
+				'<iframe title="' + e(x.title + ' — SoundCloud') + '" width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" ' +
+				'src="https://w.soundcloud.com/player/?url=' + encodeURIComponent('https://api.soundcloud.com/tracks/' + x.sc) + '&color=%23e0633a&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe></div>';
+		}).join('');
 		/* each recording's picture: its own, the YouTube still, Audiohat's picture for the episode, else the book's cover */
 		var AU = d.audio || {}, ahPic = {};
 		Object.keys(AU.thumbs || {}).forEach(function (slug) { if (window.Cassette && AU.base) ahPic[window.Cassette.pageUrl(AU, slug)] = AU.thumbs[slug]; });
@@ -355,7 +363,7 @@ window.PAGE = {
 									'<span class="d-audio-th' + (x.yt ? ' wide' : '') + '" aria-hidden="true">' + (pic ? '<img src="' + e(pic) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '</span>' +
 									'<b>' + e(where) + '</b>' + (what ? '<span>' + e(what) + '</span>' : '') +
 									(x.mins ? '<small>' + App.num(x.mins) + ' ' + L('دقيقة', 'min') + '</small>' : '') + '<i aria-hidden="true">↗</i></a></li>';
-							}).join('') + '</ul></section>' : '') +
+							}).join('') + '</ul>' + scPlayers + '</section>' : '') +
 						'<dl class="d-facts">' + rows.map(function (x) { return '<dt>' + e(x[0]) + '</dt><dd>' + (x[2] || e(x[1])) + '</dd>'; }).join('') + '</dl>' +
 						(info.altTitles && info.altTitles.length ? '<section class="d-block"><h3>' + L('عناوين أخرى', 'Other titles') + '</h3><ul class="alt-titles">' +
 							info.altTitles.map(function (a) { return '<li><b lang="' + e(a.lang || '') + '">' + e(a.title) + '</b>' + (a.note ? ' — ' + tx(a.note) : '') + (a.lang ? ' <span class="lng">' + e(a.lang) + '</span>' : '') + '</li>'; }).join('') +

@@ -376,6 +376,10 @@ html[dir="rtl"] .d-print { padding: 4px 4px 4px 10px; }
 @media (max-width: 640px) { .row-car-prev { inset-inline-start: -4px; } .row-car-next { inset-inline-end: -4px; } }
 
 /* the book's recordings, each a link to where it is heard */
+/* the music that came with a book, in SoundCloud's player */
+.d-sc { margin-top: 12px; }
+.d-sc p { margin: 0 0 8px; color: var(--paper-dim); font-size: 14px; line-height: 1.8; }
+.d-sc iframe { display: block; border-radius: 10px; }
 .d-audio-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .d-audio-list a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px; color: var(--paper); text-decoration: none; transition: border-color .2s, background .2s; }
 .d-audio-list a:hover, .d-audio-list a:focus-visible { border-color: var(--ember, #b3261e); background: color-mix(in srgb, var(--ember, #b3261e) 8%, transparent); }

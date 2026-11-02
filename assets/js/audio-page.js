@@ -132,6 +132,23 @@ window.PAGE = {
 			rows: erows
 		});
 
+		/* music that came with a book of his, on SoundCloud (data-more.js), one row a book, leading to its page */
+		var SCI = (A.soundcloud && A.soundcloud.items) || {}, scrows = [];
+		Object.keys(SCI).forEach(function (k) {
+			var m = k.match(/^work:(.+)$/), w = m && App.findWork(m[1]);
+			if (!w) return;
+			var start = tracks.length;
+			window.Cassette.soundcloudTracks(k, t(w.title)).forEach(function (tr) { tracks.push(tr); });
+			if (tracks.length === start) return;
+			scrows.push({ title: w.title, href: S.bookHref(w.id), thumb: tracks[start].art || S.coverOf((d.bookInfo || {})[w.id] || {}), start: start, count: tracks.length - start, mins: minsFrom(start) });
+		});
+		if (scrows.length) groups.push({
+			title: { ar: 'موسيقى كتبه على SoundCloud', en: 'Music of his books on SoundCloud' },
+			note: { ar: 'موسيقى صدرت مع كتاب له لتُسمع وهو يُقرأ، مثل موسيقى الرعب التي صاحبت «أكواريل»؛ الزر يفتحها على SoundCloud، وتُشغَّل في صفحة الكتاب.',
+				en: 'Music that came with a book of his, to be heard as it is read, like the horror music that came with Aquarelle; the key opens it on SoundCloud, and it plays on the book’s page.' },
+			rows: scrows
+		});
+
 		/* Dubvo's whole books on YouTube — «E.S.P» as radio drama, «شربة الحاج داوود» read essay by essay: a row each, its
 		   episodes under the tape */
 		[[A.youtube && A.youtube.dubvoEsp, { ar: '«E.S.P» دراما إذاعية على YouTube', en: 'E.S.P as radio drama on YouTube' },
