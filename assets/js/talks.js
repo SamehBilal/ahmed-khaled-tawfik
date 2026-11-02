@@ -28,9 +28,44 @@ window.PAGE = {
 
 	yt: function (url) { var m = /(?:v=|youtu\.be\/|embed\/)([\w-]{11})/.exec(url || ''); return m ? m[1] : ''; },
 
-	/* the band: a studio — two chairs under a light, a microphone, and a TV's "on air" sign */
+	/* the band: a wall of old television sets in a shop window, each tuned to one of his interviews (his own voice first) — its
+	   still under static and scanlines, its year and its name under it; the pointer tunes one in, and a click goes down to it
+	   in the list and plays it there */
 	band: function (d, A) {
-		return '<i class="tk-light"></i><i class="tk-chair a"></i><i class="tk-chair b"></i><i class="tk-mic"></i><span class="tk-air">' + A.esc(A.L('على الهواء', 'ON AIR')) + '</span>';
+		var e = A.esc, t = A.t, self = window.PAGE;
+		var vids = (d.media || []).filter(function (m) { return self.yt(m.url); });
+		var mine = vids.filter(function (m) { return m.kind === 'interview' || m.kind === 'talk'; });
+		var pick = mine.concat(vids.filter(function (m) { return mine.indexOf(m) < 0; })).slice(0, 9)
+			.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+		/* each set its own size and make: [width (px), with antenna, wooden] */
+		var SETS = [[150, 1, 1], [118, 0, 0], [170, 0, 1], [130, 1, 0], [190, 0, 1], [124, 0, 0], [160, 1, 1], [116, 0, 0], [144, 0, 1]];
+		setTimeout(function () { self.wallWire(); }, 0);
+		return '<div class="tv-wall">' + pick.map(function (m, i) {
+			var id = self.yt(m.url), s = SETS[i % SETS.length];
+			return '<button type="button" class="tv' + (s[1] ? ' has-ant' : '') + (s[2] ? ' wood' : '') + '" data-yt="' + e(id) + '" style="--w:' + s[0] + 'px;--d:' + (-(i * 0.37) % 2).toFixed(2) + 's" title="' + e(t(m.title)) + '">' +
+				'<span class="tv-box"><span class="tv-screen"><img src="https://i.ytimg.com/vi/' + e(id) + '/mqdefault.jpg" alt="" loading="lazy" referrerpolicy="no-referrer"><i class="tv-snow"></i></span>' +
+				'<span class="tv-knobs"><i></i><i></i></span></span>' +
+				'<span class="tv-cap"><b>' + e(m.year ? A.num(m.year) : '') + '</b>' + e(t(m.title)) + '</span></button>';
+		}).join('') + '</div>';
+	},
+	/* a set clicked: its interview below, shown (the filter let go if it hides it), lit, and playing */
+	wallWire: function () {
+		var wall = document.querySelector('.tv-wall');
+		if (!wall || wall.getAttribute('data-on')) return;
+		wall.setAttribute('data-on', '1');
+		var ph = wall.closest('.ph');
+		if (ph) ph.removeAttribute('aria-hidden'); /* (its sets are buttons) */
+		wall.addEventListener('click', function (ev) {
+			var tv = ev.target.closest('.tv'), id = tv && tv.getAttribute('data-yt');
+			if (!id) return;
+			var find = function () { return document.querySelector('.tk-play[data-yt="' + id + '"]'); }, b = find();
+			if (!b) { var all = document.querySelector('.tk-bar [data-k="all"]'); if (all) all.click(); b = find(); }
+			if (!b) return;
+			var card = b.closest('.tk-item');
+			card.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+			card.classList.remove('is-target'); void card.offsetWidth; card.classList.add('is-target');
+			b.click();
+		});
 	},
 
 	render: function () {
