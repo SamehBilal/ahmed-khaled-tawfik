@@ -48,3 +48,6 @@ html[data-theme="light"] .wd-word { color: rgba(30, 50, 70, .5); }
 .wd-switch span { opacity: .6; transition: opacity .3s; }
 .wd-switch[aria-pressed="false"] span:first-child, .wd-switch[aria-pressed="true"] span:last-child { opacity: 1; }
 .wd-switch:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+/* the globe one with the page: no band behind it — no background, no faded sides, no line under it */
+.ph[data-ph="world"], html[data-theme="light"] .ph[data-ph="world"] { background: none; border-bottom: 0; }
+.ph[data-ph="world"]::after { content: none; }
