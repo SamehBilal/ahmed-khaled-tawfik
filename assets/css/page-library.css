@@ -14,6 +14,12 @@
 .lb-item { display: flex; flex-direction: column; gap: 6px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); border-top: 3px solid var(--ember); }
 .lb-film { border-top-color: #c9a2e8; } .lb-writer { border-top-color: #d9a45a; } .lb-music, .lb-other { border-top-color: #6fb8a8; }
 .lb-item h3 { margin: 0; font-family: var(--f-display); font-size: 20px; }
+/* its art under the title: a cover, poster or sleeve whole on a dark ground; a writer's face filling it */
+.lb-art { margin: 4px 0 2px; height: 220px; border-radius: 8px; overflow: hidden; background: var(--ink); display: grid; place-items: center; }
+.lb-art img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.lb-art.is-face img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: 50% 25%; }
+.lb-from { margin: 0; font-size: 14px; }
+.lb-from a { color: var(--gold); }
 .lb-by { margin: 0; color: var(--muted); font-size: 14px; }
 .lb-said { margin: 4px 0 8px; color: var(--paper-dim); line-height: 1.8; font-size: 15px; }
 .lb-src { margin-top: auto; color: var(--ember); font-size: 14px; }

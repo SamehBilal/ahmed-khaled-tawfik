@@ -50,14 +50,22 @@ window.PAGE = {
 
 	list: function () {
 		var App = window.App, e = App.esc, t = App.t, L = App.L, self = this;
-		var all = App.data().library || [];
+		var all = App.data().library || [], art = this.art || {};
+		/* the art of each (tools/build-library-covers.js): drawn again once it has come */
+		if (!this.art) {
+			this.art = {};
+			fetch('assets/data/library-covers.json').then(function (r) { return r.json(); }).then(function (j) { self.art = j; self.list(); }).catch(function () {});
+		}
 		document.querySelector('.lb-list').innerHTML = this.KINDS.filter(function (k) { return self.kind === 'all' || self.kind === k[0]; }).map(function (k) {
 			var items = all.filter(function (x) { return x.kind === k[0]; });
 			if (!items.length) return '';
 			return '<h2 class="lb-h">' + e(t(k[1])) + '</h2><div class="lb-grid">' + items.map(function (x) {
 				var href = x.post ? 'blog.html?post=' + encodeURIComponent(x.post) : x.source;
+				var pic = art[x.title.en], from = x.from && window.WorksShared ? window.WorksShared.bookHref(x.from) : '';
 				return '<article class="lb-item lb-' + e(x.kind) + '"><h3>' + e(t(x.title)) + '</h3>' +
+					(pic ? '<figure class="lb-art' + (x.kind === 'writer' ? ' is-face' : '') + '"><img src="' + e(pic.src) + '" alt="" loading="lazy"></figure>' : '') +
 					(x.by || x.year ? '<p class="lb-by">' + (x.by ? e(t(x.by)) : '') + (x.by && x.year ? ' · ' : '') + (x.year ? e(App.num(x.year)) : '') + '</p>' : '') +
+					(from ? '<p class="lb-from"><a href="' + e(from) + '">' + e(L('من «نشوات قديمة»', 'From Old Delights')) + '</a></p>' : '') +
 					'<p class="lb-said">' + e(t(x.said)) + '</p>' +
 					'<a class="lb-src" href="' + e(href) + '"' + (x.post ? '' : ' target="_blank" rel="noopener"') + '>' + e(x.post ? L('في مقاله ←', 'In his article →') : L('المصدر ↗', 'Source ↗')) + '</a></article>';
 			}).join('') + '</div>';
