@@ -216,9 +216,10 @@ window.PAGE = {
 		var row = function (title, list) {
 			return '<h2 class="sm-h">' + e(title) + '</h2><div class="sm-row">' + list.map(function (s) { return tile('sm-one', S.seriesHref(s.id), '<span class="sm-p">' + e(App.t(s.title)) + '</span>'); }).join('') + '</div>';
 		};
-		document.getElementById('content').innerHTML = '<section class="section sm"><div class="wrap">' +
+		/* (beside the side menu of the pages about the site, app.js infoTabs) */
+		document.getElementById('content').innerHTML = '<section class="section sm"><div class="wrap info-wrap">' + App.infoTabs('sitemap') + '<div class="info-body">' +
 			'<div class="sm-tree">' + cols + '</div>' +
 			row(L('سلاسله', 'His series'), own) + (wrote.length ? row(L('سلاسل كتب فيها', 'Series he wrote for'), wrote) : '') +
-			'<p class="sm-xml">' + e(L('ولمحركات البحث: ', 'And for search engines: ')) + '<a href="sitemap.xml" dir="ltr">sitemap.xml</a>' + e(L('، فيها كل هذه العناوين مع أغلفتها.', ', with all these addresses and their covers.')) + '</p></div></section>';
+			'<p class="sm-xml">' + e(L('ولمحركات البحث: ', 'And for search engines: ')) + '<a href="sitemap.xml" dir="ltr">sitemap.xml</a>' + e(L('، فيها كل هذه العناوين مع أغلفتها.', ', with all these addresses and their covers.')) + '</p></div></div></section>';
 	}
 };
