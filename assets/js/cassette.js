@@ -327,13 +327,13 @@
 		});
 	}
 
-	/* music on SoundCloud that came with a book (data-more.js) -> tracks. key: work:<id>; data entries: [track id, page, minutes, by, picture] */
+	/* on SoundCloud (data-more.js) -> tracks. key: work:<id> or story:<title>; data entries: [track id, page, minutes, by, picture, label?] */
 	function soundcloudTracks(key, title) {
 		var A = (window.App.data().audio) || null, Q = A && A.soundcloud;
 		if (!Q || !Q.items || !Q.items[key]) return [];
 		var L = window.App.L, note = (Q.note || {})[key];
 		return Q.items[key].map(function (ep) {
-			var label = L('موسيقى صدرت مع الكتاب', 'Music that came with the book');
+			var label = ep[5] ? window.App.t(ep[5]) : L('موسيقى صدرت مع الكتاب', 'Music that came with the book');
 			return { title: title, ep: label, sub: 'SoundCloud · ' + label, url: Q.base + ep[1], sc: ep[0], mins: ep[2] || null, by: ep[3] || '',
 				note: note ? window.App.t(note) : '', provider: 'SoundCloud', skin: 'midnight', art: ep[4] || '' };
 		});

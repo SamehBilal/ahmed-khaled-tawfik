@@ -1277,16 +1277,30 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		ar: 'لعلك قرأت بعض هذه المقالات، ولعلك قرأتها كلها.. لكن اجتماعها في كتاب واحد يعطيك نظرة أشمل، وأعمق.\n\nقد يروق لك هذا الكتاب، وقد يبرهن على أنني حسن الظن في نفسي أكثر من اللازم، ولكني في جميع الأحوال أعدك بشيء واحد: هذه مقالات صادقة تمامًا؛ لم أكتبها طلبًا للمادة، أو نفاقًا لمسؤول، أو دفاعًا عن جهة ما..\n\nعندما حاول بعض المحيطين بعبد الناصر أن يوغروا صدره على العظيم (أحمد بهاء الدين)، قال لهم: اتركوه؛ نحن راقبناه، وندرك أنه لا علاقة له بأحد.. هذا رجل (دماغه كده)..\n\n(دماغي كده).. عنوان مناسب جدًا لهذه المقالات.. فقط هناك شخص واحد كتبت وهو في ذهني، ويهمني بالطبع رضاه والفوز باحترامه – إن لم يكن بحبه –، ويغريني بممارسة تلك اللعبة المعقدة؛ بين قول ما أريد قوله، وكتابة ما يريد قراءته؛ فلا أتورط في أسلوب (ما يطلبه المستمعون)، أو أمارس الاستفزاز المجاني لمجرد التميز.. وهذا الشخص هو القادر على جعلي أتردد، أو أراجع دماغي هذه.. وهو الوحيد الذي أدين له بكل شيء: القارئ.' };
 })(window.AKT);
 
-/* music on SoundCloud that came with a book of his, to be heard while it is read (cassette.js soundcloudTracks): «أكواريل»'s
-   horror music, sold with the book, as Nada Elhariri put it up (10 August 2016). Keys: work:<id>; each entry: [track id,
-   page (soundcloud.com/<page>), minutes, by, picture] */
+/* on SoundCloud (cassette.js soundcloudTracks): «أكواريل»'s horror music, sold with the book to be heard while it is read, as
+   Nada Elhariri put it up (10 August 2016); and from «رُواة» (soundcloud.com/rowaah, the team of his Ida2at stories on
+   StoriaPod) the trailer of their «معرض الموت» (24 May 2020), with Mohamed Khamis. Keys: work:<id> or story:<title>; each
+   entry: [track id (0: not played on the site), page (soundcloud.com/<page>), minutes, by, picture, label?].
+   about: «رُواة»'s «العراب», six short pieces about him written by Ahmed Magdy and read by Mazen Salam, 1–9 April 2019, a
+   year after his death — eps: [page, minutes, title] */
 (function (A) {
 	var Au = A.audio;
 	if (!Au) return;
 	Au.soundcloud = Au.soundcloud || {
 		base: 'https://soundcloud.com/',
-		items: { 'work:aquarelle': [[277652422, 'nada-elhariri/l6dcts8sehxv', 53, 'Nada Elhariri', 'assets/img/audio/aquarelle-soundcloud.jpg']] },
-		note: { 'work:aquarelle': { ar: 'موسيقى رعب صدرت مع الكتاب، ليُسمع وهو يُقرأ.', en: 'Horror music that came with the book, to be heard as it is read.' } }
+		items: {
+			'work:aquarelle': [[277652422, 'nada-elhariri/l6dcts8sehxv', 53, 'Nada Elhariri', 'assets/img/audio/aquarelle-soundcloud.jpg']],
+			'story:معرض الموت': [[0, 'rowaah/mjgfs2viir0q', 1, 'رُواة', 'assets/img/audio/rowaah-maarad-almawt.jpg', { ar: 'إعلان الفيلم الصوتي من «رُواة»', en: 'Trailer of Ruwah’s audio film' }]]
+		},
+		note: { 'work:aquarelle': { ar: 'موسيقى رعب صدرت مع الكتاب، ليُسمع وهو يُقرأ.', en: 'Horror music that came with the book, to be heard as it is read.' } },
+		about: [{
+			title: { ar: 'العراب', en: 'The Godfather' }, by: { ar: 'رُواة — نص أحمد مجدي، بصوت مازن سلام', en: 'Ruwah — written by Ahmed Magdy, read by Mazen Salam' },
+			page: 'rowaah/sets/qbs3oluv9fib', playlist: 745751733, year: 2019, art: 'assets/img/audio/rowaah-alarrab.jpg',
+			note: { ar: 'ست حلقات قصيرة عنه بعد عام من رحيله: الجرح الذي تركه، ولقبه، واستشرافه، والطب، وطرافته، و«رُواة».', en: 'Six short pieces about him a year after his death: the wound he left, his title, his foresight, medicine, his wit, and Ruwah.' },
+			eps: [['rowaah/thewound', 5, { ar: 'الجرح', en: 'The wound' }], ['rowaah/thegodfather-title', 4, { ar: 'اللقب', en: 'The title' }],
+				['rowaah/lrrub6hhxbxu', 4, { ar: 'الاستشراف', en: 'Foresight' }], ['rowaah/tqyolzfoherd', 4, { ar: 'الطب', en: 'Medicine' }],
+				['rowaah/zf1whadr2krn', 5, { ar: 'الطرافة', en: 'Wit' }], ['rowaah/the-end', 5, { ar: 'رُواة', en: 'Ruwah' }]]
+		}]
 	};
 })(window.AKT);
 

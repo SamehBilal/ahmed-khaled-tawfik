@@ -22,8 +22,8 @@ window.PAGE = {
 		/* the platform filter: every track goes through push, which counts it for its platform and keeps it only if it is shown */
 		var self = this;
 		if (!this.platform) { try { this.platform = sessionStorage.getItem('akt-audio-platform') || 'all'; } catch (x) { this.platform = 'all'; } }
-		var platform = this.platform, perPlatform = { all: 0, audiohat: 0, storytel: 0, iqraaly: 0, storiapod: 0, youtube: 0 };
-		var platformOf = function (tr) { return tr.yt ? 'youtube' : tr.provider === 'Storytel' ? 'storytel' : tr.provider === 'Iqraaly' ? 'iqraaly' : tr.provider === 'StoriaPod' ? 'storiapod' : 'audiohat'; };
+		var platform = this.platform, perPlatform = { all: 0, audiohat: 0, storytel: 0, iqraaly: 0, storiapod: 0, soundcloud: 0, youtube: 0 };
+		var platformOf = function (tr) { return tr.yt ? 'youtube' : tr.provider === 'Storytel' ? 'storytel' : tr.provider === 'Iqraaly' ? 'iqraaly' : tr.provider === 'StoriaPod' ? 'storiapod' : tr.provider === 'SoundCloud' ? 'soundcloud' : 'audiohat'; };
 		var push0 = tracks.push, counted = {};
 		tracks.push = function (tr) {
 			/* (a track offered twice, as a special under two series, is counted once) */
@@ -132,21 +132,38 @@ window.PAGE = {
 			rows: erows
 		});
 
-		/* music that came with a book of his, on SoundCloud (data-more.js), one row a book, leading to its page */
-		var SCI = (A.soundcloud && A.soundcloud.items) || {}, scrows = [];
+		/* his books and stories on SoundCloud (data-more.js): a book's music, leading to its page; a story's trailer, leading to it in the blog archive */
+		var SCI = (A.soundcloud && A.soundcloud.items) || {}, SCP = (A.storiapod && A.storiapod.posts) || {}, scrows = [];
 		Object.keys(SCI).forEach(function (k) {
-			var m = k.match(/^work:(.+)$/), w = m && App.findWork(m[1]);
-			if (!w) return;
-			var start = tracks.length;
-			window.Cassette.soundcloudTracks(k, t(w.title)).forEach(function (tr) { tracks.push(tr); });
+			var m = k.match(/^(work|story):(.+)$/), w = m && m[1] === 'work' ? App.findWork(m[2]) : null;
+			if (!m || (m[1] === 'work' && !w)) return;
+			var start = tracks.length, title = w ? w.title : { ar: m[2], en: m[2] };
+			window.Cassette.soundcloudTracks(k, t(title)).forEach(function (tr) { tracks.push(tr); });
 			if (tracks.length === start) return;
-			scrows.push({ title: w.title, href: S.bookHref(w.id), thumb: tracks[start].art || S.coverOf((d.bookInfo || {})[w.id] || {}), start: start, count: tracks.length - start, mins: minsFrom(start) });
+			scrows.push({ title: title, href: w ? S.bookHref(w.id) : SCP[k] ? 'blog.html?post=' + SCP[k] : '',
+				thumb: tracks[start].art || (w ? S.coverOf((d.bookInfo || {})[w.id] || {}) : ''), start: start, count: tracks.length - start, mins: minsFrom(start) });
 		});
 		if (scrows.length) groups.push({
-			title: { ar: 'موسيقى كتبه على SoundCloud', en: 'Music of his books on SoundCloud' },
-			note: { ar: 'موسيقى صدرت مع كتاب له لتُسمع وهو يُقرأ، مثل موسيقى الرعب التي صاحبت «أكواريل»؛ الزر يفتحها على SoundCloud، وتُشغَّل في صفحة الكتاب.',
-				en: 'Music that came with a book of his, to be heard as it is read, like the horror music that came with Aquarelle; the key opens it on SoundCloud, and it plays on the book’s page.' },
+			title: { ar: 'كتبه وقصصه على SoundCloud', en: 'His books and stories on SoundCloud' },
+			note: { ar: 'موسيقى صدرت مع كتاب له لتُسمع وهو يُقرأ، مثل موسيقى الرعب التي صاحبت «أكواريل» (وتُشغَّل في صفحة الكتاب)، وإعلان «رُواة» لقصته «معرض الموت»؛ الزر يفتحها على SoundCloud.',
+				en: 'Music that came with a book of his, to be heard as it is read, like the horror music that came with Aquarelle (it plays on the book’s page), and Ruwah’s trailer for his story “The Death Exhibition”; the key opens them on SoundCloud.' },
 			rows: scrows
+		});
+
+		/* works about him on SoundCloud: one row each, its pieces in the tape */
+		var scAbout = ((A.soundcloud && A.soundcloud.about) || []).map(function (ab) {
+			var start = tracks.length;
+			ab.eps.forEach(function (ep, k) {
+				tracks.push({ title: t(ab.title), ep: App.num(k + 1) + ': ' + t(ep[2]), sub: 'SoundCloud · ' + t(ep[2]), url: A.soundcloud.base + ep[0], mins: ep[1],
+					by: t(ab.by), provider: 'SoundCloud', skin: 'midnight', art: ab.art });
+			});
+			if (tracks.length === start) return null;
+			return { title: { ar: '«' + ab.title.ar + '» — ' + ab.by.ar, en: '“' + ab.title.en + '” — ' + ab.by.en }, href: A.soundcloud.base + ab.page, thumb: ab.art, start: start, count: tracks.length - start, mins: minsFrom(start), note: ab.note };
+		}).filter(Boolean);
+		if (scAbout.length) groups.push({
+			title: { ar: 'عنه على SoundCloud', en: 'About him on SoundCloud' }, cat: 'about',
+			note: scAbout[0].note,
+			rows: scAbout
 		});
 
 		/* Dubvo's whole books on YouTube — «E.S.P» as radio drama, «شربة الحاج داوود» read essay by essay: a row each, its
@@ -162,6 +179,7 @@ window.PAGE = {
 				tracks.push({ title: t(ew.title), ep: L(DE.ar || 'الحلقة', DE.en || 'Episode') + ' ' + App.num(k + 1) + ': ' + ep[1], sub: ep[1] + ' · Dubvo',
 					channel: DE.channel.name, url: 'https://www.youtube.com/watch?v=' + ep[0], yt: ep[0], ytEmbed: true, mins: ep[2], skin: 'specials' });
 			});
+			if (tracks.length === eStart) return; /* (another platform shown) */
 			groups.push({
 				title: g[1] || DE.title, note: g[2] || DE.note,
 				rows: [{ title: ew.title, href: S.bookHref(ew.id), thumb: ytThumb(DE.eps[0][0]), start: eStart, count: DE.eps.length, mins: eMins, yt: true }]
@@ -177,7 +195,7 @@ window.PAGE = {
 				tracks.push({ title: gName, ep: L('الحلقة', 'Episode') + ' ' + App.num(k + 1) + ': ' + ep[1], sub: ep[1] + ' · ' + GR.channel.name,
 					channel: GR.channel.name, url: 'https://www.youtube.com/watch?v=' + ep[0], yt: ep[0], ytEmbed: true, mins: ep[2], skin: 'specials' });
 			});
-			groups.push({
+			if (tracks.length > gStart) groups.push({
 				title: GR.title, note: GR.note, cat: 'world',
 				rows: [{ title: { ar: 'عودة رفعت إسماعيل', en: 'The Return of Refaat Ismail' }, href: S.seriesHref(GR.series), thumb: ytThumb(GR.eps[0][0]), start: gStart, count: GR.eps.length, mins: gMins, yt: true }]
 			});
@@ -271,10 +289,12 @@ window.PAGE = {
 			rows: lrows
 		});
 
-		/* the two kinds of section: [kind, heading, a word on it]; a section is of his works unless it says cat: 'world' */
+		/* the kinds of section: [kind, heading, a word on it]; a section is of his works unless it says cat: 'about' or 'world' */
 		var CATS = [
 			['works', { ar: 'من أعماله', en: 'From his works' },
 				{ ar: 'سلاسله وأعداده الخاصة وكتبه وقصصه مسموعة: بأصوات الرواة على المنصات وYouTube، ومعها موسيقى صدرت مع كتبه.', en: 'His series, their special issues, his books and his stories out loud, read on the platforms and on YouTube, with music that came with his books.' }],
+			['about', { ar: 'عنه', en: 'About him' },
+				{ ar: 'ما قيل عنه مسموعًا، بأصوات من أحبوه.', en: 'What was said of him, out loud, in the voices of those who loved him.' }],
 			['world', { ar: 'من عالمه وعلى أثره', en: 'From his world, after him' },
 				{ ar: 'ما صنعه غيره من عالمه أو بناه عليه: تكملة لسلسلة «ما وراء الطبيعة»، و«لاشين» الذي خرج من «بعد منتصف الليل».', en: 'What others made from his world or built on it: a sequel to Paranormal, and Lasheen, which grew out of After Midnight.' }]
 		];
@@ -305,7 +325,7 @@ window.PAGE = {
 						(A.youtube && A.youtube.dubvoFantasia ? ' · <a href="' + e(A.youtube.dubvoFantasia.url) + '" target="_blank" rel="noopener">' + L('«فانتازيا» من Dubvo على YouTube ↗', 'Fantasia by Dubvo on YouTube ↗') + '</a>' : '') + '</p>' +
 					/* show one platform, or all of them */
 					'<div class="chips au-platforms" role="group" aria-label="' + e(L('المنصة', 'Platform')) + '">' +
-						[['all', L('الكل', 'All')], ['audiohat', 'Audiohat'], ['storytel', 'Storytel'], ['iqraaly', L('اقرألي', 'Iqraaly')], ['storiapod', L('ستوريا بود', 'StoriaPod')], ['youtube', 'YouTube']].filter(function (p) { return p[0] === 'all' || perPlatform[p[0]]; }).map(function (p) {
+						[['all', L('الكل', 'All')], ['audiohat', 'Audiohat'], ['storytel', 'Storytel'], ['iqraaly', L('اقرألي', 'Iqraaly')], ['storiapod', L('ستوريا بود', 'StoriaPod')], ['soundcloud', 'SoundCloud'], ['youtube', 'YouTube']].filter(function (p) { return p[0] === 'all' || perPlatform[p[0]]; }).map(function (p) {
 							return '<button type="button" class="chip" data-platform="' + p[0] + '" aria-pressed="' + (platform === p[0]) + '">' + e(p[1]) + '<span class="count">' + App.num(perPlatform[p[0]]) + '</span></button>';
 						}).join('') + '</div></div>' +
 			'</div></section>' +
@@ -327,7 +347,7 @@ window.PAGE = {
 						return '<li data-start="' + r.start + '" data-count="' + r.count + '">' +
 							(r.n != null ? '<span class="no">' + e(App.num(r.n)) + '</span>' : '<span class="no">♪</span>') +
 							'<span class="th' + (r.thumb ? '' : ' none') + '" aria-hidden="true">' + (r.thumb ? '<img src="' + e(r.thumb) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">' : '') + '</span>' +
-							'<span class="tt">' + (r.href ? '<a href="' + r.href + '">' + tx(r.title) + '</a>' : tx(r.title)) +
+							'<span class="tt">' + (r.href ? '<a href="' + r.href + '"' + (/^https?:/.test(r.href) ? ' target="_blank" rel="noopener"' : '') + '>' + tx(r.title) + '</a>' : tx(r.title)) +
 								'<small>' + (r.count > 1 ? App.num(r.count) + ' ' + L('حلقات', 'episodes') + ' · ' : '') + (r.mins ? App.num(r.mins) + ' ' + L('دقيقة', 'min') : '') + '</small></span>' +
 							/* an issue or video in several episodes opens the list of all of them, each to put in the recorder */
 							(r.count > 1
