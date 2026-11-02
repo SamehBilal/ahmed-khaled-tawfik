@@ -254,17 +254,10 @@
 			}).join('') + '</div></div>';
 		},
 
-		/* map: a navigator's chart — the lines of latitude and longitude, dashed routes from Tanta to places his books name, a compass */
+		/* map: Codrops' «Infinite Circular WebGL Gallery», the covers of the books by the places they name (mapGallery, below) */
 		map: function (d, A) {
-			var X = function (lon) { return (lon + 180) / 360 * 1000; }, Y = function (lat) { return (75 - lat) / 135 * 340; };
-			var hx = X(31.0), hy = Y(30.8), grid = ''; /* (Tanta) */
-			for (var lon = -150; lon <= 180; lon += 30) grid += 'M' + X(lon) + ',0V340';
-			for (var lat = -45; lat <= 75; lat += 30) grid += 'M0,' + Y(lat).toFixed(1) + 'H1000';
-			setTimeout(function () { mapPins(A, X, Y, hx, hy); }, 0);
-			return '<svg class="ph-chart" viewBox="0 0 1000 340" preserveAspectRatio="xMidYMin slice"><path class="ph-chart-grid" d="' + grid + '"/><g class="ph-routes"></g>' +
-				'<circle class="ph-home" cx="' + hx.toFixed(1) + '" cy="' + hy.toFixed(1) + '" r="7"/></svg>' +
-				'<svg class="ph-rose" viewBox="-50 -50 100 100"><circle r="44"/><circle r="30"/><path d="M0 -46L6 0 0 46-6 0Z"/><path class="n" d="M0 -46L6 0H-6Z"/><path d="M-46 0L0 5 46 0 0-5Z" opacity=".55"/></svg>' +
-				'<div class="ph-pois"></div>';
+			setTimeout(function () { mapGallery(A); }, 0);
+			return '<canvas class="ph-gl" tabindex="0"></canvas>';
 		},
 
 		/* publishers: a dark bookshelf that a flashlight finds in colour (page-hero.css .ph-shelf) */
@@ -511,70 +504,195 @@
 		set(0, false);
 	}
 
-	/* the map band's pins, with Codrops' «Curved» tooltip (Tooltip Styles Inspiration, Mary Lou): the ten places the most books name
-	   (assets/data/places.json, the map's own), a route to each from Tanta; each a pulsing ring that, under the pointer or the
-	   keyboard, swings out a rounded bubble on its curved tail — the place, how many books name it, the first of them with the
-	   sentence that does — to the east of a pin on the map's west half, to the west on its east half. Each leads to that book */
-	function mapPins(A, X, Y, hx, hy) {
-		var stage = document.querySelector('.ph[data-ph="map"] .ph-stage'), pois = stage && stage.querySelector('.ph-pois');
-		if (!pois || pois.getAttribute('data-on')) return;
-		pois.setAttribute('data-on', '1');
-		var e = A.esc, L = A.L, svg = stage.querySelector('.ph-chart'), routes = stage.querySelector('.ph-routes');
+	/* the map band at work: Codrops' «Infinite Circular WebGL Gallery» (Luis Henrique Bizarro; MIT), in plain WebGL — a card a place
+	   his books name (assets/data/places.json, the map's own): the cover of the first book that names it, the place and the book
+	   under it, drawn on a canvas in the site's own fonts (so the Arabic joins). The cards stand on a wide arc, turned along it,
+	   and ripple as they move, more the faster; dragged sideways (or by the arrow keys) they run on without end, settling on a
+	   card when let go, and drift slowly by themselves until touched. A card clicked, tapped or given Enter opens its book. The
+	   wheel scrolls the page, as anywhere else. Drawn only while on screen */
+	function mapGallery(A) {
+		var stage = document.querySelector('.ph[data-ph="map"] .ph-stage'), cv = stage && stage.querySelector('.ph-gl');
+		if (!cv || cv.getAttribute('data-on')) return;
+		cv.setAttribute('data-on', '1');
+		var gl = cv.getContext('webgl', { alpha: true, antialias: true, premultipliedAlpha: true });
+		if (!gl) { cv.remove(); return; }
+		var L = A.L, still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+		var css = getComputedStyle(document.documentElement);
+		var fDisplay = css.getPropertyValue('--f-display').trim() || 'serif', fBody = getComputedStyle(document.body).fontFamily;
+
+		/* the shaders: the zip's, its vertex wave and cover fit (the card's canvas is made to the plane's shape, so it is drawn whole) */
+		var VS = 'precision highp float; attribute vec3 position; attribute vec2 uv; uniform mat4 uMVP; uniform float uTime; uniform float uSpeed; varying vec2 vUv;' +
+			'void main() { vUv = uv; vec3 p = position; p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);' +
+			'gl_Position = uMVP * vec4(p, 1.0); }';
+		var FS = 'precision highp float; uniform sampler2D tMap; uniform float uAlpha; varying vec2 vUv;' +
+			'void main() { vec4 c = texture2D(tMap, vUv); gl_FragColor = vec4(c.rgb * uAlpha, c.a * uAlpha); }';
+		var sh = function (type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+		var prog = gl.createProgram();
+		gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS)); gl.linkProgram(prog);
+		if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { cv.remove(); return; }
+		gl.useProgram(prog);
+		var U = {}; ['uMVP', 'uTime', 'uSpeed', 'tMap', 'uAlpha'].forEach(function (k) { U[k] = gl.getUniformLocation(prog, k); });
+
+		/* the plane: 1 × 1, cut 100 × 50 as the zip's, so it can bend */
+		var WS = 100, HS = 50, pos = [], uvs = [], idx = [];
+		for (var j = 0; j <= HS; j++) for (var i = 0; i <= WS; i++) { pos.push(i / WS - 0.5, 0.5 - j / HS, 0); uvs.push(i / WS, j / HS); }
+		for (j = 0; j < HS; j++) for (i = 0; i < WS; i++) { var a = j * (WS + 1) + i, b = a + WS + 1; idx.push(a, b, a + 1, b, b + 1, a + 1); }
+		var buf = function (target, data) { var x = gl.createBuffer(); gl.bindBuffer(target, x); gl.bufferData(target, data, gl.STATIC_DRAW); return x; };
+		var bp = buf(gl.ARRAY_BUFFER, new Float32Array(pos)), lp = gl.getAttribLocation(prog, 'position');
+		gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 3, gl.FLOAT, false, 0, 0);
+		var bu = buf(gl.ARRAY_BUFFER, new Float32Array(uvs)), lu = gl.getAttribLocation(prog, 'uv');
+		gl.bindBuffer(gl.ARRAY_BUFFER, bu); gl.enableVertexAttribArray(lu); gl.vertexAttribPointer(lu, 2, gl.FLOAT, false, 0, 0);
+		buf(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(idx));
+		gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+
+		/* the camera: the zip's, 45° at 20 */
+		var FOV = 45 * Math.PI / 180, CZ = 20, vw = 0, vh = 0, W = 0, H = 0, P = new Float32Array(16);
+		var resize = function () {
+			var dpr = Math.min(window.devicePixelRatio || 1, 2);
+			W = cv.clientWidth; H = cv.clientHeight;
+			cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+			gl.viewport(0, 0, cv.width, cv.height);
+			var f = 1 / Math.tan(FOV / 2), asp = W / H, n = 0.1, fr = 100;
+			P.fill(0); P[0] = f / asp; P[5] = f; P[10] = (fr + n) / (n - fr); P[11] = -1; P[14] = 2 * fr * n / (n - fr);
+			vh = 2 * Math.tan(FOV / 2) * CZ; vw = vh * asp;
+			size();
+		};
+		/* each card's model: moved, turned about z, scaled; with the camera's view (back 20) and its projection */
+		var mvp = function (x, y, rz, sx, sy) {
+			var c = Math.cos(rz), s = Math.sin(rz);
+			var m = [c * sx, s * sx, 0, 0, -s * sy, c * sy, 0, 0, 0, 0, 1, 0, x, y, -CZ, 1], o = new Float32Array(16);
+			for (var r = 0; r < 4; r++) for (var k = 0; k < 4; k++) o[k * 4 + r] = P[r] * m[k * 4] + P[4 + r] * m[k * 4 + 1] + P[8 + r] * m[k * 4 + 2] + P[12 + r] * m[k * 4 + 3];
+			return o;
+		};
+
+		/* the cards: one a place, the cover and its words drawn to a canvas of the card's shape */
+		var CW = 512, CH = 800, cards = [], sx = 0, sy = 0, gap = 0, total = 0;
+		var draw = function (card, img) {
+			var c = document.createElement('canvas'), x = c.getContext('2d');
+			c.width = CW; c.height = CH;
+			var ih = 640;
+			x.fillStyle = '#16120f'; x.fillRect(0, 0, CW, ih);
+			if (img) {
+				/* the cover fills its part, cut to fit (the zip's fit) */
+				var r = Math.max(CW / img.naturalWidth, ih / img.naturalHeight), w = img.naturalWidth * r, h = img.naturalHeight * r;
+				x.drawImage(img, (CW - w) / 2, (ih - h) / 2, w, h);
+			}
+			x.direction = A.lang === 'en' ? 'ltr' : 'rtl'; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
+			x.fillStyle = '#efe6d2'; x.font = '64px ' + fDisplay;
+			x.fillText(card.place, CW / 2, ih + 84, CW - 24);
+			x.fillStyle = 'rgba(239, 230, 210, .62)'; x.font = '30px ' + fBody;
+			x.fillText(card.book, CW / 2, ih + 136, CW - 24);
+			var t = card.tex || gl.createTexture();
+			gl.bindTexture(gl.TEXTURE_2D, t);
+			gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, c);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+			card.tex = t; card.ready = true;
+		};
+		/* sizes: a card three quarters of the band's height, the zip's gap of 2 between them */
+		var size = function () {
+			sy = vh * 0.78; sx = sy * CW / CH; gap = 2;
+			total = (sx + gap) * cards.length;
+			cards.forEach(function (c, k) { c.x = (sx + gap) * k; });
+		};
+
+		/* scrolling: the zip's eased run — target, current, last */
+		var sc = { ease: 0.05, current: 0, target: 0, last: 0 }, auto = !still, down = null, t0 = 0, live = true, raf = 0;
+		var snap = function () { var w = sx + gap; sc.target = Math.round(sc.target / w) * w; };
+		var at = function (cx) {
+			/* the card under the pointer: from its place across the band (it stands near the arc's middle there) */
+			var wx = (cx / W - 0.5) * vw, best = null;
+			cards.forEach(function (c) { if (Math.abs(c.px - wx) < sx / 2 && (!best || Math.abs(c.px - wx) < Math.abs(best.px - wx))) best = c; });
+			return best;
+		};
+		cv.addEventListener('pointerdown', function (ev) {
+			down = { x: ev.clientX, pos: sc.target, moved: false }; auto = false;
+			try { cv.setPointerCapture(ev.pointerId); } catch (e) {}
+		});
+		cv.addEventListener('pointermove', function (ev) {
+			if (!down) { var h = at(ev.clientX); cv.style.cursor = h ? 'pointer' : 'grab'; return; }
+			var dx = down.x - ev.clientX;
+			if (Math.abs(dx) > 6) down.moved = true;
+			sc.target = down.pos + dx * (vw / W) * 1.1;
+			cv.style.cursor = 'grabbing';
+		});
+		var up = function (ev) {
+			if (!down) return;
+			var d = down; down = null; cv.style.cursor = '';
+			if (!d.moved && ev && ev.type === 'pointerup') { var c = at(ev.clientX); if (c) location.href = c.href; return; }
+			snap();
+		};
+		cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+		/* the keyboard: a card at a time, Enter opens the one in the middle */
+		cv.addEventListener('keydown', function (ev) {
+			var w = sx + gap, rtl = A.lang !== 'en';
+			if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
+				ev.preventDefault(); auto = false;
+				sc.target = Math.round(sc.target / w) * w + ((ev.key === 'ArrowRight') !== rtl ? w : -w);
+			} else if (ev.key === 'Enter') { var c = at(W / 2); if (c) location.href = c.href; }
+		});
+
+		var frame = function () {
+			raf = 0;
+			if (!live || !document.body.contains(cv)) return;
+			if (auto) sc.target += 0.012;
+			sc.current += (sc.target - sc.current) * sc.ease;
+			var dir = sc.current > sc.last ? 1 : -1, speed = sc.current - sc.last;
+			gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+			/* the arc: the zip's cosine, made as deep at the band's edges as the band allows */
+			var half = vw / 2, depth = vh * 0.32 / (1 - Math.cos(Math.min(0.95, half / total) * Math.PI));
+			cards.forEach(function (c) {
+				var x = c.x - sc.current - c.extra;
+				/* the zip's endless run: a card gone off one side comes in at the other */
+				if (dir > 0 && x + sx / 2 < -half - sx) { c.extra -= total; x += total; }
+				if (dir < 0 && x - sx / 2 > half + sx) { c.extra += total; x -= total; }
+				c.px = x;
+				if (!c.ready || Math.abs(x) > half + sx) return;
+				var y = (Math.cos(x / total * Math.PI) - 1) * depth + vh * 0.02, rz = -x / total * Math.PI;
+				c.time += 0.04;
+				gl.uniformMatrix4fv(U.uMVP, false, mvp(x, y, rz, sx, sy));
+				gl.uniform1f(U.uTime, c.time); gl.uniform1f(U.uSpeed, still ? 0 : speed);
+				gl.uniform1f(U.uAlpha, 1);
+				gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, c.tex); gl.uniform1i(U.tMap, 0);
+				gl.drawElements(gl.TRIANGLES, idx.length, gl.UNSIGNED_SHORT, 0);
+			});
+			sc.last = sc.current;
+			if (!still || down || Math.abs(sc.target - sc.current) > 0.001) raf = requestAnimationFrame(frame);
+		};
+		var go = function () { if (!raf && live) raf = requestAnimationFrame(frame); };
+		['pointerdown', 'pointermove', 'keydown'].forEach(function (k) { cv.addEventListener(k, go); });
+		/* drawn only while the band is on screen */
+		if (window.IntersectionObserver) new IntersectionObserver(function (es) { live = es[0].isIntersecting; go(); }).observe(cv);
+		window.addEventListener('resize', function () { resize(); go(); });
+
 		fetch('assets/data/places.json').then(function (r) { return r.json(); }).then(function (all) {
-			if (!document.body.contains(pois)) return;
-			var top = all.filter(function (p) { return (p.items || []).length && Math.abs(p.lon - 31) + Math.abs(p.lat - 30.8) > 4; })
-				.sort(function (a, b) { return b.items.length - a.items.length; }).slice(0, 10);
-			routes.innerHTML = top.map(function (p, i) {
-				var x = X(p.lon), y = Y(p.lat), mx = (hx + x) / 2, my = Math.max(24, Math.min(hy, y) - 18 - Math.abs(x - hx) * 0.07);
-				return '<path class="ph-route" d="M' + hx.toFixed(1) + ',' + hy.toFixed(1) + 'Q' + mx.toFixed(1) + ',' + my.toFixed(1) + ' ' + x.toFixed(1) + ',' + y.toFixed(1) + '" style="--d:' + (i * 0.6).toFixed(1) + 's"/>';
-			}).join('');
-			var n = function (k) { return L(k === 1 ? 'كتاب واحد' : k === 2 ? 'كتابان' : A.num(k) + (k <= 10 ? ' كتب' : ' كتابًا'), A.num(k) + (k === 1 ? ' book' : ' books')); };
-			pois.innerHTML = top.map(function (p) {
-				var b = p.items[0], east = X(p.lon) > 500, s = String(b.s || '').replace(/\s+/g, ' ').trim();
-				if (s.length > 110) s = s.slice(0, 108).replace(/\s+\S*$/, '') + '…';
-				return '<a class="ph-tt ' + (east ? 'ph-tt-east' : 'ph-tt-west') + '" href="' + e(b.h) + '" data-x="' + X(p.lon).toFixed(1) + '" data-y="' + Y(p.lat).toFixed(1) + '">' +
-					'<span class="ph-tt-item" aria-hidden="true"></span>' +
-					'<span class="ph-tt-content"><b>' + e(L(p.ar, p.en)) + '</b><small>' + e(L('يسمّيه ' + n(p.items.length), 'Named in ' + n(p.items.length))) + '</small>' +
-						'<i>«' + e(b.t) + '»' + (b.k ? ' — ' + e(b.k) : '') + '</i>' + (s ? '<q>' + e(s) + '</q>' : '') + '</span></a>';
-			}).join('');
+			if (!document.body.contains(cv)) return;
+			var list = all.filter(function (p) { return (p.items || []).some(function (b) { return b.c; }); })
+				.sort(function (a, b) { return b.items.length - a.items.length; });
+			/* enough cards to go round (the zip doubles its twelve) */
+			while (list.length && list.length < 14) list = list.concat(list);
+			cards = list.map(function (p, k) {
+				var b = p.items.filter(function (x) { return x.c; })[0];
+				return { place: L(p.ar, p.en), book: '«' + b.t + '»' + (b.k ? ' — ' + b.k : ''), href: b.h, src: b.c, x: 0, px: 1e9, extra: 0, time: 100 * Math.random(), k: k };
+			});
+			resize();
+			sc.target = sc.current = sc.last = 0;
 			var ph = stage.closest('.ph');
 			if (ph) ph.removeAttribute('aria-hidden'); /* (this band is a control, not a decoration) */
-			/* each pin where its place falls on the chart, which is cut to the band's shape (slice): from the chart's own scale */
-			var place = function () {
-				var m = svg.getScreenCTM(), r = stage.getBoundingClientRect(), h = r.height;
-				if (!m) return;
-				[].forEach.call(pois.children, function (a) {
-					var x = m.a * +a.getAttribute('data-x') + m.e - r.left, y = m.d * +a.getAttribute('data-y') + m.f - r.top;
-					a.style.left = x.toFixed(1) + 'px'; a.style.top = y.toFixed(1) + 'px';
-					a.hidden = y < 0 || y > h || x < 0 || x > r.width;
-					/* which way it opens: to the side of the pin with more room on the band (on a phone it shows only the chart's
-					   middle), and no wider than that room, past the 4em of its tail */
-					var east = x > r.width - x, c = a.querySelector('.ph-tt-content'), fs = parseFloat(getComputedStyle(c).fontSize);
-					a.classList.toggle('ph-tt-east', east); a.classList.toggle('ph-tt-west', !east);
-					c.style.width = '';
-					var room = (east ? x : r.width - x) - 4 * fs - 8;
-					if (c.offsetWidth > room) c.style.width = Math.max(120, room).toFixed(0) + 'px';
-					/* the bubble kept inside the band: moved up or down, its tail still at the pin (its middle is 1em below the pin, as
-					   Codrops set it) */
-					var ch = c.offsetHeight, dy = 0, cy = y + fs;
-					if (cy - ch / 2 < 8) dy = 8 - (cy - ch / 2); else if (cy + ch / 2 > h - 8) dy = h - 8 - (cy + ch / 2);
-					c.style.setProperty('--dy', dy.toFixed(1) + 'px');
+			cv.setAttribute('aria-label', L('أماكن كتبه: اسحب أو استعمل الأسهم، وEnter لفتح الكتاب', 'The places of his books: drag or use the arrows, Enter opens the book'));
+			/* the words wait for the site's fonts; each cover drawn in when it has come */
+			(document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () {
+				var seen = {};
+				cards.forEach(function (c) {
+					draw(c, null);
+					var img = seen[c.src] || new Image();
+					seen[c.src] = img;
+					var put = function () { draw(c, img); go(); };
+					if (img.complete && img.naturalWidth) put(); else { img.addEventListener('load', put); if (!img.src) img.src = c.src; }
 				});
-			};
-			place();
-			window.addEventListener('resize', place);
-			/* on touch, where there is no hover: the first tap opens the bubble, the second goes to the book */
-			var touch = false;
-			pois.addEventListener('pointerdown', function (ev) { touch = ev.pointerType !== 'mouse'; });
-			pois.addEventListener('click', function (ev) {
-				var t = ev.target.closest('.ph-tt');
-				if (!t || !touch || t.classList.contains('is-open')) return;
-				ev.preventDefault();
-				[].forEach.call(pois.querySelectorAll('.is-open'), function (o) { o.classList.remove('is-open'); });
-				t.classList.add('is-open');
-			});
-			document.addEventListener('pointerdown', function (ev) {
-				if (!ev.target.closest || !ev.target.closest('.ph-tt')) [].forEach.call(pois.querySelectorAll('.is-open'), function (o) { o.classList.remove('is-open'); });
+				stage.classList.add('is-on');
+				go();
 			});
 		}).catch(function () {});
 	}
