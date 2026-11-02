@@ -29,3 +29,22 @@ html[data-theme="light"] .wd-word { color: rgba(30, 50, 70, .5); }
 .wd-ed .wd-pub { color: var(--muted); }
 .wd-src { font-size: 13px; }
 .wd-note { color: var(--muted); font-size: 14px; }
+
+/* the band's globe (world.js, amCharts' «Map Sankey» pen): taller than other bands, so the globe has room; the drifting words
+   stay until it is drawn, and are what is left if it cannot be */
+.ph[data-ph="world"] { height: 460px; }
+@media (max-width: 640px) { .ph[data-ph="world"] { height: 340px; } }
+.wd-words { position: absolute; inset: 0; transition: opacity .6s; }
+.wd-chart { position: absolute; inset: 0; z-index: 4; opacity: 0; transition: opacity .8s; }
+.ph[data-ph="world"].wd-live .wd-chart { opacity: 1; }
+.ph[data-ph="world"].wd-live .wd-words { opacity: 0; }
+.wd-switch { position: absolute; z-index: 6; top: 18px; inset-inline-start: 11%; /* (across from the zoom buttons) */ display: flex; align-items: center; gap: 8px; padding: 6px 12px;
+	border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--ph-bg) 75%, transparent); color: var(--ph-ink);
+	font: inherit; font-size: 13px; cursor: pointer; }
+.wd-switch i { position: relative; width: 34px; height: 18px; border-radius: 9px; background: #3a414c; transition: background .3s; }
+.wd-switch i::after { content: ''; position: absolute; top: 2px; inset-inline-start: 2px; width: 14px; height: 14px; border-radius: 50%; background: #efe6d2; transition: inset-inline-start .3s; }
+.wd-switch[aria-pressed="true"] i { background: var(--ember); }
+.wd-switch[aria-pressed="true"] i::after { inset-inline-start: 18px; }
+.wd-switch span { opacity: .6; transition: opacity .3s; }
+.wd-switch[aria-pressed="false"] span:first-child, .wd-switch[aria-pressed="true"] span:last-child { opacity: 1; }
+.wd-switch:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
