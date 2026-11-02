@@ -1,0 +1,240 @@
+{
+ "America": {
+  "src": "assets/img/places/america.jpg",
+  "sight": {
+   "en": "Statue of Liberty"
+  },
+  "page": "https://en.wikipedia.org/wiki/Statue_of_Liberty"
+ },
+ "Egypt": {
+  "src": "assets/img/places/egypt.jpg",
+  "sight": {
+   "en": "Giza pyramid complex"
+  },
+  "page": "https://en.wikipedia.org/wiki/Giza_pyramid_complex"
+ },
+ "Africa": {
+  "src": "assets/img/places/africa.jpg",
+  "sight": {
+   "en": "Mount Kilimanjaro"
+  },
+  "page": "https://en.wikipedia.org/wiki/Mount_Kilimanjaro"
+ },
+ "Tibet": {
+  "src": "assets/img/places/tibet.jpg",
+  "sight": {
+   "en": "Potala Palace"
+  },
+  "page": "https://en.wikipedia.org/wiki/Potala_Palace"
+ },
+ "the Mongols": {
+  "src": "assets/img/places/mongols.jpg",
+  "sight": {
+   "en": "Gorkhi-Terelj National Park"
+  },
+  "page": "https://en.wikipedia.org/wiki/Gorkhi-Terelj_National_Park"
+ },
+ "the Amazon": {
+  "src": "assets/img/places/amazon.jpg",
+  "sight": {
+   "en": "Amazon rainforest"
+  },
+  "page": "https://en.wikipedia.org/wiki/Amazon_rainforest"
+ },
+ "Cairo": {
+  "src": "assets/img/places/cairo.jpg",
+  "sight": {
+   "en": "Muhammad Ali Mosque"
+  },
+  "page": "https://en.wikipedia.org/wiki/Muhammad_Ali_Mosque"
+ },
+ "Tunisia": {
+  "src": "assets/img/places/tunisia.jpg",
+  "sight": {
+   "en": "Sidi Bou Said"
+  },
+  "page": "https://en.wikipedia.org/wiki/Sidi_Bou_Said"
+ },
+ "Kuwait": {
+  "src": "assets/img/places/kuwait.jpg",
+  "sight": {
+   "en": "Kuwait Towers"
+  },
+  "page": "https://en.wikipedia.org/wiki/Kuwait_Towers"
+ },
+ "Cameroon": {
+  "src": "assets/img/places/cameroon.jpg",
+  "sight": {
+   "en": "Mount Cameroon"
+  },
+  "page": "https://en.wikipedia.org/wiki/Mount_Cameroon"
+ },
+ "Congo": {
+  "src": "assets/img/places/congo.jpg",
+  "sight": {
+   "en": "Congo River"
+  },
+  "page": "https://en.wikipedia.org/wiki/Congo_River"
+ },
+ "Liberia": {
+  "src": "assets/img/places/liberia.jpg",
+  "sight": {
+   "en": "Monrovia"
+  },
+  "page": "https://en.wikipedia.org/wiki/Monrovia"
+ },
+ "Romania": {
+  "src": "assets/img/places/romania.jpg",
+  "sight": {
+   "en": "Bran Castle"
+  },
+  "page": "https://en.wikipedia.org/wiki/Bran_Castle"
+ },
+ "London": {
+  "src": "assets/img/places/london.jpg",
+  "sight": {
+   "en": "Tower Bridge"
+  },
+  "page": "https://en.wikipedia.org/wiki/Tower_Bridge"
+ },
+ "France": {
+  "src": "assets/img/places/france.jpg",
+  "sight": {
+   "en": "Mont-Saint-Michel"
+  },
+  "page": "https://en.wikipedia.org/wiki/Mont-Saint-Michel"
+ },
+ "Paris": {
+  "src": "assets/img/places/paris.jpg",
+  "sight": {
+   "en": "Champ de Mars"
+  },
+  "page": "https://en.wikipedia.org/wiki/Champ_de_Mars"
+ },
+ "Germany": {
+  "src": "assets/img/places/germany.jpg",
+  "sight": {
+   "en": "Neuschwanstein Castle"
+  },
+  "page": "https://en.wikipedia.org/wiki/Neuschwanstein_Castle"
+ },
+ "Rome": {
+  "src": "assets/img/places/rome.jpg",
+  "sight": {
+   "en": "Colosseum"
+  },
+  "page": "https://en.wikipedia.org/wiki/Colosseum"
+ },
+ "Poland": {
+  "src": "assets/img/places/poland.jpg",
+  "sight": {
+   "en": "Wawel Castle"
+  },
+  "page": "https://en.wikipedia.org/wiki/Wawel_Castle"
+ },
+ "Russia": {
+  "src": "assets/img/places/russia.jpg",
+  "sight": {
+   "en": "Saint Basil's Cathedral"
+  },
+  "page": "https://en.wikipedia.org/wiki/Saint_Basil's_Cathedral"
+ },
+ "Moscow": {
+  "src": "assets/img/places/moscow.jpg",
+  "sight": {
+   "en": "Kremlin"
+  },
+  "page": "https://en.wikipedia.org/wiki/Kremlin"
+ },
+ "Norway": {
+  "src": "assets/img/places/norway.jpg",
+  "sight": {
+   "en": "Geirangerfjord"
+  },
+  "page": "https://en.wikipedia.org/wiki/Geirangerfjord"
+ },
+ "Finland": {
+  "src": "assets/img/places/finland.jpg",
+  "sight": {
+   "en": "Lapland (Finland)"
+  },
+  "page": "https://en.wikipedia.org/wiki/Lapland_(Finland)"
+ },
+ "Iceland": {
+  "src": "assets/img/places/iceland.jpg",
+  "sight": {
+   "en": "Skógafoss"
+  },
+  "page": "https://en.wikipedia.org/wiki/Sk%C3%B3gafoss"
+ },
+ "India": {
+  "src": "assets/img/places/india.jpg",
+  "sight": {
+   "en": "Taj Mahal"
+  },
+  "page": "https://en.wikipedia.org/wiki/Taj_Mahal"
+ },
+ "Afghanistan": {
+  "src": "assets/img/places/afghanistan.jpg",
+  "sight": {
+   "en": "Band-e Amir National Park"
+  },
+  "page": "https://en.wikipedia.org/wiki/Band-e_Amir_National_Park"
+ },
+ "Beijing": {
+  "src": "assets/img/places/beijing.jpg",
+  "sight": {
+   "en": "Forbidden City"
+  },
+  "page": "https://en.wikipedia.org/wiki/Forbidden_City"
+ },
+ "Australia": {
+  "src": "assets/img/places/australia.jpg",
+  "sight": {
+   "en": "Uluru"
+  },
+  "page": "https://en.wikipedia.org/wiki/Uluru"
+ },
+ "Los Angeles": {
+  "src": "assets/img/places/los-angeles.jpg",
+  "sight": {
+   "en": "Hollywood Sign"
+  },
+  "page": "https://en.wikipedia.org/wiki/Hollywood_Sign"
+ },
+ "Mexico": {
+  "src": "assets/img/places/mexico.jpg",
+  "sight": {
+   "en": "Teotihuacan"
+  },
+  "page": "https://en.wikipedia.org/wiki/Teotihuacan"
+ },
+ "Argentina": {
+  "src": "assets/img/places/argentina.jpg",
+  "sight": {
+   "en": "Perito Moreno Glacier"
+  },
+  "page": "https://en.wikipedia.org/wiki/Perito_Moreno_Glacier"
+ },
+ "Bolivia": {
+  "src": "assets/img/places/bolivia.jpg",
+  "sight": {
+   "en": "Salar de Uyuni"
+  },
+  "page": "https://en.wikipedia.org/wiki/Salar_de_Uyuni"
+ },
+ "the Maya": {
+  "src": "assets/img/places/maya.jpg",
+  "sight": {
+   "en": "Chichen Itza"
+  },
+  "page": "https://en.wikipedia.org/wiki/Chichen_Itza"
+ },
+ "Bermuda": {
+  "src": "assets/img/places/bermuda.jpg",
+  "sight": {
+   "en": "Gibbs Hill Lighthouse"
+  },
+  "page": "https://en.wikipedia.org/wiki/Gibbs_Hill_Lighthouse"
+ }
+}

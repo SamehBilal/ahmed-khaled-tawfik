@@ -505,10 +505,10 @@
 	}
 
 	/* the map band at work: Codrops' «Infinite Circular WebGL Gallery» (Luis Henrique Bizarro; MIT), in plain WebGL — a card a place
-	   his books name (assets/data/places.json, the map's own): the cover of the first book that names it, the place and the book
-	   under it, drawn on a canvas in the site's own fonts (so the Arabic joins). The cards stand on a wide arc, turned along it,
+	   his books name (assets/data/places.json, the map's own): a picture of it (assets/data/place-photos.json, tools/build-place-photos.js),
+	   its name and how many books name it under it, drawn on a canvas in the site's own fonts (so the Arabic joins). The cards stand on a wide arc, turned along it,
 	   and ripple as they move, more the faster; dragged sideways (or by the arrow keys) they run on without end, settling on a
-	   card when let go, and drift slowly by themselves until touched. A card clicked, tapped or given Enter opens its book. The
+	   card when let go, and drift slowly by themselves until touched. A card clicked, tapped or given Enter opens its place on the map below. The
 	   wheel scrolls the page, as anywhere else. Drawn only while on screen */
 	function mapGallery(A) {
 		var stage = document.querySelector('.ph[data-ph="map"] .ph-stage'), cv = stage && stage.querySelector('.ph-gl');
@@ -581,7 +581,7 @@
 			x.fillStyle = '#efe6d2'; x.font = '64px ' + fDisplay;
 			x.fillText(card.place, CW / 2, ih + 84, CW - 24);
 			x.fillStyle = 'rgba(239, 230, 210, .62)'; x.font = '30px ' + fBody;
-			x.fillText(card.book, CW / 2, ih + 136, CW - 24);
+			x.fillText(card.sub, CW / 2, ih + 136, CW - 24); /* (how many of his books name it) */
 			var t = card.tex || gl.createTexture();
 			gl.bindTexture(gl.TEXTURE_2D, t);
 			gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
@@ -594,12 +594,22 @@
 		var size = function () {
 			sy = vh * 0.78; sx = sy * CW / CH; gap = 2;
 			total = (sx + gap) * cards.length;
-			cards.forEach(function (c, k) { c.x = (sx + gap) * k; });
+			/* (around the middle from the start, on both sides, so the circle is full at once) */
+			var mid = Math.floor(cards.length / 2);
+			cards.forEach(function (c, k) { c.x = (sx + gap) * (k - mid); });
 		};
 
 		/* scrolling: the zip's eased run — target, current, last */
 		var sc = { ease: 0.05, current: 0, target: 0, last: 0 }, auto = !still, down = null, t0 = 0, live = true, raf = 0;
 		var snap = function () { var w = sx + gap; sc.target = Math.round(sc.target / w) * w; };
+		/* a card opens its place on the map below (map.js), and goes there */
+		var show = function (c) {
+			var P = window.PAGE, i = P && P._places ? P._places.findIndex(function (p) { return p.en === c.en; }) : -1;
+			if (i < 0) { location.hash = encodeURIComponent(c.en); return; }
+			P.open(i);
+			var to = document.querySelector('.mp-panel') || document.querySelector('.mp-map');
+			if (to) to.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'center' });
+		};
 		var at = function (cx) {
 			/* the card under the pointer: from its place across the band (it stands near the arc's middle there) */
 			var wx = (cx / W - 0.5) * vw, best = null;
@@ -620,7 +630,7 @@
 		var up = function (ev) {
 			if (!down) return;
 			var d = down; down = null; cv.style.cursor = '';
-			if (!d.moved && ev && ev.type === 'pointerup') { var c = at(ev.clientX); if (c) location.href = c.href; return; }
+			if (!d.moved && ev && ev.type === 'pointerup') { var c = at(ev.clientX); if (c) show(c); return; }
 			snap();
 		};
 		cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
@@ -630,7 +640,7 @@
 			if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
 				ev.preventDefault(); auto = false;
 				sc.target = Math.round(sc.target / w) * w + ((ev.key === 'ArrowRight') !== rtl ? w : -w);
-			} else if (ev.key === 'Enter') { var c = at(W / 2); if (c) location.href = c.href; }
+			} else if (ev.key === 'Enter') { var c = at(W / 2); if (c) show(c); }
 		});
 
 		var frame = function () {
@@ -666,21 +676,23 @@
 		if (window.IntersectionObserver) new IntersectionObserver(function (es) { live = es[0].isIntersecting; go(); }).observe(cv);
 		window.addEventListener('resize', function () { resize(); go(); });
 
-		fetch('assets/data/places.json').then(function (r) { return r.json(); }).then(function (all) {
+		var json = function (u) { return fetch(u).then(function (r) { return r.json(); }); };
+		Promise.all([json('assets/data/places.json'), json('assets/data/place-photos.json')]).then(function (got) {
 			if (!document.body.contains(cv)) return;
-			var list = all.filter(function (p) { return (p.items || []).some(function (b) { return b.c; }); })
+			var photos = got[1];
+			var list = got[0].filter(function (p) { return photos[p.en] && (p.items || []).length; })
 				.sort(function (a, b) { return b.items.length - a.items.length; });
 			/* enough cards to go round (the zip doubles its twelve) */
 			while (list.length && list.length < 14) list = list.concat(list);
+			var n = function (k) { return k === 1 ? L('كتاب واحد يذكره', 'Named in one book') : k === 2 ? L('يذكره كتابان', 'Named in 2 books') : L('يذكره ' + A.num(k) + ' من كتبه', 'Named in ' + k + ' books'); };
 			cards = list.map(function (p, k) {
-				var b = p.items.filter(function (x) { return x.c; })[0];
-				return { place: L(p.ar, p.en), book: '«' + b.t + '»' + (b.k ? ' — ' + b.k : ''), href: b.h, src: b.c, x: 0, px: 1e9, extra: 0, time: 100 * Math.random(), k: k };
+				return { place: L(p.ar, p.en), sub: n(p.items.length), en: p.en, src: photos[p.en].src, x: 0, px: 1e9, extra: 0, time: 100 * Math.random(), k: k };
 			});
 			resize();
 			sc.target = sc.current = sc.last = 0;
 			var ph = stage.closest('.ph');
 			if (ph) ph.removeAttribute('aria-hidden'); /* (this band is a control, not a decoration) */
-			cv.setAttribute('aria-label', L('أماكن كتبه: اسحب أو استعمل الأسهم، وEnter لفتح الكتاب', 'The places of his books: drag or use the arrows, Enter opens the book'));
+			cv.setAttribute('aria-label', L('أماكن كتبه: اسحب أو استعمل الأسهم، وEnter لفتح المكان على الخريطة', 'The places of his books: drag or use the arrows, Enter opens the place on the map'));
 			/* the words wait for the site's fonts; each cover drawn in when it has come */
 			(document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () {
 				var seen = {};
