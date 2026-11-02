@@ -7,7 +7,11 @@
 html[data-theme="light"] .cr-row { --sil: color-mix(in srgb, var(--ink) 22%, var(--paper)); }
 .cr-sil { position: relative; flex: 0 1 calc(var(--w) * 1.5px); height: calc(var(--h) / 150 * 100%); min-width: 0; color: var(--sil); transition: color .3s, translate .3s; }
 .cr-sil svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.cr-sil path { fill: currentColor; }
+.cr-sil path, .cr-sil rect { fill: currentColor; }
+/* the haunted house's windows: a warm light behind it, flickering, brighter under the pointer */
+.cr-sil .cr-lit { fill: #f0a040; opacity: .55; animation: cr-flicker 5s var(--d) infinite; }
+@keyframes cr-flicker { 0%, 100% { opacity: .55; } 40% { opacity: .35; } 44% { opacity: .6; } 70% { opacity: .45; } }
+.cr-sil:hover .cr-lit, .cr-sil:focus-visible .cr-lit { opacity: .9; animation: none; }
 .cr-eye { fill: #ffcf5a; filter: drop-shadow(0 0 3px #ff9a3a); opacity: 0; transform-box: fill-box; transform-origin: center; animation: cr-blink 7s var(--d) infinite; }
 @keyframes cr-blink { 0%, 42%, 100% { opacity: 0; scale: 1 .1; } 48%, 86% { opacity: 1; scale: 1; } 90% { scale: 1 .1; } 93% { scale: 1; } }
 .cr-sil:hover, .cr-sil:focus-visible { color: color-mix(in srgb, var(--ember) 35%, var(--sil)); translate: 0 -6px; outline: none; }
@@ -17,7 +21,7 @@ html[data-theme="light"] .cr-row { --sil: color-mix(in srgb, var(--ink) 22%, var
 .cr-sil:hover .cr-tag, .cr-sil:focus-visible .cr-tag { opacity: 1; translate: -50% 0; }
 .cr-ground { position: absolute; left: 4%; right: 4%; bottom: 33px; height: 1px; background: linear-gradient(90deg, transparent, var(--line) 15%, var(--line) 85%, transparent); }
 @media (max-width: 640px) { .cr-sil:nth-child(n+8) { display: none; } }
-@media (prefers-reduced-motion: reduce) { .cr-eye { animation: none; opacity: .7; scale: 1; } .cr-sil, .cr-tag { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .cr-eye, .cr-sil .cr-lit { animation: none; opacity: .7; scale: 1; } .cr-sil, .cr-tag { transition: none; } }
 .cx-bar { margin: 6px 0 26px; }
 .cx-note { color: var(--muted); line-height: 1.9; }
 .cx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
