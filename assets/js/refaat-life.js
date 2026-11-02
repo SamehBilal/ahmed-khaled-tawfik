@@ -44,9 +44,10 @@ window.PAGE = {
 		var radios = [].slice.call(ul.querySelectorAll('input[name="rw"]'));
 		/* (chosen here, not left to the browser: its radio, wherever on the turned wheel it sits, is focused without the page
 		   being scrolled to it) */
-		var pick = function (k) {
+		var pick = function (k, auto) {
 			var r = radios[(k + radios.length) % radios.length];
-			r.checked = true; r.focus({ preventScroll: true });
+			r.checked = true;
+			if (!auto) { r.focus({ preventScroll: true }); rest = Date.now() + 15000; }
 			ul.style.setProperty('--index', r.value);
 		};
 		ul.addEventListener('click', function (ev) {
@@ -62,6 +63,21 @@ window.PAGE = {
 			/* (left is the next moment in Arabic, as the wheel runs; right in English) */
 			pick(k + (getComputedStyle(ul).direction === 'rtl' ? step : -step));
 		});
+		/* and on by itself: the next moment every seven seconds, held while the pointer or the focus is on it, for a while after
+		   one is chosen by hand, and while the band is off screen; never for those who ask for less motion */
+		var rest = 0, held = false, seen = true;
+		var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+		var wheel = ul.closest('.rw');
+		wheel.addEventListener('pointerenter', function () { held = true; });
+		wheel.addEventListener('pointerleave', function () { held = false; });
+		wheel.addEventListener('focusin', function () { held = true; });
+		wheel.addEventListener('focusout', function () { held = false; });
+		if (window.IntersectionObserver) new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }).observe(wheel);
+		if (!still) var timer = setInterval(function () {
+			if (!document.body.contains(ul)) { clearInterval(timer); return; }
+			if (held || !seen || document.hidden || Date.now() < rest) return;
+			pick(radios.findIndex(function (r) { return r.checked; }) + 1, true);
+		}, 7000);
 	},
 
 	render: function () {
