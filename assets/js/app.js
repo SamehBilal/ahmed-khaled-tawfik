@@ -75,7 +75,7 @@
 		/* pages linked only from the footer, not the header */
 		legal: [
 			{ href: 'about.html', ar: 'عن الموقع والأسئلة', en: 'About & FAQ' },
-			{ href: 'sources.html', ar: 'المصادر وطريقة الجمع', en: 'Sources & method' },
+			{ href: 'sources.html', ar: 'المصادر', en: 'Sources' },
 			{ href: 'privacy.html', ar: 'الخصوصية', en: 'Privacy' },
 			{ href: 'terms.html', ar: 'حقوق الاستخدام', en: 'Rights & use' },
 			{ href: 'contact.html', ar: 'تواصل وساهم', en: 'Contact & contribute' },
