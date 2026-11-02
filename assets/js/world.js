@@ -39,7 +39,9 @@ window.PAGE = {
 	band: function (d, A) {
 		var self = window.PAGE; /* (page-hero.js calls this unbound) */
 		setTimeout(function () { self.globe(A); }, 0);
-		return '<div class="wd-chart" id="wd-chart"></div>';
+		/* (dir=ltr: amCharts draws on a canvas, which takes the page's right-to-left and set every Arabic label off to one side of
+		   its place; Arabic still reads right to left within it) */
+		return '<div class="wd-chart" id="wd-chart" dir="ltr"></div>';
 	},
 
 	/* amCharts' scripts, once, one after the other */
@@ -75,8 +77,6 @@ window.PAGE = {
 		var L = A.L, self = this, light = document.documentElement.getAttribute('data-theme') === 'light';
 		var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 		var root = this.root = am5.Root.new(el, { tapToActivate: true, tapToActivateTimeout: 3000 });
-		/* (Arabic labels measured and laid out right to left, the switch's «كرة … خريطة» among them) */
-		root.rtl = A.lang !== 'en';
 		var c = function (x) { return am5.color(x); };
 		/* the site's colours: the night's ink, the paper, the ember */
 		var ink = c(light ? 0x2a2017 : 0xefe6d2), sea = c(light ? 0xdfd2bb : 0x10141c), land = c(light ? 0xf3ebdc : 0x1b2029),
@@ -117,11 +117,13 @@ window.PAGE = {
 			});
 		});
 		var sankey = chart.series.push(am5map.MapSankeySeries.new(root, { polygonSeries: countries, maxWidth: 3, controlPointDistance: 0.35, resolution: 60, nodePadding: 0.3 }));
+		/* each Arabic line marked right to left (U+202B … U+202C) in the chart's left-to-right box, or «4 طبعات» reads «طبعات 4» */
+		var rl = function (x) { return A.lang === 'en' ? x : '‫' + x + '‬'; };
 		var eds = function (v) { return A.num(v) + ' ' + L(v === 1 ? 'طبعة' : v === 2 ? 'طبعتان' : v <= 10 ? 'طبعات' : 'طبعة', v === 1 ? 'edition' : 'editions'); };
 		sankey.mapPolygons.template.setAll({ fill: ember, fillOpacity: 0.7, strokeOpacity: 0, tooltipText: '{lang}' });
 		sankey.mapPolygons.template.adapters.add('tooltipText', function (text, target) {
 			var x = target.dataItem && target.dataItem.dataContext;
-			return x ? L('من مصر إلى ', 'From Egypt into ') + x.lang + '\n' + eds(x.value) : text;
+			return x ? rl(L('من مصر إلى ', 'From Egypt into ') + x.lang) + '\n' + rl(eds(x.value)) : text;
 		});
 		sankey.nodes.mapPolygons.template.setAll({ fill: deep, stroke: ink, strokeWidth: 1, fillOpacity: 0.95, strokeOpacity: 0.8, tooltipText: '{name}' });
 		/* a small book along each stream */
@@ -134,7 +136,7 @@ window.PAGE = {
 		sankey.events.on('datavalidated', function () {
 			am5.array.each(sankey.nodes.dataItems, function (di) {
 				var id = di.get('id');
-				di.set('name', id === 'EG' ? L('مصر، حيث كتب', 'Egypt, where he wrote') : lands[id] ? lands[id] : id);
+				di.set('name', rl(id === 'EG' ? L('مصر، حيث كتب', 'Egypt, where he wrote') : lands[id] ? lands[id] : id));
 			});
 			if (still) return;
 			am5.array.each(sankey.dataItems, function (di) {
