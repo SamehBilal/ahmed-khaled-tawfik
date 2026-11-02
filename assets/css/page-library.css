@@ -1,5 +1,7 @@
 /* «مكتبته» (library.html, library.js) */
-.ph[data-ph="library"] { background: radial-gradient(60% 120% at 50% 20%, #2c2016 0%, #0e0b08 72%); }
+/* the band is the page itself: no ground, faded sides or line under it */
+.ph[data-ph="library"], html[data-theme="light"] .ph[data-ph="library"] { background: none; border-bottom: 0; }
+.ph[data-ph="library"]::after { content: none; }
 .lb-shelf { position: absolute; left: 4%; right: 4%; bottom: 18%; height: 66%; display: flex; align-items: flex-end; gap: 4px; justify-content: center; }
 .lb-shelf span { position: relative; flex: 0 0 var(--w); height: var(--h); background: linear-gradient(90deg, rgba(0,0,0,.35), transparent 30%, transparent 70%, rgba(0,0,0,.35)), var(--c); border-radius: 3px 3px 0 0; box-shadow: inset 0 6px 0 rgba(255,255,255,.08); overflow: hidden; }
 .lb-shelf b { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap; font-family: var(--f-display); font-weight: 400; font-size: 13px; color: rgba(246,215,154,.85); }
