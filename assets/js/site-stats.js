@@ -47,7 +47,7 @@ window.SiteStats = {
 			[editions, L('طبعة مسجّلة', 'editions recorded'), 'covers.html#editions'],
 			[(d.publishers || []).length, L('دار نشر ومنصة', 'publishers and platforms'), 'publishers.html'],
 			[(d.stats || {}).papers, L('مقالًا في الأرشيف', 'articles in the archive'), 'blog.html'],
-			[(d.stats || {}).outlets, L('جريدة ومجلة وموقعًا', 'papers and sites he wrote for'), 'papers.html'],
+			[(d.stats || {}).outlets, L('جريدة ومجلة وموقعًا', 'papers and sites he wrote for'), 'blog.html#papers'],
 			[Object.keys(heard).length, L('تسجيلًا صوتيًا ومرئيًا', 'audio and video recordings'), 'audio.html'],
 			[(d.media || []).length, L('لقاءً وفيلمًا عنه', 'interviews and films'), 'talks.html#talks'],
 			[(d.characters || []).length, L('شخصية', 'characters'), 'characters.html'],

@@ -11,8 +11,8 @@ window.PAGE = {
 		eyebrow: { ar: 'مقالات وقصص وكوميكس', en: 'Columns, stories and comics' },
 		title: { ar: 'المدونة', en: 'The Blog' },
 		lead: {
-			ar: 'مقالاته وقصصه القصيرة والكوميكس التي كتبها، كما جمعها عمرو عبيد في مدونة «أحمد خالد توفيق»، مرتّبة بالسنة والشهر. اضغط على سنة لتنفتح شهورها، ثم على شهر لتنفتح مقالاته.',
-			en: 'His columns, short stories and comics, as collected by Amr Ebaid on the "Ahmed Khaled Tawfik" blog, arranged by year and month. Open a year to fan out its months, then a month to fan out its articles.'
+			ar: 'مقالاته وقصصه القصيرة والكوميكس التي كتبها، كما جمعها عمرو عبيد في مدونة «أحمد خالد توفيق»، مرتّبة بالسنة والشهر. اضغط على سنة لتنفتح شهورها، ثم على شهر لتنفتح مقالاته. وتحت الأرشيف: في أي الصحف نُشرت، وفي أي الأعوام.',
+			en: 'His columns, short stories and comics, as collected by Amr Ebaid on the "Ahmed Khaled Tawfik" blog, arranged by year and month. Open a year to fan out its months, then a month to fan out its articles. Under the archive: which papers they ran in, and when.'
 		}
 	},
 	MONTHS: {
@@ -89,7 +89,20 @@ window.PAGE = {
 				L('أرشيف جمعه ' + (blog.curator === 'Amr Ebaid' ? 'عمرو عبيد' : blog.curator) + '. هنا العنوان ومقتطف قصير، والنص الكامل في المدونة.', 'an archive collected by ' + blog.curator + '. Here: the title and a short excerpt; the full text is on the blog.') +
 				/* checked against his page on Ida2at (2016–2018): every column and story episode he wrote there is in the archive */
 				' ' + L('ومقالاته وحلقات قصصه على ', 'His columns and story episodes on ') + '<a href="https://www.ida2at.com/author/aktowfik/" target="_blank" rel="noopener">' + L('«إضاءات» ↗', 'Ida2at ↗') + '</a>' + L(' (2016–2018) كلها هنا.', ' (2016–2018) are all here.') + '</p>' +
-		'</div></section>';
+		'</div></section>' +
+			/* and under the archive, where those pieces first ran: «في الصحف» (papers.js), once a page of its own */
+			(window.PapersSection ? window.PapersSection.html() : '');
+		if (window.PapersSection) {
+			window.PapersSection.wire();
+			/* (blog.html#papers, as papers.html now leads: to its heading, once drawn — it is too tall to centre) */
+			/* (again as the archive above it settles and its pictures come, as long as the reader has not scrolled away) */
+			if (location.hash === '#papers') [60, 400, 1000, 2000].forEach(function (ms) {
+				setTimeout(function () {
+					var to = document.getElementById('papers');
+					if (to && location.hash === '#papers' && Math.abs(to.getBoundingClientRect().top - 80) > 40) to.scrollIntoView({ block: 'start', behavior: 'instant' });
+				}, ms);
+			});
+		}
 
 		this.hero();
 		document.getElementById('bl-kinds').onclick = function (ev) {

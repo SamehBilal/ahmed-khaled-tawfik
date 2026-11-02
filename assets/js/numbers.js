@@ -49,7 +49,7 @@ window.PAGE = {
 					tile(main.length, ['سلسلة', 'سلاسل', 'series'], 'works.html') +
 					tile(beyond.length, ['سلسلة شارك فيها', 'سلاسل أخرى شارك فيها', 'more series he wrote for'], 'works.html') +
 					tile(works.length, ['كتابًا مستقلًا', 'كتب مستقلة', 'standalone books'], 'works.html') +
-					tile(printed.length, ['مقالًا وقصة في الصحف', 'مقالات في الصحف', 'pieces in the papers'], 'papers.html') +
+					tile(printed.length, ['مقالًا وقصة في الصحف', 'مقالات في الصحف', 'pieces in the papers'], 'blog.html#papers') +
 					tile(posts.length, ['منشورًا في المدونة', 'منشورات في المدونة', 'posts on the blog'], 'blog.html') +
 					tile((d.characters || []).length, ['شخصية', 'شخصيات', 'characters'], 'characters.html') +
 					tile((d.quotes || []).length, ['اقتباسًا', 'اقتباسات', 'quotes'], 'quotes.html') +
@@ -59,7 +59,7 @@ window.PAGE = {
 				'<figure class="nm-chart" id="nm-span"><figcaption>' + e(L('مسيرة السلاسل', 'The series, year by year')) + '</figcaption><div class="nm-plot"></div></figure>' +
 				'<figure class="nm-chart" id="nm-mwt"><figcaption>' + e(L('أعداد «ما وراء الطبيعة» في كل عام', 'Ma Wara’ al-Tabi’a issues each year')) + '</figcaption><div class="nm-plot"></div><div class="nm-tip" hidden></div></figure>' +
 				'<figure class="nm-chart" id="nm-books"><figcaption>' + e(L('كتبه المستقلة في كل عام، بأنواعها', 'His standalone books each year, by kind')) + '<small class="nm-note">' + e(L('ما بعد 2018 كتب جُمعت ونُشرت بعد رحيله.', 'The books after 2018 were collected and published after his death.')) + '</small></figcaption><div class="nm-legend"></div><div class="nm-plot"></div><div class="nm-tip" hidden></div></figure>' +
-				'<figure class="nm-chart" id="nm-papers"><figcaption>' + e(L('مقالاته في الصحف في كل عام', 'His pieces in the papers each year')) + ' <a href="papers.html">' + e(L('في الصحف ←', 'In the papers →')) + '</a></figcaption><div class="nm-plot"></div><div class="nm-tip" hidden></div></figure>' +
+				'<figure class="nm-chart" id="nm-papers"><figcaption>' + e(L('مقالاته في الصحف في كل عام', 'His pieces in the papers each year')) + ' <a href="blog.html#papers">' + e(L('في الصحف ←', 'In the papers →')) + '</a></figcaption><div class="nm-plot"></div><div class="nm-tip" hidden></div></figure>' +
 				'<figure class="nm-chart" id="nm-houses"><figcaption>' + e(L('دور النشر، بعدد كتبه عن كل منها', 'Publishers, by how many of his books each put out')) + '</figcaption><div class="nm-plot"></div></figure>' +
 			'</section>' +
 			'<section class="flow-step" id="style">' + step(2, L('وكيف كتبه', 'And how he wrote it'), L('اللغة والأسلوب', 'Language & style'),

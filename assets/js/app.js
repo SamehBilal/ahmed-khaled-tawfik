@@ -22,7 +22,7 @@
 			/* in the phone menu only (on a wider screen the «My lists» button is always at hand) */
 			{ id: 'lists', href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey', phone: true },
 			/* and the pages made from the data, which on a wider screen the footer lists */
-			{ id: 'papers', href: 'papers.html', ar: 'في الصحف', en: 'In the papers', phone: true },
+			{ id: 'papers', href: 'blog.html#papers', ar: 'في الصحف', en: 'In the papers', phone: true },
 			{ id: 'numbers', href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style', phone: true },
 			{ id: 'quiz', href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner', phone: true },
 			{ id: 'map', href: 'map.html', ar: 'الخريطة', en: 'The map', phone: true },
@@ -49,7 +49,7 @@
 			/* and beside it, the books and films he loved */
 			{ href: 'library.html', ar: 'مكتبته', en: 'His library', main: true },
 			/* the pages made from the data: his columns by paper, his work and his style in numbers, the quiz, the map */
-			{ href: 'papers.html', ar: 'في الصحف', en: 'In the papers' },
+			{ href: 'blog.html#papers', ar: 'في الصحف', en: 'In the papers' },
 			{ href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style' },
 			{ href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner' },
 			/* the reader's own lists and journey: the «My lists» button's page, in the footer too */

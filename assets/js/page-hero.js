@@ -228,7 +228,7 @@
 			/* [number, label, where it leads, the card's two colours, its gradient running from one to the other] */
 			var cells = [[issues, L('عددًا في السلاسل', 'series issues'), 'works.html', '#e0633a', '#f6c98a'], [(d.series || []).length, L('سلسلة', 'series'), 'works.html', '#6d4aff', '#dcc8f4'],
 				[(d.works || []).length, L('كتابًا مستقلًا', 'standalone books'), 'works.html', '#ff8a1c', '#f4b8f0'], [posts.length, L('منشورًا في المدونة', 'blog posts'), 'blog.html', '#1fa2a6', '#c2f2dc'],
-				[papers, L('مقالًا في الصحف', 'pieces in the papers'), 'papers.html', '#d1343e', '#ffc7ad'], [(d.characters || []).length, L('شخصية', 'characters'), 'characters.html', '#3f9b4f', '#dcf29e'],
+				[papers, L('مقالًا في الصحف', 'pieces in the papers'), 'blog.html#papers', '#d1343e', '#ffc7ad'], [(d.characters || []).length, L('شخصية', 'characters'), 'characters.html', '#3f9b4f', '#dcf29e'],
 				[(d.quotes || []).length, L('اقتباسًا', 'quotes'), 'quotes.html', '#3b6cff', '#aee6ff'], [houses, L('دار نشر', 'publishers'), 'publishers.html', '#c79a3b', '#f6ecc8']].filter(function (c) { return c[0]; });
 			setTimeout(numbersDeck, 0);
 			return '<div class="ph-deck" tabindex="0" role="group" aria-roledescription="' + e(L('شريط بطاقات', 'carousel')) + '" aria-label="' + e(L('الموقع بالأرقام', 'The site in numbers')) + '">' +

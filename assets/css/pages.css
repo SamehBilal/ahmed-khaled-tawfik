@@ -14,6 +14,10 @@ html[data-theme="light"] {
 }
 
 /* ---------- «في الصحف» ---------- */
+/* (on the blog page, under the archive: its heading and its word) */
+.pp-title { margin: 0 0 6px; font-family: var(--f-display); font-size: clamp(30px, 4vw, 44px); color: var(--paper); scroll-margin-top: 90px; }
+.pp-lead { margin: 0 0 20px; max-width: 62ch; color: var(--paper-dim); line-height: 1.9; }
+.pp { scroll-margin-top: 80px; }
 .pp-sum { font-family: var(--f-display); font-size: 20px; color: var(--paper-dim); margin: 0 0 22px; }
 .pp-sum b { color: var(--paper); font-family: var(--f-latin); font-size: 1.3em; }
 .pp-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin: 0 0 30px; }

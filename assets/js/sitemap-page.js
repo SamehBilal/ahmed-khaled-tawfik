@@ -183,7 +183,7 @@ window.PAGE = {
 			['audio.html', []],
 			['legacy.html', ['talks.html', 'awards.html', 'handwriting.html', 'map.html']],
 			['tributes.html', []],
-			['blog.html', ['papers.html', 'numbers.html'], [[((d.blog || {}).posts || []).length || (d.stats || {}).posts, L('مقال', 'articles')]]],
+			['blog.html', ['blog.html#papers', 'numbers.html'], [[((d.blog || {}).posts || []).length || (d.stats || {}).posts, L('مقال', 'articles')]]],
 			['quiz.html', ['lists.html']],
 			['about.html', UI.legal.map(function (n) { return n.href; }).filter(function (h) { return h !== 'about.html'; })]
 		];

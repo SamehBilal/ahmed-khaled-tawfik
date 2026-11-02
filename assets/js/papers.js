@@ -1,16 +1,12 @@
-/* papers.html — «في الصحف»: where his columns ran, from the blog archive (data-blog.js), which keeps for most articles the
-   paper and the date it first ran («الدستور - 28 مايو 2009»). Each outlet as a card (the legend and the filter at once), his
-   articles by year as stacked columns, one colour an outlet, and the articles themselves, by year, under it. */
-window.PAGE = {
-	id: 'papers',
+/* «في الصحف» — a section of the blog page (blog.html#papers; papers.html, once a page of its own, leads there): where his
+   columns ran, from the blog archive (data-blog.js), which keeps for most articles the paper and the date it first ran
+   («الدستور - 28 مايو 2009»). Each outlet as a card (the legend and the filter at once), his articles by year as stacked
+   columns, one colour an outlet, and the articles themselves, by year, under it. blog.js draws it (html) and wires it (wire). */
+window.PapersSection = {
 	title: { ar: 'في الصحف', en: 'In the papers' },
-	strings: {
-		eyebrow: { ar: 'الكاتب الصحفي', en: 'The columnist' },
-		title: { ar: 'في الصحف', en: 'In the papers' },
-		lead: {
-			ar: 'أين نُشرت مقالاته وقصصه، وفي أي الأعوام: كل جريدة وموقع ومجلة كتب فيها، بعدد مقالاته فيها، كما يحفظها أرشيف المدونة.',
-			en: 'Where his columns and stories ran, and when: every paper, site and magazine he wrote for, with how many of his pieces each carried, as the blog archive keeps them.'
-		}
+	lead: {
+		ar: 'أين نُشرت مقالاته وقصصه، وفي أي الأعوام: كل جريدة وموقع ومجلة كتب فيها، بعدد مقالاته فيها، كما يحفظها أرشيف المدونة.',
+		en: 'Where his columns and stories ran, and when: every paper, site and magazine he wrote for, with how many of his pieces each carried, as the blog archive keeps them.'
 	},
 	/* the outlets as the archive spells them, and one name for each */
 	SAME: { 'اﻻتحاد': 'الاتحاد', 'بص وطل': 'بص و طل', 'مؤسسة هنداوي': 'مؤسسة هنداوي للتعليم والثقافة', 'الشباب': 'مجلة الشباب' },
@@ -26,6 +22,9 @@ window.PAGE = {
 		'اليوم': { en: 'Al-Youm' },
 		'بوابة الشباب': { en: 'Bawabet al-Shabab', kind: { ar: 'موقع', en: 'Website' } },
 		'مجلة نور': { en: 'Nour magazine', kind: { ar: 'مجلة', en: 'Magazine' } },
+		'زائد 18': { en: 'Zayed 18', kind: { ar: 'موقع', en: 'Website' } },
+		/* the General Book Organisation's literary quarterly (issue 76, summer–autumn 2009) */
+		'مجلة فصول': { en: 'Fusul magazine', kind: { ar: 'مجلة', en: 'Magazine' } },
 		'المصري اليوم': { en: 'Al-Masry Al-Youm', kind: { ar: 'جريدة', en: 'Newspaper' } },
 		/* the Tagammu' party's paper, where he first wrote on politics and public affairs (e3lam.com/704514) */
 		'التجمع': { en: 'Al-Tagammu', kind: { ar: 'جريدة', en: 'Newspaper' },
@@ -47,7 +46,8 @@ window.PAGE = {
 		}).filter(Boolean);
 	},
 
-	render: function () {
+	/* the section's markup; wire() fills its chart and list */
+	html: function () {
 		var App = window.App, e = App.esc, L = App.L, self = this;
 		var all = this.articles(), by = {};
 		all.forEach(function (a) { (by[a.outlet] = by[a.outlet] || []).push(a); });
@@ -68,8 +68,8 @@ window.PAGE = {
 				'<span class="pp-n">' + (list.length === 1 ? '<small>' + e(L('مقال واحد', '1 piece')) + '</small>' : e(App.num(list.length)) + ' <small>' + e(L(list.length === 2 ? 'مقالان' : list.length > 10 ? 'مقالًا' : 'مقالات', 'pieces')) + '</small>') + '</span>' +
 				'<span class="pp-meta">' + (info.kind ? e(App.t(info.kind)) + ' · ' : '') + e(span) + '</span></button>';
 		};
-		document.getElementById('content').innerHTML =
-			'<section class="section pp"><div class="wrap">' +
+		return '<section class="section pp" id="papers"><div class="wrap">' +
+				'<h2 class="pp-title">' + e(App.t(this.title)) + '</h2><p class="pp-lead">' + e(App.t(this.lead)) + '</p>' +
 				'<div class="pp-sum"><b>' + e(App.num(all.length)) + '</b> ' + e(L('مقالًا وقصة في ', 'pieces in ')) + '<b>' + e(App.num(outlets.length)) + '</b> ' +
 					e(L('جريدة وموقعًا ومجلة، بين ', 'papers, sites and magazines, from ')) + e(App.num(y0)) + e(L(' و', ' to ')) + e(App.num(y1)) + '.</div>' +
 				'<div class="pp-cards"><button type="button" class="pp-card pp-all" data-o="all" aria-pressed="true"><b>' + e(L('كل الصحف', 'Every outlet')) + '</b>' +
@@ -77,7 +77,10 @@ window.PAGE = {
 				'<figure class="pp-chart"><figcaption>' + e(L('مقالاته في كل عام', 'His pieces, year by year')) + '</figcaption><div class="pp-plot"></div><div class="pp-tip" role="status" hidden></div></figure>' +
 				'<div class="pp-list"></div>' +
 			'</div></section>';
-		var root = document.querySelector('.pp');
+	},
+	wire: function () {
+		var self = this, root = document.querySelector('.pp');
+		if (!root) return;
 		root.querySelector('.pp-cards').onclick = function (ev) {
 			var b = ev.target.closest('.pp-card');
 			if (!b) return;
