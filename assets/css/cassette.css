@@ -131,7 +131,11 @@ html[lang="en"] .cs-meta { direction: ltr; }
 .ep-list button[data-eps]::after { content: ' ▾'; }
 .ep-list button[data-eps][aria-expanded="true"]::after { content: ' ▴'; }
 .ep-sub { flex-basis: 100%; list-style: none; margin: 4px 0 0; padding: 8px 0 0; border-top: 1px dashed var(--line);
-	display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 8px; }
+	display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 8px; }
+/* (an episode's title keeps room to read across: the button goes under it before the title is squeezed into a column) */
+.ep-list .ep-sub li { flex-wrap: wrap; }
+.ep-list .ep-sub .tt { min-width: 9em; }
+.ep-list .ep-sub button { white-space: nowrap; margin-inline-start: auto; }
 .ep-sub[hidden] { display: none; }
 .ep-list .ep-sub li { padding: 6px 10px; background: var(--ink-3, #1d1915); }
 .ep-list .ep-sub .no { min-width: 22px; font-size: 14px; }
