@@ -256,20 +256,15 @@
 
 		/* map: a navigator's chart — the lines of latitude and longitude, dashed routes from Tanta to places his books name, a compass */
 		map: function (d, A) {
-			/* [longitude, latitude]: Tanta, then Romania, the Amazon, Tibet, London, America, Australia, Cameroon, Tunisia, Moscow */
-			var home = [31.0, 30.8], spots = [[24.97, 45.9], [-62.2, -3.4], [88, 31.7], [-0.13, 51.5], [-98.6, 39.8], [133.8, -25.3], [12.4, 5.7], [9.5, 34], [37.6, 55.75]];
 			var X = function (lon) { return (lon + 180) / 360 * 1000; }, Y = function (lat) { return (75 - lat) / 135 * 340; };
-			var hx = X(home[0]), hy = Y(home[1]), grid = '';
+			var hx = X(31.0), hy = Y(30.8), grid = ''; /* (Tanta) */
 			for (var lon = -150; lon <= 180; lon += 30) grid += 'M' + X(lon) + ',0V340';
 			for (var lat = -45; lat <= 75; lat += 30) grid += 'M0,' + Y(lat).toFixed(1) + 'H1000';
-			var routes = spots.map(function (s, i) {
-				var x = X(s[0]), y = Y(s[1]), mx = (hx + x) / 2, my = Math.max(24, Math.min(hy, y) - 18 - Math.abs(x - hx) * 0.07);
-				return '<path class="ph-route" d="M' + hx.toFixed(1) + ',' + hy.toFixed(1) + 'Q' + mx.toFixed(1) + ',' + my.toFixed(1) + ' ' + x.toFixed(1) + ',' + y.toFixed(1) + '" style="--d:' + (i * 0.6).toFixed(1) + 's"/>' +
-					'<circle class="ph-spot-pin" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="5" style="--d:' + (i * 0.6 + 1.6).toFixed(1) + 's"/>';
-			}).join('');
-			return '<svg class="ph-chart" viewBox="0 0 1000 340" preserveAspectRatio="xMidYMin slice"><path class="ph-chart-grid" d="' + grid + '"/>' + routes +
+			setTimeout(function () { mapPins(A, X, Y, hx, hy); }, 0);
+			return '<svg class="ph-chart" viewBox="0 0 1000 340" preserveAspectRatio="xMidYMin slice"><path class="ph-chart-grid" d="' + grid + '"/><g class="ph-routes"></g>' +
 				'<circle class="ph-home" cx="' + hx.toFixed(1) + '" cy="' + hy.toFixed(1) + '" r="7"/></svg>' +
-				'<svg class="ph-rose" viewBox="-50 -50 100 100"><circle r="44"/><circle r="30"/><path d="M0 -46L6 0 0 46-6 0Z"/><path class="n" d="M0 -46L6 0H-6Z"/><path d="M-46 0L0 5 46 0 0-5Z" opacity=".55"/></svg>';
+				'<svg class="ph-rose" viewBox="-50 -50 100 100"><circle r="44"/><circle r="30"/><path d="M0 -46L6 0 0 46-6 0Z"/><path class="n" d="M0 -46L6 0H-6Z"/><path d="M-46 0L0 5 46 0 0-5Z" opacity=".55"/></svg>' +
+				'<div class="ph-pois"></div>';
 		},
 
 		/* publishers: a dark bookshelf that a flashlight finds in colour (page-hero.css .ph-shelf) */
@@ -514,6 +509,74 @@
 		});
 		el.querySelector('.tb-reset').addEventListener('click', function () { done = 0; set(0, false); knob.focus(); });
 		set(0, false);
+	}
+
+	/* the map band's pins, with Codrops' «Curved» tooltip (Tooltip Styles Inspiration, Mary Lou): the ten places the most books name
+	   (assets/data/places.json, the map's own), a route to each from Tanta; each a pulsing ring that, under the pointer or the
+	   keyboard, swings out a rounded bubble on its curved tail — the place, how many books name it, the first of them with the
+	   sentence that does — to the east of a pin on the map's west half, to the west on its east half. Each leads to that book */
+	function mapPins(A, X, Y, hx, hy) {
+		var stage = document.querySelector('.ph[data-ph="map"] .ph-stage'), pois = stage && stage.querySelector('.ph-pois');
+		if (!pois || pois.getAttribute('data-on')) return;
+		pois.setAttribute('data-on', '1');
+		var e = A.esc, L = A.L, svg = stage.querySelector('.ph-chart'), routes = stage.querySelector('.ph-routes');
+		fetch('assets/data/places.json').then(function (r) { return r.json(); }).then(function (all) {
+			if (!document.body.contains(pois)) return;
+			var top = all.filter(function (p) { return (p.items || []).length && Math.abs(p.lon - 31) + Math.abs(p.lat - 30.8) > 4; })
+				.sort(function (a, b) { return b.items.length - a.items.length; }).slice(0, 10);
+			routes.innerHTML = top.map(function (p, i) {
+				var x = X(p.lon), y = Y(p.lat), mx = (hx + x) / 2, my = Math.max(24, Math.min(hy, y) - 18 - Math.abs(x - hx) * 0.07);
+				return '<path class="ph-route" d="M' + hx.toFixed(1) + ',' + hy.toFixed(1) + 'Q' + mx.toFixed(1) + ',' + my.toFixed(1) + ' ' + x.toFixed(1) + ',' + y.toFixed(1) + '" style="--d:' + (i * 0.6).toFixed(1) + 's"/>';
+			}).join('');
+			var n = function (k) { return L(k === 1 ? 'كتاب واحد' : k === 2 ? 'كتابان' : A.num(k) + (k <= 10 ? ' كتب' : ' كتابًا'), A.num(k) + (k === 1 ? ' book' : ' books')); };
+			pois.innerHTML = top.map(function (p) {
+				var b = p.items[0], east = X(p.lon) > 500, s = String(b.s || '').replace(/\s+/g, ' ').trim();
+				if (s.length > 110) s = s.slice(0, 108).replace(/\s+\S*$/, '') + '…';
+				return '<a class="ph-tt ' + (east ? 'ph-tt-east' : 'ph-tt-west') + '" href="' + e(b.h) + '" data-x="' + X(p.lon).toFixed(1) + '" data-y="' + Y(p.lat).toFixed(1) + '">' +
+					'<span class="ph-tt-item" aria-hidden="true"></span>' +
+					'<span class="ph-tt-content"><b>' + e(L(p.ar, p.en)) + '</b><small>' + e(L('يسمّيه ' + n(p.items.length), 'Named in ' + n(p.items.length))) + '</small>' +
+						'<i>«' + e(b.t) + '»' + (b.k ? ' — ' + e(b.k) : '') + '</i>' + (s ? '<q>' + e(s) + '</q>' : '') + '</span></a>';
+			}).join('');
+			var ph = stage.closest('.ph');
+			if (ph) ph.removeAttribute('aria-hidden'); /* (this band is a control, not a decoration) */
+			/* each pin where its place falls on the chart, which is cut to the band's shape (slice): from the chart's own scale */
+			var place = function () {
+				var m = svg.getScreenCTM(), r = stage.getBoundingClientRect(), h = r.height;
+				if (!m) return;
+				[].forEach.call(pois.children, function (a) {
+					var x = m.a * +a.getAttribute('data-x') + m.e - r.left, y = m.d * +a.getAttribute('data-y') + m.f - r.top;
+					a.style.left = x.toFixed(1) + 'px'; a.style.top = y.toFixed(1) + 'px';
+					a.hidden = y < 0 || y > h || x < 0 || x > r.width;
+					/* which way it opens: to the side of the pin with more room on the band (on a phone it shows only the chart's
+					   middle), and no wider than that room, past the 4em of its tail */
+					var east = x > r.width - x, c = a.querySelector('.ph-tt-content'), fs = parseFloat(getComputedStyle(c).fontSize);
+					a.classList.toggle('ph-tt-east', east); a.classList.toggle('ph-tt-west', !east);
+					c.style.width = '';
+					var room = (east ? x : r.width - x) - 4 * fs - 8;
+					if (c.offsetWidth > room) c.style.width = Math.max(120, room).toFixed(0) + 'px';
+					/* the bubble kept inside the band: moved up or down, its tail still at the pin (its middle is 1em below the pin, as
+					   Codrops set it) */
+					var ch = c.offsetHeight, dy = 0, cy = y + fs;
+					if (cy - ch / 2 < 8) dy = 8 - (cy - ch / 2); else if (cy + ch / 2 > h - 8) dy = h - 8 - (cy + ch / 2);
+					c.style.setProperty('--dy', dy.toFixed(1) + 'px');
+				});
+			};
+			place();
+			window.addEventListener('resize', place);
+			/* on touch, where there is no hover: the first tap opens the bubble, the second goes to the book */
+			var touch = false;
+			pois.addEventListener('pointerdown', function (ev) { touch = ev.pointerType !== 'mouse'; });
+			pois.addEventListener('click', function (ev) {
+				var t = ev.target.closest('.ph-tt');
+				if (!t || !touch || t.classList.contains('is-open')) return;
+				ev.preventDefault();
+				[].forEach.call(pois.querySelectorAll('.is-open'), function (o) { o.classList.remove('is-open'); });
+				t.classList.add('is-open');
+			});
+			document.addEventListener('pointerdown', function (ev) {
+				if (!ev.target.closest || !ev.target.closest('.ph-tt')) [].forEach.call(pois.querySelectorAll('.is-open'), function (o) { o.classList.remove('is-open'); });
+			});
+		}).catch(function () {});
 	}
 
 	function render() {
