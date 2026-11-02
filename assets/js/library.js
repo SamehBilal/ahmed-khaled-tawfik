@@ -18,38 +18,41 @@ window.PAGE = {
 	/* the drawn small covers' colours, by kind */
 	COLOR: { book: '#6b1d10', writer: '#7a4e1d', film: '#3b3357', music: '#1f4a44', other: '#2f4a3a' },
 
-	/* the band: a shelf of spines, each a book he loved, its title along it; beside it a box of the songs and films, and on its
-	   other side one of the writers, magazines and the rest, each a small cover (filled in when the art has come) leading to
+	/* the band: a shelf of spines, each a book he loved, its title along it; at one end of it a crate of the songs and films,
+	   at the other one of the writers, magazines and the rest — the crates of «قوائمي» (page-hero.css .ph-crate), a brass
+	   plate with the name and how many, the covers (filled in when the art has come) leaning out of the top, each leading to
 	   what he said of it */
 	band: function (d, A) {
-		var e = A.esc, t = A.t, L = A.L, self = window.PAGE, all = d.library || [], list = all.filter(function (x) { return x.kind === 'book'; }).slice(0, 18);
+		var e = A.esc, t = A.t, L = A.L, self = window.PAGE, all = d.library || [], list = all.filter(function (x) { return x.kind === 'book'; }).slice(0, 14);
 		var cols = ['#6b1d10', '#2f4a3a', '#3b3357', '#7a4e1d', '#1f3b52', '#5a2a3a', '#4a4a2a'];
-		var box = function (name, kinds) {
-			var items = all.filter(function (x) { return kinds.indexOf(x.kind) >= 0; });
-			return '<div class="lb-bx" data-kinds="' + kinds.join(' ') + '"><p class="lb-bx-h">' + e(name) + ' <b>' + e(A.num(items.length)) + '</b></p><div class="lb-bx-covers"></div></div>';
+		var crate = function (name, kinds, icon) {
+			var n = all.filter(function (x) { return kinds.indexOf(x.kind) >= 0; }).length;
+			return '<div class="ph-crate on lb-crate" data-kinds="' + kinds.join(' ') + '"><div class="ph-crate-in"></div>' +
+				'<div class="ph-crate-box"><span class="ph-plate"><svg viewBox="0 0 24 24"><path d="' + icon + '"/></svg><b>' + e(name) + '</b><em>' + e(A.num(n)) + '</em></span></div></div>';
 		};
 		setTimeout(function () { self.bandArt(d, A); }, 0);
-		return '<div class="lb-band">' + box(L('أغانٍ وأفلام', 'Songs and films'), ['music', 'film']) +
-			'<div class="lb-mid"><div class="lb-shelf">' + list.map(function (x, i) {
+		return '<div class="lb-shelf">' + crate(L('أغانٍ وأفلام', 'Songs and films'), ['music', 'film'], 'M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z') +
+			list.map(function (x, i) {
 				return '<span style="--c:' + cols[i % cols.length] + ';--h:' + (70 + (i * 37) % 26) + '%;--w:' + (34 + (i * 13) % 18) + 'px"><b>' + e(t(x.title)) + '</b></span>';
-			}).join('') + '</div><i class="lb-plank"></i></div>' +
-			box(L('كتّاب ومجلات', 'Writers and magazines'), ['writer', 'other']) + '</div>';
+			}).join('') +
+			crate(L('كتّاب ومجلات', 'Writers and magazines'), ['writer', 'other'], 'M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z') + '</div><i class="lb-plank"></i>';
 	},
-	/* the boxes' small covers: three of each kind, those with art first */
+	/* the crates' covers: two of each kind, those with art first, leaning as in «قوائمي» */
 	bandArt: function (d, A) {
 		var self = this, e = A.esc, t = A.t, all = d.library || [];
 		var fill = function (art) {
-			document.querySelectorAll('.lb-bx').forEach(function (bx) {
+			document.querySelectorAll('.lb-crate').forEach(function (bx) {
 				var kinds = bx.getAttribute('data-kinds').split(' ');
 				var items = [].concat.apply([], kinds.map(function (k) {
 					return all.filter(function (x) { return x.kind === k; })
-						.sort(function (a, b) { return (art[b.title.en] ? 1 : 0) - (art[a.title.en] ? 1 : 0); }).slice(0, 3);
+						.sort(function (a, b) { return (art[b.title.en] ? 1 : 0) - (art[a.title.en] ? 1 : 0); }).slice(0, 2);
 				}));
-				bx.querySelector('.lb-bx-covers').innerHTML = items.map(function (x) {
+				bx.querySelector('.ph-crate-in').innerHTML = items.map(function (x, j) {
 					var pic = art[x.title.en], href = x.post ? 'blog.html?post=' + encodeURIComponent(x.post) : x.source;
-					return '<a href="' + e(href) + '" title="' + e(t(x.title)) + '"' + (x.post ? '' : ' target="_blank" rel="noopener"') + '>' +
-						window.WorksShared.miniCover({ img: pic && pic.src, color: self.COLOR[x.kind], title: t(x.title), by: ' ' }) + '</a>';
-				}).join('');
+					var st = '--j:' + j + ';--r:' + [-6, 3, -2, 5][j] + 'deg';
+					return '<a class="ph-cv' + (pic ? '' : ' ph-cv-drawn') + '" href="' + e(href) + '" title="' + e(t(x.title)) + '" style="' + st + (pic ? '' : ';background:' + self.COLOR[x.kind]) + '"' +
+						(x.post ? '' : ' target="_blank" rel="noopener"') + '>' + (pic ? '<img src="' + e(pic.src) + '" alt="">' : '<b>' + e(t(x.title)) + '</b>') + '</a>';
+				}).reverse().join('');
 			});
 			var ph = document.querySelector('.ph[data-ph="library"]');
 			if (ph) ph.removeAttribute('aria-hidden'); /* (its covers are links) */
