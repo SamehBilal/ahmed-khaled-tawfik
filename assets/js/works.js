@@ -25,7 +25,7 @@ window.PAGE = {
 	render: function () {
 		var App = window.App, d = App.data(), e = App.esc, t = App.t, tx = App.tx;
 		var S = window.WorksShared, self = this;
-		/* «في مثل هذا اليوم», moved here from the home page (otd.js) */
+		/* «في مثل هذا اليوم», moved here from the home page (otd.js); after «الكتب المستقلة» */
 		if (window.OnThisDay) window.OnThisDay.mount(document.getElementById('otd'));
 
 		this.renderMosaic();
