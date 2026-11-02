@@ -62,8 +62,14 @@ window.PAGE = {
 			if (!a) return;
 			ev.preventDefault();
 			if (!card) { var all = document.querySelector('.cx-bar [data-k="all"]'); if (all) all.click(); card = document.getElementById(id); }
-			if (card) { card.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' }); history.replaceState(null, '', '#' + id); }
+			if (card) { window.PAGE.show(card); history.replaceState(null, '', '#' + id); }
 		});
+	},
+	/* go to a card and light it for a moment with the site's own glow, as a link to it from another page does (app.js
+	   focusHash, extras.css .is-target) */
+	show: function (card) {
+		card.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+		card.classList.remove('is-target'); void card.offsetWidth; card.classList.add('is-target');
 	},
 
 	render: function () {
