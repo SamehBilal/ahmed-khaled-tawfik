@@ -58,21 +58,44 @@ window.PAGE = {
 			this.art = {};
 			fetch('assets/data/library-covers.json').then(function (r) { return r.json(); }).then(function (j) { self.art = j; self.list(); }).catch(function () {});
 		}
-		document.querySelector('.lb-list').innerHTML = this.KINDS.filter(function (k) { return self.kind === 'all' || self.kind === k[0]; }).map(function (k) {
-			var items = all.filter(function (x) { return x.kind === k[0]; });
-			if (!items.length) return '';
-			return '<h2 class="lb-h">' + e(t(k[1])) + '</h2><div class="lb-grid">' + items.map(function (x) {
-				var href = x.post ? 'blog.html?post=' + encodeURIComponent(x.post) : x.source;
-				var pic = art[x.title.en], from = x.from && window.WorksShared ? window.WorksShared.bookHref(x.from) : '';
-				/* under the title a small cover, as the site's small books (its art, else drawn with its title), with who and when beside it */
-				var mini = window.WorksShared ? window.WorksShared.miniCover({ img: pic && pic.src, color: self.COLOR[x.kind], title: t(x.title), by: x.by ? t(x.by) : ' ' }) : '';
-				return '<article class="lb-item lb-' + e(x.kind) + '"><h3>' + e(t(x.title)) + '</h3>' +
-					'<div class="lb-meta">' + mini + '<div>' +
-					(x.by || x.year ? '<p class="lb-by">' + (x.by ? e(t(x.by)) : '') + (x.by && x.year ? ' · ' : '') + (x.year ? e(App.num(x.year)) : '') + '</p>' : '') +
-					(from ? '<p class="lb-from"><a href="' + e(from) + '">' + e(L('من «نشوات قديمة»', 'From Old Delights')) + '</a></p>' : '') + '</div></div>' +
-					'<p class="lb-said">' + e(t(x.said)) + '</p>' +
-					'<a class="lb-src" href="' + e(href) + '"' + (x.post ? '' : ' target="_blank" rel="noopener"') + '>' + e(x.post ? L('في مقاله ←', 'In his article →') : L('المصدر ↗', 'Source ↗')) + '</a></article>';
-			}).join('') + '</div>';
+		var href = function (x) { return x.post ? 'blog.html?post=' + encodeURIComponent(x.post) : x.source; };
+		var src = function (x) { return '<a class="lb-src" href="' + e(href(x)) + '"' + (x.post ? '' : ' target="_blank" rel="noopener"') + '>' + e(x.post ? L('في مقاله ←', 'In his article →') : L('المصدر ↗', 'Source ↗')) + '</a>'; };
+		/* a small cover, as the site's small books (its art, else drawn with its title) */
+		var mini = function (x) { var pic = art[x.title.en]; return window.WorksShared ? window.WorksShared.miniCover({ img: pic && pic.src, color: self.COLOR[x.kind], title: t(x.title), by: x.by ? t(x.by) : ' ' }) : ''; };
+		var who = function (x) {
+			var from = x.from && window.WorksShared ? window.WorksShared.bookHref(x.from) : '';
+			return (x.by || x.year ? '<p class="lb-by">' + (x.by ? e(t(x.by)) : '') + (x.by && x.year ? ' · ' : '') + (x.year ? e(App.num(x.year)) : '') + '</p>' : '') +
+				(from ? '<p class="lb-from"><a href="' + e(from) + '">' + e(L('من «نشوات قديمة»', 'From Old Delights')) + '</a></p>' : '');
+		};
+		/* a card: the title, the small cover with who and when beside it, what he said */
+		var card = function (x) {
+			return '<article class="lb-item lb-' + e(x.kind) + '"><h3>' + e(t(x.title)) + '</h3>' +
+				'<div class="lb-meta">' + mini(x) + '<div>' + who(x) + '</div></div>' +
+				'<p class="lb-said">' + e(t(x.said)) + '</p>' + src(x) + '</article>';
+		};
+		/* a row of a side box: the small cover, and beside it the title, who and when, and what he said */
+		var row = function (x) {
+			return '<li class="lb-row lb-' + e(x.kind) + '">' + mini(x) + '<div><h4>' + e(t(x.title)) + '</h4>' + who(x) +
+				'<p class="lb-said">' + e(t(x.said)) + '</p>' + src(x) + '</div></li>';
+		};
+		var of = function (kind) { return all.filter(function (x) { return x.kind === kind; }); };
+		var name = function (kind) { return t(this.KINDS.filter(function (k) { return k[0] === kind; })[0][1]); }.bind(this);
+		var box = function (kinds) {
+			return '<aside class="lb-box">' + kinds.filter(function (k) { return of(k).length; }).map(function (k) {
+				return '<h2 class="lb-h">' + e(name(k)) + '</h2><ul class="lb-rows">' + of(k).map(row).join('') + '</ul>';
+			}).join('') + '</aside>';
+		};
+		var el = document.querySelector('.lb-list');
+		/* all of it: the books in the middle, the songs and films in a box on one side, the writers and the rest on the other */
+		el.classList.toggle('is-all', this.kind === 'all');
+		if (this.kind === 'all') {
+			el.innerHTML = '<div class="lb-main"><h2 class="lb-h">' + e(name('book')) + '</h2><div class="lb-grid">' + of('book').map(card).join('') + '</div></div>' +
+				box(['music', 'film']) + box(['writer', 'other']);
+			return;
+		}
+		el.innerHTML = this.KINDS.filter(function (k) { return self.kind === k[0]; }).map(function (k) {
+			var items = of(k[0]);
+			return items.length ? '<h2 class="lb-h">' + e(t(k[1])) + '</h2><div class="lb-grid">' + items.map(card).join('') + '</div>' : '';
 		}).join('');
 	}
 };
