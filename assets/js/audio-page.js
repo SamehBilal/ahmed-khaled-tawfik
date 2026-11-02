@@ -132,7 +132,7 @@ window.PAGE = {
 			rows: erows
 		});
 
-		/* his books and stories on SoundCloud (data-more.js): a book's music, leading to its page; a story's trailer, leading to it in the blog archive */
+		/* music that came with a book of his, on SoundCloud (data-more.js), one row a book, leading to its page (a story's, to it in the blog archive) */
 		var SCI = (A.soundcloud && A.soundcloud.items) || {}, SCP = (A.storiapod && A.storiapod.posts) || {}, scrows = [];
 		Object.keys(SCI).forEach(function (k) {
 			var m = k.match(/^(work|story):(.+)$/), w = m && m[1] === 'work' ? App.findWork(m[2]) : null;
@@ -144,9 +144,9 @@ window.PAGE = {
 				thumb: tracks[start].art || (w ? S.coverOf((d.bookInfo || {})[w.id] || {}) : ''), start: start, count: tracks.length - start, mins: minsFrom(start) });
 		});
 		if (scrows.length) groups.push({
-			title: { ar: 'كتبه وقصصه على SoundCloud', en: 'His books and stories on SoundCloud' },
-			note: { ar: 'موسيقى صدرت مع كتاب له لتُسمع وهو يُقرأ، مثل موسيقى الرعب التي صاحبت «أكواريل» (وتُشغَّل في صفحة الكتاب)، وإعلان «رُواة» لقصته «معرض الموت»؛ الزر يفتحها على SoundCloud.',
-				en: 'Music that came with a book of his, to be heard as it is read, like the horror music that came with Aquarelle (it plays on the book’s page), and Ruwah’s trailer for his story “The Death Exhibition”; the key opens them on SoundCloud.' },
+			title: { ar: 'موسيقى كتبه على SoundCloud', en: 'Music of his books on SoundCloud' },
+			note: { ar: 'موسيقى صدرت مع كتاب له لتُسمع وهو يُقرأ، مثل موسيقى الرعب التي صاحبت «أكواريل»؛ الزر يفتحها على SoundCloud، وتُشغَّل في صفحة الكتاب.',
+				en: 'Music that came with a book of his, to be heard as it is read, like the horror music that came with Aquarelle; the key opens it on SoundCloud, and it plays on the book’s page.' },
 			rows: scrows
 		});
 

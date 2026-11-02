@@ -1278,19 +1278,17 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 })(window.AKT);
 
 /* on SoundCloud (cassette.js soundcloudTracks): «أكواريل»'s horror music, sold with the book to be heard while it is read, as
-   Nada Elhariri put it up (10 August 2016); and from «رُواة» (soundcloud.com/rowaah, the team of his Ida2at stories on
-   StoriaPod) the trailer of their «معرض الموت» (24 May 2020), with Mohamed Khamis. Keys: work:<id> or story:<title>; each
-   entry: [track id (0: not played on the site), page (soundcloud.com/<page>), minutes, by, picture, label?].
-   about: «رُواة»'s «العراب», six short pieces about him written by Ahmed Magdy and read by Mazen Salam, 1–9 April 2019, a
-   year after his death — eps: [page, minutes, title] */
+   Nada Elhariri put it up (10 August 2016). Keys: work:<id> or story:<title>; each entry: [track id (0: not played on the
+   site), page (soundcloud.com/<page>), minutes, by, picture, label?].
+   about: «رُواة»'s «العراب» (soundcloud.com/rowaah, the team of his Ida2at stories on StoriaPod), six short pieces about him
+   written by Ahmed Magdy and read by Mazen Salam, 1–9 April 2019, a year after his death — eps: [page, minutes, title] */
 (function (A) {
 	var Au = A.audio;
 	if (!Au) return;
 	Au.soundcloud = Au.soundcloud || {
 		base: 'https://soundcloud.com/',
 		items: {
-			'work:aquarelle': [[277652422, 'nada-elhariri/l6dcts8sehxv', 53, 'Nada Elhariri', 'assets/img/audio/aquarelle-soundcloud.jpg']],
-			'story:معرض الموت': [[0, 'rowaah/mjgfs2viir0q', 1, 'رُواة', 'assets/img/audio/rowaah-maarad-almawt.jpg', { ar: 'إعلان الفيلم الصوتي من «رُواة»', en: 'Trailer of Ruwah’s audio film' }]]
+			'work:aquarelle': [[277652422, 'nada-elhariri/l6dcts8sehxv', 53, 'Nada Elhariri', 'assets/img/audio/aquarelle-soundcloud.jpg']]
 		},
 		note: { 'work:aquarelle': { ar: 'موسيقى رعب صدرت مع الكتاب، ليُسمع وهو يُقرأ.', en: 'Horror music that came with the book, to be heard as it is read.' } },
 		about: [{
