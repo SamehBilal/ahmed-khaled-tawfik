@@ -12,12 +12,56 @@ window.PAGE = {
 		}
 	},
 
-	/* the band: a page of his memoirs, ruled, with dates in the margin and a lamp's glow */
+	/* the band: after Chris Bolson's circular timeline on CodePen (vEBWwxL) — his life as a great wheel, half of it showing, each
+	   moment a mark on its rim named by its year, its issue («ع ٢٠») or the time of his life; one chosen (a click, or the arrow
+	   keys: they are radio buttons, as in the pen), the wheel turns to bring it to the top, a line drops from it and its title
+	   and its story rise in the middle, with the issue it is told in */
 	band: function (d, A) {
-		var e = A.esc, t = A.t, list = (d.refaatLife || []).slice(0, 9);
-		return '<div class="rl-page">' + list.map(function (x, i) {
-			return '<p style="--d:' + (i * 0.5).toFixed(1) + 's"><b>' + e(t(x.when)) + '</b>' + e(t(x.title)) + '</p>';
-		}).join('') + '</div><i class="rl-lamp"></i>';
+		var e = A.esc, t = A.t, L = A.L, S = window.WorksShared, list = d.refaatLife || [], self = window.PAGE;
+		var issues = S ? S.seriesIssues('mwt') : [], byKey = {};
+		issues.forEach(function (is, i) { byKey[decodeURIComponent(A.issueHref('mwt', Object.assign({ _idx: i }, is)).replace(/^book\.html\?id=/, ''))] = [is, i]; });
+		var mark = function (x) {
+			var w = t(x.when), hit = x.issue && byKey[x.issue];
+			return /^\d/.test(x.when.en || x.when.ar) ? w : hit ? L('ع ' + A.num(hit[0].n), '#' + hit[0].n) : w;
+		};
+		setTimeout(function () { self.wheelWire(); }, 0);
+		return '<div class="rw"><ul class="rw-cards" style="--items:' + list.length + ';--index:0">' + list.map(function (x, i) {
+			var hit = x.issue && byKey[x.issue];
+			return '<li style="--i:' + i + '"><input type="radio" id="rw-' + i + '" name="rw" value="' + i + '"' + (i ? '' : ' checked') + '>' +
+				'<label for="rw-' + i + '" title="' + e(t(x.title)) + '">' + e(mark(x)) + '</label>' +
+				'<div class="rw-info"><p class="rw-when">' + e(t(x.when)) + '</p><h2>' + e(t(x.title)) + '</h2><p>' + e(t(x.text)) + '</p>' +
+					(hit ? '<a href="' + e(A.issueHref('mwt', Object.assign({ _idx: hit[1] }, hit[0]))) + '">' + e(L('العدد ' + A.num(hit[0].n) + ': ' + t(hit[0].title) + ' ←', 'Issue ' + hit[0].n + ': ' + t(hit[0].title) + ' →')) + '</a>' : '') +
+				'</div></li>';
+		}).join('') + '</ul></div>';
+	},
+	/* the wheel turns to the chosen moment (the pen sets this with :has() for each item; here the radio's own value does it) */
+	wheelWire: function () {
+		var ul = document.querySelector('.rw-cards');
+		if (!ul || ul.getAttribute('data-on')) return;
+		ul.setAttribute('data-on', '1');
+		var ph = ul.closest('.ph');
+		if (ph) ph.removeAttribute('aria-hidden'); /* (its marks are controls) */
+		var radios = [].slice.call(ul.querySelectorAll('input[name="rw"]'));
+		/* (chosen here, not left to the browser: its radio, wherever on the turned wheel it sits, is focused without the page
+		   being scrolled to it) */
+		var pick = function (k) {
+			var r = radios[(k + radios.length) % radios.length];
+			r.checked = true; r.focus({ preventScroll: true });
+			ul.style.setProperty('--index', r.value);
+		};
+		ul.addEventListener('click', function (ev) {
+			var lb = ev.target.closest('label[for^="rw-"]');
+			if (!lb) return;
+			ev.preventDefault();
+			pick(+lb.getAttribute('for').slice(3));
+		});
+		ul.addEventListener('keydown', function (ev) {
+			var k = radios.indexOf(document.activeElement), step = { ArrowLeft: 1, ArrowDown: 1, ArrowRight: -1, ArrowUp: -1 }[ev.key];
+			if (k < 0 || !step) return;
+			ev.preventDefault();
+			/* (left is the next moment in Arabic, as the wheel runs; right in English) */
+			pick(k + (getComputedStyle(ul).direction === 'rtl' ? step : -step));
+		});
 	},
 
 	render: function () {

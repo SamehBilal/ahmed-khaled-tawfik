@@ -1,12 +1,46 @@
 /* «يوميات رفعت إسماعيل» (refaat-life.html, refaat-life.js) */
-.ph[data-ph="refaat-life"] { background: radial-gradient(50% 120% at 70% 30%, #3a2a16 0%, #0d0a07 72%); }
-.rl-page { position: absolute; left: 50%; top: 10%; bottom: 8%; width: min(560px, 86%); transform: translateX(-50%) rotate(-2deg); padding: 18px 26px;
-	background: repeating-linear-gradient(transparent 0 27px, rgba(80, 60, 30, .25) 27px 28px), #e9dcc0; border-radius: 3px; box-shadow: 0 20px 40px rgba(0, 0, 0, .6); overflow: hidden; }
-.rl-page p { margin: 0; line-height: 28px; font-family: var(--f-display); font-size: 16px; color: #3a2a18; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; animation: rl-ink 1s var(--d) forwards; }
-.rl-page b { display: inline-block; min-width: 110px; color: #8a2a12; font-weight: 400; }
-@keyframes rl-ink { to { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .rl-page p { animation: none; opacity: 1; } }
-.rl-lamp { position: absolute; right: 6%; top: -10%; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 200, 120, .35), transparent 65%); pointer-events: none; }
+/* the band: after Chris Bolson's circular timeline (refaat-life.js band, wheelWire) — a wheel whose top half shows, the band being
+   the page itself (no ground or line of its own) */
+.ph[data-ph="refaat-life"], html[data-theme="light"] .ph[data-ph="refaat-life"] { height: 470px; overflow: clip; background: none; border-bottom: 0; }
+/* (clip, not hidden: a mark chosen focuses its radio, and a box that hides its overflow can still be scrolled to it) */
+.ph[data-ph="refaat-life"]::after { content: none; }
+html[dir="rtl"] .rw { --dir: -1; } /* (in Arabic the next moment comes to the left) */
+.rw { --r: min(44vw, 560px); --duration: 200ms; --mark: var(--muted); --mark-on: var(--ember); --line-h: 0;
+	position: absolute; left: 50%; top: 64px; width: calc(var(--r) * 2); height: calc(var(--r) * 2); translate: -50% 0; }
+.rw-cards { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; border-radius: 50%; border: 1px solid var(--line);
+	transform: rotate(calc(var(--index) * -360deg * var(--dir, 1) / var(--items))); transition: transform .5s cubic-bezier(.4, 0, .2, 1) var(--duration); }
+.rw-cards li { position: absolute; inset: 0; transform: rotate(calc(var(--i) * 360deg * var(--dir, 1) / var(--items))); pointer-events: none; }
+.rw-cards input { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; opacity: 0; }
+/* a mark on the rim: its name over a dot, a line dropping from the chosen one */
+.rw-cards label { position: absolute; left: 50%; top: 0; width: 64px; translate: -50% calc(-100% - 6px); padding-bottom: 4px; text-align: center; cursor: pointer;
+	pointer-events: auto; white-space: nowrap; font-family: var(--f-display); font-size: 14px; color: var(--mark); transition: color var(--duration); }
+.rw-cards label::before { content: ''; position: absolute; left: 50%; top: calc(100% + 6px); width: 10px; height: 10px; translate: -50% -50%; border-radius: 50%;
+	background: var(--mark); transition: background-color var(--duration), scale var(--duration); }
+.rw-cards label::after { content: ''; position: absolute; left: 50%; top: calc(100% + 14px); width: 2px; height: var(--line-h); translate: -50% 0; background: var(--mark-on);
+	transition: height .3s ease-in-out var(--line-delay, 0ms); }
+.rw-cards label:hover { --mark: var(--paper); }
+.rw-cards input:focus-visible + label { outline: 2px solid var(--ember); outline-offset: 2px; border-radius: 4px; }
+/* the chosen moment's title and story, in the middle of the wheel's top */
+.rw-info { position: absolute; left: 50%; top: 4.6rem; width: min(78%, 560px); translate: -50% 30px; text-align: center; opacity: 0; pointer-events: none;
+	transition: opacity var(--duration) ease-in-out, translate var(--duration) ease-in-out; }
+.rw-when { margin: 0; color: var(--ember); font-family: var(--f-display); font-size: 15px; }
+.rw-info h2 { margin: 4px 0 10px; font-family: var(--f-display); font-weight: 400; font-size: clamp(24px, 3vw, 36px); color: var(--paper); }
+.rw-info p:not(.rw-when) { margin: 0 0 10px; color: var(--paper-dim); line-height: 1.85; font-size: 15.5px; text-wrap: pretty; }
+.rw-info a { color: var(--ember); font-size: 14px; }
+.rw-cards li:has(input:checked) { --mark: var(--mark-on); --line-h: 3rem; --line-delay: calc(var(--duration) * 2); }
+.rw-cards li:has(input:checked) label::before { scale: 1.5; }
+.rw-cards li:has(input:checked) .rw-info { opacity: 1; translate: -50% 0; pointer-events: auto; transition-delay: calc(var(--duration) * 3); }
+/* on a phone: a smaller wheel, the marks only dots but for the chosen one's name */
+@media (max-width: 640px) {
+	.ph[data-ph="refaat-life"] { height: 430px; }
+	.rw { --r: 82vw; top: 54px; }
+	.rw-cards label { font-size: 0; width: 22px; }
+	.rw-cards li:has(input:checked) label { font-size: 13px; width: auto; }
+	.rw-cards label::before { width: 7px; height: 7px; }
+	.rw-info { top: 3.4rem; width: 92vw; }
+	.rw-info p:not(.rw-when) { font-size: 14px; line-height: 1.7; }
+}
+@media (prefers-reduced-motion: reduce) { .rw-cards, .rw-cards label::after, .rw-info { transition: none; } }
 .rl-intro { display: flex; gap: 22px; align-items: center; max-width: 900px; margin-bottom: 30px; }
 .rl-intro img { width: 130px; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, .5)); }
 .rl-intro p { margin: 0 0 8px; color: var(--paper-dim); line-height: 1.9; }
