@@ -5,8 +5,8 @@ window.PAGE = {
 		eyebrow: { ar: 'بكلماته', en: 'In his words' },
 		title: { ar: 'اقتباسات', en: 'Quotes' },
 		lead: {
-			ar: 'تنتشر على الإنترنت اقتباسات كثيرة منسوبة إليه خطأً. هنا فقط ما وجدنا له مصدرًا موثوقًا — مع رابط المصدر تحت كل اقتباس.',
-			en: 'Many quotes are falsely attributed to him online. This page holds only those we could trace to a reliable source — with the link under each one.'
+			ar: 'تنتشر على الإنترنت اقتباسات كثيرة منسوبة إليه خطأً. هنا فقط ما وجدنا له مصدرًا موثوقًا — مع رابط المصدر تحت كل اقتباس. وتحتها «قاموس العرّاب»: العبارات القصيرة التي عُرف بها هو وأبطاله.',
+			en: 'Many quotes are falsely attributed to him online. This page holds only those we could trace to a reliable source — with the link under each one. Under them, the phrasebook: the short lines he and his heroes are known by.'
 		}
 	},
 	filter: 'all',
@@ -56,7 +56,10 @@ window.PAGE = {
 						'</figcaption>' +
 					'</figure>';
 				}).join('') + '</div>' +
-			'</div></section>';
+			'</div></section>' +
+			/* and under the quotes, the shorter lines: «قاموس العرّاب» (glossary.js), once a page of its own */
+			(window.GlossarySection ? window.GlossarySection.html() : '');
+		if (window.GlossarySection) window.GlossarySection.wire();
 
 		var grid = document.getElementById('q-grid'), filters = document.getElementById('q-filters');
 		function apply() {
@@ -83,7 +86,20 @@ window.PAGE = {
 		};
 		apply();
 		this.featured();
-		App.focusHash(function (el) { if (el.hidden) { self.filter = 'all'; apply(); } });
+		this.onHash();
+	},
+
+	/* quotes.html#glossary (as glossary.html now leads): to the phrasebook's heading — it is too tall to centre — and again as the
+	   quotes above it settle, as long as the reader has not scrolled away; any other hash, the quote it names */
+	onHash: function () {
+		var self = this;
+		if (location.hash === '#glossary') return [60, 400, 1000].forEach(function (ms) {
+			setTimeout(function () {
+				var to = document.getElementById('glossary');
+				if (to && location.hash === '#glossary' && Math.abs(to.getBoundingClientRect().top - 80) > 40) to.scrollIntoView({ block: 'start', behavior: 'instant' });
+			}, ms);
+		});
+		window.App.focusHash(function (el) { if (el.hidden) { self.filter = 'all'; self.apply(); } });
 	},
 
 	/* one quote in a speech bubble under the page title; "another" picks a new one */
@@ -109,11 +125,6 @@ window.PAGE = {
 				self._qb = n; self.featured(); box.classList.remove('swap');
 			}, 300);
 		};
-	},
-
-	onHash: function () {
-		var self = this;
-		window.App.focusHash(function (el) { if (el.hidden) { self.filter = 'all'; self.apply(); } });
 	},
 
 	copy: function (text, btn) {

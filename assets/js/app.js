@@ -22,7 +22,6 @@
 			/* in the phone menu only (on a wider screen the «My lists» button is always at hand) */
 			{ id: 'lists', href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey', phone: true },
 			/* and the pages made from the data, which on a wider screen the footer lists */
-			{ id: 'papers', href: 'blog.html#papers', ar: 'في الصحف', en: 'In the papers', phone: true },
 			{ id: 'numbers', href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style', phone: true },
 			{ id: 'quiz', href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner', phone: true },
 			{ id: 'map', href: 'map.html', ar: 'الخريطة', en: 'The map', phone: true },
@@ -34,7 +33,6 @@
 			{ id: 'translations', href: 'translations.html', ar: 'ترجماته', en: 'His translations', phone: true },
 			{ id: 'library', href: 'library.html', ar: 'مكتبته', en: 'His library', phone: true },
 			/* «عالم العرّاب» (the footer's block of its own) */
-			{ id: 'glossary', href: 'glossary.html', ar: 'قاموس العرّاب', en: 'The phrasebook', phone: true },
 			{ id: 'creatures', href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends', phone: true },
 			{ id: 'refaat-life', href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life', phone: true },
 			{ id: 'network', href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web', phone: true },
@@ -48,8 +46,7 @@
 			{ href: 'publishers.html', ar: 'دور النشر', en: 'Publishers', main: true },
 			/* and beside it, the books and films he loved */
 			{ href: 'library.html', ar: 'مكتبته', en: 'His library', main: true },
-			/* the pages made from the data: his columns by paper, his work and his style in numbers, the quiz, the map */
-			{ href: 'blog.html#papers', ar: 'في الصحف', en: 'In the papers' },
+			/* the pages made from the data: his work and his style in numbers, the quiz, the map */
 			{ href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style' },
 			{ href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner' },
 			/* the reader's own lists and journey: the «My lists» button's page, in the footer too */
@@ -67,7 +64,6 @@
 		],
 		/* «عالم العرّاب»: the pages inside his world, a block of their own under «صفحات الموقع» */
 		world: [
-			{ href: 'glossary.html', ar: 'قاموس العرّاب', en: 'The phrasebook' },
 			{ href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends' },
 			{ href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life' },
 			{ href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web' }
@@ -81,6 +77,11 @@
 			{ href: 'contact.html', ar: 'تواصل وساهم', en: 'Contact & contribute' },
 			{ href: 'changelog.html', ar: 'سجل التحديثات', en: 'Changelog' },
 			{ href: 'sitemap.html', ar: 'خريطة الموقع', en: 'Site map' }
+		],
+		/* the pages that are now a section of another, in no menu but found by the search and named on the site map */
+		sections: [
+			{ href: 'blog.html#papers', ar: 'في الصحف', en: 'In the papers' },
+			{ href: 'quotes.html#glossary', ar: 'قاموس العرّاب', en: 'The phrasebook' }
 		],
 		fix: { ar: 'وجدت خطأً أو لديك إضافة؟ اقترح تصحيحًا ↗', en: 'Spotted a mistake or have an addition? Suggest a correction ↗' },
 		/* the footer's last column: who made the site (the notes and credits live on about.html) */
@@ -720,8 +721,8 @@
 				network: 'شبكة شخصيات علاقات characters web relations', handwriting: 'خط يده إهداء توقيع مخطوط handwriting dedication signature',
 				style: 'أسلوب لغة كلمات style language words', writers: 'كتاب رسامون مخرجون ممثلون دائرة writers artists directors actors circle',
 				changelog: 'تحديثات جديد سجل changelog updates', sitemap: 'خريطة الموقع صفحات sitemap pages', about: 'عن الموقع أسئلة شائعة about faq', contact: 'تواصل ساهم مساهمة contact contribute' };
-			UI.nav.concat(UI.more, UI.world, UI.legal).forEach(function (n) {
-				var id = n.href.replace(/\.html$/, '');
+			UI.nav.concat(UI.more, UI.world, UI.legal, UI.sections).forEach(function (n) {
+				var id = n.href.split('#')[1] || n.href.replace(/\.html$/, '');
 				if (n.href !== 'index.html') add(K.page, { ar: n.ar, en: n.en }, '', n.href, PAGE_WORDS[id] || '');
 			});
 			(d.legacy || []).forEach(function (l, i) { add(K.legacy, l.title, l.date, 'legacy.html#l-' + i, both(l.text)); });

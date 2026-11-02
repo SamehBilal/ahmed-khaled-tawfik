@@ -1,37 +1,33 @@
-/* glossary.html — «قاموس العرّاب»: the phrases readers know him and his heroes by (AKT.glossary, data-pages.js) — each with who
-   says it, what it means and when it comes, the issue or book it is from, and where it was checked. By speaker, or searched. */
-window.PAGE = {
-	id: 'glossary',
+/* «قاموس العرّاب» — a section of the quotes page (quotes.html#glossary; glossary.html, once a page of its own, leads there): the
+   phrases readers know him and his heroes by (AKT.glossary, data-pages.js) — each with who says it, what it means and when it
+   comes, the issue or book it is from, and where it was checked. By speaker, or searched. quotes.js draws it (html) and wires it (wire). */
+window.GlossarySection = {
 	title: { ar: 'قاموس العرّاب', en: 'The Godfather’s phrasebook' },
-	strings: {
-		eyebrow: { ar: 'عبارات لا تُنسى', en: 'Lines that stay' },
-		title: { ar: 'قاموس العرّاب', en: 'The Godfather’s phrasebook' },
-		lead: {
-			ar: '«حتى تحترق النجوم» و«جعلوه فانجعل» وأخواتهما: العبارات التي عرفنا بها رفعت إسماعيل وعبير وعلاء عبد العظيم، وصوته هو في مقالاته، مع معناها ومن أين جاءت.',
-			en: '“Until the stars burn out”, “they made him, so he was made” and the rest: the lines we know Refaat Ismail, Abeer, Alaa Abdel Azim and his own column voice by, with what they mean and where they come from.'
-		}
+	lead: {
+		ar: '«حتى تحترق النجوم» و«جعلوه فانجعل» وأخواتهما: العبارات التي عرفنا بها رفعت إسماعيل وعبير وعلاء عبد العظيم، وصوته هو في مقالاته، مع معناها ومن أين جاءت.',
+		en: '“Until the stars burn out”, “they made him, so he was made” and the rest: the lines we know Refaat Ismail, Abeer, Alaa Abdel Azim and his own column voice by, with what they mean and where they come from.'
 	},
 	WHO: [['refaat', { ar: 'رفعت إسماعيل', en: 'Refaat Ismail' }], ['abeer', { ar: 'عبير', en: 'Abeer' }], ['alaa', { ar: 'علاء عبد العظيم', en: 'Alaa Abdel Azim' }],
 		['akt', { ar: 'بصوته هو', en: 'In his own voice' }], ['other', { ar: 'وغيرهم', en: 'And others' }]],
 	who: 'all', q: '',
 
-	/* the band: phrases set like type on a page, one lit at a time */
-	band: function (d, A) {
-		var e = A.esc, list = (d.glossary || []).filter(function (x) { return x.phrase.length < 34; }).slice(0, 12);
-		return '<div class="gl-type">' + list.map(function (x, i) { return '<span style="--d:' + (-i * 1.4).toFixed(1) + 's">' + e(x.phrase) + '</span>'; }).join('') + '</div>';
-	},
-
-	render: function () {
-		var App = window.App, e = App.esc, L = App.L, self = this, list = App.data().glossary || [];
+	html: function () {
+		var App = window.App, e = App.esc, L = App.L, t = App.t, list = App.data().glossary || [];
+		if (!list.length) return '';
 		var count = {}; list.forEach(function (x) { count[x.who] = (count[x.who] || 0) + 1; });
-		document.getElementById('content').innerHTML = '<section class="section gl"><div class="wrap">' +
+		return '<section class="section gl" id="glossary"><div class="wrap">' +
+			'<h2 class="pp-title">' + e(t(this.title)) + '</h2><p class="pp-lead">' + e(t(this.lead)) + '</p>' +
 			'<div class="gl-bar"><div class="chips"><button type="button" class="chip" data-w="all" aria-pressed="true">' + e(L('الكل', 'All')) + ' <b>' + e(App.num(list.length)) + '</b></button>' +
 				this.WHO.filter(function (w) { return count[w[0]]; }).map(function (w) { return '<button type="button" class="chip" data-w="' + w[0] + '" aria-pressed="false">' + e(App.t(w[1])) + ' <b>' + e(App.num(count[w[0]])) + '</b></button>'; }).join('') +
 			'</div><input type="search" class="gl-q" placeholder="' + e(L('ابحث عن عبارة…', 'Look up a phrase…')) + '"></div>' +
 			'<div class="gl-list"></div>' +
-			'<p class="gl-note">' + e(L('كل عبارة نُقلت كما في مصدرها؛ تعرف عبارة أخرى؟ أرسلها من «تواصل وساهم». وللاقتباسات الأطول صفحة «اقتباسات».', 'Each phrase is given as its source has it; know another? Send it from Contact & contribute. Longer quotations are on the Quotes page.')) + ' <a href="quotes.html">' + e(L('اقتباسات ←', 'Quotes →')) + '</a></p>' +
+			'<p class="gl-note">' + e(L('كل عبارة نُقلت كما في مصدرها؛ تعرف عبارة أخرى؟ أرسلها من «تواصل وساهم».', 'Each phrase is given as its source has it; know another? Send it from Contact & contribute.')) + ' <a href="contact.html">' + e(L('تواصل وساهم ←', 'Contact & contribute →')) + '</a></p>' +
 		'</div></section>';
-		var root = document.querySelector('.gl');
+	},
+
+	wire: function () {
+		var self = this, root = document.querySelector('.gl');
+		if (!root) return;
 		root.querySelector('.chips').onclick = function (ev) {
 			var b = ev.target.closest('[data-w]');
 			if (!b) return;

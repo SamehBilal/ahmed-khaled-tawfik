@@ -164,7 +164,7 @@ window.PAGE = {
 		var App = window.App, d = App.data(), S = window.WorksShared, e = App.esc, L = App.L, UI = App.UI;
 		/* every page the header and footer know, by its address, so a name here is the name there */
 		var page = {};
-		UI.nav.concat(UI.more, UI.world, UI.legal).forEach(function (n) { if (!page[n.href]) page[n.href] = n; });
+		UI.nav.concat(UI.more, UI.world, UI.legal, UI.sections).forEach(function (n) { if (!page[n.href]) page[n.href] = n; });
 		var name = function (href) { return (page[href] || {})[App.lang === 'en' ? 'en' : 'ar'] || href; };
 		/* the pages made one per thing, counted as tools/build-sitemap.js counts them for sitemap.xml */
 		var own = S.ownSeries(), wrote = S.contributedSeries(), issues = 0, books = 0, seen = {};
@@ -177,9 +177,9 @@ window.PAGE = {
 		var TREE = [
 			['index.html', ['guide.html']],
 			['works.html', ['covers.html', 'translations.html', 'world.html', 'screen.html'], [[own.length + wrote.length, L('صفحة سلسلة', 'series pages')], [issues, L('صفحة عدد', 'issue pages')], [books, L('صفحة كتاب', 'book pages')]]],
-			['characters.html', ['glossary.html', 'creatures.html', 'refaat-life.html', 'network.html'], [[chars, L('صفحة بطل', 'lead’s pages')]]],
+			['characters.html', ['creatures.html', 'refaat-life.html', 'network.html'], [[chars, L('صفحة بطل', 'lead’s pages')]]],
 			['writers.html', ['publishers.html', 'library.html'], [[window.People ? window.People.all().length : 0, L('صفحة اسم من دائرته', 'pages of his circle')], [S.publishers().length, L('صفحة دار نشر', 'publisher pages')]]],
-			['quotes.html', []],
+			['quotes.html', ['quotes.html#glossary']],
 			['audio.html', []],
 			['legacy.html', ['talks.html', 'awards.html', 'handwriting.html', 'map.html']],
 			['tributes.html', []],
