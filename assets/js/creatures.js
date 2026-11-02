@@ -20,14 +20,14 @@ window.PAGE = {
 	   eyes (or the windows) now and then; each one's name under it with the pointer, leading to its card. Each: [id, width,
 	   height, picture or path, eyes [[x, y]…], how tall it stands (of 150)]. Most are pictures cut out to their shape
 	   (assets/img/creatures, from silhouettes the site's owner chose), painted in the page's own shade through an alpha mask;
-	   the mummy and Frankenstein's monster drawn here */
+	   a path drawn here would do as well */
 	SIL: [
 		['haunted-house', 358, 360, 'img', [], 140], ['man-eating-plant', 252, 360, 'img', [], 108], ['loch-ness', 471, 163, 'img', [], 62],
 		['medusa', 144, 360, 'img', [], 132], ['yeti', 367, 360, 'img', [], 124], ['witch', 223, 272, 'img', [], 118],
 		['minotaur', 346, 360, 'img', [[262, 81]], 136],
-		['mummy', 104, 150, 'M44 8c-9 0-15 7-15 17 0 7 4 12 9 15l-14 6v8l58-2 18 4v-8l-22-6-12-2c5-3 8-8 8-15 0-10-6-17-15-17zM24 54l-4 50h10l4-40 2 48-4 38h18l4-30 4 30h18l-4-38 2-48z', [[38, 24], [50, 24]], 118],
+		['mummy', 119, 360, 'img', [[51, 25], [63, 25]], 118],
 		['werewolf', 289, 360, 'img', [], 140], ['dracula', 422, 360, 'img', [], 128],
-		['frankenstein', 96, 150, 'M30 10h36v8h4v30h-6v8h22l6 6v52h-8v-40h-4v56H72v20H56v-20h-16v20H24v-20h-8V64h-4v40H4V62l6-6h22v-8h-6V18h4z', [[39, 32], [57, 32]], 122],
+		['frankenstein', 156, 360, 'img', [], 122],
 		['ghost', 197, 360, 'img', [[88, 24], [102, 24]], 132]
 	],
 	band: function (d, A) {
