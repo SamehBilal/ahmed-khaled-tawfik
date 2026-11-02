@@ -34,13 +34,100 @@ window.PAGE = {
 	],
 	KIND: { love: '#e0633a', family: '#d9a45a', friend: '#6fb8a8', foe: '#c94a4a', work: 'rgba(239,230,210,.18)' },
 
-	/* the band: points of light joined by threads that come and go */
-	band: function () {
-		var out = '<svg class="nw-band" viewBox="0 0 100 40" preserveAspectRatio="none">', pts = [];
-		for (var i = 0; i < 22; i++) pts.push([(i * 37) % 100, 4 + (i * 23) % 32]);
-		pts.forEach(function (p, i) { var q = pts[(i * 7 + 3) % pts.length]; out += '<line x1="' + p[0] + '" y1="' + p[1] + '" x2="' + q[0] + '" y2="' + q[1] + '" style="--d:' + (-i * 0.6).toFixed(1) + 's"/>'; });
-		pts.forEach(function (p) { out += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r=".6"/>'; });
-		return out + '</svg>';
+	/* the band: after Tommy Ho's «UI Kits: LottieFiles» hero on CodePen — eight of his people as a tilted stack of cards that, as
+	   the page scrolls, spreads out around the words in the middle, and then leans a little after the pointer. Each card their
+	   own picture where there is one, else a cover of their work (a different issue for each in a series); spread, a card
+	   lights its character in the web below */
+	TILES: ['refaat', 'alaa', 'maggie', 'abeer', 'lucifer', 'bernadette', 'alaa-utopia', 'essam'],
+	/* each card's place, the pen's own: [stacked x, y (vw, vh)], its tilt in the stack, [spread x, y, width (vw), height (vh),
+	   scale], and [x, y] on a small screen */
+	SPOT: [
+		[[-8, -10], -18, [-20, -34, 17, 22, .9], [-22, -40]], [[14, -10], 20, [32, -30, 18, 32, .9], [22, -40]],
+		[[-16, 0], -4, [-36, -2, 15, 32, .9], [-22, -19]], [[1, -10], -2, [6, -32, 25, 30, .8], [22, -19]],
+		[[18, 1], 6, [37, 6, 18, 32, .8], [-22, 20]], [[-6, 10], 6, [-24, 34, 22, 25, .9], [22, 20]],
+		[[8, 7], 3, [2, 36, 20, 26, .8], [-22, 40]], [[20, 12], -7, [30, 34, 16, 20, .7], [22, 40]]
+	],
+	band: function (d, A) {
+		var self = window.PAGE, e = A.esc, L = A.L, S = window.WorksShared, chars = d.characters || [], mine = {}, works = {};
+		var cover = function (c) {
+			var src = c.image || (d.charFigures || {})[c.id];
+			if (src) return src;
+			var k = mine[c.work] = (mine[c.work] || 0) + 1;
+			var covers = S.anySeries(c.work) ? S.seriesIssues(c.work).map(function (is) { return S.coverOf((d.issueInfo || {})[S.issueKey(c.work, is)] || {}); }).filter(Boolean) : [];
+			return covers.length ? covers[(k * 7) % covers.length] : S.coverOf((d.bookInfo || {})[c.work] || {});
+		};
+		var tiles = self.TILES.map(function (id) { return chars.filter(function (c) { return c.id === id; })[0]; }).filter(Boolean).map(function (c, i) {
+			var src = cover(c);
+			return '<a class="nwh-tile" href="character.html?id=' + e(c.id) + '" data-id="' + e(c.id) + '" style="z-index:' + (i + 2) + '">' +
+				'<span class="nwh-pic">' + (src ? '<img src="' + e(src) + '" alt="" loading="lazy">' : '') + '</span>' +
+				'<span class="nwh-tl"><span>' + e(A.t(c.name)) + '</span><span>' + e(A.num(('0' + (i + 1)).slice(-2))) + '</span></span></a>';
+		}).join('');
+		chars.forEach(function (c) { works[c.work] = 1; });
+		var nw = Object.keys(works).length;
+		setTimeout(function () { self.heroWire(A); }, 0);
+		return '<div class="nwh-copy"><h2>' + L('أبطاله <span>في</span> شبكة<i>.</i>', 'His people <span>in</span> one web<i>.</i>') + '</h2>' +
+			'<p>' + e(L(A.num(chars.length) + ' شخصية من ' + A.num(nw) + ' أعمال، وخيوط الحب والقرابة والصداقة والعداوة بينهم.',
+				chars.length + ' characters from ' + nw + ' works, and the threads of love, family, friendship and enmity between them.')) + '</p></div>' +
+			'<div class="nwh-cards">' + tiles + '</div>' +
+			'<div class="nwh-hint" aria-hidden="true"><span>' + e(L('مرّر', 'Scroll')) + '</span><svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></div>';
+	},
+	/* the pen's frame: how far the band has scrolled sets how far the cards have spread (from 12% of the way to 90%), and,
+	   spread, they lean after the pointer, the nearer more */
+	heroWire: function (A) {
+		var self = this, hero = document.querySelector('.ph[data-ph="network"]'), cardsEl = hero && hero.querySelector('.nwh-cards');
+		if (!cardsEl || cardsEl.getAttribute('data-on')) return;
+		cardsEl.setAttribute('data-on', '1');
+		hero.removeAttribute('aria-hidden'); /* (its cards are links) */
+		var copy = hero.querySelector('.nwh-copy'), hint = hero.querySelector('.nwh-hint');
+		var START = .12, END = .9, PX = 2.6, PY = 2.2, STACK = .82, clamp = function (v) { return Math.min(1, Math.max(0, v)); };
+		var mqS = matchMedia('(pointer: coarse), (max-width: 640px)'), mqR = matchMedia('(prefers-reduced-motion: reduce)');
+		var els = [].slice.call(cardsEl.querySelectorAll('.nwh-tile')), N = els.length;
+		var tiles = els.map(function (el, i) { var s = self.SPOT[i]; return { el: el, so: s[0], sr: s[1], t: s[2], sm: s[3], depth: .55 + (N > 1 ? i / (N - 1) : 0) * .75 }; });
+		var px = 0, py = 0, tx = 0, ty = 0, spread = false, key = '', raf = 0, live = true;
+		var layout = function () { tiles.forEach(function (t) { t.el.style.width = (mqS.matches ? 40 : t.t[2]) + 'vw'; t.el.style.height = (mqS.matches ? 20 : t.t[3]) + 'vh'; }); key = ''; };
+		var frame = function () {
+			raf = 0;
+			if (!document.body.contains(cardsEl)) return;
+			var small = mqS.matches, reduce = mqR.matches, r = hero.getBoundingClientRect();
+			var p = clamp((clamp(-r.top / Math.max(1, r.height - innerHeight)) - START) / (END - START));
+			if (p >= .999) spread = true; else if (p <= .985) spread = false;
+			var par = !reduce && !small, gx = par && spread ? tx : 0, gy = par && spread ? ty : 0;
+			px += (gx - px) * .1; py += (gy - py) * .1;
+			var k = [p.toFixed(4), px.toFixed(3), py.toFixed(3), small, reduce].join();
+			if (k !== key) {
+				key = k;
+				tiles.forEach(function (t) {
+					var ex = small ? Math.sign(t.sm[0]) * 22 : t.t[0], ey = small ? t.sm[1] : t.t[1];
+					var x = t.so[0] + (ex - t.so[0]) * p, y = t.so[1] + (ey - t.so[1]) * p, dp = par ? t.depth * p : 0;
+					var rot = reduce ? 0 : (1 - p) * t.sr, rest = small ? .72 : t.t[4], sc = STACK + (rest - STACK) * p;
+					t.el.style.transform = 'translate(calc(-50% + ' + (x - px * PX * dp) + 'vw), calc(-50% + ' + (y - py * PY * dp) + 'vh)) rotate(' + rot + 'deg) scale(' + sc + ')';
+				});
+				copy.style.opacity = clamp((p - .3) / .35);
+				copy.style.transform = reduce ? 'none' : 'scale(' + (.85 + .15 * clamp((p - .3) / .6)) + ')';
+				hint.style.opacity = 1 - clamp(p / START);
+				cardsEl.classList.toggle('live', spread);
+			}
+			/* (again while the lean is still easing in) */
+			if (live && (Math.abs(gx - px) > .001 || Math.abs(gy - py) > .001)) go();
+		};
+		var go = function () { if (!raf) raf = requestAnimationFrame(frame); };
+		addEventListener('scroll', go, { passive: true });
+		addEventListener('resize', function () { layout(); go(); });
+		addEventListener('pointermove', function (ev) { tx = ev.clientX / innerWidth * 2 - 1; ty = ev.clientY / innerHeight * 2 - 1; if (spread) go(); }, { passive: true });
+		document.addEventListener('pointerleave', function () { tx = ty = 0; go(); });
+		if (mqS.addEventListener) { mqS.addEventListener('change', function () { layout(); go(); }); mqR.addEventListener('change', function () { key = ''; go(); }); }
+		if (window.IntersectionObserver) new IntersectionObserver(function (es) { live = es[0].isIntersecting; go(); }).observe(hero);
+		/* a card lights its character in the web below, and goes there (their page is a click away from it) */
+		cardsEl.addEventListener('click', function (ev) {
+			var a = ev.target.closest('.nwh-tile'), n = a && document.querySelector('.nw-node[data-id="' + a.getAttribute('data-id') + '"]');
+			if (!n || ev.ctrlKey || ev.metaKey || ev.shiftKey) return;
+			ev.preventDefault();
+			n.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+			var to = document.querySelector('.nw-stage');
+			if (to) to.scrollIntoView({ behavior: mqR.matches ? 'auto' : 'smooth', block: 'center' });
+		});
+		layout();
+		go();
 	},
 
 	/* the works the characters belong to, in the order they came */

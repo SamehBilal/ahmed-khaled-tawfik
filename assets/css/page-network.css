@@ -1,10 +1,34 @@
 /* «شبكة العرّاب» (network.html, network.js) */
-.ph[data-ph="network"] { background: radial-gradient(60% 120% at 50% 40%, #1a1a2a 0%, #08080c 72%); }
-.nw-band { position: absolute; inset: 8% 3%; width: 94%; height: 84%; }
-.nw-band line { stroke: rgba(224, 99, 58, .5); stroke-width: .12; stroke-dasharray: 60; stroke-dashoffset: 60; animation: nw-draw 8s var(--d) ease-in-out infinite; }
-.nw-band circle { fill: #f6d79a; }
-@keyframes nw-draw { 40%, 60% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -60; } }
-@media (prefers-reduced-motion: reduce) { .nw-band line { animation: none; stroke-dashoffset: 0; } }
+/* the band: after Tommy Ho's «UI Kits: LottieFiles» hero (network.js band, heroWire) — a tall band whose stage stays on screen
+   while its cards spread; it is the page itself, with no ground or line of its own */
+.ph[data-ph="network"], html[data-theme="light"] .ph[data-ph="network"] { height: 260vh; overflow: clip; background: none; border-bottom: 0; }
+.ph[data-ph="network"]::after { content: none; }
+.ph[data-ph="network"] .ph-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.nwh-copy { position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center;
+	text-align: center; padding: 0 24px; pointer-events: none; opacity: 0; }
+.nwh-copy h2 { margin: 0; font: 400 clamp(36px, 5.4vw, 92px)/1.15 var(--f-display); color: var(--paper); }
+.nwh-copy h2 span { color: var(--muted); }
+.nwh-copy h2 i { font-style: normal; color: var(--ember); }
+.nwh-copy p { margin: 1.3vw 0 0; max-width: 44ch; font-size: max(15px, 1.15vw); line-height: 1.8; color: var(--paper-dim); }
+.nwh-cards { position: absolute; inset: 0; z-index: 10; }
+.nwh-tile { position: absolute; left: 50%; top: 50%; will-change: transform; border-radius: 12px; overflow: hidden; container-type: size;
+	display: block; text-decoration: none; color: var(--paper); background: var(--ink-2); pointer-events: none;
+	box-shadow: 0 0 0 1px var(--line), 0 24px 48px -28px rgba(0, 0, 0, .6); }
+.nwh-cards.live .nwh-tile { pointer-events: auto; }
+.nwh-pic { position: absolute; inset: 0 0 16cqmin; overflow: hidden; transition: scale .6s cubic-bezier(.22, 1, .36, 1); }
+.nwh-pic img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.nwh-cards.live .nwh-tile:hover .nwh-pic, .nwh-tile:focus-visible .nwh-pic { scale: 1.06; }
+.nwh-tile:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+.nwh-tl { position: absolute; inset-inline: 6cqmin; bottom: 4cqmin; display: flex; justify-content: space-between; gap: 8px;
+	font: 400 max(11px, 7cqmin)/1.2 var(--f-display); white-space: nowrap; }
+.nwh-tl span:first-child { overflow: hidden; text-overflow: ellipsis; }
+.nwh-tl span:last-child { color: var(--ember); }
+.nwh-hint { position: absolute; inset: auto 0 calc(3vh + 70px); /* (above the fold while the band still starts under the header) */ z-index: 20; display: flex; flex-direction: column; align-items: center; gap: .6vh;
+	pointer-events: none; font-size: max(13px, .9vw); color: var(--muted); }
+.nwh-hint svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+	animation: nwh-bob 1.2s ease-in-out infinite; }
+@keyframes nwh-bob { 50% { translate: 0 5px; } }
+@media (prefers-reduced-motion: reduce) { .nwh-hint svg { animation: none; } }
 .nw-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; }
 .nw-stage { border: 1px solid var(--line); border-radius: 16px; background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--ember) 8%, var(--ink-2)), var(--ink)); }
 .nw-map { display: block; width: 100%; height: auto; }

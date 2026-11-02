@@ -511,7 +511,32 @@
 	   card when let go, and drift slowly by themselves until touched. A card clicked, tapped or given Enter opens its place on the map below. The
 	   wheel scrolls the page, as anywhere else. Drawn only while on screen */
 	function mapGallery(A) {
-		var stage = document.querySelector('.ph[data-ph="map"] .ph-stage'), cv = stage && stage.querySelector('.ph-gl');
+		var L = A.L, json = function (u) { return fetch(u).then(function (r) { return r.json(); }); };
+		var n = function (k) { return k === 1 ? L('كتاب واحد يذكره', 'Named in one book') : k === 2 ? L('يذكره كتابان', 'Named in 2 books') : L('يذكره ' + A.num(k) + ' من كتبه', 'Named in ' + k + ' books'); };
+		gallery(document.querySelector('.ph[data-ph="map"] .ph-stage'), A, {
+			label: L('أماكن كتبه: اسحب أو استعمل الأسهم، وEnter لفتح المكان على الخريطة', 'The places of his books: drag or use the arrows, Enter opens the place on the map'),
+			load: function () {
+				return Promise.all([json('assets/data/places.json'), json('assets/data/place-photos.json')]).then(function (got) {
+					var photos = got[1];
+					return got[0].filter(function (p) { return photos[p.en] && (p.items || []).length; })
+						.sort(function (a, b) { return b.items.length - a.items.length; })
+						.map(function (p) { return { title: L(p.ar, p.en), sub: n(p.items.length), en: p.en, src: photos[p.en].src }; });
+				});
+			},
+			/* a card opens its place on the map below (map.js), and goes there */
+			show: function (c) {
+				var P = window.PAGE, i = P && P._places ? P._places.findIndex(function (p) { return p.en === c.en; }) : -1;
+				if (i < 0) { location.hash = encodeURIComponent(c.en); return; }
+				P.open(i);
+				return document.querySelector('.mp-panel') || document.querySelector('.mp-map');
+			}
+		});
+	}
+
+	/* the gallery itself, for a band's stage holding a .ph-gl canvas; o.load() gives its cards ({title, sub, src}), o.show(card)
+	   opens one (and may give back the element to go to), o.label names it for screen readers */
+	function gallery(stage, A, o) {
+		var cv = stage && stage.querySelector('.ph-gl');
 		if (!cv || cv.getAttribute('data-on')) return;
 		cv.setAttribute('data-on', '1');
 		var gl = cv.getContext('webgl', { alpha: true, antialias: true, premultipliedAlpha: true });
@@ -570,7 +595,8 @@
 		var draw = function (card, img) {
 			var c = document.createElement('canvas'), x = c.getContext('2d');
 			c.width = CW; c.height = CH;
-			var ih = 640;
+			var ih = 640, ink = getComputedStyle(stage); /* (the words in the band's own colours, dark or light) */
+			card.img = img;
 			x.fillStyle = '#16120f'; x.fillRect(0, 0, CW, ih);
 			if (img) {
 				/* the cover fills its part, cut to fit (the zip's fit) */
@@ -578,9 +604,9 @@
 				x.drawImage(img, (CW - w) / 2, (ih - h) / 2, w, h);
 			}
 			x.direction = A.lang === 'en' ? 'ltr' : 'rtl'; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
-			x.fillStyle = '#efe6d2'; x.font = '64px ' + fDisplay;
-			x.fillText(card.place, CW / 2, ih + 84, CW - 24);
-			x.fillStyle = 'rgba(239, 230, 210, .62)'; x.font = '30px ' + fBody;
+			x.fillStyle = ink.getPropertyValue('--ph-ink').trim() || '#efe6d2'; x.font = '64px ' + fDisplay;
+			x.fillText(card.title, CW / 2, ih + 84, CW - 24);
+			x.fillStyle = ink.getPropertyValue('--ph-dim').trim() || '#8f887a'; x.font = '30px ' + fBody;
 			x.fillText(card.sub, CW / 2, ih + 136, CW - 24); /* (how many of his books name it) */
 			var t = card.tex || gl.createTexture();
 			gl.bindTexture(gl.TEXTURE_2D, t);
@@ -602,18 +628,14 @@
 		/* scrolling: the zip's eased run — target, current, last */
 		var sc = { ease: 0.05, current: 0, target: 0, last: 0 }, auto = !still, down = null, t0 = 0, live = true, raf = 0;
 		var snap = function () { var w = sx + gap; sc.target = Math.round(sc.target / w) * w; };
-		/* a card opens its place on the map below (map.js), and goes there */
 		var show = function (c) {
-			var P = window.PAGE, i = P && P._places ? P._places.findIndex(function (p) { return p.en === c.en; }) : -1;
-			if (i < 0) { location.hash = encodeURIComponent(c.en); return; }
-			P.open(i);
-			var to = document.querySelector('.mp-panel') || document.querySelector('.mp-map');
+			var to = o.show(c.data);
 			if (to) to.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'center' });
 		};
-		var at = function (cx) {
-			/* the card under the pointer: from its place across the band (it stands near the arc's middle there) */
+		var at = function (cx, any) {
+			/* the card under the pointer: from its place across the band (it stands near the arc's middle there); any: the nearest, under it or not */
 			var wx = (cx / W - 0.5) * vw, best = null;
-			cards.forEach(function (c) { if (Math.abs(c.px - wx) < sx / 2 && (!best || Math.abs(c.px - wx) < Math.abs(best.px - wx))) best = c; });
+			cards.forEach(function (c) { if ((any || Math.abs(c.px - wx) < sx / 2) && (!best || Math.abs(c.px - wx) < Math.abs(best.px - wx))) best = c; });
 			return best;
 		};
 		cv.addEventListener('pointerdown', function (ev) {
@@ -640,7 +662,7 @@
 			if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') {
 				ev.preventDefault(); auto = false;
 				sc.target = Math.round(sc.target / w) * w + ((ev.key === 'ArrowRight') !== rtl ? w : -w);
-			} else if (ev.key === 'Enter') { var c = at(W / 2); if (c) show(c); }
+			} else if (ev.key === 'Enter') { var c = at(W / 2, true); if (c) show(c); }
 		});
 
 		var frame = function () {
@@ -676,23 +698,16 @@
 		if (window.IntersectionObserver) new IntersectionObserver(function (es) { live = es[0].isIntersecting; go(); }).observe(cv);
 		window.addEventListener('resize', function () { resize(); go(); });
 
-		var json = function (u) { return fetch(u).then(function (r) { return r.json(); }); };
-		Promise.all([json('assets/data/places.json'), json('assets/data/place-photos.json')]).then(function (got) {
-			if (!document.body.contains(cv)) return;
-			var photos = got[1];
-			var list = got[0].filter(function (p) { return photos[p.en] && (p.items || []).length; })
-				.sort(function (a, b) { return b.items.length - a.items.length; });
+		o.load().then(function (list) {
+			if (!document.body.contains(cv) || !list.length) return;
 			/* enough cards to go round (the zip doubles its twelve) */
-			while (list.length && list.length < 14) list = list.concat(list);
-			var n = function (k) { return k === 1 ? L('كتاب واحد يذكره', 'Named in one book') : k === 2 ? L('يذكره كتابان', 'Named in 2 books') : L('يذكره ' + A.num(k) + ' من كتبه', 'Named in ' + k + ' books'); };
-			cards = list.map(function (p, k) {
-				return { place: L(p.ar, p.en), sub: n(p.items.length), en: p.en, src: photos[p.en].src, x: 0, px: 1e9, extra: 0, time: 100 * Math.random(), k: k };
-			});
+			while (list.length < 14) list = list.concat(list);
+			cards = list.map(function (p, k) { return { title: p.title, sub: p.sub, src: p.src, data: p, x: 0, px: 1e9, extra: 0, time: 100 * Math.random(), k: k }; });
 			resize();
 			sc.target = sc.current = sc.last = 0;
 			var ph = stage.closest('.ph');
 			if (ph) ph.removeAttribute('aria-hidden'); /* (this band is a control, not a decoration) */
-			cv.setAttribute('aria-label', L('أماكن كتبه: اسحب أو استعمل الأسهم، وEnter لفتح المكان على الخريطة', 'The places of his books: drag or use the arrows, Enter opens the place on the map'));
+			cv.setAttribute('aria-label', o.label);
 			/* the words wait for the site's fonts; each cover drawn in when it has come */
 			(document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () {
 				var seen = {};
@@ -705,6 +720,9 @@
 				});
 				stage.classList.add('is-on');
 				go();
+				/* drawn again when the theme changes */
+				new MutationObserver(function () { cards.forEach(function (c) { draw(c, c.img && c.img.naturalWidth ? c.img : null); }); go(); })
+					.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 			});
 		}).catch(function () {});
 	}
@@ -729,5 +747,5 @@
 	} else {
 		document.addEventListener('DOMContentLoaded', function () { setTimeout(render, 0); });
 	}
-	window.PageHero = { render: render };
+	window.PageHero = { render: render, gallery: gallery };
 })();
