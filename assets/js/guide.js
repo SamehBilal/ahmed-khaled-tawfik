@@ -107,8 +107,8 @@ window.PAGE = {
 				{ ref: 'dermaphoria' },
 				{ ref: 'kiterunner' },
 				{ ref: 'che' },
-				{ ref: 'nashawat-qadima', note: { ar: 'كلمات أغانيه المفضلة وترجمتها، صدرت بعد رحيله.', en: 'The lyrics of his favourite songs and his translations of them, published after his death.' } },
-				{ ref: 'rwg', note: { ar: 'روائع الأدب العالمي مختصرة بحجم الجيب؛ ترجم أعدادها من 7 إلى 83.', en: 'World classics abridged to pocket size; he translated issues 7 to 83.' } }
+				{ ref: 'rwg', note: { ar: 'روائع الأدب العالمي مختصرة بحجم الجيب؛ ترجم أعدادها من 7 إلى 83.', en: 'World classics abridged to pocket size; he translated issues 7 to 83.' } },
+				{ ref: 'nashawat-qadima', note: { ar: 'كلمات أغانيه المفضلة وترجمتها، صدرت بعد رحيله.', en: 'The lyrics of his favourite songs and his translations of them, published after his death.' } }
 			]
 		}
 	],
