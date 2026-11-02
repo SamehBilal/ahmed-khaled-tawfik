@@ -1,11 +1,23 @@
 /* «وحوش وأساطير» (creatures.html, creatures.js) */
-.ph[data-ph="creatures"] { background: radial-gradient(70% 120% at 50% 100%, #1d1a12 0%, #070708 70%); }
-.cr-eyes { position: absolute; display: flex; gap: 10px; animation: cx-blink 6s var(--d) infinite; }
-.cr-eyes i { width: 10px; height: 6px; border-radius: 50%; background: #ffcf5a; box-shadow: 0 0 12px #ff9a3a, 0 0 24px rgba(255, 120, 40, .6); }
-@keyframes cx-blink { 0%, 40%, 100% { opacity: 0; transform: scaleY(.1); } 48%, 88% { opacity: 1; transform: scaleY(1); } 92% { transform: scaleY(.1); } }
-.cr-name { position: absolute; font-family: var(--f-display); font-size: 20px; color: rgba(239, 230, 210, .22); white-space: nowrap; animation: cx-fade 9s var(--d) ease-in-out infinite; }
-@keyframes cx-fade { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .cr-eyes, .cr-name { animation: none; opacity: .6; } }
+/* the band is the page itself, no ground, faded sides or line of its own: the creatures as silhouettes in a row on a faint
+   ground line, a shade off the page, their eyes opening now and then; under the pointer one comes forward and says its name */
+.ph[data-ph="creatures"], html[data-theme="light"] .ph[data-ph="creatures"] { background: none; border-bottom: 0; }
+.ph[data-ph="creatures"]::after { content: none; }
+.cr-row { --sil: color-mix(in srgb, var(--paper) 9%, var(--ink)); position: absolute; inset: 24px 2% 34px; display: flex; align-items: flex-end; justify-content: center; gap: 1.2%; }
+html[data-theme="light"] .cr-row { --sil: color-mix(in srgb, var(--ink) 22%, var(--paper)); }
+.cr-sil { position: relative; flex: 0 1 calc(var(--w) * 1.5px); height: calc(var(--h) / 150 * 100%); min-width: 0; color: var(--sil); transition: color .3s, translate .3s; }
+.cr-sil svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.cr-sil path { fill: currentColor; }
+.cr-eye { fill: #ffcf5a; filter: drop-shadow(0 0 3px #ff9a3a); opacity: 0; transform-box: fill-box; transform-origin: center; animation: cr-blink 7s var(--d) infinite; }
+@keyframes cr-blink { 0%, 42%, 100% { opacity: 0; scale: 1 .1; } 48%, 86% { opacity: 1; scale: 1; } 90% { scale: 1 .1; } 93% { scale: 1; } }
+.cr-sil:hover, .cr-sil:focus-visible { color: color-mix(in srgb, var(--ember) 35%, var(--sil)); translate: 0 -6px; outline: none; }
+.cr-sil:hover .cr-eye, .cr-sil:focus-visible .cr-eye { opacity: 1; scale: 1; animation: none; }
+.cr-tag { position: absolute; top: 100%; left: 50%; translate: -50% -4px; margin-top: 4px; white-space: nowrap; font-family: var(--f-display); font-size: 16px; color: var(--paper);
+	opacity: 0; transition: opacity .25s, translate .25s; pointer-events: none; }
+.cr-sil:hover .cr-tag, .cr-sil:focus-visible .cr-tag { opacity: 1; translate: -50% 0; }
+.cr-ground { position: absolute; left: 4%; right: 4%; bottom: 33px; height: 1px; background: linear-gradient(90deg, transparent, var(--line) 15%, var(--line) 85%, transparent); }
+@media (max-width: 640px) { .cr-sil:nth-child(n+8) { display: none; } }
+@media (prefers-reduced-motion: reduce) { .cr-eye { animation: none; opacity: .7; scale: 1; } .cr-sil, .cr-tag { transition: none; } }
 .cx-bar { margin: 6px 0 26px; }
 .cx-note { color: var(--muted); line-height: 1.9; }
 .cx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
