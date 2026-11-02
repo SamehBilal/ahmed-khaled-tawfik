@@ -8,7 +8,7 @@ html[dir="rtl"] .rw { --dir: -1; } /* (in Arabic the next moment comes to the le
 .rw { --r: min(44vw, 560px); --duration: 200ms; --mark: var(--muted); --mark-on: var(--ember); --line-h: 0;
 	position: absolute; left: 50%; top: 64px; width: calc(var(--r) * 2); height: calc(var(--r) * 2); translate: -50% 0; }
 .rw-cards { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; border-radius: 50%; border: 1px solid var(--line);
-	transform: rotate(calc(var(--index) * -360deg * var(--dir, 1) / var(--items))); transition: transform .5s cubic-bezier(.4, 0, .2, 1) var(--duration); }
+	transform: rotate(calc(var(--index) * -360deg * var(--dir, 1) / var(--items))); transition: transform .45s cubic-bezier(.4, 0, .2, 1) calc(var(--duration) / 2); }
 .rw-cards li { position: absolute; inset: 0; transform: rotate(calc(var(--i) * 360deg * var(--dir, 1) / var(--items))); pointer-events: none; }
 .rw-cards input { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; opacity: 0; }
 /* a mark on the rim: its name over a dot, a line dropping from the chosen one */

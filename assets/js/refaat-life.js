@@ -47,7 +47,7 @@ window.PAGE = {
 		var pick = function (k, auto) {
 			var r = radios[(k + radios.length) % radios.length];
 			r.checked = true;
-			if (!auto) { r.focus({ preventScroll: true }); rest = Date.now() + 15000; }
+			if (!auto) { r.focus({ preventScroll: true }); rest = Date.now() + 10000; }
 			ul.style.setProperty('--index', r.value);
 		};
 		ul.addEventListener('click', function (ev) {
@@ -63,7 +63,7 @@ window.PAGE = {
 			/* (left is the next moment in Arabic, as the wheel runs; right in English) */
 			pick(k + (getComputedStyle(ul).direction === 'rtl' ? step : -step));
 		});
-		/* and on by itself: the next moment every seven seconds, held while the pointer or the focus is on it, for a while after
+		/* and on by itself: the next moment every three and a half seconds, held while the pointer or the focus is on it, for ten seconds after
 		   one is chosen by hand, and while the band is off screen; never for those who ask for less motion */
 		var rest = 0, held = false, seen = true;
 		var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -77,7 +77,7 @@ window.PAGE = {
 			if (!document.body.contains(ul)) { clearInterval(timer); return; }
 			if (held || !seen || document.hidden || Date.now() < rest) return;
 			pick(radios.findIndex(function (r) { return r.checked; }) + 1, true);
-		}, 7000);
+		}, 3500);
 	},
 
 	render: function () {
