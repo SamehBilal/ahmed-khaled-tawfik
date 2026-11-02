@@ -35,15 +35,11 @@ window.PAGE = {
 
 	/* the band: amCharts' «Map Sankey» pen (codepen.io/amcharts/pen/OPRwxBd) — a globe turning slowly, a stream from Egypt to the
 	   land of each language he was translated into, as wide as its editions, small books travelling along it; a switch from the
-	   globe to a flat map, and back. amCharts 5 comes from its own CDN on this page only; until it has (or if it cannot, offline),
-	   the band is «Utopia» in every script it was printed in, drifting, as before */
+	   globe to a flat map, and back. amCharts 5 comes from its own CDN on this page only; the globe alone, fading in once drawn */
 	band: function (d, A) {
-		var words = ['يوتوبيا', 'Utopia', 'Utopia: Roman aus Ägypten', 'Utopia', 'Utopia', 'عقل بی‌بدن', 'ESP', 'Rahasyamuri 207', 'چای با نعناع', 'قلقلک', 'Utopia', 'خنده های غم انگیز'];
 		var self = window.PAGE; /* (page-hero.js calls this unbound) */
 		setTimeout(function () { self.globe(A); }, 0);
-		return '<div class="wd-words"><i class="wd-globe"></i>' + words.map(function (w, i) {
-			return '<span class="wd-word" style="--y:' + (8 + (i * 37) % 80) + '%;--s:' + (16 + (i * 7) % 22) + 'px;--d:' + (-i * 2.3).toFixed(1) + 's;--t:' + (26 + (i * 5) % 18) + 's">' + A.esc(w) + '</span>';
-		}).join('') + '</div><div class="wd-chart" id="wd-chart"></div>';
+		return '<div class="wd-chart" id="wd-chart"></div>';
 	},
 
 	/* amCharts' scripts, once, one after the other */

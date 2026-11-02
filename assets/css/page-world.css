@@ -1,16 +1,4 @@
 /* «حول العالم» (world.html, world.js) */
-.ph[data-ph="world"] { background: radial-gradient(60% 120% at 50% 40%, #13263a 0%, #0a1018 70%); }
-.wd-globe { position: absolute; left: 50%; top: 50%; width: 260px; height: 260px; margin: -130px 0 0 -130px; border-radius: 50%;
-	background: repeating-linear-gradient(90deg, transparent 0 24px, rgba(140, 190, 230, .16) 24px 25px), repeating-linear-gradient(transparent 0 24px, rgba(140, 190, 230, .16) 24px 25px),
-		radial-gradient(circle at 35% 30%, rgba(120, 180, 230, .35), rgba(10, 20, 35, .9) 70%);
-	box-shadow: 0 0 80px rgba(80, 150, 220, .3); animation: wd-turn 30s linear infinite; background-size: 50px 100%, 100% 100%, 100% 100%; }
-@keyframes wd-turn { to { background-position: 50px 0, 0 0, 0 0; } }
-.wd-word { position: absolute; top: var(--y); left: 100%; font-family: var(--f-display); font-size: var(--s); color: rgba(239, 230, 210, .55); white-space: nowrap;
-	animation: wd-drift var(--t) var(--d) linear infinite; direction: ltr; }
-@keyframes wd-drift { to { transform: translateX(calc(-100vw - 100%)); } }
-html[data-theme="light"] .ph[data-ph="world"] { background: radial-gradient(60% 120% at 50% 40%, #e3ecf2 0%, #cfd9e0 70%); }
-html[data-theme="light"] .wd-word { color: rgba(30, 50, 70, .5); }
-@media (prefers-reduced-motion: reduce) { .wd-globe, .wd-word { animation: none; } .wd-word { left: calc(var(--y) * 1.1); } }
 
 .wd-sum { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 20px; }
 .wd-sum div { display: flex; flex-direction: column; padding: 14px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); min-width: 120px; }
@@ -30,14 +18,11 @@ html[data-theme="light"] .wd-word { color: rgba(30, 50, 70, .5); }
 .wd-src { font-size: 13px; }
 .wd-note { color: var(--muted); font-size: 14px; }
 
-/* the band's globe (world.js, amCharts' «Map Sankey» pen): taller than other bands, so the globe has room; the drifting words
-   stay until it is drawn, and are what is left if it cannot be */
+/* the band's globe (world.js, amCharts' «Map Sankey» pen): taller than other bands, so the globe has room */
 .ph[data-ph="world"] { height: 460px; }
 @media (max-width: 640px) { .ph[data-ph="world"] { height: 340px; } }
-.wd-words { position: absolute; inset: 0; transition: opacity .6s; }
 .wd-chart { position: absolute; inset: 0; z-index: 4; opacity: 0; transition: opacity .8s; }
 .ph[data-ph="world"].wd-live .wd-chart { opacity: 1; }
-.ph[data-ph="world"].wd-live .wd-words { opacity: 0; }
 .wd-switch { position: absolute; z-index: 6; top: 18px; inset-inline-start: 11%; /* (across from the zoom buttons) */ display: flex; align-items: center; gap: 8px; padding: 6px 12px;
 	border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--ph-bg) 75%, transparent); color: var(--ph-ink);
 	font: inherit; font-size: 13px; cursor: pointer; }
