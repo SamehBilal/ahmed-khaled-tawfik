@@ -178,7 +178,7 @@ window.PAGE = {
 					channel: GR.channel.name, url: 'https://www.youtube.com/watch?v=' + ep[0], yt: ep[0], ytEmbed: true, mins: ep[2], skin: 'specials' });
 			});
 			groups.push({
-				title: GR.title, note: GR.note,
+				title: GR.title, note: GR.note, cat: 'world',
 				rows: [{ title: { ar: 'عودة رفعت إسماعيل', en: 'The Return of Refaat Ismail' }, href: S.seriesHref(GR.series), thumb: ytThumb(GR.eps[0][0]), start: gStart, count: GR.eps.length, mins: gMins, yt: true }]
 			});
 		}
@@ -258,18 +258,26 @@ window.PAGE = {
 		}
 		srows2 = srows2.filter(function (r) { return r.count > 0; });
 		if (srows2.length) groups.push({
-			title: { ar: 'بعد منتصف الليل — مواسم «لاشين»', en: 'After Midnight — the Lasheen seasons' },
+			title: { ar: 'بعد منتصف الليل — مواسم «لاشين»', en: 'After Midnight — the Lasheen seasons' }, cat: 'world',
 			note: { ar: 'عاد البرنامج الذي كتب عنه في «أسطورة بعد منتصف الليل» بمواسم جديدة على Audiohat من تأليف شيرين هنائي، ومنها خرجت روايات «لاشين»؛ ومعها حلقتا «قبل منتصف الليل!» الساخرتان.',
 				en: 'The radio show he wrote of in “The Legend of After Midnight” came back on Audiohat in new seasons written by Sherine Hanaey, out of which the Lasheen novels grew; with them, the two comic episodes of “Before Midnight!”.' },
 			rows: srows2
 		});
 		lrows = lrows.filter(function (r) { return r.count > 0; }).sort(function (a, b) { return a.n - b.n; });
 		if (lrows.length) groups.push({
-			title: { ar: 'روايات «لاشين» مسموعة', en: 'The Lasheen novels, out loud' },
+			title: { ar: 'روايات «لاشين» مسموعة', en: 'The Lasheen novels, out loud' }, cat: 'world',
 			note: { ar: 'سلسلة شيرين هنائي التي خرجت من «بعد منتصف الليل»: الكتب من الأول إلى الثامن على «اقرألي» بصوت محمد خميس، ومن الأول إلى الرابع على «ستوريا بود» بصوته أيضًا ومعها مسلسل «العهد» الصوتي، والخامس عشر على Audiohat؛ الزر يفتح صفحة الكتاب هناك.',
 				en: 'Sherine Hanaey’s series that grew out of After Midnight: books one to eight on Iqraaly, read by Mohamed Khamis; one to four on StoriaPod, read by him too, with the audio drama “The Covenant”; and book fifteen on Audiohat. The key opens the book’s page there.' },
 			rows: lrows
 		});
+
+		/* the two kinds of section: [kind, heading, a word on it]; a section is of his works unless it says cat: 'world' */
+		var CATS = [
+			['works', { ar: 'من أعماله', en: 'From his works' },
+				{ ar: 'سلاسله وأعداده الخاصة وكتبه وقصصه مسموعة: بأصوات الرواة على المنصات وYouTube، ومعها موسيقى صدرت مع كتبه.', en: 'His series, their special issues, his books and his stories out loud, read on the platforms and on YouTube, with music that came with his books.' }],
+			['world', { ar: 'من عالمه وعلى أثره', en: 'From his world, after him' },
+				{ ar: 'ما صنعه غيره من عالمه أو بناه عليه: تكملة لسلسلة «ما وراء الطبيعة»، و«لاشين» الذي خرج من «بعد منتصف الليل».', en: 'What others made from his world or built on it: a sequel to Paranormal, and Lasheen, which grew out of After Midnight.' }]
+		];
 
 		/* which sections are open, kept for this visit (the first one always) */
 		var openGroups = [0];
@@ -302,7 +310,17 @@ window.PAGE = {
 						}).join('') + '</div></div>' +
 			'</div></section>' +
 			/* each section opens and closes on its title: the first starts open, and the ones you open stay so while you browse */
-			'<section class="section"><div class="wrap"><div class="ep-groups">' + groups.map(function (g, gi) {
+			/* in two: what comes from his own works, and what others made from his world, on it or after it */
+			'<section class="section"><div class="wrap">' + CATS.map(function (c) {
+				var mine = groups.map(function (g, gi) { return [g, gi]; }).filter(function (x) { return (x[0].cat || 'works') === c[0]; });
+				return mine.length ? '<div class="au-cat"><h2 class="au-cat-h">' + tx(c[1]) + '</h2><p class="au-cat-note">' + tx(c[2]) + '</p><div class="ep-groups">' +
+					mine.map(function (x) { return groupHtml(x[0], x[1]); }).join('') + '</div></div>' : '';
+			}).join('') +
+			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat وStorytel و«اقرألي» وناشريها («شركة سلاح التلميذ للطباعة والنشر» وغيرها)، ودراما «سافاري» الإذاعية من قناة «تسجيل» و«فانتازيا» من «دار النشر الصوتية – Dubvo» على YouTube. هذا الموقع يربط إليها أو يعرضها عبر مشغّل YouTube فقط، ولا يستضيف أي صوت منها.',
+				'Recordings and rights belong to Audiohat, Storytel, Iqraaly and their publishers (Salah El Telmeez for Printing & Publishing and others); the Safari radio drama is from the Tasgeel channel and Fantasia from Dubvo, on YouTube. This site only links to them or plays them through the YouTube player, and hosts none of their audio.') + '</p>' +
+			'</div></section>';
+
+		function groupHtml(g, gi) {
 				return '<details class="ep-group" data-g="' + gi + '"' + (gi === 0 || openGroups.indexOf(gi) >= 0 ? ' open' : '') + '><summary><h3>' + tx(g.title) + ' <small style="color:var(--muted);font-family:var(--f-latin);font-size:15px">(' + App.num(g.rows.length) + (g.total ? ' / ' + App.num(g.total) : '') + ')</small></h3></summary>' +
 					(g.note ? '<p style="color:var(--muted);margin:-6px 0 12px">' + tx(g.note) + '</p>' : '') +
 					'<ul class="ep-list">' + g.rows.map(function (r) {
@@ -325,10 +343,7 @@ window.PAGE = {
 								: '<button type="button" data-start="' + r.start + '">' + L('ضعه في المسجل', 'Load tape') + '</button>') +
 						'</li>';
 					}).join('') + '</ul></details>';
-			}).join('') + '</div>' +
-			'<p class="audio-credit">' + L('التسجيلات وحقوقها لـ Audiohat وStorytel و«اقرألي» وناشريها («شركة سلاح التلميذ للطباعة والنشر» وغيرها)، ودراما «سافاري» الإذاعية من قناة «تسجيل» و«فانتازيا» من «دار النشر الصوتية – Dubvo» على YouTube. هذا الموقع يربط إليها أو يعرضها عبر مشغّل YouTube فقط، ولا يستضيف أي صوت منها.',
-				'Recordings and rights belong to Audiohat, Storytel, Iqraaly and their publishers (Salah El Telmeez for Printing & Publishing and others); the Safari radio drama is from the Tasgeel channel and Fantasia from Dubvo, on YouTube. This site only links to them or plays them through the YouTube player, and hosts none of their audio.') + '</p>' +
-			'</div></section>';
+		}
 
 		root.querySelectorAll('details.ep-group').forEach(function (d) {
 			d.addEventListener('toggle', function () {

@@ -91,6 +91,10 @@ html[lang="en"] .cs-meta { direction: ltr; }
 .audio-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
 @media (max-width: 900px) { .audio-hero { grid-template-columns: 1fr; } }
 .ep-groups { display: grid; gap: 14px; }
+/* «مسموع» in two: from his works, and from his world (audio-page.js CATS) */
+.au-cat + .au-cat { margin-top: 44px; }
+.au-cat-h { margin: 0 0 6px; font-family: var(--f-display); font-size: 30px; color: var(--paper); }
+.au-cat-note { margin: 0 0 16px; color: var(--muted); line-height: 1.8; }
 .ep-group h3 { font-family: var(--f-display); font-size: 24px; margin: 0; display: inline; }
 /* a section opens and closes on its title, a chevron turning to show which way */
 .ep-group > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 10px 14px; margin: 0 0 12px;
