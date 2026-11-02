@@ -10,6 +10,7 @@
 .nwh-copy h2 span { color: var(--muted); }
 .nwh-copy h2 i { font-style: normal; color: var(--ember); }
 .nwh-copy p { margin: 1.3vw 0 0; max-width: 44ch; font-size: max(15px, 1.15vw); line-height: 1.8; color: var(--paper-dim); }
+.nwh-copy { top: 4vh; bottom: -4vh; } /* (with the spread cards, clear of the header; network.js heroWire LIFT) */
 .nwh-cards { position: absolute; inset: 0; z-index: 10; }
 .nwh-tile { position: absolute; left: 50%; top: 50%; will-change: transform; border-radius: 12px; overflow: hidden; container-type: size;
 	display: block; text-decoration: none; color: var(--paper); background: var(--ink-2); pointer-events: none;
@@ -17,6 +18,9 @@
 .nwh-cards.live .nwh-tile { pointer-events: auto; }
 .nwh-pic { position: absolute; inset: 0 0 16cqmin; overflow: hidden; transition: scale .6s cubic-bezier(.22, 1, .36, 1); }
 .nwh-pic img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+/* a figure on its own stands whole, on a lamp-lit ground */
+.nwh-tile.is-fig .nwh-pic { background: radial-gradient(70% 60% at 50% 45%, color-mix(in srgb, var(--ember) 22%, var(--ink-3)), var(--ink-2)); }
+.nwh-tile.is-fig .nwh-pic img { object-fit: contain; object-position: 50% 100%; padding-top: 6cqmin; }
 .nwh-cards.live .nwh-tile:hover .nwh-pic, .nwh-tile:focus-visible .nwh-pic { scale: 1.06; }
 .nwh-tile:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
 .nwh-tl { position: absolute; inset-inline: 6cqmin; bottom: 4cqmin; display: flex; justify-content: space-between; gap: 8px;

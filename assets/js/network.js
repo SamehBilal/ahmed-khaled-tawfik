@@ -34,11 +34,17 @@ window.PAGE = {
 	],
 	KIND: { love: '#e0633a', family: '#d9a45a', friend: '#6fb8a8', foe: '#c94a4a', work: 'rgba(239,230,210,.18)' },
 
-	/* the band: after Tommy Ho's «UI Kits: LottieFiles» hero on CodePen — eight of his people as a tilted stack of cards that, as
-	   the page scrolls, spreads out around the words in the middle, and then leans a little after the pointer. Each card their
-	   own picture where there is one, else a cover of their work (a different issue for each in a series); spread, a card
-	   lights its character in the web below */
-	TILES: ['refaat', 'alaa', 'maggie', 'abeer', 'lucifer', 'bernadette', 'alaa-utopia', 'essam'],
+	/* the band: after Tommy Ho's «UI Kits: LottieFiles» hero on CodePen — the site's pictures of his people as a tilted stack of
+	   cards that, as the page scrolls, spreads out around the words in the middle, and then leans a little after the pointer;
+	   spread, a card lights its character in the web below */
+	/* the cards: who (the first lit), the picture, and whether it is a figure on its own (shown whole) — the tall places for the
+	   figures, the wide one for the still from the series */
+	TILES: [
+		[['refaat'], 'assets/img/refaat.jpg'], [['refaat'], 'assets/img/characters/refaat-lantern.webp', 1],
+		[['bernadette'], 'assets/img/characters/bernadette-figure.webp', 1], [['refaat'], 'assets/img/photos/refaat-lantern-netflix.webp'],
+		[['abeer'], 'assets/img/characters/abeer-figure.webp', 1], [['alaa'], 'assets/img/characters/alaa-doctor.webp'],
+		[['alaa', 'bernadette'], 'assets/img/figures/alaa-bernadette-3d.webp', 1], [['abeer'], 'assets/img/characters/abeer-fantasia-17.webp']
+	],
 	/* each card's place, the pen's own: [stacked x, y (vw, vh)], its tilt in the stack, [spread x, y, width (vw), height (vh),
 	   scale], and [x, y] on a small screen */
 	SPOT: [
@@ -48,19 +54,13 @@ window.PAGE = {
 		[[8, 7], 3, [2, 36, 20, 26, .8], [-22, 40]], [[20, 12], -7, [30, 34, 16, 20, .7], [22, 40]]
 	],
 	band: function (d, A) {
-		var self = window.PAGE, e = A.esc, L = A.L, S = window.WorksShared, chars = d.characters || [], mine = {}, works = {};
-		var cover = function (c) {
-			var src = c.image || (d.charFigures || {})[c.id];
-			if (src) return src;
-			var k = mine[c.work] = (mine[c.work] || 0) + 1;
-			var covers = S.anySeries(c.work) ? S.seriesIssues(c.work).map(function (is) { return S.coverOf((d.issueInfo || {})[S.issueKey(c.work, is)] || {}); }).filter(Boolean) : [];
-			return covers.length ? covers[(k * 7) % covers.length] : S.coverOf((d.bookInfo || {})[c.work] || {});
-		};
-		var tiles = self.TILES.map(function (id) { return chars.filter(function (c) { return c.id === id; })[0]; }).filter(Boolean).map(function (c, i) {
-			var src = cover(c);
-			return '<a class="nwh-tile" href="character.html?id=' + e(c.id) + '" data-id="' + e(c.id) + '" style="z-index:' + (i + 2) + '">' +
-				'<span class="nwh-pic">' + (src ? '<img src="' + e(src) + '" alt="" loading="lazy">' : '') + '</span>' +
-				'<span class="nwh-tl"><span>' + e(A.t(c.name)) + '</span><span>' + e(A.num(('0' + (i + 1)).slice(-2))) + '</span></span></a>';
+		var self = window.PAGE, e = A.esc, L = A.L, chars = d.characters || [], works = {};
+		var who = function (id) { return chars.filter(function (c) { return c.id === id; })[0]; };
+		var tiles = self.TILES.filter(function (t) { return t[0].every(who); }).map(function (t, i) {
+			var name = t[0].map(function (id) { return A.t(who(id).name); }).join(L(' و', ' & '));
+			return '<a class="nwh-tile' + (t[2] ? ' is-fig' : '') + '" href="character.html?id=' + e(t[0][0]) + '" data-id="' + e(t[0][0]) + '" style="z-index:' + (i + 2) + '">' +
+				'<span class="nwh-pic"><img src="' + e(t[1]) + '" alt="' + e(name) + '" loading="lazy"></span>' +
+				'<span class="nwh-tl"><span>' + e(name) + '</span><span>' + e(A.num(('0' + (i + 1)).slice(-2))) + '</span></span></a>';
 		}).join('');
 		chars.forEach(function (c) { works[c.work] = 1; });
 		var nw = Object.keys(works).length;
@@ -79,7 +79,8 @@ window.PAGE = {
 		cardsEl.setAttribute('data-on', '1');
 		hero.removeAttribute('aria-hidden'); /* (its cards are links) */
 		var copy = hero.querySelector('.nwh-copy'), hint = hero.querySelector('.nwh-hint');
-		var START = .12, END = .9, PX = 2.6, PY = 2.2, STACK = .82, clamp = function (v) { return Math.min(1, Math.max(0, v)); };
+		/* LIFT: the stack a little higher than the pen's, the spread a little lower (vh), so neither sits under the header */
+		var START = .12, END = .9, PX = 2.6, PY = 2.2, STACK = .82, LIFT = [-7, 4], clamp = function (v) { return Math.min(1, Math.max(0, v)); };
 		var mqS = matchMedia('(pointer: coarse), (max-width: 640px)'), mqR = matchMedia('(prefers-reduced-motion: reduce)');
 		var els = [].slice.call(cardsEl.querySelectorAll('.nwh-tile')), N = els.length;
 		var tiles = els.map(function (el, i) { var s = self.SPOT[i]; return { el: el, so: s[0], sr: s[1], t: s[2], sm: s[3], depth: .55 + (N > 1 ? i / (N - 1) : 0) * .75 }; });
@@ -98,7 +99,7 @@ window.PAGE = {
 				key = k;
 				tiles.forEach(function (t) {
 					var ex = small ? Math.sign(t.sm[0]) * 22 : t.t[0], ey = small ? t.sm[1] : t.t[1];
-					var x = t.so[0] + (ex - t.so[0]) * p, y = t.so[1] + (ey - t.so[1]) * p, dp = par ? t.depth * p : 0;
+					var x = t.so[0] + (ex - t.so[0]) * p, y = t.so[1] + LIFT[0] + (ey + LIFT[1] - t.so[1] - LIFT[0]) * p, dp = par ? t.depth * p : 0;
 					var rot = reduce ? 0 : (1 - p) * t.sr, rest = small ? .72 : t.t[4], sc = STACK + (rest - STACK) * p;
 					t.el.style.transform = 'translate(calc(-50% + ' + (x - px * PX * dp) + 'vw), calc(-50% + ' + (y - py * PY * dp) + 'vh)) rotate(' + rot + 'deg) scale(' + sc + ')';
 				});
