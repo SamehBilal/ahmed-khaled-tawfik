@@ -1938,7 +1938,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		{ title: T, publisher: { ar: 'دار ليلى', en: 'Dar Lila' }, year: 2009, date: '2009-01-01', lang: 'ar', asin: 'B0DLT8BD7K', pages: 244, format: PB,
 			edition: { ar: 'الطبعة الأولى', en: '1st edition' }, cover: C + 'faqaqee-2009.webp', source: 'https://www.goodreads.com/book/show/7481068' },
 		{ title: T, publisher: { ar: 'كيان كورب (دار ليلى)', en: 'Kayan Corp (Dar Lila)' }, lang: 'ar', isbn: '9789776836013', isbn10: '9776836011', asin: '9776836011',
-			pages: 225, format: PB, cover: C + 'faqaqee-kayan-corp.webp' },
+			pages: 225, format: PB, cover: C + 'faqaqee-kayan-corp.webp', back: 'assets/img/covers/back/faqaqee-kayan-corp.webp' },
 		{ title: T, publisher: { ar: 'دار ليلى (كيان كورب)', en: 'Dar Lila (Kayan Corp)' }, year: 2015, date: '2015-01-01', lang: 'ar', asin: 'B0DM1C576Z',
 			pages: 187, format: PB, cover: C + 'faqaqee-2015.webp' },
 		{ title: T, publisher: KAYAN, year: 2017, date: '2017-01-01', lang: 'ar', isbn: '9789778200331', isbn10: '9778200335', asin: '9778200335', pages: 224, format: PB,
