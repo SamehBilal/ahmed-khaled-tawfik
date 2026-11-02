@@ -117,12 +117,14 @@ window.PAGE = {
 
 	render: function () {
 		var App = window.App, e = App.esc, L = App.L, self = this;
-		document.getElementById('content').innerHTML = '<section class="section cl"><div class="wrap"><p class="cl-sum">' + e(L('…', '…')) + '</p></div></section>';
+		/* the log beside the side menu of the pages about the site (app.js infoTabs), as on «عن الموقع» and the others */
+		document.getElementById('content').innerHTML = '<section class="section cl"><div class="wrap info-wrap">' + App.infoTabs('changelog') +
+			'<div class="info-body cl-body"><p class="cl-sum">' + e(L('…', '…')) + '</p></div></div></section>';
 		fetch('assets/data/changelog.json').then(function (r) { return r.json(); }).then(function (log) {
 			self.log = log;
 			var count = {}; log.forEach(function (x) { x.k.forEach(function (k) { count[k] = (count[k] || 0) + 1; }); });
 			var days = {}; log.forEach(function (x) { days[x.d] = 1; });
-			document.querySelector('.cl .wrap').innerHTML =
+			document.querySelector('.cl-body').innerHTML =
 				'<p class="cl-sum">' + e(L(App.num(log.length) + ' تحديثًا في ' + App.num(Object.keys(days).length) + ' يومًا، منذ ' + App.num(log[log.length - 1].d) + '.', log.length + ' changes on ' + Object.keys(days).length + ' days, since ' + log[log.length - 1].d + '.')) + '</p>' +
 				'<div class="cl-bar"><div class="chips"><button type="button" class="chip" data-k="all" aria-pressed="true">' + e(L('الكل', 'All')) + '</button>' +
 					self.KINDS.filter(function (k) { return count[k[0]]; }).map(function (k) { return '<button type="button" class="chip" data-k="' + k[0] + '" aria-pressed="false">' + e(App.t(k[1])) + ' <b>' + e(App.num(count[k[0]])) + '</b></button>'; }).join('') +
@@ -145,7 +147,7 @@ window.PAGE = {
 			self.list();
 			self.ruler();
 		}).catch(function () {
-			document.querySelector('.cl .wrap').innerHTML = '<p class="cl-sum">' + e(L('تعذّر تحميل السجل الآن.', 'The log could not be loaded just now.')) + '</p>';
+			document.querySelector('.cl-body').innerHTML = '<p class="cl-sum">' + e(L('تعذّر تحميل السجل الآن.', 'The log could not be loaded just now.')) + '</p>';
 		});
 	},
 

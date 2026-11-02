@@ -193,6 +193,16 @@
 			dlg.showModal();
 		},
 
+		/* the side menu of the pages about the site (info.js, changelog.js): each a page, the one open marked (site.css .info-tabs) */
+		INFO_PAGES: [['about', { ar: 'عن الموقع والأسئلة الشائعة', en: 'About & FAQ' }], ['sources', { ar: 'المصادر وطريقة الجمع', en: 'Sources & method' }],
+			['privacy', { ar: 'الخصوصية', en: 'Privacy' }], ['terms', { ar: 'حقوق الاستخدام', en: 'Rights & use' }],
+			['contact', { ar: 'تواصل وساهم', en: 'Contact & contribute' }], ['changelog', { ar: 'سجل التحديثات', en: 'Changelog' }]],
+		infoTabs: function (current) {
+			return '<nav class="info-tabs" aria-label="' + App.esc(App.L('عن الموقع', 'About the site')) + '">' + App.INFO_PAGES.map(function (p) {
+				return '<a href="' + p[0] + '.html"' + (p[0] === current ? ' aria-current="page"' : '') + '>' + App.esc(App.t(p[1])) + '</a>';
+			}).join('') + '</nav>';
+		},
+
 		focusHash: function (onTarget) {
 			var id = decodeURIComponent(location.hash.slice(1));
 			if (!id) return;

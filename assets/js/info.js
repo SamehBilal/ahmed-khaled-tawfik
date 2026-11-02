@@ -176,9 +176,7 @@
 
 		render: function () {
 			var App = window.App, L = App.L, t = App.t, e = App.esc;
-			var tabs = ['about', 'sources', 'privacy', 'terms', 'contact'].map(function (k) {
-				return '<a href="' + k + '.html"' + (k === id ? ' aria-current="page"' : '') + '>' + e(t(PAGES[k].title)) + '</a>';
-			}).join('');
+			var tabs = App.infoTabs(id);
 			var body = cfg.sections.map(function (s, i) {
 				var sid = id === 'about' && i === cfg.sections.length - 1 ? ' id="credits"' : '';
 				return '<section class="info-sec"' + sid + '><h2>' + e(t(s.h)) + '</h2>' + t(s.p) + '</section>';
@@ -231,7 +229,7 @@
 			}
 
 			document.getElementById('content').innerHTML =
-				'<div class="wrap info-wrap"><nav class="info-tabs" aria-label="' + L('عن الموقع', 'About the site') + '">' + tabs + '</nav>' +
+				'<div class="wrap info-wrap">' + tabs +
 				'<div class="info-body">' + body + (cfg.extra ? cfg.extra(App) : '') + '</div></div>';
 		}
 	};
