@@ -133,7 +133,7 @@
 			var S = window.WorksShared, e = A.esc, L = A.L, t = A.t;
 			var px = [32, 24, 18, 14, 10, 8, 6, 4].map(function (n) {
 				var h = n / 2;
-				return '<filter id="tb-px' + n + '" x="0" y="0" width="150%" height="150%" color-interpolation-filters="sRGB"><feOffset dx="' + h + '" dy="' + h + '" result="s"/>' +
+				return '<filter id="pst-px' + n + '" x="0" y="0" width="150%" height="150%" color-interpolation-filters="sRGB"><feOffset dx="' + h + '" dy="' + h + '" result="s"/>' +
 					'<feFlood x="' + h + '" y="' + h + '" width="1" height="1"/><feComposite width="' + n + '" height="' + n + '"/><feTile result="d"/>' +
 					'<feComposite in="s" in2="d" operator="in"/><feMorphology operator="dilate" radius="' + h + '"/></filter>';
 			}).join('');
@@ -141,19 +141,19 @@
 			var work = function (id) { var w = (d.works || []).filter(function (x) { return x.id === id; })[0]; return w && [S.coverOf((d.bookInfo || {})[id]), t(w.title)]; };
 			var looks = ['pixel', 'pixel masked stitch', 'blur', 'pixel masked cross', 'frost'];
 			var prints = [series('mwt'), series('fantasia'), work('utopia'), series('safari'), work('rats')].filter(function (x) { return x && x[0]; }).map(function (c, i) {
-				return '<li class="tb-print ' + looks[i] + '"><div class="pic"><img src="' + e(c[0]) + '" alt="" draggable="false"></div><span class="cap">' + e(c[1]) + '</span></li>';
+				return '<li class="pst-print ' + looks[i] + '"><div class="pic"><img src="' + e(c[0]) + '" alt="" draggable="false"></div><span class="cap">' + e(c[1]) + '</span></li>';
 			}).join('');
 			setTimeout(termsBand, 0);
-			return '<svg class="tb-filters" aria-hidden="true">' + px + '<filter id="tb-goo" x="-10%" y="-50%" width="120%" height="200%" color-interpolation-filters="sRGB">' +
+			return '<svg class="pst-filters" aria-hidden="true">' + px + '<filter id="pst-goo" x="-10%" y="-50%" width="120%" height="200%" color-interpolation-filters="sRGB">' +
 				'<feGaussianBlur stdDeviation="10"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9"/></filter></svg>' +
-				'<div class="tb" data-px="32"><div class="tb-track"><span class="tb-text tb-idle" aria-hidden="true">' + e(L('اسحب لتكشف الأغلفة', 'Stretch to reveal the covers')) + '</span>' +
-				'<span class="tb-text tb-ok" role="status"><span>' + e(L('الأغلفة لأصحابها', 'Their owners’ covers')) + '</span></span>' +
-				'<button type="button" class="tb-knob" aria-label="' + e(L('اسحب لتكشف الأغلفة، أو اضغط Enter', 'Stretch to reveal the covers, or press Enter')) + '">' +
-				'<span class="tb-body" aria-hidden="true"><i class="tb-neck"></i></span>' +
-				'<svg class="tb-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>' +
-				'<svg class="tb-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></div>' +
-				'<button type="button" class="tb-reset">' + e(L('من جديد', 'Again')) + '</button>' +
-				'<ul class="tb-photos" aria-hidden="true">' + prints + '</ul></div>';
+				'<div class="pst" data-px="32"><div class="pst-track"><span class="pst-text pst-idle" aria-hidden="true">' + e(L('اسحب لتكشف الأغلفة', 'Stretch to reveal the covers')) + '</span>' +
+				'<span class="pst-text pst-ok" role="status"><span>' + e(L('الأغلفة لأصحابها', 'Their owners’ covers')) + '</span></span>' +
+				'<button type="button" class="pst-knob" aria-label="' + e(L('اسحب لتكشف الأغلفة، أو اضغط Enter', 'Stretch to reveal the covers, or press Enter')) + '">' +
+				'<span class="pst-body" aria-hidden="true"><i class="pst-neck"></i></span>' +
+				'<svg class="pst-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>' +
+				'<svg class="pst-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></div>' +
+				'<button type="button" class="pst-reset">' + e(L('من جديد', 'Again')) + '</button>' +
+				'<ul class="pst-photos" aria-hidden="true">' + prints + '</ul></div>';
 		},
 
 		/* lists: four wooden crates under a hanging lamp, one per list, holding the reader's own covers (the newest in front) and
@@ -463,19 +463,19 @@
 	/* the terms band at work: the knob follows the pull with a growing lag, x (1 + 2.2x) / (1 + x + 2.2x²) of the free length, so it
 	   never quite gets there; let go past .72 and it runs to the end, or else it snaps back. The pixelated covers clear in eight steps */
 	function termsBand() {
-		var el = document.querySelector('.tb');
+		var el = document.querySelector('.pst');
 		if (!el || el.getAttribute('data-on')) return;
 		el.setAttribute('data-on', '1');
 		var ph = el.closest('.ph');
 		if (ph) ph.removeAttribute('aria-hidden'); /* (this band is a control, not a decoration) */
-		var knob = el.querySelector('.tb-knob'), p = 0, done = 0, x0 = null;
+		var knob = el.querySelector('.pst-knob'), p = 0, done = 0, x0 = null;
 		var rtl = function () { return getComputedStyle(el).direction === 'rtl'; };
-		var max = function () { return parseFloat(getComputedStyle(el).getPropertyValue('--tb-max')) || 400; };
+		var max = function () { return parseFloat(getComputedStyle(el).getPropertyValue('--pst-max')) || 400; };
 		var set = function (np, held) {
 			p = np;
-			el.style.setProperty('--tb-p', p);
-			el.style.setProperty('--tb-held', held ? 1 : 0);
-			el.style.setProperty('--tb-done', done);
+			el.style.setProperty('--pst-p', p);
+			el.style.setProperty('--pst-held', held ? 1 : 0);
+			el.style.setProperty('--pst-done', done);
 			el.setAttribute('data-held', held ? 1 : 0);
 			el.setAttribute('data-done', done);
 			el.setAttribute('data-px', p >= 1 ? 0 : [32, 24, 18, 14, 10, 8, 6, 4][Math.min(7, Math.floor(p * 8))]);
@@ -500,7 +500,7 @@
 		knob.addEventListener('keydown', function (ev) {
 			if (!done && (ev.key === 'Enter' || ev.key === (rtl() ? 'ArrowLeft' : 'ArrowRight'))) { ev.preventDefault(); finish(); }
 		});
-		el.querySelector('.tb-reset').addEventListener('click', function () { done = 0; set(0, false); knob.focus(); });
+		el.querySelector('.pst-reset').addEventListener('click', function () { done = 0; set(0, false); knob.focus(); });
 		set(0, false);
 	}
 
