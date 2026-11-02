@@ -615,6 +615,9 @@
 		cancelPending();
 		if (!key) return;
 		dragging = { a: a, key: key, rec: describe(key, a) };
+		/* one edition's cover (a book page's «الطبعات والأغلفة»): the ghost wears it */
+		var edImg = a.getAttribute('data-ls-ed-img');
+		if (edImg) { dragging.edImg = edImg; dragging.rec.img = edImg; }
 		/* the ghost: the cover if there is one, otherwise a small card with the title */
 		var vis = a.querySelector('.mini-cover, img, .bk-cover, .hc-cover, .sh-image') || a;
 		ghost = document.createElement('div');
@@ -660,7 +663,15 @@
 			if (ghost) { ghost.classList.add('is-dropped'); }
 			setTimeout(function () {
 				close();
-				if (LISTS[list].mode === 'collector') chooseEditions(list, d.key);
+				if (LISTS[list].mode !== 'collector') return;
+				/* dragged from one edition's cover: that edition, added to those already chosen, without asking */
+				var ed = d.edImg && editionsOf(d.key).filter(function (x) { return x.img === d.edImg; })[0];
+				var x = ed && state.lists[list].filter(function (y) { return y.key === d.key; })[0];
+				if (x) {
+					x.eds = (x.eds || []).filter(function (e) { return ed.ids.indexOf(e.id) < 0; }).concat([{ id: ed.id, label: ed.label }]);
+					save(); changed();
+					say(L('حُفظت الطبعة: ', 'Edition saved: ') + tt(ed.label));
+				} else chooseEditions(list, d.key);
 			}, 650);
 			}
 		} else close();

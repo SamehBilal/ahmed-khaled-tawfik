@@ -78,6 +78,8 @@ html[lang="en"] .d-alt { font-family: var(--f-display); }
 	padding: 14px; border-radius: var(--radius); background: var(--ink-2); border: 1px solid var(--line);
 }
 .edition .mini-cover { width: 84px; }
+.ed-drag { cursor: grab; touch-action: pan-y; } /* (drags into the lists, lists.js) */
+.ed-drag img { -webkit-user-drag: none; user-select: none; }
 .edition h4 { margin: 0 0 4px; font-family: var(--f-display); font-size: 17px; line-height: 1.35; }
 .edition .meta { margin: 0 0 2px; font-size: 14px; color: var(--muted); }
 .edition a { font-family: var(--f-latin); font-size: 14px; }

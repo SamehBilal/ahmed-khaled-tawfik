@@ -175,8 +175,11 @@ window.PAGE = {
 			/* the house links to its page when it has one */
 			var meta = [withPub.publisher ? S.publisherLink(withPub.publisher) : '', e(langName(first.lang)),
 				n > 1 ? e(n === 2 ? L('طبعتان', '2 printings') : App.num(n) + ' ' + L(n <= 10 ? 'طبعات' : 'طبعة', 'printings')) : ''].filter(Boolean).join(' · ');
+			/* its cover drags into the lists as the 3D book does (lists.js), carrying this edition: the ghost wears its cover, and a
+			   collector's list takes it as the edition chosen */
 			return '<article class="edition">' +
-				S.miniCover({ img: g.cover, color: color, title: t(first.title || title), by: otherAuthor ? authorAr : first.lang && first.lang !== 'ar' ? 'Ahmed Khaled Tawfik' : '' }) +
+				'<div class="ed-drag" data-ls-key="' + e('b:' + id) + '"' + (g.cover ? ' data-ls-ed-img="' + e(g.cover) + '"' : '') + '>' +
+				S.miniCover({ img: g.cover, color: color, title: t(first.title || title), by: otherAuthor ? authorAr : first.lang && first.lang !== 'ar' ? 'Ahmed Khaled Tawfik' : '' }) + '</div>' +
 				'<div><h4>' + tx(first.title || title) + '</h4>' +
 				'<p class="meta">' + meta + '</p>' +
 				'<div class="ed-years" role="group" aria-label="' + e(L('الطبعات', 'Printings')) + '">' + g.list.map(function (i) {
