@@ -7,7 +7,7 @@
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'akt-cdee7efc1f';
+var VERSION = 'akt-ea039df904';
 var PRECACHE = [
 	'./',
 	'about.html',
@@ -49,6 +49,7 @@ var PRECACHE = [
 	'series.html',
 	'sitemap.html',
 	'sources.html',
+	'story.html',
 	'style.html',
 	'talks.html',
 	'tanta.html',
@@ -123,6 +124,7 @@ var PRECACHE = [
 	'assets/js/shelf-hero.js',
 	'assets/js/site-stats.js',
 	'assets/js/sitemap-page.js',
+	'assets/js/story.js',
 	'assets/js/style.js',
 	'assets/js/talks.js',
 	'assets/js/tanta.js',
@@ -166,6 +168,7 @@ var PRECACHE = [
 	'assets/css/page-refaat-life.css',
 	'assets/css/page-screen.css',
 	'assets/css/page-sitemap.css',
+	'assets/css/page-story.css',
 	'assets/css/page-style.css',
 	'assets/css/page-talks.css',
 	'assets/css/page-tanta.css',
@@ -195,8 +198,10 @@ var PRECACHE = [
 	'assets/data/days/11.json',
 	'assets/data/days/12.json',
 	'assets/data/library-covers.json',
+	'assets/data/links.json',
 	'assets/data/place-photos.json',
 	'assets/data/places.json',
+	'assets/data/story.json',
 	'assets/data/style.json',
 	'assets/data/world.json',
 	'assets/fonts/gf/CormorantGaramond-latin-1.woff2',
