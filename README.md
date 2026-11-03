@@ -57,7 +57,7 @@ node tools/build-sw.js
 
 It builds, in order:
 
-- **`assets/js/data-built.js`** (`tools/build-data.js`) — the eleven data files from `data.js` to `data-more.js`, run once with their corrections applied: the pages load this one file, not those. Edit the data in those files, never in this one, then rebuild.
+- **`assets/js/data-built.js`** (`tools/build-data.js`) — the eleven data files from `data.js` to `data-more.js`, run once with their corrections applied: the pages load this one file, not those; what only the book, series and «حول العالم» pages read (the editions' links and credits, the Abjjad links) goes to `assets/js/data-detail.js`, which only they load. Edit the data in those files, never in this one, then rebuild.
 - **page descriptions** (`tools/build-meta.js`) — each section page's description, share tags and JSON-LD, with their numbers (issues, books, quotes, articles…) counted from the data; also the font and data preloads in every head.
 - **`sw.js`** — the service worker's file list and version, so installed copies show "A newer version is ready".
 - **`sitemap.xml`** (`tools/build-sitemap.js`) — every page, book, issue, series, character, writer, publisher and blog article, for search engines.
