@@ -86,6 +86,7 @@
 			{ href: 'contact.html', ar: 'تواصل وساهم', en: 'Contact & contribute' },
 			{ href: 'wanted.html', ar: 'ما ينقص الأرشيف', en: 'Wanted for the archive' },
 			{ href: 'changelog.html', ar: 'سجل التحديثات', en: 'Changelog' },
+			{ href: 'story.html', ar: 'قصة الموقع', en: 'The site’s story' },
 			{ href: 'sitemap.html', ar: 'خريطة الموقع', en: 'Site map' }
 		],
 		/* the pages that are now a section of another, in no menu but found by the search and named on the site map */
@@ -122,6 +123,17 @@
 		lang: store(LANG_KEY) === 'en' ? 'en' : 'ar',
 		UI: UI,
 		REPO: REPO,
+		/* the newest change in «سجل التحديثات» (written here by tools/build-changelog.js), and the newest a reader has seen there:
+		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
+		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
+		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
+		LATEST: '59dc74c',
+		isNew: function () {
+			var seen = store('akt-cl-seen');
+			if (!App.LATEST) return false;
+			if (!seen) { store('akt-cl-seen', App.LATEST); return false; }
+			return seen !== App.LATEST;
+		},
 		norm: norm,
 
 		/* pick a localized string from {ar, en} (or return plain strings as-is) */
@@ -226,11 +238,11 @@
 		INFO_PAGES: [['about', { ar: 'عن الموقع والأسئلة الشائعة', en: 'About & FAQ' }], ['sources', { ar: 'المصادر', en: 'Sources' }],
 			['privacy', { ar: 'الخصوصية', en: 'Privacy' }], ['terms', { ar: 'حقوق الاستخدام', en: 'Rights & use' }],
 			['contact', { ar: 'تواصل وساهم', en: 'Contact & contribute' }],
-			['wanted', { ar: 'ما ينقص الأرشيف', en: 'Wanted for the archive' }], ['changelog', { ar: 'سجل التحديثات', en: 'Changelog' }],
+			['wanted', { ar: 'ما ينقص الأرشيف', en: 'Wanted for the archive' }], ['changelog', { ar: 'سجل التحديثات', en: 'Changelog' }], ['story', { ar: 'قصة الموقع', en: 'The site’s story' }],
 			['sitemap', { ar: 'خريطة الموقع', en: 'Site map' }]],
 		infoTabs: function (current) {
 			return '<nav class="info-tabs" aria-label="' + App.esc(App.L('عن الموقع', 'About the site')) + '">' + App.INFO_PAGES.map(function (p) {
-				return '<a href="' + p[0] + '.html"' + (p[0] === current ? ' aria-current="page"' : '') + '>' + App.esc(App.t(p[1])) + '</a>';
+				return '<a href="' + p[0] + '.html"' + (p[0] === current ? ' aria-current="page"' : '') + (p[0] === 'changelog' && p[0] !== current && App.isNew() ? ' class="is-new"' : '') + '>' + App.esc(App.t(p[1])) + '</a>';
 			}).join('') + '</nav>';
 		},
 
@@ -311,6 +323,11 @@
 		shareButton: function () {
 			return '<button type="button" class="share-btn" data-share><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.8l7.4-4.3M8.3 13.2l7.4 4.3"/></svg>' +
 				App.esc(App.L('شارك', 'Share')) + '</button>';
+		},
+		/* «استشهد»: this page's reference, ready to copy, on the terms page («كيف تستشهد بالموقع», info.js) */
+		citeButton: function () {
+			var page = (location.pathname.split('/').pop() || 'index.html') + location.search;
+			return '<a class="share-btn" href="terms.html?cite=' + encodeURIComponent(page) + '#cite">' + App.esc(App.L('استشهد', 'Cite')) + '</a>';
 		},
 		/* him, as the books' author in their JSON-LD: the Person the home page describes */
 		seoAuthor: { '@type': 'Person', '@id': 'https://samehbilal.github.io/ahmed-khaled-tawfik/#akt', name: 'أحمد خالد توفيق', alternateName: 'Ahmed Khaled Tawfik' },
@@ -500,7 +517,7 @@
 							'</nav>' +
 							/* then the site's own pages */
 							'<nav class="ft-legal" aria-labelledby="ft-legal-h"><h2 id="ft-legal-h">' + App.L('خلف الكواليس', 'Behind the site') + '</h2>' +
-								UI.legal.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
+								UI.legal.map(function (n) { return '<a href="' + n.href + '"' + (n.href === 'changelog.html' && App.isNew() ? ' class="is-new" title="' + App.esc(App.L('جديد منذ زيارتك', 'New since your visit')) + '"' : '') + '>' + App.esc(n[App.lang]) + '</a>'; }).join('') +
 							'</nav>' +
 						'</div>' +
 						'<div class="ft-maker">' +

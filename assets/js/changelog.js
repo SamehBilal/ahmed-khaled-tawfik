@@ -1,5 +1,7 @@
 /* changelog.html — «سجل التحديثات»: everything added to the site and when, from its history (assets/data/changelog.json,
-   tools/build-changelog.js): a day at a time, newest first, filtered by kind or searched; each change in Arabic where it has a line (x.a), with the words it was recorded in under it. */
+   tools/build-changelog.js): a day at a time, newest first, filtered by kind or searched; each change in Arabic where it has a line (x.a), with the words it was recorded in under it.
+   Above it «ما الجديد منذ زيارتك» (what came since the newest change this reader saw here, kept on their device as akt-cl-seen),
+   and under it «سجل التصحيحات»: the changes that put a fact right (x.c). */
 window.PAGE = {
 	id: 'changelog',
 	title: { ar: 'سجل التحديثات', en: 'Changelog' },
@@ -13,7 +15,7 @@ window.PAGE = {
 	},
 	KINDS: [['page', { ar: 'صفحات جديدة', en: 'New pages' }], ['data', { ar: 'كتب ومقالات وبيانات', en: 'Books, articles, data' }], ['pics', { ar: 'أغلفة وصور', en: 'Covers & pictures' }],
 		['audio', { ar: 'مسموع ومرئي', en: 'Audio & video' }], ['design', { ar: 'تصميم', en: 'Design' }], ['fix', { ar: 'تصحيحات', en: 'Fixes' }]],
-	kind: 'all', q: '', shown: 3, day: '',
+	kind: 'all', q: '', shown: 3, day: '', since: 0,
 
 	/* the band, after Paul Troshkin's «Date Ruler» on CodePen (made there with Reactive CSS; here in plain script): a card with
 	   the weekday and the year, the date on reels that roll to it, and a ruler each for the day, the month and the year, dragged
@@ -80,7 +82,7 @@ window.PAGE = {
 			reelTo('dr-mo', v.m - 1); reelTo('dr-wd', new Date(v.y, v.m - 1, dd).getDay());
 			String(v.y).split('').forEach(function (c, i) { reelTo('dr-y' + (i + 1), +c); });
 			var c = by[key()];
-			card.querySelector('.dr-out').innerHTML = c ? '<button type="button" class="dr-go">' + A.esc(L(A.num(c) + ' تحديثًا في هذا اليوم ↓', c + ' change' + (c > 1 ? 's' : '') + ' on this day ↓')) + '</button>'
+			card.querySelector('.dr-out').innerHTML = c ? '<button type="button" class="dr-go">' + A.esc(L(A.count(c, ['تحديث واحد', 'تحديثان', 'تحديثات', 'تحديثًا']) + ' في هذا اليوم ↓', c + ' change' + (c > 1 ? 's' : '') + ' on this day ↓')) + '</button>'
 				: '<span>' + A.esc(L('لم يتغير الموقع في هذا اليوم', 'The site did not change on this day')) + '</span>';
 		};
 		/* the day is cut to the month's end once the month or the year has moved */
@@ -124,12 +126,14 @@ window.PAGE = {
 			self.log = log;
 			var count = {}; log.forEach(function (x) { x.k.forEach(function (k) { count[k] = (count[k] || 0) + 1; }); });
 			var days = {}; log.forEach(function (x) { days[x.d] = 1; });
-			document.querySelector('.cl-body').innerHTML =
-				'<p class="cl-sum">' + e(L(App.num(log.length) + ' تحديثًا في ' + App.num(Object.keys(days).length) + ' يومًا، منذ ' + App.num(log[log.length - 1].d) + '.', log.length + ' changes on ' + Object.keys(days).length + ' days, since ' + log[log.length - 1].d + '.')) + '</p>' +
+			var fixes = log.filter(function (x) { return x.c; });
+			document.querySelector('.cl-body').innerHTML = self.sinceHtml(log) +
+				'<p class="cl-sum">' + e(L(App.num(log.length) + ' تحديثًا في ' + App.num(Object.keys(days).length) + ' يومًا، منذ ' + App.num(log[log.length - 1].d) + '.', log.length + ' changes on ' + Object.keys(days).length + ' days, since ' + log[log.length - 1].d + '.')) +
+					(fixes.length ? ' <a href="#corrections">' + e(L('وسجل التصحيحات (' + App.num(fixes.length) + ') ↓', 'And the corrections (' + fixes.length + ') ↓')) + '</a>' : '') + '</p>' +
 				'<div class="cl-bar"><div class="chips"><button type="button" class="chip" data-k="all" aria-pressed="true">' + e(L('الكل', 'All')) + '</button>' +
 					self.KINDS.filter(function (k) { return count[k[0]]; }).map(function (k) { return '<button type="button" class="chip" data-k="' + k[0] + '" aria-pressed="false">' + e(App.t(k[1])) + ' <b>' + e(App.num(count[k[0]])) + '</b></button>'; }).join('') +
 				'</div><input type="search" class="cl-q" placeholder="' + e(L('ابحث في السجل…', 'Search the log…')) + '"></div>' +
-				'<div class="cl-list"></div>' +
+				'<div class="cl-list"></div>' + self.fixesHtml(fixes) +
 				'<p class="cl-note">' + e(L('كُتب السجل أولًا بالإنجليزية في تاريخ الموقع على GitHub؛ وتحت كل سطر عربي نصّه الأصلي.', 'The log is written in the site’s history on GitHub, as it was recorded there.')) + ' <a href="https://github.com/SamehBilal/ahmed-khaled-tawfik/commits/main" target="_blank" rel="noopener">GitHub ↗</a></p>';
 			var root = document.querySelector('.cl');
 			root.querySelector('.chips').onclick = function (ev) {
@@ -142,10 +146,13 @@ window.PAGE = {
 			root.querySelector('.cl-q').oninput = function (ev) { self.q = ev.target.value.trim().toLowerCase(); self.shown = 3; self.list(); };
 			root.querySelector('.cl-list').onclick = function (ev) {
 				if (ev.target.closest('.cl-more')) { self.shown += 3; self.list(); }
-				if (ev.target.closest('.cl-all')) { self.day = ''; self.shown = 3; self.list(); }
+				if (ev.target.closest('.cl-all')) { self.day = ''; self.since = 0; self.shown = 3; self.list(); }
 			};
+			var only = root.querySelector('.cl-new-only');
+			if (only) only.onclick = function () { self.since = +only.getAttribute('data-n'); self.day = ''; self.shown = 99; self.list(); root.querySelector('.cl-list').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
 			self.list();
 			self.ruler();
+			App.focusHash();
 		}).catch(function () {
 			document.querySelector('.cl-body').innerHTML = '<p class="cl-sum">' + e(L('تعذّر تحميل السجل الآن.', 'The log could not be loaded just now.')) + '</p>';
 		});
@@ -157,7 +164,7 @@ window.PAGE = {
 		var kindName = {}; this.KINDS.forEach(function (k) { kindName[k[0]] = k[1]; });
 		var MONTHS = App.lang === 'en' ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 			: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-		var rows = this.log.filter(function (x) { return (!self.day || x.d === self.day) && (self.kind === 'all' || x.k.indexOf(self.kind) >= 0) && (!self.q || (x.s + ' ' + (x.a || '')).toLowerCase().indexOf(self.q) >= 0); });
+		var rows = this.log.filter(function (x, i) { return (!self.since || i < self.since) && (!self.day || x.d === self.day) && (self.kind === 'all' || x.k.indexOf(self.kind) >= 0) && (!self.q || (x.s + ' ' + (x.a || '')).toLowerCase().indexOf(self.q) >= 0); });
 		/* a block a day (the site is young: its months are long) */
 		var days = [], by = {};
 		rows.forEach(function (x) { if (!by[x.d]) { by[x.d] = []; days.push(x.d); } by[x.d].push(x); });
@@ -169,6 +176,41 @@ window.PAGE = {
 				return '<li><span class="cl-d">•</span><div>' + (ar ? '<p class="cl-ar">' + e(x.a) + '</p><details class="cl-en"><summary>' + e(L('النص الأصلي', 'Original')) + '</summary><p dir="ltr">' + e(x.s) + '</p></details>' : '<p dir="ltr">' + e(x.s) + '</p>') + (x.k.length ? '<p class="cl-k">' + x.k.map(function (k) { return '<span class="cl-' + k + '">' + e(t(kindName[k])) + '</span>'; }).join('') + '</p>' : '') + '</div></li>';
 			}).join('') + '</ol></section>';
 		}).join('') + (days.length > this.shown ? '<button type="button" class="share-btn cl-more">' + e(L('أيام أقدم', 'Older days')) + '</button>' : '') +
-			(this.day ? ' <button type="button" class="share-btn cl-all">' + e(L('كل الأيام', 'All days')) + '</button>' : '');
+			(this.day || this.since ? ' <button type="button" class="share-btn cl-all">' + e(L('كل الأيام', 'All days')) + '</button>' : '');
+	},
+
+	/* «ما الجديد منذ زيارتك»: the changes since the newest one this reader saw here; then all of them count as seen */
+	sinceHtml: function (log) {
+		var App = window.App, e = App.esc, L = App.L, seen = null;
+		try { seen = localStorage.getItem('akt-cl-seen'); localStorage.setItem('akt-cl-seen', log[0].h); } catch (err) {}
+		document.querySelectorAll('a.is-new').forEach(function (a) { a.classList.remove('is-new'); a.removeAttribute('title'); });
+		var at = -1;
+		log.some(function (x, i) { if (x.h === seen) { at = i; return true; } });
+		if (at < 0) return '';
+		var MONTHS = this.MONTHS(), when = log[at].d, date = App.num(+when.slice(8)) + ' ' + MONTHS[+when.slice(5, 7) - 1];
+		if (!at) return '<p class="cl-new is-none">' + e(L('لا جديد منذ زيارتك الأخيرة لهذه الصفحة (' + date + ').', 'Nothing new since you last looked here (' + date + ').')) + '</p>';
+		var fresh = log.slice(0, at), pages = fresh.filter(function (x) { return x.k.indexOf('page') >= 0; });
+		var count = {}; fresh.forEach(function (x) { x.k.forEach(function (k) { count[k] = (count[k] || 0) + 1; }); });
+		var name = {}; this.KINDS.forEach(function (k) { name[k[0]] = k[1]; });
+		var line = function (x) { var s = App.lang !== 'en' && x.a ? x.a : x.s; return s.length > 150 ? s.slice(0, 148).replace(/\s+\S*$/, '') + '…' : s; };
+		return '<section class="cl-new" aria-labelledby="cl-new-h"><h2 id="cl-new-h">' + e(L('ما الجديد منذ زيارتك', 'New since your visit')) + '</h2>' +
+			'<p>' + e(L(App.count(fresh.length, ['تحديث واحد', 'تحديثان', 'تحديثات', 'تحديثًا']) + ' منذ آخر مرة فتحت فيها هذه الصفحة، في ' + date + ':', fresh.length + ' change' + (fresh.length > 1 ? 's' : '') + ' since you last opened this page, on ' + date + ':')) + '</p>' +
+			'<p class="cl-k">' + this.KINDS.filter(function (k) { return count[k[0]]; }).map(function (k) { return '<span class="cl-' + k[0] + '">' + e(App.t(name[k[0]])) + ' ' + e(App.num(count[k[0]])) + '</span>'; }).join('') + '</p>' +
+			(pages.length ? '<ul class="cl-new-pages">' + pages.slice(0, 5).map(function (x) { return '<li>' + e(line(x)) + '</li>'; }).join('') + '</ul>' : '') +
+			'<button type="button" class="share-btn cl-new-only" data-n="' + at + '">' + e(L('اعرض الجديد وحده ↓', 'Show only what is new ↓')) + '</button></section>';
+	},
+
+	/* «سجل التصحيحات»: each fact put right, newest first — what it says now, when, who sent it, and the change itself on GitHub */
+	fixesHtml: function (fixes) {
+		var App = window.App, e = App.esc, L = App.L, MONTHS = this.MONTHS();
+		return '<section class="cl-fixes" id="corrections"><h2>' + e(L('سجل التصحيحات', 'Corrections')) + ' <small>' + e(App.num(fixes.length)) + '</small></h2>' +
+			'<p class="cl-sum">' + e(L('كل معلومة كانت خطأً في الموقع ثم صُحّحت: ماذا صارت ومتى، ومن نبّه إليها إن أحب أن يُذكر. لا نمحو الخطأ بصمت.', 'Every fact the site had wrong and then put right: what it says now and when, and who pointed it out, if they wished to be named. Mistakes are not erased quietly.')) + '</p>' +
+			(fixes.length ? '<ol class="cl-fix-list">' + fixes.map(function (x) {
+				return '<li><time datetime="' + e(x.d) + '">' + e(App.num(+x.d.slice(8)) + ' ' + MONTHS[+x.d.slice(5, 7) - 1] + ' ' + App.num(x.d.slice(0, 4))) + '</time>' +
+					'<p>' + e(App.t(x.c)) + '</p>' +
+					'<p class="cl-fix-by">' + (x.c.by ? e(L('بتنبيه من ', 'Pointed out by ') + x.c.by) + ' · ' : '') +
+					'<a href="https://github.com/SamehBilal/ahmed-khaled-tawfik/commit/' + e(x.h) + '" target="_blank" rel="noopener" dir="ltr">' + e(x.h) + ' ↗</a></p></li>';
+			}).join('') + '</ol>' : '') +
+			'<p class="cl-fix-send"><a class="share-btn" href="' + e(App.fixHref(L('تصحيح', 'Correction'))) + '" target="_blank" rel="noopener">' + e(L('وجدت خطأً آخر؟ أرسله ↗', 'Found another mistake? Send it ↗')) + '</a></p></section>';
 	}
 };

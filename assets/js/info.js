@@ -9,6 +9,64 @@
 	var VOICE = 'https://www.audiohatdar.com/books/' + encodeURIComponent('53_أسطورة_النبوءة_');
 	var ext = function (href, text) { return '<a href="' + href + '" target="_blank" rel="noopener">' + text + '</a>'; };
 
+	/* the terms page's «كيف تستشهد بالموقع» at work: the page's title from its link, then its reference in each form */
+	var PAGE_CITE = {
+		NAME: { ar: 'العرّاب: أرشيف أحمد خالد توفيق', en: 'The Godfather: An Ahmed Khaled Tawfik Archive' },
+		title: function (App, rel) {
+			var S = window.WorksShared, d = App.data() || {}, m = /^([\w-]+\.html)?(?:\?([^#]*))?/.exec(rel) || [], file = m[1] || 'index.html';
+			var q = new URLSearchParams(m[2] || ''), id = q.get('id'), two = function (o) { return o ? { ar: o.ar || o.en || '', en: o.en || o.ar || '' } : null; };
+			if (file === 'index.html') return null;
+			if (id && file === 'book.html' && S) {
+				var r = S.resolveBook(id);
+				if (r && r.kind === 'issue' && r.series) return { ar: r.series.s.title.ar + ' ' + r.item.n + ': ' + r.item.title.ar, en: (r.series.s.title.en || r.series.s.title.ar) + ' ' + r.item.n + ': ' + (r.item.title.en || r.item.title.ar) };
+				if (r) return two(r.item.title);
+			}
+			if (id && file === 'series.html' && S && S.anySeries(id)) return two(S.anySeries(id).title);
+			if (id && file === 'character.html') { var c = (d.characters || []).filter(function (x) { return x.id === id; })[0]; if (c) return two(c.name); }
+			var UI = App.UI, found = null;
+			[UI.nav, UI.more, UI.world, UI.legal, UI.sections].forEach(function (list) { (list || []).forEach(function (n) { if (!found && n.href && n.href.split('#')[0] === file) found = { ar: n.ar, en: n.en }; }); });
+			return found || { ar: rel, en: rel };
+		},
+		wire: function (App, SITE) {
+			var box = document.querySelector('.info-cite');
+			if (!box) return;
+			var L = App.L, e = App.esc, self = this, input = box.querySelector('input[type=url]');
+			var today = new Date(), iso = today.toISOString().slice(0, 10);
+			box.querySelector('.info-cite-in').insertAdjacentHTML('afterend', '<label class="info-cite-in info-cite-day"><span>' + e(L('تاريخ الاطلاع', 'Date seen')) + '</span><input type="date" value="' + iso + '"></label>');
+			var day = box.querySelector('input[type=date]');
+			var AR_M = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+			var EN_M = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+			var draw = function () {
+				var raw = input.value.trim(), url = raw;
+				var rel = raw.replace(/^https?:\/\/samehbilal\.github\.io\/ahmed-khaled-tawfik\/?/i, '').replace(/^\.?\//, '').replace(/^https?:\/\/[^\/]+\/(ahmed-khaled-tawfik\/)?/i, '');
+				if (!/^https?:/i.test(url)) url = SITE + rel;
+				var t = self.title(App, rel), N = self.NAME, d = (day.value || iso).split('-'), y = +d[0], mo = +d[1], dd = +d[2];
+				var tEn = t ? t.en : N.en, tAr = t ? t.ar : N.ar;
+				var F = [
+					['ar', L('بالعربية', 'Arabic'), 'سامح بلال، «' + tAr + '»' + (t ? '، ' + N.ar : '') + '، تاريخ الاطلاع: ' + dd + ' ' + AR_M[mo - 1] + ' ' + y + '، ' + url, null],
+					['apa', 'APA', 'Bilal, S. (n.d.). ' + tEn + '. ' + (t ? N.en + '. ' : '') + 'Retrieved ' + EN_M[mo - 1] + ' ' + dd + ', ' + y + ', from ' + url,
+						'Bilal, S. (n.d.). <i>' + e(tEn) + '</i>. ' + (t ? e(N.en) + '. ' : '') + 'Retrieved ' + EN_M[mo - 1] + ' ' + dd + ', ' + y + ', from ' + e(url)],
+					['mla', 'MLA', 'Bilal, Sameh. ' + (t ? '"' + tEn + '." ' + N.en : N.en) + ', ' + url + '. Accessed ' + dd + ' ' + EN_M[mo - 1].slice(0, 3) + (mo === 5 ? '' : '.') + ' ' + y + '.',
+						'Bilal, Sameh. ' + (t ? '"' + e(tEn) + '." <i>' + e(N.en) + '</i>' : '<i>' + e(N.en) + '</i>') + ', ' + e(url) + '. Accessed ' + dd + ' ' + EN_M[mo - 1].slice(0, 3) + (mo === 5 ? '' : '.') + ' ' + y + '.'],
+					['bib', 'BibTeX', '@misc{akt-' + (rel.replace(/\.html|[^\w]+/g, '-').replace(/^-+|-+$/g, '') || 'site') + ',\n  author = {Bilal, Sameh},\n  title = {' + tEn + '},\n  howpublished = {\\url{' + url + '}},\n  note = {' + (t ? N.en + '. ' : '') + 'Accessed ' + (day.value || iso) + '}\n}', null]
+				];
+				box.querySelector('.info-cite-title').innerHTML = e(L('الصفحة: ', 'The page: ')) + '<b>' + e(t ? App.t(t) : App.t(N)) + '</b>';
+				box.querySelector('.info-cite-out').innerHTML = F.map(function (f, i) {
+					return '<div class="info-cite-f"><p class="info-cite-k">' + e(f[1]) + '</p><pre' + (f[0] === 'ar' ? ' dir="rtl"' : ' dir="ltr"') + '>' + (f[3] || e(f[2])) + '</pre>' +
+						'<button type="button" class="share-btn" data-copy="' + i + '">' + e(L('انسخ', 'Copy')) + '</button></div>';
+				}).join('');
+				box.querySelector('.info-cite-out').onclick = function (ev) {
+					var b = ev.target.closest('[data-copy]');
+					if (!b) return;
+					var done = function () { b.textContent = L('نُسخ ✓', 'Copied ✓'); setTimeout(function () { b.textContent = L('انسخ', 'Copy'); }, 1600); };
+					if (navigator.clipboard) navigator.clipboard.writeText(F[+b.getAttribute('data-copy')][2]).then(done, function () {}); else done();
+				};
+			};
+			input.addEventListener('input', draw); day.addEventListener('input', draw);
+			draw();
+		}
+	};
+
 	var PAGES = {
 		about: {
 			title: { ar: 'عن الموقع والأسئلة الشائعة', en: 'About & FAQ' },
@@ -94,7 +152,18 @@
 				[A.legacy, A.tributes, A.quotes, A.awards].forEach(function (list) { (list || []).forEach(function (x) { take(x && x.source); }); });
 				Object.keys(A.writers || {}).forEach(function (k) { (A.writers[k] || []).forEach(function (w) { take(w && w.source); }); });
 				var top = Object.keys(hosts).sort(function (a, b) { return hosts[b] - hosts[a]; }).slice(0, 14);
-				return '<section class="info-sec"><h2>' + L('المراجع الرئيسية', 'Main references') + '</h2>' +
+				/* «روايات متضاربة»: where the sources disagree — what each says, with its link, and what the site goes by (AKT.disputes) */
+				var src = function (u) { return u ? ' <a class="info-dsp-src" href="' + e(u) + '" target="_blank" rel="noopener">' + e((u.match(/^https?:\/\/(?:www\.)?([^\/]+)/) || [])[1] || u) + ' ↗</a>' : ''; };
+				var disputes = (A.disputes || []).length ? '<section class="info-sec info-dsp" id="disputes"><h2>' + L('روايات متضاربة', 'Where the sources disagree') + '</h2>' +
+					'<p>' + L('مواضع لا تتفق فيها المصادر: ما يقوله كلٌّ منها، وما يأخذ به الموقع ولماذا. لا نختار رواية بصمت؛ وإن كان عندك ما يحسم إحداها فأرسله.', 'Places where the sources do not agree: what each one says, and what the site goes by and why. No account is picked quietly; if you have something that settles one, send it.') + '</p>' +
+					'<ol class="info-dsp-list">' + A.disputes.map(function (x) {
+						return '<li id="dsp-' + e(x.id) + '"><h3><a href="' + e(x.href) + '">' + e(App.t(x.topic)) + '</a></h3>' +
+							'<ul>' + x.says.map(function (s, i) { return '<li><b>' + e(L('رواية ', 'Account ') + App.num(i + 1)) + '</b> ' + e(App.t(s)) + src(s.src) + '</li>'; }).join('') + '</ul>' +
+							'<p class="info-dsp-site"><b>' + L('ما يأخذ به الموقع:', 'What the site goes by:') + '</b> ' + e(App.t(x.site)) + '</p></li>';
+					}).join('') + '</ol>' +
+					'<p><a class="share-btn" href="' + e(App.fixHref(L('روايات متضاربة', 'Where the sources disagree'))) + '" target="_blank" rel="noopener">' + L('عندك ما يحسمها، أو خلاف آخر؟ ↗', 'Something that settles one, or another? ↗') + '</a></p></section>' : '';
+				setTimeout(function () { App.focusHash(); }, 0);
+				return disputes + '<section class="info-sec"><h2>' + L('المراجع الرئيسية', 'Main references') + '</h2>' +
 					'<ul class="info-refs">' + main.map(function (s) { return '<li><a href="' + e(s.url) + '" target="_blank" rel="noopener">' + e(s.label || s.url) + '</a></li>'; }).join('') + '</ul></section>' +
 					(cited ? '<section class="info-sec"><h2>' + L('ومراجع في صفحات الموقع', 'And across the site') + '</h2>' +
 						'<p>' + L('إلى جانبها ', 'Besides these, ') + App.num(cited) + L(' رابطًا آخر مذكورًا في صفحات الكتب والسلاسل والإرث والكُتّاب والاقتباسات، أكثرها من:', ' more links are cited on the book, series, Legacy, Writers and Quotes pages, most of them from:') + '</p>' +
@@ -154,7 +223,20 @@
 				{ h: { ar: 'الموقع نفسه', en: 'The site itself' },
 					p: { ar: '<p>تصميم الموقع وشيفرته منشوران على ' + ext(REPO, 'GitHub ↗') + '. المكوّنات المقتبسة من غيرنا تبقى تحت رخص أصحابها (انظر <a href="about.html#credits">شكر وإسناد</a>).</p>',
 						en: '<p>The site’s design and code are public on ' + ext(REPO, 'GitHub ↗') + '. Parts adapted from others stay under their owners’ licences (see <a href="about.html#credits">Credits</a>).</p>' } }
-			]
+			],
+			/* «كيف تستشهد بالموقع»: a page's reference, ready to copy, in four forms — Arabic, APA, MLA and BibTeX — with today as the day
+			   it was seen. The page comes from ?cite= (the «استشهد» key on book, series, character and writer pages, App.citeButton),
+			   or is pasted in; its title from the data (WorksShared.resolveBook, the series and characters) or the site's menus */
+			extra: function (App) {
+				var L = App.L, e = App.esc, SITE = 'https://samehbilal.github.io/ahmed-khaled-tawfik/';
+				var start = new URLSearchParams(location.search).get('cite') || '';
+				setTimeout(function () { PAGE_CITE.wire(App, SITE); if (start || location.hash === '#cite') document.getElementById('cite').scrollIntoView({ block: 'start' }); }, 0);
+				return '<section class="info-sec info-cite" id="cite"><h2>' + L('كيف تستشهد بالموقع', 'How to cite the site') + '</h2>' +
+					'<p>' + L('إن نقلت عن الموقع في بحث أو مقال أو رسالة جامعية فاذكره، واذكر معه المصدر الأول المذكور في الصفحة: الموقع يدلّ على المصادر ولا يغني عنها. ضع هنا رابط الصفحة التي نقلت عنها (أو اضغط «استشهد» في صفحة أي كتاب أو سلسلة أو شخصية) وانسخ المرجع بالشكل الذي تحتاجه.', 'If you quote the site in a paper, an article or a thesis, cite it, and with it the original source the page names: the site points to its sources, it does not replace them. Put the link of the page you used here (or press «Cite» on any book, series or character page) and copy the reference in the form you need.') + '</p>' +
+					'<label class="info-cite-in"><span>' + L('رابط الصفحة', 'The page’s link') + '</span><input type="url" dir="ltr" value="' + e(start ? SITE + start.replace(/^\/+/, '') : SITE) + '" spellcheck="false"></label>' +
+					'<p class="info-cite-title"></p><div class="info-cite-out"></div>' +
+					'<p class="info-note">' + L('تاريخ الاطلاع هو اليوم؛ غيّره إن كنت قرأت الصفحة في يوم آخر. ولأن صفحات الموقع تتغيّر مع الوقت، فاحفظ نسخة منها إن احتجت، على ', 'The date seen is today; change it if you read the page on another day. Since the site’s pages change over time, keep a copy if you need one, on the ') + '<a href="https://web.archive.org/" target="_blank" rel="noopener">Wayback Machine ↗</a>.</p></section>';
+			}
 		},
 
 		contact: {

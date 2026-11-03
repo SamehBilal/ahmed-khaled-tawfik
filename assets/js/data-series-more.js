@@ -382,3 +382,42 @@ window.AKT.seriesEndings = {
     "source": "https://3rabica.org/%D9%85%D8%A7_%D9%88%D8%B1%D8%A7%D8%A1_%D8%A7%D9%84%D8%B7%D8%A8%D9%8A%D8%B9%D8%A9_(%D8%B3%D9%84%D8%B3%D9%84%D8%A9)"
   }
 };
+
+/* «روايات متضاربة» (sources.html#disputes): the facts the sources do not agree on — what each says, and what the site goes by and why */
+window.AKT.disputes = [
+  { "id": "daani-pages", "href": "book.html?id=daani-okhberak",
+    "topic": { "ar": "عدد صفحات «دعني أخبرك بشيء»", "en": "How many pages «دعني أخبرك بشيء» has" },
+    "says": [
+      { "ar": "متاجر وفهارس تذكر 57 صفحة، وأخرى 110 صفحات.", "en": "Some stores and catalogues give 57 pages, others 110." },
+      { "ar": "ودار الكرمة، ناشرته، تذكر 112 صفحة.", "en": "Dar Al Karma, its publisher, gives 112.", "src": "https://alkarmabooks.com/book/%D8%AF%D8%B9%D9%86%D9%8A-%D8%A3%D8%AE%D8%A8%D8%B1%D9%83-%D8%A8%D8%B4%D9%8A%D8%A1" }
+    ],
+    "site": { "ar": "يأخذ الموقع برقم الناشر (112)، فهو من طبع الكتاب.", "en": "The site goes by the publisher’s figure (112), as the one who printed it." } },
+  { "id": "www-publisher", "href": "series.html?id=www",
+    "topic": { "ar": "ناشر «WWW» الأول", "en": "Who first published «WWW»" },
+    "says": [
+      { "ar": "أجزاؤه الخمسة (2006–2012) صدرت عن دار ليلى (كيان كورب).", "en": "Its five parts (2006–2012) came out from Dar Lila (Kayan Corp).", "src": "https://www.goodreads.com/series/58359" },
+      { "ar": "وبعض المصادر تذكر دايموند بوك أيضًا.", "en": "Some sources also name Diamond Book." }
+    ],
+    "site": { "ar": "يذكر الموقع دار ليلى ناشرًا للطبعة الأصلية، ويُبقي الملاحظة عن دايموند بوك في صفحة السلسلة إلى أن يظهر غلاف يحسمها.", "en": "The site names Dar Lila for the original run and keeps the note on Diamond Book on the series page until a cover settles it." } },
+  { "id": "graveyard-2013", "href": "book.html?id=graveyard",
+    "topic": { "ar": "ترجمته لـ«كتاب المقبرة» لنيل جايمان", "en": "His translation of Neil Gaiman’s «The Graveyard Book»" },
+    "says": [
+      { "ar": "فهرس ينسب إليه طبعة بعنوان «كتاب المقابر» عن بلومزبري – مؤسسة قطر للنشر (2013).", "en": "A catalogue credits him with a 2013 edition titled «كتاب المقابر», from Bloomsbury Qatar Foundation Publishing." },
+      { "ar": "ودار الكرمة نشرت ترجمته «كتاب المقبرة» في 2021، بعد رحيله.", "en": "Dar Al Karma published his translation, «كتاب المقبرة», in 2021, after his death.", "src": "https://alkarmabooks.com/book/%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D9%85%D9%82%D8%A8%D8%B1%D8%A9-%D8%AA%D8%B1%D8%AC%D9%85%D8%A7%D8%AA-%D8%A7%D9%84%D9%83%D8%B1%D9%85%D8%A9" }
+    ],
+    "site": { "ar": "طبعة 2013 ليست ترجمته، فلا يذكرها الموقع؛ والكتاب لدار الكرمة.", "en": "The 2013 edition is not his translation, so the site leaves it out; the book is Dar Al Karma’s." } },
+  { "id": "kiterunner-year", "href": "book.html?id=kiterunner",
+    "topic": { "ar": "سنة «عدّاء الطائرة الورقية» (الرواية المصورة)", "en": "The year of «The Kite Runner» graphic novel" },
+    "says": [
+      { "ar": "صفحتها على Goodreads تجعلها في 2012، عن بلومزبري – مؤسسة قطر للنشر.", "en": "Its Goodreads page puts it in 2012, from Bloomsbury Qatar Foundation Publishing.", "src": "https://www.goodreads.com/book/show/11720044" },
+      { "ar": "وسجلّها في Open Library بتاريخ 2011.", "en": "Its record on Open Library is dated 2011.", "src": "https://openlibrary.org/books/OL27650548M" }
+    ],
+    "site": { "ar": "يضعها الموقع في 2012، ويُبقي سجلّ 2011 بين طبعاتها كما ورد.", "en": "The site puts it in 2012 and keeps the 2011 record among its editions as given." } },
+  { "id": "pocket-house", "href": "publishers.html",
+    "topic": { "ar": "اسم ناشر سلاسل الجيب", "en": "The name of the pocket series’ publisher" },
+    "says": [
+      { "ar": "الطبعات الأولى تحمل اسم «المؤسسة العربية الحديثة».", "en": "The first editions carry the name «المؤسسة العربية الحديثة» (the Modern Arab Association)." },
+      { "ar": "والطبعات الأحدث «سلاح التلميذ»، ومتجرها اليوم «روايات مصرية»؛ فتبدو في الفهارس ثلاث دور.", "en": "Later editions say «سلاح التلميذ», and its store today is «روايات مصرية», so catalogues show three houses.", "src": "https://rewayatmasreya.com/" }
+    ],
+    "site": { "ar": "هي دار واحدة بثلاثة أسماء، والموقع يجمع طبعاتها كلها تحت «المؤسسة العربية الحديثة («روايات مصرية» اليوم)».", "en": "It is one house under three names; the site gathers all its editions under «المؤسسة العربية الحديثة («روايات مصرية» اليوم)»." } }
+];

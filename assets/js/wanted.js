@@ -1,7 +1,7 @@
 /* wanted.html — «ما ينقص الأرشيف»: what the archive is missing, counted from the data itself every time the page opens, so it is
    never out of date: the Fantasia worlds and Safari cases not known yet (data-pages.js), the issues whose back-cover text is
    only the series' own (or none: data-blurbs.js), the back covers no one has sent, the editions with no year, and the text with
-   no English. Each part says why it matters, lists what is missing (each to its page), and how to send it. */
+   no English, and the outside links that no longer answer (assets/data/links.json, from tools/check-links.js). Each part says why it matters, lists what is missing (each to its page), and how to send it. */
 window.PAGE = {
 	id: 'wanted',
 	title: { ar: 'ما ينقص الأرشيف', en: 'Wanted for the archive' },
@@ -94,10 +94,26 @@ window.PAGE = {
 			of: 0, done: { ar: 'نصوص بالإنجليزية', en: 'Text in English' },
 			counts: Object.keys(en).sort(function (a, b) { return en[b] - en[a]; }).map(function (k) { return { label: t(NAMES[k] || { ar: k, en: k }), n: en[k] }; }) });
 		out[out.length - 1].of = texts2;
+		/* «حالة الروابط»: the outside links the site cites that no longer answer (assets/data/links.json, tools/check-links.js) */
+		var lk = this.links;
+		if (lk && lk.total) out.push({ id: 'links', title: { ar: 'روابط لم تعد تعمل', en: 'Links that no longer work' },
+			why: { ar: 'مصادر الموقع روابط إلى مواقع أخرى، وبعضها يختفي مع الوقت. هذه روابط لم تُجب حين فُحصت في ' + App.num(lk.checked) + '. إن وجدت نسخة منها في أرشيف الإنترنت أو مكانها الجديد فأرسله.', en: 'The site’s sources are links to other sites, and some vanish with time. These did not answer when checked on ' + lk.checked + '. If you find a copy in the Internet Archive, or where it moved, send it.' },
+			items: lk.dead.map(function (x) {
+				var host = (x.u.match(/^https?:\/\/(?:www\.)?([^\/]+)/) || [])[1] || x.u, rest = x.u.replace(/^https?:\/\/[^\/]+/, '');
+				try { rest = decodeURI(rest); } catch (err) {}
+				return { href: x.w[0] || x.u, label: host + (rest.length > 1 ? ' — ' + rest.slice(0, 60) : ''), alt: { href: 'https://web.archive.org/web/*/' + x.u, label: L('في الأرشيف ↗', 'archived ↗') } };
+			}), of: lk.total - lk.unknown, done: { ar: 'روابط تعمل', en: 'Links that work' } });
 		return out;
 	},
 
 	render: function () {
+		var self = this;
+		/* the link check first (a small file), then the page; without it, the page as it was */
+		if (this.links === undefined) {
+			fetch('assets/data/links.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+				.then(function (x) { self.links = x; self.render(); });
+			return;
+		}
 		var App = window.App, e = App.esc, t = App.t, L = App.L, parts = this.parts();
 		var total = function (p) { return p.missing != null ? p.missing : p.items ? p.items.length : p.counts.reduce(function (s, c) { return s + c.n; }, 0); };
 		/* «حالة الأرشيف»: how far along each part is, the most nearly done first */
@@ -117,7 +133,7 @@ window.PAGE = {
 			}).join('') + '</nav>' +
 			parts.map(function (p) {
 				var n = total(p), list = p.items
-					? '<ul class="wn-list">' + p.items.slice(0, 60).map(function (x) { return '<li><a href="' + e(x.href) + '">' + e(x.label) + '</a>' + (x.n > 1 ? ' <small>(' + e(App.num(x.n)) + ')</small>' : '') + '</li>'; }).join('') + '</ul>' +
+					? '<ul class="wn-list">' + p.items.slice(0, 60).map(function (x) { return '<li><a href="' + e(x.href) + '"' + (x.alt ? ' dir="ltr"' : '') + '>' + e(x.label) + '</a>' + (x.n > 1 ? ' <small>(' + e(App.num(x.n)) + ')</small>' : '') + (x.alt ? ' <a class="wn-alt" href="' + e(x.alt.href) + '" target="_blank" rel="noopener">' + e(x.alt.label) + '</a>' : '') + '</li>'; }).join('') + '</ul>' +
 						(p.items.length > 60 ? '<details class="wn-more"><summary>' + e(L('والباقي (' + App.num(p.items.length - 60) + ')', 'And the rest (' + (p.items.length - 60) + ')')) + '</summary><ul class="wn-list">' +
 							p.items.slice(60).map(function (x) { return '<li><a href="' + e(x.href) + '">' + e(x.label) + '</a></li>'; }).join('') + '</ul></details>' : '')
 					: '<ul class="wn-counts">' + p.counts.map(function (c) { return '<li><span>' + e(c.label) + '</span><b>' + e(App.num(c.n)) + '</b></li>'; }).join('') + '</ul>';

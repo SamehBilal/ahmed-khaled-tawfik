@@ -11,6 +11,8 @@ require('./build-days.js');
 require('./build-places.js');
 // and «سجل التحديثات»'s history from git (assets/data/changelog.json)
 require('./build-changelog.js');
+// and «قصة الموقع»'s days, from the same history (assets/data/story.json)
+require('./build-story.js');
 // and «اللغة والأسلوب»'s counts of his writing (assets/data/style.json)
 require('./build-style.js');
 // and each page's description, share tags and JSON-LD, their numbers from the data (tools/build-meta.js)

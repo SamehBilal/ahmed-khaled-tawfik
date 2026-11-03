@@ -1235,3 +1235,38 @@ html[dir="rtl"] .flow-map > b { background: linear-gradient(-90deg, var(--ember)
 .info-files b { font-family: var(--f-display); font-size: 18px; color: var(--paper); }
 .info-files span { font-size: 14px; line-height: 1.7; }
 .info-files small { margin-top: auto; padding-top: 6px; font-family: var(--f-latin); color: var(--ember); }
+
+/* «ما الجديد منذ زيارتك»: a dot on the changelog's link, in the footer and the side menu, when it has changed since the reader last looked */
+.ft-legal a.is-new::after, .info-tabs a.is-new::after { content: ''; display: inline-block; width: 7px; height: 7px; margin-inline-start: 6px; vertical-align: .35em;
+	border-radius: 50%; background: var(--ember); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ember) 25%, transparent); animation: is-new-pulse 2.4s ease-in-out infinite; }
+@keyframes is-new-pulse { 50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--ember) 0%, transparent); } }
+@media (prefers-reduced-motion: reduce) { .ft-legal a.is-new::after, .info-tabs a.is-new::after { animation: none; } }
+
+/* «روايات متضاربة» (sources.html#disputes): each disagreement, its accounts with their links, and what the site goes by */
+.info-dsp-list { list-style: none; margin: 18px 0; padding: 0; display: grid; gap: 14px; }
+.info-dsp-list > li { padding: 16px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); scroll-margin-top: 90px; }
+.info-dsp-list h3 { margin: 0 0 8px; font-family: var(--f-display); font-size: 19px; }
+.info-dsp-list h3 a { color: var(--paper); }
+.info-dsp-list h3 a:hover { color: var(--ember); }
+.info-dsp-list ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.info-dsp-list ul li { color: var(--paper-dim); line-height: 1.8; }
+.info-dsp-list ul b { display: inline-block; min-width: 4.6em; font-size: 13px; color: var(--muted); font-family: var(--f-display); font-weight: 400; }
+.info-dsp-src { font-size: 13px; color: var(--muted); font-family: var(--f-latin); white-space: nowrap; }
+.info-dsp-src:hover { color: var(--ember); }
+.info-dsp-site { margin: 10px 0 0; padding-top: 10px; border-top: 1px dashed var(--line); color: var(--paper); line-height: 1.8; }
+.info-dsp-site b { color: var(--ember); font-family: var(--f-display); font-weight: 400; }
+
+/* «كيف تستشهد بالموقع» (terms.html#cite): the page's link and the day it was seen, then each form of its reference with a copy key */
+.info-cite { scroll-margin-top: 90px; }
+.info-cite-in { display: flex; flex-direction: column; gap: 6px; margin: 14px 0 0; }
+.info-cite-in span { font-size: 13px; color: var(--muted); font-family: var(--f-display); }
+.info-cite-in input { width: 100%; min-width: 0; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--ink-2); color: var(--paper); font: 14px var(--f-latin), sans-serif; }
+.info-cite-day input { width: auto; max-width: 220px; }
+.info-cite-title { margin: 16px 0 10px; color: var(--paper-dim); }
+.info-cite-title b { color: var(--paper); }
+.info-cite-out { display: grid; gap: 12px; }
+.info-cite-f { position: relative; padding: 12px 16px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
+.info-cite-k { margin: 0 0 6px; font-size: 13px; color: var(--ember); font-family: var(--f-display); }
+.info-cite-f pre { margin: 0 0 10px; white-space: pre-wrap; overflow-wrap: anywhere; font: 14px/1.75 var(--f-latin), sans-serif; color: var(--paper); text-align: start; }
+.info-cite-f pre[dir="rtl"] { font-family: inherit; font-size: 15px; }
+.info-cite-f .share-btn { font-size: 13px; }

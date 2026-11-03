@@ -1,0 +1,10 @@
+{
+	"_": "«سجل التصحيحات» on changelog.html: the changes that put a fact right, keyed by their short hash — what the site said before, and what it says now. New ones come from a «correction: …» line in the commit's body (and «correction-en: …», «by: …»). Read by tools/build-changelog.js.",
+	"b34a4c7": { "ar": "أُزيلت من شخصياته آدم وسهير ومهاب: هم شخصيات شيرين هنائي في «لاشين»، لا شخصياته.", "en": "Adam, Soheir and Mohab are no longer among his characters: they are Sherine Hanaey's, in Lasheen, not his." },
+	"158f678": { "ar": "آخر كتبه «ألغام في بحر الذكريات» (يوليو 2025)، لا «دعني أخبرك بشيء» (يناير 2025).", "en": "His last book is «ألغام في بحر الذكريات» (July 2025), not «دعني أخبرك بشيء» (January 2025)." },
+	"d2b80a4": { "ar": "«روايات عالمية للجيب»: ترجم الأعداد 7–83، والأعداد 1–6 لنبيل فاروق؛ والعدد الخاص 9 «جاءوا من الوادي» من «فانتازيا» لا من «ما وراء الطبيعة».", "en": "«روايات عالمية للجيب»: he translated issues 7–83, and 1–6 are Nabil Farouk's; special issue 9 «جاءوا من الوادي» belongs to Fantasia, not Ma Wara' al-Tabi'a." },
+	"fef0f4a": { "ar": "أرقام أعداد صُحّحت: «سوبر ميجا» 1، و«بلية العجيب» 17، و«كتاب الصيف» 1، والكوميكس 1 و2.", "en": "Issue numbers put right: «سوبر ميجا» 1, «بلية العجيب» 17, «كتاب الصيف» 1 and the comics 1 and 2." },
+	"288df86": { "ar": "«كتاب المقبرة»: طبعة «كتاب المقابر» (2013) المنسوبة إلى بلومزبري – مؤسسة قطر للنشر ليست له؛ والكتاب لدار الكرمة (2021).", "en": "«كتاب المقبرة»: the 2013 «كتاب المقابر» edition credited to Bloomsbury Qatar Foundation Publishing is not his; the book is Dar Al Karma's (2021)." },
+	"344c9e3": { "ar": "«روايات عالمية للجيب» 76، «الأفق المفقود»: صورة غلافه في المتجر كانت غلاف العدد 70 «ماتيلدا»؛ وصار له غلافه الصحيح.", "en": "«روايات عالمية للجيب» 76, «الأفق المفقود»: the bookshop's picture for it was the cover of #70, «ماتيلدا»; it has its own now.", "by": "محرّر الموقع" },
+	"2390533": { "ar": "سلاسل الجيب لم تنتقل من «المؤسسة العربية الحديثة»: «سلاح التلميذ» اسمها على طبعاتها الأحدث، واسمها اليوم «روايات مصرية».", "en": "The pocket series never left the Modern Arab Association: «سلاح التلميذ» is its name on their later editions, and «روايات مصرية» today." }
+}

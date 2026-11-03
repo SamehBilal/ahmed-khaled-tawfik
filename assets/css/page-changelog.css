@@ -67,3 +67,26 @@ html[dir="ltr"] .cl-k { direction: ltr; }
 .cl-en { margin-top: 4px; }
 .cl-en summary { cursor: pointer; font-size: 12px; color: var(--muted); width: max-content; }
 .cl-en p { margin-top: 4px !important; font-size: 13px !important; }
+
+/* «ما الجديد منذ زيارتك»: a card above the log, of what came since this reader last looked */
+.cl-new { margin: 0 0 22px; padding: 18px 22px; border: 1px solid color-mix(in srgb, var(--ember) 45%, var(--line)); border-radius: 14px;
+	background: linear-gradient(135deg, color-mix(in srgb, var(--ember) 10%, var(--ink-2)), var(--ink-2)); }
+.cl-new h2 { margin: 0 0 6px; font-family: var(--f-display); font-size: 22px; color: var(--ember); }
+.cl-new p { margin: 0 0 10px; color: var(--paper-dim); line-height: 1.8; }
+.cl-new .cl-k { display: flex; flex-wrap: wrap; gap: 6px; }
+.cl-new-pages { margin: 0 0 14px; padding-inline-start: 20px; color: var(--paper); line-height: 1.8; font-size: 15px; }
+.cl-new-pages li + li { margin-top: 4px; }
+p.cl-new.is-none { padding: 10px 16px; border-style: dashed; border-color: var(--line); background: none; color: var(--muted); font-size: 14px; }
+
+/* «سجل التصحيحات»: each fact put right, with its date and its change on GitHub */
+.cl-fixes { margin: 40px 0 10px; padding-top: 24px; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
+.cl-fixes h2 { font-family: var(--f-display); font-size: 26px; margin: 0 0 8px; }
+.cl-fixes h2 small { font-family: var(--f-latin); font-size: 15px; color: var(--ember); }
+.cl-fix-list { list-style: none; margin: 18px 0; padding: 0; display: grid; gap: 12px; }
+.cl-fix-list li { padding: 14px 18px; border: 1px solid var(--line); border-inline-start: 3px solid var(--ember); border-radius: 10px; background: var(--ink-2); }
+.cl-fix-list time { font-size: 13px; color: var(--ember); font-family: var(--f-display); }
+.cl-fix-list p { margin: 4px 0 0; line-height: 1.85; color: var(--paper); }
+.cl-fix-list .cl-fix-by { font-size: 13px; color: var(--muted); }
+.cl-fix-list .cl-fix-by a { color: var(--muted); font-family: var(--f-latin); }
+.cl-fix-list .cl-fix-by a:hover { color: var(--ember); }
+.cl-sum a { color: var(--ember); }
