@@ -26,7 +26,7 @@
 				'<div class="bk-front">' +
 					'<div class="bk-cover-back"></div>' +
 					'<div class="bk-cover' + (o.img ? ' has-img' : '') + '">' +
-						(o.img ? '<img class="bk-img" src="' + e(o.img) + '" alt="" loading="lazy" onerror="this.parentNode.classList.remove(\'has-img\');this.remove()">' : '') +
+						(o.img ? '<img class="bk-img" src="' + e(window.App.thumb(o.img)) + '" alt="" loading="lazy" onerror="this.parentNode.classList.remove(\'has-img\');this.remove()">' : '') +
 						(o.num ? '<span class="bk-num">' + e(o.num) + '</span>' : '') +
 						(o.motif ? '<span class="bk-motif">' + e(o.motif) + '</span>' : '') +
 						'<h2><span class="t-ar">' + e(o.title.ar || '') + '</span><span class="t-en">' + e(o.title.en || '') + '</span><span class="by">' + e(o.by || 'د. أحمد خالد توفيق') + '</span></h2>' +
@@ -194,7 +194,7 @@
 		'<figure class="hc" tabindex="0"' + (o.key ? ' data-ls-key="' + e(o.key) + '"' : '') + ' style="--hc-c:' + e(o.color || '#444') + '" aria-label="' + e((o.title.ar || '') + ' — ' + (o.title.en || '')) + '">' +
 			'<ul class="hc-front">' +
 				'<li><div class="hc-cover' + (o.img ? ' has-img' : '') + '">' +
-					(o.img ? '<img class="hc-img" src="' + e(o.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.remove(\'has-img\');this.remove()">' : '') +
+					(o.img ? '<img class="hc-img" src="' + e(window.App.thumb(o.img)) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.remove(\'has-img\');this.remove()">' : '') +
 					(o.ribbon ? '<span class="hc-ribbon">' + e(o.ribbon) + '</span>' : '') +
 					'<span class="c-ar">' + e(o.title.ar || '') + '</span>' +
 					'<span class="c-en">' + e(o.title.en || '') + '</span>' +

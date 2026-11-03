@@ -34,7 +34,11 @@ const pageOk = (href) => {
 	return S.publishers().some(c => c.p.id === id);
 };
 walk(d, 'AKT', (s, at) => {
-	if (/^assets\/[^\s"']+\.(webp|jpe?g|png|gif|svg|avif|mp3|pdf)$/i.test(s)) { if (!has(s)) add('missing file', at + ' → ' + s); }
+	if (/^assets\/[^\s"']+\.(webp|jpe?g|png|gif|svg|avif|mp3|pdf)$/i.test(s)) {
+		if (!has(s)) add('missing file', at + ' → ' + s);
+		/* a cover's small copy for the grids (tools/build-thumbs.js) */
+		else if (App.thumb(s) !== s && !has(App.thumb(s))) add('cover without its small copy', s);
+	}
 	else if (/^(book|series|character|writer|publisher)\.html\?id=/.test(s)) { if (!pageOk(s)) add('broken link', at + ' → ' + s); }
 	/* (the blog's addresses are relative to the blog itself, and its «src» names where an article first ran) */
 	else if (!/^AKT\.blog\./.test(at) && /(^|\.)(source|sources|url|src)(\[\d+\])?$/.test(at) &&!/^(https?:|assets\/|[a-z-]+\.html)/.test(s) && s) add('odd source', at + ' → ' + s.slice(0, 80));

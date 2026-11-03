@@ -241,7 +241,7 @@
 			'<button type="button" class="ls-grip" data-grip="' + esc(list) + '" data-key="' + esc(x.key) + '" aria-label="' + esc(L('حرّك «', 'Move “') + tt(x.title) + L('» — الأسهم للترتيب والنقل', '” — arrow keys reorder and move')) + '">' +
 				'<svg viewBox="0 0 12 20" aria-hidden="true"><g fill="currentColor"><circle cx="3" cy="4" r="1.6"/><circle cx="9" cy="4" r="1.6"/><circle cx="3" cy="10" r="1.6"/><circle cx="9" cy="10" r="1.6"/><circle cx="3" cy="16" r="1.6"/><circle cx="9" cy="16" r="1.6"/></g></svg></button>' +
 			'<a href="' + esc(x.href) + '" class="ls-thumb" style="--c:' + esc(x.color || '#3a1414') + '">' +
-				(x.img ? '<img src="' + esc(x.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') +
+				(x.img ? '<img src="' + esc(window.App.thumb(x.img)) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') +
 				(num ? '<span>' + esc(num) + '</span>' : '') + '</a>' +
 			'<span class="ls-item-t"><a href="' + esc(x.href) + '">' + esc(tt(x.title)) + '</a>' +
 				(x.series ? '<small>' + esc(tt(x.series)) + (num && x.sid ? ' ' + esc(num) : '') + '</small>' : '') +
@@ -325,7 +325,7 @@
 						var cls = done[x.key] ? ' is-lit' : wish[x.key] ? ' is-wish' : '';
 						var label = (x.n != null ? '#' + A.num(x.n) + ' ' : '') + tt(x.title) + (done[x.key] ? ' — ' + tt(LISTS[mode.done]) : wish[x.key] ? ' — ' + tt(LISTS[wishList]) : '');
 						return '<a class="ls-slot' + cls + '" href="' + esc('book.html?id=' + encodeURIComponent(x.key.slice(2))) + '" title="' + esc(label) + '" aria-label="' + esc(label) + '" style="--c:' + esc(x.color || '#3a1414') + '">' +
-							(x.img ? '<img src="' + esc(x.img) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">' : '') +
+							(x.img ? '<img src="' + esc(window.App.thumb(x.img)) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">' : '') +
 							(x.n != null ? '<span>' + esc(A.num(x.n)) + '</span>' : '') + '</a>';
 					}).join('') + '</div></details>';
 			}).join('') + '</section>';
@@ -379,6 +379,8 @@
 	var lastFocus = null;
 	function open(drag) {
 		if (!panel) return;
+		/* (the shelf is drawn from the data, which a few pages fetch only now) */
+		if (App() && !App().data().works) return App().needData(function () { open(drag); });
 		dragView = !!drag;
 		render();
 		if (inPage) { document.body.classList.toggle('ls-dragging', !!drag); if (!drag) panel.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
@@ -475,7 +477,7 @@
 			'<p class="ls-hint">' + L('اختر طبعة أو أكثر، أو «أي طبعة» إن كانت أيها تكفي.', 'Pick one edition or more, or “Any edition” if any will do.') + '</p>' +
 			'<div class="ls-ed-grid">' + eds.map(function (ed) {
 				return '<label class="ls-ed"><input type="checkbox" value="' + esc(ed.id) + '"' + (ed.ids.some(function (id) { return picked[id]; }) ? ' checked' : '') + '>' +
-					'<span class="ls-ed-c" style="--c:' + esc(x.color || '#3a1414') + '">' + (ed.img ? '<img src="' + esc(ed.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '<i aria-hidden="true">✓</i></span>' +
+					'<span class="ls-ed-c" style="--c:' + esc(x.color || '#3a1414') + '">' + (ed.img ? '<img src="' + esc(window.App.thumb(ed.img)) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '<i aria-hidden="true">✓</i></span>' +
 					'<span class="ls-ed-t">' + esc(tt(ed.label)) + '</span></label>';
 			}).join('') + '</div>' +
 			'<div class="ls-eds-act"><button type="button" class="ls-eds-save">' + L('حفظ', 'Save') + '</button>' +

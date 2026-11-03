@@ -1,0 +1,22 @@
+# On every push and pull request: the data checks (tools/check-data.js), and that the built files are up to date —
+# data-built.js and data-detail.js are made from the data files, and the pages' descriptions and share tags from the data
+# (tools/build-data.js, tools/build-meta.js). If this fails after a data change, run  node tools/build-sw.js  and commit.
+name: Check the data
+on:
+  push:
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Pictures, links and ids in the data
+        run: node tools/check-data.js
+      - name: The built data and the pages' tags are up to date
+        run: |
+          node tools/build-data.js
+          node tools/build-meta.js
+          git diff --stat --exit-code -- assets/js/data-built.js assets/js/data-detail.js '*.html'

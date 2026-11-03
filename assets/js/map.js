@@ -89,7 +89,7 @@ window.PAGE = {
 		panel.innerHTML = '<button type="button" class="mp-x" aria-label="' + e(L('إغلاق', 'Close')) + '">×</button>' +
 			'<h3>' + e(this.name(p)) + '</h3><p class="mp-sub">' + e(p.items.length === 1 ? L('كتاب واحد يذكره', 'Named in one book') : L('يذكره ' + App.num(p.items.length) + ' من كتبه وأعداده', 'Named in ' + p.items.length + ' of his books and issues')) + '</p>' +
 			'<ul>' + p.items.map(function (it) {
-				return '<li><a href="' + e(it.h) + '">' + (it.c ? '<img src="' + e(it.c) + '" alt="" loading="lazy">' : '<i class="mp-nocover"></i>') +
+				return '<li><a href="' + e(it.h) + '">' + (it.c ? '<img src="' + e(window.App.thumb(it.c)) + '" alt="" loading="lazy">' : '<i class="mp-nocover"></i>') +
 					'<span><b>' + e(it.t) + '</b>' + (it.k ? '<small>' + e(it.k) + '</small>' : '') + '<q>' + mark(it.s) + '</q></span></a></li>';
 			}).join('') + '</ul>';
 		panel.hidden = false;

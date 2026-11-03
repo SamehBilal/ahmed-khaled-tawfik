@@ -15,6 +15,8 @@ require('./build-changelog.js');
 require('./build-style.js');
 // and each page's description, share tags and JSON-LD, their numbers from the data (tools/build-meta.js)
 require('./build-meta.js');
+// and the covers' small copies for the grids (assets/img/covers-s/)
+require('./build-thumbs.js');
 
 const list = ['./'];
 const add = (rel) => list.push(rel.split(path.sep).join('/'));

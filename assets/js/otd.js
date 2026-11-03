@@ -36,7 +36,7 @@
 			var card = function (x) {
 				var years = now.getFullYear() - x[1], src = x[5] ? (x[5].indexOf('g:') === 0 ? base + x[5].slice(2) : x[5]) : '';
 				return '<a class="otd-card otd-' + e(x[0]) + (src ? ' has-pic' : '') + '" href="' + e(x[3]) + '">' +
-					(src ? '<span class="otd-pic' + (/\/covers\//.test(src) ? ' is-tall' : '') + '"><img src="' + e(src) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></span>' : '') +
+					(src ? '<span class="otd-pic' + (/\/covers\//.test(src) ? ' is-tall' : '') + '"><img src="' + e(window.App.thumb(src)) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></span>' : '') +
 					'<span class="otd-y">' + e(App.num(x[1])) + '</span><span class="otd-ago">' + e(years > 0 ? ago(years) : '') + '</span>' +
 					'<span class="otd-k">' + e(t(KIND[x[0]] || x[0])) + (x[4] ? ' · ' + e(t(x[4])) : '') + '</span>' +
 					'<b>' + e(t(x[2])) + '</b></a>';

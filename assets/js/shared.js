@@ -214,7 +214,7 @@
 	function miniCover(o) {
 		var App = window.App, e = App.esc;
 		return '<span class="mini-cover' + (o.img ? ' has-img' : '') + '" style="--c:' + e(o.color || '#3a1414') + '">' +
-			(o.img ? '<img src="' + e(o.img) + '" alt="" loading="lazy" onerror="this.parentNode.classList.remove(\'has-img\');this.remove()">' : '') +
+			(o.img ? '<img src="' + e(window.App.thumb(o.img)) + '" alt="" loading="lazy" onerror="this.parentNode.classList.remove(\'has-img\');this.remove()">' : '') +
 			(o.num ? '<span class="mc-num">' + e(o.num) + '</span>' : '') +
 			'<span class="mc-t">' + e(o.title || '') + '</span>' +
 			(o.sub ? '<span class="mc-s">' + e(o.sub) + '</span>' : '') +
@@ -267,7 +267,10 @@
 	/* Aseer Al Kotb is a store, not an edition: its listings leave the editions (so no card and no count anywhere)
 	   and become info.aseer {source, cover} for the where-to-buy link. The covers stay: the book keeps the cover
 	   it showed before, and when no edition left has one, the first edition takes Aseer's. */
-	(function () {
+	/* (run now, and again on a page that fetches the data later: App.needData) */
+	asideAseer();
+	document.addEventListener('akt-data', asideAseer);
+	function asideAseer() {
 		var A = window.AKT || {};
 		[A.bookInfo, A.issueInfo].forEach(function (map) {
 			Object.keys(map || {}).forEach(function (k) {
@@ -287,7 +290,7 @@
 					info.editions[0] = Object.assign({}, info.editions[0], { cover: info.aseer.cover });
 			});
 		});
-	})();
+	}
 
 	/* ---------- publishers (AKT.publishers): each house's name is matched against the publisher of every work and series ---------- */
 	function publisherHref(id) { return 'publisher.html?id=' + encodeURIComponent(id); }
@@ -449,7 +452,7 @@
 		].filter(Boolean);
 		var img = issueCover(sid, is);
 		return '<button type="button" class="ip-close" aria-label="' + e(L('إغلاق', 'Close')) + '">✕</button>' +
-			'<a class="ip-cover" href="' + e(App.issueHref(sid, is)) + '">' + (img ? '<img src="' + e(img) + '" alt="" loading="lazy" decoding="async">' : miniCover({ color: s.color, title: t(is.title) })) + '</a>' +
+			'<a class="ip-cover" href="' + e(App.issueHref(sid, is)) + '">' + (img ? '<img src="' + e(window.App.thumb(img)) + '" alt="" loading="lazy" decoding="async">' : miniCover({ color: s.color, title: t(is.title) })) + '</a>' +
 			'<div class="ip-body"><h4>' + tx(is.title) + '</h4>' +
 				(facts.length ? '<dl class="ip-facts">' + facts.map(function (f) { return '<div><dt>' + e(f[0]) + '</dt><dd>' + (/</.test(f[1]) ? f[1] : e(f[1])) + '</dd></div>'; }).join('') + '</dl>' : '') +
 				(text ? '<p class="ip-text" dir="rtl" lang="ar">' + e(text) + '</p>' : '') +

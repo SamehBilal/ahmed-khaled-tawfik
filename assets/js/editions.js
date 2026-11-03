@@ -75,7 +75,7 @@ window.Editions = {
 						var info = [ed.edition ? t(ed.edition) : '', h.name, App.num(+ed.year), ed.pages ? App.num(ed.pages) + ' ' + L('صفحة', 'pages') : '', ed.format ? t(ed.format) : ''].filter(Boolean);
 						return '<span class="ed-dot tooltip tooltip-effect-1" tabindex="0" style="inset-inline-start:' + p + '%">' +
 							'<i class="tooltip-item" style="background:var(--pp-' + slot(h.id) + ')" aria-hidden="true"></i>' +
-							'<span class="tooltip-content" role="tooltip">' + (cover ? '<img src="' + e(cover) + '" alt="" loading="lazy" decoding="async">' : '') +
+							'<span class="tooltip-content" role="tooltip">' + (cover ? '<img src="' + e(window.App.thumb(cover)) + '" alt="" loading="lazy" decoding="async">' : '') +
 								'<span class="tooltip-text"><strong>' + e(ed.title ? t(ed.title) : t(b.w.title)) + '</strong>' + info.map(function (x) { return '<span>' + e(x) + '</span>'; }).join('') + '</span></span></span>';
 					}).join('') + '</span><span class="ed-n">' + e(App.num(b.eds.length)) + '</span></li>';
 			}).join('') + '</ol>' +

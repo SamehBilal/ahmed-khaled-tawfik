@@ -55,7 +55,7 @@ window.PAGE = {
 		var en = is.map(function (x) { var o = P.orig(x, 'en'); return o && [o.title, S.issueCover('rwg', x)]; }).filter(Boolean).slice(0, 26);
 		var ar = is.map(function (x) { return x.title && x.title.ar && [x.title.ar, S.issueCover('rwg', x)]; }).filter(Boolean).slice(0, 26);
 		var row = function (list, k, dir) {
-			var s = list.map(function (w) { return '<span>' + (w[1] ? '<img class="tr-cv" src="' + e(w[1]) + '" alt="" loading="lazy" decoding="async">' : '') + e(w[0]) + '</span>'; }).join('<i>✦</i>');
+			var s = list.map(function (w) { return '<span>' + (w[1] ? '<img class="tr-cv" src="' + e(window.App.thumb(w[1])) + '" alt="" loading="lazy" decoding="async">' : '') + e(w[0]) + '</span>'; }).join('<i>✦</i>');
 			return '<div class="tr-row tr-r' + k + '" dir="' + dir + '"><div class="tr-track">' + s + '<i>✦</i>' + s + '<i>✦</i></div></div>';
 		};
 		return row(en, 'en', 'ltr') + '<i class="tr-quill" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 3C14 4 9 8 6.5 14L5 19l1.2.8 3-3.6C14 15 19 10 21 3z" fill="currentColor"/><path d="M6.2 19.8 9 15" stroke="#1a130d" stroke-width=".9"/></svg></i>' + row(ar, 'ar', 'rtl');
@@ -101,7 +101,7 @@ window.PAGE = {
 			'<section class="tr-part" id="tr-books"><h2>' + e(L('كتب ترجمها', 'Books he translated')) + '</h2><div class="wd-row">' + books.map(function (w) {
 				var cover = S.coverOf((d.bookInfo || {})[w.id]), by = self.BY[w.id];
 				return '<article class="wd-ed">' +
-					'<a class="wd-cover" href="' + e(S.bookHref(w.id)) + '">' + (cover ? '<img src="' + e(cover) + '" alt="" loading="lazy">' : '<i></i>') + '</a>' +
+					'<a class="wd-cover" href="' + e(S.bookHref(w.id)) + '">' + (cover ? '<img src="' + e(window.App.thumb(cover)) + '" alt="" loading="lazy">' : '<i></i>') + '</a>' +
 					'<div><h3><a href="' + e(S.bookHref(w.id)) + '">' + e(t(w.title)) + '</a></h3>' +
 					(lang === 'ar' && w.title.en ? '<p class="tr-en" dir="ltr">' + e(w.title.en) + '</p>' : '') +
 					(by ? '<p>' + e(L('عن ', 'From ')) + (by.none ? e(t(by)) : self.authorLink(by.ar, by.en)) + '</p>' : '') +

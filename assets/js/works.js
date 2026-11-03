@@ -97,7 +97,7 @@ window.PAGE = {
 			var cover = S.coverOf(bi);
 			/* a solid book for the details view: it turns to show its spine (on the right, as Arabic books bind) */
 			var box = '<div class="hc-boxwrap" aria-hidden="true"><div class="hc-box" style="--hc-c:' + e(w.color || '#444') + '">' +
-				'<div class="hcb-front">' + (cover ? '<img src="' + e(cover) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '<span>' + e(t(w.title)) + '</span></div>' +
+				'<div class="hcb-front">' + (cover ? '<img src="' + e(window.App.thumb(cover)) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '<span>' + e(t(w.title)) + '</span></div>' +
 				'<div class="hcb-back"></div><div class="hcb-edge"></div><div class="hcb-top"></div>' +
 				'<div class="hcb-spine"><span>' + e(t(w.title)) + '</span><b>' + e(App.num(w.year || '')) + '</b></div>' +
 			'</div></div>';

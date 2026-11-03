@@ -214,7 +214,7 @@ window.PAGE = {
 					by[k].slice().sort(function (a, b) { return (a.ed.year || 9999) - (b.ed.year || 9999); }).map(function (x) {
 						var ed = x.ed, cover = S.coverOf(ed);
 						return '<article class="wd-ed">' +
-							'<a class="wd-cover" href="' + e(S.bookHref(x.id)) + '">' + (cover ? '<img src="' + e(cover) + '" alt="" loading="lazy">' : '<i></i>') + '</a>' +
+							'<a class="wd-cover" href="' + e(S.bookHref(x.id)) + '">' + (cover ? '<img src="' + e(window.App.thumb(cover)) + '" alt="" loading="lazy">' : '<i></i>') + '</a>' +
 							'<div><h3 lang="' + k + '" dir="auto">' + e(t(ed.title) || t(x.w.title)) + '</h3>' +
 							'<p class="wd-of">' + e(L('ترجمة «', 'A translation of ')) + '<a href="' + e(S.bookHref(x.id)) + '">' + e(t(x.w.title)) + '</a>' + e(L('»', '')) + '</p>' +
 							(ed.translator ? '<p>' + e(L('ترجمة: ', 'Translated by ')) + e(t(ed.translator)) + '</p>' : '') +

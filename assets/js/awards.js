@@ -124,7 +124,7 @@ window.PAGE = {
 				return '<li class="aw-item aw-' + e(a.kind) + '" id="aw-' + i + '">' +
 					'<div class="aw-year"><b>' + e(App.num(a.year)) + '</b><span>' + e(t(self.KIND[a.kind] || self.KIND.honour)) + '</span>' + (after ? '<small>' + e(L('بعد رحيله', 'after his death')) + '</small>' : '') + '</div>' +
 					'<div class="aw-body"><h2>' + e(t(a.title).replace(/\s*—\s*بعد الرحيل$/, '')) + '</h2><p>' + e(t(a.text)) + '</p>' +
-						(w ? '<a class="aw-book" href="' + e(S.bookHref(w.id)) + '">' + (S.coverOf((d.bookInfo || {})[w.id]) ? '<img src="' + e(S.coverOf(d.bookInfo[w.id])) + '" alt="" loading="lazy">' : '') + '<span>' + e(t(w.title)) + '</span></a>' : '') +
+						(w ? '<a class="aw-book" href="' + e(S.bookHref(w.id)) + '">' + (S.coverOf((d.bookInfo || {})[w.id]) ? '<img src="' + e(window.App.thumb(S.coverOf(d.bookInfo[w.id]))) + '" alt="" loading="lazy">' : '') + '<span>' + e(t(w.title)) + '</span></a>' : '') +
 						(a.source ? '<a class="aw-src" href="' + e(a.source) + '" target="_blank" rel="noopener">' + e(L('المصدر ↗', 'Source ↗')) + '</a>' : '') + '</div>' +
 					/* its photograph opens full size with its caption, as the home timeline's do */
 					(a.image ? '<figure class="aw-pic"><button type="button" class="aw-zoom" data-src="' + e(a.image.src) + '" data-alt="' + e(t(a.image.alt)) + '" aria-label="' + e(L('تكبير الصورة', 'Enlarge the photo')) + '">' +

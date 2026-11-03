@@ -78,6 +78,13 @@ img { max-width: 100%; display: block; }
 	-webkit-backdrop-filter: blur(10px);
 	border-bottom: 1px solid var(--line);
 }
+/* its place kept until app.js draws it, so the page does not drop when it comes */
+#site-header:empty { display: block; height: 65px; }
+html.is-app #site-header:empty { height: calc(65px + env(safe-area-inset-top)); }
+/* the page's words are in its HTML in Arabic (tools/build-meta.js): for an English reader, hidden, their place kept, until app.js puts in the English */
+html[lang="en"]:not(.i18n) [data-i18n] { visibility: hidden; }
+/* (two rows on a tablet: the links under the name) */
+@media (max-width: 1100px) and (min-width: 761px) { #site-header:empty { height: 111px; } }
 
 .site-header .wrap {
 	display: flex; align-items: center; gap: 24px;

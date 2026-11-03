@@ -350,4 +350,6 @@ html[lang="en"] .g-quote { font-family: var(--f-display); font-weight: 700; }
 .today.is-phrase blockquote { font-size: clamp(28px, 4vw, 40px); }
 .today figcaption { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; align-items: baseline; color: var(--paper-dim); font-size: 15px; line-height: 1.8; }
 .today figcaption a { color: var(--ember); white-space: nowrap; }
+.today-pic { padding: 3px 14px; border: 1px solid var(--line); border-radius: 99px; background: none; color: var(--paper-dim); font: inherit; font-size: 14px; cursor: pointer; }
+.today-pic:hover, .today-pic:focus-visible { border-color: var(--ember); color: var(--ember); }
 @media (max-width: 640px) { .today { padding: 24px 20px 18px; } }

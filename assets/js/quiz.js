@@ -28,7 +28,7 @@ window.PAGE = {
 			var k = i - mid;
 			return '<div class="qzb-card' + (q.img ? ' has-img' : '') + '" style="--k:' + k + ';--ak:' + Math.abs(k) + '">' +
 				'<span class="qzb-kind">' + e(q.kind) + '</span>' +
-				(q.img ? '<img src="' + e(q.img) + '" alt="" decoding="async">' : '') +
+				(q.img ? '<img src="' + e(window.App.thumb(q.img)) + '" alt="" decoding="async">' : '') +
 				'<p class="qzb-q">' + e(q.quote ? '«' + q.quote + '»' : q.q) + '</p>' +
 				'<ol class="qzb-opts">' + q.opts.map(function (o) { return '<li' + (o === q.a ? ' class="ok"' : '') + '>' + e(o) + '</li>'; }).join('') + '</ol></div>';
 		}).join('') + '</div>';

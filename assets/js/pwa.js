@@ -74,7 +74,7 @@
 		var set = {};
 		(function walk(o) {
 			if (!o) return;
-			if (typeof o === 'string') { if (/^assets\/img\/.+\.(png|jpe?g|webp|gif|svg)$/i.test(o)) set[o] = 1; return; }
+			if (typeof o === 'string') { if (/^assets\/img\/.+\.(png|jpe?g|webp|gif|svg)$/i.test(o)) { set[o] = 1; set[App.thumb(o)] = 1; } return; }
 			if (typeof o === 'object') for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) walk(o[k]);
 		})(App.data());
 		return Object.keys(set);
@@ -82,6 +82,7 @@
 	var saving = false;
 	function saveOffline() {
 		if (saving || !('caches' in window)) return;
+		if (!App.data().works) return App.needData(saveOffline);
 		var list = localImages();
 		if (!confirm(L('سيُحفظ ' + App.num(list.length) + ' غلافًا وصورة (نحو 100 ميجابايت) على هذا الجهاز لتعمل دون إنترنت. متابعة؟',
 			'This saves ' + list.length + ' covers and photos (about 100 MB) on this device so they work offline. Continue?'))) return;

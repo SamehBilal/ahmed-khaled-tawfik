@@ -36,6 +36,11 @@ window.GlossarySection = {
 			history.replaceState(null, '', self.who === 'all' ? '#glossary' : '#glossary-' + self.who);
 		};
 		root.querySelector('.gl-q').oninput = function (ev) { self.q = ev.target.value.trim(); self.list(); };
+		/* «صورة»: the phrase as a picture to post (quote-image.js), in the voice of who says it */
+		root.querySelector('.gl-list').onclick = function (ev) {
+			var b = ev.target.closest('.gl-pic');
+			if (b && window.QuoteImage) self.picture((window.App.data().glossary || [])[+b.getAttribute('data-g')]);
+		};
 		this.list();
 	},
 
@@ -49,6 +54,15 @@ window.GlossarySection = {
 			root.querySelector('.gl-q').value = '';
 		}
 		this.list();
+	},
+
+	/* the phrase as a picture: said by its speaker (his own name for his voice and the rest), with its issue's or book's cover */
+	picture: function (x) {
+		if (!x) return;
+		var App = window.App, S = window.WorksShared, d = App.data(), L = App.L, w = this.where(x.where), who = {};
+		this.WHO.forEach(function (v) { who[v[0]] = v[1]; });
+		var k = x.where || '', by = who[x.who] && x.who !== 'akt' && x.who !== 'other' ? App.t(who[x.who]) : L('أحمد خالد توفيق', 'Ahmed Khaled Tawfik');
+		window.QuoteImage.open({ text: L(x.phrase, x.en) }, { by: by, cite: w ? w.label : '', cover: (S && (S.coverOf((d.issueInfo || {})[k]) || S.coverOf((d.bookInfo || {})[k]))) || '' });
 	},
 
 	/* where a phrase is from: an issue's page (with its series and number) or a book's */
@@ -77,7 +91,8 @@ window.GlossarySection = {
 				'<h3>' + e(x.phrase) + '</h3>' + (App.lang === 'en' ? '' : '<p class="gl-en" dir="ltr">' + e(x.en) + '</p>') +
 				(App.lang === 'en' ? '<p class="gl-en-main">' + e(x.en) + '</p>' : '') +
 				'<p class="gl-mean">' + e(t(x.meaning)) + '</p>' +
-				'<p class="gl-from">' + (w ? '<a href="' + e(w.href) + '">' + e(w.label) + '</a>' : '') + (x.source ? (w ? ' · ' : '') + '<a href="' + e(x.source) + '" target="_blank" rel="noopener">' + e(L('المصدر ↗', 'Source ↗')) + '</a>' : '') + '</p></article>';
+				'<p class="gl-from">' + (w ? '<a href="' + e(w.href) + '">' + e(w.label) + '</a>' : '') + (x.source ? (w ? ' · ' : '') + '<a href="' + e(x.source) + '" target="_blank" rel="noopener">' + e(L('المصدر ↗', 'Source ↗')) + '</a>' : '') +
+				((w || x.source) ? ' · ' : '') + '<button type="button" class="gl-pic" data-g="' + all.indexOf(x) + '">' + e(L('صورة', 'Image')) + '</button></p></article>';
 		}).join('') || '<p class="gl-note">' + e(L('لا عبارة تطابق.', 'No phrase matches.')) + '</p>';
 	}
 };

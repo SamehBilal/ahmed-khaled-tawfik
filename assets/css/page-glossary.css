@@ -14,3 +14,5 @@
 .gl-from a { color: var(--ember); }
 .gl-note { color: var(--muted); line-height: 1.9; margin-top: 22px; }
 .gl-note a { color: var(--ember); }
+.gl-pic { padding: 0; border: 0; background: none; color: var(--ember); font: inherit; cursor: pointer; }
+.gl-pic:hover, .gl-pic:focus-visible { text-decoration: underline; }

@@ -60,7 +60,7 @@
 				var fig = (d.charFigures || {})[c.id];
 				return '<a class="ph-hc' + (fig ? ' has-fig' : '') + '" href="' + e(A.charHref(c.id)) + '" tabindex="-1" style="--c:' + e(s.color || '#5a2a22') + ';--i:' + i + '">' +
 					/* the cover of the series' first issue */
-					'<span class="ph-hc-wrap"><img src="' + e(S.firstIssueCover(s.id) || S.seriesCover(s.id)) + '" alt="" loading="lazy"></span>' +
+					'<span class="ph-hc-wrap"><img src="' + e(window.App.thumb(S.firstIssueCover(s.id) || S.seriesCover(s.id))) + '" alt="" loading="lazy"></span>' +
 					'<span class="ph-hc-name">' + e(t(c.name).replace(/^(د\.|Dr\.)\s*/, '')) + '<small>' + e(t(s.title)) + '</small></span>' +
 					(fig ? '<img class="ph-hc-fig" src="' + e(fig) + '" alt="" loading="lazy">' : '') + '</a>';
 			}).join('');
@@ -171,10 +171,10 @@
 				var covers = few.length ? few.map(function (x, j) {
 					var r = ((rnd(j, 30 + i) - 0.5) * 10).toFixed(1);
 					return x.img
-						? '<img class="ph-cv" src="' + e(x.img) + '" alt="" loading="lazy" style="--j:' + j + ';--r:' + r + 'deg">'
+						? '<img class="ph-cv" src="' + e(window.App.thumb(x.img)) + '" alt="" loading="lazy" style="--j:' + j + ';--r:' + r + 'deg">'
 						: '<i class="ph-cv ph-cv-drawn" style="--j:' + j + ';--r:' + r + 'deg;background:' + e(x.color || '#5a2a22') + '"><b>' + e(t(x.title)) + '</b></i>';
 				}).reverse().join('')
-					: (drops[i] ? '<img class="ph-cv ph-drop" src="' + e(drops[i]) + '" alt="" loading="lazy" style="--d:' + (i * 1.1).toFixed(1) + 's">' : '');
+					: (drops[i] ? '<img class="ph-cv ph-drop" src="' + e(window.App.thumb(drops[i])) + '" alt="" loading="lazy" style="--d:' + (i * 1.1).toFixed(1) + 's">' : '');
 				return '<div class="ph-crate' + (mode[k] === st.mode ? ' on' : '') + (few.length ? '' : ' empty') + '">' +
 					'<div class="ph-crate-in">' + covers + '</div>' +
 					'<div class="ph-crate-box"><span class="ph-plate"><svg viewBox="0 0 24 24"><path d="' + LI[k].icon + '"/></svg>' +

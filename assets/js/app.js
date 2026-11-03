@@ -147,6 +147,24 @@
 			return String(s).replace(/[٠-٩]/g, function (d) { return d.charCodeAt(0) - 0x0660; }).replace(/[۰-۹]/g, function (d) { return d.charCodeAt(0) - 0x06F0; });
 		},
 		data: function () { return window.AKT || {}; },
+		/* the data, for the few pages that draw nothing from it (privacy, contact, the changelog, 404) and so do not load it:
+		   fetched when search, the lists or "Save for offline" first need it; then() runs once it is there (at once where it is) */
+		needData: function (then) {
+			var q = App.needData.q || (App.needData.q = []);
+			if (window.AKT && window.AKT.works) return then && then();
+			if (then) q.push(then);
+			if (q.loading) return;
+			q.loading = true;
+			var s = document.createElement('script');
+			s.src = 'assets/js/data-built.js';
+			s.onload = function () { document.dispatchEvent(new CustomEvent('akt-data')); q.splice(0).forEach(function (f) { f(); }); };
+			document.head.appendChild(s);
+		},
+		/* a cover's small copy, for the grids (assets/img/covers-s/, tools/build-thumbs.js); anything else as it is */
+		thumb: function (src) {
+			var m = /^assets\/img\/covers\/(.+)\.(webp|jpe?g|png)$/i.exec(src || '');
+			return m ? 'assets/img/covers-s/' + m[1] + '.webp' : src;
+		},
 		byId: function (list, id) {
 			list = list || [];
 			for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
@@ -542,6 +560,8 @@
 				var k = el.getAttribute('data-i18n');
 				if (s[k]) el.textContent = App.t(s[k]);
 			});
+			/* (the page has them in Arabic, tools/build-meta.js; an English reader's are hidden until now: site.css) */
+			document.documentElement.classList.add('i18n');
 		},
 
 		/* fade/rise elements with .rise when they scroll into view */
@@ -755,18 +775,24 @@
 
 		open: function () {
 			if (!Search.index) Search.build();
-			/* the blog index is large, so pages other than the blog fetch it only when search opens */
-			[['blog', 'data-blog.js']].forEach(function (x) {
-				if (App.data()[x[0]] || (Search.loading || (Search.loading = {}))[x[0]]) return;
-				Search.loading[x[0]] = true;
-				var bs = document.createElement('script');
-				bs.src = 'assets/js/' + x[1];
-				bs.onload = function () {
-					Search.build();
-					var inp = document.querySelector('#search-dialog input');
-					if (inp && inp.value.trim()) inp.dispatchEvent(new Event('input'));
-				};
-				document.head.appendChild(bs);
+			var refresh = function () {
+				Search.build();
+				var inp = document.querySelector('#search-dialog input');
+				if (inp && inp.value.trim()) inp.dispatchEvent(new Event('input'));
+			};
+			/* (a page without the data fetches it first, the blog's after it, as the data sets window.AKT afresh) */
+			var lazy = !App.data().works;
+			App.needData(function () {
+				if (lazy) refresh();
+				/* the blog index is large, so pages other than the blog fetch it only when search opens */
+				[['blog', 'data-blog.js']].forEach(function (x) {
+					if (App.data()[x[0]] || (Search.loading || (Search.loading = {}))[x[0]]) return;
+					Search.loading[x[0]] = true;
+					var bs = document.createElement('script');
+					bs.src = 'assets/js/' + x[1];
+					bs.onload = refresh;
+					document.head.appendChild(bs);
+				});
 			});
 			var dlg = document.getElementById('search-dialog');
 			if (!dlg) {

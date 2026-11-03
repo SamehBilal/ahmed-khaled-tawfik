@@ -37,7 +37,7 @@ window.PAGE = {
 		var c = window.PAGE.covers().filter(function (x) { return x.sid !== 'works'; }), rows = '';
 		for (var r = 0; r < 3; r++) {
 			var row = '';
-			for (var k = 0; k < 18; k++) { var x = c[(r * 41 + k * 7) % c.length]; row += '<i style="background-image:url(&quot;' + A.esc(x.src) + '&quot;)"></i>'; }
+			for (var k = 0; k < 18; k++) { var x = c[(r * 41 + k * 7) % c.length]; row += '<i style="background-image:url(&quot;' + A.esc(A.thumb(x.src)) + '&quot;)"></i>'; }
 			rows += '<div class="cw-row" style="--d:' + (r % 2 ? 'reverse' : 'normal') + ';--t:' + (60 + r * 15) + 's"><div>' + row + row + '</div></div>';
 		}
 		return rows;
@@ -84,7 +84,7 @@ window.PAGE = {
 		wall.className = 'cw-wall';
 		wall.innerHTML = list.map(function (x) {
 			var label = x.title + (x.n != null ? ' #' + x.n : '') + (x.ed ? ' — ' + x.ed : '');
-			return '<a href="' + e(x.href) + '" title="' + e(label) + '"><img src="' + e(x.src) + '" alt="' + e(label) + '" loading="lazy" decoding="async"></a>';
+			return '<a href="' + e(x.href) + '" title="' + e(label) + '"><img src="' + e(window.App.thumb(x.src)) + '" alt="' + e(label) + '" loading="lazy" decoding="async"></a>';
 		}).join('');
 	}
 };

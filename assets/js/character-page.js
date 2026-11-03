@@ -109,7 +109,7 @@ window.PAGE = {
 					return '<a role="listitem" class="ch-place' + (cov ? ' has-cover' : '') + '" href="' + e(is ? S.bookHref(key) : '#') + '">' + mark +
 						'<b>' + tx(p.name) + '</b><span>' + tx(p.where) + '</span>' +
 						(is ? '<small>' + L('العدد ', 'Issue ') + e(App.num(is.n)) + '</small>' : '') +
-						(cov ? '<img class="ch-place-cover" src="' + e(cov) + '" alt="" loading="lazy">' : '') + '</a>';
+						(cov ? '<img class="ch-place-cover" src="' + e(window.App.thumb(cov)) + '" alt="" loading="lazy">' : '') + '</a>';
 				}).join('') + '</div>' : '') +
 				hero.groups.map(function (g) {
 					var list = g.issues.map(byN).filter(Boolean);

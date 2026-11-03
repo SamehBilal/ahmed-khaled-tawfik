@@ -62,7 +62,7 @@ window.PAGE = {
 						'<p class="eyebrow">' + e(t(x.kind)) + (x.cameo ? ' · ' + e(L('أول ظهور لرفعت إسماعيل', 'Refaat Ismail’s first appearance')) : '') + '</p>' +
 						'<h2>' + e(t(x.title)) + '</h2>' +
 						'<p class="sc-text">' + e(t(x.text)) + '</p>' +
-						(b ? '<a class="sc-from" href="' + e(b.href) + '">' + (b.cover ? '<img src="' + e(b.cover) + '" alt="" loading="lazy">' : '') +
+						(b ? '<a class="sc-from" href="' + e(b.href) + '">' + (b.cover ? '<img src="' + e(window.App.thumb(b.cover)) + '" alt="" loading="lazy">' : '') +
 							'<span><small>' + e(L('مأخوذ عن', 'Based on')) + ' · ' + e(b.what) + '</small><b>' + e(b.title) + '</b></span></a>' : '') +
 						(ex.yt || ex.more ? '<div class="sc-videos">' + (ex.yt ? player(ex.yt, ex.ytLabel) : '') + (ex.more || []).map(function (m) { return player(m[0], m[1]); }).join('') + '</div>' : '') +
 						(press.length ? '<div class="sc-press"><h3>' + e(L('كُتب عنه', 'Written about it')) + '</h3><ul>' + press.map(function (m) {

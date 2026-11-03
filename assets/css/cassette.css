@@ -175,6 +175,8 @@ html[lang="en"] .cs-meta { direction: ltr; }
 
 /* ---------- Audio page: the deck sits above the headline ---------- */
 .audio-deck { padding: 34px 0 6px; background: radial-gradient(60% 80% at 50% 0%, rgba(179, 38, 30, .16), transparent 70%); }
+/* (its height kept before the cassette is drawn, so the page does not drop: 401 px on a 360 px phone, 580 at most) */
+.audio-deck { min-height: min(580px, calc(63vw + 174px)); box-sizing: border-box; }
 .audio-deck + .page-hero { padding-top: 18px; }
 .audio-help { padding-top: 0; }
 

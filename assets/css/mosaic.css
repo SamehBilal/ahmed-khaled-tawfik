@@ -14,6 +14,8 @@
 	overflow: hidden; direction: ltr;
 	padding: 10px 0 0;
 	/* a wall of books about one screen tall, fading into the page */
+	/* (its height kept before the books are drawn, so the page does not drop) */
+	min-height: min(82vh, 760px, 125vw);
 	max-height: min(82vh, 760px);
 	-webkit-mask-image: linear-gradient(#000 70%, transparent);
 	        mask-image: linear-gradient(#000 70%, transparent);

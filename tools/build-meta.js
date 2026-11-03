@@ -4,7 +4,7 @@
 // stylesheet a page links twice. A page not listed in DESC keeps its own description; index.html keeps its own JSON-LD; the
 // pages drawn one per thing (book.html, character.html…), the redirects, 404 and offline only lose a doubled stylesheet.
 // Run from the repo root after changing the data:  node tools/build-meta.js  (tools/build-sw.js runs it too)
-const fs = require('fs'), path = require('path');
+const fs = require('fs'), path = require('path'), vm = require('vm');
 const load = require('./load-data.js'), SITE = load.SITE, root = load.root;
 const { App, S, d, win } = load(['data-built', 'data-blog', 'data-pages', 'people', 'books', 'shared', 'app', 'site-stats']);
 
@@ -70,6 +70,21 @@ fs.readdirSync(root).filter(f => /\.html$/.test(f)).sort().forEach(f => {
 		const pre = ['NotoNaskhArabic-arabic-7', 'ReemKufi-arabic-10'].map(n => '\t<link rel="preload" href="assets/fonts/gf/' + n + '.woff2" as="font" type="font/woff2" crossorigin>\n').join('') +
 			(/<script src="assets\/js\/data-built\.js"><\/script>/.test(h) ? '\t<link rel="preload" href="assets/js/data-built.js" as="script">\n' : '');
 		h = h.replace(/([ \t]*<link rel="stylesheet" href="assets\/css\/fonts\.css">)/, pre + '$1');
+	}
+	/* the page's own words ([data-i18n]: its eyebrow, title, lead, section heads), in Arabic in the page itself, from PAGE.strings of
+	   its script: there at the first paint, so nothing drops when the script fills them, and read by search engines (an English
+	   reader's page still puts its English in) */
+	const own = (h.match(/<script src="assets\/js\/([a-z0-9-]+\.js)"><\/script>/g) || []).map(t => /js\/([^"]+)"/.exec(t)[1])
+		.map(n => path.join(root, 'assets/js', n)).filter(p => fs.existsSync(p) && /^window\.PAGE = /m.test(fs.readFileSync(p, 'utf8')))[0];
+	if (own && /data-i18n="/.test(h)) {
+		const before = win.PAGE;
+		let strings = {};
+		try { vm.runInContext(fs.readFileSync(own, 'utf8'), win, { filename: path.basename(own) }); strings = (win.PAGE && win.PAGE.strings) || {}; } catch (err) { console.warn('meta: could not read', path.basename(own), err.message); }
+		win.PAGE = before;
+		h = h.replace(/(<([a-z0-9]+)\b[^>]*\bdata-i18n="([^"]+)"[^>]*>)[^<]*(<\/\2>)/g, (m, open, tag, k, close) => {
+			const s = strings[k], text = typeof s === 'string' ? s : s && typeof s.ar === 'string' ? s.ar : null;
+			return text == null ? m : open + text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + close;
+		});
 	}
 	const section = !/http-equiv="refresh"/.test(h) && ONE.indexOf(f) < 0 && /<!-- \/share -->/.test(h);
 	if (section) {

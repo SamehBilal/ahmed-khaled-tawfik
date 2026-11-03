@@ -76,7 +76,7 @@ window.PAGE = {
 			return is && { title: is.title, href: App.issueHref(m[2], is), img: S.issueCover(m[2], is), color: sr.s.color };
 		}).filter(Boolean);
 		return list.length ? '<div class="wr-bks">' + list.map(function (b) {
-			return '<a class="wr-bk" href="' + e(b.href) + '">' + (b.img ? '<img src="' + e(b.img) + '" alt="" loading="lazy">' : S.miniCover({ color: b.color, title: t(b.title) })) + '<span>' + App.tx(b.title) + '</span></a>';
+			return '<a class="wr-bk" href="' + e(b.href) + '">' + (b.img ? '<img src="' + e(window.App.thumb(b.img)) + '" alt="" loading="lazy">' : S.miniCover({ color: b.color, title: t(b.title) })) + '<span>' + App.tx(b.title) + '</span></a>';
 		}).join('') + '</div>' : '';
 	},
 
