@@ -1,0 +1,25 @@
+/* «أعلام في حكاياته» (names.html, names.js): the band is a sky of their names as stars, bigger for those met in more issues;
+   the band is the page itself, no ground or line of its own. Under it a card each, with the covers of its issues */
+.ph[data-ph="names"], html[data-theme="light"] .ph[data-ph="names"] { background: none; border-bottom: 0; }
+.ph[data-ph="names"]::after { content: none; }
+.nm-sky { position: absolute; inset: 14px 2% 10px; }
+.nm-star { position: absolute; translate: -50% -50%; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; font-family: var(--f-display);
+	font-size: calc(13px * var(--s)); color: var(--paper-dim); opacity: .55; animation: nm-glow 8s var(--d) infinite; transition: opacity .2s, color .2s; }
+.nm-star i { width: calc(4px * var(--s)); height: calc(4px * var(--s)); border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+@keyframes nm-glow { 0%, 70%, 100% { opacity: .5; } 80% { opacity: 1; color: var(--paper); } }
+.nm-star:hover, .nm-star:focus-visible { opacity: 1; color: var(--ember); animation: none; outline: none; z-index: 2; }
+@media (max-width: 640px) { .nm-star { font-size: calc(11px * var(--s)); } .nm-star:not(:nth-child(3n+1)) { display: none; } }
+@media (prefers-reduced-motion: reduce) { .nm-star { animation: none; } }
+
+.nm-tools { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; justify-content: space-between; margin: 6px 0 24px; }
+.nm-q { flex: 0 1 260px; min-width: 0; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--ink-2); color: var(--paper); font: inherit; }
+.nm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.nm-card { display: flex; flex-direction: column; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); scroll-margin-top: 90px; }
+.nm-kind { margin: 0; font-size: 13px; color: var(--ember); font-family: var(--f-display); }
+.nm-card h3 { margin: 2px 0 0; font-family: var(--f-display); font-size: 23px; }
+.nm-en { margin: 0; font-family: var(--f-latin); font-size: 14px; color: var(--muted); }
+.nm-who { margin: 8px 0 12px; color: var(--paper-dim); line-height: 1.8; font-size: 15px; }
+.nm-covers { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+.nm-covers a { width: 56px; }
+.nm-note { margin-top: 26px; color: var(--muted); line-height: 1.9; }
+.nm-note a { color: var(--ember); }

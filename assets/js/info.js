@@ -190,13 +190,16 @@
 						'<a class="buy-btn" href="' + e(href) + '"' + (/^mailto:/.test(href) ? '' : ' target="_blank" rel="noopener"') + '>' + btn + '</a></div>';
 				};
 				var mailto = function (subject, body) { return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + (body ? '&body=' + encodeURIComponent(body) : ''); };
-				/* the page is one story in two steps, «تواصل» then «ساهم معنا» (the flow in site.css): a map of the two, then a thread
-				   down the side from one numbered step to the next, the second's lead carrying on from the first */
+				/* the page is one story in steps — «تواصل», «ساهم معنا», «ساهم بالكود», then what the site gives back, «البيانات مفتوحة» and
+				   «دليل الاستخدام» (the flow in site.css): a map of them, then a thread down the side from one numbered step to the next */
 				var step = function (n, kicker, h, lead) {
 					return '<div class="flow-head"><span class="flow-mark" aria-hidden="true">' + e(App.num(n)) + '</span><p class="flow-kicker">' + e(kicker) + '</p><h2>' + e(h) + '</h2><p class="flow-lead">' + lead + '</p></div>';
 				};
-				body = '<nav class="flow-map" aria-label="' + e(L('خطوتان', 'Two steps')) + '"><a href="#reach"><i>' + e(App.num(1)) + '</i>' + e(L('تواصل', 'Get in touch')) + '</a><b></b>' +
-						'<a href="#contribute"><i>' + e(App.num(2)) + '</i>' + e(L('ساهم معنا', 'Contribute')) + '</a></nav>' +
+				var STEPS = [['reach', L('تواصل', 'Get in touch')], ['contribute', L('ساهم معنا', 'Contribute')], ['code', L('ساهم بالكود', 'Contribute code')],
+					['open-data', L('البيانات مفتوحة', 'Open data')], ['guide', L('دليل الاستخدام', 'How to use the site')]];
+				body = '<nav class="flow-map" aria-label="' + e(L('الخطوات', 'The steps')) + '">' + STEPS.map(function (x, i) {
+						return (i ? '<b></b>' : '') + '<a href="#' + x[0] + '"><i>' + e(App.num(i + 1)) + '</i>' + e(x[1]) + '</a>';
+					}).join('') + '</nav>' +
 					'<div class="flow"><section class="flow-step" id="reach">' +
 					step(1, L('قل لنا', 'Tell us'), L('تواصل', 'Get in touch'), e(L('خطأ رأيته، أو حقّ لك، أو فكرة: ثلاث طرق تصلنا بها، كلٌّ بما يناسبها.', 'A mistake you saw, a right of yours, or an idea: three ways to reach us, each by what suits it.'))) +
 					'<div class="info-cards">' +
@@ -226,13 +229,56 @@
 					'<p class="info-give-act"><a class="buy-btn" href="' + e(mailto(L('مساهمة للموقع', 'A contribution to the site'), L('ما أرسله (غلاف / إهداء / مقال / تسجيل / صورة):\n\nالعمل أو الصفحة:\n\nالمصدر أو الرابط:\n\nهل يُذكر اسمك؟ (نعم / لا):\n', 'What I am sending (cover / dedication / article / recording / photo):\n\nThe work or page:\n\nSource or link:\n\nMay we name you? (yes / no):\n'))) + '">' + e(L('أرسل مساهمتك بالبريد', 'Send it by email')) + '</a> ' +
 						'<a class="buy-btn" href="' + e(App.fixHref(L('', ''))) + '" target="_blank" rel="noopener">' + e(L('أو على GitHub ↗', 'or on GitHub ↗')) + '</a></p>' +
 					'<p class="info-note">' + L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها إن أراد، وفي «سجل التحديثات».', 'Each contribution that goes up names its sender on its page if they wish, and in the Changelog.') + '</p>' +
-				'</section></div>' +
+					'</section>' +
+					/* «ساهم بالكود»: for a reader who writes a little code — where the data is, how to check and build it, how to send it */
+					'<section class="flow-step" id="code">' +
+						step(3, L('بيديك', 'With your own hands'), L('ساهم بالكود', 'Contribute code'), e(L('الموقع كله مفتوح على GitHub: شيفرته وبياناته وأدوات بنائه. إن كنت تعرف قليلًا من البرمجة فبوسعك أن تضيف بنفسك عددًا أو طبعة أو تصحيحًا، ونراجعه قبل أن يُنشر.', 'The whole site is open on GitHub: its code, its data and its build tools. If you know a little programming you can add an issue, an edition or a fix yourself, and we review it before it goes up.'))) +
+						'<ol class="info-steps">' + [
+							[L('خذ نسخة', 'Get a copy'), L('افتح ', 'Open ') + '<a href="' + e(REPO) + '" target="_blank" rel="noopener">' + e(L('المستودع على GitHub ↗', 'the repository on GitHub ↗')) + '</a>' + L('، واضغط Fork لتكون لك نسخة منه، ثم انسخها إلى جهازك:', ', press Fork for a copy of your own, then clone it to your computer:') + '<pre class="info-code" dir="ltr">git clone https://github.com/&lt;you&gt;/ahmed-khaled-tawfik.git</pre>'],
+							[L('عدّل البيانات', 'Edit the data'), L('كل المحتوى في ملفات <code>assets/js/data-*.js</code>: الأعداد في <code>data-issues.js</code>، وتفاصيل الكتب وطبعاتها في <code>data-books-a.js</code> و<code>data-books-b.js</code>، والاقتباسات في <code>data-quotes.js</code>، وصفحات عالمه في <code>data-pages.js</code>. أما <code>data-built.js</code> فيُبنى منها، فلا تعدّله.', 'All the content is in <code>assets/js/data-*.js</code>: the issues in <code>data-issues.js</code>, book details and editions in <code>data-books-a.js</code> and <code>data-books-b.js</code>, the quotes in <code>data-quotes.js</code>, the pages of his world in <code>data-pages.js</code>. <code>data-built.js</code> is built from them, so leave it alone.')],
+							[L('افحص وابنِ', 'Check and build'), L('بـ Node.js 22 (وPython مع Pillow للصور):', 'With Node.js 22 (and Python with Pillow for pictures):') + '<pre class="info-code" dir="ltr">node tools/check-data.js\nnode tools/build-sw.js</pre>' + L('الأول يجد الصور الناقصة والروابط المكسورة، والثاني يبني البيانات ووصف الصفحات وخريطة الموقع.', 'The first finds missing pictures and broken links; the second builds the data, the pages’ descriptions and the sitemap.')],
+							[L('جرّبه', 'Try it'), L('شغّل خادمًا بسيطًا في المجلد وافتح الموقع على جهازك:', 'Run a simple server in the folder and open the site on your computer:') + '<pre class="info-code" dir="ltr">python -m http.server 8000</pre>'],
+							[L('أرسله', 'Send it'), L('افتح Pull Request بما غيّرت ومصدره. يفحص GitHub البيانات تلقائيًا، ثم نراجعه وننشره، ويُذكر اسمك في «سجل التحديثات».', 'Open a pull request with what you changed and its source. GitHub checks the data by itself; then we review and publish it, and your name goes in the Changelog.')]
+						].map(function (x) { return '<li><b>' + e(x[0]) + '</b><p>' + x[1] + '</p></li>'; }).join('') + '</ol>' +
+						'<p class="info-note">' + L('التفاصيل كاملة بالإنجليزية في ملف ', 'The full details are in the ') + '<a href="' + e(REPO + '#readme') + '" target="_blank" rel="noopener">README ↗</a>.</p>' +
+					'</section>' +
+					/* «البيانات مفتوحة»: the archive's facts as CSV files (assets/data/open/, tools/build-open.js); their rows and sizes from its index.json */
+					'<section class="flow-step" id="open-data">' +
+						step(4, L('خذ منا', 'Take from us'), L('البيانات مفتوحة', 'Open data'), e(L('حقائق الأرشيف ملفاتٍ تفتحها في Excel أو أي برنامج: كل عدد وكتاب وطبعة واقتباس وعبارة ويوم، وفي كل صف رابط صفحته هنا. تُبنى من جديد مع كل تحديث للموقع.', 'The archive’s facts as files you open in Excel or anything else: every issue, book, edition, quote, phrase and day, each row with its page here. Built afresh with every update.'))) +
+						'<ul class="info-files">' + [['issues', L('الأعداد', 'Issues'), L('كل أعداد سلاسله: الرقم والعنوان بلغتين والسنة والغلاف', 'Every issue of his series: number, title in both languages, year, cover')],
+							['books', L('الكتب', 'Books'), L('كتبه ورواياته: العنوان والنوع والسنة والناشر', 'His books and novels: title, kind, year, publisher')],
+							['editions', L('الطبعات', 'Editions'), L('كل طبعة مسجّلة: الناشر والسنة والشكل والردمك وعدد الصفحات', 'Every edition recorded: publisher, year, format, ISBN, pages')],
+							['quotes', L('الاقتباسات', 'Quotes'), L('اقتباساته بنصها ومصدرها', 'His quotes with their sources')],
+							['phrases', L('قاموس العرّاب', 'The phrasebook'), L('العبارات ومعناها ومن قالها وأين', 'The phrases, what they mean, who says them and where')],
+							['calendar', L('التقويم', 'The calendar'), L('كل حدث بيومه وشهره وسنته', 'Every moment by its day, month and year')]
+						].map(function (x) { return '<li><a href="assets/data/open/' + x[0] + '.csv" download><b>' + e(x[1]) + '</b><span>' + e(x[2]) + '</span><small data-open="' + x[0] + '.csv">CSV</small></a></li>'; }).join('') + '</ul>' +
+						'<p class="info-note">' + L('هذه حقائق مجمّعة من مصادر عامة؛ استعملها في بحثك أو مشروعك واذكر الموقع ومصادره. أما الأغلفة والنصوص فتبقى لأصحابها، كما في ', 'These are facts gathered from public sources; use them in your research or project and credit the site and its sources. The covers and texts stay their owners’, as ') + '<a href="terms.html">' + L('حقوق الاستخدام', 'Rights & use') + '</a>' + L('.', ' says.') + '</p>' +
+					'</section>' +
+					/* «دليل الاستخدام»: what the site can do that is easy to miss */
+					'<section class="flow-step" id="guide">' +
+						step(5, L('حيل صغيرة', 'Small tricks'), L('دليل الاستخدام', 'How to use the site'), e(L('ما يستطيعه الموقع ولا يظهر من أول نظرة:', 'What the site can do that you may not see at first:'))) +
+						'<ul class="info-give-list info-tips">' + [
+							['⌕', L('البحث من أي مكان', 'Search from anywhere'), L('اضغط / أو Ctrl+K في أي صفحة وابحث عن كتاب أو عدد أو شخصية أو اقتباس أو عبارة أو مقال، بالعربية أو الإنجليزية.', 'Press / or Ctrl+K on any page and search for a book, an issue, a character, a quote, a phrase or an article, in Arabic or English.')],
+							['☰', L('قوائمي', 'My lists'), L('اسحب أي غلاف (أو اضغط عليه مطوّلًا على الهاتف) إلى «سأقرؤه» أو «قرأته» أو «في مكتبتي» أو «أبحث عنه». صدّر قوائمك أو شاركها برابط من صفحة «قوائمي ورحلتي».', 'Drag any cover (or long-press it on a phone) into «Want to read», «Read», «In my collection» or «Looking for it». Export your lists or share one by link from «My lists & journey».')],
+							['⇗', L('روابط تُشارك', 'Links to share'), L('لكل شيء رابطه: عدد (book.html?id=mwt-12)، واقتباس (quotes.html#q-3)، وعبارة، وعالم من «فانتازيا»، ويوم من التقويم (calendar.html#d-06-10). وزر «شارك» يرسل الرابط بصورته.', 'Everything has its own link: an issue (book.html?id=mwt-12), a quote (quotes.html#q-3), a phrase, a Fantasia world, a calendar day (calendar.html#d-06-10). The «Share» button sends it with its picture.')],
+							['▧', L('صورة للنشر', 'A picture to post'), L('حوّل أي اقتباس أو عبارة أو «كلمة اليوم» إلى صورة مربعة أو طولية لـ«ستوري» بزر «صورة».', 'Turn any quote, phrase or «Today’s line» into a square or story-sized picture with the «Image» button.')],
+							['⬇', L('تطبيق ودون إنترنت', 'An app, offline'), L('ثبّت الموقع على هاتفك من زر «ثبّت» فيفتح كتطبيق، واحفظه كاملًا للقراءة دون إنترنت من أسفل أي صفحة.', 'Install the site on your phone from the «Install» button to open it like an app, and save it whole for offline reading from the foot of any page.')],
+							['◐', L('الورق والإنجليزية', 'Paper and English'), L('زر القمر يبدّل بين الليل والورق، وزر English يقلب الموقع كله إلى الإنجليزية، ويتذكرهما الموقع في زيارتك القادمة.', 'The moon button switches night and paper, and the English button turns the whole site to English; it remembers both next time.')]
+						].map(function (x) { return '<li><span class="info-ic" aria-hidden="true">' + x[0] + '</span><b>' + e(x[1]) + '</b><p>' + e(x[2]) + '</p></li>'; }).join('') + '</ul>' +
+					'</section></div>' +
 				'<p class="info-note">' + L('التصحيحات تُرسل عبر GitHub وتحتاج حسابًا مجانيًا هناك، وتكون علنية؛ أما البريد إلى ', 'Corrections go through GitHub, need a free account there, and are public; email to ') + mail + L(' فيبقى خاصًا — انظر ', ' stays private — see ') + '<a href="privacy.html">' + L('الخصوصية', 'Privacy') + '</a>.</p>';
 			}
 
 			document.getElementById('content').innerHTML =
 				'<div class="wrap info-wrap">' + tabs +
 				'<div class="info-body">' + body + (cfg.extra ? cfg.extra(App) : '') + '</div></div>';
+			/* the open data files' rows and sizes (assets/data/open/index.json) */
+			if (id === 'contact') fetch('assets/data/open/index.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (x) {
+				((x && x.files) || []).forEach(function (f) {
+					var el = document.querySelector('[data-open="' + f.file + '"]');
+					if (el) el.textContent = 'CSV · ' + L(App.num(f.rows) + ' صفًّا · ' + App.num(f.kb) + ' ك.ب', f.rows + ' rows · ' + f.kb + ' KB');
+				});
+			}).catch(function () {});
 		}
 	};
 })();

@@ -24,7 +24,8 @@ const N = {
 	legacy: (d.legacy || []).length, library: (d.library || []).length, creatures: (d.creatures || []).length, life: (d.refaatLife || []).length,
 	hand: (d.handwriting || []).length, awards: (d.awards || []).length,
 	translations: (d.works || []).filter(w => w.type === 'translation').length,
-	worlds: (d.fantasiaWorlds || []).filter(x => x.world).length, diseases: (d.safariCases || []).filter(x => x.kind === 'disease').length
+	worlds: (d.fantasiaWorlds || []).filter(x => x.world).length, diseases: (d.safariCases || []).filter(x => x.kind === 'disease').length,
+	figures: (d.storyPeople || []).length
 };
 /* «تقويم العرّاب»'s days and moments (assets/data/days/, tools/build-days.js, run before this) */
 N.days = 0; N.moments = 0;
@@ -55,6 +56,7 @@ const DESC = {
 	'handwriting.html': n => `ما كتبه أحمد خالد توفيق بيده لقرّائه: ${ar(n.hand, 'إهداء', 'إهداءان', 'إهداءات وتوقيعات', 'إهداءً وتوقيعًا')} كما رواها أصحابها، ودعوة لمن عنده إهداء منه. — What Ahmed Khaled Tawfik wrote by hand for his readers: ${n.hand} dedications and signatures.`,
 	'worlds.html': n => `العوالم التي تدخلها عبير في أعداد «فانتازيا» الأربعة والستين: ${ar(n.worlds, 'عالم', 'عالمان', 'عوالم', 'عالمًا')} من الأساطير والأدب والسينما والتاريخ، عددًا عددًا كما يقول غلافه الخلفي.`,
 	'clinic.html': n => `أعداد «سافاري» الثلاثة والخمسون ملفاتٍ لعلاء عبد العظيم: المرض أو القبيلة أو اللغز في كل عدد، و${ar(n.diseases, 'مرض', 'مرضان', 'أمراض', 'مرضًا')} بنبذة طبية عن كل منها.`,
+	'names.html': n => `${ar(n.figures, 'عَلَم', 'علمان', 'أعلام', 'علمًا')} حقيقيًّا وأسطوريًّا في أعداد أحمد خالد توفيق: شكسبير وهانيبال وتشي جيفارا وفرويد وباستير وجلجاميش وغيرهم، ومن هو كل منهم والأعداد التي تلقاه فيها.`,
 	'calendar.html': n => `تقويم أحمد خالد توفيق يومًا بيوم: ${ar(n.moments, 'حدث', 'حدثان', 'أحداث', 'حدثًا')} على ${ar(n.days, 'يوم', 'يومين', 'أيام', 'يومًا')} من العام، من ميلاده ورحيله إلى ما صدر من أعداده وكتبه ومقالاته.`,
 	'awards.html': n => `جوائز أحمد خالد توفيق في حياته وبعد رحيله (${n.awards}): جائزة الشارقة عن «مثل إيكاروس»، والقائمة القصيرة لترجمة «يوتوبيا»، وما كُرِّم به اسمه. — His ${n.awards} awards and honours.`
 };

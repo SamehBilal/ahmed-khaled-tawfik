@@ -177,7 +177,7 @@ window.PAGE = {
 		var TREE = [
 			['index.html', ['guide.html']],
 			['works.html', ['covers.html', 'translations.html', 'world.html', 'screen.html'], [[own.length + wrote.length, L('صفحة سلسلة', 'series pages')], [issues, L('صفحة عدد', 'issue pages')], [books, L('صفحة كتاب', 'book pages')]]],
-			['characters.html', ['creatures.html', 'refaat-life.html', 'network.html', 'worlds.html', 'clinic.html'], [[chars, L('صفحة بطل', 'lead’s pages')]]],
+			['characters.html', ['creatures.html', 'refaat-life.html', 'network.html', 'worlds.html', 'clinic.html', 'names.html'], [[chars, L('صفحة بطل', 'lead’s pages')]]],
 			['writers.html', ['publishers.html', 'library.html'], [[window.People ? window.People.all().length : 0, L('صفحة اسم من دائرته', 'pages of his circle')], [S.publishers().length, L('صفحة دار نشر', 'publisher pages')]]],
 			['quotes.html', ['quotes.html#glossary']],
 			['audio.html', []],

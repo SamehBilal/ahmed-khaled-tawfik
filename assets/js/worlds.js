@@ -52,9 +52,27 @@ window.PAGE = {
 		});
 	},
 
+	/* «خط زمن فانتازيا»: the worlds of history and legend in the order they are set, from Gilgamesh to Che Guevara (their year
+	   and era in AKT.fantasiaWorlds), a cover at each stop, each to its card; in order, not to scale (the span is nearly five
+	   thousand years) */
+	timeline: function () {
+		var App = window.App, S = window.WorksShared, e = App.esc, t = App.t, L = App.L, by = {};
+		S.seriesIssues('fantasia').forEach(function (is) { if (!by[is.n]) by[is.n] = is; });
+		var list = (App.data().fantasiaWorlds || []).filter(function (x) { return x.year != null && by[x.n]; }).sort(function (a, b) { return a.year - b.year; });
+		if (!list.length) return '';
+		return '<section class="section wl" id="timeline"><div class="wrap"><h2 class="wl-h">' + e(L('خط زمن فانتازيا', 'Fantasia’s timeline')) + '</h2>' +
+			'<p class="wl-lead">' + e(L('العوالم التاريخية والأسطورية التي زارتها عبير بترتيب زمنها، من جلجاميش إلى تشي جيفارا: نحو خمسة آلاف عام في ' + App.num(list.length) + ' عددًا.', 'The worlds of history and legend Abeer visited, in the order they are set, from Gilgamesh to Che Guevara: nearly five thousand years in ' + list.length + ' issues.')) + '</p>' +
+			'<ol class="wl-line">' + list.map(function (x) {
+				var is = by[x.n];
+				return '<li><a href="#fantasia-' + x.n + '" class="wl-stop"><span class="wl-era">' + e(t(x.era)) + '</span><i class="wl-dot"></i>' +
+					'<span class="wl-cv">' + S.miniCover({ img: S.issueCover('fantasia', is), color: '#3a1414', title: t(is.title), num: App.num(is.n) }) + '</span>' +
+					'<b>' + e(t(is.title)) + '</b></a></li>';
+			}).join('') + '</ol></div></section>';
+	},
+
 	render: function () {
 		window.SeriesFile.render(this, {
-			sid: 'fantasia', field: 'world', kinds: this.KINDS,
+			sid: 'fantasia', field: 'world', kinds: this.KINDS, before: this.timeline(),
 			list: function () { return window.App.data().fantasiaWorlds || []; },
 			note: { ar: 'العالم كما يقوله الغلاف الخلفي لكل عدد (في صفحته)، وما عُلِّم «من عنوانه» مأخوذ من العنوان وحده.', en: 'Each world as the issue’s back cover gives it (on its page); those marked «from its title» are from the title alone.' }
 		});

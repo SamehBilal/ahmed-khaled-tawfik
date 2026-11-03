@@ -19,9 +19,10 @@ Static site. Open `index.html` or serve the folder (e.g. GitHub Pages). After an
 | `quotes.html` | Sourced quotes, with copy / link / save-as-image; under them «قاموس العرّاب», the phrasebook (`#glossary`) |
 | `blog.html` | His columns, stories and comics from the blog archive by year and month; under them «في الصحف», the papers they ran in (`#papers`) |
 | `legacy.html` | Farewell and tributes timeline, adaptations, interviews and talks |
-| `worlds.html`, `clinic.html` | «عوالم فانتازيا» and «عيادة سافاري»: the world each Fantasia issue enters and the case of each Safari issue (`AKT.fantasiaWorlds`, `AKT.safariCases` in `data-pages.js`), from their back covers; `#fantasia-25`, `#safari-36` |
+| `worlds.html`, `clinic.html` | «عوالم فانتازيا» and «عيادة سافاري»: the world each Fantasia issue enters and the case of each Safari issue (`AKT.fantasiaWorlds`, `AKT.safariCases` in `data-pages.js`), from their back covers, with «خط زمن فانتازيا», the worlds of history and legend in order (`#timeline`); `#fantasia-25`, `#safari-36` |
+| `names.html` | «أعلام في حكاياته»: the real and legendary figures the back covers name (`AKT.storyPeople`), who each was and their issues; `#p-shakespeare` |
 | `calendar.html` | «تقويم العرّاب»: the whole year a day at a time, from `assets/data/days/`; `#d-06-10` opens one day |
-| `wanted.html` | «ما ينقص الأرشيف»: what the archive lacks (unknown worlds and cases, back-cover texts and pictures, editions with no year, text with no English), counted from the data when it opens |
+| `wanted.html` | «ما ينقص الأرشيف»: what the archive lacks (unknown worlds and cases, back-cover texts and pictures, editions with no year, text with no English), counted from the data when it opens, with «حالة الأرشيف», how complete each part is |
 | `about.html`, `sources.html`, `privacy.html`, `terms.html`, `contact.html` | Linked from the footer only (not the header): who built the site, sources and how the data was collected, privacy, rights and use, contact. Their text is in `assets/js/info.js` |
 
 Every page has search (press `/` or Ctrl+K), an Arabic/English switch, a paper (light) theme, and a "suggest a fix" link that opens a pre-filled GitHub issue.
@@ -64,6 +65,7 @@ It builds, in order:
 - **`assets/js/data-built.js`** (`tools/build-data.js`) — the eleven data files from `data.js` to `data-more.js`, run once with their corrections applied: the pages load this one file, not those; what only the book, series and «حول العالم» pages read (the editions' links and credits, the Abjjad links) goes to `assets/js/data-detail.js`, which only they load. Edit the data in those files, never in this one, then rebuild. The privacy, contact, changelog and 404 pages draw nothing from the data and do not load it; search, the lists and "Save for offline" fetch it there when first opened (`App.needData`).
 - **page descriptions** (`tools/build-meta.js`) — each section page's description, share tags and JSON-LD, with their numbers (issues, books, quotes, articles…) counted from the data; also the font and data preloads in every head.
 - **`assets/img/covers-s/`** (`tools/build-thumbs.js`, needs Python with Pillow) — a WebP copy of every cover at most 320 px wide, at the same path, for the grids (`App.thumb`); the book pages show the cover itself. A new or changed cover gets its copy on the next build.
+- **`assets/data/open/`** (`tools/build-open.js`) — the archive's facts as CSV files to download (issues, books, editions, quotes, phrases, calendar), listed on the contact page with how to contribute code and a guide to the site.
 - **`sw.js`** — the service worker's file list and version, so installed copies show "A newer version is ready".
 - **`sitemap.xml`** (`tools/build-sitemap.js`) — every page, book, issue, series, character, writer, publisher and blog article, for search engines.
 - **`share/`** (`tools/build-share.js`) — a small page per book, series, character, writer, publisher and article with its own title and picture for WhatsApp, Facebook and X; the «شارك» buttons hand these out.

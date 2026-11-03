@@ -194,6 +194,8 @@ window.PAGE = {
 					'<div class="char-grid cc-grid cc-minor">' + chars.filter(function (c) { return c.main; }).concat(chars.filter(function (c) { return !c.main; })).map(function (c) { return window.CharCards.card(c); }).join('') + '</div>' +
 				'</section>' : '') +
 				this.withHtml(id) +
+				/* how it ended: its last issue, and the ending itself behind a button (it gives it away) */
+				(ser.own && issues.length ? this.endingHtml(id, issues) : '') +
 				((specials.length + extraSpecials.length) ? '<section class="d-block d-wide"><div class="d-head"><h3>' + L('الأعداد الخاصة', 'Special issues') + ' <small>(' + App.num(specials.length + extraSpecials.length) + ')</small></h3></div><div class="cover-grid">' +
 					specials.map(function (is) {
 						var au = d.audio && d.audio.youtube && d.audio.youtube.issues[id + '-s' + is.n];
@@ -252,6 +254,22 @@ window.PAGE = {
 
 	/* the reader's progress through the series, from their lists (lists.js): how many issues they have read (a collector: own),
 	   a bar, and the first one not yet read (owned) to go to next; each read or owned cover is marked. Redrawn as the lists change */
+	/* «النهاية»: the series' last issue, and how it ended (AKT.seriesEndings, data-series-more.js), shown only when asked; a series
+	   whose ending we have not written asks for it */
+	endingHtml: function (id, issues) {
+		var App = window.App, S = window.WorksShared, e = App.esc, t = App.t, L = App.L;
+		var i = issues.length - 1, last = issues[i], end = (App.data().seriesEndings || {})[id];
+		var href = App.issueHref(id, Object.assign({ _idx: i }, last));
+		return '<section class="d-block d-wide sv-end"><div class="d-head"><h3>' + e(L('النهاية', 'The ending')) + '</h3></div>' +
+			'<div class="sv-end-row"><a class="sv-end-cover" href="' + e(href) + '">' + S.miniCover({ img: S.issueCover(id, last), color: '#3a1414', title: t(last.title), num: App.num(last.n) }) + '</a>' +
+			'<div class="sv-end-body"><p class="sv-end-last">' + e(L('آخر أعدادها: ', 'Its last issue: ')) + '<a href="' + e(href) + '">' + e(App.num(last.n) + ' · ' + t(last.title)) + '</a>' + (last.year ? ' <small>(' + e(App.num(last.year)) + ')</small>' : '') + '</p>' +
+				(end ? '<details class="sv-end-spoil"><summary>' + e(L('اكشف كيف انتهت (تحرق الأحداث)', 'Show how it ended (gives it away)')) + '</summary><p>' + e(t(end.text)) + '</p>' +
+						(end.source ? '<a class="sv-end-src" href="' + e(end.source) + '" target="_blank" rel="noopener">' + e(L('المصدر ↗', 'Source ↗')) + '</a>' : '') + '</details>'
+					: '<p class="sv-end-none">' + e(L('لم نكتب بعد كيف انتهت. قرأت آخر أعدادها؟', 'We have not written how it ended yet. Read its last issue?')) +
+						' <a href="' + e(App.fixHref(L('نهاية ', 'The ending of ') + t((S.anySeries(id) || {}).s ? S.anySeries(id).s.title : id))) + '" target="_blank" rel="noopener">' + e(L('أخبرنا ↗', 'Tell us ↗')) + '</a></p>') +
+			'</div></div></section>';
+	},
+
 	progress: function (issues, id) {
 		var App = window.App, Ls = window.Lists, e = App.esc, t = App.t, L = App.L, self = this;
 		var box = document.getElementById('sv-progress'), grid = document.getElementById('issue-grid');

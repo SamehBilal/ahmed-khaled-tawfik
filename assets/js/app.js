@@ -39,6 +39,7 @@
 			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true },
 			{ id: 'worlds', href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds', phone: true },
 			{ id: 'clinic', href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic', phone: true },
+			{ id: 'names', href: 'names.html', ar: 'أعلام في حكاياته', en: 'Figures in his tales', phone: true },
 			{ id: 'calendar', href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
@@ -73,7 +74,8 @@
 			{ href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life' },
 			{ href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web' },
 			{ href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds' },
-			{ href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic' }
+			{ href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic' },
+			{ href: 'names.html', ar: 'أعلام في حكاياته', en: 'Figures in his tales' }
 		],
 		/* pages linked only from the footer, not the header */
 		legal: [

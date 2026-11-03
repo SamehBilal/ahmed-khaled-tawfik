@@ -17,6 +17,8 @@ require('./build-style.js');
 require('./build-meta.js');
 // and the covers' small copies for the grids (assets/img/covers-s/)
 require('./build-thumbs.js');
+// and the archive's facts as CSV files to download (assets/data/open/, the contact page's «البيانات مفتوحة»)
+require('./build-open.js');
 
 const list = ['./'];
 const add = (rel) => list.push(rel.split(path.sep).join('/'));
@@ -29,7 +31,7 @@ const walk = (dir, test) => fs.readdirSync(path.join(root, dir), { withFileTypes
 });
 walk('assets/js', f => /\.js$/.test(f) && DATA.indexOf(f.split(path.sep).join('/')) < 0);
 walk('assets/css', f => /\.css$/.test(f));
-walk('assets/data', f => /\.json$/.test(f));
+walk('assets/data', f => /\.json$/.test(f) && !/^assets[\\/]data[\\/]open[\\/]/.test(f));
 walk('assets/fonts', f => /\.(woff2?|ttf)$/.test(f));
 walk('assets/img/icons', () => true);
 walk('assets/img/cassette', f => /\.(png|jpe?g|webp)$/.test(f));

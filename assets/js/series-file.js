@@ -1,12 +1,12 @@
 /* What «عوالم فانتازيا» (worlds.js) and «عيادة سافاري» (clinic.js) share: a card per issue of a series — its cover, number and
    title, its kind, its line (from AKT.fantasiaWorlds / AKT.safariCases, data-pages.js), a note under some — filtered by kind,
    each card at #<series>-<n>. An issue whose line is not known yet says so and asks for it («ما ينقص الأرشيف», wanted.html).
-   SeriesFile.render(page, { sid, list, field, note, kinds }) draws it into #content; page.kind keeps the filter. */
+   SeriesFile.render(page, { sid, list, field, note, kinds, before }) draws it into #content (before: a section above it); page.kind keeps the filter. */
 window.SeriesFile = {
 	render: function (page, o) {
 		var App = window.App, e = App.esc, L = App.L, list = o.list();
 		var count = {}; list.forEach(function (x) { count[x.kind] = (count[x.kind] || 0) + 1; });
-		document.getElementById('content').innerHTML = '<section class="section sf"><div class="wrap">' +
+		document.getElementById('content').innerHTML = (o.before || '') + '<section class="section sf"><div class="wrap">' +
 			'<div class="chips sf-bar"><button type="button" class="chip" data-k="all" aria-pressed="true">' + e(L('الكل', 'All')) + ' <b>' + e(App.num(list.length)) + '</b></button>' +
 				o.kinds.filter(function (k) { return count[k[0]]; }).map(function (k) {
 					return '<button type="button" class="chip" data-k="' + k[0] + '" aria-pressed="false">' + e(App.t(k[1])) + ' <b>' + e(App.num(count[k[0]])) + '</b></button>';

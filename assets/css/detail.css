@@ -551,3 +551,19 @@ html[data-theme="light"] .sv-clock { stroke: #2a3580; }
 	box-shadow: 0 1px 4px rgba(0, 0, 0, .4); }
 .sv-random { margin: 0; }
 .sv-random svg { fill: none; }
+
+/* «النهاية» on a series page (series-page.js endingHtml): the last issue, and how it ended behind a button */
+.sv-end-row { display: flex; gap: 18px; align-items: flex-start; }
+.sv-end-cover { flex: 0 0 92px; }
+.sv-end-body { min-width: 0; flex: 1; }
+.sv-end-last { margin: 0 0 10px; font-family: var(--f-display); font-size: 18px; }
+.sv-end-last a { color: var(--paper); }
+.sv-end-last a:hover { color: var(--ember); }
+.sv-end-last small { color: var(--muted); font-family: var(--f-latin); }
+.sv-end-spoil { border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
+.sv-end-spoil summary { cursor: pointer; padding: 12px 16px; color: var(--ember); font-family: var(--f-display); }
+.sv-end-spoil[open] summary { border-bottom: 1px solid var(--line); }
+.sv-end-spoil p { margin: 0; padding: 14px 16px 6px; line-height: 1.9; color: var(--paper-dim); }
+.sv-end-src { display: inline-block; padding: 0 16px 12px; font-size: 13px; color: var(--muted); }
+.sv-end-none { margin: 0; color: var(--muted); line-height: 1.9; }
+.sv-end-none a { color: var(--ember); }

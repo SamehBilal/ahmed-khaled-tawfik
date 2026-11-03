@@ -373,3 +373,12 @@ window.AKT.seriesInfo = {
     }
   ];
 })();
+
+/* «النهاية» on a series page (series-page.js endingHtml): how a series ended, shown only when asked (it gives the end away), with its
+   source; a series not here shows its last issue and asks for it («ما ينقص الأرشيف») */
+window.AKT.seriesEndings = {
+  "mwt": {
+    "text": { "ar": "انتهت السلسلة بالعدد 80 «أسطورة الأساطير» في جزأين، وفي الجزء الثاني أنهى الكاتب حياة د. رفعت إسماعيل بمرض عضال، ووعد بحكايات لم تُروَ وُجدت في مذكراته بعد رحيله.", "en": "The series ended with issue 80, «The Legend of Legends», in two parts; in the second the author ended Dr Refaat Ismail’s life with an incurable illness, and promised untold tales found in his diaries after his death." },
+    "source": "https://3rabica.org/%D9%85%D8%A7_%D9%88%D8%B1%D8%A7%D8%A1_%D8%A7%D9%84%D8%B7%D8%A8%D9%8A%D8%B9%D8%A9_(%D8%B3%D9%84%D8%B3%D9%84%D8%A9)"
+  }
+};

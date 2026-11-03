@@ -39,7 +39,7 @@ window.PAGE = {
 			{ ar: 'الأعداد التي لا يقول غلافها الخلفي ما حالتها: المرض أو القبيلة أو اللغز. قرأت واحدًا منها؟ أخبرنا بما فيه.', en: 'The issues whose back cover does not say what the case is: the disease, the tribe or the mystery. Read one? Tell us what is in it.' }]
 		].forEach(function (p) {
 			var items = (d[p[1]] || []).filter(function (x) { return !x[p[2]]; }).map(function (x) { return { href: p[3] + '#' + p[0] + '-' + x.n, label: label(p[0] + '-' + x.n) }; });
-			out.push({ id: p[0], title: p[4], why: p[5], items: items });
+			out.push({ id: p[0], title: p[4], why: p[5], items: items, of: (d[p[1]] || []).length, done: { ar: p[0] === 'fantasia' ? 'عوالم «فانتازيا» معروفة' : 'حالات «سافاري» معروفة', en: p[0] === 'fantasia' ? 'Fantasia worlds known' : 'Safari cases known' } });
 		});
 		/* the back-cover text: none, or only the series' own words (the same text on three issues or more) */
 		var seen = {}, texts = {}, bare = function (s) { return String(s || '').replace(/["“”\s]+/g, ' ').trim(); };
@@ -52,28 +52,36 @@ window.PAGE = {
 		keys.forEach(function (k) { var b = blurbOf(k); if (b) texts[b] = (texts[b] || 0) + 1; });
 		out.push({ id: 'blurbs', title: { ar: 'أعداد بلا نص غلافها الخلفي', en: 'Issues without their back-cover text' },
 			why: { ar: 'نص الغلاف الخلفي يُعرض في صفحة العدد، ومنه نعرف ما فيه. هذه الأعداد ليس عندنا نصها، أو عندنا فقط النص العام للسلسلة. صورة واضحة للغلاف الخلفي تكفي.', en: 'The back-cover text is shown on the issue’s page, and tells what it holds. For these we have no text, or only the series’ general one. A clear photo of the back cover is enough.' },
-			items: keys.filter(function (k) { var b = blurbOf(k); return !b || texts[b] >= 3; }).map(function (k) { return { href: 'book.html?id=' + k, label: label(k) }; }) });
+			items: keys.filter(function (k) { var b = blurbOf(k); return !b || texts[b] >= 3; }).map(function (k) { return { href: 'book.html?id=' + k, label: label(k) }; }),
+			of: keys.length, done: { ar: 'أعداد بنص غلافها الخلفي', en: 'Issues with their back-cover text' } });
 		/* the back covers no one has sent */
 		var noBack = [];
 		keys.forEach(function (k) { if (!S.backOf(k)) noBack.push({ href: 'book.html?id=' + k, label: label(k) }); });
 		(d.works || []).forEach(function (w) { if (!S.backOf(w.id)) noBack.push({ href: S.bookHref(w.id), label: t(w.title) }); });
 		out.push({ id: 'backs', title: { ar: 'أغلفة خلفية لم تصلنا', en: 'Back covers we do not have' },
 			why: { ar: 'صورة الغلاف الخلفي تظهر حين تقلب الكتاب في صفحته. صوّر غلاف نسختك الخلفي وأرسله، مع الطبعة وسنتها إن عرفتها.', en: 'The back cover shows when you turn the book over on its page. Photograph your copy’s back and send it, with the edition and its year if you know them.' },
-			items: noBack });
+			items: noBack, of: keys.length + (d.works || []).length, done: { ar: 'أعداد وكتب بغلافها الخلفي', en: 'Issues and books with their back cover' } });
 		/* the editions with no year */
-		var noYear = [];
+		var noYear = [], eds = 0;
 		[d.issueInfo, d.bookInfo].forEach(function (m) {
 			Object.keys(m || {}).forEach(function (k) {
+				eds += (m[k].editions || []).length;
 				var n = (m[k].editions || []).filter(function (ed) { return !ed.year && !ed.date; }).length;
 				if (n) noYear.push({ href: 'book.html?id=' + encodeURIComponent(k), label: label(k), n: n });
 			});
 		});
 		out.push({ id: 'dates', title: { ar: 'طبعات بلا سنة', en: 'Editions with no year' },
 			why: { ar: 'السنة هي ما يرتّب الطبعات ويضعها في «تقويم العرّاب». سنة الطبع مكتوبة عادة في الصفحة الأولى من الكتاب أو آخره.', en: 'The year orders the editions and puts them in the calendar. The printing year is usually on the book’s first or last page.' },
-			items: noYear });
+			items: noYear, missing: noYear.reduce(function (a, x) { return a + x.n; }, 0), of: eds, done: { ar: 'طبعات بسنتها', en: 'Editions with their year' } });
+		/* the series whose ending is not written yet (series-page.js endingHtml) */
+		var own = S.ownSeries().filter(function (s) { return S.seriesIssues(s.id).length; }), ends = d.seriesEndings || {};
+		out.push({ id: 'endings', title: { ar: 'سلاسل لم نكتب نهايتها', en: 'Series whose ending is not written' },
+			why: { ar: 'في صفحة كل سلسلة قسم «النهاية»: كيف انتهت، مخفيًّا حتى يطلبه القارئ. هذه السلاسل لم نكتبه لها بعد؛ أرسل سطرين عن نهايتها ومصدرهما.', en: 'Each series page has «The ending»: how it ended, hidden until the reader asks. These series have none yet; send two lines on how it ended, and where that comes from.' },
+			items: own.filter(function (s) { return !ends[s.id]; }).map(function (s) { return { href: S.seriesHref(s.id), label: t(s.title) }; }), of: own.length, done: { ar: 'سلاسل بنهايتها', en: 'Series with their ending' } });
 		/* the text with no English yet (the printed back covers stay Arabic, as printed) */
-		var en = {}, walk = function (o, top, depth) {
+		var en = {}, texts2 = 0, walk = function (o, top, depth) {
 			if (!o || typeof o !== 'object' || depth > 8) return;
+			if (typeof o.ar === 'string' && o.ar.trim()) texts2++;
 			if (typeof o.ar === 'string' && o.ar.trim() && !String(o.en || '').trim()) en[top] = (en[top] || 0) + 1;
 			for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) walk(o[k], top, depth + 1);
 		};
@@ -83,15 +91,27 @@ window.PAGE = {
 			legacy: { ar: 'الإرث', en: 'Legacy' }, media: { ar: 'اللقاءات', en: 'Interviews' }, seriesInfo: { ar: 'تفاصيل السلاسل', en: 'Series details' }, quotes: { ar: 'الاقتباسات', en: 'Quotes' } };
 		out.push({ id: 'english', title: { ar: 'نصوص بلا إنجليزية', en: 'Text with no English' },
 			why: { ar: 'الموقع بلغتين، وهذه نصوص عربية لم تُترجم بعد. إن كنت تجيد الإنجليزية فترجمة سطر واحد تفيد.', en: 'The site is in two languages, and these are Arabic texts not translated yet. If you write English, even one line helps.' },
+			of: 0, done: { ar: 'نصوص بالإنجليزية', en: 'Text in English' },
 			counts: Object.keys(en).sort(function (a, b) { return en[b] - en[a]; }).map(function (k) { return { label: t(NAMES[k] || { ar: k, en: k }), n: en[k] }; }) });
+		out[out.length - 1].of = texts2;
 		return out;
 	},
 
 	render: function () {
 		var App = window.App, e = App.esc, t = App.t, L = App.L, parts = this.parts();
-		var total = function (p) { return p.items ? p.items.length : p.counts.reduce(function (s, c) { return s + c.n; }, 0); };
+		var total = function (p) { return p.missing != null ? p.missing : p.items ? p.items.length : p.counts.reduce(function (s, c) { return s + c.n; }, 0); };
+		/* «حالة الأرشيف»: how far along each part is, the most nearly done first */
+		var bars = parts.filter(function (p) { return p.of; }).map(function (p) { return { p: p, pc: Math.max(0, Math.min(100, Math.round((p.of - total(p)) / p.of * 100))) }; })
+			.sort(function (a, b) { return b.pc - a.pc; });
+		var all = bars.reduce(function (a, b) { return a + b.pc; }, 0) / (bars.length || 1);
 		/* (beside the side menu of the pages about the site, app.js infoTabs) */
 		document.getElementById('content').innerHTML = '<section class="section wn"><div class="wrap info-wrap">' + App.infoTabs('wanted') + '<div class="info-body">' +
+			'<section class="wn-status" id="status"><h2>' + e(L('حالة الأرشيف', 'The archive’s progress')) + ' <small>' + e(App.num(Math.round(all)) + '%') + '</small></h2>' +
+				'<p class="wn-why">' + e(L('ما اكتمل من كل جزء من الأرشيف، محسوبًا الآن من بياناته؛ وتحتها ما ينقص كل جزء، فما ترسله يرفع هذه الأشرطة.', 'How complete each part of the archive is, counted now from its data; below, what each part lacks, so whatever you send moves these bars.')) + '</p>' +
+				'<ul class="wn-bars">' + bars.map(function (b) {
+					return '<li><a href="#' + b.p.id + '"><span class="wn-bar-t">' + e(t(b.p.done)) + '</span><span class="wn-bar-n">' + e(App.num(b.p.of - total(b.p)) + ' / ' + App.num(b.p.of)) + '</span>' +
+						'<span class="wn-bar" role="progressbar" aria-valuenow="' + b.pc + '" aria-valuemin="0" aria-valuemax="100"><i style="width:' + b.pc + '%"></i></span><b>' + e(App.num(b.pc) + '%') + '</b></a></li>';
+				}).join('') + '</ul></section>' +
 			'<nav class="wn-sum" aria-label="' + e(L('الأقسام', 'Parts')) + '">' + parts.map(function (p) {
 				return '<a href="#' + p.id + '"><b>' + e(App.num(total(p))) + '</b><span>' + e(t(p.title)) + '</span></a>';
 			}).join('') + '</nav>' +

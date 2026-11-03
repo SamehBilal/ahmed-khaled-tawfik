@@ -34,3 +34,20 @@
 .wt-engine .wt-w:nth-of-type(6) { left: 18px; } .wt-engine .wt-w:nth-of-type(7) { left: 64px; } .wt-engine .wt-w:nth-of-type(8) { right: 20px; }
 @media (max-width: 640px) { .wt-run { height: 150px; bottom: 40px; } .wt-car { width: 108px; height: 120px; } .wt-engine { width: 130px; height: 96px; } .wt-rail { bottom: 34px; } }
 @media (prefers-reduced-motion: reduce) { .wt-run { animation: none; } .wt-puff { animation: none; } }
+
+/* «خط زمن فانتازيا» (worlds.js timeline): the worlds of history and legend in order along a line that scrolls sideways */
+.wl { padding-bottom: 0; }
+.wl-h { margin: 0 0 6px; font-family: var(--f-display); font-size: 28px; }
+.wl-lead { margin: 0 0 18px; color: var(--paper-dim); line-height: 1.8; }
+.wl-line { position: relative; display: flex; gap: 6px; margin: 0; padding: 4px 4px 14px; list-style: none; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; }
+.wl-line li { position: relative; flex: 0 0 112px; scroll-snap-align: start; }
+.wl-line li::before { content: ""; position: absolute; top: 43px; inset-inline: -3px; height: 2px; background: var(--ember); opacity: .45; }
+.wl-line li:first-child::before { inset-inline-start: 50%; } .wl-line li:last-child::before { inset-inline-end: 50%; }
+.wl-stop { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; color: var(--paper-dim); }
+.wl-era { height: 30px; display: flex; align-items: flex-end; font-family: var(--f-display); font-size: 13px; line-height: 1.2; color: var(--ember); }
+.wl-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); border: 2px solid var(--ember); }
+.wl-cv { width: 64px; transition: translate .25s; }
+.wl-stop b { font-family: var(--f-display); font-size: 14px; font-weight: 400; line-height: 1.4; }
+.wl-stop:hover, .wl-stop:focus-visible { color: var(--paper); outline: none; }
+.wl-stop:hover .wl-cv, .wl-stop:focus-visible .wl-cv { translate: 0 -4px; }
+.wl-stop:hover .wl-dot { background: var(--ember); }

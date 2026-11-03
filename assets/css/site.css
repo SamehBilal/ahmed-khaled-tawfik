@@ -1216,3 +1216,22 @@ html[dir="rtl"] .flow-map > b { background: linear-gradient(-90deg, var(--ember)
 	.flow-mark { inset-inline-start: -44px; width: 32px; height: 32px; font-size: 16px; }
 	.flow-head h2 { font-size: 26px; }
 }
+
+/* the contact page's «ساهم بالكود», «البيانات مفتوحة» and «دليل الاستخدام» (info.js): numbered steps with the commands to run,
+   the files to download with their rows and sizes; the steps' map wraps when it has more than fits */
+.flow-map { flex-wrap: wrap; row-gap: 10px; }
+.info-steps { margin: 0; padding: 0; list-style: none; counter-reset: st; display: grid; gap: 12px; }
+.info-steps li { counter-increment: st; position: relative; padding: 14px 18px 14px 18px; padding-inline-start: 52px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
+.info-steps li::before { content: counter(st); position: absolute; inset-inline-start: 16px; top: 14px; width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; background: var(--ember); color: #fff; font: 600 13px/1 var(--f-latin); }
+.info-steps b { font-family: var(--f-display); font-size: 17px; color: var(--paper); }
+.info-steps p { margin: 4px 0 0; color: var(--paper-dim); line-height: 1.8; }
+.info-steps p a { color: var(--ember); }
+.info-steps code, .info-code { font-family: ui-monospace, Consolas, monospace; font-size: 13px; }
+.info-steps code { padding: 1px 6px; border-radius: 5px; background: color-mix(in srgb, var(--paper) 9%, transparent); direction: ltr; unicode-bidi: isolate; }
+.info-code { margin: 8px 0 4px; padding: 10px 14px; border-radius: 8px; background: #0b0c10; color: #efe6d2; text-align: left; white-space: pre-wrap; overflow-wrap: anywhere; }
+.info-files { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.info-files a { display: flex; flex-direction: column; gap: 4px; height: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); color: var(--paper-dim); }
+.info-files a:hover { border-color: var(--ember); color: var(--paper); }
+.info-files b { font-family: var(--f-display); font-size: 18px; color: var(--paper); }
+.info-files span { font-size: 14px; line-height: 1.7; }
+.info-files small { margin-top: auto; padding-top: 6px; font-family: var(--f-latin); color: var(--ember); }
