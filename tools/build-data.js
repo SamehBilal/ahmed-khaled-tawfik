@@ -20,6 +20,8 @@ let papers = 0;
 });
 let places = 0;
 try { places = JSON.parse(fs.readFileSync(path.join(root, 'assets/data/places.json'), 'utf8')).length; } catch (e) {}
+/* and «قاموس العرّاب»'s phrases (data-pages.js), small, for the home page's line of the day and the search on every page */
+A.glossary = load(['data-pages']).win.AKT.glossary || [];
 A.stats = { papers: papers, outlets: Object.keys(outlets).length, places: places, posts: (blog.posts || []).length };
 /* and what only a book's, a series' and «حول العالم»'s pages read, set apart in data-detail.js, which only those pages load
    (right after this file, before shared.js reorders the editions): each edition's links and credits, and the Abjjad shop links */

@@ -92,11 +92,15 @@ window.PAGE = {
 	/* quotes.html#glossary (as glossary.html now leads): to the phrasebook's heading — it is too tall to centre — and again as the
 	   quotes above it settle, as long as the reader has not scrolled away; any other hash, the quote it names */
 	onHash: function () {
-		var self = this;
-		if (location.hash === '#glossary') return [60, 400, 1000].forEach(function (ms) {
+		var self = this, G = window.GlossarySection, h = location.hash;
+		/* #glossary-refaat: the phrasebook with one speaker's phrases; #g-3: one phrase, every speaker's shown so it is there */
+		var sp = /^#glossary-([a-z]+)$/.exec(h);
+		if (G && sp) G.pick(sp[1]);
+		if (G && /^#g-\d+$/.test(h)) G.pick('all');
+		if (/^#glossary(-[a-z]+)?$/.test(h)) return [60, 400, 1000].forEach(function (ms) {
 			setTimeout(function () {
 				var to = document.getElementById('glossary');
-				if (to && location.hash === '#glossary' && Math.abs(to.getBoundingClientRect().top - 80) > 40) to.scrollIntoView({ block: 'start', behavior: 'instant' });
+				if (to && location.hash === h && Math.abs(to.getBoundingClientRect().top - 80) > 40) to.scrollIntoView({ block: 'start', behavior: 'instant' });
 			}, ms);
 		});
 		window.App.focusHash(function (el) { if (el.hidden) { self.filter = 'all'; self.apply(); } });

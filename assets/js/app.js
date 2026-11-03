@@ -195,7 +195,7 @@
 		},
 
 		/* the side menu of the pages about the site (info.js, changelog.js, sitemap-page.js): each a page, the one open marked (site.css .info-tabs) */
-		INFO_PAGES: [['about', { ar: 'عن الموقع والأسئلة الشائعة', en: 'About & FAQ' }], ['sources', { ar: 'المصادر وطريقة الجمع', en: 'Sources & method' }],
+		INFO_PAGES: [['about', { ar: 'عن الموقع والأسئلة الشائعة', en: 'About & FAQ' }], ['sources', { ar: 'المصادر', en: 'Sources' }],
 			['privacy', { ar: 'الخصوصية', en: 'Privacy' }], ['terms', { ar: 'حقوق الاستخدام', en: 'Rights & use' }],
 			['contact', { ar: 'تواصل وساهم', en: 'Contact & contribute' }], ['changelog', { ar: 'سجل التحديثات', en: 'Changelog' }],
 			['sitemap', { ar: 'خريطة الموقع', en: 'Site map' }]],
@@ -666,7 +666,8 @@
 				character: { ar: 'شخصية', en: 'Character' }, writer: { ar: 'كاتب', en: 'Writer' }, quote: { ar: 'اقتباس', en: 'Quote' },
 				legacy: { ar: 'الإرث', en: 'Legacy' }, tribute: { ar: 'قالوا عنه', en: 'Tribute' }, blog: { ar: 'المدونة', en: 'Blog' }, media: { ar: 'لقاء / مقال', en: 'Media' },
 				about: { ar: 'كتاب عنه', en: 'Book about him' }, near: { ar: 'كتاب من حوله', en: 'Related book' }, publisher: { ar: 'دار نشر', en: 'Publisher' },
-				award: { ar: 'جائزة', en: 'Award' }, audio: { ar: 'مسموع', en: 'Audio' }, page: { ar: 'صفحة', en: 'Page' }
+				award: { ar: 'جائزة', en: 'Award' }, audio: { ar: 'مسموع', en: 'Audio' }, page: { ar: 'صفحة', en: 'Page' },
+				phrase: { ar: 'عبارة', en: 'Phrase' }
 			};
 			var S = window.WorksShared;
 
@@ -711,6 +712,8 @@
 			});
 			if (au.midnightSpoofs) add(K.audio, au.midnightSpoofs.title, { ar: au.midnightSpoofs.years || '', en: au.midnightSpoofs.years || '' }, 'audio.html', 'audiohat');
 			(d.quotes || []).forEach(function (q, i) { add(K.quote, q.text, q.from, 'quotes.html#q-' + i, both(q.from)); });
+			/* «قاموس العرّاب»'s phrases, each to its card under the quotes (built into data-built.js) */
+			(d.glossary || []).forEach(function (g, i) { add(K.phrase, { ar: g.phrase, en: g.en }, { ar: 'قاموس العرّاب', en: 'The phrasebook' }, 'quotes.html#g-' + i, g.phrase + ' ' + g.en + ' ' + both(g.meaning)); });
 			/* the site's own pages, the header's and the footer's, found by their names and what they hold */
 			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات إحصاءات الموقع أسلوب لغة كلمات جمل statistics site numbers style language words', quiz: 'اختبار مسابقة أسئلة شخصية بطاقة القارئ اقرأ معنا نادي القراءة quiz character reader card reading club',
 				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
@@ -753,17 +756,18 @@
 		open: function () {
 			if (!Search.index) Search.build();
 			/* the blog index is large, so pages other than the blog fetch it only when search opens */
-			if (!App.data().blog && !Search.loadingBlog) {
-				Search.loadingBlog = true;
+			[['blog', 'data-blog.js']].forEach(function (x) {
+				if (App.data()[x[0]] || (Search.loading || (Search.loading = {}))[x[0]]) return;
+				Search.loading[x[0]] = true;
 				var bs = document.createElement('script');
-				bs.src = 'assets/js/data-blog.js';
+				bs.src = 'assets/js/' + x[1];
 				bs.onload = function () {
 					Search.build();
 					var inp = document.querySelector('#search-dialog input');
 					if (inp && inp.value.trim()) inp.dispatchEvent(new Event('input'));
 				};
 				document.head.appendChild(bs);
-			}
+			});
 			var dlg = document.getElementById('search-dialog');
 			if (!dlg) {
 				dlg = document.createElement('dialog');

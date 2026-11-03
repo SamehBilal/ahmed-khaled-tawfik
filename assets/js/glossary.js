@@ -31,11 +31,23 @@ window.GlossarySection = {
 		root.querySelector('.chips').onclick = function (ev) {
 			var b = ev.target.closest('[data-w]');
 			if (!b) return;
-			self.who = b.getAttribute('data-w');
-			root.querySelectorAll('[data-w]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-			self.list();
+			self.pick(b.getAttribute('data-w'));
+			/* (the address names the speaker, to share: quotes.html#glossary-refaat) */
+			history.replaceState(null, '', self.who === 'all' ? '#glossary' : '#glossary-' + self.who);
 		};
 		root.querySelector('.gl-q').oninput = function (ev) { self.q = ev.target.value.trim(); self.list(); };
+		this.list();
+	},
+
+	/* one speaker's phrases ('all' for every one), the search cleared */
+	pick: function (w) {
+		var root = document.querySelector('.gl');
+		if (!root || !root.querySelector('[data-w="' + w + '"]')) w = 'all';
+		this.who = w; this.q = '';
+		if (root) {
+			root.querySelectorAll('[data-w]').forEach(function (x) { x.setAttribute('aria-pressed', String(x.getAttribute('data-w') === w)); });
+			root.querySelector('.gl-q').value = '';
+		}
 		this.list();
 	},
 
@@ -56,12 +68,12 @@ window.GlossarySection = {
 		var App = window.App, e = App.esc, t = App.t, L = App.L, self = this;
 		var who = {}; this.WHO.forEach(function (w) { who[w[0]] = w[1]; });
 		var bare = function (s) { return String(s).replace(/[ًٌٍَُِّْـ«»]/g, '').toLowerCase(); }, q = bare(this.q);
-		var rows = (App.data().glossary || []).filter(function (x) {
+		var all = App.data().glossary || [], rows = all.filter(function (x) {
 			return (self.who === 'all' || x.who === self.who) && (!q || bare(x.phrase + ' ' + x.en + ' ' + t(x.meaning)).indexOf(q) >= 0);
 		});
 		document.querySelector('.gl-list').innerHTML = rows.map(function (x) {
 			var w = self.where(x.where);
-			return '<article class="gl-item gl-' + e(x.who) + '"><p class="gl-who">' + e(t(who[x.who] || who.other)) + '</p>' +
+			return '<article class="gl-item gl-' + e(x.who) + '" id="g-' + all.indexOf(x) + '"><p class="gl-who">' + e(t(who[x.who] || who.other)) + '</p>' +
 				'<h3>' + e(x.phrase) + '</h3>' + (App.lang === 'en' ? '' : '<p class="gl-en" dir="ltr">' + e(x.en) + '</p>') +
 				(App.lang === 'en' ? '<p class="gl-en-main">' + e(x.en) + '</p>' : '') +
 				'<p class="gl-mean">' + e(t(x.meaning)) + '</p>' +

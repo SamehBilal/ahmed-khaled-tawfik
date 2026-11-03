@@ -340,3 +340,14 @@ html[lang="en"] .g-quote { font-family: var(--f-display); font-weight: 700; }
 }
 
 .pub-list .pub-is { font-size: 13px; color: var(--muted); }
+
+/* the home page's «كلمة اليوم»: a quote or a phrasebook line, a new one each day (home.js today) */
+.today { position: relative; max-width: 860px; margin: 0; padding: 30px 34px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--ink-2);
+	border-inline-start: 4px solid var(--ember); }
+.today::before { content: '«'; position: absolute; inset-inline-end: 22px; top: -18px; font-family: var(--f-display); font-size: 120px; line-height: 1; color: var(--ember); opacity: .18; pointer-events: none; }
+.today-kind { display: inline-block; padding: 2px 12px; border-radius: 99px; background: var(--ember); color: #fff; font-family: var(--f-display); font-size: 13px; }
+.today blockquote { margin: 14px 0 12px; font-family: var(--f-display); font-size: clamp(22px, 3vw, 30px); line-height: 1.6; color: var(--paper); }
+.today.is-phrase blockquote { font-size: clamp(28px, 4vw, 40px); }
+.today figcaption { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; align-items: baseline; color: var(--paper-dim); font-size: 15px; line-height: 1.8; }
+.today figcaption a { color: var(--ember); white-space: nowrap; }
+@media (max-width: 640px) { .today { padding: 24px 20px 18px; } }

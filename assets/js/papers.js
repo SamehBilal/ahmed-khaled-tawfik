@@ -86,7 +86,12 @@ window.PapersSection = {
 			if (!b) return;
 			self.filter = b.getAttribute('data-o');
 			self.update();
+			/* (the address names the outlet, to share: blog.html#papers-الدستور) */
+			history.replaceState(null, '', self.filter === 'all' ? '#papers' : '#papers-' + encodeURIComponent(self.filter));
 		};
+		/* blog.html#papers-الدستور: that outlet's pieces */
+		var m = /^#papers-(.+)$/.exec(location.hash), o = m && decodeURIComponent(m[1]);
+		if (o && root.querySelector('.pp-card[data-o="' + o.replace(/"/g, '') + '"]')) this.filter = o;
 		this.update();
 	},
 

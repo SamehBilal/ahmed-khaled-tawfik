@@ -96,10 +96,11 @@ window.PAGE = {
 			window.PapersSection.wire();
 			/* (blog.html#papers, as papers.html now leads: to its heading, once drawn — it is too tall to centre) */
 			/* (again as the archive above it settles and its pictures come, as long as the reader has not scrolled away) */
-			if (location.hash === '#papers') [60, 400, 1000, 2000].forEach(function (ms) {
+			var h = location.hash;
+			if (/^#papers(-.+)?$/.test(h)) [60, 400, 1000, 2000].forEach(function (ms) {
 				setTimeout(function () {
 					var to = document.getElementById('papers');
-					if (to && location.hash === '#papers' && Math.abs(to.getBoundingClientRect().top - 80) > 40) to.scrollIntoView({ block: 'start', behavior: 'instant' });
+					if (to && location.hash === h && Math.abs(to.getBoundingClientRect().top - 80) > 40) to.scrollIntoView({ block: 'start', behavior: 'instant' });
 				}, ms);
 			});
 		}
