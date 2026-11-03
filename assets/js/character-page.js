@@ -170,7 +170,7 @@ window.PAGE = {
 				'<div class="ch-people">' + others.map(function (o) {
 					var on = t(o.name), om = (App.lang === 'ar' ? (o.name.ar || '') : (o.name.en || '')).replace(/^(د\.|Dr\.)\s*/, '').charAt(0);
 					return '<a class="ch-person rise" href="' + e(App.charHref(o.id)) + '" style="--c:' + e(color) + '">' +
-						(o.image ? '<img src="' + e(o.image) + '" alt="">' : '<span class="ch-mono" aria-hidden="true">' + e(om) + '</span>') +
+						(o.image ? '<img src="' + e(o.image) + '" alt="" loading="lazy" decoding="async">' : '<span class="ch-mono" aria-hidden="true">' + e(om) + '</span>') +
 						'<b>' + e(on) + '</b><span>' + tx(o.role) + '</span></a>';
 				}).join('') + '</div></div></section>';
 		}

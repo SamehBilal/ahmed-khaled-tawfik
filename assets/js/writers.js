@@ -148,7 +148,7 @@ window.PAGE = {
 			card.style.setProperty('--c', b.style.getPropertyValue('--c') || '#6e1a14');
 			/* the same panel as an issue pulled off a shelf on the works page: the writer's photo, then what they shared with him */
 			card.innerHTML = '<button type="button" class="ip-close" aria-label="' + e(L('إغلاق', 'Close')) + '">✕</button>' +
-				'<div class="ip-cover">' + (p.photo ? '<figure class="wr-photo"><img src="' + e(p.photo.url) + '" alt="' + e(t(p.name)) + '" referrerpolicy="no-referrer">' +
+				'<div class="ip-cover">' + (p.photo ? '<figure class="wr-photo"><img src="' + e(p.photo.url) + '" alt="' + e(t(p.name)) + '" referrerpolicy="no-referrer" loading="lazy" decoding="async">' +
 					(p.photo.file ? '<figcaption><a href="' + e(p.photo.file) + '" target="_blank" rel="noopener">' + (p.photo.license ? e(p.photo.license) + ' · ' : '') + (p.photo.source ? tx(p.photo.source) : 'Wikimedia Commons') + '</a></figcaption>' : '') + '</figure>'
 					: '<span class="wr-initials">' + e(P.initials(t(p.name), App.lang)) + '</span>') + '</div>' +
 				'<div class="ip-body"><h4>' + tx(p.name) + '</h4>' +

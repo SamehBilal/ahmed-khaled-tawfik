@@ -51,7 +51,7 @@ window.PAGE = {
 					var pic = art[x.title.en], href = x.post ? 'blog.html?post=' + encodeURIComponent(x.post) : x.source;
 					var st = '--j:' + j + ';--r:' + [-6, 3, -2, 5][j] + 'deg';
 					return '<a class="ph-cv' + (pic ? '' : ' ph-cv-drawn') + '" href="' + e(href) + '" title="' + e(t(x.title)) + '" style="' + st + (pic ? '' : ';background:' + self.COLOR[x.kind]) + '"' +
-						(x.post ? '' : ' target="_blank" rel="noopener"') + '>' + (pic ? '<img src="' + e(pic.src) + '" alt="">' : '<b>' + e(t(x.title)) + '</b>') + '</a>';
+						(x.post ? '' : ' target="_blank" rel="noopener"') + '>' + (pic ? '<img src="' + e(pic.src) + '" alt="" loading="lazy" decoding="async">' : '<b>' + e(t(x.title)) + '</b>') + '</a>';
 				}).reverse().join('');
 			});
 			var ph = document.querySelector('.ph[data-ph="library"]');

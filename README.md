@@ -16,7 +16,8 @@ Static site. Open `index.html` or serve the folder (e.g. GitHub Pages). After an
 | `book.html?id=…` | One page per book or series issue (`?id=utopia`, `?id=mwt-12`): cover, titles in other languages, description, details, editions and covers, characters, quotes, neighbouring issues |
 | `series.html?id=…` | One page per series (`?id=mwt`), including series by others that he wrote or translated for |
 | `audio.html` | His audiobooks on a cassette deck (adapted from Codrops' Old School Cassette Player): Audiohat episodes (Ma Wara' al-Tabi'a, Fantasia, After Midnight) and the Safari radio drama from the Tasgeel YouTube channel. ▶ plays in the cassette when it can (a sample file, or YouTube in a visible player), otherwise opens the source; issue pages get their own cassette |
-| `quotes.html` | Sourced quotes, with copy / link / save-as-image |
+| `quotes.html` | Sourced quotes, with copy / link / save-as-image; under them «قاموس العرّاب», the phrasebook (`#glossary`) |
+| `blog.html` | His columns, stories and comics from the blog archive by year and month; under them «في الصحف», the papers they ran in (`#papers`) |
 | `legacy.html` | Farewell and tributes timeline, adaptations, interviews and talks |
 | `about.html`, `sources.html`, `privacy.html`, `terms.html`, `contact.html` | Linked from the footer only (not the header): who built the site, sources and how the data was collected, privacy, rights and use, contact. Their text is in `assets/js/info.js` |
 
@@ -57,6 +58,7 @@ node tools/build-sw.js
 It builds, in order:
 
 - **`assets/js/data-built.js`** (`tools/build-data.js`) — the eleven data files from `data.js` to `data-more.js`, run once with their corrections applied: the pages load this one file, not those. Edit the data in those files, never in this one, then rebuild.
+- **page descriptions** (`tools/build-meta.js`) — each section page's description, share tags and JSON-LD, with their numbers (issues, books, quotes, articles…) counted from the data; also the font and data preloads in every head.
 - **`sw.js`** — the service worker's file list and version, so installed copies show "A newer version is ready".
 - **`sitemap.xml`** (`tools/build-sitemap.js`) — every page, book, issue, series, character, writer, publisher and blog article, for search engines.
 - **`share/`** (`tools/build-share.js`) — a small page per book, series, character, writer, publisher and article with its own title and picture for WhatsApp, Facebook and X; the «شارك» buttons hand these out.

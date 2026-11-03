@@ -13,6 +13,8 @@ require('./build-places.js');
 require('./build-changelog.js');
 // and «اللغة والأسلوب»'s counts of his writing (assets/data/style.json)
 require('./build-style.js');
+// and each page's description, share tags and JSON-LD, their numbers from the data (tools/build-meta.js)
+require('./build-meta.js');
 
 const list = ['./'];
 const add = (rel) => list.push(rel.split(path.sep).join('/'));

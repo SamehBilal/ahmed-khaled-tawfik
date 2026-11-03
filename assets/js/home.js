@@ -137,7 +137,7 @@ window.PAGE = {
 		}
 		ov.innerHTML =
 			'<div class="grave-bg"></div>' +
-			'<img class="grave-img" src="assets/img/grave.webp" alt="' + App.esc(L('قبر أحمد خالد توفيق، مغطّى برسائل قرّائه، وعليه «جعل الشباب يقرأون»', 'The grave of Ahmed Khaled Tawfik, covered in notes from his readers, inscribed “He made the young read”')) + '">' +
+			'<img class="grave-img" src="assets/img/grave.webp" loading="lazy" decoding="async" alt="' + App.esc(L('قبر أحمد خالد توفيق، مغطّى برسائل قرّائه، وعليه «جعل الشباب يقرأون»', 'The grave of Ahmed Khaled Tawfik, covered in notes from his readers, inscribed “He made the young read”')) + '">' +
 			'<div class="grave-cap"><p class="g-line">' + L('وهكذا كُتب على قبره', 'And so it was written on his grave') + '</p>' +
 				'<p class="g-quote">' + L('«جعل الشباب يقرأون»', '“He made the young read”') + '</p>' +
 				'<p class="g-sub">' + L('قبره اليوم، مغطّى برسائل قرّائه', 'His grave today, covered in notes from his readers') + '</p></div>';

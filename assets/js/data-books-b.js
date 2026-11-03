@@ -681,7 +681,7 @@ Object.assign(window.AKT.bookInfo, {
     "pages": 228,
     "language": "ar",
     "editions": [
-      { "title": { "ar": "اللغز وراء السطور: أحاديث من مطبخ الكتابة", "en": "The Mystery Behind the Lines: Talks from the Writing Kitchen" }, "publisher": { "ar": "دار الشروق", "en": "Dar El Shorouk" }, "year": 2017, "lang": "ar", "isbn": "9789770933954", "pages": 228, "format": { "ar": "غلاف ورقي – الطبعة الأولى", "en": "Paperback – 1st edition" }, "cover": "assets/img/covers/books/openlibrary-2a2a18a9a6bf.jpg", "source": "https://openlibrary.org/books/OL32234696M" }
+      { "title": { "ar": "اللغز وراء السطور: أحاديث من مطبخ الكتابة", "en": "The Mystery Behind the Lines: Talks from the Writing Kitchen" }, "publisher": { "ar": "دار الشروق", "en": "Dar El Shorouk" }, "year": 2017, "lang": "ar", "isbn": "9789770933954", "pages": 228, "format": { "ar": "غلاف ورقي – الطبعة الأولى", "en": "Paperback – 1st edition" }, "cover": "assets/img/covers/books/openlibrary-2a2a18a9a6bf.webp", "source": "https://openlibrary.org/books/OL32234696M" }
     ],
     "links": [
       { "label": "Goodreads", "url": "https://www.goodreads.com/book/show/33844994" },

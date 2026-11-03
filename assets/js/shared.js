@@ -449,7 +449,7 @@
 		].filter(Boolean);
 		var img = issueCover(sid, is);
 		return '<button type="button" class="ip-close" aria-label="' + e(L('إغلاق', 'Close')) + '">✕</button>' +
-			'<a class="ip-cover" href="' + e(App.issueHref(sid, is)) + '">' + (img ? '<img src="' + e(img) + '" alt="">' : miniCover({ color: s.color, title: t(is.title) })) + '</a>' +
+			'<a class="ip-cover" href="' + e(App.issueHref(sid, is)) + '">' + (img ? '<img src="' + e(img) + '" alt="" loading="lazy" decoding="async">' : miniCover({ color: s.color, title: t(is.title) })) + '</a>' +
 			'<div class="ip-body"><h4>' + tx(is.title) + '</h4>' +
 				(facts.length ? '<dl class="ip-facts">' + facts.map(function (f) { return '<div><dt>' + e(f[0]) + '</dt><dd>' + (/</.test(f[1]) ? f[1] : e(f[1])) + '</dd></div>'; }).join('') + '</dl>' : '') +
 				(text ? '<p class="ip-text" dir="rtl" lang="ar">' + e(text) + '</p>' : '') +

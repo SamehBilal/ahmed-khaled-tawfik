@@ -138,7 +138,7 @@ window.PAGE = {
 		el.innerHTML = '<div class="bh-box">' +
 			'<div class="bh-media"><img src="' + e(blog.heroImage || L('assets/img/blog-hero-ar.webp', 'assets/img/blog-hero.webp')) + '" alt=""></div>' +
 			'<div class="bh-mini">' + picks.map(function (p) {
-				return '<a class="bh-icon" href="blog.html?post=' + e(p.id) + '"><span class="bh-card"><img src="' + e(self.img(p.img)) + '" alt="" referrerpolicy="no-referrer">' +
+				return '<a class="bh-icon" href="blog.html?post=' + e(p.id) + '"><span class="bh-card"><img src="' + e(self.img(p.img)) + '" alt="" referrerpolicy="no-referrer" loading="lazy" decoding="async">' +
 					'<span class="bh-card-t">' + e(p.t) + '</span></span></a>';
 			}).join('') + '</div>' +
 			'<div class="bh-text">' +
