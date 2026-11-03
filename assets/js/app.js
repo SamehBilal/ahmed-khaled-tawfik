@@ -223,7 +223,8 @@
 		/* the side menu of the pages about the site (info.js, changelog.js, sitemap-page.js): each a page, the one open marked (site.css .info-tabs) */
 		INFO_PAGES: [['about', { ar: 'عن الموقع والأسئلة الشائعة', en: 'About & FAQ' }], ['sources', { ar: 'المصادر', en: 'Sources' }],
 			['privacy', { ar: 'الخصوصية', en: 'Privacy' }], ['terms', { ar: 'حقوق الاستخدام', en: 'Rights & use' }],
-			['contact', { ar: 'تواصل وساهم', en: 'Contact & contribute' }], ['changelog', { ar: 'سجل التحديثات', en: 'Changelog' }],
+			['contact', { ar: 'تواصل وساهم', en: 'Contact & contribute' }],
+			['wanted', { ar: 'ما ينقص الأرشيف', en: 'Wanted for the archive' }], ['changelog', { ar: 'سجل التحديثات', en: 'Changelog' }],
 			['sitemap', { ar: 'خريطة الموقع', en: 'Site map' }]],
 		infoTabs: function (current) {
 			return '<nav class="info-tabs" aria-label="' + App.esc(App.L('عن الموقع', 'About the site')) + '">' + App.INFO_PAGES.map(function (p) {

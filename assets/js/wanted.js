@@ -90,7 +90,8 @@ window.PAGE = {
 	render: function () {
 		var App = window.App, e = App.esc, t = App.t, L = App.L, parts = this.parts();
 		var total = function (p) { return p.items ? p.items.length : p.counts.reduce(function (s, c) { return s + c.n; }, 0); };
-		document.getElementById('content').innerHTML = '<section class="section wn"><div class="wrap">' +
+		/* (beside the side menu of the pages about the site, app.js infoTabs) */
+		document.getElementById('content').innerHTML = '<section class="section wn"><div class="wrap info-wrap">' + App.infoTabs('wanted') + '<div class="info-body">' +
 			'<nav class="wn-sum" aria-label="' + e(L('الأقسام', 'Parts')) + '">' + parts.map(function (p) {
 				return '<a href="#' + p.id + '"><b>' + e(App.num(total(p))) + '</b><span>' + e(t(p.title)) + '</span></a>';
 			}).join('') + '</nav>' +
@@ -106,7 +107,7 @@ window.PAGE = {
 						'<a class="share-btn" href="contact.html#contribute">' + e(L('أو بالبريد من «تواصل وساهم»', 'Or by email from Contact')) + '</a></p></section>';
 			}).join('') +
 			'<p class="wn-note">' + e(L('تُحسب هذه القوائم من بيانات الموقع كلما فُتحت الصفحة، فما يُضاف يختفي منها وحده.', 'These lists are counted from the site’s data each time the page opens, so whatever is added drops off them by itself.')) + '</p>' +
-		'</div></section>';
+		'</div></div></section>';
 		App.focusHash();
 	}
 };
