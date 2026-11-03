@@ -9,9 +9,19 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-03T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6b749ab</id>
+		<title>«بياناتك على هذا الجهاز» (privacy.html#mydata)</title>
+		<updated>2026-11-03T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="New page"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«بياناتك على هذا الجهاز» (privacy.html#mydata): everything the site keeps in this browser, read live as the page opens — the lists with how many in each, the language, the theme, the last change seen in the changelog, the offline save, the install invitation and the reading time it counts, what is forgotten when the browser closes, and the offline copy with how many files and about how much room — each with a key to clear it; all of it saved to a JSON file and loaded in another browser or device (the lists' own export loads too), or cleared at once. The privacy page's text now names every thing kept, and points there. The changelog's news is an Atom feed, feed.xml in Arabic and feed-en.xml in English, the newest 60 changes with their kinds (tools/build-feed.js, run by build-sw.js), linked from the changelog and from every page's head. And the outside links are checked on the 1st of every month by GitHub (.github/workflows/links.yml): it runs tools/check-links.js, commits the new links.json, and opens an issue for the links that died since the last check (check-links.js --report=FILE)</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d6992a1</id>
 		<title>«قصة الموقع» (story.html), a new page in «خلف الكواليس»</title>
-		<updated>2026-11-03T20:59:00Z</updated>
+		<updated>2026-11-03T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -23,7 +33,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2af0ca2</id>
 		<title>«أعلام في حكاياته» (names.html), a new page in «عالم العرّاب»</title>
-		<updated>2026-11-03T20:58:00Z</updated>
+		<updated>2026-11-03T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -34,7 +44,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f82b1bb</id>
 		<title>«ما ينقص الأرشيف» has the side menu of the pages about the site, as «عن الموقع» and the rest do, and is in it…</title>
-		<updated>2026-11-03T20:57:00Z</updated>
+		<updated>2026-11-03T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">«ما ينقص الأرشيف» has the side menu of the pages about the site, as «عن الموقع» and the rest do, and is in it on each of them, after «تواصل وساهم»</content>
@@ -42,7 +52,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/069c17a</id>
 		<title>Four new pages</title>
-		<updated>2026-11-03T20:56:00Z</updated>
+		<updated>2026-11-03T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -53,7 +63,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ce14532</id>
 		<title>Lighter grids and steadier pages</title>
-		<updated>2026-11-03T20:55:00Z</updated>
+		<updated>2026-11-03T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -65,7 +75,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/919a2bb</id>
 		<title>The rest of the round</title>
-		<updated>2026-11-03T20:54:00Z</updated>
+		<updated>2026-11-03T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="data" label="Data"/>
@@ -75,7 +85,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8f35eab</id>
 		<title>«ركن القرّاء»</title>
-		<updated>2026-11-03T20:53:00Z</updated>
+		<updated>2026-11-03T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="data" label="Data"/>
@@ -85,7 +95,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f663dcc</id>
 		<title>Every page loads less</title>
-		<updated>2026-11-03T20:52:00Z</updated>
+		<updated>2026-11-03T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="data" label="Data"/>
@@ -94,7 +104,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/820c61a</id>
 		<title>A round of every page</title>
-		<updated>2026-11-03T20:51:00Z</updated>
+		<updated>2026-11-03T20:50:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -105,7 +115,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b6af226</id>
 		<title>«اقتباسات» and «قاموس العرّاب» are one page</title>
-		<updated>2026-11-03T20:50:00Z</updated>
+		<updated>2026-11-03T20:49:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
@@ -114,7 +124,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6f5b9d3</id>
 		<title>«المدونة» and «في الصحف» are one page</title>
-		<updated>2026-11-03T20:49:00Z</updated>
+		<updated>2026-11-03T20:48:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
@@ -539,14 +549,5 @@
 		<category term="pics" label="Pictures"/>
 		<category term="data" label="Data"/>
 		<content type="text">«ترجماته»: every publisher, author and page named on it a link — a publisher to its page here (both in «دار ميريت (ثم دار ليلى)»), an author (none has a page here) to Wikipedia in the language shown: the books' own authors and, under each World Pocket Novels and «رجفة الخوف» cover, the novel's author, now a link of its own beside the cover's; and the closing note's «تواصل وساهم» to that page. The author chips filter as before</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/964c3f6</id>
-		<title>«ترجماته»</title>
-		<updated>2026-11-01T20:48:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<content type="text">«ترجماته»: the covers of the books he translated whole inside their frames, not cropped to it — «تشي جيفارا: سيرة مصورة» and «كتاب المقبرة», of another shape, had lost their edges; each now sits within the frame, its shadow its own</content>
 	</entry>
 </feed>
