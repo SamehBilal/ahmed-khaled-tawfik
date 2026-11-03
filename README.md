@@ -19,6 +19,9 @@ Static site. Open `index.html` or serve the folder (e.g. GitHub Pages). After an
 | `quotes.html` | Sourced quotes, with copy / link / save-as-image; under them «قاموس العرّاب», the phrasebook (`#glossary`) |
 | `blog.html` | His columns, stories and comics from the blog archive by year and month; under them «في الصحف», the papers they ran in (`#papers`) |
 | `legacy.html` | Farewell and tributes timeline, adaptations, interviews and talks |
+| `worlds.html`, `clinic.html` | «عوالم فانتازيا» and «عيادة سافاري»: the world each Fantasia issue enters and the case of each Safari issue (`AKT.fantasiaWorlds`, `AKT.safariCases` in `data-pages.js`), from their back covers; `#fantasia-25`, `#safari-36` |
+| `calendar.html` | «تقويم العرّاب»: the whole year a day at a time, from `assets/data/days/`; `#d-06-10` opens one day |
+| `wanted.html` | «ما ينقص الأرشيف»: what the archive lacks (unknown worlds and cases, back-cover texts and pictures, editions with no year, text with no English), counted from the data when it opens |
 | `about.html`, `sources.html`, `privacy.html`, `terms.html`, `contact.html` | Linked from the footer only (not the header): who built the site, sources and how the data was collected, privacy, rights and use, contact. Their text is in `assets/js/info.js` |
 
 Every page has search (press `/` or Ctrl+K), an Arabic/English switch, a paper (light) theme, and a "suggest a fix" link that opens a pre-filled GitHub issue.
@@ -32,6 +35,7 @@ All content lives in plain data files under `assets/js/`:
 - **`data.js`** — bio, timeline, series, works, characters, adaptations, writers
 - **`data-issues.js`** — every numbered issue of Ma Wara' al-Tabi'a, Fantasia and Safari
 - **`data-quotes.js`** — sourced quotes
+- **`data-pages.js`** — the pages about his world and reading: his library, Refaat's life, the creatures, the phrasebook, Tanta, his handwriting, Fantasia's worlds and Safari's cases
 - **`data-legacy.js`** — tributes timeline and interviews / media links
 - **`data-books-a.js`, `data-books-b.js`** — per-book details (`AKT.bookInfo`): longer descriptions, other titles, genres, editions with ISBNs and covers
 - **`data-audio.js`** — Audiohat episodes per issue (links only: their sample URLs expire daily, so no audio is hosted here; add an optional sample per episode if you have permission) and the Safari YouTube episodes

@@ -36,7 +36,10 @@
 			{ id: 'creatures', href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends', phone: true },
 			{ id: 'refaat-life', href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life', phone: true },
 			{ id: 'network', href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web', phone: true },
-			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true }
+			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true },
+			{ id: 'worlds', href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds', phone: true },
+			{ id: 'clinic', href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic', phone: true },
+			{ id: 'calendar', href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
@@ -60,13 +63,17 @@
 			{ href: 'awards.html', ar: 'الجوائز', en: 'Awards' },
 			{ href: 'translations.html', ar: 'ترجماته', en: 'His translations' },
 			/* his handwriting (his city is a part of «سيرته» on talks.html) */
-			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' }
+			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' },
+			/* the whole year, a day at a time */
+			{ href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar' }
 		],
 		/* «عالم العرّاب»: the pages inside his world, a block of their own under «صفحات الموقع» */
 		world: [
 			{ href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends' },
 			{ href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life' },
-			{ href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web' }
+			{ href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web' },
+			{ href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds' },
+			{ href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic' }
 		],
 		/* pages linked only from the footer, not the header */
 		legal: [
@@ -75,6 +82,7 @@
 			{ href: 'privacy.html', ar: 'الخصوصية', en: 'Privacy' },
 			{ href: 'terms.html', ar: 'حقوق الاستخدام', en: 'Rights & use' },
 			{ href: 'contact.html', ar: 'تواصل وساهم', en: 'Contact & contribute' },
+			{ href: 'wanted.html', ar: 'ما ينقص الأرشيف', en: 'Wanted for the archive' },
 			{ href: 'changelog.html', ar: 'سجل التحديثات', en: 'Changelog' },
 			{ href: 'sitemap.html', ar: 'خريطة الموقع', en: 'Site map' }
 		],

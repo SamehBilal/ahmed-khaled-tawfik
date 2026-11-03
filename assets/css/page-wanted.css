@@ -1,0 +1,35 @@
+/* «ما ينقص الأرشيف» (wanted.html, wanted.js): the band is a shelf of covers with gaps, a question mark in each gap lighting now
+   and then; the band is the page itself, no ground or line of its own. Under it the parts, each with its count, why, list and how to send */
+.ph[data-ph="wanted"], html[data-theme="light"] .ph[data-ph="wanted"] { background: none; border-bottom: 0; }
+.ph[data-ph="wanted"]::after { content: none; }
+.wn-shelf { position: absolute; left: 50%; bottom: 58px; translate: -50% 0; display: flex; align-items: flex-end; gap: 8px; direction: ltr; }
+.wn-cv, .wn-gap { flex: 0 0 auto; width: 92px; height: 138px; border-radius: 4px; }
+.wn-cv { object-fit: cover; box-shadow: 0 10px 22px rgba(0, 0, 0, .45); opacity: .82; }
+.wn-gap { display: grid; place-items: center; border: 2px dashed var(--line); font-family: var(--f-display); font-size: 54px; color: var(--muted);
+	animation: wn-ask 6s calc(var(--i) * -.9s) infinite; }
+@keyframes wn-ask { 0%, 80%, 100% { color: var(--muted); border-color: var(--line); } 88% { color: var(--ember); border-color: var(--ember); } }
+.wn-board { position: absolute; left: 0; right: 0; bottom: 46px; height: 12px; background: linear-gradient(color-mix(in srgb, var(--paper) 14%, var(--ink-2)), var(--ink-2)); box-shadow: 0 8px 18px rgba(0, 0, 0, .4); }
+@media (max-width: 640px) { .wn-cv, .wn-gap { width: 64px; height: 96px; } .wn-gap { font-size: 38px; } .wn-shelf { bottom: 44px; } .wn-board { bottom: 34px; } }
+@media (prefers-reduced-motion: reduce) { .wn-gap { animation: none; } }
+
+.wn-sum { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin: 4px 0 34px; }
+.wn-sum a { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); color: var(--paper-dim); }
+.wn-sum a:hover { border-color: var(--ember); color: var(--paper); }
+.wn-sum b { font-family: var(--f-latin); font-size: 30px; color: var(--ember); line-height: 1.1; }
+.wn-part { padding: 26px 0; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
+.wn-part h2 { margin: 0 0 8px; font-family: var(--f-display); font-size: 26px; }
+.wn-part h2 small { font-family: var(--f-latin); font-size: 18px; color: var(--ember); }
+.wn-why { margin: 0 0 14px; max-width: 760px; color: var(--paper-dim); line-height: 1.9; }
+.wn-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.wn-list li { padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; }
+.wn-list a { color: var(--paper-dim); }
+.wn-list a:hover { color: var(--ember); }
+.wn-list small { color: var(--muted); }
+.wn-more { margin-top: 10px; }
+.wn-more summary { cursor: pointer; color: var(--ember); margin-bottom: 10px; }
+.wn-counts { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.wn-counts li { display: flex; justify-content: space-between; padding: 8px 14px; border: 1px solid var(--line); border-radius: 10px; color: var(--paper-dim); }
+.wn-counts b { font-family: var(--f-latin); color: var(--ember); }
+.wn-done { color: var(--muted); }
+.wn-send { display: flex; flex-wrap: wrap; gap: 4px 10px; margin: 14px 0 0; }
+.wn-note { margin-top: 20px; color: var(--muted); line-height: 1.9; }

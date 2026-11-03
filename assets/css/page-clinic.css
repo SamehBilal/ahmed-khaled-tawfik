@@ -1,0 +1,21 @@
+/* «عيادة سافاري» (clinic.html, clinic.js): the band is a heart monitor — a faint grid, the trace running across and beating,
+   the diseases the series names as its readings; the band is the page itself, no ground or line of its own */
+.ph[data-ph="clinic"], html[data-theme="light"] .ph[data-ph="clinic"] { background: none; border-bottom: 0; }
+.ph[data-ph="clinic"]::after { content: none; }
+.cl-grid { position: absolute; inset: 20px 4%; border-radius: 16px; opacity: .5;
+	background: linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 28px 28px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 28px 28px;
+	-webkit-mask-image: radial-gradient(80% 90% at 50% 50%, #000 40%, transparent); mask-image: radial-gradient(80% 90% at 50% 50%, #000 40%, transparent); }
+.cl-trace { position: absolute; left: 0; right: 0; top: 70px; width: 100%; height: 170px; overflow: visible; }
+.cl-trace path { fill: none; stroke: color-mix(in srgb, var(--ember) 35%, transparent); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.cl-trace .cl-glow { stroke: var(--ember); stroke-width: 3; filter: drop-shadow(0 0 6px var(--ember)); stroke-dasharray: 220 2600; animation: cl-run 6s linear infinite; }
+@keyframes cl-run { from { stroke-dashoffset: 2820; } to { stroke-dashoffset: 0; } }
+.cl-reads { position: absolute; inset: 26px 6% auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px; }
+.cl-read { display: inline-flex; align-items: baseline; gap: 6px; padding: 4px 12px; border-radius: 6px; border: 1px solid var(--line); background: color-mix(in srgb, var(--ink) 70%, transparent);
+	font-family: var(--f-display); font-size: 14px; color: var(--paper-dim); animation: cl-blink 9s calc(var(--i) * -.7s) infinite; transition: border-color .2s, color .2s; }
+.cl-read b { font-family: var(--f-latin); font-size: 12px; color: var(--ember); }
+@keyframes cl-blink { 0%, 86%, 100% { border-color: var(--line); } 90% { border-color: var(--ember); color: var(--paper); } }
+.cl-read:hover, .cl-read:focus-visible { border-color: var(--ember); color: var(--paper); outline: none; animation: none; }
+.cl-bpm { position: absolute; bottom: 22px; inset-inline-end: 6%; font-family: var(--f-latin); font-size: 22px; color: var(--ember); animation: cl-beat 1.2s infinite; }
+@keyframes cl-beat { 0%, 30%, 100% { opacity: .5; } 12% { opacity: 1; } }
+@media (max-width: 640px) { .cl-read:nth-child(n+9) { display: none; } .cl-trace { top: 80px; height: 120px; } }
+@media (prefers-reduced-motion: reduce) { .cl-trace .cl-glow, .cl-read, .cl-bpm { animation: none; } }

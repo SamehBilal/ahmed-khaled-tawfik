@@ -1,0 +1,21 @@
+/* «عوالم فانتازيا» and «عيادة سافاري» (series-file.js): a card per issue, its cover beside its line */
+.sf-bar { margin: 6px 0 26px; }
+.sf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.sf-card { display: flex; gap: 16px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); scroll-margin-top: 90px; }
+.sf-cover { flex: 0 0 78px; align-self: flex-start; }
+.sf-body { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.sf-kind { margin: 0; font-size: 13px; color: var(--ember); font-family: var(--f-display); }
+.sf-card h3 { margin: 0 0 4px; font-family: var(--f-display); font-size: 21px; line-height: 1.4; }
+.sf-card h3 a { color: var(--paper); }
+.sf-card h3 a:hover { color: var(--ember); }
+.sf-line { margin: 0; color: var(--paper-dim); line-height: 1.8; font-size: 15px; }
+.sf-none { color: var(--muted); font-style: italic; }
+.sf-none a { color: var(--ember); font-style: normal; white-space: nowrap; }
+.sf-from { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+.sf-fact { margin: 8px 0 0; padding: 8px 12px; border-inline-start: 3px solid var(--ember); background: color-mix(in srgb, var(--ember) 7%, transparent); border-radius: 6px;
+	font-size: 14px; line-height: 1.8; color: var(--paper-dim); }
+.sf-fact b { color: var(--paper); font-weight: 600; }
+.sf-unknown { border-style: dashed; background: none; }
+.sf-note { margin-top: 26px; color: var(--muted); line-height: 1.9; }
+.sf-note a { color: var(--ember); }
+@media (max-width: 420px) { .sf-grid { grid-template-columns: minmax(0, 1fr); } .sf-cover { flex-basis: 64px; } }

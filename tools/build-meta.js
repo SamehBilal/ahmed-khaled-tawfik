@@ -23,8 +23,16 @@ const N = {
 	glossary: (d.glossary || []).length, people: tiles['writers.html'] || 0, tributes: (d.tributes || []).length, places: st.places || 0,
 	legacy: (d.legacy || []).length, library: (d.library || []).length, creatures: (d.creatures || []).length, life: (d.refaatLife || []).length,
 	hand: (d.handwriting || []).length, awards: (d.awards || []).length,
-	translations: (d.works || []).filter(w => w.type === 'translation').length
+	translations: (d.works || []).filter(w => w.type === 'translation').length,
+	worlds: (d.fantasiaWorlds || []).filter(x => x.world).length, diseases: (d.safariCases || []).filter(x => x.kind === 'disease').length
 };
+/* «تقويم العرّاب»'s days and moments (assets/data/days/, tools/build-days.js, run before this) */
+N.days = 0; N.moments = 0;
+for (let m = 1; m <= 12; m++) {
+	let month = {};
+	try { month = JSON.parse(fs.readFileSync(path.join(root, 'assets/data/days', (m < 10 ? '0' : '') + m + '.json'), 'utf8')); } catch (e) {}
+	Object.keys(month).filter(k => k !== '_g').forEach(k => { N.days++; N.moments += month[k].length; });
+}
 
 /* the descriptions with numbers in them, Arabic and then English, as the pages had them before */
 const DESC = {
@@ -45,6 +53,9 @@ const DESC = {
 	'creatures.html': n => `${ar(n.creatures, 'وحش', 'وحشان', 'وحوش', 'وحشًا')} وأسطورة من «ما وراء الطبيعة»: الأسطورة الحقيقية وراء مصاص الدماء والمذءوب والنداهة والمومياء وغيرها، والأعداد التي تظهر فيها. — The ${n.creatures} monsters and legends of Paranormal, and the issues they appear in.`,
 	'refaat-life.html': n => `حياة د. رفعت إسماعيل كما ترويها «ما وراء الطبيعة»: من كفر بدر عام 1924 إلى العدد الثمانين، في ${ar(n.life, 'محطة', 'محطتين', 'محطات', 'محطة')} مع أعدادها. — Refaat Ismail's life as Paranormal tells it, in ${n.life} moments.`,
 	'handwriting.html': n => `ما كتبه أحمد خالد توفيق بيده لقرّائه: ${ar(n.hand, 'إهداء', 'إهداءان', 'إهداءات وتوقيعات', 'إهداءً وتوقيعًا')} كما رواها أصحابها، ودعوة لمن عنده إهداء منه. — What Ahmed Khaled Tawfik wrote by hand for his readers: ${n.hand} dedications and signatures.`,
+	'worlds.html': n => `العوالم التي تدخلها عبير في أعداد «فانتازيا» الأربعة والستين: ${ar(n.worlds, 'عالم', 'عالمان', 'عوالم', 'عالمًا')} من الأساطير والأدب والسينما والتاريخ، عددًا عددًا كما يقول غلافه الخلفي.`,
+	'clinic.html': n => `أعداد «سافاري» الثلاثة والخمسون ملفاتٍ لعلاء عبد العظيم: المرض أو القبيلة أو اللغز في كل عدد، و${ar(n.diseases, 'مرض', 'مرضان', 'أمراض', 'مرضًا')} بنبذة طبية عن كل منها.`,
+	'calendar.html': n => `تقويم أحمد خالد توفيق يومًا بيوم: ${ar(n.moments, 'حدث', 'حدثان', 'أحداث', 'حدثًا')} على ${ar(n.days, 'يوم', 'يومين', 'أيام', 'يومًا')} من العام، من ميلاده ورحيله إلى ما صدر من أعداده وكتبه ومقالاته.`,
 	'awards.html': n => `جوائز أحمد خالد توفيق في حياته وبعد رحيله (${n.awards}): جائزة الشارقة عن «مثل إيكاروس»، والقائمة القصيرة لترجمة «يوتوبيا»، وما كُرِّم به اسمه. — His ${n.awards} awards and honours.`
 };
 

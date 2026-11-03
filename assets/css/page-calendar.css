@@ -1,0 +1,39 @@
+/* «تقويم العرّاب» (calendar.html, calendar.js): the band is twelve tear-off sheets on a rail; under it the year, a block a month
+   and a square a day, its shade by how much it holds; the chosen day's moments below. The band is the page itself, no ground or line */
+.ph[data-ph="calendar"], html[data-theme="light"] .ph[data-ph="calendar"] { background: none; border-bottom: 0; }
+.ph[data-ph="calendar"]::after { content: none; }
+.ca-sheets { position: absolute; inset: 40px 3% 30px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.ca-sheet { position: relative; flex: 0 1 108px; aspect-ratio: 3 / 4; max-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+	border-radius: 8px; background: var(--paper); color: var(--ink); box-shadow: 0 14px 30px rgba(0, 0, 0, .45); rotate: calc((var(--i) - 5.5) * 1.6deg);
+	transition: translate .3s, rotate .3s; }
+.ca-sheet::before { content: ''; position: absolute; inset: 0 0 auto; height: 22%; border-radius: 8px 8px 0 0; background: var(--ember); }
+.ca-rings { position: absolute; top: -8px; left: 22%; right: 22%; height: 16px; background: radial-gradient(circle, var(--paper-dim) 0 4px, transparent 5px) 0 0 / 33% 100% repeat-x; }
+.ca-sheet b { position: relative; margin-top: 18%; font-family: var(--f-display); font-size: 17px; }
+.ca-n { font-family: var(--f-latin); font-size: 28px; font-weight: 700; color: var(--ember); }
+.ca-sheet.is-now { outline: 3px solid var(--ember); outline-offset: 4px; }
+.ca-sheet:hover, .ca-sheet:focus-visible { translate: 0 -10px; rotate: 0deg; outline-color: var(--paper); }
+@media (max-width: 900px) { .ca-sheet:nth-child(n+7) { display: none; } }
+@media (max-width: 640px) { .ca-sheets { gap: 8px; inset: 36px 3% 24px; } .ca-sheet:nth-child(n+5) { display: none; } .ca-sheet b { font-size: 14px; } .ca-n { font-size: 22px; } }
+@media (prefers-reduced-motion: reduce) { .ca-sheet { transition: none; } }
+
+.ca-bar { margin: 6px 0 24px; }
+.ca-year { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 22px 26px; }
+.ca-wait { color: var(--muted); }
+.ca-m h3 { margin: 0 0 8px; font-family: var(--f-display); font-size: 18px; color: var(--paper); scroll-margin-top: 90px; }
+.ca-m { scroll-margin-top: 90px; }
+.ca-cells { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.ca-c { aspect-ratio: 1; padding: 0; border: 1px solid var(--line); border-radius: 5px; background: var(--ink-2); color: var(--muted); font: 500 11px/1 var(--f-latin); cursor: pointer; }
+.ca-c:disabled { cursor: default; opacity: .45; }
+.ca-c[data-l="1"] { background: color-mix(in srgb, var(--ember) 18%, var(--ink-2)); color: var(--paper-dim); }
+.ca-c[data-l="2"] { background: color-mix(in srgb, var(--ember) 36%, var(--ink-2)); color: var(--paper); }
+.ca-c[data-l="3"] { background: color-mix(in srgb, var(--ember) 58%, var(--ink-2)); color: #fff; }
+.ca-c[data-l="4"] { background: var(--ember); color: #fff; border-color: var(--ember); }
+.ca-c[data-today] { outline: 2px solid var(--paper); outline-offset: 1px; }
+.ca-c[aria-pressed="true"] { outline: 3px solid var(--gold, #d9a45a); outline-offset: 1px; }
+.ca-c:not(:disabled):hover, .ca-c:focus-visible { border-color: var(--paper); }
+.ca-day { margin-top: 36px; scroll-margin-top: 80px; }
+.ca-day h2 { margin: 0 0 16px; font-family: var(--f-display); font-size: 30px; }
+.ca-day h2 small { font-size: 15px; color: var(--muted); font-family: var(--f-body, inherit); }
+.ca-note { margin-top: 30px; color: var(--muted); line-height: 1.9; }
+.ca-note a { color: var(--ember); }
+@media (max-width: 640px) { .ca-year { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; } .ca-cells { gap: 3px; } .ca-c { font-size: 9px; border-radius: 4px; } }
