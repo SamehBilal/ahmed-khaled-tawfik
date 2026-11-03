@@ -1,8 +1,9 @@
 // «حالة الروابط»: asks every outside link the data cites (sources, stores, interviews, recordings, the papers) whether it is still
 // there, and writes the ones that are gone to assets/data/links.json, which «ما ينقص الأرشيف» lists (wanted.js) so readers can
 // send a copy from the Wayback Machine or a new home for it. A site that turns robots away (403, 429, a challenge page) is counted
-// as "could not tell", not as dead; a link is dead when the page is not found (404, 410), its host is gone, or it times out twice.
-// It reaches the internet, so it is not part of the build: run it now and then from the repo root:  node tools/check-links.js
+// as "could not tell", not as dead; a link is dead when the page is not found (404, 410), or its host is gone (a slow one only could not tell).
+// It reaches the internet, so it is not part of the build: .github/workflows/links.yml runs it on the 1st of every month (and opens an
+// issue for the links that died since), or run it from the repo root:  node tools/check-links.js
 const fs = require('fs'), path = require('path');
 const load = require('./load-data.js'), root = load.root;
 const { d } = load(['data-built', 'data-detail', 'data-pages', 'books', 'shared', 'app']);
@@ -94,6 +95,20 @@ const kind = (r) => {
 	const dead = list.filter(u => kind(out[u]) === 'dead').sort().map(u => ({ u, s: out[u].s || out[u].e, w: [...urls[u]] }));
 	const res = { checked: new Date().toISOString().slice(0, 10), total: list.length,
 		ok: list.filter(u => kind(out[u]) === 'ok').length, unknown: list.filter(u => kind(out[u]) === 'unknown').length, dead };
-	fs.writeFileSync(path.join(root, 'assets/data/links.json'), JSON.stringify(res));
+	const file = path.join(root, 'assets/data/links.json');
+	let before = [];
+	try { before = JSON.parse(fs.readFileSync(file, 'utf8')).dead.map(x => x.u); } catch (e) {}
+	fs.writeFileSync(file, JSON.stringify(res));
 	console.log('links.json', res.total, 'links:', res.ok, 'fine,', res.unknown, 'could not tell,', dead.length, 'dead');
+	/* with --report=FILE (the monthly check, .github/workflows/links.yml): the links that died since the last check, as an issue's text */
+	const report = (process.argv.find(a => a.indexOf('--report=') === 0) || '').slice(9);
+	if (report) {
+		const fresh = dead.filter(x => before.indexOf(x.u) < 0);
+		fs.writeFileSync(report, fresh.length ? 'The monthly link check (' + res.checked + ') found ' + fresh.length + ' outside link' + (fresh.length > 1 ? 's' : '') + ' that no longer answer' + (fresh.length > 1 ? '' : 's') +
+			'. Each is listed on «ما ينقص الأرشيف» (wanted.html#links) until it is mended: point it to the page’s new home, or to a copy on the Wayback Machine, in the data.\n\n' +
+			'| Link | Answer | Cited on | Wayback Machine |\n|---|---|---|---|\n' +
+			fresh.map(x => '| ' + x.u + ' | ' + x.s + ' | ' + (x.w.join(', ') || '—') + ' | [copies](https://web.archive.org/web/*/' + x.u + ') |').join('\n') +
+			'\n\nIn all: ' + res.total + ' links, ' + res.ok + ' fine, ' + res.unknown + ' could not tell, ' + dead.length + ' dead.\n' : '');
+		console.log(fresh.length, 'newly dead');
+	}
 })();

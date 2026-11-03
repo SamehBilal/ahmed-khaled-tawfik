@@ -130,6 +130,10 @@ window.PAGE = {
 			document.querySelector('.cl-body').innerHTML = self.sinceHtml(log) +
 				'<p class="cl-sum">' + e(L(App.num(log.length) + ' تحديثًا في ' + App.num(Object.keys(days).length) + ' يومًا، منذ ' + App.num(log[log.length - 1].d) + '.', log.length + ' changes on ' + Object.keys(days).length + ' days, since ' + log[log.length - 1].d + '.')) +
 					(fixes.length ? ' <a href="#corrections">' + e(L('وسجل التصحيحات (' + App.num(fixes.length) + ') ↓', 'And the corrections (' + fixes.length + ') ↓')) + '</a>' : '') + '</p>' +
+				/* the same news as a feed (feed.xml, feed-en.xml, built by tools/build-feed.js) */
+				'<p class="cl-feed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19a1 1 0 1 0 0-.01M5 11a8 8 0 0 1 8 8M5 4a15 15 0 0 1 15 15"/></svg>' +
+					e(L('تابع الجديد من قارئ الأخبار، دون أن تزور الموقع: ', 'Follow what’s new in a feed reader, without visiting: ')) +
+					'<a href="feed.xml" type="application/atom+xml">' + e(L('بالعربية', 'in Arabic')) + '</a> · <a href="feed-en.xml" type="application/atom+xml" hreflang="en">' + e(L('بالإنجليزية', 'in English')) + '</a> <small>(RSS / Atom)</small></p>' +
 				'<div class="cl-bar"><div class="chips"><button type="button" class="chip" data-k="all" aria-pressed="true">' + e(L('الكل', 'All')) + '</button>' +
 					self.KINDS.filter(function (k) { return count[k[0]]; }).map(function (k) { return '<button type="button" class="chip" data-k="' + k[0] + '" aria-pressed="false">' + e(App.t(k[1])) + ' <b>' + e(App.num(count[k[0]])) + '</b></button>'; }).join('') +
 				'</div><input type="search" class="cl-q" placeholder="' + e(L('ابحث في السجل…', 'Search the log…')) + '"></div>' +

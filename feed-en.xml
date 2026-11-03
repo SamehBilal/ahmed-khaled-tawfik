@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<id>https://samehbilal.github.io/ahmed-khaled-tawfik/feed-en.xml</id>
+	<title>The Godfather: what’s new in the Ahmed Khaled Tawfik archive</title>
+	<subtitle>Everything added to the site or changed in it: new pages, covers, recordings and corrections.</subtitle>
+	<link rel="self" type="application/atom+xml" href="https://samehbilal.github.io/ahmed-khaled-tawfik/feed-en.xml"/>
+	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
+	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
+	<updated>2026-11-03T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d6992a1</id>
+		<title>«قصة الموقع» (story.html), a new page in «خلف الكواليس»</title>
+		<updated>2026-11-03T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="New page"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">«قصة الموقع» (story.html), a new page in «خلف الكواليس»: the site's history a day at a time from its first, 19 October — the pages born each day, the covers added, how many changes and of what kind, and the day's two headline changes (assets/data/story.json, built from git by tools/build-story.js); its band the days as a skyline, a column as tall as each day's changes, flagged where a page was born. «سجل التحديثات» opens on «ما الجديد منذ زيارتك»: what came since the newest change this reader saw there (kept on their device), with «show only what is new»; until they look, the changelog's link in the footer and the side menu carries a dot (App.LATEST, written into app.js by build-changelog.js). Under the log, «سجل التصحيحات» (#corrections): seven facts the site had wrong and put right — Lasheen's characters, his last book, the World Pocket issues he translated, issue numbers, «كتاب المقبرة»'s 2013 edition, a borrowed cover, the pocket series' publisher — from tools/corrections.json, and from now on a «correction: …» line in a commit's body. «المصادر» has «روايات متضاربة» (#disputes): five places the sources disagree, what each says with its link and what the site goes by (AKT.disputes). «حقوق الاستخدام» has «كيف تستشهد بالموقع» (#cite): a page's reference in Arabic, APA, MLA and BibTeX with the day it was seen, ready to copy, opened from a new «استشهد» key on book, series, character and writer pages. And «ما ينقص الأرشيف» lists the outside links that no longer answer, each with its Wayback Machine copies, and counts the links that work among its bars (assets/data/links.json, from tools/check-links.js, run by hand: 1,898 links, 3 gone)</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2af0ca2</id>
+		<title>«أعلام في حكاياته» (names.html), a new page in «عالم العرّاب»</title>
+		<updated>2026-11-03T20:58:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="New page"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«أعلام في حكاياته» (names.html), a new page in «عالم العرّاب»: the 42 real and legendary figures his issues' back covers name — Shakespeare, Dostoevsky, al-Mutanabbi, Hannibal, Che Guevara, Freud, Pasteur, Gilgamesh… — who each was, and the covers of the issues you meet them in (AKT.storyPeople, data-pages.js); by kind or searched, its band a sky of their names. «عوالم فانتازيا» has «خط زمن فانتازيا»: the 22 worlds of history and legend in the order they are set, from Gilgamesh (c. 2700 BC) to Che Guevara. Every series page has «النهاية»: its last issue, and how it ended behind a button that gives it away — «ما وراء الطبيعة»'s from 3rabica (AKT.seriesEndings); the others ask for theirs. «ما ينقص الأرشيف» opens on «حالة الأرشيف», a bar for how complete each part is, and lists the series whose ending is not written. «تواصل وساهم» has three more steps: «ساهم بالكود» (fork, the data files, check and build, try it, send a pull request), «البيانات مفتوحة» (issues, books, editions, quotes, phrases and the calendar as CSV files, built by tools/build-open.js into assets/data/open/, kept out of the offline copy) and «دليل الاستخدام» (search, lists, links, pictures, the app, the paper theme)</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f82b1bb</id>
+		<title>«ما ينقص الأرشيف» has the side menu of the pages about the site, as «عن الموقع» and the rest do, and is in it…</title>
+		<updated>2026-11-03T20:57:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">«ما ينقص الأرشيف» has the side menu of the pages about the site, as «عن الموقع» and the rest do, and is in it on each of them, after «تواصل وساهم»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/069c17a</id>
+		<title>Four new pages</title>
+		<updated>2026-11-03T20:56:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="New page"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">Four new pages. «عوالم فانتازيا» (worlds.html): the world each of Fantasia's 64 issues takes Abeer to — myths, books, film and comics, history, ideas, games — 54 of them from the issues' own back covers, a few from their titles alone (and marked so), ten not known yet; its band is Abeer's train to Fantasia, a cover in each carriage window. «عيادة سافاري» (clinic.html): Safari's 53 issues as Dr Alaa's case files — the disease, tribe or place, experiment or mystery of each — with a short medical note on the twelve diseases the series names (kala-azar, malaria, leprosy, rabies, yellow fever…); its band a heart monitor whose readings are those diseases. Both in AKT.fantasiaWorlds and AKT.safariCases (data-pages.js), drawn by series-file.js; #fantasia-25, #safari-36 go to one issue. «تقويم العرّاب» (calendar.html): the whole year in small squares, darker where more happened, 979 moments on 336 days from assets/data/days/; a day chosen shows its moments, #d-06-10 opens one, by kind; its band twelve tear-off sheets. «ما ينقص الأرشيف» (wanted.html): what the archive lacks, counted from the data each time it opens — the worlds and cases not known, issues without their back-cover text, back covers no one has sent, editions with no year, text with no English — each with why and how to send it; linked from «تواصل وساهم». In the footer (عالم العرّاب, اكتشف أكثر, خلف الكواليس), the phone menu, the site map, search and sitemap.xml, each with its share picture and a description counted from the data</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ce14532</id>
+		<title>Lighter grids and steadier pages</title>
+		<updated>2026-11-03T20:55:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">Lighter grids and steadier pages. Every cover has a small copy now (assets/img/covers-s/, at most 320 px wide, made by tools/build-thumbs.js on every build), and the grids, shelves, map, quiz cards and the covers band show it instead of the full cover (App.thumb); the book pages still show the cover itself. The pages no longer drop as they load: the header's place is kept before it is drawn, the works page's bookshelf band and the audio cassette keep their height, and each page's eyebrow, title, lead and section heads are written into its HTML in Arabic (tools/build-meta.js, from the page's own strings) — the home page's shift went from 0.96 to 0.04, the works page's from 1.0 to 0.002 on a phone. Privacy, contact, the changelog and 404 no longer load the data (they draw nothing from it); search, the lists and &quot;Save for offline&quot; fetch it there when opened. «قاموس العرّاب»'s phrases and «كلمة اليوم» can be made a picture to post, as the quotes can (assets/js/quote-image.js, shared by the three), each in its speaker's name with its issue's cover. GitHub checks the data on every push (.github/workflows/check.yml), and that data-built.js and the pages' tags were rebuilt. The 28 source scans of covers/back/New folder and five loose copies, already on the site as WebP, moved out of the published site to a folder beside the repo.</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/919a2bb</id>
+		<title>The rest of the round</title>
+		<updated>2026-11-03T20:54:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">The rest of the round. Lighter: 15 more covers between 40 and 120 KB are WebP (2.1 → 0.9 MB, every reference moved, every picture checked), and what nothing used is gone — the share pictures of the pages that became redirects (papers, glossary, editions, journey, style, tanta) and two source copies of «ما وراء الطبيعة»'s box and complete edition, kept as WebP. The phrasebook's 42 lines are in data-built.js now (19 KB), and so in the search on every page: «حتى تحترق النجوم» finds its card (quotes.html#g-0). Deep links: quotes.html#glossary-refaat opens the phrasebook on one speaker, and a speaker chosen sets it; blog.html#papers-الدستور opens «في الصحف» on one paper, and a paper chosen sets it. The home page has «كلمة اليوم» under the biography: one of his quotes or one of the phrasebook's lines in turn, the same for everyone on a day, each to its place. «المصادر» is the sources page's name everywhere now, as in the footer (its title, its share tags, the info pages' menu). Checked at phone width: no page wider than the screen</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8f35eab</id>
+		<title>«ركن القرّاء»</title>
+		<updated>2026-11-03T20:53:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«ركن القرّاء»: a new band — a fan of seven question cards from a round of the quiz itself (a cover, a quote, a character, a year…), each with its four answers; in turn one lifts and its right answer lights green, as the pointer does over any, and a click goes down to «اختبر نفسك». In place of the glowing question mark; the band is one with the page, no ground or line; five cards on a tablet, three on a phone</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f663dcc</id>
+		<title>Every page loads less</title>
+		<updated>2026-11-03T20:52:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<content type="text">Every page loads less: what only the book, series and «حول العالم» pages read — each edition's links, translator, credit, ISBN-10 and cover source, and the Abjjad shop links — is set apart by tools/build-data.js in assets/js/data-detail.js, which only those three load (right after data-built.js, before shared.js orders the editions), and put back into AKT there; data-built.js 1148 → 988 KB (gzip 229 → 209 KB). The data the pages see is the same as before, checked field by field (the store's editions are copied first, as some are shared between two books). The ISBNs, formats and editions stay, as the reader's collector lists keep their choices by them</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/820c61a</id>
+		<title>A round of every page</title>
+		<updated>2026-11-03T20:51:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">A round of every page: the numbers, the tags and the speed. Each section page's description — in its meta tag, its share tags and its JSON-LD — now comes from the data (tools/build-meta.js, run by build-sw.js), so its counts are the site's own: 299 issues in 14 series and 54 books, 75 quotes and 42 phrases, 1078 articles and 869 of them in 15 papers, 695 recordings, 499 covers and 1087 editions, and so on; the stale ones set right (audio was &quot;on Audiohat&quot; only, «سيرته ولقاءاته» was interviews only). Every section page has the same JSON-LD now (fourteen had none), a stylesheet linked twice is linked once, and every head asks early for the two Arabic fonts and the data file. «الأرقام»'s 869 is pieces in the papers (it said articles in the archive, which holds 1078). Faster: 235 heavy PNG/JPG covers are WebP now, at most 800 px wide (the covers from 105.7 to 17.6 MB of their 108; the images 155 → 74 MB), every reference moved with them and every picture checked on disk and on the covers wall; files no page uses are left as they were. Lists below the fold (issue covers, the library, the circle, a character's links, the grave, the blog's icons) load their pictures lazily. README: the build step, the quotes and blog pages' sections</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b6af226</id>
+		<title>«اقتباسات» and «قاموس العرّاب» are one page</title>
+		<updated>2026-11-03T20:50:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«اقتباسات» and «قاموس العرّاب» are one page: the phrasebook — its speakers as chips, its search, each phrase with its meaning and where it is from — now under the quotes (glossary.js as GlossarySection, drawn and wired by quotes.js), glossary.html leading to quotes.html#glossary, which lands on its heading; its band of lit phrases goes with the page. «في الصحف» and «قاموس العرّاب» leave the footer and the phone menu: both are sections now, found by the search and named on the site map (UI.sections); the XML sitemap leaves glossary.html out</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6f5b9d3</id>
+		<title>«المدونة» and «في الصحف» are one page</title>
+		<updated>2026-11-03T20:49:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«المدونة» and «في الصحف» are one page: the papers section — every outlet as a card, his pieces year by year, and the pieces themselves — now under the blog's archive (papers.js as PapersSection, drawn and wired by blog.js), papers.html leading to blog.html#papers; the menus, the home page, «الأرقام», the bands and the site map point there, and the XML sitemap leaves papers.html out. First the data: 31 pieces whose post names the paper and the day it ran («بص و طل - 25 أغسطس 2010», «الدستور - 9 مارس 2010»…) but whose source the archive had not kept now have it, from the blog's feed (the archive otherwise matches it: no post added or gone, the same labels), their misspelt months set right; two outlets come in with them, «زائد 18» and «مجلة فصول». 869 pieces in 15 outlets, 2005–2018</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/47de56c</id>
+		<title>«سيرته ولقاءاته»</title>
+		<updated>2026-11-02T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«سيرته ولقاءاته»: a new band — a row of old television sets, some in wood, some with rabbit ears, each tuned to one of his interviews on YouTube (his own voice first, nine, in the order they were made): its still in grey under static and scanlines, its year and name under it; the pointer tunes one in (colour, the static gone), and a click goes down to it in the list (letting go of a filter that hides it), lights it and plays it there. In place of the drawn studio; the band is one with the page, no ground, faded sides or line; six sets on a tablet, four on a phone</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2e5ec88</id>
+		<title>The side menu of the pages about the site has «خريطة الموقع» too, and the site map has the menu, its tree of…</title>
+		<updated>2026-11-02T20:58:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">The side menu of the pages about the site has «خريطة الموقع» too, and the site map has the menu, its tree of pages beside it (app.js App.infoTabs, sitemap-page.js)</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/60b3ddc</id>
+		<title>«سجل التحديثات» has the side menu of the pages about the site, as «عن الموقع», «المصادر», «الخصوصية», «حقوق…</title>
+		<updated>2026-11-02T20:57:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">«سجل التحديثات» has the side menu of the pages about the site, as «عن الموقع», «المصادر», «الخصوصية», «حقوق الاستخدام» and «تواصل وساهم» do, the log beside it; and the menu has «سجل التحديثات» in it on all of them — one list of the six, drawn by app.js App.infoTabs for info.js and changelog.js alike</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/990295c</id>
+		<title>Footer</title>
+		<updated>2026-11-02T20:56:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">Footer: the link to sources.html reads «المصادر» (Sources), not «المصادر وطريقة الجمع»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/82fb1c5</id>
+		<title>«يوميات رفعت إسماعيل»</title>
+		<updated>2026-11-02T20:55:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«يوميات رفعت إسماعيل»: the wheel turns faster — the next moment every three and a half seconds (was seven), the turn itself quicker and sooner, and ten seconds' rest after one is chosen by hand (was fifteen)</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/94f7e45</id>
+		<title>«يوميات رفعت إسماعيل»</title>
+		<updated>2026-11-02T20:54:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">«يوميات رفعت إسماعيل»: the wheel turns on by itself, to the next moment every seven seconds — held while the pointer or the focus is on it, for fifteen seconds after one is chosen by hand, while the band is off screen or the tab hidden; never for those who ask for less motion. Turning by itself it takes no focus</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cc8f446</id>
+		<title>«يوميات رفعت إسماعيل»</title>
+		<updated>2026-11-02T20:53:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«يوميات رفعت إسماعيل»: the band is now Chris Bolson's circular timeline (CodePen vEBWwxL) — his life as a great wheel, its top half showing, each of the 37 moments a mark on its rim named by its year, its issue («ع ٢٠») or the time of his life; one chosen (a click, or the arrow keys: they are radio buttons, as in the pen), the wheel turns to bring it to the top, a line drops from it, and its title and story rise in the middle with the issue it is told in. In Arabic the next moment comes to the left. The band is one with the page (no ground, faded sides or line), and clips rather than hides its overflow, so a chosen mark's radio is focused without the band or the page being scrolled to it; on a phone a larger wheel, the marks dots but for the chosen one</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6b0fc3b</id>
+		<title>«وحوش وأساطير»</title>
+		<updated>2026-11-02T20:52:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">«وحوش وأساطير»: a silhouette clicked now lights its card for a moment with the site's own glow (extras.css .is-target), as a link to it from another page does, and again each time it is clicked</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e1e2842</id>
+		<title>«وحوش وأساطير»</title>
+		<updated>2026-11-02T20:51:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="design" label="Design"/>
+		<content type="text">«وحوش وأساطير»: the mummy and Frankenstein's monster are now silhouettes the site's owner chose too, cut out as the others (the mummy's bandages left as fine lines through it, its eyes glowing where the picture has them), in place of the two drawn here; every shape in the band is now a picture</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/27b84d7</id>
+		<title>«وحوش وأساطير»</title>
+		<updated>2026-11-02T20:50:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="design" label="Design"/>
+		<content type="text">«وحوش وأساطير»: the band's silhouettes are now the ones the site's owner chose — the haunted house, the killer plant, the Loch Ness monster, Medusa, the Yeti, the witch, the Minotaur, the werewolf, Dracula and the ghost — cut out to their shape (assets/img/creatures, 2–9 KB each) and painted in the page's own shade through an alpha mask, so they follow the theme as the drawn ones did; the ghost's and the Minotaur's eyes glow, and the house's windows (a mask of the gaps its walls close in) let a warm light flicker through. The mummy and Frankenstein's monster stay drawn: the pictures offered for them were watermarked stock previews, as were one ghost and one Minotaur, left out</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/aef575b</id>
+		<title>«وحوش وأساطير»</title>
+		<updated>2026-11-02T20:49:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">«وحوش وأساطير»: the band is one with the page — no ground, faded sides or line under it — and the eyes in the dark are now the creatures themselves: twelve silhouettes drawn for those with a shape of their own (the ghost, Frankenstein's monster, Dracula, the werewolf, the mummy, the Minotaur, the witch, the Yeti, Medusa, the Loch Ness monster, the killer plant, the haunted house) in a row on a faint ground line, a shade off the page, their eyes opening now and then; under the pointer one lights up and says its name, and leads to its card (letting go of the filter if it hides it)</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e9aabb</id>
+		<title>«مسموع»</title>
+		<updated>2026-11-02T20:48:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">«مسموع»: an issue's episodes, opened, no longer squeeze their titles into a tall column on wide screens — the cards under it are wider (360px at least, three across became two or three as room allows), an episode's title keeps room to read across, and its «ضعها في المسجل» key goes under it before the title is narrowed</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/24b140e</id>
+		<title>«مسموع»</title>
+		<updated>2026-11-02T20:47:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<content type="text">«مسموع»: the «معرض الموت» trailer from «رُواة» on SoundCloud taken out (its data and artwork); the section is the music of his books again, «موسيقى كتبه على SoundCloud». The story itself stays on StoriaPod</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/176148c</id>
+		<title>«مسموع»</title>
+		<updated>2026-11-02T20:46:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="Audio"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">«مسموع»: from «رُواة» on SoundCloud — «العراب», six short pieces about him written by Ahmed Magdy and read by Mazen Salam (1–9 April 2019, about 27 minutes: الجرح، اللقب، الاستشراف، الطب، الطرافة، رواة), under a new heading «عنه», each piece in the tape; and the trailer of their «معرض الموت» (24 May 2020) with the Aquarelle music in «كتبه وقصصه على SoundCloud», leading to the story in the blog archive. SoundCloud is now a platform of its own among the chips (it was counted as Audiohat), and the E.S.P, «شربة الحاج داوود» and «عودة رفعت إسماعيل» sections no longer show under platforms that leave them empty. Artwork kept in assets/img/audio</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/19f9f7e</id>
+		<title>«مسموع» in two</title>
+		<updated>2026-11-02T20:45:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<content type="text">«مسموع» in two: «من أعماله» — his series and their special issues, his books and stories on Storytel and StoriaPod, the readings on YouTube and the music of his books — and «من عالمه وعلى أثره», what others made from his world or built on it: the fan sequel «عودة رفعت إسماعيل», the Lasheen seasons of «بعد منتصف الليل» and the Lasheen novels; each under its heading with a word on it (audio-page.js CATS, a section's cat), the platform chips filtering both</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/44e7bcd</id>
+		<title>«أكواريل»</title>
+		<updated>2026-11-02T20:44:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<content type="text">«أكواريل»: its horror music, sold with the book to be heard as it is read, on SoundCloud (Nada Elhariri, 10 August 2016, 53 minutes; AKT.audio.soundcloud in data-more.js, read by cassette.js soundcloudTracks). On the book's page it is among «استمع إليه» and «مسموع» to buy, and plays there in SoundCloud's own player with a word on what it is; on «مسموع» a new group, «موسيقى كتبه على SoundCloud», has it as a row that goes in the tape and opens it on SoundCloud. Its artwork kept in assets/img/audio</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/17239f3</id>
+		<title>«قالوا عنه» mended</title>
+		<updated>2026-11-02T20:43:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«قالوا عنه» mended: the terms page's «Stretch to reveal» band used the tributes timeline's own class names (.tb, .tb-knob, .tb-track…) in page-hero.css, which every page loads, so its styles fell on the timeline and its script took the timeline for the slider — the cards stayed folded and squeezed. The band's names are now its own (pst-), in page-hero.css and page-hero.js</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/104b118</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:42:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«مكتبته»: the two boxes are now crates on the shelf, as in «قوائمي» (page-hero.css .ph-crate) — one at each end of the spines, standing on the plank: slats of wood and a brass plate with the name, an icon and how many (songs and films; writers and magazines), and four covers leaning out of the top, two of each kind, each leading to what he said of it and rising under the pointer. Smaller, and with fewer spines between them, on smaller screens</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/92b1f28</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:41:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«مكتبته»: the two boxes are in the band, not the list — beside the shelf of spines a box of songs and films and on its other side one of writers and magazines, each with how many there are and six small covers, three of each kind (those with art first), leading to what he said of each; the boxes are left out on smaller screens. The list below is back to its grid (the three columns undone), and the band and the list share one fetch of the art</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/dd82d87</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:40:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<content type="text">«مكتبته»: «الكل» in three — the books as cards in the middle, beside them a box of the songs and films and on the other side one of the writers, magazines and the rest, each a row of its small cover, title, who and when, and two lines of what he said; the boxes stay in view and scroll on their own, and go under the books on smaller screens. One kind picked stays the grid</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/468ae4f</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:39:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<content type="text">«مكتبته»: the art is now a small cover under each title, as the site's small books (WorksShared.miniCover), with who and when beside it — drawn with its title, in its kind's colour, where there is no picture</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/121e420</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:38:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<content type="text">«مكتبته»: each thing he loved has its art under its title — a book's cover, a film's poster, a song's sleeve, a writer's portrait — from the lead image of its Wikipedia article (tools/build-library-covers.js; 48 of the 61 in assets/img/library, listed with their articles in assets/data/library-covers.json); and the music has the songs of «نشوات قديمة» whose episodes could be found — Ma Baker (Boney M.), Chiquitita (ABBA), Yesterday, When I Was Young (Aznavour), Take My Breath Away (Berlin), Another Brick in the Wall (Pink Floyd) and In the Year 2525 (Zager and Evans) — what he said of each, its episode on Masress, and a link to the book</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c3a1c0c</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:37:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">«مكتبته»: the band is one with the page — the shelf of spines with no background, faded sides or line under it</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/734ce17</id>
+		<title>«شبكة العرّاب»</title>
+		<updated>2026-11-02T20:36:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="design" label="Design"/>
+		<content type="text">«شبكة العرّاب»: the band's cards are now only the site's pictures of the characters — Refaat's portrait, lantern figure and the Netflix still, Alaa the doctor, Abeer from Fantasia 17, the drawn Abeer and Bernadette, and the 3D Alaa and Bernadette — the figures whole on a lamp-lit ground, in the pen's tall places, the still in its wide one; and the stack stands higher, the spread a little lower, so neither is under the header</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8e59220</id>
+		<title>«شبكة العرّاب»</title>
+		<updated>2026-11-02T20:35:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="design" label="Design"/>
+		<content type="text">«شبكة العرّاب»: the band is now Tommy Ho's «UI Kits: LottieFiles» hero (CodePen) — eight of his people (Refaat, Alaa, Maggie, Abeer, Lucifer, Bernadette, Utopia's Alaa, Essam) as a tilted stack of cards, each their own picture or a cover of their work, with their name and number; as the page scrolls the band holds still and the stack spreads out around «أبطاله في شبكة.» and how many characters and works there are, the pen's own places, then leans a little after the pointer. Spread, a card lights its character in the web below and goes there. In place of the threads of light. The band is the page itself, with no ground or line. Also: the map's gallery is now shared code (PageHero.gallery), its names under the cards in the band's own colours (they were lost in the paper theme), and Enter opens the card nearest the middle</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/adba201</id>
+		<title>«الخريطة»</title>
+		<updated>2026-11-02T20:34:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«الخريطة»: the gallery's cards are now the places themselves — a picture of a well-known sight of each (Bran Castle for Romania, the Potala Palace for Tibet, Uluru for Australia…), from the lead image of its Wikipedia article (tools/build-place-photos.js; the 34 in assets/img/places, listed with their articles in assets/data/place-photos.json), its name and how many of his books name it under it; a card clicked, tapped or given Enter opens its place on the map below and goes there. The circle is full from the start, the cards on both sides of the middle, not coming in from one side; and the band is one with the page — no background, faded sides or line under it</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/682408f</id>
+		<title>«الخريطة»</title>
+		<updated>2026-11-02T20:33:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«الخريطة»: the band is now Codrops' «Infinite Circular WebGL Gallery» (Luis Henrique Bizarro; MIT), in plain WebGL — in place of the chart and its curved tooltips. A card a place his books name, from the map's own places: the cover of the first book that names it, and under it the place and the book, drawn in the site's fonts. The cards stand on a wide arc, turned along it, and ripple as they move (the zip's shaders); dragged sideways or by the arrow keys they run on without end and settle on a card, and drift by themselves until touched. A card clicked, tapped or given Enter opens its book; the wheel scrolls the page; drawn only while on screen; still for those who ask for less motion</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/09b64f2</id>
+		<title>«الخريطة»</title>
+		<updated>2026-11-02T20:32:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«الخريطة»: the band's pins in Codrops' «Curved» tooltip (Tooltip Styles Inspiration, Mary Lou) — the ten places the most books name, from the map's own places, each with its route from Tanta and a pulsing ring; under the pointer, the keyboard or a first tap, a rounded ember bubble swings out on Codrops' curved tail: the place, how many books name it, the first of them and the sentence that does, leading to that book. It opens to the side of the pin with more room, no wider than that room, and moves up or down to stay inside the band, its tail still at the pin. Only the zip's curve and motion were taken, not its font or images</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/54a343f</id>
+		<title>«حول العالم»</title>
+		<updated>2026-11-02T20:31:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«حول العالم»: the globe's Arabic in its place — amCharts draws on a canvas, which took the page's right-to-left and set every label off to one side of its box (or out of sight); the chart now has a left-to-right box, each Arabic line marked right to left within it («من مصر إلى الإنجليزية», «4 طبعات» in that order), and amCharts' own right-to-left mode, which moved them further, is off</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/21799a0</id>
+		<title>«حول العالم»</title>
+		<updated>2026-11-02T20:30:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">«حول العالم»: only the globe at the top — the drifting titles that showed until it was drawn are gone, with their styles and the band's old backgrounds; the globe fades in once it is ready</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1f6ea65</id>
+		<title>«حول العالم»</title>
+		<updated>2026-11-02T20:29:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">«حول العالم»: the globe one with the page — its band no longer has a background, faded sides or a line under it; the page's own shows around the globe</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/03e94ff</id>
+		<title>«حول العالم»</title>
+		<updated>2026-11-02T20:28:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«حول العالم»: its band is now amCharts' «Map Sankey» pen (codepen.io/amcharts/pen/OPRwxBd) in the site's colours — a globe turning slowly, a stream from Egypt into the land of each language he was translated into (Britain, France, Germany, Italy, Finland, Iran, India), as wide as its editions, small books travelling along it, each stream and country named on hover; a switch, the site's own button, from the globe to a flat map centred on the streams and back; the zoom buttons (not on a phone). The wheel scrolls the page, not the map; on touch a tap wakes it; still for those who ask for less motion. amCharts 5 comes from its CDN on this page only; until then, or offline, the band is the drifting titles as before. The band is taller here (460px; 340 on a phone)</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5354b1d</id>
+		<title>Book pages</title>
+		<updated>2026-11-02T20:27:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">Book pages: each cover under «الطبعات والأغلفة» drags into the lists as the 3D book does — the cover flying along is that edition's, the book goes into the list with it, and in «مكتبتي» or «أبحث عنه» that edition is the one chosen (added to any chosen before), without the «أي طبعة؟» question</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/15a2249</id>
+		<title>«فقاقيع»</title>
+		<updated>2026-11-02T20:26:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<content type="text">«فقاقيع»: the Kayan Corp (Dar Lila) edition's covers — a clearer front (the bowler-hatted bust blowing a bubble) in place of the dim, small photo, and its back cover, new (his portrait over the blurb, «هذه مقالات ساخرة قصيرة…», and the Dar Lila mark)</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a1a2269</id>
+		<title>«الأعمال»</title>
+		<updated>2026-11-02T20:25:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«الأعمال»: «في مثل هذا اليوم» moved down from the top of the page to right after «الكتب المستقلة»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/09b0922</id>
+		<title>«من أين أبدأ؟»</title>
+		<updated>2026-11-02T20:24:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«من أين أبدأ؟»: in «العالم بالعربية», «روايات عالمية للجيب» now fifth and «نشوات قديمة» sixth (the two swapped)</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/4500879</id>
+		<title>«دور النشر»</title>
+		<updated>2026-11-02T20:23:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<content type="text">«دور النشر»: every publisher's logo whole inside its white box — the square and tall ones (Kayan, Diamond Book, Iqraaly, Delta, Karma, Kotopia and others) were up to 64px in a 52px box, cut at top and bottom, since in the box's grid «max-height: 100%» had no height to go by; the logo now takes the box's size and scales within it</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e36cbcf</id>
+		<title>«طنطا» folded into «سيرته ولقاءاته»</title>
+		<updated>2026-11-01T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«طنطا» folded into «سيرته ولقاءاته»: his city is now a part of the page after «سيرته» and before «لقاءاته» — «طنطا، مدينته», with its lead, the years of his birth and burial there, the places in their four groups (home and school, the doctor, farewell and memory, Tanta in his writing), each with its map and source, and the note with its link to «تواصل وساهم»; a chip for it among «سيرته»'s. tanta.html now sends its visitors to talks.html#tanta, which the page goes to once loaded and again while «سيرته»'s columns settle (unless the reader has started scrolling); the menus, the search words, the sitemap page and sitemap.xml name the one page</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cbd2ac9</id>
+		<title>«سيرته ولقاءاته»</title>
+		<updated>2026-11-01T20:58:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«سيرته ولقاءاته»: «سيرته» back in its two columns, as the home page's biography (.bio) — but within the site's width (1180px), not across the window: the columns now on its .wrap rather than on the section</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/169165f</id>
+		<title>«عن الموقع»</title>
+		<updated>2026-11-01T20:57:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">«عن الموقع»: the number that rises under a panel on hover a little bigger (up to 104px, from 84) and higher (40px above the band's foot, from 22), nearer the panel it belongs to; a little bigger on a phone too</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6150a28</id>
+		<title>«سيرته ولقاءاته»</title>
+		<updated>2026-11-01T20:56:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«سيرته ولقاءاته»: «سيرته» as wide as the rest of the site (1180px), lined up with «لقاءاته» — its section carried the class .bio, which the home page's biography sets in two columns, so it was split in two and stretched across the window; it is .tk-life now</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b89b3bc</id>
+		<title>«إحصاءات الموقع» moved from the covers page to «بالأرقام والأسلوب», as its third step after «المسيرة» and…</title>
+		<updated>2026-11-01T20:55:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<content type="text">«إحصاءات الموقع» moved from the covers page to «بالأرقام والأسلوب», as its third step after «المسيرة» and «اللغة والأسلوب» — on the page's map and its thread («وما يحفظه الموقع منه»), the same fifteen numbers in the page's own tiles, each leading where it counts (the cover wall and the editions now back on the covers page), numbers.html#stats opening on it. Counted by site-stats.js, which the covers page draws its wall from too; the search words and the sitemap follow</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/203704b</id>
+		<title>«الأغلفة والطبعات»</title>
+		<updated>2026-11-01T20:54:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«الأغلفة والطبعات»: in «رواياته وكتبه» each edition's dot opens a card in Codrops' classic «Tooltip Styles» (Mary Lou; its first effect), in place of the browser's bare title — a dark box above the dot, the edition's cover on one side and on the other its title in bold with which edition, its house, year, pages and format, an arrow beneath, dropping in as it fades in, a gap filler so the pointer can reach it; on hover or keyboard focus. Each card is placed as it opens, centred on its dot but kept within the chart (its arrow still on the dot), and the chart clips its sides so hidden cards never widen the page on a phone</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2390533</id>
+		<title>Correction: The pocket series never left the Modern Arab Association</title>
+		<updated>2026-11-01T20:53:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">Correction: The pocket series never left the Modern Arab Association: «سلاح التلميذ» is its name on their later editions, and «روايات مصرية» today. — The pocket series never left their house: the Modern Arab Association is «سلاح التلميذ» on most of their later editions and «روايات مصرية» by name today — one house (its match takes all three names), so «الطبعات» on the covers page shows each series in it from first issue to now (Ma Wara' al-Tabi'a 1993–2025, 327 editions), named «المؤسسة العربية الحديثة («روايات مصرية» اليوم)», and its lead no longer has them moving to Selah El-Telmeez; the house's page says the same, and its editions under either name link there</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/be1ddc8</id>
+		<title>«على الشاشة»</title>
+		<updated>2026-11-01T20:52:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">«على الشاشة»: the projector's beam no longer ends in a hard edge at the band's foot, as if cut by a box — the band lets it out below (still clipped at the sides) and it fades out gently over the headline; a warmer beam in the paper theme</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/62593f8</id>
+		<title>«على الشاشة»</title>
+		<updated>2026-11-01T20:51:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«على الشاشة»: «زي النهارده» (2008) has its trailer now, from its director Amr Salama's own channel — played on the page when pressed, as the other works' trailers</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/19159b7</id>
+		<title>«على الشاشة»</title>
+		<updated>2026-11-01T20:50:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">«على الشاشة»: the band merged with the page — no ground of its own, no line under it, no fade at its sides, in either theme; only the running film strip and the projector's beam</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/87c11c2</id>
+		<title>«ترجماته»</title>
+		<updated>2026-11-01T20:49:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<content type="text">«ترجماته»: every publisher, author and page named on it a link — a publisher to its page here (both in «دار ميريت (ثم دار ليلى)»), an author (none has a page here) to Wikipedia in the language shown: the books' own authors and, under each World Pocket Novels and «رجفة الخوف» cover, the novel's author, now a link of its own beside the cover's; and the closing note's «تواصل وساهم» to that page. The author chips filter as before</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/964c3f6</id>
+		<title>«ترجماته»</title>
+		<updated>2026-11-01T20:48:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<content type="text">«ترجماته»: the covers of the books he translated whole inside their frames, not cropped to it — «تشي جيفارا: سيرة مصورة» and «كتاب المقبرة», of another shape, had lost their edges; each now sits within the frame, its shadow its own</content>
+	</entry>
+</feed>

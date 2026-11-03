@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ar">
+	<id>https://samehbilal.github.io/ahmed-khaled-tawfik/feed.xml</id>
+	<title>العرّاب: ما الجديد في أرشيف أحمد خالد توفيق</title>
+	<subtitle>كل ما أُضيف إلى الموقع أو تغيّر فيه: صفحات جديدة وأغلفة وتسجيلات وتصحيحات.</subtitle>
+	<link rel="self" type="application/atom+xml" href="https://samehbilal.github.io/ahmed-khaled-tawfik/feed.xml"/>
+	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
+	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
+	<updated>2026-11-03T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d6992a1</id>
+		<title>صفحة «قصة الموقع» يومًا بيوم منذ بدأ، و«ما الجديد منذ زيارتك» و«سجل التصحيحات» في «سجل التحديثات»، و«روايات…</title>
+		<updated>2026-11-03T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="صفحة جديدة"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<category term="fix" label="تصحيح"/>
+		<content type="text">صفحة «قصة الموقع» يومًا بيوم منذ بدأ، و«ما الجديد منذ زيارتك» و«سجل التصحيحات» في «سجل التحديثات»، و«روايات متضاربة» في «المصادر»، و«كيف تستشهد بالموقع» في «حقوق الاستخدام» مع زر «استشهد»، و«روابط لم تعد تعمل» في «ما ينقص الأرشيف»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2af0ca2</id>
+		<title>صفحة «أعلام في حكاياته» للشخصيات الحقيقية والأسطورية في أعداده، و«خط زمن فانتازيا» في «عوالم فانتازيا»…</title>
+		<updated>2026-11-03T20:58:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="صفحة جديدة"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">صفحة «أعلام في حكاياته» للشخصيات الحقيقية والأسطورية في أعداده، و«خط زمن فانتازيا» في «عوالم فانتازيا»، و«النهاية» في صفحة كل سلسلة، و«حالة الأرشيف» في «ما ينقص الأرشيف»، و«ساهم بالكود» و«البيانات مفتوحة» و«دليل الاستخدام» في «تواصل وساهم»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f82b1bb</id>
+		<title>«ما ينقص الأرشيف» بالقائمة الجانبية لصفحات الموقع، وصار فيها على كل منها</title>
+		<updated>2026-11-03T20:57:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«ما ينقص الأرشيف» بالقائمة الجانبية لصفحات الموقع، وصار فيها على كل منها</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/069c17a</id>
+		<title>أربع صفحات جديدة</title>
+		<updated>2026-11-03T20:56:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="صفحة جديدة"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">أربع صفحات جديدة: «عوالم فانتازيا» إلى أين أخذ كل عدد عبير، و«عيادة سافاري» ملفات علاء عبد العظيم بالمرض أو القبيلة أو اللغز مع نبذة طبية، و«تقويم العرّاب» عام كامل يومًا بيوم، و«ما ينقص الأرشيف» ما ينقص الموقع وكيف تساعد في إكماله</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ce14532</id>
+		<title>لكل غلاف نسخة صغيرة تُعرض في الشبكات والرفوف والخريطة فتخفّ الصفحات، ولم تعد الصفحات تقفز وهي تُحمَّل…</title>
+		<updated>2026-11-03T20:55:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<category term="fix" label="تصحيح"/>
+		<content type="text">لكل غلاف نسخة صغيرة تُعرض في الشبكات والرفوف والخريطة فتخفّ الصفحات، ولم تعد الصفحات تقفز وهي تُحمَّل (عناوينها مكتوبة فيها بالعربية من الآن)، وصفحات الخصوصية والتواصل وسجل التحديثات لا تحمّل البيانات إلا عند البحث، وعبارات «قاموس العرّاب» و«كلمة اليوم» تُصنع صورًا للنشر كالاقتباسات، وفحص للبيانات على GitHub مع كل تحديث</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/919a2bb</id>
+		<title>«كلمة اليوم» في الرئيسية، وعبارات «قاموس العرّاب» في البحث، وروابط مباشرة لكل متحدث وكل جريدة، وأغلفة أخف…</title>
+		<updated>2026-11-03T20:54:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«كلمة اليوم» في الرئيسية، وعبارات «قاموس العرّاب» في البحث، وروابط مباشرة لكل متحدث وكل جريدة، وأغلفة أخف، وحُذفت صور لم تعد مستخدمة</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8f35eab</id>
+		<title>«ركن القرّاء»</title>
+		<updated>2026-11-03T20:53:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«ركن القرّاء»: الجزء العلوي صار مروحة من بطاقات أسئلة حقيقية من الاختبار، تُضيء إجابتها الصحيحة بالتناوب، ومندمجًا مع الصفحة بلا خط</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f663dcc</id>
+		<title>الصفحات أخف</title>
+		<updated>2026-11-03T20:52:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">الصفحات أخف: روابط الطبعات وما لا تقرؤه إلا صفحات الكتب والسلاسل و«حول العالم» صارت في ملف لا تحمله إلا هي</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/820c61a</id>
+		<title>جولة على كل الصفحات</title>
+		<updated>2026-11-03T20:51:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">جولة على كل الصفحات: أوصاف الصفحات ووسوم المشاركة صارت تُحسب أرقامها من البيانات، وصارت الأغلفة الثقيلة بصيغة WebP فصارت الصفحات أخف وأسرع</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b6af226</id>
+		<title>«قاموس العرّاب» صار قسمًا في صفحة «اقتباسات»، وحُذف «في الصحف» و«قاموس العرّاب» من التذييل وقائمة الهاتف</title>
+		<updated>2026-11-03T20:50:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«قاموس العرّاب» صار قسمًا في صفحة «اقتباسات»، وحُذف «في الصحف» و«قاموس العرّاب» من التذييل وقائمة الهاتف</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6f5b9d3</id>
+		<title>«المدونة» و«في الصحف» صارتا صفحة واحدة، وأُضيف مصدر 31 مقالًا لم يكن محفوظًا، فصارت 869 مقالًا في 15 جريدة…</title>
+		<updated>2026-11-03T20:49:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«المدونة» و«في الصحف» صارتا صفحة واحدة، وأُضيف مصدر 31 مقالًا لم يكن محفوظًا، فصارت 869 مقالًا في 15 جريدة وموقعًا ومجلة</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/47de56c</id>
+		<title>«سيرته ولقاءاته»</title>
+		<updated>2026-11-02T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«سيرته ولقاءاته»: صار أعلى الصفحة صفًا من أجهزة التلفزيون القديمة، كل جهاز على لقاء من لقاءاته، يصفو عند الإشارة إليه ويشغّل اللقاء عند الضغط</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2e5ec88</id>
+		<title>أُضيفت «خريطة الموقع» إلى القائمة الجانبية لصفحات «عن الموقع»، وصارت لها القائمة نفسها</title>
+		<updated>2026-11-02T20:58:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">أُضيفت «خريطة الموقع» إلى القائمة الجانبية لصفحات «عن الموقع»، وصارت لها القائمة نفسها</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/60b3ddc</id>
+		<title>«سجل التحديثات»</title>
+		<updated>2026-11-02T20:57:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«سجل التحديثات»: صارت له القائمة الجانبية نفسها لصفحات «عن الموقع»، وأُضيف إليها</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/990295c</id>
+		<title>التذييل</title>
+		<updated>2026-11-02T20:56:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">التذييل: صار الرابط «المصادر» بدل «المصادر وطريقة الجمع»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/82fb1c5</id>
+		<title>«يوميات رفعت إسماعيل»</title>
+		<updated>2026-11-02T20:55:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«يوميات رفعت إسماعيل»: صارت العجلة أسرع، لحظة كل ثلاث ثوانٍ ونصف</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/94f7e45</id>
+		<title>«يوميات رفعت إسماعيل»</title>
+		<updated>2026-11-02T20:54:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«يوميات رفعت إسماعيل»: صارت العجلة تدور وحدها إلى اللحظة التالية كل سبع ثوانٍ، وتتوقف عند الإشارة إليها أو الاختيار منها</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cc8f446</id>
+		<title>«يوميات رفعت إسماعيل»</title>
+		<updated>2026-11-02T20:53:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«يوميات رفعت إسماعيل»: صار أعلى الصفحة عجلة لحياته، كل لحظة علامة على حافتها، تدور العجلة إلى ما تختاره فتظهر حكايته</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6b0fc3b</id>
+		<title>«وحوش وأساطير»</title>
+		<updated>2026-11-02T20:52:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«وحوش وأساطير»: البطاقة تضيء لحظات عند الضغط على ظل الكائن، كبقية الموقع</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e1e2842</id>
+		<title>«وحوش وأساطير»</title>
+		<updated>2026-11-02T20:51:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«وحوش وأساطير»: صار ظلا المومياء ووحش فرانكنشتاين من الصور المختارة</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/27b84d7</id>
+		<title>«وحوش وأساطير»</title>
+		<updated>2026-11-02T20:50:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«وحوش وأساطير»: صارت ظلال الكائنات من الصور المختارة، ونوافذ البيت المسكون تضيء</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/aef575b</id>
+		<title>«وحوش وأساطير»</title>
+		<updated>2026-11-02T20:49:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«وحوش وأساطير»: اندمج أعلى الصفحة مع الصفحة، وصار صفًا من ظلال الكائنات تنفتح عيونها، وكل ظل يأخذك إلى بطاقته</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e9aabb</id>
+		<title>«مسموع»</title>
+		<updated>2026-11-02T20:48:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<category term="fix" label="تصحيح"/>
+		<content type="text">«مسموع»: إصلاح بطاقات الحلقات التي كانت عناوينها تنضغط في عمود طويل</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/24b140e</id>
+		<title>«مسموع»</title>
+		<updated>2026-11-02T20:47:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«مسموع»: حُذف إعلان «معرض الموت» من SoundCloud</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/176148c</id>
+		<title>«مسموع»</title>
+		<updated>2026-11-02T20:46:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="مسموع"/>
+		<category term="fix" label="تصحيح"/>
+		<content type="text">«مسموع»: قسم جديد «عنه» فيه سلسلة «العراب» من «رُواة» على SoundCloud، وإعلان «معرض الموت»، وSoundCloud صار منصة في الأزرار</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/19f9f7e</id>
+		<title>«مسموع»</title>
+		<updated>2026-11-02T20:45:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«مسموع»: صار قسمين — «من أعماله» و«من عالمه وعلى أثره»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/44e7bcd</id>
+		<title>«أكواريل»</title>
+		<updated>2026-11-02T20:44:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«أكواريل»: أُضيفت موسيقى الرعب التي صدرت مع الكتاب من SoundCloud إلى صفحة الكتاب وصفحة «مسموع»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/17239f3</id>
+		<title>إصلاح «قالوا عنه»</title>
+		<updated>2026-11-02T20:43:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">إصلاح «قالوا عنه»: عادت البطاقات تنفتح بعد أن تداخلت معها أنماط شريط صفحة «حقوق الاستخدام»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/104b118</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:42:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«مكتبته»: صار الصندوقان صندوقين خشبيين على الرف مثل صفحة «قوائمي»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/92b1f28</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:41:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«مكتبته»: صندوقا الأغاني والأفلام والكتّاب والمجلات صارا أعلى الصفحة بجانب رف الكتب، والقائمة عادت كما كانت</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/dd82d87</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:40:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«مكتبته»: الكتب في الوسط، وبجانبها صندوق للأغاني والأفلام وآخر للكتّاب والمجلات وغيرها</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/468ae4f</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:39:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«مكتبته»: صار الغلاف صغيرًا تحت كل عنوان مثل الكتب الصغيرة في الموقع</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/121e420</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:38:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«مكتبته»: صورة الغلاف أو الملصق تحت كل عنوان، وأُضيفت إلى الموسيقى أغاني «نشوات قديمة»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c3a1c0c</id>
+		<title>«مكتبته»</title>
+		<updated>2026-11-02T20:37:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«مكتبته»: اندمج أعلى الصفحة مع الصفحة، بلا خلفية ولا خط تحته</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/734ce17</id>
+		<title>«شبكة العرّاب»</title>
+		<updated>2026-11-02T20:36:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«شبكة العرّاب»: بطاقات أعلى الصفحة صارت صور الشخصيات نفسها، والكومة أعلى قليلًا</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8e59220</id>
+		<title>«شبكة العرّاب»</title>
+		<updated>2026-11-02T20:35:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«شبكة العرّاب»: صار أعلى الصفحة كومة بطاقات لأبطاله تنفرط مع التمرير حول «أبطاله في شبكة.»، وكل بطاقة تضيء صاحبها في الشبكة</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/adba201</id>
+		<title>«الخريطة»</title>
+		<updated>2026-11-02T20:34:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«الخريطة»: صار المعرض الدائري صورًا للأماكن نفسها، يبدأ ممتلئًا، والنقر يفتح المكان على الخريطة؛ وأُزيلت خلفية الشريط والخط تحته</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/682408f</id>
+		<title>«الخريطة»</title>
+		<updated>2026-11-02T20:33:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«الخريطة»: صار أعلى الصفحة معرضًا دائريًا لا ينتهي لأغلفة الكتب، كل غلاف لمكان تذكره كتبه، يُسحب ويُفتح بالنقر</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/09b64f2</id>
+		<title>«الخريطة»</title>
+		<updated>2026-11-02T20:32:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«الخريطة»: نقاط أعلى الصفحة صارت تفتح فقاعة منحنية بأسلوب Tooltip Styles — المكان وعدد الكتب التي تذكره وأولها والجملة التي ذكرته</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/54a343f</id>
+		<title>«حول العالم»</title>
+		<updated>2026-11-02T20:31:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«حول العالم»: النصوص العربية في الكرة الأرضية صارت في مكانها وبترتيبها الصحيح</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/21799a0</id>
+		<title>«حول العالم»</title>
+		<updated>2026-11-02T20:30:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«حول العالم»: تظهر الكرة الأرضية وحدها أعلى الصفحة، دون العناوين المتحركة التي كانت تسبقها</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1f6ea65</id>
+		<title>«حول العالم»</title>
+		<updated>2026-11-02T20:29:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<category term="fix" label="تصحيح"/>
+		<content type="text">«حول العالم»: الكرة الأرضية صارت جزءًا من الصفحة، بلا خلفية ولا خط تحتها</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/03e94ff</id>
+		<title>«حول العالم»</title>
+		<updated>2026-11-02T20:28:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«حول العالم»: صار أعلى الصفحة كرة أرضية تدور، تخرج منها من مصر مجارٍ إلى بلاد كل لغة تُرجم إليها، مع مفتاح للتبديل إلى خريطة مسطحة</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5354b1d</id>
+		<title>صفحة الكتاب</title>
+		<updated>2026-11-02T20:27:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">صفحة الكتاب: صار سحب أغلفة «الطبعات والأغلفة» يضيف الكتاب إلى القوائم مثل الكتاب ثلاثي الأبعاد، مع اختيار الطبعة المسحوبة</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/15a2249</id>
+		<title>«فقاقيع»</title>
+		<updated>2026-11-02T20:26:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«فقاقيع»: غلاف أمامي أوضح وغلاف خلفي جديد لطبعة كيان كورب (دار ليلى)</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a1a2269</id>
+		<title>«الأعمال»</title>
+		<updated>2026-11-02T20:25:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«الأعمال»: نُقل قسم «في مثل هذا اليوم» إلى ما بعد «الكتب المستقلة»</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/09b0922</id>
+		<title>«من أين أبدأ؟»</title>
+		<updated>2026-11-02T20:24:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«من أين أبدأ؟»: في «العالم بالعربية» صارت «روايات عالمية للجيب» الخامسة و«نشوات قديمة» السادسة</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/4500879</id>
+		<title>«دور النشر»</title>
+		<updated>2026-11-02T20:23:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«دور النشر»: شعارات الدور كاملة داخل إطارها الأبيض، بعد أن كانت بعضها تخرج منه وتُقص</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e36cbcf</id>
+		<title>صفحة «طنطا» صارت جزءًا من «سيرته ولقاءاته» بعنوان «طنطا، مدينته»، بعد السيرة وقبل اللقاءات</title>
+		<updated>2026-11-01T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">صفحة «طنطا» صارت جزءًا من «سيرته ولقاءاته» بعنوان «طنطا، مدينته»، بعد السيرة وقبل اللقاءات</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cbd2ac9</id>
+		<title>«سيرته ولقاءاته»</title>
+		<updated>2026-11-01T20:58:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«سيرته ولقاءاته»: عاد قسم «سيرته» إلى عموديه كما كان، لكن بعرض محتوى الموقع</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/169165f</id>
+		<title>«عن الموقع»</title>
+		<updated>2026-11-01T20:57:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«عن الموقع»: الرقم الذي يظهر عند المرور على اللوحة أكبر قليلًا وأعلى</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6150a28</id>
+		<title>«سيرته ولقاءاته»</title>
+		<updated>2026-11-01T20:56:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«سيرته ولقاءاته»: قسم «سيرته» بعرض بقية الموقع بدل عرض المتصفح كله</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b89b3bc</id>
+		<title>نُقلت «إحصاءات الموقع» من صفحة الأغلفة إلى «بالأرقام والأسلوب» خطوةً ثالثة بعد المسيرة والأسلوب</title>
+		<updated>2026-11-01T20:55:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">نُقلت «إحصاءات الموقع» من صفحة الأغلفة إلى «بالأرقام والأسلوب» خطوةً ثالثة بعد المسيرة والأسلوب</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/203704b</id>
+		<title>«الأغلفة والطبعات»</title>
+		<updated>2026-11-01T20:54:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«الأغلفة والطبعات»: نقاط الطبعات في «رواياته وكتبه» تفتح بطاقة بأسلوب Tooltip Styles الكلاسيكي — غلاف الطبعة وعنوانها ودارها وسنتها وصفحاتها، بسهم نحو النقطة</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2390533</id>
+		<title>تصحيح</title>
+		<updated>2026-11-01T20:53:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="fix" label="تصحيح"/>
+		<content type="text">تصحيح: سلاسل الجيب لم تنتقل من «المؤسسة العربية الحديثة» — «سلاح التلميذ» اسمها على طبعاتها الأحدث واسمها اليوم «روايات مصرية»؛ صارت دارًا واحدة في «الطبعات» وصفحة الدار</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/be1ddc8</id>
+		<title>«على الشاشة»</title>
+		<updated>2026-11-01T20:52:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<category term="fix" label="تصحيح"/>
+		<content type="text">«على الشاشة»: ضوء جهاز العرض لم يعد ينقطع فجأة عند حافة الشريط، بل يمتد ويتلاشى تدريجيًا فوق العنوان</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/62593f8</id>
+		<title>«على الشاشة»</title>
+		<updated>2026-11-01T20:51:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">«على الشاشة»: إعلان فيلم «زي النهارده» من قناة مخرجه عمرو سلامة</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/19159b7</id>
+		<title>«على الشاشة»</title>
+		<updated>2026-11-01T20:50:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«على الشاشة»: الشريط العلوي مندمج مع الصفحة بلا خلفية ولا خط تحته، ويبقى شريط الفيلم وحده</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/87c11c2</id>
+		<title>«ترجماته»</title>
+		<updated>2026-11-01T20:49:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«ترجماته»: كل دار نشر وكاتب وصفحة مذكورة صارت رابطًا — دور النشر إلى صفحاتها، والكتّاب إلى ويكيبيديا، و«تواصل وساهم» إلى صفحتها</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/964c3f6</id>
+		<title>«ترجماته»</title>
+		<updated>2026-11-01T20:48:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«ترجماته»: غلافا «تشي جيفارا: سيرة مصورة» و«كتاب المقبرة» يظهران كاملين بدل قصّهما</content>
+	</entry>
+</feed>

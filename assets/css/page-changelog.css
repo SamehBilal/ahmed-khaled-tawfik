@@ -90,3 +90,9 @@ p.cl-new.is-none { padding: 10px 16px; border-style: dashed; border-color: var(-
 .cl-fix-list .cl-fix-by a { color: var(--muted); font-family: var(--f-latin); }
 .cl-fix-list .cl-fix-by a:hover { color: var(--ember); }
 .cl-sum a { color: var(--ember); }
+
+/* the feeds' links, under the summary */
+.cl-feed { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: -6px 0 18px; font-size: 14px; color: var(--muted); }
+.cl-feed svg { width: 16px; height: 16px; fill: none; stroke: var(--ember); stroke-width: 2.2; stroke-linecap: round; }
+.cl-feed a { color: var(--ember); }
+.cl-feed small { font-family: var(--f-latin); font-size: 12px; }

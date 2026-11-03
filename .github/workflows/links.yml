@@ -1,0 +1,42 @@
+# Once a month (and whenever it is run by hand from the Actions tab): asks every outside link the data cites whether it is still
+# there (tools/check-links.js), commits the new assets/data/links.json that «ما ينقص الأرشيف» lists the dead ones from, and opens
+# an issue naming the links that died since the last check. The service worker's copy of links.json is renewed with the next
+# ordinary build (node tools/build-sw.js).
+name: Check the outside links
+on:
+  schedule:
+    - cron: '0 5 1 * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: links
+  cancel-in-progress: false
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Ask every link
+        run: node tools/check-links.js --report="$RUNNER_TEMP/dead.md"
+      - name: Commit the new links.json
+        run: |
+          git diff --quiet -- assets/data/links.json && exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898299+github-actions[bot]@users.noreply.github.com'
+          git add assets/data/links.json
+          n=$(node -p "require('./assets/data/links.json').dead.length")
+          git commit -m "Monthly link check: $n dead" -m "ar: فحص الروابط الخارجية الشهري"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Open an issue for the links that died
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -s "$RUNNER_TEMP/dead.md" ] || exit 0
+          gh issue create --title "Links that no longer answer ($(date -u +%Y-%m))" --body-file "$RUNNER_TEMP/dead.md"

@@ -11,6 +11,8 @@ require('./build-days.js');
 require('./build-places.js');
 // and «سجل التحديثات»'s history from git (assets/data/changelog.json)
 require('./build-changelog.js');
+// and the same news as Atom feeds for feed readers (feed.xml, feed-en.xml), linked from every page's head
+require('./build-feed.js');
 // and «قصة الموقع»'s days, from the same history (assets/data/story.json)
 require('./build-story.js');
 // and «اللغة والأسلوب»'s counts of his writing (assets/data/style.json)

@@ -67,6 +67,131 @@
 		}
 	};
 
+	/* the privacy page's «بياناتك على هذا الجهاز»: everything the site keeps in this browser, read live — what each thing is, what it
+	   holds now, and a key to clear it — and the offline copy with its size; all of it saved to a file and loaded on another device,
+	   or cleared at once. Nothing here leaves the device: the file is made in the browser and read back in it */
+	var PAGE_MYDATA = {
+		LOCAL: {
+			'akt-lists': [{ ar: 'قوائمك', en: 'Your lists' }, function (v, App) {
+				var s = JSON.parse(v) || {}, N = { toread: ['سأقرؤه', 'Want to read'], read: ['قرأته', 'Read'], own: ['في مكتبتي', 'In my collection'], want: ['أبحث عنه', 'Looking for it'] };
+				var parts = Object.keys(N).filter(function (k) { return s.lists && s.lists[k] && s.lists[k].length; }).map(function (k) { return App.L('«' + N[k][0] + '» ' + App.num(s.lists[k].length), N[k][1] + ' ' + s.lists[k].length); });
+				return parts.length ? parts.join(' · ') : App.L('فارغة', 'Empty');
+			}, 'lists.html'],
+			'akt-lang': [{ ar: 'اللغة', en: 'Language' }, function (v) { return v === 'en' ? 'English' : 'العربية'; }],
+			'akt-theme': [{ ar: 'المظهر', en: 'Theme' }, function (v, App) { return v === 'light' ? App.L('ورقي', 'Paper') : App.L('ليلي', 'Night'); }],
+			'akt-cl-seen': [{ ar: 'آخر ما رأيته في «سجل التحديثات»', en: 'The last change you saw in the Changelog' }, function (v, App) {
+				return App.L('التحديث ', 'Change ') + '<code dir="ltr">' + App.esc(v) + '</code>' + App.L('، ليعلّم لك الموقع ما جاء بعده', ', so the site can mark what came after it');
+			}, 'changelog.html'],
+			'akt-offline-saved': [{ ar: 'حفظ الأغلفة دون اتصال', en: 'Covers saved for offline' }, function (v, App) { return App.L('في ', 'On ') + PAGE_MYDATA.day(App, +v); }],
+			'akt-invite-off': [{ ar: 'دعوة تثبيت التطبيق', en: 'The invitation to install the app' }, function (v, App) {
+				return App.L('أجّلتها في ' + PAGE_MYDATA.day(App, +v) + '، فلن تظهر قبل أسبوعين منه', 'You put it off on ' + PAGE_MYDATA.day(App, +v) + ', so it won’t show for two weeks after');
+			}],
+			'akt-browse-ms': [{ ar: 'وقت تصفّحك', en: 'Your reading time' }, function (v, App) {
+				var m = Math.round(+v / 60000);
+				return App.L(App.count(m, ['دقيقة واحدة', 'دقيقتان', 'دقائق', 'دقيقة']), m + ' minute' + (m === 1 ? '' : 's')) + App.L('، يُحسب ليقترح الموقع تثبيته بعد ثلاث دقائق، مرة واحدة', ', counted so the site offers to be installed after three minutes, once');
+			}]
+		},
+		SESSION: {
+			'akt-intro-seen': { ar: 'أنك شاهدت الافتتاحية', en: 'That you saw the opening' },
+			'akt-audio-platform': { ar: 'المنصة المختارة في «مسموع»', en: 'The platform chosen on Audio' },
+			'akt-audio-open': { ar: 'الأقسام المفتوحة في «مسموع»', en: 'The sections open on Audio' },
+			'akt-blog-level': { ar: 'طريقة عرض المدونة', en: 'How the blog is shown' }
+		},
+		day: function (App, t) {
+			return new Date(t).toLocaleDateString(App.lang === 'en' ? 'en-GB' : 'ar-EG-u-nu-latn', { day: 'numeric', month: 'long', year: 'numeric' });
+		},
+		keys: function (store) {
+			var out = [];
+			try { for (var i = 0; i < store.length; i++) if (/^akt-/.test(store.key(i))) out.push(store.key(i)); } catch (e) {}
+			return out.sort();
+		},
+		/* the offline copy: the service worker's caches, how many files and about how much room they take */
+		caches: function () {
+			if (!('caches' in window)) return Promise.resolve(null);
+			return caches.keys().then(function (names) {
+				names = names.filter(function (n) { return /^akt-/.test(n); });
+				return Promise.all(names.map(function (n) { return caches.open(n).then(function (c) { return c.keys(); }).then(function (k) { return k.length; }); })).then(function (counts) {
+					var files = counts.reduce(function (a, b) { return a + b; }, 0);
+					var size = navigator.storage && navigator.storage.estimate ? navigator.storage.estimate().then(function (x) { return x.usage || 0; }).catch(function () { return 0; }) : Promise.resolve(0);
+					return size.then(function (bytes) { return { names: names, files: files, bytes: bytes }; });
+				});
+			}).catch(function () { return null; });
+		},
+		again: function () { location.hash = 'mydata'; location.reload(); },
+
+		wire: function (App) {
+			var L = App.L, e = App.esc, self = this, box = document.getElementById('mydata');
+			if (!box) return;
+			var list = box.querySelector('.info-my-list');
+			var row = function (name, key, what, clear, href) {
+				return '<li><p class="info-my-name"><b>' + (href ? '<a href="' + href + '">' + e(name) + '</a>' : e(name)) + '</b> <code dir="ltr">' + e(key) + '</code></p>' +
+					'<p class="info-my-what">' + what + '</p>' + (clear ? '<button type="button" class="share-btn" data-clear="' + e(clear) + '">' + e(L('امسح', 'Clear')) + '</button>' : '') + '</li>';
+			};
+			/* in the order they are described in, then any other the site has kept */
+			var order = Object.keys(this.LOCAL);
+			var html = this.keys(localStorage).sort(function (a, b) { return (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99); }).map(function (k) {
+				var d = self.LOCAL[k], v = localStorage.getItem(k), what;
+				try { what = d ? d[1](v, App) : e(v.length > 80 ? v.slice(0, 80) + '…' : v); } catch (x) { what = e(L('لا تُقرأ', 'Unreadable')); }
+				return row(d ? App.t(d[0]) : k, k, what, 'local:' + k, d && d[2]);
+			});
+			var sess = this.keys(sessionStorage);
+			if (sess.length) html.push(row(L('ما يُنسى حين تغلق المتصفح', 'What is forgotten when you close the browser'), 'sessionStorage',
+				e(sess.map(function (k) { return self.SESSION[k] ? App.t(self.SESSION[k]) : k; }).join(L('، ', ', '))), 'session'));
+			/* after «امسح كل شيء»: what shows now was kept again as this page opened */
+			if (/[?&]cleared=1/.test(location.search)) list.insertAdjacentHTML('beforebegin', '<p class="info-my-done">' + e(L('مُسح كل شيء. ما تراه أدناه حفظه الموقع من جديد حين فتحت هذه الصفحة: آخر تحديث في السجل، ونسخة الصفحة نفسها للعمل دون اتصال.', 'Everything was cleared. What you see below the site kept again as this page opened: the newest change in the log, and this page’s own offline copy.')) + '</p>');
+			list.innerHTML = html.join('') || '<li class="info-my-none">' + e(L('لا شيء محفوظ الآن من هذا الموقع في هذا المتصفح.', 'Nothing from this site is kept in this browser just now.')) + '</li>';
+			this.caches().then(function (c) {
+				if (!c || !c.names.length) return;
+				var none = list.querySelector('.info-my-none');
+				if (none) none.remove();
+				list.insertAdjacentHTML('beforeend', row(L('النسخة المحفوظة دون اتصال', 'The offline copy'), 'Cache Storage',
+					e(L(App.count(c.files, ['ملف واحد', 'ملفان', 'ملفات', 'ملفًا']), c.files + ' file' + (c.files === 1 ? '' : 's')) +
+						(c.bytes ? L(' · نحو ' + App.num(Math.max(1, Math.round(c.bytes / 1048576))) + ' ميجابايت', ' · about ' + Math.max(1, Math.round(c.bytes / 1048576)) + ' MB') : '') +
+						L('، من الصفحات والصور التي زرتها أو حفظتها. إن مسحتها عاد الموقع يحفظ ما تزوره من جديد.', ', from the pages and pictures you visited or saved. Clear it and the site starts again with what you visit.')), 'caches'));
+			});
+
+			box.addEventListener('click', function (ev) {
+				var b = ev.target.closest('[data-clear], [data-my]');
+				if (!b) return;
+				var what = b.getAttribute('data-clear') || b.getAttribute('data-my');
+				if (what.indexOf('local:') === 0) { try { localStorage.removeItem(what.slice(6)); } catch (x) {} self.again(); }
+				else if (what === 'session') { self.keys(sessionStorage).forEach(function (k) { sessionStorage.removeItem(k); }); self.again(); }
+				else if (what === 'caches') { localStorage.removeItem('akt-offline-saved'); self.caches().then(function (c) { return Promise.all(((c && c.names) || []).map(function (n) { return caches.delete(n); })); }).then(self.again); }
+				else if (what === 'save') {
+					var local = {};
+					self.keys(localStorage).forEach(function (k) { local[k] = localStorage.getItem(k); });
+					var a = document.createElement('a');
+					a.href = URL.createObjectURL(new Blob([JSON.stringify({ app: 'akt-data', version: 1, exported: new Date().toISOString(), local: local }, null, 2)], { type: 'application/json' }));
+					a.download = 'akt-data-' + new Date().toISOString().slice(0, 10) + '.json';
+					document.body.appendChild(a); a.click(); a.remove();
+					setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+				}
+				else if (what === 'all' && confirm(L('سيُمسح كل ما يحفظه الموقع في هذا المتصفح، ومعه قوائمك والنسخة المحفوظة دون اتصال. متابعة؟', 'Everything the site keeps in this browser will be cleared, your lists and the offline copy with it. Continue?'))) {
+					self.keys(localStorage).forEach(function (k) { localStorage.removeItem(k); });
+					self.keys(sessionStorage).forEach(function (k) { sessionStorage.removeItem(k); });
+					self.caches().then(function (c) { return Promise.all(((c && c.names) || []).map(function (n) { return caches.delete(n); })); }).then(function () { location.replace('privacy.html?cleared=1#mydata'); });
+				}
+			});
+			/* a file saved here (or the lists' own export from «قوائمي») read back: it takes the place of what is here */
+			box.querySelector('input[type="file"]').addEventListener('change', function () {
+				var f = this.files && this.files[0];
+				if (!f) return;
+				f.text().then(function (txt) {
+					var d = JSON.parse(txt), local = {};
+					if (d && d.app === 'akt-data' && d.local) local = d.local;
+					else if (d && d.app === 'akt-lists' && d.lists) local['akt-lists'] = JSON.stringify({ mode: 'reader', lists: d.lists });
+					else throw new Error('format');
+					var keys = Object.keys(local).filter(function (k) { return /^akt-[a-z0-9-]+$/.test(k) && typeof local[k] === 'string'; });
+					if (!keys.length) throw new Error('empty');
+					if (!confirm(L('سيأخذ ما في الملف مكان ما هنا (' + App.count(keys.length, ['شيء واحد', 'شيئان', 'أشياء', 'شيئًا']) + '). متابعة؟', 'What is in the file will take the place of what is here (' + keys.length + ' item' + (keys.length === 1 ? '' : 's') + '). Continue?'))) return;
+					keys.forEach(function (k) { localStorage.setItem(k, local[k]); });
+					self.again();
+				}).catch(function () { alert(L('هذا الملف ليس من ملفات بيانات الموقع.', 'This file is not one of the site’s data files.')); });
+				this.value = '';
+			});
+		}
+	};
+
 	var PAGES = {
 		about: {
 			title: { ar: 'عن الموقع والأسئلة الشائعة', en: 'About & FAQ' },
@@ -180,8 +305,8 @@
 			},
 			sections: [
 				{ h: { ar: 'ما يُحفظ في متصفحك فقط', en: 'What stays in your browser' },
-					p: { ar: '<p>يحفظ الموقع بعض التفضيلات في متصفحك نفسه (localStorage)، ولا تُرسل إلى أي مكان:</p><ul><li>اللغة التي اخترتها، والمظهر (ليلي أو ورقي).</li><li>قوائمك إن استخدمتها: قوائم القارئ («سأقرؤه»، «قرأته») والمقتني («في مكتبتي»، «أبحث عنه»)، ومعها الطبعات التي اخترتها. يمكنك تصديرها أو استيرادها أو مسحها من «قوائمي».</li><li>موعد آخر حفظ للأغلفة دون إنترنت.</li></ul><p>وأشياء تُنسى حين تغلق المتصفح (sessionStorage): أنك شاهدت الافتتاحية، والأقسام المفتوحة والمنصة المختارة في «مسموع»، وطريقة عرض المدونة.</p><p>تمسحها كلها بمسح بيانات هذا الموقع من إعدادات متصفحك.</p>',
-						en: '<p>The site keeps a few preferences in your own browser (localStorage); they are never sent anywhere:</p><ul><li>The language you chose, and the theme (night or paper).</li><li>Your lists, if you use them: the reader’s (“want to read”, “read”) and the collector’s (“in my collection”, “looking for it”), with the editions you picked. You can export, import or clear them from My lists.</li><li>When you last saved the covers for offline.</li></ul><p>And a few things forgotten when you close the browser (sessionStorage): that you saw the opening, which Audio sections are open and which platform is chosen, and how the blog is shown.</p><p>Clearing this site’s data in your browser settings removes all of it.</p>' } },
+					p: { ar: '<p>يحفظ الموقع بعض الأشياء في متصفحك نفسه (localStorage)، ولا تُرسل إلى أي مكان: اللغة والمظهر (ليلي أو ورقي)؛ وقوائمك إن استخدمتها؛ وآخر ما رأيته في «سجل التحديثات» ليعلّم لك ما جاء بعده؛ وموعد حفظك للأغلفة دون إنترنت؛ ووقت تصفّحك، ليقترح عليك الموقع تثبيته مرة واحدة، ومتى أجّلت ذلك.</p><p>وأشياء تُنسى حين تغلق المتصفح (sessionStorage): أنك شاهدت الافتتاحية، والأقسام المفتوحة والمنصة المختارة في «مسموع»، وطريقة عرض المدونة.</p><p>تراها كلها بما فيها الآن، وتمسحها أو تنقلها إلى جهاز آخر، في <a href="#mydata">«بياناتك على هذا الجهاز»</a> أسفل هذه الصفحة.</p>',
+						en: '<p>The site keeps a few things in your own browser (localStorage); they are never sent anywhere: the language and the theme (night or paper); your lists, if you use them; the last change you saw in the Changelog, so it can mark what came after; when you saved the covers for offline; and your reading time, so the site offers to be installed once, and when you put that off.</p><p>And a few things forgotten when you close the browser (sessionStorage): that you saw the opening, which Audio sections are open and which platform is chosen, and how the blog is shown.</p><p>See all of it as it is now, and clear it or move it to another device, in <a href="#mydata">Your data on this device</a> at the foot of this page.</p>' } },
 				{ h: { ar: 'العمل دون إنترنت', en: 'Working offline' },
 					p: { ar: '<p>ليعمل الموقع دون إنترنت يحفظ متصفحك نسخة من صفحاته وصوره (Service Worker). هذه النسخة على جهازك وحده، ويمكنك حذفها بمسح بيانات الموقع أو بإلغاء تثبيت التطبيق.</p>',
 						en: '<p>To work offline, your browser keeps a copy of the site’s pages and images (a service worker). That copy lives only on your device; clearing the site’s data or uninstalling the app removes it.</p>' } },
@@ -191,7 +316,19 @@
 				{ h: { ar: 'إن راسلتنا', en: 'If you write to us' },
 					p: { ar: '<p>التصحيحات تُرسل عبر GitHub، فتكون علنية ويظهر فيها اسم حسابك هناك. لا تكتب فيها بيانات شخصية لا تريد نشرها.</p><p>أما الرسائل إلى ' + mail + ' فخاصة: لا تُنشر، ولا يُستخدم عنوانك إلا للرد عليك.</p>',
 						en: '<p>Corrections go through GitHub, so they are public and show your account name there. Don’t include personal details you don’t want published.</p><p>Emails to ' + mail + ' are private: they are not published, and your address is used only to reply to you.</p>' } }
-			]
+			],
+			/* «بياناتك على هذا الجهاز» (PAGE_MYDATA) */
+			extra: function (App) {
+				var L = App.L;
+				setTimeout(function () { PAGE_MYDATA.wire(App); }, 0);
+				return '<section class="info-sec info-my" id="mydata"><h2>' + L('بياناتك على هذا الجهاز', 'Your data on this device') + '</h2>' +
+					'<p>' + L('هذا كل ما يحفظه الموقع الآن في هذا المتصفح، مقروءًا منه الآن، وما في كلٍّ منه. امسح ما شئت، أو احفظه كله في ملف وحمّله في متصفح أو جهاز آخر لتنتقل معك قوائمك وتفضيلاتك.', 'This is everything the site keeps in this browser now, read from it as you look, and what each holds. Clear what you like, or save it all to a file and load it in another browser or device so your lists and choices come with you.') + '</p>' +
+					'<ul class="info-my-list"></ul>' +
+					'<div class="info-my-do"><button type="button" class="share-btn" data-my="save">' + L('احفظ بياناتك في ملف', 'Save your data to a file') + '</button>' +
+						'<label class="share-btn">' + L('حمّلها من ملف', 'Load it from a file') + '<input type="file" accept=".json,application/json" hidden></label>' +
+						'<button type="button" class="share-btn info-my-all" data-my="all">' + L('امسح كل شيء', 'Clear everything') + '</button></div>' +
+					'<p class="info-note">' + L('الملف يُصنع في متصفحك ويُقرأ فيه، ولا يمرّ بأي خادم. يحمل قوائمك وتفضيلاتك، لا النسخة المحفوظة دون اتصال: تلك يعيد الموقع حفظها في الجهاز الآخر.', 'The file is made in your browser and read in it; it goes through no server. It carries your lists and choices, not the offline copy: the site saves that again on the other device.') + '</p></section>';
+			}
 		},
 
 		terms: {
