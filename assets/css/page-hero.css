@@ -707,26 +707,6 @@ html[data-theme="light"] .nmc-papers, html[data-theme="light"] .nmc-sq, html[dat
 .ph-deck-nav button:hover, .ph-deck-nav button:focus-visible { border-color: var(--ember); color: var(--ember); outline: none; }
 @media (max-width: 640px) { .ph-cards { height: 11rem; } .ph-count { width: 8rem; height: 10rem; } .ph-count b { font-size: calc(46px * var(--fs, 1)); } .ph-count .pc-top, .ph-count .pc-bot { font-size: 12px; top: 13px; } .ph-count .pc-bot { top: auto; bottom: 13px; } }
 
-/* ---------- quiz: a question mark glowing over four answers ---------- */
-.ph[data-ph="quiz"] { background: radial-gradient(50% 90% at 50% 40%, #2a1830 0%, #110c16 60%, #0b0a0e 100%); }
-.ph-qm { position: absolute; bottom: -60px; left: var(--x); font-family: var(--f-display); font-size: var(--s); color: rgba(224, 99, 58, .22); font-style: normal;
-	animation: ph-qm 12s var(--d) linear infinite; }
-@keyframes ph-qm { from { transform: translateY(0) rotate(-10deg); opacity: 0; } 15% { opacity: 1; } to { transform: translateY(-420px) rotate(14deg); opacity: 0; } }
-.ph-quiz { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
-.ph-quiz-q { font-family: var(--f-display); font-size: 150px; line-height: .9; color: #f6d79a; text-shadow: 0 0 40px rgba(224, 99, 58, .6), 0 0 90px rgba(224, 99, 58, .35);
-	animation: ph-glow-q 3s ease-in-out infinite; }
-@keyframes ph-glow-q { 50% { text-shadow: 0 0 60px rgba(224, 99, 58, .85), 0 0 120px rgba(224, 99, 58, .45); transform: scale(1.04); } }
-.ph-quiz-opts { display: grid; grid-template-columns: repeat(4, auto); gap: 10px; }
-.ph-quiz-opts span { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(239, 230, 210, .18); background: rgba(14, 15, 19, .6);
-	animation: ph-opt 8s calc(var(--i) * 2s) infinite; }
-.ph-quiz-opts em { font-style: normal; font-family: var(--f-display); color: var(--ph-ink); }
-.ph-quiz-opts i { width: 54px; height: 8px; border-radius: 4px; background: rgba(239, 230, 210, .2); }
-@keyframes ph-opt { 0%, 18%, 100% { border-color: rgba(239, 230, 210, .18); background: rgba(14, 15, 19, .6); } 4%, 14% { border-color: #2f9e6a; background: rgba(47, 158, 106, .3); } }
-@media (max-width: 640px) { .ph-quiz-q { font-size: 110px; } .ph-quiz-opts { grid-template-columns: repeat(2, auto); } }
-html[data-theme="light"] .ph[data-ph="quiz"] { background: radial-gradient(50% 90% at 50% 40%, #fbeedd 0%, #ead8bd 70%); }
-html[data-theme="light"] .ph-quiz-q { color: #9e2219; text-shadow: 0 0 30px rgba(224, 99, 58, .35); }
-html[data-theme="light"] .ph-quiz-opts span { background: rgba(251, 246, 234, .8); border-color: rgba(42, 32, 23, .18); }
-
 /* ---------- map: a navigator's chart, routes running out from Tanta ---------- */
 .ph[data-ph="map"] { background: radial-gradient(70% 120% at 55% 30%, #14202a 0%, #0a0f14 70%); }
 html[data-theme="light"] .ph[data-ph="map"] { background: radial-gradient(70% 120% at 55% 30%, #f1ead8 0%, #ddd0b4 70%); }
@@ -740,5 +720,5 @@ html[data-theme="light"] .ph[data-ph="map"] { background: radial-gradient(70% 12
 .ph-gl:focus-visible { box-shadow: inset 0 0 0 2px var(--ember); }
 
 @media (prefers-reduced-motion: reduce) {
-	.ph-paper, .ph-qm, .ph-quiz-q, .ph-quiz-opts span { animation: none; }
+	.ph-paper { animation: none; }
 }

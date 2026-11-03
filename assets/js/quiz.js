@@ -15,6 +15,38 @@ window.PAGE = {
 	},
 	ROUND: 10,
 
+	/* the band: a fan of question cards from a round of the quiz itself (a cover, a quote, a character, a year…), each with its
+	   four answers; in turn one lifts and its right answer lights, as the pointer does over any; a click goes down to the quiz.
+	   The band is one with the page: no ground or line of its own */
+	band: function (d, A) {
+		var self = window.PAGE, e = A.esc, qs = [];
+		try { qs = self.round().slice(0, 7); } catch (err) {}
+		if (!qs.length) return '';
+		var mid = (qs.length - 1) / 2;
+		setTimeout(function () { self.bandWire(); }, 0);
+		return '<div class="qzb">' + qs.map(function (q, i) {
+			var k = i - mid;
+			return '<div class="qzb-card' + (q.img ? ' has-img' : '') + '" style="--k:' + k + ';--ak:' + Math.abs(k) + '">' +
+				'<span class="qzb-kind">' + e(q.kind) + '</span>' +
+				(q.img ? '<img src="' + e(q.img) + '" alt="" decoding="async">' : '') +
+				'<p class="qzb-q">' + e(q.quote ? '«' + q.quote + '»' : q.q) + '</p>' +
+				'<ol class="qzb-opts">' + q.opts.map(function (o) { return '<li' + (o === q.a ? ' class="ok"' : '') + '>' + e(o) + '</li>'; }).join('') + '</ol></div>';
+		}).join('') + '</div>';
+	},
+	bandWire: function () {
+		var box = document.querySelector('.qzb');
+		if (!box || box._wired) return;
+		box._wired = true;
+		var cards = [].slice.call(box.children), at = 0, hold = false;
+		var show = function (i) { cards.forEach(function (c, j) { c.classList.toggle('is-on', j === i); }); };
+		box.addEventListener('pointerover', function (ev) { var c = ev.target.closest('.qzb-card'); if (c) { hold = true; show(cards.indexOf(c)); } });
+		box.addEventListener('pointerleave', function () { hold = false; });
+		box.addEventListener('click', function () { var to = document.getElementById('quiz'); if (to) to.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) return show(Math.floor(cards.length / 2));
+		show(at = Math.floor(cards.length / 2));
+		setInterval(function () { if (!hold && !document.hidden) show(at = (at + 1) % cards.length); }, 2400);
+	},
+
 	shuffle: function (a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; },
 	pick: function (a) { return a[Math.floor(Math.random() * a.length)]; },
 	/* the right answer and three others, distinct, shuffled */

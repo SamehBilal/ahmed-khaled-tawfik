@@ -244,16 +244,6 @@
 				'<div class="ph-type">' + ((window.StyleSection || {}).LINES || []).map(function (l, i) { return '<p style="--d:' + (i ? i * 3 - 9 : 0) + 's"><span>' /* (started part-way, not waiting: a waiting line would show its caret) */ + e(L(l[0], l[1])) + '</span></p>'; }).join('') + '</div>';
 		},
 
-		/* quiz: a question mark glowing over four answers, the right one lighting in turn */
-		quiz: function (d, A) {
-			var e = A.esc, L = A.L, marks = '';
-			for (var i = 0; i < 14; i++) marks += '<i class="ph-qm" style="--x:' + (rnd(i, 31) * 96).toFixed(1) + '%;--s:' + (18 + rnd(i, 32) * 46).toFixed(0) + 'px;--d:' + (-rnd(i, 33) * 12).toFixed(1) + 's">؟</i>';
-			var opts = L(['أ', 'ب', 'ج', 'د'], ['A', 'B', 'C', 'D']);
-			return marks + '<div class="ph-quiz"><b class="ph-quiz-q">؟</b><div class="ph-quiz-opts">' + opts.map(function (o, i) {
-				return '<span style="--i:' + i + '"><em>' + e(o) + '</em><i></i></span>';
-			}).join('') + '</div></div>';
-		},
-
 		/* map: Codrops' «Infinite Circular WebGL Gallery», the covers of the books by the places they name (mapGallery, below) */
 		map: function (d, A) {
 			setTimeout(function () { mapGallery(A); }, 0);
