@@ -9,9 +9,19 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-04T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e8aa14b</id>
+		<title>«حياته» in the main menu</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«حياته» in the main menu: a new photograph of him (assets/img/photos/akt-portrait-cafe.webp), and on it a new line of his each time the panel opens — his wish for his headstone or one of the short quotes from his books (AKT.quotes, 120 letters at most, never the same twice running) with the book it is from; on the pages that do not load the data, his wish. The photograph now leads to «اقتباسات»</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d658a11</id>
 		<title>«أعماله» in the main menu</title>
-		<updated>2026-11-04T20:59:00Z</updated>
+		<updated>2026-11-04T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="data" label="Data"/>
@@ -21,7 +31,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1db58ff</id>
 		<title>The main menu's panels, fuller</title>
-		<updated>2026-11-04T20:58:00Z</updated>
+		<updated>2026-11-04T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="design" label="Design"/>
@@ -30,7 +40,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3317c06</id>
 		<title>The main menu, on a wider screen, is six words</title>
-		<updated>2026-11-04T20:57:00Z</updated>
+		<updated>2026-11-04T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -41,7 +51,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8b3a21d</id>
 		<title>Tablets</title>
-		<updated>2026-11-04T20:56:00Z</updated>
+		<updated>2026-11-04T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<category term="fix" label="Fix"/>
@@ -50,7 +60,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c015779</id>
 		<title>Lighter pictures</title>
-		<updated>2026-11-04T20:55:00Z</updated>
+		<updated>2026-11-04T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -61,7 +71,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
 		<title>«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data</title>
-		<updated>2026-11-04T20:54:00Z</updated>
+		<updated>2026-11-04T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -549,14 +559,5 @@
 		<updated>2026-11-01T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">«سيرته ولقاءاته»: «سيرته» as wide as the rest of the site (1180px), lined up with «لقاءاته» — its section carried the class .bio, which the home page's biography sets in two columns, so it was split in two and stretched across the window; it is .tk-life now</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b89b3bc</id>
-		<title>«إحصاءات الموقع» moved from the covers page to «بالأرقام والأسلوب», as its third step after «المسيرة» and…</title>
-		<updated>2026-11-01T20:55:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<content type="text">«إحصاءات الموقع» moved from the covers page to «بالأرقام والأسلوب», as its third step after «المسيرة» and «اللغة والأسلوب» — on the page's map and its thread («وما يحفظه الموقع منه»), the same fifteen numbers in the page's own tiles, each leading where it counts (the cover wall and the editions now back on the covers page), numbers.html#stats opening on it. Counted by site-stats.js, which the covers page draws its wall from too; the search words and the sitemap follow</content>
 	</entry>
 </feed>
