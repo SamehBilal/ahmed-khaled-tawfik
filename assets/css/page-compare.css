@@ -1,0 +1,60 @@
+/* «السلاسل جنبًا إلى جنب» (compare.html, compare.js): the band is the series' lives side by side — a lane each from its first year
+   to its last, marked as many times as it has issues; under it the table, and «أعداء وأشرار» */
+.ph[data-ph="compare"], html[data-theme="light"] .ph[data-ph="compare"] { background: none; border-bottom: 0; }
+.ph[data-ph="compare"]::after { content: none; }
+.cp-lanes { position: absolute; inset: 22px max(16px, 6%) 26px; display: grid; grid-template-rows: repeat(var(--n), 1fr); gap: 6px; direction: ltr; }
+.cp-tick { position: absolute; left: var(--x); bottom: -22px; translate: -50% 0; font: 11px var(--f-latin), sans-serif; color: var(--muted); }
+.cp-tick::before { content: ''; position: absolute; left: 50%; bottom: 18px; height: calc(100% + 200px); max-height: 200px; border-left: 1px dashed color-mix(in srgb, var(--paper) 10%, transparent); }
+.cp-lane { position: relative; display: block; text-decoration: none; }
+.cp-bar { position: absolute; left: var(--a); width: var(--w); top: 15%; bottom: 15%; min-width: 6px; border-radius: 999px;
+	/* a fine mark for each issue, over the series' own colour warmed with the ember */
+	background: repeating-linear-gradient(90deg, rgba(0, 0, 0, .28) 0 1px, transparent 1px calc(100% / var(--k))),
+		linear-gradient(90deg, color-mix(in srgb, var(--c) 55%, var(--ember)), color-mix(in srgb, var(--c) 30%, var(--ember)));
+	box-shadow: 0 0 18px color-mix(in srgb, var(--c) 40%, transparent);
+	transform-origin: left; animation: cp-grow 1s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i) * 120ms); transition: filter .2s; }
+.cp-lane b { position: absolute; left: calc(var(--a) + var(--w) + 8px); top: 50%; translate: 0 -50%; white-space: nowrap; font: 400 14px var(--f-display); color: var(--paper); direction: rtl; }
+html[lang="en"] .cp-lane b { direction: ltr; }
+.cp-lane b small { font: 11px var(--f-latin), sans-serif; color: var(--muted); }
+/* (a lane that runs to the right edge names itself inside its bar, at its start) */
+.cp-lane.is-in b { left: calc(var(--a) + 12px); text-shadow: 0 1px 3px rgba(0, 0, 0, .7); }
+.cp-lane:hover .cp-bar, .cp-lane:focus-visible .cp-bar { filter: brightness(1.3); }
+@keyframes cp-grow { from { transform: scaleX(0); } }
+@media (max-width: 640px) { .cp-lane b { font-size: 11px; } .cp-tick { font-size: 9px; } }
+@media (prefers-reduced-motion: reduce) { .cp-bar { animation: none; } }
+
+.cp-sum, .cp-note { color: var(--muted); line-height: 1.9; }
+.cp-note a { color: var(--ember); }
+.cp-scroll { margin: 18px 0 6px; overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); }
+.cp-scroll:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+.cp-table { width: 100%; min-width: 820px; border-collapse: collapse; font-size: 14px; }
+.cp-table th, .cp-table td { padding: 12px 14px; text-align: start; vertical-align: top; border-bottom: 1px solid var(--line); line-height: 1.7; }
+.cp-table tbody tr:last-child > * { border-bottom: 0; }
+.cp-table thead th { position: sticky; top: 0; font: 400 17px var(--f-display); background: color-mix(in srgb, var(--c) 30%, var(--ink-2)); border-bottom: 2px solid var(--c); }
+.cp-table thead th a { color: var(--paper); }
+.cp-table thead th a:hover { color: var(--ember); }
+.cp-table tbody th { position: sticky; inset-inline-start: 0; z-index: 1; width: 9.5em; font: 400 14px var(--f-display); color: var(--muted); background: var(--ink-2); }
+.cp-table td { color: var(--paper-dim); min-width: 120px; }
+.cp-table td a { color: var(--paper); }
+.cp-table td a:hover { color: var(--ember); }
+.cp-table td small { display: block; font-size: 12px; color: var(--muted); }
+.cp-big { font: 400 28px var(--f-display); color: var(--ember); }
+.cp-none { color: var(--muted); }
+.cp-ask { font-size: 13px; color: var(--muted) !important; border-bottom: 1px dashed currentColor; }
+.cp-cv { display: flex; flex-direction: column; gap: 6px; max-width: 120px; font-size: 12px; line-height: 1.5; }
+.cp-cv .mini-cover, .cp-cv > :first-child { width: 64px; }
+
+.cp-vill { margin-top: 46px; scroll-margin-top: 90px; }
+.cp-vill h2 { font-family: var(--f-display); font-weight: 400; }
+.cp-vill h2 small { font-size: 16px; color: var(--muted); }
+.cp-who { margin: 14px 0 18px; }
+.cp-vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.cp-v { padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); scroll-margin-top: 90px; }
+.cp-v-s { margin: 0; font-size: 12px; color: var(--ember); font-family: var(--f-display); }
+.cp-v h3 { margin: 4px 0 0; font: 400 20px var(--f-display); color: var(--paper); }
+.cp-v-en { margin: 0; font: 12px var(--f-latin), sans-serif; color: var(--muted); }
+.cp-v-d { margin: 8px 0 10px; color: var(--paper-dim); line-height: 1.85; font-size: 15px; }
+.cp-v-covers { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.cp-v-covers a { width: 46px; }
+.cp-v-src { margin: 0; font-size: 12px; }
+.cp-v-src a { color: var(--muted); }
+.cp-v-src a:hover { color: var(--ember); }

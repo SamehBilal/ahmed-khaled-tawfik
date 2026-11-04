@@ -29,12 +29,35 @@ window.PAGE = {
 					'<h3>' + e(t(x.title)) + '</h3><p>' + e(t(x.text)) + '</p>' +
 					'<a class="hw-src" href="' + e(x.url) + '" target="_blank" rel="noopener">' + e(t(x.outlet || { ar: 'المصدر', en: 'Source' })) + ' ↗</a></article>';
 			}).join('') + '</div>' +
+			this.dedications() +
 			'<aside class="hw-call"><h2>' + e(L('هل عندك إهداء منه؟', 'Do you have a dedication from him?')) + '</h2>' +
 				'<p>' + e(L('قلّما نُشر خطه: لم نجد بعد مخطوطًا أو رسالة بخطه في مكان عام. إن كتب لك إهداءً على نسختك، أو عندك ورقة بخطه، فصوّرها وأرسلها، واكتب سطرًا عن اليوم؛ تُنشر هنا باسمك إن أردت.', 'His hand was seldom published: we have yet to find a manuscript or a letter of his shown anywhere public. If he wrote a dedication in your copy, or you have a page in his hand, photograph it and send it with a line about the day; it goes up here, under your name if you wish.')) + '</p>' +
 				this.form() +
 			'</aside>' +
 		'</div></section>';
 		this.wire();
+		App.focusHash();
+	},
+
+	/* «إهداءات كتبه» (#dedications): the printed dedication at the front of his books and issues — to whom, its words where a
+	   source gives them, and what it tells (AKT.dedications, data-pages.js) */
+	dedications: function () {
+		var App = window.App, S = window.WorksShared, e = App.esc, t = App.t, L = App.L, list = App.data().dedications || [];
+		if (!list.length || !S) return '';
+		return '<section class="hw-ded" id="dedications"><h2>' + e(L('إهداءات كتبه', 'His books’ dedications')) + ' <small>' + e(App.num(list.length)) + '</small></h2>' +
+			'<p class="hw-ded-lead">' + e(L('وفي أول صفحة من بعض كتبه إهداء مطبوع: لمن أهدى الكتاب، وبماذا، كما نقلته المصادر. أكثر كتبه وأعداده بلا إهداء.', 'And on the first page of some of his books, a printed dedication: to whom he gave the book, and in what words, as the sources quote it. Most of his books and issues have none.')) + '</p>' +
+			'<div class="hw-ded-list">' + list.map(function (x) {
+				var r = S.resolveBook(x.book);
+				if (!r) return '';
+				var title = r.series ? t(r.series.s.title) + ' ' + App.num(r.item.n) + ': ' + t(r.item.title) : t(r.item.title);
+				var img = r.series ? S.issueCover(r.series.s.id, r.item) : S.coverOf(r.info), href = r.series ? 'book.html?id=' + x.book : App.workHref(x.book);
+				return '<article class="hw-ded-card"><a class="hw-ded-cv" href="' + e(href) + '">' + S.miniCover({ img: img, color: '#3a2a1f', title: t(r.item.title) }) + '</a><div>' +
+					'<h3><a href="' + e(href) + '">' + e(title) + '</a></h3><p class="hw-ded-to">' + e(L('إلى ', 'To ')) + e(t(x.to)) + '</p>' +
+					(x.text ? '<blockquote dir="rtl" lang="ar">' + e(x.text) + '</blockquote>' : '') +
+					(x.note ? '<p class="hw-ded-note">' + e(t(x.note)) + '</p>' : '') +
+					(x.src || []).map(function (u, i) { return '<a class="hw-src" href="' + e(u) + '" target="_blank" rel="noopener">' + e(L('المصدر', 'Source') + ((x.src || []).length > 1 ? ' ' + App.num(i + 1) : '') + ' ↗') + '</a>'; }).join(' ') +
+				'</div></article>';
+			}).join('') + '</div></section>';
 	},
 
 	/* the form, after Muhammed Erdem's «Credit Card Form» on CodePen (made there with Vue; here in plain script): above the boxes, a

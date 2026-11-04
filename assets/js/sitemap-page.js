@@ -176,12 +176,12 @@ window.PAGE = {
 		   it, and in a lighter tile the pages made one per thing, with how many */
 		var TREE = [
 			['index.html', ['guide.html']],
-			['works.html', ['covers.html', 'translations.html', 'world.html', 'screen.html'], [[own.length + wrote.length, L('صفحة سلسلة', 'series pages')], [issues, L('صفحة عدد', 'issue pages')], [books, L('صفحة كتاب', 'book pages')]]],
+			['works.html', ['covers.html', 'translations.html', 'world.html', 'screen.html', 'compare.html'], [[own.length + wrote.length, L('صفحة سلسلة', 'series pages')], [issues, L('صفحة عدد', 'issue pages')], [books, L('صفحة كتاب', 'book pages')]]],
 			['characters.html', ['creatures.html', 'refaat-life.html', 'network.html', 'worlds.html', 'clinic.html', 'names.html'], [[chars, L('صفحة بطل', 'lead’s pages')]]],
 			['writers.html', ['publishers.html', 'library.html'], [[window.People ? window.People.all().length : 0, L('صفحة اسم من دائرته', 'pages of his circle')], [S.publishers().length, L('صفحة دار نشر', 'publisher pages')]]],
 			['quotes.html', ['quotes.html#glossary']],
 			['audio.html', []],
-			['legacy.html', ['talks.html', 'awards.html', 'handwriting.html', 'map.html', 'calendar.html']],
+			['legacy.html', ['talks.html', 'awards.html', 'handwriting.html', 'map.html', 'calendar.html', 'era.html']],
 			['tributes.html', []],
 			['blog.html', ['blog.html#papers', 'numbers.html'], [[((d.blog || {}).posts || []).length || (d.stats || {}).posts, L('مقال', 'articles')]]],
 			['quiz.html', ['lists.html']],

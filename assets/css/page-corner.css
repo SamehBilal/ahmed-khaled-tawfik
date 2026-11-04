@@ -71,3 +71,22 @@
 @media (max-width: 640px) { .ph[data-ph="quiz"] { height: 330px; } .qzb-card { flex-basis: 150px; margin: 0 -30px; padding: 10px; }
 	.qzb-card:nth-child(2), .qzb-card:nth-child(6) { display: none; } .qzb-q { font-size: 12.5px; } }
 @media (prefers-reduced-motion: reduce) { .qzb-card, .qzb-opts li { transition: none; } }
+
+/* «البدايات» (#openings): the first line as a quote, four covers to choose from, then the answer */
+.cr-line { margin: 0 0 18px; padding: 18px 22px; border-inline-start: 4px solid var(--ember); border-radius: 10px; background: var(--ink-2);
+	font: 400 clamp(20px, 3vw, 26px)/1.8 var(--f-display); color: var(--paper); }
+.cr-line span { display: block; margin-top: 8px; font: italic 15px/1.6 var(--f-latin), serif; color: var(--paper-dim); }
+.cr-open-opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.cr-open-opts button { display: flex; align-items: center; gap: 12px; text-align: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink); color: var(--paper); font: inherit; cursor: pointer; transition: border-color .2s, transform .2s; }
+.cr-open-opts button:hover:not(:disabled), .cr-open-opts button:focus-visible { border-color: var(--ember); transform: translateY(-2px); }
+.cr-open-opts button:disabled { cursor: default; opacity: .55; }
+.cr-open-opts button.is-right { opacity: 1; border-color: #6fb8a8; box-shadow: 0 0 0 2px color-mix(in srgb, #6fb8a8 40%, transparent); }
+.cr-open-opts button.is-wrong { opacity: 1; border-color: #c94a4a; }
+.cr-open-opts .mini-cover { width: 46px; flex: none; }
+.cr-open-opts b { display: block; font: 400 16px/1.5 var(--f-display); }
+.cr-open-opts small { display: block; font-size: 12px; color: var(--muted); }
+.cr-open-say { margin: 16px 0 0; color: var(--paper-dim); line-height: 1.9; }
+.cr-open-say a { color: var(--ember); }
+.cr-open-say .share-btn { margin-inline-start: 8px; }
+.cr-open-en { display: block; font: italic 14px var(--f-latin), serif; color: var(--muted); }
+.cr-open-end h3 { font: 400 48px var(--f-display); color: var(--ember); margin: 0 0 10px; }

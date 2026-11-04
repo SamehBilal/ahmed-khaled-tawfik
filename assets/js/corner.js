@@ -81,13 +81,60 @@
 			el.innerHTML =
 				'<section class="section cr" id="who"><div class="wrap"><h2 class="cr-h">' + esc(L('أي شخصية أنت؟', 'Which character are you?')) + '</h2>' +
 					'<p class="cr-lead">' + esc(L('سبعة أسئلة، وفي آخرها شخصية من عالمه تشبهك.', 'Seven questions, and at the end one of his characters who is like you.')) + '</p><div class="cr-who"></div></div></section>' +
+				/* «البدايات»: a first line, and which book or issue it opens */
+				((App().data().openings || []).length > 3 ? '<section class="section cr" id="openings"><div class="wrap"><h2 class="cr-h">' + esc(L('البدايات', 'First lines')) + '</h2>' +
+					'<p class="cr-lead">' + esc(L('أول سطر في كتاب أو عدد من أعداده: من أي كتاب هو؟', 'The first line of one of his books or issues: which one does it open?')) + '</p><div class="cr-open"></div></div></section>' : '') +
 				'<section class="section cr" id="card"><div class="wrap"><h2 class="cr-h">' + esc(L('بطاقة القارئ', 'Reader’s card')) + '</h2>' +
 					'<p class="cr-lead">' + esc(L('أول ما قرأت له، وأحب كتبه إليك، وشخصيتك المفضلة، في بطاقة تشاركها. لا يُرسل شيء؛ البطاقة تُرسم على جهازك.', 'The first thing of his you read, your favourite book and character, on a card to share. Nothing is sent; the card is drawn on your device.')) + '</p><div class="cr-card"></div></div></section>' +
 				'<section class="section cr" id="cover"><div class="wrap"><h2 class="cr-h">' + esc(L('صمّم غلافك', 'Design your cover')) + '</h2>' +
 					'<p class="cr-lead">' + esc(L('غلاف كتاب جيب على طريقة سلاسله: عنوانك واسمك ورقم العدد وصورتك. لا تُرفع الصورة إلى أي مكان؛ الغلاف يُرسم على جهازك.', 'A pocket-book cover in the manner of his series: your title, your name, an issue number and your picture. The picture goes nowhere; the cover is drawn on your device.')) + '</p><div class="cr-cover"></div></div></section>' +
 				'<section class="section cr" id="club"><div class="wrap"><h2 class="cr-h">' + esc(L('اقرأ معنا', 'Read with us')) + '</h2>' +
 					'<p class="cr-lead">' + esc(L('كتاب كل شهر، الكتاب نفسه لكل القرّاء، وأسئلة تتحدث فيها مع أصدقائك.', 'A book a month, the same one for every reader, with questions to talk over with your friends.')) + '</p><div class="cr-club"></div></div></section>';
-			this.who(); this.card(); this.cover(); this.club();
+			this.who(); this.openings(); this.card(); this.cover(); this.club();
+		},
+
+		/* «البدايات»: the lines in a shuffled order, each with four books to choose from (of its own kind: an issue among issues,
+		   a book among books, where there are enough), the answer and a link to it; and how many were right */
+		openings: function (at, right, order) {
+			var A = App(), S = window.WorksShared, t = A.t, L = A.L, box = this.el.querySelector('.cr-open'), self = this, all = A.data().openings || [];
+			if (!box || !S) return;
+			var shuffle = function (a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; };
+			at = at || 0; right = right || 0; order = order || shuffle(all.map(function (x, i) { return i; }));
+			var key = function (o) { return o.book + (o.part ? '-' + o.part : ''); };
+			var info = function (o) {
+				var r = S.resolveBook(key(o));
+				if (!r) return null;
+				return r.series ? { href: 'book.html?id=' + key(o), img: S.issueCover(r.series.s.id, r.item), title: t(r.item.title), sub: t(r.series.s.title) + ' ' + A.num(r.item.n), issue: true }
+					: { href: A.workHref(o.book), img: S.coverOf(r.info), title: t(r.item.title), sub: '', issue: false };
+			};
+			if (at >= order.length) {
+				box.innerHTML = '<div class="cr-open-end"><p class="cr-step">' + esc(L('النتيجة', 'Your score')) + '</p><h3>' + esc(A.num(right) + ' / ' + A.num(order.length)) + '</h3>' +
+					'<button type="button" class="share-btn" data-again>' + esc(L('العب مرة أخرى', 'Play again')) + '</button></div>';
+				box.querySelector('[data-again]').onclick = function () { self.openings(); };
+				return;
+			}
+			var o = all[order[at]], me = info(o);
+			if (!me) return this.openings(at + 1, right, order);
+			var others = shuffle(all.filter(function (x) { return x.book !== o.book; })).map(function (x) { return { o: x, i: info(x) }; }).filter(function (x) { return x.i; });
+			var same = others.filter(function (x) { return x.i.issue === me.issue; }), pick = (same.length >= 3 ? same : others).slice(0, 3);
+			var opts = shuffle([{ o: o, i: me }].concat(pick));
+			box.innerHTML = '<p class="cr-step">' + esc(A.num(at + 1) + ' / ' + A.num(order.length)) + ' · ' + esc(L('أصبت ', 'Right: ') + A.num(right)) + '</p>' +
+				'<blockquote class="cr-line">' + esc(o.line) + (A.lang === 'en' && o.en ? '<span dir="ltr">' + esc(o.en) + '</span>' : '') + '</blockquote>' +
+				'<div class="cr-open-opts">' + opts.map(function (x, k) {
+					return '<button type="button" data-k="' + k + '">' + S.miniCover({ img: x.i.img, color: '#3a1414', title: x.i.title }) + '<span><b>' + esc(x.i.title) + '</b>' + (x.i.sub ? '<small>' + esc(x.i.sub) + '</small>' : '') + '</span></button>';
+				}).join('') + '</div><p class="cr-open-say" aria-live="polite"></p>';
+			box.onclick = function (ev) {
+				var b = ev.target.closest('button[data-k]');
+				if (!b || box.classList.contains('is-done')) return;
+				var good = opts[+b.getAttribute('data-k')].o === o;
+				box.classList.add('is-done');
+				box.querySelectorAll('button[data-k]').forEach(function (x) { x.disabled = true; if (opts[+x.getAttribute('data-k')].o === o) x.classList.add('is-right'); });
+				if (!good) b.classList.add('is-wrong');
+				box.querySelector('.cr-open-say').innerHTML = esc(good ? L('أصبت! ', 'Right! ') : L('ليس هذا. ', 'Not that one. ')) + esc(L('إنها بداية ', 'It is the opening of ')) +
+					'<a href="' + esc(me.href) + '">' + esc((me.sub ? me.sub + ': ' : '') + me.title) + '</a>' + (A.lang === 'en' || !o.en ? '' : '<span class="cr-open-en" dir="ltr">' + esc(o.en) + '</span>') +
+					' <button type="button" class="share-btn" data-next>' + esc(at + 1 < order.length ? L('السطر التالي', 'Next line') : L('النتيجة', 'Your score')) + '</button>';
+				box.querySelector('[data-next]').onclick = function () { box.classList.remove('is-done'); self.openings(at + 1, right + (good ? 1 : 0), order); };
+			};
 		},
 
 		/* «أي شخصية أنت؟» */

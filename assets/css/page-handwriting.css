@@ -102,3 +102,21 @@
 	.hw-form { grid-template-columns: 1fr; padding: 132px 16px 20px; }
 }
 @media (prefers-reduced-motion: reduce) { .dc-side, .dc-focus { transition: none; } .dc-w.is-new, .dc-ph.is-new, .dc-kind b.is-new { animation: none; } }
+
+/* «إهداءات كتبه» (#dedications): the printed dedications, the book's cover beside each */
+.hw-ded { margin: 40px 0; scroll-margin-top: 80px; }
+.hw-ded h2 { font-family: var(--f-display); font-weight: 400; font-size: 28px; margin: 0 0 6px; }
+.hw-ded h2 small { font-size: .55em; color: var(--muted); }
+.hw-ded-lead { color: var(--paper-dim); line-height: 1.9; margin: 0 0 16px; }
+.hw-ded-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+@media (max-width: 420px) { .hw-ded-list { grid-template-columns: 1fr; } }
+.hw-ded-card { display: flex; gap: 14px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); border-inline-start: 4px solid var(--ember); }
+.hw-ded-cv { flex: none; width: 58px; }
+.hw-ded-card h3 { margin: 0; font: 400 18px/1.5 var(--f-display); }
+.hw-ded-card h3 a { color: var(--paper); }
+.hw-ded-card h3 a:hover { color: var(--ember); }
+.hw-ded-to { margin: 2px 0 8px; font-size: 14px; color: var(--ember); font-family: var(--f-display); }
+.hw-ded-card blockquote { margin: 0 0 8px; padding: 0; font: 400 17px/1.9 var(--f-display); color: var(--paper); }
+.hw-ded-card blockquote::before { content: '«'; color: var(--muted); }
+.hw-ded-card blockquote::after { content: '»'; color: var(--muted); }
+.hw-ded-note { margin: 0 0 8px; color: var(--paper-dim); line-height: 1.8; font-size: 14px; }

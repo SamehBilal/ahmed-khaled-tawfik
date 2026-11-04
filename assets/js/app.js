@@ -40,7 +40,9 @@
 			{ id: 'worlds', href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds', phone: true },
 			{ id: 'clinic', href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic', phone: true },
 			{ id: 'names', href: 'names.html', ar: 'أعلام في حكاياته', en: 'Figures in his tales', phone: true },
-			{ id: 'calendar', href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', phone: true }
+			{ id: 'calendar', href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', phone: true },
+			{ id: 'compare', href: 'compare.html', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side', phone: true },
+			{ id: 'era', href: 'era.html', ar: 'زمن العرّاب', en: 'The Godfather’s times', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
@@ -66,7 +68,10 @@
 			/* his handwriting (his city is a part of «سيرته» on talks.html) */
 			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' },
 			/* the whole year, a day at a time */
-			{ href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar' }
+			{ href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar' },
+			/* his series in one table, and his work beside the world it came out in */
+			{ href: 'compare.html', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side' },
+			{ href: 'era.html', ar: 'زمن العرّاب', en: 'The Godfather’s times' }
 		],
 		/* «عالم العرّاب»: the pages inside his world, a block of their own under «صفحات الموقع» */
 		world: [

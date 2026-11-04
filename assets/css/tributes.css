@@ -157,3 +157,22 @@ html[dir="rtl"] .tb-body .alt { text-align: right; }
 .tb-books-h { font-family: var(--f-display); font-size: 28px; margin: 0 0 18px; }
 .tb-books { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
 .tb-books figure { margin: 0; }
+
+/* «دراسات ورسائل عنه» (#studies): the theses and the journal articles about him, a column each */
+.tb-st { scroll-margin-top: 80px; }
+.tb-books-h small, .tb-st h3 small { font-size: .6em; color: var(--muted); }
+.tb-st-lead { max-width: 820px; color: var(--paper-dim); line-height: 1.9; }
+.tb-st-lead a { color: var(--ember); }
+.tb-st-cols { display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px 32px; margin: 18px 0; }
+@media (max-width: 820px) { .tb-st-cols { grid-template-columns: 1fr; } }
+.tb-st h3 { margin: 0 0 10px; font: 400 20px var(--f-display); color: var(--ember); }
+.tb-st-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.tb-st-list li { padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
+.tb-st-k { margin: 0 0 4px; font: 400 12px var(--f-display); color: var(--muted); }
+.tb-st-t { display: block; font: 400 17px/1.6 var(--f-display); color: var(--paper); overflow-wrap: anywhere; }
+.tb-st-t[dir="ltr"] { font: 500 15px/1.55 var(--f-latin), sans-serif; text-align: start; }
+.tb-st-t:hover { color: var(--ember); }
+.tb-st-en { margin: 2px 0 0; font: 13px var(--f-latin), sans-serif; color: var(--muted); }
+.tb-st-by { margin: 6px 0 0; font-size: 13px; color: var(--paper-dim); line-height: 1.7; }
+.tb-st-on { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+.tb-st-on a { color: var(--ember); }

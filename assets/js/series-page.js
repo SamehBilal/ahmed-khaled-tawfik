@@ -250,6 +250,8 @@ window.PAGE = {
 		this.initVolumes(id);
 		var cs = document.querySelector('.sv-chars');
 		if (cs) window.CharCards.bindFlip(cs);
+		/* (#ending, from «السلاسل جنبًا إلى جنب») */
+		App.focusHash();
 	},
 
 	/* the reader's progress through the series, from their lists (lists.js): how many issues they have read (a collector: own),
@@ -260,7 +262,7 @@ window.PAGE = {
 		var App = window.App, S = window.WorksShared, e = App.esc, t = App.t, L = App.L;
 		var i = issues.length - 1, last = issues[i], end = (App.data().seriesEndings || {})[id];
 		var href = App.issueHref(id, Object.assign({ _idx: i }, last));
-		return '<section class="d-block d-wide sv-end"><div class="d-head"><h3>' + e(L('النهاية', 'The ending')) + '</h3></div>' +
+		return '<section class="d-block d-wide sv-end" id="ending"><div class="d-head"><h3>' + e(L('النهاية', 'The ending')) + '</h3></div>' +
 			'<div class="sv-end-row"><a class="sv-end-cover" href="' + e(href) + '">' + S.miniCover({ img: S.issueCover(id, last), color: '#3a1414', title: t(last.title), num: App.num(last.n) }) + '</a>' +
 			'<div class="sv-end-body"><p class="sv-end-last">' + e(L('آخر أعدادها: ', 'Its last issue: ')) + '<a href="' + e(href) + '">' + e(App.num(last.n) + ' · ' + t(last.title)) + '</a>' + (last.year ? ' <small>(' + e(App.num(last.year)) + ')</small>' : '') + '</p>' +
 				(end ? '<details class="sv-end-spoil"><summary>' + e(L('اكشف كيف انتهت (تحرق الأحداث)', 'Show how it ended (gives it away)')) + '</summary><p>' + e(t(end.text)) + '</p>' +

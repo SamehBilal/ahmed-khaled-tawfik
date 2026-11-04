@@ -78,6 +78,7 @@ window.PAGE = {
 				}).join('') + '</div>' +
 			'<div class="lb-list"></div>' +
 			'<p class="lb-note">' + e(L('ما قاله عن كل منها مُلخَّص من كلامه؛ افتح المقال لتقرأه بنصّه. وإن كنت تعرف كتابًا آخر نصح به فأرسله من «تواصل وساهم».', 'What he said of each is summed up from his words; open the article to read them in full. If you know another book he recommended, send it from Contact & contribute.')) + '</p>' +
+			this.refaat() +
 		'</div></section>';
 		document.querySelector('.lb-bar').onclick = function (ev) {
 			var b = ev.target.closest('[data-k]');
@@ -87,6 +88,36 @@ window.PAGE = {
 			self.list();
 		};
 		this.list();
+		App.focusHash();
+	},
+
+	/* «مكتبة رفعت إسماعيل» (#refaat): what his heroes read, watch and hum inside the stories — Refaat above all, and Alaa and Abeer —
+	   each with how they use it and the issues it is in (AKT.refaatLibrary, data-pages.js) */
+	WHO: { refaat: { ar: 'رفعت إسماعيل', en: 'Refaat Ismail' }, alaa: { ar: 'علاء عبد العظيم', en: 'Alaa Abdel Azim' }, abeer: { ar: 'عبير عبد الرحمن', en: 'Abeer Abdel Rahman' } },
+	refaat: function () {
+		var App = window.App, S = window.WorksShared, e = App.esc, t = App.t, L = App.L, self = this, list = App.data().refaatLibrary || [];
+		if (!list.length) return '';
+		var KIND = { book: L('كتاب', 'Book'), author: L('كاتب', 'Writer'), film: L('فيلم', 'Film'), music: L('موسيقى', 'Music'), poem: L('شعر', 'Poetry') };
+		var COL = { book: '#6b1d10', author: '#7a4e1d', film: '#3b3357', music: '#1f4a44', poem: '#5a2a3a' };
+		var whos = Object.keys(this.WHO).filter(function (w) { return list.some(function (x) { return x.who === w; }); }).concat(list.some(function (x) { return !self.WHO[x.who]; }) ? ['other'] : []);
+		return '<section class="lb-rf" id="refaat"><h2 class="lb-h">' + e(L('مكتبة رفعت إسماعيل', 'Refaat Ismail’s library')) + ' <small>' + e(App.num(list.length)) + '</small></h2>' +
+			'<p class="lb-sum">' + e(L('وفي حكاياته مكتبة أخرى: ما يقرؤه أبطاله ويستشهدون به ويحبونه داخل القصص، من بو ولافكرافت إلى الأفلام القديمة والأغاني، والأعداد التي تجده فيها.', 'And in his tales there is another library: what his heroes read, quote and love inside the stories, from Poe and Lovecraft to old films and songs, and the issues you find it in.')) + ' ' +
+				e(L('أما عبير فتدخل الكتب نفسها: هي في ', 'Abeer goes into the books themselves: they are in ')) + '<a href="worlds.html">' + e(L('«عوالم فانتازيا»', 'Fantasia’s worlds')) + '</a>.</p>' +
+			whos.map(function (w) {
+				var items = list.filter(function (x) { return w === 'other' ? !self.WHO[x.who] : x.who === w; });
+				return '<h3 class="lb-rf-who">' + e(w === 'other' ? L('وغيرهم', 'And others') : t(self.WHO[w])) + '</h3><div class="lb-grid">' + items.map(function (x) {
+					var covers = (x.issues || []).map(function (n) {
+						var k = x.series + '-' + n, r = S && S.resolveBook(k);
+						return r && r.series ? '<a href="' + e('book.html?id=' + k) + '" title="' + e(t(r.series.s.title) + ' ' + App.num(r.item.n) + ' · ' + t(r.item.title)) + '">' + e(App.num(n)) + '</a>' : '';
+					}).filter(Boolean);
+					var mini = S ? S.miniCover({ color: COL[x.kind] || '#3a1414', title: t(x.title), by: x.by ? t(x.by) : ' ' }) : '';
+					return '<article class="lb-item lb-' + e(x.kind) + '"><h3>' + e(t(x.title)) + '</h3>' +
+						'<div class="lb-meta">' + mini + '<div><p class="lb-by">' + e(KIND[x.kind] || '') + (x.by ? ' · ' + e(t(x.by)) : '') + '</p>' +
+						(covers.length ? '<p class="lb-from lb-rf-is">' + e(L('في العدد ', 'In issue ')) + covers.join(L('، ', ', ')) + '</p>' : '') + '</div></div>' +
+						'<p class="lb-said">' + e(t(x.said)) + '</p>' +
+						(x.src || []).map(function (u, i) { return '<a class="lb-src" href="' + e(u) + '" target="_blank" rel="noopener">' + e(L('المصدر', 'Source') + ((x.src || []).length > 1 ? ' ' + App.num(i + 1) : '') + ' ↗') + '</a>'; }).join(' ') + '</article>';
+				}).join('') + '</div>';
+			}).join('') + '</section>';
 	},
 
 	list: function () {

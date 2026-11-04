@@ -31,3 +31,9 @@
 .lb-by { margin: 0; color: var(--muted); font-size: 14px; }
 .lb-said { margin: 4px 0 8px; color: var(--paper-dim); line-height: 1.8; font-size: 15px; }
 .lb-src { margin-top: auto; color: var(--ember); font-size: 14px; }
+
+/* «مكتبة رفعت إسماعيل» (#refaat): his heroes' own reading, by hero, in the same cards */
+.lb-rf { margin-top: 48px; padding-top: 10px; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
+.lb-rf .lb-h small { font-size: .55em; color: var(--muted); }
+.lb-rf-who { margin: 22px 0 12px; font: 400 20px var(--f-display); color: var(--ember); }
+.lb-rf-is a { color: var(--ember); font-family: var(--f-latin); }

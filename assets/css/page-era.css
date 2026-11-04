@@ -1,0 +1,48 @@
+/* «زمن العرّاب» (era.html, era.js): the band is the years as two tracks — his above the line, the world's below — a column for each
+   year with something in it, as tall as how much; under it the years themselves, his side and the world's side by side */
+.ph[data-ph="era"], html[data-theme="light"] .ph[data-ph="era"] { background: none; border-bottom: 0; }
+.ph[data-ph="era"]::after { content: none; }
+.er-band { position: absolute; inset: 16px max(16px, 5%) 26px; direction: ltr; }
+.er-band::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: color-mix(in srgb, var(--paper) 22%, transparent); }
+.er-lab { position: absolute; left: 0; font: 400 12px var(--f-display); color: var(--muted); }
+.er-lab-h { top: 2px; color: var(--ember); }
+.er-lab-w { bottom: 2px; }
+.er-yr { position: absolute; left: var(--x); top: 0; bottom: 0; width: 1.3%; min-width: 4px; translate: -50% 0; }
+.er-yr i { position: absolute; left: 0; right: 0; border-radius: 3px; transform-origin: center; animation: er-rise .7s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i) * 18ms); }
+.er-h { bottom: 50%; height: calc(var(--h) * 9%); margin-bottom: 2px; background: linear-gradient(to top, color-mix(in srgb, var(--ember) 55%, transparent), var(--ember)); transform-origin: bottom !important; }
+.er-w { top: 50%; height: calc(var(--w) * 5.6%); margin-top: 2px; background: linear-gradient(to bottom, color-mix(in srgb, #8fb3d9 55%, transparent), #8fb3d9); transform-origin: top !important; }
+.er-yr:hover i, .er-yr:focus-visible i { filter: brightness(1.35); }
+.er-dec { position: absolute; left: var(--x); bottom: -22px; translate: -50% 0; font: 11px var(--f-latin), sans-serif; color: var(--muted); }
+@keyframes er-rise { from { transform: scaleY(0); } }
+@media (prefers-reduced-motion: reduce) { .er-yr i { animation: none; } }
+
+.er-sum, .er-note { color: var(--muted); line-height: 1.9; }
+.er-note a { color: var(--ember); }
+.er-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin: 16px 0 24px; }
+.er-decades { display: flex; flex-wrap: wrap; gap: 6px; }
+.er-decades a { padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; font: 13px var(--f-latin), sans-serif; color: var(--paper-dim); }
+.er-decades a:hover { border-color: var(--ember); color: var(--ember); }
+.er-years { list-style: none; margin: 0; padding: 0; }
+.er-y { padding: 18px 0; border-top: 1px solid var(--line); }
+.er-y h2 { margin: 0 0 10px; font: 400 30px var(--f-display); color: var(--ember); scroll-margin-top: 90px; }
+.er-y h2 span { display: block; position: relative; top: -90px; }
+.er-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; }
+@media (max-width: 720px) { .er-cols { grid-template-columns: 1fr; } }
+.er-his, .er-world { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; align-content: start; }
+.er-his { padding-inline-start: 12px; border-inline-start: 3px solid var(--ember); }
+.er-world { padding-inline-start: 12px; border-inline-start: 3px solid #8fb3d9; }
+.er-his > li, .er-world > li { line-height: 1.75; }
+.er-y small { display: block; font: 400 12px var(--f-display); color: var(--muted); }
+.er-y b { font: 400 17px var(--f-display); color: var(--paper); font-weight: 400; }
+.er-y li p { margin: 2px 0 0; color: var(--paper-dim); font-size: 14px; }
+.er-b a { display: flex; align-items: center; gap: 10px; color: var(--paper); }
+.er-b a:hover { color: var(--ember); }
+.er-b .mini-cover { width: 42px; flex: none; }
+.er-b span { font: 400 17px var(--f-display); }
+.er-s a { font: 400 17px var(--f-display); color: var(--paper); }
+.er-s a:hover { color: var(--ember); }
+.er-tie { font-size: 13px !important; }
+.er-tie a { color: var(--ember); }
+.er-src { font-size: 12px; color: var(--muted); }
+.er-src:hover { color: var(--ember); }
+.er-quiet { color: var(--muted); }
