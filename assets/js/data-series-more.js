@@ -304,8 +304,13 @@ window.AKT.seriesInfo = {
     [83, "قلبك ملك لي", "Your Heart Belongs to Me", "", "", null]
   ];
 
+  /* the year each Arabic issue came out, from its own Goodreads edition (the edition's date, not the original novel's): one
+     about every three months from #8 (April 1994) to #74 (October 2010), then #75–80 from 2012 to January 2015. Left out where
+     Goodreads gives only the original's date (13, 18, 25, 35, 42, 43, 81) or a date out of turn (68); 1–7 and 82–83 not found */
+  var rwgYears = { 8: 1994, 9: 1994, 10: 1994, 11: 1995, 12: 1995, 14: 1995, 15: 1996, 16: 1996, 17: 1996, 19: 1997, 20: 1997, 21: 1997, 22: 1997, 23: 1998, 24: 1998, 26: 1998, 27: 1999, 28: 1999, 29: 1999, 30: 1999, 31: 2000, 32: 2000, 33: 2000, 34: 2000, 36: 2001, 37: 2001, 38: 2001, 39: 2002, 40: 2002, 41: 2002, 44: 2003, 45: 2003, 46: 2003, 47: 2004, 48: 2004, 49: 2004, 50: 2004, 51: 2005, 52: 2005, 53: 2005, 54: 2005, 55: 2006, 56: 2006, 57: 2006, 58: 2006, 59: 2007, 60: 2007, 61: 2007, 62: 2007, 63: 2008, 64: 2008, 65: 2008, 66: 2008, 67: 2009, 69: 2009, 70: 2009, 71: 2010, 72: 2010, 73: 2010, 74: 2010, 75: 2012, 76: 2012, 77: 2013, 78: 2014, 79: 2014, 80: 2015 };
   var rwgIssues = rwgRows.map(function (r) {
     var issue = { "n": r[0], "title": { "ar": r[1], "en": r[2] } };
+    if (rwgYears[r[0]]) issue.year = rwgYears[r[0]];
     if (r[3] || r[4]) issue.original = { "ar": r[3], "en": r[4] };
     issue.source = r[5] ? GR + r[5] : WIKI_RWG;
     return issue;

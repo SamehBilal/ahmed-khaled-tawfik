@@ -21,7 +21,14 @@ window.PAGE = {
 
 	years: function (s) {
 		var m = String(s.years || '').match(/(\d{4})\D+(\d{4})/) || String(s.years || '').match(/(\d{4})/);
-		return m ? [+m[1], +(m[2] || m[1])] : null;
+		if (m) return [+m[1], +(m[2] || m[1])];
+		/* a series whose own years are not known: from the first to the last of its issues that are dated («روايات عالمية للجيب») */
+		var d = this.dated(s);
+		return d ? [d.from.year, d.to.year] : null;
+	},
+	dated: function (s) {
+		var S = window.WorksShared, list = S ? S.seriesIssues(s.id).filter(function (is) { return is.year; }) : [];
+		return list.length ? { from: list[0], to: list[list.length - 1] } : null;
 	},
 
 	/* the band: a lane each, from its first year to its last, as many marks along it as it has issues */
@@ -32,7 +39,7 @@ window.PAGE = {
 		return '<div class="cp-lanes" style="--n:' + lanes.length + '">' +
 			ticks.map(function (y) { return '<span class="cp-tick" style="--x:' + ((y - self.FROM) / span * 100).toFixed(2) + '%">' + e(A.num(y)) + '</span>'; }).join('') +
 			lanes.map(function (s, i) {
-				var y = self.years(s), n = s.count || ((d.issues || {})[s.id] || []).length, end = (y[1] + 1 - self.FROM) / span;
+				var y = self.years(s), n = s.count || (window.WorksShared ? window.WorksShared.seriesIssues(s.id).length : ((d.issues || {})[s.id] || []).length), end = (y[1] + 1 - self.FROM) / span;
 				return '<a class="cp-lane' + (end > 0.72 ? ' is-in' : '') + '" href="#col-' + e(s.id) + '" style="--a:' + ((y[0] - self.FROM) / span * 100).toFixed(2) + '%;--w:' + (Math.max(1, y[1] - y[0] + 1) / span * 100).toFixed(2) + '%;--c:' + e(s.color || '#7a2a1a') + ';--i:' + i + ';--k:' + Math.min(n, 90) + '">' +
 					'<span class="cp-bar"></span><b>' + e(t(s.title)) + ' <small>' + e(A.num(n)) + '</small></b></a>';
 			}).join('') + '</div>';
@@ -59,7 +66,11 @@ window.PAGE = {
 				/* a series of others' novels: his part in it instead */
 				return other(s.id).role ? '<small>' + e(t(other(s.id).role)) + '</small>' : none;
 			}],
-			[L('السنوات', 'Years'), function (s) { return s.years ? e(App.num(s.years)) : none; }],
+			[L('السنوات', 'Years'), function (s) {
+				if (s.years) return e(App.num(s.years));
+				var x = self.dated(s);
+				return x ? e(App.num(x.from.year) + '–' + App.num(x.to.year)) + '<small>' + e(L('من العدد ' + App.num(x.from.n) + ' إلى ' + App.num(x.to.n) + '، كما أرّختها طبعاتها', 'from #' + x.from.n + ' to #' + x.to.n + ', as their editions date them')) + '</small>' : none;
+			}],
 			[L('الأعداد', 'Issues'), function (s) {
 				var is = issuesOf(s.id), n = s.count || is.length, a = is.length && is[0].n, z = is.length && is[is.length - 1].n;
 				/* (where his part began after its first issue, which numbers) */
