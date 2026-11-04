@@ -9,9 +9,20 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-04T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3317c06</id>
+		<title>The main menu, on a wider screen, is six words</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">The main menu, on a wider screen, is six words — الرئيسية، أعماله، عالمه، حياته، إرثه، من أين أبدأ؟ — four of them opening a large panel under the header: «أعماله» his three series as covers on their colours, the rest as a list (all his works, side by side, covers, translations, audio, publishers) and «من أين أبدأ؟» along its foot; «عالمه» the eight pages inside his stories beside Refaat, Abeer and Alaa standing; «حياته» his life and his writing in two columns beside his photograph and his wish for his headstone; «إرثه» what he left, a still from the Netflix series and his books year by year in bars. It opens on a hover, a click, a tap, Enter or ↓, and closes on leaving it, Escape, a click outside or focus moving away; the panel holding the page you are on is marked; its pictures load on the first move towards it; the notices in the corner step aside while it is open. It is narrow enough that the header keeps one row from 1,001px (two only on a narrower tablet); the panels fold for a tablet; a phone keeps its contents page</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8b3a21d</id>
 		<title>Tablets</title>
-		<updated>2026-11-04T20:59:00Z</updated>
+		<updated>2026-11-04T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<category term="fix" label="Fix"/>
@@ -20,7 +31,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c015779</id>
 		<title>Lighter pictures</title>
-		<updated>2026-11-04T20:58:00Z</updated>
+		<updated>2026-11-04T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -31,7 +42,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
 		<title>«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data</title>
-		<updated>2026-11-04T20:57:00Z</updated>
+		<updated>2026-11-04T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -548,14 +559,5 @@
 		<category term="data" label="Data"/>
 		<category term="fix" label="Fix"/>
 		<content type="text">Correction: The pocket series never left the Modern Arab Association: «سلاح التلميذ» is its name on their later editions, and «روايات مصرية» today. — The pocket series never left their house: the Modern Arab Association is «سلاح التلميذ» on most of their later editions and «روايات مصرية» by name today — one house (its match takes all three names), so «الطبعات» on the covers page shows each series in it from first issue to now (Ma Wara' al-Tabi'a 1993–2025, 327 editions), named «المؤسسة العربية الحديثة («روايات مصرية» اليوم)», and its lead no longer has them moving to Selah El-Telmeez; the house's page says the same, and its editions under either name link there</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/be1ddc8</id>
-		<title>«على الشاشة»</title>
-		<updated>2026-11-01T20:52:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="design" label="Design"/>
-		<category term="fix" label="Fix"/>
-		<content type="text">«على الشاشة»: the projector's beam no longer ends in a hard edge at the band's foot, as if cut by a box — the band lets it out below (still clipped at the sides) and it fades out gently over the headline; a warmer beam in the paper theme</content>
 	</entry>
 </feed>
