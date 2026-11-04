@@ -1,0 +1,171 @@
+/* =========================================================
+   After him: «ما صدر بعد رحيله» (works.html #after, posthumous.js), «الجيل الذي صنعه» (writers.html #generation),
+   «الوداع، يومًا بيوم» (tributes.html #farewell), «ذكراه كل عام» (remembrance.html) and «حكايات القرّاء»
+   (reader-stories.html, and its step on contact.html)
+   ========================================================= */
+
+/* ---------- «ما صدر بعد رحيله»: the books along a line from the day he died ---------- */
+.pm-lead { max-width: 70ch; color: var(--paper-dim); }
+.pm-lead a { color: var(--ember); white-space: nowrap; }
+.pm-list {
+	list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 14px;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+}
+.pm-book {
+	position: relative; display: grid; grid-template-columns: 74px 1fr; gap: 14px; align-items: start; height: 100%;
+	padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); color: var(--paper);
+	transition: border-color .2s, transform .25s;
+}
+.pm-book:hover { border-color: color-mix(in srgb, var(--ember) 50%, var(--line)); transform: translateY(-2px); color: var(--paper); }
+.pm-book .mini-cover { width: 74px; }
+.pm-tx { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.pm-when { color: var(--ember); font-size: 13px; }
+.pm-tx b { font-family: var(--f-display); font-weight: 600; font-size: 18px; line-height: 1.4; }
+.pm-meta { color: var(--muted); font-size: 13.5px; }
+.pm-note { color: var(--paper-dim); font-size: 14px; line-height: 1.6; }
+
+/* ---------- «الجيل الذي صنعه»: a face and a line each ---------- */
+.gn-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.gn-card { display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); }
+.gn-who { display: flex; align-items: center; gap: 12px; color: var(--paper); }
+.gn-who:hover b { color: var(--ember); }
+.gn-pic {
+	flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; overflow: hidden;
+	background: var(--ink-3); color: var(--paper-dim); font-family: var(--f-display); box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 45%, transparent);
+}
+.gn-pic img { width: 100%; height: 100%; object-fit: cover; }
+.gn-name { display: flex; flex-direction: column; min-width: 0; }
+.gn-name b { font-family: var(--f-display); font-weight: 600; font-size: 17px; }
+.gn-name small { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.gn-said { margin: 0; flex: 1; color: var(--paper-dim); font-size: 15px; line-height: 1.75; }
+.gn-src { align-self: flex-start; color: var(--ember); font-size: 13px; }
+
+/* ---------- «الوداع، يومًا بيوم»: the days down a line, each its date in a block ---------- */
+.fw-days { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 18px; }
+.fw-days::before { content: ''; position: absolute; top: 10px; bottom: 10px; inset-inline-start: 44px; width: 2px; background: linear-gradient(var(--blood), var(--line)); }
+.fw-day { position: relative; display: grid; grid-template-columns: 90px 1fr; gap: 18px; }
+.fw-date {
+	position: relative; z-index: 1; align-self: start; display: flex; flex-direction: column; align-items: center; padding: 8px 4px;
+	border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); text-align: center;
+}
+.fw-date b { font-family: var(--f-chunky); font-weight: normal; font-size: 30px; line-height: 1.1; color: var(--paper); }
+.fw-date span { font-size: 13px; color: var(--ember); }
+.fw-date small { font-size: 12px; color: var(--muted); }
+.fw-day:first-child .fw-date { border-color: var(--blood); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blood) 25%, transparent); }
+.fw-body { display: grid; gap: 10px; min-width: 0; }
+.fw-ev, .rm-ev {
+	display: grid; grid-template-columns: 120px 1fr; gap: 14px; align-items: start; padding: 12px; border-radius: 12px;
+	border: 1px solid var(--line); background: var(--ink-2); color: var(--paper-dim); font-size: 14.5px; line-height: 1.7;
+	transition: border-color .2s;
+}
+.fw-ev:not(:has(img)), .rm-ev:not(:has(img)) { grid-template-columns: 1fr; }
+.fw-ev:hover, .rm-ev:hover { border-color: color-mix(in srgb, var(--ember) 45%, var(--line)); color: var(--paper-dim); }
+.fw-ev img, .rm-ev img { width: 120px; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 8px; background: var(--ink-3); }
+.fw-ev b, .rm-ev b { display: block; font-family: var(--f-display); font-weight: 600; font-size: 16.5px; color: var(--paper); margin-bottom: 2px; }
+.fw-who { padding: 12px 14px; border-radius: 12px; border: 1px dashed var(--line); }
+.fw-who p { margin: 0 0 10px; font-size: 13.5px; color: var(--muted); }
+.fw-who a { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 8px; margin-inline-end: 14px; color: var(--paper); font-size: 14px; }
+.fw-who a:hover span { color: var(--ember); }
+.fw-who img, .fw-who i { flex: none; width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: var(--ink-3); display: grid; place-items: center; font-style: normal; color: var(--paper-dim); }
+@media (max-width: 640px) {
+	.fw-days::before { inset-inline-start: 31px; }
+	.fw-day { grid-template-columns: 64px 1fr; gap: 12px; }
+	.fw-date b { font-size: 24px; }
+	.fw-ev, .rm-ev { grid-template-columns: 1fr; }
+	.fw-ev img, .rm-ev img { width: 100%; }
+}
+
+/* ---------- «ذكراه كل عام» ---------- */
+/* the band: a candle a year, each lit flame flickering on its own beat; the next one dark */
+.rm-band { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center; gap: clamp(14px, 3.2vw, 44px); padding: 0 16px 46px; }
+.rm-candle { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.rm-wax { width: 22px; height: calc(70px + var(--i) * 9px); border-radius: 4px 4px 2px 2px; background: linear-gradient(90deg, #cdbf9c, #f3ead2 45%, #bfb08a); box-shadow: inset 0 6px 0 rgba(255, 255, 255, .25); }
+.rm-candle b { font-family: var(--f-latin); font-size: 14px; color: var(--ph-dim, #8f887a); }
+.rm-flame { width: 12px; height: 22px; margin-bottom: -2px; border-radius: 50% 50% 45% 45% / 65% 65% 35% 35%; background: transparent; }
+.rm-candle.is-lit .rm-flame {
+	background: radial-gradient(circle at 50% 75%, #fff6d0, #ffc94d 40%, #e0633a 75%, transparent 80%);
+	box-shadow: 0 0 18px 6px rgba(255, 180, 70, .45), 0 0 60px 18px rgba(224, 99, 58, .18);
+	transform-origin: 50% 100%; animation: rm-flicker calc(2.2s + var(--i) * .17s) ease-in-out infinite alternate;
+}
+.rm-candle:not(.is-lit) .rm-flame { width: 2px; height: 10px; border-radius: 1px; background: #3a3430; }
+.rm-candle:not(.is-lit) .rm-wax { opacity: .55; }
+.rm-candle:not(.is-lit) b { color: var(--ember); }
+@keyframes rm-flicker { 0% { transform: scale(1, 1) rotate(-2deg); } 40% { transform: scale(.92, 1.08) rotate(2deg); } 70% { transform: scale(1.05, .95) rotate(-1deg); } 100% { transform: scale(.96, 1.04) rotate(1deg); } }
+/* the next anniversary */
+.rm-next-sec { padding-bottom: 0; }
+.rm-next {
+	display: flex; align-items: center; gap: 22px; flex-wrap: wrap; padding: 22px 26px; border-radius: 18px;
+	border: 1px solid color-mix(in srgb, var(--gold) 35%, var(--line)); background: linear-gradient(to var(--rm-to, left), color-mix(in srgb, var(--gold) 10%, var(--ink-2)), var(--ink-2));
+}
+html[dir="ltr"] .rm-next { --rm-to: right; }
+.rm-next > div { flex: 1; min-width: 220px; }
+.rm-next h2 { margin: 2px 0 4px; }
+.rm-next p:last-child { margin: 0; color: var(--paper-dim); }
+.rm-next-flame { position: relative; flex: none; width: 46px; height: 64px; }
+.rm-next-flame i { position: absolute; left: 50%; bottom: 0; width: 26px; height: 46px; margin-left: -13px; border-radius: 50% 50% 45% 45% / 65% 65% 35% 35%; background: radial-gradient(circle at 50% 75%, #fff6d0, #ffc94d 40%, #e0633a 75%, transparent 80%); box-shadow: 0 0 30px 10px rgba(255, 180, 70, .35); transform-origin: 50% 100%; animation: rm-flicker 2.4s ease-in-out infinite alternate; }
+/* the years, newest first */
+.rm-jump { margin-bottom: 22px; }
+.rm-years { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.rm-year { padding: 20px 22px; border: 1px solid var(--line); border-radius: 18px; background: var(--ink-2); scroll-margin-top: 90px; }
+.rm-head { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.rm-flag { flex: none; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; font-family: var(--f-chunky); font-size: 26px; color: #1a1408; background: radial-gradient(circle at 40% 35%, #f6d27a, #d9a441 70%); box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 20%, transparent); }
+.rm-head h3 { margin: 0; font-family: var(--f-display); font-size: 22px; }
+.rm-head p { margin: 0; color: var(--muted); font-size: 14px; }
+.rm-head > div { flex: 1; min-width: 180px; }
+.rm-counts { display: flex; flex-wrap: wrap; gap: 6px; }
+.rm-counts i { font-style: normal; font-size: 12.5px; padding: 2px 10px; border-radius: 999px; background: var(--ink-3); color: var(--paper-dim); }
+.rm-evs { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); }
+.rm-ev small { display: block; color: var(--ember); font-size: 12.5px; }
+.rm-ev.is-day { border-color: color-mix(in srgb, var(--gold) 55%, var(--line)); background: color-mix(in srgb, var(--gold) 7%, var(--ink-2)); }
+.rm-ev.is-day small { color: var(--gold); }
+.rm-group { margin-top: 16px; }
+.rm-group h4 { margin: 0 0 10px; font-family: var(--f-display); font-size: 15px; color: var(--muted); font-weight: 500; }
+.rm-books { display: flex; flex-wrap: wrap; gap: 14px; }
+.rm-books .cover-link { width: 110px; }
+.rm-who { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+.rm-who a { display: flex; gap: 12px; align-items: flex-start; padding: 10px 12px; border-radius: 12px; background: var(--ink-3); color: var(--paper-dim); font-size: 14px; line-height: 1.7; }
+.rm-who img { flex: none; width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+.rm-who b { display: block; color: var(--paper); font-family: var(--f-display); font-weight: 600; }
+.rm-who q { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.rm-media { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.rm-media a { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; color: var(--paper); }
+.rm-media a:hover b { color: var(--ember); }
+.rm-media b { font-weight: 500; }
+.rm-media small { color: var(--muted); font-size: 13px; }
+.rm-empty { margin: 0; color: var(--muted); font-size: 14.5px; }
+.rm-empty a { color: var(--ember); }
+.rm-zero { background: transparent; border-style: dashed; }
+.rm-zero .rm-flag { background: var(--ink-3); color: var(--paper-dim); box-shadow: none; }
+
+/* ---------- «حكايات القرّاء» ---------- */
+.rs-band { position: absolute; inset: 0; overflow: hidden; }
+.rs-note {
+	position: absolute; width: 150px; padding: 14px 14px 18px; border-radius: 3px; background: #efe5cf; color: #4a3b28;
+	box-shadow: 0 14px 26px rgba(0, 0, 0, .45); transform: rotate(var(--r)); animation: rs-drift 9s ease-in-out infinite; animation-delay: var(--d);
+	background-image: repeating-linear-gradient(transparent 0 17px, rgba(90, 70, 40, .22) 17px 18px);
+}
+.rs-note i { display: block; height: 6px; margin: 6px 0 11px; border-radius: 3px; background: rgba(60, 45, 25, .5); width: var(--w); }
+@keyframes rs-drift { 50% { translate: 0 -10px; } }
+.rs-grid { list-style: none; margin: 0; padding: 0; columns: 3 300px; column-gap: 16px; }
+.rs-card { break-inside: avoid; margin: 0 0 16px; padding: 20px 22px; border-radius: var(--radius); background: var(--ink-2); border: 1px solid var(--line); }
+.rs-photo { width: 100%; border-radius: 10px; margin-bottom: 12px; }
+.rs-card blockquote { margin: 0 0 12px; font-size: 16px; line-height: 1.85; color: var(--paper); }
+.rs-who { margin: 0; color: var(--paper-dim); }
+.rs-who small { display: block; color: var(--muted); font-size: 13px; }
+.rs-who a { color: var(--ember); }
+.rs-empty { text-align: center; padding: 40px 20px; border: 1px dashed var(--line); border-radius: 18px; }
+.rs-empty-ic { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--ink-3); color: var(--ember); font-size: 28px; }
+.rs-empty h2 { margin: 12px 0 6px; }
+.rs-empty p { margin: 0 auto; max-width: 52ch; color: var(--paper-dim); }
+.rs-invite h2 { margin-top: 0; }
+.rs-ask { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); counter-reset: rs; }
+.rs-ask li { counter-increment: rs; padding: 14px 16px; border-radius: 12px; background: var(--ink-2); border: 1px solid var(--line); }
+.rs-ask b { display: block; font-family: var(--f-display); color: var(--ember); }
+.rs-ask b::before { content: counter(rs, arabic-indic) '. '; }
+html[lang="en"] .rs-ask b::before { content: counter(rs) '. '; }
+.rs-ask span { color: var(--paper-dim); font-size: 14.5px; line-height: 1.7; }
+.rs-act { display: flex; flex-wrap: wrap; gap: 10px; }
+
+@media (prefers-reduced-motion: reduce) {
+	.rm-candle.is-lit .rm-flame, .rm-next-flame i, .rs-note { animation: none; }
+}

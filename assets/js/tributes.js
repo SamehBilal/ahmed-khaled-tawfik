@@ -10,6 +10,47 @@ window.PAGE = {
 		}
 	},
 
+	/* «الوداع، يومًا بيوم» (#farewell): from Monday 2 April 2018, the evening he died, to the end of May — each day with what
+	   the legacy timeline has for it (AKT.legacy, each to its place on legacy.html) and the faces of those whose words about him
+	   are dated that day (AKT.tributes, each opening its card above) */
+	farewell: function (d) {
+		var App = window.App, e = App.esc, t = App.t, L = App.L, P = window.Posthumous;
+		if (!P) return '';
+		var END = '2018-05-31', days = {}, order = [];
+		var day = function (k) { if (!days[k]) { days[k] = { k: k, ev: [], who: [] }; order.push(k); } return days[k]; };
+		(d.legacy || []).forEach(function (l, i) { if (l.date >= P.DEATH && l.date <= END) day(l.date).ev.push({ l: l, i: i }); });
+		(d.tributes || []).forEach(function (p, i) { if (p.date >= P.DEATH && p.date <= END) day(p.date).who.push({ p: p, i: i }); });
+		if (!order.length) return '';
+		order.sort();
+		var pic = function (l) {
+			var s = l.image || '';
+			if (s === 'portrait') return 'assets/img/photos/youm7-e94d8bd9a946.jpg';
+			if (s.indexOf('yt:') === 0) return 'https://i.ytimg.com/vi/' + s.slice(3) + '/mqdefault.jpg';
+			if (s.indexOf('cover:') === 0 || !s) return '';
+			return s;
+		};
+		return '<section class="section fw" id="farewell"><div class="wrap">' +
+			'<div class="section-head"><div><p class="eyebrow">' + e(L('أبريل ومايو 2018', 'April and May 2018')) + '</p><h2>' + e(L('الوداع، يومًا بيوم', 'The farewell, day by day')) + '</h2>' +
+				'<p>' + e(L('من مساء الاثنين الذي رحل فيه إلى آخر مايو: كيف ودّعه قرّاؤه ومدينته ومن كتبوا معه، يومًا بعد يوم.', 'From the Monday evening he died to the end of May: how his readers, his city and those who wrote beside him said goodbye, one day after another.')) + '</p></div></div>' +
+			'<ol class="fw-days">' + order.map(function (k) {
+				var x = days[k], parts = k.split('-'), full = parts.length === 3;
+				return '<li class="fw-day rise">' +
+					'<div class="fw-date"><b>' + e(full ? App.num(+parts[2]) : '—') + '</b><span>' + e(full ? P.weekday(k) : '') + '</span><small>' + e(P.fmt(parts[0] + '-' + parts[1])) + '</small></div>' +
+					'<div class="fw-body">' +
+						x.ev.map(function (v) {
+							var src = pic(v.l);
+							return '<a class="fw-ev" href="legacy.html#l-' + v.i + '">' + (src ? '<img src="' + e(src) + '" alt="" loading="lazy" referrerpolicy="no-referrer">' : '') +
+								'<span><b>' + e(t(v.l.title)) + '</b><small>' + e(t(v.l.text)) + '</small></span></a>';
+						}).join('') +
+						(x.who.length ? '<div class="fw-who"><p>' + e(L('قالوا عنه في هذا اليوم:', 'Who spoke of him that day:')) + '</p>' + x.who.map(function (w) {
+							var name = t(w.p.name);
+							return '<a href="#t-' + w.i + '" data-t="' + w.i + '" title="' + e(name) + '">' + (w.p.photo ? '<img src="' + e(w.p.photo) + '" alt="" loading="lazy" referrerpolicy="no-referrer">' : '<i>' + e(name.charAt(0)) + '</i>') + '<span>' + e(name) + '</span></a>';
+						}).join('') + '</div>' : '') +
+					'</div></li>';
+			}).join('') + '</ol>' +
+		'</div></section>';
+	},
+
 	render: function () {
 		var App = window.App, d = App.data(), e = App.esc, t = App.t, tx = App.tx, L = App.L;
 		var list = d.tributes || []; /* kept in date order in the data, so #t-i matches search links */
@@ -56,6 +97,8 @@ window.PAGE = {
 				? L('الصور من ويكيميديا كومنز بتراخيص حرّة، وبعضها من صفحات المؤلفين في «عصير الكتب» أو من التقرير الذي نقل كلمته.', 'Photos from Wikimedia Commons under free licences, and some from the authors’ pages on Aseer Al Kotb or from the report that carried their words.')
 				: L('الصور من ويكيميديا كومنز، بتراخيص حرّة.', 'Photos from Wikimedia Commons, under free licences.')) + '</p>' : '') +
 		'</div></section>' +
+		/* «الوداع، يومًا بيوم»: the days from his death to the end of May 2018 */
+		this.farewell(d) +
 		/* books written about him, covers from assets/img/covers/about */
 		((d.aboutBooks || []).length && window.WorksShared ? '<section class="section"><div class="wrap"><h2 class="tb-books-h">' + L('كتب عنه', 'Books about him') + '</h2><div class="cover-grid tb-books">' +
 			d.aboutBooks.map(function (b) {
@@ -65,6 +108,16 @@ window.PAGE = {
 		/* and after them, the academic work: theses first, then journal articles (AKT.studies) */
 		this.studies(d);
 
+		var fwBox = document.getElementById('farewell');
+		if (fwBox) fwBox.addEventListener('click', function (ev) {
+			var a = ev.target.closest('.fw-who a[data-t]');
+			if (!a) return;
+			var li = document.getElementById('t-' + a.dataset.t), btn = li && li.querySelector('.tb-head button');
+			if (!li) return;
+			ev.preventDefault();
+			li.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			if (btn && btn.getAttribute('aria-expanded') !== 'true') setTimeout(function () { btn.click(); }, 450);
+		});
 		var root = document.getElementById('tb');
 		/* keep: leave the other cards open (scrolling on a phone: folding a card above would pull the page up under the reader) */
 		var open = function (li, keep) {

@@ -42,7 +42,9 @@
 			{ id: 'names', href: 'names.html', ar: 'أعلام في حكاياته', en: 'Figures in his tales', phone: true },
 			{ id: 'calendar', href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', phone: true },
 			{ id: 'compare', href: 'compare.html', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side', phone: true },
-			{ id: 'era', href: 'era.html', ar: 'زمن العرّاب', en: 'The Godfather’s times', phone: true }
+			{ id: 'era', href: 'era.html', ar: 'زمن العرّاب', en: 'The Godfather’s times', phone: true },
+			{ id: 'remembrance', href: 'remembrance.html', ar: 'ذكراه كل عام', en: 'Remembered every year', phone: true },
+			{ id: 'reader-stories', href: 'reader-stories.html', ar: 'حكايات القرّاء', en: 'Readers’ stories', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
@@ -71,7 +73,10 @@
 			{ href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar' },
 			/* his series in one table, and his work beside the world it came out in */
 			{ href: 'compare.html', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side' },
-			{ href: 'era.html', ar: 'زمن العرّاب', en: 'The Godfather’s times' }
+			{ href: 'era.html', ar: 'زمن العرّاب', en: 'The Godfather’s times' },
+			/* his memory each year since, and his readers' own stories */
+			{ href: 'remembrance.html', ar: 'ذكراه كل عام', en: 'Remembered every year' },
+			{ href: 'reader-stories.html', ar: 'حكايات القرّاء', en: 'Readers’ stories' }
 		],
 		/* «عالم العرّاب»: the pages inside his world, a block of their own under «صفحات الموقع» */
 		world: [
@@ -169,6 +174,8 @@
 		bookmark: '<path d="M7 3h10v18l-5-3.5L7 21z"/>',
 		pin: '<path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.3"/>',
 		skull: '<path d="M12 3a7.5 7.5 0 0 0-7.5 7.5c0 2.7 1.3 4.5 3 5.6V20h9v-3.9c1.7-1.1 3-2.9 3-5.6A7.5 7.5 0 0 0 12 3Z"/><circle cx="9.2" cy="11" r="1.6"/><circle cx="14.8" cy="11" r="1.6"/><path d="M10.5 20v-2.5M13.5 20v-2.5"/>',
+		flame: '<path d="M12 21c-3.6 0-6-2.5-6-5.8 0-2.6 1.6-4.3 3.1-6 .4 1.6 1.2 2.6 2.2 3 0-3.2 1.4-6 3.7-8.2-.2 2.9.8 4.8 1.9 6.4 1 1.4 1.1 2.7 1.1 4.6 0 3.4-2.4 6-6 6Z"/>',
+		chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.5h5"/>',
 		candle: '<path d="M9 10h6v11H9zM12 10V7.5M12 3.5c1.2 1.2 1.6 2.2 1 3.2-.5.8-1.5.8-2 0-.6-1 .1-2 1-3.2ZM6 21h12"/>'
 	};
 	function megaIcon(k) {
@@ -227,6 +234,8 @@
 			{ href: 'screen.html', ic: 'film', ar: 'على الشاشة', en: 'On screen', dar: 'من نتفليكس إلى الإذاعة', den: 'From Netflix to the radio' },
 			{ href: 'world.html', ic: 'globe', ar: 'حول العالم', en: 'Around the world', dar: 'كتبه بلغات أخرى', den: 'His books in other languages' },
 			{ href: 'quiz.html', ic: 'puzzle', ar: 'ركن القرّاء', en: 'Readers’ corner', dar: 'اختبارات وألعاب ومن قال هذا؟', den: 'Quizzes, games and who said it?' },
+			{ href: 'remembrance.html', ic: 'flame', ar: 'ذكراه كل عام', en: 'Remembered every year', dar: 'كل 2 أبريل منذ رحيله', den: 'Every 2 April since he died' },
+			{ href: 'reader-stories.html', ic: 'chat', ar: 'حكايات القرّاء', en: 'Readers’ stories', dar: 'كيف عرفوه، بأقلامهم', den: 'How they found him, in their words' },
 			{ href: 'lists.html', ic: 'bookmark', ar: 'قوائمي ورحلتي', en: 'My lists & journey', dar: 'ما قرأته وما تريد قراءته', den: 'What you have read and want to' }
 		],
 		/* the books floating along «من أين أبدأ؟»: the series' fronts, his novels and two more series (small copies, covers-s) */
@@ -666,6 +675,9 @@
 		seoAuthor: { '@type': 'Person', '@id': 'https://samehbilal.github.io/ahmed-khaled-tawfik/#akt', name: 'أحمد خالد توفيق', alternateName: 'Ahmed Khaled Tawfik' },
 
 		/* "suggest a correction" link to a pre-filled GitHub issue */
+		/* the site's address and its repository, for the pages that ask readers to write (reader-stories.js) */
+		EMAIL: UI.maker.email,
+		REPO: REPO,
 		fixHref: function (subject) {
 			var title = (App.lang === 'ar' ? 'تصحيح: ' : 'Correction: ') + (subject || document.title);
 			var body = (App.lang === 'ar'

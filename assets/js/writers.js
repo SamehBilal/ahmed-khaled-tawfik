@@ -107,6 +107,7 @@ window.PAGE = {
 			}).join('') + '</div>' +
 			'<div class="issue-card"><div class="issue-panel wr-panel" id="wr-card" aria-live="polite" hidden></div></div>' +
 		'</div></section>' +
+		this.generation() +
 		this.directory() +
 		'<section class="section"><div class="wrap"><div class="shelf-block rise" id="sources-block"></div></div></section>';
 
@@ -190,6 +191,35 @@ window.PAGE = {
 
 	/* every writer once, A to Z, each card leading to their own page; the shelves filter it */
 	dirShelf: '',
+	/* «الجيل الذي صنعه»: the writers and filmmakers who say themselves that they came out of his cloak (AKT.writers.influenced),
+	   a face and what each said, with its source — one card a person (Amr Salama's two entries, his film and his series, together) */
+	generation: function () {
+		var App = window.App, d = App.data(), e = App.esc, t = App.t, L = App.L, P = window.People;
+		var byName = {}, list = [];
+		((d.writers || {}).influenced || []).forEach(function (w) {
+			var k = (w.name && w.name.ar) || '';
+			if (!byName[k]) { byName[k] = { w: w, works: [] }; list.push(byName[k]); }
+			if (w.work) byName[k].works.push(t(w.work) + (w.year ? ' (' + App.num(w.year) + ')' : ''));
+		});
+		if (!list.length) return '';
+		var pic = function (w) { var u = w.photo && (w.photo.url || w.photo); return typeof u === 'string' ? u : ''; };
+		return '<section class="section gn" id="generation"><div class="wrap">' +
+			'<div class="section-head"><div><p class="eyebrow">' + e(L('خرجوا من عباءته', 'Out of his cloak')) + '</p><h2>' + e(L('الجيل الذي صنعه', 'The generation he made')) + '</h2>' +
+				'<p>' + e(L(App.num(list.length) + ' كاتبًا وصانعًا قالوا بأنفسهم إنهم كبروا على كتبه، ثم كتبوا. على شاهد قبره: «جعل الشباب يقرؤون» — وهؤلاء بعض من قرؤوا.',
+					list.length + ' writers and filmmakers who say they grew up on his books, and then wrote. His headstone says “He made the young read” — these are some of those who did.')) + '</p></div></div>' +
+			'<ul class="gn-grid">' + list.map(function (g) {
+				var w = g.w, p = P && P.ofEntry(w), name = t(w.name), u = pic(w);
+				return '<li class="gn-card rise">' +
+					'<a class="gn-who" href="' + e(p ? P.href(p) : '#all') + '">' +
+						'<span class="gn-pic">' + (u ? '<img src="' + e(u) + '" alt="" loading="lazy" referrerpolicy="no-referrer">' : e(P ? P.initials(name, App.lang) : name.charAt(0))) + '</span>' +
+						'<span class="gn-name"><b>' + e(name) + '</b>' + (g.works.length ? '<small>' + e(g.works.join(' · ')) + '</small>' : '') + '</span></a>' +
+					'<p class="gn-said">' + e(t(w.line || w.text)) + '</p>' +
+					(w.source ? '<a class="gn-src" href="' + e(w.source) + '" target="_blank" rel="noopener">' + e(L('المصدر ↗', 'Source ↗')) + '</a>' : '') +
+				'</li>';
+			}).join('') + '</ul>' +
+		'</div></section>';
+	},
+
 	directory: function () {
 		var App = window.App, P = window.People, self = this;
 		var e = App.esc, t = App.t, L = App.L;

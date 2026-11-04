@@ -182,7 +182,7 @@ window.PAGE = {
 			['quotes.html', ['quotes.html#glossary']],
 			['audio.html', []],
 			['legacy.html', ['talks.html', 'awards.html', 'handwriting.html', 'map.html', 'calendar.html', 'era.html']],
-			['tributes.html', []],
+			['tributes.html', ['remembrance.html', 'reader-stories.html']],
 			['blog.html', ['blog.html#papers', 'numbers.html'], [[((d.blog || {}).posts || []).length || (d.stats || {}).posts, L('مقال', 'articles')]]],
 			['quiz.html', ['lists.html']],
 			['about.html', UI.legal.map(function (n) { return n.href; }).filter(function (h) { return h !== 'about.html'; })]
