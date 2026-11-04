@@ -9,9 +9,19 @@
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-04T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d658a11</id>
+		<title>في قائمة «أعماله» صارت كتبه تطفو في شريط «من أين أبدأ؟»، وبطاقات السلاسل بمشاهد التذييل</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">في قائمة «أعماله» صارت كتبه تطفو في شريط «من أين أبدأ؟»، وبطاقات السلاسل بمشاهد التذييل: التل المسكون والساحرة والقمر وغروب أفريقيا</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1db58ff</id>
 		<title>لوحات القائمة أغنى</title>
-		<updated>2026-11-04T20:59:00Z</updated>
+		<updated>2026-11-04T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="صور"/>
 		<category term="design" label="تصميم"/>
@@ -20,7 +30,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3317c06</id>
 		<title>قائمة رئيسية جديدة بلوحات كبيرة</title>
-		<updated>2026-11-04T20:58:00Z</updated>
+		<updated>2026-11-04T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="صور"/>
 		<category term="audio" label="مسموع"/>
@@ -31,7 +41,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8b3a21d</id>
 		<title>على الأجهزة اللوحية لم تعد الصفحة تنزلق جانبيًا، وصُحح مربع البحث في سجل التحديثات وبريد صفحة التواصل وصور…</title>
-		<updated>2026-11-04T20:57:00Z</updated>
+		<updated>2026-11-04T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="تصميم"/>
 		<category term="fix" label="تصحيح"/>
@@ -40,7 +50,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c015779</id>
 		<title>صور أخف بـ4.2 ميجابايت، ولوسيفر في الأعداد نفسها في كل مكان، و«من أين أبدأ؟» بعدد الكتب الصحيح</title>
-		<updated>2026-11-04T20:56:00Z</updated>
+		<updated>2026-11-04T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="صور"/>
 		<category term="audio" label="مسموع"/>
@@ -51,7 +61,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
 		<title>صفحتا «السلاسل جنبًا إلى جنب» مع «أعداء وأشرار» و«زمن العرّاب»، و«إهداءات كتبه» في «بخط يده»، و«مكتبة رفعت…</title>
-		<updated>2026-11-04T20:55:00Z</updated>
+		<updated>2026-11-04T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="pics" label="صور"/>
@@ -548,15 +558,5 @@
 		<category term="pics" label="صور"/>
 		<category term="data" label="بيانات"/>
 		<content type="text">نُقلت «إحصاءات الموقع» من صفحة الأغلفة إلى «بالأرقام والأسلوب» خطوةً ثالثة بعد المسيرة والأسلوب</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/203704b</id>
-		<title>«الأغلفة والطبعات»</title>
-		<updated>2026-11-01T20:54:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="صور"/>
-		<category term="data" label="بيانات"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">«الأغلفة والطبعات»: نقاط الطبعات في «رواياته وكتبه» تفتح بطاقة بأسلوب Tooltip Styles الكلاسيكي — غلاف الطبعة وعنوانها ودارها وسنتها وصفحاتها، بسهم نحو النقطة</content>
 	</entry>
 </feed>

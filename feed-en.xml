@@ -9,9 +9,19 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-04T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d658a11</id>
+		<title>«أعماله» in the main menu</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«أعماله» in the main menu: his books float along «من أين أبدأ؟» at its foot — the three series' first covers, his six novels, WWW and World Fiction, each opening its own page — in place of the shelf under the covers; and the series' cards carry the footer's night, each its own part of it: Ma Wara' al-Tabi'a the haunted hill with its lit castle, its three bats, eyes in the dark and fog; Fantasia the moon with the witch riding across it, stars and sparks from the book; Safari the sunset in the shape of Africa behind the savanna. The footer's Africa and bats are drawn by one function each, shared by the two</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1db58ff</id>
 		<title>The main menu's panels, fuller</title>
-		<updated>2026-11-04T20:59:00Z</updated>
+		<updated>2026-11-04T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="design" label="Design"/>
@@ -20,7 +30,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3317c06</id>
 		<title>The main menu, on a wider screen, is six words</title>
-		<updated>2026-11-04T20:58:00Z</updated>
+		<updated>2026-11-04T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -31,7 +41,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8b3a21d</id>
 		<title>Tablets</title>
-		<updated>2026-11-04T20:57:00Z</updated>
+		<updated>2026-11-04T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<category term="fix" label="Fix"/>
@@ -40,7 +50,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c015779</id>
 		<title>Lighter pictures</title>
-		<updated>2026-11-04T20:56:00Z</updated>
+		<updated>2026-11-04T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -51,7 +61,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
 		<title>«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data</title>
-		<updated>2026-11-04T20:55:00Z</updated>
+		<updated>2026-11-04T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -548,15 +558,5 @@
 		<category term="pics" label="Pictures"/>
 		<category term="data" label="Data"/>
 		<content type="text">«إحصاءات الموقع» moved from the covers page to «بالأرقام والأسلوب», as its third step after «المسيرة» and «اللغة والأسلوب» — on the page's map and its thread («وما يحفظه الموقع منه»), the same fifteen numbers in the page's own tiles, each leading where it counts (the cover wall and the editions now back on the covers page), numbers.html#stats opening on it. Counted by site-stats.js, which the covers page draws its wall from too; the search words and the sitemap follow</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/203704b</id>
-		<title>«الأغلفة والطبعات»</title>
-		<updated>2026-11-01T20:54:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«الأغلفة والطبعات»: in «رواياته وكتبه» each edition's dot opens a card in Codrops' classic «Tooltip Styles» (Mary Lou; its first effect), in place of the browser's bare title — a dark box above the dot, the edition's cover on one side and on the other its title in bold with which edition, its house, year, pages and format, an arrow beneath, dropping in as it fades in, a gap filler so the pointer can reach it; on hover or keyboard focus. Each card is placed as it opens, centred on its dot but kept within the chart (its arrow still on the dot), and the chart clips its sides so hidden cards never widen the page on a phone</content>
 	</entry>
 </feed>
