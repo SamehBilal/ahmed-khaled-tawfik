@@ -9,9 +9,18 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-04T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8b3a21d</id>
+		<title>Tablets</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">Tablets: the page no longer slides sideways — the root hides what is wider than the window and the body clips it (clip, not hidden, so the sticky header holds); with hidden alone on the body, an iPad's swipe or a jump to a card panned the whole page, header and all. «سجل التحديثات»'s search box wraps to its own row when the chips leave it no room (between 900 and 1,200 px it was pushed off the bar); «تواصل»'s email breaks inside its card; on «الشخصيات» the last column's figure has room for its overhang and is no longer cut at the window's edge</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c015779</id>
 		<title>Lighter pictures</title>
-		<updated>2026-11-04T20:59:00Z</updated>
+		<updated>2026-11-04T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -22,7 +31,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
 		<title>«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data</title>
-		<updated>2026-11-04T20:58:00Z</updated>
+		<updated>2026-11-04T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -548,12 +557,5 @@
 		<category term="design" label="Design"/>
 		<category term="fix" label="Fix"/>
 		<content type="text">«على الشاشة»: the projector's beam no longer ends in a hard edge at the band's foot, as if cut by a box — the band lets it out below (still clipped at the sides) and it fades out gently over the headline; a warmer beam in the paper theme</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/62593f8</id>
-		<title>«على الشاشة»</title>
-		<updated>2026-11-01T20:51:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<content type="text">«على الشاشة»: «زي النهارده» (2008) has its trailer now, from its director Amr Salama's own channel — played on the page when pressed, as the other works' trailers</content>
 	</entry>
 </feed>
