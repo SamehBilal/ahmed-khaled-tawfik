@@ -14,13 +14,61 @@ window.PAGE = {
 		lead: { ar: 'أول عدد اشتريته من بائع الجرائد، الكتاب الذي خبّأته تحت كتب المدرسة، الندوة التي وقّع لك فيها، اليوم الذي عرفت فيه أنه رحل. كل قارئ له حكاية مع العرّاب، وهنا تُحكى بأصحابها.',
 			en: 'The first issue you bought from the newsstand, the book hidden under your schoolbooks, the talk where he signed your copy, the day you heard he had gone. Every reader has a story with the Godfather, and here they are told by those who lived them.' }
 	},
-	/* the band: notes on lined paper drifting on the dark, each a reader's few lines still to be written */
-	band: function () {
-		var spots = [[6, 30, -8], [21, 120, 5], [37, 18, -3], [52, 140, 7], [66, 40, -6], [81, 112, 4], [93, 26, 9]];
-		return '<div class="rs-band">' + spots.map(function (p, i) {
-			return '<span class="rs-note" style="inset-inline-start:calc(' + p[0] + '% - 75px);top:' + p[1] + 'px;--r:' + p[2] + 'deg;--d:-' + (i * 1.3).toFixed(1) + 's">' +
-				[86, 64, 92, 48].map(function (w) { return '<i style="--w:' + ((w + i * 7) % 60 + 40) + '%"></i>'; }).join('') + '</span>';
+	/* the band: his covers as polaroids tossed on the page, after Toc's «Scattered Polaroids — CSS random()» (codepen.io/ol-ivier):
+	   each a little off true, turned and shadowed its own way, placed where it overlaps the others by no more than about a
+	   third; a polaroid under the pointer lifts and straightens. Laid out once the band is on the page, and again on resize */
+	band: function (d, A) {
+		var S = window.WorksShared, t = A.t, e = A.esc, out = [];
+		if (!S) return '';
+		[['mwt', 7], ['fantasia', 5], ['safari', 5], ['www', 2]].forEach(function (x) {
+			S.seriesIssues(x[0]).slice(0, x[1]).forEach(function (is) { var c = S.issueCover(x[0], is); if (c) out.push({ img: A.thumb(c), cap: t(is.title) }); });
+		});
+		['utopia', 'senga', 'icarus', 'rats', 'shaabeeb'].forEach(function (id) {
+			var w = A.findWork(id), c = w && S.coverOf((d.bookInfo || {})[id] || {});
+			if (c) out.push({ img: A.thumb(c), cap: t(w.title) });
+		});
+		/* shuffled the same way on every visit */
+		var seed = 7, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+		out.sort(function () { return rnd() - 0.5; });
+		setTimeout(function () { window.PAGE.scatter(); }, 0);
+		return '<div class="rs-scatter">' + out.map(function (c, i) {
+			return '<span class="rs-sc" style="--d:' + (i * 0.05).toFixed(2) + 's"><img src="' + e(c.img) + '" alt="" loading="lazy" decoding="async"><i>' + e(c.cap.length > 22 ? c.cap.slice(0, 21) + '…' : c.cap) + '</i></span>';
 		}).join('') + '</div>';
+	},
+	/* the pen's permissive anti-collision: for each polaroid up to 60 tries for a place where it covers no other by more than
+	   35%, else the place that covers least; as many as the band's size holds, the rest left out */
+	scatter: function () {
+		var box = document.querySelector('.rs-scatter');
+		if (!box) return;
+		var cards = [].slice.call(box.querySelectorAll('.rs-sc')), W = box.clientWidth, H = box.clientHeight;
+		if (!W || !H) return;
+		var cw = W < 560 ? 86 : 112, ch = cw * 1.36, placed = [], seed = 11;
+		var rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+		var fit = Math.min(cards.length, Math.round((W * H) / (cw * ch) * 1.25));
+		var over = function (a, b) {
+			var x = Math.max(0, Math.min(a.x + cw, b.x + cw) - Math.max(a.x, b.x)), y = Math.max(0, Math.min(a.y + ch, b.y + ch) - Math.max(a.y, b.y));
+			return (x * y) / (cw * ch);
+		};
+		cards.forEach(function (el, i) {
+			if (i >= fit) { el.hidden = true; return; }
+			el.hidden = false;
+			var best = null, bestO = 9;
+			for (var k = 0; k < 60; k++) {
+				var p = { x: rnd() * (W - cw), y: 8 + rnd() * Math.max(1, H - ch - 16) };
+				var o = placed.reduce(function (m, q) { return Math.max(m, over(p, q)); }, 0);
+				if (o < bestO) { best = p; bestO = o; }
+				if (o <= 0.35) break;
+			}
+			placed.push(best);
+			el.style.cssText += ';--x:' + best.x.toFixed(0) + 'px;--y:' + best.y.toFixed(0) + 'px;--r:' + ((rnd() - 0.5) * 26).toFixed(1) + 'deg;--w:' + cw + 'px;--s:' + (0.25 + rnd() * 0.35).toFixed(2);
+		});
+		box.classList.add('is-laid');
+		setTimeout(function () { box.classList.add('is-done'); }, 2200);
+		if (!box.dataset.wired) {
+			box.dataset.wired = '1';
+			var tm;
+			window.addEventListener('resize', function () { clearTimeout(tm); tm = setTimeout(function () { window.PAGE.scatter(); }, 200); });
+		}
 	},
 
 	/* the reel's polaroids: the stories, or — until there are some — his covers asking the questions, and a blank one */
@@ -44,6 +92,8 @@ window.PAGE = {
 	},
 	reel: function (cards) {
 		var A = window.App, e = A.esc, L = A.L;
+		/* drawn chevrons, not ❮ ❯: right-to-left text mirrors those, and the arrows pointed the wrong way in Arabic */
+		var chev = function (dir) { return '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="' + (dir === 'left' ? 'M15 5 8 12l7 7' : 'M9 5l7 7-7 7') + '" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'; };
 		return '<section class="rs-reel" id="reel" style="--n:' + cards.length + '" aria-label="' + e(L('صور الحكايات', 'The stories’ polaroids')) + '">' +
 			'<div class="rs-stage">' +
 				'<p class="rs-hint" aria-hidden="true">' + e(L('مرّر لتقلّب الصور', 'Scroll to turn the polaroids')) + ' <i>↓</i></p>' +
@@ -53,9 +103,9 @@ window.PAGE = {
 						'<span class="rs-cap">' + e(c.cap) + '</span>' + (c.sub ? '<small>' + e(c.sub) + '</small>' : '') + '</a>';
 				}).join('') +
 				'<div class="rs-nav">' +
-					'<button type="button" class="rs-step" data-d="-1" aria-label="' + e(L('السابقة', 'Previous')) + '">' + (A.lang === 'ar' ? '❯' : '❮') + '</button>' +
+					'<button type="button" class="rs-step" data-d="-1" aria-label="' + e(L('السابقة', 'Previous')) + '">' + chev(A.lang === 'ar' ? 'right' : 'left') + '</button>' +
 					'<span class="rs-dots">' + cards.map(function (c, i) { return '<button type="button" data-i="' + i + '" aria-label="' + e(A.num(i + 1) + ' — ' + c.cap) + '"></button>'; }).join('') + '</span>' +
-					'<button type="button" class="rs-step" data-d="1" aria-label="' + e(L('التالية', 'Next')) + '">' + (A.lang === 'ar' ? '❮' : '❯') + '</button>' +
+					'<button type="button" class="rs-step" data-d="1" aria-label="' + e(L('التالية', 'Next')) + '">' + chev(A.lang === 'ar' ? 'left' : 'right') + '</button>' +
 				'</div>' +
 			'</div></section>';
 	},
