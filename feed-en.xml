@@ -9,9 +9,20 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-04T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c015779</id>
+		<title>Lighter pictures</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">Lighter pictures: the photos, the library's covers, the places, the posters, the prizes, the screens, the timeline and the cassette's face that are shown at full size (not the covers, whose grids have their small copies) made no larger than they are seen — 700 px for the library, 800 for the places, 1,000 for photos — and saved again, 4.2 MB lighter in all; the thirteen that were PNG photographs are WebP now (their names in the data, the library's list, the share pages and the cassette's stylesheet with them). Lucifer is in the same issues wherever the site names him — 20, 35, 50, 62, 78, 79 and the last — on «وحوش وأساطير» (it had 34 for 35) and in the issues' characters (50 and 78 were missing), as «أعداء وأشرار» has. «من أين أبدأ؟» now says some three hundred issues and fifty books, not «more than two hundred»</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
 		<title>«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data</title>
-		<updated>2026-11-04T20:59:00Z</updated>
+		<updated>2026-11-04T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -544,13 +555,5 @@
 		<updated>2026-11-01T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">«على الشاشة»: «زي النهارده» (2008) has its trailer now, from its director Amr Salama's own channel — played on the page when pressed, as the other works' trailers</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/19159b7</id>
-		<title>«على الشاشة»</title>
-		<updated>2026-11-01T20:50:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="design" label="Design"/>
-		<content type="text">«على الشاشة»: the band merged with the page — no ground of its own, no line under it, no fade at its sides, in either theme; only the running film strip and the projector's beam</content>
 	</entry>
 </feed>

@@ -9,9 +9,20 @@
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-04T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c015779</id>
+		<title>صور أخف بـ4.2 ميجابايت، ولوسيفر في الأعداد نفسها في كل مكان، و«من أين أبدأ؟» بعدد الكتب الصحيح</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">صور أخف بـ4.2 ميجابايت، ولوسيفر في الأعداد نفسها في كل مكان، و«من أين أبدأ؟» بعدد الكتب الصحيح</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
 		<title>صفحتا «السلاسل جنبًا إلى جنب» مع «أعداء وأشرار» و«زمن العرّاب»، و«إهداءات كتبه» في «بخط يده»، و«مكتبة رفعت…</title>
-		<updated>2026-11-04T20:59:00Z</updated>
+		<updated>2026-11-04T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="pics" label="صور"/>
@@ -544,13 +555,5 @@
 		<updated>2026-11-01T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">«على الشاشة»: إعلان فيلم «زي النهارده» من قناة مخرجه عمرو سلامة</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/19159b7</id>
-		<title>«على الشاشة»</title>
-		<updated>2026-11-01T20:50:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">«على الشاشة»: الشريط العلوي مندمج مع الصفحة بلا خلفية ولا خط تحته، ويبقى شريط الفيلم وحده</content>
 	</entry>
 </feed>
