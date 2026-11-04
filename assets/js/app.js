@@ -138,7 +138,16 @@
 		pen: '<path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4"/>',
 		quote: '<path d="M6 8h4v4c0 3-1.6 4.6-4 5.5M14 8h4v4c0 3-1.6 4.6-4 5.5"/>',
 		hand: '<path d="M14 4l6 6-8.5 8.5-6-6zM5.5 12.5 3 21l8.5-2.5"/><circle cx="9.5" cy="14.5" r="1.3"/>',
-		shelf: '<path d="M4 4v16M8 4v16M3 20h18M12 6l3.6-1.2 3.4 14-3.6 1.2z"/>'
+		shelf: '<path d="M4 4v16M8 4v16M3 20h18M12 6l3.6-1.2 3.4 14-3.6 1.2z"/>',
+		sprout: '<path d="M12 21v-9M12 12C12 7 8.5 4.5 4 4.5 4 9 7 12 12 12ZM12 14c0-4 3-6.5 8-6.5 0 4.5-3 6.5-8 6.5Z"/>',
+		heart: '<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10Z"/>',
+		film: '<path d="M4 5h16v14H4zM8 5v14M16 5v14M4 9h4M4 15h4M16 9h4M16 15h4"/>',
+		globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.5 3.8 5.3 3.8 8.5S14.6 18 12 20.5C9.4 18 8.2 15.2 8.2 12S9.4 6 12 3.5Z"/>',
+		puzzle: '<path d="M5 8h3.5a2 2 0 1 1 4 0H16v3.5a2 2 0 1 1 0 4V19H12.5a2 2 0 1 0-4 0H5v-3.5a2 2 0 1 0 0-4z"/>',
+		bookmark: '<path d="M7 3h10v18l-5-3.5L7 21z"/>',
+		pin: '<path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.3"/>',
+		skull: '<path d="M12 3a7.5 7.5 0 0 0-7.5 7.5c0 2.7 1.3 4.5 3 5.6V20h9v-3.9c1.7-1.1 3-2.9 3-5.6A7.5 7.5 0 0 0 12 3Z"/><circle cx="9.2" cy="11" r="1.6"/><circle cx="14.8" cy="11" r="1.6"/><path d="M10.5 20v-2.5M13.5 20v-2.5"/>',
+		candle: '<path d="M9 10h6v11H9zM12 10V7.5M12 3.5c1.2 1.2 1.6 2.2 1 3.2-.5.8-1.5.8-2 0-.6-1 .1-2 1-3.2ZM6 21h12"/>'
 	};
 	function megaIcon(k) {
 		return '<span class="mg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + MEGA_ICONS[k] + '</svg></span>';
@@ -166,7 +175,10 @@
 			{ href: 'clinic.html', ic: 'clinic', ar: 'عيادة سافاري', en: 'The Safari clinic', dar: 'أوبئة أفريقيا وأمراضها', den: 'Africa’s epidemics and diseases' },
 			{ href: 'names.html', ic: 'star', ar: 'أعلام في حكاياته', en: 'Figures in his tales', dar: 'شخصيات حقيقية مرّت بقصصه', den: 'Real people who pass through' },
 			{ href: 'map.html', ic: 'map', ar: 'الخريطة', en: 'The map', dar: 'أماكن حكاياته على الأرض', den: 'Where his tales take place' },
-			{ href: 'network.html', ic: 'web', ar: 'شبكة العرّاب', en: 'The Godfather’s web', dar: 'كيف يتصل كل شيء', den: 'How it all connects' }
+			{ href: 'network.html', ic: 'web', ar: 'شبكة العرّاب', en: 'The Godfather’s web', dar: 'كيف يتصل كل شيء', den: 'How it all connects' },
+			/* and two parts of other pages that belong here */
+			{ href: 'compare.html#villains', ic: 'skull', ar: 'أعداء وأشرار', en: 'Enemies & villains', dar: 'من واجههم أبطاله، سلسلةً سلسلة', den: 'Whom his heroes faced, series by series' },
+			{ href: 'library.html#refaat', ic: 'candle', ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library', dar: 'ما يقرؤه أبطاله داخل الحكايات', den: 'What his heroes read inside the tales' }
 		],
 		heroes: [
 			{ id: 'refaat', ar: 'رفعت إسماعيل', en: 'Refaat Ismail', sar: 'ما وراء الطبيعة', sen: 'Ma Wara’ al-Tabi’a', c: '#6e1c1c', img: 'assets/img/characters/refaat-lantern.webp' },
@@ -177,7 +189,8 @@
 			{ href: 'talks.html', ic: 'mic', ar: 'سيرته ولقاءاته', en: 'His life & interviews', dar: 'من طنطا إلى الكتابة، بصوته', den: 'From Tanta to writing, in his words' },
 			{ href: 'era.html', ic: 'clock', ar: 'زمن العرّاب', en: 'The Godfather’s times', dar: 'حياته بجوار أحداث عصره', den: 'His life beside the world’s' },
 			{ href: 'calendar.html', ic: 'calendar', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', dar: 'كل يوم من أيام السنة', den: 'Every day of the year' },
-			{ href: 'awards.html', ic: 'award', ar: 'الجوائز', en: 'Awards', dar: 'ما ناله وما سُمّي باسمه', den: 'What he won and what bears his name' }
+			{ href: 'awards.html', ic: 'award', ar: 'الجوائز', en: 'Awards', dar: 'ما ناله وما سُمّي باسمه', den: 'What he won and what bears his name' },
+			{ href: 'talks.html#tanta', ic: 'pin', ar: 'طنطا، مدينته', en: 'Tanta, his city', dar: 'المدينة التي وُلد فيها وعاش ودُفن', den: 'Where he was born, lived and lies' }
 		],
 		writing: [
 			{ href: 'blog.html', ic: 'pen', ar: 'المدونة', en: 'Blog', dar: 'مقالاته وأعمدته', den: 'His articles and columns' },
@@ -187,15 +200,44 @@
 			{ href: 'writers.html', ic: 'people', ar: 'دائرته', en: 'His circle', dar: 'رفاقه ومن حملوا عالمه', den: 'His companions and heirs' }
 		],
 		legacy: [
-			{ href: 'legacy.html', ar: 'الإرث', en: 'Legacy', dar: 'ما تركه في جيل كامل من القرّاء', den: 'What he left a whole generation of readers' },
-			{ href: 'tributes.html', ar: 'قالوا عنه', en: 'Tributes', dar: 'كتّاب وفنانون عند رحيله وفي ذكراه', den: 'Writers and artists, at his death and since' },
-			{ href: 'screen.html', ar: 'على الشاشة', en: 'On screen', dar: 'من نتفليكس إلى الإذاعة', den: 'From Netflix to the radio' },
-			{ href: 'world.html', ar: 'حول العالم', en: 'Around the world', dar: 'كتبه بلغات أخرى', den: 'His books in other languages' },
-			{ href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner', dar: 'اختبارات وألعاب ومن قال هذا؟', den: 'Quizzes, games and who said it?' },
-			{ href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey', dar: 'ما قرأته وما تريد قراءته', den: 'What you have read and want to' }
+			{ href: 'legacy.html', ic: 'sprout', ar: 'الإرث', en: 'Legacy', dar: 'ما تركه في جيل كامل من القرّاء', den: 'What he left a whole generation of readers' },
+			{ href: 'tributes.html', ic: 'heart', ar: 'قالوا عنه', en: 'Tributes', dar: 'كتّاب وفنانون عند رحيله وفي ذكراه', den: 'Writers and artists, at his death and since' },
+			{ href: 'screen.html', ic: 'film', ar: 'على الشاشة', en: 'On screen', dar: 'من نتفليكس إلى الإذاعة', den: 'From Netflix to the radio' },
+			{ href: 'world.html', ic: 'globe', ar: 'حول العالم', en: 'Around the world', dar: 'كتبه بلغات أخرى', den: 'His books in other languages' },
+			{ href: 'quiz.html', ic: 'puzzle', ar: 'ركن القرّاء', en: 'Readers’ corner', dar: 'اختبارات وألعاب ومن قال هذا؟', den: 'Quizzes, games and who said it?' },
+			{ href: 'lists.html', ic: 'bookmark', ar: 'قوائمي ورحلتي', en: 'My lists & journey', dar: 'ما قرأته وما تريد قراءته', den: 'What you have read and want to' }
+		],
+		/* under the series: his novels, and two more series of his, a cover each (their small copies, covers-s) */
+		books: [
+			{ href: 'book.html?id=utopia', ar: 'يوتوبيا', en: 'Utopia', img: 'novels/utopia-53524902' },
+			{ href: 'book.html?id=senga', ar: 'السنجة', en: 'Al-Senga', img: 'novels/openlibrary-8b37322cd6fa' },
+			{ href: 'book.html?id=icarus', ar: 'مثل إيكاروس', en: 'Like Icarus', img: 'novels/abjjad-d28ae02b1015' },
+			{ href: 'book.html?id=rats', ar: 'في ممر الفئران', en: 'In the Rats’ Passage', img: 'karma/9789776467552' },
+			{ href: 'book.html?id=shaabeeb', ar: 'شآبيب', en: 'Shaabeeb', img: 'novels/abjjad-0130dee0b332' },
+			{ href: 'book.html?id=mirante', ar: 'الميرانتي', en: 'Al-Mirante', img: 'novels/abjjad-86a9f6dcbee1' },
+			{ href: 'series.html?id=www', ar: 'WWW', en: 'WWW', img: 'series/www/abjjad-c790bc32b24a' },
+			{ href: 'series.html?id=rwg', ar: 'روايات عالمية للجيب', en: 'World Fiction', img: 'contrib/rwg' }
 		],
 		/* his own books (AKT.works) a year at a time, 2005–2018 */
 		bars: [2, 2, 5, 8, 5, 3, 0, 6, 1, 5, 3, 1, 2, 3]
+	};
+	/* the series cards and the heroes carry the effects of their own pages: Ma Wara' al-Tabi'a's fog, bats and eyes in the
+	   dark; Fantasia's stars and a turning portal, sparks rising; Safari's sun going down over the savanna and its acacias;
+	   and on the heroes those of character.html — Refaat's fog and his lantern's breathing glow with moths circling it,
+	   Abeer's stars and portal, Alaa's heartbeat (they move only while the panel is open) */
+	var MEGA_BAT = '<svg viewBox="0 0 20 10"><path fill="currentColor" d="M10 4C8 1 5 0 0 2c3 1 3 3 2 5 2-1 4-1 5 1 1-2 2-2 3-1 1-1 2-1 3 1 1-2 3-2 5-1-1-2-1-4 2-5-5-2-8-1-10 2Z"/></svg>';
+	var MEGA_FX = {
+		mwt: '<span class="mg-fx fx-mwt" aria-hidden="true"><i class="fog"></i><i class="fog f2"></i><b class="eyes"></b><b class="eyes e2"></b>' +
+			'<span class="bat b1">' + MEGA_BAT + '</span><span class="bat b2">' + MEGA_BAT + '</span><span class="bat b3">' + MEGA_BAT + '</span></span>',
+		fantasia: '<span class="mg-fx fx-fan" aria-hidden="true"><i class="stars"></i><i class="portal"></i><i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i><i class="spark s4"></i></span>',
+		safari: '<span class="mg-fx fx-saf" aria-hidden="true"><i class="sun"></i>' +
+			'<svg class="savanna" viewBox="0 0 240 60" preserveAspectRatio="xMidYMax slice"><path d="M0 60V44Q60 38 120 43T240 40V60Z"/>' +
+			'<path d="M176 43l2-17h2l2 17zM160 26q20-9 40 0-6 3-20 3t-20-3Z"/><path d="M40 44l1.4-11h1.4l1.4 11zM30 33q13-6 26 0-4 2-13 2t-13-2Z"/>' +
+			'<path d="M96 44q2-7 4 0M104 44q1.5-5 3 0M214 42q2-6 4 0"/></svg><i class="haze"></i></span>',
+		refaat: '<span class="mg-fx fx-ghosts" aria-hidden="true"><i class="fog"></i><i class="fog f2"></i></span>',
+		'refaat-in': '<span class="mg-lantern" aria-hidden="true"><b class="glow"></b>' + [0, 1, 2].map(function (i) { return '<i class="moth" style="--i:' + i + '"><b></b></i>'; }).join('') + '</span>',
+		abeer: '<span class="mg-fx fx-fantasy" aria-hidden="true"><i class="stars"></i><i class="portal"></i></span>',
+		alaa: '<span class="mg-fx fx-medicine" aria-hidden="true"><svg class="ecg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 60 H380 L400 60 L415 30 L430 95 L450 10 L470 110 L485 60 H700 L715 45 L730 75 L745 60 H1200"/></svg></span>'
 	};
 	/* which panel holds this page: its own pages, and the pages made one per series, book, character or writer */
 	function megaGroupOf(file) {
@@ -227,8 +269,11 @@
 		var works = panel('works', L('أعماله', 'His works'),
 			'<div class="mg-cards">' + MEGA.series.map(function (s) {
 				return '<a class="mg-card" href="series.html?id=' + s.id + '" style="--c:' + s.c + '"' + (file === 'series.html' && /[?&]id=/.test(location.search) && new RegExp('[?&]id=' + s.id + '(&|$)').test(location.search) ? ' aria-current="page"' : '') + '>' +
-					'<span class="mg-card-t"><b>' + e(L(s.ar, s.en)) + '</b><small>' + e(L(s.sar, s.sen)) + '</small></span>' + img(s.img, 'mg-cover') + '</a>';
-			}).join('') + '</div>' +
+					MEGA_FX[s.id] + '<span class="mg-card-t"><b>' + e(L(s.ar, s.en)) + '</b><small>' + e(L(s.sar, s.sen)) + '</small></span>' + img(s.img, 'mg-cover') + '</a>';
+			}).join('') +
+			'<div class="mg-books"><p class="mg-h">' + L('رواياته وسلاسل أخرى', 'His novels & more series') + '</p><div class="mg-shelf">' + MEGA.books.map(function (b) {
+				return '<a class="mg-book" href="' + b.href + '" title="' + e(L(b.ar, b.en)) + '">' + img('assets/img/covers-s/' + b.img + '.webp', 'mg-book-img') + '<span>' + e(L(b.ar, b.en)) + '</span></a>';
+			}).join('') + '</div></div></div>' +
 			'<div class="mg-more"><p class="mg-h">' + L('المزيد', 'More') + '</p>' + MEGA.worksMore.map(function (n) {
 				return '<a class="mg-row" href="' + n.href + '"' + cur(n.href) + '>' + megaIcon(n.ic) + '<b>' + e(L(n.ar, n.en)) + '</b>' + arrow + '</a>';
 			}).join('') + '</div>' +
@@ -239,7 +284,8 @@
 		var world = panel('world', L('عالمه', 'His world'),
 			'<div class="mg-list">' + MEGA.world.map(function (n) { return item(n); }).join('') + '</div>' +
 			'<div class="mg-figs">' + MEGA.heroes.map(function (h) {
-				return '<a class="mg-fig" href="character.html?id=' + h.id + '" style="--c:' + h.c + '">' + img(h.img, 'mg-fig-img') +
+				return '<a class="mg-fig mg-fig-' + h.id + '" href="character.html?id=' + h.id + '" style="--c:' + h.c + '">' + (MEGA_FX[h.id] || '') +
+					'<span class="mg-fig-box">' + img(h.img, 'mg-fig-img') + (MEGA_FX[h.id + '-in'] || '') + '</span>' +
 					'<span class="mg-fig-t"><b>' + e(L(h.ar, h.en)) + '</b><small>' + e(L(h.sar, h.sen)) + '</small></span></a>';
 			}).join('') + '</div>');
 
@@ -252,7 +298,7 @@
 
 		var max = Math.max.apply(null, MEGA.bars);
 		var legacy = panel('legacy', L('إرثه', 'His legacy'),
-			'<div class="mg-text">' + MEGA.legacy.map(function (n) { return item(n, 'mg-tl'); }).join('') + '</div>' +
+			'<div class="mg-text">' + MEGA.legacy.map(function (n) { return item(n); }).join('') + '</div>' +
 			'<a class="mg-tall" href="screen.html"' + cur('screen.html') + '>' + img('assets/img/photos/refaat-lantern-netflix.webp', 'mg-tall-img') + '<span>' + L('رفعت إسماعيل على نتفليكس', 'Refaat Ismail on Netflix') + '</span></a>' +
 			'<a class="mg-data" href="numbers.html"' + cur('numbers.html') + '><span class="mg-new">' + L('بالأرقام', 'In numbers') + '</span>' +
 				'<span class="mg-bars" aria-hidden="true">' + MEGA.bars.map(function (v, i) { return '<i style="height:' + Math.max(4, Math.round(v / max * 100)) + '%"' + (v === max ? ' class="hi"' : i === 7 ? ' class="hi2"' : '') + '></i>'; }).join('') + '</span>' +
@@ -491,8 +537,11 @@
 			if (!el) return;
 			el.classList.add('rise', 'in');
 			if (onTarget) onTarget(el, id);
+			/* an entry is brought to the middle of the window; a whole section taller than the window (a menu's link to
+			   «أعداء وأشرار» or «مكتبة رفعت إسماعيل») to its top, under the header — centred, its top would be far above sight */
+			var block = function () { return el.getBoundingClientRect().height > window.innerHeight * 0.7 ? 'start' : 'center'; };
 			setTimeout(function () {
-				el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				el.scrollIntoView({ behavior: 'smooth', block: block() });
 				el.classList.remove('is-target'); void el.offsetWidth; el.classList.add('is-target');
 			}, 60);
 			/* a smooth scroll begun while the page is still loading is cut short as the rest comes in (a link from another page to an
@@ -500,7 +549,7 @@
 			if (document.readyState !== 'complete') window.addEventListener('load', function () {
 				setTimeout(function () {
 					var r = el.getBoundingClientRect();
-					if (r.bottom < 0 || r.top > window.innerHeight) el.scrollIntoView({ behavior: 'instant', block: 'center' });
+					if (r.bottom < 0 || r.top > window.innerHeight || (block() === 'start' && Math.abs(r.top - 90) > 60)) el.scrollIntoView({ behavior: 'instant', block: block() });
 				}, 120);
 			}, { once: true });
 		},

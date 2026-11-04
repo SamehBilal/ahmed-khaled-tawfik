@@ -71,6 +71,10 @@ img { max-width: 100%; display: block; }
 	clip: rect(0 0 0 0); white-space: nowrap;
 }
 
+/* a section reached by its address stops under the sticky header, not behind it */
+section[id] { scroll-margin-top: 84px; }
+@media (max-width: 1000px) and (min-width: 761px) { section[id] { scroll-margin-top: 124px; } }
+
 /* ---------- Header ---------- */
 
 .site-header {
@@ -285,7 +289,20 @@ html[dir="ltr"] a:hover > .mg-arr, html[dir="ltr"] a:hover .mg-arr { transform: 
 	background: radial-gradient(120% 85% at 50% 110%, color-mix(in srgb, var(--c) 80%, #fff 14%), var(--c) 48%, color-mix(in srgb, var(--c) 55%, #000) 100%);
 }
 .mg-card::after, .mg-fig::before { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .09); pointer-events: none; z-index: 3; }
-.mg-card { min-height: 268px; padding: 16px 18px; }
+.mg-card { min-height: 244px; padding: 16px 18px; }
+/* under the covers: his novels and two more series on a shelf */
+.mg-books { grid-column: 1 / -1; padding: 8px 6px 4px; border-radius: 16px; background: var(--ink-3); }
+html[data-theme="light"] .mg-books { background: #efe5d0; }
+.mg-books .mg-h { margin-inline: 6px; }
+.mg-shelf { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; padding: 0 6px 4px; }
+.mg-book { display: block; min-width: 0; text-align: center; }
+.mg-book-img {
+	display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 3px 5px 5px 3px; background: var(--ink-2);
+	box-shadow: inset 3px 0 0 rgba(0, 0, 0, .25), 0 8px 14px rgba(0, 0, 0, .35); transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s;
+}
+.mg-book:hover .mg-book-img, .mg-book:focus-visible .mg-book-img { transform: translateY(-6px) rotate(-2deg); box-shadow: 0 14px 22px rgba(0, 0, 0, .45); }
+.mg-book span { display: block; margin-top: 6px; font-size: 12px; line-height: 1.35; color: var(--paper-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mg-book:hover span { color: var(--paper); }
 .mg-card-t { position: relative; z-index: 2; display: block; }
 .mg-card-t b { display: block; font-family: var(--f-chunky); font-weight: normal; font-size: 25px; line-height: 1.2; }
 html[lang="en"] .mg-card-t b { font-family: var(--f-display); font-weight: 600; font-size: 22px; }
@@ -326,16 +343,98 @@ html[dir="ltr"] .mg-band { --band-to: right; }
 .mg-figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .mg-fig { display: flex; align-items: flex-end; min-height: 310px; padding: 14px; }
 .mg-fig::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(transparent 55%, rgba(0, 0, 0, .7)); }
-.mg-fig-img {
-	position: absolute; left: 50%; top: 5%; height: 98%; width: auto; max-width: none;
-	transform: translateX(-50%); filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .5));
-	transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+.mg-fig-box {
+	position: absolute; left: 50%; top: 5%; height: 98%; aspect-ratio: 2 / 3; z-index: 1;
+	transform: translateX(-50%); transition: transform .5s cubic-bezier(.2, .8, .2, 1);
 }
-.mg-fig:hover .mg-fig-img, .mg-fig:focus-visible .mg-fig-img { transform: translateX(-50%) translateY(-8px) scale(1.04); }
+.mg-fig-img { display: block; width: 100%; height: 100%; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .5)); }
+.mg-fig:hover .mg-fig-box, .mg-fig:focus-visible .mg-fig-box { transform: translateX(-50%) translateY(-8px) scale(1.04); }
 .mg-fig-t { position: relative; z-index: 2; }
 .mg-fig-t b { display: block; font-family: var(--f-chunky); font-weight: normal; font-size: 19px; line-height: 1.25; }
 html[lang="en"] .mg-fig-t b { font-family: var(--f-display); font-weight: 600; font-size: 17px; }
 .mg-fig-t small { display: block; font-size: 12.5px; opacity: .8; }
+
+/* the effects of the series and of the heroes' pages, in their cards (app.js MEGA_FX); still while the panel is closed */
+.mg-fx { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; border-radius: inherit; }
+.mg-fx i, .mg-fx b, .mg-fx span, .mg-fx svg { position: absolute; display: block; }
+.mega:not(.is-open) .mg-fx *, .mega:not(.is-open) .mg-lantern * { animation-play-state: paused !important; }
+.mg-card .mg-cover { z-index: 1; }
+/* Ma Wara' al-Tabi'a: fog along the ground, two pairs of eyes that open and blink, bats crossing */
+.fx-mwt .fog, .fx-ghosts .fog {
+	left: -50%; bottom: -20%; width: 200%; height: 60%; opacity: .8; filter: blur(6px);
+	background: radial-gradient(closest-side, rgba(215, 218, 228, .3), transparent 70%) 0 0 / 34% 100% repeat-x;
+	animation: mgx-drift 24s linear infinite;
+}
+.fx-mwt .fog.f2, .fx-ghosts .fog.f2 { bottom: 6%; opacity: .35; animation-duration: 36s; animation-direction: reverse; background-size: 50% 100%; }
+@keyframes mgx-drift { to { transform: translateX(25%); } }
+.fx-mwt .eyes { top: 46%; inset-inline-start: 12%; width: 22px; height: 6px; animation: mgx-blink 5s infinite; }
+.fx-mwt .eyes::before, .fx-mwt .eyes::after { content: ''; position: absolute; top: 0; width: 7px; height: 5px; border-radius: 50%; background: #ffd25e; box-shadow: 0 0 8px 2px rgba(255, 190, 60, .7); }
+.fx-mwt .eyes::before { left: 0; }
+.fx-mwt .eyes::after { right: 0; }
+.fx-mwt .eyes.e2 { top: 62%; inset-inline-start: auto; inset-inline-end: 10%; scale: .7; animation-delay: -2.3s; animation-duration: 6.5s; }
+@keyframes mgx-blink { 0%, 30%, 100% { opacity: 0; transform: scaleY(.1); } 36%, 60% { opacity: 1; transform: scaleY(1); } 62% { transform: scaleY(.1); } 64%, 80% { opacity: 1; transform: scaleY(1); } 86% { opacity: 0; } }
+.fx-mwt .bat { width: 22px; color: rgba(10, 6, 8, .85); top: 38%; left: -12%; animation: mgx-fly 9s linear infinite; }
+.fx-mwt .bat svg { position: static; width: 100%; height: auto; animation: mgx-flap .18s ease-in-out infinite alternate; }
+.fx-mwt .bat.b2 { top: 24%; width: 15px; animation-duration: 12s; animation-delay: -5s; }
+.fx-mwt .bat.b3 { top: 52%; width: 12px; animation-duration: 15s; animation-delay: -9s; }
+@keyframes mgx-fly { 0% { transform: translate(0, 0); } 25% { transform: translate(80px, -18px); } 50% { transform: translate(160px, 6px); } 75% { transform: translate(230px, -14px); } 100% { transform: translate(320px, 0); } }
+@keyframes mgx-flap { to { transform: scaleY(.45); } }
+/* Fantasia (and Abeer): stars that twinkle, a portal turning behind the cover, sparks rising out of the book */
+.fx-fan .stars, .fx-fantasy .stars {
+	inset: 0; opacity: .8; animation: mgx-twinkle 4s ease-in-out infinite alternate;
+	background-image:
+		radial-gradient(1.5px 1.5px at 12% 22%, #fff, transparent), radial-gradient(1px 1px at 30% 64%, #fff, transparent),
+		radial-gradient(1.5px 1.5px at 56% 36%, #fff, transparent), radial-gradient(1px 1px at 76% 78%, #fff, transparent),
+		radial-gradient(1px 1px at 88% 14%, #fff, transparent), radial-gradient(1.5px 1.5px at 42% 88%, #fff, transparent),
+		radial-gradient(1px 1px at 66% 56%, #fff, transparent), radial-gradient(1px 1px at 20% 48%, #fff, transparent);
+	background-size: 180px 150px;
+}
+@keyframes mgx-twinkle { from { opacity: .35; } to { opacity: .95; } }
+.fx-fan .portal, .fx-fantasy .portal {
+	left: 50%; top: 66%; width: 210px; height: 210px; margin: -105px 0 0 -105px; border-radius: 50%;
+	border: 1.5px solid rgba(190, 165, 255, .5); box-shadow: 0 0 40px rgba(150, 120, 240, .45), inset 0 0 40px rgba(150, 120, 240, .3);
+	background: conic-gradient(from 0deg, transparent, rgba(190, 165, 255, .18), transparent 40%);
+	animation: mgx-spin 18s linear infinite;
+}
+.fx-fantasy .portal { top: 46%; width: 180px; height: 180px; margin: -90px 0 0 -90px; }
+@keyframes mgx-spin { to { transform: rotate(360deg); } }
+.fx-fan .spark { bottom: 22%; left: 50%; width: 4px; height: 4px; border-radius: 50%; background: #e9dcff; box-shadow: 0 0 8px 2px rgba(190, 160, 255, .9); opacity: 0; animation: mgx-rise 4s ease-out infinite; }
+.fx-fan .spark.s1 { --dx: -40px; }
+.fx-fan .spark.s2 { --dx: 30px; animation-delay: -1s; }
+.fx-fan .spark.s3 { --dx: -14px; animation-delay: -2s; }
+.fx-fan .spark.s4 { --dx: 48px; animation-delay: -3s; }
+@keyframes mgx-rise { 0% { opacity: 0; transform: translate(0, 0) scale(.6); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx), -150px) scale(1.2); } }
+/* Safari: a low sun in bands, heat on the air, the savanna with its acacias against it */
+.fx-saf .sun {
+	inset-inline-start: 6%; top: 40%; width: 104px; height: 104px; border-radius: 50%;
+	background: radial-gradient(circle, #f6d77c, #e9a33e 55%, #c8611f);
+	-webkit-mask: repeating-linear-gradient(#000 0 13px, transparent 13px 16px); mask: repeating-linear-gradient(#000 0 13px, transparent 13px 16px);
+	opacity: .7; animation: mgx-sun 7s ease-in-out infinite alternate;
+}
+@keyframes mgx-sun { to { transform: translateY(10px); opacity: .9; } }
+.fx-saf .savanna { left: 0; right: 0; bottom: 0; width: 100%; height: 34%; fill: rgba(16, 18, 8, .72); stroke: rgba(16, 18, 8, .72); stroke-width: 1.4; }
+.fx-saf .haze { left: 0; right: 0; bottom: 18%; height: 30%; background: linear-gradient(transparent, rgba(255, 200, 120, .12), transparent); animation: mgx-haze 3s ease-in-out infinite alternate; }
+@keyframes mgx-haze { to { transform: translateY(-6px) scaleY(1.15); opacity: .5; } }
+/* Refaat: his lantern, where it is in his hand (27% across, half-way down), its glow breathing, three moths circling */
+.mg-lantern { position: absolute; left: 27.4%; top: 49.6%; width: 0; height: 0; }
+.mg-lantern .glow {
+	position: absolute; left: -70px; top: -70px; width: 140px; height: 140px; border-radius: 50%; z-index: -1;
+	background: radial-gradient(closest-side, rgba(255, 196, 92, .8), rgba(240, 150, 60, .3) 45%, transparent);
+	animation: mgx-glow 3.2s ease-in-out infinite;
+}
+@keyframes mgx-glow { 0%, 100% { opacity: .85; transform: scale(1); } 30% { opacity: 1; transform: scale(1.1); } 42% { opacity: .55; transform: scale(.96); } 46% { opacity: .95; transform: scale(1.05); } }
+.mg-lantern .moth { position: absolute; left: 0; top: 0; transform: rotateZ(calc(var(--i) * 120deg)) scaleY(.55); }
+.mg-lantern .moth b { position: absolute; left: -4px; top: -3px; width: 8px; height: 7px; animation: mgx-orbit calc(3s + var(--i) * 1s) linear infinite; animation-delay: calc(var(--i) * -1.2s); }
+.mg-lantern .moth:nth-child(3) b { animation-direction: reverse; }
+.mg-lantern .moth b::before, .mg-lantern .moth b::after { content: ''; position: absolute; top: 0; width: 5px; height: 7px; background: #e3d2ad; border-radius: 80% 20% 70% 30%; box-shadow: 0 0 5px rgba(255, 200, 110, .8); animation: mgx-flap .12s ease-in-out infinite alternate; }
+.mg-lantern .moth b::before { left: -1px; transform-origin: right center; }
+.mg-lantern .moth b::after { right: -1px; transform-origin: left center; border-radius: 20% 80% 30% 70%; }
+@keyframes mgx-orbit { from { transform: rotate(0deg) translateX(calc(16px + var(--i) * 7px)) rotate(0deg) scaleY(1.8); } to { transform: rotate(360deg) translateX(calc(16px + var(--i) * 7px)) rotate(-360deg) scaleY(1.8); } }
+.fx-ghosts .fog { opacity: .7; }
+/* Alaa: the heartbeat running across behind him */
+.fx-medicine .ecg { left: 0; right: 0; top: 44%; width: 100%; height: 56px; opacity: .7; }
+.fx-medicine .ecg path { fill: none; stroke: #4fc39a; stroke-width: 3; stroke-linejoin: round; stroke-dasharray: 1400; stroke-dashoffset: 1400; filter: drop-shadow(0 0 5px rgba(79, 195, 154, .8)); animation: mgx-beat 3s linear infinite; }
+@keyframes mgx-beat { to { stroke-dashoffset: 0; } }
 
 /* «حياته»: two columns with a rule between, and his photograph with his wish */
 .mega-life .mega-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(240px, .9fr); gap: 0; }
@@ -353,7 +452,7 @@ html[dir="rtl"] .mg-col { padding: 6px 10px 6px 6px; }
 
 /* «إرثه»: a list in two columns, a still from the Netflix series and his books in bars, on a dark card in both themes */
 .mega-legacy .mega-in { grid-template-columns: minmax(0, 1.6fr) minmax(0, .62fr) minmax(0, 1fr); padding: 14px; }
-.mg-text { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 14px; align-content: center; }
+.mg-text { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 10px; align-content: center; }
 .mg-tl { display: block; padding: 11px 12px; border-radius: 12px; transition: background .2s; }
 .mg-tl:hover { background: var(--ink-3); }
 .mg-tl b { display: block; font-family: var(--f-display); font-weight: 500; font-size: 16.5px; }
@@ -382,12 +481,8 @@ html[lang="en"] .mg-data b { font-family: var(--f-display); font-weight: 700; fo
 /* a tablet (the menu on its own row under the name): the panels fold to fit a narrower, shorter screen */
 @media (max-width: 1100px) {
 	.mega-in { max-height: calc(100dvh - 128px); }
-	.mega-works .mega-in { grid-template-columns: minmax(0, 1fr); }
-	.mg-card { min-height: 210px; }
-	.mg-cover { width: 44%; }
-	.mg-more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 8px; }
-	.mg-more .mg-h { grid-column: 1 / -1; }
-	.mg-row { border-bottom: 0; }
+	.mg-card { min-height: 214px; }
+	.mg-shelf { gap: 8px; }
 	.mg-band-art { width: 180px; }
 	.mega-world .mega-in { grid-template-columns: minmax(0, 1fr); }
 	.mg-fig { min-height: 230px; }
@@ -399,14 +494,26 @@ html[lang="en"] .mg-data b { font-family: var(--f-display); font-weight: 700; fo
 	.mg-text { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 	.mg-tall { min-height: 230px; border-radius: 18px; }
 }
+/* a narrow tablet: «أعماله» in one column, its list in three */
+@media (max-width: 1000px) {
+	.mega-works .mega-in { grid-template-columns: minmax(0, 1fr); }
+	.mg-card { min-height: 200px; }
+	.mg-cover { width: 44%; }
+	.mg-more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 8px; }
+	.mg-more .mg-h { grid-column: 1 / -1; }
+	.mg-row { border-bottom: 0; }
+}
 @media (max-width: 900px) {
 	.mg-more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 	.mg-band-art { display: none; }
+	.mg-book span { display: none; }
 	.mg-text { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) {
 	.mega, .mega.is-open, .mg-cover, .mg-fig-img, .mg-photo-img, .mg-tall-img, .mnav-chev { transition: none; }
-	.mg-chip, .mega-legacy.is-open .mg-bars i { animation: none; }
+	.mg-chip, .mega-legacy.is-open .mg-bars i, .mg-fx *, .mg-fx svg, .mg-lantern *, .mg-lantern *::before, .mg-lantern *::after { animation: none !important; }
+	.mg-fx .bat, .mg-fx .spark, .mg-lantern .moth { display: none; }
+	.fx-medicine .ecg path { stroke-dashoffset: 0; }
 }
 
 /* ---------- Page hero ---------- */
