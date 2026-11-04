@@ -290,19 +290,6 @@ html[dir="ltr"] a:hover > .mg-arr, html[dir="ltr"] a:hover .mg-arr { transform: 
 }
 .mg-card::after, .mg-fig::before { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .09); pointer-events: none; z-index: 3; }
 .mg-card { min-height: 244px; padding: 16px 18px; }
-/* under the covers: his novels and two more series on a shelf */
-.mg-books { grid-column: 1 / -1; padding: 8px 6px 4px; border-radius: 16px; background: var(--ink-3); }
-html[data-theme="light"] .mg-books { background: #efe5d0; }
-.mg-books .mg-h { margin-inline: 6px; }
-.mg-shelf { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; padding: 0 6px 4px; }
-.mg-book { display: block; min-width: 0; text-align: center; }
-.mg-book-img {
-	display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 3px 5px 5px 3px; background: var(--ink-2);
-	box-shadow: inset 3px 0 0 rgba(0, 0, 0, .25), 0 8px 14px rgba(0, 0, 0, .35); transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s;
-}
-.mg-book:hover .mg-book-img, .mg-book:focus-visible .mg-book-img { transform: translateY(-6px) rotate(-2deg); box-shadow: 0 14px 22px rgba(0, 0, 0, .45); }
-.mg-book span { display: block; margin-top: 6px; font-size: 12px; line-height: 1.35; color: var(--paper-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.mg-book:hover span { color: var(--paper); }
 .mg-card-t { position: relative; z-index: 2; display: block; }
 .mg-card-t b { display: block; font-family: var(--f-chunky); font-weight: normal; font-size: 25px; line-height: 1.2; }
 html[lang="en"] .mg-card-t b { font-family: var(--f-display); font-weight: 600; font-size: 22px; }
@@ -321,20 +308,25 @@ html[data-theme="light"] .mg-more { background: #efe5d0; }
 .mg-row b { flex: 1; font-family: var(--f-display); font-weight: 500; }
 .mg-row .mg-ic { width: 24px; height: 24px; border: 0; background: none; color: var(--ember); }
 .mg-band {
-	grid-column: 1 / -1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 16px;
-	min-height: 74px; padding: 12px 20px; border-radius: 16px; border: 1px solid var(--line);
+	grid-column: 1 / -1; position: relative; display: flex; align-items: center; gap: 20px;
+	min-height: 92px; padding: 10px 20px; border-radius: 16px; border: 1px solid var(--line);
 	background: linear-gradient(to var(--band-to, left), color-mix(in srgb, var(--ember) 12%, transparent), transparent 70%);
 }
 html[dir="ltr"] .mg-band { --band-to: right; }
+.mg-band-tx { flex: none; }
 .mg-band-tx b { display: block; font-family: var(--f-display); font-weight: 600; font-size: 17px; }
+.mg-band-tx:hover b { color: var(--ember); }
 .mg-band-tx em { margin-inline-start: 8px; padding: 1px 9px; border-radius: 999px; font-style: normal; font-size: 11.5px; font-weight: 600; vertical-align: 2px; color: var(--ember); background: color-mix(in srgb, var(--ember) 16%, transparent); }
 .mg-band-tx small { display: block; font-size: 13.5px; color: var(--paper-dim); }
-.mg-band-art { position: relative; flex: none; width: 260px; height: 64px; }
-.mg-chip { position: absolute; width: 36px; border-radius: 3px; box-shadow: 0 8px 14px rgba(0, 0, 0, .4); animation: mg-float 6s ease-in-out infinite; }
-.mg-chip.c0 { inset-inline-start: 4%; top: 6px; rotate: -10deg; }
-.mg-chip.c1 { inset-inline-start: 30%; top: 16px; rotate: 6deg; animation-delay: -1.5s; }
-.mg-chip.c2 { inset-inline-start: 56%; top: 2px; rotate: -4deg; animation-delay: -3s; }
-.mg-chip.c3 { inset-inline-start: 82%; top: 14px; rotate: 9deg; animation-delay: -4.5s; }
+/* his books, floating in a loose row beside it, each lifting and coming forward under the pointer */
+.mg-band-art { position: relative; flex: 1; min-width: 0; height: 74px; margin-inline-end: 34px; }
+.mg-chip {
+	position: absolute; top: var(--y); inset-inline-start: var(--x); width: 38px; rotate: var(--r);
+	animation: mg-float 6s ease-in-out infinite; animation-delay: var(--d);
+	transition: rotate .3s, scale .3s, z-index 0s;
+}
+.mg-chip-img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 3px; box-shadow: 0 8px 14px rgba(0, 0, 0, .45); }
+.mg-chip:hover, .mg-chip:focus-visible { z-index: 2; rotate: 0deg; scale: 1.35; }
 @keyframes mg-float { 50% { transform: translateY(-6px); } }
 
 /* «عالمه»: the list in two columns, and three heroes standing on their series' colour */
@@ -359,27 +351,23 @@ html[lang="en"] .mg-fig-t b { font-family: var(--f-display); font-weight: 600; f
 .mg-fx i, .mg-fx b, .mg-fx span, .mg-fx svg { position: absolute; display: block; }
 .mega:not(.is-open) .mg-fx *, .mega:not(.is-open) .mg-lantern * { animation-play-state: paused !important; }
 .mg-card .mg-cover { z-index: 1; }
-/* Ma Wara' al-Tabi'a: fog along the ground, two pairs of eyes that open and blink, bats crossing */
+/* Ma Wara' al-Tabi'a: the footer's haunted hill behind the cover, its bats flying over, eyes in the dark and fog */
 .fx-mwt .fog, .fx-ghosts .fog {
 	left: -50%; bottom: -20%; width: 200%; height: 60%; opacity: .8; filter: blur(6px);
 	background: radial-gradient(closest-side, rgba(215, 218, 228, .3), transparent 70%) 0 0 / 34% 100% repeat-x;
 	animation: mgx-drift 24s linear infinite;
 }
+.fx-mwt .fog { z-index: 2; }
 .fx-mwt .fog.f2, .fx-ghosts .fog.f2 { bottom: 6%; opacity: .35; animation-duration: 36s; animation-direction: reverse; background-size: 50% 100%; }
 @keyframes mgx-drift { to { transform: translateX(25%); } }
-.fx-mwt .eyes { top: 46%; inset-inline-start: 12%; width: 22px; height: 6px; animation: mgx-blink 5s infinite; }
-.fx-mwt .eyes::before, .fx-mwt .eyes::after { content: ''; position: absolute; top: 0; width: 7px; height: 5px; border-radius: 50%; background: #ffd25e; box-shadow: 0 0 8px 2px rgba(255, 190, 60, .7); }
-.fx-mwt .eyes::before { left: 0; }
-.fx-mwt .eyes::after { right: 0; }
-.fx-mwt .eyes.e2 { top: 62%; inset-inline-start: auto; inset-inline-end: 10%; scale: .7; animation-delay: -2.3s; animation-duration: 6.5s; }
-@keyframes mgx-blink { 0%, 30%, 100% { opacity: 0; transform: scaleY(.1); } 36%, 60% { opacity: 1; transform: scaleY(1); } 62% { transform: scaleY(.1); } 64%, 80% { opacity: 1; transform: scaleY(1); } 86% { opacity: 0; } }
-.fx-mwt .bat { width: 22px; color: rgba(10, 6, 8, .85); top: 38%; left: -12%; animation: mgx-fly 9s linear infinite; }
-.fx-mwt .bat svg { position: static; width: 100%; height: auto; animation: mgx-flap .18s ease-in-out infinite alternate; }
-.fx-mwt .bat.b2 { top: 24%; width: 15px; animation-duration: 12s; animation-delay: -5s; }
-.fx-mwt .bat.b3 { top: 52%; width: 12px; animation-duration: 15s; animation-delay: -9s; }
-@keyframes mgx-fly { 0% { transform: translate(0, 0); } 25% { transform: translate(80px, -18px); } 50% { transform: translate(160px, 6px); } 75% { transform: translate(230px, -14px); } 100% { transform: translate(320px, 0); } }
-@keyframes mgx-flap { to { transform: scaleY(.45); } }
-/* Fantasia (and Abeer): stars that twinkle, a portal turning behind the cover, sparks rising out of the book */
+.fx-mwt .hill { position: absolute; bottom: -2px; inset-inline-end: -8%; height: 74%; width: auto; max-width: none; opacity: .95; }
+html[dir="ltr"] .fx-mwt .hill { transform: scaleX(-1); }
+.fx-mwt .eyes { display: flex; gap: 6px; top: auto; bottom: 30%; inset-inline-start: 9%; opacity: 0; animation: ft-eyes 9s infinite; }
+.fx-mwt .eyes i { position: static; width: 7px; height: 4px; border-radius: 50%; background: #ffb347; box-shadow: 0 0 8px 2px rgba(255, 150, 60, .6); animation: ft-blink 4.2s infinite; }
+.fx-mwt .eyes.e2 { bottom: 12%; inset-inline-start: 22%; gap: 4px; animation-delay: 4s; }
+.fx-mwt .eyes.e2 i { width: 5px; height: 3px; background: #ff5a3c; box-shadow: 0 0 8px 2px rgba(255, 60, 40, .6); animation-delay: 1.3s; }
+.mg-fx .mg-bats { position: absolute; top: -6%; inset-inline-end: -10%; width: 120%; height: 80%; }
+/* Fantasia: the footer's stars, its moon with the witch riding across it, sparks rising from the book */
 .fx-fan .stars, .fx-fantasy .stars {
 	inset: 0; opacity: .8; animation: mgx-twinkle 4s ease-in-out infinite alternate;
 	background-image:
@@ -389,32 +377,27 @@ html[lang="en"] .mg-fig-t b { font-family: var(--f-display); font-weight: 600; f
 		radial-gradient(1px 1px at 66% 56%, #fff, transparent), radial-gradient(1px 1px at 20% 48%, #fff, transparent);
 	background-size: 180px 150px;
 }
-@keyframes mgx-twinkle { from { opacity: .35; } to { opacity: .95; } }
-.fx-fan .portal, .fx-fantasy .portal {
-	left: 50%; top: 66%; width: 210px; height: 210px; margin: -105px 0 0 -105px; border-radius: 50%;
-	border: 1.5px solid rgba(190, 165, 255, .5); box-shadow: 0 0 40px rgba(150, 120, 240, .45), inset 0 0 40px rgba(150, 120, 240, .3);
-	background: conic-gradient(from 0deg, transparent, rgba(190, 165, 255, .18), transparent 40%);
-	animation: mgx-spin 18s linear infinite;
-}
-.fx-fantasy .portal { top: 46%; width: 180px; height: 180px; margin: -90px 0 0 -90px; }
-@keyframes mgx-spin { to { transform: rotate(360deg); } }
-.fx-fan .spark { bottom: 22%; left: 50%; width: 4px; height: 4px; border-radius: 50%; background: #e9dcff; box-shadow: 0 0 8px 2px rgba(190, 160, 255, .9); opacity: 0; animation: mgx-rise 4s ease-out infinite; }
+.mg-fx .ft-luna { top: 46%; inset-inline-start: auto; inset-inline-end: 6%; width: 62px; height: 62px; }
+.mg-fx .ft-luna .ft-moon { position: absolute; }
+.mg-fx .ft-witch { position: absolute; width: 58px; top: 14px; inset-inline-start: -14px; }
+.fx-fan .spark { bottom: 22%; left: 50%; width: 4px; height: 4px; border-radius: 50%; background: #e9dcff; box-shadow: 0 0 8px 2px rgba(190, 160, 255, .9); opacity: 0; animation: mgx-rise 4s ease-out infinite; z-index: 2; }
 .fx-fan .spark.s1 { --dx: -40px; }
 .fx-fan .spark.s2 { --dx: 30px; animation-delay: -1s; }
 .fx-fan .spark.s3 { --dx: -14px; animation-delay: -2s; }
 .fx-fan .spark.s4 { --dx: 48px; animation-delay: -3s; }
 @keyframes mgx-rise { 0% { opacity: 0; transform: translate(0, 0) scale(.6); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx), -150px) scale(1.2); } }
-/* Safari: a low sun in bands, heat on the air, the savanna with its acacias against it */
-.fx-saf .sun {
-	inset-inline-start: 6%; top: 40%; width: 104px; height: 104px; border-radius: 50%;
-	background: radial-gradient(circle, #f6d77c, #e9a33e 55%, #c8611f);
-	-webkit-mask: repeating-linear-gradient(#000 0 13px, transparent 13px 16px); mask: repeating-linear-gradient(#000 0 13px, transparent 13px 16px);
-	opacity: .7; animation: mgx-sun 7s ease-in-out infinite alternate;
+/* Safari: the footer's sunset in the shape of Africa, and the savanna in front of it */
+.mg-fx .mg-africa { position: absolute; top: 36%; inset-inline-start: 6%; width: 74px; height: 82px; opacity: .92; filter: drop-shadow(0 0 18px rgba(150, 180, 80, .45)); }
+.fx-saf .ft-savanna { position: absolute; left: 0; bottom: -2px; width: 135%; max-width: none; height: auto; inset-inline-start: -18%; z-index: 2; }
+@keyframes mgx-twinkle { from { opacity: .35; } to { opacity: .95; } }
+.fx-fantasy .portal {
+	left: 50%; top: 46%; width: 180px; height: 180px; margin: -90px 0 0 -90px; border-radius: 50%;
+	border: 1.5px solid rgba(190, 165, 255, .5); box-shadow: 0 0 40px rgba(150, 120, 240, .45), inset 0 0 40px rgba(150, 120, 240, .3);
+	background: conic-gradient(from 0deg, transparent, rgba(190, 165, 255, .18), transparent 40%);
+	animation: mgx-spin 18s linear infinite;
 }
-@keyframes mgx-sun { to { transform: translateY(10px); opacity: .9; } }
-.fx-saf .savanna { left: 0; right: 0; bottom: 0; width: 100%; height: 34%; fill: rgba(16, 18, 8, .72); stroke: rgba(16, 18, 8, .72); stroke-width: 1.4; }
-.fx-saf .haze { left: 0; right: 0; bottom: 18%; height: 30%; background: linear-gradient(transparent, rgba(255, 200, 120, .12), transparent); animation: mgx-haze 3s ease-in-out infinite alternate; }
-@keyframes mgx-haze { to { transform: translateY(-6px) scaleY(1.15); opacity: .5; } }
+@keyframes mgx-spin { to { transform: rotate(360deg); } }
+@keyframes mgx-flap { to { transform: scaleY(.45); } }
 /* Refaat: his lantern, where it is in his hand (27% across, half-way down), its glow breathing, three moths circling */
 .mg-lantern { position: absolute; left: 27.4%; top: 49.6%; width: 0; height: 0; }
 .mg-lantern .glow {
@@ -482,8 +465,6 @@ html[lang="en"] .mg-data b { font-family: var(--f-display); font-weight: 700; fo
 @media (max-width: 1100px) {
 	.mega-in { max-height: calc(100dvh - 128px); }
 	.mg-card { min-height: 214px; }
-	.mg-shelf { gap: 8px; }
-	.mg-band-art { width: 180px; }
 	.mega-world .mega-in { grid-template-columns: minmax(0, 1fr); }
 	.mg-fig { min-height: 230px; }
 	.mega-life .mega-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
@@ -505,14 +486,14 @@ html[lang="en"] .mg-data b { font-family: var(--f-display); font-weight: 700; fo
 }
 @media (max-width: 900px) {
 	.mg-more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-	.mg-band-art { display: none; }
-	.mg-book span { display: none; }
+	.mg-chip { width: 32px; }
 	.mg-text { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) {
 	.mega, .mega.is-open, .mg-cover, .mg-fig-img, .mg-photo-img, .mg-tall-img, .mnav-chev { transition: none; }
 	.mg-chip, .mega-legacy.is-open .mg-bars i, .mg-fx *, .mg-fx svg, .mg-lantern *, .mg-lantern *::before, .mg-lantern *::after { animation: none !important; }
-	.mg-fx .bat, .mg-fx .spark, .mg-lantern .moth { display: none; }
+	.mg-fx .spark, .mg-lantern .moth { display: none; }
+	.fx-mwt .eyes { opacity: 1; }
 	.fx-medicine .ecg path { stroke-dashoffset: 0; }
 }
 

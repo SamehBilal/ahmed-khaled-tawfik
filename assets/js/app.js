@@ -110,6 +110,28 @@
 		}
 	};
 
+	/* the footer's night, shared with the main menu's cards: Safari's sunset in the shape of Africa (its ids prefixed, p,
+	   so the footer's and the menu's copies do not meet) and the three bats */
+	function ftAfrica(p) {
+		return ('<svg class="ft-africa" viewBox="0 0 100 110"><defs>' +
+			'<linearGradient id="ft-sun" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b4c86a"/><stop offset=".55" stop-color="#86a045"/><stop offset="1" stop-color="#5a6b2a"/></linearGradient>' +
+			'<mask id="ft-bands"><rect width="100" height="110" fill="#fff"/><g fill="#000"><rect x="0" y="15" width="64" height="1.6"/><rect x="10" y="23" width="70" height="1.6"/><rect x="0" y="31" width="58" height="1.6"/><rect x="20" y="39" width="70" height="1.4"/></g></mask></defs>' +
+			'<g mask="url(#ft-bands)" fill="url(#ft-sun)"><path d="M18 6 40 2 55 6 62 4 70 10 76 26 86 34 98 36 90 48 82 60 80 72 76 80 72 92 64 104 52 108 46 100 42 86 40 72 38 60 36 52 30 50 18 52 8 46 2 36 4 24 10 14Z"/>' +
+			'<ellipse cx="88" cy="84" rx="3" ry="7" transform="rotate(20 88 84)"/></g></svg>').replace(/ft-(sun|bands|africa)/g, p + '-$1');
+	}
+	/* the bats: after Calleb's CodePen "Halloween" (codepen.io/Calleb/pen/vYZqgwz, MIT) —
+	   three of them, wings flapping, eyes glowing, each on its own flight path */
+	function penBat(k) {
+		return '<g class="pb pb' + k + '">' +
+			'<path d="M306.9,145.4l-7.3,7.3l-7.3-7.3c-0.6-0.6-1.6-0.2-1.6,0.6v7.9h7.6h2.5h7.6V146C308.5,145.2,307.5,144.8,306.9,145.4z"/>' +
+			'<path class="pb-w" d="M408.4,167.5c-3.3-2.7-7.6-4.4-12.2-4.4c-9.3,0-17.1,6.6-18.9,15.4c-2.8-1.6-6.1-2.5-9.6-2.5c-8.5,0-15.7,5.5-18.3,13.1c-3-6.6-9.7-11.3-17.5-11.3c-7.7,0-14.4,4.6-17.5,11.1c-6.9-4.7-11-10.7-11-17.1c0-2.4,0.6-4.7,1.6-6.9c0.2,0,0.4,0,0.7,0c24.7,0,45.4-9,51.2-21.1C383,144.1,404.5,154.3,408.4,167.5z"/>' +
+			'<path class="pb-w1" d="M191.6,167.5c3.3-2.7,7.6-4.4,12.2-4.4c9.3,0,17.1,6.6,18.9,15.4c2.8-1.6,6.1-2.5,9.6-2.5c8.5,0,15.7,5.5,18.3,13.1c3-6.6,9.7-11.3,17.5-11.3c7.7,0,14.4,4.6,17.5,11.1c6.9-4.7,11-10.7,11-17.1c0-2.4-0.6-4.7-1.6-6.9c-0.2,0-0.4,0-0.7,0c-24.7,0-45.4-9-51.2-21.1C217,144.1,195.5,154.3,191.6,167.5z"/>' +
+			'<path d="M312.3,158.2c0,5.2-6,27.3-12.9,27.3c-7,0-12.3-22.1-12.3-27.3s5.7-9.5,12.6-9.5C306.6,148.8,312.3,153,312.3,158.2z"/>' +
+			'<ellipse class="pb-eye" cx="295.2" cy="161.8" rx="1.5" ry="3"/><ellipse class="pb-eye" cx="304.2" cy="161.8" rx="1.5" ry="3"/>' +
+		'</g>';
+	}
+	function ftBats(cls) { return '<svg class="' + cls + '" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet">' + penBat(0) + penBat(1) + penBat(2) + '</svg>'; }
+
 	/* ---------- the main menu on a wider screen: six words, four of them opening a large panel ----------
 	   «أعماله» his three series as covers and the rest as a list, with «من أين أبدأ؟» along its foot; «عالمه» the pages
 	   inside his stories beside three of his heroes standing; «حياته» his life and his writing in two columns beside his
@@ -207,8 +229,11 @@
 			{ href: 'quiz.html', ic: 'puzzle', ar: 'ركن القرّاء', en: 'Readers’ corner', dar: 'اختبارات وألعاب ومن قال هذا؟', den: 'Quizzes, games and who said it?' },
 			{ href: 'lists.html', ic: 'bookmark', ar: 'قوائمي ورحلتي', en: 'My lists & journey', dar: 'ما قرأته وما تريد قراءته', den: 'What you have read and want to' }
 		],
-		/* under the series: his novels, and two more series of his, a cover each (their small copies, covers-s) */
+		/* the books floating along «من أين أبدأ؟»: the series' fronts, his novels and two more series (small copies, covers-s) */
 		books: [
+			{ href: 'series.html?id=mwt', ar: 'ما وراء الطبيعة', en: 'Ma Wara’ al-Tabi’a', img: 'assets/img/covers/fronts/mwt.webp' },
+			{ href: 'series.html?id=fantasia', ar: 'فانتازيا', en: 'Fantasia', img: 'assets/img/covers/fronts/fantasia.webp' },
+			{ href: 'series.html?id=safari', ar: 'سافاري', en: 'Safari', img: 'assets/img/covers/fronts/safari.webp' },
 			{ href: 'book.html?id=utopia', ar: 'يوتوبيا', en: 'Utopia', img: 'novels/utopia-53524902' },
 			{ href: 'book.html?id=senga', ar: 'السنجة', en: 'Al-Senga', img: 'novels/openlibrary-8b37322cd6fa' },
 			{ href: 'book.html?id=icarus', ar: 'مثل إيكاروس', en: 'Like Icarus', img: 'novels/abjjad-d28ae02b1015' },
@@ -221,19 +246,17 @@
 		/* his own books (AKT.works) a year at a time, 2005–2018 */
 		bars: [2, 2, 5, 8, 5, 3, 0, 6, 1, 5, 3, 1, 2, 3]
 	};
-	/* the series cards and the heroes carry the effects of their own pages: Ma Wara' al-Tabi'a's fog, bats and eyes in the
-	   dark; Fantasia's stars and a turning portal, sparks rising; Safari's sun going down over the savanna and its acacias;
-	   and on the heroes those of character.html — Refaat's fog and his lantern's breathing glow with moths circling it,
+	/* the series cards carry the footer's night, each its own part of it, and the heroes those of character.html — Refaat's fog and his lantern's breathing glow with moths circling it,
 	   Abeer's stars and portal, Alaa's heartbeat (they move only while the panel is open) */
-	var MEGA_BAT = '<svg viewBox="0 0 20 10"><path fill="currentColor" d="M10 4C8 1 5 0 0 2c3 1 3 3 2 5 2-1 4-1 5 1 1-2 2-2 3-1 1-1 2-1 3 1 1-2 3-2 5-1-1-2-1-4 2-5-5-2-8-1-10 2Z"/></svg>';
 	var MEGA_FX = {
-		mwt: '<span class="mg-fx fx-mwt" aria-hidden="true"><i class="fog"></i><i class="fog f2"></i><b class="eyes"></b><b class="eyes e2"></b>' +
-			'<span class="bat b1">' + MEGA_BAT + '</span><span class="bat b2">' + MEGA_BAT + '</span><span class="bat b3">' + MEGA_BAT + '</span></span>',
-		fantasia: '<span class="mg-fx fx-fan" aria-hidden="true"><i class="stars"></i><i class="portal"></i><i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i><i class="spark s4"></i></span>',
-		safari: '<span class="mg-fx fx-saf" aria-hidden="true"><i class="sun"></i>' +
-			'<svg class="savanna" viewBox="0 0 240 60" preserveAspectRatio="xMidYMax slice"><path d="M0 60V44Q60 38 120 43T240 40V60Z"/>' +
-			'<path d="M176 43l2-17h2l2 17zM160 26q20-9 40 0-6 3-20 3t-20-3Z"/><path d="M40 44l1.4-11h1.4l1.4 11zM30 33q13-6 26 0-4 2-13 2t-13-2Z"/>' +
-			'<path d="M96 44q2-7 4 0M104 44q1.5-5 3 0M214 42q2-6 4 0"/></svg><i class="haze"></i></span>',
+		/* Ma Wara' al-Tabi'a: the footer's haunted hill with its lit castle, its bats, eyes in the dark and fog */
+		mwt: '<span class="mg-fx fx-mwt" aria-hidden="true"><i class="fog"></i><img class="hill" data-src="assets/img/footer/haunted-hill.webp" alt="">' +
+			'<b class="eyes"><i></i><i></i></b><b class="eyes e2"><i></i><i></i></b>' + ftBats('ft-bats mg-bats') + '<i class="fog f2"></i></span>',
+		/* Fantasia: its stars, the moon with the witch riding across it, and sparks rising from the book */
+		fantasia: '<span class="mg-fx fx-fan" aria-hidden="true"><i class="stars"></i><span class="ft-luna"><span class="ft-moon"></span><img class="ft-witch" data-src="assets/img/footer/witch.webp" alt=""></span>' +
+			'<i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i><i class="spark s4"></i></span>',
+		/* Safari: the sunset in the shape of Africa behind the savanna, its acacias, elephant, giraffes and car */
+		safari: '<span class="mg-fx fx-saf" aria-hidden="true">' + ftAfrica('mg') + '<img class="ft-savanna" data-src="assets/img/footer/savanna.webp" alt=""></span>',
 		refaat: '<span class="mg-fx fx-ghosts" aria-hidden="true"><i class="fog"></i><i class="fog f2"></i></span>',
 		'refaat-in': '<span class="mg-lantern" aria-hidden="true"><b class="glow"></b>' + [0, 1, 2].map(function (i) { return '<i class="moth" style="--i:' + i + '"><b></b></i>'; }).join('') + '</span>',
 		abeer: '<span class="mg-fx fx-fantasy" aria-hidden="true"><i class="stars"></i><i class="portal"></i></span>',
@@ -271,15 +294,18 @@
 				return '<a class="mg-card" href="series.html?id=' + s.id + '" style="--c:' + s.c + '"' + (file === 'series.html' && /[?&]id=/.test(location.search) && new RegExp('[?&]id=' + s.id + '(&|$)').test(location.search) ? ' aria-current="page"' : '') + '>' +
 					MEGA_FX[s.id] + '<span class="mg-card-t"><b>' + e(L(s.ar, s.en)) + '</b><small>' + e(L(s.sar, s.sen)) + '</small></span>' + img(s.img, 'mg-cover') + '</a>';
 			}).join('') +
-			'<div class="mg-books"><p class="mg-h">' + L('رواياته وسلاسل أخرى', 'His novels & more series') + '</p><div class="mg-shelf">' + MEGA.books.map(function (b) {
-				return '<a class="mg-book" href="' + b.href + '" title="' + e(L(b.ar, b.en)) + '">' + img('assets/img/covers-s/' + b.img + '.webp', 'mg-book-img') + '<span>' + e(L(b.ar, b.en)) + '</span></a>';
-			}).join('') + '</div></div></div>' +
+			'</div>' +
 			'<div class="mg-more"><p class="mg-h">' + L('المزيد', 'More') + '</p>' + MEGA.worksMore.map(function (n) {
 				return '<a class="mg-row" href="' + n.href + '"' + cur(n.href) + '>' + megaIcon(n.ic) + '<b>' + e(L(n.ar, n.en)) + '</b>' + arrow + '</a>';
 			}).join('') + '</div>' +
-			'<a class="mg-band" href="guide.html"' + cur('guide.html') + '><span class="mg-band-tx"><b>' + L('من أين أبدأ؟', 'Where to start?') + ' <em>' + L('للقارئ الجديد', 'New reader') + '</em></b>' +
-				'<small>' + L('مسارات قراءة مقترحة حسب ذوقك', 'Reading paths to suit your taste') + ' ' + arrow + '</small></span>' +
-				'<span class="mg-band-art" aria-hidden="true">' + ['mwt', 'fantasia', 'safari', 'rwg'].map(function (k, i) { return img('assets/img/covers/fronts/' + k + '.webp', 'mg-chip c' + i); }).join('') + '</span></a>');
+			/* along the foot: the way in for a new reader, and his books floating beside it — the three series' first covers,
+			   his novels and two more series — each opening its own page */
+			'<div class="mg-band"><a class="mg-band-tx" href="guide.html"' + cur('guide.html') + '><b>' + L('من أين أبدأ؟', 'Where to start?') + ' <em>' + L('للقارئ الجديد', 'New reader') + '</em></b>' +
+				'<small>' + L('مسارات قراءة مقترحة حسب ذوقك', 'Reading paths to suit your taste') + ' ' + arrow + '</small></a>' +
+				'<span class="mg-band-art">' + MEGA.books.map(function (b, i) {
+					return '<a class="mg-chip" href="' + b.href + '" title="' + e(L(b.ar, b.en)) + '" style="--x:' + (i * 100 / (MEGA.books.length - 1)).toFixed(1) + '%;--y:' + [6, 20, 2, 16, 8, 22, 4, 18, 10, 24, 0][i % 11] + 'px;--r:' + [-9, 6, -4, 8, -6, 4, -8, 7, -3, 9, -5][i % 11] + 'deg;--d:' + (-i * 0.55).toFixed(2) + 's">' +
+						img(b.img.indexOf('assets/') === 0 ? b.img : 'assets/img/covers-s/' + b.img + '.webp', 'mg-chip-img') + '<span class="visually-hidden">' + e(L(b.ar, b.en)) + '</span></a>';
+				}).join('') + '</span></div>');
 
 		var world = panel('world', L('عالمه', 'His world'),
 			'<div class="mg-list">' + MEGA.world.map(function (n) { return item(n); }).join('') + '</div>' +
@@ -724,24 +750,9 @@
 					'<path d="M40 36Q22 28 4 32V8Q22 4 40 12Z" fill="url(#ft-pg)"/><path d="M40 36Q58 28 76 32V8Q58 4 40 12Z" fill="url(#ft-pg)"/>' +
 					'<g fill="none" stroke="#9c8a62" stroke-width=".8" opacity=".7"><path d="M10 13Q22 10 34 15M10 18Q22 15 34 20M10 23Q22 20 34 25"/><path d="M46 15Q58 10 70 13M46 20Q58 15 70 18M46 25Q58 20 70 23"/></g>' +
 					'<path d="M40 12V36" stroke="#7d6c48" stroke-width="1"/></svg>';
-				var africa = '<svg class="ft-africa" viewBox="0 0 100 110"><defs>' +
-					'<linearGradient id="ft-sun" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b4c86a"/><stop offset=".55" stop-color="#86a045"/><stop offset="1" stop-color="#5a6b2a"/></linearGradient>' +
-					'<mask id="ft-bands"><rect width="100" height="110" fill="#fff"/><g fill="#000"><rect x="0" y="15" width="64" height="1.6"/><rect x="10" y="23" width="70" height="1.6"/><rect x="0" y="31" width="58" height="1.6"/><rect x="20" y="39" width="70" height="1.4"/></g></mask></defs>' +
-					'<g mask="url(#ft-bands)" fill="url(#ft-sun)"><path d="M18 6 40 2 55 6 62 4 70 10 76 26 86 34 98 36 90 48 82 60 80 72 76 80 72 92 64 104 52 108 46 100 42 86 40 72 38 60 36 52 30 50 18 52 8 46 2 36 4 24 10 14Z"/>' +
-					'<ellipse cx="88" cy="84" rx="3" ry="7" transform="rotate(20 88 84)"/></g></svg>';
+				var africa = ftAfrica('ft');
 				var bat = '<svg viewBox="0 0 20 10"><path fill="currentColor" d="M10 4C8 1 5 0 0 2c3 1 3 3 2 5 2-1 4-1 5 1 1-2 2-2 3-1 1-1 2-1 3 1 1-2 3-2 5-1-1-2-1-4 2-5-5-2-8-1-10 2Z"/></svg>';
-				/* the bats: after Calleb's CodePen "Halloween" (codepen.io/Calleb/pen/vYZqgwz, MIT) —
-				   three of them, wings flapping, eyes glowing, each on its own flight path */
-				var penBat = function (k) {
-					return '<g class="pb pb' + k + '">' +
-						'<path d="M306.9,145.4l-7.3,7.3l-7.3-7.3c-0.6-0.6-1.6-0.2-1.6,0.6v7.9h7.6h2.5h7.6V146C308.5,145.2,307.5,144.8,306.9,145.4z"/>' +
-						'<path class="pb-w" d="M408.4,167.5c-3.3-2.7-7.6-4.4-12.2-4.4c-9.3,0-17.1,6.6-18.9,15.4c-2.8-1.6-6.1-2.5-9.6-2.5c-8.5,0-15.7,5.5-18.3,13.1c-3-6.6-9.7-11.3-17.5-11.3c-7.7,0-14.4,4.6-17.5,11.1c-6.9-4.7-11-10.7-11-17.1c0-2.4,0.6-4.7,1.6-6.9c0.2,0,0.4,0,0.7,0c24.7,0,45.4-9,51.2-21.1C383,144.1,404.5,154.3,408.4,167.5z"/>' +
-						'<path class="pb-w1" d="M191.6,167.5c3.3-2.7,7.6-4.4,12.2-4.4c9.3,0,17.1,6.6,18.9,15.4c2.8-1.6,6.1-2.5,9.6-2.5c8.5,0,15.7,5.5,18.3,13.1c3-6.6,9.7-11.3,17.5-11.3c7.7,0,14.4,4.6,17.5,11.1c6.9-4.7,11-10.7,11-17.1c0-2.4-0.6-4.7-1.6-6.9c-0.2,0-0.4,0-0.7,0c-24.7,0-45.4-9-51.2-21.1C217,144.1,195.5,154.3,191.6,167.5z"/>' +
-						'<path d="M312.3,158.2c0,5.2-6,27.3-12.9,27.3c-7,0-12.3-22.1-12.3-27.3s5.7-9.5,12.6-9.5C306.6,148.8,312.3,153,312.3,158.2z"/>' +
-						'<ellipse class="pb-eye" cx="295.2" cy="161.8" rx="1.5" ry="3"/><ellipse class="pb-eye" cx="304.2" cy="161.8" rx="1.5" ry="3"/>' +
-					'</g>';
-				};
-				var bats = '<svg class="ft-bats" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet">' + penBat(0) + penBat(1) + penBat(2) + '</svg>';
+				var bats = ftBats('ft-bats');
 				/* hills with grass along the top edge; the same curve sets how high each thing stands */
 				var hillPts = [[0, 30], [110, 18], [220, 30], [400, 26], [600, 32], [790, 24], [1000, 28]];
 				var hillY = function (x) {
