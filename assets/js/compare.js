@@ -10,11 +10,12 @@ window.PAGE = {
 		eyebrow: { ar: 'من البيانات', en: 'From the data' },
 		title: { ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side' },
 		lead: {
-			ar: '«ما وراء الطبيعة» و«فانتازيا» و«سافاري» و«WWW» وأخواتها في جدول واحد: من يرويها، وكم عددًا، ومتى بدأت وانتهت، وما يُسمع منها، وكيف انتهت. وتحته أعداء أبطالها وأشرارها.',
-			en: 'Paranormal, Fantasia, Safari, WWW and the rest in one table: who tells each, how many issues, when it began and ended, what can be heard of it, and how it ended. Under it, its heroes’ enemies and villains.'
+			ar: '«ما وراء الطبيعة» و«فانتازيا» و«سافاري» و«WWW» و«روايات عالمية» وأخواتها في جدول واحد: من يرويها، وكم عددًا، ومتى بدأت وانتهت، وما يُسمع منها، وكيف انتهت. وتحته أعداء أبطالها وأشرارها.',
+			en: 'Paranormal, Fantasia, Safari, WWW, World Pocket Novels and the rest in one table: who tells each, how many issues, when it began and ended, what can be heard of it, and how it ended. Under it, its heroes’ enemies and villains.'
 		}
 	},
-	SERIES: ['mwt', 'fantasia', 'safari', 'www', 'shivers', 'specials'],
+	/* (with «روايات عالمية للجيب», the line of world novels he translated from its 7th issue, its issues in AKT.otherSeries) */
+	SERIES: ['mwt', 'fantasia', 'safari', 'www', 'rwg', 'shivers', 'specials'],
 	FROM: 1992, TO: 2019,
 	who: 'all',
 
@@ -44,17 +45,28 @@ window.PAGE = {
 		var ofSeries = function (arr, id, key) { return (arr || []).filter(function (x) { return (x[key || 'issues'] || []).some(function (k) { return String(k).indexOf(id + '-') === 0; }); }); };
 		var keys = function (o, id) { return Object.keys(o || {}).filter(function (k) { return k.indexOf(id + '-') === 0; }).length; };
 		/* (by its place in the list, so the last issue's second part is the last, not its first) */
+		var issuesOf = function (sid) { return S.seriesIssues(sid); };
+		var other = function (sid) { return App.byId(d.otherSeries, sid) || {}; };
 		var cover = function (sid, i) {
-			var is = ((d.issues || {})[sid] || [])[i];
+			var is = issuesOf(sid)[i];
 			return is ? '<a class="cp-cv" href="' + e(App.issueHref(sid, Object.assign({ _idx: i }, is))) + '" title="' + e(t(is.title)) + '">' + S.miniCover({ img: S.issueCover(sid, is), color: '#3a1414', title: t(is.title), num: App.num(is.n) }) + '<span>' + e(App.num(is.n) + ' · ' + t(is.title)) + '</span></a>' : '';
 		};
 		var none = '<span class="cp-none">—</span>';
 		var ROWS = [
-			[L('من يرويها', 'Who tells it'), function (s) { var c = chars[s.hero]; return c ? '<a href="character.html?id=' + e(c.id) + '">' + e(t(c.name)) + '</a><small>' + e(t(c.role)) + '</small>' : none; }],
+			[L('من يرويها', 'Who tells it'), function (s) {
+				var c = chars[s.hero];
+				if (c) return '<a href="character.html?id=' + e(c.id) + '">' + e(t(c.name)) + '</a><small>' + e(t(c.role)) + '</small>';
+				/* a series of others' novels: his part in it instead */
+				return other(s.id).role ? '<small>' + e(t(other(s.id).role)) + '</small>' : none;
+			}],
 			[L('السنوات', 'Years'), function (s) { return s.years ? e(App.num(s.years)) : none; }],
-			[L('الأعداد', 'Issues'), function (s) { var n = s.count || ((d.issues || {})[s.id] || []).length; return '<b class="cp-big">' + e(App.num(n)) + '</b>'; }],
-			[L('أول عدد', 'First issue'), function (s) { var is = (d.issues || {})[s.id] || []; return is.length ? cover(s.id, 0) : none; }],
-			[L('آخر عدد', 'Last issue'), function (s) { var is = (d.issues || {})[s.id] || []; return is.length > 1 ? cover(s.id, is.length - 1) : none; }],
+			[L('الأعداد', 'Issues'), function (s) {
+				var is = issuesOf(s.id), n = s.count || is.length, a = is.length && is[0].n, z = is.length && is[is.length - 1].n;
+				/* (where his part began after its first issue, which numbers) */
+				return '<b class="cp-big">' + e(App.num(n)) + '</b>' + (a > 1 ? '<small>' + e(L('الأعداد ' + App.num(a) + '–' + App.num(z), '#' + a + '–' + z)) + '</small>' : '');
+			}],
+			[L('أول عدد', 'First issue'), function (s) { var is = issuesOf(s.id); return is.length ? cover(s.id, 0) : none; }],
+			[L('آخر عدد', 'Last issue'), function (s) { var is = issuesOf(s.id); return is.length > 1 ? cover(s.id, is.length - 1) : none; }],
 			[L('الناشر', 'Publisher'), function (s) { return s.publisher ? e(t(s.publisher)) : none; }],
 			[L('طابعها', 'Its kind'), function (s) { return s.tagline ? e(t(s.tagline)) : none; }],
 			[L('مسموعة على Audiohat', 'Heard on Audiohat'), function (s) { var n = keys((d.audio || {}).issues, s.id); return n ? '<a href="audio.html">' + e(App.num(n)) + '</a>' : none; }],
@@ -64,12 +76,14 @@ window.PAGE = {
 			[L('أعداء وأشرار', 'Enemies & villains'), function (s) { var n = (d.villains || []).filter(function (v) { return v.series === s.id; }).length; return n ? '<a href="#villains" data-who="' + e(s.id) + '">' + e(App.num(n)) + '</a>' : none; }],
 			[L('على الشاشة', 'On screen'), function (s) { var a = (d.adaptations || []).filter(function (x) { return x.basedOn === s.id; }); return a.length ? a.map(function (x) { return '<a href="screen.html">' + e(t(x.title) + ' (' + App.num(x.year) + ')') + '</a>'; }).join('<br>') : none; }],
 			[L('النهاية', 'The ending'), function (s) {
+				/* (a line of separate novels has no ending of its own to tell) */
+				if (s.contributor) return none;
 				return (d.seriesEndings || {})[s.id] ? '<a href="series.html?id=' + e(s.id) + '#ending">' + e(L('على صفحتها', 'On its page')) + '</a>' : '<a class="cp-ask" href="wanted.html">' + e(L('لم تُكتب بعد', 'Not written yet')) + '</a>';
 			}]
 		];
 		var vs = d.villains || [];
 		document.getElementById('content').innerHTML = '<section class="section cp"><div class="wrap">' +
-			'<p class="cp-sum">' + e(L('السلاسل الست التي كتبها أو ترجمها في «روايات مصرية للجيب» وغيرها، عمودًا عمودًا. الأرقام من بيانات الموقع، فما لم يُعرف بعد تركناه بشَرطة.', 'The six series he wrote or translated for the Egyptian Pocket Novels and others, a column each. The numbers come from the site’s data; what is not known yet is left as a dash.')) + '</p>' +
+			'<p class="cp-sum">' + e(L('السلاسل ' + (['', '', '', 'الثلاث', 'الأربع', 'الخمس', 'الست', 'السبع', 'الثماني', 'التسع'][list.length] || App.num(list.length)) + ' التي كتبها أو ترجمها في «روايات مصرية للجيب» وغيرها، عمودًا عمودًا. الأرقام من بيانات الموقع، فما لم يُعرف بعد تركناه بشَرطة.', 'The ' + (['', '', '', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'][list.length] || list.length) + ' series he wrote or translated for the Egyptian Pocket Novels and others, a column each. The numbers come from the site’s data; what is not known yet is left as a dash.')) + '</p>' +
 			'<div class="cp-scroll" tabindex="0" role="region" aria-label="' + e(L('جدول السلاسل', 'The series table')) + '"><table class="cp-table"><thead><tr><th scope="col"></th>' + list.map(function (s) {
 				return '<th scope="col" id="col-' + e(s.id) + '" style="--c:' + e(s.color || '#7a2a1a') + '"><a href="series.html?id=' + e(s.id) + '">' + e(t(s.title)) + '</a></th>';
 			}).join('') + '</tr></thead><tbody>' + ROWS.map(function (r) {
