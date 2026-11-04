@@ -84,8 +84,10 @@
 		if (saving || !('caches' in window)) return;
 		if (!App.data().works) return App.needData(saveOffline);
 		var list = localImages();
-		if (!confirm(L('سيُحفظ ' + App.num(list.length) + ' غلافًا وصورة (نحو 100 ميجابايت) على هذا الجهاز لتعمل دون إنترنت. متابعة؟',
-			'This saves ' + list.length + ' covers and photos (about 100 MB) on this device so they work offline. Continue?'))) return;
+		/* their size, measured at each build (tools/build-data.js, AKT.stats.offlineMB) */
+		var mb = (App.data().stats || {}).offlineMB || 60;
+		if (!confirm(L('سيُحفظ ' + App.num(list.length) + ' غلافًا وصورة (نحو ' + App.num(mb) + ' ميجابايت) على هذا الجهاز لتعمل دون إنترنت. متابعة؟',
+			'This saves ' + list.length + ' covers and photos (about ' + mb + ' MB) on this device so they work offline. Continue?'))) return;
 		saving = true;
 		var n = Notify(L('جارٍ الحفظ…', 'Saving…'), { title: L('حفظ للقراءة دون اتصال', 'Saving for offline'), ttl: 0 });
 		var p = n.el.querySelector('p');

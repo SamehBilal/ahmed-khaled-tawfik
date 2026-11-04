@@ -39,7 +39,7 @@ All content lives in plain data files under `assets/js/`:
 - **`data.js`** — bio, timeline, series, works, characters, adaptations, writers
 - **`data-issues.js`** — every numbered issue of Ma Wara' al-Tabi'a, Fantasia and Safari
 - **`data-quotes.js`** — sourced quotes, and the first lines of books and issues for «البدايات» on `quiz.html#openings` (`AKT.openings`)
-- **`data-pages.js`** — the pages about his world and reading: his library, Refaat's life, the creatures, the phrasebook, Tanta, his handwriting and his books' printed dedications (`AKT.dedications`, `handwriting.html#dedications`), what his heroes read and watch inside the stories (`AKT.refaatLibrary`, `library.html#refaat`), Fantasia's worlds, Safari's cases, and the world around him (`AKT.era`)
+- **`data-pages.js`** — the pages about his world and reading: his library, Refaat's life, the creatures, the phrasebook, Tanta, his handwriting and his books' printed dedications (`AKT.dedications`, `handwriting.html#dedications`), what his heroes read and watch inside the stories (`AKT.refaatLibrary`, `library.html#refaat`), Fantasia's worlds, Safari's cases, and the world around him (`AKT.era`) — edited here; the build writes each part to `assets/js/pages/<part>.js`, and each page loads only the parts it reads
 - **`data-legacy.js`** — tributes timeline and interviews / media links
 - **`data-tributes.js`** — what people said of him, and the theses and journal articles about him (`AKT.studies`, «دراسات ورسائل عنه» on `tributes.html#studies`)
 - **`data-books-a.js`, `data-books-b.js`** — per-book details (`AKT.bookInfo`): longer descriptions, other titles, genres, editions with ISBNs and covers

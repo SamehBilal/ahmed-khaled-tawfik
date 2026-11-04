@@ -33,7 +33,8 @@ const walk = (dir, test) => fs.readdirSync(path.join(root, dir), { withFileTypes
 	const rel = path.join(dir, d.name);
 	if (d.isDirectory()) walk(rel, test); else if (test(rel)) add(rel);
 });
-walk('assets/js', f => /\.js$/.test(f) && DATA.indexOf(f.split(path.sep).join('/')) < 0);
+/* (not the data sources built into data-built.js, nor data-pages.js, whose parts the pages load from assets/js/pages/) */
+walk('assets/js', f => /\.js$/.test(f) && DATA.indexOf(f.split(path.sep).join('/')) < 0 && !/data-pages\.js$/.test(f));
 walk('assets/css', f => /\.css$/.test(f));
 walk('assets/data', f => /\.json$/.test(f) && !/^assets[\\/]data[\\/]open[\\/]/.test(f));
 walk('assets/fonts', f => /\.(woff2?|ttf)$/.test(f));

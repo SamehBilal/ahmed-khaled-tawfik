@@ -42,8 +42,29 @@ const more = '/* Built by tools/build-data.js — do not edit here. The editions
 	'\t\tD.eds[key].forEach(function (o, i) { if (o && eds[i]) for (var f in o) eds[i][f] = o[f]; });\n\t});\n' +
 	'})(window.AKT, ' + JSON.stringify(detail) + ');\n';
 fs.writeFileSync(path.join(root, 'assets/js/data-detail.js'), more);
+/* how much «حفظ للقراءة دون اتصال» downloads (pwa.js): every local picture the data names and its small copy, as on the page */
+{
+	const set = {}, thumb = s => { const m = /^assets\/img\/covers\/(.+)\.(webp|jpe?g|png)$/i.exec(s); return m ? 'assets/img/covers-s/' + m[1] + '.webp' : s; };
+	(function walk(o) {
+		if (!o) return;
+		if (typeof o === 'string') { if (/^assets\/img\/.+\.(png|jpe?g|webp|gif|svg)$/i.test(o)) { set[o] = 1; set[thumb(o)] = 1; } return; }
+		if (typeof o === 'object') for (const k in o) walk(o[k]);
+	})(A);
+	let bytes = 0;
+	Object.keys(set).forEach(f => { try { bytes += fs.statSync(path.join(root, f)).size; } catch (e) {} });
+	A.stats.offlineMB = Math.max(1, Math.round(bytes / 1048576 / 5) * 5);
+}
 const body = '/* Built by tools/build-data.js from ' + FILES.map(f => f + '.js').join(', ') + ' — do not edit here; edit those and rebuild. */\n' +
 	'window.AKT = ' + JSON.stringify(A) + ';\n';
 fs.writeFileSync(path.join(root, 'assets/js/data-built.js'), body);
 console.log('data-built.js', Math.round(body.length / 1024) + ' KB');
+/* and data-pages.js, the pages about his world and his reading, a file a part (assets/js/pages/<part>.js): each of those pages
+   loads only the parts it reads — «وحوش وأساطير» its monsters, «زمن العرّاب» its years — not all twelve (about 80 KB compressed) */
+const parts = load(['data-pages']).win.AKT, partsDir = path.join(root, 'assets/js/pages');
+fs.mkdirSync(partsDir, { recursive: true });
+fs.readdirSync(partsDir).filter(f => f.endsWith('.js') && !(f.slice(0, -3) in parts)).forEach(f => fs.unlinkSync(path.join(partsDir, f)));
+Object.keys(parts).forEach(k => fs.writeFileSync(path.join(partsDir, k + '.js'),
+	'/* Built by tools/build-data.js from data-pages.js — do not edit here; edit that and rebuild. */\n' +
+	'window.AKT = window.AKT || {};\nwindow.AKT.' + k + ' = ' + JSON.stringify(parts[k]) + ';\n'));
+console.log('pages/', Object.keys(parts).length + ' parts');
 module.exports = FILES;
