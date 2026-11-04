@@ -41,7 +41,7 @@ html .ph[data-ph="changelog"], html[data-theme="light"] .ph[data-ph="changelog"]
 .cl-note a { color: var(--ember); }
 /* the kinds and the search on one row: small chips, and a short search at the row's end (the left, in Arabic); on a narrow
    screen they wrap */
-.cl-bar { display: flex; flex-wrap: nowrap; gap: 10px; align-items: center; margin: 8px 0 24px; }
+.cl-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 8px 0 24px; }
 .cl-bar .chips { flex-wrap: nowrap; gap: 6px; flex: none; }
 .cl-bar .chip { padding: 4px 11px; font-size: 13px; white-space: nowrap; }
 .cl-bar .chip b { font-size: 12px; }

@@ -37,7 +37,9 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* the page never scrolls sideways: the root hides what is wider than the window and the body clips it (clip, not hidden, so it stays no scroll container
+   and the sticky header still holds) — with hidden alone on the body, a scrollIntoView or an iPad's swipe panned the whole page */
+html { scroll-behavior: smooth; overflow-x: hidden; }
 html, body { margin: 0; padding: 0; }
 
 body {
@@ -51,7 +53,7 @@ body {
 	font-size: 17px;
 	line-height: 1.8;
 	-webkit-font-smoothing: antialiased;
-	overflow-x: hidden;
+	overflow-x: clip;
 }
 
 html[lang="en"] body { font-family: var(--f-latin); font-size: 19px; line-height: 1.6; }
@@ -914,7 +916,7 @@ html[dir="ltr"] .ft-night::before { background: radial-gradient(34% 60% at 22% 7
 @media (max-width: 1000px) { .info-cards { grid-template-columns: 1fr; } }
 .info-card { display: flex; flex-direction: column; align-items: flex-start; padding: 22px 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); }
 .info-card h3 { font-size: 22px; margin-bottom: 8px; }
-.info-card p { flex: 1; margin: 0 0 18px; color: var(--paper-dim); }
+.info-card p { flex: 1; max-width: 100%; margin: 0 0 18px; color: var(--paper-dim); overflow-wrap: anywhere; }
 .info-ic { font-size: 28px; line-height: 1; color: var(--ember); margin-bottom: 14px; }
 .info-note { margin-top: 22px; color: var(--muted); font-size: .95em; }
 @media (max-width: 860px) {

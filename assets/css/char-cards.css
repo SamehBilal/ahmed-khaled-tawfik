@@ -72,6 +72,8 @@ html[dir="rtl"] .cc:hover .cc-figure, html[dir="rtl"] .cc:focus-visible .cc-figu
 	.cc { height: 410px; }
 	.cc-figure { width: 124px; inset-inline-end: -34px; }
 }
+/* a tablet's page gutter is narrower than the figure's 40px overhang: room for it on that side, or the last column's figure is cut at the window's edge */
+@media (min-width: 641px) and (max-width: 1199px) { .cc-grid { padding-inline-end: 36px; } }
 @media (prefers-reduced-motion: reduce) { .cc-inner, .cc-figure { transition: none; } }
 /* Arabic: the first word large in the series colour, the rest after it */
 .cc-name { flex-wrap: wrap; gap: 0 10px; }
