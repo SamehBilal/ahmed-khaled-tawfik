@@ -85,8 +85,8 @@ img { max-width: 100%; display: block; }
 html.is-app #site-header:empty { height: calc(65px + env(safe-area-inset-top)); }
 /* the page's words are in its HTML in Arabic (tools/build-meta.js): for an English reader, hidden, their place kept, until app.js puts in the English */
 html[lang="en"]:not(.i18n) [data-i18n] { visibility: hidden; }
-/* (two rows on a tablet: the links under the name) */
-@media (max-width: 1100px) and (min-width: 761px) { #site-header:empty { height: 111px; } }
+/* (two rows on a narrow tablet: the menu under the name; from 1,001px it sits beside it) */
+@media (max-width: 1000px) and (min-width: 761px) { #site-header:empty { height: 107px; } }
 
 .site-header .wrap {
 	display: flex; align-items: center; gap: 24px;
@@ -125,7 +125,7 @@ html[lang="en"]:not(.i18n) [data-i18n] { visibility: hidden; }
 
 /* eleven links don't fit beside the brand on laptop widths: tighten, then give the menu its own row */
 @media (max-width: 1280px) { .nav { gap: 2px; } .nav a { padding: 8px 10px; font-size: 15px; } }
-@media (max-width: 1100px) and (min-width: 761px) {
+@media (max-width: 1000px) and (min-width: 761px) {
 	.site-header .wrap { flex-wrap: wrap; row-gap: 6px; padding-block: 10px; }
 	.nav { order: 3; width: 100%; margin: 0; overflow-x: auto; scrollbar-width: none; justify-content: center; }
 	.nav::-webkit-scrollbar { display: none; }
@@ -212,6 +212,201 @@ html[lang="en"]:not(.i18n) [data-i18n] { visibility: hidden; }
 @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
 	.nav, .menu-open .nav, .nav a, .menu-open .nav a, .menu-btn .stack i { transition: none; }
 	.nav { transform: none; }
+}
+
+/* ---------- The main menu on a wider screen (app.js megaHTML): six words, four opening a panel under the header ----------
+   «أعماله» the series as covers, a list and «من أين أبدأ؟» along its foot; «عالمه» the pages inside his stories and
+   three heroes standing; «حياته» two columns and his photograph; «إرثه» a list, a still and his books in bars */
+.mnav { display: flex; align-items: center; gap: 4px; margin-inline-start: auto; }
+@media (min-width: 761px) { .site-header .nav { display: none; } }
+@media (max-width: 760px) { .mnav { display: none; } }
+.mnav-btn, .mnav-link {
+	position: relative; display: inline-flex; align-items: center; gap: 6px;
+	font: inherit; font-family: var(--f-display); font-size: 16px; line-height: 1.5;
+	color: var(--paper-dim); background: none; border: 0; cursor: pointer;
+	padding: 8px 14px; border-radius: 999px; white-space: nowrap;
+	transition: color .2s, background .2s;
+}
+.mnav-btn:hover, .mnav-link:hover, .mnav-btn[aria-expanded="true"] { color: var(--paper); background: var(--ink-3); }
+.mnav-link[aria-current="page"] { color: var(--ink); background: var(--paper); }
+html[data-theme="light"] .mnav-link[aria-current="page"] { color: #fbf6ea; }
+/* the panel that holds the page you are on: a small ember mark under its word */
+.mnav-btn.is-here { color: var(--paper); }
+.mnav-btn.is-here::after { content: ''; position: absolute; bottom: 2px; inset-inline: 50%; width: 16px; margin-inline-start: -8px; height: 2px; border-radius: 2px; background: var(--ember); }
+.mnav-chev { opacity: .7; transition: transform .25s; }
+.mnav-btn[aria-expanded="true"] .mnav-chev { transform: rotate(180deg); }
+.mnav-start { color: var(--ember); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ember) 55%, transparent); margin-inline-start: 4px; }
+.mnav-start:hover { color: var(--ink); background: var(--ember); }
+@media (max-width: 1280px) { .mnav { gap: 2px; } .mnav-btn, .mnav-link { padding: 8px 11px; font-size: 15px; } }
+@media (max-width: 1000px) and (min-width: 761px) {
+	.mnav { order: 3; width: 100%; margin: 0; justify-content: center; }
+}
+
+/* the panel: under the header, as wide as the page; its transparent top keeps the pointer inside on the way down */
+.mega {
+	position: absolute; inset-inline: 0; top: 100%; z-index: 60; padding: 8px 16px 0;
+	visibility: hidden; opacity: 0; transform: translateY(-8px); pointer-events: none;
+	transition: opacity .18s, transform .25s cubic-bezier(.2, .8, .2, 1), visibility 0s .25s;
+}
+/* the notices in the top corner (notify.css) step aside while a panel is open, and come back when it closes */
+body:has(.site-header.mega-open) .ns-stack { opacity: 0; visibility: hidden; transition: opacity .15s, visibility 0s .15s; }
+.mega.is-open { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition: opacity .18s, transform .25s cubic-bezier(.2, .8, .2, 1); }
+.mega-in {
+	width: min(1180px, 100%); margin-inline: auto; display: grid; gap: 12px; padding: 12px;
+	max-height: calc(100dvh - 96px); overflow-y: auto; overscroll-behavior: contain;
+	background: var(--ink-2); border: 1px solid var(--line); border-radius: 22px;
+	box-shadow: 0 30px 70px rgba(0, 0, 0, .55), 0 0 0 1px rgba(0, 0, 0, .2);
+}
+html[data-theme="light"] .mega-in { background: #f8f1e2; box-shadow: 0 30px 60px rgba(70, 50, 20, .25); }
+.mega a { color: var(--paper); }
+.mega a:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+.mg-h { margin: 2px 10px 6px; font-family: var(--f-display); font-size: 13px; letter-spacing: .04em; color: var(--muted); }
+.mg-ic {
+	flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px;
+	border: 1px solid var(--line); background: var(--ink-3); color: var(--paper-dim); transition: color .2s, border-color .2s;
+}
+.mg-tx { min-width: 0; }
+.mg-tx b { display: block; font-family: var(--f-display); font-weight: 500; font-size: 15.5px; line-height: 1.4; }
+.mg-tx small { display: block; margin-top: 1px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.mg-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px; border-radius: 12px; transition: background .2s; }
+.mg-item:hover { background: var(--ink-3); }
+.mg-item:hover .mg-ic, .mg-item[aria-current="page"] .mg-ic { color: var(--ember); border-color: color-mix(in srgb, var(--ember) 45%, transparent); }
+.mg-item[aria-current="page"] b, .mg-tl[aria-current="page"] b, .mg-row[aria-current="page"] b { color: var(--ember); }
+.mg-arr { color: var(--muted); transition: transform .25s, color .2s; }
+html[dir="rtl"] a:hover > .mg-arr, html[dir="rtl"] a:hover .mg-arr { transform: translateX(-4px); }
+html[dir="ltr"] a:hover > .mg-arr, html[dir="ltr"] a:hover .mg-arr { transform: translateX(4px); }
+
+/* «أعماله»: three covers on their series' colour, the rest as rows, and the reader's way in along the foot */
+.mega-works .mega-in { grid-template-columns: minmax(0, 3fr) minmax(250px, 1.15fr); }
+.mg-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.mg-card, .mg-fig {
+	position: relative; isolation: isolate; overflow: hidden; border-radius: 16px; color: #fff;
+	background: var(--c);
+	background: radial-gradient(120% 85% at 50% 110%, color-mix(in srgb, var(--c) 80%, #fff 14%), var(--c) 48%, color-mix(in srgb, var(--c) 55%, #000) 100%);
+}
+.mg-card::after, .mg-fig::before { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .09); pointer-events: none; z-index: 3; }
+.mg-card { min-height: 268px; padding: 16px 18px; }
+.mg-card-t { position: relative; z-index: 2; display: block; }
+.mg-card-t b { display: block; font-family: var(--f-chunky); font-weight: normal; font-size: 25px; line-height: 1.2; }
+html[lang="en"] .mg-card-t b { font-family: var(--f-display); font-weight: 600; font-size: 22px; }
+.mg-card-t small { display: block; margin-top: 2px; font-size: 13px; opacity: .78; }
+.mg-cover {
+	position: absolute; left: 50%; bottom: -16%; width: 50%; max-width: 150px; border-radius: 4px;
+	transform: translateX(-50%) rotate(-6deg); box-shadow: 0 18px 30px rgba(0, 0, 0, .5);
+	transition: transform .45s cubic-bezier(.2, .8, .2, 1);
+}
+.mg-card:hover .mg-cover, .mg-card:focus-visible .mg-cover { transform: translateX(-50%) translateY(-14px) rotate(-1deg); }
+.mg-card[aria-current="page"] { box-shadow: 0 0 0 2px var(--ember); }
+.mg-more { padding: 10px 8px 6px; border-radius: 16px; background: var(--ink-3); }
+html[data-theme="light"] .mg-more { background: #efe5d0; }
+.mg-row { display: flex; align-items: center; gap: 10px; padding: 9px 8px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.mg-row:last-child { border-bottom: 0; }
+.mg-row b { flex: 1; font-family: var(--f-display); font-weight: 500; }
+.mg-row .mg-ic { width: 24px; height: 24px; border: 0; background: none; color: var(--ember); }
+.mg-band {
+	grid-column: 1 / -1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+	min-height: 74px; padding: 12px 20px; border-radius: 16px; border: 1px solid var(--line);
+	background: linear-gradient(to var(--band-to, left), color-mix(in srgb, var(--ember) 12%, transparent), transparent 70%);
+}
+html[dir="ltr"] .mg-band { --band-to: right; }
+.mg-band-tx b { display: block; font-family: var(--f-display); font-weight: 600; font-size: 17px; }
+.mg-band-tx em { margin-inline-start: 8px; padding: 1px 9px; border-radius: 999px; font-style: normal; font-size: 11.5px; font-weight: 600; vertical-align: 2px; color: var(--ember); background: color-mix(in srgb, var(--ember) 16%, transparent); }
+.mg-band-tx small { display: block; font-size: 13.5px; color: var(--paper-dim); }
+.mg-band-art { position: relative; flex: none; width: 260px; height: 64px; }
+.mg-chip { position: absolute; width: 36px; border-radius: 3px; box-shadow: 0 8px 14px rgba(0, 0, 0, .4); animation: mg-float 6s ease-in-out infinite; }
+.mg-chip.c0 { inset-inline-start: 4%; top: 6px; rotate: -10deg; }
+.mg-chip.c1 { inset-inline-start: 30%; top: 16px; rotate: 6deg; animation-delay: -1.5s; }
+.mg-chip.c2 { inset-inline-start: 56%; top: 2px; rotate: -4deg; animation-delay: -3s; }
+.mg-chip.c3 { inset-inline-start: 82%; top: 14px; rotate: 9deg; animation-delay: -4.5s; }
+@keyframes mg-float { 50% { transform: translateY(-6px); } }
+
+/* «عالمه»: the list in two columns, and three heroes standing on their series' colour */
+.mega-world .mega-in { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.65fr); }
+.mg-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 4px; align-content: start; padding: 2px; }
+.mg-figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.mg-fig { display: flex; align-items: flex-end; min-height: 310px; padding: 14px; }
+.mg-fig::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(transparent 55%, rgba(0, 0, 0, .7)); }
+.mg-fig-img {
+	position: absolute; left: 50%; top: 5%; height: 98%; width: auto; max-width: none;
+	transform: translateX(-50%); filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .5));
+	transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+}
+.mg-fig:hover .mg-fig-img, .mg-fig:focus-visible .mg-fig-img { transform: translateX(-50%) translateY(-8px) scale(1.04); }
+.mg-fig-t { position: relative; z-index: 2; }
+.mg-fig-t b { display: block; font-family: var(--f-chunky); font-weight: normal; font-size: 19px; line-height: 1.25; }
+html[lang="en"] .mg-fig-t b { font-family: var(--f-display); font-weight: 600; font-size: 17px; }
+.mg-fig-t small { display: block; font-size: 12.5px; opacity: .8; }
+
+/* «حياته»: two columns with a rule between, and his photograph with his wish */
+.mega-life .mega-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(240px, .9fr); gap: 0; }
+.mg-col { padding: 6px 6px 6px 10px; border-inline-end: 1px solid var(--line); }
+html[dir="rtl"] .mg-col { padding: 6px 10px 6px 6px; }
+.mg-col + .mg-col { padding-inline-start: 12px; }
+.mg-photo { position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: flex-end; min-height: 330px; margin-inline-start: 12px; border-radius: 16px; background: var(--ink-3); color: #fff; }
+.mg-photo-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+.mg-photo:hover .mg-photo-img { transform: scale(1.04); }
+.mg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(8, 8, 10, .88)); }
+.mega .mg-photo, .mega .mg-fig, .mega .mg-card { color: #fff; }
+.mg-photo-tx { position: relative; z-index: 2; padding: 16px 18px; }
+.mg-photo-tx q { display: block; quotes: none; font-family: var(--f-display); font-size: 17px; line-height: 1.55; }
+.mg-photo-tx small { display: block; margin-top: 6px; font-size: 12.5px; opacity: .72; }
+
+/* «إرثه»: a list in two columns, a still from the Netflix series and his books in bars, on a dark card in both themes */
+.mega-legacy .mega-in { grid-template-columns: minmax(0, 1.6fr) minmax(0, .62fr) minmax(0, 1fr); padding: 14px; }
+.mg-text { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 14px; align-content: center; }
+.mg-tl { display: block; padding: 11px 12px; border-radius: 12px; transition: background .2s; }
+.mg-tl:hover { background: var(--ink-3); }
+.mg-tl b { display: block; font-family: var(--f-display); font-weight: 500; font-size: 16.5px; }
+.mg-tl small { display: block; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.mg-tall { position: relative; overflow: hidden; display: flex; align-items: flex-end; min-height: 290px; border-radius: 999px 999px 18px 18px; background: #222; }
+.mg-tall-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 68% 40%; transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+.mg-tall:hover .mg-tall-img { transform: scale(1.06); }
+.mg-tall::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 55%, rgba(0, 0, 0, .75)); }
+.mega .mg-tall span { position: relative; z-index: 2; padding: 12px 14px; font-size: 13px; line-height: 1.4; color: #fff; }
+.mega .mg-data { display: flex; flex-direction: column; gap: 3px; padding: 18px; border-radius: 18px; background: #111216; border: 1px solid rgba(255, 255, 255, .06); color: #efe6d2; }
+.mg-new { align-self: flex-start; padding: 1px 10px; border-radius: 999px; background: #d9a441; color: #1a1408; font-family: var(--f-display); font-size: 12px; font-weight: 600; }
+.mg-bars { display: flex; align-items: flex-end; gap: 4px; height: 92px; margin: 12px 0 12px; }
+.mg-bars i { flex: 1; min-height: 3px; border-radius: 2px 2px 0 0; background: #3a3c45; transform-origin: bottom; }
+.mg-bars i.hi { background: #e0633a; }
+.mg-bars i.hi2 { background: #d9a441; }
+.mega-legacy.is-open .mg-bars i { animation: mg-grow .6s cubic-bezier(.2, .8, .2, 1) both; }
+.mega-legacy.is-open .mg-bars i:nth-child(2n) { animation-delay: .05s; }
+.mega-legacy.is-open .mg-bars i:nth-child(3n) { animation-delay: .1s; }
+@keyframes mg-grow { from { transform: scaleY(0); } }
+.mg-eye { color: #d9a441; font-size: 12px; }
+.mg-data b { font-family: var(--f-chunky); font-weight: normal; font-size: 21px; line-height: 1.3; color: #fff; }
+html[lang="en"] .mg-data b { font-family: var(--f-display); font-weight: 700; font-size: 19px; }
+.mg-data small:not(.mg-eye) { font-size: 13px; color: #a7a091; }
+.mg-go { margin-top: auto; padding-top: 10px; color: #d9a441; font-size: 13.5px; }
+
+/* a tablet (the menu on its own row under the name): the panels fold to fit a narrower, shorter screen */
+@media (max-width: 1100px) {
+	.mega-in { max-height: calc(100dvh - 128px); }
+	.mega-works .mega-in { grid-template-columns: minmax(0, 1fr); }
+	.mg-card { min-height: 210px; }
+	.mg-cover { width: 44%; }
+	.mg-more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 8px; }
+	.mg-more .mg-h { grid-column: 1 / -1; }
+	.mg-row { border-bottom: 0; }
+	.mg-band-art { width: 180px; }
+	.mega-world .mega-in { grid-template-columns: minmax(0, 1fr); }
+	.mg-fig { min-height: 230px; }
+	.mega-life .mega-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+	.mg-col + .mg-col { border-inline-end: 0; }
+	.mg-photo { grid-column: 1 / -1; min-height: 150px; margin: 12px 0 0; }
+	.mg-photo-img { object-position: 50% 28%; }
+	.mega-legacy .mega-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+	.mg-text { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.mg-tall { min-height: 230px; border-radius: 18px; }
+}
+@media (max-width: 900px) {
+	.mg-more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.mg-band-art { display: none; }
+	.mg-text { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+	.mega, .mega.is-open, .mg-cover, .mg-fig-img, .mg-photo-img, .mg-tall-img, .mnav-chev { transition: none; }
+	.mg-chip, .mega-legacy.is-open .mg-bars i { animation: none; }
 }
 
 /* ---------- Page hero ---------- */

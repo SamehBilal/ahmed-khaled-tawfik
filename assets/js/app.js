@@ -110,6 +110,239 @@
 		}
 	};
 
+	/* ---------- the main menu on a wider screen: six words, four of them opening a large panel ----------
+	   «أعماله» his three series as covers and the rest as a list, with «من أين أبدأ؟» along its foot; «عالمه» the pages
+	   inside his stories beside three of his heroes standing; «حياته» his life and his writing in two columns beside his
+	   photograph and his wish for his headstone; «إرثه» what he left, a still from the Netflix series and his books year
+	   by year. (On a phone the links fold into the contents page instead: UI.nav.) The pictures load on the first move
+	   towards the menu, not with the page. */
+	var MEGA_ICONS = {
+		books: '<path d="M4 19V5h4v14zM8 5h4v14H8M13 6l3.6-1 3.4 13.5-3.6 1z"/>',
+		columns: '<path d="M4 4h4v16H4zM10 4h4v16h-4zM16 4h4v16h-4z"/>',
+		image: '<path d="M4 5h16v14H4z"/><path d="m4 16 5-5 4 4 2-2 5 5"/><circle cx="15.5" cy="9" r="1.5"/>',
+		translate: '<path d="M4 6h9M8.5 4v2M6 6c1 4 4 7 7 8M11 6c-1 4-4 7-7 8M14 20l3.5-9 3.5 9M15.2 17h4.6"/>',
+		headphones: '<path d="M4 15v-3a8 8 0 0 1 16 0v3M4 15h3v5H5a1 1 0 0 1-1-1zM20 15h-3v5h2a1 1 0 0 0 1-1z"/>',
+		building: '<path d="M5 20V6l7-3 7 3v14M3 20h18M9 9h1M14 9h1M9 13h1M14 13h1M10 20v-3h4v3"/>',
+		people: '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M16 5a3 3 0 0 1 0 6M18 15c2 .5 3 2.2 3 5"/>',
+		bat: '<path d="M12 9c-1.6-2.2-4.6-3.3-9-2.2 1.8 1.4 2 3.6 1 6 2-1.1 4-.9 5 1 .8-1.5 2-1.6 3-.6 1-1 2.2-.9 3 .6 1-1.9 3-2.1 5-1-1-2.4-.8-4.6 1-6-4.4-1.1-7.4 0-9 2.2Z"/>',
+		diary: '<path d="M6 3h12v18H6zM9 3v18M12 8h3M12 12h3"/>',
+		bookOpen: '<path d="M12 6.5C10 5 7 4.5 4 5v14c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5ZM12 6.5V20"/>',
+		clinic: '<path d="M6 3v6a4 4 0 0 0 8 0V3M10 13v1.5a5 5 0 0 0 10 0V12"/><circle cx="20" cy="10" r="2"/>',
+		star: '<path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/>',
+		map: '<path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v14M15 6v14"/>',
+		web: '<circle cx="12" cy="5" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M12 7v4m0 0-5.5 5.6M12 11l5.5 5.6M7 18h10"/>',
+		mic: '<path d="M12 3a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V6a3 3 0 0 1 3-3ZM5 11a7 7 0 0 0 14 0M12 18v3"/>',
+		clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/>',
+		calendar: '<path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"/>',
+		award: '<circle cx="12" cy="9" r="5.5"/><path d="m9 14-2 7 5-2.6 5 2.6-2-7"/>',
+		pen: '<path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4"/>',
+		quote: '<path d="M6 8h4v4c0 3-1.6 4.6-4 5.5M14 8h4v4c0 3-1.6 4.6-4 5.5"/>',
+		hand: '<path d="M14 4l6 6-8.5 8.5-6-6zM5.5 12.5 3 21l8.5-2.5"/><circle cx="9.5" cy="14.5" r="1.3"/>',
+		shelf: '<path d="M4 4v16M8 4v16M3 20h18M12 6l3.6-1.2 3.4 14-3.6 1.2z"/>'
+	};
+	function megaIcon(k) {
+		return '<span class="mg-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + MEGA_ICONS[k] + '</svg></span>';
+	}
+	var MEGA = {
+		/* the series' own numbers (AKT.series), written here because not every page loads the data */
+		series: [
+			{ id: 'mwt', ar: 'ما وراء الطبيعة', en: 'Ma Wara’ al-Tabi’a', sar: '81 عددًا · 1993–2014', sen: '81 issues · 1993–2014', c: '#6e1c1c', img: 'assets/img/covers/fronts/mwt.webp' },
+			{ id: 'fantasia', ar: 'فانتازيا', en: 'Fantasia', sar: '64 عددًا · 1995–2017', sen: '64 issues · 1995–2017', c: '#4b2f7a', img: 'assets/img/covers/fronts/fantasia.webp' },
+			{ id: 'safari', ar: 'سافاري', en: 'Safari', sar: '53 عددًا · 1996–2018', sen: '53 issues · 1996–2018', c: '#5a6b2a', img: 'assets/img/covers/fronts/safari.webp' }
+		],
+		worksMore: [
+			{ href: 'works.html', ic: 'books', ar: 'كل أعماله', en: 'All his works' },
+			{ href: 'compare.html', ic: 'columns', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side' },
+			{ href: 'covers.html', ic: 'image', ar: 'الأغلفة والطبعات', en: 'Covers & editions' },
+			{ href: 'translations.html', ic: 'translate', ar: 'ترجماته', en: 'His translations' },
+			{ href: 'audio.html', ic: 'headphones', ar: 'مسموع', en: 'Audio' },
+			{ href: 'publishers.html', ic: 'building', ar: 'دور النشر', en: 'Publishers' }
+		],
+		world: [
+			{ href: 'characters.html', ic: 'people', ar: 'الشخصيات', en: 'Characters', dar: 'أبطاله ومن حولهم', den: 'His heroes and those around them' },
+			{ href: 'creatures.html', ic: 'bat', ar: 'وحوش وأساطير', en: 'Monsters & legends', dar: 'ما واجهه أبطاله في الظلام', den: 'What his heroes met in the dark' },
+			{ href: 'refaat-life.html', ic: 'diary', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life', dar: 'حياة الراوي عامًا بعام', den: 'The narrator’s life, year by year' },
+			{ href: 'worlds.html', ic: 'bookOpen', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds', dar: 'الحكايات التي دخلتها عبير', den: 'The stories Abeer stepped into' },
+			{ href: 'clinic.html', ic: 'clinic', ar: 'عيادة سافاري', en: 'The Safari clinic', dar: 'أوبئة أفريقيا وأمراضها', den: 'Africa’s epidemics and diseases' },
+			{ href: 'names.html', ic: 'star', ar: 'أعلام في حكاياته', en: 'Figures in his tales', dar: 'شخصيات حقيقية مرّت بقصصه', den: 'Real people who pass through' },
+			{ href: 'map.html', ic: 'map', ar: 'الخريطة', en: 'The map', dar: 'أماكن حكاياته على الأرض', den: 'Where his tales take place' },
+			{ href: 'network.html', ic: 'web', ar: 'شبكة العرّاب', en: 'The Godfather’s web', dar: 'كيف يتصل كل شيء', den: 'How it all connects' }
+		],
+		heroes: [
+			{ id: 'refaat', ar: 'رفعت إسماعيل', en: 'Refaat Ismail', sar: 'ما وراء الطبيعة', sen: 'Ma Wara’ al-Tabi’a', c: '#6e1c1c', img: 'assets/img/characters/refaat-lantern.webp' },
+			{ id: 'abeer', ar: 'عبير عبد الرحمن', en: 'Abeer Abdel Rahman', sar: 'فانتازيا', sen: 'Fantasia', c: '#4b2f7a', img: 'assets/img/characters/abeer-figure.webp' },
+			{ id: 'alaa', ar: 'علاء عبد العظيم', en: 'Alaa Abdel Azim', sar: 'سافاري', sen: 'Safari', c: '#5a6b2a', img: 'assets/img/characters/alaa-figure.webp' }
+		],
+		life: [
+			{ href: 'talks.html', ic: 'mic', ar: 'سيرته ولقاءاته', en: 'His life & interviews', dar: 'من طنطا إلى الكتابة، بصوته', den: 'From Tanta to writing, in his words' },
+			{ href: 'era.html', ic: 'clock', ar: 'زمن العرّاب', en: 'The Godfather’s times', dar: 'حياته بجوار أحداث عصره', den: 'His life beside the world’s' },
+			{ href: 'calendar.html', ic: 'calendar', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', dar: 'كل يوم من أيام السنة', den: 'Every day of the year' },
+			{ href: 'awards.html', ic: 'award', ar: 'الجوائز', en: 'Awards', dar: 'ما ناله وما سُمّي باسمه', den: 'What he won and what bears his name' }
+		],
+		writing: [
+			{ href: 'blog.html', ic: 'pen', ar: 'المدونة', en: 'Blog', dar: 'مقالاته وأعمدته', den: 'His articles and columns' },
+			{ href: 'quotes.html', ic: 'quote', ar: 'اقتباسات', en: 'Quotes', dar: 'جمل من كتبه', den: 'Lines from his books' },
+			{ href: 'handwriting.html', ic: 'hand', ar: 'بخط يده', en: 'In his hand', dar: 'رسائله وإهداءاته', den: 'His letters and dedications' },
+			{ href: 'library.html', ic: 'shelf', ar: 'مكتبته', en: 'His library', dar: 'ما أحبه ونصح به', den: 'What he loved and recommended' },
+			{ href: 'writers.html', ic: 'people', ar: 'دائرته', en: 'His circle', dar: 'رفاقه ومن حملوا عالمه', den: 'His companions and heirs' }
+		],
+		legacy: [
+			{ href: 'legacy.html', ar: 'الإرث', en: 'Legacy', dar: 'ما تركه في جيل كامل من القرّاء', den: 'What he left a whole generation of readers' },
+			{ href: 'tributes.html', ar: 'قالوا عنه', en: 'Tributes', dar: 'كتّاب وفنانون عند رحيله وفي ذكراه', den: 'Writers and artists, at his death and since' },
+			{ href: 'screen.html', ar: 'على الشاشة', en: 'On screen', dar: 'من نتفليكس إلى الإذاعة', den: 'From Netflix to the radio' },
+			{ href: 'world.html', ar: 'حول العالم', en: 'Around the world', dar: 'كتبه بلغات أخرى', den: 'His books in other languages' },
+			{ href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner', dar: 'اختبارات وألعاب ومن قال هذا؟', den: 'Quizzes, games and who said it?' },
+			{ href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey', dar: 'ما قرأته وما تريد قراءته', den: 'What you have read and want to' }
+		],
+		/* his own books (AKT.works) a year at a time, 2005–2018 */
+		bars: [2, 2, 5, 8, 5, 3, 0, 6, 1, 5, 3, 1, 2, 3]
+	};
+	/* which panel holds this page: its own pages, and the pages made one per series, book, character or writer */
+	function megaGroupOf(file) {
+		var g = { 'series.html': 'works', 'book.html': 'works', 'publisher.html': 'works', 'character.html': 'world', 'writer.html': 'life', 'numbers.html': 'legacy' }[file];
+		if (g) return g;
+		var groups = { works: MEGA.worksMore, world: MEGA.world, life: MEGA.life.concat(MEGA.writing), legacy: MEGA.legacy };
+		for (var k in groups) if (groups[k].some(function (n) { return n.href === file; })) return k;
+		return '';
+	}
+	function megaHTML(App, file) {
+		var L = App.L, e = App.esc;
+		var cur = function (href) { return href === file ? ' aria-current="page"' : ''; };
+		var arrow = '<span class="mg-arr" aria-hidden="true">' + (App.lang === 'ar' ? '←' : '→') + '</span>';
+		var item = function (n, cls) {
+			return '<a class="' + (cls || 'mg-item') + '" href="' + n.href + '"' + cur(n.href) + '>' + (n.ic ? megaIcon(n.ic) : '') +
+				'<span class="mg-tx"><b>' + e(L(n.ar, n.en)) + '</b>' + (n.dar ? '<small>' + e(L(n.dar, n.den)) + '</small>' : '') + '</span></a>';
+		};
+		var img = function (src, cls) { return '<img class="' + cls + '" data-src="' + src + '" alt="" decoding="async">'; };
+		var panel = function (id, label, inner) {
+			return '<div class="mega mega-' + id + '" id="mega-' + id + '" role="group" aria-label="' + e(label) + '"><div class="mega-in">' + inner + '</div></div>';
+		};
+		var top = function (id, ar, en) {
+			var on = megaGroupOf(file) === id;
+			return '<button class="mnav-btn' + (on ? ' is-here' : '') + '" type="button" aria-expanded="false" aria-controls="mega-' + id + '" data-mega="' + id + '">' + e(L(ar, en)) +
+				'<svg class="mnav-chev" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
+		};
+		var link = function (href, ar, en, cls) { return '<a class="mnav-link' + (cls ? ' ' + cls : '') + '" href="' + href + '"' + cur(href) + '>' + e(L(ar, en)) + '</a>'; };
+
+		var works = panel('works', L('أعماله', 'His works'),
+			'<div class="mg-cards">' + MEGA.series.map(function (s) {
+				return '<a class="mg-card" href="series.html?id=' + s.id + '" style="--c:' + s.c + '"' + (file === 'series.html' && /[?&]id=/.test(location.search) && new RegExp('[?&]id=' + s.id + '(&|$)').test(location.search) ? ' aria-current="page"' : '') + '>' +
+					'<span class="mg-card-t"><b>' + e(L(s.ar, s.en)) + '</b><small>' + e(L(s.sar, s.sen)) + '</small></span>' + img(s.img, 'mg-cover') + '</a>';
+			}).join('') + '</div>' +
+			'<div class="mg-more"><p class="mg-h">' + L('المزيد', 'More') + '</p>' + MEGA.worksMore.map(function (n) {
+				return '<a class="mg-row" href="' + n.href + '"' + cur(n.href) + '>' + megaIcon(n.ic) + '<b>' + e(L(n.ar, n.en)) + '</b>' + arrow + '</a>';
+			}).join('') + '</div>' +
+			'<a class="mg-band" href="guide.html"' + cur('guide.html') + '><span class="mg-band-tx"><b>' + L('من أين أبدأ؟', 'Where to start?') + ' <em>' + L('للقارئ الجديد', 'New reader') + '</em></b>' +
+				'<small>' + L('مسارات قراءة مقترحة حسب ذوقك', 'Reading paths to suit your taste') + ' ' + arrow + '</small></span>' +
+				'<span class="mg-band-art" aria-hidden="true">' + ['mwt', 'fantasia', 'safari', 'rwg'].map(function (k, i) { return img('assets/img/covers/fronts/' + k + '.webp', 'mg-chip c' + i); }).join('') + '</span></a>');
+
+		var world = panel('world', L('عالمه', 'His world'),
+			'<div class="mg-list">' + MEGA.world.map(function (n) { return item(n); }).join('') + '</div>' +
+			'<div class="mg-figs">' + MEGA.heroes.map(function (h) {
+				return '<a class="mg-fig" href="character.html?id=' + h.id + '" style="--c:' + h.c + '">' + img(h.img, 'mg-fig-img') +
+					'<span class="mg-fig-t"><b>' + e(L(h.ar, h.en)) + '</b><small>' + e(L(h.sar, h.sen)) + '</small></span></a>';
+			}).join('') + '</div>');
+
+		var life = panel('life', L('حياته', 'His life'),
+			'<div class="mg-col"><p class="mg-h">' + L('سيرته', 'His life') + '</p>' + MEGA.life.map(function (n) { return item(n); }).join('') + '</div>' +
+			'<div class="mg-col"><p class="mg-h">' + L('كتاباته ودائرته', 'His writing & circle') + '</p>' + MEGA.writing.map(function (n) { return item(n); }).join('') + '</div>' +
+			'<a class="mg-photo" href="talks.html">' + img('assets/img/photos/youm7-e94d8bd9a946.jpg', 'mg-photo-img') +
+				'<span class="mg-photo-tx"><q>' + L('أما أنا فأريد أن يُكتب على قبري: «جعل الشباب يقرؤون»', 'I want my headstone to say: “He made the young read”') + '</q>' +
+				'<small>' + L('د. أحمد خالد توفيق · 1962–2018', 'Dr. Ahmed Khaled Tawfik · 1962–2018') + '</small></span></a>');
+
+		var max = Math.max.apply(null, MEGA.bars);
+		var legacy = panel('legacy', L('إرثه', 'His legacy'),
+			'<div class="mg-text">' + MEGA.legacy.map(function (n) { return item(n, 'mg-tl'); }).join('') + '</div>' +
+			'<a class="mg-tall" href="screen.html"' + cur('screen.html') + '>' + img('assets/img/photos/refaat-lantern-netflix.webp', 'mg-tall-img') + '<span>' + L('رفعت إسماعيل على نتفليكس', 'Refaat Ismail on Netflix') + '</span></a>' +
+			'<a class="mg-data" href="numbers.html"' + cur('numbers.html') + '><span class="mg-new">' + L('بالأرقام', 'In numbers') + '</span>' +
+				'<span class="mg-bars" aria-hidden="true">' + MEGA.bars.map(function (v, i) { return '<i style="height:' + Math.max(4, Math.round(v / max * 100)) + '%"' + (v === max ? ' class="hi"' : i === 7 ? ' class="hi2"' : '') + '></i>'; }).join('') + '</span>' +
+				'<small class="mg-eye">' + L('كتبه عامًا بعام، 2005–2018', 'His books, year by year, 2005–2018') + '</small>' +
+				'<b>' + L('عمله وأسلوبه بالأرقام', 'His work and style in numbers') + '</b>' +
+				'<small>' + L('كم كتب، ومتى، وبأي الكلمات', 'How much he wrote, when, and in which words') + '</small>' +
+				'<span class="mg-go">' + L('اكتشف الأرقام', 'Explore the numbers') + ' ' + arrow + '</span></a>');
+
+		return '<nav class="mnav" aria-label="' + L('التنقل الرئيسي', 'Main') + '">' +
+			link('index.html', 'الرئيسية', 'Home') +
+			top('works', 'أعماله', 'His works') + top('world', 'عالمه', 'His world') + top('life', 'حياته', 'His life') + top('legacy', 'إرثه', 'His legacy') +
+			link('guide.html', 'من أين أبدأ؟', 'Start here', 'mnav-start') +
+			works + world + life + legacy + '</nav>';
+	}
+	/* open on a hover with a mouse (after a moment, at once when moving from one panel to the next), on a click or a tap,
+	   on Enter or ↓; close on leaving the header, Escape, a click outside, or focus moving out */
+	function wireMega(header) {
+		var nav = header.querySelector('.mnav');
+		if (!nav) return;
+		var btns = [].slice.call(nav.querySelectorAll('.mnav-btn'));
+		var openId = '', timer = 0, openedAt = 0, hydrated = false;
+		var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+		var hydrate = function () {
+			if (hydrated) return;
+			hydrated = true;
+			[].forEach.call(nav.querySelectorAll('img[data-src]'), function (im) { im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); });
+		};
+		var set = function (id) {
+			clearTimeout(timer);
+			if (id) hydrate();
+			openId = id;
+			btns.forEach(function (b) {
+				var on = b.dataset.mega === id;
+				b.setAttribute('aria-expanded', String(on));
+				document.getElementById('mega-' + b.dataset.mega).classList.toggle('is-open', on);
+			});
+			header.classList.toggle('mega-open', !!id);
+			if (id) openedAt = Date.now();
+		};
+		nav.addEventListener('pointerenter', hydrate);
+		nav.addEventListener('focusin', hydrate);
+		btns.forEach(function (b) {
+			var id = b.dataset.mega;
+			b.addEventListener('click', function () {
+				/* a click just after the hover opened it keeps it open */
+				if (openId === id && Date.now() - openedAt > 450) set('');
+				else set(id);
+			});
+			b.addEventListener('keydown', function (ev) {
+				if (ev.key === 'ArrowDown') {
+					ev.preventDefault(); set(id);
+					var first = document.getElementById('mega-' + id).querySelector('a');
+					if (first) first.focus();
+				}
+			});
+			b.addEventListener('pointerenter', function (ev) {
+				if (ev.pointerType !== 'mouse' || !finePointer.matches) return;
+				clearTimeout(timer);
+				timer = setTimeout(function () { set(id); }, openId ? 0 : 110);
+			});
+			b.addEventListener('pointerleave', function () { if (!openId) clearTimeout(timer); });
+		});
+		[].forEach.call(nav.querySelectorAll('.mnav-link'), function (a) {
+			a.addEventListener('pointerenter', function (ev) { if (ev.pointerType === 'mouse' && openId) { clearTimeout(timer); timer = setTimeout(function () { set(''); }, 140); } });
+		});
+		header.addEventListener('pointerleave', function (ev) {
+			if (ev.pointerType !== 'mouse' || !openId) return;
+			clearTimeout(timer);
+			timer = setTimeout(function () { set(''); }, 260);
+		});
+		header.addEventListener('pointerenter', function (ev) {
+			if (ev.pointerType === 'mouse' && openId) { clearTimeout(timer); }
+		});
+		nav.addEventListener('click', function (ev) { if (ev.target.closest('.mega a')) set(''); });
+		nav.addEventListener('focusout', function (ev) { if (openId && ev.relatedTarget && !nav.contains(ev.relatedTarget)) set(''); });
+		/* the header is drawn again when the language changes: the page-wide listeners are added once and reach the menu of the moment */
+		header._mega = { nav: nav, set: set, open: function () { return openId; } };
+		if (header.dataset.megaWired) return;
+		header.dataset.megaWired = '1';
+		document.addEventListener('keydown', function (ev) {
+			var m = header._mega;
+			if (ev.key !== 'Escape' || !m.open()) return;
+			var b = m.nav.querySelector('[data-mega="' + m.open() + '"]');
+			m.set(''); if (b) b.focus();
+		});
+		document.addEventListener('click', function (ev) { var m = header._mega; if (m.open() && !m.nav.contains(ev.target)) m.set(''); });
+		var mq = window.matchMedia('(max-width: 760px)');
+		(mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(function () { header._mega.set(''); });
+	}
+
 	function store(k, v) {
 		try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; }
 	}
@@ -394,6 +627,8 @@
 								return '<a href="' + n.href + '" style="--i:' + i + '"' + (n.phone ? ' class="nav-phone"' : '') + (n.id === pageId ? ' aria-current="page"' : '') + '>' + App.esc(n[App.lang]) + '<span aria-hidden="true"></span></a>';
 							}).join('') +
 						'</nav>' +
+						/* on a wider screen, the main menu with its four panels (the links above are the phone's contents page) */
+						megaHTML(App, location.pathname.split('/').pop() || 'index.html') +
 						'<div class="tools">' +
 							'<button class="icon-btn search-open" type="button" aria-label="' + App.L('بحث', 'Search') + '" title="' + App.L('بحث (/)', 'Search (/)') + '">' +
 								'<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' +
@@ -422,6 +657,7 @@
 					var mq = window.matchMedia('(max-width: 760px)');
 					(mq.addEventListener ? mq.addEventListener.bind(mq, 'change') : mq.addListener.bind(mq))(function () { setMenu(false); });
 				}
+				wireMega(header);
 				header.querySelector('.lang-toggle').addEventListener('click', function () { App.setLang(App.lang === 'ar' ? 'en' : 'ar'); });
 				header.querySelector('.theme-toggle').addEventListener('click', function () { App.setTheme(App.theme() === 'light' ? 'dark' : 'light'); });
 				header.querySelector('.search-open').addEventListener('click', function () { Search.open(); });
