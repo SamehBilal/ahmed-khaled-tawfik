@@ -9,9 +9,18 @@
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-04T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1db58ff</id>
+		<title>لوحات القائمة أغنى</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">لوحات القائمة أغنى: رف كتب وتأثيرات للسلاسل، وتأثيرات صفحات الشخصيات في بطاقاتها، وروابط جديدة وأيقونات</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3317c06</id>
 		<title>قائمة رئيسية جديدة بلوحات كبيرة</title>
-		<updated>2026-11-04T20:59:00Z</updated>
+		<updated>2026-11-04T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="صور"/>
 		<category term="audio" label="مسموع"/>
@@ -22,7 +31,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8b3a21d</id>
 		<title>على الأجهزة اللوحية لم تعد الصفحة تنزلق جانبيًا، وصُحح مربع البحث في سجل التحديثات وبريد صفحة التواصل وصور…</title>
-		<updated>2026-11-04T20:58:00Z</updated>
+		<updated>2026-11-04T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="تصميم"/>
 		<category term="fix" label="تصحيح"/>
@@ -31,7 +40,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c015779</id>
 		<title>صور أخف بـ4.2 ميجابايت، ولوسيفر في الأعداد نفسها في كل مكان، و«من أين أبدأ؟» بعدد الكتب الصحيح</title>
-		<updated>2026-11-04T20:57:00Z</updated>
+		<updated>2026-11-04T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="صور"/>
 		<category term="audio" label="مسموع"/>
@@ -42,7 +51,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
 		<title>صفحتا «السلاسل جنبًا إلى جنب» مع «أعداء وأشرار» و«زمن العرّاب»، و«إهداءات كتبه» في «بخط يده»، و«مكتبة رفعت…</title>
-		<updated>2026-11-04T20:56:00Z</updated>
+		<updated>2026-11-04T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="pics" label="صور"/>
@@ -549,15 +558,5 @@
 		<category term="data" label="بيانات"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">«الأغلفة والطبعات»: نقاط الطبعات في «رواياته وكتبه» تفتح بطاقة بأسلوب Tooltip Styles الكلاسيكي — غلاف الطبعة وعنوانها ودارها وسنتها وصفحاتها، بسهم نحو النقطة</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2390533</id>
-		<title>تصحيح</title>
-		<updated>2026-11-01T20:53:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="صور"/>
-		<category term="data" label="بيانات"/>
-		<category term="fix" label="تصحيح"/>
-		<content type="text">تصحيح: سلاسل الجيب لم تنتقل من «المؤسسة العربية الحديثة» — «سلاح التلميذ» اسمها على طبعاتها الأحدث واسمها اليوم «روايات مصرية»؛ صارت دارًا واحدة في «الطبعات» وصفحة الدار</content>
 	</entry>
 </feed>

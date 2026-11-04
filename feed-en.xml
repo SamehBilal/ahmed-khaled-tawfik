@@ -9,9 +9,18 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-04T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1db58ff</id>
+		<title>The main menu's panels, fuller</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="design" label="Design"/>
+		<content type="text">The main menu's panels, fuller: «أعماله» has a shelf under its covers — Utopia, Al-Senga, Like Icarus, In the Rats' Passage, Shaabeeb, Al-Mirante, WWW and World Fiction — and each series' card its own night behind the cover: Ma Wara' al-Tabi'a's fog, eyes that open and blink and bats crossing; Fantasia's stars, a portal turning and sparks rising; Safari's banded sun going down over the savanna's acacias. «عالمه» has «أعداء وأشرار» and «مكتبة رفعت إسماعيل», and its three heroes carry their pages' effects — Refaat's fog and his lantern glowing in his hand with moths circling it, Abeer's stars and portal, Alaa's heartbeat. «حياته» has «طنطا، مدينته»; «إرثه»'s links have their icons. The effects move only while their panel is open and stop for those who ask for less motion. A link to a whole section (#villains, #refaat) now stops at its top under the header — centred, a section taller than the window was left above sight — and «أعماله» keeps its two columns on a tablet held sideways</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3317c06</id>
 		<title>The main menu, on a wider screen, is six words</title>
-		<updated>2026-11-04T20:59:00Z</updated>
+		<updated>2026-11-04T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -22,7 +31,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8b3a21d</id>
 		<title>Tablets</title>
-		<updated>2026-11-04T20:58:00Z</updated>
+		<updated>2026-11-04T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<category term="fix" label="Fix"/>
@@ -31,7 +40,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c015779</id>
 		<title>Lighter pictures</title>
-		<updated>2026-11-04T20:57:00Z</updated>
+		<updated>2026-11-04T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -42,7 +51,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
 		<title>«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data</title>
-		<updated>2026-11-04T20:56:00Z</updated>
+		<updated>2026-11-04T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -549,15 +558,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">«الأغلفة والطبعات»: in «رواياته وكتبه» each edition's dot opens a card in Codrops' classic «Tooltip Styles» (Mary Lou; its first effect), in place of the browser's bare title — a dark box above the dot, the edition's cover on one side and on the other its title in bold with which edition, its house, year, pages and format, an arrow beneath, dropping in as it fades in, a gap filler so the pointer can reach it; on hover or keyboard focus. Each card is placed as it opens, centred on its dot but kept within the chart (its arrow still on the dot), and the chart clips its sides so hidden cards never widen the page on a phone</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2390533</id>
-		<title>Correction: The pocket series never left the Modern Arab Association</title>
-		<updated>2026-11-01T20:53:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<category term="fix" label="Fix"/>
-		<content type="text">Correction: The pocket series never left the Modern Arab Association: «سلاح التلميذ» is its name on their later editions, and «روايات مصرية» today. — The pocket series never left their house: the Modern Arab Association is «سلاح التلميذ» on most of their later editions and «روايات مصرية» by name today — one house (its match takes all three names), so «الطبعات» on the covers page shows each series in it from first issue to now (Ma Wara' al-Tabi'a 1993–2025, 327 editions), named «المؤسسة العربية الحديثة («روايات مصرية» اليوم)», and its lead no longer has them moving to Selah El-Telmeez; the house's page says the same, and its editions under either name link there</content>
 	</entry>
 </feed>
