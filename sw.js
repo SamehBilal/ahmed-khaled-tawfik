@@ -7,7 +7,7 @@
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'akt-dad82607aa';
+var VERSION = 'akt-f9e97a4fcf';
 var PRECACHE = [
 	'./',
 	'about.html',
@@ -46,7 +46,9 @@ var PRECACHE = [
 	'publishers.html',
 	'quiz.html',
 	'quotes.html',
+	'reader-stories.html',
 	'refaat-life.html',
+	'remembrance.html',
 	'screen.html',
 	'series.html',
 	'sitemap.html',
@@ -89,6 +91,7 @@ var PRECACHE = [
 	'assets/js/data-detail.js',
 	'assets/js/data-heroes.js',
 	'assets/js/data-pages.js',
+	'assets/js/data-readers.js',
 	'assets/js/editions.js',
 	'assets/js/era.js',
 	'assets/js/figure3d.js',
@@ -114,13 +117,17 @@ var PRECACHE = [
 	'assets/js/page-hero.js',
 	'assets/js/papers.js',
 	'assets/js/people.js',
+	'assets/js/posthumous.js',
 	'assets/js/publisher-page.js',
 	'assets/js/publishers-page.js',
 	'assets/js/pwa.js',
 	'assets/js/quiz.js',
 	'assets/js/quote-image.js',
 	'assets/js/quotes.js',
+	'assets/js/reader-stories.js',
+	'assets/js/readers-invite.js',
 	'assets/js/refaat-life.js',
+	'assets/js/remembrance.js',
 	'assets/js/screen.js',
 	'assets/js/series-file.js',
 	'assets/js/series-page.js',
@@ -170,6 +177,7 @@ var PRECACHE = [
 	'assets/css/page-hero.css',
 	'assets/css/page-journey.css',
 	'assets/css/page-library.css',
+	'assets/css/page-memory.css',
 	'assets/css/page-names.css',
 	'assets/css/page-network.css',
 	'assets/css/page-refaat-life.css',
