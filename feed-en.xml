@@ -7,7 +7,19 @@
 	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
-	<updated>2026-11-03T20:59:00Z</updated>
+	<updated>2026-11-04T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
+		<title>«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="New page"/>
+		<category term="pics" label="Pictures"/>
+		<category term="audio" label="Audio"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<content type="text">«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data: his six series in one table — who tells each, its years and issues, the first and the last, its house, its kind, how many are heard on Audiohat and Storytel, its legends, real figures and enemies, the screen, and its ending (on the series page, #ending, or asked for) — its band the series' lives as lanes from first year to last, a mark for each issue; and under it «أعداء وأشرار» (#villains): 17 enemies his heroes meet, by series — Lucifer, Mother Marsha, Ronel the Black, the other Refaat, Abraham Levy, Mira Goran, Rasputin, Hassan-i Sabbah… — each with its issues and sources (AKT.villains). «زمن العرّاب» (era.html), a new page: his life, his books and his series as they began and ended, his awards and the screen, year by year from 1962, beside 91 events in Egypt, the Arab world and the world, in culture and in science, each sourced; 22 tied to what he wrote of them — his column on the blog or his issue — its band the years as two tracks, his and the world's (AKT.era). «بخط يده» has «إهداءات كتبه» (#dedications): the printed dedications of four of his books — to his readers, pirated or not; to his father and Sami El-Salamouni; to Ahmed Mourad, Ayman El-Gendy and Raef Wasfy; and «السنجة»'s to Ahmed El-Aidy and the revolution (AKT.dedications). «مكتبته» has «مكتبة رفعت إسماعيل» (#refaat): 19 things his heroes read, quote, watch and hum inside the stories — Dracula, Poe, Dante, Umm Kulthum, Frankenstein, the Necronomicon, Carmina Burana, Frost, Darwish… — with their issues (AKT.refaatLibrary). «قالوا عنه» has, after «كتب عنه», «دراسات ورسائل عنه» (#studies): 35 theses and journal articles about him from ten countries, each linked to its record (AKT.studies). «ركن القرّاء» has «البدايات» (#openings): the first line of 27 of his books and issues, and four covers to choose which it opens (AKT.openings)</content>
+	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6b749ab</id>
 		<title>«بياناتك على هذا الجهاز» (privacy.html#mydata)</title>
@@ -540,14 +552,5 @@
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">«على الشاشة»: the band merged with the page — no ground of its own, no line under it, no fade at its sides, in either theme; only the running film strip and the projector's beam</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/87c11c2</id>
-		<title>«ترجماته»</title>
-		<updated>2026-11-01T20:49:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<content type="text">«ترجماته»: every publisher, author and page named on it a link — a publisher to its page here (both in «دار ميريت (ثم دار ليلى)»), an author (none has a page here) to Wikipedia in the language shown: the books' own authors and, under each World Pocket Novels and «رجفة الخوف» cover, the novel's author, now a link of its own beside the cover's; and the closing note's «تواصل وساهم» to that page. The author chips filter as before</content>
 	</entry>
 </feed>

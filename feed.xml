@@ -7,7 +7,19 @@
 	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
-	<updated>2026-11-03T20:59:00Z</updated>
+	<updated>2026-11-04T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
+		<title>صفحتا «السلاسل جنبًا إلى جنب» مع «أعداء وأشرار» و«زمن العرّاب»، و«إهداءات كتبه» في «بخط يده»، و«مكتبة رفعت…</title>
+		<updated>2026-11-04T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="صفحة جديدة"/>
+		<category term="pics" label="صور"/>
+		<category term="audio" label="مسموع"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">صفحتا «السلاسل جنبًا إلى جنب» مع «أعداء وأشرار» و«زمن العرّاب»، و«إهداءات كتبه» في «بخط يده»، و«مكتبة رفعت إسماعيل» في «مكتبته»، و«دراسات ورسائل عنه» في «قالوا عنه»، ولعبة «البدايات» في «ركن القرّاء»</content>
+	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6b749ab</id>
 		<title>«بياناتك على هذا الجهاز» في «الخصوصية» تعرض كل ما يحفظه الموقع في متصفحك وتمسحه أو تنقله إلى جهاز آخر، وأخبار…</title>
@@ -540,14 +552,5 @@
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">«على الشاشة»: الشريط العلوي مندمج مع الصفحة بلا خلفية ولا خط تحته، ويبقى شريط الفيلم وحده</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/87c11c2</id>
-		<title>«ترجماته»</title>
-		<updated>2026-11-01T20:49:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="صور"/>
-		<category term="data" label="بيانات"/>
-		<content type="text">«ترجماته»: كل دار نشر وكاتب وصفحة مذكورة صارت رابطًا — دور النشر إلى صفحاتها، والكتّاب إلى ويكيبيديا، و«تواصل وساهم» إلى صفحتها</content>
 	</entry>
 </feed>

@@ -7,7 +7,7 @@
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'akt-848b076b67';
+var VERSION = 'akt-7f5eda583f';
 var PRECACHE = [
 	'./',
 	'about.html',
@@ -21,10 +21,12 @@ var PRECACHE = [
 	'character.html',
 	'characters.html',
 	'clinic.html',
+	'compare.html',
 	'contact.html',
 	'covers.html',
 	'creatures.html',
 	'editions.html',
+	'era.html',
 	'glossary.html',
 	'guide.html',
 	'handwriting.html',
@@ -77,6 +79,7 @@ var PRECACHE = [
 	'assets/js/character-page.js',
 	'assets/js/characters.js',
 	'assets/js/clinic.js',
+	'assets/js/compare.js',
 	'assets/js/corner.js',
 	'assets/js/covers.js',
 	'assets/js/creatures.js',
@@ -87,6 +90,7 @@ var PRECACHE = [
 	'assets/js/data-heroes.js',
 	'assets/js/data-pages.js',
 	'assets/js/editions.js',
+	'assets/js/era.js',
 	'assets/js/figure3d.js',
 	'assets/js/glossary.js',
 	'assets/js/guide.js',
@@ -154,10 +158,12 @@ var PRECACHE = [
 	'assets/css/page-calendar.css',
 	'assets/css/page-changelog.css',
 	'assets/css/page-clinic.css',
+	'assets/css/page-compare.css',
 	'assets/css/page-corner.css',
 	'assets/css/page-covers.css',
 	'assets/css/page-creatures.css',
 	'assets/css/page-editions.css',
+	'assets/css/page-era.css',
 	'assets/css/page-glossary.css',
 	'assets/css/page-handwriting.css',
 	'assets/css/page-hero.css',
