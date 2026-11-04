@@ -64,7 +64,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "تغريدة على حسابه الرسمي في تويتر، نقلها اليوم السابع.", "en": "Tweet from his official Twitter account, quoted by Youm7." },
     "source": "https://www.youm7.com/story/2018/4/3/هنيدى-ناعيا-أحمد-خالد-توفيق-أفكارك-وروحك-هتفضل-موجودة-فى/3727715",
-    "photo": "assets/img/photos/wikimedia-8683d4a4726d.png"
+    "photo": "assets/img/photos/wikimedia-8683d4a4726d.webp"
   },
   {
     "name": { "ar": "تميم البرغوثي", "en": "Tamim Al-Barghouti" },
@@ -112,7 +112,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "تغريدة على حسابه في تويتر، نقلها صدى البلد.", "en": "Tweet from his Twitter account, quoted by Sada El Balad." },
     "source": "https://www.elbalad.news/3244707",
-    "photo": "assets/img/photos/wikimedia-707e4c24b6e5.png"
+    "photo": "assets/img/photos/wikimedia-707e4c24b6e5.webp"
   },
   {
     "name": { "ar": "حمزة نمرة", "en": "Hamza Namira" },
@@ -187,7 +187,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "حديث عن كواليس «ما وراء الطبيعة» بعد عرضه على نتفليكس.", "en": "Talking about the making of Netflix's \"Paranormal\" days after its release." },
     "source": "https://www.youm7.com/story/2020/11/9/%D8%A3%D8%AD%D9%85%D8%AF-%D8%A3%D9%85%D9%8A%D9%86-%D9%8A%D9%83%D8%B4%D9%81-%D9%83%D9%88%D8%A7%D9%84%D9%8A%D8%B3-%D9%85%D8%A7-%D9%88%D8%B1%D8%A7%D8%A1-%D8%A7%D9%84%D8%B7%D8%A8%D9%8A%D8%B9%D8%A9-%D8%B1%D9%81%D8%B6%D8%AA-%D9%81%D9%89-%D8%A7%D9%84%D8%A8%D8%AF%D8%A7%D9%8A%D8%A9/5059257",
-    "photo": "assets/img/photos/wikimedia-bc48cae3b42e.png"
+    "photo": "assets/img/photos/wikimedia-bc48cae3b42e.webp"
   },
   {
     "name": { "ar": "محمد فراج", "en": "Mohamed Farrag" },
@@ -199,7 +199,7 @@ window.AKT.tributes = [
     },
     "context": { "ar": "في لقاء لمنصة «شاهد» عن بطولته لمسلسل «الغرفة 207».", "en": "In an interview for Shahid about starring in \"Room 207\"." },
     "source": "https://www.filfan.com/news/153571",
-    "photo": "assets/img/photos/wikimedia-b192e9ae738a.png"
+    "photo": "assets/img/photos/wikimedia-b192e9ae738a.webp"
   }
 ];
 

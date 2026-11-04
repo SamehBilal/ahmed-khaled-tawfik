@@ -1,6 +1,6 @@
 {
  "The Cairo Trilogy": {
-  "src": "assets/img/library/the-cairo-trilogy.png",
+  "src": "assets/img/library/the-cairo-trilogy.webp",
   "page": "https://en.wikipedia.org/wiki/Palace_Walk"
  },
  "The Journey of Ibn Fattouma": {
@@ -12,7 +12,7 @@
   "page": "https://en.wikipedia.org/wiki/Naguib_Mahfouz"
  },
  "Crime and Punishment": {
-  "src": "assets/img/library/crime-and-punishment.png",
+  "src": "assets/img/library/crime-and-punishment.webp",
   "page": "https://en.wikipedia.org/wiki/Crime_and_Punishment"
  },
  "Anton Chekhov": {
@@ -100,7 +100,7 @@
   "page": "https://en.wikipedia.org/wiki/Cinema_Paradiso"
  },
  "Grindhouse": {
-  "src": "assets/img/library/grindhouse.png",
+  "src": "assets/img/library/grindhouse.webp",
   "page": "https://en.wikipedia.org/wiki/Grindhouse_(film)"
  },
  "Dracula — Hammer films with Christopher Lee": {
@@ -144,7 +144,7 @@
   "page": "https://en.wikipedia.org/wiki/Chiquitita"
  },
  "In the Year 2525": {
-  "src": "assets/img/library/in-the-year-2525.png",
+  "src": "assets/img/library/in-the-year-2525.webp",
   "page": "https://en.wikipedia.org/wiki/In_the_Year_2525"
  },
  "The Personality of Egypt": {
@@ -152,11 +152,11 @@
   "page": "https://ar.wikipedia.org/wiki/%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9_%D9%85%D8%B5%D8%B1%3A_%D8%AF%D8%B1%D8%A7%D8%B3%D8%A9_%D9%81%D9%8A_%D8%B9%D8%A8%D9%82%D8%B1%D9%8A%D8%A9_%D8%A7%D9%84%D9%85%D9%83%D8%A7%D9%86_(%D9%83%D8%AA%D8%A7%D8%A8)"
  },
  "Tintin": {
-  "src": "assets/img/library/tintin.png",
+  "src": "assets/img/library/tintin.webp",
   "page": "https://en.wikipedia.org/wiki/The_Adventures_of_Tintin"
  },
  "Samir magazine (its golden age)": {
-  "src": "assets/img/library/samir-magazine-its-golden-age.png",
+  "src": "assets/img/library/samir-magazine-its-golden-age.webp",
   "page": "https://ar.wikipedia.org/wiki/%D8%B3%D9%85%D9%8A%D8%B1_(%D9%85%D8%AC%D9%84%D8%A9)"
  },
  "Bayram al-Tunisi": {
@@ -168,7 +168,7 @@
   "page": "https://en.wikipedia.org/wiki/Salah_Jahin"
  },
  "Take My Breath Away": {
-  "src": "assets/img/library/take-my-breath-away.png",
+  "src": "assets/img/library/take-my-breath-away.webp",
   "page": "https://en.wikipedia.org/wiki/Take_My_Breath_Away"
  },
  "Madame Bovary": {

@@ -5,8 +5,8 @@ window.PAGE = {
 		eyebrow: { ar: 'دليل القراءة', en: 'Reading guide' },
 		title: { ar: 'من أين أبدأ؟', en: 'Where do I start?' },
 		lead: {
-			ar: 'أكثر من مئتي كتاب قد تُربك القارئ الجديد. هذه مسارات مقترحة حسب ذوقك — ليست قوائم رسمية، بل نقطة انطلاق.',
-			en: 'More than two hundred books can overwhelm a new reader. These are suggested paths by taste — not official lists, just a way in.'
+			ar: 'نحو ثلاثمئة عدد وخمسين كتابًا قد تُربك القارئ الجديد. هذه مسارات مقترحة حسب ذوقك — ليست قوائم رسمية، بل نقطة انطلاق.',
+			en: 'Some three hundred issues and fifty books can overwhelm a new reader. These are suggested paths by taste — not official lists, just a way in.'
 		}
 	},
 

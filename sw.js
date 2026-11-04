@@ -235,7 +235,7 @@ var PRECACHE = [
 	'assets/img/icons/maskable-192.png',
 	'assets/img/icons/maskable-512.png',
 	'assets/img/cassette/cs_back.png',
-	'assets/img/cassette/cs_front_akt.png',
+	'assets/img/cassette/cs_front_akt.webp',
 	'assets/img/cassette/cs_wheel.png',
 	'assets/img/cassette/metal.jpg',
 	'assets/img/cassette/metal_dark.jpg',

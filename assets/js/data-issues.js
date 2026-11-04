@@ -55,7 +55,7 @@ window.AKT.issues = {
     { "n": 47, "title": { "ar": "أسطورة المنزل رقم 5", "en": "The Legend of House No. 5" } },
     { "n": 48, "title": { "ar": "أسطورة المومياء", "en": "The Legend of the Mummy" } },
     { "n": 49, "title": { "ar": "أسطورة العشيرة", "en": "The Legend of the Clan" } },
-    { "n": 50, "title": { "ar": "في جانب النجوم", "en": "On the Side of the Stars" } },
+    { "n": 50, "title": { "ar": "في جانب النجوم", "en": "On the Side of the Stars" }, "chars": ["lucifer"] },
     { "n": 51, "title": { "ar": "أسطورة الرقم المشئوم", "en": "The Legend of the Ill-Omened Number" } },
     { "n": 52, "title": { "ar": "أسطورة مملة", "en": "A Boring Legend" } },
     { "n": 53, "title": { "ar": "أسطورة النبوءة", "en": "The Legend of the Prophecy" } },
@@ -83,7 +83,7 @@ window.AKT.issues = {
     { "n": 75, "title": { "ar": "أسطورة الطفيل", "en": "The Legend of the Parasite" } },
     { "n": 76, "title": { "ar": "أسطورة معرض الرعب", "en": "The Legend of the Horror Exhibition" } },
     { "n": 77, "title": { "ar": "أسطورة الفتاة الزرقاء", "en": "The Legend of the Blue Girl" } },
-    { "n": 78, "title": { "ar": "أسطورة حامل الضياء (الجزء الأول)", "en": "The Legend of the Light-Bearer (Part One)" } },
+    { "n": 78, "title": { "ar": "أسطورة حامل الضياء (الجزء الأول)", "en": "The Legend of the Light-Bearer (Part One)" }, "chars": ["lucifer"] },
     { "n": 79, "title": { "ar": "أسطورة حامل الضياء (الجزء الثاني)", "en": "The Legend of the Light-Bearer (Part Two)" }, "chars": ["lucifer"] },
     { "n": 80, "part": 1, "title": { "ar": "أسطورة الأساطير (الجزء الأول)", "en": "The Legend of Legends (Part One)" }, "year": 2014 },
     { "n": 80, "part": 2, "title": { "ar": "أسطورة الأساطير (الجزء الثاني)", "en": "The Legend of Legends (Part Two)" }, "year": 2014, "chars": ["lucifer"] }
