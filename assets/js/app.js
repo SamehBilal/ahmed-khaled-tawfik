@@ -241,7 +241,7 @@
 			{ href: 'book.html?id=shaabeeb', ar: 'شآبيب', en: 'Shaabeeb', img: 'novels/abjjad-0130dee0b332' },
 			{ href: 'book.html?id=mirante', ar: 'الميرانتي', en: 'Al-Mirante', img: 'novels/abjjad-86a9f6dcbee1' },
 			{ href: 'series.html?id=www', ar: 'WWW', en: 'WWW', img: 'series/www/abjjad-c790bc32b24a' },
-			{ href: 'series.html?id=rwg', ar: 'روايات عالمية للجيب', en: 'World Fiction', img: 'contrib/rwg' }
+			{ href: 'series.html?id=rwg', ar: 'روايات عالمية للجيب', en: 'World Fiction', img: 'assets/img/covers/fronts/rwg.webp' }
 		],
 		/* his own books (AKT.works) a year at a time, 2005–2018 */
 		bars: [2, 2, 5, 8, 5, 3, 0, 6, 1, 5, 3, 1, 2, 3]
@@ -260,7 +260,7 @@
 		refaat: '<span class="mg-fx fx-ghosts" aria-hidden="true"><i class="fog"></i><i class="fog f2"></i></span>',
 		'refaat-in': '<span class="mg-lantern" aria-hidden="true"><b class="glow"></b>' + [0, 1, 2].map(function (i) { return '<i class="moth" style="--i:' + i + '"><b></b></i>'; }).join('') + '</span>',
 		abeer: '<span class="mg-fx fx-fantasy" aria-hidden="true"><i class="stars"></i><i class="portal"></i></span>',
-		alaa: '<span class="mg-fx fx-medicine" aria-hidden="true"><svg class="ecg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 60 H380 L400 60 L415 30 L430 95 L450 10 L470 110 L485 60 H700 L715 45 L730 75 L745 60 H1200"/></svg></span>'
+		alaa: '<span class="mg-fx fx-medicine" aria-hidden="true"><svg class="ecg" viewBox="0 0 240 60" preserveAspectRatio="none"><path d="M0 30H8L13 30 17 17 22 45 27 4 32 56 36 30H58L62 24 66 36 70 30H240"/></svg></span>'
 	};
 	/* «حياته»'s photograph carries one of his lines, a new one each time the panel opens: his wish for his headstone, or one of
 	   the short quotes from his books (AKT.quotes, on the pages that load the data) with the book it is from */

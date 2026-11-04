@@ -414,9 +414,14 @@ html[dir="ltr"] .fx-mwt .hill { transform: scaleX(-1); }
 .mg-lantern .moth b::after { right: -1px; transform-origin: left center; border-radius: 20% 80% 30% 70%; }
 @keyframes mgx-orbit { from { transform: rotate(0deg) translateX(calc(16px + var(--i) * 7px)) rotate(0deg) scaleY(1.8); } to { transform: rotate(360deg) translateX(calc(16px + var(--i) * 7px)) rotate(-360deg) scaleY(1.8); } }
 .fx-ghosts .fog { opacity: .7; }
+/* Refaat's card in the dark, as his page is, so his lantern's light shows: night with a little warmth where the lamp is */
+.mega .mg-fig-refaat { background: radial-gradient(70% 55% at 30% 52%, #2a1d12, #111014 55%, #07080b); }
 /* Alaa: the heartbeat running across behind him */
-.fx-medicine .ecg { left: 0; right: 0; top: 44%; width: 100%; height: 56px; opacity: .7; }
-.fx-medicine .ecg path { fill: none; stroke: #4fc39a; stroke-width: 3; stroke-linejoin: round; stroke-dasharray: 1400; stroke-dashoffset: 1400; filter: drop-shadow(0 0 5px rgba(79, 195, 154, .8)); animation: mgx-beat 3s linear infinite; }
+/* drawn at the card's own scale (a wide line squeezed into it thinned the beat's strokes to nothing), the beat at the row's start —
+   the right in Arabic, the line running from it across behind him */
+.fx-medicine .ecg { left: 0; right: 0; top: 40%; width: 100%; height: 60px; opacity: .85; }
+html[dir="rtl"] .fx-medicine .ecg { transform: scaleX(-1); }
+.fx-medicine .ecg path { fill: none; stroke: #8ff5c8; stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 420; stroke-dashoffset: 420; filter: drop-shadow(0 0 5px rgba(79, 195, 154, .8)); animation: mgx-beat 3s linear infinite; }
 @keyframes mgx-beat { to { stroke-dashoffset: 0; } }
 
 /* «حياته»: two columns with a rule between, and his photograph with his wish */
