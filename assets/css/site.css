@@ -425,12 +425,16 @@ html[dir="ltr"] .fx-mwt .hill { transform: scaleX(-1); }
 html[dir="rtl"] .mg-col { padding: 6px 10px 6px 6px; }
 .mg-col + .mg-col { padding-inline-start: 12px; }
 .mg-photo { position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: flex-end; min-height: 330px; margin-inline-start: 12px; border-radius: 16px; background: var(--ink-3); color: #fff; }
-.mg-photo-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+.mg-photo-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 44% 30%; transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
 .mg-photo:hover .mg-photo-img { transform: scale(1.04); }
 .mg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(8, 8, 10, .88)); }
 .mega .mg-photo, .mega .mg-fig, .mega .mg-card { color: #fff; }
 .mg-photo-tx { position: relative; z-index: 2; padding: 16px 18px; }
-.mg-photo-tx q { display: block; quotes: none; font-family: var(--f-display); font-size: 17px; line-height: 1.55; }
+.mg-photo-tx q { display: block; quotes: none; font-family: var(--f-display); font-size: 16px; line-height: 1.6; }
+.mg-photo-tx q::before { content: '«'; color: #e0633a; margin-inline-end: 2px; }
+.mg-photo-tx q::after { content: '»'; color: #e0633a; margin-inline-start: 2px; }
+html[lang="en"] .mg-photo-tx q::before { content: '“'; }
+html[lang="en"] .mg-photo-tx q::after { content: '”'; }
 .mg-photo-tx small { display: block; margin-top: 6px; font-size: 12.5px; opacity: .72; }
 
 /* «إرثه»: a list in two columns, a still from the Netflix series and his books in bars, on a dark card in both themes */
@@ -470,7 +474,7 @@ html[lang="en"] .mg-data b { font-family: var(--f-display); font-weight: 700; fo
 	.mega-life .mega-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 	.mg-col + .mg-col { border-inline-end: 0; }
 	.mg-photo { grid-column: 1 / -1; min-height: 150px; margin: 12px 0 0; }
-	.mg-photo-img { object-position: 50% 28%; }
+	.mg-photo-img { object-position: 50% 26%; }
 	.mega-legacy .mega-in { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
 	.mg-text { grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 	.mg-tall { min-height: 230px; border-radius: 18px; }

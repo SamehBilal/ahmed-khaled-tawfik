@@ -262,6 +262,22 @@
 		abeer: '<span class="mg-fx fx-fantasy" aria-hidden="true"><i class="stars"></i><i class="portal"></i></span>',
 		alaa: '<span class="mg-fx fx-medicine" aria-hidden="true"><svg class="ecg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 60 H380 L400 60 L415 30 L430 95 L450 10 L470 110 L485 60 H700 L715 45 L730 75 L745 60 H1200"/></svg></span>'
 	};
+	/* «حياته»'s photograph carries one of his lines, a new one each time the panel opens: his wish for his headstone, or one of
+	   the short quotes from his books (AKT.quotes, on the pages that load the data) with the book it is from */
+	var MEGA_WISH = { text: { ar: 'أما أنا فأريد أن يُكتب على قبري: «جعل الشباب يقرؤون»', en: 'I want my headstone to say: “He made the young read”' } };
+	var megaLastQuote = -1;
+	function megaQuoteHTML(App) {
+		var list = [MEGA_WISH].concat(((window.AKT && window.AKT.quotes) || []).filter(function (q) {
+			var t = q.text && q.text[App.lang];
+			return t && t.length <= 120;
+		}));
+		var k = list.length > 1 ? Math.floor(Math.random() * list.length) : 0;
+		if (k === megaLastQuote && list.length > 1) k = (k + 1) % list.length;
+		megaLastQuote = k;
+		var q = list[k], from = q.from ? App.t(q.from) : '';
+		return '<q>' + App.esc(App.t(q.text)) + '</q><small>' + App.esc(App.L('د. أحمد خالد توفيق', 'Dr. Ahmed Khaled Tawfik')) +
+			(from ? ' · ' + App.esc(from) : ' · 1962–2018') + '</small>';
+	}
 	/* which panel holds this page: its own pages, and the pages made one per series, book, character or writer */
 	function megaGroupOf(file) {
 		var g = { 'series.html': 'works', 'book.html': 'works', 'publisher.html': 'works', 'character.html': 'world', 'writer.html': 'life', 'numbers.html': 'legacy' }[file];
@@ -318,9 +334,8 @@
 		var life = panel('life', L('حياته', 'His life'),
 			'<div class="mg-col"><p class="mg-h">' + L('سيرته', 'His life') + '</p>' + MEGA.life.map(function (n) { return item(n); }).join('') + '</div>' +
 			'<div class="mg-col"><p class="mg-h">' + L('كتاباته ودائرته', 'His writing & circle') + '</p>' + MEGA.writing.map(function (n) { return item(n); }).join('') + '</div>' +
-			'<a class="mg-photo" href="talks.html">' + img('assets/img/photos/youm7-e94d8bd9a946.jpg', 'mg-photo-img') +
-				'<span class="mg-photo-tx"><q>' + L('أما أنا فأريد أن يُكتب على قبري: «جعل الشباب يقرؤون»', 'I want my headstone to say: “He made the young read”') + '</q>' +
-				'<small>' + L('د. أحمد خالد توفيق · 1962–2018', 'Dr. Ahmed Khaled Tawfik · 1962–2018') + '</small></span></a>');
+			'<a class="mg-photo" href="quotes.html">' + img('assets/img/photos/akt-portrait-cafe.webp', 'mg-photo-img') +
+				'<span class="mg-photo-tx">' + megaQuoteHTML(App) + '</span></a>');
 
 		var max = Math.max.apply(null, MEGA.bars);
 		var legacy = panel('legacy', L('إرثه', 'His legacy'),
@@ -355,6 +370,11 @@
 		var set = function (id) {
 			clearTimeout(timer);
 			if (id) hydrate();
+			/* a new line of his on the photograph each time «حياته» opens */
+			if (id === 'life' && openId !== 'life') {
+				var tx = nav.querySelector('.mg-photo-tx');
+				if (tx && window.App) tx.innerHTML = megaQuoteHTML(window.App);
+			}
 			openId = id;
 			btns.forEach(function (b) {
 				var on = b.dataset.mega === id;
