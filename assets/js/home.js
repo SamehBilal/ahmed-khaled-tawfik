@@ -6,8 +6,6 @@ window.PAGE = {
 		bioTitle: { ar: 'طبيب كتب لجيلٍ كامل', en: 'The doctor who wrote for a generation' },
 		lifeEyebrow: { ar: 'خط الزمن', en: 'Timeline' },
 		lifeTitle: { ar: 'حياة في محطات', en: 'A life in moments' },
-		todayEyebrow: { ar: 'كلمة اليوم', en: 'Today’s line' },
-		todayTitle: { ar: 'بكلماته', en: 'In his words' },
 		exploreEyebrow: { ar: 'استكشف', en: 'Explore' },
 		exploreTitle: { ar: 'ادخل المكتبة', en: 'Enter the library' }
 	},
@@ -71,7 +69,6 @@ window.PAGE = {
 
 		/* bio */
 		document.getElementById('bio').innerHTML = App.paras(bio.summary);
-		this.today();
 
 		/* timeline */
 		document.getElementById('timeline').innerHTML = (d.timeline || []).map(function (ev) {
@@ -125,43 +122,6 @@ window.PAGE = {
 
 	/* hovering (or tapping) his grave wish fills the screen with a photo of his grave today,
 	   where readers did write it, and slowly zooms in on the inscription */
-	/* «كلمة اليوم»: one of his quotes (data-quotes.js) or of the phrasebook's lines (data-pages.js, in data-built.js), in turn,
-	   the same for everyone on the same day (by the day of the year); each to its place on the quotes page */
-	today: function () {
-		var App = window.App, d = App.data(), e = App.esc, t = App.t, L = App.L, box = document.getElementById('today');
-		if (!box) return;
-		var all = [];
-		(d.quotes || []).forEach(function (q, i) { if (t(q.text) && t(q.text).length < 260) all.push({ text: t(q.text), from: t(q.from) || t((App.findWork(q.work) || {}).title), href: 'quotes.html#q-' + i, q: q }); });
-		var g = (d.glossary || []).map(function (x, i) { return { text: L(x.phrase, x.en), from: t(x.meaning), href: 'quotes.html#g-' + i, phrase: x }; });
-		/* quotes and phrases interleaved, so the days take them in turn */
-		var mix = [];
-		for (var i = 0; i < Math.max(all.length, g.length); i++) { if (all[i]) mix.push(all[i]); if (g[i]) mix.push(g[i]); }
-		if (!mix.length) return box.closest('section').remove();
-		var now = new Date(), day = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(now.getFullYear(), 0, 0)) / 864e5);
-		var x = mix[(day + now.getFullYear() * 7) % mix.length];
-		box.className = 'today rise' + (x.phrase ? ' is-phrase' : '');
-		box.innerHTML = '<span class="today-kind">' + e(x.phrase ? L('من «قاموس العرّاب»', 'From the phrasebook') : L('اقتباس', 'Quote')) + '</span>' +
-			'<blockquote>' + e(x.text) + '</blockquote>' +
-			'<figcaption>' + (x.from ? '<span>' + e(x.phrase ? x.from : '— ' + x.from) + '</span>' : '') +
-			'<a href="' + e(x.href) + '">' + e(x.phrase ? L('في القاموس ←', 'In the phrasebook →') : L('في الاقتباسات ←', 'Among the quotes →')) + '</a>' +
-			'<button type="button" class="today-pic">' + e(L('صورة', 'Image')) + '</button></figcaption>';
-		/* «صورة»: the line as a picture to post — quote-image.js (and, for a phrase, glossary.js, which says whose it is), fetched only now */
-		box.querySelector('.today-pic').onclick = function () {
-			var need = (window.QuoteImage ? [] : ['quote-image.js']).concat(x.phrase && !window.GlossarySection ? ['glossary.js'] : []);
-			var go = function () {
-				if (x.phrase) window.GlossarySection.picture(x.phrase);
-				else window.QuoteImage.open(x.q, { cite: x.from });
-			};
-			(function next() {
-				if (!need.length) return go();
-				var s = document.createElement('script');
-				s.src = 'assets/js/' + need.shift();
-				s.onload = next;
-				document.head.appendChild(s);
-			})();
-		};
-	},
-
 	initGrave: function () {
 		var App = window.App, L = App.L;
 		var q = document.querySelector('.grave-quote');

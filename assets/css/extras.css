@@ -341,7 +341,7 @@ html[lang="en"] .g-quote { font-family: var(--f-display); font-weight: 700; }
 
 .pub-list .pub-is { font-size: 13px; color: var(--muted); }
 
-/* the home page's «كلمة اليوم»: a quote or a phrasebook line, a new one each day (home.js today) */
+/* «كلمة اليوم» (on the Works page, today.js): a quote or a phrasebook line, a new one each day (home.js today) */
 .today { position: relative; max-width: 860px; margin: 0; padding: 30px 34px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--ink-2);
 	border-inline-start: 4px solid var(--ember); }
 .today::before { content: '«'; position: absolute; inset-inline-end: 22px; top: -18px; font-family: var(--f-display); font-size: 120px; line-height: 1; color: var(--ember); opacity: .18; pointer-events: none; }
