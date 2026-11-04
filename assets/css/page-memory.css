@@ -169,3 +169,60 @@ html[lang="en"] .rs-ask b::before { content: counter(rs) '. '; }
 @media (prefers-reduced-motion: reduce) {
 	.rm-candle.is-lit .rm-flame, .rm-next-flame i, .rs-note { animation: none; }
 }
+
+/* ---------- «ذكراه كل عام»: the candles stand on the page itself — no ground of their own, no line under them, in either
+   theme (as «بخط يده»'s sheet does) — only a warm light around their flames ---------- */
+.ph[data-ph="remembrance"], html[data-theme="light"] .ph[data-ph="remembrance"] {
+	background: radial-gradient(48% 40% at 50% 52%, rgba(255, 170, 70, .1), transparent 100%); border-bottom: 0;
+}
+.ph[data-ph="remembrance"]::before, .ph[data-ph="remembrance"]::after { display: none; }
+.ph[data-ph="remembrance"] { height: 290px; }
+.ph[data-ph="remembrance"] .rm-band { padding-bottom: 14px; }
+.ph[data-ph="remembrance"] + .page-hero { padding-top: 8px; }
+html[data-theme="light"] .rm-wax { box-shadow: inset 0 6px 0 rgba(255, 255, 255, .35), 0 0 0 1px rgba(90, 70, 40, .25), 0 6px 14px rgba(70, 50, 20, .18); }
+html[data-theme="light"] .rm-candle b { color: var(--muted); }
+html[data-theme="light"] .rm-candle:not(.is-lit) .rm-flame { background: #8a7a66; }
+
+/* ---------- «حكايات القرّاء»: the reel of polaroids ---------- */
+/* the handwriting under the polaroids: Aref Ruqaa (SIL Open Font License), only on this page */
+@font-face { font-family: 'Aref Ruqaa'; font-style: normal; font-weight: 400; font-display: swap; src: url(../fonts/gf/ArefRuqaa-arabic.woff2) format('woff2');
+	unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC; }
+@font-face { font-family: 'Aref Ruqaa'; font-style: normal; font-weight: 400; font-display: swap; src: url(../fonts/gf/ArefRuqaa-latin.woff2) format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* a long run of the page, and in it a stage that stays while the polaroids fly (reader-stories.js places them) */
+.rs-reel { position: relative; height: calc(var(--n) * 62vh + 100vh); }
+.rs-stage { position: sticky; top: 64px; height: calc(100vh - 64px); height: calc(100dvh - 64px); overflow: hidden; }
+.rs-pol {
+	position: absolute; left: 50%; top: 46%; width: min(300px, 64vw); padding: 14px 14px 16px; border-radius: 3px;
+	background: #fdfaf3; color: #2a2320; text-align: center; transform: translate(-50%, -50%) scale(.15); opacity: 0; will-change: transform, opacity;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, .18), 0 10px 22px rgba(0, 0, 0, .28), 0 26px 50px rgba(0, 0, 0, .25);
+}
+.rs-pol:hover, .rs-pol:focus-visible { color: #2a2320; }
+.rs-pol:focus-visible { outline: 3px solid var(--ember); outline-offset: 4px; }
+.rs-pic { display: grid; place-items: center; aspect-ratio: 4 / 5; overflow: hidden; background: #e7e0d2; }
+.rs-pic img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.12) contrast(1.03); }
+.rs-cap { display: block; margin-top: 12px; font-family: 'Aref Ruqaa', var(--f-display); font-size: 27px; line-height: 1.25; }
+html[lang="en"] .rs-cap { font-family: 'Aref Ruqaa', var(--f-latin); font-size: 24px; }
+.rs-pol small { display: block; margin-top: 2px; font-size: 13px; color: #7a6c5a; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+/* the last one, left blank: ruled paper and a pen */
+.rs-pol.is-blank .rs-pic { background: #fbf7ee repeating-linear-gradient(transparent 0 27px, rgba(70, 110, 160, .25) 27px 28px); }
+.rs-pol.is-blank .rs-pic b { display: grid; place-items: center; width: 74px; height: 74px; border-radius: 50%; background: var(--ember); color: #fff; font-size: 34px; box-shadow: 0 8px 18px rgba(224, 99, 58, .4); }
+.rs-pol.is-blank .rs-cap { color: var(--ember); }
+.rs-hint { position: absolute; left: 0; right: 0; top: 18px; margin: 0; text-align: center; font-size: 14px; color: var(--muted); transition: opacity .4s; }
+.rs-hint i { display: inline-block; font-style: normal; animation: rs-bob 1.6s ease-in-out infinite; }
+@keyframes rs-bob { 50% { transform: translateY(5px); } }
+.rs-reel.is-moved .rs-hint { opacity: 0; }
+/* the markers and the arrows, under the stage */
+.rs-nav { position: absolute; left: 50%; bottom: 18px; z-index: 300; display: flex; align-items: center; gap: 12px; transform: translateX(-50%); padding: 6px 10px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 70%, transparent); backdrop-filter: blur(6px); }
+.rs-dots { display: flex; gap: 6px; }
+.rs-dots button { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: var(--line); cursor: pointer; transition: background .2s, transform .2s; }
+.rs-dots button:hover { background: var(--paper-dim); }
+.rs-dots button[aria-current="true"] { background: var(--ember); transform: scale(1.3); }
+.rs-step { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; background: var(--ink-2); color: var(--paper); cursor: pointer; font-size: 14px; }
+.rs-step:hover, .rs-step:focus-visible { border-color: var(--ember); color: var(--ember); }
+@media (max-width: 640px) { .rs-cap { font-size: 23px; } .rs-pol { width: min(250px, 66vw); padding: 10px 10px 12px; } }
+/* for those who ask for less motion: the polaroids lie in a row, as on a table */
+.rs-reel.is-still { height: auto; }
+.rs-reel.is-still .rs-stage { position: static; height: auto; overflow: visible; display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; padding: 30px 16px; }
+.rs-reel.is-still .rs-pol { position: relative; left: auto; top: auto; width: 220px; opacity: 1; transform: rotate(calc((var(--i) - 3) * 2deg)); }
+.rs-reel.is-still .rs-nav, .rs-reel.is-still .rs-hint { display: none; }
