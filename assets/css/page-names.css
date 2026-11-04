@@ -1,15 +1,38 @@
-/* «أعلام في حكاياته» (names.html, names.js): the band is a sky of their names as stars, bigger for those met in more issues;
+/* «أعلام في حكاياته» (names.html, names.js): the band is a frieze of their names sliding past, the years they lived beside each;
    the band is the page itself, no ground or line of its own. Under it a card each, with the covers of its issues */
 .ph[data-ph="names"], html[data-theme="light"] .ph[data-ph="names"] { background: none; border-bottom: 0; }
 .ph[data-ph="names"]::after { content: none; }
-.nm-sky { position: absolute; inset: 14px 2% 10px; }
-.nm-star { position: absolute; translate: -50% -50%; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; font-family: var(--f-display);
-	font-size: calc(13px * var(--s)); color: var(--paper-dim); opacity: .55; animation: nm-glow 8s var(--d) infinite; transition: opacity .2s, color .2s; }
-.nm-star i { width: calc(4px * var(--s)); height: calc(4px * var(--s)); border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
-@keyframes nm-glow { 0%, 70%, 100% { opacity: .5; } 80% { opacity: 1; color: var(--paper); } }
-.nm-star:hover, .nm-star:focus-visible { opacity: 1; color: var(--ember); animation: none; outline: none; z-index: 2; }
-@media (max-width: 640px) { .nm-star { font-size: calc(11px * var(--s)); } .nm-star:not(:nth-child(3n+1)) { display: none; } }
-@media (prefers-reduced-motion: reduce) { .nm-star { animation: none; } }
+/* the frieze: three rows of names sliding past (names.js band) */
+.nm-frieze {
+	position: absolute; inset: 12px 0 8px; display: flex; flex-direction: column; justify-content: center; gap: clamp(10px, 2vw, 22px);
+	overflow: hidden; direction: ltr;
+	-webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+}
+.nm-row { overflow: visible; }
+.nm-track { display: flex; width: max-content; animation: nm-slide var(--dur, 80s) linear infinite; }
+.nm-row.is-rev .nm-track { animation-direction: reverse; }
+.nm-frieze:hover .nm-track, .nm-frieze:focus-within .nm-track { animation-play-state: paused; }
+@keyframes nm-slide { to { transform: translateX(-50%); } }
+.nm-name {
+	display: inline-flex; align-items: baseline; gap: 10px; padding: 0 clamp(16px, 2.4vw, 30px); white-space: nowrap;
+	color: var(--paper); text-decoration: none; transition: color .2s;
+}
+.nm-name i { align-self: center; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--k); box-shadow: 0 0 10px var(--k); }
+.nm-name b { font-family: var(--f-display); font-weight: 600; font-size: clamp(24px, 3.6vw, 46px); line-height: 1.25; letter-spacing: 0; }
+html[lang="en"] .nm-name b { font-family: var(--f-latin); font-weight: 600; }
+.nm-name small { font-family: var(--f-latin); font-size: clamp(12px, 1.1vw, 15px); color: var(--muted); }
+/* the middle row in outline, the outer two in full */
+.nm-row.is-rev .nm-name b { color: transparent; -webkit-text-stroke: 1px var(--paper-dim); }
+.nm-name:hover b, .nm-name:focus-visible b { color: var(--k); -webkit-text-stroke: 0; }
+.nm-name:focus-visible { outline: none; }
+.nm-row:nth-child(3) .nm-name b { opacity: .72; }
+.nm-row:nth-child(3) .nm-name:hover b { opacity: 1; }
+/* each name read its own way: in Arabic the dot first on the right, the years after the name */
+html[dir="rtl"] .nm-name { direction: rtl; }
+.ph[data-ph="names"] { height: 280px; }
+.ph[data-ph="names"] + .page-hero { padding-top: 6px; }
+@media (max-width: 640px) { .ph[data-ph="names"] { height: 220px; } .nm-frieze { inset: 8px 0 6px; } }
+@media (prefers-reduced-motion: reduce) { .nm-track { animation: none; } }
 
 .nm-tools { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; justify-content: space-between; margin: 6px 0 24px; }
 .nm-q { flex: 0 1 260px; min-width: 0; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--ink-2); color: var(--paper); font: inherit; }

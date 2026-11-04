@@ -374,5 +374,23 @@ window.AKT.media = [
     "year": 2025,
     "lang": "ar",
     "url": "https://www.ajnet.me/culture/2025/12/4/وثائقي-العراب-أحمد-خالد-توفيق-أديب"
+  },
+  {
+    "kind": "profile",
+    "title": { "ar": "«كل يوم»: فقرة عن «العرّاب» الراحل أحمد خالد توفيق", "en": "Kol Youm: a segment on the late \"Godfather\" Ahmed Khaled Tawfik" },
+    "outlet": { "ar": "قناة ON", "en": "ON TV" },
+    "year": 2018,
+    "lang": "ar",
+    "url": "https://www.youtube.com/watch?v=TuxA9s3nUbI",
+    "note": { "ar": "فقرة من برنامج «كل يوم» في الأيام التي تلت رحيله، نُشرت في 5 أبريل 2018 (38 دقيقة).", "en": "A segment of the programme Kol Youm in the days after his death, posted on 5 April 2018 (38 minutes)." }
+  },
+  {
+    "kind": "profile",
+    "title": { "ar": "«آخر النهار»: إبراهيم عيسى عن الكاتب الراحل أحمد خالد توفيق", "en": "Akher El Nahar: Ibrahim Eissa on the late writer Ahmed Khaled Tawfik" },
+    "outlet": { "ar": "قناة النهار", "en": "Al Nahar TV" },
+    "year": 2020,
+    "lang": "ar",
+    "url": "https://www.youtube.com/watch?v=qkOMgu48PN8",
+    "note": { "ar": "حديث إبراهيم عيسى عنه في برنامج «آخر النهار»، نُشر في 29 نوفمبر 2020 (8 دقائق).", "en": "Ibrahim Eissa speaking of him on Akher El Nahar, posted on 29 November 2020 (8 minutes)." }
   }
 ];

@@ -16,26 +16,39 @@ window.PAGE = {
 		['science', { ar: 'علماء وأطباء', en: 'Scientists & doctors' }], ['explorer', { ar: 'رحّالة ومستكشفون', en: 'Explorers' }], ['legend', { ar: 'أبطال الأساطير', en: 'Heroes of legend' }]],
 	kind: 'all', q: '',
 
-	/* the band: their names as a sky of stars, bigger for those met in more issues, each glowing now and then; one lights with
-	   the pointer and leads to its card */
+	/* the band: a frieze of their names — three rows sliding slowly, each the other way, the middle one in outline; beside each
+	   name the years they lived (from their note) and a dot in the colour of their kind. A row stops under the pointer; a name
+	   leads to its card */
+	COLORS: { writer: '#d9a441', ruler: '#e0633a', thinker: '#9b8cf0', science: '#4fc39a', explorer: '#5aa9e6', legend: '#e07ab0' },
 	band: function (d, A) {
-		var e = A.esc, t = A.t, self = window.PAGE, list = d.storyPeople || [];
-		var rnd = function (i, k) { var x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
+		var e = A.esc, t = A.t, self = window.PAGE, list = (d.storyPeople || []).slice();
 		setTimeout(function () { self.bandWire(); }, 0);
-		return '<div class="nm-sky">' + list.map(function (p, i) {
-			return '<a class="nm-star" href="#p-' + e(p.id) + '" style="left:' + (4 + rnd(i, 1) * 88).toFixed(1) + '%;top:' + (8 + rnd(i, 2) * 76).toFixed(1) + '%;--s:' + (0.8 + p.issues.length * 0.25 + rnd(i, 3) * 0.3).toFixed(2) + ';--d:' + (-rnd(i, 4) * 8).toFixed(1) + 's">' +
-				'<i></i>' + e(t(p.name)) + '</a>';
+		/* «(1564–1616)», «(c. 2700 BC)»: the first bracket in their note with a year in it */
+		var years = function (p) { var m = /\(([^()]*\d{3,4}[^()]*)\)/.exec(t(p.who) || ''); return m ? m[1].replace(/\s+/g, ' ').trim() : ''; };
+		/* the most met first, dealt into three rows so each has some of every kind */
+		list.sort(function (a, b) { return b.issues.length - a.issues.length; });
+		var rows = [[], [], []];
+		list.forEach(function (p, i) { rows[i % 3].push(p); });
+		var name = function (p, dup) {
+			var y = years(p);
+			return '<a class="nm-name" href="#p-' + e(p.id) + '" style="--k:' + (self.COLORS[p.kind] || '#d9a441') + '"' + (dup ? ' tabindex="-1" aria-hidden="true"' : '') + '>' +
+				'<i aria-hidden="true"></i><b>' + e(t(p.name)) + '</b>' + (y ? '<small dir="auto">' + e(y) + '</small>' : '') + '</a>';
+		};
+		return '<div class="nm-frieze">' + rows.map(function (r, k) {
+			/* each row twice over, so it runs on without a seam */
+			var once = r.map(function (p) { return name(p); }).join(''), again = r.map(function (p) { return name(p, true); }).join('');
+			return '<div class="nm-row' + (k === 1 ? ' is-rev' : '') + '" style="--dur:' + (70 + k * 18) + 's"><div class="nm-track">' + once + again + '</div></div>';
 		}).join('') + '</div>';
 	},
 	bandWire: function () {
-		var sky = document.querySelector('.nm-sky');
+		var sky = document.querySelector('.nm-frieze');
 		if (!sky || sky.getAttribute('data-on')) return;
 		sky.setAttribute('data-on', '1');
 		var ph = sky.closest('.ph');
 		if (ph) ph.removeAttribute('aria-hidden');
 		var self = this;
 		sky.addEventListener('click', function (ev) {
-			var a = ev.target.closest('.nm-star');
+			var a = ev.target.closest('.nm-name');
 			if (!a) return;
 			ev.preventDefault();
 			var id = a.getAttribute('href').slice(1);
