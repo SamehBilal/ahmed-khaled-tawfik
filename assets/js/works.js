@@ -200,7 +200,6 @@ window.PAGE = {
 			'</div></article>';
 		}).join('');
 
-		this.renderPublishers();
 
 		/* his awards, and the books others wrote about him, after On screen */
 		var after = document.getElementById('adaptations-section');
@@ -223,22 +222,7 @@ window.PAGE = {
 		this.onHash();
 	},
 
-	/* ---------- the publishers he worked with, in order of their first book with him ---------- */
-	renderPublishers: function () {
-		var App = window.App, d = App.data(), S = window.WorksShared, e = App.esc, tx = App.tx, L = App.L;
-		var pubs = d.publishers || [], before = document.getElementById('adaptations-section');
-		if (!pubs.length || !before) return;
-		var cards = S.publishers();
-		var sec = document.getElementById('publishers-section');
-		if (!sec) {
-			sec = document.createElement('section');
-			sec.id = 'publishers-section'; sec.className = 'section';
-			before.parentNode.insertBefore(sec, before);
-		}
-		sec.innerHTML = '<div class="wrap"><div class="section-head"><div><h2>' + L('دور النشر', 'Publishers') + '</h2>' +
-			'<p>' + L('الدور التي صدرت عنها كتبه وسلاسله، بترتيب أول كتاب له عند كل منها.', 'The houses that published his books and series, in order of his first book with each.') + '</p></div></div>' +
-			'<div class="pub-grid">' + cards.map(S.publisherCard).join('') + '</div></div>';
-	},
+	/* (the publishers are on their own page, publishers.html, in «أعماله»'s menu — not repeated here) */
 
 	/* ---------- every issue, as spines on a shelf ---------- */
 	renderIssues: function () {
