@@ -59,7 +59,7 @@ const body = '/* Built by tools/build-data.js from ' + FILES.map(f => f + '.js')
 fs.writeFileSync(path.join(root, 'assets/js/data-built.js'), body);
 console.log('data-built.js', Math.round(body.length / 1024) + ' KB');
 /* and data-pages.js, the pages about his world and his reading, a file a part (assets/js/pages/<part>.js): each of those pages
-   loads only the parts it reads — «وحوش وأساطير» its monsters, «زمن العرّاب» its years — not all twelve (about 80 KB compressed) */
+   loads only the parts it reads — «وحوش وأساطير» its monsters, «يوميات رفعت إسماعيل» its days — not all twelve (about 80 KB compressed) */
 const parts = load(['data-pages']).win.AKT, partsDir = path.join(root, 'assets/js/pages');
 fs.mkdirSync(partsDir, { recursive: true });
 fs.readdirSync(partsDir).filter(f => f.endsWith('.js') && !(f.slice(0, -3) in parts)).forEach(f => fs.unlinkSync(path.join(partsDir, f)));

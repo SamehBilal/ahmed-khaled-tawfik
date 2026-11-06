@@ -42,7 +42,6 @@
 			{ id: 'names', href: 'names.html', ar: 'أعلام في حكاياته', en: 'Figures in his tales', phone: true },
 			{ id: 'calendar', href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', phone: true },
 			{ id: 'compare', href: 'compare.html', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side', phone: true },
-			{ id: 'era', href: 'era.html', ar: 'زمن العرّاب', en: 'The Godfather’s times', phone: true },
 			{ id: 'remembrance', href: 'remembrance.html', ar: 'ذكراه كل عام', en: 'Remembered every year', phone: true },
 			{ id: 'reader-stories', href: 'reader-stories.html', ar: 'حكايات القرّاء', en: 'Readers’ stories', phone: true }
 		],
@@ -71,9 +70,8 @@
 			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' },
 			/* the whole year, a day at a time */
 			{ href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar' },
-			/* his series in one table, and his work beside the world it came out in */
+			/* his series in one table */
 			{ href: 'compare.html', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side' },
-			{ href: 'era.html', ar: 'زمن العرّاب', en: 'The Godfather’s times' },
 			/* his memory each year since, and his readers' own stories */
 			{ href: 'remembrance.html', ar: 'ذكراه كل عام', en: 'Remembered every year' },
 			{ href: 'reader-stories.html', ar: 'حكايات القرّاء', en: 'Readers’ stories' }
@@ -216,7 +214,6 @@
 		],
 		life: [
 			{ href: 'talks.html', ic: 'mic', ar: 'سيرته ولقاءاته', en: 'His life & interviews', dar: 'من طنطا إلى الكتابة، بصوته', den: 'From Tanta to writing, in his words' },
-			{ href: 'era.html', ic: 'clock', ar: 'زمن العرّاب', en: 'The Godfather’s times', dar: 'حياته بجوار أحداث عصره', den: 'His life beside the world’s' },
 			{ href: 'calendar.html', ic: 'calendar', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', dar: 'كل يوم من أيام السنة', den: 'Every day of the year' },
 			{ href: 'awards.html', ic: 'award', ar: 'الجوائز', en: 'Awards', dar: 'ما ناله وما سُمّي باسمه', den: 'What he won and what bears his name' },
 			{ href: 'talks.html#tanta', ic: 'pin', ar: 'طنطا، مدينته', en: 'Tanta, his city', dar: 'المدينة التي وُلد فيها وعاش ودُفن', den: 'Where he was born, lived and lies' }
