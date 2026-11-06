@@ -9,16 +9,26 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-06T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3d93817</id>
+		<title>«الأعمال» no longer repeats «الجوائز والتكريم»</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="New page"/>
+		<category term="data" label="Data"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">«الأعمال» no longer repeats «الجوائز والتكريم»: his awards are on their own page, «الجوائز» (awards.html), and search now leads an award with no book of its own there, not to the Works page</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d675ed6</id>
 		<title>«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar</title>
-		<updated>2026-11-06T20:59:00Z</updated>
+		<updated>2026-11-06T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar: the day's events from the same day files the calendar is drawn from (otd.js), and the line of the day (today.js)</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/434b589</id>
 		<title>«الأعمال» no longer repeats «دور النشر»</title>
-		<updated>2026-11-06T20:58:00Z</updated>
+		<updated>2026-11-06T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -29,7 +39,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
 		<title>«زمن العرّاب» (era.html) is gone</title>
-		<updated>2026-11-06T20:57:00Z</updated>
+		<updated>2026-11-06T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -567,12 +577,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">«الخريطة»: the band's pins in Codrops' «Curved» tooltip (Tooltip Styles Inspiration, Mary Lou) — the ten places the most books name, from the map's own places, each with its route from Tanta and a pulsing ring; under the pointer, the keyboard or a first tap, a rounded ember bubble swings out on Codrops' curved tail: the place, how many books name it, the first of them and the sentence that does, leading to that book. It opens to the side of the pin with more room, no wider than that room, and moves up or down to stay inside the band, its tail still at the pin. Only the zip's curve and motion were taken, not its font or images</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/54a343f</id>
-		<title>«حول العالم»</title>
-		<updated>2026-11-02T20:31:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<content type="text">«حول العالم»: the globe's Arabic in its place — amCharts draws on a canvas, which took the page's right-to-left and set every label off to one side of its box (or out of sight); the chart now has a left-to-right box, each Arabic line marked right to left within it («من مصر إلى الإنجليزية», «4 طبعات» in that order), and amCharts' own right-to-left mode, which moved them further, is off</content>
 	</entry>
 </feed>
