@@ -198,7 +198,8 @@
 			{ href: 'covers.html', ic: 'image', ar: 'الأغلفة والطبعات', en: 'Covers & editions' },
 			{ href: 'translations.html', ic: 'translate', ar: 'ترجماته', en: 'His translations' },
 			{ href: 'audio.html', ic: 'headphones', ar: 'مسموع', en: 'Audio' },
-			{ href: 'publishers.html', ic: 'building', ar: 'دور النشر', en: 'Publishers' }
+			/* his columns and stories, written week by week, with his books */
+			{ href: 'blog.html', ic: 'pen', ar: 'المدونة', en: 'Blog' }
 		],
 		world: [
 			{ href: 'characters.html', ic: 'people', ar: 'الشخصيات', en: 'Characters', dar: 'أبطاله ومن حولهم', den: 'His heroes and those around them' },
@@ -224,11 +225,12 @@
 			{ href: 'talks.html#tanta', ic: 'pin', ar: 'طنطا، مدينته', en: 'Tanta, his city', dar: 'المدينة التي وُلد فيها وعاش ودُفن', den: 'Where he was born, lived and lies' }
 		],
 		writing: [
-			{ href: 'blog.html', ic: 'pen', ar: 'المدونة', en: 'Blog', dar: 'مقالاته وأعمدته', den: 'His articles and columns' },
 			{ href: 'quotes.html', ic: 'quote', ar: 'اقتباسات', en: 'Quotes', dar: 'جمل من كتبه', den: 'Lines from his books' },
 			{ href: 'handwriting.html', ic: 'hand', ar: 'بخط يده', en: 'In his hand', dar: 'رسائله وإهداءاته', den: 'His letters and dedications' },
 			{ href: 'library.html', ic: 'shelf', ar: 'مكتبته', en: 'His library', dar: 'ما أحبه ونصح به', den: 'What he loved and recommended' },
-			{ href: 'writers.html', ic: 'people', ar: 'دائرته', en: 'His circle', dar: 'رفاقه ومن حملوا عالمه', den: 'His companions and heirs' }
+			{ href: 'writers.html', ic: 'people', ar: 'دائرته', en: 'His circle', dar: 'رفاقه ومن حملوا عالمه', den: 'His companions and heirs' },
+			/* the houses he worked with, beside the people */
+			{ href: 'publishers.html', ic: 'building', ar: 'دور النشر', en: 'Publishers', dar: 'الدور التي نشرت كتبه وسلاسله', den: 'The houses that published him' }
 		],
 		legacy: [
 			{ href: 'legacy.html', ic: 'sprout', ar: 'الإرث', en: 'Legacy', dar: 'ما تركه في جيل كامل من القرّاء', den: 'What he left a whole generation of readers' },

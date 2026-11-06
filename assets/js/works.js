@@ -182,7 +182,7 @@ window.PAGE = {
 		this.onHash();
 	},
 
-	/* (the publishers are on their own page, publishers.html, in «أعماله»'s menu — not repeated here) */
+	/* (the publishers are on their own page, publishers.html, in «حياته»'s menu — not repeated here) */
 
 	/* ---------- every issue, as spines on a shelf ---------- */
 	renderIssues: function () {
