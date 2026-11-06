@@ -197,22 +197,7 @@ window.PAGE = {
 		}).join('');
 
 
-		/* the books others wrote about him, after On screen (his awards are on their own page, awards.html) */
-		var after = document.getElementById('adaptations-section');
-		var addSection = function (id, html) {
-			var el = document.getElementById(id);
-			if (!el) { el = document.createElement('section'); el.id = id; el.className = 'section'; after.parentNode.insertBefore(el, after.nextSibling); }
-			el.innerHTML = '<div class="wrap">' + html + '</div>';
-			after = el;
-		};
-		if ((d.aboutBooks || []).length) addSection('about-section',
-			'<div class="section-head"><div><h2>' + App.L('كتب عنه', 'Books about him') + '</h2>' +
-				'<p>' + App.L('سِيَر ودراسات كتبها غيره عنه وعن أدبه. ', 'Biographies and studies others wrote about him and his work. ') + '<a href="tributes.html">' + App.L('وما قالوه عنه ←', 'And what they said →') + '</a></p></div></div>' +
-			'<div class="cover-grid tb-books">' + d.aboutBooks.map(function (b) {
-				return '<a class="cover-link" href="' + S.bookHref(b.id) + '">' + S.miniCover({ img: b.cover, color: b.color, title: t(b.title), by: t(b.by) }) +
-					'<span class="cl-t">' + tx(b.title) + ' — ' + tx(b.by) + '</span></a>';
-			}).join('') + '</div>');
-
+		/* (his awards and the books others wrote about him are on their own pages, awards.html and tributes.html — not repeated here) */
 		this.onHash();
 	},
 

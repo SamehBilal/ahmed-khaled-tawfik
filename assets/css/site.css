@@ -303,7 +303,10 @@ html[lang="en"] .mg-card-t b { font-family: var(--f-display); font-weight: 600; 
 .mg-card[aria-current="page"] { box-shadow: 0 0 0 2px var(--ember); }
 .mg-more { padding: 10px 8px 6px; border-radius: 16px; background: var(--ink-3); }
 html[data-theme="light"] .mg-more { background: #efe5d0; }
-.mg-row { display: flex; align-items: center; gap: 10px; padding: 9px 8px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.mg-row { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-bottom: 1px solid var(--line); border-radius: 10px; font-size: 15px; transition: background .2s; }
+/* a light ground under the row the pointer is on (its rule hidden while it has one, so the ground is whole) */
+.mg-row:hover, .mg-row:focus-visible { background: rgba(255, 255, 255, .06); border-bottom-color: transparent; }
+html[data-theme="light"] .mg-row:hover, html[data-theme="light"] .mg-row:focus-visible { background: rgba(70, 45, 20, .07); }
 .mg-row:last-child { border-bottom: 0; }
 .mg-row b { flex: 1; font-family: var(--f-display); font-weight: 500; }
 .mg-row .mg-ic { width: 24px; height: 24px; border: 0; background: none; color: var(--ember); }
@@ -1017,7 +1020,6 @@ html[dir="rtl"] .award { padding: 18px 58px 16px 18px; }
 .award p { margin: 0 0 6px; color: var(--paper-dim); font-size: .93em; }
 .award .for, .award .src { font-size: .88em; }
 .award .src { color: var(--muted); }
-#about-section .cover-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 22px 16px; }
 .d-block .award h3 { font-size: 19px; margin: 2px 0 6px; }
 
 /* ---------- Footer bats, after Calleb's CodePen "Halloween" (MIT) ----------
