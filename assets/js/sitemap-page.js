@@ -181,7 +181,7 @@ window.PAGE = {
 			['writers.html', ['publishers.html', 'library.html'], [[window.People ? window.People.all().length : 0, L('صفحة اسم من دائرته', 'pages of his circle')], [S.publishers().length, L('صفحة دار نشر', 'publisher pages')]]],
 			['quotes.html', ['quotes.html#glossary']],
 			['audio.html', []],
-			['legacy.html', ['talks.html', 'interviews.html', 'tanta.html', 'awards.html', 'handwriting.html', 'map.html', 'calendar.html']],
+			['legacy.html', ['talks.html', 'interviews.html', 'tanta.html', 'awards.html', 'map.html', 'calendar.html']],
 			['tributes.html', ['studies.html', 'remembrance.html', 'reader-stories.html']],
 			['blog.html', ['blog.html#papers', 'numbers.html'], [[((d.blog || {}).posts || []).length || (d.stats || {}).posts, L('مقال', 'articles')]]],
 			['quiz.html', ['lists.html']],

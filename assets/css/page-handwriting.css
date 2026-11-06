@@ -1,13 +1,12 @@
-/* «بخط يده» (handwriting.html, handwriting.js) */
-/* the band is the page itself: no ground of its own, no glow, no line under it, in either theme — only the handwritten sheet */
-.ph[data-ph="handwriting"], html[data-theme="light"] .ph[data-ph="handwriting"] { background: transparent; border-bottom: 0; }
-.ph[data-ph="handwriting"]::before, .ph[data-ph="handwriting"]::after { display: none; }
+/* «بخط يده», the second half of «حكايات القرّاء وبخط يده» (reader-stories.html, reader-stories.js #hand; once handwriting.html).
+   Its sheet is the middle of the page's band, the readers' polaroids tossed around it (page-memory.css .rs-scatter) */
 /* the sheet, as Robert Messerle's «Lined Paper Email Form» on CodePen: white paper ruled in light blue every 30px below a blank head,
    a salmon margin line down the side the writing starts from, and the writing sitting on the rules */
-.hw-page { --rule: 30px; --head: 60px; position: absolute; left: 50%; top: 12%; bottom: 10%; width: min(520px, 86%); transform: translateX(-50%) rotate(1.5deg); overflow: hidden;
+.hw-page { --rule: 30px; --head: 60px; position: absolute; z-index: 5; left: 50%; top: 12%; bottom: 10%; width: min(440px, 44%); transform: translateX(-50%) rotate(1.5deg); overflow: hidden; display: block; text-decoration: none; transition: transform .35s, box-shadow .35s;
 	padding: var(--head) 26px 0; padding-inline-start: 74px; border-radius: 2px 6px 6px 2px;
 	background: linear-gradient(#fff 0 calc(var(--head) - 1px), transparent calc(var(--head) - 1px)), linear-gradient(#add8e6 1px, transparent 1px) 0 0 / 100% var(--rule), #fff;
 	box-shadow: 0 20px 40px rgba(0, 0, 0, .6), inset 18px 0 24px -18px rgba(0, 0, 0, .18); }
+.hw-page:hover, .hw-page:focus-visible { transform: translateX(-50%) rotate(0deg) scale(1.03); outline: none; }
 .hw-page::before { content: ''; position: absolute; top: 0; bottom: 0; inset-inline-start: 58px; width: 1px; background: salmon; }
 .hw-page p { margin: 0; font-family: var(--f-display); line-height: var(--rule); color: #0e0f13; }
 .hw-page .hw-sign { margin-top: var(--rule); }
@@ -16,7 +15,9 @@
 .hw-sign { font-size: 26px; text-align: end; font-style: italic; }
 .hw-sign span { animation-delay: 2.5s; }
 @keyframes hw-write { 0% { width: 0; } 35%, 85% { width: 100%; } 100% { width: 100%; opacity: 0; } }
-@media (max-width: 640px) { .hw-page { --rule: 26px; --head: 44px; padding-inline-start: 50px; } .hw-page::before { inset-inline-start: 38px; } .hw-line { font-size: 16px; } .hw-sign { font-size: 19px; } }
+@media (max-width: 760px) { .hw-page { width: min(400px, 56%); } }
+@media (max-width: 640px) { .hw-page { --rule: 26px; --head: 44px; padding-inline-start: 50px; }
+	.ph .hw-page { width: 48%; padding-inline: 34px 12px; } .ph .hw-page::before { inset-inline-start: 26px; } .ph .hw-line { font-size: 14px; white-space: normal; } .ph .hw-sign { font-size: 16px; } .hw-page::before { inset-inline-start: 38px; } .hw-line { font-size: 16px; } .hw-sign { font-size: 19px; } }
 @media (prefers-reduced-motion: reduce) { .hw-page span { animation: none; width: auto; } }
 .hw-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
 .hw-card { display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); border-inline-start: 4px solid #3a5aa0; }
@@ -120,3 +121,11 @@
 .hw-ded-card blockquote::before { content: '«'; color: var(--muted); }
 .hw-ded-card blockquote::after { content: '»'; color: var(--muted); }
 .hw-ded-note { margin: 0 0 8px; color: var(--paper-dim); line-height: 1.8; font-size: 14px; }
+
+/* the page's two halves: the chips to each, and «بخط يده»'s own heading */
+.rs-jump { padding: 0 0 6px; }
+.rs-jump .chips { justify-content: center; }
+.hw { scroll-margin-top: 80px; }
+.hw-h { margin: 0 0 8px; font-family: var(--f-display); font-size: 34px; }
+.hw-lead { max-width: 820px; margin: 0 0 20px; color: var(--paper-dim); line-height: 1.9; }
+#dedications, #send { scroll-margin-top: 90px; }

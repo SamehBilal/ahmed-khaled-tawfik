@@ -42,14 +42,13 @@
 			{ id: 'refaat-life', href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life', phone: true },
 			{ id: 'refaat-library', href: 'refaat-library.html', ar: 'مكتبة أبطاله', en: 'His heroes’ library', phone: true },
 			{ id: 'network', href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web', phone: true },
-			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true },
 			{ id: 'worlds', href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds', phone: true },
 			{ id: 'clinic', href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic', phone: true },
 			{ id: 'names', href: 'names.html', ar: 'أعلام في حكاياته', en: 'Figures in his tales', phone: true },
 			{ id: 'calendar', href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', phone: true },
 			{ id: 'compare', href: 'compare.html', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side', phone: true },
 			{ id: 'remembrance', href: 'remembrance.html', ar: 'ذكراه كل عام', en: 'Remembered every year', phone: true },
-			{ id: 'reader-stories', href: 'reader-stories.html', ar: 'حكايات القرّاء', en: 'Readers’ stories', phone: true }
+			{ id: 'reader-stories', href: 'reader-stories.html', ar: 'حكايات القرّاء وبخط يده', en: 'Readers’ stories, and his hand', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
@@ -73,16 +72,15 @@
 			{ href: 'interviews.html', ar: 'لقاءاته', en: 'His interviews' },
 			{ href: 'awards.html', ar: 'الجوائز', en: 'Awards' },
 			{ href: 'translations.html', ar: 'ترجماته', en: 'His translations' },
-			/* his city and his handwriting */
+			/* his city */
 			{ href: 'tanta.html', ar: 'طنطا، مدينته', en: 'Tanta, his city' },
-			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' },
 			/* the whole year, a day at a time */
 			{ href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar' },
 			/* his series in one table */
 			{ href: 'compare.html', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side' },
 			/* his memory each year since, and his readers' own stories */
 			{ href: 'remembrance.html', ar: 'ذكراه كل عام', en: 'Remembered every year' },
-			{ href: 'reader-stories.html', ar: 'حكايات القرّاء', en: 'Readers’ stories' }
+			{ href: 'reader-stories.html', ar: 'حكايات القرّاء وبخط يده', en: 'Readers’ stories, and his hand' }
 		],
 		/* «عالم العرّاب»: the pages inside his world, a block of their own under «صفحات الموقع» */
 		world: [
@@ -232,7 +230,6 @@
 		],
 		writing: [
 			{ href: 'quotes.html', ic: 'quote', ar: 'اقتباسات', en: 'Quotes', dar: 'جمل من كتبه', den: 'Lines from his books' },
-			{ href: 'handwriting.html', ic: 'hand', ar: 'بخط يده', en: 'In his hand', dar: 'رسائله وإهداءاته', den: 'His letters and dedications' },
 			{ href: 'library.html', ic: 'shelf', ar: 'مكتبته', en: 'His library', dar: 'ما أحبه ونصح به', den: 'What he loved and recommended' },
 			{ href: 'writers.html', ic: 'people', ar: 'دائرته', en: 'His circle', dar: 'رفاقه ومن حملوا عالمه', den: 'His companions and heirs' },
 			/* the houses he worked with, beside the people */
@@ -246,7 +243,7 @@
 			{ href: 'world.html', ic: 'globe', ar: 'حول العالم', en: 'Around the world', dar: 'كتبه بلغات أخرى', den: 'His books in other languages' },
 			{ href: 'quiz.html', ic: 'puzzle', ar: 'ركن القرّاء', en: 'Readers’ corner', dar: 'اختبارات وألعاب ومن قال هذا؟', den: 'Quizzes, games and who said it?' },
 			{ href: 'remembrance.html', ic: 'flame', ar: 'ذكراه كل عام', en: 'Remembered every year', dar: 'كل 2 أبريل منذ رحيله', den: 'Every 2 April since he died' },
-			{ href: 'reader-stories.html', ic: 'chat', ar: 'حكايات القرّاء', en: 'Readers’ stories', dar: 'كيف عرفوه، بأقلامهم', den: 'How they found him, in their words' },
+			{ href: 'reader-stories.html', ic: 'chat', ar: 'حكايات القرّاء وبخط يده', en: 'Readers’ stories, and his hand', dar: 'كيف عرفوه، وما كتبه لهم بيده', den: 'How they found him, and what he wrote them' },
 			{ href: 'lists.html', ic: 'bookmark', ar: 'قوائمي ورحلتي', en: 'My lists & journey', dar: 'ما قرأته وما تريد قراءته', den: 'What you have read and want to' }
 		],
 		/* the books floating along «من أين أبدأ؟»: the series' fronts, his novels and two more series (small copies, covers-s) */
@@ -496,7 +493,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: '46f438b',
+		LATEST: 'f2956f3',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
@@ -1139,7 +1136,7 @@
 				talks: 'سيرة حياة فصول biography life chapters', interviews: 'لقاءات حوارات فيديو محاضرات وثائقي interviews talks videos documentaries', tanta: 'طنطا مدينته بيته قبره Tanta city home grave', studies: 'دراسات رسائل ماجستير دكتوراه بحث أبحاث جامعة studies theses thesis research university journal', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',
 				library: 'كتب أفلام موسيقى مفضلة نصح books films music favourite', glossary: 'عبارات قاموس لزمات حتى تحترق النجوم phrases glossary',
 				creatures: 'وحوش أساطير مصاص دماء مذءوب نداهة مومياء monsters legends vampire werewolf', 'refaat-life': 'رفعت إسماعيل حياة سيرة يوميات Refaat life',
-				network: 'شبكة شخصيات علاقات characters web relations', handwriting: 'خط يده إهداء توقيع مخطوط handwriting dedication signature',
+				network: 'شبكة شخصيات علاقات characters web relations', 'reader-stories': 'حكايات القراء حكايتي قارئ خط يده إهداء توقيع مخطوط reader stories handwriting dedication signature',
 				style: 'أسلوب لغة كلمات style language words', writers: 'كتاب رسامون مخرجون ممثلون دائرة writers artists directors actors circle',
 				changelog: 'تحديثات جديد سجل changelog updates', sitemap: 'خريطة الموقع صفحات sitemap pages', about: 'عن الموقع أسئلة شائعة about faq', contact: 'تواصل ساهم مساهمة contact contribute' };
 			UI.nav.concat(UI.more, UI.world, UI.legal, UI.sections).forEach(function (n) {
