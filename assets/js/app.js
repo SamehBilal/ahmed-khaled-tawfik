@@ -11,6 +11,8 @@
 		nav: [
 			{ id: 'home', href: 'index.html', ar: 'الرئيسية', en: 'Home' },
 			{ id: 'guide', href: 'guide.html', ar: 'من أين أبدأ؟', en: 'Start here' },
+			/* the reader's turn: on a wider screen «شارك» opens its panel */
+			{ id: 'share', href: 'contact.html#contribute', ar: 'شارك', en: 'Contribute', phone: true },
 			{ id: 'works', href: 'works.html', ar: 'الأعمال', en: 'Works' },
 			{ id: 'characters', href: 'characters.html', ar: 'الشخصيات', en: 'Characters' },
 			{ id: 'writers', href: 'writers.html', ar: 'دائرته', en: 'His circle' },
@@ -174,6 +176,8 @@
 		bookmark: '<path d="M7 3h10v18l-5-3.5L7 21z"/>',
 		pin: '<path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.8" r="2.3"/>',
 		skull: '<path d="M12 3a7.5 7.5 0 0 0-7.5 7.5c0 2.7 1.3 4.5 3 5.6V20h9v-3.9c1.7-1.1 3-2.9 3-5.6A7.5 7.5 0 0 0 12 3Z"/><circle cx="9.2" cy="11" r="1.6"/><circle cx="14.8" cy="11" r="1.6"/><path d="M10.5 20v-2.5M13.5 20v-2.5"/>',
+		code: '<path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>',
+		data: '<ellipse cx="12" cy="6" rx="7" ry="2.6"/><path d="M5 6v12c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6M5 12c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6"/>',
 		flame: '<path d="M12 21c-3.6 0-6-2.5-6-5.8 0-2.6 1.6-4.3 3.1-6 .4 1.6 1.2 2.6 2.2 3 0-3.2 1.4-6 3.7-8.2-.2 2.9.8 4.8 1.9 6.4 1 1.4 1.1 2.7 1.1 4.6 0 3.4-2.4 6-6 6Z"/>',
 		chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.5h5"/>',
 		candle: '<path d="M9 10h6v11H9zM12 10V7.5M12 3.5c1.2 1.2 1.6 2.2 1 3.2-.5.8-1.5.8-2 0-.6-1 .1-2 1-3.2ZM6 21h12"/>'
@@ -250,6 +254,14 @@
 			{ href: 'series.html?id=www', ar: 'WWW', en: 'WWW', img: 'series/www/abjjad-c790bc32b24a' },
 			{ href: 'series.html?id=rwg', ar: 'روايات عالمية للجيب', en: 'World Fiction', img: 'assets/img/covers/fronts/rwg.webp' }
 		],
+		/* «شارك»: every way a reader adds to the site (the GitHub one is built in megaHTML, its address carrying the page) */
+		share: [
+			{ href: 'contact.html#contribute', ic: 'image', ar: 'أرسل غلافًا أو إهداءً', en: 'Send a cover or a dedication', dar: 'طبعة تنقص، إهداء بخط يده، تسجيل، مقال', den: 'A missing edition, his handwriting, a recording, an article' },
+			{ href: 'reader-stories.html#write', ic: 'chat', ar: 'احكِ حكايتك', en: 'Tell your story', dar: 'كيف عرفته، تُنشر بإذنك', den: 'How you found him, published with your leave' },
+			{ href: 'wanted.html', ic: 'puzzle', ar: 'ما ينقص الأرشيف', en: 'Wanted for the archive', dar: 'ما نبحث عنه الآن، عددًا عددًا', den: 'What we are looking for, issue by issue' },
+			{ href: 'contact.html#code', ic: 'code', ar: 'ساهم بالكود', en: 'Contribute code', dar: 'الموقع كله مفتوح على GitHub', den: 'The whole site is open on GitHub' },
+			{ href: 'contact.html#open-data', ic: 'data', ar: 'خذ البيانات', en: 'Take the data', dar: 'الأعداد والكتب والاقتباسات ملفاتٍ مفتوحة', den: 'Issues, books and quotes as open files' }
+		],
 		/* his own books (AKT.works) a year at a time, 2005–2018 */
 		bars: [2, 2, 5, 8, 5, 3, 0, 6, 1, 5, 3, 1, 2, 3]
 	};
@@ -287,7 +299,7 @@
 	}
 	/* which panel holds this page: its own pages, and the pages made one per series, book, character or writer */
 	function megaGroupOf(file) {
-		var g = { 'series.html': 'works', 'book.html': 'works', 'publisher.html': 'works', 'character.html': 'world', 'writer.html': 'life', 'numbers.html': 'legacy' }[file];
+		var g = { 'series.html': 'works', 'book.html': 'works', 'publisher.html': 'works', 'character.html': 'world', 'writer.html': 'life', 'numbers.html': 'legacy', 'contact.html': 'share', 'wanted.html': 'share' }[file];
 		if (g) return g;
 		var groups = { works: MEGA.worksMore, world: MEGA.world, life: MEGA.life.concat(MEGA.writing), legacy: MEGA.legacy };
 		for (var k in groups) if (groups[k].some(function (n) { return n.href === file; })) return k;
@@ -305,9 +317,9 @@
 		var panel = function (id, label, inner) {
 			return '<div class="mega mega-' + id + '" id="mega-' + id + '" role="group" aria-label="' + e(label) + '"><div class="mega-in">' + inner + '</div></div>';
 		};
-		var top = function (id, ar, en) {
+		var top = function (id, ar, en, cls, icon) {
 			var on = megaGroupOf(file) === id;
-			return '<button class="mnav-btn' + (on ? ' is-here' : '') + '" type="button" aria-expanded="false" aria-controls="mega-' + id + '" data-mega="' + id + '">' + e(L(ar, en)) +
+			return '<button class="mnav-btn' + (cls ? ' ' + cls : '') + (on ? ' is-here' : '') + '" type="button" aria-expanded="false" aria-controls="mega-' + id + '" data-mega="' + id + '">' + (icon || '') + '<span class="mnav-label">' + e(L(ar, en)) + '</span>' +
 				'<svg class="mnav-chev" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';
 		};
 		var link = function (href, ar, en, cls) { return '<a class="mnav-link' + (cls ? ' ' + cls : '') + '" href="' + href + '"' + cur(href) + '>' + e(L(ar, en)) + '</a>'; };
@@ -355,11 +367,22 @@
 				'<small>' + L('كم كتب، ومتى، وبأي الكلمات', 'How much he wrote, when, and in which words') + '</small>' +
 				'<span class="mg-go">' + L('اكتشف الأرقام', 'Explore the numbers') + ' ' + arrow + '</span></a>');
 
+		/* «شارك»: the reader's turn — a correction, a cover, a dedication, a story, code, the data — and a word on how each is credited */
+		var share = panel('share', L('شارك', 'Contribute'),
+			'<div class="mg-list">' +
+				item({ href: App.fixHref(L('', '')), ic: 'pen', ar: 'صحّح أو أضف', en: 'Correct or add', dar: 'خطأ رأيته أو معلومة تنقص، على GitHub', den: 'A mistake you saw or something missing, on GitHub' }).replace('<a ', '<a target="_blank" rel="noopener" ') +
+				MEGA.share.map(function (n) { return item(n); }).join('') + '</div>' +
+			'<a class="mg-credit" href="changelog.html"><span class="mg-seal" aria-hidden="true">' + megaIcon('award') + '</span>' +
+				'<b>' + e(L('باسمك، إن أردت', 'In your name, if you wish')) + '</b>' +
+				'<small>' + e(L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها وفي «سجل التحديثات». الموقع يكبر بقرّائه.', 'Each contribution that goes up names its sender on its page and in the changelog. The site grows with its readers.')) + '</small>' +
+				'<span class="mg-go">' + e(L('سجل التحديثات', 'The changelog')) + ' ' + arrow + '</span></a>');
+		var pen = '<svg class="mnav-ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 		return '<nav class="mnav" aria-label="' + L('التنقل الرئيسي', 'Main') + '">' +
 			link('index.html', 'الرئيسية', 'Home') +
 			top('works', 'أعماله', 'His works') + top('world', 'عالمه', 'His world') + top('life', 'حياته', 'His life') + top('legacy', 'إرثه', 'His legacy') +
 			link('guide.html', 'من أين أبدأ؟', 'Start here', 'mnav-start') +
-			works + world + life + legacy + '</nav>';
+			top('share', 'شارك', 'Contribute', 'mnav-share', pen) +
+			works + world + life + legacy + share + '</nav>';
 	}
 	/* open on a hover with a mouse (after a moment, at once when moving from one panel to the next), on a click or a tap,
 	   on Enter or ↓; close on leaving the header, Escape, a click outside, or focus moving out */
