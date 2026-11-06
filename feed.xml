@@ -9,9 +9,16 @@
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-06T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d675ed6</id>
+		<title>نُقل «في مثل هذا اليوم» و«كلمة اليوم» من صفحة الأعمال إلى «تقويم العرّاب»</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">نُقل «في مثل هذا اليوم» و«كلمة اليوم» من صفحة الأعمال إلى «تقويم العرّاب»</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/434b589</id>
 		<title>أُزيل قسم «دور النشر» من صفحة الأعمال، وبقيت صفحته المستقلة</title>
-		<updated>2026-11-06T20:59:00Z</updated>
+		<updated>2026-11-06T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="data" label="بيانات"/>
@@ -22,7 +29,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
 		<title>حُذفت صفحة «زمن العرّاب» من الموقع وكل ما يشير إليها، وعنوانها يقود الآن إلى «سيرته ولقاءاته»</title>
-		<updated>2026-11-06T20:58:00Z</updated>
+		<updated>2026-11-06T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="pics" label="صور"/>
@@ -567,13 +574,5 @@
 		<updated>2026-11-02T20:31:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">«حول العالم»: النصوص العربية في الكرة الأرضية صارت في مكانها وبترتيبها الصحيح</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/21799a0</id>
-		<title>«حول العالم»</title>
-		<updated>2026-11-02T20:30:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">«حول العالم»: تظهر الكرة الأرضية وحدها أعلى الصفحة، دون العناوين المتحركة التي كانت تسبقها</content>
 	</entry>
 </feed>
