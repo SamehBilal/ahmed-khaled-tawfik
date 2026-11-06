@@ -16,39 +16,62 @@ window.PAGE = {
 		['science', { ar: 'علماء وأطباء', en: 'Scientists & doctors' }], ['explorer', { ar: 'رحّالة ومستكشفون', en: 'Explorers' }], ['legend', { ar: 'أبطال الأساطير', en: 'Heroes of legend' }]],
 	kind: 'all', q: '',
 
-	/* the band: a frieze of their names — three rows sliding slowly, each the other way, the middle one in outline; beside each
-	   name the years they lived (from their note) and a dot in the colour of their kind. A row stops under the pointer; a name
-	   leads to its card */
+	/* the band: an investigation board — cork in a wooden frame, and on it the issues where several of them meet (Verne and Wells,
+	   Freud with Adler and Jung, Pasteur among the bacteriologists, Ross, Manson and Grassi…): each issue's cover pinned, the
+	   names met in it on paper tags around it, a red thread from the cover to each; a tag leads to its card, a cover to its issue.
+	   «التقوا في عدد واحد» stamped in its corner. Laid out on a canvas of its own, in hundredths, that scrolls sideways on a phone */
 	COLORS: { writer: '#d9a441', ruler: '#e0633a', thinker: '#9b8cf0', science: '#4fc39a', explorer: '#5aa9e6', legend: '#e07ab0' },
 	band: function (d, A) {
-		var e = A.esc, t = A.t, self = window.PAGE, list = (d.storyPeople || []).slice();
+		var e = A.esc, t = A.t, L = A.L, S = window.WorksShared, self = window.PAGE, list = d.storyPeople || [];
 		setTimeout(function () { self.bandWire(); }, 0);
-		/* «(1564–1616)», «(c. 2700 BC)»: the first bracket in their note with a year in it */
 		var years = function (p) { var m = /\(([^()]*\d{3,4}[^()]*)\)/.exec(t(p.who) || ''); return m ? m[1].replace(/\s+/g, ' ').trim() : ''; };
-		/* the most met first, dealt into three rows so each has some of every kind */
-		list.sort(function (a, b) { return b.issues.length - a.issues.length; });
-		var rows = [[], [], []];
-		list.forEach(function (p, i) { rows[i % 3].push(p); });
-		var name = function (p, dup) {
-			var y = years(p);
-			return '<a class="nm-name" href="#p-' + e(p.id) + '" style="--k:' + (self.COLORS[p.kind] || '#d9a441') + '"' + (dup ? ' tabindex="-1" aria-hidden="true"' : '') + '>' +
-				'<i aria-hidden="true"></i><b>' + e(t(p.name)) + '</b>' + (y ? '<small dir="auto">' + e(y) + '</small>' : '') + '</a>';
-		};
-		return '<div class="nm-frieze">' + rows.map(function (r, k) {
-			/* each row twice over, so it runs on without a seam */
-			var once = r.map(function (p) { return name(p); }).join(''), again = r.map(function (p) { return name(p, true); }).join('');
-			return '<div class="nm-row' + (k === 1 ? ' is-rev' : '') + '" style="--dur:' + (70 + k * 18) + 's"><div class="nm-track">' + once + again + '</div></div>';
-		}).join('') + '</div>';
+		/* the issues two or more of them share, the fullest first */
+		var by = {};
+		list.forEach(function (p) { p.issues.forEach(function (k) { (by[k] = by[k] || []).push(p); }); });
+		var groups = Object.keys(by).filter(function (k) { return by[k].length > 1; })
+			.sort(function (a, b) { return by[b].length - by[a].length || (a < b ? -1 : 1); }).slice(0, 9);
+		if (!groups.length || !S) return '';
+		/* two rows, the groups dealt so the rows weigh alike; each group's width by how many names it holds; in it, its cover in the
+		   middle, half its names on tags above it and half below, a red thread from the cover to each */
+		var rnd = function (i, k) { var x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
+		var weight = function (k) { return Math.max(by[k].length, 2) + 0.8; };
+		var rows = [[], []], tot = [0, 0];
+		groups.forEach(function (k) { var r = tot[0] <= tot[1] ? 0 : 1; rows[r].push(k); tot[r] += weight(k); });
+		var threads = [], pins = [], g = 0;
+		rows.forEach(function (row, ri) {
+			var x0 = 0, cy = ri ? 74 : 26;
+			row.forEach(function (key) {
+				var w = weight(key) / tot[ri] * 100, cx = x0 + w / 2;
+				var r = S.resolveBook(key), is = r && r.item, cover = is ? S.issueCover(key.split('-')[0], is) : '';
+				pins.push('<a class="nb-cover" href="book.html?id=' + e(key) + '" style="left:' + cx.toFixed(2) + '%;top:' + cy + '%;--r:' + ((rnd(g, 1) - 0.5) * 10).toFixed(1) + 'deg" title="' + e(is ? t(r.series.s.title) + ' ' + A.num(is.n) + ' · ' + t(is.title) : key) + '">' +
+					(cover ? '<img src="' + e(A.thumb(cover)) + '" alt="" loading="lazy" decoding="async">' : '') + '<i class="nb-pin" aria-hidden="true"></i></a>');
+				var ppl = by[key], up = Math.ceil(ppl.length / 2);
+				ppl.forEach(function (p, k) {
+					var above = k < up, m = above ? up : ppl.length - up, idx = above ? k : k - up;
+					var x = x0 + (idx + 0.5) / m * w, y = cy + (above ? -17.5 : 17.5) + (rnd(g * 7 + k, 3) - 0.5) * 2;
+					threads.push('<path d="M' + cx.toFixed(2) + ' ' + cy + ' Q' + ((cx + x) / 2).toFixed(2) + ' ' + ((cy + y) / 2 + 2).toFixed(2) + ' ' + x.toFixed(2) + ' ' + y.toFixed(2) + '"/>');
+					var y2 = years(p);
+					pins.push('<a class="nb-tag" href="#p-' + e(p.id) + '" style="left:' + x.toFixed(2) + '%;top:' + y.toFixed(2) + '%;--r:' + ((rnd(g * 7 + k, 2) - 0.5) * 8).toFixed(1) + 'deg;--k:' + (self.COLORS[p.kind] || '#d9a441') + '">' +
+						'<i class="nb-pin" aria-hidden="true"></i><b>' + e(t(p.name)) + '</b>' + (y2 ? '<small dir="auto">' + e(y2) + '</small>' : '') + '</a>');
+				});
+				x0 += w; g++;
+			});
+		});
+		return '<div class="nb-wrap"><div class="nb-board">' +
+			'<svg class="nb-threads" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">' + threads.join('') + '</svg>' +
+			pins.join('') +
+			'<span class="nb-stamp" aria-hidden="true">' + e(L('التقوا في عدد واحد', 'Met in one issue')) + '</span>' +
+		'</div></div>';
 	},
 	bandWire: function () {
-		var sky = document.querySelector('.nm-frieze');
+		var sky = document.querySelector('.nb-board');
 		if (!sky || sky.getAttribute('data-on')) return;
 		sky.setAttribute('data-on', '1');
 		var ph = sky.closest('.ph');
 		if (ph) ph.removeAttribute('aria-hidden');
 		var self = this;
 		sky.addEventListener('click', function (ev) {
-			var a = ev.target.closest('.nm-name');
+			var a = ev.target.closest('.nb-tag');
 			if (!a) return;
 			ev.preventDefault();
 			var id = a.getAttribute('href').slice(1);

@@ -1,38 +1,40 @@
-/* «أعلام في حكاياته» (names.html, names.js): the band is a frieze of their names sliding past, the years they lived beside each;
+/* «أعلام في حكاياته» (names.html, names.js): the band is an investigation board of the issues where several of them meet;
    the band is the page itself, no ground or line of its own. Under it a card each, with the covers of its issues */
 .ph[data-ph="names"], html[data-theme="light"] .ph[data-ph="names"] { background: none; border-bottom: 0; }
 .ph[data-ph="names"]::after { content: none; }
-/* the frieze: three rows of names sliding past (names.js band) */
-.nm-frieze {
-	position: absolute; inset: 12px 0 8px; display: flex; flex-direction: column; justify-content: center; gap: clamp(10px, 2vw, 22px);
-	overflow: hidden; direction: ltr;
-	-webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
-}
-.nm-row { overflow: visible; }
-.nm-track { display: flex; width: max-content; animation: nm-slide var(--dur, 80s) linear infinite; }
-.nm-row.is-rev .nm-track { animation-direction: reverse; }
-.nm-frieze:hover .nm-track, .nm-frieze:focus-within .nm-track { animation-play-state: paused; }
-@keyframes nm-slide { to { transform: translateX(-50%); } }
-.nm-name {
-	display: inline-flex; align-items: baseline; gap: 10px; padding: 0 clamp(16px, 2.4vw, 30px); white-space: nowrap;
-	color: var(--paper); text-decoration: none; transition: color .2s;
-}
-.nm-name i { align-self: center; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--k); box-shadow: 0 0 10px var(--k); }
-.nm-name b { font-family: var(--f-display); font-weight: 600; font-size: clamp(24px, 3.6vw, 46px); line-height: 1.25; letter-spacing: 0; }
-html[lang="en"] .nm-name b { font-family: var(--f-latin); font-weight: 600; }
-.nm-name small { font-family: var(--f-latin); font-size: clamp(12px, 1.1vw, 15px); color: var(--muted); }
-/* the middle row in outline, the outer two in full */
-.nm-row.is-rev .nm-name b { color: transparent; -webkit-text-stroke: 1px var(--paper-dim); }
-.nm-name:hover b, .nm-name:focus-visible b { color: var(--k); -webkit-text-stroke: 0; }
-.nm-name:focus-visible { outline: none; }
-.nm-row:nth-child(3) .nm-name b { opacity: .72; }
-.nm-row:nth-child(3) .nm-name:hover b { opacity: 1; }
-/* each name read its own way: in Arabic the dot first on the right, the years after the name */
-html[dir="rtl"] .nm-name { direction: rtl; }
-.ph[data-ph="names"] { height: 280px; }
+/* the board: cork in a wooden frame, covers and paper tags pinned on it, red threads between (names.js band) */
+.ph[data-ph="names"] { height: 440px; pointer-events: auto; }
 .ph[data-ph="names"] + .page-hero { padding-top: 6px; }
-@media (max-width: 640px) { .ph[data-ph="names"] { height: 220px; } .nm-frieze { inset: 8px 0 6px; } }
-@media (prefers-reduced-motion: reduce) { .nm-track { animation: none; } }
+.nb-wrap { position: absolute; inset: 14px 16px 22px; overflow-x: auto; overflow-y: visible; scrollbar-width: thin; }
+.nb-board {
+	position: relative; min-width: 940px; height: 100%; max-width: 1180px; margin-inline: auto; border-radius: 6px;
+	border: 12px solid #5a3a20; box-shadow: inset 0 0 40px rgba(40, 20, 5, .55), 0 18px 40px rgba(0, 0, 0, .45);
+	border-image: linear-gradient(135deg, #7a5230, #4a2e18 40%, #6b4626 70%, #3e2614) 1;
+	background:
+		radial-gradient(circle at 20% 30%, rgba(255, 255, 255, .06) 0 1px, transparent 2px) 0 0 / 9px 9px,
+		radial-gradient(circle at 70% 60%, rgba(0, 0, 0, .18) 0 1px, transparent 2px) 0 0 / 7px 7px,
+		radial-gradient(120% 120% at 50% 40%, #b98a58, #96693c 60%, #7a5230);
+}
+.nb-threads { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.nb-threads path { fill: none; stroke: #b3261e; stroke-width: 1.6; vector-effect: non-scaling-stroke; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35)); }
+.nb-cover, .nb-tag { position: absolute; transform: translate(-50%, -50%) rotate(var(--r, 0deg)); transition: transform .25s, box-shadow .25s; }
+.nb-cover { z-index: 2; width: 44px; padding: 4px 4px 10px; background: #fbf6ea; box-shadow: 0 6px 12px rgba(0, 0, 0, .4); }
+.nb-cover img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; background: #ddd; }
+.nb-tag {
+	z-index: 3; display: flex; flex-direction: column; align-items: center; max-width: 132px; padding: 7px 10px 5px; border-radius: 2px;
+	background: #fdfaf2; color: #2a2320; text-align: center; box-shadow: 0 4px 9px rgba(0, 0, 0, .35); border-top: 3px solid var(--k);
+}
+.nb-tag b { font-family: var(--f-display); font-size: 13px; font-weight: 600; line-height: 1.3; }
+.nb-tag small { font-family: var(--f-latin); font-size: 11px; color: #7a6c5a; }
+.nb-pin { position: absolute; top: -6px; left: 50%; width: 11px; height: 11px; margin-left: -5.5px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ff8a7a, #b3261e 60%, #6e140f); box-shadow: 0 2px 3px rgba(0, 0, 0, .45); }
+.nb-cover:hover, .nb-cover:focus-visible, .nb-tag:hover, .nb-tag:focus-visible { z-index: 5; transform: translate(-50%, -50%) rotate(0deg) scale(1.12); box-shadow: 0 12px 22px rgba(0, 0, 0, .5); outline: none; color: #2a2320; }
+.nb-stamp {
+	/* a brass plate set in the frame's lower edge */
+	position: absolute; z-index: 4; bottom: -12px; left: 50%; translate: -50% 0; padding: 2px 16px; border-radius: 3px; white-space: nowrap;
+	font-family: var(--f-display); font-size: 13px; color: #3a2a10; pointer-events: none;
+	background: linear-gradient(180deg, #f2d48a, #c9a24e 55%, #a9832f); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 2px 4px rgba(0, 0, 0, .45);
+}
+@media (max-width: 640px) { .ph[data-ph="names"] { height: 360px; } .nb-wrap { inset: 8px 8px 6px; } }
 
 .nm-tools { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; justify-content: space-between; margin: 6px 0 24px; }
 .nm-q { flex: 0 1 260px; min-width: 0; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--ink-2); color: var(--paper); font: inherit; }
