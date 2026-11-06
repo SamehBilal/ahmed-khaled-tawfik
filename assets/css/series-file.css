@@ -1,5 +1,9 @@
 /* «عوالم فانتازيا» and «عيادة سافاري» (series-file.js): a card per issue, its cover beside its line */
 .sf-bar { margin: 6px 0 26px; }
+/* a group per kind: its heading, then its cards */
+.sf-group + .sf-group { margin-top: 34px; }
+.sf-gh { display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-family: var(--f-display); font-size: 24px; }
+.sf-gh b { font-family: var(--f-latin); font-size: 15px; font-weight: 600; color: var(--ember); }
 .sf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
 .sf-card { display: flex; gap: 16px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); scroll-margin-top: 90px; }
 .sf-cover { flex: 0 0 78px; align-self: flex-start; }
