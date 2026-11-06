@@ -9,9 +9,16 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-06T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d8e59a9</id>
+		<title>Redeploy</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">Redeploy: the last GitHub Pages deploy timed out</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/77495e5</id>
 		<title>«أعلام في حكاياته» has a new band</title>
-		<updated>2026-11-06T20:59:00Z</updated>
+		<updated>2026-11-06T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="data" label="Data"/>
@@ -21,14 +28,14 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1979bae</id>
 		<title>up</title>
-		<updated>2026-11-06T20:58:00Z</updated>
+		<updated>2026-11-06T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6bb8fc9</id>
 		<title>The main menu</title>
-		<updated>2026-11-06T20:57:00Z</updated>
+		<updated>2026-11-06T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
@@ -37,7 +44,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/63e99c1</id>
 		<title>«شارك» in the main menu</title>
-		<updated>2026-11-06T20:56:00Z</updated>
+		<updated>2026-11-06T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="data" label="Data"/>
@@ -48,7 +55,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/403acf1</id>
 		<title>«أعداء وأشرار» moves from «السلاسل جنبًا إلى جنب» to each series' own page</title>
-		<updated>2026-11-06T20:55:00Z</updated>
+		<updated>2026-11-06T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="data" label="Data"/>
@@ -57,7 +64,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/745203d</id>
 		<title>«مكتبة رفعت إسماعيل» is a page of its own (refaat-library.html), no longer a part of «مكتبته»</title>
-		<updated>2026-11-06T20:54:00Z</updated>
+		<updated>2026-11-06T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -68,7 +75,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/11ac84e</id>
 		<title>«عوالم فانتازيا» and «عيادة سافاري» list their issues by kind, a heading each</title>
-		<updated>2026-11-06T20:53:00Z</updated>
+		<updated>2026-11-06T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">«عوالم فانتازيا» and «عيادة سافاري» list their issues by kind, a heading each — «أساطير وملاحم 9», «أمراض وأوبئة 12», … «لم نعرف بعد» — with its count, and its issues under it in their order, not one run in the series' order; each card says its issue's number, its kind being the heading over it. The kinds above still show one group at a time, and #fantasia-25 still goes to its card</content>
@@ -76,7 +83,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/4b8c437</id>
 		<title>«خط زمن فانتازيا» (worlds.html) is a carousel</title>
-		<updated>2026-11-06T20:52:00Z</updated>
+		<updated>2026-11-06T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -85,7 +92,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/999a237</id>
 		<title>The day his translations and stories for others came out, sent by the site's editor</title>
-		<updated>2026-11-06T20:51:00Z</updated>
+		<updated>2026-11-06T20:50:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">The day his translations and stories for others came out, sent by the site's editor: «رجفة الخوف»'s ten issues — 1 on 19 January 2003, 2 on 26 May 2003, 3 on 15 January 2004, 4 on 2 January 2005, 5 on 15 December 2005, 6 in 2006, 7 on 11 June 2007, 8 on 5 January 2008, 9 on 15 July 2008, 10 on 27 December 2009 — and the series' years, 2003–2009; «ثلاثة» in «كتاب الصيف» on 28 May 2003; «أسطورة بلية» (بلية العجيب 17) on 5 June 2004. Each as its issue's first edition, with its year: on its page, in «السلاسل جنبًا إلى جنب», and on its day in «تقويم العرّاب» and «في مثل هذا اليوم» (990 moments now)</content>
@@ -93,7 +100,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8180cd1</id>
 		<title>«الأعمال» no longer repeats «على الشاشة»</title>
-		<updated>2026-11-06T20:50:00Z</updated>
+		<updated>2026-11-06T20:49:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="design" label="Design"/>
@@ -103,7 +110,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7145ef6</id>
 		<title>«الأعمال» no longer repeats «كتب عنه»</title>
-		<updated>2026-11-06T20:49:00Z</updated>
+		<updated>2026-11-06T20:48:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
@@ -113,7 +120,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3d93817</id>
 		<title>«الأعمال» no longer repeats «الجوائز والتكريم»</title>
-		<updated>2026-11-06T20:48:00Z</updated>
+		<updated>2026-11-06T20:47:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -123,14 +130,14 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d675ed6</id>
 		<title>«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar</title>
-		<updated>2026-11-06T20:47:00Z</updated>
+		<updated>2026-11-06T20:46:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar: the day's events from the same day files the calendar is drawn from (otd.js), and the line of the day (today.js)</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/434b589</id>
 		<title>«الأعمال» no longer repeats «دور النشر»</title>
-		<updated>2026-11-06T20:46:00Z</updated>
+		<updated>2026-11-06T20:45:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -141,7 +148,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
 		<title>«زمن العرّاب» (era.html) is gone</title>
-		<updated>2026-11-06T20:45:00Z</updated>
+		<updated>2026-11-06T20:44:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -566,14 +573,5 @@
 		<category term="audio" label="Audio"/>
 		<category term="data" label="Data"/>
 		<content type="text">«أكواريل»: its horror music, sold with the book to be heard as it is read, on SoundCloud (Nada Elhariri, 10 August 2016, 53 minutes; AKT.audio.soundcloud in data-more.js, read by cassette.js soundcloudTracks). On the book's page it is among «استمع إليه» and «مسموع» to buy, and plays there in SoundCloud's own player with a word on what it is; on «مسموع» a new group, «موسيقى كتبه على SoundCloud», has it as a row that goes in the tape and opens it on SoundCloud. Its artwork kept in assets/img/audio</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/17239f3</id>
-		<title>«قالوا عنه» mended</title>
-		<updated>2026-11-02T20:43:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«قالوا عنه» mended: the terms page's «Stretch to reveal» band used the tributes timeline's own class names (.tb, .tb-knob, .tb-track…) in page-hero.css, which every page loads, so its styles fell on the timeline and its script took the timeline for the slider — the cards stayed folded and squeezed. The band's names are now its own (pst-), in page-hero.css and page-hero.js</content>
 	</entry>
 </feed>

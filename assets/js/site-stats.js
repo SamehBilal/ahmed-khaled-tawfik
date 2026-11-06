@@ -49,7 +49,7 @@ window.SiteStats = {
 			[(d.stats || {}).papers, L('مقالًا في الصحف', 'pieces in the papers'), 'blog.html#papers'],
 			[(d.stats || {}).outlets, L('جريدة ومجلة وموقعًا', 'papers and sites he wrote for'), 'blog.html#papers'],
 			[Object.keys(heard).length, L('تسجيلًا صوتيًا ومرئيًا', 'audio and video recordings'), 'audio.html'],
-			[(d.media || []).length, L('لقاءً وفيلمًا عنه', 'interviews and films'), 'talks.html#talks'],
+			[(d.media || []).length, L('لقاءً وفيلمًا عنه', 'interviews and films'), 'interviews.html'],
 			[(d.characters || []).length, L('شخصية', 'characters'), 'characters.html'],
 			[(d.quotes || []).length, L('اقتباسًا', 'quotes'), 'quotes.html'],
 			[Object.keys(people).length, L('اسمًا من دائرته', 'people in his circle'), 'writers.html'],

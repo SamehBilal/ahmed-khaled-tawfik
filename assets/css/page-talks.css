@@ -1,8 +1,8 @@
-/* «لقاءاته» (talks.html, talks.js) */
-/* the band: a wall of old television sets, each tuned to one of his interviews (talks.js band, wallWire); the band is the page
+/* «سيرته» (talks.html, talks.js) and «لقاءاته» (interviews.html, interviews.js) */
+/* the band: a wall of old television sets, each tuned to one of his interviews (interviews.js band, wallWire); the band is the page
    itself — no ground, faded sides or line of its own */
-.ph[data-ph="talks"], html[data-theme="light"] .ph[data-ph="talks"] { height: 290px; background: none; border-bottom: 0; }
-.ph[data-ph="talks"]::after { content: none; }
+.ph[data-ph="interviews"], html[data-theme="light"] .ph[data-ph="interviews"] { height: 290px; background: none; border-bottom: 0; }
+.ph[data-ph="interviews"]::after, .ph[data-ph="talks"]::after { content: none; }
 .tv-wall { position: absolute; inset: 60px 3% 26px; display: flex; justify-content: center; align-items: flex-end; gap: 1.6%; }
 .tv { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 0 1 var(--w); min-width: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
 /* the set: a case with a rounded screen and two knobs beside it; some in wood, some with rabbit ears */
@@ -32,10 +32,29 @@
 .tv:hover .tv-cap, .tv:focus-visible .tv-cap { color: var(--paper); }
 .tv:focus-visible { outline: none; } .tv:focus-visible .tv-box { box-shadow: 0 0 0 2px var(--ember); }
 @media (max-width: 900px) { .tv:nth-child(n+7) { display: none; } }
-@media (max-width: 640px) { .ph[data-ph="talks"] { height: 220px; } .tv-wall { gap: 14px 10px; }  .tv:nth-child(n+5) { display: none; } .tv-cap { font-size: 11px; } }
+@media (max-width: 640px) { .ph[data-ph="interviews"] { height: 220px; } .tv-wall { gap: 14px 10px; }  .tv:nth-child(n+5) { display: none; } .tv-cap { font-size: 11px; } }
 @media (prefers-reduced-motion: reduce) { .tv-snow { animation: none; } .tv-box { transition: none; } }
-@media (max-width: 640px) { .tk-chair.a { left: 18%; } .tk-chair.b { right: 18%; } }
 
+/* «سيرته»'s band: his life as one line, a stretch a chapter (talks.js band) */
+.ph[data-ph="talks"], html[data-theme="light"] .ph[data-ph="talks"] { height: 200px; background: none; border-bottom: 0; }
+.ll { position: absolute; inset: 40px 4% 30px; display: flex; align-items: center; }
+.ll-line { display: flex; width: 100%; gap: 6px; }
+.ll-ch { position: relative; flex: 0 0 calc(var(--w) - 5px); min-width: 0; display: grid; grid-template-rows: auto auto 14px auto; gap: 4px; color: var(--paper-dim); text-decoration: none; }
+.ll-n { font-family: var(--f-latin); font-size: 26px; line-height: 1; color: var(--ember); opacity: .75; transition: opacity .2s; }
+.ll-t { font-family: var(--f-display); font-size: 15px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color .2s; }
+.ll-bar { align-self: center; height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--ember) calc(35% + var(--i) * 10%), var(--line)); transition: height .2s, box-shadow .2s; }
+.ll-ch.is-after .ll-bar { background: linear-gradient(to left, transparent, color-mix(in srgb, var(--ember) 45%, var(--line))); }
+html[dir="ltr"] .ll-ch.is-after .ll-bar { background: linear-gradient(to right, color-mix(in srgb, var(--ember) 45%, var(--line)), transparent); }
+.ll-ch:first-child .ll-bar::before { content: ''; position: absolute; inset-inline-start: -4px; bottom: calc(1.4em + 6px); width: 14px; height: 14px; border-radius: 50%; background: var(--ember); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ember) 25%, transparent); }
+.ll-y { font-family: var(--f-latin); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.ll-ch:hover .ll-n, .ll-ch:focus-visible .ll-n { opacity: 1; }
+.ll-ch:hover .ll-t, .ll-ch:focus-visible .ll-t { color: var(--paper); }
+.ll-ch:hover .ll-bar, .ll-ch:focus-visible .ll-bar { height: 10px; box-shadow: 0 0 14px color-mix(in srgb, var(--ember) 50%, transparent); }
+.ll-ch:focus-visible { outline: none; }
+@media (max-width: 760px) { .ll-t { display: none; } .ll-y { font-size: 10.5px; } .ph[data-ph="talks"] { height: 150px; } }
+.bio-out { color: var(--ember); border-color: color-mix(in srgb, var(--ember) 45%, var(--line)); }
+.tk-also a { color: var(--ember); }
+.tk-item.is-target { box-shadow: 0 0 0 2px var(--ember); }
 .tk-sum { color: var(--paper-dim); font-family: var(--f-display); margin: 0 0 14px; }
 .tk-bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin: 0 0 18px; }
 .tk-bar .chip b { font-family: var(--f-latin); color: var(--ember); margin-inline-start: 4px; }
@@ -55,7 +74,7 @@
 .tk-out { font-size: 13px; color: var(--muted); }
 @media (max-width: 760px) { .tk-item.is-video { grid-template-columns: 1fr; } }
 
-/* «سيرته»: the summary and the six chapters, above the interviews */
+/* «سيرته»: the summary and the six chapters */
 .tk-h { font-family: var(--f-display); font-size: 34px; margin: 0 0 18px; }
 .bio-sum { max-width: 860px; color: var(--paper-dim); line-height: 2; font-size: 17px; }
 .bio-sum p { margin: 0 0 14px; }

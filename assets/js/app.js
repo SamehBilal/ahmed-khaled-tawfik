@@ -30,7 +30,9 @@
 			{ id: 'world', href: 'world.html', ar: 'حول العالم', en: 'Around the world', phone: true },
 			{ id: 'screen', href: 'screen.html', ar: 'على الشاشة', en: 'On screen', phone: true },
 			{ id: 'covers', href: 'covers.html', ar: 'الأغلفة والطبعات', en: 'Covers & editions', phone: true },
-			{ id: 'talks', href: 'talks.html', ar: 'سيرته ولقاءاته', en: 'His life & interviews', phone: true },
+			{ id: 'talks', href: 'talks.html', ar: 'سيرته', en: 'His life', phone: true },
+			{ id: 'interviews', href: 'interviews.html', ar: 'لقاءاته', en: 'His interviews', phone: true },
+			{ id: 'tanta', href: 'tanta.html', ar: 'طنطا، مدينته', en: 'Tanta, his city', phone: true },
 			{ id: 'awards', href: 'awards.html', ar: 'الجوائز', en: 'Awards', phone: true },
 			{ id: 'translations', href: 'translations.html', ar: 'ترجماته', en: 'His translations', phone: true },
 			{ id: 'library', href: 'library.html', ar: 'مكتبته', en: 'His library', phone: true },
@@ -66,10 +68,12 @@
 			{ href: 'world.html', ar: 'حول العالم', en: 'Around the world' },
 			{ href: 'screen.html', ar: 'على الشاشة', en: 'On screen' },
 			{ href: 'covers.html', ar: 'الأغلفة والطبعات', en: 'Covers & editions' },
-			{ href: 'talks.html', ar: 'سيرته ولقاءاته', en: 'His life & interviews' },
+			{ href: 'talks.html', ar: 'سيرته', en: 'His life' },
+			{ href: 'interviews.html', ar: 'لقاءاته', en: 'His interviews' },
 			{ href: 'awards.html', ar: 'الجوائز', en: 'Awards' },
 			{ href: 'translations.html', ar: 'ترجماته', en: 'His translations' },
-			/* his handwriting (his city is a part of «سيرته» on talks.html) */
+			/* his city and his handwriting */
+			{ href: 'tanta.html', ar: 'طنطا، مدينته', en: 'Tanta, his city' },
 			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' },
 			/* the whole year, a day at a time */
 			{ href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar' },
@@ -219,10 +223,11 @@
 			{ id: 'alaa', ar: 'علاء عبد العظيم', en: 'Alaa Abdel Azim', sar: 'سافاري', sen: 'Safari', c: '#5a6b2a', img: 'assets/img/characters/alaa-figure.webp' }
 		],
 		life: [
-			{ href: 'talks.html', ic: 'mic', ar: 'سيرته ولقاءاته', en: 'His life & interviews', dar: 'من طنطا إلى الكتابة، بصوته', den: 'From Tanta to writing, in his words' },
+			{ href: 'talks.html', ic: 'diary', ar: 'سيرته', en: 'His life', dar: 'حياته في ستة فصول', den: 'His life in six chapters' },
+			{ href: 'interviews.html', ic: 'mic', ar: 'لقاءاته', en: 'His interviews', dar: 'بصوته: لقاءات ومحاضرات وأفلام', den: 'In his voice: interviews, talks, films' },
 			{ href: 'calendar.html', ic: 'calendar', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', dar: 'كل يوم من أيام السنة', den: 'Every day of the year' },
 			{ href: 'awards.html', ic: 'award', ar: 'الجوائز', en: 'Awards', dar: 'ما ناله وما سُمّي باسمه', den: 'What he won and what bears his name' },
-			{ href: 'talks.html#tanta', ic: 'pin', ar: 'طنطا، مدينته', en: 'Tanta, his city', dar: 'المدينة التي وُلد فيها وعاش ودُفن', den: 'Where he was born, lived and lies' }
+			{ href: 'tanta.html', ic: 'pin', ar: 'طنطا، مدينته', en: 'Tanta, his city', dar: 'المدينة التي وُلد فيها وعاش ودُفن', den: 'Where he was born, lived and lies' }
 		],
 		writing: [
 			{ href: 'quotes.html', ic: 'quote', ar: 'اقتباسات', en: 'Quotes', dar: 'جمل من كتبه', den: 'Lines from his books' },
@@ -489,7 +494,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: '77495e5',
+		LATEST: 'd8e59a9',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
@@ -1129,7 +1134,7 @@
 			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات إحصاءات الموقع أسلوب لغة كلمات جمل statistics site numbers style language words', quiz: 'اختبار مسابقة أسئلة شخصية بطاقة القارئ اقرأ معنا نادي القراءة quiz character reader card reading club',
 				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
 				covers: 'أغلفة غلاف طبعات طبعة covers editions', lists: 'قوائم رحلتي قراءة تقدم lists journey reading progress',
-				talks: 'سيرة حياة لقاءات حوارات فيديو طنطا مدينته بيته قبره biography life interviews videos Tanta city', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',
+				talks: 'سيرة حياة فصول biography life chapters', interviews: 'لقاءات حوارات فيديو محاضرات وثائقي interviews talks videos documentaries', tanta: 'طنطا مدينته بيته قبره Tanta city home grave', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',
 				library: 'كتب أفلام موسيقى مفضلة نصح books films music favourite', glossary: 'عبارات قاموس لزمات حتى تحترق النجوم phrases glossary',
 				creatures: 'وحوش أساطير مصاص دماء مذءوب نداهة مومياء monsters legends vampire werewolf', 'refaat-life': 'رفعت إسماعيل حياة سيرة يوميات Refaat life',
 				network: 'شبكة شخصيات علاقات characters web relations', handwriting: 'خط يده إهداء توقيع مخطوط handwriting dedication signature',
