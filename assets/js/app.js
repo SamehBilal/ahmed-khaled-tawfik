@@ -37,7 +37,7 @@
 			/* «عالم العرّاب» (the footer's block of its own) */
 			{ id: 'creatures', href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends', phone: true },
 			{ id: 'refaat-life', href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life', phone: true },
-			{ id: 'refaat-library', href: 'refaat-library.html', ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library', phone: true },
+			{ id: 'refaat-library', href: 'refaat-library.html', ar: 'مكتبة أبطاله', en: 'His heroes’ library', phone: true },
 			{ id: 'network', href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web', phone: true },
 			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true },
 			{ id: 'worlds', href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds', phone: true },
@@ -83,7 +83,7 @@
 		world: [
 			{ href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends' },
 			{ href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life' },
-			{ href: 'refaat-library.html', ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library' },
+			{ href: 'refaat-library.html', ar: 'مكتبة أبطاله', en: 'His heroes’ library' },
 			{ href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web' },
 			{ href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds' },
 			{ href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic' },
@@ -211,7 +211,7 @@
 			{ href: 'map.html', ic: 'map', ar: 'الخريطة', en: 'The map', dar: 'أماكن حكاياته على الأرض', den: 'Where his tales take place' },
 			{ href: 'network.html', ic: 'web', ar: 'شبكة العرّاب', en: 'The Godfather’s web', dar: 'كيف يتصل كل شيء', den: 'How it all connects' },
 			/* and his heroes' own library */
-			{ href: 'refaat-library.html', ic: 'candle', ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library', dar: 'ما يقرؤه أبطاله داخل الحكايات', den: 'What his heroes read inside the tales' }
+			{ href: 'refaat-library.html', ic: 'candle', ar: 'مكتبة أبطاله', en: 'His heroes’ library', dar: 'ما يقرؤه أبطاله داخل الحكايات', den: 'What his heroes read inside the tales' }
 		],
 		heroes: [
 			{ id: 'refaat', ar: 'رفعت إسماعيل', en: 'Refaat Ismail', sar: 'ما وراء الطبيعة', sen: 'Ma Wara’ al-Tabi’a', c: '#6e1c1c', img: 'assets/img/characters/refaat-lantern.webp' },
@@ -489,7 +489,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: '6bb8fc9',
+		LATEST: '5e71c4d',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;

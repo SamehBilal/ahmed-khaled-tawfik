@@ -1,13 +1,13 @@
-/* «مكتبة رفعت إسماعيل» (refaat-library.html): what his heroes read, quote, watch and hum inside the stories — Refaat above all,
+/* «مكتبة أبطاله» (refaat-library.html): what his heroes read, quote, watch and hum inside the stories — Refaat above all,
    and Alaa — each with how they use it and the issues it is in (AKT.refaatLibrary, data-pages.js; assets/js/pages/refaatLibrary.js).
    By hero, a heading each, and by kind. Its band: their books standing on a shelf in the light of Refaat's lantern, each spine
    leading to its card. (Once a part of «مكتبته», library.html#refaat, which now leads here.) */
 window.PAGE = {
 	id: 'refaat-library',
-	title: { ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library' },
+	title: { ar: 'مكتبة أبطاله', en: 'His heroes’ library' },
 	strings: {
 		eyebrow: { ar: 'داخل الحكايات', en: 'Inside the stories' },
-		title: { ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library' },
+		title: { ar: 'مكتبة أبطاله', en: 'His heroes’ library' },
 		lead: { ar: 'ما يقرؤه أبطاله ويستشهدون به ويحبونه داخل القصص: من بو ولافكرافت ودراكيولا إلى الأفلام القديمة وأم كلثوم، والأعداد التي يرد فيها كل منها.',
 			en: 'What his heroes read, quote and love inside the stories: from Poe, Lovecraft and Dracula to old films and Umm Kulthum, and the issues each one turns up in.' }
 	},
