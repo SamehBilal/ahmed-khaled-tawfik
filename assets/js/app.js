@@ -13,6 +13,12 @@
 			{ id: 'guide', href: 'guide.html', ar: 'من أين أبدأ؟', en: 'Start here' },
 			/* the reader's turn: on a wider screen «شارك» opens its panel */
 			{ id: 'share', href: 'contact.html#contribute', ar: 'شارك', en: 'Contribute', phone: true },
+			{ id: 'test', href: 'test.html', ar: 'اختبر نفسك', en: 'Test yourself', phone: true },
+			{ id: 'which-character', href: 'which-character.html', ar: 'أي شخصية أنت؟', en: 'Which character are you?', phone: true },
+			{ id: 'first-lines', href: 'first-lines.html', ar: 'البدايات', en: 'First lines', phone: true },
+			{ id: 'reader-card', href: 'reader-card.html', ar: 'بطاقة القارئ', en: 'Reader’s card', phone: true },
+			{ id: 'cover-maker', href: 'cover-maker.html', ar: 'صمّم غلافك', en: 'Design your cover', phone: true },
+			{ id: 'read-with-us', href: 'read-with-us.html', ar: 'اقرأ معنا', en: 'Read with us', phone: true },
 			{ id: 'works', href: 'works.html', ar: 'الأعمال', en: 'Works' },
 			{ id: 'characters', href: 'characters.html', ar: 'الشخصيات', en: 'Characters' },
 			{ id: 'writers', href: 'writers.html', ar: 'دائرته', en: 'His circle' },
@@ -26,7 +32,6 @@
 			{ id: 'lists', href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey', phone: true },
 			/* and the pages made from the data, which on a wider screen the footer lists */
 			{ id: 'numbers', href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style', phone: true },
-			{ id: 'quiz', href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner', phone: true },
 			{ id: 'map', href: 'map.html', ar: 'الخريطة', en: 'The map', phone: true },
 			{ id: 'world', href: 'world.html', ar: 'حول العالم', en: 'Around the world', phone: true },
 			{ id: 'screen', href: 'screen.html', ar: 'على الشاشة', en: 'On screen', phone: true },
@@ -58,9 +63,8 @@
 			{ href: 'publishers.html', ar: 'دور النشر', en: 'Publishers', main: true },
 			/* and beside it, the books and films he loved */
 			{ href: 'library.html', ar: 'مكتبته', en: 'His library', main: true },
-			/* the pages made from the data: his work and his style in numbers, the quiz, the map */
+			/* the pages made from the data: his work and his style in numbers, the map */
 			{ href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style' },
-			{ href: 'quiz.html', ar: 'ركن القرّاء', en: 'Readers’ corner' },
 			/* the reader's own lists and journey: the «My lists» button's page, in the footer too */
 			{ href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey' },
 			{ href: 'map.html', ar: 'الخريطة', en: 'The map' },
@@ -241,7 +245,6 @@
 			{ href: 'studies.html', ic: 'bookmark', ar: 'دراسات ورسائل عنه', en: 'Studies and theses', dar: 'ما كُتب عنه في الجامعات والمجلات', den: 'What universities and journals wrote on him' },
 			{ href: 'screen.html', ic: 'film', ar: 'على الشاشة', en: 'On screen', dar: 'من نتفليكس إلى الإذاعة', den: 'From Netflix to the radio' },
 			{ href: 'world.html', ic: 'globe', ar: 'حول العالم', en: 'Around the world', dar: 'كتبه بلغات أخرى', den: 'His books in other languages' },
-			{ href: 'quiz.html', ic: 'puzzle', ar: 'ركن القرّاء', en: 'Readers’ corner', dar: 'اختبارات وألعاب ومن قال هذا؟', den: 'Quizzes, games and who said it?' },
 			{ href: 'remembrance.html', ic: 'flame', ar: 'ذكراه كل عام', en: 'Remembered every year', dar: 'كل 2 أبريل منذ رحيله', den: 'Every 2 April since he died' },
 			{ href: 'reader-stories.html', ic: 'chat', ar: 'حكايات القرّاء وبخط يده', en: 'Readers’ stories, and his hand', dar: 'كيف عرفوه، وما كتبه لهم بيده', den: 'How they found him, and what he wrote them' },
 			{ href: 'lists.html', ic: 'bookmark', ar: 'قوائمي ورحلتي', en: 'My lists & journey', dar: 'ما قرأته وما تريد قراءته', den: 'What you have read and want to' }
@@ -267,6 +270,15 @@
 			{ href: 'wanted.html', ic: 'puzzle', ar: 'ما ينقص الأرشيف', en: 'Wanted for the archive', dar: 'ما نبحث عنه الآن، عددًا عددًا', den: 'What we are looking for, issue by issue' },
 			{ href: 'contact.html#code', ic: 'code', ar: 'ساهم بالكود', en: 'Contribute code', dar: 'الموقع كله مفتوح على GitHub', den: 'The whole site is open on GitHub' },
 			{ href: 'contact.html#open-data', ic: 'data', ar: 'خذ البيانات', en: 'Take the data', dar: 'الأعداد والكتب والاقتباسات ملفاتٍ مفتوحة', den: 'Issues, books and quotes as open files' }
+		],
+		/* «العب واقرأ»: the six things to do with his world, a page each (once «ركن القرّاء», quiz.html) */
+		play: [
+			{ href: 'test.html', ic: 'puzzle', ar: 'اختبر نفسك', en: 'Test yourself', dar: 'عشرة أسئلة تتغيّر كل جولة', den: 'Ten questions, new each round' },
+			{ href: 'which-character.html', ic: 'people', ar: 'أي شخصية أنت؟', en: 'Which character are you?', dar: 'سبعة أسئلة وشخصية تشبهك', den: 'Seven questions, one character like you' },
+			{ href: 'first-lines.html', ic: 'quote', ar: 'البدايات', en: 'First lines', dar: 'أول سطر: من أي كتاب؟', den: 'A first line: which book?' },
+			{ href: 'reader-card.html', ic: 'bookmark', ar: 'بطاقة القارئ', en: 'Reader’s card', dar: 'بطاقتك قارئًا له، صورة تشاركها', den: 'Your reader’s card, to share' },
+			{ href: 'cover-maker.html', ic: 'image', ar: 'صمّم غلافك', en: 'Design your cover', dar: 'غلاف جيب بعنوانك واسمك', den: 'A pocket cover with your title' },
+			{ href: 'read-with-us.html', ic: 'books', ar: 'اقرأ معنا', en: 'Read with us', dar: 'كتاب كل شهر وأسئلة للنقاش', den: 'A book a month, with questions' }
 		],
 		/* his own books (AKT.works) a year at a time, 2005–2018 */
 		bars: [2, 2, 5, 8, 5, 3, 0, 6, 1, 5, 3, 1, 2, 3]
@@ -307,7 +319,7 @@
 	function megaGroupOf(file) {
 		var g = { 'series.html': 'works', 'book.html': 'works', 'publisher.html': 'works', 'character.html': 'world', 'writer.html': 'life', 'numbers.html': 'legacy', 'contact.html': 'share', 'wanted.html': 'share' }[file];
 		if (g) return g;
-		var groups = { works: MEGA.worksMore, world: MEGA.world, life: MEGA.life.concat(MEGA.writing), legacy: MEGA.legacy };
+		var groups = { works: MEGA.worksMore, world: MEGA.world, life: MEGA.life.concat(MEGA.writing), legacy: MEGA.legacy, share: MEGA.share.concat(MEGA.play) };
 		for (var k in groups) if (groups[k].some(function (n) { return n.href === file; })) return k;
 		return '';
 	}
@@ -375,9 +387,10 @@
 
 		/* «شارك»: the reader's turn — a correction, a cover, a dedication, a story, code, the data — and a word on how each is credited */
 		var share = panel('share', L('شارك', 'Contribute'),
-			'<div class="mg-list">' +
+			'<div class="mg-share-main"><p class="mg-h">' + L('ساهم في الموقع', 'Add to the site') + '</p><div class="mg-list">' +
 				item({ href: App.fixHref(L('', '')), ic: 'pen', ar: 'صحّح أو أضف', en: 'Correct or add', dar: 'خطأ رأيته أو معلومة تنقص، على GitHub', den: 'A mistake you saw or something missing, on GitHub' }).replace('<a ', '<a target="_blank" rel="noopener" ') +
 				MEGA.share.map(function (n) { return item(n); }).join('') + '</div>' +
+				'<p class="mg-h">' + L('العب واقرأ', 'Play and read') + '</p><div class="mg-list mg-play">' + MEGA.play.map(function (n) { return item(n); }).join('') + '</div></div>' +
 			'<a class="mg-credit" href="changelog.html"><span class="mg-seal" aria-hidden="true">' + megaIcon('award') + '</span>' +
 				'<b>' + e(L('باسمك، إن أردت', 'In your name, if you wish')) + '</b>' +
 				'<small>' + e(L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها وفي «سجل التحديثات». الموقع يكبر بقرّائه.', 'Each contribution that goes up names its sender on its page and in the changelog. The site grows with its readers.')) + '</small>' +
@@ -493,7 +506,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: '1283c61',
+		LATEST: '28b93ff',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
@@ -1130,7 +1143,7 @@
 			/* «قاموس العرّاب»'s phrases, each to its card under the quotes (built into data-built.js) */
 			(d.glossary || []).forEach(function (g, i) { add(K.phrase, { ar: g.phrase, en: g.en }, { ar: 'قاموس العرّاب', en: 'The phrasebook' }, 'quotes.html#g-' + i, g.phrase + ' ' + g.en + ' ' + both(g.meaning)); });
 			/* the site's own pages, the header's and the footer's, found by their names and what they hold */
-			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات إحصاءات الموقع أسلوب لغة كلمات جمل statistics site numbers style language words', quiz: 'اختبار مسابقة أسئلة شخصية بطاقة القارئ اقرأ معنا نادي القراءة quiz character reader card reading club',
+			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات إحصاءات الموقع أسلوب لغة كلمات جمل statistics site numbers style language words', test: 'اختبار مسابقة أسئلة quiz test', 'which-character': 'شخصية أي شخصية أنت character quiz', 'first-lines': 'البدايات أول سطر first lines openings', 'reader-card': 'بطاقة القارئ reader card', 'cover-maker': 'صمم غلافك غلاف cover maker design', 'read-with-us': 'اقرأ معنا نادي القراءة كتاب الشهر reading club book of the month',
 				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
 				covers: 'أغلفة غلاف طبعات طبعة covers editions', lists: 'قوائم رحلتي قراءة تقدم lists journey reading progress',
 				talks: 'سيرة حياة فصول biography life chapters', interviews: 'لقاءات حوارات فيديو محاضرات وثائقي interviews talks videos documentaries', tanta: 'طنطا مدينته بيته قبره Tanta city home grave', studies: 'دراسات رسائل ماجستير دكتوراه بحث أبحاث جامعة studies theses thesis research university journal', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',

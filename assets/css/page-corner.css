@@ -1,4 +1,5 @@
-/* «ركن القرّاء» (quiz.html): under «اختبر نفسك», the character quiz, the reader's card and the reading club (corner.js) */
+/* «اختبر نفسك» (test.html, quiz.js) and the five pages of corner.js — «أي شخصية أنت؟», «البدايات», «بطاقة القارئ», «صمّم غلافك», «اقرأ معنا»
+   (once the parts of «ركن القرّاء», quiz.html) */
 .cr-jump { margin-top: 8px; margin-bottom: -10px; }
 .qz, .cr { scroll-margin-top: 80px; }
 .cr-h { font-family: var(--f-display); font-size: 32px; margin: 0 0 8px; }
@@ -48,8 +49,8 @@
 @media (max-width: 900px) { .cr-cv { grid-template-columns: minmax(0, 1fr); } .cr-cv-art { max-width: 300px; margin: 0 auto; } }
 
 /* the band: a fan of question cards from a round of the quiz (quiz.js band, bandWire), one with the page — no ground or line */
-.ph[data-ph="quiz"], html[data-theme="light"] .ph[data-ph="quiz"] { height: 380px; background: none; border-bottom: 0; overflow: clip; }
-.ph[data-ph="quiz"]::after { content: none; }
+.ph[data-ph="test"], html[data-theme="light"] .ph[data-ph="test"] { height: 380px; background: none; border-bottom: 0; overflow: clip; }
+.ph[data-ph="test"]::after { content: none; }
 .qzb { position: absolute; inset: 86px 0 0; display: flex; justify-content: center; align-items: flex-start; cursor: pointer; }
 .qzb-card { position: relative; flex: 0 0 196px; margin: 0 -14px; padding: 14px 14px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2);
 	box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .55); text-align: start;
@@ -66,9 +67,9 @@
 .qzb-opts li { padding: 4px 10px; border: 1px solid var(--line); border-radius: 99px; font-size: 12px; color: var(--paper-dim);
 	white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background .3s .2s, border-color .3s .2s, color .3s .2s; }
 .qzb-card.is-on .qzb-opts li.ok { background: #2f9e6a; border-color: #2f9e6a; color: #fff; }
-.ph[data-ph="quiz"] + .page-hero { padding-top: 10px; }
+.ph[data-ph="test"] + .page-hero { padding-top: 10px; }
 @media (max-width: 900px) { .qzb-card:nth-child(1), .qzb-card:nth-child(7) { display: none; } }
-@media (max-width: 640px) { .ph[data-ph="quiz"] { height: 330px; } .qzb-card { flex-basis: 150px; margin: 0 -30px; padding: 10px; }
+@media (max-width: 640px) { .ph[data-ph="test"] { height: 330px; } .qzb-card { flex-basis: 150px; margin: 0 -30px; padding: 10px; }
 	.qzb-card:nth-child(2), .qzb-card:nth-child(6) { display: none; } .qzb-q { font-size: 12.5px; } }
 @media (prefers-reduced-motion: reduce) { .qzb-card, .qzb-opts li { transition: none; } }
 
@@ -90,3 +91,90 @@
 .cr-open-say .share-btn { margin-inline-start: 8px; }
 .cr-open-en { display: block; font: italic 14px var(--f-latin), serif; color: var(--muted); }
 .cr-open-end h3 { font: 400 48px var(--f-display); color: var(--ember); margin: 0 0 10px; }
+
+/* the five pages' bands (corner.js Corner.PAGES): one with the page, no ground or line of their own */
+.ph[data-ph="which-character"], .ph[data-ph="first-lines"], .ph[data-ph="reader-card"], .ph[data-ph="cover-maker"], .ph[data-ph="read-with-us"],
+html[data-theme="light"] .ph[data-ph="which-character"], html[data-theme="light"] .ph[data-ph="first-lines"], html[data-theme="light"] .ph[data-ph="reader-card"],
+html[data-theme="light"] .ph[data-ph="cover-maker"], html[data-theme="light"] .ph[data-ph="read-with-us"] { height: 320px; background: none; border-bottom: 0; pointer-events: auto; overflow: clip; }
+.ph[data-ph="which-character"]::after, .ph[data-ph="first-lines"]::after, .ph[data-ph="reader-card"]::after, .ph[data-ph="cover-maker"]::after, .ph[data-ph="read-with-us"]::after { content: none; }
+.ph[data-ph="which-character"] + .page-hero, .ph[data-ph="first-lines"] + .page-hero, .ph[data-ph="reader-card"] + .page-hero, .ph[data-ph="cover-maker"] + .page-hero, .ph[data-ph="read-with-us"] + .page-hero { padding-top: 10px; }
+
+/* «أي شخصية أنت؟»: six oval portraits in gilt frames, one lit with its name and what makes them so */
+.cbw { position: absolute; inset: 70px 16px 10px; display: flex; justify-content: center; align-items: center; gap: clamp(8px, 2vw, 26px); }
+.cbw-f { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 132px; color: var(--muted); text-decoration: none; text-align: center; transition: transform .45s cubic-bezier(.2, .7, .2, 1), color .3s; }
+.cbw-pic { display: grid; place-items: center; width: 104px; height: 136px; overflow: hidden; border-radius: 50%; padding: 5px;
+	background: linear-gradient(145deg, #e9c97a, #8a6420 45%, #f2d38a 70%, #6e4c14); box-shadow: 0 12px 24px -10px rgba(0, 0, 0, .7); filter: grayscale(.85) brightness(.7); transition: filter .45s, box-shadow .45s; }
+.cbw-pic img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 50%; background: #1a1410; }
+.cbw-pic b { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: #1a1410; color: #e9c97a; font: 400 44px var(--f-display); }
+.cbw-n { font: 400 15px/1.3 var(--f-display); }
+.cbw-f small { min-height: 2.6em; font-size: 12px; line-height: 1.3; opacity: 0; transition: opacity .35s; }
+.cbw-f.is-on { transform: translateY(-8px) scale(1.08); color: var(--paper); }
+.cbw-f.is-on .cbw-pic { filter: none; box-shadow: 0 0 0 2px var(--ember), 0 18px 36px -12px rgba(224, 99, 58, .55); }
+.cbw-f.is-on small { opacity: 1; color: var(--ember); }
+@media (max-width: 760px) { .cbw-f { width: 84px; } .cbw-pic { width: 70px; height: 92px; padding: 3px; } .cbw-f small { display: none; } .cbw-n { font-size: 12px; } }
+@media (max-width: 460px) { .cbw-f:nth-child(n+5) { display: none; } }
+
+/* «البدايات»: a sheet in a typewriter, the line typed on it, then «…من أي كتاب؟» */
+.cbo { position: absolute; left: 50%; bottom: 0; width: min(620px, 92%); height: 260px; translate: -50% 0; display: block; color: inherit; text-decoration: none; }
+.cbo-sheet { position: absolute; left: 9%; right: 9%; top: 0; bottom: 70px; padding: 22px 26px; border-radius: 3px 3px 0 0; background: #f7f1e3; color: #1d1a16;
+	box-shadow: 0 -2px 18px rgba(0, 0, 0, .35); background-image: repeating-linear-gradient(transparent 0 29px, rgba(80, 120, 170, .12) 29px 30px); }
+.cbo-line { font: 400 19px/30px "Courier Prime", "Noto Naskh Arabic", var(--f-display), serif; }
+.cbo-caret { display: inline-block; width: 2px; height: 20px; margin-inline-start: 2px; vertical-align: -3px; background: #a8121b; animation: cbo-blink 1s steps(1) infinite; }
+@keyframes cbo-blink { 50% { opacity: 0; } }
+.cbo-ask { display: block; margin-top: 12px; font: 400 17px var(--f-display); color: #a8121b; opacity: 0; transition: opacity .4s; }
+.cbo.is-asked .cbo-ask { opacity: 1; }
+.cbo-roll { position: absolute; left: 4%; right: 4%; bottom: 62px; height: 18px; z-index: 2; border-radius: 9px; background: linear-gradient(#3a3a40, #121216); box-shadow: 0 4px 10px rgba(0, 0, 0, .6); }
+.cbo-body { position: absolute; left: 0; right: 0; bottom: 0; height: 70px; z-index: 1; display: flex; justify-content: center; align-items: flex-end; gap: 8px; padding-bottom: 12px;
+	border-radius: 14px 14px 0 0; background: linear-gradient(#2a2a30, #141418); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08); }
+.cbo-body i { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #f3ead6, #b9ad92); box-shadow: 0 3px 0 #0a0a0c; }
+.cbo:hover .cbo-sheet { box-shadow: 0 -2px 24px rgba(224, 99, 58, .35); }
+@media (max-width: 560px) { .cbo-line { font-size: 15px; line-height: 26px; } .cbo-sheet { left: 4%; right: 4%; padding: 16px; } .cbo-body i:nth-child(n+7) { display: none; } }
+@media (prefers-reduced-motion: reduce) { .cbo-caret { animation: none; } }
+
+/* «بطاقة القارئ»: a library borrowing card, his books down it, their years stamped in red, a round stamp at its corner */
+.cbc { position: absolute; inset: 60px 16px 44px; display: flex; justify-content: center; align-items: center; text-decoration: none; }
+.cbc-card { position: relative; display: flex; flex-direction: column; width: min(460px, 100%); padding: 16px 22px 18px; rotate: -2deg; border-radius: 3px;
+	background: #f1e7cf; color: #2a2118; box-shadow: 0 18px 36px -12px rgba(0, 0, 0, .7); background-image: linear-gradient(90deg, transparent 105px, rgba(168, 18, 27, .3) 105px 106px, transparent 106px); transition: rotate .4s; }
+[dir="ltr"] .cbc-card { background-image: linear-gradient(90deg, transparent calc(100% - 106px), rgba(168, 18, 27, .3) calc(100% - 106px) calc(100% - 105px), transparent calc(100% - 105px)); }
+.cbc-h { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 6px; border-bottom: 2px solid #2a2118; }
+.cbc-h b { font: 400 20px var(--f-display); } .cbc-h small { font-size: 12px; color: #6b5a44; }
+.cbc-name { padding: 6px 0; border-bottom: 1px solid rgba(42, 33, 24, .35); font-size: 13px; color: #6b5a44; }
+.cbc-name i { font-style: normal; font-family: 'Aref Ruqaa', var(--f-display); font-size: 16px; color: #1f3b6e; }
+.cbc-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px solid rgba(42, 33, 24, .25); font: 400 14px var(--f-display); }
+.cbc-row em { width: 72px; font: 700 13px/1 var(--f-latin), monospace; font-style: normal; text-align: center; color: rgba(168, 18, 27, .85); letter-spacing: .1em;
+	padding: 3px 0; border: 1.5px solid rgba(168, 18, 27, .7); border-radius: 3px; rotate: calc((var(--i) - 2) * 3deg); }
+.cbc-seal { position: absolute; bottom: -30px; inset-inline-start: 34%; display: grid; place-content: center; width: 86px; height: 86px; rotate: -16deg; border: 3px double rgba(31, 59, 110, .8); border-radius: 50%;
+	color: rgba(31, 59, 110, .9); font: 400 20px/1 var(--f-display); text-align: center; background: rgba(241, 231, 207, .6); }
+.cbc-seal small { font-size: 11px; }
+.cbc:hover .cbc-card { rotate: 0deg; }
+@media (max-width: 560px) { .cbc-row:nth-child(n+7) { display: none; } .cbc-seal { width: 66px; height: 66px; font-size: 16px; bottom: -34px; } }
+
+/* «صمّم غلافك»: pocket-book covers in his series' looks, untitled; in the middle the reader's own, its title a blinking caret */
+.cbv { position: absolute; inset: 64px 16px 0; display: flex; justify-content: center; align-items: flex-end; }
+.cbv-c { position: relative; flex: 0 0 132px; height: 200px; margin: 0 -10px; display: flex; flex-direction: column; align-items: center; overflow: hidden; border-radius: 3px 8px 8px 3px;
+	background: linear-gradient(var(--band) 0 22%, transparent 22%), radial-gradient(60% 40% at 50% 58%, color-mix(in srgb, var(--band) 55%, transparent), transparent 70%), var(--bg);
+	box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--gold) 60%, transparent), 0 14px 26px -10px rgba(0, 0, 0, .75); color: var(--gold); text-decoration: none;
+	transform: translateY(calc(var(--ak) * 16px)) rotate(calc(var(--k) * 5deg)); transform-origin: 50% 120%; z-index: calc(10 - var(--ak)); transition: transform .45s cubic-bezier(.2, .7, .2, 1); }
+[dir="rtl"] .cbv-c { transform: translateY(calc(var(--ak) * 16px)) rotate(calc(var(--k) * -5deg)); }
+.cbv-band { margin-top: 10px; font: 400 15px var(--f-chunky, var(--f-display)); white-space: nowrap; }
+.cbv-n { position: absolute; top: 50px; inset-inline-start: 8px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--gold); color: var(--bg); font: 400 15px var(--f-chunky, var(--f-display)); }
+.cbv-moon { position: absolute; top: 62px; inset-inline-end: 22px; width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 240, 200, .8); }
+.cbv-t { margin-top: auto; font: 400 18px var(--f-chunky, var(--f-display)); }
+.cbv-blank { display: block; width: 74px; height: 10px; border-radius: 5px; background: color-mix(in srgb, var(--gold) 45%, transparent); }
+.cbv-by { margin: 6px 0 12px; font-size: 11px; color: #efe6d2; opacity: .8; }
+.cbv-c.is-me { flex-basis: 150px; height: 228px; z-index: 12; border: 2px dashed var(--gold); box-shadow: 0 18px 36px -12px rgba(224, 99, 58, .55); }
+.cbv-caret { display: inline-block; width: 2px; height: 18px; margin-inline-start: 3px; vertical-align: -2px; background: var(--gold); animation: cbo-blink 1s steps(1) infinite; }
+.cbv-c.is-on { transform: translateY(-12px) rotate(0) scale(1.06); z-index: 20; }
+@media (max-width: 560px) { .cbv-c { flex-basis: 96px; height: 150px; } .cbv-c.is-me { flex-basis: 112px; height: 170px; } .cbv-c:first-child, .cbv-c:last-child { display: none; } .cbv-band { font-size: 12px; } .cbv-n { top: 36px; } .cbv-moon { top: 44px; } }
+
+/* «اقرأ معنا»: the months as a row of covers, this month's raised and lit, the ones before faded */
+.cbk { position: absolute; inset: 70px 16px 20px; display: flex; justify-content: center; align-items: flex-end; gap: clamp(8px, 1.6vw, 20px); }
+.cbk-m { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 92px; color: var(--muted); text-decoration: none; transition: transform .3s; }
+.cbk-m .mini-cover, .cbk-m > :first-child { width: 100%; box-shadow: 0 12px 22px -10px rgba(0, 0, 0, .7); }
+.cbk-m b { font: 400 13px var(--f-display); white-space: nowrap; }
+.cbk-m.is-past { opacity: .4; filter: grayscale(.7); }
+.cbk-m.is-now { width: 132px; color: var(--ember); }
+.cbk-m.is-now > :first-child { box-shadow: 0 0 0 2px var(--ember), 0 20px 40px -12px rgba(224, 99, 58, .55); }
+.cbk-m:hover { transform: translateY(-6px); color: var(--paper); }
+@media (max-width: 760px) { .cbk-m { width: 64px; } .cbk-m.is-now { width: 96px; } .cbk-m:nth-child(n+7) { display: none; } }
+@media (max-width: 460px) { .cbk-m.is-past { display: none; } }

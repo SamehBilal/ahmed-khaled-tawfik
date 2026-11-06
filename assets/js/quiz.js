@@ -1,16 +1,16 @@
-/* quiz.html — «ركن القرّاء»: «اختبر نفسك» first (here), then the character quiz, the reader's card, the cover maker and the reading club (corner.js).
+/* test.html — «اختبر نفسك» (once the first part of «ركن القرّاء», quiz.html; the others are pages of their own too, corner.js).
    «اختبر نفسك»: ten questions drawn from the site's own data each round — a cover and its issue, a quote and its
    book, a character and their series, an issue and its series, a book and its year, a description and the character —
    four answers each, the right one shown with a link to its page; then the score, and the score as a picture to share. */
 window.PAGE = {
-	id: 'quiz',
-	title: { ar: 'ركن القرّاء', en: 'Readers’ corner' },
+	id: 'test',
+	title: { ar: 'اختبر نفسك', en: 'Test yourself' },
 	strings: {
-		eyebrow: { ar: 'العب واقرأ', en: 'Play and read' },
-		title: { ar: 'ركن القرّاء', en: 'Readers’ corner' },
+		eyebrow: { ar: 'العب', en: 'Play' },
+		title: { ar: 'اختبر نفسك', en: 'Test yourself' },
 		lead: {
-			ar: 'اختبر معرفتك بعالم العرّاب، واعرف أي شخصياته أنت، وارسم بطاقتك قارئًا، واقرأ معنا كتاب الشهر.',
-			en: 'Test what you know of the Godfather’s world, find which of his characters you are, draw your reader’s card, and read this month’s book with us.'
+			ar: 'عشرة أسئلة عن عالم العرّاب، تتغيّر في كل جولة: أغلفة واقتباسات وشخصيات وسنوات. كم تعرف؟',
+			en: 'Ten questions on the Godfather’s world, new each round: covers, quotes, characters and years. How much do you know?'
 		}
 	},
 	ROUND: 10,
@@ -128,9 +128,7 @@ window.PAGE = {
 		this.qs = this.round();
 		this.at = 0; this.score = 0;
 		var L = window.App.L, e = window.App.esc;
-		document.getElementById('content').innerHTML = '<nav class="chips cr-jump wrap"><a class="chip" href="#quiz">' + e(L('اختبر نفسك', 'Test yourself')) + '</a><a class="chip" href="#who">' + e(L('أي شخصية أنت؟', 'Which character are you?')) + '</a>' + ((window.App.data().openings || []).length > 3 ? '<a class="chip" href="#openings">' + e(L('البدايات', 'First lines')) + '</a>' : '') + '<a class="chip" href="#card">' + e(L('بطاقة القارئ', 'Reader’s card')) + '</a><a class="chip" href="#cover">' + e(L('صمّم غلافك', 'Design your cover')) + '</a><a class="chip" href="#club">' + e(L('اقرأ معنا', 'Read with us')) + '</a></nav>' +
-			'<section class="section qz" id="quiz"><div class="wrap"><h2 class="cr-h">' + e(L('اختبر نفسك', 'Test yourself')) + '</h2><p class="cr-lead">' + e(L('عشرة أسئلة عن عالم العرّاب، تتغيّر في كل جولة: أغلفة واقتباسات وشخصيات وسنوات. كم تعرف؟', 'Ten questions on the Godfather’s world, new each round: covers, quotes, characters and years. How much do you know?')) + '</p><div class="qz-box"></div></div></section><div id="corner"></div>';
-		if (window.Corner) window.Corner.mount(document.getElementById('corner'));
+		document.getElementById('content').innerHTML = '<section class="section qz" id="quiz"><div class="wrap"><div class="qz-box"></div></div></section>';
 		var self = this;
 		document.querySelector('.qz-box').addEventListener('click', function (ev) {
 			var b = ev.target.closest('button');
@@ -224,12 +222,12 @@ window.PAGE = {
 			x.font = '400 44px Lalezar, sans-serif'; x.fillStyle = '#e0633a';
 			x.fillText('العرّاب', 540, 920);
 			x.font = '400 24px "Cormorant Garamond", Georgia, serif'; x.fillStyle = '#c9b48e'; x.direction = 'ltr';
-			x.fillText('samehbilal.github.io/ahmed-khaled-tawfik/quiz.html', 540, 970);
+			x.fillText('samehbilal.github.io/ahmed-khaled-tawfik/test.html', 540, 970);
 			if (act === 'share') {
 				c.toBlob(function (blob) {
 					navigator.share({ files: [new File([blob], 'akt-quiz.png', { type: 'image/png' })],
 						text: L('حصلت على ' + self.score + ' من ' + self.qs.length + ' في «اختبر نفسك» عن عالم أحمد خالد توفيق.', 'I scored ' + self.score + '/' + self.qs.length + ' on the Ahmed Khaled Tawfik quiz.'),
-						url: 'https://samehbilal.github.io/ahmed-khaled-tawfik/quiz.html' }).catch(function () {});
+						url: 'https://samehbilal.github.io/ahmed-khaled-tawfik/test.html' }).catch(function () {});
 				}, 'image/png');
 			} else {
 				var a = document.createElement('a'); a.download = 'akt-quiz.png'; a.href = c.toDataURL('image/png'); a.click();

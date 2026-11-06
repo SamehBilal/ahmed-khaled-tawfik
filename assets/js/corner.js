@@ -1,8 +1,10 @@
-/* quiz.html, «ركن القرّاء»: after «اختبر نفسك» (quiz.js), three more things to do with his world —
-   «أي شخصية أنت؟» (seven questions; the answers lean to one of six of his characters, with a picture to share),
-   «بطاقة القارئ» (the reader's first book, favourite book and character, and how much they have read, as a card to share),
-   «صمّم غلافك» (a pocket-book cover with the reader's title, name, number and picture, drawn as they type),
-   and «اقرأ معنا» (a book a month, the same for everyone, with questions to talk over). Nothing is sent anywhere. */
+/* Five things to do with his world, a page each (once «ركن القرّاء», quiz.html, with «اختبر نفسك», now test.html / quiz.js) —
+   «أي شخصية أنت؟» (which-character.html: seven questions; the answers lean to one of six of his characters, with a picture to share),
+   «البدايات» (first-lines.html: a first line, and which book or issue it opens),
+   «بطاقة القارئ» (reader-card.html: the reader's first book, favourite book and character, and how much they have read, as a card to share),
+   «صمّم غلافك» (cover-maker.html: a pocket-book cover with the reader's title, name, number and picture, drawn as they type),
+   and «اقرأ معنا» (read-with-us.html: a book a month, the same for everyone, with questions to talk over). Nothing is sent anywhere.
+   Each page is named by <main data-corner="who|openings|card|cover|club">, and Corner.PAGES gives it its strings and its band. */
 (function () {
 	'use strict';
 
@@ -75,22 +77,13 @@
 	function esc(s) { return App().esc(s); }
 
 	var Corner = {
-		mount: function (el) {
+		/* one part, on its own page: its box in a section of the page's (#who, #openings, #card, #cover, #club) */
+		mount: function (el, key) {
 			this.el = el;
-			var L = App().L;
-			el.innerHTML =
-				'<section class="section cr" id="who"><div class="wrap"><h2 class="cr-h">' + esc(L('أي شخصية أنت؟', 'Which character are you?')) + '</h2>' +
-					'<p class="cr-lead">' + esc(L('سبعة أسئلة، وفي آخرها شخصية من عالمه تشبهك.', 'Seven questions, and at the end one of his characters who is like you.')) + '</p><div class="cr-who"></div></div></section>' +
-				/* «البدايات»: a first line, and which book or issue it opens */
-				((App().data().openings || []).length > 3 ? '<section class="section cr" id="openings"><div class="wrap"><h2 class="cr-h">' + esc(L('البدايات', 'First lines')) + '</h2>' +
-					'<p class="cr-lead">' + esc(L('أول سطر في كتاب أو عدد من أعداده: من أي كتاب هو؟', 'The first line of one of his books or issues: which one does it open?')) + '</p><div class="cr-open"></div></div></section>' : '') +
-				'<section class="section cr" id="card"><div class="wrap"><h2 class="cr-h">' + esc(L('بطاقة القارئ', 'Reader’s card')) + '</h2>' +
-					'<p class="cr-lead">' + esc(L('أول ما قرأت له، وأحب كتبه إليك، وشخصيتك المفضلة، في بطاقة تشاركها. لا يُرسل شيء؛ البطاقة تُرسم على جهازك.', 'The first thing of his you read, your favourite book and character, on a card to share. Nothing is sent; the card is drawn on your device.')) + '</p><div class="cr-card"></div></div></section>' +
-				'<section class="section cr" id="cover"><div class="wrap"><h2 class="cr-h">' + esc(L('صمّم غلافك', 'Design your cover')) + '</h2>' +
-					'<p class="cr-lead">' + esc(L('غلاف كتاب جيب على طريقة سلاسله: عنوانك واسمك ورقم العدد وصورتك. لا تُرفع الصورة إلى أي مكان؛ الغلاف يُرسم على جهازك.', 'A pocket-book cover in the manner of his series: your title, your name, an issue number and your picture. The picture goes nowhere; the cover is drawn on your device.')) + '</p><div class="cr-cover"></div></div></section>' +
-				'<section class="section cr" id="club"><div class="wrap"><h2 class="cr-h">' + esc(L('اقرأ معنا', 'Read with us')) + '</h2>' +
-					'<p class="cr-lead">' + esc(L('كتاب كل شهر، الكتاب نفسه لكل القرّاء، وأسئلة تتحدث فيها مع أصدقائك.', 'A book a month, the same one for every reader, with questions to talk over with your friends.')) + '</p><div class="cr-club"></div></div></section>';
-			this.who(); this.openings(); this.card(); this.cover(); this.club();
+			var P = Corner.PAGES[key];
+			if (!P) return;
+			el.innerHTML = '<section class="section cr" id="' + key + '"><div class="wrap"><div class="' + P.box + '"></div></div></section>';
+			({ who: this.who, openings: this.openings, card: this.card, cover: this.cover, club: this.club })[key].call(this);
 		},
 
 		/* «البدايات»: the lines in a shuffled order, each with four books to choose from (of its own kind: an issue among issues,
@@ -293,7 +286,7 @@
 				if (!b) return;
 				var k = b.getAttribute('data-club');
 				if (k === 'share') {
-					var text = L('اقرأ معي هذا الشهر «' + t(r.title) + '» لأحمد خالد توفيق', 'Read “' + t(r.title) + '” by Ahmed Khaled Tawfik with me this month'), url = 'https://samehbilal.github.io/ahmed-khaled-tawfik/quiz.html#club';
+					var text = L('اقرأ معي هذا الشهر «' + t(r.title) + '» لأحمد خالد توفيق', 'Read “' + t(r.title) + '” by Ahmed Khaled Tawfik with me this month'), url = 'https://samehbilal.github.io/ahmed-khaled-tawfik/read-with-us.html';
 					if (navigator.share) navigator.share({ text: text, url: url }).catch(function () {});
 					else if (navigator.clipboard) navigator.clipboard.writeText(text + ' ' + url).then(function () { if (window.Notify) window.Notify(L('نُسخت الدعوة.', 'Invitation copied.'), { type: 'success' }); });
 					return;
@@ -338,7 +331,7 @@
 					});
 				}
 				text('العرّاب', 1210, '400 48px Lalezar, sans-serif', '#e0633a');
-				text('samehbilal.github.io/ahmed-khaled-tawfik/quiz.html', 1262, '400 24px "Cormorant Garamond", Georgia, serif', '#c9b48e', 'ltr');
+				text('samehbilal.github.io/ahmed-khaled-tawfik/' + (kind === 'who' ? 'which-character' : 'reader-card') + '.html', 1262, '400 24px "Cormorant Garamond", Georgia, serif', '#c9b48e', 'ltr');
 				self.save(c, kind === 'who' ? 'akt-character.png' : 'akt-reader-card.png');
 			});
 		},
@@ -352,5 +345,146 @@
 			}, 'image/png');
 		}
 	};
+
+	/* the five pages of their own (once the parts of «ركن القرّاء», quiz.html, which now leads to them): each its strings, its
+	   band and its section; the page says which with <main data-corner="…">, and corner.js gives it its PAGE */
+	var LOOK = { mwt: ['#0b0b0b', '#a8121b', '#f2c14e'], fantasia: ['#1d1036', '#6b3fa0', '#f6d79a'], safari: ['#0f2a1a', '#2f7d3a', '#f4d03f'], own: ['#1a1410', '#e0633a', '#f6d79a'] };
+	/* one of a band's pieces lit in turn, as the pointer lights any; a click goes down to the page's section */
+	function spotlight(box, sel, to) {
+		if (!box || box._wired) return;
+		box._wired = true;
+		var items = [].slice.call(box.querySelectorAll(sel)), at = Math.floor(items.length / 2), hold = false;
+		var show = function (i) { items.forEach(function (c, j) { c.classList.toggle('is-on', j === i); }); };
+		box.addEventListener('pointerover', function (ev) { var c = ev.target.closest(sel); if (c) { hold = true; show(items.indexOf(c)); } });
+		box.addEventListener('pointerleave', function () { hold = false; });
+		box.addEventListener('click', function (ev) { ev.preventDefault(); var el = document.getElementById(to); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+		show(at);
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		setInterval(function () { if (!hold && !document.hidden) show(at = (at + 1) % items.length); }, 2400);
+	}
+	function heroOf(id) {
+		var A = App(), c = (A.data().characters || []).filter(function (x) { return x.id === id; })[0] || { name: { ar: id, en: id } };
+		return { c: c, pic: (A.data().charFigures || {})[id] || c.image || '' };
+	}
+
+	Corner.PAGES = {
+		/* «أي شخصية أنت؟»: the six he might find in you, in oval frames like old portraits, one lit at a time with what makes them so */
+		who: {
+			id: 'which-character', box: 'cr-who',
+			title: { ar: 'أي شخصية أنت؟', en: 'Which character are you?' },
+			eyebrow: { ar: 'العب', en: 'Play' },
+			lead: { ar: 'سبعة أسئلة عن ليلتك وخوفك ومشروبك، وفي آخرها شخصية من عالم العرّاب تشبهك، وصورة تشاركها.', en: 'Seven questions about your evenings, your fears and your drink, and at the end one of the Godfather’s characters who is like you, with a picture to share.' },
+			band: function (d, A) {
+				var e = A.esc, t = A.t;
+				setTimeout(function () { spotlight(document.querySelector('.cbw'), '.cbw-f', 'who'); }, 0);
+				return '<div class="cbw">' + Object.keys(WHO).map(function (id, i) {
+					var h = heroOf(id);
+					return '<a class="cbw-f" href="#who" style="--i:' + i + '"><span class="cbw-pic">' + (h.pic ? '<img src="' + e(h.pic) + '" alt="" loading="lazy" decoding="async">' : '<b>' + e(t(h.c.name).replace(/^د\.\s*/, '').slice(0, 1)) + '</b>') + '</span>' +
+						'<span class="cbw-n">' + e(t(h.c.name)) + '</span><small>' + e(t(WHO[id]).split(':')[0]) + '</small></a>';
+				}).join('') + '</div>';
+			}
+		},
+		/* «البدايات»: a sheet in a typewriter, a first line typed on it a letter at a time, then the question */
+		openings: {
+			id: 'first-lines', box: 'cr-open',
+			title: { ar: 'البدايات', en: 'First lines' },
+			eyebrow: { ar: 'العب', en: 'Play' },
+			lead: { ar: 'أول سطر في كتاب أو عدد من أعداده: من أي كتاب هو؟ أربعة أغلفة تختار منها، والجواب برابط صفحته.', en: 'The first line of one of his books or issues: which one does it open? Four covers to choose from, and the answer with a link to its page.' },
+			band: function (d, A) {
+				var e = A.esc, L = A.L, lines = (d.openings || []).map(function (o) { return o.line; }).filter(function (s) { return s && s.length < 150; });
+				setTimeout(function () { Corner.typewriter(lines); }, 0);
+				return '<a class="cbo" href="#openings"><span class="cbo-roll" aria-hidden="true"></span><span class="cbo-sheet"><span class="cbo-line" dir="rtl"></span><i class="cbo-caret" aria-hidden="true"></i>' +
+					'<span class="cbo-ask">' + e(L('…من أي كتاب؟', '…which book?')) + '</span></span><span class="cbo-body" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></a>';
+			}
+		},
+		/* «بطاقة القارئ»: a library's borrowing card, his books down it with their years stamped in red, and a round stamp */
+		card: {
+			id: 'reader-card', box: 'cr-card',
+			title: { ar: 'بطاقة القارئ', en: 'Reader’s card' },
+			eyebrow: { ar: 'شارك', en: 'Share' },
+			lead: { ar: 'أول ما قرأت له، وأحب كتبه إليك، وشخصيتك المفضلة، وكم قرأت له، في بطاقة تشاركها. لا يُرسل شيء؛ البطاقة تُرسم على جهازك.', en: 'The first thing of his you read, your favourite book and character, and how many you have read, on a card to share. Nothing is sent; the card is drawn on your device.' },
+			band: function (d, A) {
+				var e = A.esc, L = A.L, t = A.t;
+				var rows = [['mwt', 1993], ['fantasia', 1995], ['safari', 1996], ['utopia', 2008], ['rats', 2016]].map(function (x) {
+					var w = A.findWork(x[0]), s = (d.series || []).filter(function (y) { return y.id === x[0]; })[0];
+					return [w ? t(w.title) : s ? t(s.title) : x[0], x[1]];
+				});
+				return '<a class="cbc" href="#card"><span class="cbc-card"><span class="cbc-h"><b>' + e(L('بطاقة استعارة', 'Borrowing card')) + '</b><small>' + e(L('مكتبة العرّاب', 'The Godfather’s library')) + '</small></span>' +
+					'<span class="cbc-name">' + e(L('اسم القارئ: ', 'Reader: ')) + '<i>' + e(L('اسمك هنا', 'your name here')) + '</i></span>' +
+					rows.map(function (r, i) { return '<span class="cbc-row" style="--i:' + i + '"><span>' + e(r[0]) + '</span><em>' + e(A.num(r[1])) + '</em></span>'; }).join('') +
+					'<span class="cbc-seal">' + e(L('قارئ', 'Reader')) + '<small>' + e(L('العرّاب', 'Al-Arrab')) + '</small></span></span></a>';
+			}
+		},
+		/* «صمّم غلافك»: pocket-book covers in his series' looks, untitled, and in the middle the reader's, its title still a caret */
+		cover: {
+			id: 'cover-maker', box: 'cr-cover',
+			title: { ar: 'صمّم غلافك', en: 'Design your cover' },
+			eyebrow: { ar: 'اصنع', en: 'Make' },
+			lead: { ar: 'غلاف كتاب جيب على طريقة سلاسله: عنوانك واسمك ورقم العدد وصورتك. لا تُرفع الصورة إلى أي مكان؛ الغلاف يُرسم على جهازك.', en: 'A pocket-book cover in the manner of his series: your title, your name, an issue number and your picture. The picture goes nowhere; the cover is drawn on your device.' },
+			band: function (d, A) {
+				var e = A.esc, L = A.L;
+				var set = [['safari', L('سافاري', 'Safari'), 7], ['mwt', L('ما وراء الطبيعة', 'Ma Wara’'), 33], ['own', L('سلسلتك', 'Your series'), 1], ['fantasia', L('فانتازيا', 'Fantasia'), 12], ['mwt', L('ما وراء الطبيعة', 'Ma Wara’'), 80]];
+				setTimeout(function () { spotlight(document.querySelector('.cbv'), '.cbv-c', 'cover'); }, 0);
+				return '<div class="cbv">' + set.map(function (s, i) {
+					var lk = LOOK[s[0]], me = s[0] === 'own';
+					return '<a class="cbv-c' + (me ? ' is-me' : '') + '" href="#cover" style="--bg:' + lk[0] + ';--band:' + lk[1] + ';--gold:' + lk[2] + ';--k:' + (i - 2) + ';--ak:' + Math.abs(i - 2) + '">' +
+						'<span class="cbv-band">' + e(s[1]) + '</span><span class="cbv-n">' + e(A.num(s[2])) + '</span><span class="cbv-moon" aria-hidden="true"></span>' +
+						'<span class="cbv-t">' + (me ? e(L('عنوانك', 'Your title')) + '<i class="cbv-caret" aria-hidden="true"></i>' : '<i class="cbv-blank"></i>') + '</span>' +
+						'<span class="cbv-by">' + e(me ? L('بقلم: أنت', 'by: you') : L('بقلم: ؟', 'by: ?')) + '</span></a>';
+				}).join('') + '</div>';
+			}
+		},
+		/* «اقرأ معنا»: the months as a row of covers, the month's book raised and lit, the ones before faded, the ones to come ahead */
+		club: {
+			id: 'read-with-us', box: 'cr-club',
+			title: { ar: 'اقرأ معنا', en: 'Read with us' },
+			eyebrow: { ar: 'اقرأ', en: 'Read' },
+			lead: { ar: 'كتاب كل شهر، الكتاب نفسه لكل القرّاء، وأسئلة تتحدث فيها مع أصدقائك؛ وكتب الشهور القادمة لتستعد لها.', en: 'A book a month, the same one for every reader, with questions to talk over with your friends; and the books of the months ahead, to get ready.' },
+			band: function (d, A) {
+				var e = A.esc, L = A.L, t = A.t, Ls = window.Lists, S = window.WorksShared;
+				if (!Ls || !S) return '';
+				var now = new Date(), idx = now.getFullYear() * 12 + now.getMonth();
+				var MON = A.lang === 'en' ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] : ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+				var out = [];
+				for (var k = idx - 3; k <= idx + 5; k++) {
+					if (k < CLUB_FROM) continue;
+					var r = Ls.describe(CLUB[((k - CLUB_FROM) % CLUB.length + CLUB.length) % CLUB.length][0]);
+					out.push('<a class="cbk-m' + (k === idx ? ' is-now' : k < idx ? ' is-past' : '') + '" href="#club" title="' + e(t(r.title)) + '">' +
+						S.miniCover({ img: r.img, color: r.color || '#3a1414', title: t(r.title) }) +
+						'<b>' + e(k === idx ? L('هذا الشهر', 'This month') : MON[k % 12]) + '</b></a>');
+				}
+				return '<div class="cbk">' + out.join('') + '</div>';
+			}
+		}
+	};
+
+	/* «البدايات»'s band: a first line typed out, held, cleared, and the next */
+	Corner.typewriter = function (lines) {
+		var el = document.querySelector('.cbo-line'), box = document.querySelector('.cbo');
+		if (!el || !lines.length) return;
+		var order = lines.slice().sort(function () { return Math.random() - 0.5; }), n = 0;
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = order[0]; box.classList.add('is-asked'); return; }
+		var line = function () {
+			var s = order[n++ % order.length], i = 0;
+			box.classList.remove('is-asked');
+			var tick = setInterval(function () {
+				if (!el.isConnected) return clearInterval(tick);
+				if (document.hidden) return;
+				el.textContent = s.slice(0, ++i);
+				if (i >= s.length) { clearInterval(tick); box.classList.add('is-asked'); setTimeout(line, 3600); }
+			}, 55);
+		};
+		line();
+	};
+
+	/* the page this is, if it is one of the five */
+	var host = document.querySelector('[data-corner]'), key = host && host.getAttribute('data-corner'), P = key && Corner.PAGES[key];
+	if (P && !window.PAGE) window.PAGE = {
+		id: P.id, title: P.title,
+		strings: { eyebrow: P.eyebrow, title: P.title, lead: P.lead },
+		band: P.band,
+		render: function () { Corner.mount(document.getElementById('content'), key); window.App.focusHash(); }
+	};
+
 	window.Corner = Corner;
 })();

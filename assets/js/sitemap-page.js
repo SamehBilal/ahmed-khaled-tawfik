@@ -184,7 +184,7 @@ window.PAGE = {
 			['legacy.html', ['talks.html', 'interviews.html', 'tanta.html', 'awards.html', 'map.html', 'calendar.html']],
 			['tributes.html', ['studies.html', 'remembrance.html', 'reader-stories.html']],
 			['blog.html', ['blog.html#papers', 'numbers.html'], [[((d.blog || {}).posts || []).length || (d.stats || {}).posts, L('مقال', 'articles')]]],
-			['quiz.html', ['lists.html']],
+			['test.html', ['which-character.html', 'first-lines.html', 'reader-card.html', 'cover-maker.html', 'read-with-us.html', 'lists.html']],
 			['about.html', UI.legal.map(function (n) { return n.href; }).filter(function (h) { return h !== 'about.html'; })]
 		];
 		/* a page the header or footer gains later and the tree does not place yet still shows, in the last column */
