@@ -392,5 +392,14 @@ window.AKT.media = [
     "lang": "ar",
     "url": "https://www.youtube.com/watch?v=qkOMgu48PN8",
     "note": { "ar": "حديث إبراهيم عيسى عنه في برنامج «آخر النهار»، نُشر في 29 نوفمبر 2020 (8 دقائق).", "en": "Ibrahim Eissa speaking of him on Akher El Nahar, posted on 29 November 2020 (8 minutes)." }
+  },
+  {
+    "kind": "profile",
+    "title": { "ar": "ليه كتابات أحمد خالد توفيق مهمة؟", "en": "Why does Ahmed Khaled Tawfik's writing matter?" },
+    "outlet": { "ar": "طارق عثمان، يوتيوب", "en": "Tarek Osman, YouTube" },
+    "year": 2025,
+    "lang": "ar",
+    "url": "https://www.youtube.com/watch?v=l8hD_IPIUKo",
+    "note": { "ar": "طارق عثمان عن أهمية ما كتبه، على قناته في يوتيوب، نُشر في 31 يناير 2025 (10 دقائق).", "en": "Tarek Osman on why his writing matters, on his YouTube channel, posted on 31 January 2025 (10 minutes)." }
   }
 ];
