@@ -9,9 +9,19 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-06T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8180cd1</id>
+		<title>«الأعمال» no longer repeats «على الشاشة»</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="New page"/>
+		<category term="design" label="Design"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">«الأعمال» no longer repeats «على الشاشة»: his work on screen has its own page (screen.html), in «إرثه»'s menu; the Works page now ends with «ما صدر بعد رحيله»</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7145ef6</id>
 		<title>«الأعمال» no longer repeats «كتب عنه»</title>
-		<updated>2026-11-06T20:59:00Z</updated>
+		<updated>2026-11-06T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
@@ -21,7 +31,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3d93817</id>
 		<title>«الأعمال» no longer repeats «الجوائز والتكريم»</title>
-		<updated>2026-11-06T20:58:00Z</updated>
+		<updated>2026-11-06T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -31,14 +41,14 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d675ed6</id>
 		<title>«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar</title>
-		<updated>2026-11-06T20:57:00Z</updated>
+		<updated>2026-11-06T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar: the day's events from the same day files the calendar is drawn from (otd.js), and the line of the day (today.js)</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/434b589</id>
 		<title>«الأعمال» no longer repeats «دور النشر»</title>
-		<updated>2026-11-06T20:56:00Z</updated>
+		<updated>2026-11-06T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -49,7 +59,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
 		<title>«زمن العرّاب» (era.html) is gone</title>
-		<updated>2026-11-06T20:55:00Z</updated>
+		<updated>2026-11-06T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -567,15 +577,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">«الخريطة»: the gallery's cards are now the places themselves — a picture of a well-known sight of each (Bran Castle for Romania, the Potala Palace for Tibet, Uluru for Australia…), from the lead image of its Wikipedia article (tools/build-place-photos.js; the 34 in assets/img/places, listed with their articles in assets/data/place-photos.json), its name and how many of his books name it under it; a card clicked, tapped or given Enter opens its place on the map below and goes there. The circle is full from the start, the cards on both sides of the middle, not coming in from one side; and the band is one with the page — no background, faded sides or line under it</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/682408f</id>
-		<title>«الخريطة»</title>
-		<updated>2026-11-02T20:33:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«الخريطة»: the band is now Codrops' «Infinite Circular WebGL Gallery» (Luis Henrique Bizarro; MIT), in plain WebGL — in place of the chart and its curved tooltips. A card a place his books name, from the map's own places: the cover of the first book that names it, and under it the place and the book, drawn in the site's fonts. The cards stand on a wide arc, turned along it, and ripple as they move (the zip's shaders); dragged sideways or by the arrow keys they run on without end and settle on a card, and drift by themselves until touched. A card clicked, tapped or given Enter opens its book; the wheel scrolls the page; drawn only while on screen; still for those who ask for less motion</content>
 	</entry>
 </feed>
