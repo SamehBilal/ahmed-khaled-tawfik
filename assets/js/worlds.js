@@ -62,7 +62,7 @@ window.PAGE = {
 		if (!list.length) return '';
 		return '<section class="section wl" id="timeline"><div class="wrap"><h2 class="wl-h">' + e(L('خط زمن فانتازيا', 'Fantasia’s timeline')) + '</h2>' +
 			'<p class="wl-lead">' + e(L('العوالم التاريخية والأسطورية التي زارتها عبير بترتيب زمنها، من جلجاميش إلى تشي جيفارا: نحو خمسة آلاف عام في ' + App.num(list.length) + ' عددًا.', 'The worlds of history and legend Abeer visited, in the order they are set, from Gilgamesh to Che Guevara: nearly five thousand years in ' + list.length + ' issues.')) + '</p>' +
-			'<ol class="wl-line">' + list.map(function (x) {
+			'<ol class="wl-line" data-carousel>' + list.map(function (x) {
 				var is = by[x.n];
 				return '<li><a href="#fantasia-' + x.n + '" class="wl-stop"><span class="wl-era">' + e(t(x.era)) + '</span><i class="wl-dot"></i>' +
 					'<span class="wl-cv">' + S.miniCover({ img: S.issueCover('fantasia', is), color: '#3a1414', title: t(is.title), num: App.num(is.n) }) + '</span>' +

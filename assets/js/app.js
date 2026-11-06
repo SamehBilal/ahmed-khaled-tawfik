@@ -942,7 +942,8 @@
 		/* a row of covers that runs past the page gets previous / next buttons at its ends, a page of covers at a time;
 		   they hide when the row fits and dim at either end (in Arabic the row runs right to left). Rows already done are skipped. */
 		carousels: function (root) {
-			(root || document).querySelectorAll('.cover-row').forEach(function (row) {
+			/* (any other row that asks for it too, with data-carousel: «خط زمن فانتازيا») */
+			(root || document).querySelectorAll('.cover-row, [data-carousel]').forEach(function (row) {
 				if (row.parentNode && row.parentNode.classList.contains('row-car')) return;
 				var box = document.createElement('div');
 				box.className = 'row-car';
@@ -975,6 +976,12 @@
 					next.disabled = at >= max - 4;
 				};
 				row.addEventListener('scroll', update, { passive: true });
+				/* while it moves, and a moment after, the row is «is-scrolling»: a row that wants it shows its scrollbar only then */
+				row.addEventListener('scroll', function () {
+					row.classList.add('is-scrolling');
+					clearTimeout(row._still);
+					row._still = setTimeout(function () { row.classList.remove('is-scrolling'); }, 900);
+				}, { passive: true });
 				update();
 				/* covers load lazily, so measure again once they have */
 				setTimeout(update, 600);

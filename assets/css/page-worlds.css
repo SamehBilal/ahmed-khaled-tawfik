@@ -39,7 +39,13 @@
 .wl { padding-bottom: 0; }
 .wl-h { margin: 0 0 6px; font-family: var(--f-display); font-size: 28px; }
 .wl-lead { margin: 0 0 18px; color: var(--paper-dim); line-height: 1.8; }
-.wl-line { position: relative; display: flex; gap: 6px; margin: 0; padding: 4px 4px 14px; list-style: none; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; }
+.wl-line { position: relative; display: flex; gap: 6px; margin: 0; padding: 4px 4px 14px; list-style: none; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; scrollbar-color: transparent transparent; transition: scrollbar-color .4s; }
+/* its scrollbar only while it moves (app.js carousels marks it «is-scrolling»), its room kept so nothing jumps; arrows at its ends */
+.wl-line.is-scrolling { scrollbar-color: color-mix(in srgb, var(--ember) 70%, transparent) transparent; }
+.wl-line::-webkit-scrollbar { height: 6px; }
+.wl-line::-webkit-scrollbar-thumb { border-radius: 3px; background: transparent; }
+.wl-line.is-scrolling::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--ember) 70%, transparent); }
+.row-car:has(> .wl-line) .row-car-btn { top: 44px; }
 .wl-line li { position: relative; flex: 0 0 112px; scroll-snap-align: start; }
 .wl-line li::before { content: ""; position: absolute; top: 43px; inset-inline: -3px; height: 2px; background: var(--ember); opacity: .45; }
 .wl-line li:first-child::before { inset-inline-start: 50%; } .wl-line li:last-child::before { inset-inline-end: 50%; }
