@@ -9,9 +9,18 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-06T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/403acf1</id>
+		<title>«أعداء وأشرار» moves from «السلاسل جنبًا إلى جنب» to each series' own page</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="data" label="Data"/>
+		<content type="text">«أعداء وأشرار» moves from «السلاسل جنبًا إلى جنب» to each series' own page: on «ما وراء الطبيعة» its 10 (Franz Lucifer, Mother Marsha, Ronel the Black, the other Refaat…), on «سافاري» its 4, on «فانتازيا» its 3 — after the characters, a card each with its note, the covers of the issues it is in and its sources, at #v-&lt;id&gt; (series.html?id=mwt#v-franz-lucifer). The comparison loses its section and its row, and «عالمه»'s panel its link</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/745203d</id>
 		<title>«مكتبة رفعت إسماعيل» is a page of its own (refaat-library.html), no longer a part of «مكتبته»</title>
-		<updated>2026-11-06T20:59:00Z</updated>
+		<updated>2026-11-06T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -22,7 +31,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/11ac84e</id>
 		<title>«عوالم فانتازيا» and «عيادة سافاري» list their issues by kind, a heading each</title>
-		<updated>2026-11-06T20:58:00Z</updated>
+		<updated>2026-11-06T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">«عوالم فانتازيا» and «عيادة سافاري» list their issues by kind, a heading each — «أساطير وملاحم 9», «أمراض وأوبئة 12», … «لم نعرف بعد» — with its count, and its issues under it in their order, not one run in the series' order; each card says its issue's number, its kind being the heading over it. The kinds above still show one group at a time, and #fantasia-25 still goes to its card</content>
@@ -30,7 +39,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/4b8c437</id>
 		<title>«خط زمن فانتازيا» (worlds.html) is a carousel</title>
-		<updated>2026-11-06T20:57:00Z</updated>
+		<updated>2026-11-06T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -39,7 +48,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/999a237</id>
 		<title>The day his translations and stories for others came out, sent by the site's editor</title>
-		<updated>2026-11-06T20:56:00Z</updated>
+		<updated>2026-11-06T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">The day his translations and stories for others came out, sent by the site's editor: «رجفة الخوف»'s ten issues — 1 on 19 January 2003, 2 on 26 May 2003, 3 on 15 January 2004, 4 on 2 January 2005, 5 on 15 December 2005, 6 in 2006, 7 on 11 June 2007, 8 on 5 January 2008, 9 on 15 July 2008, 10 on 27 December 2009 — and the series' years, 2003–2009; «ثلاثة» in «كتاب الصيف» on 28 May 2003; «أسطورة بلية» (بلية العجيب 17) on 5 June 2004. Each as its issue's first edition, with its year: on its page, in «السلاسل جنبًا إلى جنب», and on its day in «تقويم العرّاب» and «في مثل هذا اليوم» (990 moments now)</content>
@@ -47,7 +56,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8180cd1</id>
 		<title>«الأعمال» no longer repeats «على الشاشة»</title>
-		<updated>2026-11-06T20:55:00Z</updated>
+		<updated>2026-11-06T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="design" label="Design"/>
@@ -57,7 +66,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7145ef6</id>
 		<title>«الأعمال» no longer repeats «كتب عنه»</title>
-		<updated>2026-11-06T20:54:00Z</updated>
+		<updated>2026-11-06T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
@@ -67,7 +76,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3d93817</id>
 		<title>«الأعمال» no longer repeats «الجوائز والتكريم»</title>
-		<updated>2026-11-06T20:53:00Z</updated>
+		<updated>2026-11-06T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -77,14 +86,14 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d675ed6</id>
 		<title>«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar</title>
-		<updated>2026-11-06T20:52:00Z</updated>
+		<updated>2026-11-06T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar: the day's events from the same day files the calendar is drawn from (otd.js), and the line of the day (today.js)</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/434b589</id>
 		<title>«الأعمال» no longer repeats «دور النشر»</title>
-		<updated>2026-11-06T20:51:00Z</updated>
+		<updated>2026-11-06T20:50:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -95,7 +104,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
 		<title>«زمن العرّاب» (era.html) is gone</title>
-		<updated>2026-11-06T20:50:00Z</updated>
+		<updated>2026-11-06T20:49:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -567,15 +576,5 @@
 		<category term="pics" label="Pictures"/>
 		<category term="data" label="Data"/>
 		<content type="text">«مكتبته»: the art is now a small cover under each title, as the site's small books (WorksShared.miniCover), with who and when beside it — drawn with its title, in its kind's colour, where there is no picture</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/121e420</id>
-		<title>«مكتبته»</title>
-		<updated>2026-11-02T20:38:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="audio" label="Audio"/>
-		<category term="data" label="Data"/>
-		<content type="text">«مكتبته»: each thing he loved has its art under its title — a book's cover, a film's poster, a song's sleeve, a writer's portrait — from the lead image of its Wikipedia article (tools/build-library-covers.js; 48 of the 61 in assets/img/library, listed with their articles in assets/data/library-covers.json); and the music has the songs of «نشوات قديمة» whose episodes could be found — Ma Baker (Boney M.), Chiquitita (ABBA), Yesterday, When I Was Young (Aznavour), Take My Breath Away (Berlin), Another Brick in the Wall (Pink Floyd) and In the Year 2525 (Zager and Evans) — what he said of each, its episode on Masress, and a link to the book</content>
 	</entry>
 </feed>
