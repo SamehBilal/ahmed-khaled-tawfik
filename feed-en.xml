@@ -9,9 +9,20 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-06T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/434b589</id>
+		<title>«الأعمال» no longer repeats «دور النشر»</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="New page"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">«الأعمال» no longer repeats «دور النشر»: the houses that published him are on their own page (publishers.html), reached from «أعماله»'s menu, the footer and the site map</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
 		<title>«زمن العرّاب» (era.html) is gone</title>
-		<updated>2026-11-06T20:59:00Z</updated>
+		<updated>2026-11-06T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -564,14 +575,5 @@
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">«حول العالم»: only the globe at the top — the drifting titles that showed until it was drawn are gone, with their styles and the band's old backgrounds; the globe fades in once it is ready</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1f6ea65</id>
-		<title>«حول العالم»</title>
-		<updated>2026-11-02T20:29:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="design" label="Design"/>
-		<category term="fix" label="Fix"/>
-		<content type="text">«حول العالم»: the globe one with the page — its band no longer has a background, faded sides or a line under it; the page's own shows around the globe</content>
 	</entry>
 </feed>
