@@ -32,8 +32,34 @@
 .lb-said { margin: 4px 0 8px; color: var(--paper-dim); line-height: 1.8; font-size: 15px; }
 .lb-src { margin-top: auto; color: var(--ember); font-size: 14px; }
 
-/* «مكتبة رفعت إسماعيل» (#refaat): his heroes' own reading, by hero, in the same cards */
+/* «مكتبة رفعت إسماعيل» (refaat-library.html): his heroes' own reading, by hero, in the same cards */
 .lb-rf { margin-top: 48px; padding-top: 10px; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
 .lb-rf .lb-h small { font-size: .55em; color: var(--muted); }
 .lb-rf-who { margin: 22px 0 12px; font: 400 20px var(--f-display); color: var(--ember); }
 .lb-rf-is a { color: var(--ember); font-family: var(--f-latin); }
+
+/* «مكتبة رفعت إسماعيل»'s own page: a group per hero, and its band, their books on a shelf in the light of his lantern */
+.rl-group + .rl-group { margin-top: 34px; }
+.rl-who { display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-family: var(--f-display); font-size: 24px; color: var(--ember); }
+.rl-who b { font-family: var(--f-latin); font-size: 15px; color: var(--muted); }
+.lb-item.is-target { box-shadow: 0 0 0 2px var(--ember); }
+.ph[data-ph="refaat-library"], html[data-theme="light"] .ph[data-ph="refaat-library"] { background: transparent; border-bottom: 0; }
+.ph[data-ph="refaat-library"]::before, .ph[data-ph="refaat-library"]::after { display: none; }
+.ph[data-ph="refaat-library"] { pointer-events: auto; }
+.ph[data-ph="refaat-library"] + .page-hero { padding-top: 8px; }
+.rl-shelf { position: absolute; inset: 0 16px; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 26px; }
+.rl-books { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: center; gap: 4px; flex-wrap: nowrap; overflow: hidden; }
+.rl-spine {
+	flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 38px; height: var(--h, 170px); padding: 10px 0; border-radius: 3px 3px 1px 1px;
+	background: linear-gradient(90deg, rgba(0, 0, 0, .35), transparent 30%, transparent 70%, rgba(0, 0, 0, .3)), var(--c);
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06), 0 6px 12px rgba(0, 0, 0, .35); color: #f1e6cc; transition: transform .25s;
+}
+.rl-spine span { writing-mode: vertical-rl; font-family: var(--f-display); font-size: 14px; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-height: 100%; }
+.rl-spine:hover, .rl-spine:focus-visible { transform: translateY(-12px); color: #fff; outline: none; }
+.rl-board { position: relative; z-index: 2; display: block; height: 14px; margin-top: -1px; border-radius: 2px; background: linear-gradient(#6b4a2a, #3e2a17); box-shadow: 0 10px 20px rgba(0, 0, 0, .45); }
+/* the lantern at its end: a warm light that breathes */
+.rl-lamp { position: absolute; z-index: 0; bottom: 30px; inset-inline-end: 6%; width: 0; height: 0; }
+.rl-lamp i { position: absolute; left: -170px; top: -230px; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 190, 90, .35), rgba(240, 140, 60, .12) 50%, transparent); animation: rl-glow 3.4s ease-in-out infinite; }
+@keyframes rl-glow { 0%, 100% { opacity: .8; transform: scale(1); } 40% { opacity: 1; transform: scale(1.06); } 46% { opacity: .6; } }
+@media (max-width: 640px) { .rl-spine { width: 28px; } .rl-spine span { font-size: 12px; } .rl-books { justify-content: flex-start; } }
+@media (prefers-reduced-motion: reduce) { .rl-lamp i { animation: none; } }

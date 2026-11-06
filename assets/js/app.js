@@ -35,6 +35,7 @@
 			/* «عالم العرّاب» (the footer's block of its own) */
 			{ id: 'creatures', href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends', phone: true },
 			{ id: 'refaat-life', href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life', phone: true },
+			{ id: 'refaat-library', href: 'refaat-library.html', ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library', phone: true },
 			{ id: 'network', href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web', phone: true },
 			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true },
 			{ id: 'worlds', href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds', phone: true },
@@ -80,6 +81,7 @@
 		world: [
 			{ href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends' },
 			{ href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life' },
+			{ href: 'refaat-library.html', ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library' },
 			{ href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web' },
 			{ href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds' },
 			{ href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic' },
@@ -203,9 +205,9 @@
 			{ href: 'names.html', ic: 'star', ar: 'أعلام في حكاياته', en: 'Figures in his tales', dar: 'شخصيات حقيقية مرّت بقصصه', den: 'Real people who pass through' },
 			{ href: 'map.html', ic: 'map', ar: 'الخريطة', en: 'The map', dar: 'أماكن حكاياته على الأرض', den: 'Where his tales take place' },
 			{ href: 'network.html', ic: 'web', ar: 'شبكة العرّاب', en: 'The Godfather’s web', dar: 'كيف يتصل كل شيء', den: 'How it all connects' },
-			/* and two parts of other pages that belong here */
+			/* a part of another page that belongs here, and his heroes' own library */
 			{ href: 'compare.html#villains', ic: 'skull', ar: 'أعداء وأشرار', en: 'Enemies & villains', dar: 'من واجههم أبطاله، سلسلةً سلسلة', den: 'Whom his heroes faced, series by series' },
-			{ href: 'library.html#refaat', ic: 'candle', ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library', dar: 'ما يقرؤه أبطاله داخل الحكايات', den: 'What his heroes read inside the tales' }
+			{ href: 'refaat-library.html', ic: 'candle', ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library', dar: 'ما يقرؤه أبطاله داخل الحكايات', den: 'What his heroes read inside the tales' }
 		],
 		heroes: [
 			{ id: 'refaat', ar: 'رفعت إسماعيل', en: 'Refaat Ismail', sar: 'ما وراء الطبيعة', sen: 'Ma Wara’ al-Tabi’a', c: '#6e1c1c', img: 'assets/img/characters/refaat-lantern.webp' },
@@ -590,7 +592,7 @@
 			el.classList.add('rise', 'in');
 			if (onTarget) onTarget(el, id);
 			/* an entry is brought to the middle of the window; a whole section taller than the window (a menu's link to
-			   «أعداء وأشرار» or «مكتبة رفعت إسماعيل») to its top, under the header — centred, its top would be far above sight */
+			   «أعداء وأشرار») to its top, under the header — centred, its top would be far above sight */
 			var block = function () { return el.getBoundingClientRect().height > window.innerHeight * 0.7 ? 'start' : 'center'; };
 			setTimeout(function () {
 				el.scrollIntoView({ behavior: 'smooth', block: block() });

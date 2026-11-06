@@ -21,7 +21,7 @@ const DATA = {
 	'numbers.html': ['data-built.js', 'data-blog.js', 'style.js', 'site-stats.js', '../data/style.json'], 'covers.html': ['data-built.js'], 'screen.html': ['data-more.js'], 'awards.html': ['data.js', 'data-more.js'],
 	'translations.html': ['data.js', 'data-more.js'], 'talks.html': ['data.js', 'data-more.js', 'data-pages.js', 'tanta.js'], 'guide.html': ['data.js'],
 	'map.html': ['../data/places.json'], 'world.html': ['../data/world.json'], 'changelog.html': ['../data/changelog.json'], 'story.html': ['../data/story.json'],
-	'worlds.html': ['data-pages.js', 'data-blurbs.js'], 'clinic.html': ['data-pages.js', 'data-blurbs.js'], 'names.html': ['data-pages.js'], 'compare.html': ['data-built.js', 'data-pages.js'], 'remembrance.html': ['data-legacy.js', 'data-tributes.js', 'data-more.js', 'data.js'], 'reader-stories.html': ['data-readers.js'], 'calendar.html': ['../data/days/01.json'], 'wanted.html': ['data-built.js', 'data-pages.js', '../data/links.json']
+	'worlds.html': ['data-pages.js', 'data-blurbs.js'], 'clinic.html': ['data-pages.js', 'data-blurbs.js'], 'names.html': ['data-pages.js'], 'refaat-library.html': ['data-pages.js'], 'compare.html': ['data-built.js', 'data-pages.js'], 'remembrance.html': ['data-legacy.js', 'data-tributes.js', 'data-more.js', 'data.js'], 'reader-stories.html': ['data-readers.js'], 'calendar.html': ['../data/days/01.json'], 'wanted.html': ['data-built.js', 'data-pages.js', '../data/links.json']
 };
 const pageFiles = {};
 fs.readdirSync(root).filter(f => f.endsWith('.html')).forEach(f => {
@@ -42,7 +42,7 @@ const img = (src) => src && !/^https?:/.test(src) ? SITE + src : src || '';
 
 /* the section pages (not 404, offline, the redirects authors.html, journey.html, editions.html, style.html, tanta.html, papers.html and glossary.html, or lists.html, which holds only the reader's own lists) */
 const PAGES = { 'index.html': 1, 'works.html': 0.9, 'characters.html': 0.8, 'writers.html': 0.8, 'legacy.html': 0.8, 'audio.html': 0.8, 'blog.html': 0.8,
-	'quotes.html': 0.7, 'guide.html': 0.7, 'tributes.html': 0.7, 'publishers.html': 0.7, 'numbers.html': 0.6, 'quiz.html': 0.6, 'map.html': 0.6, 'world.html': 0.6, 'screen.html': 0.6, 'covers.html': 0.6, 'talks.html': 0.6, 'awards.html': 0.5, 'translations.html': 0.7, 'library.html': 0.7, 'creatures.html': 0.7, 'worlds.html': 0.7, 'clinic.html': 0.7, 'names.html': 0.7, 'compare.html': 0.6, 'remembrance.html': 0.6, 'reader-stories.html': 0.6, 'calendar.html': 0.6, 'wanted.html': 0.4, 'refaat-life.html': 0.7, 'network.html': 0.6, 'handwriting.html': 0.5, 'changelog.html': 0.4, 'story.html': 0.4, 'sitemap.html': 0.3, 'about.html': 0.5, 'sources.html': 0.5, 'contact.html': 0.3,
+	'quotes.html': 0.7, 'guide.html': 0.7, 'tributes.html': 0.7, 'publishers.html': 0.7, 'numbers.html': 0.6, 'quiz.html': 0.6, 'map.html': 0.6, 'world.html': 0.6, 'screen.html': 0.6, 'covers.html': 0.6, 'talks.html': 0.6, 'awards.html': 0.5, 'translations.html': 0.7, 'library.html': 0.7, 'creatures.html': 0.7, 'worlds.html': 0.7, 'clinic.html': 0.7, 'names.html': 0.7, 'compare.html': 0.6, 'remembrance.html': 0.6, 'reader-stories.html': 0.6, 'calendar.html': 0.6, 'wanted.html': 0.4, 'refaat-life.html': 0.7, 'refaat-library.html': 0.7, 'network.html': 0.6, 'handwriting.html': 0.5, 'changelog.html': 0.4, 'story.html': 0.4, 'sitemap.html': 0.3, 'about.html': 0.5, 'sources.html': 0.5, 'contact.html': 0.3,
 	'privacy.html': 0.2, 'terms.html': 0.2 };
 Object.keys(PAGES).forEach(f => add(f === 'index.html' ? '' : f, { priority: PAGES[f], lastmod: lastmod(f) }));
 
