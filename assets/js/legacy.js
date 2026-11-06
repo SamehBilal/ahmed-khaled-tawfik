@@ -5,8 +5,8 @@ window.PAGE = {
 		eyebrow: { ar: 'ما بعد 2 أبريل 2018', en: 'After 2 April 2018' },
 		title: { ar: 'الإرث', en: 'The Legacy' },
 		lead: {
-			ar: 'رحل العرّاب، وبقي جيلٌ تعلّم القراءة على يديه. هنا الوداع والتكريم وما تحوّل من أعماله إلى الشاشة، ثم لقاءاته ومحاضراته بصوته.',
-			en: 'The Godfather is gone, but a generation that learned to read through him remains. Here are the farewell, the tributes, the screen adaptations — and his interviews and talks, in his own voice.'
+			ar: 'رحل العرّاب، وبقي جيلٌ تعلّم القراءة على يديه. هنا الوداع والتكريم، ثم لقاءاته ومحاضراته بصوته.',
+			en: 'The Godfather is gone, but a generation that learned to read through him remains. Here are the farewell and the tributes — and his interviews and talks, in his own voice.'
 		}
 	},
 
@@ -59,19 +59,7 @@ window.PAGE = {
 			'</div></div></section>';
 		}
 
-		var ad = d.adaptations || [];
-		if (ad.length) {
-			html += '<section class="section"><div class="wrap">' +
-				'<div class="section-head"><div><h2>' + L('على الشاشة', 'On screen') + '</h2></div></div>' +
-				'<div class="adapt-grid">' + ad.map(function (a) {
-					return '<article class="adapt rise' + (a.poster ? ' has-poster' : '') + '">' +
-						(a.poster ? '<a class="adapt-poster" href="' + e(a.posterSource || a.poster) + '" target="_blank" rel="noopener"><img src="' + e(a.poster) + '" alt="" loading="lazy"></a>' : '') +
-						'<div><div class="kind">' + tx(a.kind) + '</div><h3>' + tx(a.title) + '</h3>' +
-						'<div class="yr">' + App.num(a.year || '') + (App.findWork(a.basedOn) ? ' · ' + L('عن ', 'from ') + App.workLink(a.basedOn) : '') + '</div>' +
-						'<p>' + tx(a.text) + '</p></div></article>';
-				}).join('') + '</div>' +
-			'</div></section>';
-		}
+		/* (the adaptations on screen are no longer shown here) */
 
 		if (media.length) {
 			var card = function (m, i) {
