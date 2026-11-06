@@ -20,6 +20,7 @@
 			{ id: 'audio', href: 'audio.html', ar: 'مسموع', en: 'Audio' },
 			{ id: 'legacy', href: 'legacy.html', ar: 'الإرث', en: 'Legacy' },
 			{ id: 'tributes', href: 'tributes.html', ar: 'قالوا عنه', en: 'Tributes' },
+			{ id: 'studies', href: 'studies.html', ar: 'دراسات ورسائل عنه', en: 'Studies and theses' },
 			{ id: 'blog', href: 'blog.html', ar: 'المدونة', en: 'Blog' },
 			/* in the phone menu only (on a wider screen the «My lists» button is always at hand) */
 			{ id: 'lists', href: 'lists.html', ar: 'قوائمي ورحلتي', en: 'My lists & journey', phone: true },
@@ -240,6 +241,7 @@
 		legacy: [
 			{ href: 'legacy.html', ic: 'sprout', ar: 'الإرث', en: 'Legacy', dar: 'ما تركه في جيل كامل من القرّاء', den: 'What he left a whole generation of readers' },
 			{ href: 'tributes.html', ic: 'heart', ar: 'قالوا عنه', en: 'Tributes', dar: 'كتّاب وفنانون عند رحيله وفي ذكراه', den: 'Writers and artists, at his death and since' },
+			{ href: 'studies.html', ic: 'bookmark', ar: 'دراسات ورسائل عنه', en: 'Studies and theses', dar: 'ما كُتب عنه في الجامعات والمجلات', den: 'What universities and journals wrote on him' },
 			{ href: 'screen.html', ic: 'film', ar: 'على الشاشة', en: 'On screen', dar: 'من نتفليكس إلى الإذاعة', den: 'From Netflix to the radio' },
 			{ href: 'world.html', ic: 'globe', ar: 'حول العالم', en: 'Around the world', dar: 'كتبه بلغات أخرى', den: 'His books in other languages' },
 			{ href: 'quiz.html', ic: 'puzzle', ar: 'ركن القرّاء', en: 'Readers’ corner', dar: 'اختبارات وألعاب ومن قال هذا؟', den: 'Quizzes, games and who said it?' },
@@ -494,7 +496,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: '1f0aad7',
+		LATEST: '9b967bd',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
@@ -1134,7 +1136,7 @@
 			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات إحصاءات الموقع أسلوب لغة كلمات جمل statistics site numbers style language words', quiz: 'اختبار مسابقة أسئلة شخصية بطاقة القارئ اقرأ معنا نادي القراءة quiz character reader card reading club',
 				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
 				covers: 'أغلفة غلاف طبعات طبعة covers editions', lists: 'قوائم رحلتي قراءة تقدم lists journey reading progress',
-				talks: 'سيرة حياة فصول biography life chapters', interviews: 'لقاءات حوارات فيديو محاضرات وثائقي interviews talks videos documentaries', tanta: 'طنطا مدينته بيته قبره Tanta city home grave', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',
+				talks: 'سيرة حياة فصول biography life chapters', interviews: 'لقاءات حوارات فيديو محاضرات وثائقي interviews talks videos documentaries', tanta: 'طنطا مدينته بيته قبره Tanta city home grave', studies: 'دراسات رسائل ماجستير دكتوراه بحث أبحاث جامعة studies theses thesis research university journal', awards: 'جوائز جائزة تكريم awards prizes', translations: 'ترجمة ترجمات مترجم روايات عالمية للجيب رجفة الخوف نادي القتال translation translator fight club',publishers: 'دور نشر ناشر publishers',
 				library: 'كتب أفلام موسيقى مفضلة نصح books films music favourite', glossary: 'عبارات قاموس لزمات حتى تحترق النجوم phrases glossary',
 				creatures: 'وحوش أساطير مصاص دماء مذءوب نداهة مومياء monsters legends vampire werewolf', 'refaat-life': 'رفعت إسماعيل حياة سيرة يوميات Refaat life',
 				network: 'شبكة شخصيات علاقات characters web relations', handwriting: 'خط يده إهداء توقيع مخطوط handwriting dedication signature',

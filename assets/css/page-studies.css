@@ -1,0 +1,50 @@
+/* the band: the theses bound in cloth on a shelf, their years in gold on the spines, the journals stacked beside them (studies.js band) */
+.ph[data-ph="studies"], html[data-theme="light"] .ph[data-ph="studies"] { height: 290px; pointer-events: auto; background: radial-gradient(70% 90% at 50% 100%, rgba(217, 164, 65, .12), transparent 70%); border-bottom: 0; }
+.ph[data-ph="studies"]::after { content: none; }
+.st-room { position: absolute; inset: 0 16px 16px; display: flex; flex-direction: column; justify-content: flex-end; }
+.st-shelf { display: flex; justify-content: center; align-items: flex-end; gap: clamp(18px, 4vw, 56px); padding: 0 12px; }
+.st-vols { display: flex; align-items: flex-end; gap: 3px; }
+.st-vol { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; width: 44px; height: var(--h); padding: 12px 0 10px; border-radius: 3px 3px 1px 1px;
+	background: linear-gradient(90deg, rgba(0, 0, 0, .35), transparent 18%, rgba(255, 255, 255, .08) 45%, transparent 60%, rgba(0, 0, 0, .4)), var(--c);
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06), 0 10px 18px -8px rgba(0, 0, 0, .8); color: #e9c97a; text-decoration: none; transition: translate .25s, filter .25s; }
+.st-vol.is-phd { width: 56px; }
+.st-band { position: absolute; left: 0; right: 0; top: 22px; height: 3px; border-top: 2px solid rgba(233, 201, 122, .55); border-bottom: 2px solid rgba(233, 201, 122, .35); }
+.st-vol::after { content: ''; position: absolute; left: 0; right: 0; bottom: 34px; border-top: 2px solid rgba(233, 201, 122, .45); }
+.st-vt { flex: 1; min-height: 0; margin: 20px 0 30px; writing-mode: vertical-rl; overflow: hidden; font-family: var(--f-display); font-size: 12px; line-height: 1.2; white-space: nowrap; text-overflow: ellipsis; color: rgba(240, 220, 170, .85); }
+.st-vol b { font-family: var(--f-latin); font-size: 12px; font-weight: 600; letter-spacing: .04em; }
+.st-vol:hover, .st-vol:focus-visible { translate: 0 -10px; filter: brightness(1.25); outline: none; }
+.st-stack { position: relative; display: flex; flex-direction: column-reverse; align-items: center; }
+.st-jr { display: block; width: var(--w); height: 9px; margin-top: 1px; translate: var(--x) 0; border-radius: 1px; background: linear-gradient(#f3ead6 0 2px, var(--c) 2px); box-shadow: 0 2px 3px rgba(0, 0, 0, .45); transition: translate .2s, filter .2s; }
+.st-jr:hover, .st-jr:focus-visible { translate: calc(var(--x) + 8px) 0; filter: brightness(1.4); outline: none; }
+.st-count { order: 99; display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; font-family: var(--f-display); font-size: 13px; color: var(--muted); }
+.st-count b { font-family: var(--f-latin); font-size: 30px; line-height: 1; color: var(--ember); }
+.st-board { display: block; height: 14px; margin: 0 auto; width: min(960px, 100%); border-radius: 2px; background: linear-gradient(#7a5230, #4a2e18); box-shadow: 0 12px 24px -8px rgba(0, 0, 0, .8); }
+@media (max-width: 760px) { .ph[data-ph="studies"] { height: 240px; } .st-vol { width: 32px; } .st-vol.is-phd { width: 40px; } .st-vt { display: none; } .st-jr { width: calc(var(--w) * .6); } .st-shelf { gap: 18px; } }
+@media (max-width: 420px) { .st-vol:nth-child(n+8) { display: none; } .st-count b { font-size: 24px; } }
+@media (prefers-reduced-motion: reduce) { .st-vol, .st-jr { transition: none; } }
+
+.st-bar { margin: 0 0 22px; }
+.st-bar .chip b { font-family: var(--f-latin); color: var(--ember); margin-inline-start: 4px; }
+.st-bar .chip[aria-pressed="true"] { background: var(--ember); border-color: var(--ember); color: #fff; }
+.st-bar .chip[aria-pressed="true"] b { color: #fff; }
+.tb-st-cols.is-one { grid-template-columns: minmax(0, 1fr); }
+.tb-st-list li { scroll-margin-top: 90px; transition: box-shadow .3s; }
+.tb-st-list li.is-target, .tb-st-list li:target { box-shadow: 0 0 0 2px var(--ember); }
+/* «دراسات ورسائل عنه» (studies.html, studies.js): the theses and the journal articles about him, a column each */
+.tb-st { scroll-margin-top: 80px; }
+.tb-st h2 small { font-size: .6em; color: var(--muted); }
+.tb-st-lead { max-width: 820px; color: var(--paper-dim); line-height: 1.9; }
+.tb-st-lead a { color: var(--ember); }
+.tb-st-cols { display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px 32px; margin: 18px 0; }
+@media (max-width: 820px) { .tb-st-cols { grid-template-columns: 1fr; } }
+.tb-st h2 { margin: 0 0 10px; font: 400 20px var(--f-display); color: var(--ember); }
+.tb-st-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.tb-st-list li { padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); }
+.tb-st-k { margin: 0 0 4px; font: 400 12px var(--f-display); color: var(--muted); }
+.tb-st-t { display: block; font: 400 17px/1.6 var(--f-display); color: var(--paper); overflow-wrap: anywhere; }
+.tb-st-t[dir="ltr"] { font: 500 15px/1.55 var(--f-latin), sans-serif; text-align: start; }
+.tb-st-t:hover { color: var(--ember); }
+.tb-st-en { margin: 2px 0 0; font: 13px var(--f-latin), sans-serif; color: var(--muted); }
+.tb-st-by { margin: 6px 0 0; font-size: 13px; color: var(--paper-dim); line-height: 1.7; }
+.tb-st-on { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+.tb-st-on a { color: var(--ember); }

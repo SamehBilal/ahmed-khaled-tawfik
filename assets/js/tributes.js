@@ -52,6 +52,8 @@ window.PAGE = {
 	},
 
 	render: function () {
+		/* «دراسات ورسائل عنه» has a page of its own now: an old link to it goes there */
+		if (location.hash === '#studies') { location.replace('studies.html'); return; }
 		var App = window.App, d = App.data(), e = App.esc, t = App.t, tx = App.tx, L = App.L;
 		var list = d.tributes || []; /* kept in date order in the data, so #t-i matches search links */
 		var content = document.getElementById('content');
@@ -104,9 +106,7 @@ window.PAGE = {
 			d.aboutBooks.map(function (b) {
 				return '<a class="cover-link" href="book.html?id=' + e(b.id) + '">' + window.WorksShared.miniCover({ img: b.cover, color: b.color || '#3a1414', title: t(b.title), by: t(b.by) }) +
 					'<span class="cl-t">' + tx(b.title) + ' — ' + tx(b.by) + '</span></a>';
-			}).join('') + '</div></div></section>' : '') +
-		/* and after them, the academic work: theses first, then journal articles (AKT.studies) */
-		this.studies(d);
+			}).join('') + '</div></div></section>' : '');
 
 		var fwBox = document.getElementById('farewell');
 		if (fwBox) fwBox.addEventListener('click', function (ev) {
@@ -157,34 +157,6 @@ window.PAGE = {
 	},
 
 	/* #t-3 opens that card */
-	/* «دراسات ورسائل عنه» (#studies): the theses and the journal articles about him, each with where and when, and the book it reads */
-	COUNTRY: { Egypt: 'مصر', Algeria: 'الجزائر', 'Saudi Arabia': 'السعودية', Jordan: 'الأردن', Ukraine: 'أوكرانيا', USA: 'الولايات المتحدة', Iraq: 'العراق', Iran: 'إيران', Turkey: 'تركيا', Brazil: 'البرازيل' },
-	studies: function (d) {
-		var App = window.App, e = App.esc, t = App.t, L = App.L, self = this, list = d.studies || [];
-		if (!list.length) return '';
-		var KIND = { phd: L('دكتوراه', 'PhD'), ma: L('ماجستير', 'Master’s'), article: L('بحث محكّم', 'Journal article'), paper: L('ورقة مؤتمر', 'Conference paper'), chapter: L('فصل في كتاب', 'Book chapter') };
-		var where = function (c) { return App.lang === 'en' ? c : (self.COUNTRY[c] || c); };
-		var byYear = function (a, b) { return (b.year || 0) - (a.year || 0); };
-		var row = function (x) {
-			var w = (d.works || []).filter(function (b) { return b.id === x.about; })[0], ser = !w && x.about ? (d.series || []).filter(function (s) { return s.id === x.about; })[0] : null;
-			var rtl = /[؀-ۿ]/.test(x.title);
-			return '<li><p class="tb-st-k">' + e(KIND[x.kind] || x.kind) + ' · ' + e(where(x.country)) + (x.year ? ' · ' + e(App.num(x.year)) : '') + '</p>' +
-				'<a class="tb-st-t" href="' + e(x.url) + '" target="_blank" rel="noopener" dir="' + (rtl ? 'rtl' : 'ltr') + '">' + e(x.title) + ' ↗</a>' +
-				(App.lang === 'en' && x.titleEn ? '<p class="tb-st-en" dir="ltr">' + e(x.titleEn) + '</p>' : '') +
-				'<p class="tb-st-by">' + (x.author ? e(x.author) + ' — ' : '') + e(t(x.where)) + '</p>' +
-				(w || ser ? '<p class="tb-st-on">' + e(L('عن ', 'On ')) + '<a href="' + e(w ? App.workHref(w.id) : 'series.html?id=' + ser.id) + '">' + e(t((w || ser).title)) + '</a></p>' : '') + '</li>';
-		};
-		var theses = list.filter(function (x) { return x.kind === 'phd' || x.kind === 'ma'; }).sort(byYear), papers = list.filter(function (x) { return x.kind !== 'phd' && x.kind !== 'ma'; }).sort(byYear);
-		var lands = {}; list.forEach(function (x) { lands[x.country] = (lands[x.country] || 0) + 1; });
-		return '<section class="section tb-st" id="studies"><div class="wrap"><h2 class="tb-books-h">' + e(L('دراسات ورسائل عنه', 'Studies and theses about him')) + ' <small>' + e(App.num(list.length)) + '</small></h2>' +
-			'<p class="tb-st-lead">' + e(L('ما كُتب عنه في الجامعات والمجلات المحكّمة: رسائل ماجستير ودكتوراه وأبحاث، أكثرها عن «يوتوبيا»، من ', 'What has been written about him in universities and peer-reviewed journals: master’s and doctoral theses and articles, most of them on Utopia, from ')) +
-				e(Object.keys(lands).sort(function (a, b) { return lands[b] - lands[a]; }).map(function (c) { return where(c) + ' (' + App.num(lands[c]) + ')'; }).join(L('، ', ', '))) + e(L('. كل عنوان يفتح سجلّه في الجامعة أو المجلة.', '. Each title opens its record at the university or the journal.')) + '</p>' +
-			'<div class="tb-st-cols"><div><h3>' + e(L('رسائل جامعية', 'Theses')) + ' <small>' + e(App.num(theses.length)) + '</small></h3><ul class="tb-st-list">' + theses.map(row).join('') + '</ul></div>' +
-			'<div><h3>' + e(L('أبحاث في المجلات', 'Journal articles')) + ' <small>' + e(App.num(papers.length)) + '</small></h3><ul class="tb-st-list">' + papers.map(row).join('') + '</ul></div></div>' +
-			'<p class="tb-st-lead">' + e(L('تعرف رسالة أو بحثًا عنه لم يُذكر هنا؟', 'Know a thesis or a study about him that is not here?')) + ' <a href="' + e(App.fixHref(L('دراسات ورسائل عنه', 'Studies and theses about him'))) + '" target="_blank" rel="noopener">' + e(L('أخبرنا ↗', 'Tell us ↗')) + '</a></p>' +
-		'</div></section>';
-	},
-
 	onHash: function () {
 		var self = this;
 		window.App.focusHash(function (el) { if (el.classList.contains('tb-event')) self.open(el); });
