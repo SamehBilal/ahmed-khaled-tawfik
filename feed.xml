@@ -9,9 +9,17 @@
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-06T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/11ac84e</id>
+		<title>تقسيم «عوالم فانتازيا» و«عيادة سافاري» إلى مجموعات بعناوين حسب النوع، بدل ترتيب السلسلة</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">تقسيم «عوالم فانتازيا» و«عيادة سافاري» إلى مجموعات بعناوين حسب النوع، بدل ترتيب السلسلة</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/4b8c437</id>
 		<title>أزرار تنقّل لـ«خط زمن فانتازيا»، وشريط التمرير يظهر أثناء التمرير فقط</title>
-		<updated>2026-11-06T20:59:00Z</updated>
+		<updated>2026-11-06T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="pics" label="صور"/>
@@ -20,7 +28,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/999a237</id>
 		<title>تواريخ صدور أعداد «رجفة الخوف» العشرة و«ثلاثة» في «كتاب الصيف» و«أسطورة بلية»، في صفحاتها وفي «تقويم العرّاب»</title>
-		<updated>2026-11-06T20:58:00Z</updated>
+		<updated>2026-11-06T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="بيانات"/>
 		<content type="text">تواريخ صدور أعداد «رجفة الخوف» العشرة و«ثلاثة» في «كتاب الصيف» و«أسطورة بلية»، في صفحاتها وفي «تقويم العرّاب»</content>
@@ -28,7 +36,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8180cd1</id>
 		<title>أُزيل قسم «على الشاشة» من صفحة الأعمال، وبقيت صفحته المستقلة</title>
-		<updated>2026-11-06T20:57:00Z</updated>
+		<updated>2026-11-06T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="design" label="تصميم"/>
@@ -38,7 +46,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7145ef6</id>
 		<title>أُزيل قسم «كتب عنه» من صفحة الأعمال (باقٍ في «قالوا عنه»)، وخلفية خفيفة لصفوف «المزيد» في قائمة «أعماله» عند…</title>
-		<updated>2026-11-06T20:56:00Z</updated>
+		<updated>2026-11-06T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="بيانات"/>
 		<category term="design" label="تصميم"/>
@@ -48,7 +56,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3d93817</id>
 		<title>أُزيل قسم «الجوائز والتكريم» من صفحة الأعمال، وبقيت صفحة «الجوائز»</title>
-		<updated>2026-11-06T20:55:00Z</updated>
+		<updated>2026-11-06T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="data" label="بيانات"/>
@@ -58,14 +66,14 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d675ed6</id>
 		<title>نُقل «في مثل هذا اليوم» و«كلمة اليوم» من صفحة الأعمال إلى «تقويم العرّاب»</title>
-		<updated>2026-11-06T20:54:00Z</updated>
+		<updated>2026-11-06T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">نُقل «في مثل هذا اليوم» و«كلمة اليوم» من صفحة الأعمال إلى «تقويم العرّاب»</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/434b589</id>
 		<title>أُزيل قسم «دور النشر» من صفحة الأعمال، وبقيت صفحته المستقلة</title>
-		<updated>2026-11-06T20:53:00Z</updated>
+		<updated>2026-11-06T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="data" label="بيانات"/>
@@ -76,7 +84,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
 		<title>حُذفت صفحة «زمن العرّاب» من الموقع وكل ما يشير إليها، وعنوانها يقود الآن إلى «سيرته ولقاءاته»</title>
-		<updated>2026-11-06T20:52:00Z</updated>
+		<updated>2026-11-06T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="pics" label="صور"/>
@@ -566,14 +574,5 @@
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">«مكتبته»: اندمج أعلى الصفحة مع الصفحة، بلا خلفية ولا خط تحته</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/734ce17</id>
-		<title>«شبكة العرّاب»</title>
-		<updated>2026-11-02T20:36:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="صور"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">«شبكة العرّاب»: بطاقات أعلى الصفحة صارت صور الشخصيات نفسها، والكومة أعلى قليلًا</content>
 	</entry>
 </feed>
