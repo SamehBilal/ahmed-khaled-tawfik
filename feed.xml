@@ -9,9 +9,19 @@
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-06T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7145ef6</id>
+		<title>أُزيل قسم «كتب عنه» من صفحة الأعمال (باقٍ في «قالوا عنه»)، وخلفية خفيفة لصفوف «المزيد» في قائمة «أعماله» عند…</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="بيانات"/>
+		<category term="design" label="تصميم"/>
+		<category term="fix" label="تصحيح"/>
+		<content type="text">أُزيل قسم «كتب عنه» من صفحة الأعمال (باقٍ في «قالوا عنه»)، وخلفية خفيفة لصفوف «المزيد» في قائمة «أعماله» عند المرور عليها</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3d93817</id>
 		<title>أُزيل قسم «الجوائز والتكريم» من صفحة الأعمال، وبقيت صفحة «الجوائز»</title>
-		<updated>2026-11-06T20:59:00Z</updated>
+		<updated>2026-11-06T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="data" label="بيانات"/>
@@ -21,14 +31,14 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d675ed6</id>
 		<title>نُقل «في مثل هذا اليوم» و«كلمة اليوم» من صفحة الأعمال إلى «تقويم العرّاب»</title>
-		<updated>2026-11-06T20:58:00Z</updated>
+		<updated>2026-11-06T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">نُقل «في مثل هذا اليوم» و«كلمة اليوم» من صفحة الأعمال إلى «تقويم العرّاب»</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/434b589</id>
 		<title>أُزيل قسم «دور النشر» من صفحة الأعمال، وبقيت صفحته المستقلة</title>
-		<updated>2026-11-06T20:57:00Z</updated>
+		<updated>2026-11-06T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="data" label="بيانات"/>
@@ -39,7 +49,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
 		<title>حُذفت صفحة «زمن العرّاب» من الموقع وكل ما يشير إليها، وعنوانها يقود الآن إلى «سيرته ولقاءاته»</title>
-		<updated>2026-11-06T20:56:00Z</updated>
+		<updated>2026-11-06T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="صفحة جديدة"/>
 		<category term="pics" label="صور"/>
@@ -567,15 +577,5 @@
 		<category term="data" label="بيانات"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">«الخريطة»: صار أعلى الصفحة معرضًا دائريًا لا ينتهي لأغلفة الكتب، كل غلاف لمكان تذكره كتبه، يُسحب ويُفتح بالنقر</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/09b64f2</id>
-		<title>«الخريطة»</title>
-		<updated>2026-11-02T20:32:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="صور"/>
-		<category term="data" label="بيانات"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">«الخريطة»: نقاط أعلى الصفحة صارت تفتح فقاعة منحنية بأسلوب Tooltip Styles — المكان وعدد الكتب التي تذكره وأولها والجملة التي ذكرته</content>
 	</entry>
 </feed>

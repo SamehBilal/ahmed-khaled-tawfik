@@ -9,9 +9,19 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-06T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7145ef6</id>
+		<title>«الأعمال» no longer repeats «كتب عنه»</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="Data"/>
+		<category term="design" label="Design"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">«الأعمال» no longer repeats «كتب عنه»: the books about him are on «قالوا عنه», under its tributes. And in «أعماله»'s menu, the rows of «المزيد» take a light ground under the pointer, in both themes</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3d93817</id>
 		<title>«الأعمال» no longer repeats «الجوائز والتكريم»</title>
-		<updated>2026-11-06T20:59:00Z</updated>
+		<updated>2026-11-06T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -21,14 +31,14 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d675ed6</id>
 		<title>«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar</title>
-		<updated>2026-11-06T20:58:00Z</updated>
+		<updated>2026-11-06T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar: the day's events from the same day files the calendar is drawn from (otd.js), and the line of the day (today.js)</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/434b589</id>
 		<title>«الأعمال» no longer repeats «دور النشر»</title>
-		<updated>2026-11-06T20:57:00Z</updated>
+		<updated>2026-11-06T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="data" label="Data"/>
@@ -39,7 +49,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
 		<title>«زمن العرّاب» (era.html) is gone</title>
-		<updated>2026-11-06T20:56:00Z</updated>
+		<updated>2026-11-06T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="page" label="New page"/>
 		<category term="pics" label="Pictures"/>
@@ -567,15 +577,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">«الخريطة»: the band is now Codrops' «Infinite Circular WebGL Gallery» (Luis Henrique Bizarro; MIT), in plain WebGL — in place of the chart and its curved tooltips. A card a place his books name, from the map's own places: the cover of the first book that names it, and under it the place and the book, drawn in the site's fonts. The cards stand on a wide arc, turned along it, and ripple as they move (the zip's shaders); dragged sideways or by the arrow keys they run on without end and settle on a card, and drift by themselves until touched. A card clicked, tapped or given Enter opens its book; the wheel scrolls the page; drawn only while on screen; still for those who ask for less motion</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/09b64f2</id>
-		<title>«الخريطة»</title>
-		<updated>2026-11-02T20:32:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«الخريطة»: the band's pins in Codrops' «Curved» tooltip (Tooltip Styles Inspiration, Mary Lou) — the ten places the most books name, from the map's own places, each with its route from Tanta and a pulsing ring; under the pointer, the keyboard or a first tap, a rounded ember bubble swings out on Codrops' curved tail: the place, how many books name it, the first of them and the sentence that does, leading to that book. It opens to the side of the pin with more room, no wider than that room, and moves up or down to stay inside the band, its tail still at the pin. Only the zip's curve and motion were taken, not its font or images</content>
 	</entry>
 </feed>
