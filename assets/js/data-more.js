@@ -89,6 +89,20 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			synopsis: shiv.description, owner: shiv.owner, role: shiv.role, source: shiv.source
 		});
 	}
+	/* «رجفة الخوف»: the day each of its ten issues came out (6 known only by its year), sent in by the site's editor — each issue's
+	   first edition (so «تقويم العرّاب» and «في مثل هذا اليوم» find it), its year, and the series' years from the first to the last */
+	var SHIV_DATES = [[1, 2003, 'January 19th 2003'], [2, 2003, 'May 26th 2003'], [3, 2004, 'January 15th 2004'], [4, 2005, 'January 2nd 2005'],
+		[5, 2005, 'December 15th 2005'], [6, 2006, ''], [7, 2007, 'June 11th 2007'], [8, 2008, 'January 5th 2008'], [9, 2008, 'July 15th 2008'], [10, 2009, 'December 27th 2009']];
+	SHIV_DATES.forEach(function (x) {
+		var is = (A.issues.shivers || []).filter(function (i) { return i.n === x[0]; })[0];
+		if (is) is.year = x[1];
+		var info = A.issueInfo['shivers-' + x[0]] = A.issueInfo['shivers-' + x[0]] || {};
+		var ed = { publisher: { ar: 'المؤسسة العربية الحديثة', en: 'Modern Arab Association' }, year: x[1], lang: 'ar', edition: 'الطبعة الأولى' };
+		if (x[2]) ed.date = x[2];
+		info.editions = [ed].concat(info.editions || []);
+	});
+	var shivS = A.series.filter(function (s) { return s.id === 'shivers'; })[0];
+	if (shivS && !shivS.years) shivS.years = '2003–2009';
 
 	/* WWW: the three of its five titles we know, unnumbered */
 	var www = A.series[at('www')];
@@ -4590,4 +4604,20 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		outlet: { ar: 'منشور', en: 'Manshoor' }, year: 2018, lang: 'ar', url: url,
 		note: { ar: 'جمعها يحيى: قرّاؤه وتلاميذه من بلاد عربية مختلفة يحكون عن علاقتهم به، وأغلبهم لم يلقه وجهًا لوجه. نُشر بعد رحيله بيومين.', en: 'Gathered by Yehia: his readers and pupils from across the Arab world tell what he was to them, most of whom never met him. Published two days after his death.' } });
 	M.sort(function (a, b) { return (a.year || 9999) - (b.year || 9999); });
+})(window.AKT);
+
+/* The day two of the books he wrote for others came out, sent by the site's editor: «ثلاثة», his story in «كتاب الصيف»
+   (28 May 2003), and «أسطورة بلية» (بلية العجيب 17, 5 June 2004) — each as its first edition, so «تقويم العرّاب» and
+   «في مثل هذا اليوم» find them, with its year */
+(function (A) {
+	[['sayf', 1, 2003, 'May 28th 2003'], ['bley', 17, 2004, 'June 5th 2004']].forEach(function (x) {
+		var o = (A.otherSeries || []).filter(function (s) { return s.id === x[0]; })[0];
+		var is = o && (o.issues || []).filter(function (i) { return i.n === x[1]; })[0];
+		if (!is) return;
+		is.year = x[2];
+		var info = A.issueInfo[x[0] + '-' + x[1]] = A.issueInfo[x[0] + '-' + x[1]] || {};
+		var ed = { year: x[2], lang: 'ar', edition: 'الطبعة الأولى', date: x[3] };
+		if (o.publisher) ed.publisher = o.publisher;
+		info.editions = [ed].concat(info.editions || []);
+	});
 })(window.AKT);
