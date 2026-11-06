@@ -16,8 +16,6 @@ window.PAGE = {
 		issuesHint: { ar: 'رفّ لكل سلسلة — اسحب أي عدد لترى تفاصيله.', en: 'A shelf for each series — pull out any issue to see its details.' },
 		booksTitle: { ar: 'الكتب المستقلة', en: 'Standalone books' },
 		booksHint: { ar: 'مرّر المؤشر على الكتاب (أو المسه) لينفتح.', en: 'Hover over a book (or tap it) to open it.' },
-		adaptTitle: { ar: 'على الشاشة', en: 'On screen' },
-		adaptHint: { ar: 'أعمال تحوّلت إلى مسلسلات وأفلام.', en: 'Works adapted for television and film.' }
 	},
 	filter: 'all',
 	issueSeries: null,
@@ -180,24 +178,7 @@ window.PAGE = {
 		};
 		applyFilter();
 
-		/* adaptations */
-		var ad = d.adaptations || [];
-		document.getElementById('adaptations-section').hidden = !ad.length;
-		var e = App.esc, t = App.t;
-		document.getElementById('adaptations').innerHTML = ad.map(function (a) {
-			var src = App.findWork(a.basedOn);
-			return '<article class="adapt rise' + (a.poster ? ' has-poster' : '') + '">' +
-				(a.poster ? '<a class="adapt-poster" href="' + e(a.posterSource || a.poster) + '" target="_blank" rel="noopener"><img src="' + e(a.poster) + '" alt="' + e(App.L('ملصق ', 'Poster: ') + t(a.title)) + '" loading="lazy"></a>' : '') +
-				'<div>' +
-				'<div class="kind">' + tx(a.kind) + '</div>' +
-				'<h3>' + tx(a.title) + '</h3>' +
-				'<div class="yr">' + App.num(a.year || '') + (src ? ' · ' + App.L('عن ', 'from ') + App.workLink(a.basedOn) : '') + '</div>' +
-				'<p>' + tx(a.text) + '</p>' +
-			'</div></article>';
-		}).join('');
-
-
-		/* (his awards and the books others wrote about him are on their own pages, awards.html and tributes.html — not repeated here) */
+		/* (his awards, the books others wrote about him and the screen are on their own pages, awards.html, tributes.html and screen.html — not repeated here) */
 		this.onHash();
 	},
 
