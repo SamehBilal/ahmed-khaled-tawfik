@@ -25,10 +25,6 @@ window.PAGE = {
 	render: function () {
 		var App = window.App, d = App.data(), e = App.esc, t = App.t, tx = App.tx;
 		var S = window.WorksShared, self = this;
-		/* «في مثل هذا اليوم», moved here from the home page (otd.js); after «الكتب المستقلة» */
-		if (window.OnThisDay) window.OnThisDay.mount(document.getElementById('otd'));
-		/* and under it «كلمة اليوم · بكلماته», moved here from the home page too (today.js) */
-		if (window.TodayLine) window.TodayLine.mount(document.getElementById('today-line'));
 		/* «ما صدر بعد رحيله»: the books that came out after him (posthumous.js) */
 		if (window.Posthumous) window.Posthumous.mount(document.getElementById('after'));
 

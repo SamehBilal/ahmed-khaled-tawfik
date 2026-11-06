@@ -1,4 +1,4 @@
-/* «في مثل هذا اليوم»: on the Works page (works.html, #otd) — what happened on today's date in other years: his birth or death,
+/* «في مثل هذا اليوم»: on «تقويم العرّاب» (calendar.html, #otd), under the calendar — what happened on today's date in other years: his birth or death,
    the legacy, a book or an issue that came out, the articles the papers printed (assets/data/days/<MM>.json, tools/build-days.js);
    on a day with none, the next one that has */
 (function () {

@@ -1,4 +1,4 @@
-/* «كلمة اليوم · بكلماته»: on the Works page (works.html, #today), under «في مثل هذا اليوم» — moved there from the home page.
+/* «كلمة اليوم · بكلماته»: on «تقويم العرّاب» (calendar.html, #today-line), under «في مثل هذا اليوم» — from the home page, then the Works page.
    One of his quotes (AKT.quotes) or of the phrasebook's lines (AKT.glossary), in turn, the same for everyone on the same day
    (by the day of the year); each to its place on the quotes page, and «صورة» makes it a picture to post. */
 (function () {
