@@ -197,7 +197,7 @@ window.PAGE = {
 		}).join('');
 
 
-		/* his awards, and the books others wrote about him, after On screen */
+		/* the books others wrote about him, after On screen (his awards are on their own page, awards.html) */
 		var after = document.getElementById('adaptations-section');
 		var addSection = function (id, html) {
 			var el = document.getElementById(id);
@@ -205,8 +205,6 @@ window.PAGE = {
 			el.innerHTML = '<div class="wrap">' + html + '</div>';
 			after = el;
 		};
-		if ((d.awards || []).length) addSection('awards-section',
-			'<div class="section-head"><div><h2>' + App.L('الجوائز والتكريم', 'Awards & honours') + '</h2></div></div>' + S.awardsList(d.awards));
 		if ((d.aboutBooks || []).length) addSection('about-section',
 			'<div class="section-head"><div><h2>' + App.L('كتب عنه', 'Books about him') + '</h2>' +
 				'<p>' + App.L('سِيَر ودراسات كتبها غيره عنه وعن أدبه. ', 'Biographies and studies others wrote about him and his work. ') + '<a href="tributes.html">' + App.L('وما قالوه عنه ←', 'And what they said →') + '</a></p></div></div>' +

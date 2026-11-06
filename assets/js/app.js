@@ -1079,7 +1079,7 @@
 			if (S && S.entryBooks) S.entryBooks().forEach(function (x) { add(K.near, x.w.book, x.w.name, S.bookHref(x.id), both(x.w.text)); });
 			(d.aboutBooks || []).forEach(function (b) { add(K.about, b.title, b.by, 'book.html?id=' + encodeURIComponent(b.id), both(b.by) + ' ' + both(b.publisher)); });
 			if (S && S.publishers) S.publishers().forEach(function (x) { var p = x.p || x; add(K.publisher, p.name, p.city || '', 'publisher.html?id=' + encodeURIComponent(p.id), both(p.note) + ' ' + both(p.about)); });
-			(d.awards || []).forEach(function (a) { add(K.award, a.title, a.year, a.work ? 'book.html?id=' + encodeURIComponent(a.work) : 'works.html#awards-section', both(a.text)); });
+			(d.awards || []).forEach(function (a) { add(K.award, a.title, a.year, a.work ? 'book.html?id=' + encodeURIComponent(a.work) : 'awards.html', both(a.text)); });
 			/* the Audio page's own rows: Eslam Adel's readings, the After Midnight programme, its later seasons and their episodes */
 			var au = d.audio || {};
 			if (au.youtube && au.youtube.eslamAdel) au.youtube.eslamAdel.eps.forEach(function (ep) { add(K.audio, ep[2], { ar: 'بصوت إسلام عادل', en: 'Read by Eslam Adel' }, 'audio.html', 'بصوت إسلام عادل Eslam Adel YouTube'); });
