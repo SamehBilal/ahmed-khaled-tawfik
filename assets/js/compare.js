@@ -1,8 +1,8 @@
 /* compare.html — «السلاسل جنبًا إلى جنب»: his pocket series in one table — who tells each, its years and issues, the first and
    the last, its house, what is heard of it on Audiohat and Storytel, the legends and figures in it, the screen, and how it
    ended — all counted from the data (AKT.series, the issues, AKT.audio, AKT.creatures, AKT.storyPeople, AKT.adaptations,
-   AKT.seriesEndings). Under it «أعداء وأشرار» (#villains): the enemies his heroes meet, by series, with the issues they are
-   in (AKT.villains, data-series-more.js). The band is the series' lives side by side, a lane each from first year to last. */
+   AKT.seriesEndings). (The enemies his heroes meet are on each series' page now.) The band is the series' lives side by side,
+   a lane each from first year to last. */
 window.PAGE = {
 	id: 'compare',
 	title: { ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side' },
@@ -10,8 +10,8 @@ window.PAGE = {
 		eyebrow: { ar: 'من البيانات', en: 'From the data' },
 		title: { ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side' },
 		lead: {
-			ar: '«ما وراء الطبيعة» و«فانتازيا» و«سافاري» و«WWW» و«روايات عالمية» وأخواتها في جدول واحد: من يرويها، وكم عددًا، ومتى بدأت وانتهت، وما يُسمع منها، وكيف انتهت. وتحته أعداء أبطالها وأشرارها.',
-			en: 'Paranormal, Fantasia, Safari, WWW, World Pocket Novels and the rest in one table: who tells each, how many issues, when it began and ended, what can be heard of it, and how it ended. Under it, its heroes’ enemies and villains.'
+			ar: '«ما وراء الطبيعة» و«فانتازيا» و«سافاري» و«WWW» و«روايات عالمية» وأخواتها في جدول واحد: من يرويها، وكم عددًا، ومتى بدأت وانتهت، وما يُسمع منها، وكيف انتهت.',
+			en: 'Paranormal, Fantasia, Safari, WWW, World Pocket Novels and the rest in one table: who tells each, how many issues, when it began and ended, what can be heard of it, and how it ended.'
 		}
 	},
 	/* (with «روايات عالمية للجيب», the line of world novels he translated from its 7th issue, its issues in AKT.otherSeries) */
@@ -84,7 +84,6 @@ window.PAGE = {
 			[L('مسموعة على Storytel', 'Heard on Storytel'), function (s) { var n = keys(((d.audio || {}).storytel || {}).items, s.id); return n ? '<a href="audio.html">' + e(App.num(n)) + '</a>' : none; }],
 			[L('وحوش وأساطير', 'Monsters & legends'), function (s) { var n = ofSeries(d.creatures, s.id).length; return n ? '<a href="creatures.html">' + e(App.num(n)) + '</a>' : none; }],
 			[L('أعلام حقيقيون', 'Real figures'), function (s) { var n = ofSeries(d.storyPeople, s.id).length; return n ? '<a href="names.html">' + e(App.num(n)) + '</a>' : none; }],
-			[L('أعداء وأشرار', 'Enemies & villains'), function (s) { var n = (d.villains || []).filter(function (v) { return v.series === s.id; }).length; return n ? '<a href="#villains" data-who="' + e(s.id) + '">' + e(App.num(n)) + '</a>' : none; }],
 			[L('على الشاشة', 'On screen'), function (s) { var a = (d.adaptations || []).filter(function (x) { return x.basedOn === s.id; }); return a.length ? a.map(function (x) { return '<a href="screen.html">' + e(t(x.title) + ' (' + App.num(x.year) + ')') + '</a>'; }).join('<br>') : none; }],
 			[L('النهاية', 'The ending'), function (s) {
 				/* (a line of separate novels has no ending of its own to tell) */
@@ -92,7 +91,6 @@ window.PAGE = {
 				return (d.seriesEndings || {})[s.id] ? '<a href="series.html?id=' + e(s.id) + '#ending">' + e(L('على صفحتها', 'On its page')) + '</a>' : '<a class="cp-ask" href="wanted.html">' + e(L('لم تُكتب بعد', 'Not written yet')) + '</a>';
 			}]
 		];
-		var vs = d.villains || [];
 		document.getElementById('content').innerHTML = '<section class="section cp"><div class="wrap">' +
 			'<p class="cp-sum">' + e(L('السلاسل ' + (['', '', '', 'الثلاث', 'الأربع', 'الخمس', 'الست', 'السبع', 'الثماني', 'التسع'][list.length] || App.num(list.length)) + ' التي كتبها أو ترجمها في «روايات مصرية للجيب» وغيرها، عمودًا عمودًا. الأرقام من بيانات الموقع، فما لم يُعرف بعد تركناه بشَرطة.', 'The ' + (['', '', '', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'][list.length] || list.length) + ' series he wrote or translated for the Egyptian Pocket Novels and others, a column each. The numbers come from the site’s data; what is not known yet is left as a dash.')) + '</p>' +
 			'<div class="cp-scroll" tabindex="0" role="region" aria-label="' + e(L('جدول السلاسل', 'The series table')) + '"><table class="cp-table"><thead><tr><th scope="col"></th>' + list.map(function (s) {
@@ -101,45 +99,7 @@ window.PAGE = {
 				return '<tr><th scope="row">' + e(r[0]) + '</th>' + list.map(function (s) { return '<td>' + r[1](s) + '</td>'; }).join('') + '</tr>';
 			}).join('') + '</tbody></table></div>' +
 			'<p class="cp-note">' + e(L('على الهاتف اسحب الجدول جانبًا لترى بقية السلاسل.', 'On a phone, swipe the table sideways for the other series.')) + '</p>' +
-			(vs.length ? '<section class="cp-vill" id="villains"><h2>' + e(L('أعداء وأشرار', 'Enemies & villains')) + ' <small>' + e(App.num(vs.length)) + '</small></h2>' +
-				'<p class="cp-sum">' + e(L('من يقف في وجه أبطاله: بشر ومنظمات وكائنات تعود مرة بعد مرة، سلسلةً سلسلة، والأعداد التي تلقاهم فيها. أما الوحوش التي تأتي من الأساطير فلها «وحوش وأساطير».', 'Who stands against his heroes: people, organisations and beings that come back again and again, series by series, and the issues you meet them in. The monsters that come from legend have their own page, Monsters & legends.')) + '</p>' +
-				'<div class="chips cp-who"><button type="button" class="chip" data-who="all" aria-pressed="true">' + e(L('الكل', 'All')) + ' <b>' + e(App.num(vs.length)) + '</b></button>' +
-					list.filter(function (s) { return vs.some(function (v) { return v.series === s.id; }); }).map(function (s) {
-						return '<button type="button" class="chip" data-who="' + e(s.id) + '" aria-pressed="false">' + e(t(s.title)) + ' <b>' + e(App.num(vs.filter(function (v) { return v.series === s.id; }).length)) + '</b></button>';
-					}).join('') + '</div><div class="cp-vgrid"></div>' +
-				'<p class="cp-note">' + e(L('كل وصف مكتوب بكلماتنا، ومصدره تحته. تعرف عدوًّا آخر أو عددًا ناقصًا؟', 'Each note is in our own words, with its source under it. Know another enemy, or a missing issue?')) +
-					' <a href="' + e(App.fixHref(L('أعداء وأشرار', 'Enemies & villains'))) + '" target="_blank" rel="noopener">' + e(L('أخبرنا ↗', 'Tell us ↗')) + '</a></p></section>' : '') +
 		'</div></section>';
-		var pick = function (who) {
-			self.who = who;
-			document.querySelectorAll('.cp-who [data-who]').forEach(function (x) { x.setAttribute('aria-pressed', String(x.getAttribute('data-who') === who)); });
-			self.villains();
-		};
-		document.getElementById('content').addEventListener('click', function (ev) {
-			var b = ev.target.closest('[data-who]');
-			if (!b) return;
-			if (b.tagName === 'A') { pick(b.getAttribute('data-who')); return; }
-			pick(b.getAttribute('data-who'));
-		});
-		if (vs.length) this.villains();
 		App.focusHash();
-	},
-
-	villains: function () {
-		var App = window.App, S = window.WorksShared, e = App.esc, t = App.t, L = App.L, d = App.data(), self = this, box = document.querySelector('.cp-vgrid');
-		if (!box) return;
-		var names = {}; (d.series || []).forEach(function (s) { names[s.id] = s.title; });
-		box.innerHTML = (d.villains || []).filter(function (v) { return self.who === 'all' || v.series === self.who; }).map(function (v) {
-			var covers = (v.issues || []).map(function (n) {
-				var k = v.series + '-' + n, r = S.resolveBook(k);
-				if (!r || !r.series) return '';
-				return '<a href="' + e('book.html?id=' + k) + '" title="' + e(t(r.series.s.title) + ' ' + App.num(r.item.n) + ' · ' + t(r.item.title)) + '">' +
-					S.miniCover({ img: S.issueCover(v.series, r.item), color: '#3a1414', title: t(r.item.title), num: App.num(r.item.n) }) + '</a>';
-			}).join('');
-			return '<article class="cp-v" id="v-' + e(v.id) + '"><p class="cp-v-s">' + e(t(names[v.series] || {})) + (v.recurring ? ' · ' + e(L('يعود مرة بعد مرة', 'Comes back')) : '') + '</p>' +
-				'<h3>' + e(t(v.name)) + '</h3>' + (App.lang === 'en' ? '' : '<p class="cp-v-en" dir="ltr">' + e(v.name.en) + '</p>') +
-				'<p class="cp-v-d">' + e(t(v.desc)) + '</p>' + (covers ? '<div class="cp-v-covers">' + covers + '</div>' : '') +
-				'<p class="cp-v-src">' + (v.src || []).map(function (u, i) { return '<a href="' + e(u) + '" target="_blank" rel="noopener">' + e(L('المصدر', 'Source') + (v.src.length > 1 ? ' ' + App.num(i + 1) : '')) + ' ↗</a>'; }).join(' · ') + '</p></article>';
-		}).join('');
 	}
 };

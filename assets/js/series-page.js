@@ -193,6 +193,8 @@ window.PAGE = {
 				(chars.length && window.CharCards ? '<section class="d-block d-wide sv-chars"><div class="d-head"><h3>' + L('الشخصيات', 'Characters') + ' <small>(' + App.num(chars.length) + ')</small></h3></div>' +
 					'<div class="char-grid cc-grid cc-minor">' + chars.filter(function (c) { return c.main; }).concat(chars.filter(function (c) { return !c.main; })).map(function (c) { return window.CharCards.card(c); }).join('') + '</div>' +
 				'</section>' : '') +
+				/* its heroes' enemies and villains (AKT.villains), once on «السلاسل جنبًا إلى جنب» */
+				this.villainsHtml(id) +
 				this.withHtml(id) +
 				/* how it ended: its last issue, and the ending itself behind a button (it gives it away) */
 				(ser.own && issues.length ? this.endingHtml(id, issues) : '') +
@@ -258,6 +260,29 @@ window.PAGE = {
 	   a bar, and the first one not yet read (owned) to go to next; each read or owned cover is marked. Redrawn as the lists change */
 	/* «النهاية»: the series' last issue, and how it ended (AKT.seriesEndings, data-series-more.js), shown only when asked; a series
 	   whose ending we have not written asks for it */
+	/* «أعداء وأشرار»: who stands against its heroes — people, orders and beings that come back — each with the issues they are
+	   in, in our words with their sources; a card each at #v-<id> */
+	villainsHtml: function (id) {
+		var App = window.App, S = window.WorksShared, e = App.esc, t = App.t, L = App.L;
+		var vs = (App.data().villains || []).filter(function (v) { return v.series === id; });
+		if (!vs.length) return '';
+		return '<section class="d-block d-wide sv-vill" id="villains"><div class="d-head"><h3>' + e(L('أعداء وأشرار', 'Enemies & villains')) + ' <small>(' + e(App.num(vs.length)) + ')</small></h3></div>' +
+			'<div class="sv-vgrid">' + vs.map(function (v) {
+				var covers = (v.issues || []).map(function (n) {
+					var k = v.series + '-' + n, r = S.resolveBook(k);
+					if (!r || !r.series) return '';
+					return '<a href="' + e('book.html?id=' + k) + '" title="' + e(App.num(r.item.n) + ' · ' + t(r.item.title)) + '">' +
+						S.miniCover({ img: S.issueCover(v.series, r.item), color: '#3a1414', title: t(r.item.title), num: App.num(r.item.n) }) + '</a>';
+				}).join('');
+				return '<article class="sv-v" id="v-' + e(v.id) + '">' + (v.recurring ? '<p class="sv-v-s">' + e(L('يعود مرة بعد مرة', 'Comes back')) + '</p>' : '') +
+					'<h4>' + e(t(v.name)) + '</h4>' + (App.lang === 'en' ? '' : '<p class="sv-v-en" dir="ltr">' + e(v.name.en) + '</p>') +
+					'<p class="sv-v-d">' + e(t(v.desc)) + '</p>' + (covers ? '<div class="sv-v-covers">' + covers + '</div>' : '') +
+					'<p class="sv-v-src">' + (v.src || []).map(function (u, i) { return '<a href="' + e(u) + '" target="_blank" rel="noopener">' + e(L('المصدر', 'Source') + (v.src.length > 1 ? ' ' + App.num(i + 1) : '')) + ' ↗</a>'; }).join(' · ') + '</p></article>';
+			}).join('') + '</div>' +
+			'<p class="sv-v-note">' + e(L('كل وصف مكتوب بكلماتنا، ومصدره تحته. تعرف عدوًّا آخر أو عددًا ناقصًا؟', 'Each note is in our own words, with its source under it. Know another enemy, or an issue missing?')) +
+				' <a href="' + e(App.fixHref(L('أعداء وأشرار', 'Enemies & villains'))) + '" target="_blank" rel="noopener">' + e(L('أخبرنا ↗', 'Tell us ↗')) + '</a></p></section>';
+	},
+
 	endingHtml: function (id, issues) {
 		var App = window.App, S = window.WorksShared, e = App.esc, t = App.t, L = App.L;
 		var i = issues.length - 1, last = issues[i], end = (App.data().seriesEndings || {})[id];

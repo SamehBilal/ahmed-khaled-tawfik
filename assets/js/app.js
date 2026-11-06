@@ -205,8 +205,7 @@
 			{ href: 'names.html', ic: 'star', ar: 'أعلام في حكاياته', en: 'Figures in his tales', dar: 'شخصيات حقيقية مرّت بقصصه', den: 'Real people who pass through' },
 			{ href: 'map.html', ic: 'map', ar: 'الخريطة', en: 'The map', dar: 'أماكن حكاياته على الأرض', den: 'Where his tales take place' },
 			{ href: 'network.html', ic: 'web', ar: 'شبكة العرّاب', en: 'The Godfather’s web', dar: 'كيف يتصل كل شيء', den: 'How it all connects' },
-			/* a part of another page that belongs here, and his heroes' own library */
-			{ href: 'compare.html#villains', ic: 'skull', ar: 'أعداء وأشرار', en: 'Enemies & villains', dar: 'من واجههم أبطاله، سلسلةً سلسلة', den: 'Whom his heroes faced, series by series' },
+			/* and his heroes' own library */
 			{ href: 'refaat-library.html', ic: 'candle', ar: 'مكتبة رفعت إسماعيل', en: 'Refaat Ismail’s library', dar: 'ما يقرؤه أبطاله داخل الحكايات', den: 'What his heroes read inside the tales' }
 		],
 		heroes: [
@@ -592,7 +591,7 @@
 			el.classList.add('rise', 'in');
 			if (onTarget) onTarget(el, id);
 			/* an entry is brought to the middle of the window; a whole section taller than the window (a menu's link to
-			   «أعداء وأشرار») to its top, under the header — centred, its top would be far above sight */
+			   «طنطا، مدينته») to its top, under the header — centred, its top would be far above sight */
 			var block = function () { return el.getBoundingClientRect().height > window.innerHeight * 0.7 ? 'start' : 'center'; };
 			setTimeout(function () {
 				el.scrollIntoView({ behavior: 'smooth', block: block() });

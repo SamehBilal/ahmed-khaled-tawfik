@@ -567,3 +567,20 @@ html[data-theme="light"] .sv-clock { stroke: #2a3580; }
 .sv-end-src { display: inline-block; padding: 0 16px 12px; font-size: 13px; color: var(--muted); }
 .sv-end-none { margin: 0; color: var(--muted); line-height: 1.9; }
 .sv-end-none a { color: var(--ember); }
+
+/* a series' «أعداء وأشرار» (series-page.js villainsHtml): a card each, the covers of the issues it is in */
+.sv-vill { scroll-margin-top: 90px; }
+.sv-vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 14px; }
+.sv-v { padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); scroll-margin-top: 90px; }
+.sv-v:target { box-shadow: 0 0 0 2px var(--ember); }
+.sv-v-s { margin: 0; font-size: 12px; color: var(--ember); font-family: var(--f-display); }
+.sv-v h4 { margin: 4px 0 0; font: 400 20px var(--f-display); color: var(--paper); }
+.sv-v-en { margin: 0; font: 12px var(--f-latin), sans-serif; color: var(--muted); }
+.sv-v-d { margin: 8px 0 10px; color: var(--paper-dim); line-height: 1.85; font-size: 15px; }
+.sv-v-covers { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.sv-v-covers a { width: 46px; }
+.sv-v-src { margin: 0; font-size: 12px; }
+.sv-v-src a { color: var(--muted); }
+.sv-v-src a:hover { color: var(--ember); }
+.sv-v-note { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+.sv-v-note a { color: var(--ember); }

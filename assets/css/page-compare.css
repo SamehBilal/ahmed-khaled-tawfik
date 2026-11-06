@@ -1,5 +1,5 @@
 /* «السلاسل جنبًا إلى جنب» (compare.html, compare.js): the band is the series' lives side by side — a lane each from its first year
-   to its last, marked as many times as it has issues; under it the table, and «أعداء وأشرار» */
+   to its last, marked as many times as it has issues; under it the table */
 .ph[data-ph="compare"], html[data-theme="light"] .ph[data-ph="compare"] { background: none; border-bottom: 0; }
 .ph[data-ph="compare"]::after { content: none; }
 .cp-lanes { position: absolute; inset: 22px max(16px, 6%) 26px; display: grid; grid-template-rows: repeat(var(--n), 1fr); gap: 6px; direction: ltr; }
@@ -43,18 +43,3 @@ html[lang="en"] .cp-lane b { direction: ltr; }
 .cp-cv { display: flex; flex-direction: column; gap: 6px; max-width: 120px; font-size: 12px; line-height: 1.5; }
 .cp-cv .mini-cover, .cp-cv > :first-child { width: 64px; }
 
-.cp-vill { margin-top: 46px; scroll-margin-top: 90px; }
-.cp-vill h2 { font-family: var(--f-display); font-weight: 400; }
-.cp-vill h2 small { font-size: 16px; color: var(--muted); }
-.cp-who { margin: 14px 0 18px; }
-.cp-vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
-.cp-v { padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2); scroll-margin-top: 90px; }
-.cp-v-s { margin: 0; font-size: 12px; color: var(--ember); font-family: var(--f-display); }
-.cp-v h3 { margin: 4px 0 0; font: 400 20px var(--f-display); color: var(--paper); }
-.cp-v-en { margin: 0; font: 12px var(--f-latin), sans-serif; color: var(--muted); }
-.cp-v-d { margin: 8px 0 10px; color: var(--paper-dim); line-height: 1.85; font-size: 15px; }
-.cp-v-covers { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
-.cp-v-covers a { width: 46px; }
-.cp-v-src { margin: 0; font-size: 12px; }
-.cp-v-src a { color: var(--muted); }
-.cp-v-src a:hover { color: var(--ember); }
