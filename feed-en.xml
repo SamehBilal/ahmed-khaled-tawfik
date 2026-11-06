@@ -7,7 +7,18 @@
 	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
-	<updated>2026-11-04T20:59:00Z</updated>
+	<updated>2026-11-06T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
+		<title>«زمن العرّاب» (era.html) is gone</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="New page"/>
+		<category term="pics" label="Pictures"/>
+		<category term="design" label="Design"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">«زمن العرّاب» (era.html) is gone: the page, its script, its stylesheet, its share picture and its data (AKT.era, the 91 events of the world around him, in data-pages.js); out of «حياته»'s panel, the footer's «اكتشف أكثر», the phone's menu, the site map's tree and sitemap.xml, and the README. Its address now leads to «سيرته ولقاءاته», as the site's other retired pages lead to theirs. «عوالم فانتازيا» no longer loads that data — its timeline reads each world's own era</content>
+	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3de2509</id>
 		<title>Two videos about him on «الإرث» (AKT.media)</title>
@@ -562,14 +573,5 @@
 		<category term="design" label="Design"/>
 		<category term="fix" label="Fix"/>
 		<content type="text">«حول العالم»: the globe one with the page — its band no longer has a background, faded sides or a line under it; the page's own shows around the globe</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/03e94ff</id>
-		<title>«حول العالم»</title>
-		<updated>2026-11-02T20:28:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«حول العالم»: its band is now amCharts' «Map Sankey» pen (codepen.io/amcharts/pen/OPRwxBd) in the site's colours — a globe turning slowly, a stream from Egypt into the land of each language he was translated into (Britain, France, Germany, Italy, Finland, Iran, India), as wide as its editions, small books travelling along it, each stream and country named on hover; a switch, the site's own button, from the globe to a flat map centred on the streams and back; the zoom buttons (not on a phone). The wheel scrolls the page, not the map; on touch a tap wakes it; still for those who ask for less motion. amCharts 5 comes from its CDN on this page only; until then, or offline, the band is the drifting titles as before. The band is taller here (460px; 340 on a phone)</content>
 	</entry>
 </feed>

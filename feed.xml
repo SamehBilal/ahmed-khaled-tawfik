@@ -7,7 +7,18 @@
 	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
-	<updated>2026-11-04T20:59:00Z</updated>
+	<updated>2026-11-06T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
+		<title>حُذفت صفحة «زمن العرّاب» من الموقع وكل ما يشير إليها، وعنوانها يقود الآن إلى «سيرته ولقاءاته»</title>
+		<updated>2026-11-06T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="page" label="صفحة جديدة"/>
+		<category term="pics" label="صور"/>
+		<category term="design" label="تصميم"/>
+		<category term="fix" label="تصحيح"/>
+		<content type="text">حُذفت صفحة «زمن العرّاب» من الموقع وكل ما يشير إليها، وعنوانها يقود الآن إلى «سيرته ولقاءاته»</content>
+	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3de2509</id>
 		<title>فيديوهان جديدان عنه في «الإرث»، وشريط جديد لأسماء «أعلام في حكاياته» بسنوات حياتهم</title>
@@ -562,14 +573,5 @@
 		<category term="design" label="تصميم"/>
 		<category term="fix" label="تصحيح"/>
 		<content type="text">«حول العالم»: الكرة الأرضية صارت جزءًا من الصفحة، بلا خلفية ولا خط تحتها</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/03e94ff</id>
-		<title>«حول العالم»</title>
-		<updated>2026-11-02T20:28:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="data" label="بيانات"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">«حول العالم»: صار أعلى الصفحة كرة أرضية تدور، تخرج منها من مصر مجارٍ إلى بلاد كل لغة تُرجم إليها، مع مفتاح للتبديل إلى خريطة مسطحة</content>
 	</entry>
 </feed>
