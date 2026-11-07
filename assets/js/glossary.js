@@ -120,7 +120,7 @@ window.PAGE = {
 		var who = {}; G.WHO.forEach(function (w) { who[w[0]] = w[1]; });
 		var short = function (s, n) { s = String(s || ''); return s.length > n ? s.slice(0, n - 1).trim() + '…' : s; };
 		/* the entries the middle turns through: the shorter lines, so each fits */
-		this._feat = list.map(function (x, i) { return i; }).filter(function (i) { return list[i].phrase.length <= 34; });
+		self._feat = list.map(function (x, i) { return i; }).filter(function (i) { return list[i].phrase.length <= 34; });
 		var entry = function (x) {
 			return '<p class="gb-e" style="--c:' + (self.SPEAKER[x.who] || self.SPEAKER.other) + '"><b>' + e(x.phrase) + '</b> ' + e(short(t(x.meaning), 70)) + '</p>';
 		};
