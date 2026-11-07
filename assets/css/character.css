@@ -242,7 +242,7 @@ html[data-theme="light"] .ch-code span { color: #13804a; text-shadow: none; }
 /* Utopia (character-page.js, utopia): one scene for Alaa and Gaber — the colony on the start side, the Others' world on the far
    side, the wall between them. Each hero stands on his own side, lit; the other side is dimmed, and holds the novel and the
    hero across the wall */
-.ut-hero { position: relative; overflow: hidden; isolation: isolate; padding: 64px 0 168px; border-bottom: 1px solid var(--line);
+.ut-hero { position: relative; overflow: hidden; isolation: isolate; padding: 64px 0 max(168px, calc(50vw * 140 / 600 + 20px)); border-bottom: 1px solid var(--line);
 	--in-a: #1c150b; --in-b: #4a3416; --in-ink: #120d06; --in-lit: #f2c46b; --in-sun: rgba(240, 180, 80, .45);
 	--out-a: #121315; --out-b: #2c2e33; --out-ink: #0b0c0d; --out-lit: #d9c38a; --out-dust: rgba(160, 155, 145, .18); }
 html[data-theme="light"] .ut-hero {
@@ -253,7 +253,7 @@ html[data-theme="light"] .ut-hero {
 .ut-world-in { background: radial-gradient(520px 260px at 50% 78%, var(--in-sun), transparent 70%), linear-gradient(var(--in-a), var(--in-b)); }
 .ut-world-out { background: radial-gradient(700px 300px at 40% 30%, var(--out-dust), transparent 70%), linear-gradient(var(--out-a), var(--out-b)); }
 /* the skylines, along the bottom */
-.ut-sky { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 150px; }
+.ut-sky { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; }
 .ut-world-in .ut-sky { fill: var(--in-ink); stroke: var(--in-ink); }
 .ut-world-in .ut-sky rect, .ut-world-in .ut-sky ellipse { stroke: none; }
 .ut-world-out .ut-sky { fill: var(--out-ink); }

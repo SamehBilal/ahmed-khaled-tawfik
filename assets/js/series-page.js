@@ -506,9 +506,10 @@ window.PAGE = {
 	   The closest cover shows its title. The panel is sized to the issues: short for a dozen or fewer, middling up to 30. */
 	proximityHtml: function (s, hero, items) {
 		var App = window.App, S = window.WorksShared, e = App.esc, tx = App.tx, L = App.L;
-		/* a series can give its library a picture of its own (seriesInfo[id].library), else the hero's portrait */
+		/* a series can give its library a picture of its own (seriesInfo[id].library), else the hero's portrait; or none at
+		   all (library.plain), the series' colour and its lead's name as for a series with no picture */
 		var lib = ((App.data().seriesInfo || {})[s.id] || {}).library || {};
-		var img = lib.image || (hero && hero.image) || '', credit = lib.image ? lib.credit : hero && hero.imageCredit;
+		var img = lib.plain ? '' : lib.image || (hero && hero.image) || '', credit = lib.plain ? null : lib.image ? lib.credit : hero && hero.imageCredit;
 		var name = hero ? hero.name : s.title, role = hero ? hero.role : s.tagline;
 		var n = items.length, size = n <= 12 ? ' prox-few' : n <= 30 ? ' prox-mid' : '';
 		return '<section class="d-block d-wide"><div class="d-head"><h3>' + L('مكتبة ', 'The library of ') + tx(name) + '</h3>' +

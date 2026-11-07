@@ -59,6 +59,9 @@
 		'amr-salama': { src: WP('عمرو سلامة'), srcEn: EN('Amr Salama'),
 			ar: 'مخرج وكاتب سيناريو ومؤلف مصري، أخرج مسلسل «ما وراء الطبيعة» على نتفليكس عام 2020.',
 			en: 'An Egyptian film director, screenwriter and author, who directed the Netflix series Paranormal in 2020.' },
+		'khaled-el-safty': { src: WP('خالد الصفتي'),
+			ar: 'كاتب ساخر ورسام كاريكاتير مصري من القاهرة (1962)، درس الفنون الجميلة، وصاحب سلسلتي «فلاش» و«سماش» في روايات مصرية للجيب عن المؤسسة العربية الحديثة.',
+			en: 'An Egyptian humorist and cartoonist from Cairo (born 1962) who studied fine arts; author of the Flash and Smash series in the Modern Arab Association’s Egyptian Pocket Novels.' },
 		'sally-adel': { src: WP('سالي عادل'),
 			ar: 'كاتبة روايات وقصص مصرية تُلقَّب بملكة الرعب، وصاحبة سلسلة «الحب والرعب» عن المؤسسة العربية الحديثة.',
 			en: 'An Egyptian novelist and short-story writer known as the queen of horror, author of the Love and Horror series at the Modern Arab Association.' },
@@ -114,7 +117,7 @@
 	};
 
 	/* the women, so Arabic speaks of them in the feminine */
-	var FEMALE = ['sherine-hanaey', 'sally-adel', 'hanan-el-karargy', 'madiha-mohamed', 'reham-ibrahim', 'engy-khaled-ahmed', 'ghada-abdel-aal'];
+	var FEMALE = ['sherine-hanaey', 'sally-adel', 'ola-samir-el-sherbiny', 'hanan-el-karargy', 'madiha-mohamed', 'reham-ibrahim', 'engy-khaled-ahmed', 'ghada-abdel-aal'];
 
 	var cache = null;
 	var key = function (name) { return String((name && name.ar) || '').replace(/^د\.\s*/, '').trim(); };

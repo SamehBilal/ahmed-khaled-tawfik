@@ -2919,11 +2919,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	}
 })(window.AKT);
 
-/* «مكتبة عبير عبد الرحمن» on the Fantasia page: the cover of Fantasia 32, «في مملكة الأخوين» */
+/* «مكتبة د. علاء عبد العظيم» and «مكتبة عبير عبد الرحمن» on the Safari and Fantasia pages: no picture behind them (not
+   Alaa's portrait, not the cover of Fantasia 32), the series' colour and the lead's name, like the other series */
 (function (A) {
-	var I = A.seriesInfo && A.seriesInfo.fantasia;
-	if (I) I.library = { image: 'assets/img/photos/fantasia-32-library.webp',
-		credit: { ar: 'غلاف «في مملكة الأخوين» — فانتازيا 32', en: 'The cover of In the Brothers\u2019 Kingdom — Fantasia 32' } };
+	var I = A.seriesInfo = A.seriesInfo || {};
+	['safari', 'fantasia'].forEach(function (id) { I[id] = I[id] || {}; I[id].library = { plain: true }; });
 })(window.AKT);
 
 /* the special issues bring the three leads together: Refaat, Alaa and Abeer in «الشخصيات» on their page */
@@ -3057,6 +3057,34 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	var I = A.seriesInfo = A.seriesInfo || {};
 	I.sayf = I.sayf || {};
 	I.sayf.with = (I.sayf.with || []).concat([{ id: 'nabil-farouk', role: { ar: 'كتب فيه معه', en: 'Wrote in it alongside him' } }]);
+})(window.AKT);
+
+/* Khaled El-Safty wrote in «كتاب الصيف» with him, Ola Samir El-Sherbiny in «سوبر ميجا», and «المغامر» is Basem Salah El-Din's line, where he wrote «لا تأخذه معك»:
+   each a page of his own among the writers who worked with him, and in «شاركوه السلسلة» on the series' page */
+(function (A) {
+	var W = A.writers = A.writers || {}, cols = W.collaborators = W.collaborators || [];
+	var has = function (en) { return cols.some(function (w) { return w.name.en === en; }); };
+	if (!has('Khaled El-Safty'))
+		cols.push({ name: { ar: 'خالد الصفتي', en: 'Khaled El-Safty' },
+			work: { ar: '«كتاب الصيف»', en: 'Kitab al-Sayf' },
+			text: { ar: 'كتب مع العرّاب ونبيل فاروق في «كتاب الصيف» عن المؤسسة العربية الحديثة.', en: 'Wrote alongside Tawfik and Nabil Farouk in Kitab al-Sayf, from the Modern Arab Association.' } });
+	if (!has('Basem Salah El-Din'))
+		cols.push({ name: { ar: 'باسم صلاح الدين', en: 'Basem Salah El-Din' },
+			work: { ar: '«المغامر»', en: 'Al-Mughamer' },
+			text: { ar: 'صاحب سلسلة «المغامر» عن المؤسسة العربية الحديثة (2009)، وكتب فيها العرّاب قصة «لا تأخذه معك» على جزأين في عدديها الأول والثاني.',
+				en: 'Author of the Al-Mughamer line from the Modern Arab Association (2009), in whose first two issues Tawfik wrote the story «Don’t Take It With You», in two parts.' } });
+	/* and Ola Samir El-Sherbiny wrote in «سوبر ميجا» with him */
+	if (!has('Ola Samir El-Sherbiny'))
+		cols.push({ name: { ar: 'علا سمير الشربيني', en: 'Ola Samir El-Sherbiny' },
+			work: { ar: '«سوبر ميجا»', en: 'Super Mega' },
+			text: { ar: 'كتبت مع العرّاب في «سوبر ميجا» عن المؤسسة العربية الحديثة.', en: 'Wrote alongside Tawfik in Super Mega, from the Modern Arab Association.' } });
+	var I = A.seriesInfo = A.seriesInfo || {};
+	I.supermega = I.supermega || {};
+	I.supermega.with = (I.supermega.with || []).concat([{ id: 'ola-samir-el-sherbiny', role: { ar: 'كتبت فيها معه', en: 'Wrote in it alongside him' } }]);
+	I.sayf = I.sayf || {};
+	I.sayf.with = (I.sayf.with || []).concat([{ id: 'khaled-el-safty', role: { ar: 'كتب فيه معه', en: 'Wrote in it alongside him' } }]);
+	I.mughamer = I.mughamer || {};
+	I.mughamer.with = (I.mughamer.with || []).concat([{ id: 'basem-salah-el-din', role: { ar: 'صاحب السلسلة، وكتب فيها معه', en: 'Its author, who wrote it alongside him' } }]);
 })(window.AKT);
 
 /* «سوبر ميجا»: Nabil Farouk and Sally Adel wrote in it with him — in «شاركوه السلسلة» on its page */
@@ -4622,4 +4650,17 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		if (o.publisher) ed.publisher = o.publisher;
 		info.editions = [ed].concat(info.editions || []);
 	});
+})(window.AKT);
+
+/* Fawaz, who drew the short comics he scripted for Bos w Tol, drew «بلية العجيب» too, the line where he wrote «أسطورة بلية»
+   (its 17th issue): among «رسموا عالمه», and in «شاركوه السلسلة» on the series' page */
+(function (A) {
+	var W = A.writers = A.writers || {}, art = W.artists = W.artists || [];
+	if (!art.some(function (w) { return (w.name || {}).ar === 'فواز'; }))
+		art.push({ name: { ar: 'فواز', en: 'Fawaz' }, work: { ar: '«بلية العجيب»', en: 'Balya al-Ageeb' },
+			text: { ar: 'رسم سلسلة «بلية العجيب» التي كتب فيها العرّاب «أسطورة بلية» (العدد 17)، ورسم القصص المصوّرة القصيرة التي كتبها لـ«بص وطل».',
+				en: 'He drew the Balya al-Ageeb line, for which Tawfik wrote The Legend of Balya (issue 17), and the short comics Tawfik scripted for Bos w Tol.' } });
+	var I = A.seriesInfo = A.seriesInfo || {};
+	I.bley = I.bley || {};
+	I.bley.with = (I.bley.with || []).concat([{ id: 'fawaz', role: { ar: 'رسم السلسلة', en: 'Drew the series' } }]);
 })(window.AKT);
