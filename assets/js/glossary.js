@@ -108,6 +108,67 @@ window.PAGE = {
 		title: window.GlossarySection.title,
 		lead: window.GlossarySection.lead
 	},
+
+	/* the band (page-hero.js): an open dictionary in the dark — one entry at a time in the middle, its headword large in its
+	   speaker's colour, the English under it, what it means and who says it, turning over every few seconds; the other entries
+	   in columns at its sides, rising slowly as pages do when leafed through; and a thumb index down the edge, a tab a speaker,
+	   each opening the phrasebook on that speaker's lines */
+	SPEAKER: { refaat: '#e0633a', abeer: '#c9a2e8', alaa: '#6fb8a8', akt: '#d9a45a', other: '#a39a8a' },
+	band: function (d, A) {
+		var self = window.PAGE, G = window.GlossarySection, e = A.esc, t = A.t, L = A.L, list = d.glossary || [];
+		if (!list.length) return '';
+		var who = {}; G.WHO.forEach(function (w) { who[w[0]] = w[1]; });
+		var short = function (s, n) { s = String(s || ''); return s.length > n ? s.slice(0, n - 1).trim() + '…' : s; };
+		/* the entries the middle turns through: the shorter lines, so each fits */
+		this._feat = list.map(function (x, i) { return i; }).filter(function (i) { return list[i].phrase.length <= 34; });
+		var entry = function (x) {
+			return '<p class="gb-e" style="--c:' + (self.SPEAKER[x.who] || self.SPEAKER.other) + '"><b>' + e(x.phrase) + '</b> ' + e(short(t(x.meaning), 70)) + '</p>';
+		};
+		var col = function (from) {
+			var rows = list.filter(function (x, i) { return i % 2 === from; }).map(entry).join('');
+			return '<div class="gb-col"><div class="gb-run">' + rows + rows + '</div></div>';
+		};
+		var tabs = G.WHO.filter(function (w) { return w[0] !== 'other'; }).map(function (w) {
+			return '<a class="gb-tab" href="#glossary-' + w[0] + '" style="--c:' + self.SPEAKER[w[0]] + '">' + e(t(w[1])) + '</a>';
+		}).join('');
+		setTimeout(function () { self.bandWire(); }, 0);
+		return '<div class="gb">' + col(0) +
+			'<div class="gb-page"><span class="gb-rule" aria-hidden="true"></span><div class="gb-feat"></div><span class="gb-rule" aria-hidden="true"></span></div>' +
+			col(1) + '<nav class="gb-tabs">' + tabs + '</nav></div>';
+	},
+	/* the middle entry, and the next every five seconds (still, for those who would rather no motion); a thumb tab picks a speaker */
+	bandWire: function () {
+		var self = this, App = window.App, e = App.esc, t = App.t, L = App.L, G = window.GlossarySection;
+		var box = document.querySelector('.gb-feat'), list = App.data().glossary || [], feat = this._feat || [];
+		if (!box || !feat.length) return;
+		var who = {}; G.WHO.forEach(function (w) { who[w[0]] = w[1]; });
+		var k = Math.floor(Math.random() * feat.length);
+		var show = function () {
+			var i = feat[k % feat.length], x = list[i];
+			box.style.setProperty('--c', self.SPEAKER[x.who] || self.SPEAKER.other);
+			box.innerHTML = '<a href="#g-' + i + '"><span class="gb-who">' + e(t(who[x.who] || who.other)) + '</span>' +
+				'<b class="gb-head">' + e(x.phrase) + '</b>' + '<i class="gb-en" dir="ltr">' + e(x.en) + '</i>' +
+				'<span class="gb-mean">' + e(String(t(x.meaning)).split(/[.؛:]/)[0]) + '</span></a>';
+			box.classList.remove('is-in'); void box.offsetWidth; box.classList.add('is-in');
+		};
+		show();
+		clearInterval(this._gbTimer);
+		if (!matchMedia('(prefers-reduced-motion: reduce)').matches) this._gbTimer = setInterval(function () { k++; show(); }, 5200);
+		var ph = box.closest('.ph');
+		if (ph) ph.removeAttribute('aria-hidden'); /* (its tabs and entry are links) */
+		var root = box.closest('.gb');
+		root.onclick = function (ev) {
+			var a = ev.target.closest('a');
+			if (!a) return;
+			var m = /#glossary-([a-z]+)$/.exec(a.getAttribute('href')), g = /#g-(\d+)$/.exec(a.getAttribute('href'));
+			ev.preventDefault();
+			if (m) G.pick(m[1]);
+			else if (g) G.pick('all');
+			history.replaceState(null, '', a.getAttribute('href'));
+			var to = document.getElementById(g ? 'g-' + g[1] : 'glossary');
+			if (to) { to.scrollIntoView({ behavior: 'smooth', block: g ? 'center' : 'start' }); if (g) { to.classList.remove('is-target'); void to.offsetWidth; to.classList.add('is-target'); } }
+		};
+	},
 	render: function () {
 		var G = window.GlossarySection, h = location.hash, sp = /^#glossary-([a-z]+)$/.exec(h);
 		document.getElementById('content').innerHTML = G.html() +
