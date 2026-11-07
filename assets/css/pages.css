@@ -33,7 +33,7 @@ html[data-theme="light"] {
 /* an outlet with nothing under the archive's other filters: still there, faded */
 .pp-card.is-empty { opacity: .45; }
 .pp-all { grid-template-columns: 1fr; }
-.pp-all .pp-n { grid-column: 1; }
+.pp-all .pp-n, .pp-all .pp-meta { grid-column: 1; }
 
 .pp-chart, .nm-chart { position: relative; margin: 0 0 34px; padding: 18px 18px 8px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); }
 .pp-chart figcaption, .nm-chart figcaption { font-family: var(--f-display); font-size: 18px; margin: 0 0 8px; }

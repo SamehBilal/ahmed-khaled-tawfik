@@ -12,6 +12,29 @@
 	background: var(--ink-2); color: var(--paper); border: 1px solid var(--line);
 }
 .bl-search input:focus { outline: none; border-color: var(--ember); }
+/* the filters' first level: the kind as tabs, the search beside them; the second level (papers.js) is the panel under
+   them, joined to the tab chosen */
+.bl-top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 18px; }
+.bl-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+.bl-tab { position: relative; display: inline-flex; align-items: baseline; gap: 8px; padding: 12px 20px 11px; cursor: pointer;
+	font: inherit; font-family: var(--f-display); font-size: 19px; color: var(--paper-dim); background: transparent;
+	border: 1px solid transparent; border-bottom: 0; border-radius: 12px 12px 0 0; transition: color .2s, background .2s; }
+.bl-tab .count { font-family: var(--f-latin); font-size: 14px; font-weight: 700; color: var(--muted); }
+.bl-tab:hover { color: var(--paper); background: color-mix(in srgb, var(--ink-2) 60%, transparent); }
+.bl-tab[aria-pressed="true"] { color: var(--paper); background: var(--ink-2); border-color: var(--line); }
+.bl-tab[aria-pressed="true"] .count { color: var(--ember); }
+/* (the chosen tab's edge runs into the panel: a strip of the panel's colour over the panel's top line) */
+.bl-tab[aria-pressed="true"]::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--ink-2); z-index: 1; }
+.bl-top .bl-search { margin-bottom: 8px; }
+.pp-level { position: relative; margin: 0 0 18px; padding: 18px 18px 6px; border: 1px solid var(--line); border-radius: var(--radius); border-start-start-radius: 0; background: var(--ink-2); }
+.pp-level .pp-card { background: var(--ink); }
+@media (max-width: 640px) {
+	.bl-top { flex-direction: column-reverse; align-items: stretch; }
+	.bl-top .bl-search { max-width: none; margin: 0; }
+	.bl-tabs { flex-wrap: nowrap; gap: 0; }
+	.bl-tab { flex: 1 1 0; flex-direction: column; align-items: center; gap: 0; padding: 10px 4px 8px; font-size: 16px; }
+	.pp-level { padding: 14px 10px 2px; }
+}
 .bl-credit { margin-top: 30px; color: var(--muted); font-size: 14px; }
 
 /* ---------- Stapel ---------- */

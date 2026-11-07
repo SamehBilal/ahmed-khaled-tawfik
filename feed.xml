@@ -9,9 +9,18 @@
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-07T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/9994814</id>
+		<title>Utopia's character pages (علاء and جابر) open on a scene of their own</title>
+		<updated>2026-11-07T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">Utopia's character pages (علاء and جابر) open on a scene of their own: the colony on one side — gold, villas with lit windows, palms and a pool under a low sun — and the Others' world on the other — grey dust, crowded blocks, a few lit windows — with a clear brick wall between them, barbed wire along its top and a searchlight sweeping the outside (still for reduced motion). Each hero stands on his own side, lit, the other dimmed; across the wall, that world's name, the novel's cover and the hero on the other side, so the two pages lead to each other. On a phone, one column, his own world behind him and no wall. In both themes and in English. Service worker, changelog and feeds rebuilt</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2c50333</id>
 		<title>Utopia's character pages (علاء and جابر)</title>
-		<updated>2026-11-07T20:59:00Z</updated>
+		<updated>2026-11-07T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="صور"/>
 		<content type="text">Utopia's character pages (علاء and جابر): the wall in the hero stands in the gap between the cover and the words, not across the middle of the screen where it cut through the eyebrow and every line of the description; hidden on a phone, where the cover sits above the words. The side of his words is tinted gold for Alaa, inside the wall, and grey for Gaber, outside it, in Arabic and English. Service worker, changelog, feeds and sitemap rebuilt</content>
@@ -19,7 +28,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c0aaeb6</id>
 		<title>The blog page's «في الصحف» is now the top of its archive</title>
-		<updated>2026-11-07T20:58:00Z</updated>
+		<updated>2026-11-07T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="بيانات"/>
 		<content type="text">The blog page's «في الصحف» is now the top of its archive: the outlets' cards (with «خارج الصحف» for the 209 posts from no paper), the kinds and the search together as one filter, then his pieces in the papers year by year, then the archive's piles, which the outlet chosen narrows; the kinds and the search narrow the cards' counts (an outlet with none faded) and the chart too. blog.html#papers-&lt;outlet&gt; still opens on that outlet, and the outlet chosen is kept on coming back from an article. The old per-year list under it is gone (the archive shows the same posts), the cards are smaller, and the page's lead says the new order. Service worker, changelog, feeds and sitemap rebuilt</content>
@@ -27,7 +36,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a0b1093</id>
 		<title>«الطبعات» on the covers page</title>
-		<updated>2026-11-07T20:57:00Z</updated>
+		<updated>2026-11-07T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="صور"/>
 		<category term="audio" label="مسموع"/>
@@ -37,7 +46,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/beb70c2</id>
 		<title>«مسيرة السلاسل» on numbers.html draws «روايات عالمية للجيب» (1994–2015, 77 issues)</title>
-		<updated>2026-11-07T20:56:00Z</updated>
+		<updated>2026-11-07T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="بيانات"/>
 		<content type="text">«مسيرة السلاسل» on numbers.html draws «روايات عالمية للجيب» (1994–2015, 77 issues): a series with no years of its own now takes the first and last of its issues' years, which also brings in كتاب الصيف (2003), بلية العجيب (2004) and روايات كوميكس (2003). Service worker, changelog, feeds and sitemap rebuilt</content>
@@ -45,7 +54,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/be7733c</id>
 		<title>«بالأرقام والأسلوب»'s «المسيرة» and «إحصاءات الموقع» are one step</title>
-		<updated>2026-11-07T20:55:00Z</updated>
+		<updated>2026-11-07T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="بيانات"/>
 		<content type="text">«بالأرقام والأسلوب»'s «المسيرة» and «إحصاءات الموقع» are one step: one set of 18 tiles (site-stats.js, which the page and tools/build-meta.js both read), each number once and with its Arabic plural, the 12 houses of his books and the 17 publishers and platforms now both 17; #stats leads to the tiles. The home page's «استكشف / ادخل المكتبة» has 18 cards for the site's main sections, adding سيرته, لقاءاته, بالأرقام والأسلوب, الأغلفة والطبعات, تقويم العرّاب and ما ينقص الأرشيف, each card's figure its own page's count (الإرث its events, not the interviews; الأعمال issues and books, not series and books). Service worker and changelog rebuilt</content>
@@ -574,13 +583,5 @@
 		<category term="data" label="بيانات"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">«سيرته ولقاءاته»: صار أعلى الصفحة صفًا من أجهزة التلفزيون القديمة، كل جهاز على لقاء من لقاءاته، يصفو عند الإشارة إليه ويشغّل اللقاء عند الضغط</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2e5ec88</id>
-		<title>أُضيفت «خريطة الموقع» إلى القائمة الجانبية لصفحات «عن الموقع»، وصارت لها القائمة نفسها</title>
-		<updated>2026-11-02T20:58:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">أُضيفت «خريطة الموقع» إلى القائمة الجانبية لصفحات «عن الموقع»، وصارت لها القائمة نفسها</content>
 	</entry>
 </feed>

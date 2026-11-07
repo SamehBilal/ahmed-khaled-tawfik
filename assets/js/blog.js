@@ -11,8 +11,8 @@ window.PAGE = {
 		eyebrow: { ar: 'مقالات وقصص وكوميكس', en: 'Columns, stories and comics' },
 		title: { ar: 'المدونة', en: 'The Blog' },
 		lead: {
-			ar: 'مقالاته وقصصه القصيرة والكوميكس التي كتبها، كما جمعها عمرو عبيد في مدونة «أحمد خالد توفيق»: في أي الصحف نُشرت وفي أي الأعوام، ثم الأرشيف مرتّبًا بالسنة والشهر. اختر صحيفة أو نوعًا أو ابحث في العناوين، ثم اضغط على سنة لتنفتح شهورها، وعلى شهر لتنفتح مقالاته.',
-			en: 'His columns, short stories and comics, as collected by Amr Ebaid on the "Ahmed Khaled Tawfik" blog, arranged by year and month. First, which papers they ran in and when; then the archive. Pick a paper or a kind, or search the titles, then open a year to fan out its months and a month to fan out its articles.'
+			ar: 'مقالاته وقصصه القصيرة والكوميكس التي كتبها، كما جمعها عمرو عبيد في مدونة «أحمد خالد توفيق»: في أي الصحف نُشرت وفي أي الأعوام، ثم الأرشيف مرتّبًا بالسنة والشهر. اختر النوع أولًا — مقالات أو قصص أو كوميكس — ثم ما يخصه: الصحيفة للمقالات، والقصة المسلسلة للقصص، والباب للكوميكس، أو ابحث في العناوين؛ ثم اضغط على سنة لتنفتح شهورها، وعلى شهر لتنفتح مقالاته.',
+			en: 'His columns, short stories and comics, as collected by Amr Ebaid on the "Ahmed Khaled Tawfik" blog, arranged by year and month. First, which papers they ran in and when; then the archive. Pick a kind first — columns, stories or comics — then its own cut: the paper for the columns, the serial for the stories, the strand for the comics, or search the titles; then open a year to fan out its months and a month to fan out its articles.'
 		}
 	},
 	MONTHS: {
@@ -79,12 +79,14 @@ window.PAGE = {
 		var KINDS = [['all', L('الكل', 'All')], ['articles', L('مقالات', 'Columns')], ['stories', L('قصص', 'Stories')], ['comics', L('كوميكس', 'Comics')]];
 		var count = function (k) { return blog.posts.filter(function (p) { return k === 'all' || self.kindOf(p) === k; }).length; };
 		var PS = window.PapersSection;
-		var filters = '<div class="section-head"><div class="chips" id="bl-kinds" role="group" aria-label="' + e(L('النوع', 'Kind')) + '">' +
-				KINDS.map(function (k) { return '<button type="button" class="chip" data-k="' + k[0] + '" aria-pressed="' + (k[0] === self.kind) + '">' + e(k[1]) + '<span class="count">' + App.num(count(k[0])) + '</span></button>'; }).join('') +
+		/* the first level: the kind, as tabs, and the search beside them; the second (papers.js) cuts the kind its own way */
+		var filters = '<div class="bl-top"><div class="bl-tabs" id="bl-kinds" role="group" aria-label="' + e(L('النوع', 'Kind')) + '">' +
+				KINDS.map(function (k) { return '<button type="button" class="bl-tab" data-k="' + k[0] + '" aria-pressed="' + (k[0] === self.kind) + '">' + e(k[1]) + '<span class="count">' + App.num(count(k[0])) + '</span></button>'; }).join('') +
 			'</div><label class="bl-search"><span class="sr-only">' + L('ابحث في العناوين', 'Search titles') + '</span><input type="search" id="bl-q" placeholder="' + e(L('ابحث في العناوين…', 'Search titles…')) + '"></label></div>';
 		document.getElementById('content').innerHTML = '<section class="section"><div class="wrap">' +
-			/* first, the filters together — where the pieces ran (the outlets' cards, papers.js), then their kind and the search —
-			   and his pieces in the papers year by year; then the archive they narrow */
+			/* first the filters, in two levels — the kind (and the search), then the kind's own cards (papers.js: the outlets for
+			   every post and the columns, the serials for the stories, the strands for the comics) — and the pieces in the papers
+			   year by year; then the archive they narrow */
 			(PS ? PS.html(filters) : filters) +
 			'<div class="tp-bar"><button type="button" class="tp-back" id="tp-back" hidden aria-label="' + e(L('رجوع', 'Back')) + '">' + (App.lang === 'ar' ? '→' : '←') + '</button>' +
 				'<h2 id="tp-crumb">' + L('الأرشيف', 'The archive') + '</h2><span id="tp-sub"></span></div>' +
@@ -110,9 +112,8 @@ window.PAGE = {
 
 		this.hero();
 		document.getElementById('bl-kinds').onclick = function (ev) {
-			var b = ev.target.closest('.chip'); if (!b) return;
+			var b = ev.target.closest('.bl-tab'); if (!b) return;
 			self.kind = b.getAttribute('data-k');
-			this.querySelectorAll('.chip').forEach(function (c) { c.setAttribute('aria-pressed', String(c === b)); });
 			self.level = null; self.show();
 		};
 		var q = document.getElementById('bl-q'), qt;
@@ -163,14 +164,17 @@ window.PAGE = {
 		wrap.insertBefore(el, wrap.firstChild);
 	},
 
-	/* the posts after the kind filter and the search (what the outlets' cards count and the chart draws) */
-	filtered: function () {
-		var self = this, q = (this.query || '').toLowerCase();
-		return (window.App.data().blog || { posts: [] }).posts.filter(function (p) {
-			return (self.kind === 'all' || self.kindOf(p) === self.kind) && (!q || p.t.toLowerCase().indexOf(q) >= 0);
-		});
+	/* the posts of the kind chosen (the cards under it are cut from them) */
+	ofKind: function () {
+		var self = this;
+		return (window.App.data().blog || { posts: [] }).posts.filter(function (p) { return self.kind === 'all' || self.kindOf(p) === self.kind; });
 	},
-	/* and after the outlet chosen too, grouped by year and month: the archive's piles */
+	/* and after the search (what the cards count and the chart draws) */
+	filtered: function () {
+		var q = (this.query || '').toLowerCase();
+		return this.ofKind().filter(function (p) { return !q || p.t.toLowerCase().indexOf(q) >= 0; });
+	},
+	/* and after the card chosen too, grouped by year and month: the archive's piles */
 	groups: function () {
 		var PS = window.PapersSection;
 		var posts = this.filtered().filter(function (p) { return !PS || PS.matches(p); });
@@ -186,11 +190,14 @@ window.PAGE = {
 	/* where we are: null (years), {y} (a year's months), {y, m} (a month's articles) */
 	show: function () {
 		var App = window.App, L = App.L, self = this, lv = this.level;
+		/* the two levels first: the kind's tabs, then its cards (which drop a card chosen that the kind has not) */
+		var PS = window.PapersSection;
+		document.querySelectorAll('#bl-kinds .bl-tab').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-k') === self.kind)); });
+		if (PS) { PS.setKind(this.kind); PS.set(this.ofKind(), this.filtered()); }
 		var years = this.groups(), MON = this.MONTHS[App.lang === 'ar' ? 'ar' : 'en'];
 		var crumb = document.getElementById('tp-crumb'), sub = document.getElementById('tp-sub'), back = document.getElementById('tp-back');
 		var thumb = function (p) { return p && p.img ? self.img(p.img) : ''; };
 		var withImg = function (list) { return list.filter(function (p) { return p.img; }).concat(list.filter(function (p) { return !p.img; })); };
-		if (window.PapersSection) window.PapersSection.set(this.filtered());
 		this.save();
 
 		if (!years.length) { crumb.textContent = L('لا نتائج', 'No results'); sub.textContent = ''; back.hidden = true; this.stapel.set([], null); return; }
@@ -263,9 +270,11 @@ window.PAGE = {
 		try {
 			var s = JSON.parse(sessionStorage.getItem('akt-blog-level') || 'null');
 			if (s) {
-				this.kind = s.k || 'all';
-				/* (the outlet too, unless the address names one: blog.html#papers-…) */
-				if (window.PapersSection && s.o && !/^#papers-/.test(location.hash)) window.PapersSection.filter = s.o;
+				/* (the kind and its card too, unless the address names an outlet: blog.html#papers-…) */
+				if (!/^#papers-/.test(location.hash)) {
+					this.kind = s.k || 'all';
+					if (window.PapersSection && s.o) { window.PapersSection.setKind(this.kind); window.PapersSection.filter = s.o; }
+				}
 				return s.l;
 			}
 		} catch (e) {}
