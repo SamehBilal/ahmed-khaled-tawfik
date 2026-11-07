@@ -423,29 +423,28 @@ html[data-theme="light"] .sv-theme-code .sv-scene { background: radial-gradient(
 /* ---------- every other series: a scene of its own behind the book (series-page.js) ----------
    --bx is where the book stands: the start of the page column plus half the book */
 .sv-scene { --bx: calc(max(0px, (100% - 1180px) / 2) + 160px); }
-/* the specials (after their covers): a crypt — stone pillars and arches, firelight at their feet — and behind the book the
-   red diamond of «سلسلة الأعداد الخاصة», the three heroes' signs at its corners: Refaat's lantern, Alaa's heartbeat, Abeer's star */
-.sv-theme-crypt .sv-scene { background: radial-gradient(700px 460px at var(--bx) 40%, rgba(150, 30, 34, .3), transparent 70%), linear-gradient(#0f090b, #1a0c10 60%, transparent); }
-html[data-theme="light"] .sv-theme-crypt .sv-scene { background: radial-gradient(700px 460px at var(--bx) 40%, rgba(190, 50, 50, .16), transparent 70%), linear-gradient(#e6d6cf, transparent); }
-.sv-crypt { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; }
-.sv-crypt .arch { fill: none; stroke: #4a2c2a; stroke-width: 14; }
-.sv-crypt .pillar, .sv-crypt .cap { fill: #2e1b1c; stroke: #4e3230; stroke-width: 1.5; }
-.sv-crypt .flame { fill: rgba(240, 140, 60, .35); filter: blur(10px); animation: sv-candle 2.4s ease-in-out infinite alternate; }
-html[data-theme="light"] .sv-crypt { opacity: .35; }
-html[data-theme="light"] .sv-crypt .arch { stroke: #9a7a6c; } html[data-theme="light"] .sv-crypt .pillar, html[data-theme="light"] .sv-crypt .cap { fill: #c9b2a4; stroke: #a48a7c; }
-@keyframes sv-candle { from { opacity: .5; transform: scale(.9); } to { opacity: 1; transform: scale(1.1); } }
-.sv-seal { position: absolute; top: 60px; inset-inline-start: calc(var(--bx) - 250px); width: 500px; height: 500px; }
-.sv-seal-d { position: absolute; inset: 70px; transform: rotate(45deg); border: 3px solid #d1262c; border-radius: 10px;
-	background: radial-gradient(closest-side, rgba(209, 38, 44, .35), rgba(209, 38, 44, .08) 70%, transparent);
-	box-shadow: 0 0 60px rgba(209, 38, 44, .45), inset 0 0 40px rgba(209, 38, 44, .35); animation: sv-seal 6s ease-in-out infinite; }
-@keyframes sv-seal { 50% { box-shadow: 0 0 90px rgba(209, 38, 44, .65), inset 0 0 60px rgba(209, 38, 44, .5); } }
-.sv-sign { position: absolute; width: 46px; height: 46px; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-.sv-sign.s-lamp { top: 4px; left: 227px; stroke: #f0b45a; filter: drop-shadow(0 0 8px #e09030); }
-.sv-sign.s-heart { top: 227px; left: 4px; stroke: #3fd18a; filter: drop-shadow(0 0 8px #1fa86a); }
-.sv-sign.s-star { top: 227px; right: 4px; stroke: #b38cff; filter: drop-shadow(0 0 8px #8a5cff); }
-html[data-theme="light"] .sv-seal-d { box-shadow: 0 0 40px rgba(209, 38, 44, .25); }
-html[data-theme="light"] .sv-sign { filter: none; }
-.sv-theme-crypt .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #e04a4a; }
+/* the specials (after the first of them, «في كهوف دراجوسان»): the dark of a cave — stalactites from its roof and stalagmites
+   from its floor, black, their edges caught by a torch flickering by the book; water dripping; eyes in the dark beyond the
+   light that open, watch and blink */
+.sv-theme-cave .sv-scene { background: radial-gradient(520px 420px at var(--bx) 42%, rgba(150, 90, 40, .22), transparent 70%), radial-gradient(130% 90% at 50% 45%, #0d0a08 0%, #050404 70%); }
+html[data-theme="light"] .sv-theme-cave .sv-scene { background: radial-gradient(520px 420px at var(--bx) 42%, rgba(220, 150, 70, .3), transparent 70%), radial-gradient(130% 90% at 50% 45%, #6d5e50 0%, #3a3029 75%); }
+.sv-torch { position: absolute; top: 120px; inset-inline-start: calc(var(--bx) - 300px); width: 600px; height: 560px; border-radius: 50%;
+	background: radial-gradient(closest-side, rgba(255, 170, 70, .22), rgba(220, 110, 40, .08) 60%, transparent); animation: sv-torch 1.8s ease-in-out infinite alternate; }
+@keyframes sv-torch { 0% { opacity: .7; transform: scale(.97); } 40% { opacity: 1; } 60% { opacity: .82; } 100% { opacity: .95; transform: scale(1.03); } }
+.sv-cave { position: absolute; left: 0; width: 100%; }
+.sv-cave path { fill: #030202; stroke: rgba(200, 130, 60, .55); stroke-width: 2.5; filter: drop-shadow(0 4px 10px rgba(200, 110, 40, .25)); vector-effect: non-scaling-stroke; }
+.sv-cave-top { top: 0; height: 270px; }
+.sv-cave-floor { bottom: 12%; height: 170px; }
+html[data-theme="light"] .sv-cave path { fill: #241c16; stroke: rgba(230, 170, 100, .35); }
+.sv-drip { position: absolute; top: 170px; left: var(--l); width: 3px; height: 9px; border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+	background: rgba(170, 200, 220, .7); opacity: 0; animation: sv-drip var(--t) var(--d) ease-in infinite; }
+@keyframes sv-drip { 0%, 30% { transform: translateY(0); opacity: 0; } 35% { opacity: .9; } 100% { transform: translateY(520px); opacity: 0; } }
+/* the eyes in the dark: two embers that open, hold, and close */
+.sv-eyes { position: absolute; display: flex; gap: calc(14px * var(--s)); transform: scale(var(--s)); }
+.sv-eyes i { width: 13px; height: 7px; border-radius: 50%; background: #ffb03a; box-shadow: 0 0 8px 2px rgba(255, 140, 30, .8), 0 0 22px rgba(255, 90, 20, .5);
+	transform-origin: center; animation: sv-eyes 9s var(--d) infinite; }
+@keyframes sv-eyes { 0%, 18% { opacity: 0; transform: scaleY(.1); } 22%, 60% { opacity: 1; transform: scaleY(1); } 62% { transform: scaleY(.1); } 64%, 80% { opacity: 1; transform: scaleY(1); } 86%, 100% { opacity: 0; transform: scaleY(.1); } }
+.sv-theme-cave .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #ffb03a; }
 /* Shivers: a storm at night — low clouds, rain in long clear streaks at a slant, a bolt of lightning and its flash */
 .sv-theme-storm .sv-scene { background: linear-gradient(#070a10, #0e1520 60%, transparent); }
 html[data-theme="light"] .sv-theme-storm .sv-scene { background: linear-gradient(#9aa6b4, #c3cbd4 60%, transparent); }
@@ -596,9 +595,9 @@ html[data-theme="light"] .sv-runes { stroke: #9a2d10; opacity: .4; filter: none;
 html[data-theme="light"] .sv-staff { filter: drop-shadow(0 6px 12px rgba(90, 40, 10, .35)); }
 .sv-theme-dihya .sv-ember { background: #ffb35a; }
 .sv-theme-dihya .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #ff8a4a; }
-@media (max-width: 760px) { .sv-sun, .sv-runes { width: 300px; height: 300px; } .sv-seal { transform: scale(.62); transform-origin: 50% 0; } .sv-boom { width: 420px; height: 420px; inset-inline-start: calc(var(--bx) - 210px); } .sv-mast { font-size: 48px; } .sv-press { grid-template-columns: repeat(3, 1fr); } .sv-press .col:nth-child(n + 5) { display: none; } .sv-bulb { transform: scale(.7); transform-origin: 50% 0; } .sv-runes { inset-inline-start: calc(var(--bx) - 150px); } .sv-floor { width: 420px; inset-inline-start: calc(var(--bx) - 210px); } .sv-panels { width: 60%; height: 360px; } }
+@media (max-width: 760px) { .sv-sun, .sv-runes { width: 300px; height: 300px; } .sv-cave-top { height: 120px; } .sv-cave-floor { height: 90px; } .sv-torch { width: 400px; height: 400px; inset-inline-start: calc(var(--bx) - 200px); } .sv-boom { width: 420px; height: 420px; inset-inline-start: calc(var(--bx) - 210px); } .sv-mast { font-size: 48px; } .sv-press { grid-template-columns: repeat(3, 1fr); } .sv-press .col:nth-child(n + 5) { display: none; } .sv-bulb { transform: scale(.7); transform-origin: 50% 0; } .sv-runes { inset-inline-start: calc(var(--bx) - 150px); } .sv-floor { width: 420px; inset-inline-start: calc(var(--bx) - 210px); } .sv-panels { width: 60%; height: 360px; } }
 @media (prefers-reduced-motion: reduce) {
-	.sv-drop, .sv-bolt, .sv-flash, .sv-crypt .flame, .sv-seal-d, .sv-skyline .fly, .sv-boom, .sv-spark, .sv-bulb, .sv-ember, .sv-sun, .sv-marble, .sv-panels i, .sv-runes, .sv-smoke, .sv-floor .k, .sv-staff .eye { animation: none; }
+	.sv-drop, .sv-bolt, .sv-flash, .sv-torch, .sv-drip, .sv-eyes i, .sv-skyline .fly, .sv-boom, .sv-spark, .sv-bulb, .sv-ember, .sv-sun, .sv-marble, .sv-panels i, .sv-runes, .sv-smoke, .sv-floor .k, .sv-staff .eye { animation: none; }
 	.sv-ember { opacity: .6; }
 	.sv-drop { display: none; } .sv-bolt { opacity: .45; }
 }

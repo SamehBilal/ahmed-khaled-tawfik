@@ -103,13 +103,13 @@ window.PAGE = {
 
 		/* the heroes' series wear their hero's scene behind the book (as on their character pages, character.css):
 		   Refaat's fog and lamplight, Alaa's heartbeat, Abeer's stars and portal, the Virus's falling code */
-		/* and every other series a scene of its own (detail.css): each after its covers — the specials, a crypt and their red diamond;
+		/* and every other series a scene of its own (detail.css): each after its covers — the specials, the dark of a cave (as «في كهوف دراجوسان»);
 		   Shivers, a storm; the World Pocket Novels, the world's landmarks on one horizon; Molotov, rising embers; the Summer Book, a
 		   sun; the Adventurer, a comic-book explosion; Adabiyat, a golden newspaper page; Super Mega, hanging light bulbs; Balya, bouncing marbles; the comics,
 		   panels; Lasheen, the chamber of «عصا أبناء ديهيا» (after the staff's poster and the books' covers): a red glow from
 		   below, smoke and embers, the snake-headed staff standing behind the book, a ring of carved runes turning around it, and a
 		   cracked stone floor lit from within */
-		var theme = { mwt: 'ghosts', safari: 'medicine', fantasia: 'fantasy', www: 'code', specials: 'crypt', shivers: 'storm', rwg: 'skyline',
+		var theme = { mwt: 'ghosts', safari: 'medicine', fantasia: 'fantasy', www: 'code', specials: 'cave', shivers: 'storm', rwg: 'skyline',
 			molotov: 'embers', sayf: 'summer', mughamer: 'blast', maqalat: 'press', supermega: 'bulbs', bley: 'marbles', comics: 'panels', lasheen: 'dihya' }[id] || '';
 		/* the runes, carved strokes like those on the staff's pedestal */
 		var RUNES = ['M10 2V26M10 9L3 2M10 9L17 2', 'M4 4L16 24M16 4L4 24M2 14H18', 'M10 2V26M3 10L10 17L17 10', 'M3 4H17M10 4V26M4 19L10 13L16 19',
@@ -121,20 +121,24 @@ window.PAGE = {
 			fantasy: '<div class="ch-stars"></div><div class="ch-portal"></div>',
 			/* WWW: the Virus's code, falling in columns */
 			code: '<div class="ch-code">' + [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (i) { var bits = ''; for (var k = 0; k < 28; k++) bits += (i * 7 + k * 13) % 3 ? '1' : '0'; return '<span style="--i:' + i + '">' + bits + '</span>'; }).join('') + '</div>',
-			/* the specials (after their covers: a crypt's pillars, the red diamond of «سلسلة الأعداد الخاصة»): the stone pillars and
-			   arches of a crypt, and behind the book the red diamond, the three heroes' signs at its corners — Refaat's lantern,
-			   Alaa's heartbeat, Abeer's star — that the specials bring together */
-			crypt: '<svg class="sv-crypt" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMin slice">' + many(6, function (i) {
-					var x = 40 + i * 230;
-					return '<path class="arch" d="M' + (x + 44) + ' 640V250 Q' + (x + 159) + ' 80 ' + (x + 274) + ' 250V640"/>' +
-						'<rect class="pillar" x="' + x + '" y="160" width="44" height="480"/><rect class="cap" x="' + (x - 8) + '" y="150" width="60" height="16"/>' +
-						'<rect class="cap" x="' + (x - 8) + '" y="600" width="60" height="16"/><ellipse class="flame" cx="' + (x + 22) + '" cy="600" rx="40" ry="16" style="animation-delay:' + (-i * .7) + 's"/>';
-				}) + '</svg>' +
-				'<div class="sv-seal"><i class="sv-seal-d"></i>' +
-					'<svg class="sv-sign s-lamp" viewBox="0 0 40 40"><path d="M14 8h12M20 4v4M12 10h16l-2 20H14z M10 32h20"/><circle cx="20" cy="20" r="4"/></svg>' +
-					'<svg class="sv-sign s-heart" viewBox="0 0 40 40"><path d="M2 22h9l3-8 5 16 4-12 3 4h12"/></svg>' +
-					'<svg class="sv-sign s-star" viewBox="0 0 40 40"><path d="M20 3l4.6 11 11.4 1-8.7 7.5 2.7 11.5L20 28l-10 6 2.7-11.5L4 15l11.4-1z"/></svg>' +
-				'</div>',
+			/* the specials (after the first of them, «في كهوف دراجوسان»): the dark of a cave — stalactites hanging from its roof and
+			   stalagmites rising from its floor, black, their edges caught by a torch that flickers by the book; water dripping from
+			   the points; and in the dark beyond the light, eyes that open, watch, and blink */
+			cave: '<i class="sv-torch"></i>' +
+				'<svg class="sv-cave sv-cave-top" viewBox="0 0 1200 200" preserveAspectRatio="none"><path d="' + (function () {
+					var d = 'M0 0 H1200 V40', x = 1200, k = 0;
+					while (x > 0) { var w = 30 + (k * 37) % 60, h = 50 + (k * 71) % 140; d += ' L' + (x - w / 2) + ' ' + h + ' L' + (x - w) + ' ' + (30 + (k * 13) % 30); x -= w; k++; }
+					return d + ' L0 40 Z';
+				})() + '"/></svg>' +
+				'<svg class="sv-cave sv-cave-floor" viewBox="0 0 1200 160" preserveAspectRatio="none"><path d="' + (function () {
+					var d = 'M0 160 V120', x = 0, k = 0;
+					while (x < 1200) { var w = 40 + (k * 29) % 70, h = 20 + (k * 53) % 100; d += ' L' + (x + w / 2) + ' ' + (160 - h - 20) + ' L' + (x + w) + ' ' + (130 - (k * 11) % 20); x += w; k++; }
+					return d + ' L1200 160 Z';
+				})() + '"/></svg>' +
+				many(6, function (i) { return '<i class="sv-drip" style="--l:' + (8 + i * 16.5) + '%;--d:' + (-(i * 1.3)).toFixed(1) + 's;--t:' + (2.6 + (i % 3) * .7).toFixed(1) + 's"></i>'; }) +
+				[[12, 38, 0], [26, 70, 2.2], [70, 30, 4.1], [86, 62, 1.3], [48, 82, 3.4]].map(function (p, i) {
+					return '<span class="sv-eyes" style="left:' + p[0] + '%;top:' + p[1] + '%;--d:' + (-p[2]).toFixed(1) + 's;--s:' + (.7 + (i % 3) * .25).toFixed(2) + '"><i></i><i></i></span>';
+				}).join(''),
 			/* Shivers: a storm at night — clouds, rain in clear long streaks falling at a slant, and a bolt of lightning with its flash */
 			storm: '<div class="sv-clouds"></div>' + many(70, function (i) {
 					return '<i class="sv-drop" style="--l:' + ((i * 37) % 103 - 2) + '%;--h:' + (40 + (i * 13) % 50) + 'px;--t:' + (.55 + (i * 7) % 5 * .09).toFixed(2) + 's;--d:' + (-(i * 0.23) % 1.6).toFixed(2) + 's;--o:' + (.35 + (i % 4) * .15).toFixed(2) + '"></i>';

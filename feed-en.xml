@@ -7,7 +7,28 @@
 	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
-	<updated>2026-11-07T20:59:00Z</updated>
+	<updated>2026-11-08T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
+		<title>Update glossary.js</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">Update glossary.js</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
+		<title>up</title>
+		<updated>2026-11-08T20:58:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">up</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
+		<title>updates</title>
+		<updated>2026-11-08T20:57:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">updates</content>
+	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/945f6da</id>
 		<title>updates</title>
@@ -548,35 +569,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">The rest of the round. Lighter: 15 more covers between 40 and 120 KB are WebP (2.1 → 0.9 MB, every reference moved, every picture checked), and what nothing used is gone — the share pictures of the pages that became redirects (papers, glossary, editions, journey, style, tanta) and two source copies of «ما وراء الطبيعة»'s box and complete edition, kept as WebP. The phrasebook's 42 lines are in data-built.js now (19 KB), and so in the search on every page: «حتى تحترق النجوم» finds its card (quotes.html#g-0). Deep links: quotes.html#glossary-refaat opens the phrasebook on one speaker, and a speaker chosen sets it; blog.html#papers-الدستور opens «في الصحف» on one paper, and a paper chosen sets it. The home page has «كلمة اليوم» under the biography: one of his quotes or one of the phrasebook's lines in turn, the same for everyone on a day, each to its place. «المصادر» is the sources page's name everywhere now, as in the footer (its title, its share tags, the info pages' menu). Checked at phone width: no page wider than the screen</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8f35eab</id>
-		<title>«ركن القرّاء»</title>
-		<updated>2026-11-03T20:52:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«ركن القرّاء»: a new band — a fan of seven question cards from a round of the quiz itself (a cover, a quote, a character, a year…), each with its four answers; in turn one lifts and its right answer lights green, as the pointer does over any, and a click goes down to «اختبر نفسك». In place of the glowing question mark; the band is one with the page, no ground or line; five cards on a tablet, three on a phone</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f663dcc</id>
-		<title>Every page loads less</title>
-		<updated>2026-11-03T20:51:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<content type="text">Every page loads less: what only the book, series and «حول العالم» pages read — each edition's links, translator, credit, ISBN-10 and cover source, and the Abjjad shop links — is set apart by tools/build-data.js in assets/js/data-detail.js, which only those three load (right after data-built.js, before shared.js orders the editions), and put back into AKT there; data-built.js 1148 → 988 KB (gzip 229 → 209 KB). The data the pages see is the same as before, checked field by field (the store's editions are copied first, as some are shared between two books). The ISBNs, formats and editions stay, as the reader's collector lists keep their choices by them</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/820c61a</id>
-		<title>A round of every page</title>
-		<updated>2026-11-03T20:50:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="audio" label="Audio"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">A round of every page: the numbers, the tags and the speed. Each section page's description — in its meta tag, its share tags and its JSON-LD — now comes from the data (tools/build-meta.js, run by build-sw.js), so its counts are the site's own: 299 issues in 14 series and 54 books, 75 quotes and 42 phrases, 1078 articles and 869 of them in 15 papers, 695 recordings, 499 covers and 1087 editions, and so on; the stale ones set right (audio was &quot;on Audiohat&quot; only, «سيرته ولقاءاته» was interviews only). Every section page has the same JSON-LD now (fourteen had none), a stylesheet linked twice is linked once, and every head asks early for the two Arabic fonts and the data file. «الأرقام»'s 869 is pieces in the papers (it said articles in the archive, which holds 1078). Faster: 235 heavy PNG/JPG covers are WebP now, at most 800 px wide (the covers from 105.7 to 17.6 MB of their 108; the images 155 → 74 MB), every reference moved with them and every picture checked on disk and on the covers wall; files no page uses are left as they were. Lists below the fold (issue covers, the library, the circle, a character's links, the grave, the blog's icons) load their pictures lazily. README: the build step, the quotes and blog pages' sections</content>
 	</entry>
 </feed>

@@ -148,7 +148,7 @@ window.PAGE = {
 			box.style.setProperty('--c', self.SPEAKER[x.who] || self.SPEAKER.other);
 			box.innerHTML = '<a href="#g-' + i + '"><span class="gb-who">' + e(t(who[x.who] || who.other)) + '</span>' +
 				'<b class="gb-head">' + e(x.phrase) + '</b>' + '<i class="gb-en" dir="ltr">' + e(x.en) + '</i>' +
-				'<span class="gb-mean">' + e(String(t(x.meaning)).split(/[.؛:]/)[0]) + '</span></a>';
+				'<span class="gb-mean">' + e((function (m) { return m.length > 120 ? m.slice(0, 119).replace(/\s+\S*$/, '') + '…' : m; })(String(t(x.meaning)))) + '</span></a>';
 			box.classList.remove('is-in'); void box.offsetWidth; box.classList.add('is-in');
 		};
 		show();

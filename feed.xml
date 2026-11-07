@@ -7,7 +7,28 @@
 	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
-	<updated>2026-11-07T20:59:00Z</updated>
+	<updated>2026-11-08T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
+		<title>Update glossary.js</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">Update glossary.js</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
+		<title>up</title>
+		<updated>2026-11-08T20:58:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">up</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
+		<title>updates</title>
+		<updated>2026-11-08T20:57:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">updates</content>
+	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/945f6da</id>
 		<title>updates</title>
@@ -548,35 +569,5 @@
 		<category term="data" label="بيانات"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">«كلمة اليوم» في الرئيسية، وعبارات «قاموس العرّاب» في البحث، وروابط مباشرة لكل متحدث وكل جريدة، وأغلفة أخف، وحُذفت صور لم تعد مستخدمة</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8f35eab</id>
-		<title>«ركن القرّاء»</title>
-		<updated>2026-11-03T20:52:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="صور"/>
-		<category term="data" label="بيانات"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">«ركن القرّاء»: الجزء العلوي صار مروحة من بطاقات أسئلة حقيقية من الاختبار، تُضيء إجابتها الصحيحة بالتناوب، ومندمجًا مع الصفحة بلا خط</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f663dcc</id>
-		<title>الصفحات أخف</title>
-		<updated>2026-11-03T20:51:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="صور"/>
-		<category term="data" label="بيانات"/>
-		<content type="text">الصفحات أخف: روابط الطبعات وما لا تقرؤه إلا صفحات الكتب والسلاسل و«حول العالم» صارت في ملف لا تحمله إلا هي</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/820c61a</id>
-		<title>جولة على كل الصفحات</title>
-		<updated>2026-11-03T20:50:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="صور"/>
-		<category term="audio" label="مسموع"/>
-		<category term="data" label="بيانات"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">جولة على كل الصفحات: أوصاف الصفحات ووسوم المشاركة صارت تُحسب أرقامها من البيانات، وصارت الأغلفة الثقيلة بصيغة WebP فصارت الصفحات أخف وأسرع</content>
 	</entry>
 </feed>
