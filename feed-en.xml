@@ -9,9 +9,17 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-07T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/beb70c2</id>
+		<title>«مسيرة السلاسل» on numbers.html draws «روايات عالمية للجيب» (1994–2015, 77 issues)</title>
+		<updated>2026-11-07T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="Data"/>
+		<content type="text">«مسيرة السلاسل» on numbers.html draws «روايات عالمية للجيب» (1994–2015, 77 issues): a series with no years of its own now takes the first and last of its issues' years, which also brings in كتاب الصيف (2003), بلية العجيب (2004) and روايات كوميكس (2003). Service worker, changelog, feeds and sitemap rebuilt</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/be7733c</id>
 		<title>«بالأرقام والأسلوب»'s «المسيرة» and «إحصاءات الموقع» are one step</title>
-		<updated>2026-11-07T20:59:00Z</updated>
+		<updated>2026-11-07T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">«بالأرقام والأسلوب»'s «المسيرة» and «إحصاءات الموقع» are one step: one set of 18 tiles (site-stats.js, which the page and tools/build-meta.js both read), each number once and with its Arabic plural, the 12 houses of his books and the 17 publishers and platforms now both 17; #stats leads to the tiles. The home page's «استكشف / ادخل المكتبة» has 18 cards for the site's main sections, adding سيرته, لقاءاته, بالأرقام والأسلوب, الأغلفة والطبعات, تقويم العرّاب and ما ينقص الأرشيف, each card's figure its own page's count (الإرث its events, not the interviews; الأعمال issues and books, not series and books). Service worker and changelog rebuilt</content>
@@ -572,13 +580,5 @@
 		<updated>2026-11-02T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">«يوميات رفعت إسماعيل»: the wheel turns faster — the next moment every three and a half seconds (was seven), the turn itself quicker and sooner, and ten seconds' rest after one is chosen by hand (was fifteen)</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/94f7e45</id>
-		<title>«يوميات رفعت إسماعيل»</title>
-		<updated>2026-11-02T20:54:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="design" label="Design"/>
-		<content type="text">«يوميات رفعت إسماعيل»: the wheel turns on by itself, to the next moment every seven seconds — held while the pointer or the focus is on it, for fifteen seconds after one is chosen by hand, while the band is off screen or the tab hidden; never for those who ask for less motion. Turning by itself it takes no focus</content>
 	</entry>
 </feed>

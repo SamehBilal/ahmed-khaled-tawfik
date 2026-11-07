@@ -19,6 +19,21 @@ window.Editions = {
 		/* (the Modern Arab Association by its name today too, so its editions under «سلاح التلميذ» read as the same house) */
 		return { id: p.id, name: App.t(p.name) + (p.id === 'maa' ? App.L(' («روايات مصرية» اليوم)', ' (Rewayat Masreya today)') : ''), href: S.publisherHref(p.id) };
 	},
+	/* an edition's cover for its card: its own; or, when the site has none for it, that of the same house's edition nearest in
+	   years (a reprint most often keeps its cover), with that edition's year; never another house's, which is another cover
+	   altogether; and for a book every edition of which is the one house's, the book's own cover: { src, year } ({} when there is none) */
+	coverFor: function (eds, ed, house, main) {
+		if (ed.cover) return { src: ed.cover };
+		var self = this, best = null;
+		eds.forEach(function (o) {
+			if (o === ed || !o.cover || self.house(o.publisher).id !== house) return;
+			var dist = Math.abs(+o.year - +ed.year);
+			/* (of two as near, the earlier one: the cover this one reprints) */
+			if (!best || dist < best.dist || (dist === best.dist && +o.year < best.year)) best = { src: o.cover, year: +o.year, dist: dist };
+		});
+		if (best) return best;
+		return main && eds.every(function (o) { return self.house(o.publisher).id === house; }) ? { src: main } : {};
+	},
 	editionsOf: function (store, key) {
 		return (((window.App.data()[store] || {})[key] || {}).editions || []).filter(function (ed) { return (ed.lang || 'ar') === 'ar' && +ed.year; });
 	},
@@ -69,10 +84,11 @@ window.Editions = {
 				return '<li><a class="ed-name" href="' + e(S.bookHref(b.w.id)) + '">' + e(t(b.w.title)) + '</a><span class="ed-line">' +
 					'<i class="ed-span" style="inset-inline-start:' + pct(b.eds[0].year) + '%;width:' + (pct(b.eds[b.eds.length - 1].year) - pct(b.eds[0].year)).toFixed(2) + '%"></i>' +
 					b.eds.map(function (ed) {
-						var h = self.house(ed.publisher), p = +pct(+ed.year), cover = ed.cover || S.coverOf((d.bookInfo || {})[b.w.id]);
+						var h = self.house(ed.publisher), p = +pct(+ed.year), c = self.coverFor(b.eds, ed, h.id, S.coverOf((d.bookInfo || {})[b.w.id])), cover = c.src;
 						/* its card, as Codrops' «Tooltip Styles» classic tooltip (page-editions.css): the edition's cover beside its title in bold,
 						   which edition, its house, year and pages; kept within the page near the line's ends */
-						var info = [ed.edition ? t(ed.edition) : '', h.name, App.num(+ed.year), ed.pages ? App.num(ed.pages) + ' ' + L('صفحة', 'pages') : '', ed.format ? t(ed.format) : ''].filter(Boolean);
+						var info = [ed.edition ? t(ed.edition) : '', h.name, App.num(+ed.year), ed.pages ? App.num(ed.pages) + ' ' + L('صفحة', 'pages') : '', ed.format ? t(ed.format) : '',
+							!cover ? L('لا يعرف الموقع غلافها بعد', 'No cover for it here yet') : c.year && c.year !== +ed.year ? L('الغلاف من طبعة ' + App.num(c.year), 'Cover from the ' + c.year + ' edition') : ''].filter(Boolean);
 						return '<span class="ed-dot tooltip tooltip-effect-1" tabindex="0" style="inset-inline-start:' + p + '%">' +
 							'<i class="tooltip-item" style="background:var(--pp-' + slot(h.id) + ')" aria-hidden="true"></i>' +
 							'<span class="tooltip-content" role="tooltip">' + (cover ? '<img src="' + e(window.App.thumb(cover)) + '" alt="" loading="lazy" decoding="async">' : '') +
