@@ -52,7 +52,8 @@
 			{ id: 'calendar', href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', phone: true },
 			{ id: 'compare', href: 'compare.html', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side', phone: true },
 			{ id: 'remembrance', href: 'remembrance.html', ar: 'ذكراه كل عام', en: 'Remembered every year', phone: true },
-			{ id: 'reader-stories', href: 'reader-stories.html', ar: 'حكايات القرّاء وبخط يده', en: 'Readers’ stories, and his hand', phone: true }
+			{ id: 'reader-stories', href: 'reader-stories.html', ar: 'حكايات القرّاء', en: 'Readers’ stories', phone: true },
+			{ id: 'handwriting', href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand', phone: true }
 		],
 		toggle: { ar: 'English', en: 'العربية' },
 		motto: { ar: 'جعل الشباب يقرؤون', en: 'He made the young read' },
@@ -82,7 +83,8 @@
 			{ href: 'compare.html', ar: 'السلاسل جنبًا إلى جنب', en: 'The series side by side' },
 			/* his memory each year since, and his readers' own stories */
 			{ href: 'remembrance.html', ar: 'ذكراه كل عام', en: 'Remembered every year' },
-			{ href: 'reader-stories.html', ar: 'حكايات القرّاء وبخط يده', en: 'Readers’ stories, and his hand' }
+			{ href: 'reader-stories.html', ar: 'حكايات القرّاء', en: 'Readers’ stories' },
+			{ href: 'handwriting.html', ar: 'بخط يده', en: 'In his hand' }
 		],
 		/* «عالم العرّاب»: the pages inside his world, a block of their own under «صفحات الموقع» */
 		world: [
@@ -244,7 +246,8 @@
 			{ href: 'screen.html', ic: 'film', ar: 'على الشاشة', en: 'On screen', dar: 'من نتفليكس إلى الإذاعة', den: 'From Netflix to the radio' },
 			{ href: 'world.html', ic: 'globe', ar: 'حول العالم', en: 'Around the world', dar: 'كتبه بلغات أخرى', den: 'His books in other languages' },
 			{ href: 'remembrance.html', ic: 'flame', ar: 'ذكراه كل عام', en: 'Remembered every year', dar: 'كل 2 أبريل منذ رحيله', den: 'Every 2 April since he died' },
-			{ href: 'reader-stories.html', ic: 'chat', ar: 'حكايات القرّاء وبخط يده', en: 'Readers’ stories, and his hand', dar: 'كيف عرفوه، وما كتبه لهم بيده', den: 'How they found him, and what he wrote them' },
+			{ href: 'reader-stories.html', ic: 'chat', ar: 'حكايات القرّاء', en: 'Readers’ stories', dar: 'كيف عرفه قرّاؤه، بأقلامهم', den: 'How readers found him, in their words' },
+			{ href: 'handwriting.html', ic: 'pen', ar: 'بخط يده', en: 'In his hand', dar: 'إهداءاته وتوقيعاته لقرّائه', den: 'His dedications and signatures for readers' },
 			{ href: 'lists.html', ic: 'bookmark', ar: 'قوائمي ورحلتي', en: 'My lists & journey', dar: 'ما قرأته وما تريد قراءته', den: 'What you have read and want to' }
 		],
 		/* the books floating along «من أين أبدأ؟»: the series' fronts, his novels and two more series (small copies, covers-s) */
@@ -507,7 +510,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: '268612d',
+		LATEST: '0e068b7',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;

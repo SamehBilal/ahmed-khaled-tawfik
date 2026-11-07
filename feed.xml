@@ -9,23 +9,30 @@
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-08T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
+		<title>up</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">up</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
-		<updated>2026-11-08T20:59:00Z</updated>
+		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
-		<updated>2026-11-08T20:58:00Z</updated>
+		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:57:00Z</updated>
+		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
@@ -559,15 +566,5 @@
 		<category term="design" label="تصميم"/>
 		<category term="fix" label="تصحيح"/>
 		<content type="text">لكل غلاف نسخة صغيرة تُعرض في الشبكات والرفوف والخريطة فتخفّ الصفحات، ولم تعد الصفحات تقفز وهي تُحمَّل (عناوينها مكتوبة فيها بالعربية من الآن)، وصفحات الخصوصية والتواصل وسجل التحديثات لا تحمّل البيانات إلا عند البحث، وعبارات «قاموس العرّاب» و«كلمة اليوم» تُصنع صورًا للنشر كالاقتباسات، وفحص للبيانات على GitHub مع كل تحديث</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/919a2bb</id>
-		<title>«كلمة اليوم» في الرئيسية، وعبارات «قاموس العرّاب» في البحث، وروابط مباشرة لكل متحدث وكل جريدة، وأغلفة أخف…</title>
-		<updated>2026-11-03T20:53:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="صور"/>
-		<category term="data" label="بيانات"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">«كلمة اليوم» في الرئيسية، وعبارات «قاموس العرّاب» في البحث، وروابط مباشرة لكل متحدث وكل جريدة، وأغلفة أخف، وحُذفت صور لم تعد مستخدمة</content>
 	</entry>
 </feed>

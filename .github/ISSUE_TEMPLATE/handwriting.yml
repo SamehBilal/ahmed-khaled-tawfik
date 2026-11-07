@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        شكرًا لك! هذه الصفحة تُنشر في «حكايات القرّاء وبخط يده» على موقع العرّاب: https://samehbilal.github.io/ahmed-khaled-tawfik/reader-stories.html#hand
+        شكرًا لك! هذه الصفحة تُنشر في «بخط يده» على موقع العرّاب: https://samehbilal.github.io/ahmed-khaled-tawfik/reader-stories.html#hand
         Thank you! What you send here may go up on the site's «بخط يده» page.
   - type: input
     id: name

@@ -9,23 +9,30 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-08T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
+		<title>up</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">up</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
-		<updated>2026-11-08T20:59:00Z</updated>
+		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
-		<updated>2026-11-08T20:58:00Z</updated>
+		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:57:00Z</updated>
+		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
@@ -559,15 +566,5 @@
 		<category term="design" label="Design"/>
 		<category term="fix" label="Fix"/>
 		<content type="text">Lighter grids and steadier pages. Every cover has a small copy now (assets/img/covers-s/, at most 320 px wide, made by tools/build-thumbs.js on every build), and the grids, shelves, map, quiz cards and the covers band show it instead of the full cover (App.thumb); the book pages still show the cover itself. The pages no longer drop as they load: the header's place is kept before it is drawn, the works page's bookshelf band and the audio cassette keep their height, and each page's eyebrow, title, lead and section heads are written into its HTML in Arabic (tools/build-meta.js, from the page's own strings) — the home page's shift went from 0.96 to 0.04, the works page's from 1.0 to 0.002 on a phone. Privacy, contact, the changelog and 404 no longer load the data (they draw nothing from it); search, the lists and &quot;Save for offline&quot; fetch it there when opened. «قاموس العرّاب»'s phrases and «كلمة اليوم» can be made a picture to post, as the quotes can (assets/js/quote-image.js, shared by the three), each in its speaker's name with its issue's cover. GitHub checks the data on every push (.github/workflows/check.yml), and that data-built.js and the pages' tags were rebuilt. The 28 source scans of covers/back/New folder and five loose copies, already on the site as WebP, moved out of the published site to a folder beside the repo.</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/919a2bb</id>
-		<title>The rest of the round</title>
-		<updated>2026-11-03T20:53:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">The rest of the round. Lighter: 15 more covers between 40 and 120 KB are WebP (2.1 → 0.9 MB, every reference moved, every picture checked), and what nothing used is gone — the share pictures of the pages that became redirects (papers, glossary, editions, journey, style, tanta) and two source copies of «ما وراء الطبيعة»'s box and complete edition, kept as WebP. The phrasebook's 42 lines are in data-built.js now (19 KB), and so in the search on every page: «حتى تحترق النجوم» finds its card (quotes.html#g-0). Deep links: quotes.html#glossary-refaat opens the phrasebook on one speaker, and a speaker chosen sets it; blog.html#papers-الدستور opens «في الصحف» on one paper, and a paper chosen sets it. The home page has «كلمة اليوم» under the biography: one of his quotes or one of the phrasebook's lines in turn, the same for everyone on a day, each to its place. «المصادر» is the sources page's name everywhere now, as in the footer (its title, its share tags, the info pages' menu). Checked at phone width: no page wider than the screen</content>
 	</entry>
 </feed>
