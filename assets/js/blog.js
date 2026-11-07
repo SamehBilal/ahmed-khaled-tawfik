@@ -11,8 +11,8 @@ window.PAGE = {
 		eyebrow: { ar: 'مقالات وقصص وكوميكس', en: 'Columns, stories and comics' },
 		title: { ar: 'المدونة', en: 'The Blog' },
 		lead: {
-			ar: 'مقالاته وقصصه القصيرة والكوميكس التي كتبها، كما جمعها عمرو عبيد في مدونة «أحمد خالد توفيق»، مرتّبة بالسنة والشهر. اضغط على سنة لتنفتح شهورها، ثم على شهر لتنفتح مقالاته. وتحت الأرشيف: في أي الصحف نُشرت، وفي أي الأعوام.',
-			en: 'His columns, short stories and comics, as collected by Amr Ebaid on the "Ahmed Khaled Tawfik" blog, arranged by year and month. Open a year to fan out its months, then a month to fan out its articles. Under the archive: which papers they ran in, and when.'
+			ar: 'مقالاته وقصصه القصيرة والكوميكس التي كتبها، كما جمعها عمرو عبيد في مدونة «أحمد خالد توفيق»: في أي الصحف نُشرت وفي أي الأعوام، ثم الأرشيف مرتّبًا بالسنة والشهر. اختر صحيفة أو نوعًا أو ابحث في العناوين، ثم اضغط على سنة لتنفتح شهورها، وعلى شهر لتنفتح مقالاته.',
+			en: 'His columns, short stories and comics, as collected by Amr Ebaid on the "Ahmed Khaled Tawfik" blog, arranged by year and month. First, which papers they ran in and when; then the archive. Pick a paper or a kind, or search the titles, then open a year to fan out its months and a month to fan out its articles.'
 		}
 	},
 	MONTHS: {
@@ -78,10 +78,14 @@ window.PAGE = {
 		var blog = App.data().blog || { posts: [] };
 		var KINDS = [['all', L('الكل', 'All')], ['articles', L('مقالات', 'Columns')], ['stories', L('قصص', 'Stories')], ['comics', L('كوميكس', 'Comics')]];
 		var count = function (k) { return blog.posts.filter(function (p) { return k === 'all' || self.kindOf(p) === k; }).length; };
-		document.getElementById('content').innerHTML = '<section class="section"><div class="wrap">' +
-			'<div class="section-head"><div class="chips" id="bl-kinds" role="group" aria-label="' + e(L('النوع', 'Kind')) + '">' +
+		var PS = window.PapersSection;
+		var filters = '<div class="section-head"><div class="chips" id="bl-kinds" role="group" aria-label="' + e(L('النوع', 'Kind')) + '">' +
 				KINDS.map(function (k) { return '<button type="button" class="chip" data-k="' + k[0] + '" aria-pressed="' + (k[0] === self.kind) + '">' + e(k[1]) + '<span class="count">' + App.num(count(k[0])) + '</span></button>'; }).join('') +
-			'</div><label class="bl-search"><span class="sr-only">' + L('ابحث في العناوين', 'Search titles') + '</span><input type="search" id="bl-q" placeholder="' + e(L('ابحث في العناوين…', 'Search titles…')) + '"></label></div>' +
+			'</div><label class="bl-search"><span class="sr-only">' + L('ابحث في العناوين', 'Search titles') + '</span><input type="search" id="bl-q" placeholder="' + e(L('ابحث في العناوين…', 'Search titles…')) + '"></label></div>';
+		document.getElementById('content').innerHTML = '<section class="section"><div class="wrap">' +
+			/* first, the filters together — where the pieces ran (the outlets' cards, papers.js), then their kind and the search —
+			   and his pieces in the papers year by year; then the archive they narrow */
+			(PS ? PS.html(filters) : filters) +
 			'<div class="tp-bar"><button type="button" class="tp-back" id="tp-back" hidden aria-label="' + e(L('رجوع', 'Back')) + '">' + (App.lang === 'ar' ? '→' : '←') + '</button>' +
 				'<h2 id="tp-crumb">' + L('الأرشيف', 'The archive') + '</h2><span id="tp-sub"></span></div>' +
 			'<div class="tp-wrap"><ul class="tp-grid" id="tp-grid"></ul></div>' +
@@ -89,13 +93,12 @@ window.PAGE = {
 				L('أرشيف جمعه ' + (blog.curator === 'Amr Ebaid' ? 'عمرو عبيد' : blog.curator) + '. هنا العنوان ومقتطف قصير، والنص الكامل في المدونة.', 'an archive collected by ' + blog.curator + '. Here: the title and a short excerpt; the full text is on the blog.') +
 				/* checked against his page on Ida2at (2016–2018): every column and story episode he wrote there is in the archive */
 				' ' + L('ومقالاته وحلقات قصصه على ', 'His columns and story episodes on ') + '<a href="https://www.ida2at.com/author/aktowfik/" target="_blank" rel="noopener">' + L('«إضاءات» ↗', 'Ida2at ↗') + '</a>' + L(' (2016–2018) كلها هنا.', ' (2016–2018) are all here.') + '</p>' +
-		'</div></section>' +
-			/* and under the archive, where those pieces first ran: «في الصحف» (papers.js), once a page of its own */
-			(window.PapersSection ? window.PapersSection.html() : '');
-		if (window.PapersSection) {
-			window.PapersSection.wire();
-			/* (blog.html#papers, as papers.html now leads: to its heading, once drawn — it is too tall to centre) */
-			/* (again as the archive above it settles and its pictures come, as long as the reader has not scrolled away) */
+		'</div></section>';
+		if (PS) {
+			/* an outlet chosen: the archive shows its pieces only, from the closed piles */
+			PS.wire(function () { self.level = null; self.show(); });
+			/* (blog.html#papers, as papers.html now leads: to the outlets, once drawn; again as the banner above settles and its
+			   pictures come, as long as the reader has not scrolled away) */
 			var h = location.hash;
 			if (/^#papers(-.+)?$/.test(h)) [60, 400, 1000, 2000].forEach(function (ms) {
 				setTimeout(function () {
@@ -160,12 +163,17 @@ window.PAGE = {
 		wrap.insertBefore(el, wrap.firstChild);
 	},
 
-	/* the posts after the kind filter and the search, grouped by year and month */
-	groups: function () {
+	/* the posts after the kind filter and the search (what the outlets' cards count and the chart draws) */
+	filtered: function () {
 		var self = this, q = (this.query || '').toLowerCase();
-		var posts = (window.App.data().blog || { posts: [] }).posts.filter(function (p) {
+		return (window.App.data().blog || { posts: [] }).posts.filter(function (p) {
 			return (self.kind === 'all' || self.kindOf(p) === self.kind) && (!q || p.t.toLowerCase().indexOf(q) >= 0);
 		});
+	},
+	/* and after the outlet chosen too, grouped by year and month: the archive's piles */
+	groups: function () {
+		var PS = window.PapersSection;
+		var posts = this.filtered().filter(function (p) { return !PS || PS.matches(p); });
 		var years = {};
 		posts.forEach(function (p) {
 			var y = p.d.slice(0, 4), m = +p.d.slice(5, 7);
@@ -182,6 +190,7 @@ window.PAGE = {
 		var crumb = document.getElementById('tp-crumb'), sub = document.getElementById('tp-sub'), back = document.getElementById('tp-back');
 		var thumb = function (p) { return p && p.img ? self.img(p.img) : ''; };
 		var withImg = function (list) { return list.filter(function (p) { return p.img; }).concat(list.filter(function (p) { return !p.img; })); };
+		if (window.PapersSection) window.PapersSection.set(this.filtered());
 		this.save();
 
 		if (!years.length) { crumb.textContent = L('لا نتائج', 'No results'); sub.textContent = ''; back.hidden = true; this.stapel.set([], null); return; }
@@ -239,7 +248,7 @@ window.PAGE = {
 		this.save();
 		this.reveal();
 	},
-	save: function () { try { sessionStorage.setItem('akt-blog-level', JSON.stringify({ l: this.level, k: this.kind })); } catch (e) {} },
+	save: function () { try { sessionStorage.setItem('akt-blog-level', JSON.stringify({ l: this.level, k: this.kind, o: (window.PapersSection || {}).filter })); } catch (e) {} },
 	/* the year and month you were in come back when you return from an article; a reload starts the archive afresh, at the top */
 	restore: function () {
 		var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
@@ -251,7 +260,15 @@ window.PAGE = {
 			window.scrollTo(0, 0);
 			return null;
 		}
-		try { var s = JSON.parse(sessionStorage.getItem('akt-blog-level') || 'null'); if (s) { this.kind = s.k || 'all'; return s.l; } } catch (e) {}
+		try {
+			var s = JSON.parse(sessionStorage.getItem('akt-blog-level') || 'null');
+			if (s) {
+				this.kind = s.k || 'all';
+				/* (the outlet too, unless the address names one: blog.html#papers-…) */
+				if (window.PapersSection && s.o && !/^#papers-/.test(location.hash)) window.PapersSection.filter = s.o;
+				return s.l;
+			}
+		} catch (e) {}
 		return null;
 	},
 
