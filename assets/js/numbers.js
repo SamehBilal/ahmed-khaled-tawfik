@@ -18,17 +18,6 @@ window.PAGE = {
 	render: function () {
 		var App = window.App, d = App.data(), S = window.WorksShared, e = App.esc, t = App.t, L = App.L, self = this;
 		var own = S.ownSeries(), other = S.contributedSeries();
-		/* counted as the home page counts them: the series of the main list (his own, and World Pocket Novels, which he carried on) */
-		var main = d.series || [], beyond = other.filter(function (s) { return !App.byId(main, s.id); });
-		var issues = main.reduce(function (n, s) { return n + S.seriesIssues(s.id).filter(function (is) { return !(is.part > 1); }).length; }, 0);
-		var works = d.works || [], posts = ((d.blog || {}).posts) || [];
-		var printed = posts.filter(function (p) { return p.src && !/^من كتاب/.test(p.src) && /(19|20)\d\d/.test(p.src); });
-		var people = window.People ? window.People.all().length : 0;
-		var houses = S.publishers().filter(function (c) { return c.list.length; }).length;
-		/* label: [Arabic after 11 and up, Arabic for 3 to 10, English] */
-		var tile = function (n, label, href) {
-			return '<a class="nm-tile" href="' + href + '"><b>' + e(App.num(n)) + '</b><span>' + e(L(n >= 3 && n <= 10 ? label[1] : label[0], label[2])) + '</span></a>';
-		};
 		var seriesIds = own.concat(other).filter(function (s) { return /\d{4}/.test(String(s.years || '')); });
 
 		var step = function (n, kicker, h, lead) {
@@ -36,26 +25,19 @@ window.PAGE = {
 		};
 		document.getElementById('content').innerHTML =
 			'<section class="section nm"><div class="wrap">' +
-				/* one story in three steps, «المسيرة» (what he wrote), «اللغة والأسلوب» (how he wrote it), then «إحصاءات الموقع» (what
-				   this site holds of it, site-stats.js; once on the covers page), as the contact page's (the flow in site.css): a map of
-				   them, then a thread down the side from one numbered step to the next */
-				'<nav class="flow-map" aria-label="' + e(L('ثلاث خطوات', 'Three steps')) + '"><a href="#career"><i>' + e(App.num(1)) + '</i>' + e(L('المسيرة', 'The career')) + '</a><b></b>' +
-					'<a href="#style"><i>' + e(App.num(2)) + '</i>' + e(L('اللغة والأسلوب', 'Language & style')) + '</a><b></b>' +
-					'<a href="#stats"><i>' + e(App.num(3)) + '</i>' + e(L('إحصاءات الموقع', 'The site in numbers')) + '</a></nav>' +
-				'<div class="flow"><section class="flow-step" id="career">' + step(1, L('ما كتبه', 'What he wrote'), L('المسيرة', 'The career'),
-					L('ربع قرن من الأعداد والكتب والمقالات: كم كتب، ومتى، ولمن.', 'A quarter-century of issues, books and articles: how much he wrote, when, and for whom.')) +
-				'<div class="nm-tiles">' +
-					tile(issues, ['عددًا في السلاسل', 'أعداد في السلاسل', 'series issues'], 'works.html') +
-					tile(main.length, ['سلسلة', 'سلاسل', 'series'], 'works.html') +
-					tile(beyond.length, ['سلسلة شارك فيها', 'سلاسل أخرى شارك فيها', 'more series he wrote for'], 'works.html') +
-					tile(works.length, ['كتابًا مستقلًا', 'كتب مستقلة', 'standalone books'], 'works.html') +
-					tile(printed.length, ['مقالًا وقصة في الصحف', 'مقالات في الصحف', 'pieces in the papers'], 'blog.html#papers') +
-					tile(posts.length, ['منشورًا في المدونة', 'منشورات في المدونة', 'posts on the blog'], 'blog.html') +
-					tile((d.characters || []).length, ['شخصية', 'شخصيات', 'characters'], 'characters.html') +
-					tile((d.quotes || []).length, ['اقتباسًا', 'اقتباسات', 'quotes'], 'quotes.html') +
-					tile(people, ['كاتبًا حوله', 'كُتّاب حوله', 'writers around him'], 'writers.html') +
-					tile(houses, ['دار نشر', 'دور نشر', 'publishers'], 'publishers.html') +
-				'</div>' +
+				/* one story in two steps, «المسيرة» (what he wrote and what this site holds of it, one set of numbers from
+				   site-stats.js; «إحصاءات الموقع» was once a third step, #stats, which now leads to these numbers) and «اللغة والأسلوب»
+				   (how he wrote it), as the contact page's (the flow in site.css): a map of them, then a thread down the side from one
+				   numbered step to the next */
+				'<nav class="flow-map" aria-label="' + e(L('خطوتان', 'Two steps')) + '"><a href="#career"><i>' + e(App.num(1)) + '</i>' + e(L('المسيرة', 'The career')) + '</a><b></b>' +
+					'<a href="#style"><i>' + e(App.num(2)) + '</i>' + e(L('اللغة والأسلوب', 'Language & style')) + '</a></nav>' +
+				'<div class="flow"><section class="flow-step" id="career">' + step(1, L('ما كتبه، وما يحفظه الموقع منه', 'What he wrote, and what this site keeps of it'), L('المسيرة', 'The career'),
+					L('ربع قرن من الأعداد والكتب والمقالات: كم كتب، ومتى، ولمن، وما يحفظه هذا الأرشيف منه حتى اليوم، محسوبًا من بياناته نفسها. وكل إضافة بتاريخها في «سجل التحديثات».',
+						'A quarter-century of issues, books and articles: how much he wrote, when, and for whom, and what this archive holds of it so far, counted from its own data. Every addition, with its date, is on the Changelog.')) +
+				'<div class="nm-tiles" id="stats">' + (window.SiteStats ? window.SiteStats.tiles() : []).map(function (x) {
+					return '<a class="nm-tile" href="' + e(x[2]) + '"><b>' + e(App.num(x[0])) + '</b><span>' + e(x[1]) + '</span></a>';
+				}).join('') + '</div>' +
+				'<p class="st-note"><a href="changelog.html">' + e(L('سجل التحديثات ←', 'The Changelog →')) + '</a></p>' +
 				'<figure class="nm-chart" id="nm-span"><figcaption>' + e(L('مسيرة السلاسل', 'The series, year by year')) + '</figcaption><div class="nm-plot"></div></figure>' +
 				'<figure class="nm-chart" id="nm-mwt"><figcaption>' + e(L('أعداد «ما وراء الطبيعة» في كل عام', 'Ma Wara’ al-Tabi’a issues each year')) + '</figcaption><div class="nm-plot"></div><div class="nm-tip" hidden></div></figure>' +
 				'<figure class="nm-chart" id="nm-books"><figcaption>' + e(L('كتبه المستقلة في كل عام، بأنواعها', 'His standalone books each year, by kind')) + '<small class="nm-note">' + e(L('ما بعد 2018 كتب جُمعت ونُشرت بعد رحيله.', 'The books after 2018 were collected and published after his death.')) + '</small></figcaption><div class="nm-legend"></div><div class="nm-plot"></div><div class="nm-tip" hidden></div></figure>' +
@@ -64,13 +46,7 @@ window.PAGE = {
 			'</section>' +
 			'<section class="flow-step" id="style">' + step(2, L('وكيف كتبه', 'And how he wrote it'), L('اللغة والأسلوب', 'Language & style'),
 				L('ومن وراء هذه الأرقام كاتبٌ له صوت: الكلمات التي عاد إليها، وجمله القصيرة، ونقاطه المعلّقة «..»، من أرشيف مقالاته.', 'And behind those numbers, a writer with a voice: the words he came back to, his short sentences, his hanging “..”, from the archive of his columns.')) +
-				'<div class="st-body"></div></section>' +
-			'<section class="flow-step" id="stats">' + step(3, L('وما يحفظه الموقع منه', 'And what this site keeps of it'), L('إحصاءات الموقع', 'The site in numbers'),
-				L('ما يحفظه هذا الأرشيف حتى اليوم، محسوبًا من بياناته نفسها. وكل إضافة بتاريخها في «سجل التحديثات».', 'What this archive holds so far, counted from its own data. Every addition, with its date, is on the Changelog.')) +
-				'<div class="nm-tiles">' + (window.SiteStats ? window.SiteStats.tiles() : []).map(function (x) {
-					return '<a class="nm-tile" href="' + e(x[2]) + '"><b>' + e(App.num(x[0])) + '</b><span>' + e(x[1]) + '</span></a>';
-				}).join('') + '</div>' +
-				'<p class="st-note"><a href="changelog.html">' + e(L('سجل التحديثات ←', 'The Changelog →')) + '</a></p></section></div>' +
+				'<div class="st-body"></div></section></div>' +
 			'</div></section>';
 		if (window.StyleSection) window.StyleSection.render(document.querySelector('.st-body'));
 		/* drawn after the page loaded, so the browser cannot go to #style (style.html sends its visitors there) by itself */

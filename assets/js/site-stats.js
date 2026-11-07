@@ -1,5 +1,5 @@
-/* «إحصاءات الموقع»: what the site holds, counted from its own data as the home page counts it — the third step of numbers.html
-   (#stats; once on the covers page). And every cover the site holds, once (each issue's and book's cover and those of its
+/* numbers.html's «المسيرة»: his work and what the site holds of it, as one set, counted from the site's own data as the home
+   page counts it (#career; «إحصاءات الموقع», #stats, was once a step of its own there, and before that on the covers page). And every cover the site holds, once (each issue's and book's cover and those of its
    other editions), which the covers page hangs on its wall and these numbers count. */
 window.SiteStats = {
 	covers: function () {
@@ -25,11 +25,13 @@ window.SiteStats = {
 		return (this._covers = out);
 	},
 
-	/* the numbers, each leading to where they are: [count, label, href] */
+	/* the numbers, each leading to where they are: [count, label, href] (tools/build-meta.js reads the first for each address) */
 	tiles: function () {
 		var App = window.App, S = window.WorksShared, d = App.data(), L = App.L;
-		var issues = 0, editions = 0, au = d.audio || {}, heard = {}, w = d.writers || {}, people = {};
-		(d.series || []).forEach(function (s) { issues += S.seriesIssues(s.id).filter(function (is) { return !(is.part > 1); }).length; });
+		var issues = 0, editions = 0, au = d.audio || {}, heard = {}, w = d.writers || {}, people = {}, main = d.series || [], st = d.stats || {};
+		main.forEach(function (s) { issues += S.seriesIssues(s.id).filter(function (is) { return !(is.part > 1); }).length; });
+		/* the series he wrote for beyond those of the main list (his own, and World Pocket Novels, which he carried on) */
+		var beyond = S.contributedSeries().filter(function (s) { return !App.byId(main, s.id); }).length;
 		[d.issueInfo, d.bookInfo].forEach(function (store) { Object.keys(store || {}).forEach(function (k) { editions += ((store[k] || {}).editions || []).length; }); });
 		/* every recording once, on every platform (home.js) */
 		var hear = function (where, eps, at) { (eps || []).forEach(function (ep) { heard[where + ':' + ep[at || 0]] = 1; }); };
@@ -40,22 +42,28 @@ window.SiteStats = {
 		((au.storiapod || {}).dramas || []).forEach(function (x) { hear('sp', x.eps); });
 		if (au.youtube) { Object.keys(au.youtube.issues || {}).forEach(function (k) { hear('yt', au.youtube.issues[k]); }); if (au.youtube.eslamAdel) hear('yt', au.youtube.eslamAdel.eps); }
 		Object.keys(w).forEach(function (k) { (w[k] || []).forEach(function (p) { people[(p.name || {}).ar || (p.name || {}).en] = 1; }); });
+		/* a label is [Arabic for eleven and up, Arabic for three to ten, English] */
 		return [
-			[issues, L('عددًا في سلاسله', 'issues in his series'), 'works.html'],
-			[(d.works || []).length, L('كتابًا مستقلًا', 'standalone books'), 'works.html'],
-			[this.covers().length, L('غلافًا على الجدار', 'covers on the wall'), 'covers.html#wall'],
-			[editions, L('طبعة مسجّلة', 'editions recorded'), 'covers.html#editions'],
-			[(d.publishers || []).length, L('دار نشر ومنصة', 'publishers and platforms'), 'publishers.html'],
-			[(d.stats || {}).papers, L('مقالًا في الصحف', 'pieces in the papers'), 'blog.html#papers'],
-			[(d.stats || {}).outlets, L('جريدة ومجلة وموقعًا', 'papers and sites he wrote for'), 'blog.html#papers'],
-			[Object.keys(heard).length, L('تسجيلًا صوتيًا ومرئيًا', 'audio and video recordings'), 'audio.html'],
-			[(d.media || []).length, L('لقاءً وفيلمًا عنه', 'interviews and films'), 'interviews.html'],
-			[(d.characters || []).length, L('شخصية', 'characters'), 'characters.html'],
-			[(d.quotes || []).length, L('اقتباسًا', 'quotes'), 'quotes.html'],
-			[Object.keys(people).length, L('اسمًا من دائرته', 'people in his circle'), 'writers.html'],
-			[(d.tributes || []).length, L('شهادة عنه', 'tributes'), 'tributes.html'],
-			[(d.stats || {}).places, L('مكانًا على الخريطة', 'places on the map'), 'map.html'],
-			[(d.legacy || []).length, L('حدثًا بعد رحيله', 'events after him'), 'legacy.html']
-		].filter(function (x) { return x[0]; });
+			[issues, ['عددًا في سلاسله', 'أعداد في سلاسله', 'issues in his series'], 'works.html'],
+			[main.length, ['سلسلة', 'سلاسل', 'series'], 'series.html'],
+			[beyond, ['سلسلة أخرى شارك فيها', 'سلاسل أخرى شارك فيها', 'more series he wrote for'], 'series.html'],
+			[(d.works || []).length, ['كتابًا مستقلًا', 'كتب مستقلة', 'standalone books'], 'works.html'],
+			[st.papers, ['مقالًا وقصة في الصحف', 'مقالات في الصحف', 'pieces in the papers'], 'blog.html#papers'],
+			[st.outlets, ['جريدة ومجلة وموقعًا كتب لها', 'صحف ومواقع كتب لها', 'papers and sites he wrote for'], 'blog.html#papers'],
+			[st.posts, ['منشورًا في المدونة', 'منشورات في المدونة', 'posts on the blog'], 'blog.html'],
+			[this.covers().length, ['غلافًا على الجدار', 'أغلفة على الجدار', 'covers on the wall'], 'covers.html#wall'],
+			[editions, ['طبعة مسجّلة', 'طبعات مسجّلة', 'editions recorded'], 'covers.html#editions'],
+			[(d.publishers || []).length, ['دار نشر ومنصة', 'دور نشر ومنصات', 'publishers and platforms'], 'publishers.html'],
+			[Object.keys(heard).length, ['تسجيلًا صوتيًا ومرئيًا', 'تسجيلات صوتية ومرئية', 'audio and video recordings'], 'audio.html'],
+			[(d.media || []).length, ['لقاءً وفيلمًا عنه', 'لقاءات وأفلام عنه', 'interviews and films'], 'interviews.html'],
+			[(d.characters || []).length, ['شخصية', 'شخصيات', 'characters'], 'characters.html'],
+			[(d.quotes || []).length, ['اقتباسًا', 'اقتباسات', 'quotes'], 'quotes.html'],
+			[Object.keys(people).length, ['اسمًا من دائرته', 'أسماء من دائرته', 'people in his circle'], 'writers.html'],
+			[(d.tributes || []).length, ['شهادة عنه', 'شهادات عنه', 'tributes'], 'tributes.html'],
+			[st.places, ['مكانًا على الخريطة', 'أماكن على الخريطة', 'places on the map'], 'map.html'],
+			[(d.legacy || []).length, ['حدثًا بعد رحيله', 'أحداث بعد رحيله', 'events after him'], 'legacy.html']
+		].filter(function (x) { return x[0]; }).map(function (x) {
+			return [x[0], L(x[0] >= 3 && x[0] <= 10 ? x[1][1] : x[1][0], x[1][2]), x[2]];
+		});
 	}
 };
