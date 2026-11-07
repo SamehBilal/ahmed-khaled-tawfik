@@ -2,7 +2,7 @@
    AKT.library — «مكتبته»: books, writers, films and music he praised, from his own articles (post: a blog post id) or interviews;
    AKT.refaatLife — «يوميات رفعت إسماعيل»: Refaat Ismail's life as Ma Wara' al-Tabi'a tells it (issue: mwt-<n>);
    AKT.creatures — «وحوش وأساطير»: the monsters and legends of the series, with the folklore behind each;
-   AKT.tanta — «طنطا»: the places of his city tied to him, from news reports and his own columns (kind: home|school|university|hospital|mosque|grave|memorial|event|fiction|other);
+   AKT.tanta — «طنطا»: the places of his city tied to him (in «سيرته», talks.html, each in its chapter), from news reports and his own columns (kind: home|school|university|hospital|mosque|grave|memorial|event|fiction|other);
    AKT.handwriting — «بخط يده»: the published reports of his signatures, dedications and notes (linked, not copied);
    AKT.glossary — «قاموس العرّاب»: the phrases readers know him and his heroes by (who: refaat|abeer|alaa|akt|other; where: an issue or a work).
    AKT.fantasiaWorlds — «عوالم فانتازيا»: the world each issue of Fantasia takes Abeer to (kind: myth|lit|screen|history|mind|play|own|unknown);

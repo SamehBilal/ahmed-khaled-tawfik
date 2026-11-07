@@ -1,4 +1,5 @@
-/* node tools/build-library-covers.js — the art of each thing in «مكتبته» (AKT.library, assets/js/data-pages.js): a book's cover,
+/* node tools/build-library-covers.js — the art of each thing in «مكتبته» (AKT.library, assets/js/data-pages.js), and of the
+   books in «مكتبة أبطاله» (AKT.refaatLibrary, heroes-library.html): a book's cover,
    a film's poster, a song's sleeve, a writer's portrait, from Wikipedia's lead image of its article. Saved to
    assets/img/library/, and listed with the article it came from in assets/data/library-covers.json (by its English title,
    read by library.js). Kept when already there; an item with no article here, or no picture in it, has none. */
@@ -24,7 +25,10 @@ const PAGES = {
 	'The Lady, or the Tiger?': 'The Lady, or the Tiger?', 'Belal Fadl': 'Belal Fadl', 'Harry Potter': "Harry Potter and the Philosopher's Stone",
 	'The Spider': 'ar:العنكبوت (رواية)', 'The Yacoubian Building': 'The Yacoubian Building',
 	'Ma Baker': 'Ma Baker', 'Chiquitita': 'Chiquitita', 'Yesterday, When I Was Young': 'Hier encore', 'Take My Breath Away': 'Take My Breath Away',
-	'Another Brick in the Wall': 'Another Brick in the Wall', 'In the Year 2525': 'In the Year 2525'
+	'Another Brick in the Wall': 'Another Brick in the Wall', 'In the Year 2525': 'In the Year 2525',
+	/* «مكتبة أبطاله»'s books (AKT.refaatLibrary, heroes-library.html); the Necronomicon is Lovecraft's invention, and has none */
+	'Dracula': 'Dracula', 'Romeo and Juliet': 'File:Romeo and Juliet Q1 Title Page.jpg', 'Frankenstein': 'Frankenstein',
+	'All Quiet on the Western Front': 'All Quiet on the Western Front', 'Calmet on vampires': 'Treatise on the Apparitions of Spirits and on Vampires or Revenants'
 };
 const UA = { 'User-Agent': 'akt-archive/1.0 (cover art for an archive site about Ahmed Khaled Tawfik)' };
 const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -34,15 +38,25 @@ const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, 
 	global.window = { AKT: {} };
 	require(path.join(root, 'assets/js/data-pages.js'));
 	const have = fs.existsSync(list) ? JSON.parse(fs.readFileSync(list, 'utf8')) : {};
-	for (const x of window.AKT.library) {
+	const heroes = (window.AKT.refaatLibrary || []).filter(x => x.kind === 'book' && PAGES[x.title.en]);
+	for (const x of window.AKT.library.concat(heroes)) {
 		const en = x.title.en, page = PAGES[en];
 		if (!page) { console.log('no article for', en); continue; }
 		if (have[en] && fs.existsSync(path.join(root, have[en].src))) continue;
 		const ar = page.startsWith('ar:'), title = ar ? page.slice(3) : page;
 		try {
-			const r = await fetch('https://' + (ar ? 'ar' : 'en') + '.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title.replace(/ /g, '_')), { headers: UA });
-			const j = await r.json();
-			let src = (j.thumbnail || j.originalimage || {}).source;
+			let j, src;
+			if (page.startsWith('File:')) {
+				/* a file on Wikimedia Commons itself (where the article's lead picture is not the book's own) */
+				const r = await fetch('https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url&iiurlwidth=500&format=json&titles=' + encodeURIComponent(page), { headers: UA });
+				const ii = ((Object.values((await r.json()).query.pages)[0] || {}).imageinfo || [])[0] || {};
+				src = ii.thumburl || ii.url;
+				j = { title: page, content_urls: { desktop: { page: ii.descriptionurl || '' } } };
+			} else {
+				const r = await fetch('https://' + (ar ? 'ar' : 'en') + '.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(title.replace(/ /g, '_')), { headers: UA });
+				j = await r.json();
+				src = (j.thumbnail || j.originalimage || {}).source;
+			}
 			if (!src) { console.log('no picture:', page); continue; }
 			/* 500px wide, one of the widths Wikimedia's thumbnails come in; else the one it gave */
 			src = src.split('?')[0];

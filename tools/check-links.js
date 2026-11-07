@@ -9,8 +9,8 @@ const load = require('./load-data.js'), root = load.root;
 const { d } = load(['data-built', 'data-detail', 'data-pages', 'books', 'shared', 'app']);
 
 /* where each link is cited, as the page that shows it */
-const PAGE = { legacy: 'legacy.html', tributes: 'tributes.html', media: 'interviews.html', tanta: 'tanta.html', writers: 'writers.html', quotes: 'quotes.html',
-	glossary: 'quotes.html#glossary', library: 'library.html', handwriting: 'reader-stories.html#hand', awards: 'awards.html', creatures: 'creatures.html',
+const PAGE = { legacy: 'legacy.html', tributes: 'tributes.html', media: 'interviews.html', tanta: 'talks.html#tanta', writers: 'writers.html', quotes: 'quotes.html',
+	glossary: 'glossary.html', library: 'library.html', handwriting: 'reader-stories.html#hand', awards: 'awards.html', creatures: 'creatures.html',
 	refaatLife: 'refaat-life.html', publishers: 'publishers.html', audio: 'audio.html', adaptations: 'screen.html', sources: 'sources.html',
 	issuesSources: 'sources.html', issues: 'works.html' };
 const where = (p, item) => {

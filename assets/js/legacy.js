@@ -5,18 +5,17 @@ window.PAGE = {
 		eyebrow: { ar: 'ما بعد 2 أبريل 2018', en: 'After 2 April 2018' },
 		title: { ar: 'الإرث', en: 'The Legacy' },
 		lead: {
-			ar: 'رحل العرّاب، وبقي جيلٌ تعلّم القراءة على يديه. هنا الوداع والتكريم، ثم لقاءاته ومحاضراته بصوته.',
-			en: 'The Godfather is gone, but a generation that learned to read through him remains. Here are the farewell and the tributes — and his interviews and talks, in his own voice.'
+			ar: 'رحل العرّاب، وبقي جيلٌ تعلّم القراءة على يديه. هنا الوداع والتكريم، يومًا بيوم.',
+			en: 'The Godfather is gone, but a generation that learned to read through him remains. Here are the farewell and the tributes, as they came.'
 		}
 	},
 
 	render: function () {
 		var App = window.App, d = App.data(), e = App.esc, tx = App.tx, L = App.L;
+		/* an old link to one of the interviews that were listed here (#m-<n>) goes to it on «لقاءاته» */
+		var old = /^#m-(\d+)$/.exec(location.hash), om = old && (d.media || [])[+old[1]];
+		if (om) { var oy = this.youtubeId(om.url); location.replace('interviews.html#' + (oy ? 'v-' + oy : 'm-' + old[1])); return; }
 		var legacy = d.legacy || [], media = d.media || [];
-		var KIND = {
-			interview: { ar: 'لقاء', en: 'Interview' }, talk: { ar: 'محاضرة / ندوة', en: 'Talk' },
-			profile: { ar: 'بورتريه', en: 'Profile' }, documentary: { ar: 'وثائقي', en: 'Documentary' }, article: { ar: 'مقال', en: 'Article' }
-		};
 		var fmtDate = function (s) {
 			if (!s) return '';
 			var p = String(s).split('-');
@@ -61,38 +60,10 @@ window.PAGE = {
 
 		/* (the adaptations on screen are no longer shown here) */
 
-		if (media.length) {
-			var card = function (m, i) {
-				var head = '<span class="kind">' + tx(KIND[m.kind] || { ar: m.kind, en: m.kind }) + (m.lang ? '<span class="lng">' + e(m.lang === 'ar' ? 'عربي' : 'EN') + '</span>' : '') + '</span>' +
-					'<h3>' + tx(m.title) + '</h3>' +
-					'<span class="outlet">' + tx(m.outlet) + (m.year ? ' · ' + App.num(m.year) : '') + '</span>' +
-					(m.note && App.t(m.note) ? '<p>' + tx(m.note) + '</p>' : '');
-				var yt = self.youtubeId(m.url);
-				if (yt) {
-					return '<button type="button" class="media has-thumb rise" id="m-' + i + '" data-yt="' + e(yt) + '" data-i="' + i + '">' +
-						'<span class="thumb"><img src="https://i.ytimg.com/vi/' + e(yt) + '/hqdefault.jpg" alt="" loading="lazy">' +
-						'<span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span></span>' +
-						'<span class="media-body">' + head + '</span></button>';
-				}
-				return '<a class="media rise" id="m-' + i + '" href="' + e(m.url) + '" target="_blank" rel="noopener">' + head + '</a>';
-			};
-			var videos = [], reads = [];
-			media.forEach(function (m, i) { (self.youtubeId(m.url) ? videos : reads).push(card(m, i)); });
-			if (videos.length) {
-				html += '<section class="section"><div class="wrap">' +
-					'<div class="section-head"><div><h2>' + L('بصوته وصورته', 'In his own voice') + '</h2>' +
-						'<p>' + L('لقاءات تلفزيونية ومحاضرات وأفلام وثائقية — اضغط لتشاهد هنا.', 'TV interviews, talks and documentaries — click to watch here.') + '</p></div></div>' +
-					'<div class="media-grid" id="videos">' + videos.join('') + '</div>' +
-				'</div></section>';
-			}
-			if (reads.length) {
-				html += '<section class="section"><div class="wrap">' +
-					'<div class="section-head"><div><h2>' + L('مقالات ولقاءات مكتوبة', 'Articles and written interviews') + '</h2>' +
-						'<p>' + L('روابط إلى مصادرها الأصلية.', 'Linked to where they were first published.') + '</p></div></div>' +
-					'<div class="media-grid">' + reads.join('') + '</div>' +
-				'</div></section>';
-			}
-		}
+		/* his interviews and talks, the films and the articles about him (AKT.media) are on their own page, «لقاءاته» (interviews.html);
+		   the farewell above still plays the videos it names */
+		html += '<section class="section"><div class="wrap"><p class="lg-more">' + L('لقاءاته ومحاضراته بصوته وصورته، والأفلام والمقالات التي كُتبت عنه، في ', 'His interviews and talks, in his own voice, and the films and articles about him, are in ') +
+			'<a href="interviews.html">' + L('«لقاءاته» ←', 'His interviews →') + '</a></p></div></section>';
 
 		if (!html) html = '<section class="section"><div class="wrap"><p class="empty-note">' + L('لم تُضف بيانات بعد.', 'Nothing added yet.') + '</p></div></section>';
 		document.getElementById('content').innerHTML = html;
@@ -100,8 +71,6 @@ window.PAGE = {
 			var b = ev.target.closest('[data-yt]');
 			if (b) self.play(media[+b.getAttribute('data-i')], b.getAttribute('data-yt'));
 		};
-		var grid = document.getElementById('videos');
-		if (grid) grid.onclick = onPlay;
 		var tl = document.getElementById('tlx');
 		if (tl) {
 			tl.onclick = function (ev) {

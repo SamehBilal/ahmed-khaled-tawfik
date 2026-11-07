@@ -7,7 +7,7 @@
    VERSION and PRECACHE are rewritten by tools/build-sw.js — run it after changing files. */
 'use strict';
 
-var VERSION = 'akt-189fbd8a73';
+var VERSION = 'akt-e3a0e6532c';
 var PRECACHE = [
 	'./',
 	'about.html',
@@ -32,6 +32,7 @@ var PRECACHE = [
 	'glossary.html',
 	'guide.html',
 	'handwriting.html',
+	'heroes-library.html',
 	'index.html',
 	'interviews.html',
 	'journey.html',
@@ -104,6 +105,7 @@ var PRECACHE = [
 	'assets/js/figure3d.js',
 	'assets/js/glossary.js',
 	'assets/js/guide.js',
+	'assets/js/heroes-library.js',
 	'assets/js/home.js',
 	'assets/js/info.js',
 	'assets/js/interviews.js',
@@ -144,7 +146,6 @@ var PRECACHE = [
 	'assets/js/quotes.js',
 	'assets/js/reader-stories.js',
 	'assets/js/readers-invite.js',
-	'assets/js/refaat-library.js',
 	'assets/js/refaat-life.js',
 	'assets/js/remembrance.js',
 	'assets/js/screen.js',
@@ -158,8 +159,6 @@ var PRECACHE = [
 	'assets/js/studies.js',
 	'assets/js/style.js',
 	'assets/js/talks.js',
-	'assets/js/tanta.js',
-	'assets/js/today.js',
 	'assets/js/translations.js',
 	'assets/js/tributes.js',
 	'assets/js/wanted.js',
@@ -206,7 +205,6 @@ var PRECACHE = [
 	'assets/css/page-studies.css',
 	'assets/css/page-style.css',
 	'assets/css/page-talks.css',
-	'assets/css/page-tanta.css',
 	'assets/css/page-translations.css',
 	'assets/css/page-wanted.css',
 	'assets/css/page-world.css',

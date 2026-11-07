@@ -92,6 +92,7 @@ html[data-theme="light"] .pw-person { color: #fff; }
 
 /* writers.html#all: every writer once, A to Z, filtered by shelf (writers.js directory) */
 .dir-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.dir-note { margin: -10px 0 22px; max-width: 70ch; color: var(--paper-dim); line-height: 1.8; }
 .dir-chip { --c: var(--ember); padding: 5px 14px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--paper-dim); font: inherit; font-family: var(--f-display); font-size: 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
 .dir-chip small { font-family: var(--f-latin); opacity: .7; }
 .dir-chip:hover, .dir-chip:focus-visible { border-color: var(--c); color: var(--paper); }

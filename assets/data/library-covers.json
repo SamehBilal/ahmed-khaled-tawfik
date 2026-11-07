@@ -190,5 +190,25 @@
  "Another Brick in the Wall": {
   "src": "assets/img/library/another-brick-in-the-wall.jpg",
   "page": "https://en.wikipedia.org/wiki/Another_Brick_in_the_Wall"
+ },
+ "Dracula": {
+  "src": "assets/img/library/dracula.jpg",
+  "page": "https://en.wikipedia.org/wiki/Dracula"
+ },
+ "Romeo and Juliet": {
+  "src": "assets/img/library/romeo-and-juliet.jpg",
+  "page": "https://commons.wikimedia.org/wiki/File:Romeo_and_Juliet_Q1_Title_Page.jpg"
+ },
+ "Frankenstein": {
+  "src": "assets/img/library/frankenstein.jpg",
+  "page": "https://en.wikipedia.org/wiki/Frankenstein"
+ },
+ "All Quiet on the Western Front": {
+  "src": "assets/img/library/all-quiet-on-the-western-front.jpg",
+  "page": "https://en.wikipedia.org/wiki/All_Quiet_on_the_Western_Front"
+ },
+ "Calmet on vampires": {
+  "src": "assets/img/library/calmet-on-vampires.png",
+  "page": "https://en.wikipedia.org/wiki/Trait%C3%A9_sur_les_apparitions_des_esprits_et_sur_les_vampires_ou_les_revenans_de_Hongrie%2C_de_Moravie%2C_%26c."
  }
 }

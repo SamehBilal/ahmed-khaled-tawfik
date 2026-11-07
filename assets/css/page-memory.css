@@ -24,22 +24,6 @@
 .pm-meta { color: var(--muted); font-size: 13.5px; }
 .pm-note { color: var(--paper-dim); font-size: 14px; line-height: 1.6; }
 
-/* ---------- «الجيل الذي صنعه»: a face and a line each ---------- */
-.gn-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
-.gn-card { display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--ink-2); }
-.gn-who { display: flex; align-items: center; gap: 12px; color: var(--paper); }
-.gn-who:hover b { color: var(--ember); }
-.gn-pic {
-	flex: none; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; overflow: hidden;
-	background: var(--ink-3); color: var(--paper-dim); font-family: var(--f-display); box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 45%, transparent);
-}
-.gn-pic img { width: 100%; height: 100%; object-fit: cover; }
-.gn-name { display: flex; flex-direction: column; min-width: 0; }
-.gn-name b { font-family: var(--f-display); font-weight: 600; font-size: 17px; }
-.gn-name small { color: var(--muted); font-size: 13px; line-height: 1.5; }
-.gn-said { margin: 0; flex: 1; color: var(--paper-dim); font-size: 15px; line-height: 1.75; }
-.gn-src { align-self: flex-start; color: var(--ember); font-size: 13px; }
-
 /* ---------- «الوداع، يومًا بيوم»: the days down a line, each its date in a block ---------- */
 .fw-days { list-style: none; margin: 0; padding: 0; position: relative; display: grid; gap: 18px; }
 .fw-days::before { content: ''; position: absolute; top: 10px; bottom: 10px; inset-inline-start: 44px; width: 2px; background: linear-gradient(var(--blood), var(--line)); }

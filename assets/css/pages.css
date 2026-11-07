@@ -167,3 +167,7 @@ html[data-theme="light"] { --map-sea: #e9e0cd; --map-land: #cbbd9f; --map-edge: 
 	.mp-n { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .mp-halo { animation: none; opacity: .15; } }
+
+/* the quotes page: the way to its sister page, «قاموس العرّاب» (glossary.html) */
+.q-more { margin: 26px 0 0; font-family: var(--f-display); font-size: 18px; }
+.q-more a { color: var(--ember); }

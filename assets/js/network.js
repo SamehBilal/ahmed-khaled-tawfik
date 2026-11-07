@@ -37,14 +37,25 @@ window.PAGE = {
 	/* the band: after Tommy Ho's «UI Kits: LottieFiles» hero on CodePen — the site's pictures of his people as a tilted stack of
 	   cards that, as the page scrolls, spreads out around the words in the middle, and then leans a little after the pointer;
 	   spread, a card lights its character in the web below */
-	/* the cards: who (the first lit), the picture, and whether it is a figure on its own (shown whole) — the tall places for the
-	   figures, the wide one for the still from the series */
+	/* the cards, each a different character: who, the picture, and how it is shown — 1 a figure on its own (shown whole, in
+	   the tall places), 2 the cover of their first appearance (shown whole: null takes it from the site's books, as their
+	   character card does). Four have pictures of their own; the other four come from four more of his books */
 	TILES: [
-		[['refaat'], 'assets/img/refaat.jpg'], [['refaat'], 'assets/img/characters/refaat-lantern.webp', 1],
-		[['bernadette'], 'assets/img/characters/bernadette-figure.webp', 1], [['refaat'], 'assets/img/photos/refaat-lantern-netflix.webp'],
-		[['abeer'], 'assets/img/characters/abeer-figure.webp', 1], [['alaa'], 'assets/img/characters/alaa-doctor.webp'],
-		[['alaa', 'bernadette'], 'assets/img/figures/alaa-bernadette-3d.webp', 1], [['abeer'], 'assets/img/characters/abeer-fantasia-17.webp']
+		[['alaa'], 'assets/img/characters/alaa-doctor.webp'], [['refaat'], 'assets/img/characters/refaat-lantern.webp', 1],
+		[['bernadette'], 'assets/img/characters/bernadette-figure.webp', 1], [['maggie'], null, 2],
+		[['abeer'], 'assets/img/characters/abeer-figure.webp', 1], [['alaa-utopia'], null, 2],
+		[['essam'], null, 2], [['samanoudi'], null, 2]
 	],
+	/* the cover of a character's first appearance: the first issue of their series that has them, else its first, else their book */
+	coverOf: function (c, d) {
+		var S = window.WorksShared;
+		if (!S || !c) return '';
+		if (S.anySeries(c.work)) {
+			var is = S.seriesIssues(c.work).filter(function (i) { return (i.chars || []).indexOf(c.id) >= 0; })[0];
+			return is ? S.issueCover(c.work, is) : S.seriesCover(c.work);
+		}
+		return S.coverOf((d.bookInfo || {})[c.work]) || '';
+	},
 	/* each card's place, the pen's own: [stacked x, y (vw, vh)], its tilt in the stack, [spread x, y, width (vw), height (vh),
 	   scale], and [x, y] on a small screen */
 	SPOT: [
@@ -56,9 +67,10 @@ window.PAGE = {
 	band: function (d, A) {
 		var self = window.PAGE, e = A.esc, L = A.L, chars = d.characters || [], works = {};
 		var who = function (id) { return chars.filter(function (c) { return c.id === id; })[0]; };
-		var tiles = self.TILES.filter(function (t) { return t[0].every(who); }).map(function (t, i) {
+		var tiles = self.TILES.map(function (t) { return t[1] || !t[0].every(who) ? t : [t[0], self.coverOf(who(t[0][0]), d), t[2]]; })
+			.filter(function (t) { return t[1] && t[0].every(who); }).map(function (t, i) {
 			var name = t[0].map(function (id) { return A.t(who(id).name); }).join(L(' و', ' & '));
-			return '<a class="nwh-tile' + (t[2] ? ' is-fig' : '') + '" href="character.html?id=' + e(t[0][0]) + '" data-id="' + e(t[0][0]) + '" style="z-index:' + (i + 2) + '">' +
+			return '<a class="nwh-tile' + (t[2] === 1 ? ' is-fig' : t[2] === 2 ? ' is-cover' : '') + '" href="character.html?id=' + e(t[0][0]) + '" data-id="' + e(t[0][0]) + '" style="z-index:' + (i + 2) + '">' +
 				'<span class="nwh-pic"><img src="' + e(t[1]) + '" alt="' + e(name) + '" loading="lazy"></span>' +
 				'<span class="nwh-tl"><span>' + e(name) + '</span><span>' + e(A.num(('0' + (i + 1)).slice(-2))) + '</span></span></a>';
 		}).join('');

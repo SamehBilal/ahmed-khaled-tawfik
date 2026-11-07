@@ -100,3 +100,19 @@ html[dir="ltr"] .ll-ch.is-after .ll-bar { background: linear-gradient(to right, 
    not on the section, which spans the window */
 .tk-life.bio { columns: auto; }
 .tk-life .wrap { columns: 2 340px; column-gap: 48px; }
+
+/* «في طنطا، مدينته»: each chapter's places in his city (talks.js tanta; once tanta.html), a short list under its events, the
+   town's dusk in a thin line along its edge */
+.tk-tanta { margin: 18px 0 0; padding: 14px 18px 4px; border-radius: 12px; scroll-margin-top: 90px;
+	background: linear-gradient(90deg, color-mix(in srgb, #a4523a 12%, transparent), transparent 60%); border-inline-start: 3px solid #d9763e; }
+[dir="ltr"] .tk-tanta { background: linear-gradient(270deg, color-mix(in srgb, #a4523a 12%, transparent), transparent 60%); }
+.tk-tanta-h { margin: 0 0 10px; font-family: var(--f-display); font-size: 17px; color: #e39a63; }
+html[data-theme="light"] .tk-tanta-h { color: #a0441c; }
+.tk-tanta ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px 22px; }
+.tk-tn { padding: 0 0 12px; }
+.tk-tn-k { display: block; font-size: 12px; color: var(--muted); }
+.tk-tn b { display: block; font-family: var(--f-display); font-size: 16px; line-height: 1.5; }
+.tk-tn p { margin: 4px 0 0; color: var(--paper-dim); font-size: 14px; line-height: 1.75; }
+.tk-tn .tk-tn-src { font-size: 12.5px; }
+.tk-tn-src a, .tk-tn-note a { color: var(--ember); }
+.tk-tn-note { grid-column: 1 / -1; margin: 0 0 12px; color: var(--muted); font-size: 13px; line-height: 1.8; }

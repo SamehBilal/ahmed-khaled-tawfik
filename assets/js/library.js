@@ -68,7 +68,7 @@ window.PAGE = {
 
 	render: function () {
 		/* «مكتبة أبطاله» was a part of this page (#refaat); it has its own now */
-		if (location.hash === '#refaat') { location.replace('refaat-library.html'); return; }
+		if (location.hash === '#refaat') { location.replace('heroes-library.html'); return; }
 		var App = window.App, e = App.esc, L = App.L, self = this, list = App.data().library || [];
 		var count = {}; list.forEach(function (x) { count[x.kind] = (count[x.kind] || 0) + 1; });
 		var posts = list.filter(function (x) { return x.post; }).length;

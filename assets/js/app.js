@@ -38,14 +38,13 @@
 			{ id: 'covers', href: 'covers.html', ar: 'الأغلفة والطبعات', en: 'Covers & editions', phone: true },
 			{ id: 'talks', href: 'talks.html', ar: 'سيرته', en: 'His life', phone: true },
 			{ id: 'interviews', href: 'interviews.html', ar: 'لقاءاته', en: 'His interviews', phone: true },
-			{ id: 'tanta', href: 'tanta.html', ar: 'طنطا، مدينته', en: 'Tanta, his city', phone: true },
 			{ id: 'awards', href: 'awards.html', ar: 'الجوائز', en: 'Awards', phone: true },
 			{ id: 'translations', href: 'translations.html', ar: 'ترجماته', en: 'His translations', phone: true },
 			{ id: 'library', href: 'library.html', ar: 'مكتبته', en: 'His library', phone: true },
 			/* «عالم العرّاب» (the footer's block of its own) */
 			{ id: 'creatures', href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends', phone: true },
 			{ id: 'refaat-life', href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life', phone: true },
-			{ id: 'refaat-library', href: 'refaat-library.html', ar: 'مكتبة أبطاله', en: 'His heroes’ library', phone: true },
+			{ id: 'heroes-library', href: 'heroes-library.html', ar: 'مكتبة أبطاله', en: 'His heroes’ library', phone: true },
 			{ id: 'network', href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web', phone: true },
 			{ id: 'worlds', href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds', phone: true },
 			{ id: 'clinic', href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic', phone: true },
@@ -77,7 +76,6 @@
 			{ href: 'awards.html', ar: 'الجوائز', en: 'Awards' },
 			{ href: 'translations.html', ar: 'ترجماته', en: 'His translations' },
 			/* his city */
-			{ href: 'tanta.html', ar: 'طنطا، مدينته', en: 'Tanta, his city' },
 			/* the whole year, a day at a time */
 			{ href: 'calendar.html', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar' },
 			/* his series in one table */
@@ -90,7 +88,7 @@
 		world: [
 			{ href: 'creatures.html', ar: 'وحوش وأساطير', en: 'Monsters & legends' },
 			{ href: 'refaat-life.html', ar: 'يوميات رفعت إسماعيل', en: 'Refaat Ismail’s life' },
-			{ href: 'refaat-library.html', ar: 'مكتبة أبطاله', en: 'His heroes’ library' },
+			{ href: 'heroes-library.html', ar: 'مكتبة أبطاله', en: 'His heroes’ library' },
 			{ href: 'network.html', ar: 'شبكة العرّاب', en: 'The Godfather’s web' },
 			{ href: 'worlds.html', ar: 'عوالم فانتازيا', en: 'Fantasia’s worlds' },
 			{ href: 'clinic.html', ar: 'عيادة سافاري', en: 'The Safari clinic' },
@@ -111,7 +109,7 @@
 		/* the pages that are now a section of another, in no menu but found by the search and named on the site map */
 		sections: [
 			{ href: 'blog.html#papers', ar: 'في الصحف', en: 'In the papers' },
-			{ href: 'quotes.html#glossary', ar: 'قاموس العرّاب', en: 'The phrasebook' }
+			{ href: 'glossary.html', ar: 'قاموس العرّاب', en: 'The phrasebook' }
 		],
 		fix: { ar: 'وجدت خطأً أو لديك إضافة؟ اقترح تصحيحًا ↗', en: 'Spotted a mistake or have an addition? Suggest a correction ↗' },
 		/* the footer's last column: who made the site (the notes and credits live on about.html) */
@@ -218,7 +216,7 @@
 			{ href: 'map.html', ic: 'map', ar: 'الخريطة', en: 'The map', dar: 'أماكن حكاياته على الأرض', den: 'Where his tales take place' },
 			{ href: 'network.html', ic: 'web', ar: 'شبكة العرّاب', en: 'The Godfather’s web', dar: 'كيف يتصل كل شيء', den: 'How it all connects' },
 			/* and his heroes' own library */
-			{ href: 'refaat-library.html', ic: 'candle', ar: 'مكتبة أبطاله', en: 'His heroes’ library', dar: 'ما يقرؤه أبطاله داخل الحكايات', den: 'What his heroes read inside the tales' }
+			{ href: 'heroes-library.html', ic: 'candle', ar: 'مكتبة أبطاله', en: 'His heroes’ library', dar: 'ما يقرؤه أبطاله داخل الحكايات', den: 'What his heroes read inside the tales' }
 		],
 		heroes: [
 			{ id: 'refaat', ar: 'رفعت إسماعيل', en: 'Refaat Ismail', sar: 'ما وراء الطبيعة', sen: 'Ma Wara’ al-Tabi’a', c: '#6e1c1c', img: 'assets/img/characters/refaat-lantern.webp' },
@@ -230,10 +228,10 @@
 			{ href: 'interviews.html', ic: 'mic', ar: 'لقاءاته', en: 'His interviews', dar: 'بصوته: لقاءات ومحاضرات وأفلام', den: 'In his voice: interviews, talks, films' },
 			{ href: 'calendar.html', ic: 'calendar', ar: 'تقويم العرّاب', en: 'The Godfather’s calendar', dar: 'كل يوم من أيام السنة', den: 'Every day of the year' },
 			{ href: 'awards.html', ic: 'award', ar: 'الجوائز', en: 'Awards', dar: 'ما ناله وما سُمّي باسمه', den: 'What he won and what bears his name' },
-			{ href: 'tanta.html', ic: 'pin', ar: 'طنطا، مدينته', en: 'Tanta, his city', dar: 'المدينة التي وُلد فيها وعاش ودُفن', den: 'Where he was born, lived and lies' }
 		],
 		writing: [
 			{ href: 'quotes.html', ic: 'quote', ar: 'اقتباسات', en: 'Quotes', dar: 'جمل من كتبه', den: 'Lines from his books' },
+			{ href: 'glossary.html', ic: 'bookOpen', ar: 'قاموس العرّاب', en: 'The phrasebook', dar: 'عبارات عُرف بها هو وأبطاله', den: 'The lines he and his heroes are known by' },
 			{ href: 'library.html', ic: 'shelf', ar: 'مكتبته', en: 'His library', dar: 'ما أحبه ونصح به', den: 'What he loved and recommended' },
 			{ href: 'writers.html', ic: 'people', ar: 'دائرته', en: 'His circle', dar: 'رفاقه ومن حملوا عالمه', den: 'His companions and heirs' },
 			/* the houses he worked with, beside the people */
@@ -315,6 +313,8 @@
 		return '<q>' + App.esc(App.t(q.text)) + '</q><small>' + App.esc(App.L('د. أحمد خالد توفيق', 'Dr. Ahmed Khaled Tawfik')) +
 			(from ? ' · ' + App.esc(from) : ' · 1962–2018') + '</small>';
 	}
+	/* a page made one per character, series, book, writer or publisher lights, in the menus, the page that lists them all */
+	var MEGA_PARENT = { 'character.html': 'characters.html', 'series.html': 'works.html', 'book.html': 'works.html', 'writer.html': 'writers.html', 'publisher.html': 'publishers.html' };
 	/* which panel holds this page: its own pages, and the pages made one per series, book, character or writer */
 	function megaGroupOf(file) {
 		var g = { 'series.html': 'works', 'book.html': 'works', 'publisher.html': 'works', 'character.html': 'world', 'writer.html': 'life', 'numbers.html': 'legacy', 'contact.html': 'share', 'wanted.html': 'share' }[file];
@@ -325,7 +325,8 @@
 	}
 	function megaHTML(App, file) {
 		var L = App.L, e = App.esc;
-		var cur = function (href) { return href === file ? ' aria-current="page"' : ''; };
+		var parent = MEGA_PARENT[file];
+		var cur = function (href) { return href === file || href === parent ? ' aria-current="page"' : ''; };
 		var arrow = '<span class="mg-arr" aria-hidden="true">' + (App.lang === 'ar' ? '←' : '→') + '</span>';
 		var item = function (n, cls) {
 			return '<a class="' + (cls || 'mg-item') + '" href="' + n.href + '"' + cur(n.href) + '>' + (n.ic ? megaIcon(n.ic) : '') +
@@ -506,7 +507,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: 'c9e126b',
+		LATEST: '72b3460',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
@@ -771,7 +772,7 @@
 						'<nav class="nav" id="site-nav" aria-label="' + App.L('التنقل الرئيسي', 'Main') + '" data-title="' + App.L('الفهرس', 'Contents') + '">' +
 							UI.nav.map(function (n, i) {
 								/* the empty span is the dotted leader to the page number in the phone menu */
-								return '<a href="' + n.href + '" style="--i:' + i + '"' + (n.phone ? ' class="nav-phone"' : '') + (n.id === pageId ? ' aria-current="page"' : '') + '>' + App.esc(n[App.lang]) + '<span aria-hidden="true"></span></a>';
+								return '<a href="' + n.href + '" style="--i:' + i + '"' + (n.phone ? ' class="nav-phone"' : '') + (n.id === pageId || n.href === MEGA_PARENT[location.pathname.split('/').pop()] ? ' aria-current="page"' : '') + '>' + App.esc(n[App.lang]) + '<span aria-hidden="true"></span></a>';
 							}).join('') +
 						'</nav>' +
 						/* on a wider screen, the main menu with its four panels (the links above are the phone's contents page) */
@@ -1141,7 +1142,7 @@
 			if (au.midnightSpoofs) add(K.audio, au.midnightSpoofs.title, { ar: au.midnightSpoofs.years || '', en: au.midnightSpoofs.years || '' }, 'audio.html', 'audiohat');
 			(d.quotes || []).forEach(function (q, i) { add(K.quote, q.text, q.from, 'quotes.html#q-' + i, both(q.from)); });
 			/* «قاموس العرّاب»'s phrases, each to its card under the quotes (built into data-built.js) */
-			(d.glossary || []).forEach(function (g, i) { add(K.phrase, { ar: g.phrase, en: g.en }, { ar: 'قاموس العرّاب', en: 'The phrasebook' }, 'quotes.html#g-' + i, g.phrase + ' ' + g.en + ' ' + both(g.meaning)); });
+			(d.glossary || []).forEach(function (g, i) { add(K.phrase, { ar: g.phrase, en: g.en }, { ar: 'قاموس العرّاب', en: 'The phrasebook' }, 'glossary.html#g-' + i, g.phrase + ' ' + g.en + ' ' + both(g.meaning)); });
 			/* the site's own pages, the header's and the footer's, found by their names and what they hold */
 			var PAGE_WORDS = { papers: 'مقالات صحف جرائد التحرير الدستور إضاءات columns newspapers', numbers: 'أرقام إحصاءات إحصاءات الموقع أسلوب لغة كلمات جمل statistics site numbers style language words', test: 'اختبار مسابقة أسئلة quiz test', 'which-character': 'شخصية أي شخصية أنت character quiz', 'first-lines': 'البدايات أول سطر first lines openings', 'reader-card': 'بطاقة القارئ reader card', 'cover-maker': 'صمم غلافك غلاف cover maker design', 'read-with-us': 'اقرأ معنا نادي القراءة كتاب الشهر reading club book of the month',
 				map: 'خريطة أماكن map places', world: 'ترجمة مترجم لغات translations languages', screen: 'مسلسل فيلم نتفليكس netflix series film adaptation',
@@ -1158,7 +1159,7 @@
 			});
 			(d.legacy || []).forEach(function (l, i) { add(K.legacy, l.title, l.date, 'legacy.html#l-' + i, both(l.text)); });
 			(d.tributes || []).forEach(function (p, i) { add(K.tribute, p.name, p.role, 'tributes.html#t-' + i, both(p.quote) + ' ' + both(p.context)); });
-			(d.media || []).forEach(function (m, i) { add(K.media, m.title, m.outlet, 'legacy.html#m-' + i, both(m.note)); });
+			(d.media || []).forEach(function (m, i) { var y = /(?:v=|youtu\.be\/|embed\/)([\w-]{11})/.exec(m.url || ''); add(K.media, m.title, m.outlet, 'interviews.html#' + (y ? 'v-' + y[1] : 'm-' + i), both(m.note)); });
 			/* his columns, stories and comics from the blog archive (loaded on first search) */
 			((d.blog && d.blog.posts) || []).forEach(function (p) { add(K.blog, { ar: p.t, en: p.t }, { ar: p.src || p.d, en: p.src || p.d }, 'blog.html?post=' + p.id, (p.l || []).join(' ') + ' ' + (p.ex || '')); });
 			Search.index = items;

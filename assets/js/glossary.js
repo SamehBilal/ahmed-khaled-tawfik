@@ -1,6 +1,7 @@
-/* «قاموس العرّاب» — a section of the quotes page (quotes.html#glossary; glossary.html, once a page of its own, leads there): the
-   phrases readers know him and his heroes by (AKT.glossary, data-pages.js) — each with who says it, what it means and when it
-   comes, the issue or book it is from, and where it was checked. By speaker, or searched. quotes.js draws it (html) and wires it (wire). */
+/* glossary.html — «قاموس العرّاب», a page of its own again (it was a section of the quotes page for a while, and
+   quotes.html#glossary leads here): the phrases readers know him and his heroes by (AKT.glossary, data-pages.js) — each with who
+   says it, what it means and when it comes, the issue or book it is from, and where it was checked. By speaker, or searched.
+   GlossarySection draws it (html) and wires it (wire); the page (PAGE, below) puts it under its title. */
 window.GlossarySection = {
 	title: { ar: 'قاموس العرّاب', en: 'The Godfather’s phrasebook' },
 	lead: {
@@ -15,8 +16,8 @@ window.GlossarySection = {
 		var App = window.App, e = App.esc, L = App.L, t = App.t, list = App.data().glossary || [];
 		if (!list.length) return '';
 		var count = {}; list.forEach(function (x) { count[x.who] = (count[x.who] || 0) + 1; });
+		/* (its title and lead are the page's own, above) */
 		return '<section class="section gl" id="glossary"><div class="wrap">' +
-			'<h2 class="pp-title">' + e(t(this.title)) + '</h2><p class="pp-lead">' + e(t(this.lead)) + '</p>' +
 			'<div class="gl-bar"><div class="chips"><button type="button" class="chip" data-w="all" aria-pressed="true">' + e(L('الكل', 'All')) + ' <b>' + e(App.num(list.length)) + '</b></button>' +
 				this.WHO.filter(function (w) { return count[w[0]]; }).map(function (w) { return '<button type="button" class="chip" data-w="' + w[0] + '" aria-pressed="false">' + e(App.t(w[1])) + ' <b>' + e(App.num(count[w[0]])) + '</b></button>'; }).join('') +
 			'</div><input type="search" class="gl-q" placeholder="' + e(L('ابحث عن عبارة…', 'Look up a phrase…')) + '"></div>' +
@@ -94,5 +95,26 @@ window.GlossarySection = {
 				'<p class="gl-from">' + (w ? '<a href="' + e(w.href) + '">' + e(w.label) + '</a>' : '') + (x.source ? (w ? ' · ' : '') + '<a href="' + e(x.source) + '" target="_blank" rel="noopener">' + e(L('المصدر ↗', 'Source ↗')) + '</a>' : '') +
 				((w || x.source) ? ' · ' : '') + '<button type="button" class="gl-pic" data-g="' + all.indexOf(x) + '">' + e(L('صورة', 'Image')) + '</button></p></article>';
 		}).join('') || '<p class="gl-note">' + e(L('لا عبارة تطابق.', 'No phrase matches.')) + '</p>';
+	}
+};
+
+/* the page: its title and lead, the phrasebook under them; glossary.html#glossary-refaat opens on one speaker's phrases, and
+   #g-3 on one phrase, every speaker's shown so it is there */
+window.PAGE = {
+	id: 'glossary',
+	title: window.GlossarySection.title,
+	strings: {
+		eyebrow: { ar: 'عبارات لا تُنسى', en: 'Lines that stay' },
+		title: window.GlossarySection.title,
+		lead: window.GlossarySection.lead
+	},
+	render: function () {
+		var G = window.GlossarySection, h = location.hash, sp = /^#glossary-([a-z]+)$/.exec(h);
+		document.getElementById('content').innerHTML = G.html() +
+			'<section class="section"><div class="wrap"><p class="gl-note">' + window.App.esc(window.App.L('وللاقتباسات الأطول، بمصادرها، صفحة ', 'And for his longer quotes, with their sources, there is ')) +
+				'<a href="quotes.html">' + window.App.esc(window.App.L('«اقتباسات»', 'Quotes')) + '</a>.</p></div></section>';
+		G.wire();
+		if (sp) G.pick(sp[1]);
+		window.App.focusHash();
 	}
 };

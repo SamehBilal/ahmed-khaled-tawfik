@@ -32,7 +32,7 @@
 .lb-said { margin: 4px 0 8px; color: var(--paper-dim); line-height: 1.8; font-size: 15px; }
 .lb-src { margin-top: auto; color: var(--ember); font-size: 14px; }
 
-/* «مكتبة أبطاله» (refaat-library.html): his heroes' own reading, by hero, in the same cards */
+/* «مكتبة أبطاله» (heroes-library.html): his heroes' own reading, by hero, in the same cards */
 .lb-rf { margin-top: 48px; padding-top: 10px; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
 .lb-rf .lb-h small { font-size: .55em; color: var(--muted); }
 .lb-rf-who { margin: 22px 0 12px; font: 400 20px var(--f-display); color: var(--ember); }
@@ -43,10 +43,10 @@
 .rl-who { display: flex; align-items: baseline; gap: 10px; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-family: var(--f-display); font-size: 24px; color: var(--ember); }
 .rl-who b { font-family: var(--f-latin); font-size: 15px; color: var(--muted); }
 .lb-item.is-target { box-shadow: 0 0 0 2px var(--ember); }
-.ph[data-ph="refaat-library"], html[data-theme="light"] .ph[data-ph="refaat-library"] { background: transparent; border-bottom: 0; }
-.ph[data-ph="refaat-library"]::before, .ph[data-ph="refaat-library"]::after { display: none; }
-.ph[data-ph="refaat-library"] { pointer-events: auto; }
-.ph[data-ph="refaat-library"] + .page-hero { padding-top: 8px; }
+.ph[data-ph="heroes-library"], html[data-theme="light"] .ph[data-ph="heroes-library"] { background: transparent; border-bottom: 0; }
+.ph[data-ph="heroes-library"]::before, .ph[data-ph="heroes-library"]::after { display: none; }
+.ph[data-ph="heroes-library"] { pointer-events: auto; }
+.ph[data-ph="heroes-library"] + .page-hero { padding-top: 8px; }
 .rl-shelf { position: absolute; inset: 0 16px; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 26px; }
 .rl-books { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: center; gap: 4px; flex-wrap: nowrap; overflow: hidden; }
 .rl-spine {

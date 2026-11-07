@@ -1,9 +1,9 @@
-/* «مكتبة أبطاله» (refaat-library.html): what his heroes read, quote, watch and hum inside the stories — Refaat above all,
+/* «مكتبة أبطاله» (heroes-library.html): what his heroes read, quote, watch and hum inside the stories — Refaat above all,
    and Alaa — each with how they use it and the issues it is in (AKT.refaatLibrary, data-pages.js; assets/js/pages/refaatLibrary.js).
    By hero, a heading each, and by kind. Its band: their books standing on a shelf in the light of Refaat's lantern, each spine
    leading to its card. (Once a part of «مكتبته», library.html#refaat, which now leads here.) */
 window.PAGE = {
-	id: 'refaat-library',
+	id: 'heroes-library',
 	title: { ar: 'مكتبة أبطاله', en: 'His heroes’ library' },
 	strings: {
 		eyebrow: { ar: 'داخل الحكايات', en: 'Inside the stories' },
@@ -32,7 +32,9 @@ window.PAGE = {
 			var k = x.series + '-' + n, r = S && S.resolveBook(k);
 			return r && r.series ? '<a href="' + e('book.html?id=' + k) + '" title="' + e(t(r.series.s.title) + ' ' + App.num(r.item.n) + ' · ' + t(r.item.title)) + '">' + e(App.num(n)) + '</a>' : '';
 		}).filter(Boolean);
-		var mini = S ? S.miniCover({ color: this.COL[x.kind] || '#3a1414', title: t(x.title), by: x.by ? t(x.by) : ' ' }) : '';
+		/* a book's cover (or first title page) where there is one (tools/build-library-covers.js), else drawn with its title */
+		var pic = (this.art || {})[x.title.en];
+		var mini = S ? S.miniCover({ img: pic && pic.src, color: this.COL[x.kind] || '#3a1414', title: t(x.title), by: x.by ? t(x.by) : ' ' }) : '';
 		return '<article class="lb-item lb-' + e(x.kind) + '" id="rl-' + i + '"><h3>' + e(t(x.title)) + '</h3>' +
 			'<div class="lb-meta">' + mini + '<div><p class="lb-by">' + e(t(this.KIND[x.kind] || {})) + (x.by ? ' · ' + e(t(x.by)) : '') + '</p>' +
 			(covers.length ? '<p class="lb-from lb-rf-is">' + e(L('في العدد ', 'In issue ')) + covers.join(L('، ', ', ')) + '</p>' : '') + '</div></div>' +
@@ -72,6 +74,9 @@ window.PAGE = {
 			self.list();
 		};
 		this.list();
+		/* the books' covers, shared with «مكتبته» (assets/data/library-covers.json, by English title): the cards again once they come */
+		if (!this.art) fetch('assets/data/library-covers.json').then(function (r) { return r.json(); })
+			.then(function (j) { self.art = j; self.list(); }).catch(function () {});
 		/* a spine on the shelf above goes to its card, whatever kind is chosen */
 		if (!this.wired) {
 			this.wired = true;

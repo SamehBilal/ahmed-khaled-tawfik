@@ -1,6 +1,6 @@
 /* talks.html — «سيرته»: his life in six chapters (the site's timeline, AKT.timeline, with each period's interviews and, after
-   him, the Legacy page's events). His interviews have a page of their own (interviews.html, once #talks here), and so has his
-   city (tanta.html, once #tanta). The band: his life as one line, 1962 to 2018 and after, a stretch for each chapter. */
+   him, the Legacy page's events), and his city's places in the chapters they belong to (talks.html#tanta; once a page of its
+   own, tanta.html, which leads here). His interviews have a page of their own (interviews.html, once #talks here). The band: his life as one line, 1962 to 2018 and after, a stretch for each chapter. */
 window.PAGE = {
 	id: 'talks',
 	title: { ar: 'سيرته', en: 'His life' },
@@ -8,8 +8,8 @@ window.PAGE = {
 		eyebrow: { ar: 'من طنطا إلى الكتابة', en: 'From Tanta to writing' },
 		title: { ar: 'سيرته', en: 'His life' },
 		lead: {
-			ar: 'حياته في ستة فصول، من طنطا إلى ما بعد رحيله: ما جرى في كل منها، ولقاءاته وما قيل عنه في سنواته.',
-			en: 'His life in six chapters, from Tanta to what came after him: what happened in each, and the interviews and films of its years.'
+			ar: 'حياته في ستة فصول، من طنطا إلى ما بعد رحيله: ما جرى في كل منها، وأماكنه في طنطا، مدينته، ولقاءاته وما قيل عنه في سنواته.',
+			en: 'His life in six chapters, from Tanta to what came after him: what happened in each, his places in Tanta, his city, and the interviews and films of its years.'
 		}
 	},
 	/* the chapters of his life: [from, to (inclusive), title, line] */
@@ -21,6 +21,30 @@ window.PAGE = {
 		[2014, 2018, { ar: 'السنوات الأخيرة', en: 'The last years' }, { ar: 'وداع رفعت إسماعيل، والجوائز، و«شآبيب»، والرحيل.', en: 'Farewell to Refaat Ismail, the awards, Shaabeeb, and his death.' }],
 		[2019, 9999, { ar: 'ما بعده', en: 'After him' }, { ar: 'ما بقي منه: كتبه بعد رحيله، والمسلسل، والتكريم.', en: 'What remained: his books after his death, the series, the honours.' }]
 	],
+	/* his city in each chapter (AKT.tanta, data-pages.js; assets/js/pages/tanta.js — once a page of its own, tanta.html): its
+	   places by the year they belong to — the houses and schools, which have none, to his childhood — each with what kind of place
+	   it is, what happened there, the map and its source */
+	TANTA_KIND: { home: { ar: 'بيت', en: 'Home' }, school: { ar: 'مدرسة', en: 'School' }, university: { ar: 'الكلية', en: 'Faculty' },
+		hospital: { ar: 'المستشفى', en: 'Hospital' }, mosque: { ar: 'مسجد', en: 'Mosque' }, grave: { ar: 'القبر', en: 'Grave' },
+		memorial: { ar: 'ذكرى', en: 'In his memory' }, event: { ar: 'حدث', en: 'Event' }, other: { ar: 'في مقالاته', en: 'In his columns' },
+		cafe: { ar: 'مقهى', en: 'Café' }, fiction: { ar: 'في قصصه', en: 'In his fiction' } },
+	tanta: function (c, first) {
+		var App = window.App, e = App.esc, t = App.t, L = App.L, self = this;
+		var items = (App.data().tanta || []).filter(function (x) { var y = x.year || 1962; return y >= c[0] && y <= c[1]; })
+			.sort(function (a, b) { return (a.year || 1962.5) - (b.year || 1962.5); }); /* (the birth house first, then the undated houses and schools) */
+		if (!items.length) return '';
+		return '<div class="tk-tanta"' + (first ? ' id="tanta"' : '') + '><h4 class="tk-tanta-h">' + e(L('في طنطا، مدينته', 'In Tanta, his city')) + '</h4><ul>' + items.map(function (x) {
+			var map = x.lat != null && x.lng != null ? 'https://www.openstreetmap.org/?mlat=' + x.lat + '&mlon=' + x.lng + '#map=17/' + x.lat + '/' + x.lng : '';
+			var own = /aktowfik\.blogspot/.test(x.source);
+			return '<li class="tk-tn tk-tn-' + e(x.kind) + '"><span class="tk-tn-k">' + e(t(self.TANTA_KIND[x.kind] || self.TANTA_KIND.other)) + (x.year ? ' · ' + e(App.num(x.year)) : '') + '</span>' +
+				'<b>' + e(t(x.name)) + '</b><p>' + e(t(x.text)) + '</p>' +
+				'<p class="tk-tn-src">' + (map ? '<a href="' + e(map) + '" target="_blank" rel="noopener">' + e(L('على الخريطة ↗', 'On the map ↗')) + '</a> · ' : '') +
+				'<a href="' + e(x.source) + '" target="_blank" rel="noopener">' + e(own ? L('في مقاله ↗', 'In his column ↗') : L('المصدر ↗', 'Source ↗')) + '</a></p></li>';
+		}).join('') +
+			/* (under the first: where the sources differ, and a place to send another) */
+			(first ? '<li class="tk-tn-note">' + e(L('تختلف بعض المصادر في التفاصيل (بيت الميلاد مثلًا)، فذكرنا ما قاله كل منها. تعرف مكانًا آخر في طنطا مرتبطًا به؟ أرسله من ', 'Some sources differ on details (his birth house, say), so we give what each says. Know another place in Tanta tied to him? Send it from ')) +
+				'<a href="contact.html#contribute">' + e(L('«تواصل وساهم»', 'Contact & contribute')) + '</a>.</li>' : '') + '</ul></div>';
+	},
 	yt: function (url) { var m = /(?:v=|youtu\.be\/|embed\/)([\w-]{11})/.exec(url || ''); return m ? m[1] : ''; },
 
 	/* the band: his life as one line — a stretch for each chapter, as long as its years (after him, a short fading one), its
@@ -39,7 +63,7 @@ window.PAGE = {
 
 	render: function () {
 		/* the parts that left for pages of their own: an old link to one goes there */
-		var away = { '#talks': 'interviews.html', '#tanta': 'tanta.html' }[location.hash];
+		var away = { '#talks': 'interviews.html' }[location.hash];
 		if (away) { location.replace(away); return; }
 		document.getElementById('content').innerHTML = this.life();
 		window.App.focusHash();
@@ -64,7 +88,7 @@ window.PAGE = {
 					var img = (x.images || [])[0];
 					return '<li' + (img ? ' class="has-img"' : '') + '>' + (img ? '<img src="' + e(img.src) + '" alt="' + e(t(img.alt || {})) + '" loading="lazy">' : '') +
 						'<b>' + e(App.num(x.year)) + '</b><h4>' + e(t(x.title)) + '</h4><p>' + e(t(x.text)) + '</p></li>';
-				}).join('') + '</ol>' +
+				}).join('') + '</ol>' + self.tanta(c, i === 0) +
 				(after ? '<p class="bio-more"><a href="legacy.html">' + e(L('كل ما جاء بعده في «الإرث» ←', 'Everything after him on the Legacy page →')) + '</a></p>' : '') +
 				(talks.length ? '<p class="bio-talks">' + e(L('من لقاءاته وما قيل عنه في هذه السنوات: ', 'Interviews and films from these years: ')) + talks.slice(0, 4).map(function (m) {
 					return '<a href="' + e(self.yt(m.url) ? 'interviews.html#v-' + self.yt(m.url) : m.url) + '"' + (self.yt(m.url) ? '' : ' target="_blank" rel="noopener"') + '>' + e(t(m.title)) + '</a>';
@@ -74,7 +98,7 @@ window.PAGE = {
 		return '<section class="section bio tk-life" id="life"><div class="wrap">' + /* (.bio: the home page's biography's two columns, here within the site's width, page-talks.css) */
 			'<div class="bio-sum">' + paras.map(function (p) { return '<p>' + e(p) + '</p>'; }).join('') + '</div>' +
 			'<nav class="chips bio-jump">' + this.CHAPTERS.map(function (c, i) { return '<a class="chip" href="#ch-' + (i + 1) + '">' + e(App.num(i + 1) + '. ' + t(c[2])) + '</a>'; }).join('') +
-				'<a class="chip bio-out" href="tanta.html">' + e(L('طنطا، مدينته ←', 'Tanta, his city →')) + '</a>' +
+				'<a class="chip bio-out" href="#tanta">' + e(L('طنطا، مدينته', 'Tanta, his city')) + '</a>' +
 				'<a class="chip bio-out" href="interviews.html">' + e(L('لقاءاته ←', 'His interviews →')) + '</a></nav>' +
 			chapters + '</div></section>';
 	}

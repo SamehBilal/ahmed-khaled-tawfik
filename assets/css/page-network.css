@@ -21,6 +21,9 @@
 /* a figure on its own stands whole, on a lamp-lit ground */
 .nwh-tile.is-fig .nwh-pic { background: radial-gradient(70% 60% at 50% 45%, color-mix(in srgb, var(--ember) 22%, var(--ink-3)), var(--ink-2)); }
 .nwh-tile.is-fig .nwh-pic img { object-fit: contain; object-position: 50% 100%; padding-top: 6cqmin; }
+/* a book's cover, whole, on the card's surface */
+.nwh-tile.is-cover .nwh-pic { background: var(--ink-2); }
+.nwh-tile.is-cover .nwh-pic img { position: relative; object-fit: contain; object-position: 50% 50%; padding: 5cqmin; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .5)); }
 .nwh-cards.live .nwh-tile:hover .nwh-pic, .nwh-tile:focus-visible .nwh-pic { scale: 1.06; }
 .nwh-tile:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
 .nwh-tl { position: absolute; inset-inline: 6cqmin; bottom: 4cqmin; display: flex; justify-content: space-between; gap: 8px;

@@ -88,10 +88,10 @@ window.PAGE = {
 			b.replaceWith(f);
 		};
 		this.list();
-		/* a link from «سيرته» to one video (#v-<id>): that one, lit */
-		var m = /^#v-([\w-]{11})$/.exec(location.hash);
+		/* a link to one item — from «سيرته» or the search; once the Legacy page's — a video (#v-<id>) or an article (#m-<n>): that one, lit */
+		var m = /^#(v-[\w-]{11}|m-\d+)$/.exec(location.hash);
 		if (m) {
-			var b = document.querySelector('.tk-play[data-yt="' + m[1] + '"]'), card = b && b.closest('.tk-item');
+			var card = document.getElementById(m[1]);
 			if (card) setTimeout(function () { card.scrollIntoView({ block: 'center' }); card.classList.add('is-target'); }, 300);
 		}
 	},
@@ -106,7 +106,7 @@ window.PAGE = {
 		document.querySelector('.tk-list').innerHTML = list.map(function (m) {
 			var id = self.yt(m.url), head = '';
 			if (m.year !== lastYear) { head = '<h2 class="tk-year">' + e(m.year ? App.num(m.year) : L('بلا تاريخ', 'Undated')) + '</h2>'; lastYear = m.year; }
-			return head + '<article class="tk-item' + (id ? ' is-video' : '') + '"' + (id ? ' id="v-' + e(id) + '"' : '') + '>' +
+			return head + '<article class="tk-item' + (id ? ' is-video' : '') + '" id="' + (id ? 'v-' + e(id) : 'm-' + (App.data().media || []).indexOf(m)) + '">' +
 				(id ? '<button type="button" class="tk-play" data-yt="' + e(id) + '" aria-label="' + e(L('شاهد: ', 'Watch: ') + t(m.title)) + '" style="background-image:url(&quot;https://i.ytimg.com/vi/' + e(id) + '/mqdefault.jpg&quot;)"><span>▶</span></button>' : '') +
 				'<div class="tk-body"><p class="tk-meta">' + e(t(kindName[m.kind] || { ar: m.kind, en: m.kind })) + ' · ' + e(t(m.outlet)) + (m.lang && m.lang !== 'ar' ? ' · ' + e(m.lang === 'en' ? 'English' : m.lang) : '') + '</p>' +
 				'<h3>' + (id ? e(t(m.title)) : '<a href="' + e(m.url) + '" target="_blank" rel="noopener">' + e(t(m.title)) + ' ↗</a>') + '</h3>' +

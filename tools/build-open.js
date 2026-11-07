@@ -33,7 +33,7 @@ counts.editions = csv('editions.csv', ['of', 'id', 'title', 'publisher_ar', 'pub
 counts.quotes = csv('quotes.csv', ['text_ar', 'text_en', 'from', 'work', 'source', 'page'],
 	(d.quotes || []).map((x, i) => [ar(x.text), en(x.text), ar(x.from) || ar((App.findWork(x.work) || {}).title), x.work || '', x.source || '', url('quotes.html#q-' + i)]));
 counts.phrases = csv('phrases.csv', ['phrase', 'english', 'who', 'meaning_ar', 'meaning_en', 'where', 'source', 'page'],
-	(d.glossary || []).map((x, i) => [x.phrase, x.en, x.who, ar(x.meaning), en(x.meaning), x.where || '', x.source || '', url('quotes.html#g-' + i)]));
+	(d.glossary || []).map((x, i) => [x.phrase, x.en, x.who, ar(x.meaning), en(x.meaning), x.where || '', x.source || '', url('glossary.html#g-' + i)]));
 /* the calendar's moments (assets/data/days/, tools/build-days.js, run before this) */
 const days = [];
 for (let m = 1; m <= 12; m++) {

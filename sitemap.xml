@@ -8,6 +8,7 @@
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/audio.html</loc><lastmod>2026-11-07</lastmod><priority>0.8</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/blog.html</loc><lastmod>2026-11-07</lastmod><priority>0.8</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/quotes.html</loc><lastmod>2026-11-06</lastmod><priority>0.7</priority></url>
+	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/glossary.html</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/guide.html</loc><lastmod>2026-11-04</lastmod><priority>0.7</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/tributes.html</loc><lastmod>2026-11-06</lastmod><priority>0.7</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/studies.html</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
@@ -25,7 +26,6 @@
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/covers.html</loc><lastmod>2026-11-07</lastmod><priority>0.6</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/talks.html</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/interviews.html</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
-	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/tanta.html</loc><lastmod>2026-11-06</lastmod><priority>0.5</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/awards.html</loc><lastmod>2026-11-07</lastmod><priority>0.5</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/translations.html</loc><lastmod>2026-11-07</lastmod><priority>0.7</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/library.html</loc><lastmod>2026-11-06</lastmod><priority>0.7</priority></url>
@@ -39,11 +39,11 @@
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/calendar.html</loc><lastmod>2026-11-06</lastmod><priority>0.6</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/wanted.html</loc><lastmod>2026-11-07</lastmod><priority>0.4</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/refaat-life.html</loc><lastmod>2026-11-04</lastmod><priority>0.7</priority></url>
-	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/refaat-library.html</loc><lastmod>2026-11-06</lastmod><priority>0.7</priority></url>
+	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/heroes-library.html</loc><lastmod>2026-11-06</lastmod><priority>0.7</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/network.html</loc><lastmod>2026-11-03</lastmod><priority>0.6</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html</loc><lastmod>2026-11-07</lastmod><priority>0.4</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/story.html</loc><lastmod>2026-11-07</lastmod><priority>0.4</priority></url>
-	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/sitemap.html</loc><lastmod>2026-11-06</lastmod><priority>0.3</priority></url>
+	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/sitemap.html</loc><lastmod>2026-11-07</lastmod><priority>0.3</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/about.html</loc><lastmod>2026-11-04</lastmod><priority>0.5</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/sources.html</loc><lastmod>2026-11-04</lastmod><priority>0.5</priority></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/contact.html</loc><lastmod>2026-11-04</lastmod><priority>0.3</priority></url>
@@ -432,7 +432,6 @@
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/book.html?id=by-sabaa-bab</loc><priority>0.5</priority><image:image><image:loc>https://samehbilal.github.io/ahmed-khaled-tawfik/assets/img/covers/intro/7-bab.jpg</image:loc></image:image></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/book.html?id=by-watan-bayna-daffatay-daftar</loc><priority>0.5</priority><image:image><image:loc>https://samehbilal.github.io/ahmed-khaled-tawfik/assets/img/covers/intro/watan-bidayat-1.webp</image:loc></image:image></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/book.html?id=by-necrophilia</loc><priority>0.5</priority><image:image><image:loc>https://samehbilal.github.io/ahmed-khaled-tawfik/assets/img/covers/outro/necrophilia-sherine-hanaei-rewaq.webp</image:loc></image:image></url>
-	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/book.html?id=by-al-barzakh</loc><priority>0.5</priority><image:image><image:loc>https://samehbilal.github.io/ahmed-khaled-tawfik/assets/img/covers/intro/barzakh-tariq-1.webp</image:loc></image:image></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/book.html?id=by-1919</loc><priority>0.5</priority><image:image><image:loc>https://samehbilal.github.io/ahmed-khaled-tawfik/assets/img/covers/outro/1919-ahmed-mourad-front.webp</image:loc></image:image></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/book.html?id=by-the-maker-of-darkness</loc><priority>0.5</priority><image:image><image:loc>https://samehbilal.github.io/ahmed-khaled-tawfik/assets/img/covers/karma/9789776467446.webp</image:loc></image:image></url>
 	<url><loc>https://samehbilal.github.io/ahmed-khaled-tawfik/book.html?id=by-tales-of-the-cellar</loc><priority>0.5</priority><image:image><image:loc>https://samehbilal.github.io/ahmed-khaled-tawfik/assets/img/covers/karma/9789776467453.webp</image:loc></image:image></url>

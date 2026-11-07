@@ -106,9 +106,14 @@ window.PAGE = {
 		/* and every other series a scene of its own (detail.css): the specials, the three heroes' lights meeting; Shivers, rain and
 		   lightning; the World Pocket Novels, a turning globe; Molotov, rising embers; the Summer Book, a sun; the Adventurer, a
 		   compass and a trail; Adabiyat, ruled paper and ink; Super Mega, comic dots and a burst; Balya, bouncing marbles; the comics,
-		   panels; Lasheen, a clock at midnight (it grew from «بعد منتصف الليل») */
+		   panels; Lasheen, the chamber of «عصا أبناء ديهيا» (after the staff's poster and the books' covers): a red glow from
+		   below, smoke and embers, the snake-headed staff standing behind the book, a ring of carved runes turning around it, and a
+		   cracked stone floor lit from within */
 		var theme = { mwt: 'ghosts', safari: 'medicine', fantasia: 'fantasy', www: 'code', specials: 'crossing', shivers: 'storm', rwg: 'globe',
-			molotov: 'embers', sayf: 'summer', mughamer: 'compass', maqalat: 'ink', supermega: 'pop', bley: 'marbles', comics: 'panels', lasheen: 'midnight' }[id] || '';
+			molotov: 'embers', sayf: 'summer', mughamer: 'compass', maqalat: 'ink', supermega: 'pop', bley: 'marbles', comics: 'panels', lasheen: 'dihya' }[id] || '';
+		/* the runes, carved strokes like those on the staff's pedestal */
+		var RUNES = ['M10 2V26M10 9L3 2M10 9L17 2', 'M4 4L16 24M16 4L4 24M2 14H18', 'M10 2V26M3 10L10 17L17 10', 'M3 4H17M10 4V26M4 19L10 13L16 19',
+			'M10 2L17 14L10 26L3 14Z', 'M10 4a5 5 0 1 0 .1 0M10 14V26M4 20H16'];
 		var many = function (n, f) { var out = ''; for (var i = 0; i < n; i++) out += f(i); return out; };
 		var scene = {
 			ghosts: '<div class="ch-fog"><span></span><span></span><span></span></div><i class="sv-lamp"></i>',
@@ -130,8 +135,21 @@ window.PAGE = {
 			pop: '<div class="sv-dots"></div><i class="sv-burst"></i>',
 			marbles: many(7, function (i) { return '<i class="sv-marble" style="--l:' + (8 + i * 13) + '%;--h:' + (60 + (i * 47) % 120) + 'px;--d:' + (-(i * 0.37)).toFixed(2) + 's;--m:hsl(' + (i * 51) % 360 + ' 70% 55%)"></i>'; }),
 			panels: '<div class="sv-panels">' + many(6, function (i) { return '<i style="--d:' + (i * 0.5) + 's"></i>'; }) + '</div>',
-			midnight: '<svg class="sv-clock" viewBox="-100 -100 200 200"><circle r="94"/>' + many(12, function (i) { return '<line y1="-86" y2="' + (i % 3 ? -78 : -70) + '" transform="rotate(' + i * 30 + ')"/>'; }) +
-				'<line class="h" y2="-46"/><line class="m" y2="-72"/><circle class="c" r="4"/></svg>'
+			dihya: '<i class="sv-smoke"></i><i class="sv-smoke" style="--d:-9s;--x:40%"></i>' +
+				/* the floor: a ring of stone, cracked, lit from within */
+				'<svg class="sv-floor" viewBox="-300 -60 600 120"><ellipse class="r" rx="280" ry="46"/><ellipse class="r" rx="200" ry="32"/>' +
+					'<path class="k" d="M-40 6L-90 22L-150 18L-210 34M30 -4L80 -22L150 -16L190 -30M0 8L20 30L70 40M-60 -10L-120 -26L-170 -20M110 10L170 24L230 20"/></svg>' +
+				/* the runes, a ring turning slowly around the book */
+				'<svg class="sv-runes" viewBox="-100 -100 200 200"><circle r="96"/><circle r="70"/>' + many(18, function (i) {
+					return '<path d="' + RUNES[(i * 5) % RUNES.length] + '" transform="rotate(' + i * 20 + ') translate(-6 -91) scale(.6)"/>';
+				}) + '</svg>' +
+				/* the staff: a twisted shaft, a snake coiled up it, its head at the top */
+				'<svg class="sv-staff" viewBox="0 0 80 640"><defs><linearGradient id="sv-wood" x1="0" x2="1"><stop offset="0" stop-color="#5a3a1e"/><stop offset=".45" stop-color="#c79a62"/><stop offset="1" stop-color="#4a2e16"/></linearGradient></defs>' +
+					'<path class="shaft" d="M34 110 C30 260 44 420 36 636 L46 636 C52 420 40 260 48 110 Z"/>' +
+					'<path class="coil" d="M41 600 C70 570 12 545 40 515 S70 455 40 430 S10 380 42 350 S72 295 41 270 S12 220 42 190 S70 140 44 112"/>' +
+					'<path class="head" d="M44 112 C30 104 22 88 26 70 C30 52 46 40 60 48 C70 54 72 68 64 78 C58 86 50 88 52 100 Z"/><circle class="eye" cx="57" cy="60" r="2.6"/>' +
+					many(5, function (i) { return '<path class="mark" d="' + RUNES[i % RUNES.length] + '" transform="translate(' + (34 + (i % 2) * 2) + ' ' + (300 + i * 42) + ') scale(.42)"/>'; }) + '</svg>' +
+				many(14, function (i) { return '<i class="sv-ember" style="--l:' + ((i * 41) % 100) + '%;--d:' + (-(i * 0.7) % 8).toFixed(1) + 's;--s:' + (2 + (i % 3)) + 'px"></i>'; })
 		}[theme] || '';
 
 		root.innerHTML =

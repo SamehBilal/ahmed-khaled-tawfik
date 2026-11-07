@@ -153,7 +153,6 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		'7 باب': C + 'intro/7-bab.jpg',
 		'تاريخ شكل تاني': C + 'intro/tarikh-shakl-tani.webp',
 		'وطن.. بين دفتي دفتر (بدايات 1)': C + 'intro/watan-bidayat-1.webp',
-		'البرزخ (سلسلة الطارق 1)': C + 'intro/barzakh-tariq-1.webp',
 		'نيكروفيليا': C + 'outro/necrophilia-sherine-hanaei-rewaq.webp'
 	};
 	var intros = (A.writers = A.writers || {}).introductions = A.writers.introductions || [];
@@ -162,14 +161,8 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			text: { ar: 'طُبع تعليق العرّاب على الرواية على غلافها الخارجي، إلى جانب تعليق نبيل فاروق.', en: 'Tawfik’s comment on the novel is printed on its outer cover, next to one by Nabil Farouk.' },
 			source: 'https://abjjad.com/review/1985576990' });
 	}
-	/* «البرزخ», the first of Sayed Zahran's «الطارق»: he read it on the Modern Arab Association's reading committee and passed it for
-	   publication (2018), as Zahran says in the book's introduction; abjjad.com/book/2805760006 */
-	if (!intros.some(function (w) { return w.book && w.book.ar === 'البرزخ (سلسلة الطارق 1)'; })) {
-		intros.push({ name: { ar: 'سيد زهران', en: 'Sayed Zahran' }, book: { ar: 'البرزخ (سلسلة الطارق 1)', en: 'Al-Barzakh (Al-Tariq #1)' }, year: 2018, direction: 'back_akt',
-			text: { ar: 'العدد الأول من «الطارق» عن «روايات مصرية للجيب»: قرأه العرّاب في لجنة القراءة بالمؤسسة العربية الحديثة وأجازه للنشر، ويذكر الكاتب ذلك في مقدمة الكتاب.',
-				en: 'The first Al-Tariq novel, in the Egyptian Pocket Novels: Tawfik read it on the Modern Arab Association’s reading committee and passed it for publication, as the author says in the book’s introduction.' },
-			source: 'https://www.abjjad.com/book/2805760006' });
-	}
+	/* («البرزخ», the first of Sayed Zahran's «الطارق», has no word of his on it: he was on the reading committee that passed it,
+	   which Zahran's entry among «كتبوا معه» tells, below) */
 	intros.forEach(function (w) { if (w.book && byBook[w.book.ar] && !w.cover) w.cover = byBook[w.book.ar]; });
 
 	var tr = { fightclub: 'fight-club.webp', dermaphoria: 'dermaphoria.webp', kiterunner: 'kite-runner-graphic.webp' };
@@ -514,7 +507,7 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 			{
 				title: { ar: 'مواسم البرنامج المسموعة على أوديوهات', en: 'The show’s audio seasons on Audiohat' },
 				text: { ar: 'إصدارات أوديوهات الأصلية، بقلم شيرين هنائي وبالتعاون مع دار كتوبيا. في الموسم الثاني أدّى محمد خميس دور لاشين، وأخرجه عمرو يسري.', en: 'Audiohat originals, written by Sherine Hanaey with Kotopia. In season two Mohamed Khamis voiced Lasheen; Amr Yousry directed.' },
-				items: [{"title":{"ar":"الموسم الثاني","en":"Season Two"},"url":"https://www.audiohatdar.com/serieses/_02_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2020 · 9 حلقات","en":"2020 · 9 episodes"},"text":{"ar":"«عودة آلة الرعب»","en":"The return of the horror machine"}},{"title":{"ar":"الموسم الثالث","en":"Season Three"},"url":"https://www.audiohatdar.com/serieses/_03_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2021 · 10 حلقات","en":"2021 · 10 episodes"}},{"title":{"ar":"الموسم الرابع","en":"Season Four"},"url":"https://www.audiohatdar.com/serieses/_04_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2022 · 10 حلقات","en":"2022 · 10 episodes"}},{"title":{"ar":"الموسم الخامس","en":"Season Five"},"url":"https://www.audiohatdar.com/serieses/_05_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2023 · 10 حلقات","en":"2023 · 10 episodes"}},{"title":{"ar":"الموسم السادس","en":"Season Six"},"url":"https://www.audiohatdar.com/serieses/_06_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2024 · 10 حلقات","en":"2024 · 10 episodes"}},{"title":{"ar":"الموسم السابع","en":"Season Seven"},"url":"https://www.audiohatdar.com/serieses/_07_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B3%D8%A7%D8%A8%D8%B9_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2025 · 10 حلقات","en":"2025 · 10 episodes"}},{"title":{"ar":"الموسم الثامن","en":"Season Eight"},"url":"https://www.audiohatdar.com/serieses/_08_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%85%D9%86_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2026 · يُذاع الآن","en":"2026 · airing now"},"text":{"ar":"الحلقة الأولى: «المال والبنون»","en":"Episode one: Money and Sons"}}].concat([{ title: { ar: 'لاشين 15: عن الرعب والسفر — مسموعًا', en: 'Lasheen 15: On Horror and Travel — audiobook' }, url: ah('لاشين:_عن_الرعب_والسفر_'), meta: { ar: '4 حلقات · إنتاج «اقرأ لي»', en: '4 parts · produced by Iqra Li' } }])
+				items: [{"title":{"ar":"الموسم الثاني","en":"Season Two"},"url":"https://www.audiohatdar.com/serieses/_02_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2020 · 9 حلقات","en":"2020 · 9 episodes"},"text":{"ar":"«عودة آلة الرعب»","en":"The return of the horror machine"}},{"title":{"ar":"الموسم الثالث","en":"Season Three"},"url":"https://www.audiohatdar.com/serieses/_03_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2021 · 10 حلقات","en":"2021 · 10 episodes"}},{"title":{"ar":"الموسم الرابع","en":"Season Four"},"url":"https://www.audiohatdar.com/serieses/_04_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2022 · 10 حلقات","en":"2022 · 10 episodes"}},{"title":{"ar":"الموسم الخامس","en":"Season Five"},"url":"https://www.audiohatdar.com/serieses/_05_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2023 · 10 حلقات","en":"2023 · 10 episodes"}},{"title":{"ar":"الموسم السادس","en":"Season Six"},"url":"https://www.audiohatdar.com/serieses/_06_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2024 · 10 حلقات","en":"2024 · 10 episodes"}},{"title":{"ar":"الموسم السابع","en":"Season Seven"},"url":"https://www.audiohatdar.com/serieses/_07_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%B3%D8%A7%D8%A8%D8%B9_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2025 · 10 حلقات","en":"2025 · 10 episodes"}},{"title":{"ar":"الموسم الثامن","en":"Season Eight"},"url":"https://www.audiohatdar.com/serieses/_08_%D8%A7%D9%84%D9%85%D9%88%D8%B3%D9%85_%D8%A7%D9%84%D8%AB%D8%A7%D9%85%D9%86_%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC_%D8%A8%D8%B9%D8%AF_%D9%85%D9%86%D8%AA%D8%B5%D9%81_%D8%A7%D9%84%D9%84%D9%8A%D9%84_","meta":{"ar":"2026 · يُذاع الآن · حلقتان","en":"2026 · airing now · 2 episodes"},"text":{"ar":"الحلقة الأولى: «المال والبنون»، والثانية: «أنا الفرخة واحنا الكتاكيت» (6 نوفمبر 2026)؛ والثالثة «ما حدث في عزبة الفسايخَة» في 13 نوفمبر","en":"Episode one: Money and Sons; episode two: I’m the Hen and We’re the Chicks (6 November 2026); the third, What Happened in Ezbet al-Fasaykha, on 13 November"}}].concat([{ title: { ar: 'لاشين 15: عن الرعب والسفر — مسموعًا', en: 'Lasheen 15: On Horror and Travel — audiobook' }, url: ah('لاشين:_عن_الرعب_والسفر_'), meta: { ar: '4 حلقات · إنتاج «اقرأ لي»', en: '4 parts · produced by Iqra Li' } }])
 			},
 			{
 				title: { ar: 'على ستوريا بود', en: 'On StoriaPod' },
@@ -4050,7 +4043,10 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	if (i.cover && /bookhome-rwg-76/.test(i.cover)) { delete i.cover; delete i.coverSource; }
 })(window.AKT);
 
-/* «سوبر ميجا»: Sayed Zahran wrote in it with him too, as the site's editor tells — on the series' page, and among «كتبوا معه» */
+/* «سوبر ميجا»: Sayed Zahran wrote in it with him too, as the site's editor tells — on the series' page, and among «كتبوا معه»;
+   and his own series «الطارق» began with «البرزخ» (2018), which Tawfik, on the Modern Arab Association's reading committee, read
+   and passed for publication, as Zahran says in its introduction (abjjad.com/book/2805760006) — no foreword of Tawfik's, so not
+   among «قدّم لهم» */
 (function (A) {
 	var I = A.seriesInfo = A.seriesInfo || {};
 	I.supermega = I.supermega || {};
@@ -4058,11 +4054,12 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	if (!I.supermega.with.some(function (x) { return x.id === 'sayed-zahran'; })) I.supermega.with.push({ id: 'sayed-zahran', role: { ar: 'كتب فيها معه', en: 'Wrote in it alongside him' } });
 	var W = A.writers = A.writers || {}, C = W.collaborators = W.collaborators || [];
 	if (C.some(function (w) { return (w.name || {}).ar === 'سيد زهران'; })) return;
-	var intro = (W.introductions || []).filter(function (w) { return (w.name || {}).ar === 'سيد زهران'; })[0] || {};
 	C.push({
-		name: { ar: 'سيد زهران', en: 'Sayed Zahran' }, photo: intro.photo,
+		name: { ar: 'سيد زهران', en: 'Sayed Zahran' }, photo: { url: 'assets/img/photos/writers/sayed-zahran.webp' },
 		work: { ar: '«سوبر ميجا»', en: 'Super Mega' },
-		text: { ar: 'كتب مع العرّاب ونبيل فاروق وسالي عادل في «سوبر ميجا» عن المؤسسة العربية الحديثة.', en: 'Wrote alongside Tawfik, Nabil Farouk and Sally Adel in Super Mega, from the Modern Arab Association.' },
+		text: { ar: 'كتب مع العرّاب ونبيل فاروق وسالي عادل في «سوبر ميجا» عن المؤسسة العربية الحديثة. وكان العرّاب في لجنة القراءة بالمؤسسة التي ساندته وأجازت للنشر «البرزخ»، أول أعداد سلسلته «الطارق» في «روايات مصرية للجيب» (2018)، كما يذكر في مقدمة الكتاب.',
+			en: 'Wrote alongside Tawfik, Nabil Farouk and Sally Adel in Super Mega, from the Modern Arab Association. Tawfik was also on the Association’s reading committee that backed him and passed for publication Al-Barzakh, the first of his Al-Tariq series in the Egyptian Pocket Novels (2018), as he says in the book’s introduction.' },
+		source: 'https://www.abjjad.com/book/2805760006',
 		books: ['s:supermega']
 	});
 })(window.AKT);

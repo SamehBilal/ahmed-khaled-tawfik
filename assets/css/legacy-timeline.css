@@ -148,3 +148,7 @@ html[dir="rtl"] .lv-ic { margin-inline-start: 0; margin-inline-end: 3px; }
 .lv.on .lv-q { color: var(--paper); }
 /* on a phone: on the same line as the «My lists» button (round there), leaving room for it beside */
 @media (max-width: 560px) { .lv { bottom: 15px; max-width: calc(100vw - 36px - 58px); } .lv-q { font-size: 12.5px; } }
+
+/* the Legacy page: its interviews are on their own page now (interviews.html) */
+.lg-more { margin: 0; font-family: var(--f-display); font-size: 19px; color: var(--paper-dim); }
+.lg-more a { color: var(--ember); }

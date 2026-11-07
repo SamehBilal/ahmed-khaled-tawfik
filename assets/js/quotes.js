@@ -5,8 +5,8 @@ window.PAGE = {
 		eyebrow: { ar: 'بكلماته', en: 'In his words' },
 		title: { ar: 'اقتباسات', en: 'Quotes' },
 		lead: {
-			ar: 'تنتشر على الإنترنت اقتباسات كثيرة منسوبة إليه خطأً. هنا فقط ما وجدنا له مصدرًا موثوقًا — مع رابط المصدر تحت كل اقتباس. وتحتها «قاموس العرّاب»: العبارات القصيرة التي عُرف بها هو وأبطاله.',
-			en: 'Many quotes are falsely attributed to him online. This page holds only those we could trace to a reliable source — with the link under each one. Under them, the phrasebook: the short lines he and his heroes are known by.'
+			ar: 'تنتشر على الإنترنت اقتباسات كثيرة منسوبة إليه خطأً. هنا فقط ما وجدنا له مصدرًا موثوقًا — مع رابط المصدر تحت كل اقتباس. وللعبارات القصيرة التي عُرف بها هو وأبطاله صفحتها: «قاموس العرّاب».',
+			en: 'Many quotes are falsely attributed to him online. This page holds only those we could trace to a reliable source — with the link under each one. The short lines he and his heroes are known by have a page of their own: the phrasebook.'
 		}
 	},
 	filter: 'all',
@@ -56,10 +56,8 @@ window.PAGE = {
 						'</figcaption>' +
 					'</figure>';
 				}).join('') + '</div>' +
-			'</div></section>' +
-			/* and under the quotes, the shorter lines: «قاموس العرّاب» (glossary.js), once a page of its own */
-			(window.GlossarySection ? window.GlossarySection.html() : '');
-		if (window.GlossarySection) window.GlossarySection.wire();
+				'<p class="q-more"><a href="glossary.html">' + e(L('«قاموس العرّاب»: العبارات القصيرة التي عُرف بها هو وأبطاله ←', 'The phrasebook: the short lines he and his heroes are known by →')) + '</a></p>' +
+			'</div></section>';
 
 		var grid = document.getElementById('q-grid'), filters = document.getElementById('q-filters');
 		function apply() {
@@ -89,20 +87,11 @@ window.PAGE = {
 		this.onHash();
 	},
 
-	/* quotes.html#glossary (as glossary.html now leads): to the phrasebook's heading — it is too tall to centre — and again as the
-	   quotes above it settle, as long as the reader has not scrolled away; any other hash, the quote it names */
+	/* the phrasebook has its own page again (glossary.html): an old link to it here (#glossary, #glossary-refaat, #g-3) goes
+	   there; any other hash, the quote it names */
 	onHash: function () {
-		var self = this, G = window.GlossarySection, h = location.hash;
-		/* #glossary-refaat: the phrasebook with one speaker's phrases; #g-3: one phrase, every speaker's shown so it is there */
-		var sp = /^#glossary-([a-z]+)$/.exec(h);
-		if (G && sp) G.pick(sp[1]);
-		if (G && /^#g-\d+$/.test(h)) G.pick('all');
-		if (/^#glossary(-[a-z]+)?$/.test(h)) return [60, 400, 1000].forEach(function (ms) {
-			setTimeout(function () {
-				var to = document.getElementById('glossary');
-				if (to && location.hash === h && Math.abs(to.getBoundingClientRect().top - 80) > 40) to.scrollIntoView({ block: 'start', behavior: 'instant' });
-			}, ms);
-		});
+		var self = this, h = location.hash;
+		if (/^#(glossary(-[a-z]+)?|g-\d+)$/.test(h)) { location.replace('glossary.html' + h); return; }
 		window.App.focusHash(function (el) { if (el.hidden) { self.filter = 'all'; self.apply(); } });
 	},
 

@@ -513,18 +513,40 @@ html[data-theme="light"] .sv-ruled { background: repeating-linear-gradient(trans
 @keyframes sv-panel { 0%, 100% { opacity: .35; } 40% { opacity: 1; } }
 html[data-theme="light"] .sv-panels i { border-color: #5a2f7a; }
 .sv-theme-panels .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #c9a2e8; }
-/* Lasheen: a clock at midnight behind the book, its minute hand creeping on */
-.sv-theme-midnight .sv-scene { background: radial-gradient(800px 420px at 80% 18%, rgba(70, 90, 180, .22), transparent 70%), linear-gradient(#06070d, transparent 80%); }
-html[data-theme="light"] .sv-theme-midnight .sv-scene { background: radial-gradient(800px 420px at 80% 18%, rgba(70, 90, 180, .16), transparent 70%); }
-.sv-clock { position: absolute; top: 170px; inset-inline-start: calc(var(--bx) - 240px); width: 480px; height: 480px; opacity: .45; fill: none; stroke: #a9b6ff; stroke-width: 1.5; stroke-linecap: round; }
-.sv-clock .h { stroke-width: 5; }
-.sv-clock .m { stroke-width: 3; animation: sv-spin 40s linear infinite; }
-.sv-clock .c { fill: #a9b6ff; }
-html[data-theme="light"] .sv-clock { stroke: #2a3580; }
-.sv-theme-midnight .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #a9b6ff; }
-@media (max-width: 760px) { .sv-globe, .sv-sun, .sv-compass, .sv-burst, .sv-clock, .sv-blot, .sv-orb { width: 300px; height: 300px; } .sv-panels { width: 60%; height: 360px; } }
+/* Lasheen: the chamber of «عصا أبناء ديهيا» (the staff's poster, the books' red and gold covers) — a glow of fire from below,
+   smoke drifting, embers rising; behind the book the snake-headed staff standing, a ring of carved runes turning slowly
+   around it, and a cracked stone floor lit from within */
+.sv-theme-dihya .sv-scene { background: radial-gradient(620px 420px at var(--bx) 88%, rgba(220, 70, 20, .38), transparent 70%),
+	radial-gradient(900px 500px at 50% 0%, rgba(120, 20, 10, .35), transparent 70%), linear-gradient(#120504, #1d0806 55%, transparent); }
+html[data-theme="light"] .sv-theme-dihya .sv-scene { background: radial-gradient(620px 420px at var(--bx) 88%, rgba(220, 90, 30, .28), transparent 70%),
+	radial-gradient(900px 500px at 50% 0%, rgba(170, 60, 30, .16), transparent 70%), linear-gradient(#f1dccb, transparent); }
+.sv-smoke { position: absolute; top: 120px; left: var(--x, 10%); width: 560px; height: 420px; border-radius: 50%; filter: blur(50px); opacity: .5;
+	background: radial-gradient(circle, rgba(150, 50, 30, .55), transparent 65%); animation: sv-smoke 18s var(--d, 0s) ease-in-out infinite alternate; }
+html[data-theme="light"] .sv-smoke { opacity: .35; }
+@keyframes sv-smoke { from { transform: translate(-40px, 20px) scale(1); } to { transform: translate(60px, -30px) scale(1.15); } }
+.sv-floor { position: absolute; top: 600px; inset-inline-start: calc(var(--bx) - 340px); width: 680px; height: 136px; fill: none; overflow: visible; }
+.sv-floor .r { stroke: rgba(255, 140, 70, .35); stroke-width: 1.5; fill: rgba(40, 10, 6, .35); }
+.sv-floor .k { stroke: #ff7a2e; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 5px #ff5a1a); opacity: .75; animation: sv-glow 3.5s ease-in-out infinite alternate; }
+html[data-theme="light"] .sv-floor .r { stroke: rgba(140, 50, 20, .4); fill: rgba(140, 60, 30, .08); }
+html[data-theme="light"] .sv-floor .k { stroke: #c2410c; filter: none; }
+@keyframes sv-glow { from { opacity: .45; } to { opacity: .95; } }
+.sv-runes { position: absolute; top: 150px; inset-inline-start: calc(var(--bx) - 260px); width: 520px; height: 520px; fill: none; stroke: #ff8a4a; stroke-width: 1.4;
+	stroke-linecap: round; opacity: .5; filter: drop-shadow(0 0 4px rgba(255, 90, 30, .8)); animation: sv-spin 120s linear infinite; }
+.sv-runes circle { stroke: rgba(255, 138, 74, .4); stroke-width: 1; }
+html[data-theme="light"] .sv-runes { stroke: #9a2d10; opacity: .4; filter: none; }
+.sv-staff { position: absolute; top: 96px; inset-inline-start: max(0px, calc(var(--bx) - 250px)); width: 84px; height: 672px; overflow: visible;
+	filter: drop-shadow(0 0 18px rgba(255, 90, 30, .45)); }
+.sv-staff .shaft { fill: url(#sv-wood); }
+.sv-staff .coil { fill: none; stroke: #9c7448; stroke-width: 9; stroke-linecap: round; }
+.sv-staff .head { fill: #b88a56; stroke: #4a2e16; stroke-width: 1.2; }
+.sv-staff .eye { fill: #ff6a1a; filter: drop-shadow(0 0 4px #ff3a00); animation: sv-glow 2.6s ease-in-out infinite alternate; }
+.sv-staff .mark { fill: none; stroke: #3a210f; stroke-width: 2.4; stroke-linecap: round; }
+html[data-theme="light"] .sv-staff { filter: drop-shadow(0 6px 12px rgba(90, 40, 10, .35)); }
+.sv-theme-dihya .sv-ember { background: #ffb35a; }
+.sv-theme-dihya .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #ff8a4a; }
+@media (max-width: 760px) { .sv-globe, .sv-sun, .sv-compass, .sv-burst, .sv-runes, .sv-blot, .sv-orb { width: 300px; height: 300px; } .sv-runes { inset-inline-start: calc(var(--bx) - 150px); } .sv-floor { width: 420px; inset-inline-start: calc(var(--bx) - 210px); } .sv-panels { width: 60%; height: 360px; } }
 @media (prefers-reduced-motion: reduce) {
-	.sv-orb, .sv-rain, .sv-flash, .sv-globe .mer, .sv-ember, .sv-sun, .sv-compass .needle, .sv-trail, .sv-blot, .sv-burst, .sv-marble, .sv-panels i, .sv-clock .m { animation: none; }
+	.sv-orb, .sv-rain, .sv-flash, .sv-globe .mer, .sv-ember, .sv-sun, .sv-compass .needle, .sv-trail, .sv-blot, .sv-burst, .sv-marble, .sv-panels i, .sv-runes, .sv-smoke, .sv-floor .k, .sv-staff .eye { animation: none; }
 	.sv-ember { opacity: .6; }
 }
 /* on a desktop the scene stays put while the page scrolls, as the book beside the text does; clipped to the series' own section

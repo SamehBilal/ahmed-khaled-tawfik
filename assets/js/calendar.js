@@ -56,8 +56,6 @@ window.PAGE = {
 
 	render: function () {
 		var App = window.App, e = App.esc, L = App.L, self = this;
-		/* under the calendar, «كلمة اليوم · بكلماته» (today.js), moved here from the Works page (the day's own events are in the calendar's open day) */
-		if (window.TodayLine) window.TodayLine.mount(document.getElementById('today-line'));
 		document.getElementById('content').innerHTML = '<section class="section ca"><div class="wrap">' +
 			'<div class="chips ca-bar"><button type="button" class="chip" data-k="all" aria-pressed="true">' + e(L('الكل', 'All')) + '</button>' +
 				this.KIND.map(function (k) { return '<button type="button" class="chip" data-k="' + k[0] + '" aria-pressed="false">' + e(App.t(k[1])) + '</button>'; }).join('') + '</div>' +
