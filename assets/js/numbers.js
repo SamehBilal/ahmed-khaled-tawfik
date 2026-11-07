@@ -18,7 +18,7 @@ window.PAGE = {
 	render: function () {
 		var App = window.App, d = App.data(), S = window.WorksShared, e = App.esc, t = App.t, L = App.L, self = this;
 		var own = S.ownSeries(), other = S.contributedSeries();
-		var seriesIds = own.concat(other).filter(function (s) { return /\d{4}/.test(String(s.years || '')); });
+		var seriesIds = own.concat(other).filter(function (s) { return self.years(s).length; });
 
 		var step = function (n, kicker, h, lead) {
 			return '<div class="flow-head"><span class="flow-mark" aria-hidden="true">' + e(App.num(n)) + '</span><p class="flow-kicker">' + e(kicker) + '</p><h2>' + e(h) + '</h2><p class="flow-lead">' + e(lead) + '</p></div>';
@@ -95,11 +95,20 @@ window.PAGE = {
 		return { mwt: mwt, books: books, papers: papers };
 	},
 
+	/* a series' years, as numbers: those the data gives it («1993–2014»), or else the first and last of its issues' own years
+	   (World Pocket Novels and the series he wrote one or two issues for have none of their own); [] when neither has any */
+	years: function (s) {
+		var ys = String(s.years || '').match(/\d{4}/g);
+		if (ys) return ys.map(Number);
+		var own = window.WorksShared.seriesIssues(s.id).map(function (is) { return +is.year || 0; }).filter(Boolean);
+		return own.length ? [Math.min.apply(null, own), Math.max.apply(null, own)] : [];
+	},
+
 	/* each series as a bar from its first year to its last, in its own colour and named on the bar */
 	spans: function (list) {
-		var App = window.App, e = App.esc, t = App.t, S = window.WorksShared, L = App.L;
+		var App = window.App, e = App.esc, t = App.t, S = window.WorksShared, L = App.L, self = this;
 		var rows = list.map(function (s) {
-			var ys = String(s.years).match(/\d{4}/g).map(Number);
+			var ys = self.years(s);
 			return { s: s, a: ys[0], b: ys[ys.length - 1], n: S.seriesIssues(s.id).filter(function (is) { return !(is.part > 1); }).length };
 		}).sort(function (x, y) { return x.a - y.a || y.n - x.n; });
 		var a0 = Math.min.apply(null, rows.map(function (r) { return r.a; })), b0 = Math.max.apply(null, rows.map(function (r) { return r.b; }));

@@ -7,7 +7,15 @@
 	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
-	<updated>2026-11-06T20:59:00Z</updated>
+	<updated>2026-11-07T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/be7733c</id>
+		<title>«بالأرقام والأسلوب»'s «المسيرة» and «إحصاءات الموقع» are one step</title>
+		<updated>2026-11-07T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="data" label="بيانات"/>
+		<content type="text">«بالأرقام والأسلوب»'s «المسيرة» and «إحصاءات الموقع» are one step: one set of 18 tiles (site-stats.js, which the page and tools/build-meta.js both read), each number once and with its Arabic plural, the 12 houses of his books and the 17 publishers and platforms now both 17; #stats leads to the tiles. The home page's «استكشف / ادخل المكتبة» has 18 cards for the site's main sections, adding سيرته, لقاءاته, بالأرقام والأسلوب, الأغلفة والطبعات, تقويم العرّاب and ما ينقص الأرشيف, each card's figure its own page's count (الإرث its events, not the interviews; الأعمال issues and books, not series and books). Service worker and changelog rebuilt</content>
+	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cfd20b2</id>
 		<title>تحديث البيانات وخريطة الموقع وملفات XML والتخزين دون اتصال، ومراجعة كل الصفحات والأداء</title>
@@ -572,14 +580,5 @@
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">«يوميات رفعت إسماعيل»: صارت العجلة تدور وحدها إلى اللحظة التالية كل سبع ثوانٍ، وتتوقف عند الإشارة إليها أو الاختيار منها</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cc8f446</id>
-		<title>«يوميات رفعت إسماعيل»</title>
-		<updated>2026-11-02T20:53:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="data" label="بيانات"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">«يوميات رفعت إسماعيل»: صار أعلى الصفحة عجلة لحياته، كل لحظة علامة على حافتها، تدور العجلة إلى ما تختاره فتظهر حكايته</content>
 	</entry>
 </feed>
