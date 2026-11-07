@@ -17,11 +17,13 @@
 .gl-pic { padding: 0; border: 0; background: none; color: var(--ember); font: inherit; cursor: pointer; }
 .gl-pic:hover, .gl-pic:focus-visible { text-decoration: underline; }
 
-/* the band (glossary.js band): an open dictionary in the dark — a page of entries in two columns rising slowly at the sides, one
-   entry large in the middle turning over every few seconds, and a thumb index of the speakers down the edge */
-.ph[data-ph="glossary"] { height: 360px;
-	background: radial-gradient(60% 90% at 50% 40%, #241a14 0%, #120e0b 60%, #0b0c10 100%); }
-html[data-theme="light"] .ph[data-ph="glossary"] { background: radial-gradient(60% 90% at 50% 40%, #f6ecd6 0%, #e8dcc0 70%, #d9caa8 100%); --ph-bg: #d9caa8; color: #2a2118; }
+/* the band (glossary.js band): an open dictionary — a page of entries in two columns rising slowly at the sides, one entry large
+   in the middle turning over every few seconds, and a thumb index of the speakers down the edge. It is the page itself: no ground
+   of its own, no fade at its sides, no line under it */
+.ph[data-ph="glossary"], html[data-theme="light"] .ph[data-ph="glossary"] { height: 360px; background: transparent; border-bottom: 0; }
+.ph[data-ph="glossary"]::before, .ph[data-ph="glossary"]::after { display: none; }
+.ph[data-ph="glossary"] + .page-hero { padding-top: 8px; }
+html[data-theme="light"] .ph[data-ph="glossary"] { --ph-bg: transparent; color: #2a2118; }
 .gb { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr minmax(320px, 1.3fr) 1fr; gap: 34px; padding: 0 max(56px, 6%); }
 /* the side columns: entries as a dictionary sets them, headword bold in its speaker's colour, then what it means */
 .gb-col { position: relative; overflow: hidden; opacity: .55;

@@ -129,3 +129,10 @@
 .hw-h { margin: 0 0 8px; font-family: var(--f-display); font-size: 34px; }
 .hw-lead { max-width: 820px; margin: 0 0 20px; color: var(--paper-dim); line-height: 1.9; }
 #dedications, #send { scroll-margin-top: 90px; }
+
+/* «بخط يده»'s band (handwriting.js band): the ruled sheet lies on the page itself — no ground of its own, no fade at its sides, no
+   line under it */
+.ph[data-ph="handwriting"], html[data-theme="light"] .ph[data-ph="handwriting"] { background: transparent; border-bottom: 0; }
+.ph[data-ph="handwriting"]::before, .ph[data-ph="handwriting"]::after { display: none; }
+.ph[data-ph="handwriting"] + .page-hero { padding-top: 8px; }
+html[data-theme="light"] .ph[data-ph="handwriting"] .hw-page { box-shadow: 0 16px 34px rgba(60, 40, 20, .25), inset 18px 0 24px -18px rgba(0, 0, 0, .12); }
