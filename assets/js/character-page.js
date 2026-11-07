@@ -67,8 +67,6 @@ window.PAGE = {
 			fantasy: '<div class="ch-stars" aria-hidden="true"></div><div class="ch-portal" aria-hidden="true"></div>',
 			/* the Virus: columns of code falling behind him */
 			code: '<div class="ch-code" aria-hidden="true">' + [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (i) { var bits = ''; for (var k = 0; k < 28; k++) bits += (i * 7 + k * 13) % 3 ? '1' : '0'; return '<span style="--i:' + i + '">' + bits + '</span>'; }).join('') + '</div>',
-			/* Utopia: the wall, gold on its inner side, grey outside */
-			wall: '<div class="ch-wall ch-wall-' + e((hero && hero.side) || 'in') + '" aria-hidden="true"><span></span></div>',
 			/* al-Senga: a scrawled, unreadable word on a wall */
 			graffiti: '<div class="ch-graffiti" aria-hidden="true"><b>؟</b></div>',
 			/* Like Icarus: a burning sun, and feathers drifting down */
@@ -77,7 +75,8 @@ window.PAGE = {
 			dark: '<div class="ch-dark" aria-hidden="true"></div>'
 		}[hero && hero.theme] || '';
 
-		var html = '<section class="ch-hero' + (hero ? ' ch-theme-' + e(hero.theme) : '') + '" style="--c:' + e(color) + '">' + backdrop +
+		/* (Utopia's heroes have a scene of their own, the two worlds and the wall between them: utopia, below) */
+		var html = hero && hero.theme === 'wall' ? this.utopia(c, hero, work) : '<section class="ch-hero' + (hero ? ' ch-theme-' + e(hero.theme) : '') + '" style="--c:' + e(color) + '">' + backdrop +
 			'<div class="wrap ch-hero-grid">' +
 				'<div class="ch-portrait' + (figure ? ' is-figure' : '') + '">' + portrait +
 					/* Refaat's lantern: its glow breathes and flickers, and moths circle it */
@@ -186,5 +185,74 @@ window.PAGE = {
 		/* in the darkness, a small light follows the pointer */
 		var dark = hero && hero.theme === 'dark' && root.querySelector('.ch-hero');
 		if (dark) dark.addEventListener('pointermove', function (ev) { var r = dark.getBoundingClientRect(); dark.style.setProperty('--mx', (ev.clientX - r.left) + 'px'); dark.style.setProperty('--my', (ev.clientY - r.top) + 'px'); });
+	},
+	/* Utopia's heroes (Alaa, inside the wall; Gaber, outside it): one scene for both, the colony on the start side — gold,
+	   villas, palms and a pool under a low sun — and the Others' world on the far side — grey dust, crowded broken blocks, a
+	   few lit windows — with the wall between them, barbed wire along its top and a searchlight sweeping the outside. The
+	   hero stands on his own side, which is lit; across the wall, the novel's cover and the hero on the other side. */
+	utopia: function (c, hero, work) {
+		var App = window.App, d = App.data(), S = window.WorksShared, e = App.esc, t = App.t, tx = App.tx, L = App.L;
+		var side = hero.side === 'out' ? 'out' : 'in', far = side === 'in' ? 'out' : 'in';
+		var cover = work && S.coverOf((d.bookInfo || {})[work.id]);
+		var other = (d.characters || []).filter(function (o) {
+			var h = (d.heroes || {})[o.id];
+			return o.main && o.id !== c.id && o.work === c.work && h && h.theme === 'wall' && (h.side === 'out' ? 'out' : 'in') !== side;
+		})[0];
+		var WORLD = {
+			in: { name: L('يوتوبيا', 'Utopia'), where: L('داخل السور · الساحل الشمالي، ' + App.num(2023), 'Inside the wall · the north coast, 2023') },
+			out: { name: L('الأغيار', 'The Others'), where: L('خارج السور · حيث يعيش الجميع', 'Outside the wall · where everyone else lives') }
+		};
+		/* a seeded random, so the skyline is the same on every visit */
+		var seed = 7, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+		/* inside: low villas with lit windows, a pool, palms */
+		var villas = '', palms = '';
+		[[20, 90], [150, 120], [300, 100], [450, 110]].forEach(function (v, i) {
+			var x = v[0], w = v[1], h = 34 + (i % 2) * 14, y = 130 - h;
+			villas += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"/><rect x="' + (x - 6) + '" y="' + (y - 5) + '" width="' + (w + 12) + '" height="6"/>';
+			for (var k = 0; k < Math.floor(w / 26); k++) villas += '<rect class="ut-lit" x="' + (x + 9 + k * 26) + '" y="' + (y + 10) + '" width="12" height="9"/>';
+		});
+		villas += '<rect class="ut-pool" x="252" y="126" width="44" height="5" rx="2"/>';
+		[[120, 1], [272, .85], [420, 1.1], [580, .9]].forEach(function (p) {
+			var x = p[0], s = p[1], top = 130 - 78 * s;
+			palms += '<path d="M' + x + ' 130 Q' + (x - 6 * s) + ' ' + (130 - 40 * s) + ' ' + (x + 3 * s) + ' ' + top + '" fill="none" stroke-width="' + (4 * s) + '"/>';
+			[-150, -110, -70, -30, 10].forEach(function (a) {
+				palms += '<ellipse cx="' + (x + 3 * s) + '" cy="' + top + '" rx="' + (24 * s) + '" ry="' + (5 * s) + '" transform="rotate(' + a + ' ' + (x + 3 * s) + ' ' + top + ') translate(' + (20 * s) + ' 0)"/>';
+			});
+		});
+		var inside = '<svg class="ut-sky" viewBox="0 0 600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g class="ut-palms">' + palms + '</g><g>' + villas + '</g><rect y="130" width="600" height="10"/></svg>';
+		/* outside: tall uneven blocks shoulder to shoulder, bare windows, a few lit, dishes and rods on the roofs */
+		var blocks = '';
+		for (var x = 0; x < 600;) {
+			var w = 30 + Math.floor(rnd() * 22), h = 50 + Math.floor(rnd() * 70), y = 132 - h;
+			blocks += '<rect x="' + x + '" y="' + y + '" width="' + (w - 2) + '" height="' + h + '"/>';
+			for (var r = y + 8; r < 124; r += 13) for (var q = x + 5; q < x + w - 9; q += 10) if (rnd() > .45) blocks += '<rect class="' + (rnd() > .88 ? 'ut-lit' : 'ut-hole') + '" x="' + q + '" y="' + r + '" width="5" height="6"/>';
+			if (rnd() > .6) blocks += '<path class="ut-rod" d="M' + (x + w / 2) + ' ' + y + 'v-12m-5 4h10" fill="none"/>';
+			else if (rnd() > .5) blocks += '<circle cx="' + (x + 8) + '" cy="' + (y - 4) + '" r="5"/>';
+			x += w;
+		}
+		var outside = '<svg class="ut-sky" viewBox="0 0 600 140" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><g>' + blocks + '</g><rect y="132" width="600" height="8"/></svg>';
+
+		var text = '<div class="ch-text ut-text">' +
+			'<p class="eyebrow">' + tx(hero.eyebrow) + ' · ' + App.workLink(c.work) + '</p>' +
+			'<h1>' + e(t(c.name)) + '</h1>' +
+			'<p class="ch-alt">' + e(App.alt(c.name)) + '</p>' +
+			'<p class="ch-role">' + tx(c.role) + '</p>' + App.shareButton() + App.citeButton() +
+			App.paras(hero.intro) +
+		'</div>';
+		/* across the wall: that world's name, the novel, and who lives there */
+		var across = '<div class="ut-across">' +
+			'<p class="ut-world-name">' + e(WORLD[far].name) + '<small>' + e(WORLD[far].where) + '</small></p>' +
+			(cover && work ? '<a class="ut-cover" href="' + e(S.bookHref(work.id)) + '"><img src="' + e(cover) + '" alt="' + e(t(work.title)) + '"></a>' : '') +
+			(other ? '<a class="ut-other" href="character.html?id=' + encodeURIComponent(other.id) + '"><small>' + e(L('على الجانب الآخر من السور', 'On the other side of the wall')) + '</small>' +
+				'<b>' + e(t(other.name)) + '</b><span>' + tx(other.role) + '</span></a>' : '') +
+		'</div>';
+		return '<section class="ut-hero ut-side-' + side + '">' +
+			'<div class="ut-scene" aria-hidden="true">' +
+				'<div class="ut-world ut-world-in"><span class="ut-mark">' + e(WORLD.in.name) + '</span>' + inside + '</div>' +
+				'<div class="ut-world ut-world-out"><span class="ut-mark">' + e(WORLD.out.name) + '</span>' + outside + '</div>' +
+				'<div class="ut-wall"><span class="ut-wire"></span><span class="ut-beam"></span></div>' +
+			'</div>' +
+			'<div class="wrap ut-grid">' + (side === 'in' ? text + across : across + text) + '</div>' +
+		'</section>';
 	}
 };

@@ -239,21 +239,90 @@ html[dir="rtl"] .ch-portrait img.ch-bookcover { transform: rotate(3deg) scale(.8
 .ch-theme-code-body .ch-group h3::before { content: '> '; color: #39e08a; font-family: ui-monospace, Consolas, monospace; }
 html[data-theme="light"] .ch-code span { color: #13804a; text-shadow: none; }
 
-/* Utopia: the wall across the scene — gold light inside it, grey dust outside */
-.ch-theme-wall::before { background: linear-gradient(90deg, rgba(212, 170, 80, .22), transparent 48%, transparent 52%, rgba(120, 120, 120, .2)); }
-/* (it stands in the gap between the cover and the words, so it never crosses them: the page's width, min(1180px, 100% - 32px),
-   centred, then the cover's 260px and half the 44px gap, less half the wall; on a phone, the cover above the words, it goes) */
-.ch-wall { position: absolute; top: 0; bottom: 0; inset-inline-start: calc((100% - min(1180px, 100% - 32px)) / 2 + 282px - 13px); width: 26px; z-index: -1; pointer-events: none;
-	background: repeating-linear-gradient(0deg, #4a4036 0 22px, #3a3129 22px 24px); box-shadow: 0 0 40px rgba(0, 0, 0, .6); opacity: .55; }
-.ch-wall span { position: absolute; top: 0; left: -6px; right: -6px; height: 14px;
-	background: repeating-linear-gradient(90deg, #6b5d4f 0 6px, transparent 6px 9px); }
-@media (max-width: 760px) { .ch-wall { display: none; } }
-/* his words' side of the wall: gold for Alaa, inside it, and grey dust for Gaber, outside */
-.ch-theme-wall:has(.ch-wall-out)::before { background: linear-gradient(90deg, rgba(120, 120, 120, .2), transparent 48%, transparent 52%, rgba(212, 170, 80, .12)); }
-[dir="ltr"] .ch-theme-wall::before { background: linear-gradient(270deg, rgba(212, 170, 80, .22), transparent 48%, transparent 52%, rgba(120, 120, 120, .2)); }
-[dir="ltr"] .ch-theme-wall:has(.ch-wall-out)::before { background: linear-gradient(270deg, rgba(120, 120, 120, .2), transparent 48%, transparent 52%, rgba(212, 170, 80, .12)); }
-.ch-wall-in ~ .ch-hero-grid .ch-role { color: #e3b95c; }
-.ch-wall-out ~ .ch-hero-grid .ch-role { color: #b9b1a0; }
+/* Utopia (character-page.js, utopia): one scene for Alaa and Gaber — the colony on the start side, the Others' world on the far
+   side, the wall between them. Each hero stands on his own side, lit; the other side is dimmed, and holds the novel and the
+   hero across the wall */
+.ut-hero { position: relative; overflow: hidden; isolation: isolate; padding: 64px 0 168px; border-bottom: 1px solid var(--line);
+	--in-a: #1c150b; --in-b: #4a3416; --in-ink: #120d06; --in-lit: #f2c46b; --in-sun: rgba(240, 180, 80, .45);
+	--out-a: #121315; --out-b: #2c2e33; --out-ink: #0b0c0d; --out-lit: #d9c38a; --out-dust: rgba(160, 155, 145, .18); }
+html[data-theme="light"] .ut-hero {
+	--in-a: #fbf1d9; --in-b: #ecd093; --in-ink: #6f4f1d; --in-lit: #fff3c9; --in-sun: rgba(255, 200, 90, .6);
+	--out-a: #eceae6; --out-b: #c9c5be; --out-ink: #55534f; --out-lit: #f3e1a6; --out-dust: rgba(120, 115, 105, .22); }
+.ut-scene { position: absolute; inset: 0; z-index: -1; display: grid; grid-template-columns: 1fr 1fr; }
+.ut-world { position: relative; overflow: hidden; transition: filter .4s; }
+.ut-world-in { background: radial-gradient(520px 260px at 50% 78%, var(--in-sun), transparent 70%), linear-gradient(var(--in-a), var(--in-b)); }
+.ut-world-out { background: radial-gradient(700px 300px at 40% 30%, var(--out-dust), transparent 70%), linear-gradient(var(--out-a), var(--out-b)); }
+/* the skylines, along the bottom */
+.ut-sky { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 150px; }
+.ut-world-in .ut-sky { fill: var(--in-ink); stroke: var(--in-ink); }
+.ut-world-in .ut-sky rect, .ut-world-in .ut-sky ellipse { stroke: none; }
+.ut-world-out .ut-sky { fill: var(--out-ink); }
+.ut-sky .ut-lit { fill: var(--in-lit); }
+.ut-world-out .ut-sky .ut-lit { fill: var(--out-lit); opacity: .8; }
+.ut-sky .ut-hole { fill: var(--out-b); opacity: .55; }
+.ut-sky .ut-pool { fill: #5fb8c9; }
+.ut-sky .ut-rod { stroke: var(--out-ink); stroke-width: 1.5; }
+/* each world's name, large and faint behind it */
+.ut-mark { position: absolute; inset-inline: 0; top: 50%; transform: translateY(-62%); text-align: center; pointer-events: none;
+	font-family: var(--f-chunky); font-size: clamp(64px, 11vw, 170px); line-height: 1; color: var(--paper); opacity: .05; white-space: nowrap; }
+/* the far side, dimmed */
+.ut-side-in .ut-world-out, .ut-side-out .ut-world-in { filter: saturate(.55) brightness(.72); }
+html[data-theme="light"] .ut-side-in .ut-world-out, html[data-theme="light"] .ut-side-out .ut-world-in { filter: saturate(.6) brightness(.93); }
+
+/* the wall: courses of sandstone bricks, each row's joints halfway along the row above, in dark mortar, lit a little on one face
+   and shadowed on both sides; barbed wire along its top */
+.ut-wall { position: absolute; top: 40px; bottom: 0; left: 50%; width: 56px; margin-left: -28px;
+	background-color: #3b3128;
+	background-image: linear-gradient(90deg, rgba(255, 236, 200, .16), transparent 30%, transparent 70%, rgba(0, 0, 0, .3)),
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='36'%3E%3Crect width='56' height='36' fill='%233b3128'/%3E%3Cg fill='%23a08a6c'%3E%3Crect x='1' y='1' width='26' height='15' rx='1'/%3E%3Crect x='29' y='1' width='26' height='15' rx='1'/%3E%3Crect x='-13' y='19' width='26' height='15' rx='1'/%3E%3Crect x='15' y='19' width='26' height='15' rx='1'/%3E%3Crect x='43' y='19' width='26' height='15' rx='1'/%3E%3C/g%3E%3Cg fill='%23000' opacity='.18'%3E%3Crect x='1' y='13' width='26' height='3'/%3E%3Crect x='29' y='13' width='26' height='3'/%3E%3Crect x='-13' y='31' width='26' height='3'/%3E%3Crect x='15' y='31' width='26' height='3'/%3E%3Crect x='43' y='31' width='26' height='3'/%3E%3C/g%3E%3C/svg%3E");
+	background-size: 100% 100%, 56px 36px;
+	box-shadow: -16px 0 28px rgba(0, 0, 0, .5), 16px 0 28px rgba(0, 0, 0, .5); }
+.ut-wall::before { content: ''; position: absolute; left: -5px; right: -5px; top: 0; height: 8px; background: #b39b7a; box-shadow: 0 3px 0 #3b3128; }
+.ut-wire { position: absolute; left: -10px; right: -10px; top: -26px; height: 26px;
+	background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='26'%3E%3Cpath d='M0 13 C6 0 18 0 24 13 C18 26 6 26 0 13Z' fill='none' stroke='%23a9a49c' stroke-width='1.6'/%3E%3Cpath d='M12 4l0 6M9 7h6M12 16l0 6M9 19h6' stroke='%23a9a49c' stroke-width='1.4'/%3E%3C/svg%3E") repeat-x 0 0 / 24px 26px; }
+/* the searchlight, from the top of the wall across the far, outside side (inline-end: its box starts at the wall's middle
+   and runs that way, its point at the wall) */
+.ut-beam { position: absolute; top: 2px; inset-inline-start: 50%; width: 46vw; height: 150px; margin-top: -75px; pointer-events: none;
+	background: linear-gradient(to left, rgba(255, 244, 200, .26), rgba(255, 244, 200, 0) 85%);
+	clip-path: polygon(100% 47%, 0 0, 0 100%, 100% 53%); transform-origin: 100% 50%; animation: ut-sweep 9s ease-in-out infinite alternate; mix-blend-mode: screen; }
+[dir="ltr"] .ut-beam { background: linear-gradient(to right, rgba(255, 244, 200, .26), rgba(255, 244, 200, 0) 85%); clip-path: polygon(0 47%, 100% 0, 100% 100%, 0 53%); transform-origin: 0 50%; }
+html[data-theme="light"] .ut-beam { mix-blend-mode: normal; opacity: .7; }
+@keyframes ut-sweep { from { transform: rotate(-16deg); } to { transform: rotate(14deg); } }
+@media (prefers-reduced-motion: reduce) { .ut-beam { animation: none; transform: rotate(6deg); } }
+
+/* the words on each side of the wall */
+.ut-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 140px; align-items: center; }
+.ut-side-in .ch-role { color: #e3b95c; }
+.ut-side-out .ch-role { color: #b9b1a0; }
+html[data-theme="light"] .ut-side-in .ch-role { color: #9a6a12; }
+html[data-theme="light"] .ut-side-out .ch-role { color: #6c665c; }
+.ut-text p { max-width: 54ch; }
+/* across the wall */
+.ut-across { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+.ut-world-name { margin: 0; font-family: var(--f-chunky); font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; color: var(--paper); }
+html[lang="en"] .ut-world-name { font-family: var(--f-display); font-weight: 700; }
+.ut-world-name small { display: block; margin-top: 4px; font-family: var(--f-body); font-size: 14px; color: var(--paper-dim); }
+.ut-cover img { display: block; width: 170px; border-radius: 6px; box-shadow: 0 18px 40px rgba(0, 0, 0, .5); transform: rotate(-3deg); transition: transform .3s; }
+.ut-side-out .ut-cover img { transform: rotate(3deg); }
+.ut-cover:hover img { transform: rotate(0) translateY(-4px); }
+.ut-other { display: grid; gap: 2px; padding: 10px 18px; border-radius: 14px; border: 1px solid var(--line); background: color-mix(in srgb, var(--ink-2) 80%, transparent);
+	color: var(--paper); backdrop-filter: blur(4px); transition: border-color .2s, transform .2s; }
+.ut-other:hover { border-color: var(--ember); color: var(--paper); transform: translateY(-2px); }
+.ut-other small { color: var(--muted); font-size: 12px; }
+.ut-other b { font-family: var(--f-display); font-size: 20px; }
+.ut-other span { color: var(--paper-dim); font-size: 13px; }
+
+/* a phone: one column, his own world behind him and no wall; across the wall comes after, smaller */
+@media (max-width: 860px) {
+	.ut-hero { padding: 36px 0 150px; }
+	.ut-grid { grid-template-columns: 1fr; row-gap: 30px; }
+	.ut-scene { grid-template-columns: 1fr; }
+	.ut-side-in .ut-world-out, .ut-side-out .ut-world-in, .ut-wall { display: none; }
+	.ut-side-out .ut-text { order: -1; }
+	.ut-across { flex-direction: row; flex-wrap: wrap; justify-content: center; text-align: start; }
+	.ut-world-name { flex-basis: 100%; text-align: center; }
+	.ut-cover img { width: 110px; }
+}
 .ch-theme-wall-body .ch-beat:nth-child(odd) { border-inline-start: 3px solid #d4aa50; }
 .ch-theme-wall-body .ch-beat:nth-child(even) { border-inline-start: 3px solid #8c8c8c; }
 
