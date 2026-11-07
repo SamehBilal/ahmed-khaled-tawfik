@@ -9,37 +9,44 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-08T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/31c119c</id>
+		<title>Blend glossary and handwriting bands into pages</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">Blend glossary and handwriting bands into pages</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/de286ca</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:59:00Z</updated>
+		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
 		<title>up</title>
-		<updated>2026-11-08T20:58:00Z</updated>
+		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
-		<updated>2026-11-08T20:57:00Z</updated>
+		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
-		<updated>2026-11-08T20:56:00Z</updated>
+		<updated>2026-11-08T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:55:00Z</updated>
+		<updated>2026-11-08T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
@@ -550,16 +557,5 @@
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">«ما ينقص الأرشيف» has the side menu of the pages about the site, as «عن الموقع» and the rest do, and is in it on each of them, after «تواصل وساهم»</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/069c17a</id>
-		<title>Four new pages</title>
-		<updated>2026-11-03T20:55:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="page" label="New page"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">Four new pages. «عوالم فانتازيا» (worlds.html): the world each of Fantasia's 64 issues takes Abeer to — myths, books, film and comics, history, ideas, games — 54 of them from the issues' own back covers, a few from their titles alone (and marked so), ten not known yet; its band is Abeer's train to Fantasia, a cover in each carriage window. «عيادة سافاري» (clinic.html): Safari's 53 issues as Dr Alaa's case files — the disease, tribe or place, experiment or mystery of each — with a short medical note on the twelve diseases the series names (kala-azar, malaria, leprosy, rabies, yellow fever…); its band a heart monitor whose readings are those diseases. Both in AKT.fantasiaWorlds and AKT.safariCases (data-pages.js), drawn by series-file.js; #fantasia-25, #safari-36 go to one issue. «تقويم العرّاب» (calendar.html): the whole year in small squares, darker where more happened, 979 moments on 336 days from assets/data/days/; a day chosen shows its moments, #d-06-10 opens one, by kind; its band twelve tear-off sheets. «ما ينقص الأرشيف» (wanted.html): what the archive lacks, counted from the data each time it opens — the worlds and cases not known, issues without their back-cover text, back covers no one has sent, editions with no year, text with no English — each with why and how to send it; linked from «تواصل وساهم». In the footer (عالم العرّاب, اكتشف أكثر, خلف الكواليس), the phone menu, the site map, search and sitemap.xml, each with its share picture and a description counted from the data</content>
 	</entry>
 </feed>

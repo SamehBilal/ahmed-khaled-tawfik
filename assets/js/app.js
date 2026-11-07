@@ -389,15 +389,17 @@
 				'<small>' + L('كم كتب، ومتى، وبأي الكلمات', 'How much he wrote, when, and in which words') + '</small>' +
 				'<span class="mg-go">' + L('اكتشف الأرقام', 'Explore the numbers') + ' ' + arrow + '</span></a>');
 
-		/* «شارك»: the reader's turn — a correction, a cover, a dedication, a story, code, the data — and a word on how each is credited */
+		/* «شارك»: the reader's turn, in two columns side by side — what one can add to the site (a correction, a cover, a
+		   dedication, a story, code, the data) and what one can play and read — six each, a row each; under both, a strip on how
+		   each contribution is credited */
 		var share = panel('share', L('شارك', 'Contribute'),
-			'<div class="mg-share-main"><p class="mg-h">' + L('ساهم في الموقع', 'Add to the site') + '</p><div class="mg-list">' +
+			'<div class="mg-col"><p class="mg-h">' + L('ساهم في الموقع', 'Add to the site') + '</p><div class="mg-list">' +
 				item({ href: App.fixHref(L('', '')), ic: 'pen', ar: 'صحّح أو أضف', en: 'Correct or add', dar: 'خطأ رأيته أو معلومة تنقص، على GitHub', den: 'A mistake you saw or something missing, on GitHub' }).replace('<a ', '<a target="_blank" rel="noopener" ') +
-				MEGA.share.map(function (n) { return item(n); }).join('') + '</div>' +
-				'<p class="mg-h">' + L('العب واقرأ', 'Play and read') + '</p><div class="mg-list mg-play">' + MEGA.play.map(function (n) { return item(n); }).join('') + '</div></div>' +
+				MEGA.share.map(function (n) { return item(n); }).join('') + '</div></div>' +
+			'<div class="mg-col mg-col-play"><p class="mg-h">' + L('العب واقرأ', 'Play and read') + '</p><div class="mg-list">' + MEGA.play.map(function (n) { return item(n); }).join('') + '</div></div>' +
 			'<a class="mg-credit" href="changelog.html"><span class="mg-seal" aria-hidden="true">' + megaIcon('award') + '</span>' +
-				'<b>' + e(L('باسمك، إن أردت', 'In your name, if you wish')) + '</b>' +
-				'<small>' + e(L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها وفي «سجل التحديثات». الموقع يكبر بقرّائه.', 'Each contribution that goes up names its sender on its page and in the changelog. The site grows with its readers.')) + '</small>' +
+				'<span class="mg-credit-tx"><b>' + e(L('باسمك، إن أردت', 'In your name, if you wish')) + '</b>' +
+				'<small>' + e(L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها وفي «سجل التحديثات». الموقع يكبر بقرّائه.', 'Each contribution that goes up names its sender on its page and in the changelog. The site grows with its readers.')) + '</small></span>' +
 				'<span class="mg-go">' + e(L('سجل التحديثات', 'The changelog')) + ' ' + arrow + '</span></a>');
 		var pen = '<svg class="mnav-ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 		return '<nav class="mnav" aria-label="' + L('التنقل الرئيسي', 'Main') + '">' +
@@ -510,7 +512,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: 'de286ca',
+		LATEST: '31c119c',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
