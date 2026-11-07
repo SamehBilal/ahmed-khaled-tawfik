@@ -241,10 +241,17 @@ html[data-theme="light"] .ch-code span { color: #13804a; text-shadow: none; }
 
 /* Utopia: the wall across the scene — gold light inside it, grey dust outside */
 .ch-theme-wall::before { background: linear-gradient(90deg, rgba(212, 170, 80, .22), transparent 48%, transparent 52%, rgba(120, 120, 120, .2)); }
-.ch-wall { position: absolute; top: 0; bottom: 0; left: 50%; width: 26px; margin-left: -13px; z-index: -1; pointer-events: none;
+/* (it stands in the gap between the cover and the words, so it never crosses them: the page's width, min(1180px, 100% - 32px),
+   centred, then the cover's 260px and half the 44px gap, less half the wall; on a phone, the cover above the words, it goes) */
+.ch-wall { position: absolute; top: 0; bottom: 0; inset-inline-start: calc((100% - min(1180px, 100% - 32px)) / 2 + 282px - 13px); width: 26px; z-index: -1; pointer-events: none;
 	background: repeating-linear-gradient(0deg, #4a4036 0 22px, #3a3129 22px 24px); box-shadow: 0 0 40px rgba(0, 0, 0, .6); opacity: .55; }
 .ch-wall span { position: absolute; top: 0; left: -6px; right: -6px; height: 14px;
 	background: repeating-linear-gradient(90deg, #6b5d4f 0 6px, transparent 6px 9px); }
+@media (max-width: 760px) { .ch-wall { display: none; } }
+/* his words' side of the wall: gold for Alaa, inside it, and grey dust for Gaber, outside */
+.ch-theme-wall:has(.ch-wall-out)::before { background: linear-gradient(90deg, rgba(120, 120, 120, .2), transparent 48%, transparent 52%, rgba(212, 170, 80, .12)); }
+[dir="ltr"] .ch-theme-wall::before { background: linear-gradient(270deg, rgba(212, 170, 80, .22), transparent 48%, transparent 52%, rgba(120, 120, 120, .2)); }
+[dir="ltr"] .ch-theme-wall:has(.ch-wall-out)::before { background: linear-gradient(270deg, rgba(120, 120, 120, .2), transparent 48%, transparent 52%, rgba(212, 170, 80, .12)); }
 .ch-wall-in ~ .ch-hero-grid .ch-role { color: #e3b95c; }
 .ch-wall-out ~ .ch-hero-grid .ch-role { color: #b9b1a0; }
 .ch-theme-wall-body .ch-beat:nth-child(odd) { border-inline-start: 3px solid #d4aa50; }
