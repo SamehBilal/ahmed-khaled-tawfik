@@ -9,16 +9,23 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-07T20:59:00Z</updated>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/72b3460</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/945f6da</id>
 		<title>updates</title>
 		<updated>2026-11-07T20:59:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/72b3460</id>
+		<title>updates</title>
+		<updated>2026-11-07T20:58:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">updates</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c9e126b</id>
 		<title>The blog page's filter in two levels</title>
-		<updated>2026-11-07T20:58:00Z</updated>
+		<updated>2026-11-07T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="audio" label="Audio"/>
 		<category term="design" label="Design"/>
@@ -27,7 +34,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/9994814</id>
 		<title>Utopia's character pages (علاء and جابر) open on a scene of their own</title>
-		<updated>2026-11-07T20:57:00Z</updated>
+		<updated>2026-11-07T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="design" label="Design"/>
@@ -36,7 +43,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2c50333</id>
 		<title>Utopia's character pages (علاء and جابر)</title>
-		<updated>2026-11-07T20:56:00Z</updated>
+		<updated>2026-11-07T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<content type="text">Utopia's character pages (علاء and جابر): the wall in the hero stands in the gap between the cover and the words, not across the middle of the screen where it cut through the eyebrow and every line of the description; hidden on a phone, where the cover sits above the words. The side of his words is tinted gold for Alaa, inside the wall, and grey for Gaber, outside it, in Arabic and English. Service worker, changelog, feeds and sitemap rebuilt</content>
@@ -44,7 +51,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c0aaeb6</id>
 		<title>The blog page's «في الصحف» is now the top of its archive</title>
-		<updated>2026-11-07T20:55:00Z</updated>
+		<updated>2026-11-07T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">The blog page's «في الصحف» is now the top of its archive: the outlets' cards (with «خارج الصحف» for the 209 posts from no paper), the kinds and the search together as one filter, then his pieces in the papers year by year, then the archive's piles, which the outlet chosen narrows; the kinds and the search narrow the cards' counts (an outlet with none faded) and the chart too. blog.html#papers-&lt;outlet&gt; still opens on that outlet, and the outlet chosen is kept on coming back from an article. The old per-year list under it is gone (the archive shows the same posts), the cards are smaller, and the page's lead says the new order. Service worker, changelog, feeds and sitemap rebuilt</content>
@@ -52,7 +59,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a0b1093</id>
 		<title>«الطبعات» on the covers page</title>
-		<updated>2026-11-07T20:54:00Z</updated>
+		<updated>2026-11-07T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="audio" label="Audio"/>
@@ -62,7 +69,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/beb70c2</id>
 		<title>«مسيرة السلاسل» on numbers.html draws «روايات عالمية للجيب» (1994–2015, 77 issues)</title>
-		<updated>2026-11-07T20:53:00Z</updated>
+		<updated>2026-11-07T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">«مسيرة السلاسل» on numbers.html draws «روايات عالمية للجيب» (1994–2015, 77 issues): a series with no years of its own now takes the first and last of its issues' years, which also brings in كتاب الصيف (2003), بلية العجيب (2004) and روايات كوميكس (2003). Service worker, changelog, feeds and sitemap rebuilt</content>
@@ -70,7 +77,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/be7733c</id>
 		<title>«بالأرقام والأسلوب»'s «المسيرة» and «إحصاءات الموقع» are one step</title>
-		<updated>2026-11-07T20:52:00Z</updated>
+		<updated>2026-11-07T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">«بالأرقام والأسلوب»'s «المسيرة» and «إحصاءات الموقع» are one step: one set of 18 tiles (site-stats.js, which the page and tools/build-meta.js both read), each number once and with its Arabic plural, the 12 houses of his books and the 17 publishers and platforms now both 17; #stats leads to the tiles. The home page's «استكشف / ادخل المكتبة» has 18 cards for the site's main sections, adding سيرته, لقاءاته, بالأرقام والأسلوب, الأغلفة والطبعات, تقويم العرّاب and ما ينقص الأرشيف, each card's figure its own page's count (الإرث its events, not the interviews; الأعمال issues and books, not series and books). Service worker and changelog rebuilt</content>
@@ -571,14 +578,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">A round of every page: the numbers, the tags and the speed. Each section page's description — in its meta tag, its share tags and its JSON-LD — now comes from the data (tools/build-meta.js, run by build-sw.js), so its counts are the site's own: 299 issues in 14 series and 54 books, 75 quotes and 42 phrases, 1078 articles and 869 of them in 15 papers, 695 recordings, 499 covers and 1087 editions, and so on; the stale ones set right (audio was &quot;on Audiohat&quot; only, «سيرته ولقاءاته» was interviews only). Every section page has the same JSON-LD now (fourteen had none), a stylesheet linked twice is linked once, and every head asks early for the two Arabic fonts and the data file. «الأرقام»'s 869 is pieces in the papers (it said articles in the archive, which holds 1078). Faster: 235 heavy PNG/JPG covers are WebP now, at most 800 px wide (the covers from 105.7 to 17.6 MB of their 108; the images 155 → 74 MB), every reference moved with them and every picture checked on disk and on the covers wall; files no page uses are left as they were. Lists below the fold (issue covers, the library, the circle, a character's links, the grave, the blog's icons) load their pictures lazily. README: the build step, the quotes and blog pages' sections</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b6af226</id>
-		<title>«اقتباسات» and «قاموس العرّاب» are one page</title>
-		<updated>2026-11-03T20:49:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«اقتباسات» and «قاموس العرّاب» are one page: the phrasebook — its speakers as chips, its search, each phrase with its meaning and where it is from — now under the quotes (glossary.js as GlossarySection, drawn and wired by quotes.js), glossary.html leading to quotes.html#glossary, which lands on its heading; its band of lit phrases goes with the page. «في الصحف» and «قاموس العرّاب» leave the footer and the phone menu: both are sections now, found by the search and named on the site map (UI.sections); the XML sitemap leaves glossary.html out</content>
 	</entry>
 </feed>

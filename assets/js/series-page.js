@@ -103,14 +103,14 @@ window.PAGE = {
 
 		/* the heroes' series wear their hero's scene behind the book (as on their character pages, character.css):
 		   Refaat's fog and lamplight, Alaa's heartbeat, Abeer's stars and portal, the Virus's falling code */
-		/* and every other series a scene of its own (detail.css): the specials, the three heroes' lights meeting; Shivers, rain and
-		   lightning; the World Pocket Novels, a turning globe; Molotov, rising embers; the Summer Book, a sun; the Adventurer, a
-		   compass and a trail; Adabiyat, ruled paper and ink; Super Mega, comic dots and a burst; Balya, bouncing marbles; the comics,
+		/* and every other series a scene of its own (detail.css): each after its covers — the specials, a crypt and their red diamond;
+		   Shivers, a storm; the World Pocket Novels, the world's landmarks on one horizon; Molotov, rising embers; the Summer Book, a
+		   sun; the Adventurer, a comic-book explosion; Adabiyat, a golden newspaper page; Super Mega, hanging light bulbs; Balya, bouncing marbles; the comics,
 		   panels; Lasheen, the chamber of «عصا أبناء ديهيا» (after the staff's poster and the books' covers): a red glow from
 		   below, smoke and embers, the snake-headed staff standing behind the book, a ring of carved runes turning around it, and a
 		   cracked stone floor lit from within */
-		var theme = { mwt: 'ghosts', safari: 'medicine', fantasia: 'fantasy', www: 'code', specials: 'crossing', shivers: 'storm', rwg: 'globe',
-			molotov: 'embers', sayf: 'summer', mughamer: 'compass', maqalat: 'ink', supermega: 'pop', bley: 'marbles', comics: 'panels', lasheen: 'dihya' }[id] || '';
+		var theme = { mwt: 'ghosts', safari: 'medicine', fantasia: 'fantasy', www: 'code', specials: 'crypt', shivers: 'storm', rwg: 'skyline',
+			molotov: 'embers', sayf: 'summer', mughamer: 'blast', maqalat: 'press', supermega: 'bulbs', bley: 'marbles', comics: 'panels', lasheen: 'dihya' }[id] || '';
 		/* the runes, carved strokes like those on the staff's pedestal */
 		var RUNES = ['M10 2V26M10 9L3 2M10 9L17 2', 'M4 4L16 24M16 4L4 24M2 14H18', 'M10 2V26M3 10L10 17L17 10', 'M3 4H17M10 4V26M4 19L10 13L16 19',
 			'M10 2L17 14L10 26L3 14Z', 'M10 4a5 5 0 1 0 .1 0M10 14V26M4 20H16'];
@@ -121,18 +121,83 @@ window.PAGE = {
 			fantasy: '<div class="ch-stars"></div><div class="ch-portal"></div>',
 			/* WWW: the Virus's code, falling in columns */
 			code: '<div class="ch-code">' + [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(function (i) { var bits = ''; for (var k = 0; k < 28; k++) bits += (i * 7 + k * 13) % 3 ? '1' : '0'; return '<span style="--i:' + i + '">' + bits + '</span>'; }).join('') + '</div>',
-			crossing: '<i class="sv-orb" style="--o:#e0a050;--x:-60px;--y:-30px"></i><i class="sv-orb" style="--o:#3fbf8a;--x:70px;--y:-10px;animation-delay:-3s"></i><i class="sv-orb" style="--o:#9a7cff;--x:0px;--y:60px;animation-delay:-6s"></i>',
-			storm: '<div class="sv-rain"></div><i class="sv-flash"></i>',
-			globe: '<svg class="sv-globe" viewBox="-110 -110 220 220"><circle r="100"/>' +
-				many(5, function (i) { return '<ellipse class="mer" rx="100" ry="100" style="animation-delay:' + (-i * 2.4) + 's"/>'; }) +
-				[-60, -30, 0, 30, 60].map(function (y) { var r = Math.sqrt(10000 - y * y * 1.6); return '<ellipse rx="' + r.toFixed(1) + '" ry="' + (r * 0.18).toFixed(1) + '" cy="' + y + '"/>'; }).join('') + '</svg>',
+			/* the specials (after their covers: a crypt's pillars, the red diamond of «سلسلة الأعداد الخاصة»): the stone pillars and
+			   arches of a crypt, and behind the book the red diamond, the three heroes' signs at its corners — Refaat's lantern,
+			   Alaa's heartbeat, Abeer's star — that the specials bring together */
+			crypt: '<svg class="sv-crypt" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMin slice">' + many(6, function (i) {
+					var x = 40 + i * 230;
+					return '<path class="arch" d="M' + (x + 44) + ' 640V250 Q' + (x + 159) + ' 80 ' + (x + 274) + ' 250V640"/>' +
+						'<rect class="pillar" x="' + x + '" y="160" width="44" height="480"/><rect class="cap" x="' + (x - 8) + '" y="150" width="60" height="16"/>' +
+						'<rect class="cap" x="' + (x - 8) + '" y="600" width="60" height="16"/><ellipse class="flame" cx="' + (x + 22) + '" cy="600" rx="40" ry="16" style="animation-delay:' + (-i * .7) + 's"/>';
+				}) + '</svg>' +
+				'<div class="sv-seal"><i class="sv-seal-d"></i>' +
+					'<svg class="sv-sign s-lamp" viewBox="0 0 40 40"><path d="M14 8h12M20 4v4M12 10h16l-2 20H14z M10 32h20"/><circle cx="20" cy="20" r="4"/></svg>' +
+					'<svg class="sv-sign s-heart" viewBox="0 0 40 40"><path d="M2 22h9l3-8 5 16 4-12 3 4h12"/></svg>' +
+					'<svg class="sv-sign s-star" viewBox="0 0 40 40"><path d="M20 3l4.6 11 11.4 1-8.7 7.5 2.7 11.5L20 28l-10 6 2.7-11.5L4 15l11.4-1z"/></svg>' +
+				'</div>',
+			/* Shivers: a storm at night — clouds, rain in clear long streaks falling at a slant, and a bolt of lightning with its flash */
+			storm: '<div class="sv-clouds"></div>' + many(70, function (i) {
+					return '<i class="sv-drop" style="--l:' + ((i * 37) % 103 - 2) + '%;--h:' + (40 + (i * 13) % 50) + 'px;--t:' + (.55 + (i * 7) % 5 * .09).toFixed(2) + 's;--d:' + (-(i * 0.23) % 1.6).toFixed(2) + 's;--o:' + (.35 + (i % 4) * .15).toFixed(2) + '"></i>';
+				}) +
+				'<svg class="sv-bolt" viewBox="0 0 120 420"><path d="M70 0 L40 150 L72 150 L30 300 L58 300 L20 420 L100 240 L68 240 L104 110 L74 110 Z"/></svg><i class="sv-flash"></i>',
+			/* the World Pocket Novels (after their cover): the world's landmarks on one horizon — the London Eye, Big Ben, the
+			   pyramids, the Eiffel Tower, the Statue of Liberty, a bridge — between a green sky and a teal sea, a dotted flight
+			   joining them */
+			skyline: '<div class="sv-sky2"></div>' +
+				'<svg class="sv-skyline" viewBox="0 0 1200 230" preserveAspectRatio="xMidYMax slice">' +
+					'<path class="fly" d="M160 60 Q460 -40 760 40 T1150 70"/>' +
+					'<g class="land">' +
+					/* the London Eye */
+					'<circle class="ring" cx="90" cy="125" r="66"/>' + many(12, function (i) { var a = i * Math.PI / 6; return '<line class="ring" x1="90" y1="125" x2="' + (90 + 66 * Math.cos(a)).toFixed(1) + '" y2="' + (125 + 66 * Math.sin(a)).toFixed(1) + '"/>'; }) +
+					'<path class="ring" d="M70 210 L90 125 L110 210"/>' +
+					/* Big Ben and the Parliament */
+					'<rect x="182" y="70" width="30" height="140"/><path d="M182 70 L197 26 L212 70 Z"/><circle class="clk" cx="197" cy="92" r="8"/><rect x="212" y="150" width="90" height="60"/>' +
+					many(6, function (i) { return '<rect x="' + (214 + i * 15) + '" y="138" width="5" height="14"/>'; }) +
+					/* the pyramids */
+					'<path d="M340 210 L440 112 L540 210 Z"/><path d="M500 210 L560 150 L620 210 Z"/>' +
+					/* the Eiffel Tower */
+					'<path d="M690 210 L712 120 L722 40 L726 14 L730 40 L740 120 L762 210 L748 210 Q726 170 704 210 Z"/><rect x="708" y="118" width="36" height="6"/><rect x="716" y="70" width="20" height="5"/>' +
+					/* the Statue of Liberty */
+					'<rect x="840" y="160" width="46" height="50"/><rect x="848" y="146" width="30" height="16"/><path d="M852 146 L856 96 L870 96 L874 146 Z"/><circle cx="863" cy="88" r="9"/>' +
+					'<path d="M866 96 L878 50 L884 52 L874 98 Z"/><path d="M874 50 L888 36 L882 54 Z"/><path d="M853 84 l-6 -10 M858 79 l-2 -11 M867 79 l3 -11 M872 84 l7 -9" class="ray"/>' +
+					/* a bridge */
+					'<rect x="960" y="70" width="12" height="140"/><rect x="1090" y="70" width="12" height="140"/><path class="ring" d="M966 74 Q1031 170 1096 74 M900 150 Q933 120 966 76 M1096 76 Q1129 120 1180 150"/><rect x="900" y="160" width="300" height="8"/>' +
+					/* and the towns between them */
+					[[0, 180, 30], [24, 160, 26], [300, 178, 40], [620, 170, 30], [646, 150, 34], [770, 160, 26], [796, 140, 34], [890, 176, 40], [1110, 150, 30], [1140, 130, 36], [1176, 165, 30]].map(function (b) {
+						return '<rect x="' + b[0] + '" y="' + b[1] + '" width="' + b[2] + '" height="' + (210 - b[1]) + '"/>';
+					}).join('') + '<rect x="0" y="208" width="1200" height="22"/></g></svg>',
+			/* the Adventurer (after its comic-book covers): an explosion of fire behind the book, the speed lines of a comic panel,
+			   sparks flying, and a town burning along the bottom */
+			blast: '<i class="sv-boom"></i><i class="sv-speed"></i>' +
+				many(18, function (i) { return '<i class="sv-spark" style="--a:' + (i * 20 + (i * 7) % 11) + 'deg;--r:' + (220 + (i * 53) % 260) + 'px;--d:' + (-(i * .31) % 2.4).toFixed(2) + 's"></i>'; }) +
+				'<svg class="sv-town" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMax slice">' + (function () {
+					var out = '', x = 0, k = 0;
+					while (x < 1200) {
+						var w = 40 + (k * 37) % 50, h = 60 + (k * 53) % 120;
+						out += '<rect x="' + x + '" y="' + (200 - h) + '" width="' + (w - 3) + '" height="' + h + '"/>';
+						for (var r = 200 - h + 12; r < 190; r += 18) for (var q = x + 7; q < x + w - 12; q += 14) if ((r + q + k) % 3) out += '<rect class="win" x="' + q + '" y="' + r + '" width="6" height="8"/>';
+						x += w; k++;
+					}
+					return out;
+				})() + '</svg>',
+			/* Adabiyat (after its golden cover of faded print): a newspaper page in gold — its masthead, columns of lines with their
+			   headlines, the rules between them */
+			press: '<div class="sv-press"><b class="sv-mast">' + e(L('أدبيات', 'Adabiyat')) + '</b>' + many(6, function (i) {
+					return '<div class="col"><i class="hd" style="width:' + (60 + (i * 23) % 35) + '%"></i><i class="ln"></i>' + (i % 2 ? '<i class="hd s" style="width:' + (50 + (i * 17) % 40) + '%"></i><i class="ln short"></i>' : '') + '</div>';
+				}) + '</div>',
+			/* Super Mega (after its cover): light bulbs hanging over a lit floor, two of them burning beside the book — as the cover
+			   lights its two writers — the rest dark, and small people standing below */
+			bulbs: many(7, function (i) {
+					var lit = i === 1 || i === 2, pos = ['calc(var(--bx) - 470px)', 'calc(var(--bx) - 270px)', 'calc(var(--bx) + 150px)', 'calc(var(--bx) + 380px)', 'calc(var(--bx) + 600px)', 'calc(var(--bx) + 820px)', 'calc(var(--bx) + 1040px)'][i];
+					return '<svg class="sv-bulb' + (lit ? ' is-lit' : '') + '" style="inset-inline-start:' + pos + ';--y:' + [120, 60, 90, 150, 70, 130, 80][i] + 'px" viewBox="0 0 80 300">' +
+						'<line class="wire" x1="40" y1="0" x2="40" y2="160"/><path class="glass" d="M28 226 C28 210 12 202 12 178 A28 28 0 1 1 68 178 C68 202 52 210 52 226 Z"/>' +
+						'<rect class="base" x="28" y="226" width="24" height="22" rx="3"/><path class="base-l" d="M28 233h24M28 240h24"/>' +
+						(lit ? '' : '<path class="fil" d="M32 214 L36 186 L40 196 L44 186 L48 214"/>') + '</svg>';
+				}) + '<i class="sv-floorlight"></i>' + many(16, function (i) {
+					return '<svg class="sv-man" style="left:' + (4 + (i * 29) % 92) + '%;--s:' + (.7 + (i % 4) * .12).toFixed(2) + ';bottom:' + (40 + (i * 17) % 90) + 'px" viewBox="0 0 10 30"><circle cx="5" cy="3.4" r="2.6"/><path d="M2 8h6l1 11H7.5L7 30H5.6L5 21L4.4 30H3l-.5-11H1z"/></svg>';
+				}),
 			embers: many(16, function (i) { return '<i class="sv-ember" style="--l:' + ((i * 37) % 100) + '%;--d:' + (-(i * 0.9) % 8).toFixed(1) + 's;--s:' + (3 + (i % 4)) + 'px"></i>'; }),
 			summer: '<i class="sv-sun"></i>',
-			compass: '<svg class="sv-trail" viewBox="0 0 600 300" preserveAspectRatio="none"><path d="M10 250 C 120 180, 160 290, 280 210 S 460 80, 590 60"/></svg>' +
-				'<svg class="sv-compass" viewBox="-100 -100 200 200"><circle r="92"/><circle r="70"/>' + many(16, function (i) { return '<line y1="-92" y2="' + (i % 4 ? -84 : -76) + '" transform="rotate(' + i * 22.5 + ')"/>'; }) +
-				'<g class="needle"><path d="M0 -66 L9 0 L0 66 L-9 0 Z"/><path class="n" d="M0 -66 L9 0 L-9 0 Z"/></g></svg>',
-			ink: '<div class="sv-ruled"></div><i class="sv-blot"></i>',
-			pop: '<div class="sv-dots"></div><i class="sv-burst"></i>',
 			marbles: many(7, function (i) { return '<i class="sv-marble" style="--l:' + (8 + i * 13) + '%;--h:' + (60 + (i * 47) % 120) + 'px;--d:' + (-(i * 0.37)).toFixed(2) + 's;--m:hsl(' + (i * 51) % 360 + ' 70% 55%)"></i>'; }),
 			panels: '<div class="sv-panels">' + many(6, function (i) { return '<i style="--d:' + (i * 0.5) + 's"></i>'; }) + '</div>',
 			dihya: '<i class="sv-smoke"></i><i class="sv-smoke" style="--d:-9s;--x:40%"></i>' +

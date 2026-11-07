@@ -41,10 +41,10 @@ window.PAGE = {
 	   the tall places), 2 the cover of their first appearance (shown whole: null takes it from the site's books, as their
 	   character card does). Four have pictures of their own; the other four come from four more of his books */
 	TILES: [
-		[['alaa'], 'assets/img/characters/alaa-doctor.webp'], [['refaat'], 'assets/img/characters/refaat-lantern.webp', 1],
+		[['essam'], null, 2], [['refaat'], 'assets/img/characters/refaat-lantern.webp', 1],
 		[['bernadette'], 'assets/img/characters/bernadette-figure.webp', 1], [['maggie'], null, 2],
 		[['abeer'], 'assets/img/characters/abeer-figure.webp', 1], [['alaa-utopia'], null, 2],
-		[['essam'], null, 2], [['samanoudi'], null, 2]
+		[['alaa'], 'assets/img/characters/alaa-figure.webp', 1], [['samanoudi'], null, 2]
 	],
 	/* the cover of a character's first appearance: the first issue of their series that has them, else its first, else their book */
 	coverOf: function (c, d) {

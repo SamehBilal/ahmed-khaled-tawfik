@@ -423,35 +423,62 @@ html[data-theme="light"] .sv-theme-code .sv-scene { background: radial-gradient(
 /* ---------- every other series: a scene of its own behind the book (series-page.js) ----------
    --bx is where the book stands: the start of the page column plus half the book */
 .sv-scene { --bx: calc(max(0px, (100% - 1180px) / 2) + 160px); }
-/* the specials: the three heroes' lights (Refaat's lamp, Alaa's green, Abeer's violet) drifting into one another behind the book */
-.sv-theme-crossing .sv-scene { background: linear-gradient(#0b0a0d, transparent 80%); }
-html[data-theme="light"] .sv-theme-crossing .sv-scene { background: none; }
-.sv-orb { position: absolute; top: 300px; inset-inline-start: calc(var(--bx) - 200px); width: 400px; height: 400px; border-radius: 50%; mix-blend-mode: screen;
-	background: radial-gradient(closest-side, color-mix(in srgb, var(--o) 85%, transparent), color-mix(in srgb, var(--o) 30%, transparent) 50%, transparent); animation: sv-orb 9s ease-in-out infinite; }
-html[data-theme="light"] .sv-orb { mix-blend-mode: multiply; opacity: .55; }
-@keyframes sv-orb { 0%, 100% { transform: translate(var(--x), var(--y)) scale(1); } 50% { transform: translate(calc(var(--x) * -.3), calc(var(--y) * -.3)) scale(1.15); } }
-.sv-theme-crossing .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #e0a050; }
-/* Shivers: a cold rain, and now and then the lightning */
-.sv-theme-storm .sv-scene { background: linear-gradient(#0a0d12, transparent 85%); }
-html[data-theme="light"] .sv-theme-storm .sv-scene { background: linear-gradient(#cfd4da, transparent 85%); }
-.sv-rain { position: absolute; inset: -40px 0 0; opacity: .32;
-	background-image: repeating-linear-gradient(105deg, transparent 0 14px, rgba(190, 210, 235, .55) 14px 15px, transparent 15px 31px),
-		repeating-linear-gradient(105deg, transparent 0 22px, rgba(190, 210, 235, .35) 22px 23px, transparent 23px 47px);
-	background-size: 100% 120px, 100% 200px; animation: sv-rain .5s linear infinite; }
-html[data-theme="light"] .sv-rain { filter: invert(1); opacity: .2; }
-@keyframes sv-rain { to { background-position: -30px 120px, -40px 200px; } }
+/* the specials (after their covers): a crypt — stone pillars and arches, firelight at their feet — and behind the book the
+   red diamond of «سلسلة الأعداد الخاصة», the three heroes' signs at its corners: Refaat's lantern, Alaa's heartbeat, Abeer's star */
+.sv-theme-crypt .sv-scene { background: radial-gradient(700px 460px at var(--bx) 40%, rgba(150, 30, 34, .3), transparent 70%), linear-gradient(#0f090b, #1a0c10 60%, transparent); }
+html[data-theme="light"] .sv-theme-crypt .sv-scene { background: radial-gradient(700px 460px at var(--bx) 40%, rgba(190, 50, 50, .16), transparent 70%), linear-gradient(#e6d6cf, transparent); }
+.sv-crypt { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .55; }
+.sv-crypt .arch { fill: none; stroke: #4a2c2a; stroke-width: 14; }
+.sv-crypt .pillar, .sv-crypt .cap { fill: #2e1b1c; stroke: #4e3230; stroke-width: 1.5; }
+.sv-crypt .flame { fill: rgba(240, 140, 60, .35); filter: blur(10px); animation: sv-candle 2.4s ease-in-out infinite alternate; }
+html[data-theme="light"] .sv-crypt { opacity: .35; }
+html[data-theme="light"] .sv-crypt .arch { stroke: #9a7a6c; } html[data-theme="light"] .sv-crypt .pillar, html[data-theme="light"] .sv-crypt .cap { fill: #c9b2a4; stroke: #a48a7c; }
+@keyframes sv-candle { from { opacity: .5; transform: scale(.9); } to { opacity: 1; transform: scale(1.1); } }
+.sv-seal { position: absolute; top: 60px; inset-inline-start: calc(var(--bx) - 250px); width: 500px; height: 500px; }
+.sv-seal-d { position: absolute; inset: 70px; transform: rotate(45deg); border: 3px solid #d1262c; border-radius: 10px;
+	background: radial-gradient(closest-side, rgba(209, 38, 44, .35), rgba(209, 38, 44, .08) 70%, transparent);
+	box-shadow: 0 0 60px rgba(209, 38, 44, .45), inset 0 0 40px rgba(209, 38, 44, .35); animation: sv-seal 6s ease-in-out infinite; }
+@keyframes sv-seal { 50% { box-shadow: 0 0 90px rgba(209, 38, 44, .65), inset 0 0 60px rgba(209, 38, 44, .5); } }
+.sv-sign { position: absolute; width: 46px; height: 46px; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.sv-sign.s-lamp { top: 4px; left: 227px; stroke: #f0b45a; filter: drop-shadow(0 0 8px #e09030); }
+.sv-sign.s-heart { top: 227px; left: 4px; stroke: #3fd18a; filter: drop-shadow(0 0 8px #1fa86a); }
+.sv-sign.s-star { top: 227px; right: 4px; stroke: #b38cff; filter: drop-shadow(0 0 8px #8a5cff); }
+html[data-theme="light"] .sv-seal-d { box-shadow: 0 0 40px rgba(209, 38, 44, .25); }
+html[data-theme="light"] .sv-sign { filter: none; }
+.sv-theme-crypt .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #e04a4a; }
+/* Shivers: a storm at night — low clouds, rain in long clear streaks at a slant, a bolt of lightning and its flash */
+.sv-theme-storm .sv-scene { background: linear-gradient(#070a10, #0e1520 60%, transparent); }
+html[data-theme="light"] .sv-theme-storm .sv-scene { background: linear-gradient(#9aa6b4, #c3cbd4 60%, transparent); }
+.sv-clouds { position: absolute; inset: 0 0 auto; height: 260px; opacity: .8;
+	background: radial-gradient(260px 90px at 15% 30%, rgba(60, 72, 92, .9), transparent 70%), radial-gradient(320px 110px at 45% 18%, rgba(50, 62, 82, .9), transparent 70%),
+		radial-gradient(300px 100px at 75% 34%, rgba(56, 68, 88, .9), transparent 70%), radial-gradient(260px 90px at 95% 16%, rgba(48, 60, 80, .9), transparent 70%); }
+html[data-theme="light"] .sv-clouds { opacity: .55; }
+.sv-drop { position: absolute; top: -80px; left: var(--l); width: 2px; height: var(--h); border-radius: 2px; opacity: var(--o);
+	background: linear-gradient(transparent, rgba(200, 220, 245, .95)); transform: rotate(14deg); animation: sv-drop var(--t) var(--d) linear infinite; }
+html[data-theme="light"] .sv-drop { background: linear-gradient(transparent, rgba(40, 70, 110, .8)); }
+@keyframes sv-drop { from { transform: translate(0, 0) rotate(14deg); } to { transform: translate(-200px, 820px) rotate(14deg); } }
+.sv-bolt { position: absolute; top: 40px; inset-inline-start: calc(var(--bx) + 200px); width: 110px; height: 390px; fill: #e8f0ff; opacity: 0;
+	filter: drop-shadow(0 0 14px #9cc2ff) drop-shadow(0 0 30px #6a9cff); animation: sv-bolt 7s infinite; }
+@keyframes sv-bolt { 0%, 70%, 74%, 100% { opacity: 0; } 71% { opacity: 1; } 72% { opacity: .2; } 73% { opacity: .9; } }
 .sv-flash { position: absolute; inset: 0; background: rgba(210, 225, 255, .5); opacity: 0; animation: sv-flash 7s infinite; }
 @keyframes sv-flash { 0%, 70%, 74%, 100% { opacity: 0; } 71% { opacity: .55; } 72% { opacity: .1; } 73% { opacity: .4; } }
+html[data-theme="light"] .sv-bolt { fill: #fff; filter: drop-shadow(0 0 10px #3a6ad0); }
 .sv-theme-storm .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #9fb8d8; }
-/* the World Pocket Novels: the globe the books came from, turning slowly behind the book */
-.sv-theme-globe .sv-scene { background: radial-gradient(700px 420px at 80% 22%, rgba(214, 160, 80, .16), transparent 70%); }
-.sv-globe { position: absolute; top: 150px; inset-inline-start: calc(var(--bx) - 260px); width: 520px; height: 520px; overflow: visible; opacity: .5;
-	fill: none; stroke: #d9a45a; stroke-width: .6; }
-.sv-globe circle { stroke-width: 1.2; }
-.sv-globe .mer { transform-box: view-box; transform-origin: 0 0; animation: sv-meridian 12s linear infinite; }
-@keyframes sv-meridian { 0% { transform: scaleX(1); } 50% { transform: scaleX(0); } 100% { transform: scaleX(-1); } }
-html[data-theme="light"] .sv-globe { stroke: #8a5a1a; opacity: .4; }
-.sv-theme-globe .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #d9a45a; }
+/* the World Pocket Novels (after their cover): a green sky over a teal sea, and on the horizon between them the world's
+   landmarks — the London Eye, Big Ben, the pyramids, the Eiffel Tower, the Statue of Liberty, a bridge — a dotted flight above */
+.sv-sky2 { position: absolute; inset: 0; background: linear-gradient(rgba(140, 193, 119, .2) 0, rgba(140, 193, 119, .2) 782px, rgba(0, 150, 150, .2) 782px, transparent 92%); }
+html[data-theme="light"] .sv-sky2 { background: linear-gradient(rgba(140, 193, 119, .45) 0, rgba(140, 193, 119, .45) 782px, rgba(0, 150, 150, .3) 782px, transparent 92%); }
+.sv-skyline { position: absolute; top: 560px; opacity: .75; left: 0; width: 100%; height: 230px; overflow: visible; }
+.sv-skyline .land { fill: #0b1814; }
+.sv-skyline .ring { fill: none; stroke: #0b1814; stroke-width: 3; }
+.sv-skyline .ray { stroke: #0b1814; stroke-width: 2; }
+.sv-skyline .clk { fill: #8cc177; }
+.sv-skyline .fly { fill: none; stroke: #8cc177; stroke-width: 2; stroke-dasharray: 3 10; stroke-linecap: round; opacity: .7; animation: sv-trail 4s linear infinite; }
+@keyframes sv-trail { to { stroke-dashoffset: -52; } }
+html[data-theme="light"] .sv-skyline .land { fill: #3a2f2a; } html[data-theme="light"] .sv-skyline .ring, html[data-theme="light"] .sv-skyline .ray { stroke: #3a2f2a; }
+html[data-theme="light"] .sv-skyline .fly { stroke: #1d6b5e; }
+html[data-theme="light"] .sv-skyline { opacity: .5; }
+.sv-theme-skyline .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #8cc177; }
 /* Molotov: embers rising from below */
 .sv-theme-embers .sv-scene { background: radial-gradient(900px 420px at 80% 30%, rgba(220, 90, 30, .22), transparent 70%), radial-gradient(900px 400px at 50% 100%, rgba(220, 90, 30, .2), transparent 70%), linear-gradient(#0d0806, transparent 85%); }
 html[data-theme="light"] .sv-theme-embers .sv-scene { background: radial-gradient(900px 400px at 50% 100%, rgba(220, 90, 30, .18), transparent 70%); }
@@ -468,36 +495,61 @@ html[data-theme="light"] .sv-theme-embers .sv-scene { background: radial-gradien
 	animation: sv-spin 60s linear infinite; }
 @keyframes sv-spin { to { transform: rotate(1turn); } }
 .sv-theme-summer .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #ffb43c; }
-/* the Adventurer: a compass whose needle swings, and a dotted trail across the page */
-.sv-theme-compass .sv-scene { background: radial-gradient(800px 420px at 80% 18%, rgba(80, 150, 180, .16), transparent 70%); }
-.sv-compass { position: absolute; top: 170px; inset-inline-start: calc(var(--bx) - 230px); width: 460px; height: 460px; opacity: .45;
-	fill: none; stroke: #8cc0d4; stroke-width: 1.2; }
-.sv-compass .needle { animation: sv-needle 6s ease-in-out infinite; }
-.sv-compass .needle path { fill: rgba(140, 192, 212, .35); stroke: none; }
-.sv-compass .needle .n { fill: #e0633a; }
-@keyframes sv-needle { 0%, 100% { transform: rotate(-24deg); } 40% { transform: rotate(18deg); } 70% { transform: rotate(-6deg); } }
-.sv-trail { position: absolute; inset: 60px 0 auto; width: 100%; height: 300px; fill: none; stroke: #8cc0d4; stroke-width: 2; stroke-dasharray: 2 12;
-	stroke-linecap: round; opacity: .4; animation: sv-trail 4s linear infinite; }
-@keyframes sv-trail { to { stroke-dashoffset: -56; } }
-html[data-theme="light"] .sv-compass, html[data-theme="light"] .sv-trail { stroke: #2a5a6e; }
-.sv-theme-compass .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #8cc0d4; }
-/* Adabiyat: ruled paper, and ink spreading behind the book */
-.sv-theme-ink .sv-scene { background: linear-gradient(rgba(240, 225, 190, .05), transparent 80%); }
-.sv-ruled { position: absolute; inset: 0; opacity: .8; background: repeating-linear-gradient(transparent 0 33px, rgba(200, 180, 140, .2) 33px 34px); }
-.sv-blot { position: absolute; top: 260px; inset-inline-start: calc(var(--bx) - 220px); width: 440px; height: 440px; border-radius: 46% 54% 52% 48% / 52% 44% 56% 48%;
-	background: radial-gradient(closest-side, rgba(90, 120, 220, .55), rgba(70, 95, 190, .22) 60%, transparent); animation: sv-blot 10s ease-in-out infinite; }
-@keyframes sv-blot { 0%, 100% { transform: scale(.85) rotate(0); border-radius: 46% 54% 52% 48% / 52% 44% 56% 48%; } 50% { transform: scale(1.05) rotate(20deg); border-radius: 54% 46% 44% 56% / 46% 56% 44% 54%; } }
-html[data-theme="light"] .sv-ruled { background: repeating-linear-gradient(transparent 0 33px, rgba(70, 110, 170, .18) 33px 34px); }
-.sv-theme-ink .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #7f9be0; }
-/* Super Mega: comic-book dots and a «POW» burst pulsing behind the book */
-.sv-dots { position: absolute; inset: 0; opacity: .35; background: radial-gradient(circle, #e04a8a 2px, transparent 2.5px) 0 0 / 14px 14px;
-	-webkit-mask-image: radial-gradient(70% 60% at 80% 20%, #000, transparent); mask-image: radial-gradient(70% 60% at 80% 20%, #000, transparent); }
-.sv-burst { position: absolute; top: 230px; inset-inline-start: calc(var(--bx) - 250px); width: 500px; height: 500px; opacity: .35;
-	background: repeating-conic-gradient(#f2c230 0 10deg, transparent 10deg 20deg);
-	-webkit-mask-image: radial-gradient(closest-side, #000 30%, transparent); mask-image: radial-gradient(closest-side, #000 30%, transparent);
-	animation: sv-burst 2.4s ease-in-out infinite; }
-@keyframes sv-burst { 0%, 100% { transform: scale(.92) rotate(0); } 50% { transform: scale(1.04) rotate(6deg); } }
-.sv-theme-pop .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #f2c230; }
+/* the Adventurer (after its comic-book covers): an explosion of fire behind the book, the speed lines of a comic panel, sparks
+   flying out, and a town burning along the bottom */
+.sv-theme-blast .sv-scene { background: linear-gradient(#120806, #1c0d08 60%, transparent); }
+html[data-theme="light"] .sv-theme-blast .sv-scene { background: linear-gradient(#f3dcc0, transparent); }
+.sv-boom { position: absolute; top: 120px; inset-inline-start: calc(var(--bx) - 340px); width: 680px; height: 600px; border-radius: 50%; mix-blend-mode: screen;
+	background: radial-gradient(closest-side, rgba(255, 236, 140, .85), rgba(255, 160, 40, .55) 35%, rgba(220, 70, 20, .3) 65%, transparent);
+	animation: sv-boom 3.2s ease-in-out infinite; }
+html[data-theme="light"] .sv-boom { mix-blend-mode: multiply; opacity: .55; }
+@keyframes sv-boom { 0%, 100% { transform: scale(.94); opacity: .85; } 50% { transform: scale(1.06); opacity: 1; } }
+.sv-speed { position: absolute; top: -200px; inset-inline-start: calc(var(--bx) - 700px); width: 1400px; height: 1400px; opacity: .22;
+	background: repeating-conic-gradient(from 0deg, rgba(255, 210, 120, .9) 0 1.2deg, transparent 1.2deg 7deg);
+	-webkit-mask-image: radial-gradient(closest-side, transparent 30%, #000 45%, transparent 75%); mask-image: radial-gradient(closest-side, transparent 30%, #000 45%, transparent 75%); }
+html[data-theme="light"] .sv-speed { background: repeating-conic-gradient(from 0deg, rgba(150, 60, 10, .7) 0 1.2deg, transparent 1.2deg 7deg); opacity: .16; }
+.sv-spark { position: absolute; top: 420px; inset-inline-start: var(--bx); width: 6px; height: 6px; border-radius: 50%; background: #ffd27a; box-shadow: 0 0 10px 3px rgba(255, 140, 40, .9);
+	opacity: 0; animation: sv-spark 2.4s var(--d) ease-out infinite; }
+@keyframes sv-spark { 0% { transform: rotate(var(--a)) translateX(60px); opacity: 0; } 15% { opacity: 1; } 100% { transform: rotate(var(--a)) translateX(var(--r)); opacity: 0; } }
+.sv-town { position: absolute; left: 0; bottom: 0; width: 100%; height: 200px; fill: #0d0705; }
+.sv-town .win { fill: #ff9a3a; opacity: .75; }
+html[data-theme="light"] .sv-town { fill: #4a2c1c; opacity: .5; }
+.sv-theme-blast .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #ffb050; }
+/* Adabiyat (after its golden cover of faded print): a newspaper page in gold — its masthead, columns of lines under their
+   headlines, the rules between them */
+.sv-theme-press .sv-scene { background: radial-gradient(900px 520px at var(--bx) 30%, rgba(225, 180, 70, .22), transparent 70%), linear-gradient(#141007, transparent 80%); }
+html[data-theme="light"] .sv-theme-press .sv-scene { background: radial-gradient(900px 520px at var(--bx) 30%, rgba(235, 190, 80, .4), transparent 70%), linear-gradient(#f6e7b8, transparent 80%); }
+.sv-press { position: absolute; top: 70px; left: 3%; right: 3%; height: 680px; opacity: .3; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: auto 1fr; gap: 0 26px;
+	border-top: 3px double #d9b25a; padding-top: 10px; }
+.sv-mast { grid-column: 1 / -1; text-align: center; font-family: var(--f-chunky); font-size: 86px; line-height: 1.1; color: #e2bd62; border-bottom: 2px solid #d9b25a; margin-bottom: 18px; }
+html[lang="en"] .sv-mast { font-family: var(--f-display); font-weight: 700; }
+.sv-press .col { display: flex; flex-direction: column; gap: 10px; border-inline-start: 1px solid rgba(217, 178, 90, .6); padding-inline-start: 14px; }
+.sv-press .col:first-of-type { border: 0; padding: 0; }
+.sv-press .hd { display: block; height: 16px; background: #d9b25a; border-radius: 2px; }
+.sv-press .hd.s { height: 11px; }
+.sv-press .ln { display: block; flex: 1; min-height: 120px; background: repeating-linear-gradient(transparent 0 9px, rgba(217, 178, 90, .9) 9px 11px); }
+.sv-press .ln.short { flex: .5; }
+html[data-theme="light"] .sv-press { opacity: .32; } html[data-theme="light"] .sv-mast { color: #8a6416; }
+html[data-theme="light"] .sv-press .hd { background: #8a6416; } html[data-theme="light"] .sv-press .ln { background: repeating-linear-gradient(transparent 0 9px, rgba(138, 100, 22, .8) 9px 11px); }
+.sv-theme-press .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #e2bd62; }
+/* Super Mega (after its cover): light bulbs hanging over a lit floor — two burning beside the book, as the cover lights its two
+   writers, the rest dark — and small people standing below */
+.sv-theme-bulbs .sv-scene { background: radial-gradient(900px 300px at var(--bx) 100%, rgba(255, 230, 170, .14), transparent 70%), linear-gradient(#0b0b0d, #141416 70%, transparent); }
+html[data-theme="light"] .sv-theme-bulbs .sv-scene { background: radial-gradient(900px 300px at var(--bx) 100%, rgba(255, 220, 140, .4), transparent 70%), linear-gradient(#d8d6d2, transparent); }
+.sv-bulb { position: absolute; top: calc(var(--y) - 160px); width: 96px; height: 360px; overflow: visible; }
+.sv-bulb .wire { stroke: #3a3a3c; stroke-width: 2; }
+.sv-bulb .glass { fill: rgba(150, 150, 160, .12); stroke: rgba(200, 200, 210, .35); stroke-width: 2; }
+.sv-bulb .base { fill: #8a7448; } .sv-bulb .base-l { stroke: #5a4a2c; stroke-width: 2; }
+.sv-bulb .fil { fill: none; stroke: rgba(200, 180, 140, .5); stroke-width: 1.5; }
+.sv-bulb.is-lit .glass { fill: #fff3c8; stroke: #ffe9a0; }
+.sv-bulb.is-lit { filter: drop-shadow(0 0 22px rgba(255, 220, 130, .9)) drop-shadow(0 0 60px rgba(255, 200, 90, .55)); animation: sv-bulb 5s ease-in-out infinite; }
+@keyframes sv-bulb { 0%, 100% { opacity: 1; } 48% { opacity: 1; } 50% { opacity: .82; } 52% { opacity: 1; } }
+html[data-theme="light"] .sv-bulb .wire { stroke: #6a6a6c; } html[data-theme="light"] .sv-bulb .glass { fill: rgba(60, 60, 70, .08); stroke: rgba(60, 60, 70, .35); }
+html[data-theme="light"] .sv-bulb.is-lit .glass { fill: #fff3c8; stroke: #e0b84a; }
+.sv-floorlight { position: absolute; left: 0; right: 0; bottom: 0; height: 240px; background: radial-gradient(60% 80% at 50% 100%, rgba(255, 235, 190, .1), transparent 70%); }
+.sv-man { position: absolute; width: calc(22px * var(--s)); height: calc(66px * var(--s)); fill: #45454c; filter: drop-shadow(0 -2px 3px rgba(255, 230, 170, .25)); }
+html[data-theme="light"] .sv-man { fill: #4a4a50; opacity: .6; }
+.sv-theme-bulbs .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #ffe08a; }
 /* Balya: his magic marbles, bouncing */
 .sv-marble { position: absolute; top: 120px; left: var(--l); width: 26px; height: 26px; border-radius: 50%; opacity: .55;
 	background: radial-gradient(circle at 34% 30%, #fff 0 12%, var(--m) 40%, color-mix(in srgb, var(--m) 50%, #000) 100%);
@@ -544,10 +596,11 @@ html[data-theme="light"] .sv-runes { stroke: #9a2d10; opacity: .4; filter: none;
 html[data-theme="light"] .sv-staff { filter: drop-shadow(0 6px 12px rgba(90, 40, 10, .35)); }
 .sv-theme-dihya .sv-ember { background: #ffb35a; }
 .sv-theme-dihya .cover-grid.is-ranked .cover-link:hover .cl-n { -webkit-text-stroke-color: #ff8a4a; }
-@media (max-width: 760px) { .sv-globe, .sv-sun, .sv-compass, .sv-burst, .sv-runes, .sv-blot, .sv-orb { width: 300px; height: 300px; } .sv-runes { inset-inline-start: calc(var(--bx) - 150px); } .sv-floor { width: 420px; inset-inline-start: calc(var(--bx) - 210px); } .sv-panels { width: 60%; height: 360px; } }
+@media (max-width: 760px) { .sv-sun, .sv-runes { width: 300px; height: 300px; } .sv-seal { transform: scale(.62); transform-origin: 50% 0; } .sv-boom { width: 420px; height: 420px; inset-inline-start: calc(var(--bx) - 210px); } .sv-mast { font-size: 48px; } .sv-press { grid-template-columns: repeat(3, 1fr); } .sv-press .col:nth-child(n + 5) { display: none; } .sv-bulb { transform: scale(.7); transform-origin: 50% 0; } .sv-runes { inset-inline-start: calc(var(--bx) - 150px); } .sv-floor { width: 420px; inset-inline-start: calc(var(--bx) - 210px); } .sv-panels { width: 60%; height: 360px; } }
 @media (prefers-reduced-motion: reduce) {
-	.sv-orb, .sv-rain, .sv-flash, .sv-globe .mer, .sv-ember, .sv-sun, .sv-compass .needle, .sv-trail, .sv-blot, .sv-burst, .sv-marble, .sv-panels i, .sv-runes, .sv-smoke, .sv-floor .k, .sv-staff .eye { animation: none; }
+	.sv-drop, .sv-bolt, .sv-flash, .sv-crypt .flame, .sv-seal-d, .sv-skyline .fly, .sv-boom, .sv-spark, .sv-bulb, .sv-ember, .sv-sun, .sv-marble, .sv-panels i, .sv-runes, .sv-smoke, .sv-floor .k, .sv-staff .eye { animation: none; }
 	.sv-ember { opacity: .6; }
+	.sv-drop { display: none; } .sv-bolt { opacity: .45; }
 }
 /* on a desktop the scene stays put while the page scrolls, as the book beside the text does; clipped to the series' own section
    (on a phone, where the book scrolls too, it scrolls with the page) */
