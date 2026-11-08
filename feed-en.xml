@@ -9,44 +9,51 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-08T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b652968</id>
+		<title>updates</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">updates</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/31c119c</id>
 		<title>Blend glossary and handwriting bands into pages</title>
-		<updated>2026-11-08T20:59:00Z</updated>
+		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Blend glossary and handwriting bands into pages</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/de286ca</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:58:00Z</updated>
+		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
 		<title>up</title>
-		<updated>2026-11-08T20:57:00Z</updated>
+		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
-		<updated>2026-11-08T20:56:00Z</updated>
+		<updated>2026-11-08T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
-		<updated>2026-11-08T20:55:00Z</updated>
+		<updated>2026-11-08T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:54:00Z</updated>
+		<updated>2026-11-08T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
@@ -549,13 +556,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">«أعلام في حكاياته» (names.html), a new page in «عالم العرّاب»: the 42 real and legendary figures his issues' back covers name — Shakespeare, Dostoevsky, al-Mutanabbi, Hannibal, Che Guevara, Freud, Pasteur, Gilgamesh… — who each was, and the covers of the issues you meet them in (AKT.storyPeople, data-pages.js); by kind or searched, its band a sky of their names. «عوالم فانتازيا» has «خط زمن فانتازيا»: the 22 worlds of history and legend in the order they are set, from Gilgamesh (c. 2700 BC) to Che Guevara. Every series page has «النهاية»: its last issue, and how it ended behind a button that gives it away — «ما وراء الطبيعة»'s from 3rabica (AKT.seriesEndings); the others ask for theirs. «ما ينقص الأرشيف» opens on «حالة الأرشيف», a bar for how complete each part is, and lists the series whose ending is not written. «تواصل وساهم» has three more steps: «ساهم بالكود» (fork, the data files, check and build, try it, send a pull request), «البيانات مفتوحة» (issues, books, editions, quotes, phrases and the calendar as CSV files, built by tools/build-open.js into assets/data/open/, kept out of the offline copy) and «دليل الاستخدام» (search, lists, links, pictures, the app, the paper theme)</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f82b1bb</id>
-		<title>«ما ينقص الأرشيف» has the side menu of the pages about the site, as «عن الموقع» and the rest do, and is in it…</title>
-		<updated>2026-11-03T20:56:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="design" label="Design"/>
-		<content type="text">«ما ينقص الأرشيف» has the side menu of the pages about the site, as «عن الموقع» and the rest do, and is in it on each of them, after «تواصل وساهم»</content>
 	</entry>
 </feed>

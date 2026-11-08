@@ -316,6 +316,26 @@
 		return '<q>' + App.esc(App.t(q.text)) + '</q><small>' + App.esc(App.L('د. أحمد خالد توفيق', 'Dr. Ahmed Khaled Tawfik')) +
 			(from ? ' · ' + App.esc(from) : ' · 1962–2018') + '</small>';
 	}
+	/* «شارك»'s die: something of his picked at random — one of his books or series from the works panel's shelf, or one of his
+	   three heroes — a new one each time the panel opens, and again at each throw of the die */
+	var megaLastLuck = -1;
+	function megaLuckHTML(App, lazy) {
+		var L = App.L, e = App.esc;
+		var pool = MEGA.books.map(function (b) {
+			return { href: b.href, ar: b.ar, en: b.en, img: b.img.indexOf('assets/') === 0 ? b.img : 'assets/img/covers-s/' + b.img + '.webp',
+				kar: /^series/.test(b.href) ? 'سلسلة' : 'رواية', ken: /^series/.test(b.href) ? 'A series' : 'A novel', fig: false };
+		}).concat(MEGA.heroes.map(function (h) {
+			return { href: 'character.html?id=' + h.id, ar: h.ar, en: h.en, img: h.img, kar: 'شخصية · ' + h.sar, ken: 'A character · ' + h.sen, fig: true, c: h.c };
+		}));
+		var k = Math.floor(Math.random() * pool.length);
+		if (k === megaLastLuck) k = (k + 1) % pool.length;
+		megaLastLuck = k;
+		var p = pool[k], src = (lazy ? 'data-src="' : 'src="') + p.img + '"';
+		return '<a class="mg-luck-card' + (p.fig ? ' is-fig' : '') + '" href="' + p.href + '"' + (p.c ? ' style="--c:' + p.c + '"' : '') + '>' +
+			'<img class="mg-luck-bg" ' + src + ' alt="" decoding="async"><img class="mg-luck-img" ' + src + ' alt="" decoding="async">' +
+			'<span class="mg-luck-tx"><small>' + e(L(p.kar, p.ken)) + '</small><b>' + e(L(p.ar, p.en)) + '</b>' +
+			'<span class="mg-go">' + e(L('افتحه', 'Open it')) + ' ' + (App.lang === 'ar' ? '←' : '→') + '</span></span></a>';
+	}
 	/* a page made one per character, series, book, writer or publisher lights, in the menus, the page that lists them all */
 	var MEGA_PARENT = { 'character.html': 'characters.html', 'series.html': 'works.html', 'book.html': 'works.html', 'writer.html': 'writers.html', 'publisher.html': 'publishers.html' };
 	/* which panel holds this page: its own pages, and the pages made one per series, book, character or writer */
@@ -389,18 +409,22 @@
 				'<small>' + L('كم كتب، ومتى، وبأي الكلمات', 'How much he wrote, when, and in which words') + '</small>' +
 				'<span class="mg-go">' + L('اكتشف الأرقام', 'Explore the numbers') + ' ' + arrow + '</span></a>');
 
-		/* «شارك»: the reader's turn, in two columns side by side — what one can add to the site (a correction, a cover, a
-		   dedication, a story, code, the data) and what one can play and read — six each, a row each; under both, a strip on how
-		   each contribution is credited */
+		/* «شارك»: the reader's turn, set as «حياته» is — two columns, what one can add to the site and what one can play and
+		   read, then at the side a card of chance: something of his picked at random, with a die to throw again; under the
+		   columns, a line on how each contribution is credited */
 		var share = panel('share', L('شارك', 'Contribute'),
-			'<div class="mg-col"><p class="mg-h">' + L('ساهم في الموقع', 'Add to the site') + '</p><div class="mg-list">' +
+			'<div class="mg-col"><p class="mg-h">' + L('ساهم في الموقع', 'Add to the site') + '</p>' +
 				item({ href: App.fixHref(L('', '')), ic: 'pen', ar: 'صحّح أو أضف', en: 'Correct or add', dar: 'خطأ رأيته أو معلومة تنقص، على GitHub', den: 'A mistake you saw or something missing, on GitHub' }).replace('<a ', '<a target="_blank" rel="noopener" ') +
-				MEGA.share.map(function (n) { return item(n); }).join('') + '</div></div>' +
-			'<div class="mg-col mg-col-play"><p class="mg-h">' + L('العب واقرأ', 'Play and read') + '</p><div class="mg-list">' + MEGA.play.map(function (n) { return item(n); }).join('') + '</div></div>' +
-			'<a class="mg-credit" href="changelog.html"><span class="mg-seal" aria-hidden="true">' + megaIcon('award') + '</span>' +
-				'<span class="mg-credit-tx"><b>' + e(L('باسمك، إن أردت', 'In your name, if you wish')) + '</b>' +
-				'<small>' + e(L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها وفي «سجل التحديثات». الموقع يكبر بقرّائه.', 'Each contribution that goes up names its sender on its page and in the changelog. The site grows with its readers.')) + '</small></span>' +
-				'<span class="mg-go">' + e(L('سجل التحديثات', 'The changelog')) + ' ' + arrow + '</span></a>');
+				MEGA.share.map(function (n) { return item(n); }).join('') + '</div>' +
+			'<div class="mg-col"><p class="mg-h">' + L('العب واقرأ', 'Play and read') + '</p>' + MEGA.play.map(function (n) { return item(n); }).join('') + '</div>' +
+			'<div class="mg-luck"><p class="mg-luck-h">' + L('صدفة من رفّه', 'A chance pick') + '</p>' +
+				'<div class="mg-luck-box">' + megaLuckHTML(App, true) + '</div>' +
+				'<button class="mg-dice" type="button" aria-label="' + e(L('اختر غيرها', 'Pick another')) + '" title="' + e(L('اختر غيرها', 'Pick another')) + '">' +
+					'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.5" fill="currentColor"/></svg>' +
+					'<span>' + e(L('ارمِ النرد', 'Roll again')) + '</span></button></div>' +
+			'<a class="mg-credit" href="changelog.html">' + megaIcon('award') +
+				'<span class="mg-credit-tx"><b>' + e(L('باسمك، إن أردت', 'In your name, if you wish')) + '</b> ' +
+				'<small>' + e(L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها وفي «سجل التحديثات».', 'Each contribution that goes up names its sender on its page and in the changelog.')) + '</small></span>' + arrow + '</a>');
 		var pen = '<svg class="mnav-ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 		return '<nav class="mnav" aria-label="' + L('التنقل الرئيسي', 'Main') + '">' +
 			link('index.html', 'الرئيسية', 'Home') +
@@ -430,6 +454,8 @@
 				var tx = nav.querySelector('.mg-photo-tx');
 				if (tx && window.App) tx.innerHTML = megaQuoteHTML(window.App);
 			}
+			/* and something new of his on «شارك»'s card of chance */
+			if (id === 'share' && openId !== 'share' && hydrated) luck();
 			openId = id;
 			btns.forEach(function (b) {
 				var on = b.dataset.mega === id;
@@ -439,6 +465,17 @@
 			header.classList.toggle('mega-open', !!id);
 			if (id) openedAt = Date.now();
 		};
+		var luck = function () {
+			var box = nav.querySelector('.mg-luck-box');
+			if (box && window.App) box.innerHTML = megaLuckHTML(window.App, false);
+		};
+		var dice = nav.querySelector('.mg-dice');
+		if (dice) dice.addEventListener('click', function () {
+			luck();
+			dice.classList.remove('is-rolling');
+			void dice.offsetWidth;
+			dice.classList.add('is-rolling');
+		});
 		nav.addEventListener('pointerenter', hydrate);
 		nav.addEventListener('focusin', hydrate);
 		btns.forEach(function (b) {
@@ -512,7 +549,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: '31c119c',
+		LATEST: 'b652968',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
