@@ -3288,7 +3288,9 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 		/* Spain Rodriguez, whose graphic biography of Che Guevara he translated: sent by the site's editor */
 		'سبين رودريجيز': { url: W + 'spain-rodriguez.webp' },
 		/* Ola Samir El-Sherbiny, who wrote in «سوبر ميجا» with him: sent by the site's editor */
-		'علا سمير الشربيني': { url: W + 'ola-samir-el-sherbiny.jpg', source: { ar: 'أرسلها محرر الموقع', en: 'Sent by the site’s editor' } }
+		'علا سمير الشربيني': { url: W + 'ola-samir-el-sherbiny.jpg', source: { ar: 'أرسلها محرر الموقع', en: 'Sent by the site’s editor' } },
+		/* Khaled El-Safty, who wrote in «كتاب الصيف» with him: sent by the site's editor */
+		'خالد الصفتي': { url: W + 'khaled-el-safty.webp', source: { ar: 'أرسلها محرر الموقع', en: 'Sent by the site’s editor' } }
 	};
 	Object.keys(A.writers || {}).forEach(function (sh) {
 		(A.writers[sh] || []).forEach(function (w) {

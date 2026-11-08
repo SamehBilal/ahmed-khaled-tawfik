@@ -7,7 +7,15 @@
 	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
-	<updated>2026-11-08T20:59:00Z</updated>
+	<updated>2026-11-09T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1dfd2f7</id>
+		<title>Ola Samir El-Sherbiny's photo on her page</title>
+		<updated>2026-11-09T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="صور"/>
+		<content type="text">Ola Samir El-Sherbiny's photo on her page</content>
+	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bc37f1b</id>
 		<title>Publisher page</title>
@@ -511,14 +519,5 @@
 		<category term="audio" label="مسموع"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">فيديوهان جديدان عنه في «الإرث»، وشريط جديد لأسماء «أعلام في حكاياته» بسنوات حياتهم</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/77c8641</id>
-		<title>سنوات «روايات عالمية للجيب» من طبعاتها</title>
-		<updated>2026-11-04T20:58:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="data" label="بيانات"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">سنوات «روايات عالمية للجيب» من طبعاتها: 1994–2015، وظهرت في «السلاسل جنبًا إلى جنب» وعلى صفحة كل عدد</content>
 	</entry>
 </feed>

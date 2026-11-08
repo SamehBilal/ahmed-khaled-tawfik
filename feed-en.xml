@@ -7,7 +7,15 @@
 	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
-	<updated>2026-11-08T20:59:00Z</updated>
+	<updated>2026-11-09T20:59:00Z</updated>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1dfd2f7</id>
+		<title>Ola Samir El-Sherbiny's photo on her page</title>
+		<updated>2026-11-09T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<content type="text">Ola Samir El-Sherbiny's photo on her page</content>
+	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bc37f1b</id>
 		<title>Publisher page</title>
@@ -511,14 +519,5 @@
 		<category term="audio" label="Audio"/>
 		<category term="design" label="Design"/>
 		<content type="text">Two videos about him on «الإرث» (AKT.media): «كل يوم» on ON, a segment on «العرّاب» in the days after his death (5 April 2018, 38 minutes), and «آخر النهار» on Al Nahar, Ibrahim Eissa speaking of him (29 November 2020, 8 minutes); each also under its year on «ذكراه كل عام». «أعلام في حكاياته» has a new band: a frieze of the 42 names — three rows sliding slowly, each the other way, the middle one in outline, the most met first — beside each the years they lived, taken from their note, and a dot in the colour of their kind; a row stops under the pointer and a name leads to its card, as before. No names over one another now, and the title closer under it</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/77c8641</id>
-		<title>«روايات عالمية للجيب» has its years</title>
-		<updated>2026-11-04T20:58:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«روايات عالمية للجيب» has its years: 66 of its issues dated from their own Goodreads editions (the Arabic edition's date, not the original novel's) — one about every three months from #8 (April 1994) to #74 (October 2010), then #75–80 from 2012 to January 2015 (AKT.otherSeries, issue.year, data-series-more.js). Left out where Goodreads gives only the original's date (13, 18, 25, 35, 42, 43, 81) or a date out of turn (68); 1–7 and 82–83 not found. «السلاسل جنبًا إلى جنب» shows 1994–2015 «from #8 to #80, as their editions date them», and the series has its lane in the band, with its 77 issues; each issue's year shows on its series page</content>
 	</entry>
 </feed>
