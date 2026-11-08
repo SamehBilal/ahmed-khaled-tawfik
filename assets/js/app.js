@@ -579,7 +579,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: 'ef69f29',
+		LATEST: '5ae29af',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
@@ -1153,7 +1153,14 @@
 				legacy: { ar: 'الإرث', en: 'Legacy' }, tribute: { ar: 'قالوا عنه', en: 'Tribute' }, blog: { ar: 'المدونة', en: 'Blog' }, media: { ar: 'لقاء / مقال', en: 'Media' },
 				about: { ar: 'كتاب عنه', en: 'Book about him' }, near: { ar: 'كتاب من حوله', en: 'Related book' }, publisher: { ar: 'دار نشر', en: 'Publisher' },
 				award: { ar: 'جائزة', en: 'Award' }, audio: { ar: 'مسموع', en: 'Audio' }, page: { ar: 'صفحة', en: 'Page' },
-				phrase: { ar: 'عبارة', en: 'Phrase' }
+				phrase: { ar: 'عبارة', en: 'Phrase' }, villain: { ar: 'شرير', en: 'Villain' }, screen: { ar: 'على الشاشة', en: 'On screen' },
+				opening: { ar: 'أول سطر', en: 'First line' }, study: { ar: 'دراسة', en: 'Study' }, life: { ar: 'من حياته', en: 'His life' },
+				dispute: { ar: 'خلاف المصادر', en: 'Sources differ' },
+				/* the rows of data-search.js (tools/build-data.js), by their first cell */
+				creature: { ar: 'وحش / أسطورة', en: 'Monster' }, world: { ar: 'عالم فانتازيا', en: 'Fantasia world' }, 'case': { ar: 'حالة سافاري', en: 'Safari case' },
+				figure: { ar: 'علم', en: 'Figure' }, library: { ar: 'من مكتبته', en: 'His library' }, heroLib: { ar: 'مكتبة أبطاله', en: 'Heroes’ library' },
+				refaat: { ar: 'يوميات رفعت', en: 'Refaat’s life' }, tanta: { ar: 'طنطا', en: 'Tanta' }, hand: { ar: 'بخط يده', en: 'In his hand' },
+				dedication: { ar: 'إهداء', en: 'Dedication' }, place: { ar: 'مكان', en: 'Place' }
 			};
 			var S = window.WorksShared;
 
@@ -1210,10 +1217,25 @@
 				network: 'شبكة شخصيات علاقات characters web relations', 'reader-stories': 'حكايات القراء حكايتي قارئ خط يده إهداء توقيع مخطوط reader stories handwriting dedication signature',
 				style: 'أسلوب لغة كلمات style language words', writers: 'كتاب رسامون مخرجون ممثلون دائرة writers artists directors actors circle',
 				changelog: 'تحديثات جديد سجل changelog updates', sitemap: 'خريطة الموقع صفحات sitemap pages', about: 'عن الموقع أسئلة شائعة about faq', contact: 'تواصل ساهم مساهمة contact contribute' };
-			UI.nav.concat(UI.more, UI.world, UI.legal, UI.sections).forEach(function (n) {
+			/* every page the menus name, once each (the menus' groups, then the older lists for the ones only they name), its line under it */
+			var seenPage = {};
+			[{ href: 'guide.html', ar: 'من أين أبدأ؟', en: 'Where to start' }, { href: 'numbers.html', ar: 'أرقام', en: 'Numbers' }]
+				.concat(MEGA.worksMore, MEGA.world, MEGA.life, MEGA.writing, MEGA.legacy, MEGA.share, MEGA.play, UI.nav, UI.more, UI.world, UI.legal, UI.sections).forEach(function (n) {
 				var id = n.href.split('#')[1] || n.href.replace(/\.html$/, '');
-				if (n.href !== 'index.html') add(K.page, { ar: n.ar, en: n.en }, '', n.href, PAGE_WORDS[id] || '');
+				if (n.href === 'index.html' || seenPage[n.href]) return;
+				seenPage[n.href] = 1;
+				add(K.page, { ar: n.ar, en: n.en }, n.dar ? { ar: n.dar, en: n.den } : '', n.href, (PAGE_WORDS[id] || '') + ' ' + (n.dar || '') + ' ' + (n.den || ''));
 			});
+			/* the rest of the data: the series' villains, the adaptations, the first lines, the studies, his life's milestones,
+			   where the sources differ */
+			(d.villains || []).forEach(function (v) { var s = App.byId(d.series, v.series); add(K.villain, v.name, s ? s.title : '', 'series.html?id=' + v.series + '#villains', both(v.desc)); });
+			(d.adaptations || []).forEach(function (a) { add(K.screen, a.title, a.year, 'screen.html', both(a.kind) + ' ' + both(a.text)); });
+			(d.openings || []).forEach(function (o) { var w = App.findWork(o.book); add(K.opening, { ar: o.line, en: o.en || o.line }, w ? w.title : '', 'first-lines.html', o.line + ' ' + (o.en || '')); });
+			(d.studies || []).forEach(function (s) { add(K.study, { ar: s.title, en: s.titleEn || s.title }, s.where || '', 'studies.html', (s.author ? both(s.author) : '') + ' ' + both(s.where)); });
+			(d.timeline || []).forEach(function (ev) { add(K.life, ev.title, ev.year, 'talks.html', both(ev.text)); });
+			(d.disputes || []).forEach(function (x) { add(K.dispute, x.topic, '', x.href || 'sources.html', (x.says || []).map(both).join(' ')); });
+			/* and the pages about his world and his reading (data-search.js, fetched with the blog's index when the search opens) */
+			(d.searchMore || []).forEach(function (r) { add(K[r[0]] || K.page, typeof r[1] === 'string' ? { ar: r[1], en: r[1] } : r[1], r[2], r[3], r[4]); });
 			(d.legacy || []).forEach(function (l, i) { add(K.legacy, l.title, l.date, 'legacy.html#l-' + i, both(l.text)); });
 			(d.tributes || []).forEach(function (p, i) { add(K.tribute, p.name, p.role, 'tributes.html#t-' + i, both(p.quote) + ' ' + both(p.context)); });
 			(d.media || []).forEach(function (m, i) { var y = /(?:v=|youtu\.be\/|embed\/)([\w-]{11})/.exec(m.url || ''); add(K.media, m.title, m.outlet, 'interviews.html#' + (y ? 'v-' + y[1] : 'm-' + i), both(m.note)); });
@@ -1251,7 +1273,7 @@
 			App.needData(function () {
 				if (lazy) refresh();
 				/* the blog index is large, so pages other than the blog fetch it only when search opens */
-				[['blog', 'data-blog.js']].forEach(function (x) {
+				[['blog', 'data-blog.js'], ['searchMore', 'data-search.js']].forEach(function (x) {
 					if (App.data()[x[0]] || (Search.loading || (Search.loading = {}))[x[0]]) return;
 					Search.loading[x[0]] = true;
 					var bs = document.createElement('script');

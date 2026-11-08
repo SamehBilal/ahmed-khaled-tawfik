@@ -67,4 +67,29 @@ Object.keys(parts).forEach(k => fs.writeFileSync(path.join(partsDir, k + '.js'),
 	'/* Built by tools/build-data.js from data-pages.js — do not edit here; edit that and rebuild. */\n' +
 	'window.AKT = window.AKT || {};\nwindow.AKT.' + k + ' = ' + JSON.stringify(parts[k]) + ';\n'));
 console.log('pages/', Object.keys(parts).length + ' parts');
+/* and the search's second part (assets/js/data-search.js, fetched when the search first opens, as the blog's index is): what the
+   pages about his world and his reading hold, which no page but their own loads — his monsters, Fantasia's worlds, Safari's cases,
+   the real people in his tales, his library and his heroes', Refaat's life, his city, his hand, and the map's places. Each row:
+   [kind, title, under it, its address, the words it is also found by] */
+const both = o => o ? (typeof o === 'string' ? o : [o.ar, o.en].filter(Boolean).join(' ')) : '';
+const cut = s => String(s || '').replace(/\s+/g, ' ').slice(0, 400);
+const issueTitle = (sid, n) => { const is = ((A.issues || {})[sid] || []).find(x => x.n === n); return is ? is.title : null; };
+const rows = [];
+(parts.creatures || []).forEach(c => rows.push(['creature', c.name, '', 'creatures.html#' + c.id, cut(both(c.lore) + ' ' + both(c.inBooks))]));
+(parts.fantasiaWorlds || []).forEach(x => x.world && rows.push(['world', issueTitle('fantasia', x.n) || { ar: 'فانتازيا ' + x.n, en: 'Fantasia ' + x.n }, { ar: 'عوالم فانتازيا · العدد ' + x.n, en: 'Fantasia’s worlds · issue ' + x.n }, 'worlds.html#fantasia-' + x.n, cut(both(x.world) + ' ' + both(x.era) + ' ' + both(x.from))]));
+(parts.safariCases || []).forEach(x => x.case && rows.push(['case', x.name || issueTitle('safari', x.n) || { ar: 'سافاري ' + x.n, en: 'Safari ' + x.n }, { ar: 'عيادة سافاري · العدد ' + x.n, en: 'The Safari clinic · issue ' + x.n }, 'clinic.html#safari-' + x.n, cut(both(x.case) + ' ' + both(x.fact) + ' ' + both(issueTitle('safari', x.n))) ]));
+(parts.storyPeople || []).forEach(p => rows.push(['figure', p.name, '', 'names.html#p-' + p.id, cut(both(p.who))]));
+(parts.library || []).forEach(x => rows.push(['library', x.title, x.by || '', 'library.html', cut(both(x.said) + ' ' + both(x.by))]));
+(parts.refaatLibrary || []).forEach((x, i) => rows.push(['heroLib', x.title, x.by || '', 'heroes-library.html#rl-' + i, cut(both(x.said) + ' ' + both(x.by))]));
+(parts.refaatLife || []).forEach(x => rows.push(['refaat', x.title, x.when, 'refaat-life.html', cut(both(x.text))]));
+(parts.tanta || []).forEach(x => rows.push(['tanta', x.name, { ar: 'طنطا', en: 'Tanta' }, 'talks.html#tanta', cut('طنطا Tanta ' + both(x.text))]));
+(parts.handwriting || []).forEach(x => rows.push(['hand', x.title, x.outlet || '', 'handwriting.html#hand', cut(both(x.text))]));
+(parts.dedications || []).forEach(x => { const w = (A.works || []).find(o => o.id === x.book); rows.push(['dedication', w ? { ar: 'إهداء «' + w.title.ar + '»', en: 'The dedication of ' + w.title.en } : x.to, x.to, 'handwriting.html#dedications', cut(x.text + ' ' + both(x.note))]); });
+let placeList = [];
+try { placeList = JSON.parse(fs.readFileSync(path.join(root, 'assets/data/places.json'), 'utf8')); } catch (e) {}
+placeList.forEach(p => rows.push(['place', { ar: p.ar, en: p.en }, { ar: p.items.length + ' من كتبه', en: p.items.length + ' of his books' }, 'map.html#' + encodeURIComponent(p.en), cut(p.items.map(i => i.t).join(' '))]));
+const sbody = '/* Built by tools/build-data.js from data-pages.js and assets/data/places.json — do not edit here; edit those and rebuild. */\n' +
+	'window.AKT = window.AKT || {};\nwindow.AKT.searchMore = ' + JSON.stringify(rows) + ';\n';
+fs.writeFileSync(path.join(root, 'assets/js/data-search.js'), sbody);
+console.log('data-search.js', rows.length + ' rows,', Math.round(sbody.length / 1024) + ' KB');
 module.exports = FILES;
