@@ -8,6 +8,68 @@
 (function () {
 	'use strict';
 
+	/* a searchable picker (the reader's card): typing narrows the list, Arabic matched loosely (with or without its marks,
+	   أ/إ/آ as ا, ة as ه, ى as ي); each choice with its cover or picture. A title may also be typed freely; a character must be
+	   one of the list, kept in the hidden field beside it */
+	function fold(s) {
+		return String(s || '').toLowerCase().replace(/[ً-ْـ]/g, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي');
+	}
+	function wirePicker(p, items, A) {
+		var e = A.esc, q = p.querySelector('.cr-pick-q'), hid = p.querySelector('input[type="hidden"]'), list = p.querySelector('.cr-pick-list'), ic = p.querySelector('.cr-pick-ic');
+		var shown = [], at = -1, keys = items.map(function (x) { return fold(x.v); });
+		var face = function (x) {
+			var mono = '<b class="cr-pick-mono">' + e(x.v.replace(/^د\.\s*/, '').slice(0, 1)) + '</b>';
+			return '<span class="cr-pick-av' + (x.round ? ' is-round' : '') + '">' + (x.img ? '<img src="' + e(A.thumb ? A.thumb(x.img) : x.img) + '" alt="" loading="lazy" onerror="this.remove()">' : '') + mono + '</span>';
+		};
+		var mark = function (x) {
+			ic.innerHTML = x ? face(x) : '';
+			p.classList.toggle('has-pick', !!x);
+		};
+		var render = function () {
+			var k = fold(q.value.trim());
+			shown = [];
+			for (var i = 0; i < items.length && shown.length < 80; i++) if (!k || keys[i].indexOf(k) > -1) shown.push(items[i]);
+			at = -1;
+			list.innerHTML = shown.length ? shown.map(function (x, i) {
+				return '<li role="option" id="' + p.dataset.kind + '-' + i + '" data-i="' + i + '">' + face(x) + '<span>' + e(x.v) + '</span></li>';
+			}).join('') : '<li class="cr-pick-none">' + e(A.L('لا شيء بهذا الاسم', 'Nothing by that name')) + '</li>';
+		};
+		var open = function (on) { list.hidden = !on; q.setAttribute('aria-expanded', String(on)); p.classList.toggle('is-open', on); };
+		var choose = function (x) {
+			q.value = x.v;
+			if (hid) hid.value = x.id;
+			mark(x);
+			open(false);
+		};
+		var move = function (d) {
+			if (!shown.length) return;
+			at = (at + d + shown.length) % shown.length;
+			[].forEach.call(list.children, function (li, i) { li.classList.toggle('is-at', i === at); });
+			var li = list.children[at];
+			q.setAttribute('aria-activedescendant', li.id);
+			li.scrollIntoView({ block: 'nearest' });
+		};
+		q.addEventListener('focus', function () { render(); open(true); });
+		q.addEventListener('input', function () {
+			var x = items.filter(function (y) { return y.v === q.value; })[0];
+			if (hid) hid.value = x ? x.id : '';
+			mark(x);
+			render(); open(true);
+		});
+		q.addEventListener('keydown', function (ev) {
+			if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') { ev.preventDefault(); if (list.hidden) { render(); open(true); } move(ev.key === 'ArrowDown' ? 1 : -1); }
+			else if (ev.key === 'Enter' && !list.hidden && at > -1) { ev.preventDefault(); choose(shown[at]); }
+			else if (ev.key === 'Escape' && !list.hidden) { ev.preventDefault(); open(false); }
+		});
+		list.addEventListener('mousedown', function (ev) { ev.preventDefault(); });
+		list.addEventListener('click', function (ev) { var li = ev.target.closest('[data-i]'); if (li) choose(shown[+li.getAttribute('data-i')]); });
+		q.addEventListener('blur', function () {
+			open(false);
+			/* a character must be one of the list: a name typed and left half-way is cleared */
+			if (hid && !hid.value) { q.value = ''; mark(null); }
+		});
+	}
+
 	/* the six characters a reader can be, each with what makes them so */
 	var WHO = {
 		refaat: { ar: 'الساخر المتشكك: تؤمن بالعقل وتسخر من كل شيء، حتى من نفسك، لكنك أشجع مما تظن حين يجدّ الجد.', en: 'The sardonic sceptic: you trust reason and mock everything, yourself included, but you are braver than you think when it counts.' },
@@ -172,16 +234,27 @@
 			});
 			this._titles = titles;
 			var st = window.Lists ? window.Lists.state() : { lists: {} }, read = (st.lists.read || []).length;
-			var chars = (d.characters || []).map(function (c) { return '<option value="' + esc(c.id) + '">' + esc(t(c.name)) + '</option>'; }).join('');
+			/* the three choices are searchable pickers: the titles each with its cover, the characters each with their picture
+			   (or the first letter of their name on a disc when there is none) */
+			var figs = d.charFigures || {};
+			var bookItems = titles.map(function (x) { return { v: x[0], img: x[2] }; });
+			var charItems = (d.characters || []).map(function (c) { return { v: t(c.name), id: c.id, img: figs[c.id] || c.image || '', round: true }; });
+			var pick = function (label, name, ph, kind) {
+				return '<div class="cr-pick" data-kind="' + kind + '"><label>' + esc(label) + '<span class="cr-pick-f"><span class="cr-pick-ic" aria-hidden="true"></span>' +
+					'<input class="cr-pick-q"' + (kind === 'char' ? '' : ' name="' + name + '"') + ' maxlength="90" placeholder="' + esc(ph) + '" role="combobox" aria-autocomplete="list" aria-expanded="false">' +
+					(kind === 'char' ? '<input type="hidden" name="' + name + '">' : '') +
+					'<svg class="cr-pick-chev" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>' +
+					'<ul class="cr-pick-list" role="listbox" hidden></ul></div>';
+			};
 			box.innerHTML = '<form class="cr-form" autocomplete="off">' +
 				'<label>' + esc(L('اسمك (كما تريده على البطاقة)', 'Your name (as you want it on the card)')) + '<input name="name" maxlength="40"></label>' +
-				'<label>' + esc(L('أول ما قرأت له', 'The first thing of his you read')) + '<input name="first" list="cr-titles" maxlength="90"></label>' +
-				'<label>' + esc(L('أحب كتبه إليك', 'Your favourite of his')) + '<input name="fav" list="cr-titles" maxlength="90"></label>' +
-				'<label>' + esc(L('شخصيتك المفضلة', 'Your favourite character')) + '<select name="char"><option value=""></option>' + chars + '</select></label>' +
+				pick(L('أول ما قرأت له', 'The first thing of his you read'), 'first', L('ابحث بالعنوان أو اكتبه', 'Search a title or type it'), 'book') +
+				pick(L('أحب كتبه إليك', 'Your favourite of his'), 'fav', L('ابحث بالعنوان أو اكتبه', 'Search a title or type it'), 'book') +
+				pick(L('شخصيتك المفضلة', 'Your favourite character'), 'char', L('ابحث بالاسم', 'Search a name'), 'char') +
 				'<label>' + esc(L('كم قرأت له؟', 'How many have you read?')) + '<input name="count" type="number" min="0" max="999" value="' + (read || '') + '"></label>' +
-				'<datalist id="cr-titles">' + titles.map(function (x) { return '<option value="' + esc(x[0]) + '">'; }).join('') + '</datalist>' +
 				'<p class="cr-act"><button type="submit" class="share-btn">' + esc(L('ارسم بطاقتي', 'Draw my card')) + '</button>' +
 				(read ? ' <span class="cr-hint">' + esc(L('العدد من «قرأته» في قوائمك.', 'The count comes from “Read” in your lists.')) + '</span>' : '') + '</p></form>';
+			[].forEach.call(box.querySelectorAll('.cr-pick'), function (p) { wirePicker(p, p.getAttribute('data-kind') === 'char' ? charItems : bookItems, A); });
 			box.querySelector('form').onsubmit = function (ev) {
 				ev.preventDefault();
 				var f = ev.target, c = (d.characters || []).filter(function (x) { return x.id === f.char.value; })[0];

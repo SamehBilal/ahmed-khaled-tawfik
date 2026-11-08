@@ -9,9 +9,17 @@
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-08T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/9f6702b</id>
+		<title>Let the reader-card page's band show the card in full</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">Let the reader-card page's band show the card in full</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3f4fcce</id>
 		<title>Let the test page's band show its cards in full</title>
-		<updated>2026-11-08T20:59:00Z</updated>
+		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">Let the test page's band show its cards in full</content>
@@ -19,7 +27,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/540d1d4</id>
 		<title>Redesign the «شارك» menu like the other panels, with a random pick</title>
-		<updated>2026-11-08T20:58:00Z</updated>
+		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">Redesign the «شارك» menu like the other panels, with a random pick</content>
@@ -27,49 +35,49 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b652968</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:57:00Z</updated>
+		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/31c119c</id>
 		<title>Blend glossary and handwriting bands into pages</title>
-		<updated>2026-11-08T20:56:00Z</updated>
+		<updated>2026-11-08T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Blend glossary and handwriting bands into pages</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/de286ca</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:55:00Z</updated>
+		<updated>2026-11-08T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
 		<title>up</title>
-		<updated>2026-11-08T20:54:00Z</updated>
+		<updated>2026-11-08T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
-		<updated>2026-11-08T20:53:00Z</updated>
+		<updated>2026-11-08T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
-		<updated>2026-11-08T20:52:00Z</updated>
+		<updated>2026-11-08T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:51:00Z</updated>
+		<updated>2026-11-08T20:50:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
@@ -539,15 +547,5 @@
 		<category term="data" label="بيانات"/>
 		<category term="design" label="تصميم"/>
 		<content type="text">صفحتا «السلاسل جنبًا إلى جنب» مع «أعداء وأشرار» و«زمن العرّاب»، و«إهداءات كتبه» في «بخط يده»، و«مكتبة رفعت إسماعيل» في «مكتبته»، و«دراسات ورسائل عنه» في «قالوا عنه»، ولعبة «البدايات» في «ركن القرّاء»</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6b749ab</id>
-		<title>«بياناتك على هذا الجهاز» في «الخصوصية» تعرض كل ما يحفظه الموقع في متصفحك وتمسحه أو تنقله إلى جهاز آخر، وأخبار…</title>
-		<updated>2026-11-03T20:59:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="page" label="صفحة جديدة"/>
-		<category term="data" label="بيانات"/>
-		<category term="design" label="تصميم"/>
-		<content type="text">«بياناتك على هذا الجهاز» في «الخصوصية» تعرض كل ما يحفظه الموقع في متصفحك وتمسحه أو تنقله إلى جهاز آخر، وأخبار الموقع صارت خلاصة RSS بالعربية والإنجليزية، وفحص الروابط الخارجية يجري تلقائيًا كل شهر</content>
 	</entry>
 </feed>

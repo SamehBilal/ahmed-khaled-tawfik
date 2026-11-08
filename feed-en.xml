@@ -9,9 +9,17 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-08T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/9f6702b</id>
+		<title>Let the reader-card page's band show the card in full</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">Let the reader-card page's band show the card in full</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3f4fcce</id>
 		<title>Let the test page's band show its cards in full</title>
-		<updated>2026-11-08T20:59:00Z</updated>
+		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Let the test page's band show its cards in full</content>
@@ -19,7 +27,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/540d1d4</id>
 		<title>Redesign the «شارك» menu like the other panels, with a random pick</title>
-		<updated>2026-11-08T20:58:00Z</updated>
+		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Redesign the «شارك» menu like the other panels, with a random pick</content>
@@ -27,49 +35,49 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b652968</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:57:00Z</updated>
+		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/31c119c</id>
 		<title>Blend glossary and handwriting bands into pages</title>
-		<updated>2026-11-08T20:56:00Z</updated>
+		<updated>2026-11-08T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Blend glossary and handwriting bands into pages</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/de286ca</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:55:00Z</updated>
+		<updated>2026-11-08T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
 		<title>up</title>
-		<updated>2026-11-08T20:54:00Z</updated>
+		<updated>2026-11-08T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
-		<updated>2026-11-08T20:53:00Z</updated>
+		<updated>2026-11-08T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
-		<updated>2026-11-08T20:52:00Z</updated>
+		<updated>2026-11-08T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:51:00Z</updated>
+		<updated>2026-11-08T20:50:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
@@ -539,15 +547,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data: his six series in one table — who tells each, its years and issues, the first and the last, its house, its kind, how many are heard on Audiohat and Storytel, its legends, real figures and enemies, the screen, and its ending (on the series page, #ending, or asked for) — its band the series' lives as lanes from first year to last, a mark for each issue; and under it «أعداء وأشرار» (#villains): 17 enemies his heroes meet, by series — Lucifer, Mother Marsha, Ronel the Black, the other Refaat, Abraham Levy, Mira Goran, Rasputin, Hassan-i Sabbah… — each with its issues and sources (AKT.villains). «زمن العرّاب» (era.html), a new page: his life, his books and his series as they began and ended, his awards and the screen, year by year from 1962, beside 91 events in Egypt, the Arab world and the world, in culture and in science, each sourced; 22 tied to what he wrote of them — his column on the blog or his issue — its band the years as two tracks, his and the world's (AKT.era). «بخط يده» has «إهداءات كتبه» (#dedications): the printed dedications of four of his books — to his readers, pirated or not; to his father and Sami El-Salamouni; to Ahmed Mourad, Ayman El-Gendy and Raef Wasfy; and «السنجة»'s to Ahmed El-Aidy and the revolution (AKT.dedications). «مكتبته» has «مكتبة رفعت إسماعيل» (#refaat): 19 things his heroes read, quote, watch and hum inside the stories — Dracula, Poe, Dante, Umm Kulthum, Frankenstein, the Necronomicon, Carmina Burana, Frost, Darwish… — with their issues (AKT.refaatLibrary). «قالوا عنه» has, after «كتب عنه», «دراسات ورسائل عنه» (#studies): 35 theses and journal articles about him from ten countries, each linked to its record (AKT.studies). «ركن القرّاء» has «البدايات» (#openings): the first line of 27 of his books and issues, and four covers to choose which it opens (AKT.openings)</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6b749ab</id>
-		<title>«بياناتك على هذا الجهاز» (privacy.html#mydata)</title>
-		<updated>2026-11-03T20:59:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="page" label="New page"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«بياناتك على هذا الجهاز» (privacy.html#mydata): everything the site keeps in this browser, read live as the page opens — the lists with how many in each, the language, the theme, the last change seen in the changelog, the offline save, the install invitation and the reading time it counts, what is forgotten when the browser closes, and the offline copy with how many files and about how much room — each with a key to clear it; all of it saved to a JSON file and loaded in another browser or device (the lists' own export loads too), or cleared at once. The privacy page's text now names every thing kept, and points there. The changelog's news is an Atom feed, feed.xml in Arabic and feed-en.xml in English, the newest 60 changes with their kinds (tools/build-feed.js, run by build-sw.js), linked from the changelog and from every page's head. And the outside links are checked on the 1st of every month by GitHub (.github/workflows/links.yml): it runs tools/check-links.js, commits the new links.json, and opens an issue for the links that died since the last check (check-links.js --report=FILE)</content>
 	</entry>
 </feed>

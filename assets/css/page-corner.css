@@ -24,6 +24,32 @@
 .cr-form input, .cr-form select { padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--ink); color: var(--paper); font: inherit; }
 .cr-form input:focus, .cr-form select:focus { outline: none; border-color: var(--ember); }
 .cr-form .cr-act { grid-column: 1 / -1; }
+/* the reader's card's pickers (corner.js wirePicker): a field with the chosen cover or face at its start, and under it a
+   list to search, each row with its cover or picture */
+.cr-pick { position: relative; }
+.cr-pick-f { position: relative; display: flex; align-items: center; }
+.cr-form .cr-pick-q { flex: 1; min-width: 0; padding-inline-end: 34px; }
+.cr-pick.has-pick .cr-pick-q { padding-inline-start: 46px; }
+.cr-pick-ic { position: absolute; inset-inline-start: 8px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.cr-pick-ic:empty { display: none; }
+.cr-pick-chev { position: absolute; inset-inline-end: 12px; color: var(--muted); pointer-events: none; transition: transform .2s; }
+.cr-pick.is-open .cr-pick-chev { transform: rotate(180deg); }
+.cr-pick-list { position: absolute; z-index: 20; inset-inline: 0; top: calc(100% + 6px); max-height: 320px; overflow-y: auto; margin: 0; padding: 6px; list-style: none;
+	border: 1px solid var(--line); border-radius: 12px; background: var(--ink-2); box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
+html[data-theme="light"] .cr-pick-list { box-shadow: 0 18px 40px rgba(70, 50, 20, .2); }
+.cr-pick-list li { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 8px; color: var(--paper); font-size: 14px; line-height: 1.5; cursor: pointer; }
+.cr-pick-list li:hover, .cr-pick-list li.is-at { background: color-mix(in srgb, var(--ember) 16%, transparent); }
+.cr-pick-list .cr-pick-none { color: var(--muted); cursor: default; }
+.cr-pick-list .cr-pick-none:hover { background: none; }
+/* a cover is a little book, a face a disc; the letter waits under the picture for when there is none */
+.cr-pick-av { position: relative; flex: none; display: grid; place-items: center; width: 30px; height: 44px; overflow: hidden; border-radius: 3px;
+	background: color-mix(in srgb, var(--ember) 22%, var(--ink)); box-shadow: 0 2px 6px rgba(0, 0, 0, .35); }
+.cr-pick-av.is-round { width: 36px; height: 36px; border-radius: 50%; }
+.cr-pick-av img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cr-pick-av.is-round img { object-position: 50% 12%; }
+.cr-pick-ic .cr-pick-av { width: 26px; height: 36px; }
+.cr-pick-ic .cr-pick-av.is-round { width: 30px; height: 30px; }
+.cr-pick-mono { font-family: var(--f-display); font-weight: 400; font-size: 15px; color: var(--ember); }
 .cr-month { display: flex; gap: 24px; align-items: flex-start; }
 .cr-month-cover { flex: 0 0 150px; }
 .cr-month h3 a { color: var(--paper); }
@@ -97,8 +123,9 @@
 html[data-theme="light"] .ph[data-ph="which-character"], html[data-theme="light"] .ph[data-ph="first-lines"], html[data-theme="light"] .ph[data-ph="reader-card"],
 html[data-theme="light"] .ph[data-ph="cover-maker"], html[data-theme="light"] .ph[data-ph="read-with-us"] { height: 320px; background: none; border-bottom: 0; pointer-events: auto; overflow: clip; }
 .ph[data-ph="which-character"]::after, .ph[data-ph="first-lines"]::after, .ph[data-ph="reader-card"]::after, .ph[data-ph="cover-maker"]::after, .ph[data-ph="read-with-us"]::after { content: none; }
-/* the reader's card shows whole, past the band's foot */
-.ph[data-ph="reader-card"], html[data-theme="light"] .ph[data-ph="reader-card"] { overflow: visible; }
+/* the reader's card and the cover show whole, past the band's foot */
+.ph[data-ph="reader-card"], html[data-theme="light"] .ph[data-ph="reader-card"],
+.ph[data-ph="cover-maker"], html[data-theme="light"] .ph[data-ph="cover-maker"] { overflow: visible; }
 .ph[data-ph="which-character"] + .page-hero, .ph[data-ph="first-lines"] + .page-hero, .ph[data-ph="reader-card"] + .page-hero, .ph[data-ph="cover-maker"] + .page-hero, .ph[data-ph="read-with-us"] + .page-hero { padding-top: 10px; }
 
 /* «أي شخصية أنت؟»: six oval portraits in gilt frames, one lit with its name and what makes them so */
