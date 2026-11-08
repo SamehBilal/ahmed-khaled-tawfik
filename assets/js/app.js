@@ -346,6 +346,28 @@
 		for (var k in groups) if (groups[k].some(function (n) { return n.href === file; })) return k;
 		return '';
 	}
+	/* the footer's links, grouped as the main menu's panels are (MEGA), each group a heading and its pages */
+	function ftGroups(App) {
+		var L = App.L, e = App.esc;
+		var a = function (n, attrs) { return '<a href="' + n.href + '"' + (attrs || '') + '>' + e(L(n.ar, n.en)) + '</a>'; };
+		var group = function (id, ar, en, links, cls) {
+			return '<nav class="ft-g' + (cls ? ' ' + cls : '') + '" aria-labelledby="ft-' + id + '-h"><h2 id="ft-' + id + '-h">' + e(L(ar, en)) + '</h2>' + links.join('') + '</nav>';
+		};
+		var works = [a({ href: 'guide.html', ar: 'من أين أبدأ؟', en: 'Where to start?' }), a(MEGA.worksMore[0])]
+			.concat(MEGA.series.map(function (s) { return a({ href: 'series.html?id=' + s.id, ar: s.ar, en: s.en }); }))
+			.concat(MEGA.worksMore.slice(1).map(function (n) { return a(n); }));
+		var share = [a({ href: App.fixHref(L('', '')), ar: 'صحّح أو أضف', en: 'Correct or add' }, ' target="_blank" rel="noopener"')]
+			.concat(MEGA.share.concat(MEGA.play).map(function (n) { return a(n); }));
+		var behind = UI.legal.filter(function (n) { return n.href !== 'wanted.html'; }).map(function (n) {
+			return a(n, n.href === 'changelog.html' && App.isNew() ? ' class="is-new" title="' + e(L('جديد منذ زيارتك', 'New since your visit')) + '"' : '');
+		});
+		return group('works', 'أعماله', 'His works', works) +
+			group('world', 'عالمه', 'His world', MEGA.world.map(function (n) { return a(n); })) +
+			group('life', 'حياته', 'His life', MEGA.life.concat(MEGA.writing).map(function (n) { return a(n); })) +
+			group('legacy', 'إرثه', 'His legacy', MEGA.legacy.map(function (n) { return a(n); }).concat(a({ href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style' }))) +
+			group('share', 'شارك', 'Contribute', share, 'ft-g-wide') +
+			group('behind', 'خلف الكواليس', 'Behind the site', behind, 'ft-more');
+	}
 	function megaHTML(App, file) {
 		var L = App.L, e = App.esc;
 		var parent = MEGA_PARENT[file];
@@ -552,7 +574,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: 'a1fd58e',
+		LATEST: '0a5fcde',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
@@ -921,24 +943,9 @@
 							'<div class="motto">' + App.tx(UI.motto) + '</div>' +
 							'<span class="ft-dates" dir="ltr">1962 — 2018</span>' +
 						'</div>' +
-						'<div class="ft-col"><nav class="ft-links" aria-labelledby="ft-links-h"><h2 id="ft-links-h">' + App.L('صفحات الموقع', 'Site pages') + '</h2>' +
-							/* (the phone menu's own entries are the footer's own pages already, or the «My lists» button) */
-							UI.nav.filter(function (n) { return !n.phone; }).concat(UI.more.filter(function (n) { return n.main; })).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
-						'</nav>' +
-						/* and under them, the pages inside his world */
-						'<nav class="ft-links ft-world" aria-labelledby="ft-world-h"><h2 id="ft-world-h">' + App.L('عالم العرّاب', 'The Godfather’s world') + '</h2>' +
-							UI.world.map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
-						'</nav></div>' +
-						/* the pages made from the data (and, under them, pwa.js's «احفظ الموقع دون اتصال») */
-						'<div class="ft-side">' +
-							'<nav class="ft-legal ft-more" aria-labelledby="ft-more-h"><h2 id="ft-more-h">' + App.L('اكتشف أكثر', 'Discover more') + '</h2>' +
-								UI.more.filter(function (n) { return !n.main; }).map(function (n) { return '<a href="' + n.href + '">' + App.esc(n[App.lang]) + '</a>'; }).join('') +
-							'</nav>' +
-							/* then the site's own pages */
-							'<nav class="ft-legal" aria-labelledby="ft-legal-h"><h2 id="ft-legal-h">' + App.L('خلف الكواليس', 'Behind the site') + '</h2>' +
-								UI.legal.map(function (n) { return '<a href="' + n.href + '"' + (n.href === 'changelog.html' && App.isNew() ? ' class="is-new" title="' + App.esc(App.L('جديد منذ زيارتك', 'New since your visit')) + '"' : '') + '>' + App.esc(n[App.lang]) + '</a>'; }).join('') +
-							'</nav>' +
-						'</div>' +
+						/* the site's pages in the main menu's own groups, in its order — «أعماله», «عالمه», «حياته», «إرثه», «شارك» — and
+						   «خلف الكواليس» for the site itself (where pwa.js puts «احفظ الموقع دون اتصال») */
+						'<div class="ft-groups">' + ftGroups(App) + '</div>' +
 						'<div class="ft-maker">' +
 							'<p class="ft-maker-line">' + App.t(UI.maker.line) + '</p>' +
 							'<div class="ft-maker-links">' +
