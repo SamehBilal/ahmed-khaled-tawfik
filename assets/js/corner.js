@@ -14,9 +14,18 @@
 	function fold(s) {
 		return String(s || '').toLowerCase().replace(/[ً-ْـ]/g, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي');
 	}
-	function wirePicker(p, items, A) {
+	/* a book title is free text under its own name; any other choice keeps its id in a hidden field of that name */
+	function pickerHTML(label, name, ph, kind) {
+		var free = kind === 'book';
+		return '<div class="cr-pick" data-kind="' + kind + '"><label>' + esc(label) + '<span class="cr-pick-f"><span class="cr-pick-ic" aria-hidden="true"></span>' +
+			'<input class="cr-pick-q"' + (free ? ' name="' + name + '"' : '') + ' maxlength="90" placeholder="' + esc(ph) + '" role="combobox" aria-autocomplete="list" aria-expanded="false">' +
+			(free ? '' : '<input type="hidden" name="' + name + '">') +
+			'<svg class="cr-pick-chev" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>' +
+			'<ul class="cr-pick-list" role="listbox" hidden></ul></div>';
+	}
+	function wirePicker(p, items, A, first) {
 		var e = A.esc, q = p.querySelector('.cr-pick-q'), hid = p.querySelector('input[type="hidden"]'), list = p.querySelector('.cr-pick-list'), ic = p.querySelector('.cr-pick-ic');
-		var shown = [], at = -1, keys = items.map(function (x) { return fold(x.v); });
+		var shown = [], at = -1, last = null, keys = items.map(function (x) { return fold(x.v); });
 		var face = function (x) {
 			var mono = '<b class="cr-pick-mono">' + e(x.v.replace(/^د\.\s*/, '').slice(0, 1)) + '</b>';
 			return '<span class="cr-pick-av' + (x.round ? ' is-round' : '') + '">' + (x.img ? '<img src="' + e(A.thumb ? A.thumb(x.img) : x.img) + '" alt="" loading="lazy" onerror="this.remove()">' : '') + mono + '</span>';
@@ -26,7 +35,8 @@
 			p.classList.toggle('has-pick', !!x);
 		};
 		var render = function () {
-			var k = fold(q.value.trim());
+			/* with a choice already made, the whole list again, until something new is typed */
+			var k = last && q.value === last.v ? '' : fold(q.value.trim());
 			shown = [];
 			for (var i = 0; i < items.length && shown.length < 80; i++) if (!k || keys[i].indexOf(k) > -1) shown.push(items[i]);
 			at = -1;
@@ -35,11 +45,14 @@
 			}).join('') : '<li class="cr-pick-none">' + e(A.L('لا شيء بهذا الاسم', 'Nothing by that name')) + '</li>';
 		};
 		var open = function (on) { list.hidden = !on; q.setAttribute('aria-expanded', String(on)); p.classList.toggle('is-open', on); };
-		var choose = function (x) {
+		var choose = function (x, quiet) {
 			q.value = x.v;
 			if (hid) hid.value = x.id;
+			last = x;
 			mark(x);
 			open(false);
+			/* the form hears of it as of any typing (the cover is drawn again) */
+			if (!quiet && hid) hid.dispatchEvent(new Event('input', { bubbles: true }));
 		};
 		var move = function (d) {
 			if (!shown.length) return;
@@ -65,9 +78,10 @@
 		list.addEventListener('click', function (ev) { var li = ev.target.closest('[data-i]'); if (li) choose(shown[+li.getAttribute('data-i')]); });
 		q.addEventListener('blur', function () {
 			open(false);
-			/* a character must be one of the list: a name typed and left half-way is cleared */
-			if (hid && !hid.value) { q.value = ''; mark(null); }
+			/* a choice must be one of the list: a name typed and left half-way goes back to the last one chosen, or is cleared */
+			if (hid && !hid.value) { if (last) choose(last); else { q.value = ''; mark(null); } }
 		});
+		if (first) choose(first, true);
 	}
 
 	/* the six characters a reader can be, each with what makes them so */
@@ -239,13 +253,7 @@
 			var figs = d.charFigures || {};
 			var bookItems = titles.map(function (x) { return { v: x[0], img: x[2] }; });
 			var charItems = (d.characters || []).map(function (c) { return { v: t(c.name), id: c.id, img: figs[c.id] || c.image || '', round: true }; });
-			var pick = function (label, name, ph, kind) {
-				return '<div class="cr-pick" data-kind="' + kind + '"><label>' + esc(label) + '<span class="cr-pick-f"><span class="cr-pick-ic" aria-hidden="true"></span>' +
-					'<input class="cr-pick-q"' + (kind === 'char' ? '' : ' name="' + name + '"') + ' maxlength="90" placeholder="' + esc(ph) + '" role="combobox" aria-autocomplete="list" aria-expanded="false">' +
-					(kind === 'char' ? '<input type="hidden" name="' + name + '">' : '') +
-					'<svg class="cr-pick-chev" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></label>' +
-					'<ul class="cr-pick-list" role="listbox" hidden></ul></div>';
-			};
+			var pick = pickerHTML;
 			box.innerHTML = '<form class="cr-form" autocomplete="off">' +
 				'<label>' + esc(L('اسمك (كما تريده على البطاقة)', 'Your name (as you want it on the card)')) + '<input name="name" maxlength="40"></label>' +
 				pick(L('أول ما قرأت له', 'The first thing of his you read'), 'first', L('ابحث بالعنوان أو اكتبه', 'Search a title or type it'), 'book') +
@@ -277,15 +285,18 @@
 				'<label>' + esc(L('عنوان العدد', 'The title')) + '<input name="title" maxlength="60" value="' + esc(L('أسطورة القارئ', 'The Legend of the Reader')) + '"></label>' +
 				'<label>' + esc(L('اسمك', 'Your name')) + '<input name="name" maxlength="40"></label>' +
 				'<label>' + esc(L('رقم العدد', 'Issue number')) + '<input name="n" type="number" min="1" max="999" value="1"></label>' +
-				'<label>' + esc(L('على طريقة', 'In the manner of')) + '<select name="look">' + Object.keys(LOOKS).map(function (k) { return '<option value="' + k + '">' + esc(LOOKS[k][0]) + '</option>'; }).join('') + '</select></label>' +
+				pickerHTML(L('على طريقة', 'In the manner of'), 'look', L('ابحث بالسلسلة', 'Search a series'), 'look') +
 				'<label>' + esc(L('اسم سلسلتك', 'Your series’ name')) + '<input name="series" maxlength="30" placeholder="' + esc(L('اتركه لاسم السلسلة', 'Leave it for the series’ name')) + '"></label>' +
 				'<label>' + esc(L('صورة الغلاف', 'Cover picture')) + '<input name="pic" type="file" accept="image/*"></label>' +
 				'<p class="cr-act"><button type="button" class="share-btn" data-act="save">' + esc(L('احفظ الغلاف', 'Save the cover')) + '</button></p></form>' +
 				'<canvas class="cr-cv-art" width="780" height="1200" aria-label="' + esc(L('الغلاف', 'The cover')) + '"></canvas></div>';
+			/* «على طريقة» as the reader's card's pickers: each series by its first cover, «سلسلتي» by its colours */
+			var looks = Object.keys(LOOKS).map(function (k) { return { v: LOOKS[k][0], id: k, img: k === 'own' ? '' : 'assets/img/covers/fronts/' + k + '.webp' }; });
+			wirePicker(box.querySelector('.cr-pick'), looks, A, looks[0]);
 			var form = box.querySelector('form'), c = box.querySelector('canvas'), x = c.getContext('2d');
 			var fonts = document.fonts && document.fonts.load ? Promise.all(['400 90px Lalezar', '600 40px "Reem Kufi"'].map(function (f) { return document.fonts.load(f).catch(function () {}); })) : Promise.resolve();
 			var draw = function () {
-				var f = form.elements, look = LOOKS[f.look.value], rtl = A.lang !== 'en';
+				var f = form.elements, look = LOOKS[f.look.value] || LOOKS.mwt, rtl = A.lang !== 'en';
 				var bg = look[1], band = look[2], gold = look[3], W = 780, H = 1200;
 				x.direction = rtl ? 'rtl' : 'ltr'; x.textAlign = 'center';
 				x.fillStyle = bg; x.fillRect(0, 0, W, H);
