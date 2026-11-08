@@ -52,9 +52,23 @@
 		}
 	}
 	window.addEventListener('beforeinstallprompt', function (ev) { ev.preventDefault(); deferred = ev; placeButton(); });
+	/* Chrome on a phone sends appinstalled as soon as the install is accepted, while it is still adding the app, and often again
+	   once it is there: the first says it is on its way, the second (or, if none comes, ten seconds later) that it is there — once.
+	   A computer installs at once and sends it once, at the end. */
+	var installing = null, wait = 0, told = false;
+	var done = function () {
+		if (told) return;
+		told = true; clearTimeout(wait);
+		if (installing && installing.dismiss) installing.dismiss();
+		Notify(L('صار العرّاب على شاشتك الرئيسية.', 'The Godfather is on your home screen now.'), { type: 'success' });
+	};
+	var mobile = /android|mobi/i.test(navigator.userAgent);
 	window.addEventListener('appinstalled', function () {
 		deferred = null; standalone = true; placeButton();
-		Notify(L('صار العرّاب على شاشتك الرئيسية.', 'The Godfather is on your home screen now.'), { type: 'success' });
+		if (told) return;
+		if (!mobile || installing) return done();
+		installing = Notify(L('يُضاف العرّاب إلى شاشتك الآن… لحظات.', 'Adding the Godfather to your home screen… a moment.'), { ttl: 10000 }) || {};
+		wait = setTimeout(done, 10000);
 	});
 	/* the header is rebuilt when the language changes */
 	var header = document.getElementById('site-header');

@@ -9,9 +9,17 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-09T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bcb821c</id>
+		<title>Lists on phones</title>
+		<updated>2026-11-09T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="fix" label="Fix"/>
+		<content type="text">Lists on phones: a long title is cut with … instead of widening its list past the screen</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7c0ee71</id>
 		<title>Khaled El-Safty's photo on his page</title>
-		<updated>2026-11-09T20:59:00Z</updated>
+		<updated>2026-11-09T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<content type="text">Khaled El-Safty's photo on his page</content>
@@ -19,7 +27,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1dfd2f7</id>
 		<title>Ola Samir El-Sherbiny's photo on her page</title>
-		<updated>2026-11-09T20:58:00Z</updated>
+		<updated>2026-11-09T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<content type="text">Ola Samir El-Sherbiny's photo on her page</content>
@@ -507,16 +515,5 @@
 		<category term="design" label="Design"/>
 		<category term="fix" label="Fix"/>
 		<content type="text">«الأعمال» no longer repeats «دور النشر»: the houses that published him are on their own page (publishers.html), reached from «أعماله»'s menu, the footer and the site map</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ac9e0b7</id>
-		<title>«زمن العرّاب» (era.html) is gone</title>
-		<updated>2026-11-06T20:35:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="page" label="New page"/>
-		<category term="pics" label="Pictures"/>
-		<category term="design" label="Design"/>
-		<category term="fix" label="Fix"/>
-		<content type="text">«زمن العرّاب» (era.html) is gone: the page, its script, its stylesheet, its share picture and its data (AKT.era, the 91 events of the world around him, in data-pages.js); out of «حياته»'s panel, the footer's «اكتشف أكثر», the phone's menu, the site map's tree and sitemap.xml, and the README. Its address now leads to «سيرته ولقاءاته», as the site's other retired pages lead to theirs. «عوالم فانتازيا» no longer loads that data — its timeline reads each world's own era</content>
 	</entry>
 </feed>
