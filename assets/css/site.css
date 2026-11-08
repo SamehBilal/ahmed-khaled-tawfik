@@ -822,7 +822,7 @@ html[lang="en"] .spine span { transform: rotate(180deg); writing-mode: vertical-
 /* night down here; in the paper theme, dusk (see the end of the footer rules) */
 .site-footer {
 	--ft-bg: #07080b; --ft-text: #b9b1a0; --ft-dim: #7d776b; --ft-bright: #efe6d2; --ft-eye: #ffb347;
-	position: relative; margin-top: 60px; color: var(--ft-text); font-size: 15px; overflow: hidden;
+	position: relative; margin-top: 60px; color: var(--ft-text); font-size: 15px; overflow: hidden; overflow: clip visible;
 }
 .ft-night {
 	position: relative; height: 260px; color: #020203;

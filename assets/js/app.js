@@ -459,8 +459,8 @@
 		return '<nav class="mnav" aria-label="' + L('التنقل الرئيسي', 'Main') + '">' +
 			link('index.html', 'الرئيسية', 'Home') +
 			top('works', 'أعماله', 'His works') + top('world', 'عالمه', 'His world') + top('life', 'حياته', 'His life') + top('legacy', 'إرثه', 'His legacy') +
-			link('guide.html', 'من أين أبدأ؟', 'Start here', 'mnav-start') +
 			top('share', 'شارك', 'Contribute', 'mnav-share', pen) +
+			link('guide.html', 'من أين أبدأ؟', 'Start here', 'mnav-start') +
 			works + world + life + legacy + share + '</nav>';
 	}
 	/* open on a hover with a mouse (after a moment, at once when moving from one panel to the next), on a click or a tap,
@@ -579,7 +579,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: 'd00659f',
+		LATEST: 'd9f91ec',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
