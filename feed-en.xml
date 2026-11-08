@@ -9,9 +9,17 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-08T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3ca4a14</id>
+		<title>Footer links grouped as the main menu</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">Footer links grouped as the main menu: works, world, life, legacy, contribute, behind the site</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0a5fcde</id>
 		<title>Share menu in four sections</title>
-		<updated>2026-11-08T20:59:00Z</updated>
+		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Share menu in four sections</content>
@@ -19,14 +27,14 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a1fd58e</id>
 		<title>Read with us</title>
-		<updated>2026-11-08T20:58:00Z</updated>
+		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Read with us: the box takes the full content width</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e3d32bb</id>
 		<title>Read with us</title>
-		<updated>2026-11-08T20:57:00Z</updated>
+		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">Read with us: centred box, a year of months ahead, a second year of books</content>
@@ -34,7 +42,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bab0581</id>
 		<title>Cover-maker's series choice as a searchable picker with covers</title>
-		<updated>2026-11-08T20:56:00Z</updated>
+		<updated>2026-11-08T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<content type="text">Cover-maker's series choice as a searchable picker with covers</content>
@@ -42,7 +50,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1e56166</id>
 		<title>Let the reader's card, cover-maker and which-character forms take the full width</title>
-		<updated>2026-11-08T20:55:00Z</updated>
+		<updated>2026-11-08T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<content type="text">Let the reader's card, cover-maker and which-character forms take the full width</content>
@@ -50,7 +58,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ae31903</id>
 		<title>Searchable pickers with covers and faces on the reader's card</title>
-		<updated>2026-11-08T20:54:00Z</updated>
+		<updated>2026-11-08T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="design" label="Design"/>
@@ -59,7 +67,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/9f6702b</id>
 		<title>Let the reader-card page's band show the card in full</title>
-		<updated>2026-11-08T20:53:00Z</updated>
+		<updated>2026-11-08T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Let the reader-card page's band show the card in full</content>
@@ -67,7 +75,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3f4fcce</id>
 		<title>Let the test page's band show its cards in full</title>
-		<updated>2026-11-08T20:52:00Z</updated>
+		<updated>2026-11-08T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Let the test page's band show its cards in full</content>
@@ -75,7 +83,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/540d1d4</id>
 		<title>Redesign the «شارك» menu like the other panels, with a random pick</title>
-		<updated>2026-11-08T20:51:00Z</updated>
+		<updated>2026-11-08T20:50:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Redesign the «شارك» menu like the other panels, with a random pick</content>
@@ -83,49 +91,49 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b652968</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:50:00Z</updated>
+		<updated>2026-11-08T20:49:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/31c119c</id>
 		<title>Blend glossary and handwriting bands into pages</title>
-		<updated>2026-11-08T20:49:00Z</updated>
+		<updated>2026-11-08T20:48:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Blend glossary and handwriting bands into pages</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/de286ca</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:48:00Z</updated>
+		<updated>2026-11-08T20:47:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
 		<title>up</title>
-		<updated>2026-11-08T20:47:00Z</updated>
+		<updated>2026-11-08T20:46:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
-		<updated>2026-11-08T20:46:00Z</updated>
+		<updated>2026-11-08T20:45:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
-		<updated>2026-11-08T20:45:00Z</updated>
+		<updated>2026-11-08T20:44:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:44:00Z</updated>
+		<updated>2026-11-08T20:43:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
@@ -523,15 +531,5 @@
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">«كلمة اليوم · بكلماته» moves from the home page to the Works page, under «في مثل هذا اليوم» (as that one did before it): the same line of his for everyone on the same day — a quote or a phrase from «قاموس العرّاب», in turn — with its place on the quotes page and «صورة», now drawn by today.js</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e8aa14b</id>
-		<title>«حياته» in the main menu</title>
-		<updated>2026-11-04T20:50:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«حياته» in the main menu: a new photograph of him (assets/img/photos/akt-portrait-cafe.webp), and on it a new line of his each time the panel opens — his wish for his headstone or one of the short quotes from his books (AKT.quotes, 120 letters at most, never the same twice running) with the book it is from; on the pages that do not load the data, his wish. The photograph now leads to «اقتباسات»</content>
 	</entry>
 </feed>

@@ -346,12 +346,13 @@
 		for (var k in groups) if (groups[k].some(function (n) { return n.href === file; })) return k;
 		return '';
 	}
-	/* the footer's links, grouped as the main menu's panels are (MEGA), each group a heading and its pages */
+	/* the footer's links, grouped as the main menu's panels are (MEGA) and set in the footer's two columns as before: «أعماله»,
+	   «عالمه» and «حياته» in the first (two short columns each), «إرثه», «شارك» and «خلف الكواليس» in the second (three each) */
 	function ftGroups(App) {
 		var L = App.L, e = App.esc;
 		var a = function (n, attrs) { return '<a href="' + n.href + '"' + (attrs || '') + '>' + e(L(n.ar, n.en)) + '</a>'; };
 		var group = function (id, ar, en, links, cls) {
-			return '<nav class="ft-g' + (cls ? ' ' + cls : '') + '" aria-labelledby="ft-' + id + '-h"><h2 id="ft-' + id + '-h">' + e(L(ar, en)) + '</h2>' + links.join('') + '</nav>';
+			return '<nav class="' + cls + '" aria-labelledby="ft-' + id + '-h"><h2 id="ft-' + id + '-h">' + e(L(ar, en)) + '</h2>' + links.join('') + '</nav>';
 		};
 		var works = [a({ href: 'guide.html', ar: 'من أين أبدأ؟', en: 'Where to start?' }), a(MEGA.worksMore[0])]
 			.concat(MEGA.series.map(function (s) { return a({ href: 'series.html?id=' + s.id, ar: s.ar, en: s.en }); }))
@@ -361,12 +362,16 @@
 		var behind = UI.legal.filter(function (n) { return n.href !== 'wanted.html'; }).map(function (n) {
 			return a(n, n.href === 'changelog.html' && App.isNew() ? ' class="is-new" title="' + e(L('جديد منذ زيارتك', 'New since your visit')) + '"' : '');
 		});
-		return group('works', 'أعماله', 'His works', works) +
-			group('world', 'عالمه', 'His world', MEGA.world.map(function (n) { return a(n); })) +
-			group('life', 'حياته', 'His life', MEGA.life.concat(MEGA.writing).map(function (n) { return a(n); })) +
-			group('legacy', 'إرثه', 'His legacy', MEGA.legacy.map(function (n) { return a(n); }).concat(a({ href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style' }))) +
-			group('share', 'شارك', 'Contribute', share, 'ft-g-wide') +
-			group('behind', 'خلف الكواليس', 'Behind the site', behind, 'ft-more');
+		return '<div class="ft-col">' +
+				group('works', 'أعماله', 'His works', works, 'ft-links') +
+				group('world', 'عالمه', 'His world', MEGA.world.map(function (n) { return a(n); }), 'ft-links') +
+				group('life', 'حياته', 'His life', MEGA.life.concat(MEGA.writing).map(function (n) { return a(n); }), 'ft-links') +
+			'</div><div class="ft-side">' +
+				group('legacy', 'إرثه', 'His legacy', MEGA.legacy.map(function (n) { return a(n); }).concat(a({ href: 'numbers.html', ar: 'بالأرقام والأسلوب', en: 'Numbers & style' })), 'ft-legal') +
+				group('share', 'شارك', 'Contribute', share, 'ft-legal') +
+				/* (pwa.js puts «احفظ الموقع دون اتصال» at the end of this one) */
+				group('behind', 'خلف الكواليس', 'Behind the site', behind, 'ft-legal ft-more') +
+			'</div>';
 	}
 	function megaHTML(App, file) {
 		var L = App.L, e = App.esc;
@@ -574,7 +579,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: '0a5fcde',
+		LATEST: '3ca4a14',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;
@@ -945,7 +950,7 @@
 						'</div>' +
 						/* the site's pages in the main menu's own groups, in its order — «أعماله», «عالمه», «حياته», «إرثه», «شارك» — and
 						   «خلف الكواليس» for the site itself (where pwa.js puts «احفظ الموقع دون اتصال») */
-						'<div class="ft-groups">' + ftGroups(App) + '</div>' +
+						ftGroups(App) +
 						'<div class="ft-maker">' +
 							'<p class="ft-maker-line">' + App.t(UI.maker.line) + '</p>' +
 							'<div class="ft-maker-links">' +

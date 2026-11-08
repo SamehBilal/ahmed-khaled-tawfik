@@ -1643,24 +1643,3 @@ html[dir="rtl"] .flow-map > b { background: linear-gradient(-90deg, var(--ember)
 .info-my-do .share-btn { margin: 0; }
 .info-my-all:hover { border-color: #c94a4a; color: #e07070; }
 .info-my-done { margin: 14px 0 0; padding: 10px 14px; border-radius: 10px; background: color-mix(in srgb, #6fb8a8 18%, transparent); color: var(--paper); font-size: 14px; line-height: 1.8; }
-
-/* ---------- The footer's links in the main menu's groups (app.js ftGroups): أعماله، عالمه، حياته، إرثه، شارك، خلف الكواليس ----------
-   the headstone at the side, the six groups beside it a column each, and who made the site under them */
-.ft-body .wrap { grid-template-columns: 240px minmax(0, 1fr); gap: 28px 44px; }
-.ft-groups { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 26px 22px; align-items: start; }
-.ft-maker { grid-column: 2; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, .08); }
-html[data-theme="light"] .ft-maker { border-top-color: rgba(0, 0, 0, .1); }
-.ft-g { display: flex; flex-direction: column; gap: 5px; min-width: 0; font-family: var(--f-display); font-size: 14.5px; line-height: 1.5; }
-.ft-g h2 { margin: 0 0 6px; padding-bottom: 6px; border-bottom: 1px solid color-mix(in srgb, var(--ember) 35%, transparent); font-family: var(--f-display); font-size: 15px; font-weight: 400; color: var(--ember); }
-.ft-g a { color: var(--ft-text); text-decoration: none; transition: color .2s, text-shadow .2s; }
-.ft-g a:hover, .ft-g a:focus-visible { color: var(--ft-bright); text-shadow: 0 0 12px rgba(224, 99, 58, .9); }
-html[data-theme="light"] .ft-g a:hover, html[data-theme="light"] .ft-g a:focus-visible { text-shadow: none; color: var(--ember); }
-.ft-g .save-offline { align-self: flex-start; margin-top: 6px; }
-@media (max-width: 1300px) { .ft-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 900px) {
-	.ft-body .wrap { grid-template-columns: 1fr; }
-	.ft-maker { grid-column: auto; }
-	.ft-g { text-align: center; align-items: center; }
-	.ft-g .save-offline { align-self: center; }
-}
-@media (max-width: 560px) { .ft-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 14px; } }
