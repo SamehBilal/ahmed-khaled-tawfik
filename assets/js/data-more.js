@@ -550,7 +550,11 @@ window.AKT.more = {"works":[{"id":"al-hafa","title":{"ar":"الحافة","en":"T
 	});
 	A.issueInfo['lasheen-1'].editions[0].isbn = '9789776692558';
 	A.issueInfo['lasheen-1'].sources = ['https://www.abjjad.com/book/2759000073/'];
-	A.issueInfo['lasheen-19'].sources = ['https://www.abjjad.com/book/1034101817359/'];
+	/* book nineteen's own page on Abjjad (its store button opens it, not a search) */
+	var abj19 = 'https://www.abjjad.com/book/1034101817359/%D9%84%D8%A7%D8%B4%D9%8A%D9%86-%D8%A7%D9%84%D9%83%D8%AA%D8%A7%D8%A8-%D8%A7%D9%84%D8%AA%D8%A7%D8%B3%D8%B9-%D8%B9%D8%B4%D8%B1-%D8%A7%D9%84%D9%81%D9%86%D8%A7%D8%B1%D8%A9-%D8%A7%D9%84%D8%B9%D9%85%D9%8A%D8%A7%D8%A1/1033801170959';
+	A.issueInfo['lasheen-19'].sources = [abj19];
+	A.abjjad = A.abjjad || {};
+	A.abjjad['lasheen-19'] = abj19;
 	/* his issue 30 points on to the series it started */
 	var m30 = A.issueInfo['mwt-30'] = A.issueInfo['mwt-30'] || {};
 	m30.links = (m30.links || []).concat([{ label: 'امتداده: سلسلة لاشين — شيرين هنائي', url: 'series.html?id=lasheen' }]);

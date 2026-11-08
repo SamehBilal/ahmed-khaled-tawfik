@@ -174,18 +174,19 @@ window.PAGE = {
 		var chars = (d.characters || []).filter(function (c) { return App.charHasPage(c.id); }).length;
 		/* the tree, as the CodePen sitemap draws it: a tall numbered tile for each main page, under it the pages that belong to
 		   it, and in a lighter tile the pages made one per thing, with how many */
+		/* (grouped as the header's panels are: «أعماله», «عالمه», «حياته», «إرثه», «شارك», then the site itself) */
 		var TREE = [
 			['index.html', ['guide.html']],
-			['works.html', ['covers.html', 'translations.html', 'world.html', 'screen.html', 'compare.html'], [[own.length + wrote.length, L('صفحة سلسلة', 'series pages')], [issues, L('صفحة عدد', 'issue pages')], [books, L('صفحة كتاب', 'book pages')]]],
-			['characters.html', ['creatures.html', 'refaat-life.html', 'heroes-library.html', 'network.html', 'worlds.html', 'clinic.html', 'names.html'], [[chars, L('صفحة بطل', 'lead’s pages')]]],
-			['writers.html', ['publishers.html', 'library.html'], [[window.People ? window.People.all().length : 0, L('صفحة اسم من دائرته', 'pages of his circle')], [S.publishers().length, L('صفحة دار نشر', 'publisher pages')]]],
-			['quotes.html', ['glossary.html']],
-			['audio.html', []],
-			['legacy.html', ['talks.html', 'interviews.html', 'awards.html', 'map.html', 'calendar.html']],
-			['tributes.html', ['studies.html', 'remembrance.html', 'reader-stories.html', 'handwriting.html']],
-			['blog.html', ['blog.html#papers', 'numbers.html'], [[((d.blog || {}).posts || []).length || (d.stats || {}).posts, L('مقال', 'articles')]]],
-			['test.html', ['which-character.html', 'first-lines.html', 'reader-card.html', 'cover-maker.html', 'read-with-us.html', 'lists.html']],
-			['about.html', UI.legal.map(function (n) { return n.href; }).filter(function (h) { return h !== 'about.html'; })]
+			['works.html', ['compare.html', 'covers.html', 'translations.html', 'audio.html'], [[own.length + wrote.length, L('صفحة سلسلة', 'series pages')], [issues, L('صفحة عدد', 'issue pages')], [books, L('صفحة كتاب', 'book pages')]]],
+			['blog.html', ['blog.html#papers'], [[((d.blog || {}).posts || []).length || (d.stats || {}).posts, L('مقال', 'articles')]]],
+			['characters.html', ['creatures.html', 'refaat-life.html', 'worlds.html', 'clinic.html', 'names.html', 'map.html', 'network.html', 'heroes-library.html'], [[chars, L('صفحة بطل', 'lead’s pages')]]],
+			['talks.html', ['interviews.html', 'calendar.html', 'awards.html']],
+			['quotes.html', ['glossary.html', 'library.html']],
+			['writers.html', ['publishers.html'], [[window.People ? window.People.all().length : 0, L('صفحة اسم من دائرته', 'pages of his circle')], [S.publishers().length, L('صفحة دار نشر', 'publisher pages')]]],
+			['legacy.html', ['tributes.html', 'studies.html', 'screen.html', 'world.html', 'remembrance.html', 'numbers.html']],
+			['reader-stories.html', ['handwriting.html', 'lists.html']],
+			['test.html', ['which-character.html', 'first-lines.html', 'reader-card.html', 'cover-maker.html', 'read-with-us.html', 'contact.html#contribute', 'wanted.html']],
+			['about.html', UI.legal.map(function (n) { return n.href; }).filter(function (h) { return h !== 'about.html' && h !== 'wanted.html'; })]
 		];
 		/* a page the header or footer gains later and the tree does not place yet still shows, in the last column */
 		var placed = {};
