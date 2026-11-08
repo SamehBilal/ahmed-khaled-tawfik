@@ -1643,3 +1643,25 @@ html[dir="rtl"] .flow-map > b { background: linear-gradient(-90deg, var(--ember)
 .info-my-do .share-btn { margin: 0; }
 .info-my-all:hover { border-color: #c94a4a; color: #e07070; }
 .info-my-done { margin: 14px 0 0; padding: 10px 14px; border-radius: 10px; background: color-mix(in srgb, #6fb8a8 18%, transparent); color: var(--paper); font-size: 14px; line-height: 1.8; }
+
+/* ---------- The footer: who made the site in a row of its own along the bottom, before «تمّت…»; the link columns take its place ---------- */
+.ft-body .wrap { grid-template-columns: 260px minmax(0, 1fr) minmax(0, 1.25fr); }
+.ft-links { grid-template-columns: repeat(3, minmax(0, max-content)); }
+.ft-side .ft-legal { grid-template-columns: repeat(4, max-content); }
+.ft-maker { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px 30px;
+	padding-top: 22px; border-top: 1px solid rgba(239, 230, 210, .12); }
+html[data-theme="light"] .ft-maker { border-top-color: rgba(42, 34, 24, .16); }
+.ft-maker-line { margin: 0; max-width: 620px; }
+.ft-maker-links { justify-content: flex-end; }
+.ft-copy, html[dir="rtl"] .ft-copy { grid-column: 1 / -1; margin: 0; padding-top: 0; border-top: 0; }
+@media (max-width: 1200px) { .ft-links { grid-template-columns: repeat(2, minmax(0, max-content)); } .ft-side .ft-legal { grid-template-columns: repeat(3, max-content); } }
+@media (max-width: 900px) {
+	.ft-body .wrap { grid-template-columns: 1fr; }
+	.ft-links { display: flex; }
+	.ft-side .ft-legal { display: flex; }
+	.ft-maker { display: block; }
+	.ft-maker-line { margin: 0 auto 14px; }
+	.ft-maker-links { justify-content: center; }
+	.ft-copy, html[dir="rtl"] .ft-copy { margin-top: 18px; }
+}
+@media (max-width: 640px) { .ft-maker-links { display: grid; } }
