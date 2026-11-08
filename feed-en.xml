@@ -9,9 +9,17 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-08T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3f4fcce</id>
+		<title>Let the test page's band show its cards in full</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">Let the test page's band show its cards in full</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/540d1d4</id>
 		<title>Redesign the «شارك» menu like the other panels, with a random pick</title>
-		<updated>2026-11-08T20:59:00Z</updated>
+		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Redesign the «شارك» menu like the other panels, with a random pick</content>
@@ -19,49 +27,49 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b652968</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:58:00Z</updated>
+		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/31c119c</id>
 		<title>Blend glossary and handwriting bands into pages</title>
-		<updated>2026-11-08T20:57:00Z</updated>
+		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Blend glossary and handwriting bands into pages</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/de286ca</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:56:00Z</updated>
+		<updated>2026-11-08T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
 		<title>up</title>
-		<updated>2026-11-08T20:55:00Z</updated>
+		<updated>2026-11-08T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
-		<updated>2026-11-08T20:54:00Z</updated>
+		<updated>2026-11-08T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
-		<updated>2026-11-08T20:53:00Z</updated>
+		<updated>2026-11-08T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:52:00Z</updated>
+		<updated>2026-11-08T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
@@ -541,17 +549,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">«بياناتك على هذا الجهاز» (privacy.html#mydata): everything the site keeps in this browser, read live as the page opens — the lists with how many in each, the language, the theme, the last change seen in the changelog, the offline save, the install invitation and the reading time it counts, what is forgotten when the browser closes, and the offline copy with how many files and about how much room — each with a key to clear it; all of it saved to a JSON file and loaded in another browser or device (the lists' own export loads too), or cleared at once. The privacy page's text now names every thing kept, and points there. The changelog's news is an Atom feed, feed.xml in Arabic and feed-en.xml in English, the newest 60 changes with their kinds (tools/build-feed.js, run by build-sw.js), linked from the changelog and from every page's head. And the outside links are checked on the 1st of every month by GitHub (.github/workflows/links.yml): it runs tools/check-links.js, commits the new links.json, and opens an issue for the links that died since the last check (check-links.js --report=FILE)</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d6992a1</id>
-		<title>«قصة الموقع» (story.html), a new page in «خلف الكواليس»</title>
-		<updated>2026-11-03T20:58:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="page" label="New page"/>
-		<category term="pics" label="Pictures"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<category term="fix" label="Fix"/>
-		<content type="text">«قصة الموقع» (story.html), a new page in «خلف الكواليس»: the site's history a day at a time from its first, 19 October — the pages born each day, the covers added, how many changes and of what kind, and the day's two headline changes (assets/data/story.json, built from git by tools/build-story.js); its band the days as a skyline, a column as tall as each day's changes, flagged where a page was born. «سجل التحديثات» opens on «ما الجديد منذ زيارتك»: what came since the newest change this reader saw there (kept on their device), with «show only what is new»; until they look, the changelog's link in the footer and the side menu carries a dot (App.LATEST, written into app.js by build-changelog.js). Under the log, «سجل التصحيحات» (#corrections): seven facts the site had wrong and put right — Lasheen's characters, his last book, the World Pocket issues he translated, issue numbers, «كتاب المقبرة»'s 2013 edition, a borrowed cover, the pocket series' publisher — from tools/corrections.json, and from now on a «correction: …» line in a commit's body. «المصادر» has «روايات متضاربة» (#disputes): five places the sources disagree, what each says with its link and what the site goes by (AKT.disputes). «حقوق الاستخدام» has «كيف تستشهد بالموقع» (#cite): a page's reference in Arabic, APA, MLA and BibTeX with the day it was seen, ready to copy, opened from a new «استشهد» key on book, series, character and writer pages. And «ما ينقص الأرشيف» lists the outside links that no longer answer, each with its Wayback Machine copies, and counts the links that work among its bars (assets/data/links.json, from tools/check-links.js, run by hand: 1,898 links, 3 gone)</content>
 	</entry>
 </feed>

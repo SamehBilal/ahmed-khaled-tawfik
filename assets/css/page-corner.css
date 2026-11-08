@@ -97,6 +97,8 @@
 html[data-theme="light"] .ph[data-ph="which-character"], html[data-theme="light"] .ph[data-ph="first-lines"], html[data-theme="light"] .ph[data-ph="reader-card"],
 html[data-theme="light"] .ph[data-ph="cover-maker"], html[data-theme="light"] .ph[data-ph="read-with-us"] { height: 320px; background: none; border-bottom: 0; pointer-events: auto; overflow: clip; }
 .ph[data-ph="which-character"]::after, .ph[data-ph="first-lines"]::after, .ph[data-ph="reader-card"]::after, .ph[data-ph="cover-maker"]::after, .ph[data-ph="read-with-us"]::after { content: none; }
+/* the reader's card shows whole, past the band's foot */
+.ph[data-ph="reader-card"], html[data-theme="light"] .ph[data-ph="reader-card"] { overflow: visible; }
 .ph[data-ph="which-character"] + .page-hero, .ph[data-ph="first-lines"] + .page-hero, .ph[data-ph="reader-card"] + .page-hero, .ph[data-ph="cover-maker"] + .page-hero, .ph[data-ph="read-with-us"] + .page-hero { padding-top: 10px; }
 
 /* «أي شخصية أنت؟»: six oval portraits in gilt frames, one lit with its name and what makes them so */
