@@ -9,9 +9,18 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-08T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ae31903</id>
+		<title>Searchable pickers with covers and faces on the reader's card</title>
+		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<category term="design" label="Design"/>
+		<content type="text">Searchable pickers with covers and faces on the reader's card; uncrop cover-maker's band</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/9f6702b</id>
 		<title>Let the reader-card page's band show the card in full</title>
-		<updated>2026-11-08T20:59:00Z</updated>
+		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Let the reader-card page's band show the card in full</content>
@@ -19,7 +28,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3f4fcce</id>
 		<title>Let the test page's band show its cards in full</title>
-		<updated>2026-11-08T20:58:00Z</updated>
+		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Let the test page's band show its cards in full</content>
@@ -27,7 +36,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/540d1d4</id>
 		<title>Redesign the «شارك» menu like the other panels, with a random pick</title>
-		<updated>2026-11-08T20:57:00Z</updated>
+		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Redesign the «شارك» menu like the other panels, with a random pick</content>
@@ -35,49 +44,49 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b652968</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:56:00Z</updated>
+		<updated>2026-11-08T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/31c119c</id>
 		<title>Blend glossary and handwriting bands into pages</title>
-		<updated>2026-11-08T20:55:00Z</updated>
+		<updated>2026-11-08T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Blend glossary and handwriting bands into pages</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/de286ca</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:54:00Z</updated>
+		<updated>2026-11-08T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
 		<title>up</title>
-		<updated>2026-11-08T20:53:00Z</updated>
+		<updated>2026-11-08T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
-		<updated>2026-11-08T20:52:00Z</updated>
+		<updated>2026-11-08T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
-		<updated>2026-11-08T20:51:00Z</updated>
+		<updated>2026-11-08T20:50:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:50:00Z</updated>
+		<updated>2026-11-08T20:49:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
@@ -535,17 +544,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">Lighter pictures: the photos, the library's covers, the places, the posters, the prizes, the screens, the timeline and the cassette's face that are shown at full size (not the covers, whose grids have their small copies) made no larger than they are seen — 700 px for the library, 800 for the places, 1,000 for photos — and saved again, 4.2 MB lighter in all; the thirteen that were PNG photographs are WebP now (their names in the data, the library's list, the share pages and the cassette's stylesheet with them). Lucifer is in the same issues wherever the site names him — 20, 35, 50, 62, 78, 79 and the last — on «وحوش وأساطير» (it had 34 for 35) and in the issues' characters (50 and 78 were missing), as «أعداء وأشرار» has. «من أين أبدأ؟» now says some three hundred issues and fifty books, not «more than two hundred»</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5322c81</id>
-		<title>«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data</title>
-		<updated>2026-11-04T20:44:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="page" label="New page"/>
-		<category term="pics" label="Pictures"/>
-		<category term="audio" label="Audio"/>
-		<category term="data" label="Data"/>
-		<category term="design" label="Design"/>
-		<content type="text">«السلاسل جنبًا إلى جنب» (compare.html), a new page among those made from the data: his six series in one table — who tells each, its years and issues, the first and the last, its house, its kind, how many are heard on Audiohat and Storytel, its legends, real figures and enemies, the screen, and its ending (on the series page, #ending, or asked for) — its band the series' lives as lanes from first year to last, a mark for each issue; and under it «أعداء وأشرار» (#villains): 17 enemies his heroes meet, by series — Lucifer, Mother Marsha, Ronel the Black, the other Refaat, Abraham Levy, Mira Goran, Rasputin, Hassan-i Sabbah… — each with its issues and sources (AKT.villains). «زمن العرّاب» (era.html), a new page: his life, his books and his series as they began and ended, his awards and the screen, year by year from 1962, beside 91 events in Egypt, the Arab world and the world, in culture and in science, each sourced; 22 tied to what he wrote of them — his column on the blog or his issue — its band the years as two tracks, his and the world's (AKT.era). «بخط يده» has «إهداءات كتبه» (#dedications): the printed dedications of four of his books — to his readers, pirated or not; to his father and Sami El-Salamouni; to Ahmed Mourad, Ayman El-Gendy and Raef Wasfy; and «السنجة»'s to Ahmed El-Aidy and the revolution (AKT.dedications). «مكتبته» has «مكتبة رفعت إسماعيل» (#refaat): 19 things his heroes read, quote, watch and hum inside the stories — Dracula, Poe, Dante, Umm Kulthum, Frankenstein, the Necronomicon, Carmina Burana, Frost, Darwish… — with their issues (AKT.refaatLibrary). «قالوا عنه» has, after «كتب عنه», «دراسات ورسائل عنه» (#studies): 35 theses and journal articles about him from ten countries, each linked to its record (AKT.studies). «ركن القرّاء» has «البدايات» (#openings): the first line of 27 of his books and issues, and four covers to choose which it opens (AKT.openings)</content>
 	</entry>
 </feed>
