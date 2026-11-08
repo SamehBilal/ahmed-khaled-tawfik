@@ -49,7 +49,7 @@
 @media (max-width: 900px) { .cr-cv { grid-template-columns: minmax(0, 1fr); } .cr-cv-art { max-width: 300px; margin: 0 auto; } }
 
 /* the band: a fan of question cards from a round of the quiz (quiz.js band, bandWire), one with the page — no ground or line */
-.ph[data-ph="test"], html[data-theme="light"] .ph[data-ph="test"] { height: 380px; background: none; border-bottom: 0; overflow: clip; }
+.ph[data-ph="test"], html[data-theme="light"] .ph[data-ph="test"] { height: 380px; background: none; border-bottom: 0; overflow: visible; }
 .ph[data-ph="test"]::after { content: none; }
 .qzb { position: absolute; inset: 86px 0 0; display: flex; justify-content: center; align-items: flex-start; cursor: pointer; }
 .qzb-card { position: relative; flex: 0 0 196px; margin: 0 -14px; padding: 14px 14px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--ink-2);
