@@ -101,7 +101,7 @@ body.ls-dragging .ls-zone h3 b { margin: 0; }
 }
 .ls-zone.drop-feedback .ls-check { opacity: 1; transform: none; }
 
-.ls-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.ls-items { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
 .ls-items:not(:empty) + .ls-empty { display: none; }
 .ls-item { display: flex; align-items: center; gap: 10px; }
 .ls-thumb {
@@ -258,9 +258,10 @@ a[href*="book.html?id="], a[href*="series.html?id="] { -webkit-touch-callout: no
 .ls-buttons button[aria-pressed="true"] { background: var(--ember); border-color: var(--ember); color: #fff; }
 
 @media (max-width: 640px) {
-	.ls-zones { grid-template-columns: 1fr; }
-	body.ls-dragging .ls-zones { grid-template-columns: 1fr 1fr; }
-	.ls-pairs { grid-template-columns: 1fr; gap: 12px; }
+	/* minmax(0, …): a plain 1fr grows to a long title's one line (.ls-item-t a, nowrap), past the phone's edge, instead of cutting it with … */
+	.ls-zones { grid-template-columns: minmax(0, 1fr); }
+	body.ls-dragging .ls-zones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.ls-pairs { grid-template-columns: minmax(0, 1fr); gap: 12px; }
 	.ls-pair h4 { margin-bottom: 6px; font-size: 15px; }
 	body.ls-dragging .ls-pair .ls-zone { min-height: 96px; }
 	body.ls-dragging .ls-zone { min-height: 130px; }

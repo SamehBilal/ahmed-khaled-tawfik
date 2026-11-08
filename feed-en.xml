@@ -9,9 +9,17 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-09T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7c0ee71</id>
+		<title>Khaled El-Safty's photo on his page</title>
+		<updated>2026-11-09T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="pics" label="Pictures"/>
+		<content type="text">Khaled El-Safty's photo on his page</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1dfd2f7</id>
 		<title>Ola Samir El-Sherbiny's photo on her page</title>
-		<updated>2026-11-09T20:59:00Z</updated>
+		<updated>2026-11-09T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<content type="text">Ola Samir El-Sherbiny's photo on her page</content>
@@ -510,14 +518,5 @@
 		<category term="design" label="Design"/>
 		<category term="fix" label="Fix"/>
 		<content type="text">«زمن العرّاب» (era.html) is gone: the page, its script, its stylesheet, its share picture and its data (AKT.era, the 91 events of the world around him, in data-pages.js); out of «حياته»'s panel, the footer's «اكتشف أكثر», the phone's menu, the site map's tree and sitemap.xml, and the README. Its address now leads to «سيرته ولقاءاته», as the site's other retired pages lead to theirs. «عوالم فانتازيا» no longer loads that data — its timeline reads each world's own era</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3de2509</id>
-		<title>Two videos about him on «الإرث» (AKT.media)</title>
-		<updated>2026-11-04T20:59:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="audio" label="Audio"/>
-		<category term="design" label="Design"/>
-		<content type="text">Two videos about him on «الإرث» (AKT.media): «كل يوم» on ON, a segment on «العرّاب» in the days after his death (5 April 2018, 38 minutes), and «آخر النهار» on Al Nahar, Ibrahim Eissa speaking of him (29 November 2020, 8 minutes); each also under its year on «ذكراه كل عام». «أعلام في حكاياته» has a new band: a frieze of the 42 names — three rows sliding slowly, each the other way, the middle one in outline, the most met first — beside each the years they lived, taken from their note, and a dot in the colour of their kind; a row stops under the pointer and a name leads to its card, as before. No names over one another now, and the title closer under it</content>
 	</entry>
 </feed>
