@@ -409,22 +409,25 @@
 				'<small>' + L('كم كتب، ومتى، وبأي الكلمات', 'How much he wrote, when, and in which words') + '</small>' +
 				'<span class="mg-go">' + L('اكتشف الأرقام', 'Explore the numbers') + ' ' + arrow + '</span></a>');
 
-		/* «شارك»: the reader's turn, set as «حياته» is — two columns, what one can add to the site and what one can play and
-		   read, then at the side a card of chance: something of his picked at random, with a die to throw again; under the
-		   columns, a line on how each contribution is credited */
+		/* «شارك»: the reader's turn in four — what one can add to the site, what one can play, what one can make and read, and
+		   at the side a card of chance: something of his picked at random, with a die to throw again; under the three columns, a
+		   strip for the open site (its code, its data) and how each contribution is credited */
+		var isOpen = function (n) { return /#(code|open-data)$/.test(n.href); };
+		var mini = function (n) { return '<a class="mg-foot-a" href="' + n.href + '"' + cur(n.href) + '>' + megaIcon(n.ic) + '<span>' + e(L(n.ar, n.en)) + '</span></a>'; };
 		var share = panel('share', L('شارك', 'Contribute'),
 			'<div class="mg-col"><p class="mg-h">' + L('ساهم في الموقع', 'Add to the site') + '</p>' +
 				item({ href: App.fixHref(L('', '')), ic: 'pen', ar: 'صحّح أو أضف', en: 'Correct or add', dar: 'خطأ رأيته أو معلومة تنقص، على GitHub', den: 'A mistake you saw or something missing, on GitHub' }).replace('<a ', '<a target="_blank" rel="noopener" ') +
-				MEGA.share.map(function (n) { return item(n); }).join('') + '</div>' +
-			'<div class="mg-col"><p class="mg-h">' + L('العب واقرأ', 'Play and read') + '</p>' + MEGA.play.map(function (n) { return item(n); }).join('') + '</div>' +
+				MEGA.share.filter(function (n) { return !isOpen(n); }).map(function (n) { return item(n); }).join('') + '</div>' +
+			'<div class="mg-col"><p class="mg-h">' + L('العب', 'Play') + '</p>' + MEGA.play.slice(0, 3).map(function (n) { return item(n); }).join('') + '</div>' +
+			'<div class="mg-col"><p class="mg-h">' + L('اصنع واقرأ', 'Make and read') + '</p>' + MEGA.play.slice(3).map(function (n) { return item(n); }).join('') + '</div>' +
 			'<div class="mg-luck"><p class="mg-luck-h">' + L('صدفة من رفّه', 'A chance pick') + '</p>' +
 				'<div class="mg-luck-box">' + megaLuckHTML(App, true) + '</div>' +
 				'<button class="mg-dice" type="button" aria-label="' + e(L('اختر غيرها', 'Pick another')) + '" title="' + e(L('اختر غيرها', 'Pick another')) + '">' +
 					'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.5" fill="currentColor"/></svg>' +
 					'<span>' + e(L('ارمِ النرد', 'Roll again')) + '</span></button></div>' +
-			'<a class="mg-credit" href="changelog.html">' + megaIcon('award') +
-				'<span class="mg-credit-tx"><b>' + e(L('باسمك، إن أردت', 'In your name, if you wish')) + '</b> ' +
-				'<small>' + e(L('كل مساهمة تُنشر يُذكر صاحبها في صفحتها وفي «سجل التحديثات».', 'Each contribution that goes up names its sender on its page and in the changelog.')) + '</small></span>' + arrow + '</a>');
+			'<div class="mg-foot"><b class="mg-foot-h">' + e(L('الموقع مفتوح', 'The site is open')) + '</b>' +
+				MEGA.share.filter(isOpen).map(mini).join('') +
+				mini({ href: 'changelog.html', ic: 'award', ar: 'باسمك، إن أردت: سجل التحديثات', en: 'In your name, if you wish: the changelog' }) + '</div>');
 		var pen = '<svg class="mnav-ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 		return '<nav class="mnav" aria-label="' + L('التنقل الرئيسي', 'Main') + '">' +
 			link('index.html', 'الرئيسية', 'Home') +
@@ -549,7 +552,7 @@
 		   on a first visit what is there now counts as seen, so the changelog's link shows a dot only for what came after */
 		/* a number with its Arabic noun in the right form: [one, two, three to ten, eleven and more] — «تحديث واحد», «تحديثان», «3 تحديثات», «12 تحديثًا» */
 		count: function (n, f) { var m = n % 100; return n === 1 ? f[0] : n === 2 ? f[1] : App.num(n) + ' ' + (m >= 3 && m <= 10 ? f[2] : f[3]); },
-		LATEST: 'e3d32bb',
+		LATEST: 'a1fd58e',
 		isNew: function () {
 			var seen = store('akt-cl-seen');
 			if (!App.LATEST) return false;

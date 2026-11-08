@@ -9,9 +9,16 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-08T20:59:00Z</updated>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e3d32bb</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a1fd58e</id>
 		<title>Read with us</title>
 		<updated>2026-11-08T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<content type="text">Read with us: the box takes the full content width</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e3d32bb</id>
+		<title>Read with us</title>
+		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="data" label="Data"/>
 		<content type="text">Read with us: centred box, a year of months ahead, a second year of books</content>
@@ -19,7 +26,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bab0581</id>
 		<title>Cover-maker's series choice as a searchable picker with covers</title>
-		<updated>2026-11-08T20:58:00Z</updated>
+		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<content type="text">Cover-maker's series choice as a searchable picker with covers</content>
@@ -27,7 +34,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1e56166</id>
 		<title>Let the reader's card, cover-maker and which-character forms take the full width</title>
-		<updated>2026-11-08T20:57:00Z</updated>
+		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<content type="text">Let the reader's card, cover-maker and which-character forms take the full width</content>
@@ -35,7 +42,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ae31903</id>
 		<title>Searchable pickers with covers and faces on the reader's card</title>
-		<updated>2026-11-08T20:56:00Z</updated>
+		<updated>2026-11-08T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<category term="design" label="Design"/>
@@ -44,7 +51,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/9f6702b</id>
 		<title>Let the reader-card page's band show the card in full</title>
-		<updated>2026-11-08T20:55:00Z</updated>
+		<updated>2026-11-08T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Let the reader-card page's band show the card in full</content>
@@ -52,7 +59,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3f4fcce</id>
 		<title>Let the test page's band show its cards in full</title>
-		<updated>2026-11-08T20:54:00Z</updated>
+		<updated>2026-11-08T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Let the test page's band show its cards in full</content>
@@ -60,7 +67,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/540d1d4</id>
 		<title>Redesign the «شارك» menu like the other panels, with a random pick</title>
-		<updated>2026-11-08T20:53:00Z</updated>
+		<updated>2026-11-08T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="design" label="Design"/>
 		<content type="text">Redesign the «شارك» menu like the other panels, with a random pick</content>
@@ -68,49 +75,49 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b652968</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:52:00Z</updated>
+		<updated>2026-11-08T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/31c119c</id>
 		<title>Blend glossary and handwriting bands into pages</title>
-		<updated>2026-11-08T20:51:00Z</updated>
+		<updated>2026-11-08T20:50:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Blend glossary and handwriting bands into pages</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/de286ca</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:50:00Z</updated>
+		<updated>2026-11-08T20:49:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
 		<title>up</title>
-		<updated>2026-11-08T20:49:00Z</updated>
+		<updated>2026-11-08T20:48:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
-		<updated>2026-11-08T20:48:00Z</updated>
+		<updated>2026-11-08T20:47:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
-		<updated>2026-11-08T20:47:00Z</updated>
+		<updated>2026-11-08T20:46:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
-		<updated>2026-11-08T20:46:00Z</updated>
+		<updated>2026-11-08T20:45:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
@@ -528,14 +535,5 @@
 		<category term="data" label="Data"/>
 		<category term="design" label="Design"/>
 		<content type="text">«أعماله» in the main menu: his books float along «من أين أبدأ؟» at its foot — the three series' first covers, his six novels, WWW and World Fiction, each opening its own page — in place of the shelf under the covers; and the series' cards carry the footer's night, each its own part of it: Ma Wara' al-Tabi'a the haunted hill with its lit castle, its three bats, eyes in the dark and fog; Fantasia the moon with the witch riding across it, stars and sparks from the book; Safari the sunset in the shape of Africa behind the savanna. The footer's Africa and bats are drawn by one function each, shared by the two</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1db58ff</id>
-		<title>The main menu's panels, fuller</title>
-		<updated>2026-11-04T20:48:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="pics" label="Pictures"/>
-		<category term="design" label="Design"/>
-		<content type="text">The main menu's panels, fuller: «أعماله» has a shelf under its covers — Utopia, Al-Senga, Like Icarus, In the Rats' Passage, Shaabeeb, Al-Mirante, WWW and World Fiction — and each series' card its own night behind the cover: Ma Wara' al-Tabi'a's fog, eyes that open and blink and bats crossing; Fantasia's stars, a portal turning and sparks rising; Safari's banded sun going down over the savanna's acacias. «عالمه» has «أعداء وأشرار» and «مكتبة رفعت إسماعيل», and its three heroes carry their pages' effects — Refaat's fog and his lantern glowing in his hand with moths circling it, Abeer's stars and portal, Alaa's heartbeat. «حياته» has «طنطا، مدينته»; «إرثه»'s links have their icons. The effects move only while their panel is open and stop for those who ask for less motion. A link to a whole section (#villains, #refaat) now stops at its top under the header — centred, a section taller than the window was left above sight — and «أعماله» keeps its two columns on a tablet held sideways</content>
 	</entry>
 </feed>
