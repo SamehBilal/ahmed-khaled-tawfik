@@ -9,16 +9,24 @@
 	<author><name>The Godfather</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-09T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a24e243</id>
+		<title>«ما ينقص الأرشيف» without the side menu of the pages about the site</title>
+		<updated>2026-11-09T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="Design"/>
+		<content type="text">«ما ينقص الأرشيف» without the side menu of the pages about the site: the archive's progress and what each part lacks across the page's whole width</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b2dd964</id>
 		<title>Install message</title>
-		<updated>2026-11-09T20:59:00Z</updated>
+		<updated>2026-11-09T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Install message: «يُضاف العرّاب إلى شاشتك» while a phone is still adding it, «صار العرّاب على شاشتك» once it is there, once</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bcb821c</id>
 		<title>Lists on phones</title>
-		<updated>2026-11-09T20:58:00Z</updated>
+		<updated>2026-11-09T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="fix" label="Fix"/>
 		<content type="text">Lists on phones: a long title is cut with … instead of widening its list past the screen</content>
@@ -26,7 +34,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7c0ee71</id>
 		<title>Khaled El-Safty's photo on his page</title>
-		<updated>2026-11-09T20:57:00Z</updated>
+		<updated>2026-11-09T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<content type="text">Khaled El-Safty's photo on his page</content>
@@ -34,7 +42,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1dfd2f7</id>
 		<title>Ola Samir El-Sherbiny's photo on her page</title>
-		<updated>2026-11-09T20:56:00Z</updated>
+		<updated>2026-11-09T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="Pictures"/>
 		<content type="text">Ola Samir El-Sherbiny's photo on her page</content>
@@ -504,12 +512,5 @@
 		<category term="data" label="Data"/>
 		<category term="fix" label="Fix"/>
 		<content type="text">«الأعمال» no longer repeats «الجوائز والتكريم»: his awards are on their own page, «الجوائز» (awards.html), and search now leads an award with no book of its own there, not to the Works page</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d675ed6</id>
-		<title>«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar</title>
-		<updated>2026-11-06T20:37:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<content type="text">«في مثل هذا اليوم» and «كلمة اليوم · بكلماته» move from the Works page to «تقويم العرّاب», under the calendar: the day's events from the same day files the calendar is drawn from (otd.js), and the line of the day (today.js)</content>
 	</entry>
 </feed>

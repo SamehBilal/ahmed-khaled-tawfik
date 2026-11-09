@@ -9,16 +9,24 @@
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
 	<updated>2026-11-09T20:59:00Z</updated>
 	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a24e243</id>
+		<title>«ما ينقص الأرشيف» بلا القائمة الجانبية، بعرض الصفحة كله</title>
+		<updated>2026-11-09T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="design" label="تصميم"/>
+		<content type="text">«ما ينقص الأرشيف» بلا القائمة الجانبية، بعرض الصفحة كله</content>
+	</entry>
+	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b2dd964</id>
 		<title>Install message</title>
-		<updated>2026-11-09T20:59:00Z</updated>
+		<updated>2026-11-09T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Install message: «يُضاف العرّاب إلى شاشتك» while a phone is still adding it, «صار العرّاب على شاشتك» once it is there, once</content>
 	</entry>
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bcb821c</id>
 		<title>Lists on phones</title>
-		<updated>2026-11-09T20:58:00Z</updated>
+		<updated>2026-11-09T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="fix" label="تصحيح"/>
 		<content type="text">Lists on phones: a long title is cut with … instead of widening its list past the screen</content>
@@ -26,7 +34,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7c0ee71</id>
 		<title>Khaled El-Safty's photo on his page</title>
-		<updated>2026-11-09T20:57:00Z</updated>
+		<updated>2026-11-09T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="صور"/>
 		<content type="text">Khaled El-Safty's photo on his page</content>
@@ -34,7 +42,7 @@
 	<entry>
 		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1dfd2f7</id>
 		<title>Ola Samir El-Sherbiny's photo on her page</title>
-		<updated>2026-11-09T20:56:00Z</updated>
+		<updated>2026-11-09T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<category term="pics" label="صور"/>
 		<content type="text">Ola Samir El-Sherbiny's photo on her page</content>
@@ -504,12 +512,5 @@
 		<category term="data" label="بيانات"/>
 		<category term="fix" label="تصحيح"/>
 		<content type="text">أُزيل قسم «الجوائز والتكريم» من صفحة الأعمال، وبقيت صفحة «الجوائز»</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d675ed6</id>
-		<title>نُقل «في مثل هذا اليوم» و«كلمة اليوم» من صفحة الأعمال إلى «تقويم العرّاب»</title>
-		<updated>2026-11-06T20:37:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<content type="text">نُقل «في مثل هذا اليوم» و«كلمة اليوم» من صفحة الأعمال إلى «تقويم العرّاب»</content>
 	</entry>
 </feed>
