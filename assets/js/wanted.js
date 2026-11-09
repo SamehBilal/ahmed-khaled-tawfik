@@ -120,8 +120,8 @@ window.PAGE = {
 		var bars = parts.filter(function (p) { return p.of; }).map(function (p) { return { p: p, pc: Math.max(0, Math.min(100, Math.round((p.of - total(p)) / p.of * 100))) }; })
 			.sort(function (a, b) { return b.pc - a.pc; });
 		var all = bars.reduce(function (a, b) { return a + b.pc; }, 0) / (bars.length || 1);
-		/* (beside the side menu of the pages about the site, app.js infoTabs) */
-		document.getElementById('content').innerHTML = '<section class="section wn"><div class="wrap info-wrap">' + App.infoTabs('wanted') + '<div class="info-body">' +
+		/* (the whole width: no side menu of the pages about the site) */
+		document.getElementById('content').innerHTML = '<section class="section wn"><div class="wrap"><div class="wn-body">' +
 			'<section class="wn-status" id="status"><h2>' + e(L('حالة الأرشيف', 'The archive’s progress')) + ' <small>' + e(App.num(Math.round(all)) + '%') + '</small></h2>' +
 				'<p class="wn-why">' + e(L('ما اكتمل من كل جزء من الأرشيف، محسوبًا الآن من بياناته؛ وتحتها ما ينقص كل جزء، فما ترسله يرفع هذه الأشرطة.', 'How complete each part of the archive is, counted now from its data; below, what each part lacks, so whatever you send moves these bars.')) + '</p>' +
 				'<ul class="wn-bars">' + bars.map(function (b) {
