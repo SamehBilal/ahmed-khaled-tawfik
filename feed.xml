@@ -7,9 +7,17 @@
 	<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 	<icon>https://samehbilal.github.io/ahmed-khaled-tawfik/favicon.ico</icon>
 	<author><name>العرّاب</name><uri>https://samehbilal.github.io/ahmed-khaled-tawfik/</uri></author>
-	<updated>2026-11-09T20:59:00Z</updated>
+	<updated>2026-11-21T20:59:00Z</updated>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a24e2438</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/932141d</id>
+		<title>الموسم الثامن من «بعد منتصف الليل» محدَّث</title>
+		<updated>2026-11-21T20:59:00Z</updated>
+		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
+		<category term="audio" label="مسموع"/>
+		<content type="text">الموسم الثامن من «بعد منتصف الليل» محدَّث: أربع حلقات، آخرها «الجلسة 23 – 1990» (20 نوفمبر)، في صفحة المسموع وصفحة «لاشين» والبحث</content>
+	</entry>
+	<entry>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a24e243</id>
 		<title>«ما ينقص الأرشيف» بلا القائمة الجانبية، بعرض الصفحة كله</title>
 		<updated>2026-11-09T20:59:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -17,14 +25,14 @@
 		<content type="text">«ما ينقص الأرشيف» بلا القائمة الجانبية، بعرض الصفحة كله</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b2dd9643</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b2dd964</id>
 		<title>Install message</title>
 		<updated>2026-11-09T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Install message: «يُضاف العرّاب إلى شاشتك» while a phone is still adding it, «صار العرّاب على شاشتك» once it is there, once</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bcb821cc</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bcb821c</id>
 		<title>Lists on phones</title>
 		<updated>2026-11-09T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -32,7 +40,7 @@
 		<content type="text">Lists on phones: a long title is cut with … instead of widening its list past the screen</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7c0ee712</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7c0ee71</id>
 		<title>Khaled El-Safty's photo on his page</title>
 		<updated>2026-11-09T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -40,7 +48,7 @@
 		<content type="text">Khaled El-Safty's photo on his page</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1dfd2f7d</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1dfd2f7</id>
 		<title>Ola Samir El-Sherbiny's photo on her page</title>
 		<updated>2026-11-09T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -48,7 +56,7 @@
 		<content type="text">Ola Samir El-Sherbiny's photo on her page</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bc37f1b1</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bc37f1b</id>
 		<title>Publisher page</title>
 		<updated>2026-11-08T20:59:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -56,7 +64,7 @@
 		<content type="text">Publisher page: the logo fitted inside its white box</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1caf8ee5</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1caf8ee</id>
 		<title>Search finds everything</title>
 		<updated>2026-11-08T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -64,7 +72,7 @@
 		<content type="text">Search finds everything: monsters, worlds, cases, figures, both libraries, Refaat's life, Tanta, his hand, map places, villains, screen, first lines, studies, every menu page</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5ae29af5</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/5ae29af</id>
 		<title>Link report</title>
 		<updated>2026-11-08T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -72,7 +80,7 @@
 		<content type="text">Link report: 1961 outside links checked, 4 no longer answer</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1726482c</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1726482</id>
 		<title>Final pass</title>
 		<updated>2026-11-08T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -80,7 +88,7 @@
 		<content type="text">Final pass: site map in the menu's groups, README pages, Lasheen 19 on Abjjad</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ef69f29f</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ef69f29</id>
 		<title>Footer night blends into the page</title>
 		<updated>2026-11-08T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -88,7 +96,7 @@
 		<content type="text">Footer night blends into the page; «شارك» before «من أين أبدأ؟»</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d9f91ecb</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d9f91ec</id>
 		<title>Footer</title>
 		<updated>2026-11-08T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -96,7 +104,7 @@
 		<content type="text">Footer: who made the site in a row along the bottom, the links wider in its place</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d00659fe</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d00659f</id>
 		<title>Footer</title>
 		<updated>2026-11-08T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -104,7 +112,7 @@
 		<content type="text">Footer: keep its original design, with the menu's groups inside it</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3ca4a141</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3ca4a14</id>
 		<title>Footer links grouped as the main menu</title>
 		<updated>2026-11-08T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -112,7 +120,7 @@
 		<content type="text">Footer links grouped as the main menu: works, world, life, legacy, contribute, behind the site</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0a5fcde3</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0a5fcde</id>
 		<title>Share menu in four sections</title>
 		<updated>2026-11-08T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -120,14 +128,14 @@
 		<content type="text">Share menu in four sections</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a1fd58ed</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a1fd58e</id>
 		<title>Read with us</title>
 		<updated>2026-11-08T20:50:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Read with us: the box takes the full content width</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e3d32bbf</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e3d32bb</id>
 		<title>Read with us</title>
 		<updated>2026-11-08T20:49:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -135,7 +143,7 @@
 		<content type="text">Read with us: centred box, a year of months ahead, a second year of books</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bab0581c</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/bab0581</id>
 		<title>Cover-maker's series choice as a searchable picker with covers</title>
 		<updated>2026-11-08T20:48:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -143,7 +151,7 @@
 		<content type="text">Cover-maker's series choice as a searchable picker with covers</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1e561666</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1e56166</id>
 		<title>Let the reader's card, cover-maker and which-character forms take the full width</title>
 		<updated>2026-11-08T20:47:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -151,7 +159,7 @@
 		<content type="text">Let the reader's card, cover-maker and which-character forms take the full width</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ae31903d</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/ae31903</id>
 		<title>Searchable pickers with covers and faces on the reader's card</title>
 		<updated>2026-11-08T20:46:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -160,7 +168,7 @@
 		<content type="text">Searchable pickers with covers and faces on the reader's card; uncrop cover-maker's band</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/9f6702b9</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/9f6702b</id>
 		<title>Let the reader-card page's band show the card in full</title>
 		<updated>2026-11-08T20:45:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -168,7 +176,7 @@
 		<content type="text">Let the reader-card page's band show the card in full</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3f4fccee</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3f4fcce</id>
 		<title>Let the test page's band show its cards in full</title>
 		<updated>2026-11-08T20:44:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -176,7 +184,7 @@
 		<content type="text">Let the test page's band show its cards in full</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/540d1d4c</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/540d1d4</id>
 		<title>Redesign the «شارك» menu like the other panels, with a random pick</title>
 		<updated>2026-11-08T20:43:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -184,70 +192,70 @@
 		<content type="text">Redesign the «شارك» menu like the other panels, with a random pick</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b6529681</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/b652968</id>
 		<title>updates</title>
 		<updated>2026-11-08T20:42:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/31c119c5</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/31c119c</id>
 		<title>Blend glossary and handwriting bands into pages</title>
 		<updated>2026-11-08T20:41:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Blend glossary and handwriting bands into pages</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/de286cac</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/de286ca</id>
 		<title>updates</title>
 		<updated>2026-11-08T20:40:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b76</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/0e068b7</id>
 		<title>up</title>
 		<updated>2026-11-08T20:39:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d5</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/268612d</id>
 		<title>Update glossary.js</title>
 		<updated>2026-11-08T20:38:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">Update glossary.js</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2fa</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/e7d0c2f</id>
 		<title>up</title>
 		<updated>2026-11-08T20:37:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2d</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cb0bcc2</id>
 		<title>updates</title>
 		<updated>2026-11-08T20:36:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/945f6dae</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/945f6da</id>
 		<title>updates</title>
 		<updated>2026-11-07T20:59:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/72b34608</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/72b3460</id>
 		<title>updates</title>
 		<updated>2026-11-07T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">updates</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c9e126b2</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c9e126b</id>
 		<title>The blog page's filter in two levels</title>
 		<updated>2026-11-07T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -256,7 +264,7 @@
 		<content type="text">The blog page's filter in two levels: the kinds (الكل 1078 / مقالات 962 / قصص 70 / كوميكس 46) as tabs on top with the search beside them, and under the tab chosen a panel cut its own way — the outlets' cards for every post and for the columns (each counting that kind, with «خارج الصحف»), the 14 serials for the stories («رفقاء الليل»، «معرض الموت»… with their episodes, where and when they ran, and «قصص منفردة»), the strands for the comics («مصر بالصور», more on Bos w Tol, «صبيان وبنات», «مجلة نور», «قعدة أصحاب»). The summary speaks for the kind («1078 منشورًا، منها 869 في 15…»), the chart puts the card chosen in front and the archive's piles follow it; blog.html#papers-&lt;outlet&gt; still opens on that outlet. In both themes and in English. Service worker, changelog and feeds rebuilt</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/99948146</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/9994814</id>
 		<title>Utopia's character pages (علاء and جابر) open on a scene of their own</title>
 		<updated>2026-11-07T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -265,7 +273,7 @@
 		<content type="text">Utopia's character pages (علاء and جابر) open on a scene of their own: the colony on one side — gold, villas with lit windows, palms and a pool under a low sun — and the Others' world on the other — grey dust, crowded blocks, a few lit windows — with a clear brick wall between them, barbed wire along its top and a searchlight sweeping the outside (still for reduced motion). Each hero stands on his own side, lit, the other dimmed; across the wall, that world's name, the novel's cover and the hero on the other side, so the two pages lead to each other. On a phone, one column, his own world behind him and no wall. In both themes and in English. Service worker, changelog and feeds rebuilt</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2c50333d</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/2c50333</id>
 		<title>Utopia's character pages (علاء and جابر)</title>
 		<updated>2026-11-07T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -273,7 +281,7 @@
 		<content type="text">Utopia's character pages (علاء and جابر): the wall in the hero stands in the gap between the cover and the words, not across the middle of the screen where it cut through the eyebrow and every line of the description; hidden on a phone, where the cover sits above the words. The side of his words is tinted gold for Alaa, inside the wall, and grey for Gaber, outside it, in Arabic and English. Service worker, changelog, feeds and sitemap rebuilt</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c0aaeb60</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/c0aaeb6</id>
 		<title>The blog page's «في الصحف» is now the top of its archive</title>
 		<updated>2026-11-07T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -281,7 +289,7 @@
 		<content type="text">The blog page's «في الصحف» is now the top of its archive: the outlets' cards (with «خارج الصحف» for the 209 posts from no paper), the kinds and the search together as one filter, then his pieces in the papers year by year, then the archive's piles, which the outlet chosen narrows; the kinds and the search narrow the cards' counts (an outlet with none faded) and the chart too. blog.html#papers-&lt;outlet&gt; still opens on that outlet, and the outlet chosen is kept on coming back from an article. The old per-year list under it is gone (the archive shows the same posts), the cards are smaller, and the page's lead says the new order. Service worker, changelog, feeds and sitemap rebuilt</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a0b10932</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/a0b1093</id>
 		<title>«الطبعات» on the covers page</title>
 		<updated>2026-11-07T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -291,7 +299,7 @@
 		<content type="text">«الطبعات» on the covers page: each edition's card in «رواياته وكتبه» shows its own cover, or else that of the same house's edition nearest in years («الغلاف من طبعة …»), or for a book all of whose editions are one house's the book's own cover, never another house's (63 cards showed the book's first cover, often another house's and year; one, «نادي القتال» from Dar Lila 2014, now says it has none yet). «بعد منتصف الليل» season 8 on Audiohat: its second episode, «أنا الفرخة واحنا الكتاكيت» (Sherine Hanaey, 6 November 2026), its length unknown (the page gives only the sample's); the third announced for 13 November. Service worker, changelog and feeds rebuilt</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/beb70c27</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/beb70c2</id>
 		<title>«مسيرة السلاسل» on numbers.html draws «روايات عالمية للجيب» (1994–2015, 77 issues)</title>
 		<updated>2026-11-07T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -299,7 +307,7 @@
 		<content type="text">«مسيرة السلاسل» on numbers.html draws «روايات عالمية للجيب» (1994–2015, 77 issues): a series with no years of its own now takes the first and last of its issues' years, which also brings in كتاب الصيف (2003), بلية العجيب (2004) and روايات كوميكس (2003). Service worker, changelog, feeds and sitemap rebuilt</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/be7733c7</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/be7733c</id>
 		<title>«بالأرقام والأسلوب»'s «المسيرة» and «إحصاءات الموقع» are one step</title>
 		<updated>2026-11-07T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -307,7 +315,7 @@
 		<content type="text">«بالأرقام والأسلوب»'s «المسيرة» and «إحصاءات الموقع» are one step: one set of 18 tiles (site-stats.js, which the page and tools/build-meta.js both read), each number once and with its Arabic plural, the 12 houses of his books and the 17 publishers and platforms now both 17; #stats leads to the tiles. The home page's «استكشف / ادخل المكتبة» has 18 cards for the site's main sections, adding سيرته, لقاءاته, بالأرقام والأسلوب, الأغلفة والطبعات, تقويم العرّاب and ما ينقص الأرشيف, each card's figure its own page's count (الإرث its events, not the interviews; الأعمال issues and books, not series and books). Service worker and changelog rebuilt</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cfd20b24</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/cfd20b2</id>
 		<title>تحديث البيانات وخريطة الموقع وملفات XML والتخزين دون اتصال، ومراجعة كل الصفحات والأداء</title>
 		<updated>2026-11-06T20:59:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -316,7 +324,7 @@
 		<content type="text">تحديث البيانات وخريطة الموقع وملفات XML والتخزين دون اتصال، ومراجعة كل الصفحات والأداء</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/734baa3f</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/734baa3</id>
 		<title>«ركن القرّاء» صار ست صفحات مستقلة، كل منها بشريط خاص، وكلها في قائمة «شارك» تحت «العب واقرأ»</title>
 		<updated>2026-11-06T20:58:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -328,7 +336,7 @@
 		<content type="text">«ركن القرّاء» صار ست صفحات مستقلة، كل منها بشريط خاص، وكلها في قائمة «شارك» تحت «العب واقرأ»</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1283c61c</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1283c61</id>
 		<title>حُذفت بطاقات «على الشاشة» من صفحة «الإرث»</title>
 		<updated>2026-11-06T20:57:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -337,7 +345,7 @@
 		<content type="text">حُذفت بطاقات «على الشاشة» من صفحة «الإرث»</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/129ec838</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/129ec83</id>
 		<title>فيديو جديد في «لقاءاته»</title>
 		<updated>2026-11-06T20:56:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -346,14 +354,14 @@
 		<content type="text">فيديو جديد في «لقاءاته»: «ليه كتابات أحمد خالد توفيق مهمة؟» لطارق عثمان</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/846452cd</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/846452c</id>
 		<title>إعادة نشر الموقع بعد تعثّر النشر</title>
 		<updated>2026-11-06T20:55:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">إعادة نشر الموقع بعد تعثّر النشر</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/fbc7147f</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/fbc7147</id>
 		<title>زر «شارك» في القائمة الرئيسية بألوان الموقع نفسها بدل الذهبي</title>
 		<updated>2026-11-06T20:54:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -362,7 +370,7 @@
 		<content type="text">زر «شارك» في القائمة الرئيسية بألوان الموقع نفسها بدل الذهبي</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f4726537</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/f472653</id>
 		<title>«حكايات القرّاء» و«بخط يده» صارتا صفحة واحدة بشريط واحد</title>
 		<updated>2026-11-06T20:53:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -373,7 +381,7 @@
 		<content type="text">«حكايات القرّاء» و«بخط يده» صارتا صفحة واحدة بشريط واحد: ورقة الإهداء في الوسط وصور القرّاء حولها</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/46f438be</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/46f438b</id>
 		<title>«دراسات ورسائل عنه» صارت صفحة مستقلة، برفّ للرسائل المجلّدة والمجلات، وتصفية حسب البلد</title>
 		<updated>2026-11-06T20:52:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -384,7 +392,7 @@
 		<content type="text">«دراسات ورسائل عنه» صارت صفحة مستقلة، برفّ للرسائل المجلّدة والمجلات، وتصفية حسب البلد</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1f0aad7b</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1f0aad7</id>
 		<title>«لقاءاته» و«طنطا، مدينته» صارتا صفحتين مستقلتين، و«سيرته» صفحة وحدها بشريط جديد لفصول حياته</title>
 		<updated>2026-11-06T20:51:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -395,14 +403,14 @@
 		<content type="text">«لقاءاته» و«طنطا، مدينته» صارتا صفحتين مستقلتين، و«سيرته» صفحة وحدها بشريط جديد لفصول حياته؛ وحُذف «في مثل هذا اليوم» من التقويم</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d8e59a9c</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/d8e59a9</id>
 		<title>إعادة نشر الموقع بعد تعثّر النشر السابق</title>
 		<updated>2026-11-06T20:50:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">إعادة نشر الموقع بعد تعثّر النشر السابق</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/77495e58</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/77495e5</id>
 		<title>تصميم جديد لأعلى «أعلام في حكاياته»</title>
 		<updated>2026-11-06T20:49:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -412,14 +420,14 @@
 		<content type="text">تصميم جديد لأعلى «أعلام في حكاياته»: لوحة تحقيقات تربط الأعلام الذين التقوا في عدد واحد بخيوط حمراء</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1979baed</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/1979bae</id>
 		<title>up</title>
 		<updated>2026-11-06T20:48:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
 		<content type="text">up</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6bb8fc93</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/6bb8fc9</id>
 		<title>نُقلت «المدونة» إلى قائمة «أعماله» و«دور النشر» إلى قائمة «حياته»</title>
 		<updated>2026-11-06T20:47:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -428,7 +436,7 @@
 		<content type="text">نُقلت «المدونة» إلى قائمة «أعماله» و«دور النشر» إلى قائمة «حياته»</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/63e99c1d</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/63e99c1</id>
 		<title>زر «شارك» ذهبي في القائمة الرئيسية، يفتح كل طرق المساهمة</title>
 		<updated>2026-11-06T20:46:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -439,7 +447,7 @@
 		<content type="text">زر «شارك» ذهبي في القائمة الرئيسية، يفتح كل طرق المساهمة: تصحيح أو إضافة، غلاف أو إهداء، حكايتك، ما ينقص الأرشيف، الكود، والبيانات</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/403acf10</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/403acf1</id>
 		<title>نُقل «أعداء وأشرار» من «السلاسل جنبًا إلى جنب» إلى صفحة كل سلسلة، وأُزيل من قائمة «عالمه»</title>
 		<updated>2026-11-06T20:45:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -448,7 +456,7 @@
 		<content type="text">نُقل «أعداء وأشرار» من «السلاسل جنبًا إلى جنب» إلى صفحة كل سلسلة، وأُزيل من قائمة «عالمه»</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/745203dc</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/745203d</id>
 		<title>«مكتبة رفعت إسماعيل» صفحة مستقلة الآن، بدل أن تكون جزءًا من «مكتبته»</title>
 		<updated>2026-11-06T20:44:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -459,7 +467,7 @@
 		<content type="text">«مكتبة رفعت إسماعيل» صفحة مستقلة الآن، بدل أن تكون جزءًا من «مكتبته»</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/11ac84e7</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/11ac84e</id>
 		<title>تقسيم «عوالم فانتازيا» و«عيادة سافاري» إلى مجموعات بعناوين حسب النوع، بدل ترتيب السلسلة</title>
 		<updated>2026-11-06T20:43:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -467,7 +475,7 @@
 		<content type="text">تقسيم «عوالم فانتازيا» و«عيادة سافاري» إلى مجموعات بعناوين حسب النوع، بدل ترتيب السلسلة</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/4b8c4372</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/4b8c437</id>
 		<title>أزرار تنقّل لـ«خط زمن فانتازيا»، وشريط التمرير يظهر أثناء التمرير فقط</title>
 		<updated>2026-11-06T20:42:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -476,7 +484,7 @@
 		<content type="text">أزرار تنقّل لـ«خط زمن فانتازيا»، وشريط التمرير يظهر أثناء التمرير فقط</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/999a2373</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/999a237</id>
 		<title>تواريخ صدور أعداد «رجفة الخوف» العشرة و«ثلاثة» في «كتاب الصيف» و«أسطورة بلية»، في صفحاتها وفي «تقويم العرّاب»</title>
 		<updated>2026-11-06T20:41:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -484,7 +492,7 @@
 		<content type="text">تواريخ صدور أعداد «رجفة الخوف» العشرة و«ثلاثة» في «كتاب الصيف» و«أسطورة بلية»، في صفحاتها وفي «تقويم العرّاب»</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8180cd1c</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/8180cd1</id>
 		<title>أُزيل قسم «على الشاشة» من صفحة الأعمال، وبقيت صفحته المستقلة</title>
 		<updated>2026-11-06T20:40:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -494,7 +502,7 @@
 		<content type="text">أُزيل قسم «على الشاشة» من صفحة الأعمال، وبقيت صفحته المستقلة</content>
 	</entry>
 	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7145ef69</id>
+		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/7145ef6</id>
 		<title>أُزيل قسم «كتب عنه» من صفحة الأعمال (باقٍ في «قالوا عنه»)، وخلفية خفيفة لصفوف «المزيد» في قائمة «أعماله» عند…</title>
 		<updated>2026-11-06T20:39:00Z</updated>
 		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
@@ -502,15 +510,5 @@
 		<category term="design" label="تصميم"/>
 		<category term="fix" label="تصحيح"/>
 		<content type="text">أُزيل قسم «كتب عنه» من صفحة الأعمال (باقٍ في «قالوا عنه»)، وخلفية خفيفة لصفوف «المزيد» في قائمة «أعماله» عند المرور عليها</content>
-	</entry>
-	<entry>
-		<id>tag:samehbilal.github.io,2026:ahmed-khaled-tawfik/3d93817e</id>
-		<title>أُزيل قسم «الجوائز والتكريم» من صفحة الأعمال، وبقيت صفحة «الجوائز»</title>
-		<updated>2026-11-06T20:38:00Z</updated>
-		<link rel="alternate" type="text/html" href="https://samehbilal.github.io/ahmed-khaled-tawfik/changelog.html"/>
-		<category term="page" label="صفحة جديدة"/>
-		<category term="data" label="بيانات"/>
-		<category term="fix" label="تصحيح"/>
-		<content type="text">أُزيل قسم «الجوائز والتكريم» من صفحة الأعمال، وبقيت صفحة «الجوائز»</content>
 	</entry>
 </feed>
